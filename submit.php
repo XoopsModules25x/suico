@@ -25,71 +25,68 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 
-
-
 /**
  * Xoops header ...
  */
-include_once("../../mainfile.php");
-$xoopsOption['template_main'] = 'yogurt_index.html';
-include_once("../../header.php");
+include_once '../../mainfile.php';
+$GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
+include_once '../../header.php';
 
 /**
- * Modules class includes  
+ * Modules class includes
  */
-include_once("class/yogurt_images.php");
+include_once 'class/yogurt_images.php';
 
 /**
- * Factory of pictures created  
+ * Factory of pictures created
  */
-$album_factory      = new Xoopsyogurt_imagesHandler($xoopsDB);
+$album_factory = new Xoopsyogurt_imagesHandler($xoopsDB);
 
 /**
- * Getting the title 
+ * Getting the title
  */
 $title = $_POST['caption'];
 
 /**
- * Getting parameters defined in admin side  
+ * Getting parameters defined in admin side
  */
-$path_upload    = XOOPS_ROOT_PATH."/uploads";
-$pictwidth      = $xoopsModuleConfig['resized_width'];
-$pictheight     = $xoopsModuleConfig['resized_height'];
-$thumbwidth     = $xoopsModuleConfig['thumb_width'];
-$thumbheight    = $xoopsModuleConfig['thumb_height'];
-$maxfilebytes   = $xoopsModuleConfig['maxfilesize'];
-$maxfileheight  = $xoopsModuleConfig['max_original_height'];
-$maxfilewidth   = $xoopsModuleConfig['max_original_width'];
+$path_upload   = XOOPS_ROOT_PATH . '/uploads';
+$pictwidth     = $xoopsModuleConfig['resized_width'];
+$pictheight    = $xoopsModuleConfig['resized_height'];
+$thumbwidth    = $xoopsModuleConfig['thumb_width'];
+$thumbheight   = $xoopsModuleConfig['thumb_height'];
+$maxfilebytes  = $xoopsModuleConfig['maxfilesize'];
+$maxfileheight = $xoopsModuleConfig['max_original_height'];
+$maxfilewidth  = $xoopsModuleConfig['max_original_width'];
 
 /**
- * If we are receiving a file  
+ * If we are receiving a file
  */
-if ($_POST['xoops_upload_file'][0]=='sel_photo'){
-       
-              /**
-              * Verify Token
-              */
-              if (!($GLOBALS['xoopsSecurity']->check())){
-                     redirect_header($_SERVER['HTTP_REFERER'], 3, _MD_YOGURT_TOKENEXPIRED);
-              }
-              ini_set('memory_limit', '50M');
-              /**
-              * Try to upload picture resize it insert in database and then redirect to index
-              */
-              if ($album_factory->receivePicture($title,$path_upload, $thumbwidth, $thumbheight, $pictwidth, $pictheight, $maxfilebytes,$maxfilewidth,$maxfileheight)){
-                     $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
-                     $extra_tags['X_OWNER_UID'] = $xoopsUser->getVar('uid');
-                     $notification_handler =& xoops_gethandler('notification');
-                     $notification_handler->triggerEvent ("picture", $xoopsUser->getVar('uid'), "new_picture",$extra_tags);
-                     //header("Location: ".XOOPS_URL."/modules/yogurt/index.php?uid=".$xoopsUser->getVar('uid'));
-                     redirect_header(XOOPS_URL."/modules/yogurt/album.php?uid=".$xoopsUser->getVar('uid'),3,_MD_YOGURT_UPLOADED);
-              } else {
-                     redirect_header(XOOPS_URL."/modules/yogurt/album.php?uid=".$xoopsUser->getVar('uid'),3,_MD_YOGURT_NOCACHACA);
-              }
+if ('sel_photo' == $_POST['xoops_upload_file'][0]) {
+
+    /**
+     * Verify Token
+     */
+    if (!$GLOBALS['xoopsSecurity']->check()) {
+        redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    }
+    ini_set('memory_limit', '50M');
+    /**
+     * Try to upload picture resize it insert in database and then redirect to index
+     */
+    if ($album_factory->receivePicture($title, $path_upload, $thumbwidth, $thumbheight, $pictwidth, $pictheight, $maxfilebytes, $maxfilewidth, $maxfileheight)) {
+        $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
+        $extra_tags['X_OWNER_UID']  = $xoopsUser->getVar('uid');
+        $notificationHandler        = xoops_getHandler('notification');
+        $notificationHandler->triggerEvent('picture', $xoopsUser->getVar('uid'), 'new_picture', $extra_tags);
+        //header("Location: ".XOOPS_URL."/modules/yogurt/index.php?uid=".$xoopsUser->getVar('uid'));
+        redirect_header(XOOPS_URL . '/modules/yogurt/album.php?uid=' . $xoopsUser->getVar('uid'), 3, _MD_YOGURT_UPLOADED);
+    } else {
+        redirect_header(XOOPS_URL . '/modules/yogurt/album.php?uid=' . $xoopsUser->getVar('uid'), 3, _MD_YOGURT_NOCACHACA);
+    }
 }
 
 /**
- * Close page  
+ * Close page
  */
-include("../../footer.php");
-?>
+include '../../footer.php';

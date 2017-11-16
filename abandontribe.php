@@ -25,46 +25,45 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 
-include_once '../../mainfile.php';
-include_once '../../header.php';
-include_once '../../class/criteria.php';
+include_once __DIR__ . '/../../mainfile.php';
+include_once __DIR__ . '/../../header.php';
+include_once __DIR__ . '/../../class/criteria.php';
 
-include_once 'class/yogurt_reltribeuser.php';
+include_once __DIR__ . '/class/yogurt_reltribeuser.php';
 
 /**
-* Verify Token
-*/
+ * Verify Token
+ */
 //if (!($GLOBALS['xoopsSecurity']->check())){
-//            redirect_header($_SERVER['HTTP_REFERER'], 5, _MD_YOGURT_TOKENEXPIRED);
+//            redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 5, _MD_YOGURT_TOKENEXPIRED);
 //}
 
 /**
-* Receiving info from get parameters  
-*/ 
-$reltribeuser_id = intval($_POST['reltribe_id']);
-if(!isset($_POST['confirm']) || $_POST['confirm']!=1)
-{
-	xoops_confirm(array('reltribe_id'=> $reltribeuser_id ,'confirm'=>1), 'abandontribe.php', _MD_YOGURT_ASKCONFIRMABANDONTRIBE, _MD_YOGURT_CONFIRMABANDON);
-}
-else
-{
+ * Receiving info from get parameters
+ */
+$reltribeuser_id = (int)$_POST['reltribe_id'];
+if (!isset($_POST['confirm']) || 1 != $_POST['confirm']) {
+    xoops_confirm(['reltribe_id' => $reltribeuser_id, 'confirm' => 1], 'abandontribe.php', _MD_YOGURT_ASKCONFIRMABANDONTRIBE, _MD_YOGURT_CONFIRMABANDON);
+} else {
 
-	/**
-	* Creating the factory  and the criteria to delete the picture
-	* The user must be the owner
-	*/
-	$reltribeuser_factory = new Xoopsyogurt_reltribeuserHandler($xoopsDB);
-	$criteria_rel_id = new Criteria('rel_id',$reltribeuser_id);
-	$uid = intval($xoopsUser->getVar('uid'));
-	$criteria_uid = new Criteria('rel_user_uid',$uid);
-	$criteria = new CriteriaCompo($criteria_rel_id);
-	$criteria->add($criteria_uid);
+    /**
+     * Creating the factory  and the criteria to delete the picture
+     * The user must be the owner
+     */
+    $reltribeuser_factory = new Xoopsyogurt_reltribeuserHandler($xoopsDB);
+    $criteria_rel_id      = new Criteria('rel_id', $reltribeuser_id);
+    $uid                  = (int)$xoopsUser->getVar('uid');
+    $criteria_uid         = new Criteria('rel_user_uid', $uid);
+    $criteria             = new CriteriaCompo($criteria_rel_id);
+    $criteria->add($criteria_uid);
 
-	/**
-	* Try to delete  
-	*/
-	if($reltribeuser_factory->deleteAll($criteria)) {redirect_header('tribes.php', 1, _MD_YOGURT_TRIBEABANDONED);}
-	else {redirect_header('tribes.php', 1, _MD_YOGURT_NOCACHACA);}
+    /**
+     * Try to delete
+     */
+    if ($reltribeuser_factory->deleteAll($criteria)) {
+        redirect_header('tribes.php', 1, _MD_YOGURT_TRIBEABANDONED);
+    } else {
+        redirect_header('tribes.php', 1, _MD_YOGURT_NOCACHACA);
+    }
 }
-include '../../footer.php';
-?>
+include __DIR__ . '/../../footer.php';

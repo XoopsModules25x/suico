@@ -24,43 +24,42 @@
 //  along with this program; if not, write to the Free Software              //
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
-include_once '../../mainfile.php';
-include_once '../../header.php';
-include_once '../../class/criteria.php';
-include_once '../../class/criteria.php';
+include_once __DIR__ . '/../../mainfile.php';
+include_once __DIR__ . '/../../header.php';
+include_once __DIR__ . '/../../class/criteria.php';
+include_once __DIR__ . '/../../class/criteria.php';
 
-include_once 'class/yogurt_suspensions.php';
+include_once __DIR__ . '/class/yogurt_suspensions.php';
 
-if(!($GLOBALS['xoopsSecurity']->check())) {redirect_header($_SERVER['HTTP_REFERER'], 3, _MD_YOGURT_TOKENEXPIRED);}
-
-$uid = intval($_POST['uid']);
-/**
-* Creating the factory  loading the picture changing its caption
-*/
-$suspensions_factory = new Xoopsyogurt_suspensionsHandler($xoopsDB);
-$suspension = $suspensions_factory->create(false);
-$suspension->load($uid);
-
-if ($xoopsUser->isAdmin(1))
-{
-	$member_handler =& xoops_gethandler('member');
-	$thisUser =& $member_handler->getUser($uid);
-
-	$thisUser->setVar('email', $suspension->getVar('old_email','n'));
-	$thisUser->setVar('pass', $suspension->getVar('old_pass','n'));
-	if(defined(ICMS_VERSION_NAME))
-	{
-		$thisUser->setVar('salt', $suspension->getVar('old_salt','n'));
-		$thisUser->setVar('pass_expired', $suspension->getVar('old_pass_expired','n'));
-		$thisUser->setVar('enc_type', $suspension->getVar('old_enc_type','n'));
-	}
-	$thisUser->setVar('user_sig', $suspension->getVar('old_signature','n'));
-	$member_handler->insertUser($thisUser);
-	
-	$criteria = new Criteria('uid',$uid);
-	$suspensions_factory->deleteAll($criteria);
-	redirect_header('index.php?uid='.$uid,3,_MD_YOGURT_USERUNSUSPENDED);
+if (!$GLOBALS['xoopsSecurity']->check()) {
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
-include '../../footer.php';
-?>
+$uid = (int)$_POST['uid'];
+/**
+ * Creating the factory  loading the picture changing its caption
+ */
+$suspensions_factory = new Xoopsyogurt_suspensionsHandler($xoopsDB);
+$suspension          = $suspensions_factory->create(false);
+$suspension->load($uid);
+
+if ($xoopsUser->isAdmin(1)) {
+    $memberHandler = xoops_getHandler('member');
+    $thisUser      = $memberHandler->getUser($uid);
+
+    $thisUser->setVar('email', $suspension->getVar('old_email', 'n'));
+    $thisUser->setVar('pass', $suspension->getVar('old_pass', 'n'));
+    if (defined(ICMS_VERSION_NAME)) {
+        $thisUser->setVar('salt', $suspension->getVar('old_salt', 'n'));
+        $thisUser->setVar('pass_expired', $suspension->getVar('old_pass_expired', 'n'));
+        $thisUser->setVar('enc_type', $suspension->getVar('old_enc_type', 'n'));
+    }
+    $thisUser->setVar('user_sig', $suspension->getVar('old_signature', 'n'));
+    $memberHandler->insertUser($thisUser);
+
+    $criteria = new Criteria('uid', $uid);
+    $suspensions_factory->deleteAll($criteria);
+    redirect_header('index.php?uid=' . $uid, 3, _MD_YOGURT_USERUNSUSPENDED);
+}
+
+include __DIR__ . '/../../footer.php';

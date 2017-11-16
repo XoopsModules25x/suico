@@ -24,41 +24,40 @@
 //  along with this program; if not, write to the Free Software              //
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
-include_once '../../mainfile.php';
-include_once '../../header.php';
+include_once __DIR__ . '/../../mainfile.php';
+include_once __DIR__ . '/../../header.php';
 
-include_once 'class/yogurt_friendpetition.php';
-include_once 'class/yogurt_friendship.php';
+include_once __DIR__ . '/class/yogurt_friendpetition.php';
+include_once __DIR__ . '/class/yogurt_friendship.php';
 
 /**
-* Factory of petitions created  
-*/
+ * Factory of petitions created
+ */
 $friendpetition_factory = new Xoopsyogurt_friendpetitionHandler($xoopsDB);
-$friendship_factory = new Xoopsyogurt_friendshipHandler($xoopsDB);
+$friendship_factory     = new Xoopsyogurt_friendshipHandler($xoopsDB);
 
 /**
-* Getting the uid of the user which user want to ask to be friend
-*/
-$friend1_uid = intval($_POST['friend_uid']);
-$friend2_uid = intval($xoopsUser->getVar('uid'));
+ * Getting the uid of the user which user want to ask to be friend
+ */
+$friend1_uid = (int)$_POST['friend_uid'];
+$friend2_uid = (int)$xoopsUser->getVar('uid');
 
-$criteria_friend1 = new Criteria('friend1_uid',$friend1_uid);
-$criteria_friend2 = new Criteria('friend2_uid',$friend2_uid);
-	
-$criteria_delete1 = new CriteriaCompo($criteria_friend1);
-$criteria_delete1->add($criteria_friend2);
-
-$friendship_factory->deleteAll($criteria_delete1);
-
-$criteria_friend1 = new Criteria('friend1_uid',$friend2_uid);
-$criteria_friend2 = new Criteria('friend2_uid',$friend1_uid);
+$criteria_friend1 = new Criteria('friend1_uid', $friend1_uid);
+$criteria_friend2 = new Criteria('friend2_uid', $friend2_uid);
 
 $criteria_delete1 = new CriteriaCompo($criteria_friend1);
 $criteria_delete1->add($criteria_friend2);
 
 $friendship_factory->deleteAll($criteria_delete1);
 
-redirect_header('friends.php',3,_MD_YOGURT_FRIENDSHIPTERMINATED);	
+$criteria_friend1 = new Criteria('friend1_uid', $friend2_uid);
+$criteria_friend2 = new Criteria('friend2_uid', $friend1_uid);
 
-include '../../footer.php';
-?>
+$criteria_delete1 = new CriteriaCompo($criteria_friend1);
+$criteria_delete1->add($criteria_friend2);
+
+$friendship_factory->deleteAll($criteria_delete1);
+
+redirect_header('friends.php', 3, _MD_YOGURT_FRIENDSHIPTERMINATED);
+
+include __DIR__ . '/../../footer.php';

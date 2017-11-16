@@ -24,40 +24,45 @@
 //  along with this program; if not, write to the Free Software              //
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
-include_once '../../mainfile.php';
-include_once '../../header.php';
-include_once '../../class/criteria.php';
+include_once __DIR__ . '/../../mainfile.php';
+include_once __DIR__ . '/../../header.php';
+include_once __DIR__ . '/../../class/criteria.php';
 
-include_once 'class/yogurt_images.php';
+include_once __DIR__ . '/class/yogurt_images.php';
 
-if(!($GLOBALS['xoopsSecurity']->check())) {redirect_header('index.php', 3, _MD_YOGURT_TOKENEXPIRED);}
+if (!$GLOBALS['xoopsSecurity']->check()) {
+    redirect_header('index.php', 3, _MD_YOGURT_TOKENEXPIRED);
+}
 
 /**
-* Creating the factory  loading the picture changing its caption
-*/
+ * Creating the factory  loading the picture changing its caption
+ */
 $picture_factory = new Xoopsyogurt_imagesHandler($xoopsDB);
-$picture = $picture_factory->create(false);
+$picture         = $picture_factory->create(false);
 $picture->load($_POST['cod_img']);
 
-$uid = intval($xoopsUser->getVar('uid'));
+$uid = (int)$xoopsUser->getVar('uid');
 
-$image = XOOPS_ROOT_PATH.'/uploads/'.'thumb_'.$picture->getVar('url');
-$avatar = 'av'.$uid.'_'.time().'.jpg';
-$imageavatar = XOOPS_ROOT_PATH.'/uploads/'.$avatar;
+$image       = XOOPS_ROOT_PATH . '/uploads/' . 'thumb_' . $picture->getVar('url');
+$avatar      = 'av' . $uid . '_' . time() . '.jpg';
+$imageavatar = XOOPS_ROOT_PATH . '/uploads/' . $avatar;
 
-if(!copy($image, $imageavatar)) {echo 'failed to copy $file...\n';}
-$xoopsUser->setVar('user_avatar',$avatar);
+if (!copy($image, $imageavatar)) {
+    echo 'failed to copy $file...\n';
+}
+$xoopsUser->setVar('user_avatar', $avatar);
 
 $userHandler = new XoopsUserHandler($xoopsDB);
 
 /**
-* Verifying who's the owner to allow changes
-*/
-if($uid == $picture->getVar('uid_owner'))
-{
-	if($userHandler->insert($xoopsUser)) {redirect_header('album.php', 2, _MD_YOGURT_AVATAR_EDITED);}
-	else {redirect_header('album.php', 2, _MD_YOGURT_NOCACHACA);}
+ * Verifying who's the owner to allow changes
+ */
+if ($uid == $picture->getVar('uid_owner')) {
+    if ($userHandler->insert($xoopsUser)) {
+        redirect_header('album.php', 2, _MD_YOGURT_AVATAR_EDITED);
+    } else {
+        redirect_header('album.php', 2, _MD_YOGURT_NOCACHACA);
+    }
 }
 
-include '../../footer.php';
-?>
+include __DIR__ . '/../../footer.php';

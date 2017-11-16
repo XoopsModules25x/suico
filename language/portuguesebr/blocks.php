@@ -26,19 +26,18 @@
 //  ------------------------------------------------------------------------ //
 
 /**
-* Translation for Portuguese users
-* $Id: blocks.php,v 3.2 2008/08/19  19:14:00 GibaPhp Exp $
-* @Module: yogurt
-* @Dependences: FrameWork 1.22
-* @Version: 3.2
-* @Release Date: 
-* @Author: Marcelo Brandão
-* @Language: Portuguesebr
-* @Translators: GibaPhp / 
-* @Revision: 
-* @Support: http://br.impresscms.org - Team Brazilian.
-* @Licence: GNU
-*/
+ * Translation for Portuguese users
+ * $Id: blocks.php,v 3.2 2008/08/19  19:14:00 GibaPhp Exp $
+ * @Module     : yogurt
+ * @Dependences: FrameWork 1.22
+ * @Version    : 3.2
+ * @Release    Date:
+ * @Author     : Marcelo Brandão
+ * @Language   : Portuguesebr
+ * @Translators: GibaPhp /
+ * @Revision   :
+ * @Support    : http://br.impresscms.org - Team Brazilian.
+ * @Licence    : GNU
+ */
 
-define("_MB_YOG_ALLFRIENDS" , "Ver todos os amigos");
-?>
+define('_MB_YOG_ALLFRIENDS', 'Ver todos os amigos');

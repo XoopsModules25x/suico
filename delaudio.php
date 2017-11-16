@@ -24,50 +24,46 @@
 //  along with this program; if not, write to the Free Software              //
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
-include_once '../../mainfile.php';
-include_once '../../header.php';
-include_once '../../class/criteria.php';
+include_once __DIR__ . '/../../mainfile.php';
+include_once __DIR__ . '/../../header.php';
+include_once __DIR__ . '/../../class/criteria.php';
 
-include_once 'class/yogurt_audio.php';
+include_once __DIR__ . '/class/yogurt_audio.php';
 
-if(!($GLOBALS['xoopsSecurity']->check())) {
-  redirect_header($_SERVER['HTTP_REFERER'], 3, _MD_YOGURT_TOKENEXPIRED);
+if (!$GLOBALS['xoopsSecurity']->check()) {
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
 /**
-* Receiving info from get parameters  
-*/ 
+ * Receiving info from get parameters
+ */
 $cod_audio = $_POST['cod_audio'];
-if(!isset($_POST['confirm']) || $_POST['confirm']!=1)
-{
-	xoops_confirm(array('cod_audio'=> $cod_audio,'confirm'=>1), 'delaudio.php', _MD_YOGURT_ASKCONFIRMAUDIODELETION, _MD_YOGURT_CONFIRMAUDIODELETION);
-}
-else
-{
-	/**
-	* Creating the factory  and the criteria to delete the picture
-	* The user must be the owner
-	*/  
-	$audio_factory = new Xoopsyogurt_audioHandler($xoopsDB);
-	$criteria_aud = new Criteria('audio_id',$cod_audio);
-	$uid = intval($xoopsUser->getVar('uid'));
-	$criteria_uid = new Criteria('uid_owner',$uid);
-	$criteria = new CriteriaCompo($criteria_aud);
-	$criteria->add($criteria_uid);
-	
-	$objects_array = $audio_factory->getObjects($criteria);
-	$audio_name = $objects_array[0]->getVar('url');
-	
-	/**
-	* Try to delete  
-	*/
-	if($audio_factory->deleteAll($criteria))
-	{
-		unlink(XOOPS_ROOT_PATH.'/uploads/yogurt/mp3/'.$audio_name);
-		redirect_header('audio.php', 2, _MD_YOGURT_AUDIODELETED);
-	}
-	else {redirect_header('audio.php', 2, _MD_YOGURT_NOCACHACA);}
+if (!isset($_POST['confirm']) || 1 != $_POST['confirm']) {
+    xoops_confirm(['cod_audio' => $cod_audio, 'confirm' => 1], 'delaudio.php', _MD_YOGURT_ASKCONFIRMAUDIODELETION, _MD_YOGURT_CONFIRMAUDIODELETION);
+} else {
+    /**
+     * Creating the factory  and the criteria to delete the picture
+     * The user must be the owner
+     */
+    $audio_factory = new Xoopsyogurt_audioHandler($xoopsDB);
+    $criteria_aud  = new Criteria('audio_id', $cod_audio);
+    $uid           = (int)$xoopsUser->getVar('uid');
+    $criteria_uid  = new Criteria('uid_owner', $uid);
+    $criteria      = new CriteriaCompo($criteria_aud);
+    $criteria->add($criteria_uid);
+
+    $objects_array = $audio_factory->getObjects($criteria);
+    $audio_name    = $objects_array[0]->getVar('url');
+
+    /**
+     * Try to delete
+     */
+    if ($audio_factory->deleteAll($criteria)) {
+        unlink(XOOPS_ROOT_PATH . '/uploads/yogurt/mp3/' . $audio_name);
+        redirect_header('audio.php', 2, _MD_YOGURT_AUDIODELETED);
+    } else {
+        redirect_header('audio.php', 2, _MD_YOGURT_NOCACHACA);
+    }
 }
 
-include '../../footer.php';
-?>
+include __DIR__ . '/../../footer.php';

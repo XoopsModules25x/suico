@@ -39,29 +39,29 @@ jQuery(document).ready(function() {
 
 
 
-//validation of scraps
+//validation of Notes
 jQuery(document).ready(function() {
-	$("form#formScrapNew").submit(function() {
-		return xoopsFormValidate_formScrapNew();
+	$("form#formNoteNew").submit(function() {
+		return xoopsFormValidate_formNoteNew();
 	});
 });
 
 
 jQuery(document).ready(function() {
-$("div.yogurt-scrap-details-form").hide();
+$("div.yogurt-Note-details-form").hide();
 });
 
 
 jQuery(document).ready(function() {
-	$("a.yogurt-scraps-replyscrap").click(function() {
-		$(this).parents("div.yogurt-scrap-details").find('div.yogurt-scrap-details-form').slideToggle("slow");
+	$("a.yogurt-Notes-replyNote").click(function() {
+		$(this).parents("div.yogurt-Note-details").find('div.yogurt-Note-details-form').slideToggle("slow");
 		
 	});
 });
 
 jQuery(document).ready(function() {
-	$("input.resetscrap").click(function() {
-		$(this).parents("div.yogurt-scrap-details-form").slideToggle("slow");
+	$("input.resetNote").click(function() {
+		$(this).parents("div.yogurt-Note-details-form").slideToggle("slow");
 		
 	});
 
@@ -189,8 +189,8 @@ function xoopsFormValidate_form_picture() { myform = window.document.form_pictur
 }
 
 
-function xoopsFormValidate_formScrapNew() { 
-myform = window.document.formScrapNew; 
+function xoopsFormValidate_formNoteNew() {
+myform = window.document.formNoteNew;
 if ( myform.text.value == "" ) { 
 window.alert("Please enter text"); 
 myform.text.focus(); 
@@ -199,7 +199,7 @@ return false;
 return true;
 		}
 
-function cleanScrapForm(id,defaultvalue) { 
+function cleanNoteForm(id,defaultvalue) {
 
 	
 var ele = xoopsGetElementById(id);

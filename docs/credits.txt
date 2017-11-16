@@ -1,0 +1,6 @@
+Credits
+===============
+
+Originally developed by
+
+Version 2.3 was updated to XOOPS 2.5.6 Standard GUI by Michael Beck (Mamba)

@@ -24,45 +24,46 @@
 //  along with this program; if not, write to the Free Software              //
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
-include_once '../../mainfile.php';
-include_once '../../header.php';
-include_once '../../class/criteria.php';
+include_once __DIR__ . '/../../mainfile.php';
+include_once __DIR__ . '/../../header.php';
+include_once __DIR__ . '/../../class/criteria.php';
 
-include_once 'class/yogurt_friendship.php';
+include_once __DIR__ . '/class/yogurt_friendship.php';
 
-if(!$xoopsUser) {redirect_header('index.php');}
+if (!$xoopsUser) {
+    redirect_header('index.php');
+}
 
 $friendship_factory = new Xoopsyogurt_friendshipHandler($xoopsDB);
-$friend2_uid = intval($_POST['friend_uid']);
-$marker = (!empty($_POST['marker'])) ? intval($_POST['marker']) : 0;
+$friend2_uid        = (int)$_POST['friend_uid'];
+$marker             = (!empty($_POST['marker'])) ? (int)$_POST['marker'] : 0;
 
 $friend = new XoopsUser($friend2_uid);
 
-if($marker==1)
-{
-	$level = $_POST['level'];
-	$cool = $_POST['cool'];
-	$sexy = $_POST['hot'];
-	$trusty = $_POST['trust'];
-	$fan = $_POST['fan'];
-	$friendship_id = intval($_POST['friendship_id']);
-	
-	$criteria= new criteria('friendship_id',$friendship_id);
-	$friendships = $friendship_factory->getObjects($criteria);
-	$friendship = $friendships[0];
-	$friendship->setVar('level',$level);
-	$friendship->setVar('cool',$cool);
-	$friendship->setVar('hot',$sexy);
-	$friendship->setVar('trust',$trusty);
-	$friendship->setVar('fan' ,$fan);
-	$friend2_uid = intval($friendship->getVar('friend2_uid'));
-	$friendship->unsetNew();
-	$friendship_factory->insert($friendship);
-	redirect_header('friends.php',2,_MD_YOGURT_FRIENDSHIPUPDATED);
-	
-}
-else {$friendship_factory->renderFormSubmit($friend);}
+if (1 == $marker) {
+    $level         = $_POST['level'];
+    $cool          = $_POST['cool'];
+    $sexy          = $_POST['hot'];
+    $trusty        = $_POST['trust'];
+    $fan           = $_POST['fan'];
+    $friendship_id = (int)$_POST['friendship_id'];
 
-include '../../footer.php';
-?>
+    $criteria    = new criteria('friendship_id', $friendship_id);
+    $friendships = $friendship_factory->getObjects($criteria);
+    $friendship  = $friendships[0];
+    $friendship->setVar('level', $level);
+    $friendship->setVar('cool', $cool);
+    $friendship->setVar('hot', $sexy);
+    $friendship->setVar('trust', $trusty);
+    $friendship->setVar('fan', $fan);
+    $friend2_uid = (int)$friendship->getVar('friend2_uid');
+    $friendship->unsetNew();
+    $friendship_factory->insert($friendship);
+    redirect_header('friends.php', 2, _MD_YOGURT_FRIENDSHIPUPDATED);
+} else {
+    $friendship_factory->renderFormSubmit($friend);
+}
+
+include __DIR__ . '/../../footer.php';
+
 

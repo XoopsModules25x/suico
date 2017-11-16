@@ -25,67 +25,64 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 
-
-
 /**
  * Xoops header ...
  */
-include_once("../../mainfile.php");
-$xoopsOption['template_main'] = 'yogurt_index.html';
-include_once("../../header.php");
+include_once '../../mainfile.php';
+$GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
+include_once '../../header.php';
 
 /**
- * Modules class includes  
+ * Modules class includes
  */
-include_once("class/yogurt_audio.php");
+include_once 'class/yogurt_audio.php';
 
 /**
- * Factory of pictures created  
+ * Factory of pictures created
  */
-$audio_factory      = new Xoopsyogurt_audioHandler($xoopsDB);
+$audio_factory = new Xoopsyogurt_audioHandler($xoopsDB);
 
-$myts =& MyTextSanitizer::getInstance();	
+$myts = MyTextSanitizer::getInstance();
 /**
- * Getting the title 
+ * Getting the title
  */
-$title = $myts->displayTarea($_POST['title'],0,1,1,1,1);
-$author = $myts->displayTarea($_POST['author'],0,1,1,1,1); 
-
-/**
- * Getting parameters defined in admin side  
- */
-$path_upload    = XOOPS_ROOT_PATH."/uploads/yogurt/mp3/";
-$maxfilebytes   = $xoopsModuleConfig['maxfilesize'];
+$title  = $myts->displayTarea($_POST['title'], 0, 1, 1, 1, 1);
+$author = $myts->displayTarea($_POST['author'], 0, 1, 1, 1, 1);
 
 /**
- * If we are receiving a file  
+ * Getting parameters defined in admin side
  */
-if ($_POST['xoops_upload_file'][0]=='sel_audio'){
-       
-              /**
-              * Verify Token
-              */
-              if (!($GLOBALS['xoopsSecurity']->check())){
-                     redirect_header($_SERVER['HTTP_REFERER'], 3, _MD_YOGURT_TOKENEXPIRED);
-              }
-              
-              /**
-              * Try to upload picture resize it insert in database and then redirect to index
-              */
-              if ($audio_factory->receiveAudio($title,$path_upload, $author, $maxfilebytes)){
-                     //$extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
-//                     $extra_tags['X_OWNER_UID'] = $xoopsUser->getVar('uid');
-//                     $notification_handler =& xoops_gethandler('notification');
-//                     $notification_handler->triggerEvent ("picture", $xoopsUser->getVar('uid'), "new_picture",$extra_tags);
-                     //header("Location: ".XOOPS_URL."/modules/yogurt/index.php?uid=".$xoopsUser->getVar('uid'));
-                     redirect_header(XOOPS_URL."/modules/yogurt/audio.php?uid=".$xoopsUser->getVar('uid'),50,_MD_YOGURT_UPLOADEDAUDIO);
-              } else {
-                     redirect_header(XOOPS_URL."/modules/yogurt/audio.php?uid=".$xoopsUser->getVar('uid'),50,_MD_YOGURT_NOCACHACA);
-              }
+$path_upload  = XOOPS_ROOT_PATH . '/uploads/yogurt/mp3/';
+$maxfilebytes = $xoopsModuleConfig['maxfilesize'];
+
+/**
+ * If we are receiving a file
+ */
+if ('sel_audio' == $_POST['xoops_upload_file'][0]) {
+
+    /**
+     * Verify Token
+     */
+    if (!$GLOBALS['xoopsSecurity']->check()) {
+        redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    }
+
+    /**
+     * Try to upload picture resize it insert in database and then redirect to index
+     */
+    if ($audio_factory->receiveAudio($title, $path_upload, $author, $maxfilebytes)) {
+        //$extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
+        //                     $extra_tags['X_OWNER_UID'] = $xoopsUser->getVar('uid');
+        //                     $notificationHandler = xoops_getHandler('notification');
+        //                     $notificationHandler->triggerEvent ("picture", $xoopsUser->getVar('uid'), "new_picture",$extra_tags);
+        //header("Location: ".XOOPS_URL."/modules/yogurt/index.php?uid=".$xoopsUser->getVar('uid'));
+        redirect_header(XOOPS_URL . '/modules/yogurt/audio.php?uid=' . $xoopsUser->getVar('uid'), 50, _MD_YOGURT_UPLOADEDAUDIO);
+    } else {
+        redirect_header(XOOPS_URL . '/modules/yogurt/audio.php?uid=' . $xoopsUser->getVar('uid'), 50, _MD_YOGURT_NOCACHACA);
+    }
 }
 
 /**
- * Close page  
+ * Close page
  */
-include("../../footer.php");
-?>
+include '../../footer.php';

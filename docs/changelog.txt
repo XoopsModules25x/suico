@@ -1,3 +1,34 @@
+<h5>3.4 Beta 1  [NOT RELEASED]</h5>
+<hr>
+- XOOPS 2.5.9, PHP 7 (mamba)
+- Converted to XOOPS 2.5.9 Admin GUI (mamba)
+- removed @version (mamba)
+- PSR-2 code cosmetics (mamba)
+- addNavigation(basename(__FILE__))  (mamba)
+- dirname(__FILE__) to __DIR__ (mamba)
+- replaced < br /> with < br > (mamba)
+- Unnecessary double quotes (mamba)
+- reference mismatch (mamba)
+- Hardening to type safe (mamba)
+- update Help, .html to .tpl (mamba)
+- changed _handler to Handler (mamba)
+- removed '/' from void HTML elements (&lt;br&gt;, &lt;img&gt;, etc) (mamba)
+- HTML 5: removed 'selected' and 'checked' (mamba)
+- updated file headers for consistency (mamba)
+- renamed several $indexAdmin with $adminObject for consistency (mamba)
+- Updates for PayPal changes (zyspec)
+- added Contributing.md (mamba)
+- moved functions to Utility class (mamba)
+- include_once to require_once (mamba)
+- php-cs-fixer updates (mamba)
+- short array syntax (mamba)
+- Yoda notation (mamba)
+- renamed scraps to notes
+- started conversion to XMF (mamba)
+    &nbsp;&nbsp;- updated addInfoBoxLine entries (mamba)
+    &nbsp;&nbsp;- displayNavigation(basename(__FILE__))  (mamba)
+    &nbsp;&nbsp;- changed to ->displayButton('left') (mamba)
+
 ## 25/08/2008
 Bugs fixed
 
@@ -6,7 +37,7 @@ fixed #2074263 check for /uploads/yogurt/mp3 in the backend (dhcst)
 fixed #2074362 MP3 player read now ID3v1 and v2 (dhcst)
 fixed #1993627 deleting Photos with errors (dhcst)
 fixed #1939798 Smarty error: mailto: missing (dhcst)
-fixed height scrapbook > bbcode tips (sato-san)
+fixed height Notebook > bbcode tips (sato-san)
 fixed bug triebes in navbar (dhcst)
 fixed Permission audio.php (dhcst)
 fixed Permission mainfile.php (dhcst)
@@ -37,11 +68,11 @@ Bugs fixed:
 1933885 No avatar for userid above 100
 1902089 filename for thumbnail is too long frogx
 1888645 yogurt.css
-1888643 cr in scraps
+1888643 cr in Notes
 1888640 display error with right column
 1888639 too much friends, no second page
-1886972 avatar in scraps
-1886412 notification is not sent to PM for new scraps notifications
+1886972 avatar in Notes
+1886412 notification is not sent to PM for new Notes notifications
 1886319 website url in user's profile
 
 
@@ -79,7 +110,7 @@ Bugs report treated. Most of them corrected, some I could not reproduce
 1844552 	no search on yogurt [takeaweb]
 1844590 	album page missing requirements [patrick80]
 1854041 	Typo
-1875338 	notification.inc scrap $item['url']
+1875338 	notification.inc Note $item['url']
 1844585 	Ugly license [irtmfan]
 1854617 	misredirect
 1849019 	installation error
@@ -89,7 +120,7 @@ Bugs report treated. Most of them corrected, some I could not reproduce
 1844591 	protect email address [patrick80]
 1844559 	User contributions remains exploded [takeaweb]
 1876676 	Private Message bug in My Friends Block
-1845327 	delete scrap
+1845327 	delete Note
 1844589 	lang definitions missing [eparcyl]
 1844560 	error on search.php [takeaweb]
 1844570 	misredirection to user un myfriends box[ctoa]
@@ -97,12 +128,12 @@ Bugs report treated. Most of them corrected, some I could not reproduce
 1844556 	view all not defined [takeaweb]
 1844555 	you can upload only... not defined [takeaweb]
 1844554 	_MI_YOGURT_FRIENDS_DESC not defined [takeaweb]
-1844553 	scrap error on ie on delete [takeaweb]
+1844553 	Note error on ie on delete [takeaweb]
 1844549 	xoops.js $ click smilies doesn t work [maxxy]
 1844546 	album: newest first [maxxy]
 1844545 	last pictures point to profile not album [maxxy]
 1844543 	fatal error in xoops cube legacy [pewy]
-1844537  	  blank page after del in scraps[pewy]
+1844537  	  blank page after del in Notes[pewy]
 1844536 	last picture block qtty [maxxy]
 1844533 	can t set avatar [maxxy]
 1844535 	user listed in visitors of the profile [maxxy]
@@ -118,7 +149,7 @@ and help this project reporting your bugs too
 ## 26/11/2007
 First Beta Release Version 2.9
 Changed the project to yogurt social network
-Picures, Videos, Scraps, Tribes, Configs, Friends
+Picures, Videos, Notes, Tribes, Configs, Friends
 
 ## 26/08/2007
 First Candidate Release Version 1.0

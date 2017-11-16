@@ -1,0 +1,245 @@
+<{include file="db:yogurt_navbar.tpl"}>
+
+<{ if $petition==1 && $isOwner==1 && $isfriend==0}>
+
+<!-- if not owner and not friend -->
+<div id="yogurt-profile-petition" class="confirmMsg">
+<h4><{$lang_youhavexpetitions}></h4>
+<img width="30" src="<{$xoops_url}>/uploads/<{$petitioner_avatar}>" />
+<form action="makefriends.php" method="post">
+<{$lang_askingfriend}>
+<ul>
+	<li>
+		<input name="level" type="radio" value="0" />
+		<{$lang_rejected}>
+	</li>
+	<li>
+		<input name="level" type="radio" value="1" />
+		<{$lang_accepted}>
+	</li>
+	
+	<li>
+		<input name="level" type="radio" value="3" />
+		<{$lang_acquaintance}>
+	</li>
+	
+	<li>
+		<input name="level" type="radio" value="5" />
+		<{$lang_friend}>
+	</li>
+</ul>
+<input type="hidden" name="petition_id" id="petition_id" value="<{$petition_id}>" />
+<input type="submit" />
+<{$token}>
+</form>
+</div>
+<{else}>
+
+<{if (($isfriend!=1) && ($isOwner==0) && ($isanonym!=1))}>
+<div id="yogurt-profile-petition">
+<form action=submit_friendpetition.php method="post">
+<{$lang_askusertobefriend}><input type="hidden" name="petitioned_uid" id="petitioned_uid" value="<{$uid_owner}>" />
+<input name="" type="image" src="images/addfriend.jpg"/><{$token}>
+</form>
+</div>
+<!-- end if -->
+<{ /if }>
+<{ /if }>
+<{ if $allow_friends }>
+<div class="yogurt-nav-bar" id="yogurt-nav-bar">    
+   <p id="yogurt-profile-fans"><a href="fans.php?uid=<{$uid_owner}>" alt="<{$lang_fans}>" title="<{$lang_fans}>" > <{$lang_fans}> </a><img src="images/fans.gif" /> ( <{$nb_fans}> ) 
+| <{$lang_trusty}> </p> <p id="trustybw"> <span id="trustycolor">&nbsp;<img width="<{$trusty}>" height="0" src="images/transparent.gif" /></span>&nbsp;<img width="<{$trusty_rest}>" height="0" src="images/transparent.gif" /></p>
+
+| <{$lang_cool}> <p id="coolbw"> <span id="coolcolor">&nbsp;<img width="<{$cool}>" height="0" src="images/transparent.gif" /></span>&nbsp;<img width="<{$cool_rest}>" height="0" src="images/transparent.gif" /></p>
+
+| <{$lang_sexy}> <p id="sexybw"> <span id="sexycolor">&nbsp;<img width="<{$sexy}>" height="0" src="images/transparent.gif" /></span>&nbsp;<img width="<{$sexy_rest}>" height="0" src="images/transparent.gif" /></p>
+</div>
+<{/if}>
+
+<div class="yogurt-profile-group1">
+<{ if $allow_pictures || $allow_videos }>
+<div id="yogurt-profile-visual" class="outer">
+	<h2 class="yogurt-profile-title head">
+		<{$owner_uname}>
+	</h2>
+<{ if $allow_pictures }>
+	<div id="yogurt-profile-avatar">
+		<{if $avatar_url!="" && $avatar_url!="blank.gif" }>
+			<img src="<{$xoops_url}>/uploads/<{$avatar_url}>" />
+		<{ else }>
+			<img src="images/noavatar.gif" >
+			<{if $isOwner}>
+				<p>
+					<{$lang_selectavatar}>
+				</p>
+			<{ else }>
+				<p>
+					<{$lang_noavatar}>
+				</p>
+			<{/if}>
+		<{ /if }>
+	</div>
+<{/if}>	
+</div>
+<{/if}>
+
+
+
+<{ if ($isOwner==1) }>
+
+	<div id="yogurt-album-visitors" class="outer">
+		<h2 class="head"><{$lang_visitors}></h2>
+    	<p>
+    	<{foreach from=$visitors key=k item=v}>
+ 			<a href=index.php?uid=<{$k}> > <{$v}> </a>&nbsp; 
+		<{/foreach}> 
+    	</p>
+		</div>
+<{ /if }>
+
+
+
+<{ if $allow_profile_general==1}>
+<div id="yogurt-profile-details" class="outer">
+<h2 class="yogurt-profile-title head"><{$lang_detailsinfo}> <{ if $isOwner==1 }> <a href="edituser.php" title="<{$lang_editprofile}>" ><img src="images/edit.gif" /></a> <{/if}></h2>
+<p class="odd"><img src="images/username.gif" /><span class="yogurt-profileinfo-label"><{$lang_uname}>:</span><span class="yogurt-profileinfo-value"><{$user_uname}></span></p>
+<p class="even"><img src="images/username.gif" /><span class="yogurt-profileinfo-label"><{$lang_realname}>:</span><span class="yogurt-profileinfo-value"><{$user_realname}></span></p>
+<p class="odd"> <img src="images/house.gif" /> <span class="yogurt-profileinfo-label"><{$lang_location}>:</span><span class="yogurt-profileinfo-value"><{$user_location}></span><a href="http://maps.google.com/?q=<{$user_location}>" target="_blank" ><img src="images/mapsgoogle.gif" /></a></p>
+<p class="even"> <img src="images/occ.gif" /> <span class="yogurt-profileinfo-label"><{$lang_occupation}>:</span><span class="yogurt-profileinfo-value"><{$user_occupation}></span></p>
+<p class="odd"> <img src="images/interests.gif" /> <span class="yogurt-profileinfo-label"><{$lang_interest}>:</span><span class="yogurt-profileinfo-value"><{$user_interest}></span></p>
+<p class="even"> <img src="images/bio.gif" /> <span class="yogurt-profileinfo-label"><{$lang_extrainfo}>:</span></p>
+<p  class="yogurt-profileinfo-valuebigtext odd"><{$user_extrainfo}></p>
+</div>
+<{ /if }>
+<{ if $allow_profile_contact==1}>
+<div id="yogurt-profile-details" class="outer">
+<h2 class="yogurt-profile-title head"><{$lang_contactinfo}> <{ if $isOwner==1 }> <a href="edituser.php" title="<{$lang_editprofile}>" ><img src="images/edit.gif" /></a> <{/if}></h2>
+<p class="even"> <img src="images/url.gif" /> <span class="yogurt-profileinfo-label"><{$lang_website}>:</span><span class="yogurt-profileinfo-value"><{$user_websiteurl}></span></p>
+<p class="odd"> <img src="images/email.gif" /> <span class="yogurt-profileinfo-label"><{$lang_email}>:</span><span class="yogurt-profileinfo-value"><{ mailto address=$user_email encode="javascript"}></span></p>
+<{ if $isanonym!=1 && $isOwner!=1 }>
+<p class="even"> <img src="images/email.gif" /> <span class="yogurt-profileinfo-label"><{$lang_privmsg}>:</span><span class="yogurt-profileinfo-value"><a href="javascript:openWithSelfMain('<{$xoops_url}>/pmlite.php?send2=1&amp;to_userid=<{$uid_owner}>', 'pmlite', 450, 380);"><img src="<{$xoops_url}>/images/icons/pm.gif" alt="Send Private Message to suico" /></a></span></p>
+<{ /if }>
+<p class="odd"> <img src="images/icq.gif" /> <span class="yogurt-profileinfo-label"><{$lang_icq}>:</span><span class="yogurt-profileinfo-value"><{$user_icq}></span> <!-- <{ if $user_icq!=""}><img src="http://status.icq.com/online.gif?icq=<{$user_icq}>&img=21"> <{ /if }> --></p>
+<p class="even"> <img src="images/aim.gif" /> <span class="yogurt-profileinfo-label"><{$lang_aim}>:</span><span class="yogurt-profileinfo-value"><{$user_aim}></span></p>
+<p class="odd"> <img src="images/ym.gif" /> <span class="yogurt-profileinfo-label"><{$lang_yim}>:</span><span class="yogurt-profileinfo-value"><{$user_yim}></span></p>
+<p class="even"> <img src="images/amsn.gif" /> <span class="yogurt-profileinfo-label"><{$lang_msnm}>:</span><span class="yogurt-profileinfo-value"><{$user_msnm}></span></p>
+</div>
+<{ /if }>
+
+
+
+<{ if $allow_profile_stats}>
+<div id="yogurt-profile-statistics" class="outer">
+<h2 class="yogurt-profiletitle head"><{$lang_statistics}></h2>
+<p class="odd"> <img src="images/birthday.gif" /> <span class="yogurt-profileinfo-label"><{$lang_membersince}>:</span><span class="yogurt-profileinfo-value"><{$user_joindate}></span></p>
+<p class="even"> <img src="images/rank.gif" /> <span class="yogurt-profileinfo-label"><{$lang_rank}>:</span><span class="yogurt-profileinfo-value"><{$user_rankimage}>  <{$user_ranktitle}></span></p>
+<p class="odd"> <img src="images/comments.gif" /> <span class="yogurt-profileinfo-label"><{$lang_posts}>:</span><span class="yogurt-profileinfo-value"><{$user_posts}></span></p>
+<p class="even"> <img src="images/clock.gif" /> <span class="yogurt-profileinfo-label"><{$lang_lastlogin}>:</span><span class="yogurt-profileinfo-value"><{$user_lastlogin}></span></p>
+<p class="odd"> <img src="images/signature.gif" /> <span class="yogurt-profileinfo-label"><{$lang_signature}>:</span></p>
+
+<p  class="yogurt-profileinfo-valuebigtext even"><{$user_signature}></p>
+</div>
+<{ /if }>
+
+
+<div id="yogurt-profile-search-results" class="outer">
+<h2 class="yogurt-profiletitle head"><{$lang_usercontributions}></h2>
+<!-- start module search results loop -->
+<{foreach item=module from=$modules name="search_results"}>
+
+<div class="yogurt-profile-search-module" id="yogurt-profile-search-module-<{$smarty.foreach.search_results.iteration}>" >
+    <h4 class="yogurt-profiletitle head"> 
+        <a class="yogurt-profile-search-module-title" id="yogurt-profile-search-module-title-<{$smarty.foreach.search_results.iteration}>" > 
+            <img src="images/toggle.gif" />
+        </a> 
+        <{$module.name}>
+    </h4>
+
+    <div class="yogurt-profile-search-module-results" id="yogurt-profile-search-module-results-<{$smarty.foreach.search_results.iteration}>">
+        <!-- start results item loop -->
+        <{foreach item=result from=$module.results}>
+
+        <p class="<{ cycle values="odd,even"}>">  
+            <img src="<{$xoops_url}>/<{$result.image}>" alt="<{$module.name}>" />
+                <b>
+                    <a href="<{$xoops_url}>/<{$result.link}>">
+                        <{$result.title}>
+                    </a>
+                </b><br />
+            <small>(<{$result.time}>)</small>
+        </p>
+
+        <{/foreach}>
+        <!-- end results item loop -->
+        <p>
+            <{$module.showall_link}>
+        </p>
+    </div>
+</div>
+<{/foreach}>
+<!-- end module search results loop -->
+</div>
+
+</div><!-- end of div of group1 -->
+
+<div class="yogurt-profile-group2">
+
+<div id="yogurt-profile-friends" class="outer">
+	<h2 id="titulo-friends" class="head"><{$lang_videos}> ( <{$nb_videos}> )</h2>
+		<{ if $allow_videos==1 }>
+			<div id="yogurt-profile-tribe">
+			    <{if $mainvideocode!="" }>
+			        <object width="200" height="150">
+			            <param name="movie" value="http://www.youtube.com/v/<{$mainvideocode}>" />
+			            <param name="wmode" value="transparent" />
+			            <embed src="http://www.youtube.com/v/<{$mainvideocode}>" type="application/x-shockwave-flash" wmode="transparent" width="200" height="150" />
+			        </object>
+			        <p id="yogurt-profile-mainvideo-desc">
+			            <{$mainvideodesc}>
+			        </p>
+			    <{ else }>
+			        <img src="images/novideo.gif" >
+			        <{if $isOwner}>
+			            <p>
+			                <{$lang_selectmainvideo}>
+			            </p>
+			        <{else}>	
+			            <p>
+			                <{$lang_nomainvideo}>
+			            </p>
+			        <{/if}>
+			    <{ /if }>
+			</div>
+		<{/if}>
+</div>
+
+<{ if $allow_friends==1 }>
+<div id="yogurt-profile-friends" class="outer">
+<h2 id="titulo-friends" class="head"><{$lang_friendstitle}> ( <{$nb_friends}> )</h2>
+<{if $nb_friends==0}><p id="nofriends"><{$lang_nofriendsyet}></p><{ /if }>       
+<{section name=i loop=$friends}>
+<div class="yogurt-profile-friend <{cycle values="odd,even"}>">    	
+<a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$friends[i].uid}>" alt="<{$friends[i].uname}>" title="<{$friends[i].uname}>"><{ if $friends[i].user_avatar=="blank.gif"}><img class="yogurt-profile-friend-photo" src="images/noavatar.gif"><{ else }><img class="yogurt-profile-friend-photo" src="<{$xoops_upload_url}>/<{$friends[i].user_avatar}>"><{/if}><{$friends[i].uname}> </a>
+</div>
+<{/section}>
+<p id="yogurt-profile-friend-viewall" class="foot">
+<a href="friends.php?uid=<{$uid_owner}>"><{$lang_viewallfriends}></a>
+</p>
+</div>
+<{ /if }>
+<{ if $allow_tribes==1}>
+<div id="yogurt-profile-tribes" class="outer">
+<h2 class="yogurt-profiletitle head"><{$lang_tribes}> (<{$nb_tribes}>)</h2>
+<{if $nb_tribes==0}><p id="notribes"><{$lang_notribesyet}></p><{ /if }>       
+<{section name=i loop=$tribes}>
+<div class="yogurt-profile-tribe <{cycle values="odd,even"}>">    	
+<a href="tribe.php?tribe_id=<{$tribes[i].tribe_id}>"><img alt="<{$tribes[i].title}>" title="<{$tribes[i].title}>" class="yogurt-profile-tribes-img" src="<{$xoops_upload_url}>/<{$tribes[i].img}>" /></a> <h4> <{$tribes[i].title}> </h4><p><{$tribes[i].desc}></p>
+</div>
+<{/section}>
+<p id="yogurt-profile-friend-viewall" class="foot">
+<a href="tribes.php?uid=<{$uid_owner}>"><{$lang_viewalltribes}></a>
+</p>
+</div>
+<{ /if }>
+</div><!-- end of group2 -->
+<{include file="db:yogurt_footer.tpl"}>

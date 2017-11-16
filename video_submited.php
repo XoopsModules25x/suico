@@ -24,45 +24,46 @@
 //  along with this program; if not, write to the Free Software              //
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
-include_once '../../mainfile.php';
-$xoopsOption['template_main'] = 'yogurt_index.html';
-include_once '../../header.php';
+include_once __DIR__ . '/../../mainfile.php';
+$GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
+include_once __DIR__ . '/../../header.php';
 
-include_once 'class/yogurt_seutubo.php';
+include_once __DIR__ . '/class/yogurt_seutubo.php';
 
 /**
-* Factory of pictures created  
-*/
+ * Factory of pictures created
+ */
 $album_factory = new Xoopsyogurt_seutuboHandler($xoopsDB);
 
 $url = $_POST['codigo'];
 
-if(!($GLOBALS['xoopsSecurity']->check())) {redirect_header($_SERVER['HTTP_REFERER'], 3, _MD_YOGURT_TOKENEXPIRED);}
+if (!$GLOBALS['xoopsSecurity']->check()) {
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+}
 
 /**
-* Try to upload picture resize it insert in database and then redirect to index
-*/
+ * Try to upload picture resize it insert in database and then redirect to index
+ */
 $newvideo = $album_factory->create(true);
-$newvideo->setVar('uid_owner', intval($xoopsUser->getVar('uid')));
+$newvideo->setVar('uid_owner', (int)$xoopsUser->getVar('uid'));
 $newvideo->setVar('video_desc', trim(htmlspecialchars($_POST['caption'])));
 
-if(strlen($url)==11) {$code=$url;}
-else
-{
-	$position_of_code = strpos($url,'v=');
-	$code = substr($url,$position_of_code+2,11);
+if (11 == strlen($url)) {
+    $code = $url;
+} else {
+    $position_of_code = strpos($url, 'v=');
+    $code             = substr($url, $position_of_code + 2, 11);
 }
 
-$newvideo->setVar('youtube_code',$code);
-if($album_factory->insert($newvideo))
-{
-	$extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
-	$extra_tags['X_OWNER_UID'] = intval($xoopsUser->getVar('uid'));
-	$notification_handler =& xoops_gethandler('notification');
-	$notification_handler->triggerEvent('video', intval($xoopsUser->getVar('uid')), 'new_video',$extra_tags);
-	redirect_header(XOOPS_URL.'/modules/yogurt/seutubo.php?uid='.intval($xoopsUser->getVar('uid')),2,_MD_YOGURT_VIDEOSAVED);
+$newvideo->setVar('youtube_code', $code);
+if ($album_factory->insert($newvideo)) {
+    $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
+    $extra_tags['X_OWNER_UID']  = (int)$xoopsUser->getVar('uid');
+    $notificationHandler        = xoops_getHandler('notification');
+    $notificationHandler->triggerEvent('video', (int)$xoopsUser->getVar('uid'), 'new_video', $extra_tags);
+    redirect_header(XOOPS_URL . '/modules/yogurt/seutubo.php?uid=' . (int)$xoopsUser->getVar('uid'), 2, _MD_YOGURT_VIDEOSAVED);
+} else {
+    redirect_header(XOOPS_URL . '/modules/yogurt/seutubo.php?uid=' . (int)$xoopsUser->getVar('uid'), 2, _MD_YOGURT_NOCACHACA);
 }
-else {redirect_header(XOOPS_URL.'/modules/yogurt/seutubo.php?uid='.intval($xoopsUser->getVar('uid')),2,_MD_YOGURT_NOCACHACA);}
 
-include '../../footer.php';
-?>
+include __DIR__ . '/../../footer.php';

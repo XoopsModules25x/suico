@@ -24,8 +24,45 @@
 //  along with this program; if not, write to the Free Software              //
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
-$adminmenu[1]['title'] = _MI_YOG_ADMENU1;
-$adminmenu[1]['link'] = "admin/index.php";
-$adminmenu[2]['title'] = _MI_YOG_ADMENU2;
-$adminmenu[2]['link'] = "admin/index.php?op=about";
-?>
+
+$moduleDirName = basename(dirname(__DIR__));
+
+if (false !== ($moduleHelper = Xmf\Module\Helper::getHelper($moduleDirName))) {
+} else {
+    $moduleHelper = Xmf\Module\Helper::getHelper('system');
+}
+
+
+$pathIcon32    = \Xmf\Module\Admin::menuIconPath('');
+//$pathModIcon32 = $moduleHelper->getModule()->getInfo('modicons32');
+
+// Load language files
+$moduleHelper->loadLanguage('admin');
+$moduleHelper->loadLanguage('modinfo');
+$moduleHelper->loadLanguage('main');
+
+$adminmenu[] = [
+    'title' => _MI_YOG_ADMENU1,
+    'link'  => 'admin/index.php',
+    'icon'  => $pathIcon32 . '/home.png'
+];
+
+$adminmenu[] = [
+    'title' => _MI_YOG_MENU_02,
+    'link'  => 'admin/main.php',
+    'icon'  => $pathIcon32 . '/manage.png'
+];
+
+$adminmenu[] = [
+    'title' => _MI_YOG_ADMENU2,
+    'link'  => 'admin/main.php?op=about',
+    'icon'  => $pathIcon32 . '/about.png'
+];
+
+$adminmenu[] = [
+    'title' => _MI_YOG_ADMENU2,
+    'link'  => 'admin/about.php',
+    'icon'  => $pathIcon32 . '/about.png'
+];
+
+

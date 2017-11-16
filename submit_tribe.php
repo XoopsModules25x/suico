@@ -25,71 +25,63 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 
-
-
 /**
  * Xoops header ...
  */
-include_once("../../mainfile.php");
-include_once("../../header.php");
+include_once '../../mainfile.php';
+include_once '../../header.php';
 
 /**
- * Modules class includes  
+ * Modules class includes
  */
-include_once("class/yogurt_friendpetition.php");
-include_once("class/yogurt_reltribeuser.php");
-include_once("class/yogurt_tribes.php");
-
+include_once 'class/yogurt_friendpetition.php';
+include_once 'class/yogurt_reltribeuser.php';
+include_once 'class/yogurt_tribes.php';
 
 /**
- * Factories of tribes  
+ * Factories of tribes
  */
-$reltribeuser_factory      = new Xoopsyogurt_reltribeuserHandler($xoopsDB);
-$tribes_factory = new Xoopsyogurt_tribesHandler($xoopsDB);
+$reltribeuser_factory = new Xoopsyogurt_reltribeuserHandler($xoopsDB);
+$tribes_factory       = new Xoopsyogurt_tribesHandler($xoopsDB);
 
+$marker = isset($_POST['marker']) ? $_POST['marker'] : 0;
 
-$marker = (isset($_POST['marker']))?$_POST['marker']:0;
-
-if ($marker==1) {
-  /**
-   * Verify Token
-   */
-  if (!($GLOBALS['xoopsSecurity']->check())){
-	redirect_header($_SERVER['HTTP_REFERER'], 3, _MD_YOGURT_TOKENEXPIRED);
-  }
-  /**
-   * 
-   */
-  $myts =& MyTextSanitizer::getInstance();
-  $tribe_title = $myts->displayTarea($_POST['tribe_title'],0,1,1,1,1);
-  $tribe_desc  = $myts->displayTarea($_POST['tribe_desc'],0,1,1,1,1);
-  $tribe_img   = (!empty($_POST['tribe_img'])) ? $_POST['tribe_img'] : "";
-  $path_upload    = XOOPS_ROOT_PATH."/uploads";
-  $pictwidth      = $xoopsModuleConfig['resized_width'];
-  $pictheight     = $xoopsModuleConfig['resized_height'];
-  $thumbwidth     = $xoopsModuleConfig['thumb_width'];
-  $thumbheight    = $xoopsModuleConfig['thumb_height'];
-  $maxfilebytes   = $xoopsModuleConfig['maxfilesize'];
-  $maxfileheight  = $xoopsModuleConfig['max_original_height'];
-  $maxfilewidth   = $xoopsModuleConfig['max_original_width'];
-  if ($tribes_factory->receiveTribe($tribe_title,$tribe_desc,'',$path_upload,$maxfilebytes,$maxfilewidth,$maxfileheight))
-  {
-    $reltribeuser = $reltribeuser_factory->create();
-    $reltribeuser->setVar('rel_tribe_id',$xoopsDB->getInsertId());
-    $reltribeuser->setVar('rel_user_uid',$xoopsUser->getVar('uid'));
-    $reltribeuser_factory->insert($reltribeuser);
-    redirect_header("tribes.php",500,_MD_YOGURT_TRIBE_CREATED);
-  }else{
-    $tribes_factory->renderFormSubmit(120000,$xoopsTpl);
-  }
-}else{
-  $tribes_factory->renderFormSubmit(120000,$xoopsTpl);
+if (1 == $marker) {
+    /**
+     * Verify Token
+     */
+    if (!$GLOBALS['xoopsSecurity']->check()) {
+        redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    }
+    /**
+     *
+     */
+    $myts          = MyTextSanitizer::getInstance();
+    $tribe_title   = $myts->displayTarea($_POST['tribe_title'], 0, 1, 1, 1, 1);
+    $tribe_desc    = $myts->displayTarea($_POST['tribe_desc'], 0, 1, 1, 1, 1);
+    $tribe_img     = (!empty($_POST['tribe_img'])) ? $_POST['tribe_img'] : '';
+    $path_upload   = XOOPS_ROOT_PATH . '/uploads';
+    $pictwidth     = $xoopsModuleConfig['resized_width'];
+    $pictheight    = $xoopsModuleConfig['resized_height'];
+    $thumbwidth    = $xoopsModuleConfig['thumb_width'];
+    $thumbheight   = $xoopsModuleConfig['thumb_height'];
+    $maxfilebytes  = $xoopsModuleConfig['maxfilesize'];
+    $maxfileheight = $xoopsModuleConfig['max_original_height'];
+    $maxfilewidth  = $xoopsModuleConfig['max_original_width'];
+    if ($tribes_factory->receiveTribe($tribe_title, $tribe_desc, '', $path_upload, $maxfilebytes, $maxfilewidth, $maxfileheight)) {
+        $reltribeuser = $reltribeuser_factory->create();
+        $reltribeuser->setVar('rel_tribe_id', $xoopsDB->getInsertId());
+        $reltribeuser->setVar('rel_user_uid', $xoopsUser->getVar('uid'));
+        $reltribeuser_factory->insert($reltribeuser);
+        redirect_header('tribes.php', 500, _MD_YOGURT_TRIBE_CREATED);
+    } else {
+        $tribes_factory->renderFormSubmit(120000, $xoopsTpl);
+    }
+} else {
+    $tribes_factory->renderFormSubmit(120000, $xoopsTpl);
 }
 
-       
-
 /**
- * Close page  
+ * Close page
  */
-include("../../footer.php");
-?>
+include '../../footer.php';

@@ -1,5 +1,5 @@
 <?php
-// $Id: delete_scrap.php,v 1.3 2008/01/22 10:25:42 marcellobrandao Exp $
+// $Id: delete_Note.php,v 1.3 2008/01/22 10:25:42 marcellobrandao Exp $
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
@@ -24,45 +24,44 @@
 //  along with this program; if not, write to the Free Software              //
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
-include_once '../../mainfile.php';
-include_once '../../header.php';
-include_once '../../class/criteria.php';
+include_once __DIR__ . '/../../mainfile.php';
+include_once __DIR__ . '/../../header.php';
+include_once __DIR__ . '/../../class/criteria.php';
 
-include_once 'class/yogurt_scraps.php';
+include_once __DIR__ . '/class/yogurt_Notes.php';
 
 /**
-* Factories of tribes  
-*/
-$scraps_factory = new Xoopsyogurt_scrapsHandler($xoopsDB);
+ * Factories of tribes
+ */
+$Notes_factory = new Xoopsyogurt_NotesHandler($xoopsDB);
 
-$scrap_id = intval($_POST['scrap_id']);
+$Note_id = (int)$_POST['Note_id'];
 
-if($_POST['confirm']!=1)
-{
-	xoops_confirm(array('scrap_id'=> $scrap_id,'confirm'=>1), 'delete_scrap.php', _MD_YOGURT_ASKCONFIRMSCRAPDELETION, _MD_YOGURT_CONFIRMSCRAPDELETION);
+if (1 != $_POST['confirm']) {
+    xoops_confirm(['Note_id' => $Note_id, 'confirm' => 1], 'delete_Note.php', _MD_YOGURT_ASKCONFIRMNOTEDELETION, _MD_YOGURT_CONFIRMNOTEDELETION);
+} else {
+    /**
+     * Creating the factory  and the criteria to delete the picture
+     * The user must be the owner
+     */
+    $criteria_Note_id = new Criteria('Note_id', $Note_id);
+    $uid               = (int)$xoopsUser->getVar('uid');
+    $criteria_uid      = new Criteria('Note_to', $uid);
+    $criteria          = new CriteriaCompo($criteria_Note_id);
+    $criteria->add($criteria_uid);
+
+    /**
+     * Try to delete
+     */
+    if (1 == $Notes_factory->getCount($criteria)) {
+        if ($Notes_factory->deleteAll($criteria)) {
+            redirect_header('notebook.php?uid=' . $uid, 2, _MD_YOGURT_NOTEDELETED);
+        } else {
+            redirect_header('notebook.php?uid=' . $uid, 2, _MD_YOGURT_NOCACHACA);
+        }
+    }
 }
-else
-{
-	/**
-	* Creating the factory  and the criteria to delete the picture
-	* The user must be the owner
-	*/
-	$criteria_scrap_id = new Criteria ('scrap_id',$scrap_id);
-	$uid = intval($xoopsUser->getVar('uid'));
-	$criteria_uid = new Criteria ('scrap_to',$uid);
-	$criteria = new CriteriaCompo ($criteria_scrap_id);
-	$criteria->add($criteria_uid);
-	
-	/**
-	* Try to delete  
-	*/
-	if($scraps_factory->getCount($criteria)==1)
-	{
-		if($scraps_factory->deleteAll($criteria)) {redirect_header('scrapbook.php?uid='.$uid, 2, _MD_YOGURT_SCRAPDELETED);}
-		else {redirect_header('scrapbook.php?uid='.$uid, 2, _MD_YOGURT_NOCACHACA);}
-	}
-}
 
-include '../../footer.php';
-?>
+include __DIR__ . '/../../footer.php';
+
 

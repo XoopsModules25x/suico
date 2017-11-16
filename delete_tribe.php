@@ -24,51 +24,46 @@
 //  along with this program; if not, write to the Free Software              //
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
-include_once '../../mainfile.php';
-include_once '../../header.php';
-include_once '../../class/criteria.php';
+include_once __DIR__ . '/../../mainfile.php';
+include_once __DIR__ . '/../../header.php';
+include_once __DIR__ . '/../../class/criteria.php';
 
-include_once 'class/yogurt_reltribeuser.php';
-include_once 'class/yogurt_tribes.php';
+include_once __DIR__ . '/class/yogurt_reltribeuser.php';
+include_once __DIR__ . '/class/yogurt_tribes.php';
 
 /**
-* Factories of tribes  
-*/
+ * Factories of tribes
+ */
 $reltribeuser_factory = new Xoopsyogurt_reltribeuserHandler($xoopsDB);
-$tribes_factory = new Xoopsyogurt_tribesHandler($xoopsDB);
+$tribes_factory       = new Xoopsyogurt_tribesHandler($xoopsDB);
 
-$tribe_id = intval($_POST['tribe_id']);
+$tribe_id = (int)$_POST['tribe_id'];
 
-if(!isset($_POST['confirm']) || $_POST['confirm']!=1)
-{
-	xoops_confirm(array('tribe_id'=> $tribe_id,'confirm'=>1), 'delete_tribe.php', _MD_YOGURT_ASKCONFIRMTRIBEDELETION, _MD_YOGURT_CONFIRMTRIBEDELETION);
-}
-else
-{
-	/**
-	* Creating the factory  and the criteria to delete the picture
-	* The user must be the owner
-	*/
-	$criteria_tribe_id = new Criteria ('tribe_id',$tribe_id);
-	$uid = intval($xoopsUser->getVar('uid'));
-	$criteria_uid = new Criteria ('owner_uid',$uid);
-	$criteria = new CriteriaCompo ($criteria_tribe_id);
-	$criteria->add($criteria_uid);
-	
-	/**
-	* Try to delete  
-	*/
-	if($tribes_factory->getCount($criteria)==1)
-	{
-		if($tribes_factory->deleteAll($criteria))
-		{
-			$criteria_rel_tribe_id = new Criteria('rel_tribe_id',$tribe_id);
-			$reltribeuser_factory->deleteAll($criteria_rel_tribe_id);
-			redirect_header('tribes.php?uid='.$uid, 3, _MD_YOGURT_TRIBEDELETED);
-		}
-		else {redirect_header('tribes.php?uid='.$uid, 3, _MD_YOGURT_NOCACHACA);}
-	}
+if (!isset($_POST['confirm']) || 1 != $_POST['confirm']) {
+    xoops_confirm(['tribe_id' => $tribe_id, 'confirm' => 1], 'delete_tribe.php', _MD_YOGURT_ASKCONFIRMTRIBEDELETION, _MD_YOGURT_CONFIRMTRIBEDELETION);
+} else {
+    /**
+     * Creating the factory  and the criteria to delete the picture
+     * The user must be the owner
+     */
+    $criteria_tribe_id = new Criteria('tribe_id', $tribe_id);
+    $uid               = (int)$xoopsUser->getVar('uid');
+    $criteria_uid      = new Criteria('owner_uid', $uid);
+    $criteria          = new CriteriaCompo($criteria_tribe_id);
+    $criteria->add($criteria_uid);
+
+    /**
+     * Try to delete
+     */
+    if (1 == $tribes_factory->getCount($criteria)) {
+        if ($tribes_factory->deleteAll($criteria)) {
+            $criteria_rel_tribe_id = new Criteria('rel_tribe_id', $tribe_id);
+            $reltribeuser_factory->deleteAll($criteria_rel_tribe_id);
+            redirect_header('tribes.php?uid=' . $uid, 3, _MD_YOGURT_TRIBEDELETED);
+        } else {
+            redirect_header('tribes.php?uid=' . $uid, 3, _MD_YOGURT_NOCACHACA);
+        }
+    }
 }
 
-include '../../footer.php';
-?>
+include __DIR__ . '/../../footer.php';

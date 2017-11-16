@@ -26,72 +26,69 @@
 //  ------------------------------------------------------------------------ //
 
 /**
-* Protection against inclusion outside the site 
-*/
-if (!defined("XOOPS_ROOT_PATH")) {
-die("XOOPS root path not defined");
+ * Protection against inclusion outside the site
+ */
+if (!defined('XOOPS_ROOT_PATH')) {
+    die('XOOPS root path not defined');
 }
 
+/**
+ * @param $category
+ * @param $item_id
+ * @return mixed
+ */
 function yogurt_iteminfo($category, $item_id)
 {
-	$module_handler =& xoops_gethandler('module');
-	$module =& $module_handler->getByDirname('yogurt');
+    $moduleHandler = xoops_getHandler('module');
+    $module        = $moduleHandler->getByDirname('yogurt');
 
-	if ($category=='global') {
-		$item['name'] = '';
-		$item['url'] = '';
-		return $item;
-	}
+    if ('global' == $category) {
+        $item['name'] = '';
+        $item['url']  = '';
+        return $item;
+    }
 
-	global $xoopsDB;
+    global $xoopsDB;
 
+    if ('picture' == $category) {
+        $sql          = 'SELECT title,uid_owner,url FROM ' . $xoopsDB->prefix('yogurt_images') . ' WHERE uid_owner = ' . $item_id . ' LIMIT 1';
+        $result       = $xoopsDB->query($sql);
+        $result_array = $xoopsDB->fetchArray($result);
+        /**
+         * Let's get the user name of the owner of the album
+         */
+        $owner        = new XoopsUser();
+        $identifier   = $owner->getUnameFromId($result_array['uid_owner']);
+        $item['name'] = $identifier . "'s Album";
+        $item['url']  = XOOPS_URL . '/modules/' . $module->getVar('dirname') . '/album.php?uid=' . $result_array['uid_owner'];
+        return $item;
+    }
 
-	if ($category=='picture') {
+    if ('video' == $category) {
+        $sql          = 'SELECT video_id,uid_owner,video_desc,youtube_code, mainvideo FROM ' . $xoopsDB->prefix('yogurt_images') . ' WHERE uid_owner = ' . $item_id . ' LIMIT 1';
+        $result       = $xoopsDB->query($sql);
+        $result_array = $xoopsDB->fetchArray($result);
+        /**
+         * Let's get the user name of the owner of the album
+         */
+        $owner        = new XoopsUser();
+        $identifier   = $owner->getUnameFromId($result_array['uid_owner']);
+        $item['name'] = $identifier . "'s Videos";
+        $item['url']  = XOOPS_URL . '/modules/' . $module->getVar('dirname') . '/seutubo.php?uid=' . $result_array['uid_owner'];
+        return $item;
+    }
 
-		$sql = 'SELECT title,uid_owner,url FROM ' . $xoopsDB->prefix('yogurt_images') . ' WHERE uid_owner = ' . $item_id . ' LIMIT 1';
-		$result = $xoopsDB->query($sql);
-		$result_array = $xoopsDB->fetchArray($result);
-		/**
-		 * Let's get the user name of the owner of the album
-		 */ 
-		$owner = new XoopsUser();
-		$identifier = $owner->getUnameFromId($result_array['uid_owner']);
-		$item['name'] = $identifier."'s Album";
-		$item['url'] = XOOPS_URL . '/modules/' . $module->getVar('dirname') . '/album.php?uid=' . $result_array['uid_owner'];
-		return $item;
-	}
-	
-	if ($category=='video') {
-
-		$sql = 'SELECT video_id,uid_owner,video_desc,youtube_code, mainvideo FROM ' . $xoopsDB->prefix('yogurt_images') . ' WHERE uid_owner = ' . $item_id . ' LIMIT 1';
-		$result = $xoopsDB->query($sql);
-		$result_array = $xoopsDB->fetchArray($result);
-		/**
-		 * Let's get the user name of the owner of the album
-		 */ 
-		$owner = new XoopsUser();
-		$identifier = $owner->getUnameFromId($result_array['uid_owner']);
-		$item['name'] = $identifier."'s Videos";
-		$item['url'] = XOOPS_URL . '/modules/' . $module->getVar('dirname') . '/seutubo.php?uid=' . $result_array['uid_owner'];
-		return $item;
-	}
-	
-		if ($category=='scrap') {
-
-		$sql = 'SELECT scrap_id, scrap_from, scrap_to, scrap_text FROM ' . $xoopsDB->prefix('yogurt_scraps') . ' WHERE scrap_from = ' . $item_id . ' LIMIT 1';
-		$result = $xoopsDB->query($sql);
-		$result_array = $xoopsDB->fetchArray($result);
-		/**
-		 * Let's get the user name of the owner of the album
-		 */ 
-		$owner = new XoopsUser();
-		$identifier = $owner->getUnameFromId($result_array['scrap_from']);
-		$item['name'] = $identifier."'s Scraps";
-		$item['url'] = XOOPS_URL . '/modules/' . $module->getVar('dirname') . '/scrapbook.php?uid=' . $result_array['scrap_from'];
-		return $item;
-	}
-	
-	
+    if ('Note' == $category) {
+        $sql          = 'SELECT Note_id, Note_from, Note_to, Note_text FROM ' . $xoopsDB->prefix('yogurt_Notes') . ' WHERE Note_from = ' . $item_id . ' LIMIT 1';
+        $result       = $xoopsDB->query($sql);
+        $result_array = $xoopsDB->fetchArray($result);
+        /**
+         * Let's get the user name of the owner of the album
+         */
+        $owner        = new XoopsUser();
+        $identifier   = $owner->getUnameFromId($result_array['Note_from']);
+        $item['name'] = $identifier . "'s Notes";
+        $item['url']  = XOOPS_URL . '/modules/' . $module->getVar('dirname') . '/notebook.php?uid=' . $result_array['Note_from'];
+        return $item;
+    }
 }
-
-?>

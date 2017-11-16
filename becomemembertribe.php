@@ -24,35 +24,37 @@
 //  along with this program; if not, write to the Free Software              //
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
-include_once '../../mainfile.php';
-include_once '../../header.php';
+include_once __DIR__ . '/../../mainfile.php';
+include_once __DIR__ . '/../../header.php';
 
-include_once 'class/yogurt_friendpetition.php';
-include_once 'class/yogurt_reltribeuser.php';
-include_once 'class/yogurt_tribes.php';
+include_once __DIR__ . '/class/yogurt_friendpetition.php';
+include_once __DIR__ . '/class/yogurt_reltribeuser.php';
+include_once __DIR__ . '/class/yogurt_tribes.php';
 
 /**
-* Factories of tribes... testing for zend editor  
-*/
+ * Factories of tribes... testing for zend editor
+ */
 $reltribeuser_factory = new Xoopsyogurt_reltribeuserHandler($xoopsDB);
-$tribes_factory = new Xoopsyogurt_tribesHandler($xoopsDB);
+$tribes_factory       = new Xoopsyogurt_tribesHandler($xoopsDB);
 
-$tribe_id = intval($_POST['tribe_id']);
-$uid = intval($xoopsUser->getVar('uid'));
+$tribe_id = (int)$_POST['tribe_id'];
+$uid      = (int)$xoopsUser->getVar('uid');
 
-$criteria_uid = new Criteria('rel_user_uid',$uid);
-$criteria_tribe_id = new Criteria('rel_tribe_id',$tribe_id);
-$criteria = new CriteriaCompo($criteria_uid);
+$criteria_uid      = new Criteria('rel_user_uid', $uid);
+$criteria_tribe_id = new Criteria('rel_tribe_id', $tribe_id);
+$criteria          = new CriteriaCompo($criteria_uid);
 $criteria->add($criteria_tribe_id);
-if($reltribeuser_factory->getCount($criteria)<1)
-{
-	$reltribeuser = $reltribeuser_factory->create();
-	$reltribeuser->setVar('rel_tribe_id',$tribe_id);
-	$reltribeuser->setVar('rel_user_uid',$uid);
-	if($reltribeuser_factory->insert($reltribeuser)) {redirect_header('tribes.php',1,_MD_YOGURT_YOUAREMEMBERNOW);}
-	else {redirect_header('tribes.php',1,_MD_YOGURT_NOCACHACA);}
+if ($reltribeuser_factory->getCount($criteria) < 1) {
+    $reltribeuser = $reltribeuser_factory->create();
+    $reltribeuser->setVar('rel_tribe_id', $tribe_id);
+    $reltribeuser->setVar('rel_user_uid', $uid);
+    if ($reltribeuser_factory->insert($reltribeuser)) {
+        redirect_header('tribes.php', 1, _MD_YOGURT_YOUAREMEMBERNOW);
+    } else {
+        redirect_header('tribes.php', 1, _MD_YOGURT_NOCACHACA);
+    }
+} else {
+    redirect_header('tribes.php', 1, _MD_YOGURT_YOUAREMEMBERALREADY);
 }
-else {redirect_header('tribes.php',1,_MD_YOGURT_YOUAREMEMBERALREADY);}
 
-include '../../footer.php';
-?>
+include __DIR__ . '/../../footer.php';

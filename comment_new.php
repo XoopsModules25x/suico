@@ -28,24 +28,22 @@
 /**
  * Xoops header
  */
-include_once("../../mainfile.php");
-include_once("../../header.php");
-include_once("class/yogurt_controler.php");
+include_once '../../mainfile.php';
+include_once '../../header.php';
+include_once 'class/yogurt_controler.php';
 
-$controler = new YogurtControlerTribes($xoopsDB,$xoopsUser);
+$controler = new YogurtControlerTribes($xoopsDB, $xoopsUser);
 
 /**
- * Receiving info from get parameters  
- */ 
+ * Receiving info from get parameters
+ */
 $tribe_id = $_GET['com_itemid'];
-$criteria= new criteria('tribe_id',$tribe_id);
-$tribes = $controler->tribes_factory->getObjects($criteria);
-$tribe = $tribes[0];
+$criteria = new criteria('tribe_id', $tribe_id);
+$tribes   = $controler->tribes_factory->getObjects($criteria);
+$tribe    = $tribes[0];
 
-$com_itemid = isset($_GET['com_itemid']) ? intval($_GET['com_itemid']) : 0;
+$com_itemid = isset($_GET['com_itemid']) ? (int)$_GET['com_itemid'] : 0;
 if ($com_itemid > 0) {
-
-    $com_replytitle = _MD_YOGURT_TRIBES.": ".$tribe->getVar('tribe_title');
-    include XOOPS_ROOT_PATH.'/include/comment_new.php';
+    $com_replytitle = _MD_YOGURT_TRIBES . ': ' . $tribe->getVar('tribe_title');
+    include XOOPS_ROOT_PATH . '/include/comment_new.php';
 }
-?>

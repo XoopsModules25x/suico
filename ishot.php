@@ -24,50 +24,55 @@
 //  along with this program; if not, write to the Free Software              //
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
-include_once '../../mainfile.php';
-$xoopsOption['template_main'] = 'yogurt_index.html';
-include_once '../../header.php';
+include_once __DIR__ . '/../../mainfile.php';
+$GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
+include_once __DIR__ . '/../../header.php';
 
-include_once 'class/yogurt_ishot.php';
+include_once __DIR__ . '/class/yogurt_ishot.php';
 
 /**
-* Factory of pictures created  
-*/
+ * Factory of pictures created
+ */
 $ishot_factory = new Xoopsyogurt_ishotHandler($xoopsDB);
 
-$uid_voted = intval($_POST['uid_voted']);
-$ishot = intval($_POST['ishot']);
-$uid_voter = intval($xoopsUser->getVar('uid'));
+$uid_voted = (int)$_POST['uid_voted'];
+$ishot     = (int)$_POST['ishot'];
+$uid_voter = (int)$xoopsUser->getVar('uid');
 
-if(!($GLOBALS['xoopsSecurity']->check())) {redirect_header($_SERVER['HTTP_REFERER'], 3, _MD_YOGURT_TOKENEXPIRED);}
-
-/**
-* Verify if user is trying to vote for himself
-*/
-if($uid_voter==$uid_voted) {redirect_header($_SERVER['HTTP_REFERER'], 3, _MD_YOGURT_CANTVOTEOWN);}
+if (!$GLOBALS['xoopsSecurity']->check()) {
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+}
 
 /**
-* Verify that this user hasn't voted or added this user yet
-*/
-$criteria_uidvoter = new criteria('uid_voter',$uid_voter);
-$criteria_uidvoted = new criteria('uid_voted',$uid_voted);
-$criteria = new criteriaCompo($criteria_uidvoter);
+ * Verify if user is trying to vote for himself
+ */
+if ($uid_voter == $uid_voted) {
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_CANTVOTEOWN);
+}
+
+/**
+ * Verify that this user hasn't voted or added this user yet
+ */
+$criteria_uidvoter = new criteria('uid_voter', $uid_voter);
+$criteria_uidvoted = new criteria('uid_voted', $uid_voted);
+$criteria          = new criteriaCompo($criteria_uidvoter);
 $criteria->add($criteria_uidvoted);
 
-if($ishot_factory->getCount($criteria)==0)
-{
-	
-	$vote = $ishot_factory->create(true);
-	$vote->setVar('uid_voted',$uid_voted);
-	$vote->setVar('uid_voter',$uid_voter);
-	
-	if($ishot==1) {$vote->setVar('ishot',1);}
-	else {$vote->setVar('ishot',0);}
-	
-	$ishot_factory->insert($vote);
-	redirect_header($_SERVER['HTTP_REFERER'], 3, _MD_YOGURT_VOTED);
-}
-else {redirect_header($_SERVER['HTTP_REFERER'], 3, _MD_YOGURT_ALREADYVOTED);}
+if (0 == $ishot_factory->getCount($criteria)) {
+    $vote = $ishot_factory->create(true);
+    $vote->setVar('uid_voted', $uid_voted);
+    $vote->setVar('uid_voter', $uid_voter);
 
-include '../../footer.php';
-?>
+    if (1 == $ishot) {
+        $vote->setVar('ishot', 1);
+    } else {
+        $vote->setVar('ishot', 0);
+    }
+
+    $ishot_factory->insert($vote);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_VOTED);
+} else {
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_ALREADYVOTED);
+}
+
+include __DIR__ . '/../../footer.php';

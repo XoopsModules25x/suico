@@ -190,15 +190,15 @@ margin:0px;
 }
 
 /****************************************************************************************************** 
- *  SCRAPS
+ *  NOTES
  */
  
-a.yogurt-scraps-replyscrap {
+a.yogurt-Notes-replyNote {
 	clear:both;
 	cursor: pointer;
 }
 
-div#yogurt-scraps-container {
+div#yogurt-Notes-container {
 margin:3px;
 float:left;
 padding:1px;
@@ -206,11 +206,11 @@ width:95%;
 overflow:hidden;
 }
 
-div#yogurt-scraps-container h2 {
+div#yogurt-Notes-container h2 {
 margin:0px;
 }
 
-img.avatar_scrap {
+img.avatar_Note {
 border:1px solid;
 padding:1px;
 margin:3px;
@@ -219,7 +219,7 @@ overflow:hidden;
 
 }
 
-div#yogurt-scraps-form {
+div#yogurt-Notes-form {
 margin:3px;
 float:left;
 padding:1px;
@@ -227,11 +227,11 @@ width:95%;
 overflow:hidden;
 }
 
-p.yogurt-scrap-uname{
+p.yogurt-Note-uname{
 clear:both;
 }
 
-div.yogurt-scrap-details {
+div.yogurt-Note-details {
 min-height:200px;
 margin:3px;
 clear:both;
@@ -239,11 +239,11 @@ padding:1px;
 width:95%;
 }
 
-div.yogurt-scrap-avatarandname{
+div.yogurt-Note-avatarandname{
 float:left;
 }
 
-form.yogurt-scrap-form{
+form.yogurt-Note-form{
 height:75px;
 width:450px;
 border:1px solid black;
@@ -253,7 +253,7 @@ background-color:white;
 text-align:center;
 }
 
-form.yogurt-scrap-form-delete{
+form.yogurt-Note-form-delete{
 display:inline;
 }
 
@@ -262,12 +262,12 @@ display:block;
 }
 
 
-div.yogurt-scrap-details-texts{
+div.yogurt-Note-details-texts{
 float:left;
 width:70%;
 }
 
-div.yogurt-scrap-details-form{
+div.yogurt-Note-details-form{
 height:100px;
 margin:3px;
 clear:both;
@@ -276,7 +276,7 @@ width:95%;
 overflow:hidden;
 }
 
-p.yogurt-scraps-editdelete-forms{
+p.yogurt-Notes-editdelete-forms{
 float:right;
 }
 
