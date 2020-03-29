@@ -17,51 +17,51 @@
  * @since
  */
 
-require __DIR__ . '/header.php';
+require __DIR__.'/header.php';
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+	redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
 $cod_img = $_POST['cod_img'];
 
 if (!isset($_POST['confirm']) || 1 != $_POST['confirm']) {
-    xoops_confirm(['cod_img' => $cod_img, 'confirm' => 1], 'delpicture.php', _MD_YOGURT_ASKCONFIRMDELETION, _MD_YOGURT_CONFIRMDELETION);
+	xoops_confirm(['cod_img' => $cod_img, 'confirm' => 1], 'delpicture.php', _MD_YOGURT_ASKCONFIRMDELETION, _MD_YOGURT_CONFIRMDELETION);
 } else {
-    /**
-     * Creating the factory  and the criteria to delete the picture
-     * The user must be the owner
-     */
-    $albumFactory = new Yogurt\ImageHandler($xoopsDB);
-    $criteria_img  = new \Criteria('cod_img', $cod_img);
-    $uid           = (int)$xoopsUser->getVar('uid');
-    $criteria_uid  = new \Criteria('uid_owner', $uid);
-    $criteria      = new \CriteriaCompo($criteria_img);
-    $criteria->add($criteria_uid);
+	/**
+	 * Creating the factory  and the criteria to delete the picture
+	 * The user must be the owner
+	 */
+	$albumFactory = new Yogurt\ImageHandler($xoopsDB);
+	$criteria_img  = new \Criteria('cod_img', $cod_img);
+	$uid           = (int)$xoopsUser->getVar('uid');
+	$criteria_uid  = new \Criteria('uid_owner', $uid);
+	$criteria      = new \CriteriaCompo($criteria_img);
+	$criteria->add($criteria_uid);
 
-    $objects_array = $albumFactory->getObjects($criteria);
-    $image_name    = $objects_array[0]->getVar('url');
-    $avatar_image  = $xoopsUser->getVar('user_avatar');
+	$objects_array = $albumFactory->getObjects($criteria);
+	$image_name    = $objects_array[0]->getVar('url');
+	$avatar_image  = $xoopsUser->getVar('user_avatar');
 
-    /**
-     * Try to delete
-     */
-    if ($albumFactory->deleteAll($criteria)) {
-        if (1 == $xoopsModuleConfig['physical_delete']) {
-            //unlink($xoopsModuleConfig['path_upload']."\/".$image_name);
-            unlink(XOOPS_ROOT_PATH . '/uploads' . '/' . $image_name);
-            unlink(XOOPS_ROOT_PATH . '/uploads' . '/resized_' . $image_name);
-            /**
-             * Delete the thumb (avatar now has another name)
-             */
-            //if ($avatar_image!=$image_name){
-            unlink(XOOPS_ROOT_PATH . '/uploads' . '/thumb_' . $image_name);
-            //}
-        }
-        redirect_header('album.php', 2, _MD_YOGURT_DELETED);
-    } else {
-        redirect_header('album.php', 2, _MD_YOGURT_NOCACHACA);
-    }
+	/**
+	 * Try to delete
+	 */
+	if ($albumFactory->deleteAll($criteria)) {
+		if (1 == $xoopsModuleConfig['physical_delete']) {
+			//unlink($xoopsModuleConfig['path_upload']."\/".$image_name);
+			unlink(XOOPS_ROOT_PATH . '/uploads' . '/' . $image_name);
+			unlink(XOOPS_ROOT_PATH . '/uploads' . '/resized_' . $image_name);
+			/**
+			 * Delete the thumb (avatar now has another name)
+			 */
+			//if ($avatar_image!=$image_name){
+			unlink(XOOPS_ROOT_PATH . '/uploads' . '/thumb_' . $image_name);
+			//}
+		}
+		redirect_header('album.php', 2, _MD_YOGURT_DELETED);
+	} else {
+		redirect_header('album.php', 2, _MD_YOGURT_NOCACHACA);
+	}
 }
 
-include __DIR__ . '/../../footer.php';
+include __DIR__.'/../../footer.php';

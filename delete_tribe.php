@@ -19,7 +19,7 @@
 
 use XoopsModules\Yogurt;
 
-require __DIR__ . '/header.php';
+require __DIR__.'/header.php';
 
 /**
  * Factories of tribes
@@ -27,33 +27,33 @@ require __DIR__ . '/header.php';
 $reltribeuserFactory = new Yogurt\ReltribeuserHandler($xoopsDB);
 $tribesFactory       = new Yogurt\TribesHandler($xoopsDB);
 
-$tribe_id = (int)$_POST['tribe_id'];
+$tribe_id = (int) $_POST['tribe_id'];
 
 if (!isset($_POST['confirm']) || 1 != $_POST['confirm']) {
-    xoops_confirm(['tribe_id' => $tribe_id, 'confirm' => 1], 'delete_tribe.php', _MD_YOGURT_ASKCONFIRMTRIBEDELETION, _MD_YOGURT_CONFIRMTRIBEDELETION);
+	xoops_confirm(['tribe_id' => $tribe_id, 'confirm' => 1], 'delete_tribe.php', _MD_YOGURT_ASKCONFIRMTRIBEDELETION, _MD_YOGURT_CONFIRMTRIBEDELETION);
 } else {
-    /**
-     * Creating the factory  and the criteria to delete the picture
-     * The user must be the owner
-     */
-    $criteria_tribe_id = new \Criteria('tribe_id', $tribe_id);
-    $uid               = (int)$xoopsUser->getVar('uid');
-    $criteria_uid      = new \Criteria('owner_uid', $uid);
-    $criteria          = new \CriteriaCompo($criteria_tribe_id);
-    $criteria->add($criteria_uid);
+	/**
+	 * Creating the factory  and the criteria to delete the picture
+	 * The user must be the owner
+	 */
+	$criteria_tribe_id = new \Criteria('tribe_id', $tribe_id);
+	$uid               = (int)$xoopsUser->getVar('uid');
+	$criteria_uid      = new \Criteria('owner_uid', $uid);
+	$criteria          = new \CriteriaCompo($criteria_tribe_id);
+	$criteria->add($criteria_uid);
 
-    /**
-     * Try to delete
-     */
-    if (1 == $tribesFactory->getCount($criteria)) {
-        if ($tribesFactory->deleteAll($criteria)) {
-            $criteria_rel_tribe_id = new \Criteria('rel_tribe_id', $tribe_id);
-            $reltribeuserFactory->deleteAll($criteria_rel_tribe_id);
-            redirect_header('tribes.php?uid=' . $uid, 3, _MD_YOGURT_TRIBEDELETED);
-        } else {
-            redirect_header('tribes.php?uid=' . $uid, 3, _MD_YOGURT_NOCACHACA);
-        }
-    }
+	/**
+	 * Try to delete
+	 */
+	if (1 == $tribesFactory->getCount($criteria)) {
+		if ($tribesFactory->deleteAll($criteria)) {
+			$criteria_rel_tribe_id = new \Criteria('rel_tribe_id', $tribe_id);
+			$reltribeuserFactory->deleteAll($criteria_rel_tribe_id);
+			redirect_header('tribes.php?uid=' . $uid, 3, _MD_YOGURT_TRIBEDELETED);
+		} else {
+			redirect_header('tribes.php?uid=' . $uid, 3, _MD_YOGURT_NOCACHACA);
+		}
+	}
 }
 
 include __DIR__ . '/../../footer.php';

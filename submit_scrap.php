@@ -19,7 +19,7 @@
 
 use XoopsModules\Yogurt;
 
-require __DIR__ . '/header.php';
+require __DIR__.'/header.php';
 
 /**
  * Modules class includes
@@ -35,7 +35,7 @@ $NotesFactory = new Yogurt\NotesHandler($xoopsDB);
  * Verify Token
  */
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+	redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 /**
  *
@@ -55,9 +55,9 @@ $extra_tags['X_OWNER_UID']  = $Notebook_uid;
 $notificationHandler        = xoops_getHandler('notification');
 $notificationHandler->triggerEvent('Note', $xoopsUser->getVar('uid'), 'new_Note', $extra_tags);
 if (1 == $mainform) {
-    redirect_header('notebook.php?uid=' . $Notebook_uid, 1, _MD_YOGURT_NOTE_SENT);
+	redirect_header('notebook.php?uid=' . $Notebook_uid, 1, _MD_YOGURT_NOTE_SENT);
 } else {
-    redirect_header('notebook.php?uid=' . $xoopsUser->getVar('uid'), 1, _MD_YOGURT_NOTE_SENT);
+	redirect_header('notebook.php?uid=' . $xoopsUser->getVar('uid'), 1, _MD_YOGURT_NOTE_SENT);
 }
 
 /**

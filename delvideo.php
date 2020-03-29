@@ -19,36 +19,36 @@
 
 use XoopsModules\Yogurt;
 
-require __DIR__ . '/header.php';
+require __DIR__.'/header.php';
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+	redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
 $cod_video = $_POST['cod_video'];
 
 if (1 != $_POST['confirm']) {
-    xoops_confirm(['cod_video' => $cod_video, 'confirm' => 1], 'delvideo.php', _MD_YOGURT_ASKCONFIRMVIDEODELETION, _MD_YOGURT_CONFIRMVIDEODELETION);
+	xoops_confirm(['cod_video' => $cod_video, 'confirm' => 1], 'delvideo.php', _MD_YOGURT_ASKCONFIRMVIDEODELETION, _MD_YOGURT_CONFIRMVIDEODELETION);
 } else {
-    /**
-     * Creating the factory  and the criteria to delete the picture
-     * The user must be the owner
-     */
-    $albumFactory = new Yogurt\SeutuboHandler($xoopsDB);
-    $criteria_img  = new \Criteria('video_id', $cod_video);
-    $uid           = (int)$xoopsUser->getVar('uid');
-    $criteria_uid  = new \Criteria('uid_owner', $uid);
-    $criteria      = new \CriteriaCompo($criteria_img);
-    $criteria->add($criteria_uid);
+	/**
+	 * Creating the factory  and the criteria to delete the picture
+	 * The user must be the owner
+	 */
+	$albumFactory = new Yogurt\SeutuboHandler($xoopsDB);
+	$criteria_img  = new \Criteria('video_id', $cod_video);
+	$uid           = (int)$xoopsUser->getVar('uid');
+	$criteria_uid  = new \Criteria('uid_owner', $uid);
+	$criteria      = new \CriteriaCompo($criteria_img);
+	$criteria->add($criteria_uid);
 
-    /**
-     * Try to delete
-     */
-    if ($albumFactory->deleteAll($criteria)) {
-        redirect_header('seutubo.php?uid=' . $uid, 2, _MD_YOGURT_VIDEODELETED);
-    } else {
-        redirect_header('seutubo.php?uid=' . $uid, 2, _MD_YOGURT_NOCACHACA);
-    }
+	/**
+	 * Try to delete
+	 */
+	if ($albumFactory->deleteAll($criteria)) {
+		redirect_header('seutubo.php?uid=' . $uid, 2, _MD_YOGURT_VIDEODELETED);
+	} else {
+		redirect_header('seutubo.php?uid=' . $uid, 2, _MD_YOGURT_NOCACHACA);
+	}
 }
 
 include __DIR__ . '/../../footer.php';

@@ -19,7 +19,7 @@
 
 use XoopsModules\Yogurt;
 
-require __DIR__ . '/header.php';
+require __DIR__.'/header.php';
 
 //include_once __DIR__ . '/class/Friendpetition.php';
 //include_once __DIR__ . '/class/Reltribeuser.php';
@@ -41,16 +41,16 @@ $criteria_tribe_id = new \Criteria('rel_tribe_id', $tribe_id);
 $criteria          = new \CriteriaCompo($criteria_uid);
 $criteria->add($criteria_tribe_id);
 if ($reltribeuserFactory->getCount($criteria) < 1) {
-    $reltribeuser = $reltribeuserFactory->create();
-    $reltribeuser->setVar('rel_tribe_id', $tribe_id);
-    $reltribeuser->setVar('rel_user_uid', $uid);
-    if ($reltribeuserFactory->insert($reltribeuser)) {
-        redirect_header('tribes.php', 1, _MD_YOGURT_YOUAREMEMBERNOW);
-    } else {
-        redirect_header('tribes.php', 1, _MD_YOGURT_NOCACHACA);
-    }
+	$reltribeuser = $reltribeuserFactory->create();
+	$reltribeuser->setVar('rel_tribe_id', $tribe_id);
+	$reltribeuser->setVar('rel_user_uid', $uid);
+	if ($reltribeuserFactory->insert($reltribeuser)) {
+		redirect_header('tribes.php', 1, _MD_YOGURT_YOUAREMEMBERNOW);
+	} else {
+		redirect_header('tribes.php', 1, _MD_YOGURT_NOCACHACA);
+	}
 } else {
-    redirect_header('tribes.php', 1, _MD_YOGURT_YOUAREMEMBERALREADY);
+	redirect_header('tribes.php', 1, _MD_YOGURT_YOUAREMEMBERALREADY);
 }
 
-include __DIR__ . '/../../footer.php';
+include __DIR__.'/../../footer.php';

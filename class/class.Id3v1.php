@@ -288,11 +288,11 @@ class Id3v1
         $rawTag = fread($this->_stream, 128);
 
         if ($rawTag[125] == chr(0) && $rawTag[126] != chr(0)) {
-            $format = 'a3marking/a30title/a30artist/a30album/a4year' . '/a28comment/x1/C1track/C1genre';
+            $format = 'a3marking/a30title/a30artist/a30album/a4year'.'/a28comment/x1/C1track/C1genre';
 
             $this->_version = self::ID3V1_1;
         } else {
-            $format = 'a3marking/a30title/a30artist/a30album/a4year' . '/a30comment/C1genre';
+            $format = 'a3marking/a30title/a30artist/a30album/a4year'.'/a30comment/C1genre';
 
             $this->_version = self::ID3V1_0;
         }
@@ -391,7 +391,7 @@ class Id3v1
     public function getYear()
     {
         if (!empty($this->_tags['year'])) {
-            return (int)$this->_tags['year'];
+            return (int) $this->_tags['year'];
         } else {
             return;
         }
@@ -408,7 +408,7 @@ class Id3v1
             return false;
         }
 
-        return (int)$this->_tags['track'];
+        return (int) $this->_tags['track'];
     }
 
     /**
@@ -420,7 +420,7 @@ class Id3v1
      */
     public function getId3v1Version()
     {
-        return constant('self::' . $this->_version);
+        return constant('self::'.$this->_version);
     }
 
     /**
@@ -679,7 +679,7 @@ class Id3v1
             return 255;
         }
 
-        return (int)$genres[$genreName];
+        return (int) $genres[$genreName];
     }
 
     /**
@@ -786,7 +786,7 @@ class Id3v1
         ];
 
         if (in_array($name, $validNames)) {
-            return $this->{'get' . ucfirst($name)}();
+            return $this->{'get'.ucfirst($name)}();
         }
 
         throw new RuntimeException('Property doesn\'t exist');
@@ -826,7 +826,7 @@ class Id3v1
         ];
 
         if (in_array($name, $validNames)) {
-            return $this->{'set' . ucfirst($name)}($value);
+            return $this->{'set'.ucfirst($name)}($value);
         }
 
         throw new RuntimeException('Property doesn\'t exist');
@@ -870,7 +870,7 @@ class Id3v1
             $returnedTags[] = $tagVal;
         }
 
-        if (count($returnedTags) > 0) {
+        if (count($returnedTags)>0) {
             return implode(', ', $returnedTags);
         }
 

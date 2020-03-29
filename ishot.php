@@ -20,26 +20,26 @@
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
-require __DIR__ . '/header.php';
+require __DIR__.'/header.php';
 
 /**
  * Factory of pictures created
  */
 $ishotFactory = new Yogurt\IshotHandler($xoopsDB);
 
-$uid_voted = (int)$_POST['uid_voted'];
-$ishot     = (int)$_POST['ishot'];
-$uid_voter = (int)$xoopsUser->getVar('uid');
+$uid_voted = (int) $_POST['uid_voted'];
+$ishot     = (int) $_POST['ishot'];
+$uid_voter = (int) $xoopsUser->getVar('uid');
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+	redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
 /**
  * Verify if user is trying to vote for himself
  */
 if ($uid_voter == $uid_voted) {
-    redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_CANTVOTEOWN);
+	redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_CANTVOTEOWN);
 }
 
 /**
@@ -51,20 +51,20 @@ $criteria          = new \CriteriaCompo($criteria_uidvoter);
 $criteria->add($criteria_uidvoted);
 
 if (0 == $ishotFactory->getCount($criteria)) {
-    $vote = $ishotFactory->create(true);
-    $vote->setVar('uid_voted', $uid_voted);
-    $vote->setVar('uid_voter', $uid_voter);
+	$vote = $ishotFactory->create(true);
+	$vote->setVar('uid_voted', $uid_voted);
+	$vote->setVar('uid_voter', $uid_voter);
 
-    if (1 == $ishot) {
-        $vote->setVar('ishot', 1);
-    } else {
-        $vote->setVar('ishot', 0);
-    }
+	if (1 == $ishot) {
+		$vote->setVar('ishot', 1);
+	} else {
+		$vote->setVar('ishot', 0);
+	}
 
-    $ishotFactory->insert($vote);
-    redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_VOTED);
+	$ishotFactory->insert($vote);
+	redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_VOTED);
 } else {
-    redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_ALREADYVOTED);
+	redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_ALREADYVOTED);
 }
 
-include __DIR__ . '/../../footer.php';
+include __DIR__.'/../../footer.php';

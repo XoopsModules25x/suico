@@ -19,38 +19,38 @@
 
 use XoopsModules\Yogurt;
 
-require __DIR__ . '/header.php';
+require __DIR__.'/header.php';
 
 /**
  * Factories of tribes
  */
 $NotesFactory = new Yogurt\NotesHandler($xoopsDB);
 
-$Note_id = (int)$_POST['Note_id'];
+$Note_id = (int) $_POST['Note_id'];
 
 if (1 != $_POST['confirm']) {
-    xoops_confirm(['Note_id' => $Note_id, 'confirm' => 1], 'delete_Note.php', _MD_YOGURT_ASKCONFIRMNOTEDELETION, _MD_YOGURT_CONFIRMNOTEDELETION);
+	xoops_confirm(['Note_id' => $Note_id, 'confirm' => 1], 'delete_Note.php', _MD_YOGURT_ASKCONFIRMNOTEDELETION, _MD_YOGURT_CONFIRMNOTEDELETION);
 } else {
-    /**
-     * Creating the factory  and the criteria to delete the picture
-     * The user must be the owner
-     */
-    $criteria_Note_id = new \Criteria('Note_id', $Note_id);
-    $uid              = (int)$xoopsUser->getVar('uid');
-    $criteria_uid     = new \Criteria('Note_to', $uid);
-    $criteria         = new \CriteriaCompo($criteria_Note_id);
-    $criteria->add($criteria_uid);
+	/**
+	 * Creating the factory  and the criteria to delete the picture
+	 * The user must be the owner
+	 */
+	$criteria_Note_id = new \Criteria('Note_id', $Note_id);
+	$uid              = (int)$xoopsUser->getVar('uid');
+	$criteria_uid     = new \Criteria('Note_to', $uid);
+	$criteria         = new \CriteriaCompo($criteria_Note_id);
+	$criteria->add($criteria_uid);
 
-    /**
-     * Try to delete
-     */
-    if (1 == $NotesFactory->getCount($criteria)) {
-        if ($NotesFactory->deleteAll($criteria)) {
-            redirect_header('notebook.php?uid=' . $uid, 2, _MD_YOGURT_NOTEDELETED);
-        } else {
-            redirect_header('notebook.php?uid=' . $uid, 2, _MD_YOGURT_NOCACHACA);
-        }
-    }
+	/**
+	 * Try to delete
+	 */
+	if (1 == $NotesFactory->getCount($criteria)) {
+		if ($NotesFactory->deleteAll($criteria)) {
+			redirect_header('notebook.php?uid=' . $uid, 2, _MD_YOGURT_NOTEDELETED);
+		} else {
+			redirect_header('notebook.php?uid=' . $uid, 2, _MD_YOGURT_NOCACHACA);
+		}
+	}
 }
 
 include __DIR__ . '/../../footer.php';

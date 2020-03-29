@@ -20,7 +20,7 @@
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_notebook.tpl';
-require __DIR__ . '/header.php';
+require __DIR__.'/header.php';
 
 $controler  = new Yogurt\ControlerNotes($xoopsDB, $xoopsUser);
 $nbSections = $controler->getNumbersSections();
@@ -37,7 +37,7 @@ $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname'
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
 if (preg_match('/msie/', strtolower($_SERVER['HTTP_USER_AGENT']))) {
-    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
+	$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
 }
 //$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/css/lightbox.css');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/prototype.js');
@@ -57,7 +57,7 @@ $xoopsTpl->assign('allow_videos', $controler->checkPrivilegeBySection('videos'))
 $xoopsTpl->assign('allow_audios', $controler->checkPrivilegeBySection('audio'));
 
 if (!($Notes = $controler->fecthNotes($nbSections['nbNotes'], $criteria_uid))) {
-    $xoopsTpl->assign('lang_noNotesyet', _MD_YOGURT_NONOTESYET);
+	$xoopsTpl->assign('lang_noNotesyet', _MD_YOGURT_NONOTESYET);
 }
 
 //form
@@ -103,4 +103,4 @@ $xoopsTpl->assign('lang_profile', _MD_YOGURT_PROFILE);
 $xoopsTpl->assign('lang_tribes', _MD_YOGURT_TRIBES);
 $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 
-include __DIR__ . '/../../footer.php';
+include __DIR__.'/../../footer.php';
