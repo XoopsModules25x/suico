@@ -1,10 +1,4 @@
-CREATE TABLE `yogurt_friendpetition` (
-  `friendpet_id`   INT(11) NOT NULL AUTO_INCREMENT,
-  `petitioner_uid` INT(11) NOT NULL,
-  `petioned_uid`   INT(11) NOT NULL,
-  PRIMARY KEY (`friendpet_id`)
-)
-  ENGINE = MyISAM;
+
 
 
 CREATE TABLE `yogurt_friendship` (
@@ -51,6 +45,13 @@ CREATE TABLE `yogurt_seutubo` (
   PRIMARY KEY (`video_id`)
 )
   ENGINE = MyISAM;
+CREATE TABLE `yogurt_friendpetition` (
+  `friendpet_id`   INT(11) NOT NULL AUTO_INCREMENT,
+  `petitioner_uid` INT(11) NOT NULL,
+  `petioned_uid`   INT(11) NOT NULL,
+  PRIMARY KEY (`friendpet_id`)
+)
+  ENGINE = MyISAM;
 
 
 CREATE TABLE `yogurt_reltribeuser` (
@@ -62,7 +63,7 @@ CREATE TABLE `yogurt_reltribeuser` (
   ENGINE = MyISAM;
 
 
-CREATE TABLE `yogurt_tribes` (
+CREATE TABLE `Tribes` (
   `tribe_id`    INT(11)      NOT NULL AUTO_INCREMENT,
   `owner_uid`   INT(11)      NOT NULL,
   `tribe_title` VARCHAR(255) NOT NULL,
@@ -84,7 +85,7 @@ CREATE TABLE `yogurt_notes` (
 )
   ENGINE = MyISAM;
 
-CREATE TABLE `yogurt_configs` (
+CREATE TABLE `Configs` (
   `config_id`       INT(11)      NOT NULL AUTO_INCREMENT,
   `config_uid`      INT(11)      NOT NULL,
   `pictures`        TINYINT(1)   NOT NULL,

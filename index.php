@@ -1,42 +1,39 @@
 <?php
-// $Id: index.php,v 1.45 2008/04/19 16:39:08 marcellobrandao Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author       Marcello Brandão aka  Suico
+ * @author       XOOPS Development Team
+ * @since
+ */
+
+use XoopsModules\Yogurt;
 
 /**
  * Xoops header
  */
-include_once '../../mainfile.php';
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
-include_once '../../header.php';
-include_once 'class/yogurt_controler.php';
-if (!@ include_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/user.php') {
-    include_once XOOPS_ROOT_PATH . '/language/english/user.php';
-}
 
-$controler = new YogurtControlerIndex($xoopsDB, $xoopsUser);
+$GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
+require __DIR__ . '/header.php';
+
+$helper->loadLanguage('user');
+
+//include_once 'class/yogurt_controler.php';
+//if (!@ include_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/user.php') {
+//    include_once XOOPS_ROOT_PATH . '/language/english/user.php';
+//}
+
+$controler = new Yogurt\ControlerIndex($xoopsDB, $xoopsUser);
 
 /**
  * Fecthing numbers of tribes friends videos pictures etc...
@@ -55,11 +52,12 @@ $start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
  */
 $petition = 0;
 if (1 == $controler->isOwner) {
-    $criteria_uidpetition = new criteria('petioned_uid', $controler->uidOwner);
-    if ($newpetition = $controler->petitions_factory->getObjects($criteria_uidpetition)) {
+    $criteria_uidpetition = new \Criteria('petioned_uid', $controler->uidOwner);
+    $newpetition          = $controler->petitionsFactory->getObjects($criteria_uidpetition);
+    if ($newpetition) {
         $nb_petitions      = count($newpetition);
         $petitionerHandler = xoops_getHandler('member');
-        $petitioner        =& $petitionerHandler->getUser($newpetition[0]->getVar('petitioner_uid'));
+        $petitioner        = $petitionerHandler->getUser($newpetition[0]->getVar('petitioner_uid'));
         $petitioner_uid    = $petitioner->getVar('uid');
         $petitioner_uname  = $petitioner->getVar('uname');
         $petitioner_avatar = $petitioner->getVar('user_avatar');
@@ -71,12 +69,12 @@ if (1 == $controler->isOwner) {
 /**
  * Criteria for mainvideo
  */
-$criteria_uidvideo  = new criteria('uid_owner', $controler->uidOwner);
-$criteria_mainvideo = new criteria('main_video', '1');
-$criteria_video     = new criteriaCompo($criteria_mainvideo);
+$criteria_uidvideo  = new \Criteria('uid_owner', $controler->uidOwner);
+$criteria_mainvideo = new \Criteria('main_video', '1');
+$criteria_video     = new \CriteriaCompo($criteria_mainvideo);
 $criteria_video->add($criteria_uidvideo);
 
-if (($nbSections['nbVideos'] > 0) && ($videos = $controler->videos_factory->getObjects($criteria_video))) {
+if (($nbSections['nbVideos'] > 0) && ($videos = $controler->videosFactory->getObjects($criteria_video))) {
     $mainvideocode = $videos[0]->getVar('youtube_code');
     $mainvideodesc = $videos[0]->getVar('video_desc');
 }
@@ -85,38 +83,37 @@ if (($nbSections['nbVideos'] > 0) && ($videos = $controler->videos_factory->getO
  * Friends
  */
 
-$criteria_friends = new criteria('friend1_uid', $controler->uidOwner);
-$friends          = $controler->friendships_factory->getFriends(9, $criteria_friends);
+$criteria_friends = new \Criteria('friend1_uid', $controler->uidOwner);
+$friends          = $controler->friendshipsFactory->getFriends(9, $criteria_friends);
 
-$controler->visitors_factory->purgeVisits();
-$evaluation = $controler->friendships_factory->getMoyennes($controler->uidOwner);
+$controler->visitorsFactory->purgeVisits();
+$evaluation = $controler->friendshipsFactory->getMoyennes($controler->uidOwner);
 
 /**
  * Tribes
  */
 
-$criteria_tribes = new criteria('rel_user_uid', $controler->uidOwner);
-$tribes          = $controler->reltribeusers_factory->getTribes(9, $criteria_tribes);
+$criteria_tribes = new \Criteria('rel_user_uid', $controler->uidOwner);
+$tribes          = $controler->reltribeusersFactory->getTribes(9, $criteria_tribes);
 
 /**
  * Visitors
  */
 
 if (0 == $controler->isAnonym) {
-
     /**
      * Fectching last visitors
      */
     if ($controler->uidOwner != $xoopsUser->getVar('uid')) {
-        $visitor_now = $controler->visitors_factory->create();
+        $visitor_now = $controler->visitorsFactory->create();
         $visitor_now->setVar('uid_owner', $controler->uidOwner);
         $visitor_now->setVar('uid_visitor', $xoopsUser->getVar('uid'));
         $visitor_now->setVar('uname_visitor', $xoopsUser->getVar('uname'));
-        $controler->visitors_factory->insert($visitor_now);
+        $controler->visitorsFactory->insert($visitor_now);
     }
-    $criteria_visitors = new criteria('uid_owner', $controler->uidOwner);
+    $criteria_visitors = new \Criteria('uid_owner', $controler->uidOwner);
     //$criteria_visitors->setLimit(5);
-    $visitors_object_array = $controler->visitors_factory->getObjects($criteria_visitors);
+    $visitors_object_array = $controler->visitorsFactory->getObjects($criteria_visitors);
 
     /**
      * Lets populate an array with the dati from visitors
@@ -132,12 +129,11 @@ if (0 == $controler->isAnonym) {
 
     $xoopsTpl->assign('visitors', $visitors_array);
     $xoopsTpl->assign('lang_visitors', _MD_YOGURT_VISITORS);
-
     /*    $criteria_deletevisitors = new criteria('uid_owner',$uid);
         $criteria_deletevisitors->setStart(5);
 
         print_r($criteria_deletevisitors);
-        $visitors_factory->deleteAll($criteria_deletevisitors, true);
+        $visitorsFactory->deleteAll($criteria_deletevisitors, true);
     */
 }
 
@@ -365,8 +361,8 @@ $xoopsTpl->assign('name', $thisUser->getVar('name'));
 $gpermHandler  = xoops_getHandler('groupperm');
 $groups        = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
 $moduleHandler = xoops_getHandler('module');
-$criteria      = new CriteriaCompo(new Criteria('hassearch', 1));
-$criteria->add(new Criteria('isactive', 1));
+$criteria      = new \CriteriaCompo(new \Criteria('hassearch', 1));
+$criteria->add(new \Criteria('isactive', 1));
 $mids = array_keys($moduleHandler->getList($criteria));
 
 //userranl
@@ -381,7 +377,9 @@ foreach ($mids as $mid) {
         $module   = $moduleHandler->get($mid);
         $user_uid = $thisUser->getVar('uid');
         $results  = $module->search('', '', 5, 0, $user_uid);
-        $count    = count($results);
+        if (is_array($results)) {
+            $count = count($results);
+        }
         if (is_array($results) && $count > 0) {
             for ($i = 0; $i < $count; $i++) {
                 if (isset($results[$i]['image']) && '' != $results[$i]['image']) {

@@ -1,35 +1,29 @@
 <?php
-// $Id: friends.php,v 1.17 2008/04/19 16:39:08 marcellobrandao Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
-include_once __DIR__ . '/../../mainfile.php';
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_friends.tpl';
-include_once __DIR__ . '/../../header.php';
-include_once __DIR__ . '/class/yogurt_controler.php';
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
 
-$controler = new YogurtControlerFriends($xoopsDB, $xoopsUser);
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author       Marcello Brandão aka  Suico
+ * @author       XOOPS Development Team
+ * @since
+ */
+
+use XoopsModules\Yogurt;
+
+
+$GLOBALS['xoopsOption']['template_main'] = 'yogurt_friends.tpl';
+require __DIR__ . '/header.php';
+
+$controler = new Yogurt\ControlerFriends($xoopsDB, $xoopsUser);
 
 /**
  * Fecthing numbers of tribes friends videos pictures etc...
@@ -41,11 +35,11 @@ $start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
 /**
  * Friends
  */
-$criteria_friends = new criteria('friend1_uid', (int)$controler->uidOwner);
-$nb_friends       = $controler->friendships_factory->getCount($criteria_friends);
+$criteria_friends = new \Criteria('friend1_uid', (int)$controler->uidOwner);
+$nb_friends       = $controler->friendshipsFactory->getCount($criteria_friends);
 $criteria_friends->setLimit($xoopsModuleConfig['friendsperpage']);
 $criteria_friends->setStart($start);
-$vetor = $controler->friendships_factory->getFriends('', $criteria_friends, 0);
+$vetor = $controler->friendshipsFactory->getFriends('', $criteria_friends, 0);
 if (0 == $nb_friends) {
     $xoopsTpl->assign('lang_nofriendsyet', _MD_YOGURT_NOFRIENDSYET);
 }
@@ -53,7 +47,7 @@ if (0 == $nb_friends) {
 /**
  * Let's get the user name of the owner of the album
  */
-$owner      = new XoopsUser();
+$owner      = new \XoopsUser();
 $identifier = $owner->getUnameFromId($controler->uidOwner);
 
 /**
@@ -77,7 +71,7 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 /**
  * Criando a barra de navegao caso tenha muitos amigos
  */
-$barra_navegacao = new XoopsPageNav($nbSections['nbFriends'], $xoopsModuleConfig['friendsperpage'], $start, 'start', 'uid=' . (int)$controler->uidOwner);
+$barra_navegacao = new \XoopsPageNav($nbSections['nbFriends'], $xoopsModuleConfig['friendsperpage'], $start, 'start', 'uid=' . (int)$controler->uidOwner);
 $navegacao       = $barra_navegacao->renderImageNav(2);
 
 //permissions

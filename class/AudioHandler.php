@@ -1,5 +1,8 @@
 <?php
-// yogurt_audio.php,v 1
+
+namespace XoopsModules\Yogurt;
+
+// Audio.php,v 1
 //  ---------------------------------------------------------------- //
 // Author: Bruno Barthez	                                           //
 // ----------------------------------------------------------------- //
@@ -7,122 +10,33 @@
 include_once XOOPS_ROOT_PATH . '/kernel/object.php';
 include_once XOOPS_ROOT_PATH . '/class/uploader.php';
 
-/**
- * yogurt_audio class.
- * $this class is responsible for providing data access mechanisms to the data source
- * of XOOPS user class objects.
- */
-class yogurt_audio extends XoopsObject
-{
-    public $db;
-
-    // constructor
-
-    /**
-     * yogurt_audio constructor.
-     * @param null $id
-     */
-    public function __construct($id = null)
-    {
-        $this->db = XoopsDatabaseFactory::getDatabaseConnection();
-        $this->initVar('audio_id', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('title', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('author', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('url', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('uid_owner', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('data_creation', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('data_update', XOBJ_DTYPE_TXTBOX, null, false);
-        if (!empty($id)) {
-            if (is_array($id)) {
-                $this->assignVars($id);
-            } else {
-                $this->load((int)$id);
-            }
-        } else {
-            $this->setNew();
-        }
-    }
-
-    /**
-     * @param $id
-     */
-    public function load($id)
-    {
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_audio') . ' WHERE audio_id=' . $id;
-        $myrow = $this->db->fetchArray($this->db->query($sql));
-        $this->assignVars($myrow);
-        if (!$myrow) {
-            $this->setNew();
-        }
-    }
-
-    /**
-     * @param array  $criteria
-     * @param bool   $asobject
-     * @param string $sort
-     * @param string $order
-     * @param int    $limit
-     * @param int    $start
-     * @return array
-     */
-    public function getAllyogurt_audios($criteria = [], $asobject = false, $sort = 'audio_id', $order = 'ASC', $limit = 0, $start = 0)
-    {
-        $db          = XoopsDatabaseFactory::getDatabaseConnection();
-        $ret         = [];
-        $where_query = '';
-        if (is_array($criteria) && count($criteria) > 0) {
-            $where_query = ' WHERE';
-            foreach ($criteria as $c) {
-                $where_query .= " $c AND";
-            }
-            $where_query = substr($where_query, 0, -4);
-        } elseif (!is_array($criteria) && $criteria) {
-            $where_query = ' WHERE ' . $criteria;
-        }
-        if (!$asobject) {
-            $sql    = 'SELECT audio_id FROM ' . $db->prefix('yogurt_audio') . "$where_query ORDER BY $sort $order";
-            $result = $db->query($sql, $limit, $start);
-            while ($myrow = $db->fetchArray($result)) {
-                $ret[] = $myrow['yogurt_audio_id'];
-            }
-        } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_audio') . "$where_query ORDER BY $sort $order";
-            $result = $db->query($sql, $limit, $start);
-            while ($myrow = $db->fetchArray($result)) {
-                $ret[] = new yogurt_audio($myrow);
-            }
-        }
-        return $ret;
-    }
-}
-
 // -------------------------------------------------------------------------
 // ------------------yogurt_audio user handler class -------------------
 // -------------------------------------------------------------------------
 
 /**
- * yogurt_audiohandler class.
+ * AudioHandler class.
  * This class provides simple mecanisme for yogurt_audio object
  */
-class Xoopsyogurt_audioHandler extends XoopsObjectHandler
+class AudioHandler extends \XoopsObjectHandler
 {
 
     /**
-     * create a new yogurt_audio
+     * create a new Audio
      *
      * @param bool $isNew flag the new objects as "new"?
      * @return \XoopsObject yogurt_audio
      */
     public function create($isNew = true)
     {
-        $yogurt_audio = new yogurt_audio();
+        $yogurtAudio = new Yogurt\Audio();
         if ($isNew) {
-            $yogurt_audio->setNew();
+            $yogurtAudio->setNew();
         } else {
-            $yogurt_audio->unsetNew();
+            $yogurtAudio->unsetNew();
         }
 
-        return $yogurt_audio;
+        return $yogurtAudio;
     }
 
     /**
@@ -131,7 +45,7 @@ class Xoopsyogurt_audioHandler extends XoopsObjectHandler
      * @param int $id of the yogurt_audio
      * @return mixed reference to the {@link yogurt_audio} object, FALSE if failed
      */
-    public function &get($id)
+    public function get($id)
     {
         $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_audio') . ' WHERE audio_id=' . $id;
         if (!$result = $this->db->query($sql)) {
@@ -139,44 +53,44 @@ class Xoopsyogurt_audioHandler extends XoopsObjectHandler
         }
         $numrows = $this->db->getRowsNum($result);
         if (1 == $numrows) {
-            $yogurt_audio = new yogurt_audio();
-            $yogurt_audio->assignVars($this->db->fetchArray($result));
-            return $yogurt_audio;
+            $yogurtAudio = new Yogurt\Audio();
+            $yogurtAudio->assignVars($this->db->fetchArray($result));
+            return $yogurtAudio;
         }
         return false;
     }
 
     /**
-     * insert a new yogurt_audio in the database
+     * insert a new Audio in the database
      *
-     * @param \XoopsObject $yogurt_audio reference to the {@link yogurt_audio}
+     * @param \XoopsObject $yogurtAudio  reference to the {@link yogurt_audio}
      *                                   object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(XoopsObject $yogurt_audio, $force = false)
+    public function insert(\XoopsObject $yogurtAudio, $force = false)
     {
         global $xoopsConfig;
-        if ('yogurt_audio' != get_class($yogurt_audio)) {
+        if ('yogurt_audio' != get_class($yogurtAudio)) {
             return false;
         }
-        if (!$yogurt_audio->isDirty()) {
+        if (!$yogurtAudio->isDirty()) {
             return true;
         }
-        if (!$yogurt_audio->cleanVars()) {
+        if (!$yogurtAudio->cleanVars()) {
             return false;
         }
-        foreach ($yogurt_audio->cleanVars as $k => $v) {
+        foreach ($yogurtAudio->cleanVars as $k => $v) {
             ${$k} = $v;
         }
         $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
-        if ($yogurt_audio->isNew()) {
+        if ($yogurtAudio->isNew()) {
             // ajout/modification d'un yogurt_audio
-            $yogurt_audio = new yogurt_audio();
-            $format       = 'INSERT INTO %s (audio_id, title, author, url, uid_owner, data_creation, data_update)';
-            $format       .= ' VALUES (%u, %s, %s, %s, %u, %s, %s)';
-            $sql          = sprintf($format, $this->db->prefix('yogurt_audio'), $audio_id, $this->db->quoteString($title), $this->db->quoteString($author), $this->db->quoteString($url), $uid_owner, $now, $now);
-            $force        = true;
+            $yogurtAudio = new Yogurt\Audio();
+            $format      = 'INSERT INTO %s (audio_id, title, author, url, uid_owner, data_creation, data_update)';
+            $format      .= ' VALUES (%u, %s, %s, %s, %u, %s, %s)';
+            $sql         = sprintf($format, $this->db->prefix('yogurt_audio'), $audio_id, $this->db->quoteString($title), $this->db->quoteString($author), $this->db->quoteString($url), $uid_owner, $now, $now);
+            $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'audio_id=%u, title=%s, author=%s, url=%s, uid_owner=%u, data_creation=%s, data_update=%s';
@@ -194,23 +108,23 @@ class Xoopsyogurt_audioHandler extends XoopsObjectHandler
         if (empty($audio_id)) {
             $audio_id = $this->db->getInsertId();
         }
-        $yogurt_audio->assignVar('audio_id', $audio_id);
+        $yogurtAudio->assignVar('audio_id', $audio_id);
         return true;
     }
 
     /**
      * delete a yogurt_audio from the database
      *
-     * @param \XoopsObject $yogurt_audio reference to the yogurt_audio to delete
+     * @param \XoopsObject $yogurtAudio reference to the yogurt_audio to delete
      * @param bool         $force
      * @return bool FALSE if failed.
      */
-    public function delete(XoopsObject $yogurt_audio, $force = false)
+    public function delete(\XoopsObject $yogurtAudio, $force = false)
     {
-        if ('yogurt_audio' != get_class($yogurt_audio)) {
+        if ('yogurt_audio' != get_class($yogurtAudio)) {
             return false;
         }
-        $sql = sprintf('DELETE FROM %s WHERE audio_id = %u', $this->db->prefix('yogurt_audio'), $yogurt_audio->getVar('audio_id'));
+        $sql = sprintf('DELETE FROM %s WHERE audio_id = %u', $this->db->prefix('yogurt_audio'), $yogurtAudio->getVar('audio_id'));
         if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
@@ -226,7 +140,7 @@ class Xoopsyogurt_audioHandler extends XoopsObjectHandler
      * retrieve yogurt_audios from the database
      *
      * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
-     * @param bool   $id_as_key use the UID as key for the array?
+     * @param bool            $id_as_key use the UID as key for the array?
      * @return array array of {@link yogurt_audio} objects
      */
     public function &getObjects($criteria = null, $id_as_key = false)
@@ -234,7 +148,7 @@ class Xoopsyogurt_audioHandler extends XoopsObjectHandler
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_audio');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
@@ -247,14 +161,14 @@ class Xoopsyogurt_audioHandler extends XoopsObjectHandler
             return $ret;
         }
         while ($myrow = $this->db->fetchArray($result)) {
-            $yogurt_audio = new yogurt_audio();
-            $yogurt_audio->assignVars($myrow);
+            $yogurtAudio = new Yogurt\Audio();
+            $yogurtAudio->assignVars($myrow);
             if (!$id_as_key) {
-                $ret[] =& $yogurt_audio;
+                $ret[] =& $yogurtAudio;
             } else {
-                $ret[$myrow['audio_id']] =& $yogurt_audio;
+                $ret[$myrow['audio_id']] =& $yogurtAudio;
             }
-            unset($yogurt_audio);
+            unset($yogurtAudio);
         }
         return $ret;
     }
@@ -268,7 +182,7 @@ class Xoopsyogurt_audioHandler extends XoopsObjectHandler
     public function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_audio');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
@@ -288,7 +202,7 @@ class Xoopsyogurt_audioHandler extends XoopsObjectHandler
     public function deleteAll($criteria = null)
     {
         $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_audio');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {
@@ -320,7 +234,7 @@ class Xoopsyogurt_audioHandler extends XoopsObjectHandler
         $maxfilesize       = $maxfilebytes;
 
         // create the object to upload
-        $uploader = new XoopsMediaUploader($path_upload, $allowed_mimetypes, $maxfilesize);
+        $uploader = new \XoopsMediaUploader($path_upload, $allowed_mimetypes, $maxfilesize);
         // fetch the media
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
             //lets create a name for it

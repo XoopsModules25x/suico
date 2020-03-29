@@ -1,117 +1,34 @@
 <?php
-// yogurt_visitors.php,v 1
+
+namespace XoopsModules\Yogurt;
+
+// Visitors.php,v 1
 //  ---------------------------------------------------------------- //
 // Author: Bruno Barthez	                                           //
 // ----------------------------------------------------------------- //
 
 include_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
-/**
- * yogurt_visitors class.
- * $this class is responsible for providing data access mechanisms to the data source
- * of XOOPS user class objects.
- */
-class yogurt_visitors extends XoopsObject
-{
-    public $db;
-
-    // constructor
-
-    /**
-     * yogurt_visitors constructor.
-     * @param null $id
-     */
-    public function __construct($id = null)
-    {
-        $this->db = XoopsDatabaseFactory::getDatabaseConnection();
-        $this->initVar('cod_visit', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('uid_owner', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('uid_visitor', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('uname_visitor', XOBJ_DTYPE_TXTBOX, null, false);
-        if (!empty($id)) {
-            if (is_array($id)) {
-                $this->assignVars($id);
-            } else {
-                $this->load((int)$id);
-            }
-        } else {
-            $this->setNew();
-        }
-    }
-
-    /**
-     * @param $id
-     */
-    public function load($id)
-    {
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_visitors') . ' WHERE cod_visit=' . $id;
-        $myrow = $this->db->fetchArray($this->db->query($sql));
-        $this->assignVars($myrow);
-        if (!$myrow) {
-            $this->setNew();
-        }
-    }
-
-    /**
-     * @param array  $criteria
-     * @param bool   $asobject
-     * @param string $sort
-     * @param string $order
-     * @param int    $limit
-     * @param int    $start
-     * @return array
-     */
-    public function getAllyogurt_visitorss($criteria = [], $asobject = false, $sort = 'cod_visit', $order = 'ASC', $limit = 0, $start = 0)
-    {
-        $db          = XoopsDatabaseFactory::getDatabaseConnection();
-        $ret         = [];
-        $where_query = '';
-        if (is_array($criteria) && count($criteria) > 0) {
-            $where_query = ' WHERE';
-            foreach ($criteria as $c) {
-                $where_query .= " $c AND";
-            }
-            $where_query = substr($where_query, 0, -4);
-        } elseif (!is_array($criteria) && $criteria) {
-            $where_query = ' WHERE ' . $criteria;
-        }
-        if (!$asobject) {
-            $sql    = 'SELECT cod_visit FROM ' . $db->prefix('yogurt_visitors') . "$where_query ORDER BY $sort $order";
-            $result = $db->query($sql, $limit, $start);
-            while ($myrow = $db->fetchArray($result)) {
-                $ret[] = $myrow['yogurt_visitors_id'];
-            }
-        } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_visitors') . "$where_query ORDER BY $sort $order";
-            $result = $db->query($sql, $limit, $start);
-            while ($myrow = $db->fetchArray($result)) {
-                $ret[] = new yogurt_visitors($myrow);
-            }
-        }
-        return $ret;
-    }
-}
-
 // -------------------------------------------------------------------------
-// ------------------yogurt_visitors user handler class -------------------
+// ------------------Yogurt\Visitors user handler class -------------------
 // -------------------------------------------------------------------------
 
 /**
  * yogurt_visitorshandler class.
- * This class provides simple mecanisme for yogurt_visitors object
+ * This class provides simple mecanisme for Yogurt\Visitors object
  */
-class Xoopsyogurt_visitorsHandler extends XoopsObjectHandler
+class VisitorsHandler extends \XoopsObjectHandler
 {
 
     /**
-     * create a new yogurt_visitors
+     * create a new Yogurt\Visitors
      *
      * @param bool $isNew flag the new objects as "new"?
-     * @return \XoopsObject yogurt_visitors
+     * @return \XoopsObject Yogurt\Visitors
      */
     public function create($isNew = true)
     {
-        $yogurt_visitors = new yogurt_visitors();
+        $yogurt_visitors = new Yogurt\Visitors();
         if ($isNew) {
             $yogurt_visitors->setNew();
         } else {
@@ -122,12 +39,12 @@ class Xoopsyogurt_visitorsHandler extends XoopsObjectHandler
     }
 
     /**
-     * retrieve a yogurt_visitors
+     * retrieve a Yogurt\Visitors
      *
-     * @param int $id of the yogurt_visitors
+     * @param int $id of the Yogurt\Visitors
      * @return mixed reference to the {@link yogurt_visitors} object, FALSE if failed
      */
-    public function &get($id)
+    public function get($id)
     {
         $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_visitors') . ' WHERE cod_visit=' . $id;
         if (!$result = $this->db->query($sql)) {
@@ -135,7 +52,7 @@ class Xoopsyogurt_visitorsHandler extends XoopsObjectHandler
         }
         $numrows = $this->db->getRowsNum($result);
         if (1 == $numrows) {
-            $yogurt_visitors = new yogurt_visitors();
+            $yogurt_visitors = new Yogurt\Visitors();
             $yogurt_visitors->assignVars($this->db->fetchArray($result));
             return $yogurt_visitors;
         }
@@ -143,17 +60,17 @@ class Xoopsyogurt_visitorsHandler extends XoopsObjectHandler
     }
 
     /**
-     * insert a new yogurt_visitors in the database
+     * insert a new Yogurt\Visitors in the database
      *
-     * @param \XoopsObject $yogurt_visitors reference to the {@link yogurt_visitors}
+     * @param \XoopsObject $yogurt_visitors reference to the {@link Yogurt\Visitors}
      *                                      object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(XoopsObject $yogurt_visitors, $force = false)
+    public function insert(\XoopsObject $yogurt_visitors, $force = false)
     {
         global $xoopsConfig;
-        if ('yogurt_visitors' != get_class($yogurt_visitors)) {
+        if (!$yogurt_visitors instanceof \Yogurt\Visitors) {
             return false;
         }
         if (!$yogurt_visitors->isDirty()) {
@@ -167,8 +84,8 @@ class Xoopsyogurt_visitorsHandler extends XoopsObjectHandler
         }
         $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
         if ($yogurt_visitors->isNew()) {
-            // ajout/modification d'un yogurt_visitors
-            $yogurt_visitors = new yogurt_visitors();
+            // ajout/modification d'un Yogurt\Visitors
+            $yogurt_visitors = new Yogurt\Visitors();
             $format          = 'INSERT INTO %s (cod_visit, uid_owner, uid_visitor,uname_visitor)';
             $format          .= 'VALUES (%u, %u, %u, %s)';
             $sql             = sprintf($format, $this->db->prefix('yogurt_visitors'), $cod_visit, $uid_owner, $uid_visitor, $this->db->quoteString($uname_visitor));
@@ -197,13 +114,13 @@ class Xoopsyogurt_visitorsHandler extends XoopsObjectHandler
     /**
      * delete a yogurt_visitors from the database
      *
-     * @param \XoopsObject $yogurt_visitors reference to the yogurt_visitors to delete
+     * @param \XoopsObject $yogurt_visitors reference to the Yogurt\Visitors to delete
      * @param bool         $force
      * @return bool FALSE if failed.
      */
-    public function delete(XoopsObject $yogurt_visitors, $force = false)
+    public function delete(\XoopsObject $yogurt_visitors, $force = false)
     {
-        if ('yogurt_visitors' != get_class($yogurt_visitors)) {
+        if (!$yogurt_visitors instanceof \Yogurt\Visitors) {
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE cod_visit = %u', $this->db->prefix('yogurt_visitors'), $yogurt_visitors->getVar('cod_visit'));
@@ -222,15 +139,15 @@ class Xoopsyogurt_visitorsHandler extends XoopsObjectHandler
      * retrieve yogurt_visitorss from the database
      *
      * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
-     * @param bool   $id_as_key use the UID as key for the array?
-     * @return array array of {@link yogurt_visitors} objects
+     * @param bool            $id_as_key use the UID as key for the array?
+     * @return array array of {@link Yogurt\Visitors} objects
      */
     public function &getObjects($criteria = null, $id_as_key = false)
     {
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_visitors');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
@@ -243,7 +160,7 @@ class Xoopsyogurt_visitorsHandler extends XoopsObjectHandler
             return $ret;
         }
         while ($myrow = $this->db->fetchArray($result)) {
-            $yogurt_visitors = new yogurt_visitors();
+            $yogurt_visitors = new Yogurt\Visitors();
             $yogurt_visitors->assignVars($myrow);
             if (!$id_as_key) {
                 $ret[] =& $yogurt_visitors;
@@ -264,7 +181,7 @@ class Xoopsyogurt_visitorsHandler extends XoopsObjectHandler
     public function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_visitors');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
@@ -279,13 +196,13 @@ class Xoopsyogurt_visitorsHandler extends XoopsObjectHandler
      * delete yogurt_visitorss matching a set of conditions
      *
      * @param CriteriaElement $criteria {@link CriteriaElement}
-     * @param bool   $force
+     * @param bool            $force
      * @return bool FALSE if deletion failed
      */
     public function deleteAll($criteria = null, $force = false)
     {
         $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_visitors');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         if (false !== $force) {

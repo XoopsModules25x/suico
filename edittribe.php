@@ -1,35 +1,28 @@
 <?php
-// $Id: edittribe.php,v 1.7 2008/01/23 10:26:21 marcellobrandao Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
-include_once __DIR__ . '/../../mainfile.php';
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_edittribe.tpl';
-include_once __DIR__ . '/../../header.php';
-include_once __DIR__ . '/class/yogurt_controler.php';
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
 
-$controler = new YogurtControlerTribes($xoopsDB, $xoopsUser);
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author       Marcello Brandão aka  Suico
+ * @author       XOOPS Development Team
+ * @since
+ */
+
+use XoopsModules\Yogurt;
+
+$GLOBALS['xoopsOption']['template_main'] = 'yogurt_edittribe.tpl';
+require __DIR__ . '/header.php';
+
+$controler = new Yogurt\ControlerTribes($xoopsDB, $xoopsUser);
 
 /**
  * Fecthing numbers of tribes friends videos pictures etc...
@@ -38,14 +31,14 @@ $nbSections = $controler->getNumbersSections();
 
 $tribe_id = (int)$_POST['tribe_id'];
 $marker   = (!empty($_POST['marker'])) ? (int)$_POST['marker'] : 0;
-$criteria = new criteria('tribe_id', $tribe_id);
-$tribes   = $controler->tribes_factory->getObjects($criteria);
+$criteria = new \Criteria('tribe_id', $tribe_id);
+$tribes   = $controler->tribesFactory->getObjects($criteria);
 $tribe    = $tribes[0];
 
 $uid = $xoopsUser->getVar('uid');
 
 if (1 == $marker && $tribe->getVar('owner_uid') == $uid) {
-    $title     = trim(htmlspecialchars($_POST['title']));
+    $title     = trim(htmlspecialchars($_POST['title'], ENT_QUOTES | ENT_HTML5));
     $desc      = $_POST['desc'];
     $img       = $_POST['img'];
     $updateImg = (1 == $_POST['flag_oldimg']) ? 0 : 1;
@@ -54,14 +47,14 @@ if (1 == $marker && $tribe->getVar('owner_uid') == $uid) {
     $maxfilebytes  = $xoopsModuleConfig['maxfilesize'];
     $maxfileheight = $xoopsModuleConfig['max_original_height'];
     $maxfilewidth  = $xoopsModuleConfig['max_original_width'];
-    $controler->tribes_factory->receiveTribe($title, $desc, $img, $path_upload, $maxfilebytes, $maxfilewidth, $maxfileheight, $updateImg, $tribe);
+    $controler->tribesFactory->receiveTribe($title, $desc, $img, $path_upload, $maxfilebytes, $maxfilewidth, $maxfileheight, $updateImg, $tribe);
 
     redirect_header('tribes.php?uid=' . $uid, 3, _MD_YOGURT_TRIBEEDITED);
 } else {
     /**
      * Render a form with the info of the user
      */
-    $tribe_members = $controler->reltribeusers_factory->getUsersFromTribe($tribe_id, 0, 50);
+    $tribe_members = $controler->reltribeusersFactory->getUsersFromTribe($tribe_id, 0, 50);
     $xoopsTpl->assign('tribe_members', $tribe_members);
     $maxfilebytes = $xoopsModuleConfig['maxfilesize'];
     $xoopsTpl->assign('lang_savetribe', _MD_YOGURT_UPLOADTRIBE);
@@ -137,5 +130,3 @@ if (preg_match('/msie/', strtolower($_SERVER['HTTP_USER_AGENT']))) {
 }
 
 include __DIR__ . '/../../footer.php';
-
-

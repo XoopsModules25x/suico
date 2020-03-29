@@ -1,29 +1,21 @@
 <?php
-// $Id: modinfo.php,v 1.34 2008/04/13 13:20:36 marcellobrandao Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author       Marcello BrandÃ£o aka  Suico
+ * @author       XOOPS Development Team
+ * @since
+ */
 define('_MI_YOG_NUMBPICT_TITLE', 'Number of Pictures');
 define('_MI_YOG_NUMBPICT_DESC', 'Number of pictures a user can have in their page');
 define('_MI_YOG_ADMENU1', 'Home');
@@ -113,7 +105,7 @@ define('_MI_YOGURT_MYCONFIGS', 'My Settings');
 define('_MI_YOG_PICTURE_TEMPLATECONFIGSDESC', 'Template settings for the user');
 define('_MI_YOG_PICTURE_TEMPLATEFOOTERDESC', 'Template for the footer of the module');
 define('_MI_YOG_PICTURE_TEMPLATEEDITTRIBE', 'Template for the Tribes page atributes');
-define('_MI_YOGURT_LICENSE', 'Yogurt by Marcello Brandão is licensed under a Attribution-No Derivative Works 2.5 Brazil.');
+define('_MI_YOGURT_LICENSE', 'Yogurt by Marcello Brandï¿½o is licensed under a Attribution-No Derivative Works 2.5 Brazil.');
 
 //19/10/2007
 define('_MI_YOG_TRIBESPERPAGE_TITLE', 'Tribes per page');

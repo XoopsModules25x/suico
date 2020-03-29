@@ -1,65 +1,55 @@
 <?php
-// $Id: submit_Note.php,v 1.3 2008/04/07 20:25:22 marcellobrandao Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
 
 /**
- * Xoops header ...
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author       Marcello Brandão aka  Suico
+ * @author       XOOPS Development Team
+ * @since
  */
-include_once '../../mainfile.php';
-include_once '../../header.php';
+
+use XoopsModules\Yogurt;
+
+require __DIR__ . '/header.php';
 
 /**
  * Modules class includes
  */
-include_once 'class/yogurt_Notes.php';
+//include_once 'class/Notes.php';
 
 /**
  * Factories of tribes
  */
-$Notes_factory = new Xoopsyogurt_NotesHandler($xoopsDB);
+$NotesFactory = new Yogurt\NotesHandler($xoopsDB);
 
 /**
  * Verify Token
  */
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 /**
  *
  */
 
-$myts          = MyTextSanitizer::getInstance();
+$myts         = MyTextSanitizer::getInstance();
 $Notebook_uid = $_POST['uid'];
 $Note_text    = $myts->displayTarea($_POST['text'], 0, 1, 1, 1, 1);
-$mainform      = (!empty($_POST['mainform'])) ? 1 : 0;
-$Note         = $Notes_factory->create();
+$mainform     = (!empty($_POST['mainform'])) ? 1 : 0;
+$Note         = $NotesFactory->create();
 $Note->setVar('Note_text', $Note_text);
 $Note->setVar('Note_from', $xoopsUser->getVar('uid'));
 $Note->setVar('Note_to', $Notebook_uid);
-$Notes_factory->insert($Note);
+$NotesFactory->insert($Note);
 $extra_tags['X_OWNER_NAME'] = $xoopsUser->getUnameFromId($Notebook_uid);
 $extra_tags['X_OWNER_UID']  = $Notebook_uid;
 $notificationHandler        = xoops_getHandler('notification');

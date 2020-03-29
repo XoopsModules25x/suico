@@ -1,3 +1,7 @@
+<h5>3.4 Beta 2   [WORK IN PROGRESS - NOT RELEASED]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.3
+<hr>
+- namespaces (mamba)
+
 <h5>3.4 Beta 1  [NOT RELEASED]</h5>
 <hr>
 - XOOPS 2.5.9, PHP 7 (mamba)

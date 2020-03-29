@@ -1,38 +1,29 @@
 <?php
-// $Id: configs.php,v 1.9 2008/04/19 16:39:08 marcellobrandao Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
-include_once __DIR__ . '/../../mainfile.php';
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author       Marcello Brandão aka  Suico
+ * @author       XOOPS Development Team
+ * @since
+ */
+
+use XoopsModules\Yogurt;
+
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_configs.tpl';
-include_once __DIR__ . '/../../header.php';
-include_once __DIR__ . '/class/yogurt_controler.php';
+require __DIR__ . '/header.php';
 
-$controler  = new YogurtControlerConfigs($xoopsDB, $xoopsUser);
+$controler  = new Yogurt\ControlerConfigs($xoopsDB, $xoopsUser);
 $nbSections = $controler->getNumbersSections();
-
-include_once __DIR__ . '/class/yogurt_configs.php';
 
 if (!$xoopsUser) {
     redirect_header('index.php');
@@ -41,13 +32,13 @@ if (!$xoopsUser) {
 /**
  * Factories of tribes
  */
-$configs_factory = new Xoopsyogurt_configsHandler($xoopsDB);
+$configsFactory = new Yogurt\ConfigsHandler($xoopsDB);
 
 $uid = (int)$xoopsUser->getVar('uid');
 
-$criteria = new Criteria('config_uid', $uid);
-if ($configs_factory->getCount($criteria) > 0) {
-    $configs = $configs_factory->getObjects($criteria);
+$criteria = new \Criteria('config_uid', $uid);
+if ($configsFactory->getCount($criteria) > 0) {
+    $configs = $configsFactory->getObjects($criteria);
     $config  = $configs[0];
 
     $pic  = $config->getVar('pictures');

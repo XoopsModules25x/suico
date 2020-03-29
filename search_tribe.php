@@ -1,35 +1,28 @@
 <?php
-// $Id: search_tribe.php,v 1.3 2008/01/23 10:26:21 marcellobrandao Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
-include_once __DIR__ . '/../../mainfile.php';
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_tribes_results.tpl';
-include_once __DIR__ . '/../../header.php';
-include_once __DIR__ . '/class/yogurt_controler.php';
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
 
-$controler = new YogurtControlerTribes($xoopsDB, $xoopsUser);
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author       Marcello Brandão aka  Suico
+ * @author       XOOPS Development Team
+ * @since
+ */
+
+use XoopsModules\Yogurt;
+
+$GLOBALS['xoopsOption']['template_main'] = 'yogurt_tribes_results.tpl';
+require __DIR__ . '/header.php';
+
+$controler = new Yogurt\ControlerTribes($xoopsDB, $xoopsUser);
 
 /**
  * Fecthing numbers of tribes friends videos pictures etc...
@@ -39,18 +32,18 @@ $nbSections = $controler->getNumbersSections();
 $start_all = isset($_GET['start_all']) ? (int)$_GET['start_all'] : 0;
 $start_my  = isset($_GET['start_my']) ? (int)$_GET['start_my'] : 0;
 
-$tribe_keyword = trim(htmlspecialchars($_GET['tribe_keyword']));
+$tribe_keyword = trim(htmlspecialchars($_GET['tribe_keyword'], ENT_QUOTES | ENT_HTML5));
 /**
  * All Tribes
  */
-$criteria_title  = new criteria('tribe_title', '%' . $tribe_keyword . '%', 'LIKE');
-$criteria_desc   = new criteria('tribe_desc', '%' . $tribe_keyword . '%', 'LIKE');
-$criteria_tribes = new CriteriaCompo($criteria_title);
+$criteria_title  = new \Criteria('tribe_title', '%' . $tribe_keyword . '%', 'LIKE');
+$criteria_desc   = new \Criteria('tribe_desc', '%' . $tribe_keyword . '%', 'LIKE');
+$criteria_tribes = new \CriteriaCompo($criteria_title);
 $criteria_tribes->add($criteria_desc, 'OR');
-$nb_tribes = $controler->tribes_factory->getCount($criteria_tribes);
+$nb_tribes = $controler->tribesFactory->getCount($criteria_tribes);
 $criteria_tribes->setLimit($xoopsModuleConfig['tribesperpage']);
 $criteria_tribes->setStart($start_all);
-$tribes_objects = $controler->tribes_factory->getObjects($criteria_tribes);
+$tribes_objects = $controler->tribesFactory->getObjects($criteria_tribes);
 $i              = 0;
 foreach ($tribes_objects as $tribe_object) {
     $tribes[$i]['id']    = $tribe_object->getVar('tribe_id');
@@ -74,7 +67,7 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 /**
  * Criando a barra de navegao caso tenha muitos amigos
  */
-$barra_navegacao = new XoopsPageNav($nb_tribes, $xoopsModuleConfig['tribesperpage'], $start_all, 'start_all', 'tribe_keyword=' . $tribe_keyword . '&amp;start_my=' . $start_my);
+$barra_navegacao = new \XoopsPageNav($nb_tribes, $xoopsModuleConfig['tribesperpage'], $start_all, 'start_all', 'tribe_keyword=' . $tribe_keyword . '&amp;start_my=' . $start_my);
 $barrinha        = $barra_navegacao->renderImageNav(2);
 
 //permissions

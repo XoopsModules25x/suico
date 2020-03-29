@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Yogurt\Common;
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -8,39 +11,39 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
+
 /**
- * PedigreeBreadcrumb Class
+ * Breadcrumb Class
  *
- * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright   XOOPS Project (https://xoops.org)
  * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
  * @author      lucio <lucio.rota@gmail.com>
- * @package     pedigree
- * @since       3.23
- * @version     $Id: breadcrumb.php 12865 2014-11-22 07:03:35Z beckmi $
+ * @package     Yogurt
  *
  * Example:
- * $breadcrumb = new PedigreeBreadcrumb();
+ * $breadcrumb = new Common\Breadcrumb();
  * $breadcrumb->addLink( 'bread 1', 'index1.php' );
  * $breadcrumb->addLink( 'bread 2', '' );
  * $breadcrumb->addLink( 'bread 3', 'index3.php' );
  * echo $breadcrumb->render();
  */
+
+use XoopsModules\Yogurt;
+use XoopsModules\Yogurt\Common;
+
 defined('XOOPS_ROOT_PATH') || exit('XOOPS Root Path not defined');
 
 /**
- * Class PedigreeBreadcrumb
+ * Class Breadcrumb
  */
-class PedigreeBreadcrumb
+class Breadcrumb
 {
-    public $dirname;
+    public  $dirname;
     private $bread = [];
 
-    /**
-     *
-     */
     public function __construct()
     {
-        $this->dirname = basename(dirname(__DIR__));
+        $this->dirname = basename(dirname(dirname(__DIR__)));
     }
 
     /**
@@ -53,23 +56,22 @@ class PedigreeBreadcrumb
     {
         $this->bread[] = [
             'link'  => $link,
-            'title' => $title
+            'title' => $title,
         ];
     }
 
     /**
-     * Render Pedigree BreadCrumb
-     *
+     * Render BreadCrumb
      */
     public function render()
     {
         if (!isset($GLOBALS['xoTheme']) || !is_object($GLOBALS['xoTheme'])) {
-            require_once $GLOBALS['xoops']->path('class/theme.php');
-            $GLOBALS['xoTheme'] = new xos_opal_Theme();
+            require $GLOBALS['xoops']->path('class/theme.php');
+            $GLOBALS['xoTheme'] = new \xos_opal_Theme();
         }
 
-        require_once $GLOBALS['xoops']->path('class/template.php');
-        $breadcrumbTpl = new XoopsTpl();
+        require $GLOBALS['xoops']->path('class/template.php');
+        $breadcrumbTpl = new \XoopsTpl();
         $breadcrumbTpl->assign('breadcrumb', $this->bread);
         $html = $breadcrumbTpl->fetch('db:' . $this->dirname . '_common_breadcrumb.tpl');
         unset($breadcrumbTpl);

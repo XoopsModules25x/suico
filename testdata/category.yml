@@ -1,0 +1,29 @@
+---
+# category
+-
+ id: 1
+ pid: 0
+ title: 'Science'
+ description: ''
+ image:
+ weight: 1
+ color:
+ online: 1
+-
+ id: 2
+ pid: 1
+ title: 'Politics'
+ description:
+ image:
+ weight: 1
+ color:
+ online: 1
+-
+ id: 3
+ pid: 0
+ title: 'Arts'
+ description:
+ image:
+ weight: 1
+ color:
+ online: 1

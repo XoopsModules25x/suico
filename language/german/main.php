@@ -1,29 +1,21 @@
 <?php
-// $Id: main.php,v 1.4 2008/04/22 15:56:03 xoops-magazine Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author       Marcello Brandão aka  Suico
+ * @author       XOOPS Development Team
+ * @since
+ */
 //Present in many files (videos pictures etc...)
 define('_MD_YOGURT_DELETE', 'L&ouml;schen');
 define('_MD_YOGURT_EDITDESC', 'Beschreibung bearbeiten');
@@ -32,8 +24,11 @@ define('_MD_YOGURT_DESC_EDITED', 'Die Beschreibung wurde erfolgreich ge&auml;nde
 define('_MD_YOGURT_CAPTION', 'Titel');
 define('_MD_YOGURT_YOUCANUPLOAD', 'Du kannst nur JPG-Dateien mit einer maximalen Dateigr&ouml;&szlig;e von %s KBytes hochladen!<br /><b>Bilder kannst Du ganz einfach unter <a href=http://www.bilder-editieren.de target=_blank>www.bilder-editieren.de</a> bearbeiten.</b>');
 define('_MD_YOGURT_UPLOADPICTURE', 'Bild hochladen');
-define('_MD_YOGURT_NOCACHACA', 'Ein Problem ist aufgetreten ... sieht nicht gut aus<br />
-Das Modul hat sich in einer unerwarteten Weise verhalten. Bitte versuche deine letzte Aktion erneut.');//Funny general error message
+define(
+    '_MD_YOGURT_NOCACHACA',
+    'Ein Problem ist aufgetreten ... sieht nicht gut aus<br />
+Das Modul hat sich in einer unerwarteten Weise verhalten. Bitte versuche deine letzte Aktion erneut.'
+);//Funny general error message
 define('_MD_YOGURT_PAGETITLE', "%s - %s's Social Network");
 define('_MD_YOGURT_SUBMIT', 'Absenden');
 define('_MD_YOGURT_VIDEOS', 'Videos');
@@ -127,8 +122,11 @@ define('_MD_YOGURT_SETMAINVIDEO', 'Dieses Video erscheint ab sofort auf deiner P
 define('_MD_YOGURT_YOUTUBECODE', 'YouTube-Link oder URL');
 define('_MD_YOGURT_ADDVIDEO', 'Video hinzuf&uuml;gen');
 define('_MD_YOGURT_ADDFAVORITEVIDEOS', 'Bevorzugtes Video hinzuf&uuml;gen');
-define('_MD_YOGURT_ADDVIDEOSHELP', 'Wenn Du ein eigenes Video mit anderen teilen willst, dann lade dieses Video
-bei <a href=http://www.youtube.com target=_blank>YouTube</a> hoch und f&uuml;ge die URL ein bei '); //The name of the site will show after this
+define(
+    '_MD_YOGURT_ADDVIDEOSHELP',
+    'Wenn Du ein eigenes Video mit anderen teilen willst, dann lade dieses Video
+bei <a href=http://www.youtube.com target=_blank>YouTube</a> hoch und f&uuml;ge die URL ein bei '
+); //The name of the site will show after this
 define('_MD_YOGURT_MYVIDEOS', 'Meine Videos');
 define('_MD_YOGURT_MAKEMAIN', 'Dieses Video als Hauptvideo festlegen');
 define('_MD_YOGURT_NOVIDEOSYET', 'Keine Videos vorhanden!');
@@ -142,7 +140,7 @@ define('_MD_YOGURT_VIDEODELETED', 'Video wurde gel&ouml;scht');
 define('_MD_YOGURT_VIDEOSAVED', 'Video wurde gespeichert');
 
 ############################## TRIBES ########################################################
-//class/yogurt_tribes.php
+//class/Tribes.php
 define('_MD_YOGURT_SUBMIT_TRIBE', 'Neue Gruppe anlegen');
 define('_MD_YOGURT_UPLOADTRIBE', 'Gruppe speichern');//also present in many ther tribes related
 define('_MD_YOGURT_TRIBE_IMAGE', 'Gruppenbild (125 Pixel breit und 80 Pixel hoch f&uuml;r optimale Darstellung)');//also present in many ther tribes related

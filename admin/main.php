@@ -1,49 +1,37 @@
 <?php
-// $Id: main.php,v 1.14 2008/04/13 14:23:43 marcellobrandao Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
 
 /**
- * main.php, Principal arquivo da administração
- *
- * Este arquivo foi implementado da seguinte forma
- * Primeiro você tem várias funções
- * Depois você tem um case que vai chamar algumas destas funções de acordo com
- * o paramentro $op
- * @author  Marcello Brandão <marcello.brandao@gmail.com>
- * @version 1.0
- * @package admin
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author       Marcello BrandÃ£o aka  Suico
+ * @author       XOOPS Development Team
+ * @since
  */
 
 /**
- * Arquivo de cabeçalho da administração do Xoops
+ * main.php, Main administration file *
+ * This file was implemented as follows
+ * First you have several functions
+ * Then you have a case that will call some of these functions according to
+ * the $ op parameter
  */
-include __DIR__ . '/../../../include/cp_header.php';
 
 /**
- * Função que desenha o cabeçalho da administração do Xoops
+ * Arquivo de cabeï¿½alho da administraï¿½ï¿½o do Xoops
+ */
+require_once __DIR__ . '/admin_header.php';
+
+/**
+ * Funï¿½ï¿½o que desenha o cabeï¿½alho da administraï¿½ï¿½o do Xoops
  */
 xoops_cp_header();
 
@@ -339,15 +327,12 @@ function homedefault()
     echo '</table>';
 }
 
-
-
 switch ($op) {
-
     case 'about':
         if ($isframeworksrequirement) {
             loadModuleAdminMenu(2, '-> About');
         } else {
-//            renderUglierMenu(2, '-> About');
+            //            renderUglierMenu(2, '-> About');
         }
         about();
 
@@ -356,12 +341,12 @@ switch ($op) {
         if ($isframeworksrequirement) {
             loadModuleAdminMenu(1, '-> home');
         } else {
-//            renderUglierMenu(1, '-> home');
+            //            renderUglierMenu(1, '-> home');
         }
         homedefault();
 
         break;
 }
 
-//fechamento das tags de if lá de cimão verificação se os arquivos do phppp existem
+//fechamento das tags de if lï¿½ de cimï¿½o verificaï¿½ï¿½o se os arquivos do phppp existem
 xoops_cp_footer();

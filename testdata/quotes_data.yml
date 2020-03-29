@@ -1,0 +1,77 @@
+---
+# quotes
+-
+  id: 1
+  quote: "<p>Life isn't about finding yourself. <span style="color: #ff0000; background-color: #ffff00;"><strong>Life is about creating yourself.&nbsp;</strong> </span></p>"
+  author: "George Bernard Shaw"
+  online: 1
+  created: "2017-06-24 03:21:03"
+  cid: 1  
+-
+  id: 2
+  quote: "The most important thing is to enjoy your life - to be happy - it's all that matters."
+  author: "Audrey Hepburn"
+  online: 1
+  created: "2017-06-24 03:21:03"
+  cid: 1  
+-
+  id: 3
+  quote: "I have found that if you love life, life will love you back."
+  author: "Arthur Rubinstein"
+  online: 1
+  created: "2017-06-24 03:21:03"
+  cid: 1
+-
+  id: 4
+  quote: "Life is really simple, but we insist on making it complicated. "
+  author: "Confucius"
+  online: 1
+  created: "2017-06-24 03:21:03"
+-
+  id: 5
+  quote: "In the end, it's not the years in your life that count. It's the life in your years."
+  author: "Abraham Lincoln"
+  online: 1
+  created: "2017-06-24 03:21:03"
+  cid: 1
+-
+  id: 6
+  quote: "We all have two lives. The second one starts when we realize we only have one."
+  author: "Tom Hiddleston"
+  online: 1
+  created: "2017-06-24 03:21:03"
+-
+  id: 7
+  quote: "You get in life what you have the courage to ask for."
+  author: "Oprah Winfrey"
+  online: 1
+  created: "2017-06-24 03:21:03"
+  cid: 1
+-
+  id: 8
+  quote: "Only a life lived for others is a life worthwhile."
+  author: "Albert Einstein"
+  online: 1
+  created: "2017-06-24 03:21:03"
+  cid: 1
+-
+  id: 9
+  quote: "Once you say you're going to settle for second, that's what happens to you in life."
+  author: "John F. Kennedy"
+  online: 1
+  created: "2017-06-24 03:21:03"
+  cid: 1
+-
+  id: 10
+  quote: "There is no passion to be found playing small--in settling for a life that is less than the one you are capable of living."
+  author: "Nelson Mandela"
+  online: 1
+  created: "2017-06-24 03:21:03"
+  cid: 1
+-
+  id: 11
+  quote: "Anyone who stops learning is old, whether at twenty or eighty. Anyone who keeps learning stays young. The greatest thing in life is to keep your mind young."
+  author: "Henry Ford"
+  online: 1
+  created: "2017-06-24 03:21:03"
+  cid: 1

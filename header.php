@@ -1,21 +1,45 @@
 <?php
-include_once __DIR__ . '/../../header.php';
-include_once __DIR__ . '/../../class/pagenav.php';
 
-include_once __DIR__ . '/class/yogurt_images.php';
-include_once __DIR__ . '/class/yogurt_visitors.php';
-include_once __DIR__ . '/class/yogurt_seutubo.php';
-include_once __DIR__ . '/class/yogurt_friendpetition.php';
-include_once __DIR__ . '/class/yogurt_friendship.php';
-if (!@ include_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/user.php') {
-    include_once XOOPS_ROOT_PATH . '/language/english/user.php';
+use XoopsModules\Yogurt;
+
+include __DIR__ . '/preloads/autoloader.php';
+
+require  dirname(dirname(__DIR__)) . '/mainfile.php';
+require XOOPS_ROOT_PATH . '/header.php';
+
+$moduleDirName = basename(__DIR__);
+
+/** @var \XoopsModules\Yogurt\Helper $helper */
+$helper = \XoopsModules\Yogurt\Helper::getInstance();
+
+$modulePath = XOOPS_ROOT_PATH . '/modules/' . $moduleDirName;
+
+$myts = \MyTextSanitizer::getInstance();
+
+if (!isset($GLOBALS['xoTheme']) || !is_object($GLOBALS['xoTheme'])) {
+    require $GLOBALS['xoops']->path('class/theme.php');
+    $GLOBALS['xoTheme'] = new \xos_opal_Theme();
 }
 
-$album_factory          = new Xoopsyogurt_imagesHandler($xoopsDB);
-$visitors_factory       = new Xoopsyogurt_visitorsHandler($xoopsDB);
-$videos_factory         = new Xoopsyogurt_seutuboHandler($xoopsDB);
-$friendpetition_factory = new Xoopsyogurt_friendpetitionHandler($xoopsDB);
-$friendship_factory     = new Xoopsyogurt_friendshipHandler($xoopsDB);
+//Handlers
+//$XXXHandler = xoops_getModuleHandler('XXX', $moduleDirName);
+
+// Load language files
+$helper->loadLanguage('main');
+//$helper->loadLanguage('user');
+xoops_loadLanguage('user');
+
+if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
+    require $GLOBALS['xoops']->path('class/template.php');
+    $xoopsTpl = new \XoopsTpl();
+}
+
+
+$albumFactory          = new Yogurt\ImageHandler($xoopsDB);
+$visitorsFactory       = new Yogurt\VisitorsHandler($xoopsDB);
+$videosFactory         = new Yogurt\SeutuboHandler($xoopsDB);
+$friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
+$friendshipFactory     = new Yogurt\FriendshipHandler($xoopsDB);
 
 $isOwner  = 0;
 $isanonym = 1;

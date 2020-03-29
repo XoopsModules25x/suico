@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Yogurt;
+
 /**
  * Protection against inclusion outside the site
  */
@@ -6,121 +9,26 @@ if (!defined('XOOPS_ROOT_PATH')) {
     die('XOOPS root path not defined');
 }
 
-/**
- * Includes of form objects and uploader
- */
-include_once XOOPS_ROOT_PATH . '/class/uploader.php';
-include_once XOOPS_ROOT_PATH . '/kernel/object.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include_once XOOPS_ROOT_PATH . '/kernel/object.php';
-
-/**
- * yogurt_seutubo class.
- * $this class is responsible for providing data access mechanisms to the data source
- * of XOOPS user class objects.
- */
-class yogurt_seutubo extends XoopsObject
-{
-    public $db;
-
-    // constructor
-
-    /**
-     * yogurt_seutubo constructor.
-     * @param null $id
-     */
-    public function __construct($id = null)
-    {
-        $this->db = XoopsDatabaseFactory::getDatabaseConnection();
-        $this->initVar('video_id', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('uid_owner', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('video_desc', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('youtube_code', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('main_video', XOBJ_DTYPE_TXTBOX, null, false);
-        if (!empty($id)) {
-            if (is_array($id)) {
-                $this->assignVars($id);
-            } else {
-                $this->load((int)$id);
-            }
-        } else {
-            $this->setNew();
-        }
-    }
-
-    /**
-     * @param $id
-     */
-    public function load($id)
-    {
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_seutubo') . ' WHERE video_id=' . $id;
-        $myrow = $this->db->fetchArray($this->db->query($sql));
-        $this->assignVars($myrow);
-        if (!$myrow) {
-            $this->setNew();
-        }
-    }
-
-    /**
-     * @param array  $criteria
-     * @param bool   $asobject
-     * @param string $sort
-     * @param string $order
-     * @param int    $limit
-     * @param int    $start
-     * @return array
-     */
-    public function getAllyogurt_seutubos($criteria = [], $asobject = false, $sort = 'video_id', $order = 'ASC', $limit = 0, $start = 0)
-    {
-        $db          = XoopsDatabaseFactory::getDatabaseConnection();
-        $ret         = [];
-        $where_query = '';
-        if (is_array($criteria) && count($criteria) > 0) {
-            $where_query = ' WHERE';
-            foreach ($criteria as $c) {
-                $where_query .= " $c AND";
-            }
-            $where_query = substr($where_query, 0, -4);
-        } elseif (!is_array($criteria) && $criteria) {
-            $where_query = ' WHERE ' . $criteria;
-        }
-        if (!$asobject) {
-            $sql    = 'SELECT video_id FROM ' . $db->prefix('yogurt_seutubo') . "$where_query ORDER BY $sort $order";
-            $result = $db->query($sql, $limit, $start);
-            while ($myrow = $db->fetchArray($result)) {
-                $ret[] = $myrow['yogurt_seutubo_id'];
-            }
-        } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_seutubo') . "$where_query ORDER BY $sort $order";
-            $result = $db->query($sql, $limit, $start);
-            while ($myrow = $db->fetchArray($result)) {
-                $ret[] = new yogurt_seutubo($myrow);
-            }
-        }
-        return $ret;
-    }
-}
-
 // -------------------------------------------------------------------------
-// ------------------yogurt_seutubo user handler class -------------------
+// ------------------Seutubo user handler class -------------------
 // -------------------------------------------------------------------------
 
 /**
  * yogurt_seutubohandler class.
- * This class provides simple mecanisme for yogurt_seutubo object
+ * This class provides simple mecanisme for Seutubo object
  */
-class Xoopsyogurt_seutuboHandler extends XoopsObjectHandler
+class SeutuboHandler extends \XoopsObjectHandler
 {
 
     /**
-     * create a new yogurt_seutubo
+     * create a new Seutubo
      *
      * @param bool $isNew flag the new objects as "new"?
-     * @return \XoopsObject yogurt_seutubo
+     * @return \XoopsObject Seutubo
      */
     public function create($isNew = true)
     {
-        $yogurt_seutubo = new yogurt_seutubo();
+        $yogurt_seutubo = new Seutubo();
         if ($isNew) {
             $yogurt_seutubo->setNew();
         } else {
@@ -131,12 +39,12 @@ class Xoopsyogurt_seutuboHandler extends XoopsObjectHandler
     }
 
     /**
-     * retrieve a yogurt_seutubo
+     * retrieve a Seutubo
      *
-     * @param int $id of the yogurt_seutubo
-     * @return mixed reference to the {@link yogurt_seutubo} object, FALSE if failed
+     * @param int $id of the Seutubo
+     * @return mixed reference to the {@link Seutubo} object, FALSE if failed
      */
-    public function &get($id)
+    public function get($id)
     {
         $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_seutubo') . ' WHERE video_id=' . $id;
         if (!$result = $this->db->query($sql)) {
@@ -144,7 +52,7 @@ class Xoopsyogurt_seutuboHandler extends XoopsObjectHandler
         }
         $numrows = $this->db->getRowsNum($result);
         if (1 == $numrows) {
-            $yogurt_seutubo = new yogurt_seutubo();
+            $yogurt_seutubo = new Seutubo();
             $yogurt_seutubo->assignVars($this->db->fetchArray($result));
             return $yogurt_seutubo;
         }
@@ -152,17 +60,17 @@ class Xoopsyogurt_seutuboHandler extends XoopsObjectHandler
     }
 
     /**
-     * insert a new yogurt_seutubo in the database
+     * insert a new Seutubo in the database
      *
-     * @param \XoopsObject $yogurt_seutubo reference to the {@link yogurt_seutubo}
+     * @param \XoopsObject $yogurt_seutubo reference to the {@link Seutubo}
      *                                     object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(XoopsObject $yogurt_seutubo, $force = false)
+    public function insert(\XoopsObject $yogurt_seutubo, $force = false)
     {
         global $xoopsConfig;
-        if ('yogurt_seutubo' != get_class($yogurt_seutubo)) {
+        if (!$yogurt_seutubo instanceof \Seutubo) {
             return false;
         }
         if (!$yogurt_seutubo->isDirty()) {
@@ -176,8 +84,8 @@ class Xoopsyogurt_seutuboHandler extends XoopsObjectHandler
         }
         $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
         if ($yogurt_seutubo->isNew()) {
-            // ajout/modification d'un yogurt_seutubo
-            $yogurt_seutubo = new yogurt_seutubo();
+            // ajout/modification d'un Seutubo
+            $yogurt_seutubo = new Seutubo();
             $format         = 'INSERT INTO %s (video_id, uid_owner, video_desc, youtube_code, main_video)';
             $format         .= 'VALUES (%u, %u, %s, %s, %s)';
             $sql            = sprintf($format, $this->db->prefix('yogurt_seutubo'), $video_id, $uid_owner, $this->db->quoteString($video_desc), $this->db->quoteString($youtube_code), $this->db->quoteString($main_video));
@@ -204,15 +112,15 @@ class Xoopsyogurt_seutuboHandler extends XoopsObjectHandler
     }
 
     /**
-     * delete a yogurt_seutubo from the database
+     * delete a Seutubo from the database
      *
-     * @param \XoopsObject $yogurt_seutubo reference to the yogurt_seutubo to delete
+     * @param \XoopsObject $yogurt_seutubo reference to the Seutubo to delete
      * @param bool         $force
      * @return bool FALSE if failed.
      */
-    public function delete(XoopsObject $yogurt_seutubo, $force = false)
+    public function delete(\XoopsObject $yogurt_seutubo, $force = false)
     {
-        if ('yogurt_seutubo' != get_class($yogurt_seutubo)) {
+        if (!$yogurt_seutubo instanceof \Seutubo) {
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE video_id = %u', $this->db->prefix('yogurt_seutubo'), $yogurt_seutubo->getVar('video_id'));
@@ -231,15 +139,15 @@ class Xoopsyogurt_seutuboHandler extends XoopsObjectHandler
      * retrieve yogurt_seutubos from the database
      *
      * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
-     * @param bool   $id_as_key use the UID as key for the array?
-     * @return array array of {@link yogurt_seutubo} objects
+     * @param bool            $id_as_key use the UID as key for the array?
+     * @return array array of {@link Seutubo} objects
      */
     public function &getObjects($criteria = null, $id_as_key = false)
     {
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_seutubo');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
@@ -252,7 +160,7 @@ class Xoopsyogurt_seutuboHandler extends XoopsObjectHandler
             return $ret;
         }
         while ($myrow = $this->db->fetchArray($result)) {
-            $yogurt_seutubo = new yogurt_seutubo();
+            $yogurt_seutubo = new Seutubo();
             $yogurt_seutubo->assignVars($myrow);
             if (!$id_as_key) {
                 $ret[] =& $yogurt_seutubo;
@@ -273,7 +181,7 @@ class Xoopsyogurt_seutuboHandler extends XoopsObjectHandler
     public function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_seutubo');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
@@ -293,7 +201,7 @@ class Xoopsyogurt_seutuboHandler extends XoopsObjectHandler
     public function deleteAll($criteria = null)
     {
         $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_seutubo');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {
@@ -312,11 +220,11 @@ class Xoopsyogurt_seutuboHandler extends XoopsObjectHandler
      */
     public function renderFormSubmit($xoopsTpl)
     {
-        $form       = new XoopsThemeForm(_MD_YOGURT_ADDFAVORITEVIDEOS, 'form_videos', 'video_submited.php', 'post', true);
-        $field_code = new XoopsFormText(_MD_YOGURT_YOUTUBECODE, 'codigo', 50, 250);
-        $field_desc = new XoopsFormTextArea(_MD_YOGURT_CAPTION, 'caption');
+        $form       = new \XoopsThemeForm(_MD_YOGURT_ADDFAVORITEVIDEOS, 'form_videos', 'video_submited.php', 'post', true);
+        $field_code = new \XoopsFormText(_MD_YOGURT_YOUTUBECODE, 'codigo', 50, 250);
+        $field_desc = new \XoopsFormTextArea(_MD_YOGURT_CAPTION, 'caption');
         $form->setExtra('enctype="multipart/form-data"');
-        $button_send = new XoopsFormButton('', 'submit_button', _MD_YOGURT_ADDVIDEO, 'submit');
+        $button_send = new \XoopsFormButton('', 'submit_button', _MD_YOGURT_ADDVIDEO, 'submit');
 
         $form->addElement($field_warning);
         $form->addElement($field_code, true);
@@ -343,17 +251,19 @@ class Xoopsyogurt_seutuboHandler extends XoopsObjectHandler
      */
     public function renderFormEdit($caption, $cod_img, $filename)
     {
-        $form       = new XoopsThemeForm(_MD_YOGURT_EDITDESC, 'form_picture', 'editdescvideo.php', 'post', true);
-        $field_desc = new XoopsFormText($caption, 'caption', 35, 55);
+        $form       = new \XoopsThemeForm(_MD_YOGURT_EDITDESC, 'form_picture', 'editdescvideo.php', 'post', true);
+        $field_desc = new \XoopsFormText($caption, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
-        $button_send    = new XoopsFormButton('', 'submit_button', _MD_YOGURT_SUBMIT, 'submit');
-        $field_warning  = new XoopsFormLabel('<object width="425" height="353">
+        $button_send    = new \XoopsFormButton('', 'submit_button', _MD_YOGURT_SUBMIT, 'submit');
+        $field_warning  = new \XoopsFormLabel(
+            '<object width="425" height="353">
 <param name="movie" value="http://www.youtube.com/v/' . $filename . '"></param>
 <param name="wmode" value="transparent"></param>
 <embed src="http://www.youtube.com/v/' . $filename . '" type="application/x-shockwave-flash" wmode="transparent" width="425" height="353"></embed>
-</object>');
-        $field_video_id = new XoopsFormHidden('video_id', $cod_img);
-        $field_marker   = new XoopsFormHidden('marker', 1);
+</object>'
+        );
+        $field_video_id = new \XoopsFormHidden('video_id', $cod_img);
+        $field_marker   = new \XoopsFormHidden('marker', 1);
         $form->addElement($field_warning);
         $form->addElement($field_desc);
         $form->addElement($field_video_id, true);

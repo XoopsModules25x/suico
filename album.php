@@ -1,36 +1,28 @@
 <?php
-// $Id: album.php,v 1.21 2008/04/19 16:39:08 marcellobrandao Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
 
-include_once __DIR__ . '/../../mainfile.php';
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author       Marcello Brandão aka  Suico
+ * @author       XOOPS Development Team
+ * @since
+ */
+
+use XoopsModules\Yogurt;
+
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_album.tpl';
-include_once __DIR__ . '/../../header.php';
-include_once __DIR__ . '/class/yogurt_controler.php';
+require __DIR__ . '/header.php';
 
-$controler = new YogurtControlerPhotos($xoopsDB, $xoopsUser);
+$controler = new Yogurt\ControlerPhotos($xoopsDB, $xoopsUser);
 
 /**
  * Fecthing numbers of tribes friends videos pictures etc...
@@ -47,11 +39,11 @@ $start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
  * Filter for search pictures in database
  */
 if (1 == $controler->isOwner) {
-    $criteria_uid = new criteria('uid_owner', $controler->uidOwner);
+    $criteria_uid = new \Criteria('uid_owner', $controler->uidOwner);
 } else {
-    $criteria_private = new criteria('private', 0);
-    $criteria_uid2    = new criteria('uid_owner', (int)$controler->uidOwner);
-    $criteria_uid     = new criteriaCompo($criteria_uid2);
+    $criteria_private = new \Criteria('private', 0);
+    $criteria_uid2    = new \Criteria('uid_owner', (int)$controler->uidOwner);
+    $criteria_uid     = new \CriteriaCompo($criteria_uid2);
     $criteria_uid->add($criteria_private);
 }
 $criteria_uid->setLimit($xoopsModuleConfig['picturesperpage']);
@@ -63,7 +55,7 @@ if (1 == $xoopsModuleConfig['images_order']) {
 /**
  * Fetch pictures from factory
  */
-$pictures_object_array = $controler->album_factory->getObjects($criteria_uid);
+$pictures_object_array = $controler->albumFactory->getObjects($criteria_uid);
 $criteria_uid->setLimit('');
 $criteria_uid->setStart(0);
 
@@ -102,7 +94,7 @@ if (!empty($xoopsUser)) {
 /**
  * Let's get the user name of the owner of the album
  */
-$owner      = new XoopsUser($controler->uidOwner);
+$owner      = new \XoopsUser($controler->uidOwner);
 $identifier = $owner->getVar('uname');
 $avatar     = $owner->getVar('user_avatar');
 
@@ -127,7 +119,7 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 /**
  * Criando a barra de navegao caso tenha muitos amigos
  */
-$barra_navegacao = new XoopsPageNav($nbSections['nbPhotos'], $xoopsModuleConfig['picturesperpage'], $start, 'start', 'uid=' . (int)$controler->uidOwner);
+$barra_navegacao = new \XoopsPageNav($nbSections['nbPhotos'], $xoopsModuleConfig['picturesperpage'], $start, 'start', 'uid=' . (int)$controler->uidOwner);
 $navegacao       = $barra_navegacao->renderImageNav(2);
 
 /**

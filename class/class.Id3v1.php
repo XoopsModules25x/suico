@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Yogurt;
+
 /*
     Id3v1 - Class for manipulating Id3v1 tags
     Copyright (C) 2007  Karol Babioch
@@ -103,7 +106,7 @@ class Id3v1
     /**
      * Indicates if the source is read-only
      *
-     * @var boolean
+     * @var bool
      * @see __construct()
      */
     protected $_readOnly = false;
@@ -243,7 +246,7 @@ class Id3v1
         'Drum Solo',
         'Acapella',
         'Euro-House',
-        'Dance Hall'
+        'Dance Hall',
     ];
 
     /**
@@ -253,9 +256,9 @@ class Id3v1
      * are some.
      *
      * @param resource stream
-     * @param boolean $readOnly
-     * @see $_tags
+     * @param bool $readOnly
      * @throws Exception
+     * @see $_tags
      */
     public function __construct($filename, $readOnly = false)
     {
@@ -264,17 +267,17 @@ class Id3v1
         }
 
         if (!is_string($filename)) {
-            throw new RuntimeException('Filename must be a string');
+            throw new \RuntimeException('Filename must be a string');
         }
 
         if (!is_file($filename)) {
-            throw new RuntimeException('File doesn\'t exist');
+            throw new \RuntimeException('File doesn\'t exist');
         }
 
         $mode = $this->_readOnly ? 'rb' : 'rb+';
 
         if (!$this->_stream = @fopen($filename, $mode, false)) {
-            throw new RuntimeException('File cannot be opened');
+            throw new \RuntimeException('File cannot be opened');
         }
 
         if (!$this->_readOnly) {
@@ -362,8 +365,8 @@ class Id3v1
     /**
      * Gets the genre name in dependece of the genre id
      *
-     * @uses getGenreNameById()
      * @return string
+     * @uses getGenreNameById()
      */
     public function getGenre()
     {
@@ -411,9 +414,9 @@ class Id3v1
     /**
      * Gets the Id3v1 version, which is used
      *
-     * @see self::ID3V1_0
-     * @see self::ID3V1_1
      * @return string
+     * @see self::ID3V1_1
+     * @see self::ID3V1_0
      */
     public function getId3v1Version()
     {
@@ -423,11 +426,11 @@ class Id3v1
     /**
      * Sets the Id3v1 version, which will be used
      *
-     * @see self::ID3V1_0
-     * @see self::ID3V1_1
      * @param string $version The version you want to set
      * @return Id3v1 Implements fluent interface
      * @throws Exception
+     * @see self::ID3V1_1
+     * @see self::ID3V1_0
      */
     public function setId3v1Version($version)
     {
@@ -436,14 +439,12 @@ class Id3v1
         }
 
         switch ($version) {
-
             case self::ID3V1_0:
             case self::ID3V1_1:
                 break;
 
             default:
                 throw new RuntimeException('Invalid version');
-
         }
 
         $this->_version = $version;
@@ -457,10 +458,10 @@ class Id3v1
      * The maximum length of this property, which will get stored is 30, even if
      * the method itself also accepts longer terms.
      *
-     * @see $_tags
      * @param string $title The title you want to set
      * @return Id3v1 Implements fluent interface
      * @throws Exception
+     * @see $_tags
      */
     public function setTitle($title)
     {
@@ -483,10 +484,10 @@ class Id3v1
      * The maximum length of this property, which will get stored is 30, even if
      * the method itself also accepts longer terms.
      *
-     * @see $_tags
      * @param string $artist The artist you want to set
      * @return Id3v1 Implements fluent interface
      * @throws Exception
+     * @see $_tags
      */
     public function setArtist($artist)
     {
@@ -509,10 +510,10 @@ class Id3v1
      * The maximum length of this property, which will get stored is 30, even if
      * the method itself also accepts longer terms.
      *
-     * @see $_tags
      * @param string $album The album you want to set
      * @return Id3v1 Implements fluent interface
      * @throws Exception
+     * @see $_tags
      */
     public function setAlbum($album)
     {
@@ -537,10 +538,10 @@ class Id3v1
      * stores 28 characters, in order to save place for the track number.
      * The method itselfs takes also longer terms.
      *
-     * @see $_tags
      * @param string $comment The comment you want to set
      * @return Id3v1 Implements fluent interface
      * @throws Exception
+     * @see $_tags
      */
     public function setComment($comment)
     {
@@ -562,10 +563,10 @@ class Id3v1
      *
      * You can either use the genre id, or the genre name.
      *
-     * @see $_tags
      * @param string|int $genre The genre you want to set
      * @return Id3v1 Implements fluent interface
      * @throws Exception
+     * @see $_tags
      */
     public function setGenre($genre)
     {
@@ -587,10 +588,10 @@ class Id3v1
     /**
      * Sets the year
      *
-     * @see $_tags
      * @param int $year The year you want to set
      * @return Id3v1 Implements fluent interface
      * @throws Exception
+     * @see $_tags
      */
     public function setYear($year)
     {
@@ -614,12 +615,12 @@ class Id3v1
      * this property is just defined there. If you want to store explicit
      * ID3V1_0 you have to set it manually after calling this method.
      *
-     * @see $_tags
-     * @see setId3v1Version()
-     * @see getId3v1Version()
      * @param int $track The tracl you want to set
      * @return Id3v1 Implements fluent interface
      * @throws Exception
+     * @see $_tags
+     * @see setId3v1Version()
+     * @see getId3v1Version()
      */
     public function setTrack($track)
     {
@@ -642,8 +643,8 @@ class Id3v1
      *
      * This method sets the default value for each tag.
      *
-     * @see $_tags
      * @return Id3v1 Implements fluent interface
+     * @see $_tags
      */
     public function clearAllTags()
     {
@@ -666,9 +667,9 @@ class Id3v1
     /**
      * Gets the genre id out of a genre name
      *
-     * @see $_genres
      * @param $genreName
      * @return int
+     * @see $_genres
      */
     public static function getGenreIdByName($genreName)
     {
@@ -684,9 +685,9 @@ class Id3v1
     /**
      * Gets the genre name out of a genre id
      *
-     * @see $_genres
      * @param $genreId
      * @return string|bool
+     * @see $_genres
      */
     public static function getGenreNameById($genreId)
     {
@@ -700,8 +701,8 @@ class Id3v1
     /**
      * Returns a array with all defined genres
      *
-     * @see $_genres
      * @return array
+     * @see $_genres
      */
     public static function getGenreList()
     {
@@ -714,6 +715,8 @@ class Id3v1
      * This method saves the set tags to the file. Therefore it seeks to
      * the end of the file and writes the Id3v1 bytestream to it.
      *
+     * @return Id3v1 Implements fluent interface
+     * @throws Exception
      * @see $_tags
      * @see setTitle()
      * @see setArtist()
@@ -722,8 +725,6 @@ class Id3v1
      * @see setGenre()
      * @see setYear()
      * @see setTrack()
-     * @return Id3v1 Implements fluent interface
-     * @throws Exception
      */
     public function save()
     {
@@ -781,7 +782,7 @@ class Id3v1
             'year',
             'comment',
             'track',
-            'genre'
+            'genre',
         ];
 
         if (in_array($name, $validNames)) {
@@ -821,7 +822,7 @@ class Id3v1
             'year',
             'comment',
             'track',
-            'genre'
+            'genre',
         ];
 
         if (in_array($name, $validNames)) {

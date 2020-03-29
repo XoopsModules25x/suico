@@ -1,35 +1,30 @@
 <?php
-// $Id: blocks.php,v 1.8 2008/01/22 10:29:27 marcellobrandao Exp $ //
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author       Marcello Brandão aka  Suico
+ * @author       XOOPS Development Team
+ * @since
+ */
+
+use XoopsModules\Yogurt;
+
 if (!defined('XOOPS_ROOT_PATH')) {
     exit();
 }
 //include_once(XOOPS_ROOT_PATH."/class/criteria.php");
-include_once XOOPS_ROOT_PATH . '/modules/yogurt/class/yogurt_friendship.php';
-include_once XOOPS_ROOT_PATH . '/modules/yogurt/class/yogurt_images.php';
+//include_once XOOPS_ROOT_PATH . '/modules/yogurt/class/Friendship.php';
+//include_once XOOPS_ROOT_PATH . '/modules/yogurt/class/Image.php';
 
 /**
  * @param $options
@@ -42,20 +37,19 @@ function b_yogurt_friends_show($options)
     $block = [];
 
     if (!empty($xoopsUser)) {
-
         /**
          * Filter for fetch votes ishot and isnothot
          */
 
-        $criteria_2 = new criteria('friend1_uid', $xoopsUser->getVar('uid'));
+        $criteria_2 = new \Criteria('friend1_uid', $xoopsUser->getVar('uid'));
 
         /**
          * Creating factories of pictures and votes
          */
-        //$album_factory      = new Xoopsyogurt_imagesHandler($xoopsDB);
-        $friends_factory = new Xoopsyogurt_friendshipHandler($xoopsDB);
+        //$albumFactory      = new ImagesHandler($xoopsDB);
+        $friendsFactory = new Yogurt\FriendshipHandler($xoopsDB);
 
-        $block['friends'] = $friends_factory->getFriends($options[0], $criteria_2, 0);
+        $block['friends'] = $friendsFactory->getFriends($options[0], $criteria_2, 0);
     }
     $block['lang_allfriends'] = _MB_YOG_ALLFRIENDS;
     return $block;
@@ -86,7 +80,7 @@ function b_yogurt_lastpictures_show($options)
      * Filter for fetch votes ishot and isnothot
      */
 
-    $criteria = new criteria('cod_img', 0, '>');
+    $criteria = new \Criteria('cod_img', 0, '>');
     $criteria->setSort('cod_img');
     $criteria->setOrder('DESC');
     $criteria->setLimit($options[0]);
@@ -94,10 +88,10 @@ function b_yogurt_lastpictures_show($options)
     /**
      * Creating factories of pictures and votes
      */
-    //$album_factory      = new Xoopsyogurt_imagesHandler($xoopsDB);
-    $pictures_factory = new Xoopsyogurt_imagesHandler($xoopsDB);
+    //$albumFactory      = new ImagesHandler($xoopsDB);
+    $picturesFactory = new Yogurt\ImageHandler($xoopsDB);
 
-    $block = $pictures_factory->getLastPicturesForBlock($options[0]);
+    $block = $picturesFactory->getLastPicturesForBlock($options[0]);
 
     return $block;
 }

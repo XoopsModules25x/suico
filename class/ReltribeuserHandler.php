@@ -1,116 +1,34 @@
 <?php
-// yogurt_reltribeuser.php,v 1
+
+namespace XoopsModules\Yogurt;
+
+// Reltribeuser.php,v 1
 //  ---------------------------------------------------------------- //
 // Author: Bruno Barthez	                                           //
 // ----------------------------------------------------------------- //
 
 include_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
-/**
- * yogurt_reltribeuser class.
- * $this class is responsible for providing data access mechanisms to the data source
- * of XOOPS user class objects.
- */
-class yogurt_reltribeuser extends XoopsObject
-{
-    public $db;
-
-    // constructor
-
-    /**
-     * yogurt_reltribeuser constructor.
-     * @param null $id
-     */
-    public function __construct($id = null)
-    {
-        $this->db = XoopsDatabaseFactory::getDatabaseConnection();
-        $this->initVar('rel_id', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('rel_tribe_id', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('rel_user_uid', XOBJ_DTYPE_INT, null, false, 10);
-        if (!empty($id)) {
-            if (is_array($id)) {
-                $this->assignVars($id);
-            } else {
-                $this->load((int)$id);
-            }
-        } else {
-            $this->setNew();
-        }
-    }
-
-    /**
-     * @param $id
-     */
-    public function load($id)
-    {
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_reltribeuser') . ' WHERE rel_id=' . $id;
-        $myrow = $this->db->fetchArray($this->db->query($sql));
-        $this->assignVars($myrow);
-        if (!$myrow) {
-            $this->setNew();
-        }
-    }
-
-    /**
-     * @param array  $criteria
-     * @param bool   $asobject
-     * @param string $sort
-     * @param string $order
-     * @param int    $limit
-     * @param int    $start
-     * @return array
-     */
-    public function getAllyogurt_reltribeusers($criteria = [], $asobject = false, $sort = 'rel_id', $order = 'ASC', $limit = 0, $start = 0)
-    {
-        $db          = XoopsDatabaseFactory::getDatabaseConnection();
-        $ret         = [];
-        $where_query = '';
-        if (is_array($criteria) && count($criteria) > 0) {
-            $where_query = ' WHERE';
-            foreach ($criteria as $c) {
-                $where_query .= " $c AND";
-            }
-            $where_query = substr($where_query, 0, -4);
-        } elseif (!is_array($criteria) && $criteria) {
-            $where_query = ' WHERE ' . $criteria;
-        }
-        if (!$asobject) {
-            $sql    = 'SELECT rel_id FROM ' . $db->prefix('yogurt_reltribeuser') . "$where_query ORDER BY $sort $order";
-            $result = $db->query($sql, $limit, $start);
-            while ($myrow = $db->fetchArray($result)) {
-                $ret[] = $myrow['yogurt_reltribeuser_id'];
-            }
-        } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_reltribeuser') . "$where_query ORDER BY $sort $order";
-            $result = $db->query($sql, $limit, $start);
-            while ($myrow = $db->fetchArray($result)) {
-                $ret[] = new yogurt_reltribeuser($myrow);
-            }
-        }
-        return $ret;
-    }
-}
-
 // -------------------------------------------------------------------------
-// ------------------yogurt_reltribeuser user handler class -------------------
+// ------------------Reltribeuser user handler class -------------------
 // -------------------------------------------------------------------------
 
 /**
  * yogurt_reltribeuserhandler class.
- * This class provides simple mecanisme for yogurt_reltribeuser object
+ * This class provides simple mecanisme for Reltribeuser object
  */
-class Xoopsyogurt_reltribeuserHandler extends XoopsObjectHandler
+class ReltribeuserHandler extends \XoopsObjectHandler
 {
 
     /**
-     * create a new yogurt_reltribeuser
+     * create a new Reltribeuser
      *
      * @param bool $isNew flag the new objects as "new"?
-     * @return \XoopsObject yogurt_reltribeuser
+     * @return \XoopsObject Reltribeuser
      */
     public function create($isNew = true)
     {
-        $yogurt_reltribeuser = new yogurt_reltribeuser();
+        $yogurt_reltribeuser = new Reltribeuser();
         if ($isNew) {
             $yogurt_reltribeuser->setNew();
         } else {
@@ -121,12 +39,12 @@ class Xoopsyogurt_reltribeuserHandler extends XoopsObjectHandler
     }
 
     /**
-     * retrieve a yogurt_reltribeuser
+     * retrieve a Reltribeuser
      *
-     * @param int $id of the yogurt_reltribeuser
-     * @return mixed reference to the {@link yogurt_reltribeuser} object, FALSE if failed
+     * @param int $id of the Reltribeuser
+     * @return mixed reference to the {@link Reltribeuser} object, FALSE if failed
      */
-    public function &get($id)
+    public function get($id)
     {
         $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_reltribeuser') . ' WHERE rel_id=' . $id;
         if (!$result = $this->db->query($sql)) {
@@ -134,7 +52,7 @@ class Xoopsyogurt_reltribeuserHandler extends XoopsObjectHandler
         }
         $numrows = $this->db->getRowsNum($result);
         if (1 == $numrows) {
-            $yogurt_reltribeuser = new yogurt_reltribeuser();
+            $yogurt_reltribeuser = new Reltribeuser();
             $yogurt_reltribeuser->assignVars($this->db->fetchArray($result));
             return $yogurt_reltribeuser;
         }
@@ -142,17 +60,17 @@ class Xoopsyogurt_reltribeuserHandler extends XoopsObjectHandler
     }
 
     /**
-     * insert a new yogurt_reltribeuser in the database
+     * insert a new Reltribeuser in the database
      *
-     * @param \XoopsObject $yogurt_reltribeuser reference to the {@link yogurt_reltribeuser}
+     * @param \XoopsObject $yogurt_reltribeuser reference to the {@link Reltribeuser}
      *                                          object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(XoopsObject $yogurt_reltribeuser, $force = false)
+    public function insert(\XoopsObject $yogurt_reltribeuser, $force = false)
     {
         global $xoopsConfig;
-        if ('yogurt_reltribeuser' != get_class($yogurt_reltribeuser)) {
+        if (!$yogurt_reltribeuser instanceof \Reltribeuser) {
             return false;
         }
         if (!$yogurt_reltribeuser->isDirty()) {
@@ -166,8 +84,8 @@ class Xoopsyogurt_reltribeuserHandler extends XoopsObjectHandler
         }
         $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
         if ($yogurt_reltribeuser->isNew()) {
-            // ajout/modification d'un yogurt_reltribeuser
-            $yogurt_reltribeuser = new yogurt_reltribeuser();
+            // ajout/modification d'un Reltribeuser
+            $yogurt_reltribeuser = new Reltribeuser();
             $format              = 'INSERT INTO %s (rel_id, rel_tribe_id, rel_user_uid)';
             $format              .= 'VALUES (%u, %u, %u)';
             $sql                 = sprintf($format, $this->db->prefix('yogurt_reltribeuser'), $rel_id, $rel_tribe_id, $rel_user_uid);
@@ -194,15 +112,15 @@ class Xoopsyogurt_reltribeuserHandler extends XoopsObjectHandler
     }
 
     /**
-     * delete a yogurt_reltribeuser from the database
+     * delete a Reltribeuser from the database
      *
-     * @param \XoopsObject $yogurt_reltribeuser reference to the yogurt_reltribeuser to delete
+     * @param \XoopsObject $yogurt_reltribeuser reference to the Reltribeuser to delete
      * @param bool         $force
      * @return bool FALSE if failed.
      */
-    public function delete(XoopsObject $yogurt_reltribeuser, $force = false)
+    public function delete(\XoopsObject $yogurt_reltribeuser, $force = false)
     {
-        if ('yogurt_reltribeuser' != get_class($yogurt_reltribeuser)) {
+        if (!$yogurt_reltribeuser instanceof \Reltribeuser) {
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE rel_id = %u', $this->db->prefix('yogurt_reltribeuser'), $yogurt_reltribeuser->getVar('rel_id'));
@@ -221,15 +139,15 @@ class Xoopsyogurt_reltribeuserHandler extends XoopsObjectHandler
      * retrieve yogurt_reltribeusers from the database
      *
      * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
-     * @param bool   $id_as_key use the UID as key for the array?
-     * @return array array of {@link yogurt_reltribeuser} objects
+     * @param bool            $id_as_key use the UID as key for the array?
+     * @return array array of {@link Reltribeuser} objects
      */
     public function &getObjects($criteria = null, $id_as_key = false)
     {
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_reltribeuser');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
@@ -242,7 +160,7 @@ class Xoopsyogurt_reltribeuserHandler extends XoopsObjectHandler
             return $ret;
         }
         while ($myrow = $this->db->fetchArray($result)) {
-            $yogurt_reltribeuser = new yogurt_reltribeuser();
+            $yogurt_reltribeuser = new Reltribeuser();
             $yogurt_reltribeuser->assignVars($myrow);
             if (!$id_as_key) {
                 $ret[] =& $yogurt_reltribeuser;
@@ -263,7 +181,7 @@ class Xoopsyogurt_reltribeuserHandler extends XoopsObjectHandler
     public function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_reltribeuser');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
@@ -283,7 +201,7 @@ class Xoopsyogurt_reltribeuserHandler extends XoopsObjectHandler
     public function deleteAll($criteria = null)
     {
         $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_reltribeuser');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {
@@ -303,7 +221,7 @@ class Xoopsyogurt_reltribeuserHandler extends XoopsObjectHandler
         $ret = [];
 
         $sql = 'SELECT rel_id, rel_tribe_id, rel_user_uid, tribe_title, tribe_desc, tribe_img, owner_uid FROM ' . $this->db->prefix('yogurt_tribes') . ', ' . $this->db->prefix('yogurt_reltribeuser');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
             $sql .= ' ' . $criteria->renderWhere();
             //attention here this is kind of a hack
             $sql .= ' AND tribe_id = rel_tribe_id ';

@@ -1,142 +1,50 @@
 <?php
-// $Id: yogurt_ishot.php,v 1.5 2007/08/31 00:47:04 marcellobrandao Exp $ //
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
+
+namespace XoopsModules\Yogurt;
+
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author       Marcello Brandão aka  Suico
+ * @author       XOOPS Development Team
+ * @since
+ */
 
 if (!defined('XOOPS_ROOT_PATH')) {
     exit();
 }
 include_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
-/**
- * yogurt_ishot class.
- * $this class is responsible for providing data access mechanisms to the data source
- * of XOOPS user class objects.
- */
-class yogurt_ishot extends XoopsObject
-{
-    public $db;
-
-    // constructor
-
-    /**
-     * yogurt_ishot constructor.
-     * @param null $id
-     */
-    public function __construct($id = null)
-    {
-        $this->db = XoopsDatabaseFactory::getDatabaseConnection();
-        $this->initVar('cod_ishot', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('uid_voter', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('uid_voted', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('ishot', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('date', XOBJ_DTYPE_TXTBOX, null, false);
-        if (!empty($id)) {
-            if (is_array($id)) {
-                $this->assignVars($id);
-            } else {
-                $this->load((int)$id);
-            }
-        } else {
-            $this->setNew();
-        }
-    }
-
-    /**
-     * @param $id
-     */
-    public function load($id)
-    {
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_ishot') . ' WHERE cod_ishot=' . $id;
-        $myrow = $this->db->fetchArray($this->db->query($sql));
-        $this->assignVars($myrow);
-        if (!$myrow) {
-            $this->setNew();
-        }
-    }
-
-    /**
-     * @param array  $criteria
-     * @param bool   $asobject
-     * @param string $sort
-     * @param string $order
-     * @param int    $limit
-     * @param int    $start
-     * @return array
-     */
-    public function getAllyogurt_ishots($criteria = [], $asobject = false, $sort = 'cod_ishot', $order = 'ASC', $limit = 0, $start = 0)
-    {
-        $db          = XoopsDatabaseFactory::getDatabaseConnection();
-        $ret         = [];
-        $where_query = '';
-        if (is_array($criteria) && count($criteria) > 0) {
-            $where_query = ' WHERE';
-            foreach ($criteria as $c) {
-                $where_query .= " $c AND";
-            }
-            $where_query = substr($where_query, 0, -4);
-        } elseif (!is_array($criteria) && $criteria) {
-            $where_query = ' WHERE ' . $criteria;
-        }
-        if (!$asobject) {
-            $sql    = 'SELECT cod_ishot FROM ' . $db->prefix('yogurt_ishot') . "$where_query ORDER BY $sort $order";
-            $result = $db->query($sql, $limit, $start);
-            while ($myrow = $db->fetchArray($result)) {
-                $ret[] = $myrow['yogurt_ishot_id'];
-            }
-        } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_ishot') . "$where_query ORDER BY $sort $order";
-            $result = $db->query($sql, $limit, $start);
-            while ($myrow = $db->fetchArray($result)) {
-                $ret[] = new yogurt_ishot($myrow);
-            }
-        }
-        return $ret;
-    }
-}
-
 // -------------------------------------------------------------------------
-// ------------------yogurt_ishot user handler class -------------------
+// ------------------Ishot user handler class -------------------
 // -------------------------------------------------------------------------
 
 /**
  * yogurt_ishothandler class.
- * This class provides simple mecanisme for yogurt_ishot object
+ * This class provides simple mecanisme for Ishot object
  */
-class Xoopsyogurt_ishotHandler extends XoopsObjectHandler
+class IshotHandler extends \XoopsObjectHandler
 {
 
     /**
-     * create a new yogurt_ishot
+     * create a new Ishot
      *
      * @param bool $isNew flag the new objects as "new"?
-     * @return \XoopsObject yogurt_ishot
+     * @return \XoopsObject Ishot
      */
     public function create($isNew = true)
     {
-        $yogurt_ishot = new yogurt_ishot();
+        $yogurt_ishot = new Ishot();
         if ($isNew) {
             $yogurt_ishot->setNew();
         } else {
@@ -147,12 +55,12 @@ class Xoopsyogurt_ishotHandler extends XoopsObjectHandler
     }
 
     /**
-     * retrieve a yogurt_ishot
+     * retrieve a Ishot
      *
-     * @param int $id of the yogurt_ishot
-     * @return mixed reference to the {@link yogurt_ishot} object, FALSE if failed
+     * @param int $id of the Ishot
+     * @return mixed reference to the {@link Ishot} object, FALSE if failed
      */
-    public function &get($id)
+    public function get($id)
     {
         $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_ishot') . ' WHERE cod_ishot=' . $id;
         if (!$result = $this->db->query($sql)) {
@@ -160,7 +68,7 @@ class Xoopsyogurt_ishotHandler extends XoopsObjectHandler
         }
         $numrows = $this->db->getRowsNum($result);
         if (1 == $numrows) {
-            $yogurt_ishot = new yogurt_ishot();
+            $yogurt_ishot = new Ishot();
             $yogurt_ishot->assignVars($this->db->fetchArray($result));
             return $yogurt_ishot;
         }
@@ -168,17 +76,17 @@ class Xoopsyogurt_ishotHandler extends XoopsObjectHandler
     }
 
     /**
-     * insert a new yogurt_ishot in the database
+     * insert a new Ishot in the database
      *
-     * @param \XoopsObject $yogurt_ishot reference to the {@link yogurt_ishot}
+     * @param \XoopsObject $yogurt_ishot reference to the {@link Ishot}
      *                                   object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(XoopsObject $yogurt_ishot, $force = false)
+    public function insert(\XoopsObject $yogurt_ishot, $force = false)
     {
         global $xoopsConfig;
-        if ('yogurt_ishot' != get_class($yogurt_ishot)) {
+        if (!$yogurt_ishot instanceof \Ishot) {
             return false;
         }
         if (!$yogurt_ishot->isDirty()) {
@@ -192,8 +100,8 @@ class Xoopsyogurt_ishotHandler extends XoopsObjectHandler
         }
         $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
         if ($yogurt_ishot->isNew()) {
-            // ajout/modification d'un yogurt_ishot
-            $yogurt_ishot = new yogurt_ishot();
+            // ajout/modification d'un Ishot
+            $yogurt_ishot = new Ishot();
             $format       = 'INSERT INTO %s (cod_ishot, uid_voter, uid_voted, ishot, DATE)';
             $format       .= 'VALUES (%u, %u, %u, %u, %s)';
             $sql          = sprintf($format, $this->db->prefix('yogurt_ishot'), $cod_ishot, $uid_voter, $uid_voted, $ishot, $this->db->quoteString($date));
@@ -220,15 +128,15 @@ class Xoopsyogurt_ishotHandler extends XoopsObjectHandler
     }
 
     /**
-     * delete a yogurt_ishot from the database
+     * delete a Ishot from the database
      *
-     * @param \XoopsObject $yogurt_ishot reference to the yogurt_ishot to delete
+     * @param \XoopsObject $yogurt_ishot reference to the Ishot to delete
      * @param bool         $force
      * @return bool FALSE if failed.
      */
-    public function delete(XoopsObject $yogurt_ishot, $force = false)
+    public function delete(\XoopsObject $yogurt_ishot, $force = false)
     {
-        if ('yogurt_ishot' != get_class($yogurt_ishot)) {
+        if (!$yogurt_ishot instanceof \Ishot) {
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE cod_ishot = %u', $this->db->prefix('yogurt_ishot'), $yogurt_ishot->getVar('cod_ishot'));
@@ -247,15 +155,15 @@ class Xoopsyogurt_ishotHandler extends XoopsObjectHandler
      * retrieve yogurt_ishots from the database
      *
      * @param \XoopsObject $criteria  {@link CriteriaElement} conditions to be met
-     * @param bool   $id_as_key use the UID as key for the array?
-     * @return array array of {@link yogurt_ishot} objects
+     * @param bool         $id_as_key use the UID as key for the array?
+     * @return array array of {@link Ishot} objects
      */
     public function &getObjects($criteria = null, $id_as_key = false)
     {
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_ishot');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
@@ -268,7 +176,7 @@ class Xoopsyogurt_ishotHandler extends XoopsObjectHandler
             return $ret;
         }
         while ($myrow = $this->db->fetchArray($result)) {
-            $yogurt_ishot = new yogurt_ishot();
+            $yogurt_ishot = new Ishot();
             $yogurt_ishot->assignVars($myrow);
             if (!$id_as_key) {
                 $ret[] =& $yogurt_ishot;
@@ -289,7 +197,7 @@ class Xoopsyogurt_ishotHandler extends XoopsObjectHandler
     public function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_ishot');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
@@ -310,7 +218,7 @@ class Xoopsyogurt_ishotHandler extends XoopsObjectHandler
     public function deleteAll($criteria = null)
     {
         $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_ishot');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {
@@ -326,7 +234,7 @@ class Xoopsyogurt_ishotHandler extends XoopsObjectHandler
     public function getHottest($criteria = null)
     {
         $sql = 'SELECT DISTINCTROW uname, user_avatar, uid_voted, COUNT(cod_ishot) AS qtd FROM ' . $this->db->prefix('yogurt_ishot') . ', ' . $this->db->prefix('users');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         //attention here this is kind of a hack
@@ -364,7 +272,7 @@ class Xoopsyogurt_ishotHandler extends XoopsObjectHandler
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT uname, user_avatar, uid_voted FROM ' . $this->db->prefix('yogurt_ishot') . ', ' . $this->db->prefix('users');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
             $sql .= ' ' . $criteria->renderWhere();
             //attention here this is kind of a hack
             $sql .= ' AND uid = uid_voted AND ishot=1';

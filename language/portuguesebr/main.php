@@ -1,32 +1,24 @@
 <?php
-// $Id: main.php,v 1.43 2008/04/07 22:30:35 marcellobrandao Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author       Marcello Brandão aka  Suico
+ * @author       XOOPS Development Team
+ * @since
+ */
 /**
  * Translation for Portuguese users
- * $Id: main.php,v 3.2 2008/08/19  19:14:00 GibaPhp Exp $
+ *
  * @Module     : yogurt
  * @Dependences: FrameWork 1.22
  * @Version    : 3.2
@@ -47,8 +39,11 @@ define('_MD_YOGURT_DESC_EDITED', 'A descrição da foto foi alterada com sucesso
 define('_MD_YOGURT_CAPTION', 'Subtítulo');
 define('_MD_YOGURT_YOUCANUPLOAD', 'Você pode submeter apenas arquivos jpg com até %s KBytes');
 define('_MD_YOGURT_UPLOADPICTURE', 'Upload Foto');
-define('_MD_YOGURT_NOCACHACA', 'Desculpe sem cachaça para você<br />
-Infelizmente, este módulo agiu de forma inesperada. Esperemos que ele volte ao seu estado normal quando você tentar novamente. '); // Funny geral mensagem de erro
+define(
+    '_MD_YOGURT_NOCACHACA',
+    'Desculpe sem cachaça para você<br />
+Infelizmente, este módulo agiu de forma inesperada. Esperemos que ele volte ao seu estado normal quando você tentar novamente. '
+); // Funny geral mensagem de erro
 define('_MD_YOGURT_PAGETITLE', '%s - Álbum do %s');
 define('_MD_YOGURT_SUBMIT', 'Enviar');
 define('_MD_YOGURT_VIDEOS', 'Videos');
@@ -142,8 +137,11 @@ define('_MD_YOGURT_SETMAINVIDEO', 'This video is selected on your front page fro
 define('_MD_YOGURT_YOUTUBECODE', 'Código do YouTube ou URL'); //GibaPhp
 define('_MD_YOGURT_ADDVIDEO', 'Incluir video'); //GibaPhp
 define('_MD_YOGURT_ADDFAVORITEVIDEOS', 'Adicione seus vídeos favoritos'); //GibaPhp
-define('_MD_YOGURT_ADDVIDEOSHELP', 'Se você quizer fazer upload do seu vídeo para compartilhar, poderá enviar os seus vídeos para 
-<a href=http://www.youtube.com>YouTube</a> e, em seguida, adicione a URL aqui '); //The name of the site will show after this - GibaPhp
+define(
+    '_MD_YOGURT_ADDVIDEOSHELP',
+    'Se você quizer fazer upload do seu vídeo para compartilhar, poderá enviar os seus vídeos para 
+<a href=http://www.youtube.com>YouTube</a> e, em seguida, adicione a URL aqui '
+); //The name of the site will show after this - GibaPhp
 define('_MD_YOGURT_MYVIDEOS', 'Meus Videos'); //GibaPhp
 define('_MD_YOGURT_MAKEMAIN', 'Fazer deste vídeo o Principal no seu Perfil'); //GibaPhp
 define('_MD_YOGURT_NOVIDEOSYET', 'Nenhum video ainda!'); //GibaPhp
@@ -157,7 +155,7 @@ define('_MD_YOGURT_VIDEODELETED', 'Seu video foi apagado'); //GibaPhp
 define('_MD_YOGURT_VIDEOSAVED', 'Seu video foi gravado'); //GibaPhp
 
 ############################## TRIBES ########################################################
-//class/yogurt_tribes.php
+//class/Tribes.php
 define('_MD_YOGURT_SUBMIT_TRIBE', 'Criar uma nova Tribo'); //GibaPhp
 define('_MD_YOGURT_UPLOADTRIBE', 'Salvar Tribo');//also present in many ther tribes related - GibaPhp
 define('_MD_YOGURT_TRIBE_IMAGE', 'Imagem da Tribo');//also present in many ther tribes related - GibaPhp

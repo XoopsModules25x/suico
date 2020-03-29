@@ -1,48 +1,38 @@
 <?php
-// $Id: submit_tribe.php,v 1.4 2008/01/23 10:26:21 marcellobrandao Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
 
 /**
- * Xoops header ...
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author       Marcello Brandão aka  Suico
+ * @author       XOOPS Development Team
+ * @since
  */
-include_once '../../mainfile.php';
-include_once '../../header.php';
+
+use XoopsModules\Yogurt;
+
+require __DIR__ . '/header.php';
 
 /**
  * Modules class includes
  */
-include_once 'class/yogurt_friendpetition.php';
-include_once 'class/yogurt_reltribeuser.php';
-include_once 'class/yogurt_tribes.php';
+//include_once 'class/Friendpetition.php';
+//include_once 'class/Reltribeuser.php';
+//include_once 'class/Tribes.php';
 
 /**
  * Factories of tribes
  */
-$reltribeuser_factory = new Xoopsyogurt_reltribeuserHandler($xoopsDB);
-$tribes_factory       = new Xoopsyogurt_tribesHandler($xoopsDB);
+$reltribeuserFactory = new Yogurt\ReltribeuserHandler($xoopsDB);
+$tribesFactory       = new Yogurt\TribesHandler($xoopsDB);
 
 $marker = isset($_POST['marker']) ? $_POST['marker'] : 0;
 
@@ -51,7 +41,7 @@ if (1 == $marker) {
      * Verify Token
      */
     if (!$GLOBALS['xoopsSecurity']->check()) {
-        redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+        redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
     }
     /**
      *
@@ -68,17 +58,17 @@ if (1 == $marker) {
     $maxfilebytes  = $xoopsModuleConfig['maxfilesize'];
     $maxfileheight = $xoopsModuleConfig['max_original_height'];
     $maxfilewidth  = $xoopsModuleConfig['max_original_width'];
-    if ($tribes_factory->receiveTribe($tribe_title, $tribe_desc, '', $path_upload, $maxfilebytes, $maxfilewidth, $maxfileheight)) {
-        $reltribeuser = $reltribeuser_factory->create();
+    if ($tribesFactory->receiveTribe($tribe_title, $tribe_desc, '', $path_upload, $maxfilebytes, $maxfilewidth, $maxfileheight)) {
+        $reltribeuser = $reltribeuserFactory->create();
         $reltribeuser->setVar('rel_tribe_id', $xoopsDB->getInsertId());
         $reltribeuser->setVar('rel_user_uid', $xoopsUser->getVar('uid'));
-        $reltribeuser_factory->insert($reltribeuser);
+        $reltribeuserFactory->insert($reltribeuser);
         redirect_header('tribes.php', 500, _MD_YOGURT_TRIBE_CREATED);
     } else {
-        $tribes_factory->renderFormSubmit(120000, $xoopsTpl);
+        $tribesFactory->renderFormSubmit(120000, $xoopsTpl);
     }
 } else {
-    $tribes_factory->renderFormSubmit(120000, $xoopsTpl);
+    $tribesFactory->renderFormSubmit(120000, $xoopsTpl);
 }
 
 /**

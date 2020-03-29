@@ -1,46 +1,36 @@
 <?php
-// $Id: submit_friendpetition.php,v 1.4 2008/04/11 21:56:35 marcellobrandao Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
 
 /**
- * Xoops header ...
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author       Marcello Brandão aka  Suico
+ * @author       XOOPS Development Team
+ * @since
  */
-include_once '../../mainfile.php';
+
+use XoopsModules\Yogurt;
+
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
-include_once '../../header.php';
+require __DIR__ . '/header.php';
 
 /**
  * Modules class includes
  */
-include_once 'class/yogurt_friendpetition.php';
+//include_once 'class/Friendpetition.php';
 
 /**
  * Factory of petitions created
  */
-$friendpetition_factory = new Xoopsyogurt_friendpetitionHandler($xoopsDB);
+$friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
 
 /**
  * Getting the uid of the user which user want to ask to be friend
@@ -51,29 +41,29 @@ $petitioned_uid = $_POST['petitioned_uid'];
  * Verify Token
  */
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
 //Verify if the user has already asked for friendship or if the user he s asking to be a friend has already asked him
-$criteria = new criteriaCompo(new criteria('petioned_uid', $petitioned_uid));
-$criteria->add(new criteria('petitioner_uid', $xoopsUser->getVar('uid')));
-if ($friendpetition_factory->getCount($criteria) > 0) {
+$criteria = new \CriteriaCompo(new \Criteria('petioned_uid', $petitioned_uid));
+$criteria->add(new \Criteria('petitioner_uid', $xoopsUser->getVar('uid')));
+if ($friendpetitionFactory->getCount($criteria) > 0) {
     redirect_header(XOOPS_URL . '/modules/yogurt/index.php?uid=' . $_POST['petitioned_uid'], 3, _MD_YOGURT_ALREADY_PETITIONED);
 } else {
-    $criteria2 = new criteriaCompo(new criteria('petitioner_uid', $petitioned_uid));
-    $criteria2->add(new criteria('petioned_uid', $xoopsUser->getVar('uid')));
-    if ($friendpetition_factory->getCount($criteria2) > 0) {
+    $criteria2 = new \CriteriaCompo(new \Criteria('petitioner_uid', $petitioned_uid));
+    $criteria2->add(new \Criteria('petioned_uid', $xoopsUser->getVar('uid')));
+    if ($friendpetitionFactory->getCount($criteria2) > 0) {
         redirect_header(XOOPS_URL . '/modules/yogurt/index.php?uid=' . $_POST['petitioned_uid'], 3, _MD_YOGURT_ALREADY_PETITIONED);
     }
 }
 /**
  * create the petition in database
  */
-$newpetition = $friendpetition_factory->create(true);
+$newpetition = $friendpetitionFactory->create(true);
 $newpetition->setVar('petitioner_uid', $xoopsUser->getVar('uid'));
 $newpetition->setVar('petioned_uid', $_POST['petitioned_uid']);
 
-if ($friendpetition_factory->insert($newpetition)) {
+if ($friendpetitionFactory->insert($newpetition)) {
     $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
     $extra_tags['X_OWNER_UID']  = $xoopsUser->getVar('uid');
     $notificationHandler        = xoops_getHandler('notification');

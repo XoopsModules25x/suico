@@ -1,38 +1,29 @@
 <?php
-// $Id: xoops_version.php,v 1.44 2008/04/20 18:02:48 marcellobrandao Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author       Marcello Brandão aka  Suico
+ * @author       XOOPS Development Team
+ * @since
+ */
 
 $moduleDirName = basename(__DIR__);
 
 // ------------------- Informations ------------------- //
 $modversion = [
     'version'             => 3.4,
-    'module_status'       => 'Beta 1',
-    'release_date'        => '2017/11/11',
+    'module_status'       => 'Beta 2',
+    'release_date'        => '2020/03/28',
     'name'                => _MI_YOGURT_MODULE_NAME,
     'description'         => _MI_YOGURT_MODULEDESC,
     'official'            => 0,
@@ -56,14 +47,8 @@ $modversion = [
     'iconsmall'           => 'assets/images/iconsmall.png',
     'iconbig'             => 'assets/images/iconbig.png',
     'dirname'             => $moduleDirName,
-    //Frameworks
-    //    'dirmoduleadmin'      => 'Frameworks/moduleclasses/moduleadmin',
-    //    'sysicons16'          => 'Frameworks/moduleclasses/icons/16',
-    //    'sysicons32'          => 'Frameworks/moduleclasses/icons/32',
-    // Local path icons
     'modicons16'          => 'assets/images/icons/16',
     'modicons32'          => 'assets/images/icons/32',
-    //About
     'demo_site_url'       => 'https://xoops.org',
     'demo_site_name'      => 'XOOPS Demo Site',
     'support_url'         => 'https://xoops.org/modules/newbb/viewforum.php?forum=28/',
@@ -72,8 +57,8 @@ $modversion = [
     'module_website_url'  => 'www.xoops.org',
     'module_website_name' => 'XOOPS Project',
     // ------------------- Min Requirements -------------------
-    'min_php'             => '5.5',
-    'min_xoops'           => '2.5.9',
+    'min_php'             => '7.1',
+    'min_xoops'           => '2.5.10',
     'min_admin'           => '1.2',
     'min_db'              => ['mysql' => '5.5'],
     // ------------------- Admin Menu -------------------
@@ -86,11 +71,11 @@ $modversion = [
     'sub'                 => [
         [
             'name' => _MI_YOGURT_SEARCH,
-            'url'  => 'searchmembers.php'
+            'url'  => 'searchmembers.php',
         ],
         [
             'name' => _MI_YOGURT_MYPROFILE,
-            'url'  => 'index.php'
+            'url'  => 'index.php',
         ],
     ],
 
@@ -100,10 +85,10 @@ $modversion = [
     //  'onUninstall'         => 'include/onuninstall.php',
     // -------------------  PayPal ---------------------------
     'paypal'              => [
-        'business'      => 'foundation@xoops.org',
+        'business'      => 'xoopsfoundation@gmail.com',
         'item_name'     => 'Donation : ' . _MI_YOGURT_MODULE_NAME,
         'amount'        => 0,
-        'currency_code' => 'USD'
+        'currency_code' => 'USD',
     ],
     // ------------------- Mysql -----------------------------
     'sqlfile'             => ['mysql' => 'sql/mysql.sql'],
@@ -172,6 +157,294 @@ $modversion['submit_bug']        = 'http://sourceforge.net/tracker/?func=add&gro
 $modversion['submit_feature']    = 'http://sourceforge.net/tracker/?func=add&group_id=204109&atid=988291';
 
 
+//$modversion['config'][1]['valuetype'] = 'int';
+//can be 'int', 'float', 'textarea' or 'array'. All items with formtype 'multi_xxx' must have the valuetype 'array'
+
+$modversion['config'][] = [
+    'name'        => 'enable_pictures',
+    'title'       => '_MI_YOG_ENABLEPICT_TITLE',
+    'description' => '_MI_YOG_ENABLEPICT_DESC',
+    'default'     => 1,
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'nb_pict',
+    'title'       => '_MI_YOG_NUMBPICT_TITLE',
+    'description' => '_MI_YOG_NUMBPICT_DESC',
+    'default'     => 12,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+/*
+ $modversion['config'][] = [
+'name' =>  'path_upload',
+'title' =>  '_MI_YOG_PATHUPLOAD_TITLE',
+'description' =>  '_MI_YOG_PATHUPLOAD_DESC',
+'default' =>  XOOPS_ROOT_PATH."/uploads/",
+'formtype' =>  'textbox',
+'valuetype' =>  'text',
+];
+
+$modversion['config'][] = [
+'name' =>  'link_path_upload',
+'title' =>  '_MI_YOG_LINKPATHUPLOAD_TITLE',
+'description' =>  '_MI_YOG_LINKPATHUPLOAD_DESC',
+'default' =>  XOOPS_UPLOAD_URL,
+'formtype' =>  'textbox',
+'valuetype' =>  'text',
+];
+*/
+
+$modversion['config'][] = [
+    'name'        => 'thumb_width',
+    'title'       => '_MI_YOG_THUMW_TITLE',
+    'description' => '_MI_YOG_THUMBW_DESC',
+    'default'     => 125,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'thumb_height',
+    'title'       => '_MI_YOG_THUMBH_TITLE',
+    'description' => '_MI_YOG_THUMBH_DESC',
+    'default'     => 175,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'resized_width',
+    'title'       => '_MI_YOG_RESIZEDW_TITLE',
+    'description' => '_MI_YOG_RESIZEDW_DESC',
+    'default'     => 650,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'resized_height',
+    'title'       => '_MI_YOG_RESIZEDH_TITLE',
+    'description' => '_MI_YOG_RESIZEDH_DESC',
+    'default'     => 450,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'max_original_width',
+    'title'       => '_MI_YOG_ORIGINALW_TITLE',
+    'description' => '_MI_YOG_ORIGINALW_DESC',
+    'default'     => 2048,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'max_original_height',
+    'title'       => '_MI_YOG_ORIGINALH_TITLE',
+    'description' => '_MI_YOG_ORIGINALH_DESC',
+    'default'     => 1600,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'maxfilesize',
+    'title'       => '_MI_YOG_MAXFILEBYTES_TITLE',
+    'description' => '_MI_YOG_MAXFILEBYTES_DESC',
+    'default'     => 512000,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'picturesperpage',
+    'title'       => '_MI_YOG_PICTURESPERPAGE_TITLE',
+    'description' => '_MI_YOG_PICTURESPERPAGE_DESC',
+    'default'     => 6,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'physical_delete',
+    'title'       => '_MI_YOG_DELETEPHYSICAL_TITLE',
+    'description' => '_MI_YOG_DELETEPHYSICAL_DESC',
+    'default'     => 1,
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'images_order',
+    'title'       => '_MI_YOG_IMGORDER_TITLE',
+    'description' => '_MI_YOG_IMGORDER_DESC',
+    'default'     => 1,
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'enable_friends',
+    'title'       => '_MI_YOG_ENABLEFRIENDS_TITLE',
+    'description' => '_MI_YOG_ENABLEFRIENDS_DESC',
+    'default'     => 1,
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'friendsperpage',
+    'title'       => '_MI_YOG_FRIENDSPERPAGE_TITLE',
+    'description' => '_MI_YOG_FRIENDSPERPAGE_DESC',
+    'default'     => 12,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'enable_audio',
+    'title'       => '_MI_YOG_ENABLEAUDIO_TITLE',
+    'description' => '_MI_YOG_ENABLEAUDIO_DESC',
+    'default'     => 1,
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'nb_audio',
+    'title'       => '_MI_YOG_NUMBAUDIO_TITLE',
+    'description' => '_MI_YOG_NUMBAUDIO_DESC',
+    'default'     => 12,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'audiosperpage',
+    'title'       => '_MI_YOG_AUDIOSPERPAGE_TITLE',
+    'description' => '_MI_YOG_AUDIOSPERPAGE_DESC',
+    'default'     => 20,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'enable_videos',
+    'title'       => '_MI_YOG_ENABLEVIDEOS_TITLE',
+    'description' => '_MI_YOG_ENABLEVIDEOS_DESC',
+    'default'     => 1,
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'videosperpage',
+    'title'       => '_MI_YOG_VIDEOSPERPAGE_TITLE',
+    'description' => '_MI_YOG_VIDEOSPERPAGE_DESC',
+    'default'     => 6,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+
+    'name'        => 'width_tube',
+    'title'       => '_MI_YOG_TUBEW_TITLE',
+    'description' => '_MI_YOG_TUBEW_DESC',
+    'default'     => 450,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'height_tube',
+    'title'       => '_MI_YOG_TUBEH_TITLE',
+    'description' => '_MI_YOG_TUBEH_DESC',
+    'default'     => 350,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'width_maintube',
+    'title'       => '_MI_YOG_MAINTUBEW_TITLE',
+    'description' => '_MI_YOG_MAINTUBEW_DESC',
+    'default'     => 250,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'height_maintube',
+    'title'       => '_MI_YOG_MAINTUBEH_TITLE',
+    'description' => '_MI_YOG_MAINTUBEH_DESC',
+    'default'     => 210,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'enable_tribes',
+    'title'       => '_MI_YOG_ENABLETRIBES_TITLE',
+    'description' => '_MI_YOG_ENABLETRIBES_DESC',
+    'default'     => 1,
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'tribesperpage',
+    'title'       => '_MI_YOG_TRIBESPERPAGE_TITLE',
+    'description' => '_MI_YOG_TRIBESPERPAGE_DESC',
+    'default'     => 6,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'enable_notes',
+    'title'       => '_MI_YOG_ENABLENOTES_TITLE',
+    'description' => '_MI_YOG_ENABLENOTES_DESC',
+    'default'     => 1,
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'Notesperpage',
+    'title'       => '_MI_YOG_NOTESPERPAGE_TITLE',
+    'description' => '_MI_YOG_NOTESPERPAGE_DESC',
+    'default'     => 20,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['templates'] = [
+    ['file' => 'yogurt_navbar.tpl', 'description' => _MI_YOG_TEMPLATENAVBARDESC],
+    ['file' => 'yogurt_index.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATEINDEXDESC],
+    ['file' => 'yogurt_friends.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATEFRIENDSDESC],
+    ['file' => 'yogurt_Notebook.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATENOTEBOOKDESC],
+    ['file' => 'yogurt_audio.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATEAUDIODESC],
+    ['file' => 'Seutubo.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATESEUTUBODESC],
+    ['file' => 'yogurt_album.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATEALBUMDESC],
+    ['file' => 'Tribes.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATETRIBESDESC],
+    ['file' => 'yogurt_configs.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATECONFIGSDESC],
+    ['file' => 'yogurt_footer.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATEFOOTERDESC],
+    ['file' => 'yogurt_edittribe.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATEEDITTRIBE],
+    ['file' => 'yogurt_tribes_results.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATESEARCHRESULTDESC],
+    ['file' => 'yogurt_tribe.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATETRIBEDESC],
+    ['file' => 'yogurt_searchresults.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATESEARCHRESULTSDESC],
+    ['file' => 'yogurt_searchform.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATESEARCHFORMDESC],
+    ['file' => 'yogurt_notifications.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATENOTIFICATIONS],
+    ['file' => 'yogurt_fans.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATEFANS],
+];
+
+
 global $xoopsModule;
 if (is_object($xoopsModule) && $xoopsModule->dirname() == $modversion['dirname']) {
     $moduleHandler = xoops_getHandler('module');
@@ -207,282 +480,6 @@ if (is_object($xoopsModule) && $xoopsModule->dirname() == $modversion['dirname']
 $modversion['sub'][9]['name'] = _MI_YOGURT_MYCONFIGS;
 $modversion['sub'][9]['url']  = 'configs.php';
 
-
-
-
-//$modversion['config'][1]['valuetype'] = 'int';
-//can be 'int', 'float', 'textarea' or 'array'. All items with formtype 'multi_xxx' must have the valuetype 'array'
-$i                                       = 1;
-$modversion['config'][$i]['name']        = 'enable_pictures';
-$modversion['config'][$i]['title']       = '_MI_YOG_ENABLEPICT_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_ENABLEPICT_DESC';
-$modversion['config'][$i]['default']     = 1;
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'nb_pict';
-$modversion['config'][$i]['title']       = '_MI_YOG_NUMBPICT_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_NUMBPICT_DESC';
-$modversion['config'][$i]['default']     = 12;
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-/*
-$modversion['config'][$i]['name'] = 'path_upload';
-$modversion['config'][$i]['title'] = '_MI_YOG_PATHUPLOAD_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_PATHUPLOAD_DESC';
-$modversion['config'][$i]['default'] = XOOPS_ROOT_PATH."/uploads/";
-$modversion['config'][$i]['formtype'] = 'textbox';
-$modversion['config'][$i]['valuetype'] = 'text';
-$i++;
-$modversion['config'][$i]['name'] = 'link_path_upload';
-$modversion['config'][$i]['title'] = '_MI_YOG_LINKPATHUPLOAD_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_LINKPATHUPLOAD_DESC';
-$modversion['config'][$i]['default'] = XOOPS_UPLOAD_URL;
-$modversion['config'][$i]['formtype'] = 'textbox';
-$modversion['config'][$i]['valuetype'] = 'text';
-$i++;*/
-$modversion['config'][$i]['name']        = 'thumb_width';
-$modversion['config'][$i]['title']       = '_MI_YOG_THUMW_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_THUMBW_DESC';
-$modversion['config'][$i]['default']     = 125;
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'thumb_height';
-$modversion['config'][$i]['title']       = '_MI_YOG_THUMBH_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_THUMBH_DESC';
-$modversion['config'][$i]['default']     = 175;
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'resized_width';
-$modversion['config'][$i]['title']       = '_MI_YOG_RESIZEDW_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_RESIZEDW_DESC';
-$modversion['config'][$i]['default']     = 650;
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'resized_height';
-$modversion['config'][$i]['title']       = '_MI_YOG_RESIZEDH_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_RESIZEDH_DESC';
-$modversion['config'][$i]['default']     = 450;
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'max_original_width';
-$modversion['config'][$i]['title']       = '_MI_YOG_ORIGINALW_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_ORIGINALW_DESC';
-$modversion['config'][$i]['default']     = 2048;
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'max_original_height';
-$modversion['config'][$i]['title']       = '_MI_YOG_ORIGINALH_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_ORIGINALH_DESC';
-$modversion['config'][$i]['default']     = 1600;
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'maxfilesize';
-$modversion['config'][$i]['title']       = '_MI_YOG_MAXFILEBYTES_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_MAXFILEBYTES_DESC';
-$modversion['config'][$i]['default']     = 512000;
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'picturesperpage';
-$modversion['config'][$i]['title']       = '_MI_YOG_PICTURESPERPAGE_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_PICTURESPERPAGE_DESC';
-$modversion['config'][$i]['default']     = 6;
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'physical_delete';
-$modversion['config'][$i]['title']       = '_MI_YOG_DELETEPHYSICAL_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_DELETEPHYSICAL_DESC';
-$modversion['config'][$i]['default']     = 1;
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'images_order';
-$modversion['config'][$i]['title']       = '_MI_YOG_IMGORDER_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_IMGORDER_DESC';
-$modversion['config'][$i]['default']     = 1;
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'enable_friends';
-$modversion['config'][$i]['title']       = '_MI_YOG_ENABLEFRIENDS_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_ENABLEFRIENDS_DESC';
-$modversion['config'][$i]['default']     = 1;
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'friendsperpage';
-$modversion['config'][$i]['title']       = '_MI_YOG_FRIENDSPERPAGE_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_FRIENDSPERPAGE_DESC';
-$modversion['config'][$i]['default']     = 12;
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'enable_audio';
-$modversion['config'][$i]['title']       = '_MI_YOG_ENABLEAUDIO_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_ENABLEAUDIO_DESC';
-$modversion['config'][$i]['default']     = 1;
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'nb_audio';
-$modversion['config'][$i]['title']       = '_MI_YOG_NUMBAUDIO_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_NUMBAUDIO_DESC';
-$modversion['config'][$i]['default']     = 12;
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'audiosperpage';
-$modversion['config'][$i]['title']       = '_MI_YOG_AUDIOSPERPAGE_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_AUDIOSPERPAGE_DESC';
-$modversion['config'][$i]['default']     = 20;
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'enable_videos';
-$modversion['config'][$i]['title']       = '_MI_YOG_ENABLEVIDEOS_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_ENABLEVIDEOS_DESC';
-$modversion['config'][$i]['default']     = 1;
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'videosperpage';
-$modversion['config'][$i]['title']       = '_MI_YOG_VIDEOSPERPAGE_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_VIDEOSPERPAGE_DESC';
-$modversion['config'][$i]['default']     = 6;
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-
-$modversion['config'][$i]['name']        = 'width_tube';
-$modversion['config'][$i]['title']       = '_MI_YOG_TUBEW_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_TUBEW_DESC';
-$modversion['config'][$i]['default']     = 450;
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'height_tube';
-$modversion['config'][$i]['title']       = '_MI_YOG_TUBEH_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_TUBEH_DESC';
-$modversion['config'][$i]['default']     = 350;
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'width_maintube';
-$modversion['config'][$i]['title']       = '_MI_YOG_MAINTUBEW_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_MAINTUBEW_DESC';
-$modversion['config'][$i]['default']     = 250;
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'height_maintube';
-$modversion['config'][$i]['title']       = '_MI_YOG_MAINTUBEH_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_MAINTUBEH_DESC';
-$modversion['config'][$i]['default']     = 210;
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'enable_tribes';
-$modversion['config'][$i]['title']       = '_MI_YOG_ENABLETRIBES_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_ENABLETRIBES_DESC';
-$modversion['config'][$i]['default']     = 1;
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'tribesperpage';
-$modversion['config'][$i]['title']       = '_MI_YOG_TRIBESPERPAGE_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_TRIBESPERPAGE_DESC';
-$modversion['config'][$i]['default']     = 6;
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'enable_Notes';
-$modversion['config'][$i]['title']       = '_MI_YOG_ENABLENOTES_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_ENABLENOTES_DESC';
-$modversion['config'][$i]['default']     = 1;
-$modversion['config'][$i]['formtype']    = 'yesno';
-$modversion['config'][$i]['valuetype']   = 'int';
-$i++;
-$modversion['config'][$i]['name']        = 'Notesperpage';
-$modversion['config'][$i]['title']       = '_MI_YOG_NOTESPERPAGE_TITLE';
-$modversion['config'][$i]['description'] = '_MI_YOG_NOTESPERPAGE_DESC';
-$modversion['config'][$i]['default']     = 20;
-$modversion['config'][$i]['formtype']    = 'textbox';
-$modversion['config'][$i]['valuetype']   = 'int';
-
-$modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
-
-$modversion['tables'][0]  = 'yogurt_images';
-$modversion['tables'][1]  = 'yogurt_friendship';
-$modversion['tables'][2]  = 'yogurt_visitors';
-$modversion['tables'][3]  = 'yogurt_seutubo';
-$modversion['tables'][4]  = 'yogurt_friendpetition';
-$modversion['tables'][5]  = 'yogurt_tribes';
-$modversion['tables'][6]  = 'yogurt_reltribeuser';
-$modversion['tables'][7]  = 'yogurt_Notes';
-$modversion['tables'][8]  = 'yogurt_configs';
-$modversion['tables'][9]  = 'yogurt_suspensions';
-$modversion['tables'][10] = 'yogurt_audio';
-
-$i                                          = 1;
-$modversion['templates'][$i]['file']        = 'yogurt_navbar.tpl';
-$modversion['templates'][$i]['description'] = _MI_YOG_TEMPLATENAVBARDESC;
-$i++;
-$modversion['templates'][$i]['file']        = 'yogurt_index.tpl';
-$modversion['templates'][$i]['description'] = _MI_YOG_PICTURE_TEMPLATEINDEXDESC;
-$i++;
-$modversion['templates'][$i]['file']        = 'yogurt_friends.tpl';
-$modversion['templates'][$i]['description'] = _MI_YOG_PICTURE_TEMPLATEFRIENDSDESC;
-$i++;
-$modversion['templates'][$i]['file']        = 'yogurt_Notebook.tpl';
-$modversion['templates'][$i]['description'] = _MI_YOG_PICTURE_TEMPLATENOTEBOOKDESC;
-$i++;
-$modversion['templates'][$i]['file']        = 'yogurt_audio.tpl';
-$modversion['templates'][$i]['description'] = _MI_YOG_PICTURE_TEMPLATEAUDIODESC;
-$i++;
-$modversion['templates'][$i]['file']        = 'yogurt_seutubo.tpl';
-$modversion['templates'][$i]['description'] = _MI_YOG_PICTURE_TEMPLATESEUTUBODESC;
-$i++;
-$modversion['templates'][$i]['file']        = 'yogurt_album.tpl';
-$modversion['templates'][$i]['description'] = _MI_YOG_PICTURE_TEMPLATEALBUMDESC;
-$i++;
-$modversion['templates'][$i]['file']        = 'yogurt_tribes.tpl';
-$modversion['templates'][$i]['description'] = _MI_YOG_PICTURE_TEMPLATETRIBESDESC;
-$i++;
-$modversion['templates'][$i]['file']        = 'yogurt_configs.tpl';
-$modversion['templates'][$i]['description'] = _MI_YOG_PICTURE_TEMPLATECONFIGSDESC;
-$i++;
-$modversion['templates'][$i]['file']        = 'yogurt_footer.tpl';
-$modversion['templates'][$i]['description'] = _MI_YOG_PICTURE_TEMPLATEFOOTERDESC;
-$i++;
-$modversion['templates'][$i]['file']        = 'yogurt_edittribe.tpl';
-$modversion['templates'][$i]['description'] = _MI_YOG_PICTURE_TEMPLATEEDITTRIBE;
-$i++;
-$modversion['templates'][$i]['file']        = 'yogurt_tribes_results.tpl';
-$modversion['templates'][$i]['description'] = _MI_YOG_PICTURE_TEMPLATESEARCHRESULTDESC;
-$i++;
-$modversion['templates'][$i]['file']        = 'yogurt_tribe.tpl';
-$modversion['templates'][$i]['description'] = _MI_YOG_PICTURE_TEMPLATETRIBEDESC;
-$i++;
-$modversion['templates'][$i]['file']        = 'yogurt_searchresults.tpl';
-$modversion['templates'][$i]['description'] = _MI_YOG_PICTURE_TEMPLATESEARCHRESULTSDESC;
-$i++;
-$modversion['templates'][$i]['file']        = 'yogurt_searchform.tpl';
-$modversion['templates'][$i]['description'] = _MI_YOG_PICTURE_TEMPLATESEARCHFORMDESC;
-$i++;
-$modversion['templates'][$i]['file']        = 'yogurt_notifications.tpl';
-$modversion['templates'][$i]['description'] = _MI_YOG_PICTURE_TEMPLATENOTIFICATIONS;
-$i++;
-$modversion['templates'][$i]['file']        = 'yogurt_fans.tpl';
-$modversion['templates'][$i]['description'] = _MI_YOG_PICTURE_TEMPLATEFANS;
 
 $modversion['hasComments']          = 1;
 $modversion['comments']['itemName'] = 'tribe_id';
@@ -556,18 +553,23 @@ $modversion['notification']['lookup_func'] = 'yogurt_iteminfo';
 //$modversion['notification']['tags_file'] = 'include/notification.inc.php';
 //$modversion['notification']['tags_func'] = 'yogurt_tags';
 
-$modversion['blocks'][1]['file']        = 'blocks.php';
-$modversion['blocks'][1]['name']        = _MI_YOGURT_FRIENDS;
-$modversion['blocks'][1]['description'] = _MI_YOGURT_FRIENDS_DESC;
-$modversion['blocks'][1]['show_func']   = 'b_yogurt_friends_show';
-$modversion['blocks'][1]['options']     = '5';
-$modversion['blocks'][1]['edit_func']   = 'b_yogurt_friends_edit';
-$modversion['blocks'][1]['template']    = 'yogurt_block_friends.tpl';
+$modversion['blocks'][] = [
+    'file'        => 'blocks.php',
+    'name'        => _MI_YOGURT_FRIENDS,
+    'description' => _MI_YOGURT_FRIENDS_DESC,
+    'show_func'   => 'b_yogurt_friends_show',
+    'options'     => '5',
+    'edit_func'   => 'b_yogurt_friends_edit',
+    'template'    => 'yogurt_block_friends.tpl',
+];
 
-$modversion['blocks'][2]['file']        = 'blocks.php';
-$modversion['blocks'][2]['name']        = _MI_YOGURT_LAST;
-$modversion['blocks'][2]['description'] = _MI_YOGURT_LAST_DESC;
-$modversion['blocks'][2]['show_func']   = 'b_yogurt_lastpictures_show';
-$modversion['blocks'][2]['options']     = '5';
-$modversion['blocks'][2]['edit_func']   = 'b_yogurt_lastpictures_edit';
-$modversion['blocks'][2]['template']    = 'yogurt_block_lastpictures.tpl';
+$modversion['blocks'][] = [
+    'file'        => 'blocks.php',
+    'name'        => _MI_YOGURT_LAST,
+    'description' => _MI_YOGURT_LAST_DESC,
+    'show_func'   => 'b_yogurt_lastpictures_show',
+    'options'     => '5',
+    'edit_func'   => 'b_yogurt_lastpictures_edit',
+    'template'    => 'yogurt_block_lastpictures.tpl',
+];
+

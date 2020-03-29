@@ -1,29 +1,21 @@
 <?php
-// $Id: main.php,v 1.46 2008/04/19 16:39:13 marcellobrandao Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author       Marcello BrandÃ£o aka  Suico
+ * @author       XOOPS Development Team
+ * @since
+ */
 //Present in many files (videos pictures etc...)
 define('_MD_YOGURT_DELETE', 'Delete');
 define('_MD_YOGURT_EDITDESC', 'Edit description');
@@ -32,8 +24,11 @@ define('_MD_YOGURT_DESC_EDITED', 'The description was edited successfully');
 define('_MD_YOGURT_CAPTION', 'Caption');
 define('_MD_YOGURT_YOUCANUPLOAD', "You can only upload jpg's files and up to %s KBytes in size");
 define('_MD_YOGURT_UPLOADPICTURE', 'Upload Picture');
-define('_MD_YOGURT_NOCACHACA', 'Bad, Bad Module...No cachaça for you!<br />
-Unfortunately, this module has acted in an unexpected way. Hopefully it will return to its helpful self if you try again. ');//Funny general error message
+define(
+    '_MD_YOGURT_NOCACHACA',
+    'Bad, Bad Module...No cachaï¿½a for you!<br />
+Unfortunately, this module has acted in an unexpected way. Hopefully it will return to its helpful self if you try again. '
+);//Funny general error message
 define('_MD_YOGURT_PAGETITLE', "%s - %s's Social Network");
 define('_MD_YOGURT_SUBMIT', 'Submit');
 define('_MD_YOGURT_VIDEOS', 'Videos');
@@ -127,8 +122,11 @@ define('_MD_YOGURT_SETMAINVIDEO', 'This video is selected on your front page fro
 define('_MD_YOGURT_YOUTUBECODE', 'YouTube code or URL');
 define('_MD_YOGURT_ADDVIDEO', 'Add video');
 define('_MD_YOGURT_ADDFAVORITEVIDEOS', 'Add favourite videos');
-define('_MD_YOGURT_ADDVIDEOSHELP', 'If you want to upload your own video for sharing, then upload your videos to 
-<a href=http://www.youtube.com>YouTube</a> and then add the URL to here '); //The name of the site will show after this
+define(
+    '_MD_YOGURT_ADDVIDEOSHELP',
+    'If you want to upload your own video for sharing, then upload your videos to 
+<a href=http://www.youtube.com>YouTube</a> and then add the URL to here '
+); //The name of the site will show after this
 define('_MD_YOGURT_MYVIDEOS', 'My Videos');
 define('_MD_YOGURT_MAKEMAIN', 'Make this video your main video');
 define('_MD_YOGURT_NOVIDEOSYET', 'No videos yet!');
@@ -142,7 +140,7 @@ define('_MD_YOGURT_VIDEODELETED', 'Your video was deleted');
 define('_MD_YOGURT_VIDEOSAVED', 'Your video was saved');
 
 ############################## TRIBES ########################################################
-//class/yogurt_tribes.php
+//class/Tribes.php
 define('_MD_YOGURT_SUBMIT_TRIBE', 'Create a new tribe');
 define('_MD_YOGURT_UPLOADTRIBE', 'Save Tribe');//also present in many ther tribes related
 define('_MD_YOGURT_TRIBE_IMAGE', 'Tribe Image');//also present in many ther tribes related

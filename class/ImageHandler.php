@@ -1,29 +1,24 @@
 <?php
-// $Id: yogurt_images.php,v 1.13 2008/04/19 16:39:12 marcellobrandao Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
+
+namespace XoopsModules\Yogurt;
+
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author       Marcello Brandão aka  Suico
+ * @author       XOOPS Development Team
+ * @since
+ */
 
 /**
  * Protection against inclusion outside the site
@@ -39,115 +34,26 @@ include_once XOOPS_ROOT_PATH . '/class/uploader.php';
 include_once XOOPS_ROOT_PATH . '/kernel/object.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-/**
- * yogurt_images class.
- * $this class is responsible for providing data access mechanisms to the data source
- * of XOOPS user class objects.
- */
-class yogurt_images extends XoopsObject
-{
-    public $db;
-
-    // constructor
-
-    /**
-     * yogurt_images constructor.
-     * @param null $id
-     */
-    public function __construct($id = null)
-    {
-        $this->db = XoopsDatabaseFactory::getDatabaseConnection();
-        $this->initVar('cod_img', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('title', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('data_creation', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('data_update', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('uid_owner', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('url', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('private', XOBJ_DTYPE_TXTBOX, null, false);
-        if (!empty($id)) {
-            if (is_array($id)) {
-                $this->assignVars($id);
-            } else {
-                $this->load((int)$id);
-            }
-        } else {
-            $this->setNew();
-        }
-    }
-
-    /**
-     * @param $id
-     */
-    public function load($id)
-    {
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_images') . ' WHERE cod_img=' . $id;
-        $myrow = $this->db->fetchArray($this->db->query($sql));
-        $this->assignVars($myrow);
-        if (!$myrow) {
-            $this->setNew();
-        }
-    }
-
-    /**
-     * @param array  $criteria
-     * @param bool   $asobject
-     * @param string $sort
-     * @param string $order
-     * @param int    $limit
-     * @param int    $start
-     * @return array
-     */
-    public function getAllyogurt_imagess($criteria = [], $asobject = false, $sort = 'cod_img', $order = 'ASC', $limit = 0, $start = 0)
-    {
-        $db          = XoopsDatabaseFactory::getDatabaseConnection();
-        $ret         = [];
-        $where_query = '';
-        if (is_array($criteria) && count($criteria) > 0) {
-            $where_query = ' WHERE';
-            foreach ($criteria as $c) {
-                $where_query .= " $c AND";
-            }
-            $where_query = substr($where_query, 0, -4);
-        } elseif (!is_array($criteria) && $criteria) {
-            $where_query = ' WHERE ' . $criteria;
-        }
-        if (!$asobject) {
-            $sql    = 'SELECT cod_img FROM ' . $db->prefix('yogurt_images') . "$where_query ORDER BY $sort $order";
-            $result = $db->query($sql, $limit, $start);
-            while ($myrow = $db->fetchArray($result)) {
-                $ret[] = $myrow['yogurt_images_id'];
-            }
-        } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_images') . "$where_query ORDER BY $sort $order";
-            $result = $db->query($sql, $limit, $start);
-            while ($myrow = $db->fetchArray($result)) {
-                $ret[] = new yogurt_images($myrow);
-            }
-        }
-        return $ret;
-    }
-}
-
 // -------------------------------------------------------------------------
-// ------------------yogurt_images user handler class -------------------
+// ------------------Image user handler class -------------------
 // -------------------------------------------------------------------------
 
 /**
  * yogurt_imageshandler class.
- * This class provides simple mecanisme for yogurt_images object and generate forms for inclusion etc
+ * This class provides simple mecanisme for Image object and generate forms for inclusion etc
  */
-class Xoopsyogurt_imagesHandler extends XoopsObjectHandler
+class ImageHandler extends \XoopsObjectHandler
 {
 
     /**
-     * create a new yogurt_images
+     * create a new Image
      *
      * @param bool $isNew flag the new objects as "new"?
-     * @return \XoopsObject yogurt_images
+     * @return \XoopsObject Image
      */
     public function create($isNew = true)
     {
-        $yogurt_images = new yogurt_images();
+        $yogurt_images = new Image();
         if ($isNew) {
             $yogurt_images->setNew();
         } else {
@@ -158,12 +64,12 @@ class Xoopsyogurt_imagesHandler extends XoopsObjectHandler
     }
 
     /**
-     * retrieve a yogurt_images
+     * retrieve a Image
      *
-     * @param int $id of the yogurt_images
-     * @return mixed reference to the {@link yogurt_images} object, FALSE if failed
+     * @param int $id of the Image
+     * @return mixed reference to the {@link Image} object, FALSE if failed
      */
-    public function &get($id)
+    public function get($id)
     {
         $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_images') . ' WHERE cod_img=' . $id;
         if (!$result = $this->db->query($sql)) {
@@ -171,7 +77,7 @@ class Xoopsyogurt_imagesHandler extends XoopsObjectHandler
         }
         $numrows = $this->db->getRowsNum($result);
         if (1 == $numrows) {
-            $yogurt_images = new yogurt_images();
+            $yogurt_images = new Image();
             $yogurt_images->assignVars($this->db->fetchArray($result));
             return $yogurt_images;
         }
@@ -179,17 +85,17 @@ class Xoopsyogurt_imagesHandler extends XoopsObjectHandler
     }
 
     /**
-     * insert a new yogurt_images in the database
+     * insert a new Image in the database
      *
-     * @param \XoopsObject $yogurt_images reference to the {@link yogurt_images}
+     * @param \XoopsObject $yogurt_images reference to the {@link Image}
      *                                    object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(XoopsObject $yogurt_images, $force = false)
+    public function insert(\XoopsObject $yogurt_images, $force = false)
     {
         global $xoopsConfig;
-        if ('yogurt_images' != get_class($yogurt_images)) {
+        if (!$yogurt_images instanceof \Image) {
             return false;
         }
         if (!$yogurt_images->isDirty()) {
@@ -203,8 +109,8 @@ class Xoopsyogurt_imagesHandler extends XoopsObjectHandler
         }
         $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
         if ($yogurt_images->isNew()) {
-            // ajout/modification d'un yogurt_images
-            $yogurt_images = new yogurt_images();
+            // ajout/modification d'un Image
+            $yogurt_images = new Image();
             $format        = 'INSERT INTO %s (cod_img, title, data_creation, data_update, uid_owner, url, private)';
             $format        .= 'VALUES (%u, %s, %s, %s, %s, %s, 0)';
             $sql           = sprintf(
@@ -241,15 +147,15 @@ class Xoopsyogurt_imagesHandler extends XoopsObjectHandler
     }
 
     /**
-     * delete a yogurt_images from the database
+     * delete a Image from the database
      *
-     * @param \XoopsObject $yogurt_images reference to the yogurt_images to delete
+     * @param \XoopsObject $yogurt_images reference to the Image to delete
      * @param bool         $force
      * @return bool FALSE if failed.
      */
-    public function delete(XoopsObject $yogurt_images, $force = false)
+    public function delete(\XoopsObject $yogurt_images, $force = false)
     {
-        if ('yogurt_images' != get_class($yogurt_images)) {
+        if (!$yogurt_images instanceof \Image) {
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE cod_img = %u', $this->db->prefix('yogurt_images'), $yogurt_images->getVar('cod_img'));
@@ -268,15 +174,15 @@ class Xoopsyogurt_imagesHandler extends XoopsObjectHandler
      * retrieve yogurt_imagess from the database
      *
      * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
-     * @param bool   $id_as_key use the UID as key for the array?
-     * @return array array of {@link yogurt_images} objects
+     * @param bool            $id_as_key use the UID as key for the array?
+     * @return array array of {@link Image} objects
      */
     public function &getObjects($criteria = null, $id_as_key = false)
     {
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_images');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
@@ -289,7 +195,7 @@ class Xoopsyogurt_imagesHandler extends XoopsObjectHandler
             return $ret;
         }
         while ($myrow = $this->db->fetchArray($result)) {
-            $yogurt_images = new yogurt_images();
+            $yogurt_images = new Image();
             $yogurt_images->assignVars($myrow);
             if (!$id_as_key) {
                 $ret[] =& $yogurt_images;
@@ -310,7 +216,7 @@ class Xoopsyogurt_imagesHandler extends XoopsObjectHandler
     public function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_images');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
@@ -330,7 +236,7 @@ class Xoopsyogurt_imagesHandler extends XoopsObjectHandler
     public function deleteAll($criteria = null)
     {
         $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_images');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {
@@ -350,12 +256,12 @@ class Xoopsyogurt_imagesHandler extends XoopsObjectHandler
      */
     public function renderFormSubmit($maxbytes, $xoopsTpl)
     {
-        $form       = new XoopsThemeForm(_MD_YOGURT_SUBMIT_PIC_TITLE, 'form_picture', 'submit.php', 'post', true);
-        $field_url  = new XoopsFormFile(_MD_YOGURT_SELECT_PHOTO, 'sel_photo', 2000000);
-        $field_desc = new XoopsFormText(_MD_YOGURT_CAPTION, 'caption', 35, 55);
+        $form       = new \XoopsThemeForm(_MD_YOGURT_SUBMIT_PIC_TITLE, 'form_picture', 'submit.php', 'post', true);
+        $field_url  = new \XoopsFormFile(_MD_YOGURT_SELECT_PHOTO, 'sel_photo', 2000000);
+        $field_desc = new \XoopsFormText(_MD_YOGURT_CAPTION, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
-        $button_send   = new XoopsFormButton('', 'submit_button', _MD_YOGURT_UPLOADPICTURE, 'submit');
-        $field_warning = new XoopsFormLabel(sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxbytes / 1024));
+        $button_send   = new \XoopsFormButton('', 'submit_button', _MD_YOGURT_UPLOADPICTURE, 'submit');
+        $field_warning = new \XoopsFormLabel(sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxbytes / 1024));
         $form->addElement($field_warning);
         $form->addElement($field_url, true);
         $form->addElement($field_desc);
@@ -380,13 +286,13 @@ class Xoopsyogurt_imagesHandler extends XoopsObjectHandler
      */
     public function renderFormEdit($caption, $cod_img, $filename)
     {
-        $form       = new XoopsThemeForm(_MD_YOGURT_EDITDESC, 'form_picture', 'editdesc.php', 'post', true);
-        $field_desc = new XoopsFormText($caption, 'caption', 35, 55);
+        $form       = new \XoopsThemeForm(_MD_YOGURT_EDITDESC, 'form_picture', 'editdesc.php', 'post', true);
+        $field_desc = new \XoopsFormText($caption, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
-        $button_send   = new XoopsFormButton('', 'submit_button', _MD_YOGURT_SUBMIT, 'submit');
-        $field_warning = new XoopsFormLabel("<img src='" . $filename . "' alt='sssss'>");
-        $field_cod_img = new XoopsFormHidden('cod_img', $cod_img);
-        $field_marker  = new XoopsFormHidden('marker', 1);
+        $button_send   = new \XoopsFormButton('', 'submit_button', _MD_YOGURT_SUBMIT, 'submit');
+        $field_warning = new \XoopsFormLabel("<img src='" . $filename . "' alt='sssss'>");
+        $field_cod_img = new \XoopsFormHidden('cod_img', $cod_img);
+        $field_marker  = new \XoopsFormHidden('marker', 1);
         $form->addElement($field_warning);
         $form->addElement($field_desc);
         $form->addElement($field_cod_img);
@@ -425,7 +331,7 @@ class Xoopsyogurt_imagesHandler extends XoopsObjectHandler
         $maxfilesize       = $maxfilebytes;
 
         // create the object to upload
-        $uploader = new XoopsMediaUploader($path_upload, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight);
+        $uploader = new \XoopsMediaUploader($path_upload, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight);
         // fetch the media
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
             //lets create a name for it
