@@ -20,9 +20,9 @@ namespace XoopsModules\Yogurt;
  * @since
  */
 
-include_once XOOPS_ROOT_PATH . '/kernel/object.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include_once XOOPS_ROOT_PATH . '/class/criteria.php';
+include_once XOOPS_ROOT_PATH.'/kernel/object.php';
+include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
+include_once XOOPS_ROOT_PATH.'/class/criteria.php';
 include_once '../../class/pagenav.php';
 /**
  * Module classes
@@ -39,7 +39,7 @@ include_once '../../class/pagenav.php';
 //include_once 'class/Configs.php';
 //include_once 'class/Suspensions.php';
 if (str_replace('.', '', PHP_VERSION) > 499) {
-    include_once 'class/class.Id3v1.php';
+	include_once 'class/class.Id3v1.php';
 }
 
 /**
@@ -47,11 +47,11 @@ if (str_replace('.', '', PHP_VERSION) > 499) {
  */
 class ControlerConfigs extends YogurtControler
 {
-    /**
-     * @return bool|void
-     */
-    public function checkPrivilege()
-    {
-        return true;
-    }
+	/**
+	 * @return bool|void
+	 */
+	public function checkPrivilege()
+	{
+		return true;
+	}
 }

@@ -21,7 +21,7 @@ use XoopsModules\Yogurt;
 
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_friends.tpl';
-require __DIR__ . '/header.php';
+require __DIR__.'/header.php';
 
 $controler = new Yogurt\ControlerFriends($xoopsDB, $xoopsUser);
 
@@ -30,18 +30,18 @@ $controler = new Yogurt\ControlerFriends($xoopsDB, $xoopsUser);
  */
 $nbSections = $controler->getNumbersSections();
 
-$start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
+$start = isset($_GET['start']) ? (int) $_GET['start'] : 0;
 
 /**
  * Friends
  */
-$criteria_friends = new \Criteria('friend1_uid', (int)$controler->uidOwner);
+$criteria_friends = new \Criteria('friend1_uid', (int) $controler->uidOwner);
 $nb_friends       = $controler->friendshipsFactory->getCount($criteria_friends);
 $criteria_friends->setLimit($xoopsModuleConfig['friendsperpage']);
 $criteria_friends->setStart($start);
 $vetor = $controler->friendshipsFactory->getFriends('', $criteria_friends, 0);
 if (0 == $nb_friends) {
-    $xoopsTpl->assign('lang_nofriendsyet', _MD_YOGURT_NOFRIENDSYET);
+	$xoopsTpl->assign('lang_nofriendsyet', _MD_YOGURT_NOFRIENDSYET);
 }
 
 /**
@@ -57,7 +57,7 @@ $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname'
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
 if (preg_match('/msie/', strtolower($_SERVER['HTTP_USER_AGENT']))) {
-    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
+	$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
 }
 //$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/css/lightbox.css');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/prototype.js');
@@ -127,4 +127,4 @@ $xoopsTpl->assign('friends', $vetor);
 $xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
 $xoopsTpl->assign('lang_evaluate', _MD_YOGURT_FRIENDSHIPCONFIGS);
 
-include __DIR__ . '/../../footer.php';
+include __DIR__.'/../../footer.php';

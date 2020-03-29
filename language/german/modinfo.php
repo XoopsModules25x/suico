@@ -38,7 +38,7 @@ define('_MI_YOG_PATHUPLOAD_DESC', 'Pfad zum Upload-Verzeichnis<br />in Linux zB.
 define('_MI_YOG_LINKPATHUPLOAD_TITLE', 'Link zu Ihrem Upload-Verzeichnis');
 define('_MI_YOG_LINKPATHUPLOAD_DESC', 'Adresse zum Root-Pfad des Upload-Verzeichnis<br />zB.: http://www.yoursite.com/uploads');
 define('_MI_YOG_MAXFILEBYTES_TITLE', 'Maximale Dateigr&ouml;&szlig;e in bytes');
-define('_MI_YOG_MAXFILEBYTES_DESC', 'Maximale Dateigr&ouml;&szlig;e von Bildern<br />Angabe in bytes, zB.: 512000 for 500 KB<br />Wert kann nicht gr&ouml;&szlig;er sein als in der PHP.INI des Servers.<br />Der Server akzeptiert maximal ' . ini_get('post_max_size'));
+define('_MI_YOG_MAXFILEBYTES_DESC', 'Maximale Dateigr&ouml;&szlig;e von Bildern<br />Angabe in bytes, zB.: 512000 for 500 KB<br />Wert kann nicht gr&ouml;&szlig;er sein als in der PHP.INI des Servers.<br />Der Server akzeptiert maximal '.ini_get('post_max_size'));
 
 define('_MI_YOG_PICTURE_NOTIFYTIT', 'Album');
 define('_MI_YOG_PICTURE_NOTIFYDSC', 'Benachrichtigungen bezogen auf das User-Album');
@@ -61,8 +61,8 @@ define('_MI_YOGURT_LAST', 'Letzte Bilder-Block');
 define('_MI_YOGURT_LAST_DESC', 'Letze, eingesendete Bilder unabh&auml;ngig vom Album');
 define('_MI_YOG_DELETEPHYSICAL_TITLE', 'Dateien auch aus dem Upload-Verzeichnis l&ouml;schen');
 define(
-    '_MI_YOG_DELETEPHYSICAL_DESC',
-    "Best&auml;tigen Sie hier mit 'Ja' erlaubt dem Skript, Dateien sowohl vom Upload-Verzeichnis als auch aus der Datenbank zu l&ouml;schen.<br />Vorsicht mit dieser Funktion. Entfernen Sie die Datei auch aus dem Verzeichnis und nicht nur aus der Datenbank, k&ouml;nnen User, die direkt auf dieses Bild von einem anderen Teil dieser Seite verlinken, Ihren Inhalt verlieren;<br />andererseits ben&ouml;tigen Sie m&ouml;glicherweise sehr viel Platz auf dem Server.<br />Konfigurieren Sie diese Funktion mit Bedacht f&uuml;r Ihre Bed&uuml;rfnisse."
+	'_MI_YOG_DELETEPHYSICAL_DESC',
+	"Best&auml;tigen Sie hier mit 'Ja' erlaubt dem Skript, Dateien sowohl vom Upload-Verzeichnis als auch aus der Datenbank zu l&ouml;schen.<br />Vorsicht mit dieser Funktion. Entfernen Sie die Datei auch aus dem Verzeichnis und nicht nur aus der Datenbank, k&ouml;nnen User, die direkt auf dieses Bild von einem anderen Teil dieser Seite verlinken, Ihren Inhalt verlieren;<br />andererseits ben&ouml;tigen Sie m&ouml;glicherweise sehr viel Platz auf dem Server.<br />Konfigurieren Sie diese Funktion mit Bedacht f&uuml;r Ihre Bed&uuml;rfnisse."
 );
 
 define('_MI_YOGURT_MYVIDEOS', 'Meine Videos');

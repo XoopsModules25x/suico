@@ -28,45 +28,45 @@ namespace XoopsModules\Yogurt\Common;
  */
 class Configurator
 {
-    public $name;
-    public $paths           = [];
-    public $uploadFolders   = [];
-    public $copyBlankFiles  = [];
-    public $copyTestFolders = [];
-    public $templateFolders = [];
-    public $oldFiles        = [];
-    public $oldFolders      = [];
-    public $renameTables    = [];
-    public $moduleStats     = [];
-    public $modCopyright;
-    public $icons;
+	public $name;
+	public $paths           = [];
+	public $uploadFolders   = [];
+	public $copyBlankFiles  = [];
+	public $copyTestFolders = [];
+	public $templateFolders = [];
+	public $oldFiles        = [];
+	public $oldFolders      = [];
+	public $renameTables    = [];
+	public $moduleStats     = [];
+	public $modCopyright;
+	public $icons;
 
-    /**
-     * Configurator constructor.
-     */
-    public function __construct()
-    {
-        //        $moduleDirName      = basename(dirname(dirname(__DIR__)));
-        //        $moduleDirNameUpper = mb_strtoupper($moduleDirName);
+	/**
+	 * Configurator constructor.
+	 */
+	public function __construct()
+	{
+		//        $moduleDirName      = basename(dirname(dirname(__DIR__)));
+		//        $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-        //        require dirname(dirname(__DIR__)) . '/config/config.php';
-        //        $config = getConfig();
+		//        require dirname(dirname(__DIR__)) . '/config/config.php';
+		//        $config = getConfig();
 
-        $config = include dirname(dirname(__DIR__)) . '/config/config.php';
+		$config = include dirname(dirname(__DIR__)) . '/config/config.php';
 
-        $this->name            = $config->name;
-        $this->paths           = $config->paths;
-        $this->uploadFolders   = $config->uploadFolders;
-        $this->copyBlankFiles  = $config->copyBlankFiles;
-        $this->copyTestFolders = $config->copyTestFolders;
-        $this->templateFolders = $config->templateFolders;
-        $this->oldFiles        = $config->oldFiles;
-        $this->oldFolders      = $config->oldFolders;
-        $this->renameTables    = $config->renameTables;
-        $this->moduleStats     = $config->moduleStats;
-        $this->modCopyright    = $config->modCopyright;
+		$this->name            = $config->name;
+		$this->paths           = $config->paths;
+		$this->uploadFolders   = $config->uploadFolders;
+		$this->copyBlankFiles  = $config->copyBlankFiles;
+		$this->copyTestFolders = $config->copyTestFolders;
+		$this->templateFolders = $config->templateFolders;
+		$this->oldFiles        = $config->oldFiles;
+		$this->oldFolders      = $config->oldFolders;
+		$this->renameTables    = $config->renameTables;
+		$this->moduleStats     = $config->moduleStats;
+		$this->modCopyright    = $config->modCopyright;
 
-        $this->icons = include dirname(dirname(__DIR__)) . '/config/icons.php';
-        $this->paths = include dirname(dirname(__DIR__)) . '/config/paths.php';
-    }
+		$this->icons = include dirname(dirname(__DIR__)) . '/config/icons.php';
+		$this->paths = include dirname(dirname(__DIR__)) . '/config/paths.php';
+	}
 }

@@ -20,13 +20,13 @@
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_configs.tpl';
-require __DIR__ . '/header.php';
+require __DIR__.'/header.php';
 
 $controler  = new Yogurt\ControlerConfigs($xoopsDB, $xoopsUser);
 $nbSections = $controler->getNumbersSections();
 
 if (!$xoopsUser) {
-    redirect_header('index.php');
+	redirect_header('index.php');
 }
 
 /**
@@ -38,28 +38,28 @@ $uid = (int)$xoopsUser->getVar('uid');
 
 $criteria = new \Criteria('config_uid', $uid);
 if ($configsFactory->getCount($criteria) > 0) {
-    $configs = $configsFactory->getObjects($criteria);
-    $config  = $configs[0];
+	$configs = $configsFactory->getObjects($criteria);
+	$config  = $configs[0];
 
-    $pic  = $config->getVar('pictures');
-    $aud  = $config->getVar('audio');
-    $vid  = $config->getVar('videos');
-    $tri  = $config->getVar('tribes');
-    $scr  = $config->getVar('Notes');
-    $fri  = $config->getVar('friends');
-    $pcon = $config->getVar('profile_contact');
-    $pgen = $config->getVar('profile_general');
-    $psta = $config->getVar('profile_stats');
+	$pic  = $config->getVar('pictures');
+	$aud  = $config->getVar('audio');
+	$vid  = $config->getVar('videos');
+	$tri  = $config->getVar('tribes');
+	$scr  = $config->getVar('Notes');
+	$fri  = $config->getVar('friends');
+	$pcon = $config->getVar('profile_contact');
+	$pgen = $config->getVar('profile_general');
+	$psta = $config->getVar('profile_stats');
 
-    $xoopsTpl->assign('pic', $pic);
-    $xoopsTpl->assign('aud', $aud);
-    $xoopsTpl->assign('vid', $vid);
-    $xoopsTpl->assign('tri', $tri);
-    $xoopsTpl->assign('scr', $scr);
-    $xoopsTpl->assign('fri', $fri);
-    $xoopsTpl->assign('pcon', $pcon);
-    $xoopsTpl->assign('pgen', $pgen);
-    $xoopsTpl->assign('psta', $psta);
+	$xoopsTpl->assign('pic', $pic);
+	$xoopsTpl->assign('aud', $aud);
+	$xoopsTpl->assign('vid', $vid);
+	$xoopsTpl->assign('tri', $tri);
+	$xoopsTpl->assign('scr', $scr);
+	$xoopsTpl->assign('fri', $fri);
+	$xoopsTpl->assign('pcon', $pcon);
+	$xoopsTpl->assign('pgen', $pgen);
+	$xoopsTpl->assign('psta', $psta);
 }
 
 //linking style and js
@@ -70,7 +70,7 @@ $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname'
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
 if (preg_match('/msie/', strtolower($_SERVER['HTTP_USER_AGENT']))) {
-    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
+	$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
 }
 //$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/css/lightbox.css');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/prototype.js');
@@ -148,4 +148,4 @@ $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 //xoopsToken
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
-include __DIR__ . '/../../footer.php';
+include __DIR__.'/../../footer.php';

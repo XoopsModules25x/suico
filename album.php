@@ -20,7 +20,7 @@
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_album.tpl';
-require __DIR__ . '/header.php';
+require __DIR__.'/header.php';
 
 $controler = new Yogurt\ControlerPhotos($xoopsDB, $xoopsUser);
 
@@ -33,24 +33,24 @@ $nbSections = $controler->getNumbersSections();
  * This variable define the beggining of the navigation must b
  * setted here so all calls to database will take this into account
  */
-$start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
+$start = isset($_GET['start']) ? (int) $_GET['start'] : 0;
 
 /**
  * Filter for search pictures in database
  */
 if (1 == $controler->isOwner) {
-    $criteria_uid = new \Criteria('uid_owner', $controler->uidOwner);
+	$criteria_uid = new \Criteria('uid_owner', $controler->uidOwner);
 } else {
-    $criteria_private = new \Criteria('private', 0);
-    $criteria_uid2    = new \Criteria('uid_owner', (int)$controler->uidOwner);
-    $criteria_uid     = new \CriteriaCompo($criteria_uid2);
-    $criteria_uid->add($criteria_private);
+	$criteria_private = new \Criteria('private', 0);
+	$criteria_uid2    = new \Criteria('uid_owner', (int)$controler->uidOwner);
+	$criteria_uid     = new \CriteriaCompo($criteria_uid2);
+	$criteria_uid->add($criteria_private);
 }
 $criteria_uid->setLimit($xoopsModuleConfig['picturesperpage']);
 $criteria_uid->setStart($start);
 if (1 == $xoopsModuleConfig['images_order']) {
-    $criteria_uid->setOrder('DESC');
-    $criteria_uid->setSort('cod_img');
+	$criteria_uid->setOrder('DESC');
+	$criteria_uid->setSort('cod_img');
 }
 /**
  * Fetch pictures from factory
@@ -63,32 +63,32 @@ $criteria_uid->setStart(0);
  * If there is no pictures in the album show in template lang_nopicyet
  */
 if (0 == $nbSections['nbPhotos']) {
-    $nopicturesyet = _MD_YOGURT_NOTHINGYET;
-    $xoopsTpl->assign('lang_nopicyet', $nopicturesyet);
+	$nopicturesyet = _MD_YOGURT_NOTHINGYET;
+	$xoopsTpl->assign('lang_nopicyet', $nopicturesyet);
 } else {
-    /**
-     * Lets populate an array with the dati from the pictures
-     */
-    $i = 0;
-    foreach ($pictures_object_array as $picture) {
-        $pictures_array[$i]['url']     = $picture->getVar('url', 's');
-        $pictures_array[$i]['desc']    = $picture->getVar('title', 's');
-        $pictures_array[$i]['cod_img'] = $picture->getVar('cod_img', 's');
-        $pictures_array[$i]['private'] = $picture->getVar('private', 's');
-        $xoopsTpl->assign('pics_array', $pictures_array);
-        $i++;
-    }
+	/**
+	 * Lets populate an array with the dati from the pictures
+	 */
+	$i = 0;
+	foreach ($pictures_object_array as $picture) {
+		$pictures_array[$i]['url']     = $picture->getVar('url', 's');
+		$pictures_array[$i]['desc']    = $picture->getVar('title', 's');
+		$pictures_array[$i]['cod_img'] = $picture->getVar('cod_img', 's');
+		$pictures_array[$i]['private'] = $picture->getVar('private', 's');
+		$xoopsTpl->assign('pics_array', $pictures_array);
+		$i++;
+	}
 }
 
 /**
  * Show the form if it is the owner and he can still upload pictures
  */
 if (!empty($xoopsUser)) {
-    if ((1 == $controler->isOwner) && $xoopsModuleConfig['nb_pict'] > $nbSections['nbPhotos']) {
-        $maxfilebytes = $xoopsModuleConfig['maxfilesize'];
-        $xoopsTpl->assign('maxfilebytes', $maxfilebytes);
-        $xoopsTpl->assign('showForm', '1');
-    }
+	if ((1 == $controler->isOwner) && $xoopsModuleConfig['nb_pict'] > $nbSections['nbPhotos']) {
+		$maxfilebytes = $xoopsModuleConfig['maxfilesize'];
+		$xoopsTpl->assign('maxfilebytes', $maxfilebytes);
+		$xoopsTpl->assign('showForm', '1');
+	}
 }
 
 /**
@@ -105,7 +105,7 @@ $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname'
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
 if (preg_match('/msie/', strtolower($_SERVER['HTTP_USER_AGENT']))) {
-    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
+	$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
 }
 //$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/css/lightbox.css');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/prototype.js');
@@ -169,7 +169,7 @@ $xoopsTpl->assign('lang_formtitle', _MD_YOGURT_SUBMIT_PIC_TITLE);
 $xoopsTpl->assign('lang_selectphoto', _MD_YOGURT_SELECT_PHOTO);
 $xoopsTpl->assign('lang_caption', _MD_YOGURT_CAPTION);
 $xoopsTpl->assign('lang_uploadpicture', _MD_YOGURT_UPLOADPICTURE);
-$xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxfilebytes / 1024));
+$xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxfilebytes/1024));
 
 //$xoopsTpl->assign('path_yogurt_uploads',$xoopsModuleConfig['link_path_upload']);
 $xoopsTpl->assign('lang_max_nb_pict', sprintf(_MD_YOGURT_YOUCANHAVE, $xoopsModuleConfig['nb_pict']));
@@ -185,6 +185,6 @@ $xoopsTpl->assign('avatar_url', $avatar);
 $xoopsTpl->assign('lang_setprivate', _MD_YOGURT_PRIVATIZE);
 $xoopsTpl->assign('lang_unsetprivate', _MD_YOGURT_UNPRIVATIZE);
 
-include XOOPS_ROOT_PATH . '/include/comment_view.php';
+include XOOPS_ROOT_PATH.'/include/comment_view.php';
 
-include __DIR__ . '/../../footer.php';
+include __DIR__.'/../../footer.php';
