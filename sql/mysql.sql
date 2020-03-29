@@ -63,7 +63,7 @@ CREATE TABLE `yogurt_reltribeuser` (
   ENGINE = MyISAM;
 
 
-CREATE TABLE `Tribes` (
+CREATE TABLE `yogurt_tribes` (
   `tribe_id`    INT(11)      NOT NULL AUTO_INCREMENT,
   `owner_uid`   INT(11)      NOT NULL,
   `tribe_title` VARCHAR(255) NOT NULL,
@@ -85,7 +85,7 @@ CREATE TABLE `yogurt_notes` (
 )
   ENGINE = MyISAM;
 
-CREATE TABLE `Configs` (
+CREATE TABLE `yogurt_configs` (
   `config_id`       INT(11)      NOT NULL AUTO_INCREMENT,
   `config_uid`      INT(11)      NOT NULL,
   `pictures`        TINYINT(1)   NOT NULL,
