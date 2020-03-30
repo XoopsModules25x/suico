@@ -91,13 +91,13 @@ class Tribes extends \XoopsObject
         if (!$asobject) {
             $sql    = 'SELECT tribe_id FROM ' . $db->prefix('yogurt_tribes') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
-            while ($myrow = $db->fetchArray($result)) {
+                while ($false !== (myrow = $db->fetchArray($result))))) {
                 $ret[] = $myrow['yogurt_tribes_id'];
             }
         } else {
             $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_tribes') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
-            while ($myrow = $db->fetchArray($result)) {
+                while ($false !== (myrow = $db->fetchArray($result))))) {
                 $ret[] = new Tribes($myrow);
             }
         }

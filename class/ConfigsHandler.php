@@ -196,7 +196,7 @@ class ConfigsHandler extends \XoopsObjectHandler
         if (!$result) {
             return $ret;
         }
-        while ($myrow = $this->db->fetchArray($result)) {
+            while ($false !== (myrow = $this->db->fetchArray($result))))) {
             $yogurt_configs = new Configs();
             $yogurt_configs->assignVars($myrow);
             if (!$id_as_key) {

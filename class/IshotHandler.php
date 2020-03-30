@@ -175,7 +175,7 @@ class IshotHandler extends \XoopsObjectHandler
         if (!$result) {
             return $ret;
         }
-        while ($myrow = $this->db->fetchArray($result)) {
+            while ($false !== (myrow = $this->db->fetchArray($result))))) {
             $yogurt_ishot = new Ishot();
             $yogurt_ishot->assignVars($myrow);
             if (!$id_as_key) {
@@ -251,7 +251,7 @@ class IshotHandler extends \XoopsObjectHandler
         $result = $this->db->query($sql, $limit, $start);
         $vetor  = [];
         $i      = 0;
-        while ($myrow = $this->db->fetchArray($result)) {
+            while ($false !== (myrow = $this->db->fetchArray($result))))) {
             $vetor[$i]['qtd']         = $myrow['qtd'];
             $vetor[$i]['uid_voted']   = $myrow['uid_voted'];
             $vetor[$i]['uname']       = $myrow['uname'];
@@ -285,7 +285,7 @@ class IshotHandler extends \XoopsObjectHandler
             $result = $this->db->query($sql, $limit, $start);
             $vetor  = [];
             $i      = 0;
-            while ($myrow = $this->db->fetchArray($result)) {
+                while ($false !== (myrow = $this->db->fetchArray($result))))) {
                 $vetor[$i]['uid_voted']   = $myrow['uid_voted'];
                 $vetor[$i]['uname']       = $myrow['uname'];
                 $vetor[$i]['user_avatar'] = $myrow['user_avatar'];

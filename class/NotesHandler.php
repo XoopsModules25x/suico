@@ -169,7 +169,7 @@ class NotesHandler extends \XoopsObjectHandler
         if (!$result) {
             return $ret;
         }
-        while ($myrow = $this->db->fetchArray($result)) {
+            while ($false !== (myrow = $this->db->fetchArray($result))))) {
             $yogurt_Notes = new Notes();
             $yogurt_Notes->assignVars($myrow);
             if (!$id_as_key) {
@@ -244,7 +244,7 @@ class NotesHandler extends \XoopsObjectHandler
             $vetor  = [];
             $i      = 0;
 
-            while ($myrow = $this->db->fetchArray($result)) {
+                while ($false !== (myrow = $this->db->fetchArray($result))))) {
                 $vetor[$i]['uid']         = $myrow['uid'];
                 $vetor[$i]['uname']       = $myrow['uname'];
                 $vetor[$i]['user_avatar'] = $myrow['user_avatar'];

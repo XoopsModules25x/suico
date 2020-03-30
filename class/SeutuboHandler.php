@@ -159,7 +159,7 @@ class SeutuboHandler extends \XoopsObjectHandler
         if (!$result) {
             return $ret;
         }
-        while ($myrow = $this->db->fetchArray($result)) {
+            while ($false !== (myrow = $this->db->fetchArray($result))))) {
             $yogurt_seutubo = new Seutubo();
             $yogurt_seutubo->assignVars($myrow);
             if (!$id_as_key) {

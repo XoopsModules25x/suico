@@ -80,13 +80,13 @@ class Friendpetition extends \XoopsObject
         if (!$asobject) {
             $sql    = 'SELECT friendpet_id FROM ' . $db->prefix('yogurt_friendpetition') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
-            while ($myrow = $db->fetchArray($result)) {
+                while ($false !== (myrow = $db->fetchArray($result))))) {
                 $ret[] = $myrow['yogurt_friendpetition_id'];
             }
         } else {
             $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_friendpetition') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
-            while ($myrow = $db->fetchArray($result)) {
+                while ($false !== (myrow = $db->fetchArray($result))))) {
                 $ret[] = new Friendpetition($myrow);
             }
         }

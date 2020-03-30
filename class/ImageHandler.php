@@ -194,7 +194,7 @@ class ImageHandler extends \XoopsObjectHandler
         if (!$result) {
             return $ret;
         }
-        while ($myrow = $this->db->fetchArray($result)) {
+            while ($false !== (myrow = $this->db->fetchArray($result))))) {
             $yogurt_images = new Image();
             $yogurt_images->assignVars($myrow);
             if (!$id_as_key) {
@@ -432,7 +432,7 @@ class ImageHandler extends \XoopsObjectHandler
         $result = $this->db->query($sql, $limit, 0);
         $vetor  = [];
         $i      = 0;
-        while ($myrow = $this->db->fetchArray($result)) {
+            while ($false !== (myrow = $this->db->fetchArray($result))))) {
             $vetor[$i]['uid_voted']   = $myrow['uid_owner'];
             $vetor[$i]['uname']       = $myrow['uname'];
             $vetor[$i]['user_avatar'] = $myrow['url'];
@@ -456,7 +456,7 @@ class ImageHandler extends \XoopsObjectHandler
         $result = $this->db->query($sql, $limit, 0);
         $vetor  = [];
         $i      = 0;
-        while ($myrow = $this->db->fetchArray($result)) {
+            while ($false !== (myrow = $this->db->fetchArray($result))))) {
             $vetor[$i]['uid_voted']    = $myrow['uid_owner'];
             $vetor[$i]['uname']        = $myrow['uname'];
             $vetor[$i]['img_filename'] = $myrow['url'];
