@@ -24,7 +24,7 @@ class VisitorsHandler extends \XoopsObjectHandler
      * create a new Yogurt\Visitors
      *
      * @param bool $isNew flag the new objects as "new"?
-     * @return \XoopsObject Yogurt\Visitors
+     * @return \XoopsModules\Yogurt\Yogurt\Visitors Yogurt\Visitors
      */
     public function create($isNew = true)
     {

@@ -25,7 +25,7 @@ class AudioHandler extends \XoopsObjectHandler
      * create a new Audio
      *
      * @param bool $isNew flag the new objects as "new"?
-     * @return \XoopsObject yogurt_audio
+     * @return \XoopsModules\Yogurt\Yogurt\Audio yogurt_audio
      */
     public function create($isNew = true)
     {

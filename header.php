@@ -9,7 +9,6 @@ require XOOPS_ROOT_PATH . '/header.php';
 
 $moduleDirName = basename(__DIR__);
 
-/** @var \XoopsModules\Yogurt\Helper $helper */
 $helper = \XoopsModules\Yogurt\Helper::getInstance();
 
 $modulePath = XOOPS_ROOT_PATH . '/modules/' . $moduleDirName;

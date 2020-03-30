@@ -25,7 +25,7 @@ class NotesHandler extends \XoopsObjectHandler
      * create a new Notes
      *
      * @param bool $isNew flag the new objects as "new"?
-     * @return \XoopsObjectNotes
+     * @return \XoopsModules\Yogurt\Notes
      */
     public function create($isNew = true)
     {
