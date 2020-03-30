@@ -147,7 +147,7 @@ class ReltribeuserHandler extends \XoopsObjectHandler
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_reltribeuser');
-        if (isset($criteria) && $criteria instanceof \criteriaelement) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
@@ -181,7 +181,7 @@ class ReltribeuserHandler extends \XoopsObjectHandler
     public function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_reltribeuser');
-        if (isset($criteria) && $criteria instanceof \criteriaelement) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
@@ -201,7 +201,7 @@ class ReltribeuserHandler extends \XoopsObjectHandler
     public function deleteAll($criteria = null)
     {
         $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_reltribeuser');
-        if (isset($criteria) && $criteria instanceof \criteriaelement) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {
@@ -221,7 +221,7 @@ class ReltribeuserHandler extends \XoopsObjectHandler
         $ret = [];
 
         $sql = 'SELECT rel_id, rel_tribe_id, rel_user_uid, tribe_title, tribe_desc, tribe_img, owner_uid FROM ' . $this->db->prefix('yogurt_tribes') . ', ' . $this->db->prefix('yogurt_reltribeuser');
-        if (isset($criteria) && $criteria instanceof \criteriaelement) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             //attention here this is kind of a hack
             $sql .= ' AND tribe_id = rel_tribe_id ';

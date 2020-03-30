@@ -163,7 +163,7 @@ class IshotHandler extends \XoopsObjectHandler
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_ishot');
-        if (isset($criteria) && $criteria instanceof \criteriaelement) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
@@ -197,7 +197,7 @@ class IshotHandler extends \XoopsObjectHandler
     public function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_ishot');
-        if (isset($criteria) && $criteria instanceof \criteriaelement) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
@@ -218,7 +218,7 @@ class IshotHandler extends \XoopsObjectHandler
     public function deleteAll($criteria = null)
     {
         $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_ishot');
-        if (isset($criteria) && $criteria instanceof \criteriaelement) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {
@@ -234,7 +234,7 @@ class IshotHandler extends \XoopsObjectHandler
     public function getHottest($criteria = null)
     {
         $sql = 'SELECT DISTINCTROW uname, user_avatar, uid_voted, COUNT(cod_ishot) AS qtd FROM ' . $this->db->prefix('yogurt_ishot') . ', ' . $this->db->prefix('users');
-        if (isset($criteria) && $criteria instanceof \criteriaelement) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         //attention here this is kind of a hack
@@ -272,7 +272,7 @@ class IshotHandler extends \XoopsObjectHandler
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT uname, user_avatar, uid_voted FROM ' . $this->db->prefix('yogurt_ishot') . ', ' . $this->db->prefix('users');
-        if (isset($criteria) && $criteria instanceof \criteriaelement) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             //attention here this is kind of a hack
             $sql .= ' AND uid = uid_voted AND ishot=1';

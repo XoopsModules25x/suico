@@ -154,7 +154,7 @@ class FriendshipHandler extends \XoopsObjectHandler
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendship');
-        if (isset($criteria) && $criteria instanceof \criteriaelement) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
@@ -188,7 +188,7 @@ class FriendshipHandler extends \XoopsObjectHandler
     public function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_friendship');
-        if (isset($criteria) && $criteria instanceof \criteriaelement) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
@@ -208,7 +208,7 @@ class FriendshipHandler extends \XoopsObjectHandler
     public function deleteAll($criteria = null)
     {
         $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_friendship');
-        if (isset($criteria) && $criteria instanceof \criteriaelement) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {
@@ -228,7 +228,7 @@ class FriendshipHandler extends \XoopsObjectHandler
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT uname, user_avatar, friend2_uid FROM ' . $this->db->prefix('yogurt_friendship') . ', ' . $this->db->prefix('users');
-        if (isset($criteria) && $criteria instanceof \criteriaelement) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             //attention here this is kind of a hack
             $sql .= ' AND uid = friend2_uid ';
@@ -268,7 +268,7 @@ class FriendshipHandler extends \XoopsObjectHandler
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT uname, user_avatar, friend1_uid FROM ' . $this->db->prefix('yogurt_friendship') . ', ' . $this->db->prefix('users');
-        if (isset($criteria) && $criteria instanceof \criteriaelement) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             //attention here this is kind of a hack
             $sql .= ' AND uid = friend1_uid ';
