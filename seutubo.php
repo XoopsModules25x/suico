@@ -22,19 +22,19 @@ use XoopsModules\Yogurt;
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_seutubo.tpl';
 require __DIR__ . '/header.php';
 
-$controler = new Yogurt\VideoController($xoopsDB, $xoopsUser);
+$controller = new Yogurt\VideoController($xoopsDB, $xoopsUser);
 
 /**
  * Fecthing numbers of tribes friends videos pictures etc...
  */
-$nbSections = $controler->getNumbersSections();
+$nbSections = $controller->getNumbersSections();
 
 $start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
 
 /**
  * Criteria for Videos
  */
-$criteriaUidVideo = new \Criteria('uid_owner', $controler->uidOwner);
+$criteriaUidVideo = new \Criteria('uid_owner', $controller->uidOwner);
 $criteriaUidVideo->setStart($start);
 $criteriaUidVideo->setLimit($xoopsModuleConfig['videosperpage']);
 
@@ -42,8 +42,8 @@ $criteriaUidVideo->setLimit($xoopsModuleConfig['videosperpage']);
  * Get all videos of this user and assign them to template
  */
 
-$videos       = $controler->getVideos($criteriaUidVideo);
-$videos_array = $controler->assignVideoContent($nbSections['nbVideos'], $videos);
+$videos       = $controller->getVideos($criteriaUidVideo);
+$videos_array = $controller->assignVideoContent($nbSections['nbVideos'], $videos);
 
 if (is_array($videos_array)) {
     $xoopsTpl->assign('videos', $videos_array);
@@ -51,7 +51,7 @@ if (is_array($videos_array)) {
     $xoopsTpl->assign('lang_novideoyet', _MD_YOGURT_NOVIDEOSYET);
 }
 
-$pageNav = $controler->VideosNavBar($nbSections['nbVideos'], $xoopsModuleConfig['videosperpage'], $start, 2);
+$pageNav = $controller->VideosNavBar($nbSections['nbVideos'], $xoopsModuleConfig['videosperpage'], $start, 2);
 
 /**
  * Adding to the module js and css of the lightbox and new ones
@@ -72,18 +72,18 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/yogurt.js');
 
 //permissions
-$xoopsTpl->assign('allow_Notes', $controler->checkPrivilegeBySection('Notes'));
-$xoopsTpl->assign('allow_friends', $controler->checkPrivilegeBySection('friends'));
-$xoopsTpl->assign('allow_tribes', $controler->checkPrivilegeBySection('tribes'));
-$xoopsTpl->assign('allow_pictures', $controler->checkPrivilegeBySection('pictures'));
-$xoopsTpl->assign('allow_videos', $controler->checkPrivilegeBySection('videos'));
-$xoopsTpl->assign('allow_audios', $controler->checkPrivilegeBySection('audio'));
+$xoopsTpl->assign('allow_Notes', $controller->checkPrivilegeBySection('Notes'));
+$xoopsTpl->assign('allow_friends', $controller->checkPrivilegeBySection('friends'));
+$xoopsTpl->assign('allow_tribes', $controller->checkPrivilegeBySection('tribes'));
+$xoopsTpl->assign('allow_pictures', $controller->checkPrivilegeBySection('pictures'));
+$xoopsTpl->assign('allow_videos', $controller->checkPrivilegeBySection('videos'));
+$xoopsTpl->assign('allow_audios', $controller->checkPrivilegeBySection('audio'));
 
 //Owner data
-$xoopsTpl->assign('uid_owner', $controler->uidOwner);
-$xoopsTpl->assign('owner_uname', $controler->nameOwner);
-$xoopsTpl->assign('isOwner', $controler->isOwner);
-$xoopsTpl->assign('isanonym', $controler->isAnonym);
+$xoopsTpl->assign('uid_owner', $controller->uidOwner);
+$xoopsTpl->assign('owner_uname', $controller->nameOwner);
+$xoopsTpl->assign('isOwner', $controller->isOwner);
+$xoopsTpl->assign('isanonym', $controller->isAnonym);
 
 //numbers
 $xoopsTpl->assign('nb_tribes', $nbSections['nbTribes']);
@@ -111,7 +111,7 @@ $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
 //page atributes
-$xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controler->nameOwner));
+$xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner));
 
 //form actions
 $xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);

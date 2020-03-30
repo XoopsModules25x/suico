@@ -28,18 +28,18 @@ require __DIR__ . '/header.php';
 
 $helper->loadLanguage('user');
 
-//include_once 'class/yogurt_controler.php';
+//include_once 'class/yogurt_controller.php';
 //if (!@ include_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/user.php') {
 //    include_once XOOPS_ROOT_PATH . '/language/english/user.php';
 //}
 
-$controler = new Yogurt\ControllerIndex($xoopsDB, $xoopsUser);
+$controller = new Yogurt\ControllerIndex($xoopsDB, $xoopsUser);
 
 /**
  * Fecthing numbers of tribes friends videos pictures etc...
  */
 
-$nbSections = $controler->getNumbersSections();
+$nbSections = $controller->getNumbersSections();
 
 /**
  * This variable define the beggining of the navigation must b
@@ -51,9 +51,9 @@ $start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
  * Filter for new friend petition
  */
 $petition = 0;
-if (1 == $controler->isOwner) {
-    $criteria_uidpetition = new \Criteria('petioned_uid', $controler->uidOwner);
-    $newpetition          = $controler->petitionsFactory->getObjects($criteria_uidpetition);
+if (1 == $controller->isOwner) {
+    $criteria_uidpetition = new \Criteria('petioned_uid', $controller->uidOwner);
+    $newpetition          = $controller->petitionsFactory->getObjects($criteria_uidpetition);
     if ($newpetition) {
         $nb_petitions      = count($newpetition);
         $petitionerHandler = xoops_getHandler('member');
@@ -69,12 +69,12 @@ if (1 == $controler->isOwner) {
 /**
  * Criteria for mainvideo
  */
-$criteria_uidvideo  = new \Criteria('uid_owner', $controler->uidOwner);
+$criteria_uidvideo  = new \Criteria('uid_owner', $controller->uidOwner);
 $criteria_mainvideo = new \Criteria('main_video', '1');
 $criteria_video     = new \CriteriaCompo($criteria_mainvideo);
 $criteria_video->add($criteria_uidvideo);
 
-if (($nbSections['nbVideos'] > 0) && ($videos = $controler->videosFactory->getObjects($criteria_video))) {
+if (($nbSections['nbVideos'] > 0) && ($videos = $controller->videosFactory->getObjects($criteria_video))) {
     $mainvideocode = $videos[0]->getVar('youtube_code');
     $mainvideodesc = $videos[0]->getVar('video_desc');
 }
@@ -83,37 +83,37 @@ if (($nbSections['nbVideos'] > 0) && ($videos = $controler->videosFactory->getOb
  * Friends
  */
 
-$criteria_friends = new \Criteria('friend1_uid', $controler->uidOwner);
-$friends          = $controler->friendshipsFactory->getFriends(9, $criteria_friends);
+$criteria_friends = new \Criteria('friend1_uid', $controller->uidOwner);
+$friends          = $controller->friendshipsFactory->getFriends(9, $criteria_friends);
 
-$controler->visitorsFactory->purgeVisits();
-$evaluation = $controler->friendshipsFactory->getMoyennes($controler->uidOwner);
+$controller->visitorsFactory->purgeVisits();
+$evaluation = $controller->friendshipsFactory->getMoyennes($controller->uidOwner);
 
 /**
  * Tribes
  */
 
-$criteria_tribes = new \Criteria('rel_user_uid', $controler->uidOwner);
-$tribes          = $controler->reltribeusersFactory->getTribes(9, $criteria_tribes);
+$criteria_tribes = new \Criteria('rel_user_uid', $controller->uidOwner);
+$tribes          = $controller->reltribeusersFactory->getTribes(9, $criteria_tribes);
 
 /**
  * Visitors
  */
 
-if (0 == $controler->isAnonym) {
+if (0 == $controller->isAnonym) {
     /**
      * Fectching last visitors
      */
-    if ($controler->uidOwner != $xoopsUser->getVar('uid')) {
-        $visitor_now = $controler->visitorsFactory->create();
-        $visitor_now->setVar('uid_owner', $controler->uidOwner);
+    if ($controller->uidOwner != $xoopsUser->getVar('uid')) {
+        $visitor_now = $controller->visitorsFactory->create();
+        $visitor_now->setVar('uid_owner', $controller->uidOwner);
         $visitor_now->setVar('uid_visitor', $xoopsUser->getVar('uid'));
         $visitor_now->setVar('uname_visitor', $xoopsUser->getVar('uname'));
-        $controler->visitorsFactory->insert($visitor_now);
+        $controller->visitorsFactory->insert($visitor_now);
     }
-    $criteria_visitors = new \Criteria('uid_owner', $controler->uidOwner);
+    $criteria_visitors = new \Criteria('uid_owner', $controller->uidOwner);
     //$criteria_visitors->setLimit(5);
-    $visitors_object_array = $controler->visitorsFactory->getObjects($criteria_visitors);
+    $visitors_object_array = $controller->visitorsFactory->getObjects($criteria_visitors);
 
     /**
      * Lets populate an array with the dati from visitors
@@ -137,10 +137,10 @@ if (0 == $controler->isAnonym) {
     */
 }
 
-$avatar = $controler->owner->getVar('user_avatar');
+$avatar = $controller->owner->getVar('user_avatar');
 
 $memberHandler = xoops_getHandler('member');
-$thisUser      = $memberHandler->getUser($controler->uidOwner);
+$thisUser      = $memberHandler->getUser($controller->uidOwner);
 $myts          = MyTextSanitizer::getInstance();
 
 /**
@@ -164,17 +164,17 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/yogurt.js');
 
 //permissions
-$xoopsTpl->assign('allow_friends', $controler->checkPrivilege('friends'));
-$xoopsTpl->assign('allow_Notes', $controler->checkPrivilege('Notes'));
-$xoopsTpl->assign('allow_tribes', $controler->checkPrivilege('tribes'));
-$xoopsTpl->assign('allow_pictures', $controler->checkPrivilege('pictures'));
-$xoopsTpl->assign('allow_videos', $controler->checkPrivilege('videos'));
-$xoopsTpl->assign('allow_audios', $controler->checkPrivilegeBySection('audio'));
-$xoopsTpl->assign('allow_profile_contact', $controler->checkPrivilege('profile_contact') ? 1 : 0);
-$xoopsTpl->assign('allow_profile_general', $controler->checkPrivilege('profile_general') ? 1 : 0);
-$xoopsTpl->assign('allow_profile_stats', $controler->checkPrivilege('profile_stats') ? 1 : 0);
+$xoopsTpl->assign('allow_friends', $controller->checkPrivilege('friends'));
+$xoopsTpl->assign('allow_Notes', $controller->checkPrivilege('Notes'));
+$xoopsTpl->assign('allow_tribes', $controller->checkPrivilege('tribes'));
+$xoopsTpl->assign('allow_pictures', $controller->checkPrivilege('pictures'));
+$xoopsTpl->assign('allow_videos', $controller->checkPrivilege('videos'));
+$xoopsTpl->assign('allow_audios', $controller->checkPrivilegeBySection('audio'));
+$xoopsTpl->assign('allow_profile_contact', $controller->checkPrivilege('profile_contact') ? 1 : 0);
+$xoopsTpl->assign('allow_profile_general', $controller->checkPrivilege('profile_general') ? 1 : 0);
+$xoopsTpl->assign('allow_profile_stats', $controller->checkPrivilege('profile_stats') ? 1 : 0);
 $xoopsTpl->assign('lang_suspensionadmin', _MD_YOGURT_SUSPENSIONADMIN);
-if (0 == $controler->isSuspended) {
+if (0 == $controller->isSuspended) {
     $xoopsTpl->assign('isSuspended', 0);
     $xoopsTpl->assign('lang_suspend', _MD_YOGURT_SUSPENDUSER);
     $xoopsTpl->assign('lang_timeinseconds', _MD_YOGURT_SUSPENDTIME);
@@ -194,11 +194,11 @@ if ($xoopsUser && $xoopsUser->isAdmin(1)) {
  */
 
 //Owner data
-$xoopsTpl->assign('uid_owner', $controler->uidOwner);
-$xoopsTpl->assign('owner_uname', $controler->nameOwner);
-$xoopsTpl->assign('isOwner', $controler->isOwner);
-$xoopsTpl->assign('isanonym', $controler->isAnonym);
-$xoopsTpl->assign('isfriend', $controler->isFriend);
+$xoopsTpl->assign('uid_owner', $controller->uidOwner);
+$xoopsTpl->assign('owner_uname', $controller->nameOwner);
+$xoopsTpl->assign('isOwner', $controller->isOwner);
+$xoopsTpl->assign('isanonym', $controller->isAnonym);
+$xoopsTpl->assign('isfriend', $controller->isFriend);
 
 //numbers
 $xoopsTpl->assign('nb_tribes', $nbSections['nbTribes']);
@@ -226,7 +226,7 @@ $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
 //page atributes
-$xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controler->nameOwner));
+$xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner));
 
 //$xoopsTpl->assign('path_yogurt_uploads',$xoopsModuleConfig['link_path_upload']);
 
@@ -283,7 +283,7 @@ if ($nbSections['nbVideos'] > 0) {
 }
 //friends
 $xoopsTpl->assign('friends', $friends);
-$xoopsTpl->assign('lang_friendstitle', sprintf(_MD_YOGURT_FRIENDSTITLE, $controler->nameOwner));
+$xoopsTpl->assign('lang_friendstitle', sprintf(_MD_YOGURT_FRIENDSTITLE, $controller->nameOwner));
 $xoopsTpl->assign('lang_viewallfriends', _MD_YOG_ALLFRIENDS);
 
 $xoopsTpl->assign('lang_nofriendsyet', _MD_YOGURT_NOFRIENDSYET);

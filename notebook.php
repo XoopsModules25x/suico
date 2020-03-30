@@ -22,11 +22,11 @@ use XoopsModules\Yogurt;
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_notebook.tpl';
 require __DIR__ . '/header.php';
 
-$controler  = new Yogurt\ControllerNotes($xoopsDB, $xoopsUser);
-$nbSections = $controler->getNumbersSections();
+$controller  = new Yogurt\ControllerNotes($xoopsDB, $xoopsUser);
+$nbSections = $controller->getNumbersSections();
 
-//$controler->renderFormNewPost($xoopsTpl);
-$criteria_uid = new \Criteria('Note_to', $controler->uidOwner);
+//$controller->renderFormNewPost($xoopsTpl);
+$criteria_uid = new \Criteria('Note_to', $controller->uidOwner);
 $criteria_uid->setOrder('DESC');
 $criteria_uid->setSort('date');
 
@@ -49,14 +49,14 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/yogurt.js');
 
 //permissions
-$xoopsTpl->assign('allow_Notes', $controler->checkPrivilegeBySection('Notes'));
-$xoopsTpl->assign('allow_friends', $controler->checkPrivilegeBySection('friends'));
-$xoopsTpl->assign('allow_tribes', $controler->checkPrivilegeBySection('tribes'));
-$xoopsTpl->assign('allow_pictures', $controler->checkPrivilegeBySection('pictures'));
-$xoopsTpl->assign('allow_videos', $controler->checkPrivilegeBySection('videos'));
-$xoopsTpl->assign('allow_audios', $controler->checkPrivilegeBySection('audio'));
+$xoopsTpl->assign('allow_Notes', $controller->checkPrivilegeBySection('Notes'));
+$xoopsTpl->assign('allow_friends', $controller->checkPrivilegeBySection('friends'));
+$xoopsTpl->assign('allow_tribes', $controller->checkPrivilegeBySection('tribes'));
+$xoopsTpl->assign('allow_pictures', $controller->checkPrivilegeBySection('pictures'));
+$xoopsTpl->assign('allow_videos', $controller->checkPrivilegeBySection('videos'));
+$xoopsTpl->assign('allow_audios', $controller->checkPrivilegeBySection('audio'));
 
-if (!($Notes = $controler->fecthNotes($nbSections['nbNotes'], $criteria_uid))) {
+if (!($Notes = $controller->fecthNotes($nbSections['nbNotes'], $criteria_uid))) {
     $xoopsTpl->assign('lang_noNotesyet', _MD_YOGURT_NONOTESYET);
 }
 
@@ -77,10 +77,10 @@ $xoopsTpl->assign('lang_italic', _MD_YOGURT_ITALIC);
 $xoopsTpl->assign('lang_underline', _MD_YOGURT_UNDERLINE);
 
 //Owner data
-$xoopsTpl->assign('uid_owner', $controler->uidOwner);
-$xoopsTpl->assign('owner_uname', $controler->nameOwner);
-$xoopsTpl->assign('isOwner', $controler->isOwner);
-$xoopsTpl->assign('isanonym', $controler->isAnonym);
+$xoopsTpl->assign('uid_owner', $controller->uidOwner);
+$xoopsTpl->assign('owner_uname', $controller->nameOwner);
+$xoopsTpl->assign('isOwner', $controller->isOwner);
+$xoopsTpl->assign('isanonym', $controller->isAnonym);
 //numbers
 $xoopsTpl->assign('nb_tribes', $nbSections['nbTribes']);
 $xoopsTpl->assign('nb_photos', $nbSections['nbPhotos']);

@@ -35,13 +35,13 @@ $op = isset($_POST['op']) ? trim(htmlspecialchars($_POST['op'], ENT_QUOTES | ENT
 if (isset($_POST['op']) && 'submit' == $_POST['op']) {
     $op = 'submit';
 }
-//include_once __DIR__ . '/class/yogurt_controler.php';
-$controler = new Yogurt\ControllerIndex($xoopsDB, $xoopsUser);
+//include_once __DIR__ . '/class/yogurt_controller.php';
+$controller = new Yogurt\ControllerIndex($xoopsDB, $xoopsUser);
 
 /**
  * Fecthing numbers of tribes friends videos pictures etc...
  */
-$nbSections = $controler->getNumbersSections();
+$nbSections = $controller->getNumbersSections();
 
 if ('form' == $op) {
     $GLOBALS['xoopsOption']['template_main'] = 'yogurt_searchform.tpl';
@@ -463,18 +463,18 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/yogurt.js');
 
 //permissions
-$xoopsTpl->assign('allow_Notes', $controler->checkPrivilegeBySection('Notes'));
-$xoopsTpl->assign('allow_friends', $controler->checkPrivilegeBySection('friends'));
-$xoopsTpl->assign('allow_tribes', $controler->checkPrivilegeBySection('tribes'));
-$xoopsTpl->assign('allow_pictures', $controler->checkPrivilegeBySection('pictures'));
-$xoopsTpl->assign('allow_videos', $controler->checkPrivilegeBySection('videos'));
-$xoopsTpl->assign('allow_audios', $controler->checkPrivilegeBySection('audio'));
+$xoopsTpl->assign('allow_Notes', $controller->checkPrivilegeBySection('Notes'));
+$xoopsTpl->assign('allow_friends', $controller->checkPrivilegeBySection('friends'));
+$xoopsTpl->assign('allow_tribes', $controller->checkPrivilegeBySection('tribes'));
+$xoopsTpl->assign('allow_pictures', $controller->checkPrivilegeBySection('pictures'));
+$xoopsTpl->assign('allow_videos', $controller->checkPrivilegeBySection('videos'));
+$xoopsTpl->assign('allow_audios', $controller->checkPrivilegeBySection('audio'));
 
 //Owner data
-$xoopsTpl->assign('uid_owner', $controler->uidOwner);
-$xoopsTpl->assign('owner_uname', $controler->nameOwner);
-$xoopsTpl->assign('isOwner', $controler->isOwner);
-$xoopsTpl->assign('isanonym', $controler->isAnonym);
+$xoopsTpl->assign('uid_owner', $controller->uidOwner);
+$xoopsTpl->assign('owner_uname', $controller->nameOwner);
+$xoopsTpl->assign('isOwner', $controller->isOwner);
+$xoopsTpl->assign('isanonym', $controller->isAnonym);
 
 //numbers
 $xoopsTpl->assign('nb_tribes', $nbSections['nbTribes']);

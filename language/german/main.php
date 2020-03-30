@@ -224,7 +224,7 @@ define('_MD_YOGURT_WHOCAN', 'Wer kann:');
 //submit_configs.php
 define('_MD_YOGURT_CONFIGSSAVE', 'Einstellungen gespeichert!');
 
-//class/yogurt_controler.php
+//class/yogurt_controller.php
 define('_MD_YOGURT_NOPRIVILEGE', 'Du ben&ouml;tigst mehr Rechte, um dieses Profil zu sehen.<br />Schlie&szlig;e Freundschaft mit diesem Mitglied.');
 
 ###################################### OTHERS ##############################

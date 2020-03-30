@@ -22,22 +22,22 @@ use XoopsModules\Yogurt;
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_tribe.tpl';
 require __DIR__ . '/header.php';
 
-$controler = new Yogurt\ControllerTribes($xoopsDB, $xoopsUser);
+$controller = new Yogurt\ControllerTribes($xoopsDB, $xoopsUser);
 
 /**
  * Fecthing numbers of tribes friends videos pictures etc...
  */
-$nbSections = $controler->getNumbersSections();
+$nbSections = $controller->getNumbersSections();
 
 $tribe_id = (int)$_GET['tribe_id'];
 $criteria = new \Criteria('tribe_id', $tribe_id);
-$tribes   = $controler->tribesFactory->getObjects($criteria);
+$tribes   = $controller->tribesFactory->getObjects($criteria);
 $tribe    = $tribes[0];
 
 /**
  * Render a form with the info of the user
  */
-$tribe_members = $controler->reltribeusersFactory->getUsersFromTribe($tribe_id, 0, 50);
+$tribe_members = $controller->reltribeusersFactory->getUsersFromTribe($tribe_id, 0, 50);
 foreach ($tribe_members as $tribe_member) {
     $uids[] = (int)$tribe_member['uid'];
 }
@@ -68,18 +68,18 @@ $xoopsTpl->assign('lang_titletribe', _MD_YOGURT_TRIBE_TITLE);
 $xoopsTpl->assign('lang_desctribe', _MD_YOGURT_TRIBE_DESC);
 
 //permissions
-$xoopsTpl->assign('allow_Notes', $controler->checkPrivilegeBySection('Notes'));
-$xoopsTpl->assign('allow_friends', $controler->checkPrivilegeBySection('friends'));
-$xoopsTpl->assign('allow_tribes', $controler->checkPrivilegeBySection('tribes'));
-$xoopsTpl->assign('allow_pictures', $controler->checkPrivilegeBySection('pictures'));
-$xoopsTpl->assign('allow_videos', $controler->checkPrivilegeBySection('videos'));
-$xoopsTpl->assign('allow_audios', $controler->checkPrivilegeBySection('audio'));
+$xoopsTpl->assign('allow_Notes', $controller->checkPrivilegeBySection('Notes'));
+$xoopsTpl->assign('allow_friends', $controller->checkPrivilegeBySection('friends'));
+$xoopsTpl->assign('allow_tribes', $controller->checkPrivilegeBySection('tribes'));
+$xoopsTpl->assign('allow_pictures', $controller->checkPrivilegeBySection('pictures'));
+$xoopsTpl->assign('allow_videos', $controller->checkPrivilegeBySection('videos'));
+$xoopsTpl->assign('allow_audios', $controller->checkPrivilegeBySection('audio'));
 
 //Owner data
-$xoopsTpl->assign('uid_owner', $controler->uidOwner);
-$xoopsTpl->assign('owner_uname', $controler->nameOwner);
-$xoopsTpl->assign('isOwner', $controler->isOwner);
-$xoopsTpl->assign('isanonym', $controler->isAnonym);
+$xoopsTpl->assign('uid_owner', $controller->uidOwner);
+$xoopsTpl->assign('owner_uname', $controller->nameOwner);
+$xoopsTpl->assign('isOwner', $controller->isOwner);
+$xoopsTpl->assign('isanonym', $controller->isAnonym);
 
 //numbers
 $xoopsTpl->assign('nb_tribes', $nbSections['nbTribes']);
@@ -107,7 +107,7 @@ $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
 //page atributes
-$xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controler->nameOwner));
+$xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner));
 
 //$xoopsTpl->assign('path_yogurt_uploads',$xoopsModuleConfig['link_path_upload']);
 $xoopsTpl->assign('lang_owner', _MD_YOGURT_TRIBEOWNER);

@@ -22,12 +22,12 @@ use XoopsModules\Yogurt;
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_tribes_results.tpl';
 require __DIR__ . '/header.php';
 
-$controler = new Yogurt\ControllerTribes($xoopsDB, $xoopsUser);
+$controller = new Yogurt\ControllerTribes($xoopsDB, $xoopsUser);
 
 /**
  * Fecthing numbers of tribes friends videos pictures etc...
  */
-$nbSections = $controler->getNumbersSections();
+$nbSections = $controller->getNumbersSections();
 
 $start_all = isset($_GET['start_all']) ? (int)$_GET['start_all'] : 0;
 $start_my  = isset($_GET['start_my']) ? (int)$_GET['start_my'] : 0;
@@ -40,10 +40,10 @@ $criteria_title  = new \Criteria('tribe_title', '%' . $tribe_keyword . '%', 'LIK
 $criteria_desc   = new \Criteria('tribe_desc', '%' . $tribe_keyword . '%', 'LIKE');
 $criteria_tribes = new \CriteriaCompo($criteria_title);
 $criteria_tribes->add($criteria_desc, 'OR');
-$nb_tribes = $controler->tribesFactory->getCount($criteria_tribes);
+$nb_tribes = $controller->tribesFactory->getCount($criteria_tribes);
 $criteria_tribes->setLimit($xoopsModuleConfig['tribesperpage']);
 $criteria_tribes->setStart($start_all);
-$tribes_objects = $controler->tribesFactory->getObjects($criteria_tribes);
+$tribes_objects = $controller->tribesFactory->getObjects($criteria_tribes);
 $i              = 0;
 foreach ($tribes_objects as $tribe_object) {
     $tribes[$i]['id']    = $tribe_object->getVar('tribe_id');
@@ -71,15 +71,15 @@ $barra_navegacao = new \XoopsPageNav($nb_tribes, $xoopsModuleConfig['tribesperpa
 $barrinha        = $barra_navegacao->renderImageNav(2);
 
 //permissions
-$xoopsTpl->assign('allow_Notes', $controler->checkPrivilegeBySection('Notes'));
-$xoopsTpl->assign('allow_friends', $controler->checkPrivilegeBySection('friends'));
-$xoopsTpl->assign('allow_tribes', $controler->checkPrivilegeBySection('tribes'));
-$xoopsTpl->assign('allow_pictures', $controler->checkPrivilegeBySection('pictures'));
-$xoopsTpl->assign('allow_videos', $controler->checkPrivilegeBySection('videos'));
-$xoopsTpl->assign('allow_audios', $controler->checkPrivilegeBySection('audio'));
-$xoopsTpl->assign('allow_profile_contact', $controler->checkPrivilege('profile_contact') ? 1 : 0);
-$xoopsTpl->assign('allow_profile_general', $controler->checkPrivilege('profile_general') ? 1 : 0);
-$xoopsTpl->assign('allow_profile_stats', $controler->checkPrivilege('profile_stats') ? 1 : 0);
+$xoopsTpl->assign('allow_Notes', $controller->checkPrivilegeBySection('Notes'));
+$xoopsTpl->assign('allow_friends', $controller->checkPrivilegeBySection('friends'));
+$xoopsTpl->assign('allow_tribes', $controller->checkPrivilegeBySection('tribes'));
+$xoopsTpl->assign('allow_pictures', $controller->checkPrivilegeBySection('pictures'));
+$xoopsTpl->assign('allow_videos', $controller->checkPrivilegeBySection('videos'));
+$xoopsTpl->assign('allow_audios', $controller->checkPrivilegeBySection('audio'));
+$xoopsTpl->assign('allow_profile_contact', $controller->checkPrivilege('profile_contact') ? 1 : 0);
+$xoopsTpl->assign('allow_profile_general', $controller->checkPrivilege('profile_general') ? 1 : 0);
+$xoopsTpl->assign('allow_profile_stats', $controller->checkPrivilege('profile_stats') ? 1 : 0);
 
 //form
 //$xoopsTpl->assign('lang_youcanupload',sprintf(_MD_YOGURT_YOUCANUPLOAD,$maxfilebytes/1024));
@@ -90,10 +90,10 @@ $xoopsTpl->assign('lang_description', _MD_YOGURT_TRIBE_DESC);
 $xoopsTpl->assign('lang_savetribe', _MD_YOGURT_UPLOADTRIBE);
 
 //Owner data
-$xoopsTpl->assign('uid_owner', $controler->uidOwner);
-$xoopsTpl->assign('owner_uname', $controler->nameOwner);
-$xoopsTpl->assign('isOwner', $controler->isOwner);
-$xoopsTpl->assign('isanonym', $controler->isAnonym);
+$xoopsTpl->assign('uid_owner', $controller->uidOwner);
+$xoopsTpl->assign('owner_uname', $controller->nameOwner);
+$xoopsTpl->assign('isOwner', $controller->isOwner);
+$xoopsTpl->assign('isanonym', $controller->isAnonym);
 
 //numbers
 //$xoopsTpl->assign('nb_tribes',$nbSections['nbTribes']);look at hte end for this nb
@@ -122,7 +122,7 @@ $xoopsTpl->assign('lang_audio', _MD_YOGURT_AUDIOS);
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
 //page atributes
-$xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controler->nameOwner));
+$xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner));
 
 //$xoopsTpl->assign('path_yogurt_uploads',$xoopsModuleConfig['link_path_upload']);
 //$xoopsTpl->assign('tribes',$tribes);

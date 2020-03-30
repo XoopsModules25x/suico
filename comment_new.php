@@ -25,14 +25,14 @@ use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
 
-$controler = new Yogurt\ControllerTribes($xoopsDB, $xoopsUser);
+$controller = new Yogurt\ControllerTribes($xoopsDB, $xoopsUser);
 
 /**
  * Receiving info from get parameters
  */
 $tribe_id = $_GET['com_itemid'];
 $criteria = new \Criteria('tribe_id', $tribe_id);
-$tribes   = $controler->tribesFactory->getObjects($criteria);
+$tribes   = $controller->tribesFactory->getObjects($criteria);
 $tribe    = $tribes[0];
 
 $com_itemid = isset($_GET['com_itemid']) ? (int)$_GET['com_itemid'] : 0;

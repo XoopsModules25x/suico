@@ -22,12 +22,12 @@ use XoopsModules\Yogurt;
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_album.tpl';
 require __DIR__ . '/header.php';
 
-$controler = new Yogurt\ControllerPhotos($xoopsDB, $xoopsUser);
+$controller = new Yogurt\ControllerPhotos($xoopsDB, $xoopsUser);
 
 /**
  * Fecthing numbers of tribes friends videos pictures etc...
  */
-$nbSections = $controler->getNumbersSections();
+$nbSections = $controller->getNumbersSections();
 
 /**
  * This variable define the beggining of the navigation must b
@@ -38,11 +38,11 @@ $start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
 /**
  * Filter for search pictures in database
  */
-if (1 == $controler->isOwner) {
-    $criteria_uid = new \Criteria('uid_owner', $controler->uidOwner);
+if (1 == $controller->isOwner) {
+    $criteria_uid = new \Criteria('uid_owner', $controller->uidOwner);
 } else {
     $criteria_private = new \Criteria('private', 0);
-    $criteria_uid2    = new \Criteria('uid_owner', (int)$controler->uidOwner);
+    $criteria_uid2    = new \Criteria('uid_owner', (int)$controller->uidOwner);
     $criteria_uid     = new \CriteriaCompo($criteria_uid2);
     $criteria_uid->add($criteria_private);
 }
@@ -55,7 +55,7 @@ if (1 == $xoopsModuleConfig['images_order']) {
 /**
  * Fetch pictures from factory
  */
-$pictures_object_array = $controler->albumFactory->getObjects($criteria_uid);
+$pictures_object_array = $controller->albumFactory->getObjects($criteria_uid);
 $criteria_uid->setLimit('');
 $criteria_uid->setStart(0);
 
@@ -84,7 +84,7 @@ if (0 == $nbSections['nbPhotos']) {
  * Show the form if it is the owner and he can still upload pictures
  */
 if (!empty($xoopsUser)) {
-    if ((1 == $controler->isOwner) && $xoopsModuleConfig['nb_pict'] > $nbSections['nbPhotos']) {
+    if ((1 == $controller->isOwner) && $xoopsModuleConfig['nb_pict'] > $nbSections['nbPhotos']) {
         $maxfilebytes = $xoopsModuleConfig['maxfilesize'];
         $xoopsTpl->assign('maxfilebytes', $maxfilebytes);
         $xoopsTpl->assign('showForm', '1');
@@ -94,7 +94,7 @@ if (!empty($xoopsUser)) {
 /**
  * Let's get the user name of the owner of the album
  */
-$owner      = new \XoopsUser($controler->uidOwner);
+$owner      = new \XoopsUser($controller->uidOwner);
 $identifier = $owner->getVar('uname');
 $avatar     = $owner->getVar('user_avatar');
 
@@ -119,24 +119,24 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 /**
  * Criando a barra de navegao caso tenha muitos amigos
  */
-$barra_navegacao = new \XoopsPageNav($nbSections['nbPhotos'], $xoopsModuleConfig['picturesperpage'], $start, 'start', 'uid=' . (int)$controler->uidOwner);
+$barra_navegacao = new \XoopsPageNav($nbSections['nbPhotos'], $xoopsModuleConfig['picturesperpage'], $start, 'start', 'uid=' . (int)$controller->uidOwner);
 $navegacao       = $barra_navegacao->renderImageNav(2);
 
 /**
  * Assigning smarty variables
  */
 //permissions
-$xoopsTpl->assign('allow_Notes', $controler->checkPrivilegeBySection('Notes'));
-$xoopsTpl->assign('allow_friends', $controler->checkPrivilegeBySection('friends'));
-$xoopsTpl->assign('allow_tribes', $controler->checkPrivilegeBySection('tribes'));
-$xoopsTpl->assign('allow_pictures', $controler->checkPrivilegeBySection('pictures'));
-$xoopsTpl->assign('allow_videos', $controler->checkPrivilegeBySection('videos'));
-$xoopsTpl->assign('allow_audios', $controler->checkPrivilegeBySection('audio'));
+$xoopsTpl->assign('allow_Notes', $controller->checkPrivilegeBySection('Notes'));
+$xoopsTpl->assign('allow_friends', $controller->checkPrivilegeBySection('friends'));
+$xoopsTpl->assign('allow_tribes', $controller->checkPrivilegeBySection('tribes'));
+$xoopsTpl->assign('allow_pictures', $controller->checkPrivilegeBySection('pictures'));
+$xoopsTpl->assign('allow_videos', $controller->checkPrivilegeBySection('videos'));
+$xoopsTpl->assign('allow_audios', $controller->checkPrivilegeBySection('audio'));
 
 //Owner data
-$xoopsTpl->assign('uid_owner', $controler->uidOwner);
-$xoopsTpl->assign('owner_uname', $controler->nameOwner);
-$xoopsTpl->assign('isOwner', $controler->isOwner);
+$xoopsTpl->assign('uid_owner', $controller->uidOwner);
+$xoopsTpl->assign('owner_uname', $controller->nameOwner);
+$xoopsTpl->assign('isOwner', $controller->isOwner);
 
 //numbers
 $xoopsTpl->assign('nb_tribes', $nbSections['nbTribes']);
@@ -161,8 +161,8 @@ $xoopsTpl->assign('lang_tribes', _MD_YOGURT_TRIBES);
 $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 
 //page atributes
-$xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controler->nameOwner));
-$xoopsTpl->assign('isanonym', $controler->isAnonym);
+$xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner));
+$xoopsTpl->assign('isanonym', $controller->isAnonym);
 
 //form
 $xoopsTpl->assign('lang_formtitle', _MD_YOGURT_SUBMIT_PIC_TITLE);

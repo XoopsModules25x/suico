@@ -239,7 +239,7 @@ define('_MD_YOGURT_WHOCAN', 'Quem pode:'); //GibaPhp
 //submit_configs.php
 define('_MD_YOGURT_CONFIGSSAVE', 'Configuração Salva!'); //GibaPhp
 
-//class/yogurt_controler.php
+//class/yogurt_controller.php
 define(
     '_MD_YOGURT_NOPRIVILEGE',
     'O proprietário deste perfil alterou os privilégios para vê-lo, <br /> e ficou superior em relação ao que você tem agora. <br />Faça o Login para tornar-se seu amigo. <br />Se eles não confirmaram ainda as permissões, talvez seja este o motivo que só eles possam ver. <br />Após ajustado isto, você será capaz de vê-lo.'

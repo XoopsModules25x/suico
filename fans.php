@@ -21,26 +21,26 @@ use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_fans.tpl';
 require __DIR__ . '/header.php';
-$controler = new Yogurt\ControllerFriends($xoopsDB, $xoopsUser);
+$controller = new Yogurt\ControllerFriends($xoopsDB, $xoopsUser);
 
 /**
  * Fecthing numbers of tribes friends videos pictures etc...
  */
-$nbSections = $controler->getNumbersSections();
+$nbSections = $controller->getNumbersSections();
 
 $start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
 
 /**
  * Friends
  */
-$criteria_friends    = new \Criteria('friend2_uid', $controler->uidOwner);
+$criteria_friends    = new \Criteria('friend2_uid', $controller->uidOwner);
 $criteria_fans       = new \Criteria('fan', 1);
 $criteria_compo_fans = new \CriteriaCompo($criteria_friends);
 $criteria_compo_fans->add($criteria_fans);
-$nb_friends = $controler->friendshipsFactory->getCount($criteria_compo_fans);
+$nb_friends = $controller->friendshipsFactory->getCount($criteria_compo_fans);
 $criteria_compo_fans->setLimit($xoopsModuleConfig['friendsperpage']);
 $criteria_compo_fans->setStart($start);
-$vetor = $controler->friendshipsFactory->getFans('', $criteria_compo_fans, 0);
+$vetor = $controller->friendshipsFactory->getFans('', $criteria_compo_fans, 0);
 if (0 == $nb_friends) {
     $xoopsTpl->assign('lang_nofansyet', _MD_YOGURT_NOFANSYET);
 }
@@ -49,7 +49,7 @@ if (0 == $nb_friends) {
  * Let's get the user name of the owner of the album
  */
 $owner      = new \XoopsUser();
-$identifier = $owner::getUnameFromId($controler->uidOwner);
+$identifier = $owner::getUnameFromId($controller->uidOwner);
 
 /**
  * Adding to the module js and css of the lightbox and new ones
@@ -72,22 +72,22 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 /**
  * Criando a barra de navegao caso tenha muitos amigos
  */
-$barra_navegacao = new \XoopsPageNav($nb_friends, $xoopsModuleConfig['friendsperpage'], $start, 'start', 'uid=' . (int)$controler->uidOwner);
+$barra_navegacao = new \XoopsPageNav($nb_friends, $xoopsModuleConfig['friendsperpage'], $start, 'start', 'uid=' . (int)$controller->uidOwner);
 $navegacao       = $barra_navegacao->renderImageNav(2);
 
 //permissions
-$xoopsTpl->assign('allow_Notes', $controler->checkPrivilegeBySection('Notes'));
-$xoopsTpl->assign('allow_friends', $controler->checkPrivilegeBySection('friends'));
-$xoopsTpl->assign('allow_tribes', $controler->checkPrivilegeBySection('tribes'));
-$xoopsTpl->assign('allow_pictures', $controler->checkPrivilegeBySection('pictures'));
-$xoopsTpl->assign('allow_videos', $controler->checkPrivilegeBySection('videos'));
-$xoopsTpl->assign('allow_audios', $controler->checkPrivilegeBySection('audio'));
+$xoopsTpl->assign('allow_Notes', $controller->checkPrivilegeBySection('Notes'));
+$xoopsTpl->assign('allow_friends', $controller->checkPrivilegeBySection('friends'));
+$xoopsTpl->assign('allow_tribes', $controller->checkPrivilegeBySection('tribes'));
+$xoopsTpl->assign('allow_pictures', $controller->checkPrivilegeBySection('pictures'));
+$xoopsTpl->assign('allow_videos', $controller->checkPrivilegeBySection('videos'));
+$xoopsTpl->assign('allow_audios', $controller->checkPrivilegeBySection('audio'));
 
 //Owner data
-$xoopsTpl->assign('uid_owner', $controler->uidOwner);
-$xoopsTpl->assign('owner_uname', $controler->nameOwner);
-$xoopsTpl->assign('isOwner', $controler->isOwner);
-$xoopsTpl->assign('isanonym', $controler->isAnonym);
+$xoopsTpl->assign('uid_owner', $controller->uidOwner);
+$xoopsTpl->assign('owner_uname', $controller->nameOwner);
+$xoopsTpl->assign('isOwner', $controller->isOwner);
+$xoopsTpl->assign('isanonym', $controller->isAnonym);
 
 //numbers
 $xoopsTpl->assign('nb_tribes', $nbSections['nbTribes']);
@@ -118,7 +118,7 @@ $xoopsTpl->assign('navegacao', $navegacao);
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
 //page atributes
-$xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controler->nameOwner));
+$xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner));
 
 $xoopsTpl->assign('lang_fanstitle', sprintf(_MD_YOGURT_FANSTITLE, $identifier));
 //$xoopsTpl->assign('path_yogurt_uploads',$xoopsModuleConfig['link_path_upload']);
