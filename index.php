@@ -33,7 +33,7 @@ $helper->loadLanguage('user');
 //    include_once XOOPS_ROOT_PATH . '/language/english/user.php';
 //}
 
-$controler = new Yogurt\ControlerIndex($xoopsDB, $xoopsUser);
+$controler = new Yogurt\ControllerIndex($xoopsDB, $xoopsUser);
 
 /**
  * Fecthing numbers of tribes friends videos pictures etc...

@@ -23,7 +23,7 @@ use XoopsModules\Yogurt;
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_audio.tpl';
 require __DIR__ . '/header.php';
 
-$controler = new Yogurt\AudioControler($xoopsDB, $xoopsUser);
+$controler = new Yogurt\AudioController($xoopsDB, $xoopsUser);
 
 /**
  * Fecthing numbers of tribes friends videos pictures etc...

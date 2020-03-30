@@ -22,7 +22,7 @@ use XoopsModules\Yogurt;
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_seutubo.tpl';
 require __DIR__ . '/header.php';
 
-$controler = new Yogurt\VideoControler($xoopsDB, $xoopsUser);
+$controler = new Yogurt\VideoController($xoopsDB, $xoopsUser);
 
 /**
  * Fecthing numbers of tribes friends videos pictures etc...

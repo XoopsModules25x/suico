@@ -25,7 +25,7 @@ use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
 
-$controler = new Yogurt\ControlerTribes($xoopsDB, $xoopsUser);
+$controler = new Yogurt\ControllerTribes($xoopsDB, $xoopsUser);
 
 /**
  * Receiving info from get parameters

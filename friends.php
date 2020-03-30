@@ -23,7 +23,7 @@ use XoopsModules\Yogurt;
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_friends.tpl';
 require __DIR__ . '/header.php';
 
-$controler = new Yogurt\ControlerFriends($xoopsDB, $xoopsUser);
+$controler = new Yogurt\ControllerFriends($xoopsDB, $xoopsUser);
 
 /**
  * Fecthing numbers of tribes friends videos pictures etc...

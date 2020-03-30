@@ -43,9 +43,9 @@ if (str_replace('.', '', PHP_VERSION) > 499) {
 }
 
 /**
- * Class YogurtControler
+ * Class YogurtController
  */
-class YogurtControler extends \XoopsObject
+class YogurtController extends \XoopsObject
 {
     public $db;
     public $user;

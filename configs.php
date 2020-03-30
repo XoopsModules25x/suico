@@ -22,7 +22,7 @@ use XoopsModules\Yogurt;
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_configs.tpl';
 require __DIR__ . '/header.php';
 
-$controler  = new Yogurt\ControlerConfigs($xoopsDB, $xoopsUser);
+$controler  = new Yogurt\ControllerConfigs($xoopsDB, $xoopsUser);
 $nbSections = $controler->getNumbersSections();
 
 if (!$xoopsUser) {

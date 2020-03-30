@@ -43,15 +43,29 @@ if (str_replace('.', '', PHP_VERSION) > 499) {
 }
 
 /**
- * Class YogurtControlerConfigs
+ * Class ControllerFriends
  */
-class ControlerConfigs extends YogurtControler
+class ControllerFriends extends YogurtController
 {
     /**
      * @return bool|void
      */
     public function checkPrivilege()
     {
+        global $xoopsModuleConfig;
+        if (0 == $xoopsModuleConfig['enable_friends']) {
+            redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_FRIENDSNOTENABLED);
+        }
+        $criteria = new \Criteria('config_uid', $this->owner->getVar('uid'));
+        if (1 == $this->configsFactory->getCount($criteria)) {
+            $configs = $this->configsFactory->getObjects($criteria);
+
+            $config = $configs[0]->getVar('friends');
+
+            if (!$this->checkPrivilegeLevel($config)) {
+                redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, _MD_YOGURT_NOPRIVILEGE);
+            }
+        }
         return true;
     }
 }

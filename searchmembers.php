@@ -36,7 +36,7 @@ if (isset($_POST['op']) && 'submit' == $_POST['op']) {
     $op = 'submit';
 }
 //include_once __DIR__ . '/class/yogurt_controler.php';
-$controler = new Yogurt\ControlerIndex($xoopsDB, $xoopsUser);
+$controler = new Yogurt\ControllerIndex($xoopsDB, $xoopsUser);
 
 /**
  * Fecthing numbers of tribes friends videos pictures etc...

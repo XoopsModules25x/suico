@@ -43,9 +43,9 @@ if (str_replace('.', '', PHP_VERSION) > 499) {
 }
 
 /**
- * Class ControlerPhotos
+ * Class ControllerTribes
  */
-class ControlerPhotos extends YogurtControler
+class ControllerTribes extends YogurtController
 {
     /**
      * @return bool|void
@@ -53,14 +53,14 @@ class ControlerPhotos extends YogurtControler
     public function checkPrivilege()
     {
         global $xoopsModuleConfig;
-        if (0 == $xoopsModuleConfig['enable_pictures']) {
-            redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_PICTURESNOTENABLED);
+        if (0 == $xoopsModuleConfig['enable_tribes']) {
+            redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_TRIBESNOTENABLED);
         }
         $criteria = new \Criteria('config_uid', $this->owner->getVar('uid'));
         if (1 == $this->configsFactory->getCount($criteria)) {
             $configs = $this->configsFactory->getObjects($criteria);
 
-            $config = $configs[0]->getVar('pictures');
+            $config = $configs[0]->getVar('tribes');
 
             if (!$this->checkPrivilegeLevel($config)) {
                 redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, _MD_YOGURT_NOPRIVILEGE);

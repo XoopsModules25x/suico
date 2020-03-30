@@ -22,7 +22,7 @@ use XoopsModules\Yogurt;
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_notebook.tpl';
 require __DIR__ . '/header.php';
 
-$controler  = new Yogurt\ControlerNotes($xoopsDB, $xoopsUser);
+$controler  = new Yogurt\ControllerNotes($xoopsDB, $xoopsUser);
 $nbSections = $controler->getNumbersSections();
 
 //$controler->renderFormNewPost($xoopsTpl);

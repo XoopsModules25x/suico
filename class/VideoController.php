@@ -43,74 +43,77 @@ if (str_replace('.', '', PHP_VERSION) > 499) {
 }
 
 /**
- * Class YogurtAudioControler
+ * Class YogurtVideoController
  */
-class AudioControler extends YogurtControler
+class VideoController extends YogurtController
 {
 
     /**
-     * Fecth audios
+     * Fecth videos
      * @param object $criteria
      * @return array of video objects
      */
-    public function getAudio($criteria)
+    public function getVideos($criteria)
     {
-        $audios = $this->audioFactory->getObjects($criteria);
-        return $audios;
+        $videos = $this->videosFactory->getObjects($criteria);
+        return $videos;
     }
 
     /**
-     * Assign Audio Content to Template
-     * @param $nbAudios
-     * @param $audios
+     * Assign Videos Submit Form to theme
+     * @param int $maxNbVideos the maximum number of videos a user can have
+     * @param     $presentNb
+     * @return void
+     */
+    public function showFormSubmitVideos($maxNbVideos, $presentNb)
+    {
+        global $xoopsTpl;
+
+        if ($this->isUser) {
+            if ((1 == $this->isOwner) && ($maxNbVideos > $presentNb)) {
+                echo '&nbsp;';
+                $this->videosFactory->renderFormSubmit($xoopsTpl);
+            }
+        }
+    }
+
+    /**
+     * Assign Video Content to Template
+     * @param $nbVideos
+     * @param $videos
      * @return bool
      */
-    public function assignAudioContent($nbAudios, $audios)
+    public function assignVideoContent($nbVideos, $videos)
     {
-        if (0 == $nbAudios) {
+        if (0 == $nbVideos) {
             return false;
         } else {
-            //audio info
             /**
-             * Lets populate an array with the data from the audio
+             * Lets populate an array with the dati from the videos
              */
             $i = 0;
-            foreach ($audios as $audio) {
-                $audios_array[$i]['url']    = $audio->getVar('url', 's');
-                $audios_array[$i]['title']  = $audio->getVar('title', 's');
-                $audios_array[$i]['id']     = $audio->getVar('audio_id', 's');
-                $audios_array[$i]['author'] = $audio->getVar('author', 's');
+            foreach ($videos as $video) {
+                $videos_array[$i]['url']  = $video->getVar('youtube_code', 's');
+                $videos_array[$i]['desc'] = $video->getVar('video_desc', 's');
+                $videos_array[$i]['id']   = $video->getVar('video_id', 's');
 
-                if (str_replace('.', '', PHP_VERSION) > 499) {
-                    $audio_path = XOOPS_ROOT_PATH . '/uploads/yogurt/mp3/' . $audio->getVar('url', 's');
-                    // echo $audio_path;
-                    $mp3filemetainfo                = new Id3v1($audio_path, true);
-                    $mp3filemetainfoarray           = [];
-                    $mp3filemetainfoarray['Title']  = $mp3filemetainfo->getTitle();
-                    $mp3filemetainfoarray['Artist'] = $mp3filemetainfo->getArtist();
-                    $mp3filemetainfoarray['Album']  = $mp3filemetainfo->getAlbum();
-                    $mp3filemetainfoarray['Year']   = $mp3filemetainfo->getYear();
-                    $audios_array[$i]['meta']       = $mp3filemetainfoarray;
-                } else {
-                    $audios_array[$i]['nometa'] = 1;
-                }
                 $i++;
             }
-            return $audios_array;
+            return $videos_array;
         }
     }
 
     /**
      * Create a page navbar for videos
-     * @param     $nbAudios
-     * @param int $audiosPerPage the number of videos in a page
+     * @param     $nbVideos
+     * @param int $videosPerPage the number of videos in a page
      * @param int $start         at which position of the array we start
      * @param int $interval      how many pages between the first link and the next one
      * @return void
      */
-    public function AudiosNavBar($nbAudios, $audiosPerPage, $start, $interval)
+    public function VideosNavBar($nbVideos, $videosPerPage, $start, $interval)
     {
-        $pageNav = new \XoopsPageNav($nbAudios, $audiosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
+        $pageNav = new \XoopsPageNav($nbVideos, $videosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
         $navBar  = $pageNav->renderImageNav($interval);
         return $navBar;
     }
@@ -121,14 +124,14 @@ class AudioControler extends YogurtControler
     public function checkPrivilege()
     {
         global $xoopsModuleConfig;
-        if (0 == $xoopsModuleConfig['enable_audio']) {
-            redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_AUDIONOTENABLED);
+        if (0 == $xoopsModuleConfig['enable_videos']) {
+            redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_VIDEOSNOTENABLED);
         }
         $criteria = new \Criteria('config_uid', $this->owner->getVar('uid'));
         if (1 == $this->configsFactory->getCount($criteria)) {
             $configs = $this->configsFactory->getObjects($criteria);
 
-            $config = $configs[0]->getVar('audio');
+            $config = $configs[0]->getVar('videos');
 
             if (!$this->checkPrivilegeLevel($config)) {
                 redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, _MD_YOGURT_NOPRIVILEGE);

@@ -43,47 +43,15 @@ if (str_replace('.', '', PHP_VERSION) > 499) {
 }
 
 /**
- * Class ControlerIndex
+ * Class YogurtControllerConfigs
  */
-class ControlerIndex extends YogurtControler
+class ControllerConfigs extends YogurtController
 {
     /**
-     * @param null|string $section
-     * @return int|void
+     * @return bool|void
      */
-    public function checkPrivilege($section = null)
+    public function checkPrivilege()
     {
-        global $xoopsModuleConfig;
-        if ('' == trim($section)) {
-            return -1;
-        }
-        $configsectionname = 'enable_' . $section;
-        if (array_key_exists($configsectionname, $xoopsModuleConfig)) {
-            if (0 == $xoopsModuleConfig[$configsectionname]) {
-                return -1;
-            }
-        }
-
-        //	if ($section=="Notes" && $xoopsModuleConfig['enable_notes']==0){
-        //	  		return false;
-        //		}
-        //		if ($section=="pictures" && $xoopsModuleConfig['enable_pictures']==0){
-        //	  		return false;
-        //		}
-        //
-        //		if ($section=="pictures" && $xoopsModuleConfig['enable_pictures']==0){
-        //	  		return false;
-        //		}
-        $criteria = new \Criteria('config_uid', $this->owner->getVar('uid'));
-        if (1 == $this->configsFactory->getCount($criteria)) {
-            $configs = $this->configsFactory->getObjects($criteria);
-
-            $config = $configs[0]->getVar($section);
-
-            if (!$this->checkPrivilegeLevel($config)) {
-                return 0;
-            }
-        }
-        return 1;
+        return true;
     }
 }

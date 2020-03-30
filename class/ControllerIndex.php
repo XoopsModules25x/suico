@@ -43,29 +43,47 @@ if (str_replace('.', '', PHP_VERSION) > 499) {
 }
 
 /**
- * Class ControlerFriends
+ * Class ControllerIndex
  */
-class ControlerFriends extends YogurtControler
+class ControllerIndex extends YogurtController
 {
     /**
-     * @return bool|void
+     * @param null|string $section
+     * @return int|void
      */
-    public function checkPrivilege()
+    public function checkPrivilege($section = null)
     {
         global $xoopsModuleConfig;
-        if (0 == $xoopsModuleConfig['enable_friends']) {
-            redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_FRIENDSNOTENABLED);
+        if ('' == trim($section)) {
+            return -1;
         }
+        $configsectionname = 'enable_' . $section;
+        if (array_key_exists($configsectionname, $xoopsModuleConfig)) {
+            if (0 == $xoopsModuleConfig[$configsectionname]) {
+                return -1;
+            }
+        }
+
+        //	if ($section=="Notes" && $xoopsModuleConfig['enable_notes']==0){
+        //	  		return false;
+        //		}
+        //		if ($section=="pictures" && $xoopsModuleConfig['enable_pictures']==0){
+        //	  		return false;
+        //		}
+        //
+        //		if ($section=="pictures" && $xoopsModuleConfig['enable_pictures']==0){
+        //	  		return false;
+        //		}
         $criteria = new \Criteria('config_uid', $this->owner->getVar('uid'));
         if (1 == $this->configsFactory->getCount($criteria)) {
             $configs = $this->configsFactory->getObjects($criteria);
 
-            $config = $configs[0]->getVar('friends');
+            $config = $configs[0]->getVar($section);
 
             if (!$this->checkPrivilegeLevel($config)) {
-                redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, _MD_YOGURT_NOPRIVILEGE);
+                return 0;
             }
         }
-        return true;
+        return 1;
     }
 }
