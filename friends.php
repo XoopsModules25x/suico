@@ -48,7 +48,7 @@ if (0 == $nb_friends) {
  * Let's get the user name of the owner of the album
  */
 $owner      = new \XoopsUser();
-$identifier = $owner->getUnameFromId($controler->uidOwner);
+$identifier = $owner::getUnameFromId($controler->uidOwner);
 
 /**
  * Adding to the module js and css of the lightbox and new ones

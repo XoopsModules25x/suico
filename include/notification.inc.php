@@ -52,7 +52,7 @@ function yogurt_iteminfo($category, $item_id)
          * Let's get the user name of the owner of the album
          */
         $owner        = new \XoopsUser();
-        $identifier   = $owner->getUnameFromId($result_array['uid_owner']);
+        $identifier   = $owner::getUnameFromId($result_array['uid_owner']);
         $item['name'] = $identifier . "'s Album";
         $item['url']  = XOOPS_URL . '/modules/' . $module->getVar('dirname') . '/album.php?uid=' . $result_array['uid_owner'];
         return $item;
@@ -66,7 +66,7 @@ function yogurt_iteminfo($category, $item_id)
          * Let's get the user name of the owner of the album
          */
         $owner        = new \XoopsUser();
-        $identifier   = $owner->getUnameFromId($result_array['uid_owner']);
+        $identifier   = $owner::getUnameFromId($result_array['uid_owner']);
         $item['name'] = $identifier . "'s Videos";
         $item['url']  = XOOPS_URL . '/modules/' . $module->getVar('dirname') . '/seutubo.php?uid=' . $result_array['uid_owner'];
         return $item;
@@ -80,7 +80,7 @@ function yogurt_iteminfo($category, $item_id)
          * Let's get the user name of the owner of the album
          */
         $owner        = new \XoopsUser();
-        $identifier   = $owner->getUnameFromId($result_array['Note_from']);
+        $identifier   = $owner::getUnameFromId($result_array['Note_from']);
         $item['name'] = $identifier . "'s Notes";
         $item['url']  = XOOPS_URL . '/modules/' . $module->getVar('dirname') . '/notebook.php?uid=' . $result_array['Note_from'];
         return $item;
