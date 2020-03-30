@@ -159,7 +159,7 @@ class FriendpetitionHandler extends \XoopsObjectHandler
         if (!$result) {
             return $ret;
         }
-            while ($false !== (myrow = $this->db->fetchArray($result))))) {
+            while (false !== ($myrow = $this->db->fetchArray($result))) {
             $yogurt_friendpetition = new Friendpetition();
             $yogurt_friendpetition->assignVars($myrow);
             if (!$id_as_key) {

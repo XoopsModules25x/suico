@@ -159,7 +159,7 @@ class SuspensionsHandler extends \XoopsObjectHandler
         if (!$result) {
             return $ret;
         }
-            while ($false !== (myrow = $this->db->fetchArray($result))))) {
+            while (false !== ($myrow = $this->db->fetchArray($result))) {
             $suspensions = new Suspensions();
             $suspensions->assignVars($myrow);
             if (!$id_as_key) {

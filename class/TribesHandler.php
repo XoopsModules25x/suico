@@ -159,7 +159,7 @@ class TribesHandler extends \XoopsObjectHandler
         if (!$result) {
             return $ret;
         }
-            while ($false !== (myrow = $this->db->fetchArray($result))))) {
+            while (false !== ($myrow = $this->db->fetchArray($result))) {
             $yogurt_tribes = new Tribes();
             $yogurt_tribes->assignVars($myrow);
             if (!$id_as_key) {
@@ -198,7 +198,7 @@ class TribesHandler extends \XoopsObjectHandler
         }
 
         $i = 0;
-            while ($false !== (myrow = $this->db->fetchArray($result))))) {
+            while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret[$i]['id']    = $myrow['tribe_id'];
             $ret[$i]['title'] = $myrow['tribe_title'];
             $ret[$i]['img']   = $myrow['tribe_img'];

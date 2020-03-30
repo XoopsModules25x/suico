@@ -81,13 +81,13 @@ class Visitors extends \XoopsObject
         if (!$asobject) {
             $sql    = 'SELECT cod_visit FROM ' . $db->prefix('yogurt_visitors') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
-                while ($false !== (myrow = $db->fetchArray($result))))) {
+                while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['yogurt_visitors_id'];
             }
         } else {
             $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_visitors') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
-                while ($false !== (myrow = $db->fetchArray($result))))) {
+                while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new Yogurt\Visitors($myrow);
             }
         }

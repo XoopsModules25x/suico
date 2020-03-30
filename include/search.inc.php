@@ -67,7 +67,7 @@ function yogurt_search($queryarray, $andor, $limit, $offset, $userid)
     $result        = $xoopsDB->query($sql, $limit, $offset);
     $i             = 0;
     $stringofimage = 'images/search.png" />';
-        while ($false !== (myrow = $xoopsDB->fetchArray($result))))) {
+        while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
         if (0 != $userid) {
             if ($limit > 5) {
                 $ret[$i]['image'] = "images/search.png' /><a href='" . XOOPS_URL . '/modules/yogurt/album.php?uid=' . $myrow['uid_owner'] . "'><img src='" . $path_uploadimages . '/thumb_' . $myrow['url'] . "' /></a><br />" . '<img src=' . XOOPS_URL . '/modules/yogurt/images/search.png';

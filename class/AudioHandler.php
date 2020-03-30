@@ -160,7 +160,7 @@ class AudioHandler extends \XoopsObjectHandler
         if (!$result) {
             return $ret;
         }
-            while ($false !== (myrow = $this->db->fetchArray($result))))) {
+            while (false !== ($myrow = $this->db->fetchArray($result))) {
             $yogurtAudio = new Yogurt\Audio();
             $yogurtAudio->assignVars($myrow);
             if (!$id_as_key) {

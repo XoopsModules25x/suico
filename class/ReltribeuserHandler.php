@@ -159,7 +159,7 @@ class ReltribeuserHandler extends \XoopsObjectHandler
         if (!$result) {
             return $ret;
         }
-            while ($false !== (myrow = $this->db->fetchArray($result))))) {
+            while (false !== ($myrow = $this->db->fetchArray($result))) {
             $yogurt_reltribeuser = new Reltribeuser();
             $yogurt_reltribeuser->assignVars($myrow);
             if (!$id_as_key) {
@@ -235,7 +235,7 @@ class ReltribeuserHandler extends \XoopsObjectHandler
             $vetor  = [];
             $i      = 0;
 
-                while ($false !== (myrow = $this->db->fetchArray($result))))) {
+                while (false !== ($myrow = $this->db->fetchArray($result))) {
                 $vetor[$i]['title']    = $myrow['tribe_title'];
                 $vetor[$i]['desc']     = $myrow['tribe_desc'];
                 $vetor[$i]['img']      = $myrow['tribe_img'];
@@ -272,7 +272,7 @@ class ReltribeuserHandler extends \XoopsObjectHandler
         $ret    = [];
         $i      = 0;
 
-            while ($false !== (myrow = $this->db->fetchArray($result))))) {
+            while (false !== ($myrow = $this->db->fetchArray($result))) {
             $ret[$i]['uid']     = $myrow['uid'];
             $ret[$i]['uname']   = $myrow['uname'];
             $ret[$i]['avatar']  = $myrow['user_avatar'];

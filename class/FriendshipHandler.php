@@ -166,7 +166,7 @@ class FriendshipHandler extends \XoopsObjectHandler
         if (!$result) {
             return $ret;
         }
-            while ($false !== (myrow = $this->db->fetchArray($result))))) {
+            while (false !== ($myrow = $this->db->fetchArray($result))) {
             $yogurt_friendship = new Friendship();
             $yogurt_friendship->assignVars($myrow);
             if (!$id_as_key) {
@@ -243,7 +243,7 @@ class FriendshipHandler extends \XoopsObjectHandler
             $vetor  = [];
             $i      = 0;
 
-                while ($false !== (myrow = $this->db->fetchArray($result))))) {
+                while (false !== ($myrow = $this->db->fetchArray($result))) {
                 $vetor[$i]['uid']         = $myrow['friend2_uid'];
                 $vetor[$i]['uname']       = $myrow['uname'];
                 $vetor[$i]['user_avatar'] = $myrow['user_avatar'];
@@ -283,7 +283,7 @@ class FriendshipHandler extends \XoopsObjectHandler
             $vetor  = [];
             $i      = 0;
 
-                while ($false !== (myrow = $this->db->fetchArray($result))))) {
+                while (false !== ($myrow = $this->db->fetchArray($result))) {
                 $vetor[$i]['uid']         = $myrow['friend1_uid'];
                 $vetor[$i]['uname']       = $myrow['uname'];
                 $vetor[$i]['user_avatar'] = $myrow['user_avatar'];
@@ -388,7 +388,7 @@ class FriendshipHandler extends \XoopsObjectHandler
         $sql    = 'SELECT friend2_uid, Avg(hot) AS mediahot FROM ' . $this->db->prefix('yogurt_friendship');
         $sql    .= ' WHERE  (hot>0) GROUP BY friend2_uid HAVING (friend2_uid=' . $user_uid . ') ';
         $result = $this->db->query($sql);
-            while ($false !== (myrow = $this->db->fetchArray($result))))) {
+            while (false !== ($myrow = $this->db->fetchArray($result))) {
             $vetor['mediahot'] = $myrow['mediahot'] * 16;
         }
 
@@ -396,14 +396,14 @@ class FriendshipHandler extends \XoopsObjectHandler
         $sql    = 'SELECT friend2_uid, Avg(trust) AS mediatrust FROM ' . $this->db->prefix('yogurt_friendship');
         $sql    .= ' WHERE  (trust>0) GROUP BY friend2_uid HAVING (friend2_uid=' . $user_uid . ') ';
         $result = $this->db->query($sql);
-            while ($false !== (myrow = $this->db->fetchArray($result))))) {
+            while (false !== ($myrow = $this->db->fetchArray($result))) {
             $vetor['mediatrust'] = $myrow['mediatrust'] * 16;
         }
         //Calculating avg(cool)
         $sql    = 'SELECT friend2_uid, Avg(cool) AS mediacool FROM ' . $this->db->prefix('yogurt_friendship');
         $sql    .= ' WHERE  (cool>0) GROUP BY friend2_uid HAVING (friend2_uid=' . $user_uid . ') ';
         $result = $this->db->query($sql);
-            while ($false !== (myrow = $this->db->fetchArray($result))))) {
+            while (false !== ($myrow = $this->db->fetchArray($result))) {
             $vetor['mediacool'] = $myrow['mediacool'] * 16;
         }
 
@@ -411,7 +411,7 @@ class FriendshipHandler extends \XoopsObjectHandler
         $sql    = 'SELECT friend2_uid, Sum(fan) AS sumfan FROM ' . $this->db->prefix('yogurt_friendship');
         $sql    .= ' GROUP BY friend2_uid HAVING (friend2_uid=' . $user_uid . ') ';
         $result = $this->db->query($sql);
-            while ($false !== (myrow = $this->db->fetchArray($result))))) {
+            while (false !== ($myrow = $this->db->fetchArray($result))) {
             $vetor['sumfan'] = $myrow['sumfan'];
         }
 

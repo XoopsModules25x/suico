@@ -80,13 +80,13 @@ class Reltribeuser extends \XoopsObject
         if (!$asobject) {
             $sql    = 'SELECT rel_id FROM ' . $db->prefix('yogurt_reltribeuser') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
-                while ($false !== (myrow = $db->fetchArray($result))))) {
+                while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['yogurt_reltribeuser_id'];
             }
         } else {
             $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_reltribeuser') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
-                while ($false !== (myrow = $db->fetchArray($result))))) {
+                while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new Reltribeuser($myrow);
             }
         }
