@@ -25,11 +25,11 @@ class AudioHandler extends \XoopsObjectHandler
      * create a new Audio
      *
      * @param bool $isNew flag the new objects as "new"?
-     * @return \XoopsModules\Yogurt\Yogurt\Audio yogurt_audio
+     * @return \XoopsModules\Yogurt\Audio yogurt_audio
      */
     public function create($isNew = true)
     {
-        $yogurtAudio = new Yogurt\Audio();
+        $yogurtAudio = new Audio();
         if ($isNew) {
             $yogurtAudio->setNew();
         } else {
@@ -53,7 +53,7 @@ class AudioHandler extends \XoopsObjectHandler
         }
         $numrows = $this->db->getRowsNum($result);
         if (1 == $numrows) {
-            $yogurtAudio = new Yogurt\Audio();
+            $yogurtAudio = new Audio();
             $yogurtAudio->assignVars($this->db->fetchArray($result));
             return $yogurtAudio;
         }
@@ -86,7 +86,7 @@ class AudioHandler extends \XoopsObjectHandler
         $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
         if ($yogurtAudio->isNew()) {
             // ajout/modification d'un yogurt_audio
-            $yogurtAudio = new Yogurt\Audio();
+            $yogurtAudio = new Audio();
             $format      = 'INSERT INTO %s (audio_id, title, author, url, uid_owner, data_creation, data_update)';
             $format      .= ' VALUES (%u, %s, %s, %s, %u, %s, %s)';
             $sql         = sprintf($format, $this->db->prefix('yogurt_audio'), $audio_id, $this->db->quoteString($title), $this->db->quoteString($author), $this->db->quoteString($url), $uid_owner, $now, $now);
@@ -139,7 +139,7 @@ class AudioHandler extends \XoopsObjectHandler
     /**
      * retrieve yogurt_audios from the database
      *
-     * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
+     * @param \CriteriaElement $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool            $id_as_key use the UID as key for the array?
      * @return array array of {@link yogurt_audio} objects
      */
@@ -161,7 +161,7 @@ class AudioHandler extends \XoopsObjectHandler
             return $ret;
         }
             while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $yogurtAudio = new Yogurt\Audio();
+            $yogurtAudio = new Audio();
             $yogurtAudio->assignVars($myrow);
             if (!$id_as_key) {
                 $ret[] =& $yogurtAudio;
@@ -176,7 +176,7 @@ class AudioHandler extends \XoopsObjectHandler
     /**
      * count yogurt_audios matching a condition
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement} to match
+     * @param \CriteriaElement $criteria {@link \CriteriaElement} to match
      * @return int count of yogurt_audios
      */
     public function getCount($criteria = null)
@@ -196,7 +196,7 @@ class AudioHandler extends \XoopsObjectHandler
     /**
      * delete yogurt_audios matching a set of conditions
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement}
+     * @param \CriteriaElement $criteria {@link \CriteriaElement}
      * @return bool FALSE if deletion failed
      */
     public function deleteAll($criteria = null)
@@ -214,9 +214,9 @@ class AudioHandler extends \XoopsObjectHandler
     /**
      * Upload the file and Save into database
      *
-     * @param text $title       A litle description of the file
-     * @param text $path_upload The path to where the file should be uploaded
-     * @param text $author      the author of the music or audio file
+     * @param string $title       A litle description of the file
+     * @param string $path_upload The path to where the file should be uploaded
+     * @param string $author      the author of the music or audio file
      * @param      $maxfilebytes
      * @return bool FALSE if upload fails or database fails
      */

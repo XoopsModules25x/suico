@@ -70,7 +70,7 @@ class TribesHandler extends \XoopsObjectHandler
     public function insert(\XoopsObject $yogurt_tribes, $force = false)
     {
         global $xoopsConfig;
-        if (!$yogurt_tribes instanceof \Tribes) {
+        if (!$yogurt_tribes instanceof Tribes) {
             return false;
         }
         if (!$yogurt_tribes->isDirty()) {
@@ -120,7 +120,7 @@ class TribesHandler extends \XoopsObjectHandler
      */
     public function delete(\XoopsObject $yogurt_tribes, $force = false)
     {
-        if (!$yogurt_tribes instanceof \Tribes) {
+        if (!$yogurt_tribes instanceof Tribes) {
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE tribe_id = %u', $this->db->prefix('yogurt_tribes'), $yogurt_tribes->getVar('tribe_id'));
@@ -138,7 +138,7 @@ class TribesHandler extends \XoopsObjectHandler
     /**
      * retrieve yogurt_tribess from the database
      *
-     * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
+     * @param \CriteriaElement $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool            $id_as_key use the UID as key for the array?
      * @return array array of {@link Tribes} objects
      */
@@ -175,7 +175,7 @@ class TribesHandler extends \XoopsObjectHandler
     /**
      * retrieve yogurt_tribess from the database
      *
-     * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
+     * @param \CriteriaElement $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool            $id_as_key use the UID as key for the array?
      * @return array array of {@link Tribes} objects
      */
@@ -212,7 +212,7 @@ class TribesHandler extends \XoopsObjectHandler
     /**
      * count yogurt_tribess matching a condition
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement} to match
+     * @param \CriteriaElement $criteria {@link \CriteriaElement} to match
      * @return int count of yogurt_tribess
      */
     public function getCount($criteria = null)
@@ -232,7 +232,7 @@ class TribesHandler extends \XoopsObjectHandler
     /**
      * delete yogurt_tribess matching a set of conditions
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement}
+     * @param \CriteriaElement $criteria {@link \CriteriaElement}
      * @return bool FALSE if deletion failed
      */
     public function deleteAll($criteria = null)
@@ -405,7 +405,7 @@ var elestyle = xoopsGetElementById(img).style;
      * @param      $img_path
      * @param int  $thumbwidth  the width in pixels that the thumbnail will have
      * @param int  $thumbheight the height in pixels that the thumbnail will have
-     * @param text $path_upload The path to where the files should be saved after resizing
+     * @param string $path_upload The path to where the files should be saved after resizing
      * @return void
      */
     public function resizeImage($img_path, $thumbwidth, $thumbheight, $path_upload)
@@ -437,8 +437,7 @@ var elestyle = xoopsGetElementById(img).style;
      * @param      $img_path
      * @param int  $thumbwidth  the width in pixels that the thumbnail will have
      * @param int  $thumbheight the height in pixels that the thumbnail will have
-     * @param text $path_upload The path to where the files should be saved after resizing
-     * @return nothing
+     * @param string $path_upload The path to where the files should be saved after resizing
      */
     public function resizeImage2($img_path, $thumbwidth, $thumbheight, $path_upload)
     {

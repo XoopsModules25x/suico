@@ -70,7 +70,7 @@ class SeutuboHandler extends \XoopsObjectHandler
     public function insert(\XoopsObject $yogurt_seutubo, $force = false)
     {
         global $xoopsConfig;
-        if (!$yogurt_seutubo instanceof \Seutubo) {
+        if (!$yogurt_seutubo instanceof Seutubo) {
             return false;
         }
         if (!$yogurt_seutubo->isDirty()) {
@@ -120,7 +120,7 @@ class SeutuboHandler extends \XoopsObjectHandler
      */
     public function delete(\XoopsObject $yogurt_seutubo, $force = false)
     {
-        if (!$yogurt_seutubo instanceof \Seutubo) {
+        if (!$yogurt_seutubo instanceof Seutubo) {
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE video_id = %u', $this->db->prefix('yogurt_seutubo'), $yogurt_seutubo->getVar('video_id'));
@@ -138,7 +138,7 @@ class SeutuboHandler extends \XoopsObjectHandler
     /**
      * retrieve yogurt_seutubos from the database
      *
-     * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
+     * @param \CriteriaElement $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool            $id_as_key use the UID as key for the array?
      * @return array array of {@link Seutubo} objects
      */
@@ -175,7 +175,7 @@ class SeutuboHandler extends \XoopsObjectHandler
     /**
      * count yogurt_seutubos matching a condition
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement} to match
+     * @param \CriteriaElement $criteria {@link \CriteriaElement} to match
      * @return int count of yogurt_seutubos
      */
     public function getCount($criteria = null)
@@ -195,7 +195,7 @@ class SeutuboHandler extends \XoopsObjectHandler
     /**
      * delete yogurt_seutubos matching a set of conditions
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement}
+     * @param \CriteriaElement $criteria {@link \CriteriaElement}
      * @return bool FALSE if deletion failed
      */
     public function deleteAll($criteria = null)
@@ -246,7 +246,7 @@ class SeutuboHandler extends \XoopsObjectHandler
      *
      * @param string $caption  The description of the picture
      * @param int    $cod_img  the id of the image in database
-     * @param text   $filename the url to the thumb of the image so it can be displayed
+     * @param string   $filename the url to the thumb of the image so it can be displayed
      * @return bool TRUE
      */
     public function renderFormEdit($caption, $cod_img, $filename)

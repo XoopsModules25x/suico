@@ -17,6 +17,8 @@
  * @since
  */
 
+use XoopsModules\Yogurt;
+
 require __DIR__ . '/header.php';
 /**
  * Factory of petitions created

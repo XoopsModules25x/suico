@@ -86,7 +86,7 @@ class IshotHandler extends \XoopsObjectHandler
     public function insert(\XoopsObject $yogurt_ishot, $force = false)
     {
         global $xoopsConfig;
-        if (!$yogurt_ishot instanceof \Ishot) {
+        if (!$yogurt_ishot instanceof Ishot) {
             return false;
         }
         if (!$yogurt_ishot->isDirty()) {
@@ -136,7 +136,7 @@ class IshotHandler extends \XoopsObjectHandler
      */
     public function delete(\XoopsObject $yogurt_ishot, $force = false)
     {
-        if (!$yogurt_ishot instanceof \Ishot) {
+        if (!$yogurt_ishot instanceof Ishot) {
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE cod_ishot = %u', $this->db->prefix('yogurt_ishot'), $yogurt_ishot->getVar('cod_ishot'));

@@ -95,7 +95,7 @@ class ImageHandler extends \XoopsObjectHandler
     public function insert(\XoopsObject $yogurt_images, $force = false)
     {
         global $xoopsConfig;
-        if (!$yogurt_images instanceof \Image) {
+        if (!$yogurt_images instanceof Image) {
             return false;
         }
         if (!$yogurt_images->isDirty()) {
@@ -155,7 +155,7 @@ class ImageHandler extends \XoopsObjectHandler
      */
     public function delete(\XoopsObject $yogurt_images, $force = false)
     {
-        if (!$yogurt_images instanceof \Image) {
+        if (!$yogurt_images instanceof Image) {
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE cod_img = %u', $this->db->prefix('yogurt_images'), $yogurt_images->getVar('cod_img'));
@@ -173,7 +173,7 @@ class ImageHandler extends \XoopsObjectHandler
     /**
      * retrieve yogurt_imagess from the database
      *
-     * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
+     * @param \CriteriaElement $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool            $id_as_key use the UID as key for the array?
      * @return array array of {@link Image} objects
      */
@@ -210,7 +210,7 @@ class ImageHandler extends \XoopsObjectHandler
     /**
      * count yogurt_imagess matching a condition
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement} to match
+     * @param \CriteriaElement $criteria {@link \CriteriaElement} to match
      * @return int count of yogurt_imagess
      */
     public function getCount($criteria = null)
@@ -230,7 +230,7 @@ class ImageHandler extends \XoopsObjectHandler
     /**
      * delete yogurt_imagess matching a set of conditions
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement}
+     * @param \CriteriaElement $criteria {@link \CriteriaElement}
      * @return bool FALSE if deletion failed
      */
     public function deleteAll($criteria = null)
@@ -281,7 +281,7 @@ class ImageHandler extends \XoopsObjectHandler
      *
      * @param string $caption  The description of the picture
      * @param int    $cod_img  the id of the image in database
-     * @param text   $filename the url to the thumb of the image so it can be displayed
+     * @param string   $filename the url to the thumb of the image so it can be displayed
      * @return bool TRUE
      */
     public function renderFormEdit($caption, $cod_img, $filename)
@@ -306,8 +306,8 @@ class ImageHandler extends \XoopsObjectHandler
     /**
      * Upload the file and Save into database
      *
-     * @param text $title         A litle description of the file
-     * @param text $path_upload   The path to where the file should be uploaded
+     * @param string $title         A litle description of the file
+     * @param string $path_upload   The path to where the file should be uploaded
      * @param int  $thumbwidth    the width in pixels that the thumbnail will have
      * @param int  $thumbheight   the height in pixels that the thumbnail will have
      * @param int  $pictwidth     the width in pixels that the pic will have
@@ -368,12 +368,12 @@ class ImageHandler extends \XoopsObjectHandler
     /**
      * Resize a picture and save it to $path_upload
      *
-     * @param text $img         the path to the file
+     * @param string $img         the path to the file
      * @param int  $thumbwidth  the width in pixels that the thumbnail will have
      * @param int  $thumbheight the height in pixels that the thumbnail will have
      * @param int  $pictwidth   the width in pixels that the pic will have
      * @param int  $pictheight  the height in pixels that the pic will have
-     * @param text $path_upload The path to where the files should be saved after resizing
+     * @param string $path_upload The path to where the files should be saved after resizing
      * @return void
      */
     public function resizeImage($img, $thumbwidth, $thumbheight, $pictwidth, $pictheight, $path_upload)
@@ -471,10 +471,10 @@ class ImageHandler extends \XoopsObjectHandler
     /**
      * Resize a picture and save it to $path_upload
      *
-     * @param text $img         the path to the file
+     * @param string $img         the path to the file
      * @param      $width
      * @param      $height
-     * @param text $path_upload The path to where the files should be saved after resizing
+     * @param string $path_upload The path to where the files should be saved after resizing
      * @return void
      */
     public function makeAvatar($img, $width, $height, $path_upload)

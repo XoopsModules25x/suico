@@ -21,14 +21,14 @@ class VisitorsHandler extends \XoopsObjectHandler
 {
 
     /**
-     * create a new Yogurt\Visitors
+     * create a new Visitors
      *
      * @param bool $isNew flag the new objects as "new"?
-     * @return \XoopsModules\Yogurt\Yogurt\Visitors Yogurt\Visitors
+     * @return \XoopsModules\Yogurt\Visitors Yogurt\Visitors
      */
     public function create($isNew = true)
     {
-        $yogurt_visitors = new Yogurt\Visitors();
+        $yogurt_visitors = new Visitors();
         if ($isNew) {
             $yogurt_visitors->setNew();
         } else {
@@ -52,7 +52,7 @@ class VisitorsHandler extends \XoopsObjectHandler
         }
         $numrows = $this->db->getRowsNum($result);
         if (1 == $numrows) {
-            $yogurt_visitors = new Yogurt\Visitors();
+            $yogurt_visitors = new Visitors();
             $yogurt_visitors->assignVars($this->db->fetchArray($result));
             return $yogurt_visitors;
         }
@@ -60,7 +60,7 @@ class VisitorsHandler extends \XoopsObjectHandler
     }
 
     /**
-     * insert a new Yogurt\Visitors in the database
+     * insert a new Visitors in the database
      *
      * @param \XoopsObject $yogurt_visitors reference to the {@link Yogurt\Visitors}
      *                                      object
@@ -70,7 +70,7 @@ class VisitorsHandler extends \XoopsObjectHandler
     public function insert(\XoopsObject $yogurt_visitors, $force = false)
     {
         global $xoopsConfig;
-        if (!$yogurt_visitors instanceof \Yogurt\Visitors) {
+        if (!$yogurt_visitors instanceof Visitors) {
             return false;
         }
         if (!$yogurt_visitors->isDirty()) {
@@ -85,7 +85,7 @@ class VisitorsHandler extends \XoopsObjectHandler
         $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
         if ($yogurt_visitors->isNew()) {
             // ajout/modification d'un Yogurt\Visitors
-            $yogurt_visitors = new Yogurt\Visitors();
+            $yogurt_visitors = new Visitors();
             $format          = 'INSERT INTO %s (cod_visit, uid_owner, uid_visitor,uname_visitor)';
             $format          .= 'VALUES (%u, %u, %u, %s)';
             $sql             = sprintf($format, $this->db->prefix('yogurt_visitors'), $cod_visit, $uid_owner, $uid_visitor, $this->db->quoteString($uname_visitor));
@@ -120,7 +120,7 @@ class VisitorsHandler extends \XoopsObjectHandler
      */
     public function delete(\XoopsObject $yogurt_visitors, $force = false)
     {
-        if (!$yogurt_visitors instanceof \Yogurt\Visitors) {
+        if (!$yogurt_visitors instanceof Visitors) {
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE cod_visit = %u', $this->db->prefix('yogurt_visitors'), $yogurt_visitors->getVar('cod_visit'));
@@ -138,7 +138,7 @@ class VisitorsHandler extends \XoopsObjectHandler
     /**
      * retrieve yogurt_visitorss from the database
      *
-     * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
+     * @param \CriteriaElement $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool            $id_as_key use the UID as key for the array?
      * @return array array of {@link Yogurt\Visitors} objects
      */
@@ -160,7 +160,7 @@ class VisitorsHandler extends \XoopsObjectHandler
             return $ret;
         }
             while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $yogurt_visitors = new Yogurt\Visitors();
+            $yogurt_visitors = new Visitors();
             $yogurt_visitors->assignVars($myrow);
             if (!$id_as_key) {
                 $ret[] =& $yogurt_visitors;
@@ -175,7 +175,7 @@ class VisitorsHandler extends \XoopsObjectHandler
     /**
      * count yogurt_visitorss matching a condition
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement} to match
+     * @param \CriteriaElement $criteria {@link \CriteriaElement} to match
      * @return int count of yogurt_visitorss
      */
     public function getCount($criteria = null)
@@ -195,7 +195,7 @@ class VisitorsHandler extends \XoopsObjectHandler
     /**
      * delete yogurt_visitorss matching a set of conditions
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement}
+     * @param \CriteriaElement $criteria {@link \CriteriaElement}
      * @param bool            $force
      * @return bool FALSE if deletion failed
      */

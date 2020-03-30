@@ -77,7 +77,7 @@ class FriendshipHandler extends \XoopsObjectHandler
     public function insert(\XoopsObject $yogurt_friendship, $force = false)
     {
         global $xoopsConfig;
-        if (!$yogurt_friendship instanceof \Friendship) {
+        if (!$yogurt_friendship instanceof Friendship) {
             return false;
         }
         if (!$yogurt_friendship->isDirty()) {
@@ -127,7 +127,7 @@ class FriendshipHandler extends \XoopsObjectHandler
      */
     public function delete(\XoopsObject $yogurt_friendship, $force = false)
     {
-        if (!$yogurt_friendship instanceof \Friendship) {
+        if (!$yogurt_friendship instanceof Friendship) {
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE friendship_id = %u', $this->db->prefix('yogurt_friendship'), $yogurt_friendship->getVar('friendship_id'));
@@ -145,7 +145,7 @@ class FriendshipHandler extends \XoopsObjectHandler
     /**
      * retrieve yogurt_friendships from the database
      *
-     * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
+     * @param \CriteriaElement $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool            $id_as_key use the UID as key for the array?
      * @return array array of {@link Friendship} objects
      */
@@ -182,7 +182,7 @@ class FriendshipHandler extends \XoopsObjectHandler
     /**
      * count yogurt_friendships matching a condition
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement} to match
+     * @param \CriteriaElement $criteria {@link \CriteriaElement} to match
      * @return int count of yogurt_friendships
      */
     public function getCount($criteria = null)
@@ -202,7 +202,7 @@ class FriendshipHandler extends \XoopsObjectHandler
     /**
      * delete yogurt_friendships matching a set of conditions
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement}
+     * @param \CriteriaElement $criteria {@link \CriteriaElement}
      * @return bool FALSE if deletion failed
      */
     public function deleteAll($criteria = null)

@@ -70,7 +70,7 @@ class ConfigsHandler extends \XoopsObjectHandler
     public function insert(\XoopsObject $yogurt_configs, $force = false)
     {
         global $xoopsConfig;
-        if (!$yogurt_configs instanceof \Configs) {
+        if (!$yogurt_configs instanceof Configs) {
             return false;
         }
         if (!$yogurt_configs->isDirty()) {
@@ -157,7 +157,7 @@ class ConfigsHandler extends \XoopsObjectHandler
      */
     public function delete(\XoopsObject $yogurt_configs, $force = false)
     {
-        if (!$yogurt_configs instanceof \Configs) {
+        if (!$yogurt_configs instanceof Configs) {
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE config_id = %u', $this->db->prefix('yogurt_configs'), $yogurt_configs->getVar('config_id'));
@@ -175,7 +175,7 @@ class ConfigsHandler extends \XoopsObjectHandler
     /**
      * retrieve yogurt_configss from the database
      *
-     * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
+     * @param \CriteriaElement $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool            $id_as_key use the UID as key for the array?
      * @return array array of {@link Configs} objects
      */
@@ -212,7 +212,7 @@ class ConfigsHandler extends \XoopsObjectHandler
     /**
      * count yogurt_configss matching a condition
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement} to match
+     * @param \CriteriaElement $criteria {@link \CriteriaElement} to match
      * @return int count of yogurt_configss
      */
     public function getCount($criteria = null)
@@ -232,7 +232,7 @@ class ConfigsHandler extends \XoopsObjectHandler
     /**
      * delete yogurt_configss matching a set of conditions
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement}
+     * @param \CriteriaElement $criteria {@link \CriteriaElement}
      * @return bool FALSE if deletion failed
      */
     public function deleteAll($criteria = null)

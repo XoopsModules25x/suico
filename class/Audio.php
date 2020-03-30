@@ -92,7 +92,7 @@ class Audio extends \XoopsObject
             $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_audio') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
                 while (false !== ($myrow = $db->fetchArray($result))) {
-                $ret[] = new Yogurt\Audio($myrow);
+                $ret[] = new Audio($myrow);
             }
         }
         return $ret;

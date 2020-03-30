@@ -70,7 +70,7 @@ class ReltribeuserHandler extends \XoopsObjectHandler
     public function insert(\XoopsObject $yogurt_reltribeuser, $force = false)
     {
         global $xoopsConfig;
-        if (!$yogurt_reltribeuser instanceof \Reltribeuser) {
+        if (!$yogurt_reltribeuser instanceof Reltribeuser) {
             return false;
         }
         if (!$yogurt_reltribeuser->isDirty()) {
@@ -120,7 +120,7 @@ class ReltribeuserHandler extends \XoopsObjectHandler
      */
     public function delete(\XoopsObject $yogurt_reltribeuser, $force = false)
     {
-        if (!$yogurt_reltribeuser instanceof \Reltribeuser) {
+        if (!$yogurt_reltribeuser instanceof Reltribeuser) {
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE rel_id = %u', $this->db->prefix('yogurt_reltribeuser'), $yogurt_reltribeuser->getVar('rel_id'));
@@ -138,7 +138,7 @@ class ReltribeuserHandler extends \XoopsObjectHandler
     /**
      * retrieve yogurt_reltribeusers from the database
      *
-     * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
+     * @param \CriteriaElement $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool            $id_as_key use the UID as key for the array?
      * @return array array of {@link Reltribeuser} objects
      */
@@ -175,7 +175,7 @@ class ReltribeuserHandler extends \XoopsObjectHandler
     /**
      * count yogurt_reltribeusers matching a condition
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement} to match
+     * @param \CriteriaElement $criteria {@link \CriteriaElement} to match
      * @return int count of yogurt_reltribeusers
      */
     public function getCount($criteria = null)
@@ -195,7 +195,7 @@ class ReltribeuserHandler extends \XoopsObjectHandler
     /**
      * delete yogurt_reltribeusers matching a set of conditions
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement}
+     * @param \CriteriaElement $criteria {@link \CriteriaElement}
      * @return bool FALSE if deletion failed
      */
     public function deleteAll($criteria = null)

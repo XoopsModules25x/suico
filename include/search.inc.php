@@ -28,7 +28,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
  * Return search results and show images on userinfo page
  *
  * @param array $queryarray the terms to look
- * @param text  $andor      the conector between the terms to be looked
+ * @param string  $andor      the conector between the terms to be looked
  * @param int   $limit      The number of maximum results
  * @param int   $offset     from wich register start
  * @param int   $userid     from which user to look

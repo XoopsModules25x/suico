@@ -25,7 +25,6 @@ namespace XoopsModules\Yogurt;
 
 use XoopsModules\Yogurt;
 use XoopsModules\Yogurt\Common;
-use XoopsModules\Yogurt\Constants;
 
 /**
  * Class Utility

@@ -17,6 +17,8 @@
  * @since
  */
 
+use XoopsModules\Yogurt;
+
 require __DIR__ . '/header.php';
 
 if (!$GLOBALS['xoopsSecurity']->check()) {

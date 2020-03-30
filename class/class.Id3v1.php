@@ -257,7 +257,7 @@ class Id3v1
      *
      * @param resource stream
      * @param bool $readOnly
-     * @throws Exception
+     * @throws \Exception
      * @see $_tags
      */
     public function __construct($filename, $readOnly = false)
@@ -428,7 +428,7 @@ class Id3v1
      *
      * @param string $version The version you want to set
      * @return Id3v1 Implements fluent interface
-     * @throws Exception
+     * @throws \Exception
      * @see self::ID3V1_1
      * @see self::ID3V1_0
      */
@@ -444,7 +444,7 @@ class Id3v1
                 break;
 
             default:
-                throw new RuntimeException('Invalid version');
+                throw new \RuntimeException('Invalid version');
         }
 
         $this->_version = $version;
@@ -460,7 +460,7 @@ class Id3v1
      *
      * @param string $title The title you want to set
      * @return Id3v1 Implements fluent interface
-     * @throws Exception
+     * @throws \Exception
      * @see $_tags
      */
     public function setTitle($title)
@@ -472,7 +472,7 @@ class Id3v1
         if (is_string($title)) {
             $this->_tags['title'] = $title;
         } else {
-            throw new RuntimeException('Title has to be a string');
+            throw new \RuntimeException('Title has to be a string');
         }
 
         return $this;
@@ -486,7 +486,7 @@ class Id3v1
      *
      * @param string $artist The artist you want to set
      * @return Id3v1 Implements fluent interface
-     * @throws Exception
+     * @throws \Exception
      * @see $_tags
      */
     public function setArtist($artist)
@@ -498,7 +498,7 @@ class Id3v1
         if (is_string($artist)) {
             $this->_tags['artist'] = $artist;
         } else {
-            throw new RuntimeException('Artist has to be a string');
+            throw new \RuntimeException('Artist has to be a string');
         }
 
         return $this;
@@ -512,7 +512,7 @@ class Id3v1
      *
      * @param string $album The album you want to set
      * @return Id3v1 Implements fluent interface
-     * @throws Exception
+     * @throws \Exception
      * @see $_tags
      */
     public function setAlbum($album)
@@ -524,7 +524,7 @@ class Id3v1
         if (is_string($album)) {
             $this->_tags['album'] = $album;
         } else {
-            throw new RuntimeException('Album has to be a string');
+            throw new \RuntimeException('Album has to be a string');
         }
 
         return $this;
@@ -540,7 +540,7 @@ class Id3v1
      *
      * @param string $comment The comment you want to set
      * @return Id3v1 Implements fluent interface
-     * @throws Exception
+     * @throws \Exception
      * @see $_tags
      */
     public function setComment($comment)
@@ -552,7 +552,7 @@ class Id3v1
         if (is_string($comment)) {
             $this->_tags['comment'] = $comment;
         } else {
-            throw new RuntimeException('Comment has to be a string');
+            throw new \RuntimeException('Comment has to be a string');
         }
 
         return $this;
@@ -565,7 +565,7 @@ class Id3v1
      *
      * @param string|int $genre The genre you want to set
      * @return Id3v1 Implements fluent interface
-     * @throws Exception
+     * @throws \Exception
      * @see $_tags
      */
     public function setGenre($genre)
@@ -579,7 +579,7 @@ class Id3v1
         } elseif (is_string($genre)) {
             $this->_tags['genre'] = self::getGenreIdByName($genre);
         } else {
-            throw new RuntimeException('Genre type invalid');
+            throw new \RuntimeException('Genre type invalid');
         }
 
         return $this;
@@ -590,7 +590,7 @@ class Id3v1
      *
      * @param int $year The year you want to set
      * @return Id3v1 Implements fluent interface
-     * @throws Exception
+     * @throws \Exception
      * @see $_tags
      */
     public function setYear($year)
@@ -602,7 +602,7 @@ class Id3v1
         if (is_int($year)) {
             $this->_tags['year'] = $year;
         } else {
-            throw new RuntimeException('Year has to be an interger');
+            throw new \RuntimeException('Year has to be an interger');
         }
 
         return $this;
@@ -617,7 +617,7 @@ class Id3v1
      *
      * @param int $track The tracl you want to set
      * @return Id3v1 Implements fluent interface
-     * @throws Exception
+     * @throws \Exception
      * @see $_tags
      * @see setId3v1Version()
      * @see getId3v1Version()
@@ -632,7 +632,7 @@ class Id3v1
             $this->_tags['track'] = $track;
             $this->_version       = self::ID3V1_1;
         } else {
-            throw new RuntimeException('Track type invalid or zero');
+            throw new \RuntimeException('Track type invalid or zero');
         }
 
         return $this;
@@ -716,7 +716,7 @@ class Id3v1
      * the end of the file and writes the Id3v1 bytestream to it.
      *
      * @return Id3v1 Implements fluent interface
-     * @throws Exception
+     * @throws \Exception
      * @see $_tags
      * @see setTitle()
      * @see setArtist()
@@ -747,7 +747,7 @@ class Id3v1
         }
 
         if (false === fwrite($this->_stream, $newTag, 128)) {
-            throw new RuntimeException('Not possible to write ID3 tags');
+            throw new \RuntimeException('Not possible to write ID3 tags');
         }
 
         return $this;
@@ -771,7 +771,7 @@ class Id3v1
      *
      * @param string $name
      * @return mixed Depends on tag, which will be returned
-     * @throws Exception
+     * @throws \Exception
      */
     public function __get($name)
     {
@@ -789,7 +789,7 @@ class Id3v1
             return $this->{'get' . ucfirst($name)}();
         }
 
-        throw new RuntimeException('Property doesn\'t exist');
+        throw new \RuntimeException('Property doesn\'t exist');
     }
 
     /**
@@ -811,7 +811,7 @@ class Id3v1
      * @param string $name
      * @param string $value
      * @return mixed Depends on tag
-     * @throws Exception
+     * @throws \Exception
      */
     public function __set($name, $value)
     {
@@ -829,7 +829,7 @@ class Id3v1
             return $this->{'set' . ucfirst($name)}($value);
         }
 
-        throw new RuntimeException('Property doesn\'t exist');
+        throw new \RuntimeException('Property doesn\'t exist');
     }
 
     /**

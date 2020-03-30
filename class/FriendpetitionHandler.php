@@ -70,7 +70,7 @@ class FriendpetitionHandler extends \XoopsObjectHandler
     public function insert(\XoopsObject $yogurt_friendpetition, $force = false)
     {
         global $xoopsConfig;
-        if (!$yogurt_friendpetition instanceof \Friendpetition) {
+        if (!$yogurt_friendpetition instanceof Friendpetition) {
             return false;
         }
         if (!$yogurt_friendpetition->isDirty()) {
@@ -120,7 +120,7 @@ class FriendpetitionHandler extends \XoopsObjectHandler
      */
     public function delete(\XoopsObject $yogurt_friendpetition, $force = false)
     {
-        if (!$yogurt_friendpetition instanceof \Friendpetition) {
+        if (!$yogurt_friendpetition instanceof Friendpetition) {
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE friendpet_id = %u', $this->db->prefix('yogurt_friendpetition'), $yogurt_friendpetition->getVar('friendpet_id'));
@@ -138,7 +138,7 @@ class FriendpetitionHandler extends \XoopsObjectHandler
     /**
      * retrieve yogurt_friendpetitions from the database
      *
-     * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
+     * @param \CriteriaElement $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool            $id_as_key use the UID as key for the array?
      * @return array array of {@link Friendpetition} objects
      */
@@ -175,7 +175,7 @@ class FriendpetitionHandler extends \XoopsObjectHandler
     /**
      * count yogurt_friendpetitions matching a condition
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement} to match
+     * @param \CriteriaElement $criteria {@link \CriteriaElement} to match
      * @return int count of yogurt_friendpetitions
      */
     public function getCount($criteria = null)
@@ -195,7 +195,7 @@ class FriendpetitionHandler extends \XoopsObjectHandler
     /**
      * delete yogurt_friendpetitions matching a set of conditions
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement}
+     * @param \CriteriaElement $criteria {@link \CriteriaElement}
      * @return bool FALSE if deletion failed
      */
     public function deleteAll($criteria = null)

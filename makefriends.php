@@ -17,6 +17,8 @@
  * @since
  */
 
+use XoopsModules\Yogurt;
+
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
 require __DIR__ . '/header.php';
 

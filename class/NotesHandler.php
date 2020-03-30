@@ -71,7 +71,7 @@ class NotesHandler extends \XoopsObjectHandler
     public function insert(\XoopsObject $yogurt_Notes, $force = false)
     {
         global $xoopsConfig;
-        if (!$yogurt_Notes instanceof \Notes) {
+        if (!$yogurt_Notes instanceof Notes) {
             return false;
         }
         if (!$yogurt_Notes->isDirty()) {
@@ -130,7 +130,7 @@ class NotesHandler extends \XoopsObjectHandler
      */
     public function delete(\XoopsObject $yogurt_Notes, $force = false)
     {
-        if (!$yogurt_Notes instanceof \Notes) {
+        if (!$yogurt_Notes instanceof Notes) {
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE Note_id = %u', $this->db->prefix('yogurt_Notes'), $yogurt_Notes->getVar('Note_id'));

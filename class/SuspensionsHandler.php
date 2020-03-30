@@ -70,7 +70,7 @@ class SuspensionsHandler extends \XoopsObjectHandler
     public function insert(\XoopsObject $suspensions, $force = false)
     {
         global $xoopsConfig;
-        if (!$suspensions instanceof \Suspensions) {
+        if (!$suspensions instanceof Suspensions) {
             return false;
         }
         if (!$suspensions->isDirty()) {
@@ -120,7 +120,7 @@ class SuspensionsHandler extends \XoopsObjectHandler
      */
     public function delete(\XoopsObject $suspensions, $force = false)
     {
-        if (!$suspensions instanceof \Suspensions) {
+        if (!$suspensions instanceof Suspensions) {
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE uid = %u', $this->db->prefix('yogurt_suspensions'), $suspensions->getVar('uid'));
@@ -138,7 +138,7 @@ class SuspensionsHandler extends \XoopsObjectHandler
     /**
      * retrieve yogurt_suspensionss from the database
      *
-     * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
+     * @param \CriteriaElement $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool            $id_as_key use the UID as key for the array?
      * @return array array of {@link Suspensions} objects
      */
@@ -175,7 +175,7 @@ class SuspensionsHandler extends \XoopsObjectHandler
     /**
      * count yogurt_suspensionss matching a condition
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement} to match
+     * @param \CriteriaElement $criteria {@link \CriteriaElement} to match
      * @return int count of yogurt_suspensionss
      */
     public function getCount($criteria = null)
@@ -195,7 +195,7 @@ class SuspensionsHandler extends \XoopsObjectHandler
     /**
      * delete yogurt_suspensionss matching a set of conditions
      *
-     * @param CriteriaElement $criteria {@link CriteriaElement}
+     * @param \CriteriaElement $criteria {@link \CriteriaElement}
      * @return bool FALSE if deletion failed
      */
     public function deleteAll($criteria = null)
