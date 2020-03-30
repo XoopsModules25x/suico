@@ -51,10 +51,9 @@ border:none;
 
 p#breadcrumbs {
 	display:block;
-	margin:0px;
-	border-bottom: 2px solid;
-	margin-bottom: 5px;
-	padding:2px;
+    border-bottom: 2px solid;
+    margin: 0px 0px 5px;
+    padding:2px;
 }
 
 /*
