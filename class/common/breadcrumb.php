@@ -38,44 +38,44 @@ defined('XOOPS_ROOT_PATH') || exit('XOOPS Root Path not defined');
  */
 class Breadcrumb
 {
-	public  $dirname;
-	private $bread = [];
+    public  $dirname;
+    private $bread = [];
 
-	public function __construct()
-	{
-		$this->dirname = basename(dirname(dirname(__DIR__)));
-	}
+    public function __construct()
+    {
+        $this->dirname = basename(dirname(dirname(__DIR__)));
+    }
 
-	/**
-	 * Add link to breadcrumb
-	 *
-	 * @param string $title
-	 * @param string $link
-	 */
-	public function addLink($title = '', $link = '')
-	{
-		$this->bread[] = [
-			'link'  => $link,
-			'title' => $title,
-		];
-	}
+    /**
+     * Add link to breadcrumb
+     *
+     * @param string $title
+     * @param string $link
+     */
+    public function addLink($title = '', $link = '')
+    {
+        $this->bread[] = [
+            'link'  => $link,
+            'title' => $title,
+        ];
+    }
 
-	/**
-	 * Render BreadCrumb
-	 */
-	public function render()
-	{
-		if (!isset($GLOBALS['xoTheme']) || !is_object($GLOBALS['xoTheme'])) {
-			require $GLOBALS['xoops']->path('class/theme.php');
-			$GLOBALS['xoTheme'] = new \xos_opal_Theme();
-		}
+    /**
+     * Render BreadCrumb
+     */
+    public function render()
+    {
+        if (!isset($GLOBALS['xoTheme']) || !is_object($GLOBALS['xoTheme'])) {
+            require $GLOBALS['xoops']->path('class/theme.php');
+            $GLOBALS['xoTheme'] = new \xos_opal_Theme();
+        }
 
-		require $GLOBALS['xoops']->path('class/template.php');
-		$breadcrumbTpl = new \XoopsTpl();
-		$breadcrumbTpl->assign('breadcrumb', $this->bread);
-		$html = $breadcrumbTpl->fetch('db:' . $this->dirname . '_common_breadcrumb.tpl');
-		unset($breadcrumbTpl);
+        require $GLOBALS['xoops']->path('class/template.php');
+        $breadcrumbTpl = new \XoopsTpl();
+        $breadcrumbTpl->assign('breadcrumb', $this->bread);
+        $html = $breadcrumbTpl->fetch('db:' . $this->dirname . '_common_breadcrumb.tpl');
+        unset($breadcrumbTpl);
 
-		return $html;
-	}
+        return $html;
+    }
 }

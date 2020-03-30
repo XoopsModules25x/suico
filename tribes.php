@@ -21,7 +21,7 @@ use XoopsModules\Yogurt;
 
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_tribes.tpl';
-require __DIR__.'/header.php';
+require __DIR__ . '/header.php';
 
 $controler = new Yogurt\ControlerTribes($xoopsDB, $xoopsUser);
 
@@ -30,8 +30,8 @@ $controler = new Yogurt\ControlerTribes($xoopsDB, $xoopsUser);
  */
 $nbSections = $controler->getNumbersSections();
 
-$start_all = isset($_GET['start_all']) ? (int) $_GET['start_all'] : 0;
-$start_my  = isset($_GET['start_my']) ? (int) $_GET['start_my'] : 0;
+$start_all = isset($_GET['start_all']) ? (int)$_GET['start_all'] : 0;
+$start_my  = isset($_GET['start_my']) ? (int)$_GET['start_my'] : 0;
 
 /**
  * All Tribes
@@ -59,7 +59,7 @@ $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname'
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
 if (preg_match('/msie/', strtolower($_SERVER['HTTP_USER_AGENT']))) {
-	$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
+    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
 }
 //$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/css/lightbox.css');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/prototype.js');
@@ -90,7 +90,7 @@ $xoopsTpl->assign('allow_videos', $controler->checkPrivilegeBySection('videos'))
 $xoopsTpl->assign('allow_audios', $controler->checkPrivilegeBySection('audio'));
 
 //form
-$xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxfilebytes/1024));
+$xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxfilebytes / 1024));
 $xoopsTpl->assign('lang_tribeimage', _MD_YOGURT_TRIBE_IMAGE);
 $xoopsTpl->assign('maxfilesize', $maxfilebytes);
 $xoopsTpl->assign('lang_title', _MD_YOGURT_TRIBE_TITLE);
@@ -136,14 +136,14 @@ $xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule-
 $xoopsTpl->assign('tribes', $tribes);
 $xoopsTpl->assign('mytribes', $mytribes);
 $xoopsTpl->assign('lang_mytribestitle', _MD_YOGURT_MYTRIBES);
-$xoopsTpl->assign('lang_tribestitle', _MD_YOGURT_ALLTRIBES.' ('.$nb_tribes.')');
+$xoopsTpl->assign('lang_tribestitle', _MD_YOGURT_ALLTRIBES . ' (' . $nb_tribes . ')');
 $xoopsTpl->assign('lang_notribesyet', _MD_YOGURT_NOTRIBESYET);
 
 //page nav
-$xoopsTpl->assign('barra_navegacao', $barrinha); //alltribes
+$xoopsTpl->assign('barra_navegacao', $barrinha);//alltribes
 $xoopsTpl->assign('barra_navegacao_my', $barrinha_my);
-$xoopsTpl->assign('nb_tribes', $nb_mytribes); // this is the one wich shows in the upper bar actually is about the mytribes
-$xoopsTpl->assign('nb_tribes_all', $nb_tribes); //this is total number of tribes
+$xoopsTpl->assign('nb_tribes', $nb_mytribes);// this is the one wich shows in the upper bar actually is about the mytribes
+$xoopsTpl->assign('nb_tribes_all', $nb_tribes);//this is total number of tribes
 
 $xoopsTpl->assign('lang_createtribe', _MD_YOGURTCREATEYOURTRIBE);
 $xoopsTpl->assign('lang_owner', _MD_YOGURT_TRIBEOWNER);
@@ -152,4 +152,4 @@ $xoopsTpl->assign('lang_jointribe', _MD_YOGURT_TRIBE_JOIN);
 $xoopsTpl->assign('lang_searchtribe', _MD_YOGURT_TRIBE_SEARCH);
 $xoopsTpl->assign('lang_tribekeyword', _MD_YOGURT_TRIBE_SEARCHKEYWORD);
 
-include __DIR__.'/../../footer.php';
+include __DIR__ . '/../../footer.php';

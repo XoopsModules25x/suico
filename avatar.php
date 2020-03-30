@@ -19,28 +19,28 @@
 
 use XoopsModules\Yogurt;
 
-require __DIR__.'/header.php';
+require __DIR__ . '/header.php';
 
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-	redirect_header('index.php', 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header('index.php', 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
 /**
  * Creating the factory  loading the picture changing its caption
  */
 $pictureFactory = new Yogurt\ImageHandler($xoopsDB);
-$picture = $pictureFactory->create(false);
+$picture         = $pictureFactory->create(false);
 $picture->load($_POST['cod_img']);
 
-$uid = (int) $xoopsUser->getVar('uid');
+$uid = (int)$xoopsUser->getVar('uid');
 
-$image       = XOOPS_ROOT_PATH.'/uploads/'.'thumb_'.$picture->getVar('url');
-$avatar      = 'av'.$uid.'_'.time().'.jpg';
-$imageavatar = XOOPS_ROOT_PATH.'/uploads/'.$avatar;
+$image       = XOOPS_ROOT_PATH . '/uploads/' . 'thumb_' . $picture->getVar('url');
+$avatar      = 'av' . $uid . '_' . time() . '.jpg';
+$imageavatar = XOOPS_ROOT_PATH . '/uploads/' . $avatar;
 
 if (!copy($image, $imageavatar)) {
-	echo 'failed to copy $file...\n';
+    echo 'failed to copy $file...\n';
 }
 $xoopsUser->setVar('user_avatar', $avatar);
 
@@ -50,11 +50,11 @@ $userHandler = new \XoopsUserHandler($xoopsDB);
  * Verifying who's the owner to allow changes
  */
 if ($uid == $picture->getVar('uid_owner')) {
-	if ($userHandler->insert($xoopsUser)) {
-		redirect_header('album.php', 2, _MD_YOGURT_AVATAR_EDITED);
-	} else {
-		redirect_header('album.php', 2, _MD_YOGURT_NOCACHACA);
-	}
+    if ($userHandler->insert($xoopsUser)) {
+        redirect_header('album.php', 2, _MD_YOGURT_AVATAR_EDITED);
+    } else {
+        redirect_header('album.php', 2, _MD_YOGURT_NOCACHACA);
+    }
 }
 
-include __DIR__.'/../../footer.php';
+include __DIR__ . '/../../footer.php';

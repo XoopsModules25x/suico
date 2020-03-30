@@ -38,7 +38,7 @@ define('_MI_YOG_PATHUPLOAD_DESC', 'Path to the uploads directory<br />in Linux i
 define('_MI_YOG_LINKPATHUPLOAD_TITLE', 'Link to your uploads directory');
 define('_MI_YOG_LINKPATHUPLOAD_DESC', 'This is the address of the root path to uploads <br />like http://www.yoursite.com/uploads');
 define('_MI_YOG_MAXFILEBYTES_TITLE', 'Max size in bytes');
-define('_MI_YOG_MAXFILEBYTES_DESC', 'This is the maximum size a picture file can be<br /> You can set it in bytes like this: 512000 for 500 KB<br /> Be careful that the maximum size is also set in the php.ini file. The server is currently set to '.ini_get('post_max_size'));
+define('_MI_YOG_MAXFILEBYTES_DESC', 'This is the maximum size a picture file can be<br /> You can set it in bytes like this: 512000 for 500 KB<br /> Be careful that the maximum size is also set in the php.ini file. The server is currently set to ' . ini_get('post_max_size'));
 
 define('_MI_YOG_PICTURE_NOTIFYTIT', 'Album');
 define('_MI_YOG_PICTURE_NOTIFYDSC', "Notifications related to user's album");
@@ -61,8 +61,8 @@ define('_MI_YOGURT_LAST', 'Last pictures block');
 define('_MI_YOGURT_LAST_DESC', 'Last pictures sent independently of the album');
 define('_MI_YOG_DELETEPHYSICAL_TITLE', 'DELETE files FROM the upload folder TO');
 define(
-	'_MI_YOG_DELETEPHYSICAL_DESC',
-	"Confirming yes here, will allow the script to delete the files from the uploaded data in the database as well.<br /> Be careful about this feature, if you exclude the files from the folder and not only in the database, some people who may have linked to the image directly in another part of the site may also lose their content;<br /> at the same time if you don't exclude them, you may use to much space in the server hard disk.<br />Configure this item well for your needs."
+    '_MI_YOG_DELETEPHYSICAL_DESC',
+    "Confirming yes here, will allow the script to delete the files from the uploaded data in the database as well.<br /> Be careful about this feature, if you exclude the files from the folder and not only in the database, some people who may have linked to the image directly in another part of the site may also lose their content;<br /> at the same time if you don't exclude them, you may use to much space in the server hard disk.<br />Configure this item well for your needs."
 );
 
 define('_MI_YOGURT_MYVIDEOS', 'My Videos');

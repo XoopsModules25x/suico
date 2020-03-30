@@ -20,7 +20,7 @@
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_tribes_results.tpl';
-require __DIR__.'/header.php';
+require __DIR__ . '/header.php';
 
 $controler = new Yogurt\ControlerTribes($xoopsDB, $xoopsUser);
 
@@ -29,15 +29,15 @@ $controler = new Yogurt\ControlerTribes($xoopsDB, $xoopsUser);
  */
 $nbSections = $controler->getNumbersSections();
 
-$start_all = isset($_GET['start_all']) ? (int) $_GET['start_all'] : 0;
-$start_my  = isset($_GET['start_my']) ? (int) $_GET['start_my'] : 0;
+$start_all = isset($_GET['start_all']) ? (int)$_GET['start_all'] : 0;
+$start_my  = isset($_GET['start_my']) ? (int)$_GET['start_my'] : 0;
 
 $tribe_keyword = trim(htmlspecialchars($_GET['tribe_keyword'], ENT_QUOTES | ENT_HTML5));
 /**
  * All Tribes
  */
-$criteria_title  = new \Criteria('tribe_title', '%'.$tribe_keyword.'%', 'LIKE');
-$criteria_desc   = new \Criteria('tribe_desc', '%'.$tribe_keyword.'%', 'LIKE');
+$criteria_title  = new \Criteria('tribe_title', '%' . $tribe_keyword . '%', 'LIKE');
+$criteria_desc   = new \Criteria('tribe_desc', '%' . $tribe_keyword . '%', 'LIKE');
 $criteria_tribes = new \CriteriaCompo($criteria_title);
 $criteria_tribes->add($criteria_desc, 'OR');
 $nb_tribes = $controler->tribesFactory->getCount($criteria_tribes);
@@ -46,19 +46,19 @@ $criteria_tribes->setStart($start_all);
 $tribes_objects = $controler->tribesFactory->getObjects($criteria_tribes);
 $i              = 0;
 foreach ($tribes_objects as $tribe_object) {
-	$tribes[$i]['id']    = $tribe_object->getVar('tribe_id');
-	$tribes[$i]['title'] = $tribe_object->getVar('tribe_title');
-	$tribes[$i]['img']   = $tribe_object->getVar('tribe_img');
-	$tribes[$i]['desc']  = $tribe_object->getVar('tribe_desc');
-	$tribes[$i]['uid']   = $tribe_object->getVar('owner_uid');
-	$i++;
+    $tribes[$i]['id']    = $tribe_object->getVar('tribe_id');
+    $tribes[$i]['title'] = $tribe_object->getVar('tribe_title');
+    $tribes[$i]['img']   = $tribe_object->getVar('tribe_img');
+    $tribes[$i]['desc']  = $tribe_object->getVar('tribe_desc');
+    $tribes[$i]['uid']   = $tribe_object->getVar('owner_uid');
+    $i++;
 }
 
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/yogurt.css');
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
 if (preg_match('/msie/', strtolower($_SERVER['HTTP_USER_AGENT']))) {
-	$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
+    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
 }
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/jquery.js');
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/js/jquery.tabs.pack.js');
@@ -128,14 +128,14 @@ $xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule-
 //$xoopsTpl->assign('tribes',$tribes);
 //$xoopsTpl->assign('mytribes',$mytribes);
 $xoopsTpl->assign('lang_mytribestitle', _MD_YOGURT_MYTRIBES);
-$xoopsTpl->assign('lang_tribestitle', _MD_YOGURT_ALLTRIBES.' ('.$nb_tribes.')');
+$xoopsTpl->assign('lang_tribestitle', _MD_YOGURT_ALLTRIBES . ' (' . $nb_tribes . ')');
 $xoopsTpl->assign('lang_notribesyet', _MD_YOGURT_NOTRIBESYET);
 
 //page nav
 $xoopsTpl->assign('barra_navegacao', $barrinha);
 //$xoopsTpl->assign('barra_navegacao_my',$barrinha_my);
 //$xoopsTpl->assign('nb_tribes',$nb_mytribes);// this is the one wich shows in the upper bar actually is about the mytribes
-$xoopsTpl->assign('nb_tribes_all', $nb_tribes); //this is total number of tribes
+$xoopsTpl->assign('nb_tribes_all', $nb_tribes);//this is total number of tribes
 
 $xoopsTpl->assign('lang_createtribe', _MD_YOGURTCREATEYOURTRIBE);
 $xoopsTpl->assign('lang_owner', _MD_YOGURT_TRIBEOWNER);
@@ -144,4 +144,4 @@ $xoopsTpl->assign('lang_jointribe', _MD_YOGURT_TRIBE_JOIN);
 $xoopsTpl->assign('lang_searchtribe', _MD_YOGURT_TRIBE_SEARCH);
 $xoopsTpl->assign('lang_tribekeyword', _MD_YOGURT_TRIBE_SEARCHKEYWORD);
 
-include __DIR__.'/../../footer.php';
+include __DIR__ . '/../../footer.php';

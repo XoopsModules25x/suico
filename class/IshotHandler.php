@@ -21,9 +21,9 @@ namespace XoopsModules\Yogurt;
  */
 
 if (!defined('XOOPS_ROOT_PATH')) {
-	exit();
+    exit();
 }
-include_once XOOPS_ROOT_PATH.'/kernel/object.php';
+include_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
 // -------------------------------------------------------------------------
 // ------------------Ishot user handler class -------------------
@@ -36,263 +36,263 @@ include_once XOOPS_ROOT_PATH.'/kernel/object.php';
 class IshotHandler extends \XoopsObjectHandler
 {
 
-	/**
-	 * create a new Ishot
-	 *
-	 * @param bool $isNew flag the new objects as "new"?
-	 * @return \XoopsObject Ishot
-	 */
-	public function create($isNew = true)
-	{
-		$yogurt_ishot = new Ishot();
-		if ($isNew) {
-			$yogurt_ishot->setNew();
-		} else {
-			$yogurt_ishot->unsetNew();
-		}
+    /**
+     * create a new Ishot
+     *
+     * @param bool $isNew flag the new objects as "new"?
+     * @return \XoopsObject Ishot
+     */
+    public function create($isNew = true)
+    {
+        $yogurt_ishot = new Ishot();
+        if ($isNew) {
+            $yogurt_ishot->setNew();
+        } else {
+            $yogurt_ishot->unsetNew();
+        }
 
-		return $yogurt_ishot;
-	}
+        return $yogurt_ishot;
+    }
 
-	/**
-	 * retrieve a Ishot
-	 *
-	 * @param int $id of the Ishot
-	 * @return mixed reference to the {@link Ishot} object, FALSE if failed
-	 */
-	public function get($id)
-	{
-		$sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_ishot') . ' WHERE cod_ishot=' . $id;
-		if (!$result = $this->db->query($sql)) {
-			return false;
-		}
-		$numrows = $this->db->getRowsNum($result);
-		if (1 == $numrows) {
-			$yogurt_ishot = new Ishot();
-			$yogurt_ishot->assignVars($this->db->fetchArray($result));
-			return $yogurt_ishot;
-		}
-		return false;
-	}
+    /**
+     * retrieve a Ishot
+     *
+     * @param int $id of the Ishot
+     * @return mixed reference to the {@link Ishot} object, FALSE if failed
+     */
+    public function get($id)
+    {
+        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_ishot') . ' WHERE cod_ishot=' . $id;
+        if (!$result = $this->db->query($sql)) {
+            return false;
+        }
+        $numrows = $this->db->getRowsNum($result);
+        if (1 == $numrows) {
+            $yogurt_ishot = new Ishot();
+            $yogurt_ishot->assignVars($this->db->fetchArray($result));
+            return $yogurt_ishot;
+        }
+        return false;
+    }
 
-	/**
-	 * insert a new Ishot in the database
-	 *
-	 * @param \XoopsObject $yogurt_ishot reference to the {@link Ishot}
-	 *                                   object
-	 * @param bool         $force
-	 * @return bool FALSE if failed, TRUE if already present and unchanged or successful
-	 */
-	public function insert(\XoopsObject $yogurt_ishot, $force = false)
-	{
-		global $xoopsConfig;
-		if (!$yogurt_ishot instanceof \Ishot) {
-			return false;
-		}
-		if (!$yogurt_ishot->isDirty()) {
-			return true;
-		}
-		if (!$yogurt_ishot->cleanVars()) {
-			return false;
-		}
-		foreach ($yogurt_ishot->cleanVars as $k => $v) {
-			${$k} = $v;
-		}
-		$now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
-		if ($yogurt_ishot->isNew()) {
-			// ajout/modification d'un Ishot
-			$yogurt_ishot = new Ishot();
-			$format       = 'INSERT INTO %s (cod_ishot, uid_voter, uid_voted, ishot, DATE)';
-			$format       .= 'VALUES (%u, %u, %u, %u, %s)';
-			$sql          = sprintf($format, $this->db->prefix('yogurt_ishot'), $cod_ishot, $uid_voter, $uid_voted, $ishot, $this->db->quoteString($date));
-			$force        = true;
-		} else {
-			$format = 'UPDATE %s SET ';
-			$format .= 'cod_ishot=%u, uid_voter=%u, uid_voted=%u, ishot=%u, date=%s';
-			$format .= ' WHERE cod_ishot = %u';
-			$sql    = sprintf($format, $this->db->prefix('yogurt_ishot'), $cod_ishot, $uid_voter, $uid_voted, $ishot, $this->db->quoteString($date), $cod_ishot);
-		}
-		if (false !== $force) {
-			$result = $this->db->queryF($sql);
-		} else {
-			$result = $this->db->query($sql);
-		}
-		if (!$result) {
-			return false;
-		}
-		if (empty($cod_ishot)) {
-			$cod_ishot = $this->db->getInsertId();
-		}
-		$yogurt_ishot->assignVar('cod_ishot', $cod_ishot);
-		return true;
-	}
+    /**
+     * insert a new Ishot in the database
+     *
+     * @param \XoopsObject $yogurt_ishot reference to the {@link Ishot}
+     *                                   object
+     * @param bool         $force
+     * @return bool FALSE if failed, TRUE if already present and unchanged or successful
+     */
+    public function insert(\XoopsObject $yogurt_ishot, $force = false)
+    {
+        global $xoopsConfig;
+        if (!$yogurt_ishot instanceof \Ishot) {
+            return false;
+        }
+        if (!$yogurt_ishot->isDirty()) {
+            return true;
+        }
+        if (!$yogurt_ishot->cleanVars()) {
+            return false;
+        }
+        foreach ($yogurt_ishot->cleanVars as $k => $v) {
+            ${$k} = $v;
+        }
+        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+        if ($yogurt_ishot->isNew()) {
+            // ajout/modification d'un Ishot
+            $yogurt_ishot = new Ishot();
+            $format       = 'INSERT INTO %s (cod_ishot, uid_voter, uid_voted, ishot, DATE)';
+            $format       .= 'VALUES (%u, %u, %u, %u, %s)';
+            $sql          = sprintf($format, $this->db->prefix('yogurt_ishot'), $cod_ishot, $uid_voter, $uid_voted, $ishot, $this->db->quoteString($date));
+            $force        = true;
+        } else {
+            $format = 'UPDATE %s SET ';
+            $format .= 'cod_ishot=%u, uid_voter=%u, uid_voted=%u, ishot=%u, date=%s';
+            $format .= ' WHERE cod_ishot = %u';
+            $sql    = sprintf($format, $this->db->prefix('yogurt_ishot'), $cod_ishot, $uid_voter, $uid_voted, $ishot, $this->db->quoteString($date), $cod_ishot);
+        }
+        if (false !== $force) {
+            $result = $this->db->queryF($sql);
+        } else {
+            $result = $this->db->query($sql);
+        }
+        if (!$result) {
+            return false;
+        }
+        if (empty($cod_ishot)) {
+            $cod_ishot = $this->db->getInsertId();
+        }
+        $yogurt_ishot->assignVar('cod_ishot', $cod_ishot);
+        return true;
+    }
 
-	/**
-	 * delete a Ishot from the database
-	 *
-	 * @param \XoopsObject $yogurt_ishot reference to the Ishot to delete
-	 * @param bool         $force
-	 * @return bool FALSE if failed.
-	 */
-	public function delete(\XoopsObject $yogurt_ishot, $force = false)
-	{
-		if (!$yogurt_ishot instanceof \Ishot) {
-			return false;
-		}
-		$sql = sprintf('DELETE FROM %s WHERE cod_ishot = %u', $this->db->prefix('yogurt_ishot'), $yogurt_ishot->getVar('cod_ishot'));
-		if (false !== $force) {
-			$result = $this->db->queryF($sql);
-		} else {
-			$result = $this->db->query($sql);
-		}
-		if (!$result) {
-			return false;
-		}
-		return true;
-	}
+    /**
+     * delete a Ishot from the database
+     *
+     * @param \XoopsObject $yogurt_ishot reference to the Ishot to delete
+     * @param bool         $force
+     * @return bool FALSE if failed.
+     */
+    public function delete(\XoopsObject $yogurt_ishot, $force = false)
+    {
+        if (!$yogurt_ishot instanceof \Ishot) {
+            return false;
+        }
+        $sql = sprintf('DELETE FROM %s WHERE cod_ishot = %u', $this->db->prefix('yogurt_ishot'), $yogurt_ishot->getVar('cod_ishot'));
+        if (false !== $force) {
+            $result = $this->db->queryF($sql);
+        } else {
+            $result = $this->db->query($sql);
+        }
+        if (!$result) {
+            return false;
+        }
+        return true;
+    }
 
-	/**
-	 * retrieve yogurt_ishots from the database
-	 *
-	 * @param \XoopsObject $criteria  {@link CriteriaElement} conditions to be met
-	 * @param bool         $id_as_key use the UID as key for the array?
-	 * @return array array of {@link Ishot} objects
-	 */
-	public function &getObjects($criteria = null, $id_as_key = false)
-	{
-		$ret   = [];
-		$limit = $start = 0;
-		$sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_ishot');
-		if (isset($criteria) && $criteria instanceof \criteriaelement) {
-			$sql .= ' ' . $criteria->renderWhere();
-			if ('' != $criteria->getSort()) {
-				$sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
-			}
-			$limit = $criteria->getLimit();
-			$start = $criteria->getStart();
-		}
-		$result = $this->db->query($sql, $limit, $start);
-		if (!$result) {
-			return $ret;
-		}
-		while ($myrow = $this->db->fetchArray($result)) {
-			$yogurt_ishot = new Ishot();
-			$yogurt_ishot->assignVars($myrow);
-			if (!$id_as_key) {
-				$ret[] =& $yogurt_ishot;
-			} else {
-				$ret[$myrow['cod_ishot']] =& $yogurt_ishot;
-			}
-			unset($yogurt_ishot);
-		}
-		return $ret;
-	}
+    /**
+     * retrieve yogurt_ishots from the database
+     *
+     * @param \XoopsObject $criteria  {@link CriteriaElement} conditions to be met
+     * @param bool         $id_as_key use the UID as key for the array?
+     * @return array array of {@link Ishot} objects
+     */
+    public function &getObjects($criteria = null, $id_as_key = false)
+    {
+        $ret   = [];
+        $limit = $start = 0;
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_ishot');
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
+            $sql .= ' ' . $criteria->renderWhere();
+            if ('' != $criteria->getSort()) {
+                $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
+            }
+            $limit = $criteria->getLimit();
+            $start = $criteria->getStart();
+        }
+        $result = $this->db->query($sql, $limit, $start);
+        if (!$result) {
+            return $ret;
+        }
+        while ($myrow = $this->db->fetchArray($result)) {
+            $yogurt_ishot = new Ishot();
+            $yogurt_ishot->assignVars($myrow);
+            if (!$id_as_key) {
+                $ret[] =& $yogurt_ishot;
+            } else {
+                $ret[$myrow['cod_ishot']] =& $yogurt_ishot;
+            }
+            unset($yogurt_ishot);
+        }
+        return $ret;
+    }
 
-	/**
-	 * count yogurt_ishots matching a condition
-	 *
-	 * @param \XoopsObject $criteria {@link CriteriaElement} to match
-	 * @return int count of yogurt_ishots
-	 */
-	public function getCount($criteria = null)
-	{
-		$sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_ishot');
-		if (isset($criteria) && $criteria instanceof \criteriaelement) {
-			$sql .= ' ' . $criteria->renderWhere();
-		}
-		$result = $this->db->query($sql);
-		if (!$result) {
-			return 0;
-		}
-		list($count) = $this->db->fetchRow($result);
+    /**
+     * count yogurt_ishots matching a condition
+     *
+     * @param \XoopsObject $criteria {@link CriteriaElement} to match
+     * @return int count of yogurt_ishots
+     */
+    public function getCount($criteria = null)
+    {
+        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_ishot');
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
+            $sql .= ' ' . $criteria->renderWhere();
+        }
+        $result = $this->db->query($sql);
+        if (!$result) {
+            return 0;
+        }
+        list($count) = $this->db->fetchRow($result);
 
-		return $count;
-	}
+        return $count;
+    }
 
-	/**
-	 * delete yogurt_ishots matching a set of conditions
-	 *
-	 * @param \XoopsObject $criteria {@link CriteriaElement}
-	 * @return bool FALSE if deletion failed
-	 */
-	public function deleteAll($criteria = null)
-	{
-		$sql = 'DELETE FROM ' . $this->db->prefix('yogurt_ishot');
-		if (isset($criteria) && $criteria instanceof \criteriaelement) {
-			$sql .= ' ' . $criteria->renderWhere();
-		}
-		if (!$result = $this->db->query($sql)) {
-			return false;
-		}
-		return true;
-	}
+    /**
+     * delete yogurt_ishots matching a set of conditions
+     *
+     * @param \XoopsObject $criteria {@link CriteriaElement}
+     * @return bool FALSE if deletion failed
+     */
+    public function deleteAll($criteria = null)
+    {
+        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_ishot');
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
+            $sql .= ' ' . $criteria->renderWhere();
+        }
+        if (!$result = $this->db->query($sql)) {
+            return false;
+        }
+        return true;
+    }
 
-	/**
-	 * @param null $criteria
-	 * @return array
-	 */
-	public function getHottest($criteria = null)
-	{
-		$sql = 'SELECT DISTINCTROW uname, user_avatar, uid_voted, COUNT(cod_ishot) AS qtd FROM ' . $this->db->prefix('yogurt_ishot') . ', ' . $this->db->prefix('users');
-		if (isset($criteria) && $criteria instanceof \criteriaelement) {
-			$sql .= ' ' . $criteria->renderWhere();
-		}
-		//attention here this is kind of a hack
-		$sql .= ' AND uid = uid_voted';
-		if ('' != $criteria->getGroupby()) {
-			$sql .= $criteria->getGroupby();
-		}
-		if ('' != $criteria->getSort()) {
-			$sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
-		}
-		$limit = $criteria->getLimit();
-		$start = $criteria->getStart();
+    /**
+     * @param null $criteria
+     * @return array
+     */
+    public function getHottest($criteria = null)
+    {
+        $sql = 'SELECT DISTINCTROW uname, user_avatar, uid_voted, COUNT(cod_ishot) AS qtd FROM ' . $this->db->prefix('yogurt_ishot') . ', ' . $this->db->prefix('users');
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
+            $sql .= ' ' . $criteria->renderWhere();
+        }
+        //attention here this is kind of a hack
+        $sql .= ' AND uid = uid_voted';
+        if ('' != $criteria->getGroupby()) {
+            $sql .= $criteria->getGroupby();
+        }
+        if ('' != $criteria->getSort()) {
+            $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
+        }
+        $limit = $criteria->getLimit();
+        $start = $criteria->getStart();
 
-		$result = $this->db->query($sql, $limit, $start);
-		$vetor  = [];
-		$i      = 0;
-		while ($myrow = $this->db->fetchArray($result)) {
-			$vetor[$i]['qtd']         = $myrow['qtd'];
-			$vetor[$i]['uid_voted']   = $myrow['uid_voted'];
-			$vetor[$i]['uname']       = $myrow['uname'];
-			$vetor[$i]['user_avatar'] = $myrow['user_avatar'];
-			$i++;
-		}
+        $result = $this->db->query($sql, $limit, $start);
+        $vetor  = [];
+        $i      = 0;
+        while ($myrow = $this->db->fetchArray($result)) {
+            $vetor[$i]['qtd']         = $myrow['qtd'];
+            $vetor[$i]['uid_voted']   = $myrow['uid_voted'];
+            $vetor[$i]['uname']       = $myrow['uname'];
+            $vetor[$i]['user_avatar'] = $myrow['user_avatar'];
+            $i++;
+        }
 
-		return $vetor;
-	}
+        return $vetor;
+    }
 
-	/**
-	 * @param null $criteria
-	 * @param bool $id_as_key
-	 * @return array
-	 */
-	public function getHotFriends($criteria = null, $id_as_key = false)
-	{
-		$ret   = [];
-		$limit = $start = 0;
-		$sql   = 'SELECT uname, user_avatar, uid_voted FROM ' . $this->db->prefix('yogurt_ishot') . ', ' . $this->db->prefix('users');
-		if (isset($criteria) && $criteria instanceof \criteriaelement) {
-			$sql .= ' ' . $criteria->renderWhere();
-			//attention here this is kind of a hack
-			$sql .= ' AND uid = uid_voted AND ishot=1';
-			if ('' != $criteria->getSort()) {
-				$sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
-			}
-			$limit = $criteria->getLimit();
-			$start = $criteria->getStart();
+    /**
+     * @param null $criteria
+     * @param bool $id_as_key
+     * @return array
+     */
+    public function getHotFriends($criteria = null, $id_as_key = false)
+    {
+        $ret   = [];
+        $limit = $start = 0;
+        $sql   = 'SELECT uname, user_avatar, uid_voted FROM ' . $this->db->prefix('yogurt_ishot') . ', ' . $this->db->prefix('users');
+        if (isset($criteria) && $criteria instanceof \criteriaelement) {
+            $sql .= ' ' . $criteria->renderWhere();
+            //attention here this is kind of a hack
+            $sql .= ' AND uid = uid_voted AND ishot=1';
+            if ('' != $criteria->getSort()) {
+                $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
+            }
+            $limit = $criteria->getLimit();
+            $start = $criteria->getStart();
 
-			$result = $this->db->query($sql, $limit, $start);
-			$vetor  = [];
-			$i      = 0;
-			while ($myrow = $this->db->fetchArray($result)) {
-				$vetor[$i]['uid_voted']   = $myrow['uid_voted'];
-				$vetor[$i]['uname']       = $myrow['uname'];
-				$vetor[$i]['user_avatar'] = $myrow['user_avatar'];
-				$i++;
-			}
+            $result = $this->db->query($sql, $limit, $start);
+            $vetor  = [];
+            $i      = 0;
+            while ($myrow = $this->db->fetchArray($result)) {
+                $vetor[$i]['uid_voted']   = $myrow['uid_voted'];
+                $vetor[$i]['uname']       = $myrow['uname'];
+                $vetor[$i]['user_avatar'] = $myrow['user_avatar'];
+                $i++;
+            }
 
-			return $vetor;
-		}
-	}
+            return $vetor;
+        }
+    }
 }

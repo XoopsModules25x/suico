@@ -20,7 +20,7 @@
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_tribe.tpl';
-require __DIR__.'/header.php';
+require __DIR__ . '/header.php';
 
 $controler = new Yogurt\ControlerTribes($xoopsDB, $xoopsUser);
 
@@ -29,7 +29,7 @@ $controler = new Yogurt\ControlerTribes($xoopsDB, $xoopsUser);
  */
 $nbSections = $controler->getNumbersSections();
 
-$tribe_id = (int) $_GET['tribe_id'];
+$tribe_id = (int)$_GET['tribe_id'];
 $criteria = new \Criteria('tribe_id', $tribe_id);
 $tribes   = $controler->tribesFactory->getObjects($criteria);
 $tribe    = $tribes[0];
@@ -39,15 +39,15 @@ $tribe    = $tribes[0];
  */
 $tribe_members = $controler->reltribeusersFactory->getUsersFromTribe($tribe_id, 0, 50);
 foreach ($tribe_members as $tribe_member) {
-	$uids[] = (int)$tribe_member['uid'];
+    $uids[] = (int)$tribe_member['uid'];
 }
 
 $uid = (int)$xoopsUser->getVar('uid');
 if ($xoopsUser) {
-	if (in_array($uid, $uids)) {
-		$xoopsTpl->assign('memberOfTribe', 1);
-	}
-	$xoopsTpl->assign('useruid', $uid);
+    if (in_array($uid, $uids)) {
+        $xoopsTpl->assign('memberOfTribe', 1);
+    }
+    $xoopsTpl->assign('useruid', $uid);
 }
 $xoopsTpl->assign('tribe_members', $tribe_members);
 $maxfilebytes = $xoopsModuleConfig['maxfilesize'];
@@ -63,7 +63,7 @@ $xoopsTpl->assign('lang_membersoftribe', _MD_YOGURT_MEMBERSDOFTRIBE);
 $xoopsTpl->assign('lang_edittribe', _MD_YOGURT_EDIT_TRIBE);
 $xoopsTpl->assign('lang_tribeimage', _MD_YOGURT_TRIBE_IMAGE);
 $xoopsTpl->assign('lang_keepimage', _MD_YOGURT_MAINTAINOLDIMAGE);
-$xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxfilebytes/1024));
+$xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxfilebytes / 1024));
 $xoopsTpl->assign('lang_titletribe', _MD_YOGURT_TRIBE_TITLE);
 $xoopsTpl->assign('lang_desctribe', _MD_YOGURT_TRIBE_DESC);
 
@@ -91,8 +91,8 @@ $xoopsTpl->assign('nb_audio', $nbSections['nbAudio']);
 
 //navbar
 $xoopsTpl->assign('module_name', $xoopsModule->getVar('name'));
-$xoopsTpl->assign('lang_mysection', _MD_YOGURT_TRIBES.' :: '.$tribe->getVar('tribe_title'));
-$xoopsTpl->assign('section_name', _MD_YOGURT_TRIBES.' > '.$tribe->getVar('tribe_title'));
+$xoopsTpl->assign('lang_mysection', _MD_YOGURT_TRIBES . ' :: ' . $tribe->getVar('tribe_title'));
+$xoopsTpl->assign('section_name', _MD_YOGURT_TRIBES . ' > ' . $tribe->getVar('tribe_title'));
 $xoopsTpl->assign('lang_home', _MD_YOGURT_HOME);
 $xoopsTpl->assign('lang_photos', _MD_YOGURT_PHOTOS);
 $xoopsTpl->assign('lang_friends', _MD_YOGURT_FRIENDS);
@@ -119,7 +119,7 @@ $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname'
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
 if (preg_match('/msie/', strtolower($_SERVER['HTTP_USER_AGENT']))) {
-	$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
+    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
 }
 //$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/css/lightbox.css');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/prototype.js');

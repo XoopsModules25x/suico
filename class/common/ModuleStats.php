@@ -21,19 +21,19 @@ namespace XoopsModules\Yogurt\Common;
  */
 trait ModuleStats
 {
-	/**
-	 * @param \XoopsModules\Yogurt\Common\Configurator $configurator
-	 * @param array                                    $moduleStats
-	 * @return array
-	 */
-	public static function getModuleStats($configurator, $moduleStats)
-	{
-		if (count($configurator->moduleStats) > 0) {
-			foreach (array_keys($configurator->moduleStats) as $i) {
-				$moduleStats[$i] = $configurator->moduleStats[$i];
-			}
-		}
+    /**
+     * @param \XoopsModules\Yogurt\Common\Configurator $configurator
+     * @param array                                    $moduleStats
+     * @return array
+     */
+    public static function getModuleStats($configurator, $moduleStats)
+    {
+        if (count($configurator->moduleStats) > 0) {
+            foreach (array_keys($configurator->moduleStats) as $i) {
+                $moduleStats[$i] = $configurator->moduleStats[$i];
+            }
+        }
 
-		return $moduleStats;
-	}
+        return $moduleStats;
+    }
 }

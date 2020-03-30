@@ -34,8 +34,8 @@
 
 //index.php
 define(
-	'_MA_YOG_FRAMEWORKSFALSE',
-	"Você precisa instalar este pacote para o módulo funcionar corretamente:<br /><br />
+    '_MA_YOG_FRAMEWORKSFALSE',
+    "Você precisa instalar este pacote para o módulo funcionar corretamente:<br /><br />
 <a href='http://dev.xoops.org/modules/xfmod/project/showfiles.php?group_id=1357'>Frameworks v 1.1 ou mais recente</a><br />"
 );
 define('_MA_YOG_FRAMEWORKSTRUE', 'Você tem a versão %s do pacote Frameworks');

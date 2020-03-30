@@ -19,39 +19,39 @@
 
 use XoopsModules\Yogurt;
 
-require __DIR__.'/header.php';
+require __DIR__ . '/header.php';
 
-$tribe_id     = (int) $_POST['tribe_id'];
-$rel_user_uid = (int) $_POST['rel_user_uid'];
+$tribe_id     = (int)$_POST['tribe_id'];
+$rel_user_uid = (int)$_POST['rel_user_uid'];
 
 if (1 != $_POST['confirm']) {
-	xoops_confirm(['rel_user_uid' => $rel_user_uid, 'tribe_id' => $tribe_id, 'confirm' => 1], 'kickfromtribe.php', _MD_YOGURT_ASKCONFIRMKICKFROMTRIBE, _MD_YOGURT_CONFIRMKICK);
+    xoops_confirm(['rel_user_uid' => $rel_user_uid, 'tribe_id' => $tribe_id, 'confirm' => 1], 'kickfromtribe.php', _MD_YOGURT_ASKCONFIRMKICKFROMTRIBE, _MD_YOGURT_CONFIRMKICK);
 } else {
-	/**
-	 * Creating the factory  and the criteria to delete the picture
-	 * The user must be the owner
-	 */
-	$reltribeuserFactory = new Yogurt\ReltribeuserHandler($xoopsDB);
-	$tribesFactory       = new Yogurt\TribesHandler($xoopsDB);
-	$tribe                = $tribesFactory->get($tribe_id);
-	//	echo "<pre>";
-	//	print_r($tribe);
-	if ($xoopsUser->getVar('uid') == $tribe->getVar('owner_uid')) {
-		$criteria_rel_user_uid = new \Criteria('rel_user_uid', $rel_user_uid);
-		$criteria_tribe_id     = new \Criteria('rel_tribe_id', $tribe_id);
-		$criteria              = new \CriteriaCompo($criteria_rel_user_uid);
-		$criteria->add($criteria_tribe_id);
-		/**
-		 * Try to delete
-		 */
-		if ($reltribeuserFactory->deleteAll($criteria)) {
-			redirect_header('tribes.php', 2, _MD_YOGURT_TRIBEKICKED);
-		} else {
-			redirect_header('tribes.php', 2, _MD_YOGURT_NOCACHACA);
-		}
-	} else {
-		redirect_header('tribes.php', 2, _MD_YOGURT_NOCACHACA);
-	}
+    /**
+     * Creating the factory  and the criteria to delete the picture
+     * The user must be the owner
+     */
+    $reltribeuserFactory = new Yogurt\ReltribeuserHandler($xoopsDB);
+    $tribesFactory       = new Yogurt\TribesHandler($xoopsDB);
+    $tribe                = $tribesFactory->get($tribe_id);
+    //	echo "<pre>";
+    //	print_r($tribe);
+    if ($xoopsUser->getVar('uid') == $tribe->getVar('owner_uid')) {
+        $criteria_rel_user_uid = new \Criteria('rel_user_uid', $rel_user_uid);
+        $criteria_tribe_id     = new \Criteria('rel_tribe_id', $tribe_id);
+        $criteria              = new \CriteriaCompo($criteria_rel_user_uid);
+        $criteria->add($criteria_tribe_id);
+        /**
+         * Try to delete
+         */
+        if ($reltribeuserFactory->deleteAll($criteria)) {
+            redirect_header('tribes.php', 2, _MD_YOGURT_TRIBEKICKED);
+        } else {
+            redirect_header('tribes.php', 2, _MD_YOGURT_NOCACHACA);
+        }
+    } else {
+        redirect_header('tribes.php', 2, _MD_YOGURT_NOCACHACA);
+    }
 }
 
-include __DIR__.'/../../footer.php';
+include __DIR__ . '/../../footer.php';

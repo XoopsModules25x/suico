@@ -21,7 +21,7 @@ use XoopsModules\Yogurt;
 
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_audio.tpl';
-require __DIR__.'/header.php';
+require __DIR__ . '/header.php';
 
 $controler = new Yogurt\AudioControler($xoopsDB, $xoopsUser);
 
@@ -30,7 +30,7 @@ $controler = new Yogurt\AudioControler($xoopsDB, $xoopsUser);
  */
 $nbSections = $controler->getNumbersSections();
 
-$start = isset($_GET['start']) ? (int) $_GET['start'] : 0;
+$start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
 
 /**
  * Criteria for Audio
@@ -46,15 +46,15 @@ $audios       = $controler->getAudio($criteriaUidAudio);
 $audios_array = $controler->assignAudioContent($nbSections['nbAudio'], $audios);
 
 if (is_array($audios_array)) {
-	$xoopsTpl->assign('audios', $audios_array);
-	$audio_list = '';
-	foreach ($audios_array as $audio_item) {
-		$audio_list .= '../../uploads/yogurt/mp3/' . $audio_item['url'] . ' | ';
-	}
-	//$audio_list = substr($audio_list,-2);
-	$xoopsTpl->assign('audio_list', $audio_list);
+    $xoopsTpl->assign('audios', $audios_array);
+    $audio_list = '';
+    foreach ($audios_array as $audio_item) {
+        $audio_list .= '../../uploads/yogurt/mp3/' . $audio_item['url'] . ' | ';
+    }
+    //$audio_list = substr($audio_list,-2);
+    $xoopsTpl->assign('audio_list', $audio_list);
 } else {
-	$xoopsTpl->assign('lang_noaudioyet', _MD_YOGURT_NOAUDIOYET);
+    $xoopsTpl->assign('lang_noaudioyet', _MD_YOGURT_NOAUDIOYET);
 }
 
 $pageNav = $controler->AudiosNavBar($nbSections['nbAudio'], $xoopsModuleConfig['audiosperpage'], $start, 2);
@@ -67,7 +67,7 @@ $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname'
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
 if (preg_match('/msie/', strtolower($_SERVER['HTTP_USER_AGENT']))) {
-	$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
+    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
 }
 //$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/css/lightbox.css');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/prototype.js');
@@ -148,4 +148,4 @@ $xoopsTpl->assign('max_youcanupload', $xoopsModuleConfig['maxfilesize']);
 //Videos NAvBAr
 $xoopsTpl->assign('pageNav', $pageNav);
 
-include __DIR__.'/../../footer.php';
+include __DIR__ . '/../../footer.php';

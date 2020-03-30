@@ -40,8 +40,8 @@ define('_MD_YOGURT_CAPTION', 'Subtítulo');
 define('_MD_YOGURT_YOUCANUPLOAD', 'Você pode submeter apenas arquivos jpg com até %s KBytes');
 define('_MD_YOGURT_UPLOADPICTURE', 'Upload Foto');
 define(
-	'_MD_YOGURT_NOCACHACA',
-	'Desculpe sem cachaça para você<br />
+    '_MD_YOGURT_NOCACHACA',
+    'Desculpe sem cachaça para você<br />
 Infelizmente, este módulo agiu de forma inesperada. Esperemos que ele volte ao seu estado normal quando você tentar novamente. '
 ); // Funny geral mensagem de erro
 define('_MD_YOGURT_PAGETITLE', '%s - Álbum do %s');
@@ -88,7 +88,7 @@ define('_MD_YOGURT_UNPRIVATIZED', 'Agora todos poderão ver esta foto em seu ál
 ########################################################## FRIENDS ###################################################
 //friends.php
 define('_MD_YOGURT_FRIENDSTITLE', 'Amigos do %s');
-define('_MD_YOGURT_NOFRIENDSYET', 'Nenhum Amigo ainda'); //also present in index.php - GibaPhp
+define('_MD_YOGURT_NOFRIENDSYET', 'Nenhum Amigo ainda');//also present in index.php - GibaPhp
 define('_MD_YOGURT_MYFRIENDS', 'Meus Amigos'); //GibaPhp
 define('_MD_YOGURT_FRIENDSHIPCONFIGS', 'Defina as configurações desta amizade. Avalie seu amigo.'); //GibaPhp
 
@@ -97,11 +97,11 @@ define('_MD_YOGURT_EDITFRIENDSHIP', 'Sua amizade com este membro:'); //GibaPhp
 define('_MD_YOGURT_FRIENDNAME', 'Usuário'); //GibaPhp
 define('_MD_YOGURT_LEVEL', 'Grau de amizade:'); //GibaPhp
 define('_MD_YOGURT_UNKNOWNACCEPTED', 'Não conheço mas aceito'); //GibaPhp
-define('_MD_YOGURT_AQUAITANCE', 'Conhecidos'); //also present in index.php - GibaPhp
-define('_MD_YOGURT_FRIEND', 'Amigo'); //also present in index.php - GibaPhp
-define('_MD_YOGURT_BESTFRIEND', 'Melhor Amigo'); //also present in index.php - GibaPhp
-define('_MD_YOGURT_FAN', 'Fan'); //also present in index.php - GibaPhp
-define('_MD_YOGURT_SEXY', 'Sexy'); //also present in index.php - GibaPhp
+define('_MD_YOGURT_AQUAITANCE', 'Conhecidos');//also present in index.php - GibaPhp
+define('_MD_YOGURT_FRIEND', 'Amigo');//also present in index.php - GibaPhp
+define('_MD_YOGURT_BESTFRIEND', 'Melhor Amigo');//also present in index.php - GibaPhp
+define('_MD_YOGURT_FAN', 'Fan');//also present in index.php - GibaPhp
+define('_MD_YOGURT_SEXY', 'Sexy');//also present in index.php - GibaPhp
 define('_MD_YOGURT_SEXYNO', 'Nope'); //GibaPhp - ??? Dúvida no conteúdo...
 define('_MD_YOGURT_SEXYYES', 'Sim'); //GibaPhp
 define('_MD_YOGURT_SEXYALOT', 'Muito!'); //GibaPhp
@@ -138,8 +138,8 @@ define('_MD_YOGURT_YOUTUBECODE', 'Código do YouTube ou URL'); //GibaPhp
 define('_MD_YOGURT_ADDVIDEO', 'Incluir video'); //GibaPhp
 define('_MD_YOGURT_ADDFAVORITEVIDEOS', 'Adicione seus vídeos favoritos'); //GibaPhp
 define(
-	'_MD_YOGURT_ADDVIDEOSHELP',
-	'Se você quizer fazer upload do seu vídeo para compartilhar, poderá enviar os seus vídeos para 
+    '_MD_YOGURT_ADDVIDEOSHELP',
+    'Se você quizer fazer upload do seu vídeo para compartilhar, poderá enviar os seus vídeos para 
 <a href=http://www.youtube.com>YouTube</a> e, em seguida, adicione a URL aqui '
 ); //The name of the site will show after this - GibaPhp
 define('_MD_YOGURT_MYVIDEOS', 'Meus Videos'); //GibaPhp
@@ -157,11 +157,11 @@ define('_MD_YOGURT_VIDEOSAVED', 'Seu video foi gravado'); //GibaPhp
 ############################## TRIBES ########################################################
 //class/Tribes.php
 define('_MD_YOGURT_SUBMIT_TRIBE', 'Criar uma nova Tribo'); //GibaPhp
-define('_MD_YOGURT_UPLOADTRIBE', 'Salvar Tribo'); //also present in many ther tribes related - GibaPhp
-define('_MD_YOGURT_TRIBE_IMAGE', 'Imagem da Tribo'); //also present in many ther tribes related - GibaPhp
-define('_MD_YOGURT_TRIBE_TITLE', 'Título'); //also present in many ther tribes related - GibaPhp
-define('_MD_YOGURT_TRIBE_DESC', 'Descrição'); //also present in many ther tribes related - GibaPhp
-define('_MD_YOGURTCREATEYOURTRIBE', 'Crie a sua própria Tribo!'); //also present in many ther tribes related - GibaPhp
+define('_MD_YOGURT_UPLOADTRIBE', 'Salvar Tribo');//also present in many ther tribes related - GibaPhp
+define('_MD_YOGURT_TRIBE_IMAGE', 'Imagem da Tribo');//also present in many ther tribes related - GibaPhp
+define('_MD_YOGURT_TRIBE_TITLE', 'Título');//also present in many ther tribes related - GibaPhp
+define('_MD_YOGURT_TRIBE_DESC', 'Descrição');//also present in many ther tribes related - GibaPhp
+define('_MD_YOGURTCREATEYOURTRIBE', 'Crie a sua própria Tribo!');//also present in many ther tribes related - GibaPhp
 
 //abandontribe.php
 define('_MD_YOGURT_ASKCONFIRMABANDONTRIBE', 'Tem certeza de que deseja sair desta Tribo?'); //GibaPhp
@@ -178,11 +178,11 @@ define('_MD_YOGURT_CONFIRMTRIBEDELETION', 'Sim, apague essa Tribo!'); //GibaPhp
 define('_MD_YOGURT_TRIBEDELETED', 'Tribo apagada!'); //GibaPhp
 
 //edit_tribe.php
-define('_MD_YOGURT_MAINTAINOLDIMAGE', 'Manter esta imagem'); //also present in other tribes related - GibaPhp
+define('_MD_YOGURT_MAINTAINOLDIMAGE', 'Manter esta imagem');//also present in other tribes related - GibaPhp
 define('_MD_YOGURT_TRIBEEDITED', 'Tribo editada'); //GibaPhp
-define('_MD_YOGURT_EDIT_TRIBE', 'Editar sua Tribo'); //also present in other tribes related - GibaPhp
-define('_MD_YOGURT_TRIBEOWNER', 'Você é o dono deste Tribo!'); //also present in other tribes related - GibaPhp
-define('_MD_YOGURT_MEMBERSDOFTRIBE', 'Os membros desta Tribo'); //also present in other tribes related - GibaPhp
+define('_MD_YOGURT_EDIT_TRIBE', 'Editar sua Tribo');//also present in other tribes related - GibaPhp
+define('_MD_YOGURT_TRIBEOWNER', 'Você é o dono deste Tribo!');//also present in other tribes related - GibaPhp
+define('_MD_YOGURT_MEMBERSDOFTRIBE', 'Os membros desta Tribo');//also present in other tribes related - GibaPhp
 
 //submit_tribe.php
 define('_MD_YOGURT_TRIBE_CREATED', 'Sua Tribo foi criada'); //GibaPhp
@@ -202,9 +202,9 @@ define('_MD_YOGURT_TRIBE_SEARCHKEYWORD', 'Palavra-chave'); //GibaPhp
 //notebook.php
 define('_MD_YOGURT_ENTERTEXTNOTE', 'Digite o texto ou códigos Especiais'); //GibaPhp
 define('_MD_YOGURT_SENDNOTE', 'Enviar Note'); //GibaPhp
-define('_MD_YOGURT_ANSWERNOTE', 'Responder'); //also present in configs.php - GibaPhp
+define('_MD_YOGURT_ANSWERNOTE', 'Responder');//also present in configs.php - GibaPhp
 define('_MD_YOGURT_MYNOTEBOOK', 'Meu Notebook'); //GibaPhp
-define('_MD_YOGURT_CANCEL', 'Cancelar'); //also present in configs.php - GibaPhp
+define('_MD_YOGURT_CANCEL', 'Cancelar');//also present in configs.php - GibaPhp
 define('_MD_YOGURT_NOTETIPS', 'Dicas de Note'); //GibaPhp
 define('_MD_YOGURT_BOLD', 'Negrito'); //GibaPhp
 define('_MD_YOGURT_ITALIC', 'itálico'); //GibaPhp
@@ -241,8 +241,8 @@ define('_MD_YOGURT_CONFIGSSAVE', 'Configuração Salva!'); //GibaPhp
 
 //class/yogurt_controler.php
 define(
-	'_MD_YOGURT_NOPRIVILEGE',
-	'O proprietário deste perfil alterou os privilégios para vê-lo, <br /> e ficou superior em relação ao que você tem agora. <br />Faça o Login para tornar-se seu amigo. <br />Se eles não confirmaram ainda as permissões, talvez seja este o motivo que só eles possam ver. <br />Após ajustado isto, você será capaz de vê-lo.'
+    '_MD_YOGURT_NOPRIVILEGE',
+    'O proprietário deste perfil alterou os privilégios para vê-lo, <br /> e ficou superior em relação ao que você tem agora. <br />Faça o Login para tornar-se seu amigo. <br />Se eles não confirmaram ainda as permissões, talvez seja este o motivo que só eles possam ver. <br />Após ajustado isto, você será capaz de vê-lo.'
 ); //GibaPhp - Tenho grande dúvida aqui.
 
 ###################################### OTHERS ##############################
@@ -271,7 +271,7 @@ define('_MD_YOGURT_SUSPENSIONADMIN', 'Ferramenta para Administrar Suspensão'); 
 
 //suspend.php
 define('_MD_YOGURT_SUSPENDED', 'Usuário está suspenso até %s'); //GibaPhp
-define('_MD_YOGURT_USERSUSPENDED', 'Usuário suspenso!'); //als0 present in index.php -GibaPhp
+define('_MD_YOGURT_USERSUSPENDED', 'Usuário suspenso!');//als0 present in index.php -GibaPhp
 
 //unsuspend.php
 define('_MD_YOGURT_USERUNSUSPENDED', 'Usuário Liberado'); //GibaPhp

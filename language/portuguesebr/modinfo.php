@@ -76,8 +76,8 @@ define('_MI_YOGURT_LAST', 'Bloco de últimas fotos');
 define('_MI_YOGURT_LAST_DESC', 'Últimas fotos postadas, independente do álbum');
 define('_MI_YOG_DELETEPHYSICAL_TITLE', 'Apagar arquivos da pasta upload também');
 define(
-	'_MI_YOG_DELETEPHYSICAL_DESC',
-	'Dizer sim aqui, permitirá que as fotos enviadas sejam apagadas da pasta bem como do banco de dados<br /> Tenha cuidado com esta opção, pois se você excluir o arquivo da pasta e não só do banco de dados as pessoas que criaram links diretos para a foto em outra parte do site perderão o conteúdo,<br /> ao mesmo tempo, se você excluí-las, as fotos podem ocupar muito espaço no servidor<br />Configures este item de acordo com as suas necessidades.'
+    '_MI_YOG_DELETEPHYSICAL_DESC',
+    'Dizer sim aqui, permitirá que as fotos enviadas sejam apagadas da pasta bem como do banco de dados<br /> Tenha cuidado com esta opção, pois se você excluir o arquivo da pasta e não só do banco de dados as pessoas que criaram links diretos para a foto em outra parte do site perderão o conteúdo,<br /> ao mesmo tempo, se você excluí-las, as fotos podem ocupar muito espaço no servidor<br />Configures este item de acordo com as suas necessidades.'
 );
 
 define('_MI_YOGURT_MYVIDEOS', 'Meus Videos'); //GibaPhp

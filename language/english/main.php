@@ -25,10 +25,10 @@ define('_MD_YOGURT_CAPTION', 'Caption');
 define('_MD_YOGURT_YOUCANUPLOAD', "You can only upload jpg's files and up to %s KBytes in size");
 define('_MD_YOGURT_UPLOADPICTURE', 'Upload Picture');
 define(
-	'_MD_YOGURT_NOCACHACA',
-	'Bad, Bad Module...No cacha�a for you!<br />
+    '_MD_YOGURT_NOCACHACA',
+    'Bad, Bad Module...No cacha�a for you!<br />
 Unfortunately, this module has acted in an unexpected way. Hopefully it will return to its helpful self if you try again. '
-); //Funny general error message
+);//Funny general error message
 define('_MD_YOGURT_PAGETITLE', "%s - %s's Social Network");
 define('_MD_YOGURT_SUBMIT', 'Submit');
 define('_MD_YOGURT_VIDEOS', 'Videos');
@@ -73,7 +73,7 @@ define('_MD_YOGURT_UNPRIVATIZED', 'From now everyone can see this image in your 
 ########################################################## FRIENDS ###################################################
 //friends.php
 define('_MD_YOGURT_FRIENDSTITLE', "%s's Friends");
-define('_MD_YOGURT_NOFRIENDSYET', 'No friends yet'); //also present in index.php
+define('_MD_YOGURT_NOFRIENDSYET', 'No friends yet');//also present in index.php
 define('_MD_YOGURT_MYFRIENDS', 'My Friends');
 define('_MD_YOGURT_FRIENDSHIPCONFIGS', 'Set the configs of this friendship. Evaluate your friend.');
 
@@ -82,11 +82,11 @@ define('_MD_YOGURT_EDITFRIENDSHIP', 'Your friendship with this member:');
 define('_MD_YOGURT_FRIENDNAME', 'Username');
 define('_MD_YOGURT_LEVEL', 'Friendship level:');
 define('_MD_YOGURT_UNKNOWNACCEPTED', "Haven't met accepted");
-define('_MD_YOGURT_AQUAITANCE', 'Acquaintances'); //also present in index.php
-define('_MD_YOGURT_FRIEND', 'Friend'); //also present in index.php
-define('_MD_YOGURT_BESTFRIEND', 'Best Friend'); //also present in index.php
-define('_MD_YOGURT_FAN', 'Fan'); //also present in index.php
-define('_MD_YOGURT_SEXY', 'Sexy'); //also present in index.php
+define('_MD_YOGURT_AQUAITANCE', 'Acquaintances');//also present in index.php
+define('_MD_YOGURT_FRIEND', 'Friend');//also present in index.php
+define('_MD_YOGURT_BESTFRIEND', 'Best Friend');//also present in index.php
+define('_MD_YOGURT_FAN', 'Fan');//also present in index.php
+define('_MD_YOGURT_SEXY', 'Sexy');//also present in index.php
 define('_MD_YOGURT_SEXYNO', 'Nope');
 define('_MD_YOGURT_SEXYYES', 'Yes');
 define('_MD_YOGURT_SEXYALOT', 'Very much!');
@@ -123,8 +123,8 @@ define('_MD_YOGURT_YOUTUBECODE', 'YouTube code or URL');
 define('_MD_YOGURT_ADDVIDEO', 'Add video');
 define('_MD_YOGURT_ADDFAVORITEVIDEOS', 'Add favourite videos');
 define(
-	'_MD_YOGURT_ADDVIDEOSHELP',
-	'If you want to upload your own video for sharing, then upload your videos to 
+    '_MD_YOGURT_ADDVIDEOSHELP',
+    'If you want to upload your own video for sharing, then upload your videos to 
 <a href=http://www.youtube.com>YouTube</a> and then add the URL to here '
 ); //The name of the site will show after this
 define('_MD_YOGURT_MYVIDEOS', 'My Videos');
@@ -142,11 +142,11 @@ define('_MD_YOGURT_VIDEOSAVED', 'Your video was saved');
 ############################## TRIBES ########################################################
 //class/Tribes.php
 define('_MD_YOGURT_SUBMIT_TRIBE', 'Create a new tribe');
-define('_MD_YOGURT_UPLOADTRIBE', 'Save Tribe'); //also present in many ther tribes related
-define('_MD_YOGURT_TRIBE_IMAGE', 'Tribe Image'); //also present in many ther tribes related
-define('_MD_YOGURT_TRIBE_TITLE', 'Title'); //also present in many ther tribes related
-define('_MD_YOGURT_TRIBE_DESC', 'Description'); //also present in many ther tribes related
-define('_MD_YOGURTCREATEYOURTRIBE', 'Create your own Tribe!'); //also present in many ther tribes related
+define('_MD_YOGURT_UPLOADTRIBE', 'Save Tribe');//also present in many ther tribes related
+define('_MD_YOGURT_TRIBE_IMAGE', 'Tribe Image');//also present in many ther tribes related
+define('_MD_YOGURT_TRIBE_TITLE', 'Title');//also present in many ther tribes related
+define('_MD_YOGURT_TRIBE_DESC', 'Description');//also present in many ther tribes related
+define('_MD_YOGURTCREATEYOURTRIBE', 'Create your own Tribe!');//also present in many ther tribes related
 
 //abandontribe.php
 define('_MD_YOGURT_ASKCONFIRMABANDONTRIBE', 'Are you sure you want to leave this Tribe?');
@@ -163,11 +163,11 @@ define('_MD_YOGURT_CONFIRMTRIBEDELETION', 'Yes, please delete this Tribe!');
 define('_MD_YOGURT_TRIBEDELETED', 'Tribe deleted!');
 
 //edit_tribe.php
-define('_MD_YOGURT_MAINTAINOLDIMAGE', 'Keep this image'); //also present in other tribes related
+define('_MD_YOGURT_MAINTAINOLDIMAGE', 'Keep this image');//also present in other tribes related
 define('_MD_YOGURT_TRIBEEDITED', 'Tribe edited');
-define('_MD_YOGURT_EDIT_TRIBE', 'Edit your Tribe'); //also present in other tribes related
-define('_MD_YOGURT_TRIBEOWNER', 'You are the owner of this Tribe!'); //also present in other tribes related
-define('_MD_YOGURT_MEMBERSDOFTRIBE', 'Members of Tribe'); //also present in other tribes related
+define('_MD_YOGURT_EDIT_TRIBE', 'Edit your Tribe');//also present in other tribes related
+define('_MD_YOGURT_TRIBEOWNER', 'You are the owner of this Tribe!');//also present in other tribes related
+define('_MD_YOGURT_MEMBERSDOFTRIBE', 'Members of Tribe');//also present in other tribes related
 
 //submit_tribe.php
 define('_MD_YOGURT_TRIBE_CREATED', 'Your Tribe was created');
@@ -187,9 +187,9 @@ define('_MD_YOGURT_TRIBE_SEARCHKEYWORD', 'Keyword');
 //notebook.php
 define('_MD_YOGURT_ENTERTEXTNOTE', 'Enter Text or Xoops Codes');
 define('_MD_YOGURT_SENDNOTE', 'post Note');
-define('_MD_YOGURT_ANSWERNOTE', 'Reply'); //also present in configs.php
+define('_MD_YOGURT_ANSWERNOTE', 'Reply');//also present in configs.php
 define('_MD_YOGURT_MYNOTEBOOK', 'My Notebook');
-define('_MD_YOGURT_CANCEL', 'Cancel'); //also present in configs.php
+define('_MD_YOGURT_CANCEL', 'Cancel');//also present in configs.php
 define('_MD_YOGURT_NOTETIPS', 'Note tips');
 define('_MD_YOGURT_BOLD', 'bold');
 define('_MD_YOGURT_ITALIC', 'italic');
@@ -253,7 +253,7 @@ define('_MD_YOGURT_SUSPENSIONADMIN', 'Suspension Admin Tools');
 
 //suspend.php
 define('_MD_YOGURT_SUSPENDED', 'User under suspension until %s');
-define('_MD_YOGURT_USERSUSPENDED', 'User suspended!'); //als0 present in index.php
+define('_MD_YOGURT_USERSUSPENDED', 'User suspended!');//als0 present in index.php
 
 //unsuspend.php
 define('_MD_YOGURT_USERUNSUSPENDED', 'User Unsuspended');

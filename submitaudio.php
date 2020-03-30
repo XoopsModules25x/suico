@@ -24,7 +24,7 @@ use XoopsModules\Yogurt;
  */
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
-require __DIR__.'/header.php';
+require __DIR__ . '/header.php';
 
 /**
  * Modules class includes
@@ -46,33 +46,33 @@ $author = $myts->displayTarea($_POST['author'], 0, 1, 1, 1, 1);
 /**
  * Getting parameters defined in admin side
  */
-$path_upload  = XOOPS_ROOT_PATH.'/uploads/yogurt/mp3/';
+$path_upload  = XOOPS_ROOT_PATH . '/uploads/yogurt/mp3/';
 $maxfilebytes = $xoopsModuleConfig['maxfilesize'];
 
 /**
  * If we are receiving a file
  */
 if ('sel_audio' == $_POST['xoops_upload_file'][0]) {
-	/**
-	 * Verify Token
-	 */
-	if (!$GLOBALS['xoopsSecurity']->check()) {
-		redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
-	}
+    /**
+     * Verify Token
+     */
+    if (!$GLOBALS['xoopsSecurity']->check()) {
+        redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    }
 
-	/**
-	 * Try to upload picture resize it insert in database and then redirect to index
-	 */
-	if ($audioFactory->receiveAudio($title, $path_upload, $author, $maxfilebytes)) {
-		//$extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
-		//                     $extra_tags['X_OWNER_UID'] = $xoopsUser->getVar('uid');
-		//                     $notificationHandler = xoops_getHandler('notification');
-		//                     $notificationHandler->triggerEvent ("picture", $xoopsUser->getVar('uid'), "new_picture",$extra_tags);
-		//header("Location: ".XOOPS_URL."/modules/yogurt/index.php?uid=".$xoopsUser->getVar('uid'));
-		redirect_header(XOOPS_URL . '/modules/yogurt/audio.php?uid=' . $xoopsUser->getVar('uid'), 50, _MD_YOGURT_UPLOADEDAUDIO);
-	} else {
-		redirect_header(XOOPS_URL . '/modules/yogurt/audio.php?uid=' . $xoopsUser->getVar('uid'), 50, _MD_YOGURT_NOCACHACA);
-	}
+    /**
+     * Try to upload picture resize it insert in database and then redirect to index
+     */
+    if ($audioFactory->receiveAudio($title, $path_upload, $author, $maxfilebytes)) {
+        //$extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
+        //                     $extra_tags['X_OWNER_UID'] = $xoopsUser->getVar('uid');
+        //                     $notificationHandler = xoops_getHandler('notification');
+        //                     $notificationHandler->triggerEvent ("picture", $xoopsUser->getVar('uid'), "new_picture",$extra_tags);
+        //header("Location: ".XOOPS_URL."/modules/yogurt/index.php?uid=".$xoopsUser->getVar('uid'));
+        redirect_header(XOOPS_URL . '/modules/yogurt/audio.php?uid=' . $xoopsUser->getVar('uid'), 50, _MD_YOGURT_UPLOADEDAUDIO);
+    } else {
+        redirect_header(XOOPS_URL . '/modules/yogurt/audio.php?uid=' . $xoopsUser->getVar('uid'), 50, _MD_YOGURT_NOCACHACA);
+    }
 }
 
 /**

@@ -32,22 +32,22 @@ use XoopsModules\Yogurt\Constants;
  */
 class Utility extends Common\SysUtility
 {
-	//--------------- Custom module methods -----------------------------
+    //--------------- Custom module methods -----------------------------
 
-	/**
-	 * Access the only instance of this class
-	 *
-	 * @return object
-	 *
-	 */
-	public static function getInstance()
-	{
-		static $instance;
-		if (null === $instance) {
-			$instance = new static();
-		}
+    /**
+     * Access the only instance of this class
+     *
+     * @return object
+     *
+     */
+    public static function getInstance()
+    {
+        static $instance;
+        if (null === $instance) {
+            $instance = new static();
+        }
 
-		return $instance;
-	}
+        return $instance;
+    }
 
 }

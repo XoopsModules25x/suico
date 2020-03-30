@@ -20,7 +20,7 @@
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_seutubo.tpl';
-require __DIR__.'/header.php';
+require __DIR__ . '/header.php';
 
 $controler = new Yogurt\VideoControler($xoopsDB, $xoopsUser);
 
@@ -29,7 +29,7 @@ $controler = new Yogurt\VideoControler($xoopsDB, $xoopsUser);
  */
 $nbSections = $controler->getNumbersSections();
 
-$start = isset($_GET['start']) ? (int) $_GET['start'] : 0;
+$start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
 
 /**
  * Criteria for Videos
@@ -46,9 +46,9 @@ $videos       = $controler->getVideos($criteriaUidVideo);
 $videos_array = $controler->assignVideoContent($nbSections['nbVideos'], $videos);
 
 if (is_array($videos_array)) {
-	$xoopsTpl->assign('videos', $videos_array);
+    $xoopsTpl->assign('videos', $videos_array);
 } else {
-	$xoopsTpl->assign('lang_novideoyet', _MD_YOGURT_NOVIDEOSYET);
+    $xoopsTpl->assign('lang_novideoyet', _MD_YOGURT_NOVIDEOSYET);
 }
 
 $pageNav = $controler->VideosNavBar($nbSections['nbVideos'], $xoopsModuleConfig['videosperpage'], $start, 2);
@@ -60,7 +60,7 @@ $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname'
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
 if (preg_match('/msie/', strtolower($_SERVER['HTTP_USER_AGENT']))) {
-	$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
+    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
 }
 //$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/css/lightbox.css');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/prototype.js');
@@ -131,4 +131,4 @@ $xoopsTpl->assign('lang_videohelp', _MD_YOGURT_ADDVIDEOSHELP);
 //Videos NAvBAr
 $xoopsTpl->assign('pageNav', $pageNav);
 
-include __DIR__.'/../../footer.php';
+include __DIR__ . '/../../footer.php';

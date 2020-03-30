@@ -20,9 +20,9 @@ namespace XoopsModules\Yogurt;
  * @since
  */
 
-include_once XOOPS_ROOT_PATH.'/kernel/object.php';
-include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
-include_once XOOPS_ROOT_PATH.'/class/criteria.php';
+include_once XOOPS_ROOT_PATH . '/kernel/object.php';
+include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+include_once XOOPS_ROOT_PATH . '/class/criteria.php';
 include_once '../../class/pagenav.php';
 /**
  * Module classes
@@ -39,7 +39,7 @@ include_once '../../class/pagenav.php';
 //include_once 'class/Configs.php';
 //include_once 'class/Suspensions.php';
 if (str_replace('.', '', PHP_VERSION) > 499) {
-	include_once 'class/class.Id3v1.php';
+    include_once 'class/class.Id3v1.php';
 }
 
 /**
@@ -47,25 +47,25 @@ if (str_replace('.', '', PHP_VERSION) > 499) {
  */
 class ControlerPhotos extends YogurtControler
 {
-	/**
-	 * @return bool|void
-	 */
-	public function checkPrivilege()
-	{
-		global $xoopsModuleConfig;
-		if (0 == $xoopsModuleConfig['enable_pictures']) {
-			redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_PICTURESNOTENABLED);
-		}
-		$criteria = new \Criteria('config_uid', $this->owner->getVar('uid'));
-		if (1 == $this->configsFactory->getCount($criteria)) {
-			$configs = $this->configsFactory->getObjects($criteria);
+    /**
+     * @return bool|void
+     */
+    public function checkPrivilege()
+    {
+        global $xoopsModuleConfig;
+        if (0 == $xoopsModuleConfig['enable_pictures']) {
+            redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_PICTURESNOTENABLED);
+        }
+        $criteria = new \Criteria('config_uid', $this->owner->getVar('uid'));
+        if (1 == $this->configsFactory->getCount($criteria)) {
+            $configs = $this->configsFactory->getObjects($criteria);
 
-			$config = $configs[0]->getVar('pictures');
+            $config = $configs[0]->getVar('pictures');
 
-			if (!$this->checkPrivilegeLevel($config)) {
-				redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, _MD_YOGURT_NOPRIVILEGE);
-			}
-		}
-		return true;
-	}
+            if (!$this->checkPrivilegeLevel($config)) {
+                redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, _MD_YOGURT_NOPRIVILEGE);
+            }
+        }
+        return true;
+    }
 }
