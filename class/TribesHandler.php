@@ -472,7 +472,7 @@ var elestyle = xoopsGetElementById(img).style;
         $resized = imagecreatefromgif('images/tribetemplate.gif');
 
         $imagem   = imagecopymerge($resized, $img, $x1, $y1, $x2, $y2, $w, $h, 90);
-        $gif_name = 'tribe_' . $xoopsUser->getVar('uid') . rand(1000000, 9999999) . '.gif';
+        $gif_name = 'tribe_' . $xoopsUser->getVar('uid') . mt_rand(1000000, 9999999) . '.gif';
         imagegif($resized, $path_upload . '/' . $gif_name);
         imagedestroy($resized);
         imagedestroy($img);
