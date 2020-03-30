@@ -149,7 +149,7 @@ text-align:center;
 }
 
 div#yogurt-profile-avatar img{
-border:2px solid black;
+border:2px solid #000000;
 }
 
 div#yogurt-profile-mainvideo{
@@ -246,10 +246,10 @@ float:left;
 form.yogurt-Note-form{
 height:75px;
 width:450px;
-border:1px solid black;
+border:1px solid #000000;
 padding:1px;
 margin:auto;
-background-color:white;
+background-color: #ffffff;
 text-align:center;
 }
 

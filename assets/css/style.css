@@ -111,7 +111,7 @@
 }
 
 #extgallery #viewecard {
-    border: 1px solid black;
+    border: 1px solid #000000;
     padding: 7px;
     margin: 0 auto 0 auto;
 }
