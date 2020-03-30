@@ -434,10 +434,11 @@ var elestyle = xoopsGetElementById(img).style;
     /**
      * Resize a picture and save it to $path_upload
      *
-     * @param      $img_path
-     * @param int  $thumbwidth  the width in pixels that the thumbnail will have
-     * @param int  $thumbheight the height in pixels that the thumbnail will have
+     * @param        $img_path
+     * @param int    $thumbwidth  the width in pixels that the thumbnail will have
+     * @param int    $thumbheight the height in pixels that the thumbnail will have
      * @param string $path_upload The path to where the files should be saved after resizing
+     * @return string
      */
     public function resizeImage2($img_path, $thumbwidth, $thumbheight, $path_upload)
     {
