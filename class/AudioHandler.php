@@ -88,15 +88,15 @@ class AudioHandler extends \XoopsObjectHandler
         if ($yogurtAudio->isNew()) {
             // ajout/modification d'un yogurt_audio
             $yogurtAudio = new Audio();
-            $format = 'INSERT INTO %s (audio_id, title, author, url, uid_owner, data_creation, data_update)';
-            $format .= ' VALUES (%u, %s, %s, %s, %u, %s, %s)';
-            $sql = sprintf($format, $this->db->prefix('yogurt_audio'), $audio_id, $this->db->quoteString($title), $this->db->quoteString($author), $this->db->quoteString($url), $uid_owner, $now, $now);
-            $force = true;
+            $format      = 'INSERT INTO %s (audio_id, title, author, url, uid_owner, data_creation, data_update)';
+            $format      .= ' VALUES (%u, %s, %s, %s, %u, %s, %s)';
+            $sql         = sprintf($format, $this->db->prefix('yogurt_audio'), $audio_id, $this->db->quoteString($title), $this->db->quoteString($author), $this->db->quoteString($url), $uid_owner, $now, $now);
+            $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'audio_id=%u, title=%s, author=%s, url=%s, uid_owner=%u, data_creation=%s, data_update=%s';
             $format .= ' WHERE audio_id = %u';
-            $sql = sprintf($format, $this->db->prefix('yogurt_audio'), $audio_id, $this->db->quoteString($title), $this->db->quoteString($author), $this->db->quoteString($url), $uid_owner, $now, $now, $audio_id);
+            $sql    = sprintf($format, $this->db->prefix('yogurt_audio'), $audio_id, $this->db->quoteString($title), $this->db->quoteString($author), $this->db->quoteString($url), $uid_owner, $now, $now, $audio_id);
         }
         if (false !== $force) {
             $result = $this->db->queryF($sql);
@@ -143,14 +143,14 @@ class AudioHandler extends \XoopsObjectHandler
      * retrieve yogurt_audios from the database
      *
      * @param \CriteriaElement $criteria  {@link \CriteriaElement} conditions to be met
-     * @param bool            $id_as_key use the UID as key for the array?
+     * @param bool             $id_as_key use the UID as key for the array?
      * @return array array of {@link yogurt_audio} objects
      */
     public function &getObjects($criteria = null, $id_as_key = false)
     {
-        $ret = [];
+        $ret   = [];
         $limit = $start = 0;
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_audio');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_audio');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
@@ -223,7 +223,7 @@ class AudioHandler extends \XoopsObjectHandler
      * @param string $title       A litle description of the file
      * @param string $path_upload The path to where the file should be uploaded
      * @param string $author      the author of the music or audio file
-     * @param      $maxfilebytes
+     * @param        $maxfilebytes
      * @return bool FALSE if upload fails or database fails
      */
     public function receiveAudio($title, $path_upload, $author, $maxfilebytes)
@@ -237,7 +237,7 @@ class AudioHandler extends \XoopsObjectHandler
 
         // mimetypes and settings put this in admin part later
         $allowed_mimetypes = ['audio/mp3', 'audio/x-mp3', 'audio/mpeg'];
-        $maxfilesize = $maxfilebytes;
+        $maxfilesize       = $maxfilebytes;
 
         // create the object to upload
         $uploader = new \XoopsMediaUploader($path_upload, $allowed_mimetypes, $maxfilesize);
@@ -255,7 +255,7 @@ class AudioHandler extends \XoopsObjectHandler
             // now let s create a new object audio and set its variables
             //echo "passei aqui";
             $audio = $this->create();
-            $url = $uploader->getSavedFileName();
+            $url   = $uploader->getSavedFileName();
             $audio->setVar('url', $url);
             $audio->setVar('title', $title);
             $audio->setVar('author', $author);
@@ -263,7 +263,7 @@ class AudioHandler extends \XoopsObjectHandler
             $audio->setVar('uid_owner', $uid);
             $this->insert($audio);
             $saved_destination = $uploader->getSavedDestination();
-        //print_r($_FILES);
+            //print_r($_FILES);
         } else {
             echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
 

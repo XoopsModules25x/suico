@@ -87,15 +87,15 @@ class SuspensionsHandler extends \XoopsObjectHandler
         if ($suspensions->isNew()) {
             // ajout/modification d'un Suspensions
             $suspensions = new Suspensions();
-            $format = 'INSERT INTO %s (uid, old_pass, old_email, old_signature, suspension_time)';
-            $format .= 'VALUES (%u, %s, %s, %s, %u)';
-            $sql = sprintf($format, $this->db->prefix('yogurt_suspensions'), $uid, $this->db->quoteString($old_pass), $this->db->quoteString($old_email), $this->db->quoteString($old_signature), $suspension_time);
-            $force = true;
+            $format      = 'INSERT INTO %s (uid, old_pass, old_email, old_signature, suspension_time)';
+            $format      .= 'VALUES (%u, %s, %s, %s, %u)';
+            $sql         = sprintf($format, $this->db->prefix('yogurt_suspensions'), $uid, $this->db->quoteString($old_pass), $this->db->quoteString($old_email), $this->db->quoteString($old_signature), $suspension_time);
+            $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'uid=%u, old_pass=%s, old_email=%s, old_signature=%s, suspension_time=%u';
             $format .= ' WHERE uid = %u';
-            $sql = sprintf($format, $this->db->prefix('yogurt_suspensions'), $uid, $this->db->quoteString($old_pass), $this->db->quoteString($old_email), $this->db->quoteString($old_signature), $suspension_time, $uid);
+            $sql    = sprintf($format, $this->db->prefix('yogurt_suspensions'), $uid, $this->db->quoteString($old_pass), $this->db->quoteString($old_email), $this->db->quoteString($old_signature), $suspension_time, $uid);
         }
         if (false !== $force) {
             $result = $this->db->queryF($sql);
@@ -142,14 +142,14 @@ class SuspensionsHandler extends \XoopsObjectHandler
      * retrieve yogurt_suspensionss from the database
      *
      * @param \CriteriaElement $criteria  {@link \CriteriaElement} conditions to be met
-     * @param bool            $id_as_key use the UID as key for the array?
+     * @param bool             $id_as_key use the UID as key for the array?
      * @return array array of {@link Suspensions} objects
      */
     public function &getObjects($criteria = null, $id_as_key = false)
     {
-        $ret = [];
+        $ret   = [];
         $limit = $start = 0;
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_suspensions');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_suspensions');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {

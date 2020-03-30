@@ -16,6 +16,7 @@
  * @author       XOOPS Development Team
  * @since
  */
+
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_tribes_results.tpl';
@@ -29,27 +30,27 @@ $controller = new Yogurt\ControllerTribes($xoopsDB, $xoopsUser);
 $nbSections = $controller->getNumbersSections();
 
 $start_all = isset($_GET['start_all']) ? (int)$_GET['start_all'] : 0;
-$start_my = isset($_GET['start_my']) ? (int)$_GET['start_my'] : 0;
+$start_my  = isset($_GET['start_my']) ? (int)$_GET['start_my'] : 0;
 
 $tribe_keyword = trim(htmlspecialchars($_GET['tribe_keyword'], ENT_QUOTES | ENT_HTML5));
 /**
  * All Tribes
  */
-$criteria_title = new \Criteria('tribe_title', '%' . $tribe_keyword . '%', 'LIKE');
-$criteria_desc = new \Criteria('tribe_desc', '%' . $tribe_keyword . '%', 'LIKE');
+$criteria_title  = new \Criteria('tribe_title', '%' . $tribe_keyword . '%', 'LIKE');
+$criteria_desc   = new \Criteria('tribe_desc', '%' . $tribe_keyword . '%', 'LIKE');
 $criteria_tribes = new \CriteriaCompo($criteria_title);
 $criteria_tribes->add($criteria_desc, 'OR');
 $nb_tribes = $controller->tribesFactory->getCount($criteria_tribes);
 $criteria_tribes->setLimit($xoopsModuleConfig['tribesperpage']);
 $criteria_tribes->setStart($start_all);
 $tribes_objects = $controller->tribesFactory->getObjects($criteria_tribes);
-$i = 0;
+$i              = 0;
 foreach ($tribes_objects as $tribe_object) {
-    $tribes[$i]['id'] = $tribe_object->getVar('tribe_id');
+    $tribes[$i]['id']    = $tribe_object->getVar('tribe_id');
     $tribes[$i]['title'] = $tribe_object->getVar('tribe_title');
-    $tribes[$i]['img'] = $tribe_object->getVar('tribe_img');
-    $tribes[$i]['desc'] = $tribe_object->getVar('tribe_desc');
-    $tribes[$i]['uid'] = $tribe_object->getVar('owner_uid');
+    $tribes[$i]['img']   = $tribe_object->getVar('tribe_img');
+    $tribes[$i]['desc']  = $tribe_object->getVar('tribe_desc');
+    $tribes[$i]['uid']   = $tribe_object->getVar('owner_uid');
     $i++;
 }
 
@@ -67,7 +68,7 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
  * Criando a barra de navegao caso tenha muitos amigos
  */
 $barra_navegacao = new \XoopsPageNav($nb_tribes, $xoopsModuleConfig['tribesperpage'], $start_all, 'start_all', 'tribe_keyword=' . $tribe_keyword . '&amp;start_my=' . $start_my);
-$barrinha = $barra_navegacao->renderImageNav(2);
+$barrinha        = $barra_navegacao->renderImageNav(2);
 
 //permissions
 $xoopsTpl->assign('allow_Notes', $controller->checkPrivilegeBySection('Notes'));

@@ -19,13 +19,14 @@ namespace XoopsModules\Yogurt\Common;
  * @license         GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Xoops Development Team
  */
+
 use Xmf\Request;
 use XoopsModules\Yogurt;
 
 //defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 require_once dirname(dirname(dirname(dirname(__DIR__)))) . '/mainfile.php';
-$moduleDirName = basename(dirname(dirname(__DIR__)));
+$moduleDirName      = basename(dirname(dirname(__DIR__)));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 xoops_loadLanguage('filechecker', $moduleDirName);
 
@@ -51,7 +52,7 @@ class FileChecker
         if (null === $redirectFile) {
             $redirectFile = $_SERVER['SCRIPT_NAME'];
         }
-        $moduleDirName = basename(dirname(dirname(__DIR__)));
+        $moduleDirName      = basename(dirname(dirname(__DIR__)));
         $moduleDirNameUpper = mb_strtoupper($moduleDirName);
         if (null === $original_file_path) {
             if (self::fileExists($file_path)) {
@@ -89,7 +90,7 @@ class FileChecker
      */
     public static function copyFile($source_path, $destination_path)
     {
-        $source_path = str_replace('..', '', $source_path);
+        $source_path      = str_replace('..', '', $source_path);
         $destination_path = str_replace('..', '', $destination_path);
 
         return @copy($source_path, $destination_path);

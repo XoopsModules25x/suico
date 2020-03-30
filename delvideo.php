@@ -16,6 +16,7 @@
  * @author       XOOPS Development Team
  * @since
  */
+
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
@@ -35,9 +36,9 @@ if (1 != $_POST['confirm']) {
      */
     $albumFactory = new Yogurt\SeutuboHandler($xoopsDB);
     $criteria_img = new \Criteria('video_id', $cod_video);
-    $uid = (int)$xoopsUser->getVar('uid');
+    $uid          = (int)$xoopsUser->getVar('uid');
     $criteria_uid = new \Criteria('uid_owner', $uid);
-    $criteria = new \CriteriaCompo($criteria_img);
+    $criteria     = new \CriteriaCompo($criteria_img);
     $criteria->add($criteria_uid);
 
     /**

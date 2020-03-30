@@ -16,6 +16,7 @@
  * @author       XOOPS Development Team
  * @since
  */
+
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
@@ -23,7 +24,7 @@ require __DIR__ . '/header.php';
  * Factory of petitions created
  */
 $friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
-$friendshipFactory = new Yogurt\FriendshipHandler($xoopsDB);
+$friendshipFactory     = new Yogurt\FriendshipHandler($xoopsDB);
 
 /**
  * Getting the uid of the user which user want to ask to be friend

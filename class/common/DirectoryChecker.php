@@ -19,13 +19,14 @@ namespace XoopsModules\Yogurt\Common;
  * @license         GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Xoops Development Team
  */
+
 use Xmf\Request;
 use XoopsModules\Yogurt;
 
 //defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 require_once dirname(dirname(dirname(dirname(__DIR__)))) . '/mainfile.php';
-$moduleDirName = basename(dirname(dirname(__DIR__)));
+$moduleDirName      = basename(dirname(dirname(__DIR__)));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 xoops_loadLanguage('directorychecker', $moduleDirName);
 
@@ -52,7 +53,7 @@ class DirectoryChecker
         if (null === $redirectFile) {
             $redirectFile = $_SERVER['SCRIPT_NAME'];
         }
-        $moduleDirName = basename(dirname(dirname(__DIR__)));
+        $moduleDirName      = basename(dirname(dirname(__DIR__)));
         $moduleDirNameUpper = mb_strtoupper($moduleDirName);
         if (!@is_dir($path)) {
             $path_status = "<img src='$pathIcon16/0.png'>";

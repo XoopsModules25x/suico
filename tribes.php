@@ -16,6 +16,7 @@
  * @author       XOOPS Development Team
  * @since
  */
+
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_tribes.tpl';
@@ -29,13 +30,13 @@ $controller = new Yogurt\ControllerTribes($xoopsDB, $xoopsUser);
 $nbSections = $controller->getNumbersSections();
 
 $start_all = isset($_GET['start_all']) ? (int)$_GET['start_all'] : 0;
-$start_my = isset($_GET['start_my']) ? (int)$_GET['start_my'] : 0;
+$start_my  = isset($_GET['start_my']) ? (int)$_GET['start_my'] : 0;
 
 /**
  * All Tribes
  */
 $criteria_tribes = new \Criteria('tribe_id', 0, '>');
-$nb_tribes = $controller->tribesFactory->getCount($criteria_tribes);
+$nb_tribes       = $controller->tribesFactory->getCount($criteria_tribes);
 $criteria_tribes->setLimit($xoopsModuleConfig['tribesperpage']);
 $criteria_tribes->setStart($start_all);
 $tribes = $controller->tribesFactory->getTribes($criteria_tribes);
@@ -43,9 +44,9 @@ $tribes = $controller->tribesFactory->getTribes($criteria_tribes);
 /**
  * My Tribes
  */
-$mytribes = '';
+$mytribes          = '';
 $criteria_mytribes = new \Criteria('rel_user_uid', $controller->uidOwner);
-$nb_mytribes = $controller->reltribeusersFactory->getCount($criteria_mytribes);
+$nb_mytribes       = $controller->reltribeusersFactory->getCount($criteria_mytribes);
 $criteria_mytribes->setLimit($xoopsModuleConfig['tribesperpage']);
 $criteria_mytribes->setStart($start_my);
 $mytribes = $controller->reltribeusersFactory->getTribes('', $criteria_mytribes, 0);
@@ -72,10 +73,10 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
  * Criando a barra de navegao caso tenha muitos amigos
  */
 $barra_navegacao = new \XoopsPageNav($nb_tribes, $xoopsModuleConfig['tribesperpage'], $start_all, 'start_all', 'uid=' . (int)$controller->uidOwner . '&amp;start_my=' . $start_my);
-$barrinha = $barra_navegacao->renderImageNav(2); //alltribes
+$barrinha        = $barra_navegacao->renderImageNav(2); //alltribes
 
 $barra_navegacao_my = new \XoopsPageNav($nb_mytribes, $xoopsModuleConfig['tribesperpage'], $start_my, 'start_my', 'uid=' . (int)$controller->uidOwner . '&amp;start_all=' . $start_all);
-$barrinha_my = $barra_navegacao_my->renderImageNav(2);
+$barrinha_my        = $barra_navegacao_my->renderImageNav(2);
 
 $maxfilebytes = $xoopsModuleConfig['maxfilesize'];
 

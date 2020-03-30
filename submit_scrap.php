@@ -16,6 +16,7 @@
  * @author       XOOPS Development Team
  * @since
  */
+
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
@@ -37,18 +38,18 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
-$myts = MyTextSanitizer::getInstance();
+$myts         = MyTextSanitizer::getInstance();
 $Notebook_uid = $_POST['uid'];
-$Note_text = $myts->displayTarea($_POST['text'], 0, 1, 1, 1, 1);
-$mainform = (!empty($_POST['mainform'])) ? 1 : 0;
-$Note = $NotesFactory->create();
+$Note_text    = $myts->displayTarea($_POST['text'], 0, 1, 1, 1, 1);
+$mainform     = (!empty($_POST['mainform'])) ? 1 : 0;
+$Note         = $NotesFactory->create();
 $Note->setVar('Note_text', $Note_text);
 $Note->setVar('Note_from', $xoopsUser->getVar('uid'));
 $Note->setVar('Note_to', $Notebook_uid);
 $NotesFactory->insert($Note);
 $extra_tags['X_OWNER_NAME'] = $xoopsUser::getUnameFromId($Notebook_uid);
-$extra_tags['X_OWNER_UID'] = $Notebook_uid;
-$notificationHandler = xoops_getHandler('notification');
+$extra_tags['X_OWNER_UID']  = $Notebook_uid;
+$notificationHandler        = xoops_getHandler('notification');
 $notificationHandler->triggerEvent('Note', $xoopsUser->getVar('uid'), 'new_Note', $extra_tags);
 if (1 == $mainform) {
     redirect_header('notebook.php?uid=' . $Notebook_uid, 1, _MD_YOGURT_NOTE_SENT);

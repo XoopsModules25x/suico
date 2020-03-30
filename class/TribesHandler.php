@@ -87,15 +87,15 @@ class TribesHandler extends \XoopsObjectHandler
         if ($yogurt_tribes->isNew()) {
             // ajout/modification d'un Tribes
             $yogurt_tribes = new Tribes();
-            $format = 'INSERT INTO %s (tribe_id, owner_uid, tribe_title, tribe_desc, tribe_img)';
-            $format .= 'VALUES (%u, %u, %s, %s, %s)';
-            $sql = sprintf($format, $this->db->prefix('yogurt_tribes'), $tribe_id, $owner_uid, $this->db->quoteString($tribe_title), $this->db->quoteString($tribe_desc), $this->db->quoteString($tribe_img));
-            $force = true;
+            $format        = 'INSERT INTO %s (tribe_id, owner_uid, tribe_title, tribe_desc, tribe_img)';
+            $format        .= 'VALUES (%u, %u, %s, %s, %s)';
+            $sql           = sprintf($format, $this->db->prefix('yogurt_tribes'), $tribe_id, $owner_uid, $this->db->quoteString($tribe_title), $this->db->quoteString($tribe_desc), $this->db->quoteString($tribe_img));
+            $force         = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'tribe_id=%u, owner_uid=%u, tribe_title=%s, tribe_desc=%s, tribe_img=%s';
             $format .= ' WHERE tribe_id = %u';
-            $sql = sprintf($format, $this->db->prefix('yogurt_tribes'), $tribe_id, $owner_uid, $this->db->quoteString($tribe_title), $this->db->quoteString($tribe_desc), $this->db->quoteString($tribe_img), $tribe_id);
+            $sql    = sprintf($format, $this->db->prefix('yogurt_tribes'), $tribe_id, $owner_uid, $this->db->quoteString($tribe_title), $this->db->quoteString($tribe_desc), $this->db->quoteString($tribe_img), $tribe_id);
         }
         if (false !== $force) {
             $result = $this->db->queryF($sql);
@@ -142,14 +142,14 @@ class TribesHandler extends \XoopsObjectHandler
      * retrieve yogurt_tribess from the database
      *
      * @param \CriteriaElement $criteria  {@link \CriteriaElement} conditions to be met
-     * @param bool            $id_as_key use the UID as key for the array?
+     * @param bool             $id_as_key use the UID as key for the array?
      * @return array array of {@link Tribes} objects
      */
     public function &getObjects($criteria = null, $id_as_key = false)
     {
-        $ret = [];
+        $ret   = [];
         $limit = $start = 0;
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_tribes');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_tribes');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
@@ -180,14 +180,14 @@ class TribesHandler extends \XoopsObjectHandler
      * retrieve yogurt_tribess from the database
      *
      * @param \CriteriaElement $criteria  {@link \CriteriaElement} conditions to be met
-     * @param bool            $id_as_key use the UID as key for the array?
+     * @param bool             $id_as_key use the UID as key for the array?
      * @return array array of {@link Tribes} objects
      */
     public function getTribes($criteria = null, $id_as_key = false)
     {
-        $ret = [];
+        $ret   = [];
         $limit = $start = 0;
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_tribes');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_tribes');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
@@ -203,11 +203,11 @@ class TribesHandler extends \XoopsObjectHandler
 
         $i = 0;
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $ret[$i]['id'] = $myrow['tribe_id'];
+            $ret[$i]['id']    = $myrow['tribe_id'];
             $ret[$i]['title'] = $myrow['tribe_title'];
-            $ret[$i]['img'] = $myrow['tribe_img'];
-            $ret[$i]['desc'] = $myrow['tribe_desc'];
-            $ret[$i]['uid'] = $myrow['owner_uid'];
+            $ret[$i]['img']   = $myrow['tribe_img'];
+            $ret[$i]['desc']  = $myrow['tribe_desc'];
+            $ret[$i]['uid']   = $myrow['owner_uid'];
             $i++;
         }
 
@@ -264,11 +264,11 @@ class TribesHandler extends \XoopsObjectHandler
         $form = new \XoopsThemeForm(_MD_YOGURT_SUBMIT_TRIBE, 'form_tribe', 'submit_tribe.php', 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
 
-        $field_url = new \XoopsFormFile(_MD_YOGURT_TRIBE_IMAGE, 'tribe_img', $maxbytes);
-        $field_title = new \XoopsFormText(_MD_YOGURT_TRIBE_TITLE, 'tribe_title', 35, 55);
-        $field_desc = new \XoopsFormText(_MD_YOGURT_TRIBE_DESC, 'tribe_desc', 35, 55);
-        $field_marker = new \XoopsFormHidden('marker', '1');
-        $button_send = new \XoopsFormButton('', 'submit_button', _MD_YOGURT_UPLOADTRIBE, 'submit');
+        $field_url     = new \XoopsFormFile(_MD_YOGURT_TRIBE_IMAGE, 'tribe_img', $maxbytes);
+        $field_title   = new \XoopsFormText(_MD_YOGURT_TRIBE_TITLE, 'tribe_title', 35, 55);
+        $field_desc    = new \XoopsFormText(_MD_YOGURT_TRIBE_DESC, 'tribe_desc', 35, 55);
+        $field_marker  = new \XoopsFormHidden('marker', '1');
+        $button_send   = new \XoopsFormButton('', 'submit_button', _MD_YOGURT_UPLOADTRIBE, 'submit');
         $field_warning = new \XoopsFormLabel(sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxbytes / 1024));
 
         $form->addElement($field_warning);
@@ -293,12 +293,12 @@ class TribesHandler extends \XoopsObjectHandler
         $form = new \XoopsThemeForm(_MD_YOGURT_EDIT_TRIBE, 'form_edittribe', 'edittribe.php', 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
         $field_tribeid = new \XoopsFormHidden('tribe_id', $tribe->getVar('tribe_id'));
-        $field_url = new \XoopsFormFile(_MD_YOGURT_TRIBE_IMAGE, 'img', $maxbytes);
+        $field_url     = new \XoopsFormFile(_MD_YOGURT_TRIBE_IMAGE, 'img', $maxbytes);
         $field_url->setExtra('style="visibility:hidden;"');
-        $field_title = new \XoopsFormText(_MD_YOGURT_TRIBE_TITLE, 'title', 35, 55, $tribe->getVar('tribe_title'));
-        $field_desc = new \XoopsFormTextArea(_MD_YOGURT_TRIBE_DESC, 'desc', $tribe->getVar('tribe_desc'));
-        $field_marker = new \XoopsFormHidden('marker', '1');
-        $button_send = new \XoopsFormButton('', 'submit_button', _MD_YOGURT_UPLOADTRIBE, 'submit');
+        $field_title   = new \XoopsFormText(_MD_YOGURT_TRIBE_TITLE, 'title', 35, 55, $tribe->getVar('tribe_title'));
+        $field_desc    = new \XoopsFormTextArea(_MD_YOGURT_TRIBE_DESC, 'desc', $tribe->getVar('tribe_desc'));
+        $field_marker  = new \XoopsFormHidden('marker', '1');
+        $button_send   = new \XoopsFormButton('', 'submit_button', _MD_YOGURT_UPLOADTRIBE, 'submit');
         $field_warning = new \XoopsFormLabel(sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxbytes / 1024));
 
         $field_oldpicture = new \XoopsFormLabel(_MD_YOGURT_TRIBE_IMAGE, '<img src="' . XOOPS_UPLOAD_URL . '/' . $tribe->getVar('tribe_img') . '">');
@@ -368,7 +368,7 @@ var elestyle = xoopsGetElementById(img).style;
         if (1 == $change_img) {
             // mimetypes and settings put this in admin part later
             $allowed_mimetypes = ['image/jpeg', 'image/pjpeg'];
-            $maxfilesize = $maxfilebytes;
+            $maxfilesize       = $maxfilebytes;
 
             // create the object to upload
             $uploader = new \XoopsMediaUploader($path_upload, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight);
@@ -387,9 +387,9 @@ var elestyle = xoopsGetElementById(img).style;
                 }
                 // now let s create a new object picture and set its variables
 
-                $url = $uploader->getSavedFileName();
+                $url               = $uploader->getSavedFileName();
                 $saved_destination = $uploader->getSavedDestination();
-                $image_name = $this->resizeImage2($saved_destination, 125, 80, $path_upload);
+                $image_name        = $this->resizeImage2($saved_destination, 125, 80, $path_upload);
                 $tribe->setVar('tribe_img', $image_name);
             } else {
                 echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
@@ -410,15 +410,15 @@ var elestyle = xoopsGetElementById(img).style;
     /**
      * Resize a picture and save it to $path_upload
      *
-     * @param      $img_path
-     * @param int  $thumbwidth  the width in pixels that the thumbnail will have
-     * @param int  $thumbheight the height in pixels that the thumbnail will have
+     * @param        $img_path
+     * @param int    $thumbwidth  the width in pixels that the thumbnail will have
+     * @param int    $thumbheight the height in pixels that the thumbnail will have
      * @param string $path_upload The path to where the files should be saved after resizing
      */
     public function resizeImage($img_path, $thumbwidth, $thumbheight, $path_upload)
     {
-        $path = pathinfo($img_path);
-        $img = imagecreatefromjpeg($img_path);
+        $path   = pathinfo($img_path);
+        $img    = imagecreatefromjpeg($img_path);
         $xratio = $thumbwidth / imagesx($img);
         $yratio = $thumbheight / imagesy($img);
 
@@ -452,25 +452,25 @@ var elestyle = xoopsGetElementById(img).style;
         global $xoopsUser, $xoopsModule;
 
         $path = pathinfo($img_path);
-        $img = imagecreatefromjpeg($img_path);
+        $img  = imagecreatefromjpeg($img_path);
         if (imagesx($img) < 128) {
             $x1 = (128 - imagesx($img)) / 2;
             $x2 = 0;
-            $w = imagesx($img);
+            $w  = imagesx($img);
         } else {
             $x1 = 0;
             $x2 = (imagesx($img) - 128) / 2;
-            $w = 125;
+            $w  = 125;
         }
 
         if (imagesy($img) < 80) {
             $y1 = (80 - imagesy($img)) / 2;
             $y2 = 0;
-            $h = imagesy($img);
+            $h  = imagesy($img);
         } else {
             $y1 = 0;
             $y2 = (imagesy($img) - 80) / 2;
-            $h = 80;
+            $h  = 80;
         }
 
         $xratio = $thumbwidth / imagesx($img);
@@ -478,7 +478,7 @@ var elestyle = xoopsGetElementById(img).style;
 
         $resized = imagecreatefromgif('images/tribetemplate.gif');
 
-        $imagem = imagecopymerge($resized, $img, $x1, $y1, $x2, $y2, $w, $h, 90);
+        $imagem   = imagecopymerge($resized, $img, $x1, $y1, $x2, $y2, $w, $h, 90);
         $gif_name = 'tribe_' . $xoopsUser->getVar('uid') . mt_rand(1000000, 9999999) . '.gif';
         imagegif($resized, $path_upload . '/' . $gif_name);
         imagedestroy($resized);

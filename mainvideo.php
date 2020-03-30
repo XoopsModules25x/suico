@@ -16,6 +16,7 @@
  * @author       XOOPS Development Team
  * @since
  */
+
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
@@ -30,7 +31,7 @@ $cod_img = (int)$_POST['video_id'];
  * Creating the factory  loading the video changing its caption
  */
 $videoFactory = new Yogurt\SeutuboHandler($xoopsDB);
-$video = $videoFactory->create(false);
+$video        = $videoFactory->create(false);
 $video->load($cod_img);
 $video->setVar('main_video', 1);
 

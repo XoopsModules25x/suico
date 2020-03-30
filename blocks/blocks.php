@@ -16,6 +16,7 @@
  * @author       XOOPS Development Team
  * @since
  */
+
 use XoopsModules\Yogurt;
 
 if (!defined('XOOPS_ROOT_PATH')) {
@@ -32,7 +33,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 function b_yogurt_friends_show($options)
 {
     global $xoopsDB, $xoopsModule, $xoopsModuleConfig, $xoopsUser;
-    $myts = MyTextSanitizer::getInstance();
+    $myts  = MyTextSanitizer::getInstance();
     $block = [];
 
     if (!empty($xoopsUser)) {
@@ -73,7 +74,7 @@ function b_yogurt_friends_edit($options)
 function b_yogurt_lastpictures_show($options)
 {
     global $xoopsDB, $xoopsModule, $xoopsModuleConfig;
-    $myts = MyTextSanitizer::getInstance();
+    $myts  = MyTextSanitizer::getInstance();
     $block = [];
 
     /**

@@ -87,15 +87,15 @@ class FriendpetitionHandler extends \XoopsObjectHandler
         if ($yogurt_friendpetition->isNew()) {
             // ajout/modification d'un Friendpetition
             $yogurt_friendpetition = new Friendpetition();
-            $format = 'INSERT INTO %s (friendpet_id, petitioner_uid, petioned_uid)';
-            $format .= 'VALUES (%u, %u, %u)';
-            $sql = sprintf($format, $this->db->prefix('yogurt_friendpetition'), $friendpet_id, $petitioner_uid, $petioned_uid);
-            $force = true;
+            $format                = 'INSERT INTO %s (friendpet_id, petitioner_uid, petioned_uid)';
+            $format                .= 'VALUES (%u, %u, %u)';
+            $sql                   = sprintf($format, $this->db->prefix('yogurt_friendpetition'), $friendpet_id, $petitioner_uid, $petioned_uid);
+            $force                 = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'friendpet_id=%u, petitioner_uid=%u, petioned_uid=%u';
             $format .= ' WHERE friendpet_id = %u';
-            $sql = sprintf($format, $this->db->prefix('yogurt_friendpetition'), $friendpet_id, $petitioner_uid, $petioned_uid, $friendpet_id);
+            $sql    = sprintf($format, $this->db->prefix('yogurt_friendpetition'), $friendpet_id, $petitioner_uid, $petioned_uid, $friendpet_id);
         }
         if (false !== $force) {
             $result = $this->db->queryF($sql);
@@ -142,14 +142,14 @@ class FriendpetitionHandler extends \XoopsObjectHandler
      * retrieve yogurt_friendpetitions from the database
      *
      * @param \CriteriaElement $criteria  {@link \CriteriaElement} conditions to be met
-     * @param bool            $id_as_key use the UID as key for the array?
+     * @param bool             $id_as_key use the UID as key for the array?
      * @return array array of {@link Friendpetition} objects
      */
     public function &getObjects($criteria = null, $id_as_key = false)
     {
-        $ret = [];
+        $ret   = [];
         $limit = $start = 0;
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendpetition');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendpetition');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {

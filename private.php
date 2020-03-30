@@ -16,6 +16,7 @@
  * @author       XOOPS Development Team
  * @since
  */
+
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
@@ -32,7 +33,7 @@ $cod_img = $_POST['cod_img'];
  * Creating the factory  loading the picture changing its caption
  */
 $pictureFactory = new Yogurt\ImageHandler($xoopsDB);
-$picture = $pictureFactory->create(false);
+$picture        = $pictureFactory->create(false);
 $picture->load($cod_img);
 $picture->setVar('private', (int)$_POST['private']);
 

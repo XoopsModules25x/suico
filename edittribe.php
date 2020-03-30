@@ -16,6 +16,7 @@
  * @author       XOOPS Development Team
  * @since
  */
+
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_edittribe.tpl';
@@ -29,23 +30,23 @@ $controller = new Yogurt\ControllerTribes($xoopsDB, $xoopsUser);
 $nbSections = $controller->getNumbersSections();
 
 $tribe_id = (int)$_POST['tribe_id'];
-$marker = (!empty($_POST['marker'])) ? (int)$_POST['marker'] : 0;
+$marker   = (!empty($_POST['marker'])) ? (int)$_POST['marker'] : 0;
 $criteria = new \Criteria('tribe_id', $tribe_id);
-$tribes = $controller->tribesFactory->getObjects($criteria);
-$tribe = $tribes[0];
+$tribes   = $controller->tribesFactory->getObjects($criteria);
+$tribe    = $tribes[0];
 
 $uid = $xoopsUser->getVar('uid');
 
 if (1 == $marker && $tribe->getVar('owner_uid') == $uid) {
-    $title = trim(htmlspecialchars($_POST['title'], ENT_QUOTES | ENT_HTML5));
-    $desc = $_POST['desc'];
-    $img = $_POST['img'];
+    $title     = trim(htmlspecialchars($_POST['title'], ENT_QUOTES | ENT_HTML5));
+    $desc      = $_POST['desc'];
+    $img       = $_POST['img'];
     $updateImg = (1 == $_POST['flag_oldimg']) ? 0 : 1;
 
-    $path_upload = XOOPS_ROOT_PATH . '/uploads';
-    $maxfilebytes = $xoopsModuleConfig['maxfilesize'];
+    $path_upload   = XOOPS_ROOT_PATH . '/uploads';
+    $maxfilebytes  = $xoopsModuleConfig['maxfilesize'];
     $maxfileheight = $xoopsModuleConfig['max_original_height'];
-    $maxfilewidth = $xoopsModuleConfig['max_original_width'];
+    $maxfilewidth  = $xoopsModuleConfig['max_original_width'];
     $controller->tribesFactory->receiveTribe($title, $desc, $img, $path_upload, $maxfilebytes, $maxfilewidth, $maxfileheight, $updateImg, $tribe);
 
     redirect_header('tribes.php?uid=' . $uid, 3, _MD_YOGURT_TRIBEEDITED);

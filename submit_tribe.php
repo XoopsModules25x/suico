@@ -16,6 +16,7 @@
  * @author       XOOPS Development Team
  * @since
  */
+
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
@@ -31,7 +32,7 @@ require __DIR__ . '/header.php';
  * Factories of tribes
  */
 $reltribeuserFactory = new Yogurt\ReltribeuserHandler($xoopsDB);
-$tribesFactory = new Yogurt\TribesHandler($xoopsDB);
+$tribesFactory       = new Yogurt\TribesHandler($xoopsDB);
 
 $marker = isset($_POST['marker']) ? $_POST['marker'] : 0;
 
@@ -43,18 +44,18 @@ if (1 == $marker) {
         redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
     }
 
-    $myts = MyTextSanitizer::getInstance();
-    $tribe_title = $myts->displayTarea($_POST['tribe_title'], 0, 1, 1, 1, 1);
-    $tribe_desc = $myts->displayTarea($_POST['tribe_desc'], 0, 1, 1, 1, 1);
-    $tribe_img = (!empty($_POST['tribe_img'])) ? $_POST['tribe_img'] : '';
-    $path_upload = XOOPS_ROOT_PATH . '/uploads';
-    $pictwidth = $xoopsModuleConfig['resized_width'];
-    $pictheight = $xoopsModuleConfig['resized_height'];
-    $thumbwidth = $xoopsModuleConfig['thumb_width'];
-    $thumbheight = $xoopsModuleConfig['thumb_height'];
-    $maxfilebytes = $xoopsModuleConfig['maxfilesize'];
+    $myts          = MyTextSanitizer::getInstance();
+    $tribe_title   = $myts->displayTarea($_POST['tribe_title'], 0, 1, 1, 1, 1);
+    $tribe_desc    = $myts->displayTarea($_POST['tribe_desc'], 0, 1, 1, 1, 1);
+    $tribe_img     = (!empty($_POST['tribe_img'])) ? $_POST['tribe_img'] : '';
+    $path_upload   = XOOPS_ROOT_PATH . '/uploads';
+    $pictwidth     = $xoopsModuleConfig['resized_width'];
+    $pictheight    = $xoopsModuleConfig['resized_height'];
+    $thumbwidth    = $xoopsModuleConfig['thumb_width'];
+    $thumbheight   = $xoopsModuleConfig['thumb_height'];
+    $maxfilebytes  = $xoopsModuleConfig['maxfilesize'];
     $maxfileheight = $xoopsModuleConfig['max_original_height'];
-    $maxfilewidth = $xoopsModuleConfig['max_original_width'];
+    $maxfilewidth  = $xoopsModuleConfig['max_original_width'];
     if ($tribesFactory->receiveTribe($tribe_title, $tribe_desc, '', $path_upload, $maxfilebytes, $maxfilewidth, $maxfileheight)) {
         $reltribeuser = $reltribeuserFactory->create();
         $reltribeuser->setVar('rel_tribe_id', $xoopsDB->getInsertId());

@@ -22,7 +22,7 @@ namespace XoopsModules\Yogurt;
 include_once XOOPS_ROOT_PATH . '/kernel/object.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 include_once XOOPS_ROOT_PATH . '/class/criteria.php';
-include_once '../../class/pagenav.php';
+include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 /**
  * Module classes
  */
@@ -38,7 +38,7 @@ include_once '../../class/pagenav.php';
 //include_once 'class/Configs.php';
 //include_once 'class/Suspensions.php';
 if (str_replace('.', '', PHP_VERSION) > 499) {
-    include_once 'class/class.Id3v1.php';
+    include_once __DIR__ . '/class.Id3v1.php';
 }
 
 /**
@@ -91,9 +91,9 @@ class VideoController extends YogurtController
          */
         $i = 0;
         foreach ($videos as $video) {
-            $videos_array[$i]['url'] = $video->getVar('youtube_code', 's');
+            $videos_array[$i]['url']  = $video->getVar('youtube_code', 's');
             $videos_array[$i]['desc'] = $video->getVar('video_desc', 's');
-            $videos_array[$i]['id'] = $video->getVar('video_id', 's');
+            $videos_array[$i]['id']   = $video->getVar('video_id', 's');
 
             $i++;
         }
@@ -107,11 +107,13 @@ class VideoController extends YogurtController
      * @param int $videosPerPage the number of videos in a page
      * @param int $start         at which position of the array we start
      * @param int $interval      how many pages between the first link and the next one
+     * @return string|null
+     * @return string|null
      */
     public function VideosNavBar($nbVideos, $videosPerPage, $start, $interval)
     {
         $pageNav = new \XoopsPageNav($nbVideos, $videosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
-        $navBar = $pageNav->renderImageNav($interval);
+        $navBar  = $pageNav->renderImageNav($interval);
 
         return $navBar;
     }

@@ -47,63 +47,63 @@ if ('form' == $op) {
     $GLOBALS['xoopsOption']['template_main'] = 'yogurt_searchform.tpl';
     include XOOPS_ROOT_PATH . '/header.php';
     $memberHandler = xoops_getHandler('member');
-    $total = $memberHandler->getUserCount(new \Criteria('level', 0, '>'));
+    $total         = $memberHandler->getUserCount(new \Criteria('level', 0, '>'));
     include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-    $uname_text = new \XoopsFormText('', 'user_uname', 30, 60);
+    $uname_text  = new \XoopsFormText('', 'user_uname', 30, 60);
     $uname_match = new \XoopsFormSelectMatchOption('', 'user_uname_match');
-    $uname_tray = new \XoopsFormElementTray(_MD_YOGURT_UNAME, '&nbsp;');
+    $uname_tray  = new \XoopsFormElementTray(_MD_YOGURT_UNAME, '&nbsp;');
     $uname_tray->addElement($uname_match);
     $uname_tray->addElement($uname_text);
-    $name_text = new \XoopsFormText('', 'user_name', 30, 60);
+    $name_text  = new \XoopsFormText('', 'user_name', 30, 60);
     $name_match = new \XoopsFormSelectMatchOption('', 'user_name_match');
-    $name_tray = new \XoopsFormElementTray(_MD_YOGURT_REALNAME, '&nbsp;');
+    $name_tray  = new \XoopsFormElementTray(_MD_YOGURT_REALNAME, '&nbsp;');
     $name_tray->addElement($name_match);
     $name_tray->addElement($name_text);
-    $email_text = new \XoopsFormText('', 'user_email', 30, 60);
+    $email_text  = new \XoopsFormText('', 'user_email', 30, 60);
     $email_match = new \XoopsFormSelectMatchOption('', 'user_email_match');
-    $email_tray = new \XoopsFormElementTray(_MD_YOGURT_EMAIL, '&nbsp;');
+    $email_tray  = new \XoopsFormElementTray(_MD_YOGURT_EMAIL, '&nbsp;');
     $email_tray->addElement($email_match);
     $email_tray->addElement($email_text);
     $url_text = new \XoopsFormText(_MD_YOGURT_URLC, 'user_url', 30, 100);
     //$theme_select = new XoopsFormSelectTheme(_MD_YOGURT_THEME, "user_theme");
     //$timezone_select = new XoopsFormSelectTimezone(_MD_YOGURT_TIMEZONE, "user_timezone_offset");
-    $icq_text = new \XoopsFormText('', 'user_icq', 30, 100);
+    $icq_text  = new \XoopsFormText('', 'user_icq', 30, 100);
     $icq_match = new \XoopsFormSelectMatchOption('', 'user_icq_match');
-    $icq_tray = new \XoopsFormElementTray(_MD_YOGURT_ICQ, '&nbsp;');
+    $icq_tray  = new \XoopsFormElementTray(_MD_YOGURT_ICQ, '&nbsp;');
     $icq_tray->addElement($icq_match);
     $icq_tray->addElement($icq_text);
-    $aim_text = new \XoopsFormText('', 'user_aim', 30, 100);
+    $aim_text  = new \XoopsFormText('', 'user_aim', 30, 100);
     $aim_match = new \XoopsFormSelectMatchOption('', 'user_aim_match');
-    $aim_tray = new \XoopsFormElementTray(_MD_YOGURT_AIM, '&nbsp;');
+    $aim_tray  = new \XoopsFormElementTray(_MD_YOGURT_AIM, '&nbsp;');
     $aim_tray->addElement($aim_match);
     $aim_tray->addElement($aim_text);
-    $yim_text = new \XoopsFormText('', 'user_yim', 30, 100);
+    $yim_text  = new \XoopsFormText('', 'user_yim', 30, 100);
     $yim_match = new \XoopsFormSelectMatchOption('', 'user_yim_match');
-    $yim_tray = new \XoopsFormElementTray(_MD_YOGURT_YIM, '&nbsp;');
+    $yim_tray  = new \XoopsFormElementTray(_MD_YOGURT_YIM, '&nbsp;');
     $yim_tray->addElement($yim_match);
     $yim_tray->addElement($yim_text);
-    $msnm_text = new \XoopsFormText('', 'user_msnm', 30, 100);
+    $msnm_text  = new \XoopsFormText('', 'user_msnm', 30, 100);
     $msnm_match = new \XoopsFormSelectMatchOption('', 'user_msnm_match');
-    $msnm_tray = new \XoopsFormElementTray(_MD_YOGURT_MSNM, '&nbsp;');
+    $msnm_tray  = new \XoopsFormElementTray(_MD_YOGURT_MSNM, '&nbsp;');
     $msnm_tray->addElement($msnm_match);
     $msnm_tray->addElement($msnm_text);
-    $location_text = new \XoopsFormText(_MD_YOGURT_LOCATION, 'user_from', 30, 100);
+    $location_text   = new \XoopsFormText(_MD_YOGURT_LOCATION, 'user_from', 30, 100);
     $occupation_text = new \XoopsFormText(_MD_YOGURT_OCCUPATION, 'user_occ', 30, 100);
-    $interest_text = new \XoopsFormText(_MD_YOGURT_INTEREST, 'user_intrest', 30, 100);
+    $interest_text   = new \XoopsFormText(_MD_YOGURT_INTEREST, 'user_intrest', 30, 100);
 
     //$bio_text = new XoopsFormText(_MD_YOGURT_EXTRAINFO, "user_bio", 30, 100);
     $lastlog_more = new \XoopsFormText(_MD_YOGURT_LASTLOGMORE, 'user_lastlog_more', 10, 5);
     $lastlog_less = new \XoopsFormText(_MD_YOGURT_LASTLOGLESS, 'user_lastlog_less', 10, 5);
-    $reg_more = new \XoopsFormText(_MD_YOGURT_REGMORE, 'user_reg_more', 10, 5);
-    $reg_less = new \XoopsFormText(_MD_YOGURT_REGLESS, 'user_reg_less', 10, 5);
-    $posts_more = new \XoopsFormText(_MD_YOGURT_POSTSMORE, 'user_posts_more', 10, 5);
-    $posts_less = new \XoopsFormText(_MD_YOGURT_POSTSLESS, 'user_posts_less', 10, 5);
-    $sort_select = new \XoopsFormSelect(_MD_YOGURT_SORT, 'user_sort');
+    $reg_more     = new \XoopsFormText(_MD_YOGURT_REGMORE, 'user_reg_more', 10, 5);
+    $reg_less     = new \XoopsFormText(_MD_YOGURT_REGLESS, 'user_reg_less', 10, 5);
+    $posts_more   = new \XoopsFormText(_MD_YOGURT_POSTSMORE, 'user_posts_more', 10, 5);
+    $posts_less   = new \XoopsFormText(_MD_YOGURT_POSTSLESS, 'user_posts_less', 10, 5);
+    $sort_select  = new \XoopsFormSelect(_MD_YOGURT_SORT, 'user_sort');
     $sort_select->addOptionArray(['uname' => _MD_YOGURT_UNAME, 'email' => _MD_YOGURT_EMAIL, 'last_login' => _MD_YOGURT_LASTLOGIN, 'user_regdate' => _MD_YOGURT_REGDATE, 'posts' => _MD_YOGURT_POSTS]);
     $order_select = new \XoopsFormSelect(_MD_YOGURT_ORDER, 'user_order');
     $order_select->addOptionArray(['ASC' => _MD_YOGURT_ASC, 'DESC' => _MD_YOGURT_DESC]);
-    $limit_text = new \XoopsFormText(_MD_YOGURT_LIMIT, 'limit', 6, 2);
-    $op_hidden = new \XoopsFormHidden('op', 'submit');
+    $limit_text    = new \XoopsFormText(_MD_YOGURT_LIMIT, 'limit', 6, 2);
+    $op_hidden     = new \XoopsFormHidden('op', 'submit');
     $submit_button = new \XoopsFormButton('', 'user_submit', _SUBMIT, 'submit');
 
     $form = new \XoopsThemeForm('', 'searchform', 'searchmembers.php');
@@ -141,7 +141,7 @@ if ('submit' == $op) {
     $GLOBALS['xoopsOption']['template_main'] = 'yogurt_searchresults.tpl';
     include XOOPS_ROOT_PATH . '/header.php';
     $iamadmin = $xoopsUserIsAdmin;
-    $myts = MyTextSanitizer::getInstance();
+    $myts     = MyTextSanitizer::getInstance();
     $criteria = new \CriteriaCompo();
     if (!empty($_POST['user_uname'])) {
         $match = (!empty($_POST['user_uname_match'])) ? (int)$_POST['user_uname_match'] : XOOPS_MATCH_START;
@@ -280,28 +280,28 @@ if ('submit' == $op) {
     }
     if (!empty($_POST['user_lastlog_more']) && is_numeric($_POST['user_lastlog_more'])) {
         $f_user_lastlog_more = (int)trim($_POST['user_lastlog_more']);
-        $time = time() - (60 * 60 * 24 * $f_user_lastlog_more);
+        $time                = time() - (60 * 60 * 24 * $f_user_lastlog_more);
         if ($time > 0) {
             $criteria->add(new \Criteria('last_login', $time, '<'));
         }
     }
     if (!empty($_POST['user_lastlog_less']) && is_numeric($_POST['user_lastlog_less'])) {
         $f_user_lastlog_less = (int)trim($_POST['user_lastlog_less']);
-        $time = time() - (60 * 60 * 24 * $f_user_lastlog_less);
+        $time                = time() - (60 * 60 * 24 * $f_user_lastlog_less);
         if ($time > 0) {
             $criteria->add(new \Criteria('last_login', $time, '>'));
         }
     }
     if (!empty($_POST['user_reg_more']) && is_numeric($_POST['user_reg_more'])) {
         $f_user_reg_more = (int)trim($_POST['user_reg_more']);
-        $time = time() - (60 * 60 * 24 * $f_user_reg_more);
+        $time            = time() - (60 * 60 * 24 * $f_user_reg_more);
         if ($time > 0) {
             $criteria->add(new \Criteria('user_regdate', $time, '<'));
         }
     }
     if (!empty($_POST['user_reg_less']) && is_numeric($_POST['user_reg_less'])) {
         $f_user_reg_less = (int)$_POST['user_reg_less'];
-        $time = time() - (60 * 60 * 24 * $f_user_reg_less);
+        $time            = time() - (60 * 60 * 24 * $f_user_reg_less);
         if ($time > 0) {
             $criteria->add(new \Criteria('user_regdate', $time, '>'));
         }
@@ -314,8 +314,8 @@ if ('submit' == $op) {
     }
     $criteria->add(new \Criteria('level', 0, '>'));
     $validsort = ['uname', 'email', 'last_login', 'user_regdate', 'posts'];
-    $sort = (!in_array($_POST['user_sort'], $validsort)) ? 'uname' : htmlspecialchars($_POST['user_sort'], ENT_QUOTES | ENT_HTML5);
-    $order = 'ASC';
+    $sort      = (!in_array($_POST['user_sort'], $validsort)) ? 'uname' : htmlspecialchars($_POST['user_sort'], ENT_QUOTES | ENT_HTML5);
+    $order     = 'ASC';
     if (isset($_POST['user_order']) && 'DESC' == $_POST['user_order']) {
         $order = 'DESC';
     }
@@ -324,9 +324,9 @@ if ('submit' == $op) {
         $limit = 50;
     }
 
-    $start = (!empty($_POST['start'])) ? (int)$_POST['start'] : 0;
+    $start         = (!empty($_POST['start'])) ? (int)$_POST['start'] : 0;
     $memberHandler = xoops_getHandler('member');
-    $total = $memberHandler->getUserCount($criteria);
+    $total         = $memberHandler->getUserCount($criteria);
     $xoopsTpl->assign('lang_search', _MD_YOGURT_SEARCH);
     $xoopsTpl->assign('lang_results', _MD_YOGURT_RESULTS);
     $xoopsTpl->assign('total_found', $total);
@@ -352,10 +352,10 @@ if ('submit' == $op) {
         $criteria->setLimit($limit);
         $foundusers = $memberHandler->getUsers($criteria, true);
         foreach (array_keys($foundusers) as $j) {
-            $userdata['avatar'] = $foundusers[$j]->getVar('user_avatar') ? "<img src='" . XOOPS_UPLOAD_URL . '/' . $foundusers[$j]->getVar('user_avatar') . "' alt=''>" : '&nbsp;';
+            $userdata['avatar']   = $foundusers[$j]->getVar('user_avatar') ? "<img src='" . XOOPS_UPLOAD_URL . '/' . $foundusers[$j]->getVar('user_avatar') . "' alt=''>" : '&nbsp;';
             $userdata['realname'] = $foundusers[$j]->getVar('name') ?: '&nbsp;';
-            $userdata['name'] = $foundusers[$j]->getVar('uname');
-            $userdata['id'] = $foundusers[$j]->getVar('uid');
+            $userdata['name']     = $foundusers[$j]->getVar('uname');
+            $userdata['id']       = $foundusers[$j]->getVar('uid');
             if (1 == $foundusers[$j]->getVar('user_viewemail') || $iamadmin) {
                 $userdata['email'] = "<a href='mailto:" . $foundusers[$j]->getVar('email') . "'><img src='" . XOOPS_URL . "/images/icons/email.gif' border='0' alt='" . sprintf(_SENDEMAILTO, $foundusers[$j]->getVar('uname', 'E')) . "'></a>";
             } else {
@@ -363,12 +363,12 @@ if ('submit' == $op) {
             }
             if ($xoopsUser) {
                 $userdata['pmlink'] = "<a href='javascript:openWithSelfMain(\"" . XOOPS_URL . '/pmlite.php?send2=1&amp;to_userid=' . $foundusers[$j]->getVar('uid') . "\",\"pmlite\",450,370);'><img src='" . XOOPS_URL . "/images/icons/pm.gif' border='0' alt='" . sprintf(
-                    _SENDPMTO,
-                    $foundusers[$j]->getVar(
-                        'uname',
-                        'E'
-                    )
-                ) . "'></a>";
+                        _SENDPMTO,
+                        $foundusers[$j]->getVar(
+                            'uname',
+                            'E'
+                        )
+                    ) . "'></a>";
             } else {
                 $userdata['pmlink'] = '&nbsp;';
             }
@@ -417,7 +417,7 @@ if ('submit' == $op) {
             if ($start - $limit >= 0) {
                 $hiddenform .= "<a href='#0' onclick='javascript:document.findnext.start.value=" . $prev . ";document.findnext.submit();'>" . _MD_YOGURT_PREVIOUS . "</a>&nbsp;\n";
             }
-            $counter = 1;
+            $counter     = 1;
             $currentpage = ($start + $limit) / $limit;
             while ($counter <= $totalpages) {
                 if ($counter == $currentpage) {

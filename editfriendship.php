@@ -16,6 +16,7 @@
  * @author       XOOPS Development Team
  * @since
  */
+
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
@@ -25,22 +26,22 @@ if (!$xoopsUser) {
 }
 
 $friendshipFactory = new Yogurt\FriendshipHandler($xoopsDB);
-$friend2_uid = (int)$_POST['friend_uid'];
-$marker = (!empty($_POST['marker'])) ? (int)$_POST['marker'] : 0;
+$friend2_uid       = (int)$_POST['friend_uid'];
+$marker            = (!empty($_POST['marker'])) ? (int)$_POST['marker'] : 0;
 
 $friend = new \XoopsUser($friend2_uid);
 
 if (1 == $marker) {
-    $level = $_POST['level'];
-    $cool = $_POST['cool'];
-    $sexy = $_POST['hot'];
-    $trusty = $_POST['trust'];
-    $fan = $_POST['fan'];
+    $level         = $_POST['level'];
+    $cool          = $_POST['cool'];
+    $sexy          = $_POST['hot'];
+    $trusty        = $_POST['trust'];
+    $fan           = $_POST['fan'];
     $friendship_id = (int)$_POST['friendship_id'];
 
-    $criteria = new \Criteria('friendship_id', $friendship_id);
+    $criteria    = new \Criteria('friendship_id', $friendship_id);
     $friendships = $friendshipFactory->getObjects($criteria);
-    $friendship = $friendships[0];
+    $friendship  = $friendships[0];
     $friendship->setVar('level', $level);
     $friendship->setVar('cool', $cool);
     $friendship->setVar('hot', $sexy);

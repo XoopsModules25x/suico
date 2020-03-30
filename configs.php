@@ -16,6 +16,7 @@
  * @author       XOOPS Development Team
  * @since
  */
+
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_configs.tpl';
@@ -38,14 +39,14 @@ $uid = (int)$xoopsUser->getVar('uid');
 $criteria = new \Criteria('config_uid', $uid);
 if ($configsFactory->getCount($criteria) > 0) {
     $configs = $configsFactory->getObjects($criteria);
-    $config = $configs[0];
+    $config  = $configs[0];
 
-    $pic = $config->getVar('pictures');
-    $aud = $config->getVar('audio');
-    $vid = $config->getVar('videos');
-    $tri = $config->getVar('tribes');
-    $scr = $config->getVar('Notes');
-    $fri = $config->getVar('friends');
+    $pic  = $config->getVar('pictures');
+    $aud  = $config->getVar('audio');
+    $vid  = $config->getVar('videos');
+    $tri  = $config->getVar('tribes');
+    $scr  = $config->getVar('Notes');
+    $fri  = $config->getVar('friends');
     $pcon = $config->getVar('profile_contact');
     $pgen = $config->getVar('profile_general');
     $psta = $config->getVar('profile_stats');

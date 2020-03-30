@@ -102,15 +102,15 @@ class IshotHandler extends \XoopsObjectHandler
         if ($yogurt_ishot->isNew()) {
             // ajout/modification d'un Ishot
             $yogurt_ishot = new Ishot();
-            $format = 'INSERT INTO %s (cod_ishot, uid_voter, uid_voted, ishot, DATE)';
-            $format .= 'VALUES (%u, %u, %u, %u, %s)';
-            $sql = sprintf($format, $this->db->prefix('yogurt_ishot'), $cod_ishot, $uid_voter, $uid_voted, $ishot, $this->db->quoteString($date));
-            $force = true;
+            $format       = 'INSERT INTO %s (cod_ishot, uid_voter, uid_voted, ishot, DATE)';
+            $format       .= 'VALUES (%u, %u, %u, %u, %s)';
+            $sql          = sprintf($format, $this->db->prefix('yogurt_ishot'), $cod_ishot, $uid_voter, $uid_voted, $ishot, $this->db->quoteString($date));
+            $force        = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'cod_ishot=%u, uid_voter=%u, uid_voted=%u, ishot=%u, date=%s';
             $format .= ' WHERE cod_ishot = %u';
-            $sql = sprintf($format, $this->db->prefix('yogurt_ishot'), $cod_ishot, $uid_voter, $uid_voted, $ishot, $this->db->quoteString($date), $cod_ishot);
+            $sql    = sprintf($format, $this->db->prefix('yogurt_ishot'), $cod_ishot, $uid_voter, $uid_voted, $ishot, $this->db->quoteString($date), $cod_ishot);
         }
         if (false !== $force) {
             $result = $this->db->queryF($sql);
@@ -162,9 +162,9 @@ class IshotHandler extends \XoopsObjectHandler
      */
     public function &getObjects($criteria = null, $id_as_key = false)
     {
-        $ret = [];
+        $ret   = [];
         $limit = $start = 0;
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_ishot');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_ishot');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
@@ -253,12 +253,12 @@ class IshotHandler extends \XoopsObjectHandler
         $start = $criteria->getStart();
 
         $result = $this->db->query($sql, $limit, $start);
-        $vetor = [];
-        $i = 0;
+        $vetor  = [];
+        $i      = 0;
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $vetor[$i]['qtd'] = $myrow['qtd'];
-            $vetor[$i]['uid_voted'] = $myrow['uid_voted'];
-            $vetor[$i]['uname'] = $myrow['uname'];
+            $vetor[$i]['qtd']         = $myrow['qtd'];
+            $vetor[$i]['uid_voted']   = $myrow['uid_voted'];
+            $vetor[$i]['uname']       = $myrow['uname'];
             $vetor[$i]['user_avatar'] = $myrow['user_avatar'];
             $i++;
         }
@@ -273,9 +273,9 @@ class IshotHandler extends \XoopsObjectHandler
      */
     public function getHotFriends($criteria = null, $id_as_key = false)
     {
-        $ret = [];
+        $ret   = [];
         $limit = $start = 0;
-        $sql = 'SELECT uname, user_avatar, uid_voted FROM ' . $this->db->prefix('yogurt_ishot') . ', ' . $this->db->prefix('users');
+        $sql   = 'SELECT uname, user_avatar, uid_voted FROM ' . $this->db->prefix('yogurt_ishot') . ', ' . $this->db->prefix('users');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             //attention here this is kind of a hack
@@ -287,11 +287,11 @@ class IshotHandler extends \XoopsObjectHandler
             $start = $criteria->getStart();
 
             $result = $this->db->query($sql, $limit, $start);
-            $vetor = [];
-            $i = 0;
+            $vetor  = [];
+            $i      = 0;
             while (false !== ($myrow = $this->db->fetchArray($result))) {
-                $vetor[$i]['uid_voted'] = $myrow['uid_voted'];
-                $vetor[$i]['uname'] = $myrow['uname'];
+                $vetor[$i]['uid_voted']   = $myrow['uid_voted'];
+                $vetor[$i]['uname']       = $myrow['uname'];
                 $vetor[$i]['user_avatar'] = $myrow['user_avatar'];
                 $i++;
             }

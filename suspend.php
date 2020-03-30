@@ -16,6 +16,7 @@
  * @author       XOOPS Development Team
  * @since
  */
+
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
@@ -31,12 +32,12 @@ $uid = (int)$_POST['uid'];
  * Creating the factory  loading the picture changing its caption
  */
 $suspensionsFactory = new Yogurt\SuspensionsHandler($xoopsDB);
-$suspension = $suspensionsFactory->create(false);
+$suspension         = $suspensionsFactory->create(false);
 $suspension->load($uid);
 
 if ($xoopsUser->isAdmin(1)) {
     $memberHandler = xoops_getHandler('member');
-    $thisUser = $memberHandler->getUser($uid);
+    $thisUser      = $memberHandler->getUser($uid);
     $suspension->setVar('uid', $uid);
     $suspension->setVar('old_email', $thisUser->getVar('email'));
     $suspension->setVar('old_pass', $thisUser->getVar('pass'));

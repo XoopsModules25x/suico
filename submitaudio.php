@@ -16,6 +16,7 @@
  * @author       XOOPS Development Team
  * @since
  */
+
 use XoopsModules\Yogurt;
 
 /**
@@ -38,13 +39,13 @@ $myts = MyTextSanitizer::getInstance();
 /**
  * Getting the title
  */
-$title = $myts->displayTarea($_POST['title'], 0, 1, 1, 1, 1);
+$title  = $myts->displayTarea($_POST['title'], 0, 1, 1, 1, 1);
 $author = $myts->displayTarea($_POST['author'], 0, 1, 1, 1, 1);
 
 /**
  * Getting parameters defined in admin side
  */
-$path_upload = XOOPS_ROOT_PATH . '/uploads/yogurt/mp3/';
+$path_upload  = XOOPS_ROOT_PATH . '/uploads/yogurt/mp3/';
 $maxfilebytes = $xoopsModuleConfig['maxfilesize'];
 
 /**

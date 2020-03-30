@@ -87,9 +87,9 @@ class ConfigsHandler extends \XoopsObjectHandler
         if ($yogurt_configs->isNew()) {
             // ajout/modification d'un Configs
             $yogurt_configs = new Configs();
-            $format = 'INSERT INTO %s (config_id, config_uid, pictures, audio, videos, tribes, Notes, friends, profile_contact, profile_general, profile_stats, suspension, backup_password, backup_email, end_suspension)';
-            $format .= 'VALUES (%u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %s, %s, %s)';
-            $sql = sprintf(
+            $format         = 'INSERT INTO %s (config_id, config_uid, pictures, audio, videos, tribes, Notes, friends, profile_contact, profile_general, profile_stats, suspension, backup_password, backup_email, end_suspension)';
+            $format         .= 'VALUES (%u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %s, %s, %s)';
+            $sql            = sprintf(
                 $format,
                 $this->db->prefix('yogurt_configs'),
                 $config_id,
@@ -108,12 +108,12 @@ class ConfigsHandler extends \XoopsObjectHandler
                 $this->db->quoteString($backup_email),
                 $this->db->quoteString($end_suspension)
             );
-            $force = true;
+            $force          = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'config_id=%u, config_uid=%u, pictures=%u, audio=%u, videos=%u, tribes=%u, Notes=%u, friends=%u, profile_contact=%u, profile_general=%u, profile_stats=%u, suspension=%u, backup_password=%s, backup_email=%s, end_suspension=%s';
             $format .= ' WHERE config_id = %u';
-            $sql = sprintf(
+            $sql    = sprintf(
                 $format,
                 $this->db->prefix('yogurt_configs'),
                 $config_id,
@@ -179,14 +179,14 @@ class ConfigsHandler extends \XoopsObjectHandler
      * retrieve yogurt_configss from the database
      *
      * @param \CriteriaElement $criteria  {@link \CriteriaElement} conditions to be met
-     * @param bool            $id_as_key use the UID as key for the array?
+     * @param bool             $id_as_key use the UID as key for the array?
      * @return array array of {@link Configs} objects
      */
     public function &getObjects($criteria = null, $id_as_key = false)
     {
-        $ret = [];
+        $ret   = [];
         $limit = $start = 0;
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_configs');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_configs');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {

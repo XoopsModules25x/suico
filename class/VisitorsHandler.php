@@ -87,15 +87,15 @@ class VisitorsHandler extends \XoopsObjectHandler
         if ($yogurt_visitors->isNew()) {
             // ajout/modification d'un Yogurt\Visitors
             $yogurt_visitors = new Visitors();
-            $format = 'INSERT INTO %s (cod_visit, uid_owner, uid_visitor,uname_visitor)';
-            $format .= 'VALUES (%u, %u, %u, %s)';
-            $sql = sprintf($format, $this->db->prefix('yogurt_visitors'), $cod_visit, $uid_owner, $uid_visitor, $this->db->quoteString($uname_visitor));
-            $force = true;
+            $format          = 'INSERT INTO %s (cod_visit, uid_owner, uid_visitor,uname_visitor)';
+            $format          .= 'VALUES (%u, %u, %u, %s)';
+            $sql             = sprintf($format, $this->db->prefix('yogurt_visitors'), $cod_visit, $uid_owner, $uid_visitor, $this->db->quoteString($uname_visitor));
+            $force           = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'cod_visit=%u, uid_owner=%u, uid_visitor=%u, uname_visitor=%s ';
             $format .= ' WHERE cod_visit = %u';
-            $sql = sprintf($format, $this->db->prefix('yogurt_visitors'), $cod_visit, $uid_owner, $uid_visitor, $this->db->quoteString($uname_visitor), $cod_visit);
+            $sql    = sprintf($format, $this->db->prefix('yogurt_visitors'), $cod_visit, $uid_owner, $uid_visitor, $this->db->quoteString($uname_visitor), $cod_visit);
         }
         if (false !== $force) {
             $result = $this->db->queryF($sql);
@@ -142,14 +142,14 @@ class VisitorsHandler extends \XoopsObjectHandler
      * retrieve yogurt_visitorss from the database
      *
      * @param \CriteriaElement $criteria  {@link \CriteriaElement} conditions to be met
-     * @param bool            $id_as_key use the UID as key for the array?
+     * @param bool             $id_as_key use the UID as key for the array?
      * @return array array of {@link Yogurt\Visitors} objects
      */
     public function &getObjects($criteria = null, $id_as_key = false)
     {
-        $ret = [];
+        $ret   = [];
         $limit = $start = 0;
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_visitors');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_visitors');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
@@ -201,7 +201,7 @@ class VisitorsHandler extends \XoopsObjectHandler
      * delete yogurt_visitorss matching a set of conditions
      *
      * @param \CriteriaElement $criteria {@link \CriteriaElement}
-     * @param bool            $force
+     * @param bool             $force
      * @return bool FALSE if deletion failed
      */
     public function deleteAll($criteria = null, $force = false)

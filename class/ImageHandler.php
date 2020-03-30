@@ -112,9 +112,9 @@ class ImageHandler extends \XoopsObjectHandler
         if ($yogurt_images->isNew()) {
             // ajout/modification d'un Image
             $yogurt_images = new Image();
-            $format = 'INSERT INTO %s (cod_img, title, data_creation, data_update, uid_owner, url, private)';
-            $format .= 'VALUES (%u, %s, %s, %s, %s, %s, 0)';
-            $sql = sprintf(
+            $format        = 'INSERT INTO %s (cod_img, title, data_creation, data_update, uid_owner, url, private)';
+            $format        .= 'VALUES (%u, %s, %s, %s, %s, %s, 0)';
+            $sql           = sprintf(
                 $format,
                 $this->db->prefix('yogurt_images'),
                 $cod_img,
@@ -124,12 +124,12 @@ class ImageHandler extends \XoopsObjectHandler
                 $this->db->quoteString($uid_owner),
                 $this->db->quoteString($url)
             );
-            $force = true;
+            $force         = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'cod_img=%u, title=%s, data_creation=%s, data_update=%s, uid_owner=%s, url=%s, private=%s';
             $format .= ' WHERE cod_img = %u';
-            $sql = sprintf($format, $this->db->prefix('yogurt_images'), $cod_img, $this->db->quoteString($title), $now, $now, $this->db->quoteString($uid_owner), $this->db->quoteString($url), $this->db->quoteString($private), $cod_img);
+            $sql    = sprintf($format, $this->db->prefix('yogurt_images'), $cod_img, $this->db->quoteString($title), $now, $now, $this->db->quoteString($uid_owner), $this->db->quoteString($url), $this->db->quoteString($private), $cod_img);
         }
         if (false !== $force) {
             $result = $this->db->queryF($sql);
@@ -176,14 +176,14 @@ class ImageHandler extends \XoopsObjectHandler
      * retrieve yogurt_imagess from the database
      *
      * @param \CriteriaElement $criteria  {@link \CriteriaElement} conditions to be met
-     * @param bool            $id_as_key use the UID as key for the array?
+     * @param bool             $id_as_key use the UID as key for the array?
      * @return array array of {@link Image} objects
      */
     public function &getObjects($criteria = null, $id_as_key = false)
     {
-        $ret = [];
+        $ret   = [];
         $limit = $start = 0;
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_images');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_images');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
@@ -261,11 +261,11 @@ class ImageHandler extends \XoopsObjectHandler
      */
     public function renderFormSubmit($maxbytes, $xoopsTpl)
     {
-        $form = new \XoopsThemeForm(_MD_YOGURT_SUBMIT_PIC_TITLE, 'form_picture', 'submit.php', 'post', true);
-        $field_url = new \XoopsFormFile(_MD_YOGURT_SELECT_PHOTO, 'sel_photo', 2000000);
+        $form       = new \XoopsThemeForm(_MD_YOGURT_SUBMIT_PIC_TITLE, 'form_picture', 'submit.php', 'post', true);
+        $field_url  = new \XoopsFormFile(_MD_YOGURT_SELECT_PHOTO, 'sel_photo', 2000000);
         $field_desc = new \XoopsFormText(_MD_YOGURT_CAPTION, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
-        $button_send = new \XoopsFormButton('', 'submit_button', _MD_YOGURT_UPLOADPICTURE, 'submit');
+        $button_send   = new \XoopsFormButton('', 'submit_button', _MD_YOGURT_UPLOADPICTURE, 'submit');
         $field_warning = new \XoopsFormLabel(sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxbytes / 1024));
         $form->addElement($field_warning);
         $form->addElement($field_url, true);
@@ -286,18 +286,18 @@ class ImageHandler extends \XoopsObjectHandler
      *
      * @param string $caption  The description of the picture
      * @param int    $cod_img  the id of the image in database
-     * @param string   $filename the url to the thumb of the image so it can be displayed
+     * @param string $filename the url to the thumb of the image so it can be displayed
      * @return bool TRUE
      */
     public function renderFormEdit($caption, $cod_img, $filename)
     {
-        $form = new \XoopsThemeForm(_MD_YOGURT_EDITDESC, 'form_picture', 'editdesc.php', 'post', true);
+        $form       = new \XoopsThemeForm(_MD_YOGURT_EDITDESC, 'form_picture', 'editdesc.php', 'post', true);
         $field_desc = new \XoopsFormText($caption, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
-        $button_send = new \XoopsFormButton('', 'submit_button', _MD_YOGURT_SUBMIT, 'submit');
+        $button_send   = new \XoopsFormButton('', 'submit_button', _MD_YOGURT_SUBMIT, 'submit');
         $field_warning = new \XoopsFormLabel("<img src='" . $filename . "' alt='sssss'>");
         $field_cod_img = new \XoopsFormHidden('cod_img', $cod_img);
-        $field_marker = new \XoopsFormHidden('marker', 1);
+        $field_marker  = new \XoopsFormHidden('marker', 1);
         $form->addElement($field_warning);
         $form->addElement($field_desc);
         $form->addElement($field_cod_img);
@@ -313,13 +313,13 @@ class ImageHandler extends \XoopsObjectHandler
      *
      * @param string $title         A litle description of the file
      * @param string $path_upload   The path to where the file should be uploaded
-     * @param int  $thumbwidth    the width in pixels that the thumbnail will have
-     * @param int  $thumbheight   the height in pixels that the thumbnail will have
-     * @param int  $pictwidth     the width in pixels that the pic will have
-     * @param int  $pictheight    the height in pixels that the pic will have
-     * @param int  $maxfilebytes  the maximum size a file can have to be uploaded in bytes
-     * @param int  $maxfilewidth  the maximum width in pixels that a pic can have
-     * @param int  $maxfileheight the maximum height in pixels that a pic can have
+     * @param int    $thumbwidth    the width in pixels that the thumbnail will have
+     * @param int    $thumbheight   the height in pixels that the thumbnail will have
+     * @param int    $pictwidth     the width in pixels that the pic will have
+     * @param int    $pictheight    the height in pixels that the pic will have
+     * @param int    $maxfilebytes  the maximum size a file can have to be uploaded in bytes
+     * @param int    $maxfilewidth  the maximum width in pixels that a pic can have
+     * @param int    $maxfileheight the maximum height in pixels that a pic can have
      * @return bool FALSE if upload fails or database fails
      */
     public function receivePicture($title, $path_upload, $thumbwidth, $thumbheight, $pictwidth, $pictheight, $maxfilebytes, $maxfilewidth, $maxfileheight)
@@ -333,7 +333,7 @@ class ImageHandler extends \XoopsObjectHandler
 
         // mimetypes and settings put this in admin part later
         $allowed_mimetypes = ['image/jpeg', 'image/pjpeg'];
-        $maxfilesize = $maxfilebytes;
+        $maxfilesize       = $maxfilebytes;
 
         // create the object to upload
         $uploader = new \XoopsMediaUploader($path_upload, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight);
@@ -351,7 +351,7 @@ class ImageHandler extends \XoopsObjectHandler
             }
             // now let s create a new object picture and set its variables
             $picture = $this->create();
-            $url = $uploader->getSavedFileName();
+            $url     = $uploader->getSavedFileName();
             $picture->setVar('url', $url);
             $picture->setVar('title', $title);
             $picture->setVar('private', 0);
@@ -376,17 +376,17 @@ class ImageHandler extends \XoopsObjectHandler
      * Resize a picture and save it to $path_upload
      *
      * @param string $img         the path to the file
-     * @param int  $thumbwidth  the width in pixels that the thumbnail will have
-     * @param int  $thumbheight the height in pixels that the thumbnail will have
-     * @param int  $pictwidth   the width in pixels that the pic will have
-     * @param int  $pictheight  the height in pixels that the pic will have
+     * @param int    $thumbwidth  the width in pixels that the thumbnail will have
+     * @param int    $thumbheight the height in pixels that the thumbnail will have
+     * @param int    $pictwidth   the width in pixels that the pic will have
+     * @param int    $pictheight  the height in pixels that the pic will have
      * @param string $path_upload The path to where the files should be saved after resizing
      */
     public function resizeImage($img, $thumbwidth, $thumbheight, $pictwidth, $pictheight, $path_upload)
     {
-        $img2 = $img;
-        $path = pathinfo($img);
-        $img = imagecreatefromjpeg($img);
+        $img2   = $img;
+        $path   = pathinfo($img);
+        $img    = imagecreatefromjpeg($img);
         $xratio = $thumbwidth / imagesx($img);
         $yratio = $thumbheight / imagesy($img);
 
@@ -404,8 +404,8 @@ class ImageHandler extends \XoopsObjectHandler
         }
 
         imagedestroy($img);
-        $path2 = pathinfo($img2);
-        $img2 = imagecreatefromjpeg($img2);
+        $path2   = pathinfo($img2);
+        $img2    = imagecreatefromjpeg($img2);
         $xratio2 = $pictwidth / imagesx($img2);
         $yratio2 = $pictheight / imagesy($img2);
         if ($xratio2 < 1 || $yratio2 < 1) {
@@ -434,13 +434,13 @@ class ImageHandler extends \XoopsObjectHandler
 
         $sql = 'SELECT uname, t.uid_owner, t.url FROM ' . $this->db->prefix('yogurt_images') . ' AS t, ' . $this->db->prefix('users');
 
-        $sql .= ' WHERE uid_owner = uid AND private=0 ORDER BY cod_img DESC';
+        $sql    .= ' WHERE uid_owner = uid AND private=0 ORDER BY cod_img DESC';
         $result = $this->db->query($sql, $limit, 0);
-        $vetor = [];
-        $i = 0;
+        $vetor  = [];
+        $i      = 0;
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $vetor[$i]['uid_voted'] = $myrow['uid_owner'];
-            $vetor[$i]['uname'] = $myrow['uname'];
+            $vetor[$i]['uid_voted']   = $myrow['uid_owner'];
+            $vetor[$i]['uname']       = $myrow['uname'];
             $vetor[$i]['user_avatar'] = $myrow['url'];
             $i++;
         }
@@ -458,15 +458,15 @@ class ImageHandler extends \XoopsObjectHandler
 
         $sql = 'SELECT uname, t.uid_owner, t.url, t.title FROM ' . $this->db->prefix('yogurt_images') . ' AS t, ' . $this->db->prefix('users');
 
-        $sql .= ' WHERE uid_owner = uid AND private=0 ORDER BY cod_img DESC';
+        $sql    .= ' WHERE uid_owner = uid AND private=0 ORDER BY cod_img DESC';
         $result = $this->db->query($sql, $limit, 0);
-        $vetor = [];
-        $i = 0;
+        $vetor  = [];
+        $i      = 0;
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $vetor[$i]['uid_voted'] = $myrow['uid_owner'];
-            $vetor[$i]['uname'] = $myrow['uname'];
+            $vetor[$i]['uid_voted']    = $myrow['uid_owner'];
+            $vetor[$i]['uname']        = $myrow['uname'];
             $vetor[$i]['img_filename'] = $myrow['url'];
-            $vetor[$i]['caption'] = $myrow['title'];
+            $vetor[$i]['caption']      = $myrow['title'];
 
             $i++;
         }
@@ -478,15 +478,15 @@ class ImageHandler extends \XoopsObjectHandler
      * Resize a picture and save it to $path_upload
      *
      * @param string $img         the path to the file
-     * @param      $width
-     * @param      $height
+     * @param        $width
+     * @param        $height
      * @param string $path_upload The path to where the files should be saved after resizing
      */
     public function makeAvatar($img, $width, $height, $path_upload)
     {
-        $img2 = $img;
-        $path = pathinfo($img);
-        $img = imagecreatefromjpeg($img);
+        $img2   = $img;
+        $path   = pathinfo($img);
+        $img    = imagecreatefromjpeg($img);
         $xratio = $thumbwidth / imagesx($img);
         $yratio = $thumbheight / imagesy($img);
 
@@ -504,8 +504,8 @@ class ImageHandler extends \XoopsObjectHandler
         }
 
         imagedestroy($img);
-        $path2 = pathinfo($img2);
-        $img2 = imagecreatefromjpeg($img2);
+        $path2   = pathinfo($img2);
+        $img2    = imagecreatefromjpeg($img2);
         $xratio2 = $pictwidth / imagesx($img2);
         $yratio2 = $pictheight / imagesy($img2);
         if ($xratio2 < 1 || $yratio2 < 1) {

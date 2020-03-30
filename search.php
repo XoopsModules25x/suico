@@ -18,13 +18,13 @@
  */
 require __DIR__ . '/header.php';
 
-$myts = MyTextSanitizer::getInstance();
-$op = isset($_REQUEST['op']) ? htmlspecialchars($_REQUEST['op'], ENT_QUOTES | ENT_HTML5) : 'search';
+$myts   = MyTextSanitizer::getInstance();
+$op     = isset($_REQUEST['op']) ? htmlspecialchars($_REQUEST['op'], ENT_QUOTES | ENT_HTML5) : 'search';
 $groups = $xoopsUser ? $xoopsUser->getGroups() : [XOOPS_GROUP_ANONYMOUS];
 switch ($op) {
     default:
     case 'search':
-        $xoopsOption['cache_group'] = implode('', $groups);
+        $xoopsOption['cache_group']              = implode('', $groups);
         $GLOBALS['xoopsOption']['template_main'] = 'yogurt_search.tpl';
         include XOOPS_ROOT_PATH . '/header.php';
 
@@ -33,7 +33,7 @@ switch ($op) {
         // Get fields
         $fields = $profileHandler->loadFields();
         // Get ids of fields that can be searched
-        $gpermHandler = xoops_getHandler('groupperm');
+        $gpermHandler      = xoops_getHandler('groupperm');
         $searchable_fields = $gpermHandler->getItemIds('smartprofile_search', $groups, $xoopsModule->getVar('mid'));
 
         include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
@@ -79,7 +79,7 @@ switch ($op) {
                         break;
                     case 'radio':
                     case 'select':
-                        $size = count($fields[$i]->getVar('field_options')) > 10 ? 10 : count($fields[$i]->getVar('field_options'));
+                        $size    = count($fields[$i]->getVar('field_options')) > 10 ? 10 : count($fields[$i]->getVar('field_options'));
                         $element = new \XoopsFormSelect($fields[$i]->getVar('field_title'), $fields[$i]->getVar('field_name'), null, $size, true);
                         $options = $fields[$i]->getVar('field_options');
                         asort($options);
@@ -147,9 +147,9 @@ switch ($op) {
         // Get fields
         $fields = $profileHandler->loadFields();
         // Get ids of fields that can be searched
-        $gpermHandler = xoops_getHandler('groupperm');
+        $gpermHandler      = xoops_getHandler('groupperm');
         $searchable_fields = $gpermHandler->getItemIds('smartprofile_search', $groups, $xoopsModule->getVar('mid'));
-        $searchvars = [];
+        $searchvars        = [];
 
         $criteria = new \CriteriaCompo(new \Criteria('level', 0, '>'));
         if (isset($_REQUEST['uname']) && '' != $_REQUEST['uname']) {
@@ -205,14 +205,14 @@ switch ($op) {
                         switch ($fields[$i]->getVar('field_valuetype')) {
                             case XOBJ_DTYPE_OTHER:
                             case XOBJ_DTYPE_INT:
-                                $value = array_map('intval', $_REQUEST[$fieldname]);
+                                $value        = array_map('intval', $_REQUEST[$fieldname]);
                                 $searchvars[] = $fieldname;
                                 $criteria->add(new \Criteria($fieldname, '(' . implode(',', $value) . ')', 'IN'));
                                 break;
                             case XOBJ_DTYPE_URL:
                             case XOBJ_DTYPE_TXTBOX:
                             case XOBJ_DTYPE_TXTAREA:
-                                $value = array_map([$xoopsDB, 'quoteString'], $_REQUEST[$fieldname]);
+                                $value        = array_map([$xoopsDB, 'quoteString'], $_REQUEST[$fieldname]);
                                 $searchvars[] = $fieldname;
                                 $criteria->add(new \Criteria($fieldname, '(' . implode(',', $value) . ')', 'IN'));
                                 break;
@@ -271,14 +271,14 @@ switch ($op) {
 
                                 default:
                                     if (isset($_REQUEST[$fieldname . '_larger']) && 0 != (int)$_REQUEST[$fieldname . '_larger']) {
-                                        $value = (int)$_REQUEST[$fieldname . '_larger'];
+                                        $value        = (int)$_REQUEST[$fieldname . '_larger'];
                                         $search_url[] = $fieldname . '_larger=' . $value;
                                         $searchvars[] = $fieldname;
                                         $criteria->add(new \Criteria($fieldname, $value, '>='));
                                     }
 
                                     if (isset($_REQUEST[$fieldname . '_smaller']) && 0 != (int)$_REQUEST[$fieldname . '_smaller']) {
-                                        $value = (int)$_REQUEST[$fieldname . '_smaller'];
+                                        $value        = (int)$_REQUEST[$fieldname . '_smaller'];
                                         $search_url[] = $fieldname . '_smaller=' . $value;
                                         $searchvars[] = $fieldname;
                                         $criteria->add(new \Criteria($fieldname, $value, '<='));
@@ -288,7 +288,7 @@ switch ($op) {
 
                             if (isset($_REQUEST[$fieldname]) && !isset($_REQUEST[$fieldname . '_smaller']) && !isset($_REQUEST[$fieldname . '_larger'])) {
                                 if (!is_array($_REQUEST[$fieldname])) {
-                                    $value = (int)$_REQUEST[$fieldname];
+                                    $value        = (int)$_REQUEST[$fieldname];
                                     $search_url[] = $fieldname . '=' . $value;
                                     $criteria->add(new \Criteria($fieldname, $value, '='));
                                 } else {
@@ -319,7 +319,7 @@ switch ($op) {
                                         break;
                                 }
                                 $search_url[] = $fieldname . '=' . $value;
-                                $operator = 'LIKE';
+                                $operator     = 'LIKE';
                                 $criteria->add(new \Criteria($fieldname, $value, $operator));
                                 $searchvars[] = $fieldname;
                             }

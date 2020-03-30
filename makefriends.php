@@ -16,6 +16,7 @@
  * @author       XOOPS Development Team
  * @since
  */
+
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
@@ -28,11 +29,11 @@ require __DIR__ . '/header.php';
  * Factory of petitions created
  */
 $friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
-$friendshipFactory = new Yogurt\FriendshipHandler($xoopsDB);
+$friendshipFactory     = new Yogurt\FriendshipHandler($xoopsDB);
 
-$petition_id = (int)$_POST['petition_id'];
+$petition_id      = (int)$_POST['petition_id'];
 $friendship_level = (int)$_POST['level'];
-$uid = (int)$xoopsUser->getVar('uid');
+$uid              = (int)$xoopsUser->getVar('uid');
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);

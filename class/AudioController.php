@@ -22,7 +22,7 @@ namespace XoopsModules\Yogurt;
 include_once XOOPS_ROOT_PATH . '/kernel/object.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 include_once XOOPS_ROOT_PATH . '/class/criteria.php';
-include_once '../../class/pagenav.php';
+include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 /**
  * Module classes
  */
@@ -38,7 +38,7 @@ include_once '../../class/pagenav.php';
 //include_once 'class/Configs.php';
 //include_once 'class/Suspensions.php';
 if (str_replace('.', '', PHP_VERSION) > 499) {
-    include_once 'class/class.Id3v1.php';
+    include_once __DIR__ . '/class.Id3v1.php';
 }
 
 /**
@@ -63,6 +63,8 @@ class AudioController extends YogurtController
      * @param $nbAudios
      * @param $audios
      * @return bool
+     * @throws \Exception
+     * @throws \Exception
      */
     public function assignAudioContent($nbAudios, $audios)
     {
@@ -75,21 +77,21 @@ class AudioController extends YogurtController
          */
         $i = 0;
         foreach ($audios as $audio) {
-            $audios_array[$i]['url'] = $audio->getVar('url', 's');
-            $audios_array[$i]['title'] = $audio->getVar('title', 's');
-            $audios_array[$i]['id'] = $audio->getVar('audio_id', 's');
+            $audios_array[$i]['url']    = $audio->getVar('url', 's');
+            $audios_array[$i]['title']  = $audio->getVar('title', 's');
+            $audios_array[$i]['id']     = $audio->getVar('audio_id', 's');
             $audios_array[$i]['author'] = $audio->getVar('author', 's');
 
             if (str_replace('.', '', PHP_VERSION) > 499) {
                 $audio_path = XOOPS_ROOT_PATH . '/uploads/yogurt/mp3/' . $audio->getVar('url', 's');
                 // echo $audio_path;
-                $mp3filemetainfo = new Id3v1($audio_path, true);
-                $mp3filemetainfoarray = [];
-                $mp3filemetainfoarray['Title'] = $mp3filemetainfo->getTitle();
+                $mp3filemetainfo                = new Id3v1($audio_path, true);
+                $mp3filemetainfoarray           = [];
+                $mp3filemetainfoarray['Title']  = $mp3filemetainfo->getTitle();
                 $mp3filemetainfoarray['Artist'] = $mp3filemetainfo->getArtist();
-                $mp3filemetainfoarray['Album'] = $mp3filemetainfo->getAlbum();
-                $mp3filemetainfoarray['Year'] = $mp3filemetainfo->getYear();
-                $audios_array[$i]['meta'] = $mp3filemetainfoarray;
+                $mp3filemetainfoarray['Album']  = $mp3filemetainfo->getAlbum();
+                $mp3filemetainfoarray['Year']   = $mp3filemetainfo->getYear();
+                $audios_array[$i]['meta']       = $mp3filemetainfoarray;
             } else {
                 $audios_array[$i]['nometa'] = 1;
             }
@@ -105,11 +107,13 @@ class AudioController extends YogurtController
      * @param int $audiosPerPage the number of videos in a page
      * @param int $start         at which position of the array we start
      * @param int $interval      how many pages between the first link and the next one
+     * @return string|null
+     * @return string|null
      */
     public function AudiosNavBar($nbAudios, $audiosPerPage, $start, $interval)
     {
         $pageNav = new \XoopsPageNav($nbAudios, $audiosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
-        $navBar = $pageNav->renderImageNav($interval);
+        $navBar  = $pageNav->renderImageNav($interval);
 
         return $navBar;
     }

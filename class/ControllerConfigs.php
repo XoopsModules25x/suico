@@ -22,7 +22,7 @@ namespace XoopsModules\Yogurt;
 include_once XOOPS_ROOT_PATH . '/kernel/object.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 include_once XOOPS_ROOT_PATH . '/class/criteria.php';
-include_once '../../class/pagenav.php';
+include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 /**
  * Module classes
  */
@@ -38,7 +38,7 @@ include_once '../../class/pagenav.php';
 //include_once 'class/Configs.php';
 //include_once 'class/Suspensions.php';
 if (str_replace('.', '', PHP_VERSION) > 499) {
-    include_once 'class/class.Id3v1.php';
+    include_once __DIR__ . '/class.Id3v1.php';
 }
 
 /**

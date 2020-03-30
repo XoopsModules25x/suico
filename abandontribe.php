@@ -16,6 +16,7 @@
  * @author       XOOPS Development Team
  * @since
  */
+
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
@@ -39,10 +40,10 @@ if (!isset($_POST['confirm']) || 1 != $_POST['confirm']) {
      * The user must be the owner
      */
     $reltribeuserFactory = new Yogurt\ReltribeuserHandler($xoopsDB);
-    $criteria_rel_id = new \Criteria('rel_id', $reltribeuser_id);
-    $uid = (int)$xoopsUser->getVar('uid');
-    $criteria_uid = new \Criteria('rel_user_uid', $uid);
-    $criteria = new \CriteriaCompo($criteria_rel_id);
+    $criteria_rel_id     = new \Criteria('rel_id', $reltribeuser_id);
+    $uid                 = (int)$xoopsUser->getVar('uid');
+    $criteria_uid        = new \Criteria('rel_user_uid', $uid);
+    $criteria            = new \CriteriaCompo($criteria_rel_id);
     $criteria->add($criteria_uid);
 
     /**

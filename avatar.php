@@ -16,6 +16,7 @@
  * @author       XOOPS Development Team
  * @since
  */
+
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
@@ -28,13 +29,13 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
  * Creating the factory  loading the picture changing its caption
  */
 $pictureFactory = new Yogurt\ImageHandler($xoopsDB);
-$picture = $pictureFactory->create(false);
+$picture        = $pictureFactory->create(false);
 $picture->load($_POST['cod_img']);
 
 $uid = (int)$xoopsUser->getVar('uid');
 
-$image = XOOPS_ROOT_PATH . '/uploads/' . 'thumb_' . $picture->getVar('url');
-$avatar = 'av' . $uid . '_' . time() . '.jpg';
+$image       = XOOPS_ROOT_PATH . '/uploads/' . 'thumb_' . $picture->getVar('url');
+$avatar      = 'av' . $uid . '_' . time() . '.jpg';
 $imageavatar = XOOPS_ROOT_PATH . '/uploads/' . $avatar;
 
 if (!copy($image, $imageavatar)) {

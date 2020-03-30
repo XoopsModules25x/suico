@@ -88,9 +88,9 @@ class NotesHandler extends \XoopsObjectHandler
         if ($yogurt_Notes->isNew()) {
             // ajout/modification d'unNotes
             $yogurt_Notes = new Notes();
-            $format = 'INSERT INTO %s (Note_id, Note_text, Note_from, Note_to, private)';
-            $format .= 'VALUES (%u, %s, %u, %u, %u)';
-            $sql = sprintf(
+            $format       = 'INSERT INTO %s (Note_id, Note_text, Note_from, Note_to, private)';
+            $format       .= 'VALUES (%u, %s, %u, %u, %u)';
+            $sql          = sprintf(
                 $format,
                 $this->db->prefix('yogurt_Notes'),
                 $Note_id,
@@ -99,12 +99,12 @@ class NotesHandler extends \XoopsObjectHandler
                 $Note_to,
                 $private
             );
-            $force = true;
+            $force        = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'Note_id=%u, Note_text=%s, Note_from=%u, Note_to=%u, private=%u';
             $format .= ' WHERE Note_id = %u';
-            $sql = sprintf($format, $this->db->prefix('yogurt_Notes'), $Note_id, $this->db->quoteString($Note_text), $Note_from, $Note_to, $private, $Note_id);
+            $sql    = sprintf($format, $this->db->prefix('yogurt_Notes'), $Note_id, $this->db->quoteString($Note_text), $Note_from, $Note_to, $private, $Note_id);
         }
         if (false !== $force) {
             $result = $this->db->queryF($sql);
@@ -156,9 +156,9 @@ class NotesHandler extends \XoopsObjectHandler
      */
     public function &getObjects($criteria = null, $id_as_key = false)
     {
-        $ret = [];
+        $ret   = [];
         $limit = $start = 0;
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_Notes');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_Notes');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
@@ -233,8 +233,8 @@ class NotesHandler extends \XoopsObjectHandler
     public function getNotes($nbNotes, $criteria)
     {
         $myts = new \MyTextSanitizer();
-        $ret = [];
-        $sql = 'SELECT Note_id, uid, uname, user_avatar, Note_from, Note_text FROM ' . $this->db->prefix('yogurt_Notes') . ', ' . $this->db->prefix('users');
+        $ret  = [];
+        $sql  = 'SELECT Note_id, uid, uname, user_avatar, Note_from, Note_text FROM ' . $this->db->prefix('yogurt_Notes') . ', ' . $this->db->prefix('users');
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
             //attention here this is kind of a hack
@@ -246,16 +246,16 @@ class NotesHandler extends \XoopsObjectHandler
             $start = $criteria->getStart();
 
             $result = $this->db->query($sql, $limit, $start);
-            $vetor = [];
-            $i = 0;
+            $vetor  = [];
+            $i      = 0;
 
             while (false !== ($myrow = $this->db->fetchArray($result))) {
-                $vetor[$i]['uid'] = $myrow['uid'];
-                $vetor[$i]['uname'] = $myrow['uname'];
+                $vetor[$i]['uid']         = $myrow['uid'];
+                $vetor[$i]['uname']       = $myrow['uname'];
                 $vetor[$i]['user_avatar'] = $myrow['user_avatar'];
-                $temptext = $myts->xoopsCodeDecode($myrow['Note_text'], 1);
-                $vetor[$i]['text'] = $myts->nl2Br($temptext);
-                $vetor[$i]['id'] = $myrow['Note_id'];
+                $temptext                 = $myts->xoopsCodeDecode($myrow['Note_text'], 1);
+                $vetor[$i]['text']        = $myts->nl2Br($temptext);
+                $vetor[$i]['id']          = $myrow['Note_id'];
 
                 $i++;
             }

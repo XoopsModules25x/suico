@@ -87,15 +87,15 @@ class ReltribeuserHandler extends \XoopsObjectHandler
         if ($yogurt_reltribeuser->isNew()) {
             // ajout/modification d'un Reltribeuser
             $yogurt_reltribeuser = new Reltribeuser();
-            $format = 'INSERT INTO %s (rel_id, rel_tribe_id, rel_user_uid)';
-            $format .= 'VALUES (%u, %u, %u)';
-            $sql = sprintf($format, $this->db->prefix('yogurt_reltribeuser'), $rel_id, $rel_tribe_id, $rel_user_uid);
-            $force = true;
+            $format              = 'INSERT INTO %s (rel_id, rel_tribe_id, rel_user_uid)';
+            $format              .= 'VALUES (%u, %u, %u)';
+            $sql                 = sprintf($format, $this->db->prefix('yogurt_reltribeuser'), $rel_id, $rel_tribe_id, $rel_user_uid);
+            $force               = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'rel_id=%u, rel_tribe_id=%u, rel_user_uid=%u';
             $format .= ' WHERE rel_id = %u';
-            $sql = sprintf($format, $this->db->prefix('yogurt_reltribeuser'), $rel_id, $rel_tribe_id, $rel_user_uid, $rel_id);
+            $sql    = sprintf($format, $this->db->prefix('yogurt_reltribeuser'), $rel_id, $rel_tribe_id, $rel_user_uid, $rel_id);
         }
         if (false !== $force) {
             $result = $this->db->queryF($sql);
@@ -142,14 +142,14 @@ class ReltribeuserHandler extends \XoopsObjectHandler
      * retrieve yogurt_reltribeusers from the database
      *
      * @param \CriteriaElement $criteria  {@link \CriteriaElement} conditions to be met
-     * @param bool            $id_as_key use the UID as key for the array?
+     * @param bool             $id_as_key use the UID as key for the array?
      * @return array array of {@link Reltribeuser} objects
      */
     public function &getObjects($criteria = null, $id_as_key = false)
     {
-        $ret = [];
+        $ret   = [];
         $limit = $start = 0;
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_reltribeuser');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_reltribeuser');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
@@ -238,15 +238,15 @@ class ReltribeuserHandler extends \XoopsObjectHandler
             $start = $criteria->getStart();
 
             $result = $this->db->query($sql, $limit, $start);
-            $vetor = [];
-            $i = 0;
+            $vetor  = [];
+            $i      = 0;
 
             while (false !== ($myrow = $this->db->fetchArray($result))) {
-                $vetor[$i]['title'] = $myrow['tribe_title'];
-                $vetor[$i]['desc'] = $myrow['tribe_desc'];
-                $vetor[$i]['img'] = $myrow['tribe_img'];
-                $vetor[$i]['id'] = $myrow['rel_id'];
-                $vetor[$i]['uid'] = $myrow['owner_uid'];
+                $vetor[$i]['title']    = $myrow['tribe_title'];
+                $vetor[$i]['desc']     = $myrow['tribe_desc'];
+                $vetor[$i]['img']      = $myrow['tribe_img'];
+                $vetor[$i]['id']       = $myrow['rel_id'];
+                $vetor[$i]['uid']      = $myrow['owner_uid'];
                 $vetor[$i]['tribe_id'] = $myrow['rel_tribe_id'];
 
                 $i++;
@@ -276,14 +276,14 @@ class ReltribeuserHandler extends \XoopsObjectHandler
         $sql .= ' WHERE rel_user_uid = uid AND rel_tribe_id = tribe_id AND tribe_id =' . $tribeId . ' GROUP BY rel_user_uid ';
 
         $result = $this->db->query($sql, $nbUsers, $start);
-        $ret = [];
-        $i = 0;
+        $ret    = [];
+        $i      = 0;
 
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $ret[$i]['uid'] = $myrow['uid'];
-            $ret[$i]['uname'] = $myrow['uname'];
-            $ret[$i]['avatar'] = $myrow['user_avatar'];
-            $isOwner = ($myrow['rel_user_uid'] == $myrow['owner_uid']) ? 1 : 0;
+            $ret[$i]['uid']     = $myrow['uid'];
+            $ret[$i]['uname']   = $myrow['uname'];
+            $ret[$i]['avatar']  = $myrow['user_avatar'];
+            $isOwner            = ($myrow['rel_user_uid'] == $myrow['owner_uid']) ? 1 : 0;
             $ret[$i]['isOwner'] = $isOwner;
             $i++;
         }

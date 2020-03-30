@@ -67,7 +67,7 @@ global $xoopsModuleConfig, $xoopsModule;
 function about()
 {
     $moduleHandler = xoops_getHandler('module');
-    $modulo = $moduleHandler->getByDirname('yogurt');
+    $modulo        = $moduleHandler->getByDirname('yogurt');
     echo "<br style='clear: both;'>
 <img src='" . XOOPS_URL . '/modules/' . $modulo->getInfo('dirname') . '/' . $modulo->getInfo('image') . "' alt='Yogurt' style='float: left; margin-right: 10px;'/></a>
 <div style='margin-top: 1px; color: #33538e; margin-bottom: 4px; font-size: 18px; line-height: 18px; font-weight: bold;'>
@@ -115,7 +115,7 @@ function about()
             <td class='even'>
                                     <div>";
 
-    $vetorpessoas = $modulo->getInfo('people');
+    $vetorpessoas    = $modulo->getInfo('people');
     $vetordevelopers = $vetorpessoas['developers'];
     foreach ($vetordevelopers as $developer) {
         echo $developer . '&nbsp;';
@@ -332,7 +332,7 @@ switch ($op) {
         if ($isframeworksrequirement) {
             loadModuleAdminMenu(2, '-> About');
         }
-            //            renderUglierMenu(2, '-> About');
+        //            renderUglierMenu(2, '-> About');
 
         about();
 
@@ -341,7 +341,7 @@ switch ($op) {
         if ($isframeworksrequirement) {
             loadModuleAdminMenu(1, '-> home');
         }
-            //            renderUglierMenu(1, '-> home');
+        //            renderUglierMenu(1, '-> home');
 
         homedefault();
 

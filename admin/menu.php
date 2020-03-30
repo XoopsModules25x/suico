@@ -18,7 +18,7 @@
  */
 include dirname(__DIR__) . '/preloads/autoloader.php';
 
-$moduleDirName = basename(dirname(__DIR__));
+$moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
 $helper = \XoopsModules\Yogurt\Helper::getInstance();
@@ -36,24 +36,24 @@ if (is_object($helper->getModule())) {
 
 $adminmenu[] = [
     'title' => _MI_YOG_ADMENU1,
-    'link' => 'admin/index.php',
-    'icon' => $pathIcon32 . '/home.png',
+    'link'  => 'admin/index.php',
+    'icon'  => $pathIcon32 . '/home.png',
 ];
 
 $adminmenu[] = [
     'title' => _MI_YOG_MENU_02,
-    'link' => 'admin/main.php',
-    'icon' => $pathIcon32 . '/manage.png',
+    'link'  => 'admin/main.php',
+    'icon'  => $pathIcon32 . '/manage.png',
 ];
 
 $adminmenu[] = [
     'title' => _MI_YOG_ADMENU2,
-    'link' => 'admin/main.php?op=about',
-    'icon' => $pathIcon32 . '/about.png',
+    'link'  => 'admin/main.php?op=about',
+    'icon'  => $pathIcon32 . '/about.png',
 ];
 
 $adminmenu[] = [
     'title' => _MI_YOG_ADMENU2,
-    'link' => 'admin/about.php',
-    'icon' => $pathIcon32 . '/about.png',
+    'link'  => 'admin/about.php',
+    'icon'  => $pathIcon32 . '/about.png',
 ];

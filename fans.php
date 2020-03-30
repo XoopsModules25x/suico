@@ -16,6 +16,7 @@
  * @author       XOOPS Development Team
  * @since
  */
+
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_fans.tpl';
@@ -32,8 +33,8 @@ $start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
 /**
  * Friends
  */
-$criteria_friends = new \Criteria('friend2_uid', $controller->uidOwner);
-$criteria_fans = new \Criteria('fan', 1);
+$criteria_friends    = new \Criteria('friend2_uid', $controller->uidOwner);
+$criteria_fans       = new \Criteria('fan', 1);
 $criteria_compo_fans = new \CriteriaCompo($criteria_friends);
 $criteria_compo_fans->add($criteria_fans);
 $nb_friends = $controller->friendshipsFactory->getCount($criteria_compo_fans);
@@ -47,7 +48,7 @@ if (0 == $nb_friends) {
 /**
  * Let's get the user name of the owner of the album
  */
-$owner = new \XoopsUser();
+$owner      = new \XoopsUser();
 $identifier = $owner::getUnameFromId($controller->uidOwner);
 
 /**
@@ -72,7 +73,7 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
  * Criando a barra de navegao caso tenha muitos amigos
  */
 $barra_navegacao = new \XoopsPageNav($nb_friends, $xoopsModuleConfig['friendsperpage'], $start, 'start', 'uid=' . (int)$controller->uidOwner);
-$navegacao = $barra_navegacao->renderImageNav(2);
+$navegacao       = $barra_navegacao->renderImageNav(2);
 
 //permissions
 $xoopsTpl->assign('allow_Notes', $controller->checkPrivilegeBySection('Notes'));

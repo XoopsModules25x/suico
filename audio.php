@@ -16,6 +16,7 @@
  * @author       XOOPS Development Team
  * @since
  */
+
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_audio.tpl';
@@ -40,7 +41,7 @@ $criteriaUidAudio->setLimit($xoopsModuleConfig['audiosperpage']);
 /**
  * Get all audios of this user and assign them to template
  */
-$audios = $controller->getAudio($criteriaUidAudio);
+$audios       = $controller->getAudio($criteriaUidAudio);
 $audios_array = $controller->assignAudioContent($nbSections['nbAudio'], $audios);
 
 if (is_array($audios_array)) {

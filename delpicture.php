@@ -16,6 +16,7 @@
  * @author       XOOPS Development Team
  * @since
  */
+
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
@@ -35,14 +36,14 @@ if (!isset($_POST['confirm']) || 1 != $_POST['confirm']) {
      */
     $albumFactory = new Yogurt\ImageHandler($xoopsDB);
     $criteria_img = new \Criteria('cod_img', $cod_img);
-    $uid = (int)$xoopsUser->getVar('uid');
+    $uid          = (int)$xoopsUser->getVar('uid');
     $criteria_uid = new \Criteria('uid_owner', $uid);
-    $criteria = new \CriteriaCompo($criteria_img);
+    $criteria     = new \CriteriaCompo($criteria_img);
     $criteria->add($criteria_uid);
 
     $objects_array = $albumFactory->getObjects($criteria);
-    $image_name = $objects_array[0]->getVar('url');
-    $avatar_image = $xoopsUser->getVar('user_avatar');
+    $image_name    = $objects_array[0]->getVar('url');
+    $avatar_image  = $xoopsUser->getVar('user_avatar');
 
     /**
      * Try to delete

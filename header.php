@@ -33,13 +33,13 @@ if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl))
     $xoopsTpl = new \XoopsTpl();
 }
 
-$albumFactory = new Yogurt\ImageHandler($xoopsDB);
-$visitorsFactory = new Yogurt\VisitorsHandler($xoopsDB);
-$videosFactory = new Yogurt\SeutuboHandler($xoopsDB);
+$albumFactory          = new Yogurt\ImageHandler($xoopsDB);
+$visitorsFactory       = new Yogurt\VisitorsHandler($xoopsDB);
+$videosFactory         = new Yogurt\SeutuboHandler($xoopsDB);
 $friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
-$friendshipFactory = new Yogurt\FriendshipHandler($xoopsDB);
+$friendshipFactory     = new Yogurt\FriendshipHandler($xoopsDB);
 
-$isOwner = 0;
+$isOwner  = 0;
 $isanonym = 1;
 $isfriend = 0;
 
@@ -53,15 +53,15 @@ if (empty($xoopsUser)) {
         $uid_owner = (int)$_GET['uid'];
     } else {
         $uid_owner = 1;
-        $isOwner = 0;
+        $isOwner   = 0;
     }
 } else {
     $isanonym = 0;
     if (isset($_GET['uid'])) {
         $uid_owner = (int)$_GET['uid'];
-        $isOwner = ($xoopsUser->getVar('uid') == $uid_owner) ? 1 : 0;
+        $isOwner   = ($xoopsUser->getVar('uid') == $uid_owner) ? 1 : 0;
     } else {
         $uid_owner = (int)$xoopsUser->getVar('uid');
-        $isOwner = 1;
+        $isOwner   = 1;
     }
 }

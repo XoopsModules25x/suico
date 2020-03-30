@@ -16,6 +16,7 @@
  * @author       XOOPS Development Team
  * @since
  */
+
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_tribe.tpl';
@@ -30,8 +31,8 @@ $nbSections = $controller->getNumbersSections();
 
 $tribe_id = (int)$_GET['tribe_id'];
 $criteria = new \Criteria('tribe_id', $tribe_id);
-$tribes = $controller->tribesFactory->getObjects($criteria);
-$tribe = $tribes[0];
+$tribes   = $controller->tribesFactory->getObjects($criteria);
+$tribe    = $tribes[0];
 
 /**
  * Render a form with the info of the user

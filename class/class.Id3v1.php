@@ -254,10 +254,8 @@ class Id3v1
      * Checks if the parameters are valid and then gets ID3 tags, if there
      * are some.
      *
-     * @param resource stream
-     * @param bool $readOnly
      * @param mixed $filename
-     * @throws \Exception
+     * @param bool  $readOnly
      * @see $_tags
      */
     public function __construct($filename, $readOnly = false)
@@ -419,8 +417,8 @@ class Id3v1
      * Sets the Id3v1 version, which will be used
      *
      * @param string $version The version you want to set
-     * @throws \Exception
      * @return Id3v1 Implements fluent interface
+     * @throws \Exception
      * @see self::ID3V1_1
      * @see self::ID3V1_0
      */
@@ -450,8 +448,8 @@ class Id3v1
      * the method itself also accepts longer terms.
      *
      * @param string $title The title you want to set
-     * @throws \Exception
      * @return Id3v1 Implements fluent interface
+     * @throws \Exception
      * @see $_tags
      */
     public function setTitle($title)
@@ -476,8 +474,8 @@ class Id3v1
      * the method itself also accepts longer terms.
      *
      * @param string $artist The artist you want to set
-     * @throws \Exception
      * @return Id3v1 Implements fluent interface
+     * @throws \Exception
      * @see $_tags
      */
     public function setArtist($artist)
@@ -502,8 +500,8 @@ class Id3v1
      * the method itself also accepts longer terms.
      *
      * @param string $album The album you want to set
-     * @throws \Exception
      * @return Id3v1 Implements fluent interface
+     * @throws \Exception
      * @see $_tags
      */
     public function setAlbum($album)
@@ -530,8 +528,8 @@ class Id3v1
      * The method itselfs takes also longer terms.
      *
      * @param string $comment The comment you want to set
-     * @throws \Exception
      * @return Id3v1 Implements fluent interface
+     * @throws \Exception
      * @see $_tags
      */
     public function setComment($comment)
@@ -555,8 +553,8 @@ class Id3v1
      * You can either use the genre id, or the genre name.
      *
      * @param string|int $genre The genre you want to set
-     * @throws \Exception
      * @return Id3v1 Implements fluent interface
+     * @throws \Exception
      * @see $_tags
      */
     public function setGenre($genre)
@@ -580,8 +578,8 @@ class Id3v1
      * Sets the year
      *
      * @param int $year The year you want to set
-     * @throws \Exception
      * @return Id3v1 Implements fluent interface
+     * @throws \Exception
      * @see $_tags
      */
     public function setYear($year)
@@ -607,8 +605,8 @@ class Id3v1
      * ID3V1_0 you have to set it manually after calling this method.
      *
      * @param int $track The tracl you want to set
-     * @throws \Exception
      * @return Id3v1 Implements fluent interface
+     * @throws \Exception
      * @see $_tags
      * @see setId3v1Version()
      * @see getId3v1Version()
@@ -621,7 +619,7 @@ class Id3v1
 
         if (is_int($track) && 0 != $track) {
             $this->_tags['track'] = $track;
-            $this->_version = self::ID3V1_1;
+            $this->_version       = self::ID3V1_1;
         } else {
             throw new \RuntimeException('Track type invalid or zero');
         }
@@ -644,13 +642,13 @@ class Id3v1
         }
 
         $this->_tags['marking'] = 'TAG';
-        $this->_tags['title'] = '';
-        $this->_tags['artist'] = '';
-        $this->_tags['album'] = '';
-        $this->_tags['year'] = null;
+        $this->_tags['title']   = '';
+        $this->_tags['artist']  = '';
+        $this->_tags['album']   = '';
+        $this->_tags['year']    = null;
         $this->_tags['comment'] = '';
-        $this->_tags['track'] = null;
-        $this->_tags['genre'] = 255;
+        $this->_tags['track']   = null;
+        $this->_tags['genre']   = 255;
 
         return $this;
     }
@@ -706,8 +704,8 @@ class Id3v1
      * This method saves the set tags to the file. Therefore it seeks to
      * the end of the file and writes the Id3v1 bytestream to it.
      *
-     * @throws \Exception
      * @return Id3v1 Implements fluent interface
+     * @throws \Exception
      * @see $_tags
      * @see setTitle()
      * @see setArtist()
@@ -761,8 +759,8 @@ class Id3v1
      * </code>
      *
      * @param string $name
-     * @throws \Exception
      * @return mixed Depends on tag, which will be returned
+     * @throws \Exception
      */
     public function __get($name)
     {
@@ -801,8 +799,8 @@ class Id3v1
      *
      * @param string $name
      * @param string $value
-     * @throws \Exception
      * @return mixed Depends on tag
+     * @throws \Exception
      */
     public function __set($name, $value)
     {
