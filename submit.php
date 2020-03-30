@@ -16,7 +16,6 @@
  * @author       XOOPS Development Team
  * @since
  */
-
 use XoopsModules\Yogurt;
 
 /**
@@ -44,14 +43,14 @@ $title = $_POST['caption'];
 /**
  * Getting parameters defined in admin side
  */
-$path_upload   = XOOPS_ROOT_PATH . '/uploads';
-$pictwidth     = $xoopsModuleConfig['resized_width'];
-$pictheight    = $xoopsModuleConfig['resized_height'];
-$thumbwidth    = $xoopsModuleConfig['thumb_width'];
-$thumbheight   = $xoopsModuleConfig['thumb_height'];
-$maxfilebytes  = $xoopsModuleConfig['maxfilesize'];
+$path_upload = XOOPS_ROOT_PATH . '/uploads';
+$pictwidth = $xoopsModuleConfig['resized_width'];
+$pictheight = $xoopsModuleConfig['resized_height'];
+$thumbwidth = $xoopsModuleConfig['thumb_width'];
+$thumbheight = $xoopsModuleConfig['thumb_height'];
+$maxfilebytes = $xoopsModuleConfig['maxfilesize'];
 $maxfileheight = $xoopsModuleConfig['max_original_height'];
-$maxfilewidth  = $xoopsModuleConfig['max_original_width'];
+$maxfilewidth = $xoopsModuleConfig['max_original_width'];
 
 /**
  * If we are receiving a file
@@ -69,8 +68,8 @@ if ('sel_photo' == $_POST['xoops_upload_file'][0]) {
      */
     if ($albumFactory->receivePicture($title, $path_upload, $thumbwidth, $thumbheight, $pictwidth, $pictheight, $maxfilebytes, $maxfilewidth, $maxfileheight)) {
         $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
-        $extra_tags['X_OWNER_UID']  = $xoopsUser->getVar('uid');
-        $notificationHandler        = xoops_getHandler('notification');
+        $extra_tags['X_OWNER_UID'] = $xoopsUser->getVar('uid');
+        $notificationHandler = xoops_getHandler('notification');
         $notificationHandler->triggerEvent('picture', $xoopsUser->getVar('uid'), 'new_picture', $extra_tags);
         //header("Location: ".XOOPS_URL."/modules/yogurt/index.php?uid=".$xoopsUser->getVar('uid'));
         redirect_header(XOOPS_URL . '/modules/yogurt/album.php?uid=' . $xoopsUser->getVar('uid'), 3, _MD_YOGURT_UPLOADED);

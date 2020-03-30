@@ -16,7 +16,6 @@
  * @author       XOOPS Development Team
  * @since
  */
-
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
@@ -35,10 +34,10 @@ if (1 != $_POST['confirm']) {
      * The user must be the owner
      */
     $albumFactory = new Yogurt\SeutuboHandler($xoopsDB);
-    $criteria_img  = new \Criteria('video_id', $cod_video);
-    $uid           = (int)$xoopsUser->getVar('uid');
-    $criteria_uid  = new \Criteria('uid_owner', $uid);
-    $criteria      = new \CriteriaCompo($criteria_img);
+    $criteria_img = new \Criteria('video_id', $cod_video);
+    $uid = (int)$xoopsUser->getVar('uid');
+    $criteria_uid = new \Criteria('uid_owner', $uid);
+    $criteria = new \CriteriaCompo($criteria_img);
     $criteria->add($criteria_uid);
 
     /**

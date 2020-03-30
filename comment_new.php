@@ -20,7 +20,6 @@
 /**
  * Xoops header
  */
-
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
@@ -32,8 +31,8 @@ $controller = new Yogurt\ControllerTribes($xoopsDB, $xoopsUser);
  */
 $tribe_id = $_GET['com_itemid'];
 $criteria = new \Criteria('tribe_id', $tribe_id);
-$tribes   = $controller->tribesFactory->getObjects($criteria);
-$tribe    = $tribes[0];
+$tribes = $controller->tribesFactory->getObjects($criteria);
+$tribe = $tribes[0];
 
 $com_itemid = isset($_GET['com_itemid']) ? (int)$_GET['com_itemid'] : 0;
 if ($com_itemid > 0) {

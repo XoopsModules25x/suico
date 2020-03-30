@@ -22,23 +22,23 @@ define('_MI_YOG_ADMENU1', 'Home');
 define('_MI_YOG_ADMENU2', 'About');
 define('_MI_YOG_SMNAME1', 'Submit');
 define('_MI_YOG_THUMW_TITLE', 'Thumb Width');
-define('_MI_YOG_THUMBW_DESC', 'Thumbnails width in pixels<br />This means your picture thumbnail will be<br />most of this size in width<br />All proportions are maintained');
+define('_MI_YOG_THUMBW_DESC', 'Thumbnails width in pixels<br>This means your picture thumbnail will be<br>most of this size in width<br>All proportions are maintained');
 define('_MI_YOG_THUMBH_TITLE', 'Thumb Height');
-define('_MI_YOG_THUMBH_DESC', 'Thumbnails Height in pixels<br />This means your picture thumbnail will be<br />most of this size in height<br />All proportions are maintained');
+define('_MI_YOG_THUMBH_DESC', 'Thumbnails Height in pixels<br>This means your picture thumbnail will be<br>most of this size in height<br>All proportions are maintained');
 define('_MI_YOG_RESIZEDW_TITLE', 'Resized picture width');
-define('_MI_YOG_RESIZEDW_DESC', 'Resized picture width in pixels<br />This means your picture will be<br />most of this size in width<br />All proportions are maintained<br /> The original picture if bigger than this size will <br />be resized, so it wont break your template');
+define('_MI_YOG_RESIZEDW_DESC', 'Resized picture width in pixels<br>This means your picture will be<br>most of this size in width<br>All proportions are maintained<br> The original picture if bigger than this size will <br>be resized, so it wont break your template');
 define('_MI_YOG_RESIZEDH_TITLE', 'Resized picture height');
-define('_MI_YOG_RESIZEDH_DESC', 'Resized picture height in pixels<br />This means your picture will be<br />most of this size in height<br />All proportions are maintained<br /> The original picture if bigger than this size will <br />be resized, so it wont break your template design');
+define('_MI_YOG_RESIZEDH_DESC', 'Resized picture height in pixels<br>This means your picture will be<br>most of this size in height<br>All proportions are maintained<br> The original picture if bigger than this size will <br>be resized, so it wont break your template design');
 define('_MI_YOG_ORIGINALW_TITLE', 'Max original picture width');
-define('_MI_YOG_ORIGINALW_DESC', "Maximum original picture width in pixels<br />This means the user's original picture can't exceed <br />this size in height<br /> else it won't be uploaded");
+define('_MI_YOG_ORIGINALW_DESC', "Maximum original picture width in pixels<br>This means the user's original picture can't exceed <br>this size in height<br> else it won't be uploaded");
 define('_MI_YOG_ORIGINALH_TITLE', 'Max original picture height');
-define('_MI_YOG_ORIGINALH_DESC', "Maximum original picture height in pixels<br />This means the user's original picture can't exceed <br />this size in height<br /> else it won't be uploaded");
+define('_MI_YOG_ORIGINALH_DESC', "Maximum original picture height in pixels<br>This means the user's original picture can't exceed <br>this size in height<br> else it won't be uploaded");
 define('_MI_YOG_PATHUPLOAD_TITLE', 'Path Uploads');
-define('_MI_YOG_PATHUPLOAD_DESC', 'Path to the uploads directory<br />in Linux it should look like this /var/www/uploads<br />in Windows like this C:/Program Files/www');
+define('_MI_YOG_PATHUPLOAD_DESC', 'Path to the uploads directory<br>in Linux it should look like this /var/www/uploads<br>in Windows like this C:/Program Files/www');
 define('_MI_YOG_LINKPATHUPLOAD_TITLE', 'Link to your uploads directory');
-define('_MI_YOG_LINKPATHUPLOAD_DESC', 'This is the address of the root path to uploads <br />like http://www.yoursite.com/uploads');
+define('_MI_YOG_LINKPATHUPLOAD_DESC', 'This is the address of the root path to uploads <br>like http://www.yoursite.com/uploads');
 define('_MI_YOG_MAXFILEBYTES_TITLE', 'Max size in bytes');
-define('_MI_YOG_MAXFILEBYTES_DESC', 'This is the maximum size a picture file can be<br /> You can set it in bytes like this: 512000 for 500 KB<br /> Be careful that the maximum size is also set in the php.ini file. The server is currently set to ' . ini_get('post_max_size'));
+define('_MI_YOG_MAXFILEBYTES_DESC', 'This is the maximum size a picture file can be<br> You can set it in bytes like this: 512000 for 500 KB<br> Be careful that the maximum size is also set in the php.ini file. The server is currently set to ' . ini_get('post_max_size'));
 
 define('_MI_YOG_PICTURE_NOTIFYTIT', 'Album');
 define('_MI_YOG_PICTURE_NOTIFYDSC', "Notifications related to user's album");
@@ -54,7 +54,7 @@ define('_MI_YOG_PICTURE_TEMPLATEINDEXDESC', 'This template shows the pictures of
 define('_MI_YOG_PICTURE_TEMPLATEFRIENDSDESC', 'This template shows the friends of the user');
 define('_MI_YOGURT_MYFRIENDS', 'My Friends');
 define('_MI_YOG_FRIENDSPERPAGE_TITLE', 'Friends per page');
-define('_MI_YOG_FRIENDSPERPAGE_DESC', 'Set the number of friends to show per page<br />In the my Friends page');
+define('_MI_YOG_FRIENDSPERPAGE_DESC', 'Set the number of friends to show per page<br>In the my Friends page');
 define('_MI_YOG_PICTURESPERPAGE_TITLE', 'Pictures showing per page before pagination');
 
 define('_MI_YOGURT_LAST', 'Last pictures block');
@@ -62,7 +62,7 @@ define('_MI_YOGURT_LAST_DESC', 'Last pictures sent independently of the album');
 define('_MI_YOG_DELETEPHYSICAL_TITLE', 'DELETE files FROM the upload folder TO');
 define(
     '_MI_YOG_DELETEPHYSICAL_DESC',
-    "Confirming yes here, will allow the script to delete the files from the uploaded data in the database as well.<br /> Be careful about this feature, if you exclude the files from the folder and not only in the database, some people who may have linked to the image directly in another part of the site may also lose their content;<br /> at the same time if you don't exclude them, you may use to much space in the server hard disk.<br />Configure this item well for your needs."
+    "Confirming yes here, will allow the script to delete the files from the uploaded data in the database as well.<br> Be careful about this feature, if you exclude the files from the folder and not only in the database, some people who may have linked to the image directly in another part of the site may also lose their content;<br> at the same time if you don't exclude them, you may use to much space in the server hard disk.<br>Configure this item well for your needs."
 );
 
 define('_MI_YOGURT_MYVIDEOS', 'My Videos');

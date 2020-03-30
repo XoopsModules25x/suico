@@ -16,7 +16,6 @@
  * @author       XOOPS Development Team
  * @since
  */
-
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
@@ -28,7 +27,7 @@ require __DIR__ . '/header.php';
 $ishotFactory = new Yogurt\IshotHandler($xoopsDB);
 
 $uid_voted = (int)$_POST['uid_voted'];
-$ishot     = (int)$_POST['ishot'];
+$ishot = (int)$_POST['ishot'];
 $uid_voter = (int)$xoopsUser->getVar('uid');
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
@@ -47,7 +46,7 @@ if ($uid_voter == $uid_voted) {
  */
 $criteria_uidvoter = new \Criteria('uid_voter', $uid_voter);
 $criteria_uidvoted = new \Criteria('uid_voted', $uid_voted);
-$criteria          = new \CriteriaCompo($criteria_uidvoter);
+$criteria = new \CriteriaCompo($criteria_uidvoter);
 $criteria->add($criteria_uidvoted);
 
 if (0 == $ishotFactory->getCount($criteria)) {

@@ -49,7 +49,6 @@ namespace XoopsModules\Yogurt;
  */
 class Id3v1
 {
-
     /**
      * Represents Id3v1.0
      */
@@ -257,6 +256,7 @@ class Id3v1
      *
      * @param resource stream
      * @param bool $readOnly
+     * @param mixed $filename
      * @throws \Exception
      * @see $_tags
      */
@@ -315,8 +315,6 @@ class Id3v1
     {
         if (!empty($this->_tags['title'])) {
             return $this->_tags['title'];
-        } else {
-            return;
         }
     }
 
@@ -329,8 +327,6 @@ class Id3v1
     {
         if (!empty($this->_tags['artists'])) {
             return $this->_tags['artist'];
-        } else {
-            return;
         }
     }
 
@@ -343,8 +339,6 @@ class Id3v1
     {
         if (!empty($this->_tags['album'])) {
             return $this->_tags['album'];
-        } else {
-            return;
         }
     }
 
@@ -355,8 +349,8 @@ class Id3v1
      */
     public function getComment()
     {
-        if ($this->_version == self::ID3V1_1) {
-            return substr($this->_tags['comment'], 0, 28);
+        if (self::ID3V1_1 == $this->_version) {
+            return mb_substr($this->_tags['comment'], 0, 28);
         }
 
         return $this->_tags['comment'];
@@ -392,8 +386,6 @@ class Id3v1
     {
         if (!empty($this->_tags['year'])) {
             return (int)$this->_tags['year'];
-        } else {
-            return;
         }
     }
 
@@ -404,7 +396,7 @@ class Id3v1
      */
     public function getTrack()
     {
-        if ($this->_version == self::ID3V1_0 || !isset($this->_tags['track'])) {
+        if (self::ID3V1_0 == $this->_version || !isset($this->_tags['track'])) {
             return false;
         }
 
@@ -427,8 +419,8 @@ class Id3v1
      * Sets the Id3v1 version, which will be used
      *
      * @param string $version The version you want to set
-     * @return Id3v1 Implements fluent interface
      * @throws \Exception
+     * @return Id3v1 Implements fluent interface
      * @see self::ID3V1_1
      * @see self::ID3V1_0
      */
@@ -442,7 +434,6 @@ class Id3v1
             case self::ID3V1_0:
             case self::ID3V1_1:
                 break;
-
             default:
                 throw new \RuntimeException('Invalid version');
         }
@@ -459,8 +450,8 @@ class Id3v1
      * the method itself also accepts longer terms.
      *
      * @param string $title The title you want to set
-     * @return Id3v1 Implements fluent interface
      * @throws \Exception
+     * @return Id3v1 Implements fluent interface
      * @see $_tags
      */
     public function setTitle($title)
@@ -485,8 +476,8 @@ class Id3v1
      * the method itself also accepts longer terms.
      *
      * @param string $artist The artist you want to set
-     * @return Id3v1 Implements fluent interface
      * @throws \Exception
+     * @return Id3v1 Implements fluent interface
      * @see $_tags
      */
     public function setArtist($artist)
@@ -511,8 +502,8 @@ class Id3v1
      * the method itself also accepts longer terms.
      *
      * @param string $album The album you want to set
-     * @return Id3v1 Implements fluent interface
      * @throws \Exception
+     * @return Id3v1 Implements fluent interface
      * @see $_tags
      */
     public function setAlbum($album)
@@ -539,8 +530,8 @@ class Id3v1
      * The method itselfs takes also longer terms.
      *
      * @param string $comment The comment you want to set
-     * @return Id3v1 Implements fluent interface
      * @throws \Exception
+     * @return Id3v1 Implements fluent interface
      * @see $_tags
      */
     public function setComment($comment)
@@ -564,8 +555,8 @@ class Id3v1
      * You can either use the genre id, or the genre name.
      *
      * @param string|int $genre The genre you want to set
-     * @return Id3v1 Implements fluent interface
      * @throws \Exception
+     * @return Id3v1 Implements fluent interface
      * @see $_tags
      */
     public function setGenre($genre)
@@ -589,8 +580,8 @@ class Id3v1
      * Sets the year
      *
      * @param int $year The year you want to set
-     * @return Id3v1 Implements fluent interface
      * @throws \Exception
+     * @return Id3v1 Implements fluent interface
      * @see $_tags
      */
     public function setYear($year)
@@ -616,8 +607,8 @@ class Id3v1
      * ID3V1_0 you have to set it manually after calling this method.
      *
      * @param int $track The tracl you want to set
-     * @return Id3v1 Implements fluent interface
      * @throws \Exception
+     * @return Id3v1 Implements fluent interface
      * @see $_tags
      * @see setId3v1Version()
      * @see getId3v1Version()
@@ -630,7 +621,7 @@ class Id3v1
 
         if (is_int($track) && 0 != $track) {
             $this->_tags['track'] = $track;
-            $this->_version       = self::ID3V1_1;
+            $this->_version = self::ID3V1_1;
         } else {
             throw new \RuntimeException('Track type invalid or zero');
         }
@@ -653,13 +644,13 @@ class Id3v1
         }
 
         $this->_tags['marking'] = 'TAG';
-        $this->_tags['title']   = '';
-        $this->_tags['artist']  = '';
-        $this->_tags['album']   = '';
-        $this->_tags['year']    = null;
+        $this->_tags['title'] = '';
+        $this->_tags['artist'] = '';
+        $this->_tags['album'] = '';
+        $this->_tags['year'] = null;
         $this->_tags['comment'] = '';
-        $this->_tags['track']   = null;
-        $this->_tags['genre']   = 255;
+        $this->_tags['track'] = null;
+        $this->_tags['genre'] = 255;
 
         return $this;
     }
@@ -715,8 +706,8 @@ class Id3v1
      * This method saves the set tags to the file. Therefore it seeks to
      * the end of the file and writes the Id3v1 bytestream to it.
      *
-     * @return Id3v1 Implements fluent interface
      * @throws \Exception
+     * @return Id3v1 Implements fluent interface
      * @see $_tags
      * @see setTitle()
      * @see setArtist()
@@ -740,7 +731,7 @@ class Id3v1
 
         $newTag = '';
 
-        if ($this->_version == self::ID3V1_0) {
+        if (self::ID3V1_0 == $this->_version) {
             $newTag = pack('a3a30a30a30a4a30C1', 'TAG', $this->_tags['title'], $this->_tags['artist'], $this->_tags['album'], $this->_tags['year'], $this->_tags['comment'], $this->_tags['genre']);
         } else {
             $newTag = pack('a3a30a30a30a4a28x1C1C1', 'TAG', $this->_tags['title'], $this->_tags['artist'], $this->_tags['album'], $this->_tags['year'], $this->_tags['comment'], $this->_tags['track'], $this->_tags['genre']);
@@ -770,8 +761,8 @@ class Id3v1
      * </code>
      *
      * @param string $name
-     * @return mixed Depends on tag, which will be returned
      * @throws \Exception
+     * @return mixed Depends on tag, which will be returned
      */
     public function __get($name)
     {
@@ -810,8 +801,8 @@ class Id3v1
      *
      * @param string $name
      * @param string $value
-     * @return mixed Depends on tag
      * @throws \Exception
+     * @return mixed Depends on tag
      */
     public function __set($name, $value)
     {
@@ -873,7 +864,5 @@ class Id3v1
         if (count($returnedTags) > 0) {
             return implode(', ', $returnedTags);
         }
-
-        return;
     }
 }

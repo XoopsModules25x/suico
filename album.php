@@ -16,7 +16,6 @@
  * @author       XOOPS Development Team
  * @since
  */
-
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_album.tpl';
@@ -42,8 +41,8 @@ if (1 == $controller->isOwner) {
     $criteria_uid = new \Criteria('uid_owner', $controller->uidOwner);
 } else {
     $criteria_private = new \Criteria('private', 0);
-    $criteria_uid2    = new \Criteria('uid_owner', (int)$controller->uidOwner);
-    $criteria_uid     = new \CriteriaCompo($criteria_uid2);
+    $criteria_uid2 = new \Criteria('uid_owner', (int)$controller->uidOwner);
+    $criteria_uid = new \CriteriaCompo($criteria_uid2);
     $criteria_uid->add($criteria_private);
 }
 $criteria_uid->setLimit($xoopsModuleConfig['picturesperpage']);
@@ -71,8 +70,8 @@ if (0 == $nbSections['nbPhotos']) {
      */
     $i = 0;
     foreach ($pictures_object_array as $picture) {
-        $pictures_array[$i]['url']     = $picture->getVar('url', 's');
-        $pictures_array[$i]['desc']    = $picture->getVar('title', 's');
+        $pictures_array[$i]['url'] = $picture->getVar('url', 's');
+        $pictures_array[$i]['desc'] = $picture->getVar('title', 's');
         $pictures_array[$i]['cod_img'] = $picture->getVar('cod_img', 's');
         $pictures_array[$i]['private'] = $picture->getVar('private', 's');
         $xoopsTpl->assign('pics_array', $pictures_array);
@@ -94,9 +93,9 @@ if (!empty($xoopsUser)) {
 /**
  * Let's get the user name of the owner of the album
  */
-$owner      = new \XoopsUser($controller->uidOwner);
+$owner = new \XoopsUser($controller->uidOwner);
 $identifier = $owner->getVar('uname');
-$avatar     = $owner->getVar('user_avatar');
+$avatar = $owner->getVar('user_avatar');
 
 /**
  * Adding to the module js and css of the lightbox and new ones
@@ -104,7 +103,7 @@ $avatar     = $owner->getVar('user_avatar');
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/yogurt.css');
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
-if (preg_match('/msie/', strtolower($_SERVER['HTTP_USER_AGENT']))) {
+if (preg_match('/msie/', mb_strtolower($_SERVER['HTTP_USER_AGENT']))) {
     $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
 }
 //$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/css/lightbox.css');
@@ -120,7 +119,7 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
  * Criando a barra de navegao caso tenha muitos amigos
  */
 $barra_navegacao = new \XoopsPageNav($nbSections['nbPhotos'], $xoopsModuleConfig['picturesperpage'], $start, 'start', 'uid=' . (int)$controller->uidOwner);
-$navegacao       = $barra_navegacao->renderImageNav(2);
+$navegacao = $barra_navegacao->renderImageNav(2);
 
 /**
  * Assigning smarty variables

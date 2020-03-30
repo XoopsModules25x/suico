@@ -16,9 +16,7 @@
  * @author       XOOPS Development Team
  * @since
  */
-
 use XoopsModules\Yogurt;
-
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_audio.tpl';
 require __DIR__ . '/header.php';
@@ -42,7 +40,7 @@ $criteriaUidAudio->setLimit($xoopsModuleConfig['audiosperpage']);
 /**
  * Get all audios of this user and assign them to template
  */
-$audios       = $controller->getAudio($criteriaUidAudio);
+$audios = $controller->getAudio($criteriaUidAudio);
 $audios_array = $controller->assignAudioContent($nbSections['nbAudio'], $audios);
 
 if (is_array($audios_array)) {
@@ -66,7 +64,7 @@ $pageNav = $controller->AudiosNavBar($nbSections['nbAudio'], $xoopsModuleConfig[
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/yogurt.css');
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
-if (preg_match('/msie/', strtolower($_SERVER['HTTP_USER_AGENT']))) {
+if (preg_match('/msie/', mb_strtolower($_SERVER['HTTP_USER_AGENT']))) {
     $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
 }
 //$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/css/lightbox.css');

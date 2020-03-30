@@ -18,9 +18,8 @@
  * @since           3.23
  * @author          Xoops Development Team
  */
-
-$moduleDirName      = basename(dirname(dirname(__DIR__)));
-$moduleDirNameUpper = strtoupper($moduleDirName);
+$moduleDirName = basename(dirname(dirname(__DIR__)));
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
 define('CO_' . $moduleDirNameUpper . '_GDLIBSTATUS', 'GD library support: ');
 define('CO_' . $moduleDirNameUpper . '_GDLIBVERSION', 'GD Library version: ');

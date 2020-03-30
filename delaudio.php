@@ -16,7 +16,6 @@
  * @author       XOOPS Development Team
  * @since
  */
-
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
@@ -37,14 +36,14 @@ if (!isset($_POST['confirm']) || 1 != $_POST['confirm']) {
      * The user must be the owner
      */
     $audioFactory = new Yogurt\AudioHandler($xoopsDB);
-    $criteria_aud  = new \Criteria('audio_id', $cod_audio);
-    $uid           = (int)$xoopsUser->getVar('uid');
-    $criteria_uid  = new \Criteria('uid_owner', $uid);
-    $criteria      = new \CriteriaCompo($criteria_aud);
+    $criteria_aud = new \Criteria('audio_id', $cod_audio);
+    $uid = (int)$xoopsUser->getVar('uid');
+    $criteria_uid = new \Criteria('uid_owner', $uid);
+    $criteria = new \CriteriaCompo($criteria_aud);
     $criteria->add($criteria_uid);
 
     $objects_array = $audioFactory->getObjects($criteria);
-    $audio_name    = $objects_array[0]->getVar('url');
+    $audio_name = $objects_array[0]->getVar('url');
 
     /**
      * Try to delete

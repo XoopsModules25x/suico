@@ -4,7 +4,7 @@ namespace XoopsModules\Yogurt;
 
 // Friendship.php,v 1
 //  ---------------------------------------------------------------- //
-// Author: Bruno Barthez	                                           //
+// Author: Bruno Barthez                                               //
 // ----------------------------------------------------------------- //
 
 include_once XOOPS_ROOT_PATH . '/kernel/object.php';
@@ -58,7 +58,7 @@ class Friendship extends \XoopsObject
      */
     public function load($id)
     {
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendship') . ' WHERE friendship_id=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendship') . ' WHERE friendship_id=' . $id;
         $myrow = $this->db->fetchArray($this->db->query($sql));
         $this->assignVars($myrow);
         if (!$myrow) {
@@ -77,31 +77,32 @@ class Friendship extends \XoopsObject
      */
     public function getAllyogurt_friendships($criteria = [], $asobject = false, $sort = 'friendship_id', $order = 'ASC', $limit = 0, $start = 0)
     {
-        $db          = \XoopsDatabaseFactory::getDatabaseConnection();
-        $ret         = [];
+        $db = \XoopsDatabaseFactory::getDatabaseConnection();
+        $ret = [];
         $where_query = '';
         if (is_array($criteria) && count($criteria) > 0) {
             $where_query = ' WHERE';
             foreach ($criteria as $c) {
                 $where_query .= " $c AND";
             }
-            $where_query = substr($where_query, 0, -4);
+            $where_query = mb_substr($where_query, 0, -4);
         } elseif (!is_array($criteria) && $criteria) {
             $where_query = ' WHERE ' . $criteria;
         }
         if (!$asobject) {
-            $sql    = 'SELECT friendship_id FROM ' . $db->prefix('yogurt_friendship') . "$where_query ORDER BY $sort $order";
+            $sql = 'SELECT friendship_id FROM ' . $db->prefix('yogurt_friendship') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
-                while (false !== ($myrow = $db->fetchArray($result))) {
+            while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['yogurt_friendship_id'];
             }
         } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_friendship') . "$where_query ORDER BY $sort $order";
+            $sql = 'SELECT * FROM ' . $db->prefix('yogurt_friendship') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
-                while (false !== ($myrow = $db->fetchArray($result))) {
-                $ret[] = new Friendship($myrow);
+            while (false !== ($myrow = $db->fetchArray($result))) {
+                $ret[] = new self($myrow);
             }
         }
+
         return $ret;
     }
 }

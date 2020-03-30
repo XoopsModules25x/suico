@@ -16,7 +16,6 @@
  * @author       XOOPS Development Team
  * @since
  */
-
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
@@ -28,17 +27,15 @@ require __DIR__ . '/header.php';
 /**
  * Factories of tribes... testing for zend editor
  */
-
-
 $reltribeuserFactory = new Yogurt\ReltribeuserHandler($xoopsDB);
-$tribesFactory       = new Yogurt\TribesHandler($xoopsDB);
+$tribesFactory = new Yogurt\TribesHandler($xoopsDB);
 
 $tribe_id = (int)$_POST['tribe_id'];
-$uid      = (int)$xoopsUser->getVar('uid');
+$uid = (int)$xoopsUser->getVar('uid');
 
-$criteria_uid      = new \Criteria('rel_user_uid', $uid);
+$criteria_uid = new \Criteria('rel_user_uid', $uid);
 $criteria_tribe_id = new \Criteria('rel_tribe_id', $tribe_id);
-$criteria          = new \CriteriaCompo($criteria_uid);
+$criteria = new \CriteriaCompo($criteria_uid);
 $criteria->add($criteria_tribe_id);
 if ($reltribeuserFactory->getCount($criteria) < 1) {
     $reltribeuser = $reltribeuserFactory->create();

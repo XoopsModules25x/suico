@@ -27,7 +27,6 @@ namespace XoopsModules\Yogurt\Common;
  * $breadcrumb->addLink( 'bread 3', 'index3.php' );
  * echo $breadcrumb->render();
  */
-
 use XoopsModules\Yogurt;
 use XoopsModules\Yogurt\Common;
 
@@ -38,7 +37,7 @@ defined('XOOPS_ROOT_PATH') || exit('XOOPS Root Path not defined');
  */
 class Breadcrumb
 {
-    public  $dirname;
+    public $dirname;
     private $bread = [];
 
     public function __construct()
@@ -55,7 +54,7 @@ class Breadcrumb
     public function addLink($title = '', $link = '')
     {
         $this->bread[] = [
-            'link'  => $link,
+            'link' => $link,
             'title' => $title,
         ];
     }

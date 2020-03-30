@@ -16,7 +16,6 @@
  * @author       XOOPS Development Team
  * @since
  */
-
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
@@ -25,7 +24,7 @@ require __DIR__ . '/header.php';
  * Factories of tribes
  */
 $reltribeuserFactory = new Yogurt\ReltribeuserHandler($xoopsDB);
-$tribesFactory       = new Yogurt\TribesHandler($xoopsDB);
+$tribesFactory = new Yogurt\TribesHandler($xoopsDB);
 
 $tribe_id = (int)$_POST['tribe_id'];
 
@@ -37,9 +36,9 @@ if (!isset($_POST['confirm']) || 1 != $_POST['confirm']) {
      * The user must be the owner
      */
     $criteria_tribe_id = new \Criteria('tribe_id', $tribe_id);
-    $uid               = (int)$xoopsUser->getVar('uid');
-    $criteria_uid      = new \Criteria('owner_uid', $uid);
-    $criteria          = new \CriteriaCompo($criteria_tribe_id);
+    $uid = (int)$xoopsUser->getVar('uid');
+    $criteria_uid = new \Criteria('owner_uid', $uid);
+    $criteria = new \CriteriaCompo($criteria_tribe_id);
     $criteria->add($criteria_uid);
 
     /**

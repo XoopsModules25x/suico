@@ -16,7 +16,6 @@
  * @author       XOOPS Development Team
  * @since
  */
-
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
@@ -26,7 +25,7 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 }
 
 $cod_img = (int)$_POST['video_id'];
-$marker  = (int)$_POST['marker'];
+$marker = (int)$_POST['marker'];
 
 $uid = (int)$xoopsUser->getVar('uid');
 
@@ -35,7 +34,7 @@ if (1 == $marker) {
      * Creating the factory  loading the picture changing its caption
      */
     $videoFactory = new Yogurt\SeutuboHandler($xoopsDB);
-    $video         = $videoFactory->create(false);
+    $video = $videoFactory->create(false);
     $video->load($cod_img);
     $video->setVar('video_desc', trim(htmlspecialchars($_POST['caption'], ENT_QUOTES | ENT_HTML5)));
 
@@ -54,10 +53,10 @@ if (1 == $marker) {
  * Creating the factory  and the criteria to edit the desc of the picture
  * The user must be the owner
  */
-$albumFactory  = new Yogurt\SeutuboHandler($xoopsDB);
+$albumFactory = new Yogurt\SeutuboHandler($xoopsDB);
 $criteria_video = new \Criteria('video_id', $cod_img);
-$criteria_uid   = new \Criteria('uid_owner', $uid);
-$criteria       = new \CriteriaCompo($criteria_video);
+$criteria_uid = new \Criteria('uid_owner', $uid);
+$criteria = new \CriteriaCompo($criteria_video);
 $criteria->add($criteria_uid);
 
 /**
@@ -67,7 +66,7 @@ $criteria->add($criteria_uid);
 $array_pict = $albumFactory->getObjects($criteria);
 if ($array_pict) {
     $caption = $array_pict[0]->getVar('video_desc');
-    $url     = $array_pict[0]->getVar('youtube_code');
+    $url = $array_pict[0]->getVar('youtube_code');
 }
 
 $albumFactory->renderFormEdit($caption, $cod_img, $url);

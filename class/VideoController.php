@@ -19,7 +19,6 @@ namespace XoopsModules\Yogurt;
  * @author       XOOPS Development Team
  * @since
  */
-
 include_once XOOPS_ROOT_PATH . '/kernel/object.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 include_once XOOPS_ROOT_PATH . '/class/criteria.php';
@@ -47,7 +46,6 @@ if (str_replace('.', '', PHP_VERSION) > 499) {
  */
 class VideoController extends YogurtController
 {
-
     /**
      * Fecth videos
      * @param object $criteria
@@ -56,6 +54,7 @@ class VideoController extends YogurtController
     public function getVideos($criteria)
     {
         $videos = $this->videosFactory->getObjects($criteria);
+
         return $videos;
     }
 
@@ -63,7 +62,6 @@ class VideoController extends YogurtController
      * Assign Videos Submit Form to theme
      * @param int $maxNbVideos the maximum number of videos a user can have
      * @param     $presentNb
-     * @return void
      */
     public function showFormSubmitVideos($maxNbVideos, $presentNb)
     {
@@ -87,20 +85,20 @@ class VideoController extends YogurtController
     {
         if (0 == $nbVideos) {
             return false;
-        } else {
-            /**
-             * Lets populate an array with the dati from the videos
-             */
-            $i = 0;
-            foreach ($videos as $video) {
-                $videos_array[$i]['url']  = $video->getVar('youtube_code', 's');
-                $videos_array[$i]['desc'] = $video->getVar('video_desc', 's');
-                $videos_array[$i]['id']   = $video->getVar('video_id', 's');
-
-                $i++;
-            }
-            return $videos_array;
         }
+        /**
+         * Lets populate an array with the dati from the videos
+         */
+        $i = 0;
+        foreach ($videos as $video) {
+            $videos_array[$i]['url'] = $video->getVar('youtube_code', 's');
+            $videos_array[$i]['desc'] = $video->getVar('video_desc', 's');
+            $videos_array[$i]['id'] = $video->getVar('video_id', 's');
+
+            $i++;
+        }
+
+        return $videos_array;
     }
 
     /**
@@ -109,12 +107,12 @@ class VideoController extends YogurtController
      * @param int $videosPerPage the number of videos in a page
      * @param int $start         at which position of the array we start
      * @param int $interval      how many pages between the first link and the next one
-     * @return void
      */
     public function VideosNavBar($nbVideos, $videosPerPage, $start, $interval)
     {
         $pageNav = new \XoopsPageNav($nbVideos, $videosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
-        $navBar  = $pageNav->renderImageNav($interval);
+        $navBar = $pageNav->renderImageNav($interval);
+
         return $navBar;
     }
 
@@ -137,6 +135,7 @@ class VideoController extends YogurtController
                 redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, _MD_YOGURT_NOPRIVILEGE);
             }
         }
+
         return true;
     }
 }

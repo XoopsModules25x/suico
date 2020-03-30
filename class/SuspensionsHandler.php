@@ -4,7 +4,7 @@ namespace XoopsModules\Yogurt;
 
 // Suspensions.php,v 1
 //  ---------------------------------------------------------------- //
-// Author: Bruno Barthez	                                           //
+// Author: Bruno Barthez                                               //
 // ----------------------------------------------------------------- //
 
 include_once XOOPS_ROOT_PATH . '/kernel/object.php';
@@ -19,7 +19,6 @@ include_once XOOPS_ROOT_PATH . '/kernel/object.php';
  */
 class SuspensionsHandler extends \XoopsObjectHandler
 {
-
     /**
      * create a new Suspensions
      *
@@ -54,8 +53,10 @@ class SuspensionsHandler extends \XoopsObjectHandler
         if (1 == $numrows) {
             $suspensions = new Suspensions();
             $suspensions->assignVars($this->db->fetchArray($result));
+
             return $suspensions;
         }
+
         return false;
     }
 
@@ -86,15 +87,15 @@ class SuspensionsHandler extends \XoopsObjectHandler
         if ($suspensions->isNew()) {
             // ajout/modification d'un Suspensions
             $suspensions = new Suspensions();
-            $format      = 'INSERT INTO %s (uid, old_pass, old_email, old_signature, suspension_time)';
-            $format      .= 'VALUES (%u, %s, %s, %s, %u)';
-            $sql         = sprintf($format, $this->db->prefix('yogurt_suspensions'), $uid, $this->db->quoteString($old_pass), $this->db->quoteString($old_email), $this->db->quoteString($old_signature), $suspension_time);
-            $force       = true;
+            $format = 'INSERT INTO %s (uid, old_pass, old_email, old_signature, suspension_time)';
+            $format .= 'VALUES (%u, %s, %s, %s, %u)';
+            $sql = sprintf($format, $this->db->prefix('yogurt_suspensions'), $uid, $this->db->quoteString($old_pass), $this->db->quoteString($old_email), $this->db->quoteString($old_signature), $suspension_time);
+            $force = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'uid=%u, old_pass=%s, old_email=%s, old_signature=%s, suspension_time=%u';
             $format .= ' WHERE uid = %u';
-            $sql    = sprintf($format, $this->db->prefix('yogurt_suspensions'), $uid, $this->db->quoteString($old_pass), $this->db->quoteString($old_email), $this->db->quoteString($old_signature), $suspension_time, $uid);
+            $sql = sprintf($format, $this->db->prefix('yogurt_suspensions'), $uid, $this->db->quoteString($old_pass), $this->db->quoteString($old_email), $this->db->quoteString($old_signature), $suspension_time, $uid);
         }
         if (false !== $force) {
             $result = $this->db->queryF($sql);
@@ -108,6 +109,7 @@ class SuspensionsHandler extends \XoopsObjectHandler
             $uid = $this->db->getInsertId();
         }
         $suspensions->assignVar('uid', $uid);
+
         return true;
     }
 
@@ -132,6 +134,7 @@ class SuspensionsHandler extends \XoopsObjectHandler
         if (!$result) {
             return false;
         }
+
         return true;
     }
 
@@ -144,9 +147,9 @@ class SuspensionsHandler extends \XoopsObjectHandler
      */
     public function &getObjects($criteria = null, $id_as_key = false)
     {
-        $ret   = [];
+        $ret = [];
         $limit = $start = 0;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_suspensions');
+        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_suspensions');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
@@ -159,16 +162,17 @@ class SuspensionsHandler extends \XoopsObjectHandler
         if (!$result) {
             return $ret;
         }
-            while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $suspensions = new Suspensions();
             $suspensions->assignVars($myrow);
             if (!$id_as_key) {
-                $ret[] =& $suspensions;
+                $ret[] = &$suspensions;
             } else {
-                $ret[$myrow['uid']] =& $suspensions;
+                $ret[$myrow['uid']] = &$suspensions;
             }
             unset($suspensions);
         }
+
         return $ret;
     }
 
@@ -189,6 +193,7 @@ class SuspensionsHandler extends \XoopsObjectHandler
             return 0;
         }
         list($count) = $this->db->fetchRow($result);
+
         return $count;
     }
 
@@ -207,6 +212,7 @@ class SuspensionsHandler extends \XoopsObjectHandler
         if (!$result = $this->db->queryF($sql)) {
             return false;
         }
+
         return true;
     }
 }

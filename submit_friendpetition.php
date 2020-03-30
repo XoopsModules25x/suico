@@ -16,7 +16,6 @@
  * @author       XOOPS Development Team
  * @since
  */
-
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
@@ -65,8 +64,8 @@ $newpetition->setVar('petioned_uid', $_POST['petitioned_uid']);
 
 if ($friendpetitionFactory->insert($newpetition)) {
     $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
-    $extra_tags['X_OWNER_UID']  = $xoopsUser->getVar('uid');
-    $notificationHandler        = xoops_getHandler('notification');
+    $extra_tags['X_OWNER_UID'] = $xoopsUser->getVar('uid');
+    $notificationHandler = xoops_getHandler('notification');
     $notificationHandler->triggerEvent('friendship', $_POST['petitioned_uid'], 'new_friendship', $extra_tags);
 
     redirect_header(XOOPS_URL . '/modules/yogurt/index.php?uid=' . $_POST['petitioned_uid'], 3, _MD_YOGURT_PETITIONED);

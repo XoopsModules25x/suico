@@ -16,7 +16,6 @@
  * @author       XOOPS Development Team
  * @since
  */
-
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_tribe.tpl';
@@ -31,8 +30,8 @@ $nbSections = $controller->getNumbersSections();
 
 $tribe_id = (int)$_GET['tribe_id'];
 $criteria = new \Criteria('tribe_id', $tribe_id);
-$tribes   = $controller->tribesFactory->getObjects($criteria);
-$tribe    = $tribes[0];
+$tribes = $controller->tribesFactory->getObjects($criteria);
+$tribe = $tribes[0];
 
 /**
  * Render a form with the info of the user
@@ -92,7 +91,7 @@ $xoopsTpl->assign('nb_audio', $nbSections['nbAudio']);
 //navbar
 $xoopsTpl->assign('module_name', $xoopsModule->getVar('name'));
 $xoopsTpl->assign('lang_mysection', _MD_YOGURT_TRIBES . ' :: ' . $tribe->getVar('tribe_title'));
-$xoopsTpl->assign('section_name', _MD_YOGURT_TRIBES . ' > ' . $tribe->getVar('tribe_title'));
+$xoopsTpl->assign('section_name', _MD_YOGURT_TRIBES . '> ' . $tribe->getVar('tribe_title'));
 $xoopsTpl->assign('lang_home', _MD_YOGURT_HOME);
 $xoopsTpl->assign('lang_photos', _MD_YOGURT_PHOTOS);
 $xoopsTpl->assign('lang_friends', _MD_YOGURT_FRIENDS);
@@ -118,7 +117,7 @@ $xoopsTpl->assign('lang_owner', _MD_YOGURT_TRIBEOWNER);
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/yogurt.css');
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
-if (preg_match('/msie/', strtolower($_SERVER['HTTP_USER_AGENT']))) {
+if (preg_match('/msie/', mb_strtolower($_SERVER['HTTP_USER_AGENT']))) {
     $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
 }
 //$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/css/lightbox.css');

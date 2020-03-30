@@ -27,7 +27,7 @@
     float: left;
     margin: 0 0 0 1px;
     min-width: 64px; /* be nice to Opera */
-	list-style:none;
+    list-style:none;
 }
 .tabs-nav a, .tabs-nav a span {
     display: block;
@@ -45,7 +45,7 @@
     line-height: 1.2;
     text-align: center;
     text-decoration: none;
-    white-space: nowrap; /* required in IE 6 */    
+    white-space: nowrap; /* required in IE 6 */
 }
 .tabs-nav .tabs-selected a {
     color: #000;
@@ -90,7 +90,7 @@
 .tabs-container {
     border-top: 1px solid #97a5b0;
     padding: 1em 8px;
-    
+
 }
 .tabs-loading em {
     padding: 0 0 0 20px;

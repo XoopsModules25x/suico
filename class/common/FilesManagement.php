@@ -24,8 +24,8 @@ trait FilesManagement
      *
      * @param string $folder The full path of the directory to check
      *
-     * @return void
      * @throws \RuntimeException
+     * @return void
      */
     public static function createFolder($folder)
     {
@@ -195,7 +195,7 @@ trait FilesManagement
         foreach ($iterator as $fObj) {
             if ($fObj->isFile()) {
                 $filename = $fObj->getPathname();
-                $fObj     = null; // clear this iterator object to close the file
+                $fObj = null; // clear this iterator object to close the file
                 if (!unlink($filename)) {
                     return false; // couldn't delete the file
                 }

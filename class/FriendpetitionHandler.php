@@ -4,7 +4,7 @@ namespace XoopsModules\Yogurt;
 
 // Friendpetition.php,v 1
 //  ---------------------------------------------------------------- //
-// Author: Bruno Barthez	                                           //
+// Author: Bruno Barthez                                               //
 // ----------------------------------------------------------------- //
 
 include_once XOOPS_ROOT_PATH . '/kernel/object.php';
@@ -19,7 +19,6 @@ include_once XOOPS_ROOT_PATH . '/kernel/object.php';
  */
 class FriendpetitionHandler extends \XoopsObjectHandler
 {
-
     /**
      * create a new Friendpetition
      *
@@ -54,8 +53,10 @@ class FriendpetitionHandler extends \XoopsObjectHandler
         if (1 == $numrows) {
             $yogurt_friendpetition = new Friendpetition();
             $yogurt_friendpetition->assignVars($this->db->fetchArray($result));
+
             return $yogurt_friendpetition;
         }
+
         return false;
     }
 
@@ -86,15 +87,15 @@ class FriendpetitionHandler extends \XoopsObjectHandler
         if ($yogurt_friendpetition->isNew()) {
             // ajout/modification d'un Friendpetition
             $yogurt_friendpetition = new Friendpetition();
-            $format                = 'INSERT INTO %s (friendpet_id, petitioner_uid, petioned_uid)';
-            $format                .= 'VALUES (%u, %u, %u)';
-            $sql                   = sprintf($format, $this->db->prefix('yogurt_friendpetition'), $friendpet_id, $petitioner_uid, $petioned_uid);
-            $force                 = true;
+            $format = 'INSERT INTO %s (friendpet_id, petitioner_uid, petioned_uid)';
+            $format .= 'VALUES (%u, %u, %u)';
+            $sql = sprintf($format, $this->db->prefix('yogurt_friendpetition'), $friendpet_id, $petitioner_uid, $petioned_uid);
+            $force = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'friendpet_id=%u, petitioner_uid=%u, petioned_uid=%u';
             $format .= ' WHERE friendpet_id = %u';
-            $sql    = sprintf($format, $this->db->prefix('yogurt_friendpetition'), $friendpet_id, $petitioner_uid, $petioned_uid, $friendpet_id);
+            $sql = sprintf($format, $this->db->prefix('yogurt_friendpetition'), $friendpet_id, $petitioner_uid, $petioned_uid, $friendpet_id);
         }
         if (false !== $force) {
             $result = $this->db->queryF($sql);
@@ -108,6 +109,7 @@ class FriendpetitionHandler extends \XoopsObjectHandler
             $friendpet_id = $this->db->getInsertId();
         }
         $yogurt_friendpetition->assignVar('friendpet_id', $friendpet_id);
+
         return true;
     }
 
@@ -132,6 +134,7 @@ class FriendpetitionHandler extends \XoopsObjectHandler
         if (!$result) {
             return false;
         }
+
         return true;
     }
 
@@ -144,9 +147,9 @@ class FriendpetitionHandler extends \XoopsObjectHandler
      */
     public function &getObjects($criteria = null, $id_as_key = false)
     {
-        $ret   = [];
+        $ret = [];
         $limit = $start = 0;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendpetition');
+        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendpetition');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
@@ -159,16 +162,17 @@ class FriendpetitionHandler extends \XoopsObjectHandler
         if (!$result) {
             return $ret;
         }
-            while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $yogurt_friendpetition = new Friendpetition();
             $yogurt_friendpetition->assignVars($myrow);
             if (!$id_as_key) {
-                $ret[] =& $yogurt_friendpetition;
+                $ret[] = &$yogurt_friendpetition;
             } else {
-                $ret[$myrow['friendpet_id']] =& $yogurt_friendpetition;
+                $ret[$myrow['friendpet_id']] = &$yogurt_friendpetition;
             }
             unset($yogurt_friendpetition);
         }
+
         return $ret;
     }
 
@@ -189,6 +193,7 @@ class FriendpetitionHandler extends \XoopsObjectHandler
             return 0;
         }
         list($count) = $this->db->fetchRow($result);
+
         return $count;
     }
 
@@ -207,6 +212,7 @@ class FriendpetitionHandler extends \XoopsObjectHandler
         if (!$result = $this->db->query($sql)) {
             return false;
         }
+
         return true;
     }
 }

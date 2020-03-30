@@ -19,7 +19,6 @@ namespace XoopsModules\Yogurt;
  * @author       XOOPS Development Team
  * @since
  */
-
 include_once XOOPS_ROOT_PATH . '/kernel/object.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 include_once XOOPS_ROOT_PATH . '/class/criteria.php';
@@ -66,6 +65,7 @@ class ControllerPhotos extends YogurtController
                 redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, _MD_YOGURT_NOPRIVILEGE);
             }
         }
+
         return true;
     }
 }

@@ -19,7 +19,6 @@ namespace XoopsModules\Yogurt;
  * @author       XOOPS Development Team
  * @since
  */
-
 include_once XOOPS_ROOT_PATH . '/kernel/object.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 include_once XOOPS_ROOT_PATH . '/class/criteria.php';
@@ -64,16 +63,16 @@ class ControllerIndex extends YogurtController
             }
         }
 
-        //	if ($section=="Notes" && $xoopsModuleConfig['enable_notes']==0){
-        //	  		return false;
-        //		}
-        //		if ($section=="pictures" && $xoopsModuleConfig['enable_pictures']==0){
-        //	  		return false;
-        //		}
+        //  if ($section=="Notes" && $xoopsModuleConfig['enable_notes']==0){
+        //          return false;
+        //      }
+        //      if ($section=="pictures" && $xoopsModuleConfig['enable_pictures']==0){
+        //          return false;
+        //      }
         //
-        //		if ($section=="pictures" && $xoopsModuleConfig['enable_pictures']==0){
-        //	  		return false;
-        //		}
+        //      if ($section=="pictures" && $xoopsModuleConfig['enable_pictures']==0){
+        //          return false;
+        //      }
         $criteria = new \Criteria('config_uid', $this->owner->getVar('uid'));
         if (1 == $this->configsFactory->getCount($criteria)) {
             $configs = $this->configsFactory->getObjects($criteria);
@@ -84,6 +83,7 @@ class ControllerIndex extends YogurtController
                 return 0;
             }
         }
+
         return 1;
     }
 }

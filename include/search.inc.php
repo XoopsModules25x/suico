@@ -38,14 +38,14 @@ function yogurt_search($queryarray, $andor, $limit, $offset, $userid)
 {
     global $xoopsDB, $module;
     //getting the url to the uploads directory
-    $moduleHandler     = xoops_getHandler('module');
-    $modulo            = $moduleHandler->getByDirname('yogurt');
-    $configHandler     = xoops_getHandler('config');
-    $moduleConfig      = $configHandler->getConfigsByCat(0, $modulo->getVar('mid'));
+    $moduleHandler = xoops_getHandler('module');
+    $modulo = $moduleHandler->getByDirname('yogurt');
+    $configHandler = xoops_getHandler('config');
+    $moduleConfig = $configHandler->getConfigsByCat(0, $modulo->getVar('mid'));
     $path_uploadimages = XOOPS_UPLOAD_URL;
 
     $ret = [];
-    $sql = 'SELECT cod_img,	title, 	data_creation, 	uid_owner, url FROM ' . $xoopsDB->prefix('yogurt_images') . ' WHERE ';
+    $sql = 'SELECT cod_img, title,  data_creation,  uid_owner, url FROM ' . $xoopsDB->prefix('yogurt_images') . ' WHERE ';
     if (0 != $userid) {
         $sql .= '(uid_owner =' . (int)$userid . ')';
     }
@@ -64,23 +64,23 @@ function yogurt_search($queryarray, $andor, $limit, $offset, $userid)
     $sql .= 'ORDER BY cod_img DESC';
     //echo $sql;
     //printr($xoopsModules);
-    $result        = $xoopsDB->query($sql, $limit, $offset);
-    $i             = 0;
-    $stringofimage = 'images/search.png" />';
-        while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
+    $result = $xoopsDB->query($sql, $limit, $offset);
+    $i = 0;
+    $stringofimage = 'images/search.png">';
+    while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
         if (0 != $userid) {
             if ($limit > 5) {
-                $ret[$i]['image'] = "images/search.png' /><a href='" . XOOPS_URL . '/modules/yogurt/album.php?uid=' . $myrow['uid_owner'] . "'><img src='" . $path_uploadimages . '/thumb_' . $myrow['url'] . "' /></a><br />" . '<img src=' . XOOPS_URL . '/modules/yogurt/images/search.png';
-                $ret[$i]['link']  = 'album.php?uid=' . $myrow['uid_owner'];
+                $ret[$i]['image'] = "images/search.png'><a href='" . XOOPS_URL . '/modules/yogurt/album.php?uid=' . $myrow['uid_owner'] . "'><img src='" . $path_uploadimages . '/thumb_' . $myrow['url'] . "'></a><br>" . '<img src=' . XOOPS_URL . '/modules/yogurt/images/search.png';
+                $ret[$i]['link'] = 'album.php?uid=' . $myrow['uid_owner'];
                 $ret[$i]['title'] = $myrow['title'];
                 //$ret[$i]['time'] = $myrow['data_creation'];
                 $ret[$i]['uid'] = $myrow['uid_owner'];
             } else {
-                $stringofimage .= '<a href="' . XOOPS_URL . '/modules/yogurt/album.php?uid=' . $myrow['uid_owner'] . '" title="' . $myrow['title'] . '"><img src="' . $path_uploadimages . '/thumb_' . $myrow['url'] . '" /></a>&nbsp;';
+                $stringofimage .= '<a href="' . XOOPS_URL . '/modules/yogurt/album.php?uid=' . $myrow['uid_owner'] . '" title="' . $myrow['title'] . '"><img src="' . $path_uploadimages . '/thumb_' . $myrow['url'] . '"></a>&nbsp;';
             }
         } else {
-            $ret[$i]['image'] = "images/search.png' /><a href='" . XOOPS_URL . '/modules/yogurt/album.php?uid=' . $myrow['uid_owner'] . "'><img src='" . $path_uploadimages . '/thumb_' . $myrow['url'] . "' /></a><br />" . "<img src='" . XOOPS_URL . '/modules/yogurt/images/search.png';
-            $ret[$i]['link']  = 'album.php?uid=' . $myrow['uid_owner'];
+            $ret[$i]['image'] = "images/search.png'><a href='" . XOOPS_URL . '/modules/yogurt/album.php?uid=' . $myrow['uid_owner'] . "'><img src='" . $path_uploadimages . '/thumb_' . $myrow['url'] . "'></a><br>" . "<img src='" . XOOPS_URL . '/modules/yogurt/images/search.png';
+            $ret[$i]['link'] = 'album.php?uid=' . $myrow['uid_owner'];
             $ret[$i]['title'] = $myrow['title'];
             //$ret[$i]['time'] = $myrow['data_creation'];
             $ret[$i]['uid'] = $myrow['uid_owner'];
@@ -93,12 +93,13 @@ function yogurt_search($queryarray, $andor, $limit, $offset, $userid)
             $ret = [];
 
             $ret[0]['title'] = 'See its album';
-            $ret[0]['time']  = time();
-            $ret[0]['uid']   = $userid;
-            $ret[0]['link']  = 'album.php?uid=' . $userid;
-            $stringofimage   .= '<img src="' . XOOPS_URL . '/modules/yogurt/images/search.png';
+            $ret[0]['time'] = time();
+            $ret[0]['uid'] = $userid;
+            $ret[0]['link'] = 'album.php?uid=' . $userid;
+            $stringofimage .= '<img src="' . XOOPS_URL . '/modules/yogurt/images/search.png';
             $ret[0]['image'] = $stringofimage;
         }
     }
+
     return $ret;
 }

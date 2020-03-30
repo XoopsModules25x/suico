@@ -53,7 +53,7 @@
     width: 100%;
     z-index: 10;
 }
-#lightbox-container-image-box > #lightbox-nav { left: 0; }
+#lightbox-container-image-box> #lightbox-nav { left: 0; }
 #lightbox-nav a { outline: none;}
 #lightbox-nav-btnPrev, #lightbox-nav-btnNext {
     width: 49%;
@@ -61,12 +61,12 @@
     background: transparent url(___just-anything-here.gif) no-repeat; /* Trick IE into showing hover */
     display: block;
 }
-#lightbox-nav-btnPrev { 
-    left: 0; 
+#lightbox-nav-btnPrev {
+    left: 0;
     float: left;
 }
-#lightbox-nav-btnNext { 
-    right: 0; 
+#lightbox-nav-btnNext {
+    right: 0;
     float: right;
 }
 #lightbox-container-image-data-box {
@@ -79,22 +79,22 @@
     padding: 0 10px 0;
 }
 #lightbox-container-image-data {
-    padding: 0 10px; 
-    color: #666; 
+    padding: 0 10px;
+    color: #666;
 }
-#lightbox-container-image-data #lightbox-image-details { 
-    width: 70%; 
-    float: left; 
-    text-align: left; 
-}    
+#lightbox-container-image-data #lightbox-image-details {
+    width: 70%;
+    float: left;
+    text-align: left;
+}
 #lightbox-image-details-caption { font-weight: bold; }
 #lightbox-image-details-currentNumber {
-    display: block; 
-    clear: left; 
-    padding-bottom: 1.0em;    
-}            
+    display: block;
+    clear: left;
+    padding-bottom: 1.0em;
+}
 #lightbox-secNav-btnClose {
-    width: 66px; 
+    width: 66px;
     float: right;
-    padding-bottom: 0.7em;    
+    padding-bottom: 0.7em;
 }

@@ -13,7 +13,6 @@
  * @since           2.5.9
  * @author          Michael Beck (aka Mamba)
  */
-
 use XoopsModules\Yogurt;
 use XoopsModules\Yogurt\Common;
 use XoopsModules\Yogurt\Utility;
@@ -23,7 +22,7 @@ require dirname(__DIR__) . '/preloads/autoloader.php';
 
 $op = \Xmf\Request::getCmd('op', '');
 
-$moduleDirName      = basename(dirname(__DIR__));
+$moduleDirName = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
 $helper = Yogurt\Helper::getInstance();
@@ -54,10 +53,10 @@ function loadSampleData()
 {
     global $xoopsConfig;
 
-    $moduleDirName      = basename(dirname(__DIR__));
+    $moduleDirName = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-    $utility      = new Yogurt\Utility();
+    $utility = new Yogurt\Utility();
     $configurator = new Common\Configurator();
 
     $tables = \Xmf\Module\Helper::getHelper($moduleDirName)->getModule()->getInfo('tables');
@@ -79,7 +78,7 @@ function loadSampleData()
     if (is_array($configurator->copyTestFolders) && count($configurator->copyTestFolders) > 0) {
         //        $file = __DIR__ . '/../testdata/images/';
         foreach (array_keys($configurator->copyTestFolders) as $i) {
-            $src  = $configurator->copyTestFolders[$i][0];
+            $src = $configurator->copyTestFolders[$i][0];
             $dest = $configurator->copyTestFolders[$i][1];
             $utility::rcopy($src, $dest);
         }
@@ -91,7 +90,7 @@ function saveSampleData()
 {
     global $xoopsConfig;
 
-    $moduleDirName      = basename(dirname(__DIR__));
+    $moduleDirName = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
     $tables = \Xmf\Module\Helper::getHelper($moduleDirName)->getModule()->getInfo('tables');
@@ -117,7 +116,7 @@ function saveSampleData()
 
 function exportSchema()
 {
-    $moduleDirName      = basename(dirname(__DIR__));
+    $moduleDirName = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
     try {

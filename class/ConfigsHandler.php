@@ -4,7 +4,7 @@ namespace XoopsModules\Yogurt;
 
 // Configs.php,v 1
 //  ---------------------------------------------------------------- //
-// Author: Bruno Barthez	                                           //
+// Author: Bruno Barthez                                               //
 // ----------------------------------------------------------------- //
 
 include_once XOOPS_ROOT_PATH . '/kernel/object.php';
@@ -19,7 +19,6 @@ include_once XOOPS_ROOT_PATH . '/kernel/object.php';
  */
 class ConfigsHandler extends \XoopsObjectHandler
 {
-
     /**
      * create a new Configs
      *
@@ -54,8 +53,10 @@ class ConfigsHandler extends \XoopsObjectHandler
         if (1 == $numrows) {
             $yogurt_configs = new Configs();
             $yogurt_configs->assignVars($this->db->fetchArray($result));
+
             return $yogurt_configs;
         }
+
         return false;
     }
 
@@ -86,9 +87,9 @@ class ConfigsHandler extends \XoopsObjectHandler
         if ($yogurt_configs->isNew()) {
             // ajout/modification d'un Configs
             $yogurt_configs = new Configs();
-            $format         = 'INSERT INTO %s (config_id, config_uid, pictures, audio, videos, tribes, Notes, friends, profile_contact, profile_general, profile_stats, suspension, backup_password, backup_email, end_suspension)';
-            $format         .= 'VALUES (%u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %s, %s, %s)';
-            $sql            = sprintf(
+            $format = 'INSERT INTO %s (config_id, config_uid, pictures, audio, videos, tribes, Notes, friends, profile_contact, profile_general, profile_stats, suspension, backup_password, backup_email, end_suspension)';
+            $format .= 'VALUES (%u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %s, %s, %s)';
+            $sql = sprintf(
                 $format,
                 $this->db->prefix('yogurt_configs'),
                 $config_id,
@@ -107,12 +108,12 @@ class ConfigsHandler extends \XoopsObjectHandler
                 $this->db->quoteString($backup_email),
                 $this->db->quoteString($end_suspension)
             );
-            $force          = true;
+            $force = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'config_id=%u, config_uid=%u, pictures=%u, audio=%u, videos=%u, tribes=%u, Notes=%u, friends=%u, profile_contact=%u, profile_general=%u, profile_stats=%u, suspension=%u, backup_password=%s, backup_email=%s, end_suspension=%s';
             $format .= ' WHERE config_id = %u';
-            $sql    = sprintf(
+            $sql = sprintf(
                 $format,
                 $this->db->prefix('yogurt_configs'),
                 $config_id,
@@ -145,6 +146,7 @@ class ConfigsHandler extends \XoopsObjectHandler
             $config_id = $this->db->getInsertId();
         }
         $yogurt_configs->assignVar('config_id', $config_id);
+
         return true;
     }
 
@@ -169,6 +171,7 @@ class ConfigsHandler extends \XoopsObjectHandler
         if (!$result) {
             return false;
         }
+
         return true;
     }
 
@@ -181,9 +184,9 @@ class ConfigsHandler extends \XoopsObjectHandler
      */
     public function &getObjects($criteria = null, $id_as_key = false)
     {
-        $ret   = [];
+        $ret = [];
         $limit = $start = 0;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_configs');
+        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_configs');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
@@ -196,16 +199,17 @@ class ConfigsHandler extends \XoopsObjectHandler
         if (!$result) {
             return $ret;
         }
-            while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $yogurt_configs = new Configs();
             $yogurt_configs->assignVars($myrow);
             if (!$id_as_key) {
-                $ret[] =& $yogurt_configs;
+                $ret[] = &$yogurt_configs;
             } else {
-                $ret[$myrow['config_id']] =& $yogurt_configs;
+                $ret[$myrow['config_id']] = &$yogurt_configs;
             }
             unset($yogurt_configs);
         }
+
         return $ret;
     }
 
@@ -226,6 +230,7 @@ class ConfigsHandler extends \XoopsObjectHandler
             return 0;
         }
         list($count) = $this->db->fetchRow($result);
+
         return $count;
     }
 
@@ -244,6 +249,7 @@ class ConfigsHandler extends \XoopsObjectHandler
         if (!$result = $this->db->query($sql)) {
             return false;
         }
+
         return true;
     }
 }

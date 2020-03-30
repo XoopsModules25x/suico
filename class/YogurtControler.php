@@ -19,7 +19,6 @@ namespace XoopsModules\Yogurt;
  * @author       XOOPS Development Team
  * @since
  */
-
 include_once XOOPS_ROOT_PATH . '/kernel/object.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 include_once XOOPS_ROOT_PATH . '/class/criteria.php';
@@ -79,12 +78,12 @@ class YogurtController extends \XoopsObject
      */
     public function __construct($db, $user)
     {
-        $this->db       = $db;
-        $this->user     = $user;
-        $this->isOwner  = 0;
+        $this->db = $db;
+        $this->user = $user;
+        $this->isOwner = 0;
         $this->isAnonym = 1;
         $this->isFriend = 0;
-        $this->isUser   = 0;
+        $this->isUser = 0;
         $this->createFactories();
         $this->getPermissions();
         $this->checkPrivilege('');
@@ -96,7 +95,7 @@ class YogurtController extends \XoopsObject
         $criteria_suspended = new \Criteria('uid', $this->uidOwner);
         if (1 == $this->isSuspended) {
             $suspensions = $this->suspensionsFactory->getObjects($criteria_suspended);
-            $suspension  = $suspensions[0];
+            $suspension = $suspensions[0];
             if (time() > $suspension->getVar('suspension_time')) {
                 $suspension = $this->suspensionsFactory->create(false);
                 $suspension->load($this->uidOwner);
@@ -125,15 +124,13 @@ class YogurtController extends \XoopsObject
     {
         if ($privilegeNeeded <= $this->privilegeLevel) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
      * Set permissions acording to user is logged or not , is owner or not etc..
-     *
-     * @return void
      */
     public function getPermissions()
     {
@@ -143,7 +140,7 @@ class YogurtController extends \XoopsObject
          */
         if (!empty($_GET['uid'])) {
             $memberHandler = xoops_getHandler('member');
-            $user          = $memberHandler->getUser((int)$_GET['uid']);
+            $user = $memberHandler->getUser((int)$_GET['uid']);
             if (!is_object($user)) {
                 redirect_header('index.php', 3, _MD_YOGURT_USERDOESNTEXIST);
             }
@@ -155,28 +152,28 @@ class YogurtController extends \XoopsObject
          */
         if (empty($this->user)) {
             $this->isAnonym = 1;
-            $this->isUser   = 0;
+            $this->isUser = 0;
 
             if (!empty($_GET['uid'])) {
                 $this->uidOwner = (int)$_GET['uid'];
             } else {
                 $this->uidOwner = 1;
-                $this->isOwner  = 0;
+                $this->isOwner = 0;
             }
         } else {
             $this->isAnonym = 0;
-            $this->isUser   = 1;
+            $this->isUser = 1;
 
             if (!empty($_GET['uid'])) {
                 $this->uidOwner = (int)$_GET['uid'];
-                $this->isOwner  = ($this->user->getVar('uid') == (int)$_GET['uid']) ? 1 : 0;
+                $this->isOwner = ($this->user->getVar('uid') == (int)$_GET['uid']) ? 1 : 0;
             } else {
                 $this->uidOwner = $this->user->getVar('uid');
-                $this->isOwner  = 1;
+                $this->isOwner = 1;
             }
         }
 
-        $this->owner        = new \XoopsUser($this->uidOwner);
+        $this->owner = new \XoopsUser($this->uidOwner);
         $criteria_suspended = new \Criteria('uid', $this->uidOwner);
 
         $this->isSuspended = ($this->suspensionsFactory->getCount($criteria_suspended) > 0) ? 1 : 0;
@@ -220,45 +217,43 @@ class YogurtController extends \XoopsObject
      */
     public function getNumbersSections()
     {
-        $criteriaTribes         = new \Criteria('rel_user_uid', $this->uidOwner);
+        $criteriaTribes = new \Criteria('rel_user_uid', $this->uidOwner);
         $nbSections['nbTribes'] = $this->reltribeusersFactory->getCount($criteriaTribes);
-        $criteriaUid            = new \Criteria('uid_owner', $this->uidOwner);
-        $criteriaAlbum          = new \CriteriaCompo($criteriaUid);
+        $criteriaUid = new \Criteria('uid_owner', $this->uidOwner);
+        $criteriaAlbum = new \CriteriaCompo($criteriaUid);
         if (0 == $this->isOwner) {
             $criteriaPrivate = new \Criteria('private', 0);
             $criteriaAlbum->add($criteriaPrivate);
         }
-        $nbSections['nbPhotos']  = $this->albumFactory->getCount($criteriaAlbum);
-        $criteriaFriends         = new \Criteria('friend1_uid', $this->uidOwner);
+        $nbSections['nbPhotos'] = $this->albumFactory->getCount($criteriaAlbum);
+        $criteriaFriends = new \Criteria('friend1_uid', $this->uidOwner);
         $nbSections['nbFriends'] = $this->friendshipsFactory->getCount($criteriaFriends);
-        $criteriaUidAudio        = new \Criteria('uid_owner', $this->uidOwner);
-        $nbSections['nbAudio']   = $this->audioFactory->getCount($criteriaUidAudio);
-        $criteriaUidVideo        = new \Criteria('uid_owner', $this->uidOwner);
-        $nbSections['nbVideos']  = $this->videosFactory->getCount($criteriaUidVideo);
-        $criteriaUidNotes        = new \Criteria('Note_to', $this->uidOwner);
-        $nbSections['nbNotes']   = $this->NotesFactory->getCount($criteriaUidNotes);
+        $criteriaUidAudio = new \Criteria('uid_owner', $this->uidOwner);
+        $nbSections['nbAudio'] = $this->audioFactory->getCount($criteriaUidAudio);
+        $criteriaUidVideo = new \Criteria('uid_owner', $this->uidOwner);
+        $nbSections['nbVideos'] = $this->videosFactory->getCount($criteriaUidVideo);
+        $criteriaUidNotes = new \Criteria('Note_to', $this->uidOwner);
+        $nbSections['nbNotes'] = $this->NotesFactory->getCount($criteriaUidNotes);
 
         return $nbSections;
     }
 
     /**
      * This creates the module factories
-     *
-     * @return void
      */
     public function createFactories()
     {
-        $this->albumFactory         = new ImageHandler($this->db);
-        $this->visitorsFactory      = new VisitorsHandler($this->db);
-        $this->audioFactory         = new AudioHandler($this->db);
-        $this->videosFactory        = new SeutuboHandler($this->db);
-        $this->petitionsFactory     = new FriendpetitionHandler($this->db);
-        $this->friendshipsFactory   = new FriendshipHandler($this->db);
+        $this->albumFactory = new ImageHandler($this->db);
+        $this->visitorsFactory = new VisitorsHandler($this->db);
+        $this->audioFactory = new AudioHandler($this->db);
+        $this->videosFactory = new SeutuboHandler($this->db);
+        $this->petitionsFactory = new FriendpetitionHandler($this->db);
+        $this->friendshipsFactory = new FriendshipHandler($this->db);
         $this->reltribeusersFactory = new ReltribeuserHandler($this->db);
-        $this->NotesFactory         = new NotesHandler($this->db);
-        $this->tribesFactory        = new TribesHandler($this->db);
-        $this->configsFactory       = new ConfigsHandler($this->db);
-        $this->suspensionsFactory   = new SuspensionsHandler($this->db);
+        $this->NotesFactory = new NotesHandler($this->db);
+        $this->tribesFactory = new TribesHandler($this->db);
+        $this->configsFactory = new ConfigsHandler($this->db);
+        $this->suspensionsFactory = new SuspensionsHandler($this->db);
     }
 
     /**
@@ -275,16 +270,16 @@ class YogurtController extends \XoopsObject
             }
         }
 
-        //	if ($section=="Notes" && $xoopsModuleConfig['enable_notes']==0){
-        //	  		return false;
-        //		}
-        //		if ($section=="pictures" && $xoopsModuleConfig['enable_pictures']==0){
-        //	  		return false;
-        //		}
+        //  if ($section=="Notes" && $xoopsModuleConfig['enable_notes']==0){
+        //          return false;
+        //      }
+        //      if ($section=="pictures" && $xoopsModuleConfig['enable_pictures']==0){
+        //          return false;
+        //      }
         //
-        //		if ($section=="pictures" && $xoopsModuleConfig['enable_pictures']==0){
-        //	  		return false;
-        //		}
+        //      if ($section=="pictures" && $xoopsModuleConfig['enable_pictures']==0){
+        //          return false;
+        //      }
         $criteria = new \Criteria('config_uid', $this->owner->getVar('uid'));
         if (1 == $this->configsFactory->getCount($criteria)) {
             $configs = $this->configsFactory->getObjects($criteria);
@@ -295,6 +290,7 @@ class YogurtController extends \XoopsObject
                 return 0;
             }
         }
+
         return 1;
     }
 }

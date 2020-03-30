@@ -4,7 +4,7 @@ namespace XoopsModules\Yogurt;
 
 // Audio.php,v 1
 //  ---------------------------------------------------------------- //
-// Author: Bruno Barthez	                                           //
+// Author: Bruno Barthez                                               //
 // ----------------------------------------------------------------- //
 
 include_once XOOPS_ROOT_PATH . '/kernel/object.php';
@@ -20,7 +20,6 @@ include_once XOOPS_ROOT_PATH . '/class/uploader.php';
  */
 class AudioHandler extends \XoopsObjectHandler
 {
-
     /**
      * create a new Audio
      *
@@ -55,8 +54,10 @@ class AudioHandler extends \XoopsObjectHandler
         if (1 == $numrows) {
             $yogurtAudio = new Audio();
             $yogurtAudio->assignVars($this->db->fetchArray($result));
+
             return $yogurtAudio;
         }
+
         return false;
     }
 
@@ -87,15 +88,15 @@ class AudioHandler extends \XoopsObjectHandler
         if ($yogurtAudio->isNew()) {
             // ajout/modification d'un yogurt_audio
             $yogurtAudio = new Audio();
-            $format      = 'INSERT INTO %s (audio_id, title, author, url, uid_owner, data_creation, data_update)';
-            $format      .= ' VALUES (%u, %s, %s, %s, %u, %s, %s)';
-            $sql         = sprintf($format, $this->db->prefix('yogurt_audio'), $audio_id, $this->db->quoteString($title), $this->db->quoteString($author), $this->db->quoteString($url), $uid_owner, $now, $now);
-            $force       = true;
+            $format = 'INSERT INTO %s (audio_id, title, author, url, uid_owner, data_creation, data_update)';
+            $format .= ' VALUES (%u, %s, %s, %s, %u, %s, %s)';
+            $sql = sprintf($format, $this->db->prefix('yogurt_audio'), $audio_id, $this->db->quoteString($title), $this->db->quoteString($author), $this->db->quoteString($url), $uid_owner, $now, $now);
+            $force = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'audio_id=%u, title=%s, author=%s, url=%s, uid_owner=%u, data_creation=%s, data_update=%s';
             $format .= ' WHERE audio_id = %u';
-            $sql    = sprintf($format, $this->db->prefix('yogurt_audio'), $audio_id, $this->db->quoteString($title), $this->db->quoteString($author), $this->db->quoteString($url), $uid_owner, $now, $now, $audio_id);
+            $sql = sprintf($format, $this->db->prefix('yogurt_audio'), $audio_id, $this->db->quoteString($title), $this->db->quoteString($author), $this->db->quoteString($url), $uid_owner, $now, $now, $audio_id);
         }
         if (false !== $force) {
             $result = $this->db->queryF($sql);
@@ -109,6 +110,7 @@ class AudioHandler extends \XoopsObjectHandler
             $audio_id = $this->db->getInsertId();
         }
         $yogurtAudio->assignVar('audio_id', $audio_id);
+
         return true;
     }
 
@@ -133,6 +135,7 @@ class AudioHandler extends \XoopsObjectHandler
         if (!$result) {
             return false;
         }
+
         return true;
     }
 
@@ -145,9 +148,9 @@ class AudioHandler extends \XoopsObjectHandler
      */
     public function &getObjects($criteria = null, $id_as_key = false)
     {
-        $ret   = [];
+        $ret = [];
         $limit = $start = 0;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_audio');
+        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_audio');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
@@ -160,16 +163,17 @@ class AudioHandler extends \XoopsObjectHandler
         if (!$result) {
             return $ret;
         }
-            while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $yogurtAudio = new Audio();
             $yogurtAudio->assignVars($myrow);
             if (!$id_as_key) {
-                $ret[] =& $yogurtAudio;
+                $ret[] = &$yogurtAudio;
             } else {
-                $ret[$myrow['audio_id']] =& $yogurtAudio;
+                $ret[$myrow['audio_id']] = &$yogurtAudio;
             }
             unset($yogurtAudio);
         }
+
         return $ret;
     }
 
@@ -190,6 +194,7 @@ class AudioHandler extends \XoopsObjectHandler
             return 0;
         }
         list($count) = $this->db->fetchRow($result);
+
         return $count;
     }
 
@@ -208,6 +213,7 @@ class AudioHandler extends \XoopsObjectHandler
         if (!$result = $this->db->query($sql)) {
             return false;
         }
+
         return true;
     }
 
@@ -231,7 +237,7 @@ class AudioHandler extends \XoopsObjectHandler
 
         // mimetypes and settings put this in admin part later
         $allowed_mimetypes = ['audio/mp3', 'audio/x-mp3', 'audio/mpeg'];
-        $maxfilesize       = $maxfilebytes;
+        $maxfilesize = $maxfilebytes;
 
         // create the object to upload
         $uploader = new \XoopsMediaUploader($path_upload, $allowed_mimetypes, $maxfilesize);
@@ -243,25 +249,27 @@ class AudioHandler extends \XoopsObjectHandler
             if (!$uploader->upload()) {
                 // if there are errors lets return them
                 echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
+
                 return false;
-            } else {
-                // now let s create a new object audio and set its variables
-                //echo "passei aqui";
-                $audio = $this->create();
-                $url   = $uploader->getSavedFileName();
-                $audio->setVar('url', $url);
-                $audio->setVar('title', $title);
-                $audio->setVar('author', $author);
-                $uid = $xoopsUser->getVar('uid');
-                $audio->setVar('uid_owner', $uid);
-                $this->insert($audio);
-                $saved_destination = $uploader->getSavedDestination();
-                //print_r($_FILES);
             }
+            // now let s create a new object audio and set its variables
+            //echo "passei aqui";
+            $audio = $this->create();
+            $url = $uploader->getSavedFileName();
+            $audio->setVar('url', $url);
+            $audio->setVar('title', $title);
+            $audio->setVar('author', $author);
+            $uid = $xoopsUser->getVar('uid');
+            $audio->setVar('uid_owner', $uid);
+            $this->insert($audio);
+            $saved_destination = $uploader->getSavedDestination();
+        //print_r($_FILES);
         } else {
             echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
+
             return false;
         }
+
         return true;
     }
 }

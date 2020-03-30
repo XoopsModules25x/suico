@@ -4,7 +4,7 @@ namespace XoopsModules\Yogurt;
 
 // Reltribeuser.php,v 1
 //  ---------------------------------------------------------------- //
-// Author: Bruno Barthez	                                           //
+// Author: Bruno Barthez                                               //
 // ----------------------------------------------------------------- //
 
 include_once XOOPS_ROOT_PATH . '/kernel/object.php';
@@ -46,7 +46,7 @@ class Reltribeuser extends \XoopsObject
      */
     public function load($id)
     {
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_reltribeuser') . ' WHERE rel_id=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_reltribeuser') . ' WHERE rel_id=' . $id;
         $myrow = $this->db->fetchArray($this->db->query($sql));
         $this->assignVars($myrow);
         if (!$myrow) {
@@ -65,31 +65,32 @@ class Reltribeuser extends \XoopsObject
      */
     public function getAllyogurt_reltribeusers($criteria = [], $asobject = false, $sort = 'rel_id', $order = 'ASC', $limit = 0, $start = 0)
     {
-        $db          = \XoopsDatabaseFactory::getDatabaseConnection();
-        $ret         = [];
+        $db = \XoopsDatabaseFactory::getDatabaseConnection();
+        $ret = [];
         $where_query = '';
         if (is_array($criteria) && count($criteria) > 0) {
             $where_query = ' WHERE';
             foreach ($criteria as $c) {
                 $where_query .= " $c AND";
             }
-            $where_query = substr($where_query, 0, -4);
+            $where_query = mb_substr($where_query, 0, -4);
         } elseif (!is_array($criteria) && $criteria) {
             $where_query = ' WHERE ' . $criteria;
         }
         if (!$asobject) {
-            $sql    = 'SELECT rel_id FROM ' . $db->prefix('yogurt_reltribeuser') . "$where_query ORDER BY $sort $order";
+            $sql = 'SELECT rel_id FROM ' . $db->prefix('yogurt_reltribeuser') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
-                while (false !== ($myrow = $db->fetchArray($result))) {
+            while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['yogurt_reltribeuser_id'];
             }
         } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_reltribeuser') . "$where_query ORDER BY $sort $order";
+            $sql = 'SELECT * FROM ' . $db->prefix('yogurt_reltribeuser') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
-                while (false !== ($myrow = $db->fetchArray($result))) {
-                $ret[] = new Reltribeuser($myrow);
+            while (false !== ($myrow = $db->fetchArray($result))) {
+                $ret[] = new self($myrow);
             }
         }
+
         return $ret;
     }
 }

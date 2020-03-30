@@ -19,7 +19,6 @@ namespace XoopsModules\Yogurt;
  * @author       XOOPS Development Team
  * @since
  */
-
 include_once XOOPS_ROOT_PATH . '/kernel/object.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 include_once XOOPS_ROOT_PATH . '/class/criteria.php';
@@ -47,27 +46,26 @@ if (str_replace('.', '', PHP_VERSION) > 499) {
  */
 class ControllerNotes extends YogurtController
 {
-
-    //	function renderFormNewPost($tpl){
+    //  function renderFormNewPost($tpl){
     //
     //
     //
-    //		$form = new XoopsThemeForm("",'formNoteNew','submit_Note.php','post',true);
-    //		$fieldNote = new XoopsFormTextArea('','text',_MD_YOGURT_ENTERTEXTNOTE);
-    //		$fieldNote->setExtra(' onclick="cleanNoteForm(text,\''._MD_YOGURT_ENTERTEXTNOTE.'\')"');
+    //      $form = new XoopsThemeForm("",'formNoteNew','submit_Note.php','post',true);
+    //      $fieldNote = new XoopsFormTextArea('','text',_MD_YOGURT_ENTERTEXTNOTE);
+    //      $fieldNote->setExtra(' onclick="cleanNoteForm(text,\''._MD_YOGURT_ENTERTEXTNOTE.'\')"');
     //
     //
-    //		$fieldScrabookUid = new XoopsFormHidden ("uid", $this->uidOwner);
+    //      $fieldScrabookUid = new XoopsFormHidden ("uid", $this->uidOwner);
     //
-    //		$submitButton = new XoopsFormButton("","post_Note",_MD_YOGURT_SENDNOTE,"submit");
+    //      $submitButton = new XoopsFormButton("","post_Note",_MD_YOGURT_SENDNOTE,"submit");
     //
-    //		$form->addElement($fieldScrabookUid);
-    //		$form->addElement($fieldNote,true);
-    //		$form->addElement($submitButton);
+    //      $form->addElement($fieldScrabookUid);
+    //      $form->addElement($fieldNote,true);
+    //      $form->addElement($submitButton);
     //
-    //		//$form->display();
-    //		$form->assign($tpl);
-    //	}
+    //      //$form->display();
+    //      $form->assign($tpl);
+    //  }
 
     /**
      * @param $nb_Notes
@@ -79,9 +77,9 @@ class ControllerNotes extends YogurtController
         $Notes = $this->NotesFactory->getNotes($nb_Notes, $criteria);
         if ($Notes) {
             return $Notes;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -112,6 +110,7 @@ class ControllerNotes extends YogurtController
                 redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, _MD_YOGURT_NOPRIVILEGE);
             }
         }
+
         return true;
     }
 }

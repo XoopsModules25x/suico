@@ -16,7 +16,6 @@
  * @author       XOOPS Development Team
  * @since
  */
-
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
@@ -36,9 +35,9 @@ if (1 != $_POST['confirm']) {
      * The user must be the owner
      */
     $criteria_Note_id = new \Criteria('Note_id', $Note_id);
-    $uid              = (int)$xoopsUser->getVar('uid');
-    $criteria_uid     = new \Criteria('Note_to', $uid);
-    $criteria         = new \CriteriaCompo($criteria_Note_id);
+    $uid = (int)$xoopsUser->getVar('uid');
+    $criteria_uid = new \Criteria('Note_to', $uid);
+    $criteria = new \CriteriaCompo($criteria_Note_id);
     $criteria->add($criteria_uid);
 
     /**

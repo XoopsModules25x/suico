@@ -4,7 +4,7 @@ namespace XoopsModules\Yogurt;
 
 // Visitors.php,v 1
 //  ---------------------------------------------------------------- //
-// Author: Bruno Barthez	                                           //
+// Author: Bruno Barthez                                               //
 // ----------------------------------------------------------------- //
 
 include_once XOOPS_ROOT_PATH . '/kernel/object.php';
@@ -19,7 +19,6 @@ include_once XOOPS_ROOT_PATH . '/kernel/object.php';
  */
 class VisitorsHandler extends \XoopsObjectHandler
 {
-
     /**
      * create a new Visitors
      *
@@ -54,8 +53,10 @@ class VisitorsHandler extends \XoopsObjectHandler
         if (1 == $numrows) {
             $yogurt_visitors = new Visitors();
             $yogurt_visitors->assignVars($this->db->fetchArray($result));
+
             return $yogurt_visitors;
         }
+
         return false;
     }
 
@@ -86,15 +87,15 @@ class VisitorsHandler extends \XoopsObjectHandler
         if ($yogurt_visitors->isNew()) {
             // ajout/modification d'un Yogurt\Visitors
             $yogurt_visitors = new Visitors();
-            $format          = 'INSERT INTO %s (cod_visit, uid_owner, uid_visitor,uname_visitor)';
-            $format          .= 'VALUES (%u, %u, %u, %s)';
-            $sql             = sprintf($format, $this->db->prefix('yogurt_visitors'), $cod_visit, $uid_owner, $uid_visitor, $this->db->quoteString($uname_visitor));
-            $force           = true;
+            $format = 'INSERT INTO %s (cod_visit, uid_owner, uid_visitor,uname_visitor)';
+            $format .= 'VALUES (%u, %u, %u, %s)';
+            $sql = sprintf($format, $this->db->prefix('yogurt_visitors'), $cod_visit, $uid_owner, $uid_visitor, $this->db->quoteString($uname_visitor));
+            $force = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'cod_visit=%u, uid_owner=%u, uid_visitor=%u, uname_visitor=%s ';
             $format .= ' WHERE cod_visit = %u';
-            $sql    = sprintf($format, $this->db->prefix('yogurt_visitors'), $cod_visit, $uid_owner, $uid_visitor, $this->db->quoteString($uname_visitor), $cod_visit);
+            $sql = sprintf($format, $this->db->prefix('yogurt_visitors'), $cod_visit, $uid_owner, $uid_visitor, $this->db->quoteString($uname_visitor), $cod_visit);
         }
         if (false !== $force) {
             $result = $this->db->queryF($sql);
@@ -108,6 +109,7 @@ class VisitorsHandler extends \XoopsObjectHandler
             $cod_visit = $this->db->getInsertId();
         }
         $yogurt_visitors->assignVar('cod_visit', $cod_visit);
+
         return true;
     }
 
@@ -132,6 +134,7 @@ class VisitorsHandler extends \XoopsObjectHandler
         if (!$result) {
             return false;
         }
+
         return true;
     }
 
@@ -144,9 +147,9 @@ class VisitorsHandler extends \XoopsObjectHandler
      */
     public function &getObjects($criteria = null, $id_as_key = false)
     {
-        $ret   = [];
+        $ret = [];
         $limit = $start = 0;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_visitors');
+        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_visitors');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
@@ -159,16 +162,17 @@ class VisitorsHandler extends \XoopsObjectHandler
         if (!$result) {
             return $ret;
         }
-            while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $yogurt_visitors = new Visitors();
             $yogurt_visitors->assignVars($myrow);
             if (!$id_as_key) {
-                $ret[] =& $yogurt_visitors;
+                $ret[] = &$yogurt_visitors;
             } else {
-                $ret[$myrow['cod_visit']] =& $yogurt_visitors;
+                $ret[$myrow['cod_visit']] = &$yogurt_visitors;
             }
             unset($yogurt_visitors);
         }
+
         return $ret;
     }
 
@@ -189,6 +193,7 @@ class VisitorsHandler extends \XoopsObjectHandler
             return 0;
         }
         list($count) = $this->db->fetchRow($result);
+
         return $count;
     }
 

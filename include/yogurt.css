@@ -18,7 +18,7 @@ float:right;
 }
 
 img#yogurt-suspensiontools {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .present{
@@ -50,7 +50,7 @@ border:none;
 
 
 p#breadcrumbs {
-	display:block;
+    display:block;
     border-bottom: 2px solid;
     margin: 0px 0px 5px;
     padding:2px;
@@ -92,7 +92,7 @@ width:90%;
 
 
 
-/* 
+/*
 Profile
 */
 
@@ -188,13 +188,13 @@ div#yogurt-profile-tribes h2, div#yogurt-profile-search-results p, div#yogurt-pr
 margin:0px;
 }
 
-/****************************************************************************************************** 
+/******************************************************************************************************
  *  NOTES
  */
- 
+
 a.yogurt-Notes-replyNote {
-	clear:both;
-	cursor: pointer;
+    clear:both;
+    cursor: pointer;
 }
 
 div#yogurt-Notes-container {
@@ -341,7 +341,7 @@ overflow:hidden;
 }
 
 
-/***************************************************************************************************************** 
+/*****************************************************************************************************************
 Audio
 */
 
@@ -357,7 +357,7 @@ padding:1px;
 width:95%;
 overflow:hidden;
 }
-/***************************************************************************************************************** 
+/*****************************************************************************************************************
 Friends
 */
 
@@ -391,7 +391,7 @@ form.yogurt-friends-evaluateform, form.yogurt-friends-deleteform {
 display:inline;
 }
 
-/* 
+/*
 NAVEGACAO MAIS
 */
 div#yogurt-navegacao {
@@ -404,7 +404,7 @@ overflow:hidden;
 p#trustybw{
 display:inline;
 height:18px;
-background-image:url(../images/trustybw.gif); 
+background-image:url(../images/trustybw.gif);
 background-repeat:no-repeat;
 width:48px;
 }
@@ -418,7 +418,7 @@ background-repeat:no-repeat;
 p#coolbw{
 display:inline;
 height:18px;
-background-image:url(../images/coolbw.gif); 
+background-image:url(../images/coolbw.gif);
 background-repeat:no-repeat;
 width:48px;
 }
@@ -432,7 +432,7 @@ background-repeat:no-repeat;
 p#sexybw{
 display:inline;
 height:18px;
-background-image:url(../images/sexybw.gif); 
+background-image:url(../images/sexybw.gif);
 background-repeat:no-repeat;
 width:48px;
 }
@@ -447,7 +447,7 @@ p#yogurt-profile-fans {
 display:inline;
 height:18px;
 }
-/*************************************************************************************************************************************** 
+/***************************************************************************************************************************************
 album
 ***************************************************************************************************************************************/
 
@@ -539,63 +539,63 @@ form.yogurt-tribes-form-becomemember,form.yogurt-tribes-form-delete,form.yogurt-
 display:inline;
 }
 
-/* 
+/*
 Others
 */
 
 .yogerrors {color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick;}
 
 fieldset.myconfigs-fieldset {
-	border: 1px dotted #80021A;
-	padding: 10px;
+    border: 1px dotted #80021A;
+    padding: 10px;
 }
 
 legend.myconfigs-legend {
-	color: #80021a;
-	font-size: 1.5em;
+    color: #80021a;
+    font-size: 1.5em;
 }
 p.alert {
-	background-color: #ffc;
-	border: 2px solid #fc6;
-	padding: 10px;
-	margin-bottom: 10px;
+    background-color: #ffc;
+    border: 2px solid #fc6;
+    padding: 10px;
+    margin-bottom: 10px;
 }
 
 
 
 div#nav{
-	margin-right:auto;
-	margin-left:auto;
-	width:100px;
-	page-break-after: always;
-	
-	
-	}
+    margin-right:auto;
+    margin-left:auto;
+    width:100px;
+    page-break-after: always;
+
+
+    }
 div#titulo-friends div {
-	float: left;
-	margin-left: auto;
-	margin-right: auto;
-	page-break-after: always;
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    page-break-after: always;
 }
 
 div#wrapper-titulo-ishot div {
-	float: left;
-	margin-bottom: 10px;
+    float: left;
+    margin-bottom: 10px;
 }
 div#titulo {
-	width: 35%;
+    width: 35%;
 }
 div#titulo h2 {
-	font-size: 1.5em;
+    font-size: 1.5em;
 }
 div#ishot {
-	width: 60%;
+    width: 60%;
 }
 div#ishot form {
-	display: inline;
+    display: inline;
 }
 div#ishot p#ishot-result {
-	font-size: 0.5em;
+    font-size: 0.5em;
 }
 div#album {
 margin:auto;
@@ -604,78 +604,78 @@ text-align:center;
 }
 
 ul#album_photos {
-	padding: 0;
-	margin:auto;
+    padding: 0;
+    margin:auto;
 text-align:center;
-	
-	
+
+
 }
 ul#album_photos:after {
-	content: ".";
-	width: 95%;
-	clear: both;
-	display: block;
-	visibility: hidden;
-	font-size: 1px;
+    content: ".";
+    width: 95%;
+    clear: both;
+    display: block;
+    visibility: hidden;
+    font-size: 1px;
 }
 ul#album_photos li {
-	list-style: none;
-	width: 180px;
-	float: left;
-	padding: 0;
-	margin: 0 6px 20px 0;
+    list-style: none;
+    width: 180px;
+    float: left;
+    padding: 0;
+    margin: 0 6px 20px 0;
 }
 
 ul#friend {
-	padding: 3px;
-	margin:auto;
+    padding: 3px;
+    margin:auto;
 text-align:center;
-	
-	
+
+
 }
 ul#friend li  {
-	list-style: none;
-	width: 75px;
-	float: left;
-	padding: 0;
-	margin: 5px 6px 20px 5px;
+    list-style: none;
+    width: 75px;
+    float: left;
+    padding: 0;
+    margin: 5px 6px 20px 5px;
 }
 
 ul#friend:after {
-	content: ".";
-	width: 95%;
-	clear: both;
-	display: block;
-	visibility: hidden;
-	font-size: 1px;
+    content: ".";
+    width: 95%;
+    clear: both;
+    display: block;
+    visibility: hidden;
+    font-size: 1px;
 }
 
 ul#album_photos li div.photo_in_album {
-	height: 240px;
-	text-align: center;
+    height: 240px;
+    text-align: center;
 }
 
 ul#album_photos li div.photo_in_album:hover {
-	background-color: #E1C3C3;	
+    background-color: #E1C3C3;
 }
 ul#album_photos li div.photo_in_album p a {
-	/*background-color:#99FFFF;*/
-	height: 110px;
-	display: block;
+    /*background-color:#99FFFF;*/
+    height: 110px;
+    display: block;
 }
 ul#album_photos li div.photo_in_album img {
-	border: 5px solid #000;
-	padding: 2px;
+    border: 5px solid #000;
+    padding: 2px;
 }
 ul#album_photos li div.photo_in_album a:hover img {
-	border-color: #80021A;
+    border-color: #80021A;
 }
 ul#album_photos li div.photo_in_album a:hover {
-	color: #80021A;
+    color: #80021A;
 }
 div.photo_in_album p#desc {
-	height: 50px;
+    height: 50px;
 }
 div.photo_in_album form {
-	display: inline;
+    display: inline;
 }

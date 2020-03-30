@@ -16,9 +16,7 @@
  * @author       XOOPS Development Team
  * @since
  */
-
 use XoopsModules\Yogurt;
-
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_friends.tpl';
 require __DIR__ . '/header.php';
@@ -36,7 +34,7 @@ $start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
  * Friends
  */
 $criteria_friends = new \Criteria('friend1_uid', (int)$controller->uidOwner);
-$nb_friends       = $controller->friendshipsFactory->getCount($criteria_friends);
+$nb_friends = $controller->friendshipsFactory->getCount($criteria_friends);
 $criteria_friends->setLimit($xoopsModuleConfig['friendsperpage']);
 $criteria_friends->setStart($start);
 $vetor = $controller->friendshipsFactory->getFriends('', $criteria_friends, 0);
@@ -47,7 +45,7 @@ if (0 == $nb_friends) {
 /**
  * Let's get the user name of the owner of the album
  */
-$owner      = new \XoopsUser();
+$owner = new \XoopsUser();
 $identifier = $owner::getUnameFromId($controller->uidOwner);
 
 /**
@@ -56,7 +54,7 @@ $identifier = $owner::getUnameFromId($controller->uidOwner);
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/yogurt.css');
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
-if (preg_match('/msie/', strtolower($_SERVER['HTTP_USER_AGENT']))) {
+if (preg_match('/msie/', mb_strtolower($_SERVER['HTTP_USER_AGENT']))) {
     $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
 }
 //$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/css/lightbox.css');
@@ -72,7 +70,7 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
  * Criando a barra de navegao caso tenha muitos amigos
  */
 $barra_navegacao = new \XoopsPageNav($nbSections['nbFriends'], $xoopsModuleConfig['friendsperpage'], $start, 'start', 'uid=' . (int)$controller->uidOwner);
-$navegacao       = $barra_navegacao->renderImageNav(2);
+$navegacao = $barra_navegacao->renderImageNav(2);
 
 //permissions
 $xoopsTpl->assign('allow_Notes', $controller->checkPrivilegeBySection('Notes'));

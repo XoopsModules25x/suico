@@ -19,7 +19,6 @@ if (!defined('XOOPS_ROOT_PATH')) {
  */
 class SeutuboHandler extends \XoopsObjectHandler
 {
-
     /**
      * create a new Seutubo
      *
@@ -54,8 +53,10 @@ class SeutuboHandler extends \XoopsObjectHandler
         if (1 == $numrows) {
             $yogurt_seutubo = new Seutubo();
             $yogurt_seutubo->assignVars($this->db->fetchArray($result));
+
             return $yogurt_seutubo;
         }
+
         return false;
     }
 
@@ -86,15 +87,15 @@ class SeutuboHandler extends \XoopsObjectHandler
         if ($yogurt_seutubo->isNew()) {
             // ajout/modification d'un Seutubo
             $yogurt_seutubo = new Seutubo();
-            $format         = 'INSERT INTO %s (video_id, uid_owner, video_desc, youtube_code, main_video)';
-            $format         .= 'VALUES (%u, %u, %s, %s, %s)';
-            $sql            = sprintf($format, $this->db->prefix('yogurt_seutubo'), $video_id, $uid_owner, $this->db->quoteString($video_desc), $this->db->quoteString($youtube_code), $this->db->quoteString($main_video));
-            $force          = true;
+            $format = 'INSERT INTO %s (video_id, uid_owner, video_desc, youtube_code, main_video)';
+            $format .= 'VALUES (%u, %u, %s, %s, %s)';
+            $sql = sprintf($format, $this->db->prefix('yogurt_seutubo'), $video_id, $uid_owner, $this->db->quoteString($video_desc), $this->db->quoteString($youtube_code), $this->db->quoteString($main_video));
+            $force = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'video_id=%u, uid_owner=%u, video_desc=%s, youtube_code=%s, main_video=%s';
             $format .= ' WHERE video_id = %u';
-            $sql    = sprintf($format, $this->db->prefix('yogurt_seutubo'), $video_id, $uid_owner, $this->db->quoteString($video_desc), $this->db->quoteString($youtube_code), $this->db->quoteString($main_video), $video_id);
+            $sql = sprintf($format, $this->db->prefix('yogurt_seutubo'), $video_id, $uid_owner, $this->db->quoteString($video_desc), $this->db->quoteString($youtube_code), $this->db->quoteString($main_video), $video_id);
         }
         if (false !== $force) {
             $result = $this->db->queryF($sql);
@@ -108,6 +109,7 @@ class SeutuboHandler extends \XoopsObjectHandler
             $video_id = $this->db->getInsertId();
         }
         $yogurt_seutubo->assignVar('video_id', $video_id);
+
         return true;
     }
 
@@ -132,6 +134,7 @@ class SeutuboHandler extends \XoopsObjectHandler
         if (!$result) {
             return false;
         }
+
         return true;
     }
 
@@ -144,9 +147,9 @@ class SeutuboHandler extends \XoopsObjectHandler
      */
     public function &getObjects($criteria = null, $id_as_key = false)
     {
-        $ret   = [];
+        $ret = [];
         $limit = $start = 0;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_seutubo');
+        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_seutubo');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
@@ -159,16 +162,17 @@ class SeutuboHandler extends \XoopsObjectHandler
         if (!$result) {
             return $ret;
         }
-            while (false !== ($myrow = $this->db->fetchArray($result))) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $yogurt_seutubo = new Seutubo();
             $yogurt_seutubo->assignVars($myrow);
             if (!$id_as_key) {
-                $ret[] =& $yogurt_seutubo;
+                $ret[] = &$yogurt_seutubo;
             } else {
-                $ret[$myrow['video_id']] =& $yogurt_seutubo;
+                $ret[$myrow['video_id']] = &$yogurt_seutubo;
             }
             unset($yogurt_seutubo);
         }
+
         return $ret;
     }
 
@@ -189,6 +193,7 @@ class SeutuboHandler extends \XoopsObjectHandler
             return 0;
         }
         list($count) = $this->db->fetchRow($result);
+
         return $count;
     }
 
@@ -207,6 +212,7 @@ class SeutuboHandler extends \XoopsObjectHandler
         if (!$result = $this->db->query($sql)) {
             return false;
         }
+
         return true;
     }
 
@@ -220,7 +226,7 @@ class SeutuboHandler extends \XoopsObjectHandler
      */
     public function renderFormSubmit($xoopsTpl)
     {
-        $form       = new \XoopsThemeForm(_MD_YOGURT_ADDFAVORITEVIDEOS, 'form_videos', 'video_submited.php', 'post', true);
+        $form = new \XoopsThemeForm(_MD_YOGURT_ADDFAVORITEVIDEOS, 'form_videos', 'video_submited.php', 'post', true);
         $field_code = new \XoopsFormText(_MD_YOGURT_YOUTUBECODE, 'codigo', 50, 250);
         $field_desc = new \XoopsFormTextArea(_MD_YOGURT_CAPTION, 'caption');
         $form->setExtra('enctype="multipart/form-data"');
@@ -232,7 +238,7 @@ class SeutuboHandler extends \XoopsObjectHandler
 
         $form->addElement($button_send);
         if (str_replace('.', '', PHP_VERSION) > 499) {
-            $form->assign($xoopsTpl);//If your server is php 5
+            $form->assign($xoopsTpl); //If your server is php 5
             //$form->display();
         } else {
             $form->display(); //If your server is php 4.4
@@ -251,11 +257,11 @@ class SeutuboHandler extends \XoopsObjectHandler
      */
     public function renderFormEdit($caption, $cod_img, $filename)
     {
-        $form       = new \XoopsThemeForm(_MD_YOGURT_EDITDESC, 'form_picture', 'editdescvideo.php', 'post', true);
+        $form = new \XoopsThemeForm(_MD_YOGURT_EDITDESC, 'form_picture', 'editdescvideo.php', 'post', true);
         $field_desc = new \XoopsFormText($caption, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
-        $button_send    = new \XoopsFormButton('', 'submit_button', _MD_YOGURT_SUBMIT, 'submit');
-        $field_warning  = new \XoopsFormLabel(
+        $button_send = new \XoopsFormButton('', 'submit_button', _MD_YOGURT_SUBMIT, 'submit');
+        $field_warning = new \XoopsFormLabel(
             '<object width="425" height="353">
 <param name="movie" value="http://www.youtube.com/v/' . $filename . '"></param>
 <param name="wmode" value="transparent"></param>
@@ -263,7 +269,7 @@ class SeutuboHandler extends \XoopsObjectHandler
 </object>'
         );
         $field_video_id = new \XoopsFormHidden('video_id', $cod_img);
-        $field_marker   = new \XoopsFormHidden('marker', 1);
+        $field_marker = new \XoopsFormHidden('marker', 1);
         $form->addElement($field_warning);
         $form->addElement($field_desc);
         $form->addElement($field_video_id, true);
@@ -285,6 +291,7 @@ class SeutuboHandler extends \XoopsObjectHandler
         if (!$result = $this->db->query($sql)) {
             return false;
         }
+
         return true;
     }
 }
