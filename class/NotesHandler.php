@@ -227,7 +227,7 @@ class NotesHandler extends \XoopsObjectHandler
      */
     public function getNotes($nbNotes, $criteria)
     {
-        $myts = new MyTextSanitizer();
+        $myts = new \MyTextSanitizer();
         $ret  = [];
         $sql  = 'SELECT Note_id, uid, uname, user_avatar, Note_from, Note_text FROM ' . $this->db->prefix('yogurt_Notes') . ', ' . $this->db->prefix('users');
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
