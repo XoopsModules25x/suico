@@ -1,12 +1,12 @@
 Hallo {X_UNAME},
 
-Du wolltest benachrichtigt werden wenn {X_OWNER_NAME} ein neues Bild im Album veröffentlicht.
+Du wolltest benachrichtigt werden wenn {X_OWNER_NAME} ein neues Bild im Album verÃ¶ffentlicht.
 
 Besuche das Album hier:
 {X_SITEURL}/modules/yogurt/index.php?uid={X_OWNER_UID}
 
-Willst Du keine weiteren Benachrichtigungen erhalten, ändere bitte deine Benachrichtigungseinstellungen hier:
+Willst Du keine weiteren Benachrichtigungen erhalten, Ã¤ndere bitte deine Benachrichtigungseinstellungen hier:
 {X_UNSUBSCRIBE_URL}
 
-Viel Spaß noch
-wünscht das Team von {X_SITEURL}
+Viel SpaÃŸ noch
+wÃ¼nscht das Team von {X_SITEURL}

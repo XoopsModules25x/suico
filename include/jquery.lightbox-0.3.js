@@ -35,7 +35,7 @@
 			// Configuration related to texts in caption. For example: Image 2 of 8. You can alter either "Image" and "of" texts.
 			txtImage:				'Image',	// (string) Specify text "Image"
 			txtOf:					'of',		// (string) Specify text "of"
-			// Don´t alter these variables in any way
+			// DonÂ´t alter these variables in any way
 			imageArray:				[],
 			activeImage:			0
 		},settings);
@@ -65,7 +65,7 @@
 			settings.imageArray.length = 0;
 			// Unset image active information
 			settings.activeImage = 0;
-			// We have an image set? Or just an image? Let´s see it.
+			// We have an image set? Or just an image? LetÂ´s see it.
 			if ( jQueryMatchedObj.length == 1 ) {
 				// Add an Array, with href and title atributes, inside the Array that storage the images references
 				settings.imageArray.push(new Array(jQueryMatchedObj.attr('href'),jQueryMatchedObj.attr('title')));
@@ -165,7 +165,7 @@
 			});
 		}
 		/**
-		 * Prepares image exibition; doing a image´s preloader to calculate it´s size
+		 * Prepares image exibition; doing a imageÂ´s preloader to calculate itÂ´s size
 		 *
 		 */
 		function _set_image_to_view() { // show the loading
@@ -187,16 +187,16 @@
 		/**
 		 * Perfomance an effect in the image container resizing it
 		 *
-		 * @param integer intImageWidth The image´s width that will be showed
-		 * @param integer intImageHeight The image´s height that will be showed
+		 * @param integer intImageWidth The imageÂ´s width that will be showed
+		 * @param integer intImageHeight The imageÂ´s height that will be showed
 		 */
 		function _resize_container_image_box(intImageWidth,intImageHeight) {
 			// Get current width and height
 			var intCurrentWidth = $('#lightbox-container-image-box').width();
 			var intCurrentHeight = $('#lightbox-container-image-box').height();
 			// Get the width and height of the selected image plus the padding
-			var intWidth = (intImageWidth + (settings.containerBorderSize * 2)); // Plus the image´s width and the left and right padding value
-			var intHeight = (intImageHeight + (settings.containerBorderSize * 2)); // Plus the image´s height and the left and right padding value
+			var intWidth = (intImageWidth + (settings.containerBorderSize * 2)); // Plus the imageÂ´s width and the left and right padding value
+			var intHeight = (intImageHeight + (settings.containerBorderSize * 2)); // Plus the imageÂ´s height and the left and right padding value
 			// Diferences
 			var intDiffW = intCurrentWidth - intWidth;
 			var intDiffH = intCurrentHeight - intHeight;
