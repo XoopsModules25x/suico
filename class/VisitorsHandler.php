@@ -97,7 +97,7 @@ class VisitorsHandler extends \XoopsObjectHandler
             $format .= ' WHERE cod_visit = %u';
             $sql    = sprintf($format, $this->db->prefix('yogurt_visitors'), $cod_visit, $uid_owner, $uid_visitor, $this->db->quoteString($uname_visitor), $cod_visit);
         }
-        if (false !== $force) {
+        if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -126,7 +126,7 @@ class VisitorsHandler extends \XoopsObjectHandler
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE cod_visit = %u', $this->db->prefix('yogurt_visitors'), $yogurt_visitors->getVar('cod_visit'));
-        if (false !== $force) {
+        if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -210,7 +210,7 @@ class VisitorsHandler extends \XoopsObjectHandler
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
-        if (false !== $force) {
+        if ($force) {
             if (!$result = $this->db->queryF($sql)) {
                 return false;
             }

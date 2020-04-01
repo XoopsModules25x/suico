@@ -131,7 +131,7 @@ class ImageHandler extends \XoopsObjectHandler
             $format .= ' WHERE cod_img = %u';
             $sql    = sprintf($format, $this->db->prefix('yogurt_images'), $cod_img, $this->db->quoteString($title), $now, $now, $this->db->quoteString($uid_owner), $this->db->quoteString($url), $this->db->quoteString($private), $cod_img);
         }
-        if (false !== $force) {
+        if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -160,7 +160,7 @@ class ImageHandler extends \XoopsObjectHandler
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE cod_img = %u', $this->db->prefix('yogurt_images'), $yogurt_images->getVar('cod_img'));
-        if (false !== $force) {
+        if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);

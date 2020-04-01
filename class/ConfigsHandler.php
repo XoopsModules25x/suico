@@ -134,7 +134,7 @@ class ConfigsHandler extends \XoopsObjectHandler
                 $config_id
             );
         }
-        if (false !== $force) {
+        if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -163,7 +163,7 @@ class ConfigsHandler extends \XoopsObjectHandler
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE config_id = %u', $this->db->prefix('yogurt_configs'), $yogurt_configs->getVar('config_id'));
-        if (false !== $force) {
+        if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);

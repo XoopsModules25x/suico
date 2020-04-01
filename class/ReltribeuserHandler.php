@@ -97,7 +97,7 @@ class ReltribeuserHandler extends \XoopsObjectHandler
             $format .= ' WHERE rel_id = %u';
             $sql    = sprintf($format, $this->db->prefix('yogurt_reltribeuser'), $rel_id, $rel_tribe_id, $rel_user_uid, $rel_id);
         }
-        if (false !== $force) {
+        if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -126,7 +126,7 @@ class ReltribeuserHandler extends \XoopsObjectHandler
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE rel_id = %u', $this->db->prefix('yogurt_reltribeuser'), $yogurt_reltribeuser->getVar('rel_id'));
-        if (false !== $force) {
+        if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);

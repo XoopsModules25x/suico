@@ -97,7 +97,7 @@ class VideoHandler extends \XoopsObjectHandler
             $format .= ' WHERE video_id = %u';
             $sql    = sprintf($format, $this->db->prefix('yogurt_video'), $video_id, $uid_owner, $this->db->quoteString($video_desc), $this->db->quoteString($youtube_code), $this->db->quoteString($main_video), $video_id);
         }
-        if (false !== $force) {
+        if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -126,7 +126,7 @@ class VideoHandler extends \XoopsObjectHandler
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE video_id = %u', $this->db->prefix('yogurt_video'), $yogurt_video->getVar('video_id'));
-        if (false !== $force) {
+        if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);

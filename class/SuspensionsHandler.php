@@ -97,7 +97,7 @@ class SuspensionsHandler extends \XoopsObjectHandler
             $format .= ' WHERE uid = %u';
             $sql    = sprintf($format, $this->db->prefix('yogurt_suspensions'), $uid, $this->db->quoteString($old_pass), $this->db->quoteString($old_email), $this->db->quoteString($old_signature), $suspension_time, $uid);
         }
-        if (false !== $force) {
+        if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -126,7 +126,7 @@ class SuspensionsHandler extends \XoopsObjectHandler
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE uid = %u', $this->db->prefix('yogurt_suspensions'), $suspensions->getVar('uid'));
-        if (false !== $force) {
+        if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);

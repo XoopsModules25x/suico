@@ -64,7 +64,7 @@ class ModuleFeedback extends \XoopsObject
      */
     public function getFormFeedback($action = false)
     {
-        if (false === $action) {
+        if (!$action) {
             $action = $_SERVER['REQUEST_URI'];
         }
         $moduleDirName      = basename(dirname(dirname(__DIR__)));

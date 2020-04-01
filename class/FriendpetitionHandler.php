@@ -97,7 +97,7 @@ class FriendpetitionHandler extends \XoopsObjectHandler
             $format .= ' WHERE friendpet_id = %u';
             $sql    = sprintf($format, $this->db->prefix('yogurt_friendpetition'), $friendpet_id, $petitioner_uid, $petioned_uid, $friendpet_id);
         }
-        if (false !== $force) {
+        if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -126,7 +126,7 @@ class FriendpetitionHandler extends \XoopsObjectHandler
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE friendpet_id = %u', $this->db->prefix('yogurt_friendpetition'), $yogurt_friendpetition->getVar('friendpet_id'));
-        if (false !== $force) {
+        if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);

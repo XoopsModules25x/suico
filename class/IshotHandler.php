@@ -112,7 +112,7 @@ class IshotHandler extends \XoopsObjectHandler
             $format .= ' WHERE cod_ishot = %u';
             $sql    = sprintf($format, $this->db->prefix('yogurt_ishot'), $cod_ishot, $uid_voter, $uid_voted, $ishot, $this->db->quoteString($date), $cod_ishot);
         }
-        if (false !== $force) {
+        if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -141,7 +141,7 @@ class IshotHandler extends \XoopsObjectHandler
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE cod_ishot = %u', $this->db->prefix('yogurt_ishot'), $yogurt_ishot->getVar('cod_ishot'));
-        if (false !== $force) {
+        if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);

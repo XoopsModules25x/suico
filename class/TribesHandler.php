@@ -97,7 +97,7 @@ class TribesHandler extends \XoopsObjectHandler
             $format .= ' WHERE tribe_id = %u';
             $sql    = sprintf($format, $this->db->prefix('yogurt_tribes'), $tribe_id, $owner_uid, $this->db->quoteString($tribe_title), $this->db->quoteString($tribe_desc), $this->db->quoteString($tribe_img), $tribe_id);
         }
-        if (false !== $force) {
+        if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -126,7 +126,7 @@ class TribesHandler extends \XoopsObjectHandler
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE tribe_id = %u', $this->db->prefix('yogurt_tribes'), $yogurt_tribes->getVar('tribe_id'));
-        if (false !== $force) {
+        if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);

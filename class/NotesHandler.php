@@ -106,7 +106,7 @@ class NotesHandler extends \XoopsObjectHandler
             $format .= ' WHERE note_id = %u';
             $sql    = sprintf($format, $this->db->prefix('yogurt_Notes'), $note_id, $this->db->quoteString($note_text), $note_from, $note_to, $private, $note_id);
         }
-        if (false !== $force) {
+        if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -135,7 +135,7 @@ class NotesHandler extends \XoopsObjectHandler
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE note_id = %u', $this->db->prefix('yogurt_Notes'), $yogurt_Notes->getVar('note_id'));
-        if (false !== $force) {
+        if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);

@@ -98,7 +98,7 @@ class AudioHandler extends \XoopsObjectHandler
             $format .= ' WHERE audio_id = %u';
             $sql    = sprintf($format, $this->db->prefix('yogurt_audio'), $audio_id, $this->db->quoteString($title), $this->db->quoteString($author), $this->db->quoteString($url), $uid_owner, $now, $now, $audio_id);
         }
-        if (false !== $force) {
+        if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -127,7 +127,7 @@ class AudioHandler extends \XoopsObjectHandler
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE audio_id = %u', $this->db->prefix('yogurt_audio'), $yogurtAudio->getVar('audio_id'));
-        if (false !== $force) {
+        if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
