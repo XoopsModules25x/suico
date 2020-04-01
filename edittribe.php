@@ -65,7 +65,7 @@ if (1 == $marker && $tribe->getVar('owner_uid') == $uid) {
     $xoopsTpl->assign('tribe_id', $tribe->getVar('tribe_id'));
 
     //permissions
-    $xoopsTpl->assign('allow_Notes', $controller->checkPrivilegeBySection('Notes'));
+    $xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('Notes'));
     $xoopsTpl->assign('allow_friends', $controller->checkPrivilegeBySection('friends'));
     $xoopsTpl->assign('allow_tribes', $controller->checkPrivilegeBySection('tribes'));
     $xoopsTpl->assign('allow_pictures', $controller->checkPrivilegeBySection('pictures'));
@@ -121,12 +121,12 @@ if (1 == $marker && $tribe->getVar('owner_uid') == $uid) {
     $xoopsTpl->assign('lang_owner', _MD_YOGURT_TRIBEOWNER);
 }
 
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/yogurt.js');
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/yogurt.css');
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs.css');
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
+$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/yogurt.css');
+$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
 if (preg_match('/msie/', mb_strtolower($_SERVER['HTTP_USER_AGENT']))) {
-    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
+    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css');
 }
 
 include __DIR__ . '/../../footer.php';

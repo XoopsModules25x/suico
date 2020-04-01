@@ -34,7 +34,7 @@
 <p><input type="radio" name="tribes" id="tribes3" value="3" <{ if $tri==3 }>checked="checked"<{/if}>>  <label for="tribes3"><{$lang_only_me}></label></p>
 
 </fieldset><br><{ /if }>
-<{ if $allow_Notes!=-1 }>
+<{ if $allow_notes!=-1 }>
 <fieldset class="myconfigs-fieldset" name="Notes" id="Notes">
 <legend class="myconfigs-legend" for="Notes"><{$lang_configNotes}></legend>
 

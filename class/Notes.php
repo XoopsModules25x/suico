@@ -28,10 +28,10 @@ class Notes extends \XoopsObject
     public function __construct($id = null)
     {
         $this->db = \XoopsDatabaseFactory::getDatabaseConnection();
-        $this->initVar('Note_id', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('Note_text', XOBJ_DTYPE_TXTAREA, null, false);
-        $this->initVar('Note_from', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('Note_to', XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('note_id', XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('note_text', XOBJ_DTYPE_TXTAREA, null, false);
+        $this->initVar('note_from', XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('note_to', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('private', XOBJ_DTYPE_INT, null, false, 10);
 
         if (!empty($id)) {
@@ -50,7 +50,7 @@ class Notes extends \XoopsObject
      */
     public function load($id)
     {
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_Notes') . ' WHERE Note_id=' . $id;
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_Notes') . ' WHERE note_id=' . $id;
         $myrow = $this->db->fetchArray($this->db->query($sql));
         $this->assignVars($myrow);
         if (!$myrow) {
@@ -67,7 +67,7 @@ class Notes extends \XoopsObject
      * @param int    $start
      * @return array
      */
-    public function getAllyogurt_Notess($criteria = [], $asobject = false, $sort = 'Note_id', $order = 'ASC', $limit = 0, $start = 0)
+    public function getAllyogurt_Notess($criteria = [], $asobject = false, $sort = 'note_id', $order = 'ASC', $limit = 0, $start = 0)
     {
         $db          = \XoopsDatabaseFactory::getDatabaseConnection();
         $ret         = [];
@@ -82,7 +82,7 @@ class Notes extends \XoopsObject
             $where_query = ' WHERE ' . $criteria;
         }
         if (!$asobject) {
-            $sql    = 'SELECT Note_id FROM ' . $db->prefix('yogurt_Notes') . "$where_query ORDER BY $sort $order";
+            $sql    = 'SELECT note_id FROM ' . $db->prefix('yogurt_Notes') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['yogurt_Notes_id'];

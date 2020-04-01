@@ -30,7 +30,7 @@ $cod_img = (int)$_POST['video_id'];
 /**
  * Creating the factory  loading the video changing its caption
  */
-$videoFactory = new Yogurt\SeutuboHandler($xoopsDB);
+$videoFactory = new Yogurt\VideoHandler($xoopsDB);
 $video        = $videoFactory->create(false);
 $video->load($cod_img);
 $video->setVar('main_video', 1);
@@ -42,9 +42,9 @@ $uid = (int)$xoopsUser->getVar('uid');
 if ($uid == $video->getVar('uid_owner')) {
     if ($videoFactory->unsetAllMainsbyID($uid)) {
         if ($videoFactory->insert($video)) {
-            redirect_header('seutubo.php', 2, _MD_YOGURT_SETMAINVIDEO);
+            redirect_header('video.php', 2, _MD_YOGURT_SETMAINVIDEO);
         } else {
-            redirect_header('seutubo.php', 2, _MD_YOGURT_NOCACHACA);
+            redirect_header('video.php', 2, _MD_YOGURT_NOCACHACA);
         }
     } else {
         echo 'nao deu certo';

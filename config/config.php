@@ -74,7 +74,7 @@ return (object)[
         '/tcpdf',
     ],
 
-    'renameTables' => [//         'XX_archive'     => 'ZZZZ_archive',
+    'renameTables' => [         'yogurt_seutubo'     => 'yogurt_video',
     ],
     'moduleStats'  => [
         //            'totalcategories' => $helper->getHandler('Category')->getCategoriesCount(-1),

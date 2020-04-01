@@ -54,15 +54,15 @@ foreach ($tribes_objects as $tribe_object) {
     $i++;
 }
 
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/yogurt.css');
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs.css');
+$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/yogurt.css');
+$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
 if (preg_match('/msie/', mb_strtolower($_SERVER['HTTP_USER_AGENT']))) {
-    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
+    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css');
 }
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/jquery.js');
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/js/jquery.tabs.pack.js');
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/yogurt.js');
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.js');
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.tabs.pack.js');
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
 
 /**
  * Criando a barra de navegao caso tenha muitos amigos
@@ -71,7 +71,7 @@ $barra_navegacao = new \XoopsPageNav($nb_tribes, $xoopsModuleConfig['tribesperpa
 $barrinha        = $barra_navegacao->renderImageNav(2);
 
 //permissions
-$xoopsTpl->assign('allow_Notes', $controller->checkPrivilegeBySection('Notes'));
+$xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('Notes'));
 $xoopsTpl->assign('allow_friends', $controller->checkPrivilegeBySection('friends'));
 $xoopsTpl->assign('allow_tribes', $controller->checkPrivilegeBySection('tribes'));
 $xoopsTpl->assign('allow_pictures', $controller->checkPrivilegeBySection('pictures'));

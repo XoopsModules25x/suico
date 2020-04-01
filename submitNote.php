@@ -40,12 +40,12 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 
 $myts         = MyTextSanitizer::getInstance();
 $Notebook_uid = $_POST['uid'];
-$Note_text    = $myts->displayTarea($_POST['text'], 0, 1, 1, 1, 1);
+$note_text    = $myts->displayTarea($_POST['text'], 0, 1, 1, 1, 1);
 $mainform     = (!empty($_POST['mainform'])) ? 1 : 0;
 $Note         = $NotesFactory->create();
-$Note->setVar('Note_text', $Note_text);
-$Note->setVar('Note_from', $xoopsUser->getVar('uid'));
-$Note->setVar('Note_to', $Notebook_uid);
+$Note->setVar('note_text', $note_text);
+$Note->setVar('note_from', $xoopsUser->getVar('uid'));
+$Note->setVar('note_to', $Notebook_uid);
 $NotesFactory->insert($Note);
 $extra_tags['X_OWNER_NAME'] = $xoopsUser::getUnameFromId($Notebook_uid);
 $extra_tags['X_OWNER_UID']  = $Notebook_uid;

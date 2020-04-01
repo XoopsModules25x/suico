@@ -47,20 +47,20 @@
             <{if $isOwner }>
                 <form action="becomemembertribe.php" method="POST" id="form_becomemember" class="yogurt-tribes-form-becomemember">
                     <input type="hidden" value="<{$tribes[j].id}>" name="tribe_id" id="tribe_id">
-                    <input type="image" src="images/makememember.gif" alt="<{$lang_jointribe}>" title="<{$lang_jointribe}>"/>
+                    <input type="image" src="assets/images/makememember.gif" alt="<{$lang_jointribe}>" title="<{$lang_jointribe}>"/>
                 </form>
 
                 <{if $xoops_userid == $tribes[j].uid }>
                 <form action="delete_tribe.php" method="POST" id="form_deletetribe" class="yogurt-tribes-form-delete">
                     <input type="hidden" value="<{$tribes[j].id}>" name="tribe_id" id="tribe_id" >
-                    <input type="image" src="images/dele.gif"/>
+                    <input type="image" src="assets/images/dele.gif"/>
                 </form>
                 <form action="edittribe.php" method="POST" id="form_edittribe" class="yogurt-tribes-form-edit">
                     <input type="hidden" value="<{$tribes[j].id}>" name="tribe_id" id="tribe_id">
-                    <input type="image" src="images/edit.gif"/>
+                    <input type="image" src="assets/images/edit.gif"/>
                 </form>
                             <form>
-                            <img src="images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>">
+                            <img src="assets/images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>">
                             </form>
                 <{ /if }>
 

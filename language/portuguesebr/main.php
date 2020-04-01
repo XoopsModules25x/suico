@@ -133,7 +133,7 @@ define('_MD_YOGURT_FRIENDSHIPTERMINATED', 'Você terminou a sua amizade com este
 //mainvideo.php
 define('_MD_YOGURT_SETMAINVIDEO', 'This video is selected on your front page from now on'); //GibaPhp
 
-//seutubo.php
+//video.php
 define('_MD_YOGURT_YOUTUBECODE', 'Código do YouTube ou URL'); //GibaPhp
 define('_MD_YOGURT_ADDVIDEO', 'Incluir video'); //GibaPhp
 define('_MD_YOGURT_ADDFAVORITEVIDEOS', 'Adicione seus vídeos favoritos'); //GibaPhp
@@ -211,7 +211,7 @@ define('_MD_YOGURT_ITALIC', 'itálico'); //GibaPhp
 define('_MD_YOGURT_UNDERLINE', 'Sublinhar'); //GibaPhp
 define('_MD_YOGURT_NONOTESYET', 'Nenhum Recado foi criado ainda neste Note'); //GibaPhp
 
-//submit_Note.php
+//submitNote.php
 define('_MD_YOGURT_NOTE_SENT', 'Obrigado pela sua participação, Note enviado'); //GibaPhp
 
 //delete_Note.php

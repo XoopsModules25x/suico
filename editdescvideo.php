@@ -34,7 +34,7 @@ if (1 == $marker) {
     /**
      * Creating the factory  loading the picture changing its caption
      */
-    $videoFactory = new Yogurt\SeutuboHandler($xoopsDB);
+    $videoFactory = new Yogurt\VideoHandler($xoopsDB);
     $video        = $videoFactory->create(false);
     $video->load($cod_img);
     $video->setVar('video_desc', trim(htmlspecialchars($_POST['caption'], ENT_QUOTES | ENT_HTML5)));
@@ -44,7 +44,7 @@ if (1 == $marker) {
      */
     if ($uid == $video->getVar('uid_owner')) {
         if ($videoFactory->insert($video)) {
-            redirect_header('seutubo.php?uid=' . $uid, 2, _MD_YOGURT_DESC_EDITED);
+            redirect_header('video.php?uid=' . $uid, 2, _MD_YOGURT_DESC_EDITED);
         } else {
             redirect_header('index.php?uid=' . $uid, 2, _MD_YOGURT_NOCACHACA);
         }
@@ -54,7 +54,7 @@ if (1 == $marker) {
  * Creating the factory  and the criteria to edit the desc of the picture
  * The user must be the owner
  */
-$albumFactory   = new Yogurt\SeutuboHandler($xoopsDB);
+$albumFactory   = new Yogurt\VideoHandler($xoopsDB);
 $criteria_video = new \Criteria('video_id', $cod_img);
 $criteria_uid   = new \Criteria('uid_owner', $uid);
 $criteria       = new \CriteriaCompo($criteria_video);

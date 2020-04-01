@@ -13,11 +13,11 @@
             <{ if $isanonym!=1 }>
                 <{if $memberOfTribe ==1}><form action="abandontribe.php" method="POST" id="form_abandontribe">
                                     <input type="hidden" value="<{$tribe_id}>" name="reltribe_id" id="reltribe_id">
-                                    <input type="image" src="images/abandontribe.gif" title="<{$lang_abandontribe}>" alt="<{$lang_abandontribe}>"/>
+                                    <input type="image" src="assets/images/abandontribe.gif" title="<{$lang_abandontribe}>" alt="<{$lang_abandontribe}>"/>
                                 </form><{ else}>
                                 <form action="becomemembertribe.php" method="POST" id="form_becomemember" class="yogurt-tribes-form-becomemember">
                         <input type="hidden" value="<{$tribe_id}>" name="tribe_id" id="tribe_id">
-                        <input type="image" src="images/makememember.gif" alt="<{$lang_jointribe}>" title="<{$lang_jointribe}>"/>
+                        <input type="image" src="assets/images/makememember.gif" alt="<{$lang_jointribe}>" title="<{$lang_jointribe}>"/>
                     </form><{/if}>
           <{/if}>
             </p>
@@ -29,17 +29,17 @@
                 <div class="yogurt-tribe-edit-member <{cycle values="odd,even"}>">
                     <h2 class="head">
                         <a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$tribe_members[i].uid}>" alt="<{$tribe_members[i].uname}>" title="<{$tribe_members[i].uname}>"><{$tribe_members[i].uname}></a>
-<{if $tribe_owneruid==$tribe_members[i].uid}><img src="images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>"><{/if}>
+<{if $tribe_owneruid==$tribe_members[i].uid}><img src="assets/images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>"><{/if}>
 </h2>
                     <p>
                         <a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$tribe_members[i].uid}>" alt="<{$tribe_members[i].uname}>" title="<{$tribe_members[i].uname}>">
-                           <{ if $tribe_members[i].avatar=="blank.gif"}><img src="images/noavatar.gif"><{else}> <img src="<{$xoops_upload_url}>/<{$tribe_members[i].avatar}>"><{/if}></a>
+                           <{ if $tribe_members[i].avatar=="blank.gif"}><img src="assets/images/noavatar.gif"><{else}> <img src="<{$xoops_upload_url}>/<{$tribe_members[i].avatar}>"><{/if}></a>
 
                         <{if $tribe_owneruid==$useruid}>
                         <form action="kickfromtribe.php" method="post">
                                 <input type="hidden" value="<{$tribe_id}>" name="tribe_id" id="tribe_id">
                                 <input type="hidden" value="<{$tribe_members[i].uid}>" name="rel_user_uid" id="rel_user_uid">
-                                <input type="image" src="images/abandontribe.gif"/>
+                                <input type="image" src="assets/images/abandontribe.gif"/>
                                 </form>
                         <{/if}>
                     </p>

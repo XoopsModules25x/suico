@@ -118,7 +118,7 @@ define('_MD_YOGURT_FRIENDSHIPTERMINATED', 'You have broken your friendship with 
 //mainvideo.php
 define('_MD_YOGURT_SETMAINVIDEO', 'This video is selected on your front page from now on');
 
-//seutubo.php
+//video.php
 define('_MD_YOGURT_YOUTUBECODE', 'YouTube code or URL');
 define('_MD_YOGURT_ADDVIDEO', 'Add video');
 define('_MD_YOGURT_ADDFAVORITEVIDEOS', 'Add favourite videos');
@@ -196,7 +196,7 @@ define('_MD_YOGURT_ITALIC', 'italic');
 define('_MD_YOGURT_UNDERLINE', 'underline');
 define('_MD_YOGURT_NONOTESYET', 'No Notes created in this Notebook yet');
 
-//submit_Note.php
+//submitNote.php
 define('_MD_YOGURT_NOTE_SENT', 'Thanks for participating, Note sent');
 
 //delete_Note.php

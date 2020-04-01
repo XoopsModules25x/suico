@@ -98,12 +98,12 @@
                         </p>
 
                             <{if $tribe_members[i].isOwner }>
-                            <img src="images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>">
+                            <img src="assets/images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>">
                             <{else}>
                             <form action="kickfromtribe.php" method="post">
                             <input type="hidden" value="<{$tribe_id}>" name="tribe_id" id="tribe_id">
                             <input type="hidden" value="<{$tribe_members[i].uid}>" name="rel_user_uid" id="rel_user_uid">
-                            <input type="image" src="images/abandontribe.gif"/>
+                            <input type="image" src="assets/images/abandontribe.gif"/>
                             </form>
                             <{ /if }>
 

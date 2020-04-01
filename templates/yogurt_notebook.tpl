@@ -2,7 +2,7 @@
 
 <{ if $isanonym!=1 }>
     <div id="yogurt-Notes-form" class="outer">
-        <form name="formNoteNew" id="formNoteNew" action="submit_Note.php" method="post" >
+        <form name="formNoteNew" id="formNoteNew" action="submitNote.php" method="post" >
             <p>
                 <input type='hidden' name='uid' id='uid' value='<{$uid_owner}>'><input type='hidden' name='mainform' id='mainform' value='1'>
                 <{$token}>
@@ -31,25 +31,25 @@
         <div class="yogurt-Note-avatarandname">
             <p class="yogurt-Note-uname">&nbsp;<a href="index.php?uid=<{$Notes[i].uid}>"><{$Notes[i].uname}></a>
             </p>
-            <{ if $Notes[i].user_avatar=="blank.gif" }><img src="images/noavatar.gif"> <{ else }><img width="100"  class="avatar_Note" src="../../uploads/<{$Notes[i].user_avatar}>"> <{/if}>
+            <{ if $Notes[i].user_avatar=="blank.gif" }><img src="assets/images/noavatar.gif"> <{ else }><img width="100"  class="avatar_Note" src="../../uploads/<{$Notes[i].user_avatar}>"> <{/if}>
             <{ if $isOwner==1}>
                 <p>
                     <form name="delete_Note" method="post" action="delete_Note.php" class="yogurt-Note-form-delete">
-                        <input value="<{$Notes[i].id}>" type="image" id="Note_idimage" name="Note_idimage" src="images/dele.gif" >
-                        <input value="<{$Notes[i].id}>" type="hidden" id="Note_id" name="Note_id"  >
+                        <input value="<{$Notes[i].id}>" type="image" id="note_idimage" name="note_idimage" src="assets/images/dele.gif" >
+                        <input value="<{$Notes[i].id}>" type="hidden" id="note_id" name="note_id"  >
                     </form>
 
                 </p>
             <{ /if}>
         </div>
         <div class="yogurt-Note-details-texts">
-            <p class="yogurt-Note-text"><img src="images/Notes.gif" alt="<{$section_name}>" title="<{$section_name}>">
+            <p class="yogurt-Note-text"><img src="assets/images/notes.gif" alt="<{$section_name}>" title="<{$section_name}>">
                 &nbsp;<{$Notes[i].text}>
                 <a name="replyform<{$Notes[i].id}>" id="replyform<{$Notes[i].id}>"></a>
             </p>
             <{ if $isOwner==1}>
                 <div class="yogurt-Note-details-form">
-                  <form  action="submit_Note.php" method="post" name="form_reply_<{$Notes[i].id}>"
+                  <form  action="submitNote.php" method="post" name="form_reply_<{$Notes[i].id}>"
                     id="form_reply_<{$Notes[i].id}>" class="yogurt-Note-form">
                         <input type="hidden" value="<{$Notes[i].uid}>" name="uid" id="uid"/>
                         <textarea name="text" id="text" cols="50"></textarea>

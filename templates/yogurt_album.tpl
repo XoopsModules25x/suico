@@ -30,27 +30,27 @@
         <form action="delpicture.php" method="post" id="deleteform" class="yogurt-album-formquick">
                 <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">
                 <{$token}>
-                <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="images/dele.gif"/>
+                <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="assets/images/dele.gif"/>
         </form>
         <form action="editdesc.php" method="post" id="editform" class="yogurt-album-formquick">
                 <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">
                 <{$token}>
-                <input name="submit" type="image" alt="<{$lang_editdesc}>" title="<{$lang_editdesc}>" src="images/edit.gif"/>
+                <input name="submit" type="image" alt="<{$lang_editdesc}>" title="<{$lang_editdesc}>" src="assets/images/edit.gif"/>
         </form>
         <form action="avatar.php" method="post" id="setavatar" class="yogurt-album-formquick">
                 <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">
                 <{$token}>
-                <input name="submit" type="image" alt="<{$lang_avatarchange}>" title="<{$lang_avatarchange}>" src="images/avatar.gif"/>
+                <input name="submit" type="image" alt="<{$lang_avatarchange}>" title="<{$lang_avatarchange}>" src="assets/images/avatar.gif"/>
         </form>
         <form action="private.php" method="post" id="setprivate" class="yogurt-album-formquick">
                 <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">
                 <{$token}>
              <{ if $pics_array[i].private == 1}>
                 <input type="hidden" value="0" name="private">
-                <input name="submit" type="image" alt="<{$lang_unsetprivate}>" title="<{$lang_unsetprivate}>" src="images/unlock.gif"/>
+                <input name="submit" type="image" alt="<{$lang_unsetprivate}>" title="<{$lang_unsetprivate}>" src="assets/images/unlock.gif"/>
              <{else}>
                 <input type="hidden" value="1" name="private">
-                <input name="submit" type="image" alt="<{$lang_setprivate}>" title="<{$lang_setprivate}>" src="images/lock.gif"/>
+                <input name="submit" type="image" alt="<{$lang_setprivate}>" title="<{$lang_setprivate}>" src="assets/images/lock.gif"/>
             <{ /if }>
          </form>
         <{ if ($pics_array[i].private == 1) }>

@@ -97,7 +97,7 @@ $modversion = [
         $moduleDirName . '_' . 'friendship',
         $moduleDirName . '_' . 'images',
         $moduleDirName . '_' . 'visitors',
-        $moduleDirName . '_' . 'seutubo',
+        $moduleDirName . '_' . 'video',
         $moduleDirName . '_' . 'reltribeuser',
         $moduleDirName . '_' . 'tribes',
         $moduleDirName . '_' . 'notes',
@@ -426,7 +426,7 @@ $modversion['templates'] = [
     ['file' => 'yogurt_friends.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATEFRIENDSDESC],
     ['file' => 'yogurt_notebook.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATENOTEBOOKDESC],
     ['file' => 'yogurt_audio.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATEAUDIODESC],
-    ['file' => 'yogurt_seutubo.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATESEUTUBODESC],
+    ['file' => 'yogurt_video.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATESEUTUBODESC],
     ['file' => 'yogurt_album.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATEALBUMDESC],
     ['file' => 'yogurt_tribes.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATETRIBESDESC],
     ['file' => 'yogurt_configs.tpl', 'description' => _MI_YOG_PICTURE_TEMPLATECONFIGSDESC],
@@ -461,7 +461,7 @@ if (is_object($xoopsModule) && $xoopsModule->dirname() == $modversion['dirname']
     }
     if (1 == $moduleConfig['enable_videos']) {
         $modversion['sub'][6]['name'] = _MI_YOGURT_MYVIDEOS;
-        $modversion['sub'][6]['url']  = 'seutubo.php';
+        $modversion['sub'][6]['url']  = 'video.php';
     }
     if (1 == $moduleConfig['enable_friends']) {
         $modversion['sub'][7]['name'] = _MI_YOGURT_MYFRIENDS;
@@ -503,7 +503,7 @@ $modversion['notification']['event'][1]['mail_subject']      = _MI_YOG_PICTURE_N
 $modversion['notification']['category'][2]['name']           = 'video';
 $modversion['notification']['category'][2]['title']          = _MI_YOG_VIDEO_NOTIFYTIT;
 $modversion['notification']['category'][2]['description']    = _MI_YOG_VIDEO_NOTIFYDSC;
-$modversion['notification']['category'][2]['subscribe_from'] = 'seutubo.php';
+$modversion['notification']['category'][2]['subscribe_from'] = 'video.php';
 $modversion['notification']['category'][2]['item_name']      = 'uid';
 $modversion['notification']['category'][2]['allow_bookmark'] = 1;
 $modversion['notification']['event'][2]['name']              = 'new_video';
@@ -525,7 +525,7 @@ $modversion['notification']['event'][3]['category']          = 'Note';
 $modversion['notification']['event'][3]['title']             = _MI_YOG_NOTE_NEWNOTE_NOTIFY;
 $modversion['notification']['event'][3]['caption']           = _MI_YOG_NOTE_NEWNOTE_NOTIFYCAP;
 $modversion['notification']['event'][3]['description']       = _MI_YOG_NOTE_NEWNOTE_NOTIFYDSC;
-$modversion['notification']['event'][3]['mail_template']     = 'Note_newNote_notify';
+$modversion['notification']['event'][3]['mail_template']     = 'note_newnote_notify';
 $modversion['notification']['event'][3]['mail_subject']      = _MI_YOG_NOTE_NEWNOTE_NOTIFYSBJ;
 
 $modversion['notification']['category'][4]['name']           = 'friendship';

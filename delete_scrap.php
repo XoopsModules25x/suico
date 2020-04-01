@@ -26,19 +26,19 @@ require __DIR__ . '/header.php';
  */
 $NotesFactory = new Yogurt\NotesHandler($xoopsDB);
 
-$Note_id = (int)$_POST['Note_id'];
+$note_id = (int)$_POST['note_id'];
 
 if (1 != $_POST['confirm']) {
-    xoops_confirm(['Note_id' => $Note_id, 'confirm' => 1], 'delete_Note.php', _MD_YOGURT_ASKCONFIRMNOTEDELETION, _MD_YOGURT_CONFIRMNOTEDELETION);
+    xoops_confirm(['note_id' => $note_id, 'confirm' => 1], 'delete_Note.php', _MD_YOGURT_ASKCONFIRMNOTEDELETION, _MD_YOGURT_CONFIRMNOTEDELETION);
 } else {
     /**
      * Creating the factory  and the criteria to delete the picture
      * The user must be the owner
      */
-    $criteria_Note_id = new \Criteria('Note_id', $Note_id);
+    $criteria_note_id = new \Criteria('note_id', $note_id);
     $uid              = (int)$xoopsUser->getVar('uid');
-    $criteria_uid     = new \Criteria('Note_to', $uid);
-    $criteria         = new \CriteriaCompo($criteria_Note_id);
+    $criteria_uid     = new \Criteria('note_to', $uid);
+    $criteria         = new \CriteriaCompo($criteria_note_id);
     $criteria->add($criteria_uid);
 
     /**

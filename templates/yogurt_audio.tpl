@@ -76,7 +76,7 @@
                 <form action="delaudio.php" method="post" id="deleteform" class="yogurt-audio-forms">
                     <input type="hidden" value="<{$audios[i].id}>" name="cod_audio">
                     <{$token}>
-                    <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="images/dele.gif"/>
+                    <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="assets/images/dele.gif"/>
                 </form>
 
 

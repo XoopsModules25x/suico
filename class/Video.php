@@ -18,18 +18,18 @@ include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 include_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
 /**
- * Seutubo class.
+ * Video class.
  * $this class is responsible for providing data access mechanisms to the data source
  * of XOOPS user class objects.
  */
-class Seutubo extends \XoopsObject
+class Video extends \XoopsObject
 {
     public $db;
 
     // constructor
 
     /**
-     * Seutubo constructor.
+     * Video constructor.
      * @param null $id
      */
     public function __construct($id = null)
@@ -56,7 +56,7 @@ class Seutubo extends \XoopsObject
      */
     public function load($id)
     {
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_seutubo') . ' WHERE video_id=' . $id;
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_video') . ' WHERE video_id=' . $id;
         $myrow = $this->db->fetchArray($this->db->query($sql));
         $this->assignVars($myrow);
         if (!$myrow) {
@@ -73,7 +73,7 @@ class Seutubo extends \XoopsObject
      * @param int    $start
      * @return array
      */
-    public function getAllyogurt_seutubos($criteria = [], $asobject = false, $sort = 'video_id', $order = 'ASC', $limit = 0, $start = 0)
+    public function getAllyogurt_videos($criteria = [], $asobject = false, $sort = 'video_id', $order = 'ASC', $limit = 0, $start = 0)
     {
         $db          = \XoopsDatabaseFactory::getDatabaseConnection();
         $ret         = [];
@@ -88,13 +88,13 @@ class Seutubo extends \XoopsObject
             $where_query = ' WHERE ' . $criteria;
         }
         if (!$asobject) {
-            $sql    = 'SELECT video_id FROM ' . $db->prefix('yogurt_seutubo') . "$where_query ORDER BY $sort $order";
+            $sql    = 'SELECT video_id FROM ' . $db->prefix('yogurt_video') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
-                $ret[] = $myrow['yogurt_seutubo_id'];
+                $ret[] = $myrow['yogurt_video_id'];
             }
         } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_seutubo') . "$where_query ORDER BY $sort $order";
+            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_video') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new self($myrow);

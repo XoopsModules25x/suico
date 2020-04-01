@@ -330,7 +330,7 @@ class FriendshipHandler extends \XoopsObjectHandler
         }
         $field_friend_name = new \XoopsFormLabel(_MD_YOGURT_FRIENDNAME, $friend->getVar('uname'));
 
-        $field_friend_fan = new \XoopsFormRadioYN(_MD_YOGURT_FAN, 'fan', $friendship->getVar('fan'), '<img src="images/fans.gif" alt="' . _YES . '" title="' . _YES . '">', '<img src="images/fansbw.gif" alt="' . _NO . '" title="' . _NO . '">');
+        $field_friend_fan = new \XoopsFormRadioYN(_MD_YOGURT_FAN, 'fan', $friendship->getVar('fan'), '<img src="assets/images/fans.gif" alt="' . _YES . '" title="' . _YES . '">', '<img src="assets/images/fansbw.gif" alt="' . _NO . '" title="' . _NO . '">');
 
         $field_friend_level = new \XoopsFormRadio(_MD_YOGURT_LEVEL, 'level', $friendship->getVar('level'), '<br>');
 
@@ -340,19 +340,19 @@ class FriendshipHandler extends \XoopsObjectHandler
         $field_friend_level->addOption('7', _MD_YOGURT_BESTFRIEND);
 
         $field_friend_sexy = new \XoopsFormRadio(_MD_YOGURT_SEXY, 'hot', $friendship->getVar('hot'));
-        $field_friend_sexy->addOption('1', '<img src="images/sexya.gif" alt="' . _MD_YOGURT_SEXYNO . '" title="' . _MD_YOGURT_SEXYNO . '">');
-        $field_friend_sexy->addOption('2', '<img src="images/sexyb.gif" alt="' . _MD_YOGURT_SEXYYES . '" title="' . _MD_YOGURT_SEXYYES . '">');
-        $field_friend_sexy->addOption('3', '<img src="images/sexyc.gif" alt="' . _MD_YOGURT_SEXYALOT . '" title="' . _MD_YOGURT_SEXYALOT . '">');
+        $field_friend_sexy->addOption('1', '<img src="assets/images/sexya.gif" alt="' . _MD_YOGURT_SEXYNO . '" title="' . _MD_YOGURT_SEXYNO . '">');
+        $field_friend_sexy->addOption('2', '<img src="assets/images/sexyb.gif" alt="' . _MD_YOGURT_SEXYYES . '" title="' . _MD_YOGURT_SEXYYES . '">');
+        $field_friend_sexy->addOption('3', '<img src="assets/images/sexyc.gif" alt="' . _MD_YOGURT_SEXYALOT . '" title="' . _MD_YOGURT_SEXYALOT . '">');
 
         $field_friend_trusty = new \XoopsFormRadio(_MD_YOGURT_TRUSTY, 'trust', $friendship->getVar('trust'));
-        $field_friend_trusty->addOption('1', '<img src="images/trustya.gif" alt="' . _MD_YOGURT_TRUSTYNO . '" title="' . _MD_YOGURT_TRUSTYNO . '">');
-        $field_friend_trusty->addOption('2', '<img src="images/trustyb.gif" alt="' . _MD_YOGURT_TRUSTYYES . '" title="' . _MD_YOGURT_TRUSTYYES . '">');
-        $field_friend_trusty->addOption('3', '<img src="images/trustyc.gif" alt="' . _MD_YOGURT_TRUSTYALOT . '" title="' . _MD_YOGURT_TRUSTYALOT . '">');
+        $field_friend_trusty->addOption('1', '<img src="assets/images/trustya.gif" alt="' . _MD_YOGURT_TRUSTYNO . '" title="' . _MD_YOGURT_TRUSTYNO . '">');
+        $field_friend_trusty->addOption('2', '<img src="assets/images/trustyb.gif" alt="' . _MD_YOGURT_TRUSTYYES . '" title="' . _MD_YOGURT_TRUSTYYES . '">');
+        $field_friend_trusty->addOption('3', '<img src="assets/images/trustyc.gif" alt="' . _MD_YOGURT_TRUSTYALOT . '" title="' . _MD_YOGURT_TRUSTYALOT . '">');
 
         $field_friend_cool = new \XoopsFormRadio(_MD_YOGURT_COOL, 'cool', $friendship->getVar('cool'));
-        $field_friend_cool->addOption('1', '<img src="images/coola.gif" alt="' . _MD_YOGURT_COOLNO . '" title="' . _MD_YOGURT_COOLNO . '">');
-        $field_friend_cool->addOption('2', '<img src="images/coolb.gif" alt="' . _MD_YOGURT_COOLYES . '" title="' . _MD_YOGURT_COOLYES . '">');
-        $field_friend_cool->addOption('3', '<img src="images/coolc.gif" alt="' . _MD_YOGURT_COOLALOT . '" title="' . _MD_YOGURT_COOLALOT . '">');
+        $field_friend_cool->addOption('1', '<img src="assets/images/coola.gif" alt="' . _MD_YOGURT_COOLNO . '" title="' . _MD_YOGURT_COOLNO . '">');
+        $field_friend_cool->addOption('2', '<img src="assets/images/coolb.gif" alt="' . _MD_YOGURT_COOLYES . '" title="' . _MD_YOGURT_COOLYES . '">');
+        $field_friend_cool->addOption('3', '<img src="assets/images/coolc.gif" alt="' . _MD_YOGURT_COOLALOT . '" title="' . _MD_YOGURT_COOLALOT . '">');
 
         $form->setExtra('enctype="multipart/form-data"');
         $button_send                = new \XoopsFormButton('', 'submit_button', _MD_YOGURT_UPDATEFRIEND, 'submit');

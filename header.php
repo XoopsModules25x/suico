@@ -35,7 +35,7 @@ if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl))
 
 $albumFactory          = new Yogurt\ImageHandler($xoopsDB);
 $visitorsFactory       = new Yogurt\VisitorsHandler($xoopsDB);
-$videosFactory         = new Yogurt\SeutuboHandler($xoopsDB);
+$videosFactory         = new Yogurt\VideoHandler($xoopsDB);
 $friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
 $friendshipFactory     = new Yogurt\FriendshipHandler($xoopsDB);
 

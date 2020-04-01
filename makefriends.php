@@ -62,7 +62,7 @@ if ($friendpetitionFactory->getCount($criteria) > 0) {
     } else {
         if (0 == $friendship_level) {
             $friendpetitionFactory->deleteAll($criteria);
-            redirect_header(XOOPS_URL . '/modules/yogurt/seutubo.php?uid=' . $uid, 3, _MD_YOGURT_FRIENDSHIPNOTACCEPTED);
+            redirect_header(XOOPS_URL . '/modules/yogurt/video.php?uid=' . $uid, 3, _MD_YOGURT_FRIENDSHIPNOTACCEPTED);
         }
         redirect_header(XOOPS_URL . '/modules/yogurt/index.php?uid=' . $uid, 3, _MD_YOGURT_NOCACHACA);
     }

@@ -90,11 +90,11 @@ function xoopsFormValidate_form_tribe() { myform = window.document.form_tribe; i
                         <{if $isOwner }>
                             <form action="abandontribe.php" method="POST" id="form_abandontribe">
                                 <input type="hidden" value="<{$mytribes[i].id}>" name="reltribe_id" id="reltribe_id">
-                                <input type="image" src="images/abandontribe.gif" title="<{$lang_abandontribe}>" alt="<{$lang_abandontribe}>"/>
+                                <input type="image" src="assets/images/abandontribe.gif" title="<{$lang_abandontribe}>" alt="<{$lang_abandontribe}>"/>
                             </form>
                             <{if $xoops_userid == $mytribes[i].uid }>
                             <form>
-                            <img src="images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>">
+                            <img src="assets/images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>">
                             </form>
                             <{ /if }>
                         <{ /if }>
@@ -135,20 +135,20 @@ function xoopsFormValidate_form_tribe() { myform = window.document.form_tribe; i
             <{if $isOwner }>
                 <form action="becomemembertribe.php" method="POST" id="form_becomemember" class="yogurt-tribes-form-becomemember">
                     <input type="hidden" value="<{$tribes[j].id}>" name="tribe_id" id="tribe_id">
-                    <input type="image" src="images/makememember.gif" alt="<{$lang_jointribe}>" title="<{$lang_jointribe}>"/>
+                    <input type="image" src="assets/images/makememember.gif" alt="<{$lang_jointribe}>" title="<{$lang_jointribe}>"/>
                 </form>
 
                 <{if $xoops_userid == $tribes[j].uid }>
                 <form action="delete_tribe.php" method="POST" id="form_deletetribe" class="yogurt-tribes-form-delete">
                     <input type="hidden" value="<{$tribes[j].id}>" name="tribe_id" id="tribe_id" >
-                    <input type="image" src="images/dele.gif"/>
+                    <input type="image" src="assets/images/dele.gif"/>
                 </form>
                 <form action="edittribe.php" method="POST" id="form_edittribe" class="yogurt-tribes-form-edit">
                     <input type="hidden" value="<{$tribes[j].id}>" name="tribe_id" id="tribe_id">
-                    <input type="image" src="images/edit.gif"/>
+                    <input type="image" src="assets/images/edit.gif"/>
                 </form>
                             <form>
-                            <img src="images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>">
+                            <img src="assets/images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>">
                             </form>
                 <{ /if }>
 

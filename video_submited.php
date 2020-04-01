@@ -22,12 +22,12 @@ use XoopsModules\Yogurt;
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
 require __DIR__ . '/header.php';
 
-//include_once __DIR__ . '/class/Seutubo.php';
+//include_once __DIR__ . '/class/Video.php';
 
 /**
  * Factory of pictures created
  */
-$albumFactory = new Yogurt\SeutuboHandler($xoopsDB);
+$albumFactory = new Yogurt\VideoHandler($xoopsDB);
 
 $url = $_POST['codigo'];
 
@@ -55,9 +55,9 @@ if ($albumFactory->insert($newvideo)) {
     $extra_tags['X_OWNER_UID']  = (int)$xoopsUser->getVar('uid');
     $notificationHandler        = xoops_getHandler('notification');
     $notificationHandler->triggerEvent('video', (int)$xoopsUser->getVar('uid'), 'new_video', $extra_tags);
-    redirect_header(XOOPS_URL . '/modules/yogurt/seutubo.php?uid=' . (int)$xoopsUser->getVar('uid'), 2, _MD_YOGURT_VIDEOSAVED);
+    redirect_header(XOOPS_URL . '/modules/yogurt/video.php?uid=' . (int)$xoopsUser->getVar('uid'), 2, _MD_YOGURT_VIDEOSAVED);
 } else {
-    redirect_header(XOOPS_URL . '/modules/yogurt/seutubo.php?uid=' . (int)$xoopsUser->getVar('uid'), 2, _MD_YOGURT_NOCACHACA);
+    redirect_header(XOOPS_URL . '/modules/yogurt/video.php?uid=' . (int)$xoopsUser->getVar('uid'), 2, _MD_YOGURT_NOCACHACA);
 }
 
 include __DIR__ . '/../../footer.php';

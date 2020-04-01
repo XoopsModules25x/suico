@@ -28,7 +28,7 @@ include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
  */
 //include_once 'class/Image.php';
 //include_once 'class/yogurt_visitors.php';
-//include_once 'class/Seutubo.php';
+//include_once 'class/Video.php';
 //include_once 'class/yogurt_audio.php';
 //include_once 'class/Friendpetition.php';
 //include_once 'class/Friendship.php';
@@ -232,7 +232,7 @@ class YogurtController extends \XoopsObject
         $nbSections['nbAudio']   = $this->audioFactory->getCount($criteriaUidAudio);
         $criteriaUidVideo        = new \Criteria('uid_owner', $this->uidOwner);
         $nbSections['nbVideos']  = $this->videosFactory->getCount($criteriaUidVideo);
-        $criteriaUidNotes        = new \Criteria('Note_to', $this->uidOwner);
+        $criteriaUidNotes        = new \Criteria('note_to', $this->uidOwner);
         $nbSections['nbNotes']   = $this->NotesFactory->getCount($criteriaUidNotes);
 
         return $nbSections;
@@ -246,7 +246,7 @@ class YogurtController extends \XoopsObject
         $this->albumFactory         = new ImageHandler($this->db);
         $this->visitorsFactory      = new VisitorsHandler($this->db);
         $this->audioFactory         = new AudioHandler($this->db);
-        $this->videosFactory        = new SeutuboHandler($this->db);
+        $this->videosFactory        = new VideoHandler($this->db);
         $this->petitionsFactory     = new FriendpetitionHandler($this->db);
         $this->friendshipsFactory   = new FriendshipHandler($this->db);
         $this->reltribeusersFactory = new ReltribeuserHandler($this->db);

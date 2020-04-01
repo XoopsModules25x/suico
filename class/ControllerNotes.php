@@ -28,7 +28,7 @@ include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
  */
 //include_once 'class/Image.php';
 //include_once 'class/yogurt_visitors.php';
-//include_once 'class/Seutubo.php';
+//include_once 'class/Video.php';
 //include_once 'class/yogurt_audio.php';
 //include_once 'class/Friendpetition.php';
 //include_once 'class/Friendship.php';
@@ -50,7 +50,7 @@ class ControllerNotes extends YogurtController
     //
     //
     //
-    //      $form = new XoopsThemeForm("",'formNoteNew','submit_Note.php','post',true);
+    //      $form = new XoopsThemeForm("",'formNoteNew','submitNote.php','post',true);
     //      $fieldNote = new XoopsFormTextArea('','text',_MD_YOGURT_ENTERTEXTNOTE);
     //      $fieldNote->setExtra(' onclick="cleanNoteForm(text,\''._MD_YOGURT_ENTERTEXTNOTE.'\')"');
     //

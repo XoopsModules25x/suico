@@ -10,92 +10,92 @@ if (!defined('XOOPS_ROOT_PATH')) {
 }
 
 // -------------------------------------------------------------------------
-// ------------------Seutubo user handler class -------------------
+// ------------------Video user handler class -------------------
 // -------------------------------------------------------------------------
 
 /**
- * yogurt_seutubohandler class.
- * This class provides simple mecanisme for Seutubo object
+ * yogurt_videohandler class.
+ * This class provides simple mecanisme for Video object
  */
-class SeutuboHandler extends \XoopsObjectHandler
+class VideoHandler extends \XoopsObjectHandler
 {
     /**
-     * create a new Seutubo
+     * create a new Video
      *
      * @param bool $isNew flag the new objects as "new"?
-     * @return \XoopsObject Seutubo
+     * @return \XoopsObject Video
      */
     public function create($isNew = true)
     {
-        $yogurt_seutubo = new Seutubo();
+        $yogurt_video = new Video();
         if ($isNew) {
-            $yogurt_seutubo->setNew();
+            $yogurt_video->setNew();
         } else {
-            $yogurt_seutubo->unsetNew();
+            $yogurt_video->unsetNew();
         }
 
-        return $yogurt_seutubo;
+        return $yogurt_video;
     }
 
     /**
-     * retrieve a Seutubo
+     * retrieve a Video
      *
-     * @param int $id of the Seutubo
-     * @return mixed reference to the {@link Seutubo} object, FALSE if failed
+     * @param int $id of the Video
+     * @return mixed reference to the {@link Video} object, FALSE if failed
      */
     public function get($id)
     {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_seutubo') . ' WHERE video_id=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_video') . ' WHERE video_id=' . $id;
         if (!$result = $this->db->query($sql)) {
             return false;
         }
         $numrows = $this->db->getRowsNum($result);
         if (1 == $numrows) {
-            $yogurt_seutubo = new Seutubo();
-            $yogurt_seutubo->assignVars($this->db->fetchArray($result));
+            $yogurt_video = new Video();
+            $yogurt_video->assignVars($this->db->fetchArray($result));
 
-            return $yogurt_seutubo;
+            return $yogurt_video;
         }
 
         return false;
     }
 
     /**
-     * insert a new Seutubo in the database
+     * insert a new Video in the database
      *
-     * @param \XoopsObject $yogurt_seutubo reference to the {@link Seutubo}
+     * @param \XoopsObject $yogurt_video reference to the {@link Video}
      *                                     object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(\XoopsObject $yogurt_seutubo, $force = false)
+    public function insert(\XoopsObject $yogurt_video, $force = false)
     {
         global $xoopsConfig;
-        if (!$yogurt_seutubo instanceof Seutubo) {
+        if (!$yogurt_video instanceof Video) {
             return false;
         }
-        if (!$yogurt_seutubo->isDirty()) {
+        if (!$yogurt_video->isDirty()) {
             return true;
         }
-        if (!$yogurt_seutubo->cleanVars()) {
+        if (!$yogurt_video->cleanVars()) {
             return false;
         }
-        foreach ($yogurt_seutubo->cleanVars as $k => $v) {
+        foreach ($yogurt_video->cleanVars as $k => $v) {
             ${$k} = $v;
         }
         $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
-        if ($yogurt_seutubo->isNew()) {
-            // ajout/modification d'un Seutubo
-            $yogurt_seutubo = new Seutubo();
+        if ($yogurt_video->isNew()) {
+            // ajout/modification d'un Video
+            $yogurt_video = new Video();
             $format         = 'INSERT INTO %s (video_id, uid_owner, video_desc, youtube_code, main_video)';
             $format         .= 'VALUES (%u, %u, %s, %s, %s)';
-            $sql            = sprintf($format, $this->db->prefix('yogurt_seutubo'), $video_id, $uid_owner, $this->db->quoteString($video_desc), $this->db->quoteString($youtube_code), $this->db->quoteString($main_video));
+            $sql            = sprintf($format, $this->db->prefix('yogurt_video'), $video_id, $uid_owner, $this->db->quoteString($video_desc), $this->db->quoteString($youtube_code), $this->db->quoteString($main_video));
             $force          = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'video_id=%u, uid_owner=%u, video_desc=%s, youtube_code=%s, main_video=%s';
             $format .= ' WHERE video_id = %u';
-            $sql    = sprintf($format, $this->db->prefix('yogurt_seutubo'), $video_id, $uid_owner, $this->db->quoteString($video_desc), $this->db->quoteString($youtube_code), $this->db->quoteString($main_video), $video_id);
+            $sql    = sprintf($format, $this->db->prefix('yogurt_video'), $video_id, $uid_owner, $this->db->quoteString($video_desc), $this->db->quoteString($youtube_code), $this->db->quoteString($main_video), $video_id);
         }
         if (false !== $force) {
             $result = $this->db->queryF($sql);
@@ -108,24 +108,24 @@ class SeutuboHandler extends \XoopsObjectHandler
         if (empty($video_id)) {
             $video_id = $this->db->getInsertId();
         }
-        $yogurt_seutubo->assignVar('video_id', $video_id);
+        $yogurt_video->assignVar('video_id', $video_id);
 
         return true;
     }
 
     /**
-     * delete a Seutubo from the database
+     * delete a Video from the database
      *
-     * @param \XoopsObject $yogurt_seutubo reference to the Seutubo to delete
+     * @param \XoopsObject $yogurt_video reference to the Video to delete
      * @param bool         $force
      * @return bool FALSE if failed.
      */
-    public function delete(\XoopsObject $yogurt_seutubo, $force = false)
+    public function delete(\XoopsObject $yogurt_video, $force = false)
     {
-        if (!$yogurt_seutubo instanceof Seutubo) {
+        if (!$yogurt_video instanceof Video) {
             return false;
         }
-        $sql = sprintf('DELETE FROM %s WHERE video_id = %u', $this->db->prefix('yogurt_seutubo'), $yogurt_seutubo->getVar('video_id'));
+        $sql = sprintf('DELETE FROM %s WHERE video_id = %u', $this->db->prefix('yogurt_video'), $yogurt_video->getVar('video_id'));
         if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
@@ -139,17 +139,17 @@ class SeutuboHandler extends \XoopsObjectHandler
     }
 
     /**
-     * retrieve yogurt_seutubos from the database
+     * retrieve yogurt_videos from the database
      *
      * @param \CriteriaElement $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool             $id_as_key use the UID as key for the array?
-     * @return array array of {@link Seutubo} objects
+     * @return array array of {@link Video} objects
      */
     public function &getObjects($criteria = null, $id_as_key = false)
     {
         $ret   = [];
         $limit = $start = 0;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_seutubo');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_video');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
@@ -163,28 +163,28 @@ class SeutuboHandler extends \XoopsObjectHandler
             return $ret;
         }
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $yogurt_seutubo = new Seutubo();
-            $yogurt_seutubo->assignVars($myrow);
+            $yogurt_video = new Video();
+            $yogurt_video->assignVars($myrow);
             if (!$id_as_key) {
-                $ret[] = &$yogurt_seutubo;
+                $ret[] = &$yogurt_video;
             } else {
-                $ret[$myrow['video_id']] = &$yogurt_seutubo;
+                $ret[$myrow['video_id']] = &$yogurt_video;
             }
-            unset($yogurt_seutubo);
+            unset($yogurt_video);
         }
 
         return $ret;
     }
 
     /**
-     * count yogurt_seutubos matching a condition
+     * count yogurt_videos matching a condition
      *
      * @param \CriteriaElement $criteria {@link \CriteriaElement} to match
-     * @return int count of yogurt_seutubos
+     * @return int count of yogurt_videos
      */
     public function getCount($criteria = null)
     {
-        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_seutubo');
+        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_video');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
@@ -198,14 +198,14 @@ class SeutuboHandler extends \XoopsObjectHandler
     }
 
     /**
-     * delete yogurt_seutubos matching a set of conditions
+     * delete yogurt_videos matching a set of conditions
      *
      * @param \CriteriaElement $criteria {@link \CriteriaElement}
      * @return bool FALSE if deletion failed
      */
     public function deleteAll($criteria = null)
     {
-        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_seutubo');
+        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_video');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
@@ -286,7 +286,7 @@ class SeutuboHandler extends \XoopsObjectHandler
      */
     public function unsetAllMainsbyID($uid_owner = null)
     {
-        $sql = 'UPDATE ' . $this->db->prefix('yogurt_seutubo') . ' SET main_video=0 WHERE uid_owner=' . $uid_owner;
+        $sql = 'UPDATE ' . $this->db->prefix('yogurt_video') . ' SET main_video=0 WHERE uid_owner=' . $uid_owner;
 
         if (!$result = $this->db->query($sql)) {
             return false;

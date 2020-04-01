@@ -118,7 +118,7 @@ define('_MD_YOGURT_FRIENDSHIPTERMINATED', 'Du hast deine Freundschaft mit diesem
 //mainvideo.php
 define('_MD_YOGURT_SETMAINVIDEO', 'Dieses Video erscheint ab sofort auf deiner Profilseite');
 
-//seutubo.php
+//video.php
 define('_MD_YOGURT_YOUTUBECODE', 'YouTube-Link oder URL');
 define('_MD_YOGURT_ADDVIDEO', 'Video hinzuf&uuml;gen');
 define('_MD_YOGURT_ADDFAVORITEVIDEOS', 'Bevorzugtes Video hinzuf&uuml;gen');
@@ -196,7 +196,7 @@ define('_MD_YOGURT_ITALIC', 'Kursiv');
 define('_MD_YOGURT_UNDERLINE', 'Unterstrichen');
 define('_MD_YOGURT_NONOTESYET', 'Keine G&auml;stebucheintr&auml;ge vorhanden, hier kannst Du noch erster sein!');
 
-//submit_Note.php
+//submitNote.php
 define('_MD_YOGURT_NOTE_SENT', 'Danke f&uuml;r die Teilnahme, G&auml;stebucheintrag wurde gesendet');
 
 //delete_Note.php
