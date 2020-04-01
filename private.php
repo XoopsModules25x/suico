@@ -35,7 +35,7 @@ $cod_img = $_POST['cod_img'];
 $pictureFactory = new Yogurt\ImageHandler($xoopsDB);
 $picture        = $pictureFactory->create(false);
 $picture->load($cod_img);
-$picture->setVar('private', (int)$_POST['private']);
+$picture->setVar('private', \Xmf\Request::getInt('private', 0, 'POST'));
 
 /**
  * Verifying who's the owner to allow changes

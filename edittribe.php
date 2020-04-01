@@ -29,8 +29,8 @@ $controller = new Yogurt\ControllerTribes($xoopsDB, $xoopsUser);
  */
 $nbSections = $controller->getNumbersSections();
 
-$tribe_id = (int)$_POST['tribe_id'];
-$marker   = (!empty($_POST['marker'])) ? (int)$_POST['marker'] : 0;
+$tribe_id = \Xmf\Request::getInt('tribe_id', 0, 'POST');
+$marker   = \Xmf\Request::getInt('marker', 0, 'POST');
 $criteria = new \Criteria('tribe_id', $tribe_id);
 $tribes   = $controller->tribesFactory->getObjects($criteria);
 $tribe    = $tribes[0];

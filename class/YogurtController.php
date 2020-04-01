@@ -140,7 +140,7 @@ class YogurtController extends \XoopsObject
          */
         if (!empty($_GET['uid'])) {
             $memberHandler = xoops_getHandler('member');
-            $user          = $memberHandler->getUser((int)$_GET['uid']);
+            $user          = $memberHandler->getUser(\Xmf\Request::getInt('uid', 0, 'GET'));
             if (!is_object($user)) {
                 redirect_header('index.php', 3, _MD_YOGURT_USERDOESNTEXIST);
             }
@@ -155,7 +155,7 @@ class YogurtController extends \XoopsObject
             $this->isUser   = 0;
 
             if (!empty($_GET['uid'])) {
-                $this->uidOwner = (int)$_GET['uid'];
+                $this->uidOwner = \Xmf\Request::getInt('uid', 0, 'GET');
             } else {
                 $this->uidOwner = 1;
                 $this->isOwner  = 0;
@@ -165,7 +165,7 @@ class YogurtController extends \XoopsObject
             $this->isUser   = 1;
 
             if (!empty($_GET['uid'])) {
-                $this->uidOwner = (int)$_GET['uid'];
+                $this->uidOwner = \Xmf\Request::getInt('uid', 0, 'GET');
                 $this->isOwner  = ($this->user->getVar('uid') == (int)$_GET['uid']) ? 1 : 0;
             } else {
                 $this->uidOwner = $this->user->getVar('uid');

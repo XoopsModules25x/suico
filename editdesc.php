@@ -26,7 +26,7 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 }
 
 $cod_img = $_POST['cod_img'];
-$marker  = (!empty($_POST['marker'])) ? (int)$_POST['marker'] : 0;
+$marker  = \Xmf\Request::getInt('marker', 0, 'POST');
 $uid     = (int)$xoopsUser->getVar('uid');
 
 if (1 == $marker) {

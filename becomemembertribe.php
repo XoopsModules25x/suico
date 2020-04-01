@@ -31,7 +31,7 @@ require __DIR__ . '/header.php';
 $reltribeuserFactory = new Yogurt\ReltribeuserHandler($xoopsDB);
 $tribesFactory       = new Yogurt\TribesHandler($xoopsDB);
 
-$tribe_id = (int)$_POST['tribe_id'];
+$tribe_id = \Xmf\Request::getInt('tribe_id', 0, 'POST');
 $uid      = (int)$xoopsUser->getVar('uid');
 
 $criteria_uid      = new \Criteria('rel_user_uid', $uid);

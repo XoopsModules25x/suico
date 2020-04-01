@@ -29,7 +29,7 @@ $controller = new Yogurt\AudioController($xoopsDB, $xoopsUser);
  */
 $nbSections = $controller->getNumbersSections();
 
-$start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
+$start = \Xmf\Request::getInt('start', 0, 'GET');
 
 /**
  * Criteria for Audio

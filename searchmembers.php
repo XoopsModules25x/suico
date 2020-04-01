@@ -300,7 +300,7 @@ if ('submit' == $op) {
         }
     }
     if (!empty($_POST['user_reg_less']) && is_numeric($_POST['user_reg_less'])) {
-        $f_user_reg_less = (int)$_POST['user_reg_less'];
+        $f_user_reg_less = \Xmf\Request::getInt('user_reg_less', 0, 'POST');
         $time            = time() - (60 * 60 * 24 * $f_user_reg_less);
         if ($time > 0) {
             $criteria->add(new \Criteria('user_regdate', $time, '>'));
@@ -319,12 +319,12 @@ if ('submit' == $op) {
     if (isset($_POST['user_order']) && 'DESC' == $_POST['user_order']) {
         $order = 'DESC';
     }
-    $limit = (!empty($_POST['limit'])) ? (int)$_POST['limit'] : 20;
+    $limit = \Xmf\Request::getInt('limit', 20, 'POST');
     if (0 == $limit || $limit > 50) {
         $limit = 50;
     }
 
-    $start         = (!empty($_POST['start'])) ? (int)$_POST['start'] : 0;
+    $start         = \Xmf\Request::getInt('start', 0, 'POST');
     $memberHandler = xoops_getHandler('member');
     $total         = $memberHandler->getUserCount($criteria);
     $xoopsTpl->assign('lang_search', _MD_YOGURT_SEARCH);

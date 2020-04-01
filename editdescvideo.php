@@ -25,8 +25,8 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
-$cod_img = (int)$_POST['video_id'];
-$marker  = (int)$_POST['marker'];
+$cod_img = \Xmf\Request::getInt('video_id', 0, 'POST');
+$marker  = \Xmf\Request::getInt('marker', 0, 'POST');
 
 $uid = (int)$xoopsUser->getVar('uid');
 

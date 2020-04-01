@@ -348,7 +348,7 @@ switch ($op) {
         $limit = isset($_REQUEST['limit']) && (int)$_REQUEST['limit'] > 0 ? (int)$_REQUEST['limit'] : 20;
         $criteria->setLimit($limit);
 
-        $start = isset($_REQUEST['start']) ? (int)$_REQUEST['start'] : 0;
+        $start = \Xmf\Request::getInt('start', 0, 'REQUEST');
         $criteria->setStart($start);
 
         //Get users based on criteria

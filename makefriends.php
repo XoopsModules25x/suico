@@ -31,8 +31,8 @@ require __DIR__ . '/header.php';
 $friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
 $friendshipFactory     = new Yogurt\FriendshipHandler($xoopsDB);
 
-$petition_id      = (int)$_POST['petition_id'];
-$friendship_level = (int)$_POST['level'];
+$petition_id      = \Xmf\Request::getInt('petition_id', 0, 'POST');
+$friendship_level = \Xmf\Request::getInt('level', 0, 'POST');
 $uid              = (int)$xoopsUser->getVar('uid');
 
 if (!$GLOBALS['xoopsSecurity']->check()) {

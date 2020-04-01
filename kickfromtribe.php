@@ -21,8 +21,8 @@ use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
 
-$tribe_id     = (int)$_POST['tribe_id'];
-$rel_user_uid = (int)$_POST['rel_user_uid'];
+$tribe_id     = \Xmf\Request::getInt('tribe_id', 0, 'POST');
+$rel_user_uid = \Xmf\Request::getInt('rel_user_uid', 0, 'POST');
 
 if (1 != $_POST['confirm']) {
     xoops_confirm(['rel_user_uid' => $rel_user_uid, 'tribe_id' => $tribe_id, 'confirm' => 1], 'kickfromtribe.php', _MD_YOGURT_ASKCONFIRMKICKFROMTRIBE, _MD_YOGURT_CONFIRMKICK);

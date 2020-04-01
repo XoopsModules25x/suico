@@ -66,7 +66,7 @@ if ('saveuser' == $op) {
     }
     $uid = 0;
     if (!empty($_POST['uid'])) {
-        $uid = (int)$_POST['uid'];
+        $uid = \Xmf\Request::getInt('uid', 0, 'POST');
     }
     if (empty($uid) || $xoopsUser->getVar('uid') != $uid) {
         redirect_header('index.php', 3, _US_NOEDITRIGHT);
@@ -332,7 +332,7 @@ if ('avatarupload' == $op) {
         $xoops_upload_file = $_POST['xoops_upload_file'];
     }
     if (!empty($_POST['uid'])) {
-        $uid = (int)$_POST['uid'];
+        $uid = \Xmf\Request::getInt('uid', 0, 'POST');
     }
     if (empty($uid) || $xoopsUser->getVar('uid') != $uid) {
         redirect_header('index.php', 3, _US_NOEDITRIGHT);
@@ -383,7 +383,7 @@ if ('avatarchoose' == $op) {
     }
     $uid = 0;
     if (!empty($_POST['uid'])) {
-        $uid = (int)$_POST['uid'];
+        $uid = \Xmf\Request::getInt('uid', 0, 'POST');
     }
     if (empty($uid) || $xoopsUser->getVar('uid') != $uid) {
         redirect_header('index.php', 3, _US_NOEDITRIGHT);

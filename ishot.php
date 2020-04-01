@@ -27,8 +27,8 @@ require __DIR__ . '/header.php';
  */
 $ishotFactory = new Yogurt\IshotHandler($xoopsDB);
 
-$uid_voted = (int)$_POST['uid_voted'];
-$ishot     = (int)$_POST['ishot'];
+$uid_voted = \Xmf\Request::getInt('uid_voted', 0, 'POST');
+$ishot     = \Xmf\Request::getInt('ishot', 0, 'POST');
 $uid_voter = (int)$xoopsUser->getVar('uid');
 
 if (!$GLOBALS['xoopsSecurity']->check()) {

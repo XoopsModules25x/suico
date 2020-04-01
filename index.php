@@ -43,7 +43,7 @@ $nbSections = $controller->getNumbersSections();
  * This variable define the beggining of the navigation must b
  * setted here so all calls to database will take this into account
  */
-$start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
+$start = \Xmf\Request::getInt('start', 0, 'GET');
 
 /**
  * Filter for new friend petition

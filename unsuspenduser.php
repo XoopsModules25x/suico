@@ -25,7 +25,7 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
-$uid = (int)$_POST['uid'];
+$uid = \Xmf\Request::getInt('uid', 0, 'POST');
 /**
  * Creating the factory  loading the picture changing its caption
  */

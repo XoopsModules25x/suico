@@ -26,8 +26,8 @@ if (!$xoopsUser) {
 }
 
 $friendshipFactory = new Yogurt\FriendshipHandler($xoopsDB);
-$friend2_uid       = (int)$_POST['friend_uid'];
-$marker            = (!empty($_POST['marker'])) ? (int)$_POST['marker'] : 0;
+$friend2_uid       = \Xmf\Request::getInt('friend_uid', 0, 'POST');
+$marker            =  \Xmf\Request::getInt('marker', 0, 'POST');
 
 $friend = new \XoopsUser($friend2_uid);
 
@@ -37,7 +37,7 @@ if (1 == $marker) {
     $sexy          = $_POST['hot'];
     $trusty        = $_POST['trust'];
     $fan           = $_POST['fan'];
-    $friendship_id = (int)$_POST['friendship_id'];
+    $friendship_id = \Xmf\Request::getInt('friendship_id', 0, 'POST');
 
     $criteria    = new \Criteria('friendship_id', $friendship_id);
     $friendships = $friendshipFactory->getObjects($criteria);

@@ -50,7 +50,7 @@ $isfriend = 0;
 if (empty($xoopsUser)) {
     $isanonym = 1;
     if (isset($_GET['uid'])) {
-        $uid_owner = (int)$_GET['uid'];
+        $uid_owner = \Xmf\Request::getInt('uid', 0, 'GET');
     } else {
         $uid_owner = 1;
         $isOwner   = 0;
@@ -58,7 +58,7 @@ if (empty($xoopsUser)) {
 } else {
     $isanonym = 0;
     if (isset($_GET['uid'])) {
-        $uid_owner = (int)$_GET['uid'];
+        $uid_owner = \Xmf\Request::getInt('uid', 0, 'GET');
         $isOwner   = ($xoopsUser->getVar('uid') == $uid_owner) ? 1 : 0;
     } else {
         $uid_owner = (int)$xoopsUser->getVar('uid');

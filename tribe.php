@@ -29,7 +29,7 @@ $controller = new Yogurt\ControllerTribes($xoopsDB, $xoopsUser);
  */
 $nbSections = $controller->getNumbersSections();
 
-$tribe_id = (int)$_GET['tribe_id'];
+$tribe_id = \Xmf\Request::getInt('tribe_id', 0, 'GET');
 $criteria = new \Criteria('tribe_id', $tribe_id);
 $tribes   = $controller->tribesFactory->getObjects($criteria);
 $tribe    = $tribes[0];

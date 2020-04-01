@@ -27,7 +27,7 @@ require __DIR__ . '/header.php';
 $reltribeuserFactory = new Yogurt\ReltribeuserHandler($xoopsDB);
 $tribesFactory       = new Yogurt\TribesHandler($xoopsDB);
 
-$tribe_id = (int)$_POST['tribe_id'];
+$tribe_id = \Xmf\Request::getInt('tribe_id', 0, 'POST');
 
 if (!isset($_POST['confirm']) || 1 != $_POST['confirm']) {
     xoops_confirm(['tribe_id' => $tribe_id, 'confirm' => 1], 'delete_tribe.php', _MD_YOGURT_ASKCONFIRMTRIBEDELETION, _MD_YOGURT_CONFIRMTRIBEDELETION);

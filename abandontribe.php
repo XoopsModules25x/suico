@@ -31,7 +31,7 @@ require __DIR__ . '/header.php';
 /**
  * Receiving info from get parameters
  */
-$reltribeuser_id = (int)$_POST['reltribe_id'];
+$reltribeuser_id = \Xmf\Request::getInt('reltribe_id', 0, 'POST');
 if (!isset($_POST['confirm']) || 1 != $_POST['confirm']) {
     xoops_confirm(['reltribe_id' => $reltribeuser_id, 'confirm' => 1], 'abandontribe.php', _MD_YOGURT_ASKCONFIRMABANDONTRIBE, _MD_YOGURT_CONFIRMABANDON);
 } else {

@@ -29,8 +29,8 @@ $controller = new Yogurt\ControllerTribes($xoopsDB, $xoopsUser);
  */
 $nbSections = $controller->getNumbersSections();
 
-$start_all = isset($_GET['start_all']) ? (int)$_GET['start_all'] : 0;
-$start_my  = isset($_GET['start_my']) ? (int)$_GET['start_my'] : 0;
+$start_all = \Xmf\Request::getInt('start_all', 0, 'GET');
+$start_my  = \Xmf\Request::getInt('start_my', 0, 'GET');
 
 /**
  * All Tribes

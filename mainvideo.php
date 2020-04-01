@@ -25,7 +25,7 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
-$cod_img = (int)$_POST['video_id'];
+$cod_img = \Xmf\Request::getInt('video_id', 0, 'POST');
 
 /**
  * Creating the factory  loading the video changing its caption

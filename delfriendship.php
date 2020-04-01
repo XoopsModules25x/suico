@@ -29,7 +29,7 @@ $friendshipFactory     = new Yogurt\FriendshipHandler($xoopsDB);
 /**
  * Getting the uid of the user which user want to ask to be friend
  */
-$friend1_uid = (int)$_POST['friend_uid'];
+$friend1_uid = \Xmf\Request::getInt('friend_uid', 0, 'POST');
 $friend2_uid = (int)$xoopsUser->getVar('uid');
 
 $criteria_friend1 = new \Criteria('friend1_uid', $friend1_uid);

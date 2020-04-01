@@ -26,7 +26,7 @@ require __DIR__ . '/header.php';
  */
 $NotesFactory = new Yogurt\NotesHandler($xoopsDB);
 
-$note_id = (int)$_POST['note_id'];
+$note_id = \Xmf\Request::getInt('note_id', 0, 'POST');
 
 if (1 != $_POST['confirm']) {
     xoops_confirm(['note_id' => $note_id, 'confirm' => 1], 'delete_Note.php', _MD_YOGURT_ASKCONFIRMNOTEDELETION, _MD_YOGURT_CONFIRMNOTEDELETION);
