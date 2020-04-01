@@ -39,7 +39,7 @@ if (isset($_POST['op']) && 'submit' == $_POST['op']) {
 $controller = new Yogurt\ControllerIndex($xoopsDB, $xoopsUser);
 
 /**
- * Fecthing numbers of tribes friends videos pictures etc...
+ * Fetching numbers of tribes friends videos pictures etc...
  */
 $nbSections = $controller->getNumbersSections();
 

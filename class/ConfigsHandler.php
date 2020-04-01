@@ -17,7 +17,7 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  * yogurt_configshandler class.
  * This class provides simple mecanisme for Configs object
  */
-class ConfigsHandler extends \XoopsObjectHandler
+class ConfigsHandler extends \XoopsPersistableObjectHandler
 {
     /**
      * create a new Configs

@@ -42,7 +42,7 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
  * yogurt_imageshandler class.
  * This class provides simple mecanisme for Image object and generate forms for inclusion etc
  */
-class ImageHandler extends \XoopsObjectHandler
+class ImageHandler extends \XoopsPersistableObjectHandler
 {
     /**
      * create a new Image

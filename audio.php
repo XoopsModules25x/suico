@@ -25,7 +25,7 @@ require __DIR__ . '/header.php';
 $controller = new Yogurt\AudioController($xoopsDB, $xoopsUser);
 
 /**
- * Fecthing numbers of tribes friends videos pictures etc...
+ * Fetching numbers of tribes friends videos pictures etc...
  */
 $nbSections = $controller->getNumbersSections();
 

@@ -18,7 +18,7 @@ require_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';
  * NotesHandler class.
  * This class provides simple mecanisme forNotes object
  */
-class NotesHandler extends \XoopsObjectHandler
+class NotesHandler extends \XoopsPersistableObjectHandler
 {
     /**
      * create a new Notes

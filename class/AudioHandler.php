@@ -18,7 +18,7 @@ require_once XOOPS_ROOT_PATH . '/class/uploader.php';
  * AudioHandler class.
  * This class provides simple mecanisme for yogurt_audio object
  */
-class AudioHandler extends \XoopsObjectHandler
+class AudioHandler extends \XoopsPersistableObjectHandler
 {
     /**
      * create a new Audio

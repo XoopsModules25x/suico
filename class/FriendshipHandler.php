@@ -24,7 +24,7 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  * yogurt_friendshiphandler class.
  * This class provides simple mecanisme for Friendship object
  */
-class FriendshipHandler extends \XoopsObjectHandler
+class FriendshipHandler extends \XoopsPersistableObjectHandler
 {
     /**
      * create a new Friendship

@@ -32,7 +32,7 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  * yogurt_ishothandler class.
  * This class provides simple mecanisme for Ishot object
  */
-class IshotHandler extends \XoopsObjectHandler
+class IshotHandler extends \XoopsPersistableObjectHandler
 {
     /**
      * create a new Ishot

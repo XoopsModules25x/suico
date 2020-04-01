@@ -17,7 +17,7 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  * Suspensionshandler class.
  * This class provides simple mecanisme for Suspensions object
  */
-class SuspensionsHandler extends \XoopsObjectHandler
+class SuspensionsHandler extends \XoopsPersistableObjectHandler
 {
     /**
      * create a new Suspensions

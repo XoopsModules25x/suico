@@ -35,7 +35,7 @@ $helper->loadLanguage('user');
 $controller = new \XoopsModules\Yogurt\ControllerIndex($xoopsDB, $xoopsUser);
 
 /**
- * Fecthing numbers of tribes friends videos pictures etc...
+ * Fetching numbers of tribes friends videos pictures etc...
  */
 $nbSections = $controller->getNumbersSections();
 

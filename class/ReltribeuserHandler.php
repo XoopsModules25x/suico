@@ -17,7 +17,7 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  * yogurt_reltribeuserhandler class.
  * This class provides simple mecanisme for Reltribeuser object
  */
-class ReltribeuserHandler extends \XoopsObjectHandler
+class ReltribeuserHandler extends \XoopsPersistableObjectHandler
 {
     /**
      * create a new Reltribeuser

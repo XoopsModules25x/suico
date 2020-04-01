@@ -56,7 +56,7 @@ $xoopsTpl->assign('allow_pictures', $controller->checkPrivilegeBySection('pictur
 $xoopsTpl->assign('allow_videos', $controller->checkPrivilegeBySection('videos'));
 $xoopsTpl->assign('allow_audios', $controller->checkPrivilegeBySection('audio'));
 
-if (!($notes = $controller->fecthNotes($nbSections['nbNotes'], $criteria_uid))) {
+if (!($notes = $controller->fetchNotes($nbSections['nbNotes'], $criteria_uid))) {
     $xoopsTpl->assign('lang_noNotesyet', _MD_YOGURT_NONOTESYET);
 }
 

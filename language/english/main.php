@@ -47,6 +47,7 @@ define('_MD_YOGURT_CONFIGSTITLE', 'My settings');
 //submit.php (for pictures submission
 define('_MD_YOGURT_UPLOADED', 'Upload Successful');
 
+
 //delpicture.php
 define('_MD_YOGURT_ASKCONFIRMDELETION', 'Are you sure you want to delete this picture?');
 define('_MD_YOGURT_CONFIRMDELETION', 'Yes please delete it!');
@@ -223,6 +224,7 @@ define('_MD_YOGURT_WHOCAN', 'Who can:');
 
 //submit_configs.php
 define('_MD_YOGURT_CONFIGSSAVE', 'Configuration saved!');
+define('_MD_YOGURT_CONFIGSSAVE_FAILED', 'ERROR: Configuration has not been saved');
 
 //class/yogurt_controller.php
 define('_MD_YOGURT_NOPRIVILEGE', "The owner of this profile has set the privileges to see it, <br>higher than you have now. <br>Login to become their friend. <br>If they haven't set it, so only they can see, <br>then you will be able to view it.");

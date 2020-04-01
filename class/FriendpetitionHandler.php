@@ -17,7 +17,7 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  * yogurt_friendpetitionhandler class.
  * This class provides simple mecanisme for Friendpetition object
  */
-class FriendpetitionHandler extends \XoopsObjectHandler
+class FriendpetitionHandler extends \XoopsPersistableObjectHandler
 {
     /**
      * create a new Friendpetition

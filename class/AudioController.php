@@ -47,7 +47,7 @@ if (str_replace('.', '', PHP_VERSION) > 499) {
 class AudioController extends YogurtController
 {
     /**
-     * Fecth audios
+     * Fetch audios
      * @param object $criteria
      * @return array of video objects
      */

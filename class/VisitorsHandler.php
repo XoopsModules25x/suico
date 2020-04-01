@@ -17,7 +17,7 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  * yogurt_visitorshandler class.
  * This class provides simple mecanisme for Yogurt\Visitors object
  */
-class VisitorsHandler extends \XoopsObjectHandler
+class VisitorsHandler extends \XoopsPersistableObjectHandler
 {
     /**
      * create a new Visitors

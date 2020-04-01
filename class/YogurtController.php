@@ -139,6 +139,7 @@ class YogurtController extends \XoopsObject
          * @desc Check if the user uid exists if not redirect back to where he was
          */
         if (!empty($_GET['uid'])) {
+            /** @var \XoopsMemberHandler $memberHandler */
             $memberHandler = xoops_getHandler('member');
             $user          = $memberHandler->getUser(\Xmf\Request::getInt('uid', 0, 'GET'));
             if (!is_object($user)) {

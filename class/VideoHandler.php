@@ -17,7 +17,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
  * yogurt_videohandler class.
  * This class provides simple mecanisme for Video object
  */
-class VideoHandler extends \XoopsObjectHandler
+class VideoHandler extends \XoopsPersistableObjectHandler
 {
     /**
      * create a new Video

@@ -17,7 +17,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
  * yogurt_tribeshandler class.
  * This class provides simple mecanisme for Tribes object
  */
-class TribesHandler extends \XoopsObjectHandler
+class TribesHandler extends \XoopsPersistableObjectHandler
 {
     /**
      * create a new Tribes

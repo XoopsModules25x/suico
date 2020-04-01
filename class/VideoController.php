@@ -47,7 +47,7 @@ if (str_replace('.', '', PHP_VERSION) > 499) {
 class VideoController extends YogurtController
 {
     /**
-     * Fecth videos
+     * Fetch videos
      * @param object $criteria
      * @return array of video objects
      */
