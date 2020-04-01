@@ -150,7 +150,7 @@ class NotesHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve yogurt_notes from the database
      *
-     * @param \XoopsObject $criteria  {@link CriteriaElement} conditions to be met
+     * @param null|\CriteriaElement|\CriteriaCompo $criteria  {@link CriteriaElement} conditions to be met
      * @param bool         $id_as_key use the UID as key for the array?
      * @return array array of {@linkNotes} objects
      */
@@ -188,7 +188,7 @@ class NotesHandler extends \XoopsPersistableObjectHandler
     /**
      * count yogurt_notes matching a condition
      *
-     * @param \XoopsObject $criteria {@link CriteriaElement} to match
+     * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link CriteriaElement} to match
      * @return int count of yogurt_notes
      */
     public function getCount($criteria = null)
@@ -209,7 +209,7 @@ class NotesHandler extends \XoopsPersistableObjectHandler
     /**
      * delete yogurt_notes matching a set of conditions
      *
-     * @param \XoopsObject $criteria {@link CriteriaElement}
+     * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link CriteriaElement}
      * @return bool FALSE if deletion failed
      */
     public function deleteAll($criteria = null)
@@ -235,7 +235,7 @@ class NotesHandler extends \XoopsPersistableObjectHandler
         $myts = new \MyTextSanitizer();
         $ret  = [];
         $sql  = 'SELECT note_id, uid, uname, user_avatar, note_from, note_text FROM ' . $this->db->prefix('yogurt_notes') . ', ' . $this->db->prefix('users');
-        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             //attention here this is kind of a hack
             $sql .= ' AND uid = note_from';

@@ -194,7 +194,7 @@ class IshotHandler extends \XoopsPersistableObjectHandler
     /**
      * count yogurt_ishots matching a condition
      *
-     * @param \XoopsObject $criteria {@link CriteriaElement} to match
+     * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link CriteriaElement} to match
      * @return int count of yogurt_ishots
      */
     public function getCount($criteria = null)
@@ -215,7 +215,7 @@ class IshotHandler extends \XoopsPersistableObjectHandler
     /**
      * delete yogurt_ishots matching a set of conditions
      *
-     * @param \XoopsObject $criteria {@link CriteriaElement}
+     * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link CriteriaElement}
      * @return bool FALSE if deletion failed
      */
     public function deleteAll($criteria = null)
