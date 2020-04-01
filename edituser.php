@@ -354,7 +354,7 @@ if ('avatarupload' == $op) {
                     @unlink($uploader->getSavedDestination());
                 } else {
                     $oldavatar = $xoopsUser->getVar('user_avatar');
-                    if (!empty($oldavatar) && 0 === strpos(mb_strtolower($oldavatar), "cavt")) {
+                    if (!empty($oldavatar) && 0 === strpos(mb_strtolower($oldavatar), 'cavt')) {
                         $avatars = &$avtHandler->getObjects(new \Criteria('avatar_file', $oldavatar));
                         if (!empty($avatars) && 1 == count($avatars) && is_object($avatars[0])) {
                             $avtHandler->delete($avatars[0]);
@@ -411,7 +411,7 @@ if ('avatarchoose' == $op) {
             require XOOPS_ROOT_PATH . '/footer.php';
             exit();
         }
-        if ($oldavatar && 0 === strpos(mb_strtolower($oldavatar), "cavt")) {
+        if ($oldavatar && 0 === strpos(mb_strtolower($oldavatar), 'cavt')) {
             $avatars = &$avtHandler->getObjects(new \Criteria('avatar_file', $oldavatar));
             if (!empty($avatars) && 1 == count($avatars) && is_object($avatars[0])) {
                 $avtHandler->delete($avatars[0]);
