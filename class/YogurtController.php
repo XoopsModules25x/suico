@@ -130,7 +130,7 @@ class YogurtController extends \XoopsObject
     }
 
     /**
-     * Set permissions acording to user is logged or not , is owner or not etc..
+     * Set permissions according to user is logged or not , is owner or not etc..
      */
     public function getPermissions()
     {
@@ -189,7 +189,7 @@ class YogurtController extends \XoopsObject
         $criteria_friends = new \Criteria('friend1_uid', $this->uidOwner);
 
         if (!$xoopsUser) {
-            $controller->isFriend = 0;
+            $this->isFriend = 0;
         } else {
             $criteria_isfriend = new \CriteriaCompo(new \Criteria('friend2_uid', $this->user->getVar('uid')));
             $criteria_isfriend->add($criteria_friends);
