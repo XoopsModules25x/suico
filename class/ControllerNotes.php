@@ -69,7 +69,7 @@ class ControllerNotes extends YogurtController
 
     /**
      * @param $nb_notes
-     * @param $criteria
+     * @param null|\CriteriaElement|\CriteriaCompo $criteria
      * @return bool|array
      */
     public function fetchNotes($nb_notes, $criteria)

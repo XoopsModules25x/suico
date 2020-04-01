@@ -227,7 +227,7 @@ class NotesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * @param $nbNotes
-     * @param $criteria
+     * @param null|\CriteriaElement|\CriteriaCompo $criteria
      * @return array
      */
     public function getNotes($nbNotes, $criteria)
@@ -235,7 +235,7 @@ class NotesHandler extends \XoopsPersistableObjectHandler
         $myts = new \MyTextSanitizer();
         $ret  = [];
         $sql  = 'SELECT note_id, uid, uname, user_avatar, note_from, note_text FROM ' . $this->db->prefix('yogurt_notes') . ', ' . $this->db->prefix('users');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
             $sql .= ' ' . $criteria->renderWhere();
             //attention here this is kind of a hack
             $sql .= ' AND uid = note_from';
