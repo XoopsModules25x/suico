@@ -52,7 +52,7 @@ border:none;
 p#breadcrumbs {
     display:block;
     border-bottom: 2px solid;
-    margin: 0px 0px 5px;
+    margin: 0 0 5px;
     padding:2px;
 }
 
@@ -185,7 +185,7 @@ overflow:hidden;
 }
 
 div#yogurt-profile-tribes h2, div#yogurt-profile-search-results p, div#yogurt-profile-statistics p, div#yogurt-profile-details p, div#yogurt-profile-search-results h2, div#yogurt-profile-search-results h4, div#yogurt-profile-friends h2, div#yogurt-profile-visual h2, div#yogurt-profile-statistics h2, div#yogurt-profile-details h2 {
-margin:0px;
+margin:0;
 }
 
 /******************************************************************************************************
@@ -206,7 +206,7 @@ overflow:hidden;
 }
 
 div#yogurt-Notes-container h2 {
-margin:0px;
+margin:0;
 }
 
 img.avatar_Note {
@@ -325,12 +325,12 @@ width:50%;
 
 
 h2#yogurt-videos-title {
-margin:0px;
+margin:0;
 }
 
 
 div#yogurt-video-form p, div#yogurt-video-form h2{
-margin:0px;
+margin:0;
 }
 div#yogurt-video-form{
 margin:3px;
@@ -346,7 +346,7 @@ Audio
 */
 
 div#yogurt-audio-form p, div#yogurt-audio-form h2, div#yogurt-audio-allaudiocontainer p, div#yogurt-audio-allaudiocontainer h2, h2#yogurt-audio-title{
-margin:0px;
+margin:0;
 }
 
 
@@ -370,7 +370,7 @@ overflow:hidden;
 }
 
 div#yogurt-friends-container h2{
-margin:0px;
+margin:0;
 }
 
 div.yogurt-friend {
@@ -460,7 +460,7 @@ overflow:hidden;
 }
 
 div#yogurt-album-visitors h2, div#yogurt-album-container h2, div#yogurt-album-form h2,div#yogurt-album-form p {
-margin:0px;
+margin:0;
 }
 
 div#yogurt-album-container{
@@ -472,7 +472,7 @@ overflow:hidden;
 }
 
 div.yogurt-album-picture {
-margin:0px;
+margin:0;
 width:31%;
 height:250px;
 float:left;
@@ -509,7 +509,7 @@ overflow:hidden;
 }
 
 div#yogurt-tribe-edit-members h2, div.yogurt-tribe-edit-member h2, form#yogurt-tribe-edit-form h2, form#form_tribe_search h2, form#form_tribe h2, div#yogurt-tribes-container h2, div#yogurt-mytribes-container h2, div#yogurt-tribe-container p,div#yogurt-tribe-container h2{
-margin:0px;
+margin:0;
 }
 
 
