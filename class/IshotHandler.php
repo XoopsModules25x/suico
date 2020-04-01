@@ -156,7 +156,7 @@ class IshotHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve yogurt_ishots from the database
      *
-     * @param \XoopsObject $criteria  {@link CriteriaElement} conditions to be met
+     * @param null|\CriteriaElement|\CriteriaCompo $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool         $id_as_key use the UID as key for the array?
      * @return array array of {@link Ishot} objects
      */

@@ -175,7 +175,7 @@ class ImageHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve yogurt_imagess from the database
      *
-     * @param \CriteriaElement $criteria  {@link \CriteriaElement} conditions to be met
+     * @param null|\CriteriaElement|\CriteriaCompo  $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool             $id_as_key use the UID as key for the array?
      * @return array array of {@link Image} objects
      */
@@ -213,7 +213,7 @@ class ImageHandler extends \XoopsPersistableObjectHandler
     /**
      * count yogurt_imagess matching a condition
      *
-     * @param \CriteriaElement $criteria {@link \CriteriaElement} to match
+     * @param null|\CriteriaElement|\CriteriaCompo  $criteria {@link \CriteriaElement} to match
      * @return int count of yogurt_imagess
      */
     public function getCount($criteria = null)
@@ -234,7 +234,7 @@ class ImageHandler extends \XoopsPersistableObjectHandler
     /**
      * delete yogurt_imagess matching a set of conditions
      *
-     * @param \CriteriaElement $criteria {@link \CriteriaElement}
+     * @param null|\CriteriaElement|\CriteriaCompo  $criteria {@link \CriteriaElement}
      * @return bool FALSE if deletion failed
      */
     public function deleteAll($criteria = null)

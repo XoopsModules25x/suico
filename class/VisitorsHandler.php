@@ -141,7 +141,7 @@ class VisitorsHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve yogurt_visitorss from the database
      *
-     * @param \CriteriaElement $criteria  {@link \CriteriaElement} conditions to be met
+     * @param null|\CriteriaElement|\CriteriaCompo  $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool             $id_as_key use the UID as key for the array?
      * @return array array of {@link Yogurt\Visitors} objects
      */
@@ -179,7 +179,7 @@ class VisitorsHandler extends \XoopsPersistableObjectHandler
     /**
      * count yogurt_visitorss matching a condition
      *
-     * @param \CriteriaElement $criteria {@link \CriteriaElement} to match
+     * @param null|\CriteriaElement|\CriteriaCompo  $criteria {@link \CriteriaElement} to match
      * @return int count of yogurt_visitorss
      */
     public function getCount($criteria = null)
@@ -200,7 +200,7 @@ class VisitorsHandler extends \XoopsPersistableObjectHandler
     /**
      * delete yogurt_visitorss matching a set of conditions
      *
-     * @param \CriteriaElement $criteria {@link \CriteriaElement}
+     * @param null|\CriteriaElement|\CriteriaCompo  $criteria {@link \CriteriaElement}
      * @param bool             $force
      * @return bool FALSE if deletion failed
      */
