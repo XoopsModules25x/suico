@@ -30,26 +30,25 @@
  * @Support    : http://br.impresscms.org - Team Brazilian.
  * @Licence    : GNU
  */
-
 define('_MI_YOG_NUMBPICT_TITLE', 'Número de fotos');
 define('_MI_YOG_NUMBPICT_DESC', 'Número de fotos permitidas na página.');
 define('_MI_YOG_ADMENU1', 'Home');
 define('_MI_YOG_ADMENU2', 'Sobre');
 define('_MI_YOG_SMNAME1', 'Enviar');
 define('_MI_YOG_THUMW_TITLE', 'Largura do Thumb');
-define('_MI_YOG_THUMBW_DESC', 'Largura dos Thumbnails em pixels.<br />Significa que sua foto terá no máximo a largura indicada. Todas as proporções serão mantidas.');
+define('_MI_YOG_THUMBW_DESC', 'Largura dos Thumbnails em pixels.<br>Significa que sua foto terá no máximo a largura indicada. Todas as proporções serão mantidas.');
 define('_MI_YOG_THUMBH_TITLE', 'Altura do Thumb');
-define('_MI_YOG_THUMBH_DESC', 'Largura dos Thumbnails em pixels.<br />Significa que sua foto terá no máximo a altura indicada. Todas as proporções serão mantidas.');
+define('_MI_YOG_THUMBH_DESC', 'Largura dos Thumbnails em pixels.<br>Significa que sua foto terá no máximo a altura indicada. Todas as proporções serão mantidas.');
 define('_MI_YOG_RESIZEDW_TITLE', 'Largura da foto redefinida');
-define('_MI_YOG_RESIZEDW_DESC', 'Largura da foto redefinida em pixels.<br />Significa que sua foto terá no máximo a largura indicada. Todas as proporções serão mantidas.<br /> Se a foto original for maior que tamanho indicado ela será redefinida para não quebrar o laytout do seu template.');
+define('_MI_YOG_RESIZEDW_DESC', 'Largura da foto redefinida em pixels.<br>Significa que sua foto terá no máximo a largura indicada. Todas as proporções serão mantidas.<br> Se a foto original for maior que tamanho indicado ela será redefinida para não quebrar o laytout do seu template.');
 define('_MI_YOG_RESIZEDH_TITLE', 'Altura da foto redefinida');
-define('_MI_YOG_RESIZEDH_DESC', 'Altura da foto redefinida em pixels.<br />Significa que sua foto terá no máximo a altura indicada. Todas as proporções serão mantidas.<br /> Se a foto original for maior que tamanho indicado ela será redefinida para não quebrar o laytout do seu template.');
+define('_MI_YOG_RESIZEDH_DESC', 'Altura da foto redefinida em pixels.<br>Significa que sua foto terá no máximo a altura indicada. Todas as proporções serão mantidas.<br> Se a foto original for maior que tamanho indicado ela será redefinida para não quebrar o laytout do seu template.');
 define('_MI_YOG_ORIGINALW_TITLE', 'Largura máxima da foto original');
-define('_MI_YOG_ORIGINALW_DESC', 'Largura máxima medida em pixels.<br />Significa que a foto original do usuário não pode exceder a largura indicada ou não será realizado o upload.');
+define('_MI_YOG_ORIGINALW_DESC', 'Largura máxima medida em pixels.<br>Significa que a foto original do usuário não pode exceder a largura indicada ou não será realizado o upload.');
 define('_MI_YOG_ORIGINALH_TITLE', 'Altura máxima da foto original');
-define('_MI_YOG_ORIGINALH_DESC', 'Altura máxima medida em pixels.<br />Significa que a foto original do usuário não pode exceder a altura indicada ou não será realizado o upload.');
+define('_MI_YOG_ORIGINALH_DESC', 'Altura máxima medida em pixels.<br>Significa que a foto original do usuário não pode exceder a altura indicada ou não será realizado o upload.');
 define('_MI_YOG_PATHUPLOAD_TITLE', 'Local dos Uploads');
-define('_MI_YOG_PATHUPLOAD_DESC', 'Endereço real para o diretório que receberá as fotos.<br />No linux deverá ser (ex.):  /var/www/uploads<br />No windows deverá ser (ex.): C:/Program Files/www');
+define('_MI_YOG_PATHUPLOAD_DESC', 'Endereço real para o diretório que receberá as fotos.<br>No linux deverá ser (ex.):  /var/www/uploads<br>No windows deverá ser (ex.): C:/Program Files/www');
 define('_MI_YOG_LINKPATHUPLOAD_TITLE', 'Link para o diretótio que receberá as fotos');
 define('_MI_YOG_LINKPATHUPLOAD_DESC', 'Indicar o endereço do diretório que receberá as fotos dos usuário, exemplo: http://www.yoursite.com/uploads');
 define('_MI_YOG_MAXFILEBYTES_TITLE', 'Tamanho máximo em bytes');
@@ -69,15 +68,15 @@ define('_MI_YOG_PICTURE_TEMPLATEINDEXDESC', 'Esta template exibe as fotos do usu
 define('_MI_YOG_PICTURE_TEMPLATEFRIENDSDESC', 'Esta template exibe os amigos do usuário');
 define('_MI_YOGURT_MYFRIENDS', 'Meus Amigos');
 define('_MI_YOG_FRIENDSPERPAGE_TITLE', 'Amigos por página');
-define('_MI_YOG_FRIENDSPERPAGE_DESC', 'Ajuste o número de amigos exibidos por a página<br />Em minha página de amigos');
+define('_MI_YOG_FRIENDSPERPAGE_DESC', 'Ajuste o número de amigos exibidos por a página<br>Em minha página de amigos');
 define('_MI_YOG_PICTURESPERPAGE_TITLE', 'Fotos por página antes de mostrar a paginação');
 
 define('_MI_YOGURT_LAST', 'Bloco de últimas fotos');
 define('_MI_YOGURT_LAST_DESC', 'Últimas fotos postadas, independente do álbum');
 define('_MI_YOG_DELETEPHYSICAL_TITLE', 'Apagar arquivos da pasta upload também');
 define(
-	'_MI_YOG_DELETEPHYSICAL_DESC',
-	'Dizer sim aqui, permitirá que as fotos enviadas sejam apagadas da pasta bem como do banco de dados<br /> Tenha cuidado com esta opção, pois se você excluir o arquivo da pasta e não só do banco de dados as pessoas que criaram links diretos para a foto em outra parte do site perderão o conteúdo,<br /> ao mesmo tempo, se você excluí-las, as fotos podem ocupar muito espaço no servidor<br />Configures este item de acordo com as suas necessidades.'
+    '_MI_YOG_DELETEPHYSICAL_DESC',
+    'Dizer sim aqui, permitirá que as fotos enviadas sejam apagadas da pasta bem como do banco de dados<br> Tenha cuidado com esta opção, pois se você excluir o arquivo da pasta e não só do banco de dados as pessoas que criaram links diretos para a foto em outra parte do site perderão o conteúdo,<br> ao mesmo tempo, se você excluí-las, as fotos podem ocupar muito espaço no servidor<br>Configures este item de acordo com as suas necessidades.'
 );
 
 define('_MI_YOGURT_MYVIDEOS', 'Meus Videos'); //GibaPhp

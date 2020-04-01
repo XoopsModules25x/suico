@@ -19,14 +19,14 @@
 //Present in many files (videos pictures etc...)
 define('_MD_YOGURT_DELETE', 'Delete');
 define('_MD_YOGURT_EDITDESC', 'Edit description');
-define('_MD_YOGURT_TOKENEXPIRED', 'Your Security Token has Expired<br />Please Try Again');
+define('_MD_YOGURT_TOKENEXPIRED', 'Your Security Token has Expired<br>Please Try Again');
 define('_MD_YOGURT_DESC_EDITED', 'The description was edited successfully');
 define('_MD_YOGURT_CAPTION', 'Caption');
 define('_MD_YOGURT_YOUCANUPLOAD', "You can only upload jpg's files and up to %s KBytes in size");
 define('_MD_YOGURT_UPLOADPICTURE', 'Upload Picture');
 define(
-	'_MD_YOGURT_NOCACHACA',
-	'Bad, Bad Module...No cacha�a for you!<br />
+    '_MD_YOGURT_NOCACHACA',
+    'Bad, Bad Module...No cacha�a for you!<br>
 Unfortunately, this module has acted in an unexpected way. Hopefully it will return to its helpful self if you try again. '
 ); //Funny general error message
 define('_MD_YOGURT_PAGETITLE', "%s - %s's Social Network");
@@ -106,7 +106,7 @@ define('_MD_YOGURT_FRIENDSHIPUPDATED', 'Friendship Updated');
 
 //submitfriendpetition.php
 define('_MD_YOGURT_PETITIONED', 'A friend request has been sent to this user, Wait until he accepts to have him in your friends list.');
-define('_MD_YOGURT_ALREADY_PETITIONED', 'You have already sent a friendship request to this user or vice-versa <br />, Wait untill he accepts or rejects it or check if he has asked you as a friend visiting your profile page.');
+define('_MD_YOGURT_ALREADY_PETITIONED', 'You have already sent a friendship request to this user or vice-versa <br>, Wait untill he accepts or rejects it or check if he has asked you as a friend visiting your profile page.');
 
 //makefriends.php
 define('_MD_YOGURT_FRIENDMADE', 'Added as a friend!');
@@ -118,13 +118,13 @@ define('_MD_YOGURT_FRIENDSHIPTERMINATED', 'You have broken your friendship with 
 //mainvideo.php
 define('_MD_YOGURT_SETMAINVIDEO', 'This video is selected on your front page from now on');
 
-//seutubo.php
+//video.php
 define('_MD_YOGURT_YOUTUBECODE', 'YouTube code or URL');
 define('_MD_YOGURT_ADDVIDEO', 'Add video');
 define('_MD_YOGURT_ADDFAVORITEVIDEOS', 'Add favourite videos');
 define(
-	'_MD_YOGURT_ADDVIDEOSHELP',
-	'If you want to upload your own video for sharing, then upload your videos to 
+    '_MD_YOGURT_ADDVIDEOSHELP',
+    'If you want to upload your own video for sharing, then upload your videos to
 <a href=http://www.youtube.com>YouTube</a> and then add the URL to here '
 ); //The name of the site will show after this
 define('_MD_YOGURT_MYVIDEOS', 'My Videos');
@@ -196,7 +196,7 @@ define('_MD_YOGURT_ITALIC', 'italic');
 define('_MD_YOGURT_UNDERLINE', 'underline');
 define('_MD_YOGURT_NONOTESYET', 'No Notes created in this Notebook yet');
 
-//submit_Note.php
+//submitNote.php
 define('_MD_YOGURT_NOTE_SENT', 'Thanks for participating, Note sent');
 
 //delete_Note.php
@@ -224,8 +224,8 @@ define('_MD_YOGURT_WHOCAN', 'Who can:');
 //submit_configs.php
 define('_MD_YOGURT_CONFIGSSAVE', 'Configuration saved!');
 
-//class/yogurt_controler.php
-define('_MD_YOGURT_NOPRIVILEGE', "The owner of this profile has set the privileges to see it, <br />higher than you have now. <br />Login to become their friend. <br />If they haven't set it, so only they can see, <br />then you will be able to view it.");
+//class/yogurt_controller.php
+define('_MD_YOGURT_NOPRIVILEGE', "The owner of this profile has set the privileges to see it, <br>higher than you have now. <br>Login to become their friend. <br>If they haven't set it, so only they can see, <br>then you will be able to view it.");
 
 ###################################### OTHERS ##############################
 

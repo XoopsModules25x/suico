@@ -17,7 +17,9 @@
  * @since
  */
 
-require __DIR__.'/header.php';
+use XoopsModules\Yogurt;
+
+require __DIR__ . '/header.php';
 /**
  * Factory of petitions created
  */
@@ -27,8 +29,8 @@ $friendshipFactory     = new Yogurt\FriendshipHandler($xoopsDB);
 /**
  * Getting the uid of the user which user want to ask to be friend
  */
-$friend1_uid = (int) $_POST['friend_uid'];
-$friend2_uid = (int) $xoopsUser->getVar('uid');
+$friend1_uid = \Xmf\Request::getInt('friend_uid', 0, 'POST');
+$friend2_uid = (int)$xoopsUser->getVar('uid');
 
 $criteria_friend1 = new \Criteria('friend1_uid', $friend1_uid);
 $criteria_friend2 = new \Criteria('friend2_uid', $friend2_uid);
@@ -48,4 +50,4 @@ $friendshipFactory->deleteAll($criteria_delete1);
 
 redirect_header('friends.php', 3, _MD_YOGURT_FRIENDSHIPTERMINATED);
 
-include __DIR__.'/../../footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

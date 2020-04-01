@@ -20,11 +20,11 @@
 use XoopsModules\Yogurt;
 
 if (!defined('XOOPS_ROOT_PATH')) {
-	exit();
+    exit();
 }
 //include_once(XOOPS_ROOT_PATH."/class/criteria.php");
-//include_once XOOPS_ROOT_PATH . '/modules/yogurt/class/Friendship.php';
-//include_once XOOPS_ROOT_PATH . '/modules/yogurt/class/Image.php';
+//require_once XOOPS_ROOT_PATH . '/modules/yogurt/class/Friendship.php';
+//require_once XOOPS_ROOT_PATH . '/modules/yogurt/class/Image.php';
 
 /**
  * @param $options
@@ -32,27 +32,28 @@ if (!defined('XOOPS_ROOT_PATH')) {
  */
 function b_yogurt_friends_show($options)
 {
-	global $xoopsDB, $xoopsModule, $xoopsModuleConfig, $xoopsUser;
-	$myts  = MyTextSanitizer::getInstance();
-	$block = [];
+    global $xoopsDB, $xoopsModule, $xoopsModuleConfig, $xoopsUser;
+    $myts  = MyTextSanitizer::getInstance();
+    $block = [];
 
-	if (!empty($xoopsUser)) {
-		/**
-		 * Filter for fetch votes ishot and isnothot
-		 */
+    if (!empty($xoopsUser)) {
+        /**
+         * Filter for fetch votes ishot and isnothot
+         */
 
-		$criteria_2 = new \Criteria('friend1_uid', $xoopsUser->getVar('uid'));
+        $criteria_2 = new \Criteria('friend1_uid', $xoopsUser->getVar('uid'));
 
-		/**
-		 * Creating factories of pictures and votes
-		 */
-		//$albumFactory      = new ImagesHandler($xoopsDB);
-		$friendsFactory = new Yogurt\FriendshipHandler($xoopsDB);
+        /**
+         * Creating factories of pictures and votes
+         */
+        //$albumFactory      = new ImagesHandler($xoopsDB);
+        $friendsFactory = new Yogurt\FriendshipHandler($xoopsDB);
 
-		$block['friends'] = $friendsFactory->getFriends($options[0], $criteria_2, 0);
-	}
-	$block['lang_allfriends'] = _MB_YOG_ALLFRIENDS;
-	return $block;
+        $block['friends'] = $friendsFactory->getFriends($options[0], $criteria_2, 0);
+    }
+    $block['lang_allfriends'] = _MB_YOG_ALLFRIENDS;
+
+    return $block;
 }
 
 /**
@@ -61,9 +62,9 @@ function b_yogurt_friends_show($options)
  */
 function b_yogurt_friends_edit($options)
 {
-	$form = "<input type='text' value='" . $options['0'] . "'id='options[]' name='options[]' />";
+    $form = "<input type='text' value='" . $options['0'] . "'id='options[]' name='options[]'>";
 
-	return $form;
+    return $form;
 }
 
 /**
@@ -72,28 +73,28 @@ function b_yogurt_friends_edit($options)
  */
 function b_yogurt_lastpictures_show($options)
 {
-	global $xoopsDB, $xoopsModule, $xoopsModuleConfig;
-	$myts  = MyTextSanitizer::getInstance();
-	$block = [];
+    global $xoopsDB, $xoopsModule, $xoopsModuleConfig;
+    $myts  = MyTextSanitizer::getInstance();
+    $block = [];
 
-	/**
-	 * Filter for fetch votes ishot and isnothot
-	 */
+    /**
+     * Filter for fetch votes ishot and isnothot
+     */
 
-	$criteria = new \Criteria('cod_img', 0, '>');
-	$criteria->setSort('cod_img');
-	$criteria->setOrder('DESC');
-	$criteria->setLimit($options[0]);
+    $criteria = new \Criteria('cod_img', 0, '>');
+    $criteria->setSort('cod_img');
+    $criteria->setOrder('DESC');
+    $criteria->setLimit($options[0]);
 
-	/**
-	 * Creating factories of pictures and votes
-	 */
-	//$albumFactory      = new ImagesHandler($xoopsDB);
-	$picturesFactory = new Yogurt\ImageHandler($xoopsDB);
+    /**
+     * Creating factories of pictures and votes
+     */
+    //$albumFactory      = new ImagesHandler($xoopsDB);
+    $picturesFactory = new Yogurt\ImageHandler($xoopsDB);
 
-	$block = $picturesFactory->getLastPicturesForBlock($options[0]);
+    $block = $picturesFactory->getLastPicturesForBlock($options[0]);
 
-	return $block;
+    return $block;
 }
 
 /**
@@ -102,7 +103,7 @@ function b_yogurt_lastpictures_show($options)
  */
 function b_yogurt_lastpictures_edit($options)
 {
-	$form = "<input type='text' value='" . $options['0'] . "'id='options[]' name='options[]' />";
+    $form = "<input type='text' value='" . $options['0'] . "'id='options[]' name='options[]'>";
 
-	return $form;
+    return $form;
 }

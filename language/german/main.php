@@ -19,14 +19,14 @@
 //Present in many files (videos pictures etc...)
 define('_MD_YOGURT_DELETE', 'L&ouml;schen');
 define('_MD_YOGURT_EDITDESC', 'Beschreibung bearbeiten');
-define('_MD_YOGURT_TOKENEXPIRED', 'Dein Sicherheitstoken ist abgelaufen<br />Bitte nochmal versuchen');
+define('_MD_YOGURT_TOKENEXPIRED', 'Dein Sicherheitstoken ist abgelaufen<br>Bitte nochmal versuchen');
 define('_MD_YOGURT_DESC_EDITED', 'Die Beschreibung wurde erfolgreich ge&auml;ndert');
 define('_MD_YOGURT_CAPTION', 'Titel');
-define('_MD_YOGURT_YOUCANUPLOAD', 'Du kannst nur JPG-Dateien mit einer maximalen Dateigr&ouml;&szlig;e von %s KBytes hochladen!<br /><b>Bilder kannst Du ganz einfach unter <a href=http://www.bilder-editieren.de target=_blank>www.bilder-editieren.de</a> bearbeiten.</b>');
+define('_MD_YOGURT_YOUCANUPLOAD', 'Du kannst nur JPG-Dateien mit einer maximalen Dateigr&ouml;&szlig;e von %s KBytes hochladen!<br><b>Bilder kannst Du ganz einfach unter <a href=http://www.bilder-editieren.de target=_blank>www.bilder-editieren.de</a> bearbeiten.</b>');
 define('_MD_YOGURT_UPLOADPICTURE', 'Bild hochladen');
 define(
-	'_MD_YOGURT_NOCACHACA',
-	'Ein Problem ist aufgetreten ... sieht nicht gut aus<br />
+    '_MD_YOGURT_NOCACHACA',
+    'Ein Problem ist aufgetreten ... sieht nicht gut aus<br>
 Das Modul hat sich in einer unerwarteten Weise verhalten. Bitte versuche deine letzte Aktion erneut.'
 ); //Funny general error message
 define('_MD_YOGURT_PAGETITLE', "%s - %s's Social Network");
@@ -106,7 +106,7 @@ define('_MD_YOGURT_FRIENDSHIPUPDATED', 'Freundschaft aktualisiert');
 
 //submitfriendpetition.php
 define('_MD_YOGURT_PETITIONED', 'Eine Anfrage wurde an diesen Benutzer gesendet. Wenn er zustimmt wird er in deiner Freundesliste erscheinen.');
-define('_MD_YOGURT_ALREADY_PETITIONED', 'Du hast bereits eine Anfrage auf Freundschaft an dieses Mitglied gesendet (oder umgekehrt). <br />Warte bitte auf Zustimmtung oder Ablehnung.');
+define('_MD_YOGURT_ALREADY_PETITIONED', 'Du hast bereits eine Anfrage auf Freundschaft an dieses Mitglied gesendet (oder umgekehrt). <br>Warte bitte auf Zustimmtung oder Ablehnung.');
 
 //makefriends.php
 define('_MD_YOGURT_FRIENDMADE', 'Als Freund hinzugef&uuml;gt!');
@@ -118,13 +118,13 @@ define('_MD_YOGURT_FRIENDSHIPTERMINATED', 'Du hast deine Freundschaft mit diesem
 //mainvideo.php
 define('_MD_YOGURT_SETMAINVIDEO', 'Dieses Video erscheint ab sofort auf deiner Profilseite');
 
-//seutubo.php
+//video.php
 define('_MD_YOGURT_YOUTUBECODE', 'YouTube-Link oder URL');
 define('_MD_YOGURT_ADDVIDEO', 'Video hinzuf&uuml;gen');
 define('_MD_YOGURT_ADDFAVORITEVIDEOS', 'Bevorzugtes Video hinzuf&uuml;gen');
 define(
-	'_MD_YOGURT_ADDVIDEOSHELP',
-	'Wenn Du ein eigenes Video mit anderen teilen willst, dann lade dieses Video
+    '_MD_YOGURT_ADDVIDEOSHELP',
+    'Wenn Du ein eigenes Video mit anderen teilen willst, dann lade dieses Video
 bei <a href=http://www.youtube.com target=_blank>YouTube</a> hoch und f&uuml;ge die URL ein bei '
 ); //The name of the site will show after this
 define('_MD_YOGURT_MYVIDEOS', 'Meine Videos');
@@ -196,7 +196,7 @@ define('_MD_YOGURT_ITALIC', 'Kursiv');
 define('_MD_YOGURT_UNDERLINE', 'Unterstrichen');
 define('_MD_YOGURT_NONOTESYET', 'Keine G&auml;stebucheintr&auml;ge vorhanden, hier kannst Du noch erster sein!');
 
-//submit_Note.php
+//submitNote.php
 define('_MD_YOGURT_NOTE_SENT', 'Danke f&uuml;r die Teilnahme, G&auml;stebucheintrag wurde gesendet');
 
 //delete_Note.php
@@ -224,8 +224,8 @@ define('_MD_YOGURT_WHOCAN', 'Wer kann:');
 //submit_configs.php
 define('_MD_YOGURT_CONFIGSSAVE', 'Einstellungen gespeichert!');
 
-//class/yogurt_controler.php
-define('_MD_YOGURT_NOPRIVILEGE', 'Du ben&ouml;tigst mehr Rechte, um dieses Profil zu sehen.<br />Schlie&szlig;e Freundschaft mit diesem Mitglied.');
+//class/yogurt_controller.php
+define('_MD_YOGURT_NOPRIVILEGE', 'Du ben&ouml;tigst mehr Rechte, um dieses Profil zu sehen.<br>Schlie&szlig;e Freundschaft mit diesem Mitglied.');
 
 ###################################### OTHERS ##############################
 
@@ -327,7 +327,7 @@ define('_MD_YOGURT_AUTHORAUDIO', 'Interpret');
 define('_MD_YOGURT_TITLEAUDIO', 'Titel oder Songname');
 define('_MD_YOGURT_ADDAUDIO', 'F&uuml;ge eine MP3-Datei hinzu');
 define('_MD_YOGURT_SUBMITAUDIO', 'Datei hochgeladen');
-define('_MD_YOGURT_ADDAUDIOHELP', 'W&auml;hle eine MP3-Datei von deinem Rechner (max. %s KBytes)<br /> Lasse die Felder Titel/Songname und Interpret frei, wenn ID-Tags vorhanden sind');
+define('_MD_YOGURT_ADDAUDIOHELP', 'W&auml;hle eine MP3-Datei von deinem Rechner (max. %s KBytes)<br> Lasse die Felder Titel/Songname und Interpret frei, wenn ID-Tags vorhanden sind');
 
 //19/04/2008
 define('_MD_YOGURT_AUDIODELETED', 'Dein MP3 wurde gel&ouml;scht!');

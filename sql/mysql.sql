@@ -36,7 +36,7 @@ CREATE TABLE `yogurt_visitors` (
 )
   ENGINE = MyISAM;
 
-CREATE TABLE `yogurt_seutubo` (
+CREATE TABLE `yogurt_video` (
   `video_id`     INT(11)     NOT NULL AUTO_INCREMENT,
   `uid_owner`    INT(11)     NOT NULL,
   `video_desc`   TEXT        NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE `yogurt_reltribeuser` (
   ENGINE = MyISAM;
 
 
-CREATE TABLE `Tribes` (
+CREATE TABLE `yogurt_tribes` (
   `tribe_id`    INT(11)      NOT NULL AUTO_INCREMENT,
   `owner_uid`   INT(11)      NOT NULL,
   `tribe_title` VARCHAR(255) NOT NULL,
@@ -75,17 +75,17 @@ CREATE TABLE `Tribes` (
   ENGINE = MyISAM;
 
 CREATE TABLE `yogurt_notes` (
-  `Note_id`   INT(11)    NOT NULL AUTO_INCREMENT,
-  `Note_text` TEXT       NOT NULL,
-  `Note_from` INT(11)    NOT NULL,
-  `Note_to`   INT(11)    NOT NULL,
+  `note_id`   INT(11)    NOT NULL AUTO_INCREMENT,
+  `note_text` TEXT       NOT NULL,
+  `note_from` INT(11)    NOT NULL,
+  `note_to`   INT(11)    NOT NULL,
   `private`   TINYINT(1) NOT NULL,
   `date`      TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`Note_id`)
+  PRIMARY KEY (`note_id`)
 )
   ENGINE = MyISAM;
 
-CREATE TABLE `Configs` (
+CREATE TABLE `yogurt_configs` (
   `config_id`       INT(11)      NOT NULL AUTO_INCREMENT,
   `config_uid`      INT(11)      NOT NULL,
   `pictures`        TINYINT(1)   NOT NULL,

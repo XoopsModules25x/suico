@@ -18,9 +18,9 @@
  */
 //index.php
 define(
-	'_MA_YOG_FRAMEWORKSFALSE',
-	"Sie m&uuml;ssen Frameworks installieren, damit dieses Modul korrekt funktioniert:<br /><br />
-<a href='http://dev.xoops.org/modules/xfmod/project/showfiles.php?group_id=1357'>Frameworks v 1.1 oder neuer wird empfohlen</a><br />"
+    '_MA_YOG_FRAMEWORKSFALSE',
+    "Sie m&uuml;ssen Frameworks installieren, damit dieses Modul korrekt funktioniert:<br><br>
+<a href='http://dev.xoops.org/modules/xfmod/project/showfiles.php?group_id=1357'>Frameworks v 1.1 oder neuer wird empfohlen</a><br>"
 );
 define('_MA_YOG_FRAMEWORKSTRUE', 'Sie haben Framework-Version %s');
 define('_MA_YOG_BY', 'Von');

@@ -20,49 +20,49 @@
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_tribes_results.tpl';
-require __DIR__.'/header.php';
+require __DIR__ . '/header.php';
 
-$controler = new Yogurt\ControlerTribes($xoopsDB, $xoopsUser);
+$controller = new Yogurt\ControllerTribes($xoopsDB, $xoopsUser);
 
 /**
- * Fecthing numbers of tribes friends videos pictures etc...
+ * Fetching numbers of tribes friends videos pictures etc...
  */
-$nbSections = $controler->getNumbersSections();
+$nbSections = $controller->getNumbersSections();
 
-$start_all = isset($_GET['start_all']) ? (int) $_GET['start_all'] : 0;
-$start_my  = isset($_GET['start_my']) ? (int) $_GET['start_my'] : 0;
+$start_all = \Xmf\Request::getInt('start_all', 0, 'GET');
+$start_my  = \Xmf\Request::getInt('start_my', 0, 'GET');
 
 $tribe_keyword = trim(htmlspecialchars($_GET['tribe_keyword'], ENT_QUOTES | ENT_HTML5));
 /**
  * All Tribes
  */
-$criteria_title  = new \Criteria('tribe_title', '%'.$tribe_keyword.'%', 'LIKE');
-$criteria_desc   = new \Criteria('tribe_desc', '%'.$tribe_keyword.'%', 'LIKE');
+$criteria_title  = new \Criteria('tribe_title', '%' . $tribe_keyword . '%', 'LIKE');
+$criteria_desc   = new \Criteria('tribe_desc', '%' . $tribe_keyword . '%', 'LIKE');
 $criteria_tribes = new \CriteriaCompo($criteria_title);
 $criteria_tribes->add($criteria_desc, 'OR');
-$nb_tribes = $controler->tribesFactory->getCount($criteria_tribes);
+$nb_tribes = $controller->tribesFactory->getCount($criteria_tribes);
 $criteria_tribes->setLimit($xoopsModuleConfig['tribesperpage']);
 $criteria_tribes->setStart($start_all);
-$tribes_objects = $controler->tribesFactory->getObjects($criteria_tribes);
+$tribes_objects = $controller->tribesFactory->getObjects($criteria_tribes);
 $i              = 0;
 foreach ($tribes_objects as $tribe_object) {
-	$tribes[$i]['id']    = $tribe_object->getVar('tribe_id');
-	$tribes[$i]['title'] = $tribe_object->getVar('tribe_title');
-	$tribes[$i]['img']   = $tribe_object->getVar('tribe_img');
-	$tribes[$i]['desc']  = $tribe_object->getVar('tribe_desc');
-	$tribes[$i]['uid']   = $tribe_object->getVar('owner_uid');
-	$i++;
+    $tribes[$i]['id']    = $tribe_object->getVar('tribe_id');
+    $tribes[$i]['title'] = $tribe_object->getVar('tribe_title');
+    $tribes[$i]['img']   = $tribe_object->getVar('tribe_img');
+    $tribes[$i]['desc']  = $tribe_object->getVar('tribe_desc');
+    $tribes[$i]['uid']   = $tribe_object->getVar('owner_uid');
+    $i++;
 }
 
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/yogurt.css');
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs.css');
+$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/yogurt.css');
+$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
-if (preg_match('/msie/', strtolower($_SERVER['HTTP_USER_AGENT']))) {
-	$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
+if (false !== strpos(mb_strtolower($_SERVER['HTTP_USER_AGENT']), 'msie')) {
+    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css');
 }
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/jquery.js');
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/js/jquery.tabs.pack.js');
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/yogurt.js');
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.js');
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.tabs.pack.js');
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
 
 /**
  * Criando a barra de navegao caso tenha muitos amigos
@@ -71,15 +71,15 @@ $barra_navegacao = new \XoopsPageNav($nb_tribes, $xoopsModuleConfig['tribesperpa
 $barrinha        = $barra_navegacao->renderImageNav(2);
 
 //permissions
-$xoopsTpl->assign('allow_Notes', $controler->checkPrivilegeBySection('Notes'));
-$xoopsTpl->assign('allow_friends', $controler->checkPrivilegeBySection('friends'));
-$xoopsTpl->assign('allow_tribes', $controler->checkPrivilegeBySection('tribes'));
-$xoopsTpl->assign('allow_pictures', $controler->checkPrivilegeBySection('pictures'));
-$xoopsTpl->assign('allow_videos', $controler->checkPrivilegeBySection('videos'));
-$xoopsTpl->assign('allow_audios', $controler->checkPrivilegeBySection('audio'));
-$xoopsTpl->assign('allow_profile_contact', $controler->checkPrivilege('profile_contact') ? 1 : 0);
-$xoopsTpl->assign('allow_profile_general', $controler->checkPrivilege('profile_general') ? 1 : 0);
-$xoopsTpl->assign('allow_profile_stats', $controler->checkPrivilege('profile_stats') ? 1 : 0);
+$xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('notes'));
+$xoopsTpl->assign('allow_friends', $controller->checkPrivilegeBySection('friends'));
+$xoopsTpl->assign('allow_tribes', $controller->checkPrivilegeBySection('tribes'));
+$xoopsTpl->assign('allow_pictures', $controller->checkPrivilegeBySection('pictures'));
+$xoopsTpl->assign('allow_videos', $controller->checkPrivilegeBySection('videos'));
+$xoopsTpl->assign('allow_audios', $controller->checkPrivilegeBySection('audio'));
+$xoopsTpl->assign('allow_profile_contact', $controller->checkPrivilege('profile_contact') ? 1 : 0);
+$xoopsTpl->assign('allow_profile_general', $controller->checkPrivilege('profile_general') ? 1 : 0);
+$xoopsTpl->assign('allow_profile_stats', $controller->checkPrivilege('profile_stats') ? 1 : 0);
 
 //form
 //$xoopsTpl->assign('lang_youcanupload',sprintf(_MD_YOGURT_YOUCANUPLOAD,$maxfilebytes/1024));
@@ -90,16 +90,16 @@ $xoopsTpl->assign('lang_description', _MD_YOGURT_TRIBE_DESC);
 $xoopsTpl->assign('lang_savetribe', _MD_YOGURT_UPLOADTRIBE);
 
 //Owner data
-$xoopsTpl->assign('uid_owner', $controler->uidOwner);
-$xoopsTpl->assign('owner_uname', $controler->nameOwner);
-$xoopsTpl->assign('isOwner', $controler->isOwner);
-$xoopsTpl->assign('isanonym', $controler->isAnonym);
+$xoopsTpl->assign('uid_owner', $controller->uidOwner);
+$xoopsTpl->assign('owner_uname', $controller->nameOwner);
+$xoopsTpl->assign('isOwner', $controller->isOwner);
+$xoopsTpl->assign('isanonym', $controller->isAnonym);
 
 //numbers
 //$xoopsTpl->assign('nb_tribes',$nbSections['nbTribes']);look at hte end for this nb
 $xoopsTpl->assign('nb_photos', $nbSections['nbPhotos']);
 $xoopsTpl->assign('nb_videos', $nbSections['nbVideos']);
-$xoopsTpl->assign('nb_Notes', $nbSections['nbNotes']);
+$xoopsTpl->assign('nb_notes', $nbSections['nbNotes']);
 $xoopsTpl->assign('nb_friends', $nbSections['nbFriends']);
 $xoopsTpl->assign('nb_tribes', $nbSections['nbTribes']);
 $xoopsTpl->assign('nb_audio', $nbSections['nbAudio']);
@@ -122,13 +122,13 @@ $xoopsTpl->assign('lang_audio', _MD_YOGURT_AUDIOS);
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
 //page atributes
-$xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controler->nameOwner));
+$xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner));
 
 //$xoopsTpl->assign('path_yogurt_uploads',$xoopsModuleConfig['link_path_upload']);
 //$xoopsTpl->assign('tribes',$tribes);
 //$xoopsTpl->assign('mytribes',$mytribes);
 $xoopsTpl->assign('lang_mytribestitle', _MD_YOGURT_MYTRIBES);
-$xoopsTpl->assign('lang_tribestitle', _MD_YOGURT_ALLTRIBES.' ('.$nb_tribes.')');
+$xoopsTpl->assign('lang_tribestitle', _MD_YOGURT_ALLTRIBES . ' (' . $nb_tribes . ')');
 $xoopsTpl->assign('lang_notribesyet', _MD_YOGURT_NOTRIBESYET);
 
 //page nav
@@ -144,4 +144,4 @@ $xoopsTpl->assign('lang_jointribe', _MD_YOGURT_TRIBE_JOIN);
 $xoopsTpl->assign('lang_searchtribe', _MD_YOGURT_TRIBE_SEARCH);
 $xoopsTpl->assign('lang_tribekeyword', _MD_YOGURT_TRIBE_SEARCHKEYWORD);
 
-include __DIR__.'/../../footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

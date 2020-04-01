@@ -22,23 +22,23 @@ define('_MI_YOG_ADMENU1', 'Startseite');
 define('_MI_YOG_ADMENU2', '&Uuml;ber');
 define('_MI_YOG_SMNAME1', 'Absenden');
 define('_MI_YOG_THUMW_TITLE', 'Miniaturansicht Breite');
-define('_MI_YOG_THUMBW_DESC', 'Miniaturansicht Breite in Pixel.<br />Die Miniaturansichten werden auf diese Breite reduziert,<br />Proportionen bleiben erhalten');
+define('_MI_YOG_THUMBW_DESC', 'Miniaturansicht Breite in Pixel.<br>Die Miniaturansichten werden auf diese Breite reduziert,<br>Proportionen bleiben erhalten');
 define('_MI_YOG_THUMBH_TITLE', 'Miniaturansicht H&ouml;he');
-define('_MI_YOG_THUMBH_DESC', 'Miniaturansicht H&ouml;he in Pixel.<br />Die Miniaturansichten werden auf diese H&ouml;he reduziert,<br />Proportionen bleiben erhalten');
+define('_MI_YOG_THUMBH_DESC', 'Miniaturansicht H&ouml;he in Pixel.<br>Die Miniaturansichten werden auf diese H&ouml;he reduziert,<br>Proportionen bleiben erhalten');
 define('_MI_YOG_RESIZEDW_TITLE', 'Angepasste Bilder Breite');
-define('_MI_YOG_RESIZEDW_DESC', 'Maximale Breite der Bilder in Pixel.<br />Proportionen bleiben erhalten.<br />Ist das Original Bild breiter, wird es reduziert.<br />Dadurch wird Ihre Layout nicht zerst&ouml;rt.');
+define('_MI_YOG_RESIZEDW_DESC', 'Maximale Breite der Bilder in Pixel.<br>Proportionen bleiben erhalten.<br>Ist das Original Bild breiter, wird es reduziert.<br>Dadurch wird Ihre Layout nicht zerst&ouml;rt.');
 define('_MI_YOG_RESIZEDH_TITLE', 'Angepasste Bilder H&ouml;he');
-define('_MI_YOG_RESIZEDH_DESC', 'Maximale H&ouml;he Ihrer Bilder in Pixel.<br />Proportionen bleiben erhalten.<br />Ist das Original Bild h&ouml;her, wird es reduziert.<br />Dadurch wird Ihre Layout nicht zerst&ouml;rt.');
+define('_MI_YOG_RESIZEDH_DESC', 'Maximale H&ouml;he Ihrer Bilder in Pixel.<br>Proportionen bleiben erhalten.<br>Ist das Original Bild h&ouml;her, wird es reduziert.<br>Dadurch wird Ihre Layout nicht zerst&ouml;rt.');
 define('_MI_YOG_ORIGINALW_TITLE', 'Maximale Breite der Originalbilder');
-define('_MI_YOG_ORIGINALW_DESC', 'Maximale Breite des Originalbildes in Pixel.<br />Bei &Uuml;berschreiten ist ein Hochladen nicht m&ouml;glich.');
+define('_MI_YOG_ORIGINALW_DESC', 'Maximale Breite des Originalbildes in Pixel.<br>Bei &Uuml;berschreiten ist ein Hochladen nicht m&ouml;glich.');
 define('_MI_YOG_ORIGINALH_TITLE', 'Maximale H&ouml;he der Originalbilder');
-define('_MI_YOG_ORIGINALH_DESC', 'Maximale H&ouml;he des Originalbildes in Pixel.<br />Bei &Uuml;berschreiten ist ein Hochladen nicht m&ouml;glich.');
+define('_MI_YOG_ORIGINALH_DESC', 'Maximale H&ouml;he des Originalbildes in Pixel.<br>Bei &Uuml;berschreiten ist ein Hochladen nicht m&ouml;glich.');
 define('_MI_YOG_PATHUPLOAD_TITLE', 'Upload-Pfad');
-define('_MI_YOG_PATHUPLOAD_DESC', 'Pfad zum Upload-Verzeichnis<br />in Linux zB.: /var/www/uploads<br />in Windows zB.: C:/Programme/www');
+define('_MI_YOG_PATHUPLOAD_DESC', 'Pfad zum Upload-Verzeichnis<br>in Linux zB.: /var/www/uploads<br>in Windows zB.: C:/Programme/www');
 define('_MI_YOG_LINKPATHUPLOAD_TITLE', 'Link zu Ihrem Upload-Verzeichnis');
-define('_MI_YOG_LINKPATHUPLOAD_DESC', 'Adresse zum Root-Pfad des Upload-Verzeichnis<br />zB.: http://www.yoursite.com/uploads');
+define('_MI_YOG_LINKPATHUPLOAD_DESC', 'Adresse zum Root-Pfad des Upload-Verzeichnis<br>zB.: http://www.yoursite.com/uploads');
 define('_MI_YOG_MAXFILEBYTES_TITLE', 'Maximale Dateigr&ouml;&szlig;e in bytes');
-define('_MI_YOG_MAXFILEBYTES_DESC', 'Maximale Dateigr&ouml;&szlig;e von Bildern<br />Angabe in bytes, zB.: 512000 for 500 KB<br />Wert kann nicht gr&ouml;&szlig;er sein als in der PHP.INI des Servers.<br />Der Server akzeptiert maximal '.ini_get('post_max_size'));
+define('_MI_YOG_MAXFILEBYTES_DESC', 'Maximale Dateigr&ouml;&szlig;e von Bildern<br>Angabe in bytes, zB.: 512000 for 500 KB<br>Wert kann nicht gr&ouml;&szlig;er sein als in der PHP.INI des Servers.<br>Der Server akzeptiert maximal ' . ini_get('post_max_size'));
 
 define('_MI_YOG_PICTURE_NOTIFYTIT', 'Album');
 define('_MI_YOG_PICTURE_NOTIFYDSC', 'Benachrichtigungen bezogen auf das User-Album');
@@ -54,15 +54,15 @@ define('_MI_YOG_PICTURE_TEMPLATEINDEXDESC', 'Diese Vorlage zeigt das Profil des 
 define('_MI_YOG_PICTURE_TEMPLATEFRIENDSDESC', 'Diese Vorlage zeigt die Freunde des Users');
 define('_MI_YOGURT_MYFRIENDS', 'Meine Freunde');
 define('_MI_YOG_FRIENDSPERPAGE_TITLE', 'Freunde je Seite');
-define('_MI_YOG_FRIENDSPERPAGE_DESC', "Anzahl der Freunde, die je Seite angezeigt werden<br />in der 'Meine Freunde' Seite");
+define('_MI_YOG_FRIENDSPERPAGE_DESC', "Anzahl der Freunde, die je Seite angezeigt werden<br>in der 'Meine Freunde' Seite");
 define('_MI_YOG_PICTURESPERPAGE_TITLE', 'Bilder je Seite vor Seitenumbruch');
 
 define('_MI_YOGURT_LAST', 'Letzte Bilder-Block');
 define('_MI_YOGURT_LAST_DESC', 'Letze, eingesendete Bilder unabh&auml;ngig vom Album');
 define('_MI_YOG_DELETEPHYSICAL_TITLE', 'Dateien auch aus dem Upload-Verzeichnis l&ouml;schen');
 define(
-	'_MI_YOG_DELETEPHYSICAL_DESC',
-	"Best&auml;tigen Sie hier mit 'Ja' erlaubt dem Skript, Dateien sowohl vom Upload-Verzeichnis als auch aus der Datenbank zu l&ouml;schen.<br />Vorsicht mit dieser Funktion. Entfernen Sie die Datei auch aus dem Verzeichnis und nicht nur aus der Datenbank, k&ouml;nnen User, die direkt auf dieses Bild von einem anderen Teil dieser Seite verlinken, Ihren Inhalt verlieren;<br />andererseits ben&ouml;tigen Sie m&ouml;glicherweise sehr viel Platz auf dem Server.<br />Konfigurieren Sie diese Funktion mit Bedacht f&uuml;r Ihre Bed&uuml;rfnisse."
+    '_MI_YOG_DELETEPHYSICAL_DESC',
+    "Best&auml;tigen Sie hier mit 'Ja' erlaubt dem Skript, Dateien sowohl vom Upload-Verzeichnis als auch aus der Datenbank zu l&ouml;schen.<br>Vorsicht mit dieser Funktion. Entfernen Sie die Datei auch aus dem Verzeichnis und nicht nur aus der Datenbank, k&ouml;nnen User, die direkt auf dieses Bild von einem anderen Teil dieser Seite verlinken, Ihren Inhalt verlieren;<br>andererseits ben&ouml;tigen Sie m&ouml;glicherweise sehr viel Platz auf dem Server.<br>Konfigurieren Sie diese Funktion mit Bedacht f&uuml;r Ihre Bed&uuml;rfnisse."
 );
 
 define('_MI_YOGURT_MYVIDEOS', 'Meine Videos');

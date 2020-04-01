@@ -20,34 +20,34 @@
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_tribe.tpl';
-require __DIR__.'/header.php';
+require __DIR__ . '/header.php';
 
-$controler = new Yogurt\ControlerTribes($xoopsDB, $xoopsUser);
+$controller = new Yogurt\ControllerTribes($xoopsDB, $xoopsUser);
 
 /**
- * Fecthing numbers of tribes friends videos pictures etc...
+ * Fetching numbers of tribes friends videos pictures etc...
  */
-$nbSections = $controler->getNumbersSections();
+$nbSections = $controller->getNumbersSections();
 
-$tribe_id = (int) $_GET['tribe_id'];
+$tribe_id = \Xmf\Request::getInt('tribe_id', 0, 'GET');
 $criteria = new \Criteria('tribe_id', $tribe_id);
-$tribes   = $controler->tribesFactory->getObjects($criteria);
+$tribes   = $controller->tribesFactory->getObjects($criteria);
 $tribe    = $tribes[0];
 
 /**
  * Render a form with the info of the user
  */
-$tribe_members = $controler->reltribeusersFactory->getUsersFromTribe($tribe_id, 0, 50);
+$tribe_members = $controller->reltribeusersFactory->getUsersFromTribe($tribe_id, 0, 50);
 foreach ($tribe_members as $tribe_member) {
-	$uids[] = (int)$tribe_member['uid'];
+    $uids[] = (int)$tribe_member['uid'];
 }
 
 $uid = (int)$xoopsUser->getVar('uid');
 if ($xoopsUser) {
-	if (in_array($uid, $uids)) {
-		$xoopsTpl->assign('memberOfTribe', 1);
-	}
-	$xoopsTpl->assign('useruid', $uid);
+    if (in_array($uid, $uids)) {
+        $xoopsTpl->assign('memberOfTribe', 1);
+    }
+    $xoopsTpl->assign('useruid', $uid);
 }
 $xoopsTpl->assign('tribe_members', $tribe_members);
 $maxfilebytes = $xoopsModuleConfig['maxfilesize'];
@@ -63,36 +63,36 @@ $xoopsTpl->assign('lang_membersoftribe', _MD_YOGURT_MEMBERSDOFTRIBE);
 $xoopsTpl->assign('lang_edittribe', _MD_YOGURT_EDIT_TRIBE);
 $xoopsTpl->assign('lang_tribeimage', _MD_YOGURT_TRIBE_IMAGE);
 $xoopsTpl->assign('lang_keepimage', _MD_YOGURT_MAINTAINOLDIMAGE);
-$xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxfilebytes/1024));
+$xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxfilebytes / 1024));
 $xoopsTpl->assign('lang_titletribe', _MD_YOGURT_TRIBE_TITLE);
 $xoopsTpl->assign('lang_desctribe', _MD_YOGURT_TRIBE_DESC);
 
 //permissions
-$xoopsTpl->assign('allow_Notes', $controler->checkPrivilegeBySection('Notes'));
-$xoopsTpl->assign('allow_friends', $controler->checkPrivilegeBySection('friends'));
-$xoopsTpl->assign('allow_tribes', $controler->checkPrivilegeBySection('tribes'));
-$xoopsTpl->assign('allow_pictures', $controler->checkPrivilegeBySection('pictures'));
-$xoopsTpl->assign('allow_videos', $controler->checkPrivilegeBySection('videos'));
-$xoopsTpl->assign('allow_audios', $controler->checkPrivilegeBySection('audio'));
+$xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('notes'));
+$xoopsTpl->assign('allow_friends', $controller->checkPrivilegeBySection('friends'));
+$xoopsTpl->assign('allow_tribes', $controller->checkPrivilegeBySection('tribes'));
+$xoopsTpl->assign('allow_pictures', $controller->checkPrivilegeBySection('pictures'));
+$xoopsTpl->assign('allow_videos', $controller->checkPrivilegeBySection('videos'));
+$xoopsTpl->assign('allow_audios', $controller->checkPrivilegeBySection('audio'));
 
 //Owner data
-$xoopsTpl->assign('uid_owner', $controler->uidOwner);
-$xoopsTpl->assign('owner_uname', $controler->nameOwner);
-$xoopsTpl->assign('isOwner', $controler->isOwner);
-$xoopsTpl->assign('isanonym', $controler->isAnonym);
+$xoopsTpl->assign('uid_owner', $controller->uidOwner);
+$xoopsTpl->assign('owner_uname', $controller->nameOwner);
+$xoopsTpl->assign('isOwner', $controller->isOwner);
+$xoopsTpl->assign('isanonym', $controller->isAnonym);
 
 //numbers
 $xoopsTpl->assign('nb_tribes', $nbSections['nbTribes']);
 $xoopsTpl->assign('nb_photos', $nbSections['nbPhotos']);
 $xoopsTpl->assign('nb_videos', $nbSections['nbVideos']);
-$xoopsTpl->assign('nb_Notes', $nbSections['nbNotes']);
+$xoopsTpl->assign('nb_notes', $nbSections['nbNotes']);
 $xoopsTpl->assign('nb_friends', $nbSections['nbFriends']);
 $xoopsTpl->assign('nb_audio', $nbSections['nbAudio']);
 
 //navbar
 $xoopsTpl->assign('module_name', $xoopsModule->getVar('name'));
-$xoopsTpl->assign('lang_mysection', _MD_YOGURT_TRIBES.' :: '.$tribe->getVar('tribe_title'));
-$xoopsTpl->assign('section_name', _MD_YOGURT_TRIBES.' > '.$tribe->getVar('tribe_title'));
+$xoopsTpl->assign('lang_mysection', _MD_YOGURT_TRIBES . ' :: ' . $tribe->getVar('tribe_title'));
+$xoopsTpl->assign('section_name', _MD_YOGURT_TRIBES . '> ' . $tribe->getVar('tribe_title'));
 $xoopsTpl->assign('lang_home', _MD_YOGURT_HOME);
 $xoopsTpl->assign('lang_photos', _MD_YOGURT_PHOTOS);
 $xoopsTpl->assign('lang_friends', _MD_YOGURT_FRIENDS);
@@ -107,7 +107,7 @@ $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
 //page atributes
-$xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controler->nameOwner));
+$xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner));
 
 //$xoopsTpl->assign('path_yogurt_uploads',$xoopsModuleConfig['link_path_upload']);
 $xoopsTpl->assign('lang_owner', _MD_YOGURT_TRIBEOWNER);
@@ -115,21 +115,21 @@ $xoopsTpl->assign('lang_owner', _MD_YOGURT_TRIBEOWNER);
 /**
  * Adding to the module js and css of the lightbox and new ones
  */
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/yogurt.css');
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs.css');
+$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/yogurt.css');
+$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
-if (preg_match('/msie/', strtolower($_SERVER['HTTP_USER_AGENT']))) {
-	$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
+if (false !== strpos(mb_strtolower($_SERVER['HTTP_USER_AGENT']), 'msie')) {
+    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css');
 }
 //$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/css/lightbox.css');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/prototype.js');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/scriptaculous.js?load=effects');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/lightbox.js');
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/jquery.lightbox-0.3.css');
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/jquery.js');
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/jquery.lightbox-0.3.js');
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/yogurt.js');
+$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.lightbox-0.3.css');
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.js');
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js');
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
 
-include_once XOOPS_ROOT_PATH . '/include/comment_view.php';
+require_once XOOPS_ROOT_PATH . '/include/comment_view.php';
 
-include __DIR__ . '/../../footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

@@ -19,12 +19,12 @@
 
 use XoopsModules\Yogurt;
 
-require __DIR__.'/header.php';
+require __DIR__ . '/header.php';
 
-//include_once __DIR__ . '/class/Image.php';
+//require_once __DIR__ . '/class/Image.php';
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-	redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
 $cod_img = $_POST['cod_img'];
@@ -33,24 +33,24 @@ $cod_img = $_POST['cod_img'];
  * Creating the factory  loading the picture changing its caption
  */
 $pictureFactory = new Yogurt\ImageHandler($xoopsDB);
-$picture = $pictureFactory->create(false);
+$picture        = $pictureFactory->create(false);
 $picture->load($cod_img);
-$picture->setVar('private', (int) $_POST['private']);
+$picture->setVar('private', \Xmf\Request::getInt('private', 0, 'POST'));
 
 /**
  * Verifying who's the owner to allow changes
  */
-$uid = (int) $xoopsUser->getVar('uid');
+$uid = (int)$xoopsUser->getVar('uid');
 if ($uid == $picture->getVar('uid_owner')) {
-	if ($pictureFactory->insert($picture)) {
-		if (1 == $_POST['private']) {
-			redirect_header('album.php', 2, _MD_YOGURT_PRIVATIZED);
-		} else {
-			redirect_header('album.php', 2, _MD_YOGURT_UNPRIVATIZED);
-		}
-	} else {
-		redirect_header('album.php', 2, _MD_YOGURT_NOCACHACA);
-	}
+    if ($pictureFactory->insert($picture)) {
+        if (1 == $_POST['private']) {
+            redirect_header('album.php', 2, _MD_YOGURT_PRIVATIZED);
+        } else {
+            redirect_header('album.php', 2, _MD_YOGURT_UNPRIVATIZED);
+        }
+    } else {
+        redirect_header('album.php', 2, _MD_YOGURT_NOCACHACA);
+    }
 }
 
-include __DIR__.'/../../footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

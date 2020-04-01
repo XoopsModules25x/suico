@@ -16,18 +16,14 @@
  * @since
  * @author       XOOPS Development Team
  */
+include dirname(__DIR__) . '/preloads/autoloader.php';
 
-use XoopsModules\Yogurt;
-
-include dirname(__DIR__).'/preloads/autoloader.php';
-
-require  dirname(dirname(dirname(__DIR__))).'/include/cp_header.php';
+require dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 //require $GLOBALS['xoops']->path('www/class/xoopsformloader.php');
-require  dirname(__DIR__).'/include/common.php';
+require dirname(__DIR__) . '/include/common.php';
 
 $moduleDirName = basename(dirname(__DIR__));
 
-/** @var \XoopsModules\Yogurt\Helper $helper */
 $helper = \XoopsModules\Yogurt\Helper::getInstance();
 
 /** @var \Xmf\Module\Admin $adminObject */
@@ -38,12 +34,11 @@ $helper->loadLanguage('admin');
 $helper->loadLanguage('modinfo');
 $helper->loadLanguage('common');
 
-
 $myts = MyTextSanitizer::getInstance();
 
 if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
-	require_once $GLOBALS['xoops']->path('class/template.php');
-	$xoopsTpl = new \XoopsTpl();
+    require_once $GLOBALS['xoops']->path('class/template.php');
+    $xoopsTpl = new \XoopsTpl();
 }
 
 $pathIcon16    = Xmf\Module\Admin::iconUrl('', 16);
@@ -53,4 +48,3 @@ $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 // Local icons path
 $xoopsTpl->assign('pathModIcon16', $pathIcon16);
 $xoopsTpl->assign('pathModIcon32', $pathIcon32);
-

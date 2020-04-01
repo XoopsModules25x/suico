@@ -14,15 +14,14 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
-
-require_once __DIR__.'/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 // Display Admin header
 xoops_cp_header();
 $adminObject = \Xmf\Module\Admin::getInstance();
 
-//$configurator = include __DIR__ . '/../include/config.php';
+//$configurator = require  dirname(__DIR__) . '/include/config.php';
 //foreach (array_keys($configurator->uploadFolders) as $i) {
 //    $utility::createFolder($configurator->uploadFolders[$i]);
 //    $adminObject->addConfigBoxLine($configurator->uploadFolders[$i], 'folder');
@@ -47,28 +46,28 @@ $adminObject->addInfoBoxLine(sprintf(_AM_LEXIKON_TOTALREQ2, '<span class="red">'
 
 
 $adminObject->addInfoBox(_AM_SOAPBOX_MODCONTENT);
-if ($totcol > 0) {
+if ($totcol> 0) {
     $adminObject->addInfoBoxLine(sprintf('<infolabel>' . '<a href="main.php">' . _AM_SOAPBOX_TOTCOL . '</a>' . '</infolabel>', '<span class="green">' . $totcol . '</span>'), '', 'green');
 } else {
     $adminObject->addInfoBoxLine(sprintf('<infolabel>' . _AM_SOAPBOX_TOTCOL . '</infolabel>', '<span class="green">' . $totcol . '</span>'), '', 'Green');
 }
-if ($totpub > 0) {
+if ($totpub> 0) {
     $adminObject->addInfoBoxLine(sprintf('<infolabel>' . '<a href="main.php">' . _AM_SOAPBOX_TOTART . '</a>' . '</infolabel>', '<span class="green">' . $totpub . '</span>'), '', 'green');
 } else {
     $adminObject->addInfoBoxLine(sprintf('<infolabel>' . _AM_SOAPBOX_TOTART . '</infolabel>', '<span class="green">' . $totpub . '</span>'), '', 'green');
 }
-if ($totoff > 0) {
+if ($totoff> 0) {
     $adminObject->addInfoBoxLine(sprintf('<infolabel>' . '<a href="main.php">' . _AM_SOAPBOX_TOTOFF . '</a>' . '</infolabel>', '<span class="red">' . $totoff . '</span>'), '', 'red');
 } else {
     $adminObject->addInfoBoxLine(sprintf('<infolabel>' . _AM_SOAPBOX_TOTOFF . '</infolabel>', '<span class="green">' . $totoff . '</span>'), '', 'green');
 }
-if ($totall > 0) {
+if ($totall> 0) {
     $adminObject->addInfoBoxLine(sprintf('<infolabel>' . '<a href="main.php">' . _AM_SOAPBOX_TOTSUB . '</a>' . '</infolabel>', '<span class="green">' . $totall . '</span>'), '', 'green');
 } else {
     $adminObject->addInfoBoxLine(sprintf('<infolabel>' . _AM_SOAPBOX_TOTSUB . '</infolabel>', '<span class="green">' . $totall . '</span>'), '', 'green');
 }
 
-if ($totsub > 0) {
+if ($totsub> 0) {
     $adminObject->addInfoBoxLine(sprintf('<infolabel>' . '<a href="submissions.php">' . _AM_SOAPBOX_NEED_APPROVAL . '</a>' . '</infolabel>', '<span class="green">' . $totsub . '</span>'), '', 'red');
 } else {
     $adminObject->addInfoBoxLine(sprintf('<infolabel>' . _AM_SOAPBOX_NEED_APPROVAL . '</infolabel>', '<span class="green">' . $totsub . '</span>'), '', 'green');
@@ -79,7 +78,7 @@ $adminObject->displayNavigation(basename(__FILE__));
 //------------- Test Data ----------------------------
 //if ($publisher->getConfig('displaySampleButton')) {
 //    xoops_loadLanguage('admin/modulesadmin', 'system');
-//    require_once __DIR__ . '/../testdata/index.php';
+//    require_once  dirname(__DIR__) . '/testdata/index.php';
 //    $adminObject->addItemButton(_AM_SYSTEM_MODULES_INSTALL_TESTDATA, '__DIR__ . /../../testdata/index.php?op=load', 'add');
 //    $adminObject->displayButton('left', '');
 //}
@@ -87,8 +86,6 @@ $adminObject->displayNavigation(basename(__FILE__));
 
 $adminObject->displayIndex();
 
-
 //echo $utility::getServerStats();
 
-require_once __DIR__.'/admin_footer.php';
-
+require_once __DIR__ . '/admin_footer.php';

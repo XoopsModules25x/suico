@@ -34,14 +34,14 @@
 //Present in many files (videos pictures etc...)
 define('_MD_YOGURT_DELETE', 'Apagar');
 define('_MD_YOGURT_EDITDESC', 'Alterar descrição');
-define('_MD_YOGURT_TOKENEXPIRED', 'Sua senha expirou<br /> Tente novamente');
+define('_MD_YOGURT_TOKENEXPIRED', 'Sua senha expirou<br> Tente novamente');
 define('_MD_YOGURT_DESC_EDITED', 'A descrição da foto foi alterada com sucesso');
 define('_MD_YOGURT_CAPTION', 'Subtítulo');
 define('_MD_YOGURT_YOUCANUPLOAD', 'Você pode submeter apenas arquivos jpg com até %s KBytes');
 define('_MD_YOGURT_UPLOADPICTURE', 'Upload Foto');
 define(
-	'_MD_YOGURT_NOCACHACA',
-	'Desculpe sem cachaça para você<br />
+    '_MD_YOGURT_NOCACHACA',
+    'Desculpe sem cachaça para você<br>
 Infelizmente, este módulo agiu de forma inesperada. Esperemos que ele volte ao seu estado normal quando você tentar novamente. '
 ); // Funny geral mensagem de erro
 define('_MD_YOGURT_PAGETITLE', '%s - Álbum do %s');
@@ -121,7 +121,7 @@ define('_MD_YOGURT_FRIENDSHIPUPDATED', 'Atualizou Amizade(s)'); //GibaPhp
 
 //submitfriendpetition.php
 define('_MD_YOGURT_PETITIONED', 'Um pedido de amizade foi enviado para este usuário. Espere até que ele aceite para aparecer em sua lista de amigos.'); //GibaPhp
-define('_MD_YOGURT_ALREADY_PETITIONED', 'Você já enviou um pedido de amizade para este usuário ou vice-versa. <br /> Espere até que ele aceite ou rejeite, ou consultando a página de perfil de amigos deste usuário em questão como um visitante.'); //GibaPhp
+define('_MD_YOGURT_ALREADY_PETITIONED', 'Você já enviou um pedido de amizade para este usuário ou vice-versa. <br> Espere até que ele aceite ou rejeite, ou consultando a página de perfil de amigos deste usuário em questão como um visitante.'); //GibaPhp
 
 //makefriends.php
 define('_MD_YOGURT_FRIENDMADE', 'Adicionado como amigo!'); //GibaPhp
@@ -133,13 +133,13 @@ define('_MD_YOGURT_FRIENDSHIPTERMINATED', 'Você terminou a sua amizade com este
 //mainvideo.php
 define('_MD_YOGURT_SETMAINVIDEO', 'This video is selected on your front page from now on'); //GibaPhp
 
-//seutubo.php
+//video.php
 define('_MD_YOGURT_YOUTUBECODE', 'Código do YouTube ou URL'); //GibaPhp
 define('_MD_YOGURT_ADDVIDEO', 'Incluir video'); //GibaPhp
 define('_MD_YOGURT_ADDFAVORITEVIDEOS', 'Adicione seus vídeos favoritos'); //GibaPhp
 define(
-	'_MD_YOGURT_ADDVIDEOSHELP',
-	'Se você quizer fazer upload do seu vídeo para compartilhar, poderá enviar os seus vídeos para 
+    '_MD_YOGURT_ADDVIDEOSHELP',
+    'Se você quizer fazer upload do seu vídeo para compartilhar, poderá enviar os seus vídeos para
 <a href=http://www.youtube.com>YouTube</a> e, em seguida, adicione a URL aqui '
 ); //The name of the site will show after this - GibaPhp
 define('_MD_YOGURT_MYVIDEOS', 'Meus Videos'); //GibaPhp
@@ -211,7 +211,7 @@ define('_MD_YOGURT_ITALIC', 'itálico'); //GibaPhp
 define('_MD_YOGURT_UNDERLINE', 'Sublinhar'); //GibaPhp
 define('_MD_YOGURT_NONOTESYET', 'Nenhum Recado foi criado ainda neste Note'); //GibaPhp
 
-//submit_Note.php
+//submitNote.php
 define('_MD_YOGURT_NOTE_SENT', 'Obrigado pela sua participação, Note enviado'); //GibaPhp
 
 //delete_Note.php
@@ -239,10 +239,10 @@ define('_MD_YOGURT_WHOCAN', 'Quem pode:'); //GibaPhp
 //submit_configs.php
 define('_MD_YOGURT_CONFIGSSAVE', 'Configuração Salva!'); //GibaPhp
 
-//class/yogurt_controler.php
+//class/yogurt_controller.php
 define(
-	'_MD_YOGURT_NOPRIVILEGE',
-	'O proprietário deste perfil alterou os privilégios para vê-lo, <br /> e ficou superior em relação ao que você tem agora. <br />Faça o Login para tornar-se seu amigo. <br />Se eles não confirmaram ainda as permissões, talvez seja este o motivo que só eles possam ver. <br />Após ajustado isto, você será capaz de vê-lo.'
+    '_MD_YOGURT_NOPRIVILEGE',
+    'O proprietário deste perfil alterou os privilégios para vê-lo, <br> e ficou superior em relação ao que você tem agora. <br>Faça o Login para tornar-se seu amigo. <br>Se eles não confirmaram ainda as permissões, talvez seja este o motivo que só eles possam ver. <br>Após ajustado isto, você será capaz de vê-lo.'
 ); //GibaPhp - Tenho grande dúvida aqui.
 
 ###################################### OTHERS ##############################
@@ -345,7 +345,7 @@ define('_MD_YOGURT_AUTHORAUDIO', 'Autor/Cantor');
 define('_MD_YOGURT_TITLEAUDIO', 'Título do arquivo ou canção');
 define('_MD_YOGURT_ADDAUDIO', 'Adicionar um arquivo MP3');
 define('_MD_YOGURT_SUBMITAUDIO', 'Carregar arquivo');
-define('_MD_YOGURT_ADDAUDIOHELP', 'Escolha um arquivo mp3 no seu computador, tamanho máximo %s ,<br /> Deixe os campos de título e autor em branco se o seu arquivo já tem metainfo');
+define('_MD_YOGURT_ADDAUDIOHELP', 'Escolha um arquivo mp3 no seu computador, tamanho máximo %s ,<br> Deixe os campos de título e autor em branco se o seu arquivo já tem metainfo');
 
 //19/04/2008 - 3.3
 define('_MD_YOGURT_AUDIODELETED', 'Seu arquivo MP3 foi excluído!');

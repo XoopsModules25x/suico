@@ -11,7 +11,7 @@ Install:
 compability important note
 ---------------------------
 xoops and jquery have a javascript function with the same name.
-I have changed the calls using $ instead of jquery to jquery in my yogurt.js file , 
+I have changed the calls using $ instead of jquery to jquery in my yogurt.js file ,
 I am not sure that the compability problem is over with this but maybe it is.
 Anyone please do report or help me on this.
 
@@ -19,7 +19,7 @@ optional procedure
 -------------------
 Hack to make the yogurt userpage as the main userpage of your site:
 
-Open userinfo.php in the root of your site, search at the very beggining of the file  for 
+Open userinfo.php in the root of your site, search at the very beggining of the file  for
 
 $uid = intval($_GET['uid']);
 if ($uid <= 0) {

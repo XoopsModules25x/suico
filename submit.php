@@ -22,14 +22,14 @@ use XoopsModules\Yogurt;
 /**
  * Xoops header ...
  */
-include_once '../../mainfile.php';
+require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
-include_once '../../header.php';
+require_once dirname(dirname(__DIR__)) . '/header.php';
 
 /**
  * Modules class includes
  */
-//include_once 'class/Image.php';
+//require_once __DIR__ . '/class/Image.php';
 
 /**
  * Factory of pictures created
@@ -44,7 +44,7 @@ $title = $_POST['caption'];
 /**
  * Getting parameters defined in admin side
  */
-$path_upload   = XOOPS_ROOT_PATH.'/uploads';
+$path_upload   = XOOPS_ROOT_PATH . '/uploads';
 $pictwidth     = $xoopsModuleConfig['resized_width'];
 $pictheight    = $xoopsModuleConfig['resized_height'];
 $thumbwidth    = $xoopsModuleConfig['thumb_width'];
@@ -73,13 +73,13 @@ if ('sel_photo' == $_POST['xoops_upload_file'][0]) {
         $notificationHandler        = xoops_getHandler('notification');
         $notificationHandler->triggerEvent('picture', $xoopsUser->getVar('uid'), 'new_picture', $extra_tags);
         //header("Location: ".XOOPS_URL."/modules/yogurt/index.php?uid=".$xoopsUser->getVar('uid'));
-        redirect_header(XOOPS_URL.'/modules/yogurt/album.php?uid='.$xoopsUser->getVar('uid'), 3, _MD_YOGURT_UPLOADED);
+        redirect_header(XOOPS_URL . '/modules/yogurt/album.php?uid=' . $xoopsUser->getVar('uid'), 3, _MD_YOGURT_UPLOADED);
     } else {
-        redirect_header(XOOPS_URL.'/modules/yogurt/album.php?uid='.$xoopsUser->getVar('uid'), 3, _MD_YOGURT_NOCACHACA);
+        redirect_header(XOOPS_URL . '/modules/yogurt/album.php?uid=' . $xoopsUser->getVar('uid'), 3, _MD_YOGURT_NOCACHACA);
     }
 }
 
 /**
  * Close page
  */
-include '../../footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

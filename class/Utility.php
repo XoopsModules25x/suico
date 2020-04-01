@@ -16,38 +16,31 @@ namespace XoopsModules\Yogurt;
  */
 
 /**
- *
  * @package      \module\xsitemap\class
  * @license      https://www.fsf.org/copyleft/gpl.html GNU public license
  * @copyright    https://xoops.org 2000-2020 &copy; XOOPS Project
  * @author       Mamba <mambax7@gmail.com>
  */
 
-use XoopsModules\Yogurt;
-use XoopsModules\Yogurt\Common;
-use XoopsModules\Yogurt\Constants;
-
 /**
  * Class Utility
  */
 class Utility extends Common\SysUtility
 {
-	//--------------- Custom module methods -----------------------------
+    //--------------- Custom module methods -----------------------------
 
-	/**
-	 * Access the only instance of this class
-	 *
-	 * @return object
-	 *
-	 */
-	public static function getInstance()
-	{
-		static $instance;
-		if (null === $instance) {
-			$instance = new static();
-		}
+    /**
+     * Access the only instance of this class
+     *
+     * @return object
+     */
+    public static function getInstance()
+    {
+        static $instance;
+        if (null === $instance) {
+            $instance = new static();
+        }
 
-		return $instance;
-	}
-
+        return $instance;
+    }
 }

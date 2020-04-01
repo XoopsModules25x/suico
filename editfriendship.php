@@ -17,40 +17,42 @@
  * @since
  */
 
+use XoopsModules\Yogurt;
+
 require __DIR__ . '/header.php';
 
 if (!$xoopsUser) {
-	redirect_header('index.php');
+    redirect_header('index.php');
 }
 
 $friendshipFactory = new Yogurt\FriendshipHandler($xoopsDB);
-$friend2_uid        = (int)$_POST['friend_uid'];
-$marker             = (!empty($_POST['marker'])) ? (int)$_POST['marker'] : 0;
+$friend2_uid       = \Xmf\Request::getInt('friend_uid', 0, 'POST');
+$marker            = \Xmf\Request::getInt('marker', 0, 'POST');
 
 $friend = new \XoopsUser($friend2_uid);
 
 if (1 == $marker) {
-	$level         = $_POST['level'];
-	$cool          = $_POST['cool'];
-	$sexy          = $_POST['hot'];
-	$trusty        = $_POST['trust'];
-	$fan           = $_POST['fan'];
-	$friendship_id = (int)$_POST['friendship_id'];
+    $level         = $_POST['level'];
+    $cool          = $_POST['cool'];
+    $sexy          = $_POST['hot'];
+    $trusty        = $_POST['trust'];
+    $fan           = $_POST['fan'];
+    $friendship_id = \Xmf\Request::getInt('friendship_id', 0, 'POST');
 
-	$criteria    = new \Criteria('friendship_id', $friendship_id);
-	$friendships = $friendshipFactory->getObjects($criteria);
-	$friendship  = $friendships[0];
-	$friendship->setVar('level', $level);
-	$friendship->setVar('cool', $cool);
-	$friendship->setVar('hot', $sexy);
-	$friendship->setVar('trust', $trusty);
-	$friendship->setVar('fan', $fan);
-	$friend2_uid = (int)$friendship->getVar('friend2_uid');
-	$friendship->unsetNew();
-	$friendshipFactory->insert($friendship);
-	redirect_header('friends.php', 2, _MD_YOGURT_FRIENDSHIPUPDATED);
+    $criteria    = new \Criteria('friendship_id', $friendship_id);
+    $friendships = $friendshipFactory->getObjects($criteria);
+    $friendship  = $friendships[0];
+    $friendship->setVar('level', $level);
+    $friendship->setVar('cool', $cool);
+    $friendship->setVar('hot', $sexy);
+    $friendship->setVar('trust', $trusty);
+    $friendship->setVar('fan', $fan);
+    $friend2_uid = (int)$friendship->getVar('friend2_uid');
+    $friendship->unsetNew();
+    $friendshipFactory->insert($friendship);
+    redirect_header('friends.php', 2, _MD_YOGURT_FRIENDSHIPUPDATED);
 } else {
-	$friendshipFactory->renderFormSubmit($friend);
+    $friendshipFactory->renderFormSubmit($friend);
 }
 
-include __DIR__.'/../../footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

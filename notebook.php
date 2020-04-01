@@ -20,44 +20,44 @@
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_notebook.tpl';
-require __DIR__.'/header.php';
+require __DIR__ . '/header.php';
 
-$controler  = new Yogurt\ControlerNotes($xoopsDB, $xoopsUser);
-$nbSections = $controler->getNumbersSections();
+$controller = new Yogurt\ControllerNotes($xoopsDB, $xoopsUser);
+$nbSections = $controller->getNumbersSections();
 
-//$controler->renderFormNewPost($xoopsTpl);
-$criteria_uid = new \Criteria('Note_to', $controler->uidOwner);
+//$controller->renderFormNewPost($xoopsTpl);
+$criteria_uid = new \Criteria('note_to', $controller->uidOwner);
 $criteria_uid->setOrder('DESC');
 $criteria_uid->setSort('date');
 
 /**
  * Adding to the module js and css of the lightbox and new ones
  */
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/yogurt.css');
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs.css');
+$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/yogurt.css');
+$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
-if (preg_match('/msie/', strtolower($_SERVER['HTTP_USER_AGENT']))) {
-	$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/css/jquery.tabs-ie.css');
+if (false !== strpos(mb_strtolower($_SERVER['HTTP_USER_AGENT']), 'msie')) {
+    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css');
 }
 //$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/css/lightbox.css');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/prototype.js');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/scriptaculous.js?load=effects');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/lightbox.js');
 //$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/include/jquery.lightbox-0.3.css');
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/jquery.js');
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/jquery.lightbox-0.3.js');
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/include/yogurt.js');
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.js');
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js');
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
 
 //permissions
-$xoopsTpl->assign('allow_Notes', $controler->checkPrivilegeBySection('Notes'));
-$xoopsTpl->assign('allow_friends', $controler->checkPrivilegeBySection('friends'));
-$xoopsTpl->assign('allow_tribes', $controler->checkPrivilegeBySection('tribes'));
-$xoopsTpl->assign('allow_pictures', $controler->checkPrivilegeBySection('pictures'));
-$xoopsTpl->assign('allow_videos', $controler->checkPrivilegeBySection('videos'));
-$xoopsTpl->assign('allow_audios', $controler->checkPrivilegeBySection('audio'));
+$xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('notes'));
+$xoopsTpl->assign('allow_friends', $controller->checkPrivilegeBySection('friends'));
+$xoopsTpl->assign('allow_tribes', $controller->checkPrivilegeBySection('tribes'));
+$xoopsTpl->assign('allow_pictures', $controller->checkPrivilegeBySection('pictures'));
+$xoopsTpl->assign('allow_videos', $controller->checkPrivilegeBySection('videos'));
+$xoopsTpl->assign('allow_audios', $controller->checkPrivilegeBySection('audio'));
 
-if (!($Notes = $controler->fecthNotes($nbSections['nbNotes'], $criteria_uid))) {
-	$xoopsTpl->assign('lang_noNotesyet', _MD_YOGURT_NONOTESYET);
+if (!($notes = $controller->fetchNotes($nbSections['nbNotes'], $criteria_uid))) {
+    $xoopsTpl->assign('lang_noNotesyet', _MD_YOGURT_NONOTESYET);
 }
 
 //form
@@ -69,7 +69,7 @@ $xoopsTpl->assign('lang_cancel', _MD_YOGURT_CANCEL);
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
 //Notes
-$xoopsTpl->assign('Notes', $Notes);
+$xoopsTpl->assign('notes', $notes);
 $xoopsTpl->assign('lang_answerNote', _MD_YOGURT_ANSWERNOTE);
 $xoopsTpl->assign('lang_tips', _MD_YOGURT_NOTETIPS);
 $xoopsTpl->assign('lang_bold', _MD_YOGURT_BOLD);
@@ -77,15 +77,15 @@ $xoopsTpl->assign('lang_italic', _MD_YOGURT_ITALIC);
 $xoopsTpl->assign('lang_underline', _MD_YOGURT_UNDERLINE);
 
 //Owner data
-$xoopsTpl->assign('uid_owner', $controler->uidOwner);
-$xoopsTpl->assign('owner_uname', $controler->nameOwner);
-$xoopsTpl->assign('isOwner', $controler->isOwner);
-$xoopsTpl->assign('isanonym', $controler->isAnonym);
+$xoopsTpl->assign('uid_owner', $controller->uidOwner);
+$xoopsTpl->assign('owner_uname', $controller->nameOwner);
+$xoopsTpl->assign('isOwner', $controller->isOwner);
+$xoopsTpl->assign('isanonym', $controller->isAnonym);
 //numbers
 $xoopsTpl->assign('nb_tribes', $nbSections['nbTribes']);
 $xoopsTpl->assign('nb_photos', $nbSections['nbPhotos']);
 $xoopsTpl->assign('nb_videos', $nbSections['nbVideos']);
-$xoopsTpl->assign('nb_Notes', $nbSections['nbNotes']);
+$xoopsTpl->assign('nb_notes', $nbSections['nbNotes']);
 $xoopsTpl->assign('nb_friends', $nbSections['nbFriends']);
 $xoopsTpl->assign('nb_audio', $nbSections['nbAudio']);
 
@@ -103,4 +103,4 @@ $xoopsTpl->assign('lang_profile', _MD_YOGURT_PROFILE);
 $xoopsTpl->assign('lang_tribes', _MD_YOGURT_TRIBES);
 $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 
-include __DIR__.'/../../footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

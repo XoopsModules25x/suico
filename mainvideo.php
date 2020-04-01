@@ -22,16 +22,16 @@ use XoopsModules\Yogurt;
 require __DIR__ . '/header.php';
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-	redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
-$cod_img = (int)$_POST['video_id'];
+$cod_img = \Xmf\Request::getInt('video_id', 0, 'POST');
 
 /**
  * Creating the factory  loading the video changing its caption
  */
-$videoFactory = new Yogurt\SeutuboHandler($xoopsDB);
-$video         = $videoFactory->create(false);
+$videoFactory = new Yogurt\VideoHandler($xoopsDB);
+$video        = $videoFactory->create(false);
 $video->load($cod_img);
 $video->setVar('main_video', 1);
 
@@ -40,15 +40,15 @@ $video->setVar('main_video', 1);
  */
 $uid = (int)$xoopsUser->getVar('uid');
 if ($uid == $video->getVar('uid_owner')) {
-	if ($videoFactory->unsetAllMainsbyID($uid)) {
-		if ($videoFactory->insert($video)) {
-			redirect_header('seutubo.php', 2, _MD_YOGURT_SETMAINVIDEO);
-		} else {
-			redirect_header('seutubo.php', 2, _MD_YOGURT_NOCACHACA);
-		}
-	} else {
-		echo 'nao deu certo';
-	}
+    if ($videoFactory->unsetAllMainsbyID($uid)) {
+        if ($videoFactory->insert($video)) {
+            redirect_header('video.php', 2, _MD_YOGURT_SETMAINVIDEO);
+        } else {
+            redirect_header('video.php', 2, _MD_YOGURT_NOCACHACA);
+        }
+    } else {
+        echo 'nao deu certo';
+    }
 }
 
-include __DIR__.'/../../footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';
