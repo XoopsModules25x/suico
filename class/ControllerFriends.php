@@ -38,7 +38,7 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 //require_once __DIR__ . '/Configs.php';
 //require_once __DIR__ . '/Suspensions.php';
 if (str_replace('.', '', PHP_VERSION) > 499) {
-    require_once __DIR__ . '/class.Id3v1.php';
+    require_once __DIR__ . '/Id3v1.php';
 }
 
 /**
