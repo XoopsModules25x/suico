@@ -22,7 +22,7 @@ namespace XoopsModules\Yogurt;
 if (!defined('XOOPS_ROOT_PATH')) {
     exit();
 }
-include_once XOOPS_ROOT_PATH . '/kernel/object.php';
+require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
 /**
  * Ishot class.

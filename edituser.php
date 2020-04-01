@@ -18,14 +18,14 @@
  */
 require __DIR__ . '/header.php';
 
-//include_once __DIR__ . '/../../mainfile.php';
-//if (!@ include_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/user.php') {
-//    include_once XOOPS_ROOT_PATH . '/language/english/user.php';
+//require_once  dirname(dirname(__DIR__)) . '/mainfile.php';
+//if (!@ require_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/user.php') {
+//    require_once XOOPS_ROOT_PATH . '/language/english/user.php';
 //}
 
-include_once __DIR__ . '/../../class/pagenav.php';
+require_once  dirname(dirname(__DIR__)) . '/class/pagenav.php';
 
-include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
 if (!is_object($xoopsUser)) {
     redirect_header('index.php', 3, _US_NOEDITRIGHT);
@@ -98,7 +98,7 @@ if ('saveuser' == $op) {
         }
     }
     if (count($errors) > 0) {
-        include XOOPS_ROOT_PATH . '/header.php';
+        require XOOPS_ROOT_PATH . '/header.php';
         echo '<div>';
         foreach ($errors as $er) {
             echo '<span style="color: #ff0000; font-weight: bold;">' . $er . '</span><br>';
@@ -156,9 +156,9 @@ if ('saveuser' == $op) {
             setcookie($xoopsConfig['usercookie']);
         }
         if (!$memberHandler->insertUser($edituser)) {
-            include XOOPS_ROOT_PATH . '/header.php';
+            require XOOPS_ROOT_PATH . '/header.php';
             echo $edituser->getHtmlErrors();
-            include XOOPS_ROOT_PATH . '/footer.php';
+            require XOOPS_ROOT_PATH . '/footer.php';
         } else {
             redirect_header('index.php?uid=' . $uid, 1, _US_PROFUPDATED);
         }
@@ -167,8 +167,8 @@ if ('saveuser' == $op) {
 }
 
 if ('editprofile' == $op) {
-    include_once XOOPS_ROOT_PATH . '/header.php';
-    include_once XOOPS_ROOT_PATH . '/include/comment_constants.php';
+    require_once XOOPS_ROOT_PATH . '/header.php';
+    require_once XOOPS_ROOT_PATH . '/include/comment_constants.php';
     $uid = (int)$xoopsUser->getVar('uid');
     echo '<a href="index.php?uid=' . $uid . '">' . _US_PROFILE . '</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;' . _US_EDITPROFILE . '<br><br>';
     $form        = new \XoopsThemeForm(_US_EDITPROFILE, 'userinfo', 'edituser.php', 'post', true);
@@ -215,7 +215,7 @@ if ('editprofile' == $op) {
     $occupation_text = new \XoopsFormText(_US_OCCUPATION, 'user_occ', 30, 100, $xoopsUser->getVar('user_occ', 'E'));
     $interest_text   = new \XoopsFormText(_US_INTEREST, 'user_intrest', 30, 150, $xoopsUser->getVar('user_intrest', 'E'));
     $sig_tray        = new \XoopsFormElementTray(_US_SIGNATURE, '<br>');
-    include_once XOOPS_ROOT_PATH . '/include/xoopscodes.php';
+    require_once XOOPS_ROOT_PATH . '/include/xoopscodes.php';
     $sig_tarea = new \XoopsFormDhtmlTextArea('', 'user_sig', $xoopsUser->getVar('user_sig', 'E'));
     $sig_tray->addElement($sig_tarea);
     $sig_cbox_value = $xoopsUser->getVar('attachsig') ? 1 : 0;
@@ -228,8 +228,8 @@ if ('editprofile' == $op) {
     $uorder_select->addOptionArray([XOOPS_COMMENT_OLD1ST => _OLDESTFIRST, XOOPS_COMMENT_NEW1ST => _NEWESTFIRST]);
     // RMV-NOTIFY
     // TODO: add this to admin user-edit functions...
-    include_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/notification.php';
-    include_once XOOPS_ROOT_PATH . '/include/notification_constants.php';
+    require_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/notification.php';
+    require_once XOOPS_ROOT_PATH . '/include/notification_constants.php';
     $notify_method_select = new \XoopsFormSelect(_NOT_NOTIFYMETHOD, 'notify_method', $xoopsUser->getVar('notify_method'));
     $notify_method_select->addOptionArray([XOOPS_NOTIFICATION_METHOD_DISABLE => _NOT_METHOD_DISABLE, XOOPS_NOTIFICATION_METHOD_PM => _NOT_METHOD_PM, XOOPS_NOTIFICATION_METHOD_EMAIL => _NOT_METHOD_EMAIL]);
     $notify_mode_select = new \XoopsFormSelect(_NOT_NOTIFYMODE, 'notify_mode', $xoopsUser->getVar('notify_mode'));
@@ -278,11 +278,11 @@ if ('editprofile' == $op) {
         $form->setRequired($email_text);
     }
     $form->display();
-    include XOOPS_ROOT_PATH . '/footer.php';
+    require XOOPS_ROOT_PATH . '/footer.php';
 }
 
 if ('avatarform' == $op) {
-    include XOOPS_ROOT_PATH . '/header.php';
+    require XOOPS_ROOT_PATH . '/header.php';
     $uid = (int)$xoopsUser->getVar('uid');
     echo '<a href="index.php?uid=' . $uid . '">' . _US_PROFILE . '</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;' . _US_UPLOADMYAVATAR . '<br><br>';
     $oldavatar = $xoopsUser->getVar('user_avatar');
@@ -291,7 +291,7 @@ if ('avatarform' == $op) {
         echo '<img src="' . XOOPS_UPLOAD_URL . '/' . $oldavatar . '" alt=""></div>';
     }
     if (1 == $xoopsConfigUser['avatar_allow_upload'] && $xoopsUser->getVar('posts') >= $xoopsConfigUser['avatar_minposts']) {
-        include_once __DIR__ . '/class/xoopsformloader.php';
+        require_once __DIR__ . '/class/xoopsformloader.php';
         $form = new \XoopsThemeForm(_US_UPLOADMYAVATAR, 'uploadavatar', 'edituser.php', 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
         $form->addElement(new \XoopsFormLabel(_US_MAXPIXEL, $xoopsConfigUser['avatar_width'] . ' x ' . $xoopsConfigUser['avatar_height']));
@@ -319,7 +319,7 @@ if ('avatarform' == $op) {
     $form2->addElement(new \XoopsFormHidden('op', 'avatarchoose'));
     $form2->addElement(new \XoopsFormButton('', 'submit2', _SUBMIT, 'submit'));
     $form2->display();
-    include XOOPS_ROOT_PATH . '/footer.php';
+    require XOOPS_ROOT_PATH . '/footer.php';
 }
 
 if ('avatarupload' == $op) {
@@ -338,7 +338,7 @@ if ('avatarupload' == $op) {
         redirect_header('index.php', 3, _US_NOEDITRIGHT);
     }
     if (1 == $xoopsConfigUser['avatar_allow_upload'] && $xoopsUser->getVar('posts') >= $xoopsConfigUser['avatar_minposts']) {
-        include_once XOOPS_ROOT_PATH . '/class/uploader.php';
+        require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $uploader = new \XoopsMediaUploader(XOOPS_UPLOAD_PATH, ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png'], $xoopsConfigUser['avatar_maxsize'], $xoopsConfigUser['avatar_width'], $xoopsConfigUser['avatar_height']);
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
             $uploader->setPrefix('cavt');
@@ -371,9 +371,9 @@ if ('avatarupload' == $op) {
                 }
             }
         }
-        include XOOPS_ROOT_PATH . '/header.php';
+        require XOOPS_ROOT_PATH . '/header.php';
         echo $uploader->getErrors();
-        include XOOPS_ROOT_PATH . '/footer.php';
+        require XOOPS_ROOT_PATH . '/footer.php';
     }
 }
 
@@ -406,9 +406,9 @@ if ('avatarchoose' == $op) {
         $xoopsUser->setVar('user_avatar', $user_avatar);
         $memberHandler = xoops_getHandler('member');
         if (!$memberHandler->insertUser($xoopsUser)) {
-            include XOOPS_ROOT_PATH . '/header.php';
+            require XOOPS_ROOT_PATH . '/header.php';
             echo $xoopsUser->getHtmlErrors();
-            include XOOPS_ROOT_PATH . '/footer.php';
+            require XOOPS_ROOT_PATH . '/footer.php';
             exit();
         }
         if ($oldavatar && preg_match('/^cavt/', mb_strtolower($oldavatar))) {

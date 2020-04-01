@@ -21,9 +21,9 @@ use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
 
-//include_once __DIR__ . '/class/Friendpetition.php';
-//include_once __DIR__ . '/class/Reltribeuser.php';
-//include_once __DIR__ . '/class/Tribes.php';
+//require_once __DIR__ . '/class/Friendpetition.php';
+//require_once __DIR__ . '/class/Reltribeuser.php';
+//require_once __DIR__ . '/class/Tribes.php';
 
 /**
  * Factories of tribes... testing for zend editor
@@ -51,4 +51,4 @@ if ($reltribeuserFactory->getCount($criteria) < 1) {
     redirect_header('tribes.php', 1, _MD_YOGURT_YOUAREMEMBERALREADY);
 }
 
-include __DIR__ . '/../../footer.php';
+require  dirname(dirname(__DIR__)) . '/footer.php';

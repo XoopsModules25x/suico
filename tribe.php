@@ -130,6 +130,6 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js');
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
 
-include_once XOOPS_ROOT_PATH . '/include/comment_view.php';
+require_once XOOPS_ROOT_PATH . '/include/comment_view.php';
 
-include __DIR__ . '/../../footer.php';
+require  dirname(dirname(__DIR__)) . '/footer.php';

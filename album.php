@@ -185,6 +185,6 @@ $xoopsTpl->assign('avatar_url', $avatar);
 $xoopsTpl->assign('lang_setprivate', _MD_YOGURT_PRIVATIZE);
 $xoopsTpl->assign('lang_unsetprivate', _MD_YOGURT_UNPRIVATIZE);
 
-include XOOPS_ROOT_PATH . '/include/comment_view.php';
+require XOOPS_ROOT_PATH . '/include/comment_view.php';
 
-include __DIR__ . '/../../footer.php';
+require  dirname(dirname(__DIR__)) . '/footer.php';

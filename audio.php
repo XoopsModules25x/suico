@@ -147,4 +147,4 @@ $xoopsTpl->assign('max_youcanupload', $xoopsModuleConfig['maxfilesize']);
 //Videos NAvBAr
 $xoopsTpl->assign('pageNav', $pageNav);
 
-include __DIR__ . '/../../footer.php';
+require  dirname(dirname(__DIR__)) . '/footer.php';

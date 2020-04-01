@@ -19,26 +19,26 @@ namespace XoopsModules\Yogurt;
  * @author       XOOPS Development Team
  * @since
  */
-include_once XOOPS_ROOT_PATH . '/kernel/object.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include_once XOOPS_ROOT_PATH . '/class/criteria.php';
-include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+require_once XOOPS_ROOT_PATH . '/kernel/object.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+require_once XOOPS_ROOT_PATH . '/class/criteria.php';
+require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 /**
  * Module classes
  */
-//include_once 'class/Image.php';
-//include_once 'class/yogurt_visitors.php';
-//include_once 'class/Video.php';
-//include_once 'class/yogurt_audio.php';
-//include_once 'class/Friendpetition.php';
-//include_once 'class/Friendship.php';
-//include_once 'class/Reltribeuser.php';
-//include_once 'class/Tribes.php';
-//include_once 'class/Notes.php';
-//include_once 'class/Configs.php';
-//include_once 'class/Suspensions.php';
+//require_once __DIR__ . '/Image.php';
+//require_once __DIR__ . '/yogurt_visitors.php';
+//require_once __DIR__ . '/Video.php';
+//require_once __DIR__ . '/yogurt_audio.php';
+//require_once __DIR__ . '/Friendpetition.php';
+//require_once __DIR__ . '/Friendship.php';
+//require_once __DIR__ . '/Reltribeuser.php';
+//require_once __DIR__ . '/Tribes.php';
+//require_once __DIR__ . '/Notes.php';
+//require_once __DIR__ . '/Configs.php';
+//require_once __DIR__ . '/Suspensions.php';
 if (str_replace('.', '', PHP_VERSION) > 499) {
-    include_once __DIR__ . '/class.Id3v1.php';
+    require_once __DIR__ . '/class.Id3v1.php';
 }
 
 /**
@@ -73,10 +73,10 @@ class YogurtController extends \XoopsObject
     /**
      * Constructor
      *
-     * @param $db
+     * @param \XoopsDatabase $db
      * @param $user
      */
-    public function __construct($db, $user)
+    public function __construct(\XoopsDatabase $db, $user)
     {
         $this->db       = $db;
         $this->user     = $user;

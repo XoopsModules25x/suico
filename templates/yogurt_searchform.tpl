@@ -8,7 +8,7 @@
   <div>
     <!-- start of form elements loop -->
     <{foreach item=element from=$searchform.elements}>
-      <{if $element.hidden != true}>
+      <{if $element.hidden !== true}>
       <div class="search-element">
         <div class="search-element-label"><label><{$element.caption}></label></div>
         <div class="search-element-body"><{$element.body}></div>

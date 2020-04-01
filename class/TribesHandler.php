@@ -303,7 +303,7 @@ class TribesHandler extends \XoopsObjectHandler
 
         $field_oldpicture = new \XoopsFormLabel(_MD_YOGURT_TRIBE_IMAGE, '<img src="' . XOOPS_UPLOAD_URL . '/' . $tribe->getVar('tribe_img') . '">');
 
-        $field_maintainimage = new \XoopsFormLabel(_MD_YOGURT_MAINTAINOLDIMAGE, "<input type='checkbox' value='1' id='flag_oldimg' name='flag_oldimg' onclick=\"tribeImgSwitch(img)\"  checked/>");
+        $field_maintainimage = new \XoopsFormLabel(_MD_YOGURT_MAINTAINOLDIMAGE, "<input type='checkbox' value='1' id='flag_oldimg' name='flag_oldimg' onclick=\"tribeImgSwitch(img)\"  checked>");
 
         $form->addElement($field_oldpicture);
         $form->addElement($field_maintainimage);

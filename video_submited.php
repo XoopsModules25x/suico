@@ -22,7 +22,7 @@ use XoopsModules\Yogurt;
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
 require __DIR__ . '/header.php';
 
-//include_once __DIR__ . '/class/Video.php';
+//require_once __DIR__ . '/class/Video.php';
 
 /**
  * Factory of pictures created
@@ -60,4 +60,4 @@ if ($albumFactory->insert($newvideo)) {
     redirect_header(XOOPS_URL . '/modules/yogurt/video.php?uid=' . (int)$xoopsUser->getVar('uid'), 2, _MD_YOGURT_NOCACHACA);
 }
 
-include __DIR__ . '/../../footer.php';
+require  dirname(dirname(__DIR__)) . '/footer.php';

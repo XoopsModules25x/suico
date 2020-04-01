@@ -7,7 +7,7 @@ namespace XoopsModules\Yogurt;
 // Author: Bruno Barthez                                               //
 // ----------------------------------------------------------------- //
 
-include_once XOOPS_ROOT_PATH . '/kernel/object.php';
+require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
 /**
  * Reltribeuser class.

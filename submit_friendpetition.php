@@ -25,7 +25,7 @@ require __DIR__ . '/header.php';
 /**
  * Modules class includes
  */
-//include_once 'class/Friendpetition.php';
+//require_once __DIR__ . '/class/Friendpetition.php';
 
 /**
  * Factory of petitions created
@@ -77,4 +77,4 @@ if ($friendpetitionFactory->insert($newpetition)) {
 /**
  * Close page
  */
-include '../../footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

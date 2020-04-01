@@ -2,7 +2,7 @@
 
 use XoopsModules\Yogurt;
 
-include __DIR__ . '/preloads/autoloader.php';
+require __DIR__ . '/preloads/autoloader.php';
 
 require dirname(dirname(__DIR__)) . '/mainfile.php';
 require XOOPS_ROOT_PATH . '/header.php';

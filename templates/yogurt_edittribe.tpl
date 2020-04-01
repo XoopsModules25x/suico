@@ -24,7 +24,7 @@
                 *
                 </span>
                 </label>
-            <input type='checkbox' value='1' id='flag_oldimg' name='flag_oldimg' onclick="disableElement(img)"  checked="checked">
+            <input type='checkbox' value='1' id='flag_oldimg' name='flag_oldimg' onclick="disableElement(img)"  checked>
         </p>
 
         <div  >
@@ -103,7 +103,7 @@
                             <form action="kickfromtribe.php" method="post">
                             <input type="hidden" value="<{$tribe_id}>" name="tribe_id" id="tribe_id">
                             <input type="hidden" value="<{$tribe_members[i].uid}>" name="rel_user_uid" id="rel_user_uid">
-                            <input type="image" src="assets/images/abandontribe.gif"/>
+                            <input type="image" src="assets/images/abandontribe.gif">
                             </form>
                             <{ /if }>
 

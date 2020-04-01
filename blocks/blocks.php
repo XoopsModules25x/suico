@@ -23,8 +23,8 @@ if (!defined('XOOPS_ROOT_PATH')) {
     exit();
 }
 //include_once(XOOPS_ROOT_PATH."/class/criteria.php");
-//include_once XOOPS_ROOT_PATH . '/modules/yogurt/class/Friendship.php';
-//include_once XOOPS_ROOT_PATH . '/modules/yogurt/class/Image.php';
+//require_once XOOPS_ROOT_PATH . '/modules/yogurt/class/Friendship.php';
+//require_once XOOPS_ROOT_PATH . '/modules/yogurt/class/Image.php';
 
 /**
  * @param $options

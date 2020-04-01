@@ -56,4 +56,4 @@ if (!isset($_POST['confirm']) || 1 != $_POST['confirm']) {
     }
 }
 
-include __DIR__ . '/../../footer.php';
+require  dirname(dirname(__DIR__)) . '/footer.php';

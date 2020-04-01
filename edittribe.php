@@ -129,4 +129,4 @@ if (preg_match('/msie/', mb_strtolower($_SERVER['HTTP_USER_AGENT']))) {
     $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css');
 }
 
-include __DIR__ . '/../../footer.php';
+require  dirname(dirname(__DIR__)) . '/footer.php';

@@ -148,4 +148,4 @@ $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 //xoopsToken
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
-include __DIR__ . '/../../footer.php';
+require  dirname(dirname(__DIR__)) . '/footer.php';

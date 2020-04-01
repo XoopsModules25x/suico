@@ -22,8 +22,8 @@ use XoopsModules\Yogurt;
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
 require __DIR__ . '/header.php';
 
-//include_once __DIR__ . '/class/Friendpetition.php';
-//include_once __DIR__ . '/class/Friendship.php';
+//require_once __DIR__ . '/class/Friendpetition.php';
+//require_once __DIR__ . '/class/Friendship.php';
 
 /**
  * Factory of petitions created
@@ -70,4 +70,4 @@ if ($friendpetitionFactory->getCount($criteria) > 0) {
     redirect_header(XOOPS_URL . '/modules/yogurt/index.php?uid=' . $uid, 3, _MD_YOGURT_NOCACHACA);
 }
 
-include __DIR__ . '/../../footer.php';
+require  dirname(dirname(__DIR__)) . '/footer.php';

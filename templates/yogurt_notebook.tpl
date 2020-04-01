@@ -51,7 +51,7 @@
                 <div class="yogurt-Note-details-form">
                   <form  action="submitNote.php" method="post" name="form_reply_<{$Notes[i].id}>"
                     id="form_reply_<{$Notes[i].id}>" class="yogurt-Note-form">
-                        <input type="hidden" value="<{$Notes[i].uid}>" name="uid" id="uid"/>
+                        <input type="hidden" value="<{$Notes[i].uid}>" name="uid" id="uid">
                         <textarea name="text" id="text" cols="50"></textarea>
                         <{$token}>
                         <div>

@@ -28,7 +28,7 @@ require __DIR__ . '/header.php';
 /**
  * Modules class includes
  */
-//include_once 'class/Audio.php';
+//require_once __DIR__ . '/class/Audio.php';
 
 /**
  * Factory of pictures created
@@ -77,4 +77,4 @@ if ('sel_audio' == $_POST['xoops_upload_file'][0]) {
 /**
  * Close page
  */
-include '../../footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

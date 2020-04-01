@@ -31,7 +31,7 @@ namespace XoopsModules\Yogurt\Common;
 use XoopsModules\Yogurt;
 use XoopsModules\Yogurt\Common;
 
-defined('XOOPS_ROOT_PATH') || exit('XOOPS Root Path not defined');
+defined('XOOPS_ROOT_PATH') || die('XOOPS Root Path not defined');
 
 /**
  * Class Breadcrumb

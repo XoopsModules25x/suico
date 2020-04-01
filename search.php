@@ -26,7 +26,7 @@ switch ($op) {
     case 'search':
         $xoopsOption['cache_group']              = implode('', $groups);
         $GLOBALS['xoopsOption']['template_main'] = 'yogurt_search.tpl';
-        include XOOPS_ROOT_PATH . '/header.php';
+        require XOOPS_ROOT_PATH . '/header.php';
 
         // Dynamic fields
         $profileHandler = xoops_getModuleHandler('profile');
@@ -36,7 +36,7 @@ switch ($op) {
         $gpermHandler      = xoops_getHandler('groupperm');
         $searchable_fields = $gpermHandler->getItemIds('smartprofile_search', $groups, $xoopsModule->getVar('mid'));
 
-        include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+        require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
         $searchform = new \XoopsThemeForm('', 'searchform', 'search.php', 'post');
 
         $name_tray = new \XoopsFormElementTray(_PROFILE_MA_DISPLAYNAME);
@@ -106,7 +106,7 @@ switch ($op) {
 
                     case 'timezone':
                         $element = new \XoopsFormSelect($fields[$i]->getVar('field_title'), $fields[$i]->getVar('field_name'), null, 6, true);
-                        include_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
+                        require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
                         $element->addOptionArray(\XoopsLists::getTimeZoneList());
                         $searchform->addElement($element);
                         unset($element);
@@ -139,7 +139,7 @@ switch ($op) {
         break;
     case 'results':
         $GLOBALS['xoopsOption']['template_main'] = 'smartprofile_results.tpl';
-        include_once XOOPS_ROOT_PATH . '/header.php';
+        require_once XOOPS_ROOT_PATH . '/header.php';
 
         $memberHandler = xoops_getHandler('member');
         // Dynamic fields
@@ -387,10 +387,10 @@ switch ($op) {
             if (isset($search_url)) {
                 $args = implode('&amp;', $search_url);
             }
-            include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+            require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
             $nav = new \XoopsPageNav($total_users, $limit, $start, 'start', $args);
             $xoopsTpl->assign('nav', $nav->renderNav(5));
         }
         break;
 }
-include XOOPS_ROOT_PATH . '/footer.php';
+require XOOPS_ROOT_PATH . '/footer.php';

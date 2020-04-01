@@ -130,4 +130,4 @@ $xoopsTpl->assign('lang_videohelp', _MD_YOGURT_ADDVIDEOSHELP);
 //Videos NAvBAr
 $xoopsTpl->assign('pageNav', $pageNav);
 
-include __DIR__ . '/../../footer.php';
+require  dirname(dirname(__DIR__)) . '/footer.php';

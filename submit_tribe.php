@@ -24,9 +24,9 @@ require __DIR__ . '/header.php';
 /**
  * Modules class includes
  */
-//include_once 'class/Friendpetition.php';
-//include_once 'class/Reltribeuser.php';
-//include_once 'class/Tribes.php';
+//require_once __DIR__ . '/class/Friendpetition.php';
+//require_once __DIR__ . '/class/Reltribeuser.php';
+//require_once __DIR__ . '/class/Tribes.php';
 
 /**
  * Factories of tribes
@@ -72,4 +72,4 @@ if (1 == $marker) {
 /**
  * Close page
  */
-include '../../footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

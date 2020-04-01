@@ -13,11 +13,11 @@
             <{ if $isanonym!=1 }>
                 <{if $memberOfTribe ==1}><form action="abandontribe.php" method="POST" id="form_abandontribe">
                                     <input type="hidden" value="<{$tribe_id}>" name="reltribe_id" id="reltribe_id">
-                                    <input type="image" src="assets/images/abandontribe.gif" title="<{$lang_abandontribe}>" alt="<{$lang_abandontribe}>"/>
+                                    <input type="image" src="assets/images/abandontribe.gif" title="<{$lang_abandontribe}>" alt="<{$lang_abandontribe}>">
                                 </form><{ else}>
                                 <form action="becomemembertribe.php" method="POST" id="form_becomemember" class="yogurt-tribes-form-becomemember">
                         <input type="hidden" value="<{$tribe_id}>" name="tribe_id" id="tribe_id">
-                        <input type="image" src="assets/images/makememember.gif" alt="<{$lang_jointribe}>" title="<{$lang_jointribe}>"/>
+                        <input type="image" src="assets/images/makememember.gif" alt="<{$lang_jointribe}>" title="<{$lang_jointribe}>">
                     </form><{/if}>
           <{/if}>
             </p>
@@ -39,7 +39,7 @@
                         <form action="kickfromtribe.php" method="post">
                                 <input type="hidden" value="<{$tribe_id}>" name="tribe_id" id="tribe_id">
                                 <input type="hidden" value="<{$tribe_members[i].uid}>" name="rel_user_uid" id="rel_user_uid">
-                                <input type="image" src="assets/images/abandontribe.gif"/>
+                                <input type="image" src="assets/images/abandontribe.gif">
                                 </form>
                         <{/if}>
                     </p>

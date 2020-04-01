@@ -103,4 +103,4 @@ $xoopsTpl->assign('lang_profile', _MD_YOGURT_PROFILE);
 $xoopsTpl->assign('lang_tribes', _MD_YOGURT_TRIBES);
 $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 
-include __DIR__ . '/../../footer.php';
+require  dirname(dirname(__DIR__)) . '/footer.php';

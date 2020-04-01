@@ -56,4 +56,4 @@ if ($uid == $picture->getVar('uid_owner')) {
     }
 }
 
-include __DIR__ . '/../../footer.php';
+require  dirname(dirname(__DIR__)) . '/footer.php';

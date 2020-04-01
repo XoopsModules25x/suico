@@ -24,7 +24,7 @@ require __DIR__ . '/header.php';
 /**
  * Modules class includes
  */
-//include_once 'class/Notes.php';
+//require_once __DIR__ . '/class/Notes.php';
 
 /**
  * Factories of tribes
@@ -60,4 +60,4 @@ if (1 == $mainform) {
 /**
  * Close page
  */
-include '../../footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

@@ -27,9 +27,9 @@ require __DIR__ . '/header.php';
 
 $helper->loadLanguage('user');
 
-//include_once 'class/yogurt_controller.php';
-//if (!@ include_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/user.php') {
-//    include_once XOOPS_ROOT_PATH . '/language/english/user.php';
+//require_once __DIR__ . '/class/yogurt_controller.php';
+//if (!@ require_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/user.php') {
+//    require_once XOOPS_ROOT_PATH . '/language/english/user.php';
 //}
 
 $controller = new \XoopsModules\Yogurt\ControllerIndex($xoopsDB, $xoopsUser);
@@ -404,4 +404,4 @@ foreach ($mids as $mid) {
 /**
  * Closing the page
  */
-include '../../footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

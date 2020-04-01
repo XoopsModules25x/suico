@@ -38,5 +38,5 @@ $tribe    = $tribes[0];
 $com_itemid = isset($_GET['com_itemid']) ? (int)$_GET['com_itemid'] : 0;
 if ($com_itemid > 0) {
     $com_replytitle = _MD_YOGURT_TRIBES . ': ' . $tribe->getVar('tribe_title');
-    include XOOPS_ROOT_PATH . '/include/comment_new.php';
+    require XOOPS_ROOT_PATH . '/include/comment_new.php';
 }

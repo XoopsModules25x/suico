@@ -22,14 +22,14 @@ use XoopsModules\Yogurt;
 /**
  * Xoops header ...
  */
-include_once '../../mainfile.php';
+require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
-include_once '../../header.php';
+require_once dirname(dirname(__DIR__)) . '/header.php';
 
 /**
  * Modules class includes
  */
-//include_once 'class/Image.php';
+//require_once __DIR__ . '/class/Image.php';
 
 /**
  * Factory of pictures created
@@ -82,4 +82,4 @@ if ('sel_photo' == $_POST['xoops_upload_file'][0]) {
 /**
  * Close page
  */
-include '../../footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

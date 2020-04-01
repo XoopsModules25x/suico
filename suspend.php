@@ -21,7 +21,7 @@ use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
 //
-//include_once __DIR__ . '/class/yogurt_suspensions.php';
+//require_once __DIR__ . '/class/Suspensions.php';
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 5, _MD_YOGURT_TOKENEXPIRED);
@@ -57,4 +57,4 @@ if ($xoopsUser->isAdmin(1)) {
     redirect_header('index.php?uid=' . $uid, 300, _MD_YOGURT_USERSUSPENDED);
 }
 
-include __DIR__ . '/../../footer.php';
+require  dirname(dirname(__DIR__)) . '/footer.php';

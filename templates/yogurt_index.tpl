@@ -39,7 +39,7 @@
 <div id="yogurt-profile-petition">
 <form action=submit_friendpetition.php method="post">
 <{$lang_askusertobefriend}><input type="hidden" name="petitioned_uid" id="petitioned_uid" value="<{$uid_owner}>">
-<input name="" type="image" src="assets/images/addfriend.jpg"/><{$token}>
+<input name="" type="image" src="assets/images/addfriend.jpg"><{$token}>
 </form>
 </div>
 <!-- end if -->

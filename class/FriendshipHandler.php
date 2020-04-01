@@ -7,14 +7,14 @@ namespace XoopsModules\Yogurt;
 // Author: Bruno Barthez                                               //
 // ----------------------------------------------------------------- //
 
-include_once XOOPS_ROOT_PATH . '/kernel/object.php';
+require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 /**
  * Includes of form objects and uploader
  */
-include_once XOOPS_ROOT_PATH . '/class/uploader.php';
-include_once XOOPS_ROOT_PATH . '/kernel/object.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include_once XOOPS_ROOT_PATH . '/kernel/object.php';
+require_once XOOPS_ROOT_PATH . '/class/uploader.php';
+require_once XOOPS_ROOT_PATH . '/kernel/object.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
 // -------------------------------------------------------------------------
 // ------------------Friendship user handler class -------------------

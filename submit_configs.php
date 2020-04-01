@@ -102,4 +102,4 @@ redirect_header('configs.php?uid=' . $xoopsUser->getVar('uid'), 3, _MD_YOGURT_CO
 /**
  * Close page
  */
-include '../../footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

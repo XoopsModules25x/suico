@@ -72,4 +72,4 @@ if ($array_pict) {
 $url = XOOPS_URL . '/uploads/thumb_' . $url;
 $albumFactory->renderFormEdit($caption, $cod_img, $url);
 
-include __DIR__ . '/../../footer.php';
+require  dirname(dirname(__DIR__)) . '/footer.php';

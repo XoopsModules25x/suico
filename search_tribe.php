@@ -144,4 +144,4 @@ $xoopsTpl->assign('lang_jointribe', _MD_YOGURT_TRIBE_JOIN);
 $xoopsTpl->assign('lang_searchtribe', _MD_YOGURT_TRIBE_SEARCH);
 $xoopsTpl->assign('lang_tribekeyword', _MD_YOGURT_TRIBE_SEARCHKEYWORD);
 
-include __DIR__ . '/../../footer.php';
+require  dirname(dirname(__DIR__)) . '/footer.php';

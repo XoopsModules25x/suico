@@ -3,9 +3,9 @@
 <{ if $isSuspended==0 }><form action="suspend.php" method="POST" name="suspend_form" id="suspend_form">
 <{$token}><input type="hidden" value="<{$uid_owner}>" id="uid" name="uid"><label for="time">
 <{$lang_timeinseconds}></label><input type="text" name="time" id="time" value="604800">
-<input type="submit" value="<{$lang_suspend}>"/></form><{ else }> <{$lang_suspended}>
+<input type="submit" value="<{$lang_suspend}>"></form><{ else }> <{$lang_suspended}>
 <form action="unsuspenduser.php" method="POST"><{$token}><input type="hidden" value="<{$uid_owner}>" id="uid" name="uid">
-<input type="submit" value="<{$lang_unsuspend}>"/></form><{/if}></div><{/if}>
+<input type="submit" value="<{$lang_unsuspend}>"></form><{/if}></div><{/if}>
 
 <div class="yogurt-nav-bar" id="yogurt-nav-bar">
 <p id="breadcrumbs">
@@ -24,7 +24,7 @@
          <{$section_name}>
     </p>
     <h2>
-        <{if $isOwner}>::<{$lang_mysection}><{else}><{$owner_uname}>::<{$section_name}><{/if}><{ if $isWebmaster==1 }><img id="yogurt-suspensiontools" src="assets/images/suspend.gif" alt="<{$lang_suspensionadmin}>" title="<{$lang_suspensionadmin}>"/><{/if}>
+        <{if $isOwner}>::<{$lang_mysection}><{else}><{$owner_uname}>::<{$section_name}><{/if}><{ if $isWebmaster==1 }><img id="yogurt-suspensiontools" src="assets/images/suspend.gif" alt="<{$lang_suspensionadmin}>" title="<{$lang_suspensionadmin}>"><{/if}>
     </h2>
 
 

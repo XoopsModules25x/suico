@@ -3,7 +3,7 @@
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
+//                       <https://www.xoops.org>                             //
 // ------------------------------------------------------------------------- //
 //  This program is free software; you can redistribute it and/or modify     //
 //  it under the terms of the GNU General Public License as published by     //
@@ -35,7 +35,7 @@ $op = isset($_POST['op']) ? trim(htmlspecialchars($_POST['op'], ENT_QUOTES | ENT
 if (isset($_POST['op']) && 'submit' == $_POST['op']) {
     $op = 'submit';
 }
-//include_once __DIR__ . '/class/yogurt_controller.php';
+//require_once __DIR__ . '/class/yogurt_controller.php';
 $controller = new Yogurt\ControllerIndex($xoopsDB, $xoopsUser);
 
 /**
@@ -45,10 +45,10 @@ $nbSections = $controller->getNumbersSections();
 
 if ('form' == $op) {
     $GLOBALS['xoopsOption']['template_main'] = 'yogurt_searchform.tpl';
-    include XOOPS_ROOT_PATH . '/header.php';
+    require XOOPS_ROOT_PATH . '/header.php';
     $memberHandler = xoops_getHandler('member');
     $total         = $memberHandler->getUserCount(new \Criteria('level', 0, '>'));
-    include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+    require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
     $uname_text  = new \XoopsFormText('', 'user_uname', 30, 60);
     $uname_match = new \XoopsFormSelectMatchOption('', 'user_uname_match');
     $uname_tray  = new \XoopsFormElementTray(_MD_YOGURT_UNAME, '&nbsp;');
@@ -139,7 +139,7 @@ if ('form' == $op) {
 
 if ('submit' == $op) {
     $GLOBALS['xoopsOption']['template_main'] = 'yogurt_searchresults.tpl';
-    include XOOPS_ROOT_PATH . '/header.php';
+    require XOOPS_ROOT_PATH . '/header.php';
     $iamadmin = $xoopsUserIsAdmin;
     $myts     = MyTextSanitizer::getInstance();
     $criteria = new \CriteriaCompo();
@@ -498,4 +498,4 @@ $xoopsTpl->assign('lang_profile', _MD_YOGURT_PROFILE);
 $xoopsTpl->assign('lang_tribes', _MD_YOGURT_TRIBES);
 $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 
-include_once XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

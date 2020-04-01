@@ -55,4 +55,4 @@ if (1 == $marker) {
     $friendshipFactory->renderFormSubmit($friend);
 }
 
-include __DIR__ . '/../../footer.php';
+require  dirname(dirname(__DIR__)) . '/footer.php';

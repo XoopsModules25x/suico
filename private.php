@@ -21,7 +21,7 @@ use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
 
-//include_once __DIR__ . '/class/Image.php';
+//require_once __DIR__ . '/class/Image.php';
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
@@ -53,4 +53,4 @@ if ($uid == $picture->getVar('uid_owner')) {
     }
 }
 
-include __DIR__ . '/../../footer.php';
+require  dirname(dirname(__DIR__)) . '/footer.php';
