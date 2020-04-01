@@ -254,7 +254,7 @@ class ImageHandler extends \XoopsPersistableObjectHandler
      * Render a form to send pictures
      *
      * @param int    $maxbytes the maximum size of a picture
-     * @param object $xoopsTpl the one in which the form will be rendered
+     * @param  \XoopsTpl $xoopsTpl the one in which the form will be rendered
      * @return bool TRUE
      *
      * obs: Some functions wont work on php 4 so edit lines down under acording to your version
