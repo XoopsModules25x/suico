@@ -60,4 +60,4 @@ if ($albumFactory->insert($newvideo)) {
     redirect_header(XOOPS_URL . '/modules/yogurt/video.php?uid=' . (int)$xoopsUser->getVar('uid'), 2, _MD_YOGURT_NOCACHACA);
 }
 
-require  dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

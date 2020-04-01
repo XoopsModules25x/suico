@@ -160,7 +160,7 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 
 //permissions
 $xoopsTpl->assign('allow_friends', $controller->checkPrivilege('friends'));
-$xoopsTpl->assign('allow_notes', $controller->checkPrivilege('Notes'));
+$xoopsTpl->assign('allow_notes', $controller->checkPrivilege('notes'));
 $xoopsTpl->assign('allow_tribes', $controller->checkPrivilege('tribes'));
 $xoopsTpl->assign('allow_pictures', $controller->checkPrivilege('pictures'));
 $xoopsTpl->assign('allow_videos', $controller->checkPrivilege('videos'));
@@ -199,7 +199,7 @@ $xoopsTpl->assign('isfriend', $controller->isFriend);
 $xoopsTpl->assign('nb_tribes', $nbSections['nbTribes']);
 $xoopsTpl->assign('nb_photos', $nbSections['nbPhotos']);
 $xoopsTpl->assign('nb_videos', $nbSections['nbVideos']);
-$xoopsTpl->assign('nb_Notes', $nbSections['nbNotes']);
+$xoopsTpl->assign('nb_notes', $nbSections['nbNotes']);
 $xoopsTpl->assign('nb_friends', $nbSections['nbFriends']);
 $xoopsTpl->assign('nb_audio', $nbSections['nbAudio']);
 

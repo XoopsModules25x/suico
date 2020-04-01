@@ -79,8 +79,8 @@ $modversion = [
     ],
 
     // ------------------- Install/Update -------------------
-//    'onInstall'           => 'include/oninstall.php',
-//    'onUpdate'            => 'include/onupdate.php',
+    //    'onInstall'           => 'include/oninstall.php',
+    //    'onUpdate'            => 'include/onupdate.php',
     //  'onUninstall'         => 'include/onuninstall.php',
     // -------------------  PayPal ---------------------------
     'paypal'              => [

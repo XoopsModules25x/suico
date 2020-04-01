@@ -51,4 +51,4 @@ if (1 != $_POST['confirm']) {
     }
 }
 
-require  dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

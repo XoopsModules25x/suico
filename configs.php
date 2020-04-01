@@ -45,7 +45,7 @@ if ($configsFactory->getCount($criteria) > 0) {
     $aud  = $config->getVar('audio');
     $vid  = $config->getVar('videos');
     $tri  = $config->getVar('tribes');
-    $scr  = $config->getVar('Notes');
+    $scr  = $config->getVar('notes');
     $fri  = $config->getVar('friends');
     $pcon = $config->getVar('profile_contact');
     $pgen = $config->getVar('profile_general');
@@ -82,7 +82,7 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
 
 //permissions
-$xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('Notes'));
+$xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('notes'));
 $xoopsTpl->assign('allow_friends', $controller->checkPrivilegeBySection('friends'));
 $xoopsTpl->assign('allow_tribes', $controller->checkPrivilegeBySection('tribes'));
 $xoopsTpl->assign('allow_pictures', $controller->checkPrivilegeBySection('pictures'));
@@ -97,8 +97,8 @@ $xoopsTpl->assign('lang_configprofilestats', _MD_YOGURT_CONFIGSPROFILESTATS);
 $xoopsTpl->assign('lang_configprofilegeneral', _MD_YOGURT_CONFIGSPROFILEGENERAL);
 $xoopsTpl->assign('lang_configprofilecontact', _MD_YOGURT_CONFIGSPROFILECONTACT);
 $xoopsTpl->assign('lang_configfriends', _MD_YOGURT_CONFIGSFRIENDS);
-$xoopsTpl->assign('lang_configNotes', _MD_YOGURT_CONFIGSNOTES);
-$xoopsTpl->assign('lang_configsendNotes', _MD_YOGURT_CONFIGSNOTESSEND);
+$xoopsTpl->assign('lang_confignotes', _MD_YOGURT_CONFIGSNOTES);
+$xoopsTpl->assign('lang_configsendnotes', _MD_YOGURT_CONFIGSNOTESSEND);
 $xoopsTpl->assign('lang_configtribes', _MD_YOGURT_CONFIGSTRIBES);
 $xoopsTpl->assign('lang_configaudio', _MD_YOGURT_CONFIGSAUDIOS);
 $xoopsTpl->assign('lang_configvideos', _MD_YOGURT_CONFIGSVIDEOS);
@@ -114,7 +114,7 @@ $xoopsTpl->assign('lang_cancel', _MD_YOGURT_CANCEL);
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
 //Notes
-//$xoopsTpl->assign('Notes',$Notes);
+//$xoopsTpl->assign('notes',$notes);
 $xoopsTpl->assign('lang_answerNote', _MD_YOGURT_ANSWERNOTE);
 
 //Owner data
@@ -127,7 +127,7 @@ $xoopsTpl->assign('isanonym', $controller->isAnonym);
 $xoopsTpl->assign('nb_tribes', $nbSections['nbTribes']);
 $xoopsTpl->assign('nb_photos', $nbSections['nbPhotos']);
 $xoopsTpl->assign('nb_videos', $nbSections['nbVideos']);
-$xoopsTpl->assign('nb_Notes', $nbSections['nbNotes']);
+$xoopsTpl->assign('nb_notes', $nbSections['nbNotes']);
 $xoopsTpl->assign('nb_friends', $nbSections['nbFriends']);
 $xoopsTpl->assign('nb_audio', $nbSections['nbAudio']);
 
@@ -148,4 +148,4 @@ $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 //xoopsToken
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
-require  dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

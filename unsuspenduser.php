@@ -52,4 +52,4 @@ if ($xoopsUser->isAdmin(1)) {
     redirect_header('index.php?uid=' . $uid, 3, _MD_YOGURT_USERUNSUSPENDED);
 }
 
-require  dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

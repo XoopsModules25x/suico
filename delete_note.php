@@ -24,7 +24,7 @@ require __DIR__ . '/header.php';
 /**
  * Factories of tribes
  */
-$NotesFactory = new Yogurt\NotesHandler($xoopsDB);
+$notesFactory = new Yogurt\NotesHandler($xoopsDB);
 
 $note_id = \Xmf\Request::getInt('note_id', 0, 'POST');
 
@@ -44,8 +44,8 @@ if (1 != $_POST['confirm']) {
     /**
      * Try to delete
      */
-    if (1 == $NotesFactory->getCount($criteria)) {
-        if ($NotesFactory->deleteAll($criteria)) {
+    if (1 == $notesFactory->getCount($criteria)) {
+        if ($notesFactory->deleteAll($criteria)) {
             redirect_header('notebook.php?uid=' . $uid, 2, _MD_YOGURT_NOTEDELETED);
         } else {
             redirect_header('notebook.php?uid=' . $uid, 2, _MD_YOGURT_NOCACHACA);
@@ -53,4 +53,4 @@ if (1 != $_POST['confirm']) {
     }
 }
 
-require  dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

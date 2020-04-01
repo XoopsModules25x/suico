@@ -55,4 +55,4 @@ if (!isset($_POST['confirm']) || 1 != $_POST['confirm']) {
         redirect_header('tribes.php', 1, _MD_YOGURT_NOCACHACA);
     }
 }
-require  dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

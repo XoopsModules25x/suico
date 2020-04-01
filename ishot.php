@@ -67,4 +67,4 @@ if (0 == $ishotFactory->getCount($criteria)) {
     redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_ALREADYVOTED);
 }
 
-require  dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

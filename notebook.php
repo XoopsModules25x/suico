@@ -49,14 +49,14 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
 
 //permissions
-$xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('Notes'));
+$xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('notes'));
 $xoopsTpl->assign('allow_friends', $controller->checkPrivilegeBySection('friends'));
 $xoopsTpl->assign('allow_tribes', $controller->checkPrivilegeBySection('tribes'));
 $xoopsTpl->assign('allow_pictures', $controller->checkPrivilegeBySection('pictures'));
 $xoopsTpl->assign('allow_videos', $controller->checkPrivilegeBySection('videos'));
 $xoopsTpl->assign('allow_audios', $controller->checkPrivilegeBySection('audio'));
 
-if (!($Notes = $controller->fecthNotes($nbSections['nbNotes'], $criteria_uid))) {
+if (!($notes = $controller->fecthNotes($nbSections['nbNotes'], $criteria_uid))) {
     $xoopsTpl->assign('lang_noNotesyet', _MD_YOGURT_NONOTESYET);
 }
 
@@ -69,7 +69,7 @@ $xoopsTpl->assign('lang_cancel', _MD_YOGURT_CANCEL);
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
 //Notes
-$xoopsTpl->assign('Notes', $Notes);
+$xoopsTpl->assign('notes', $notes);
 $xoopsTpl->assign('lang_answerNote', _MD_YOGURT_ANSWERNOTE);
 $xoopsTpl->assign('lang_tips', _MD_YOGURT_NOTETIPS);
 $xoopsTpl->assign('lang_bold', _MD_YOGURT_BOLD);
@@ -85,7 +85,7 @@ $xoopsTpl->assign('isanonym', $controller->isAnonym);
 $xoopsTpl->assign('nb_tribes', $nbSections['nbTribes']);
 $xoopsTpl->assign('nb_photos', $nbSections['nbPhotos']);
 $xoopsTpl->assign('nb_videos', $nbSections['nbVideos']);
-$xoopsTpl->assign('nb_Notes', $nbSections['nbNotes']);
+$xoopsTpl->assign('nb_notes', $nbSections['nbNotes']);
 $xoopsTpl->assign('nb_friends', $nbSections['nbFriends']);
 $xoopsTpl->assign('nb_audio', $nbSections['nbAudio']);
 
@@ -103,4 +103,4 @@ $xoopsTpl->assign('lang_profile', _MD_YOGURT_PROFILE);
 $xoopsTpl->assign('lang_tribes', _MD_YOGURT_TRIBES);
 $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 
-require  dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

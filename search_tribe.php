@@ -25,12 +25,12 @@ require __DIR__ . '/header.php';
 $controller = new Yogurt\ControllerTribes($xoopsDB, $xoopsUser);
 
 /**
- * Fecthing numbers of tribes friends videos pictures etc...
+ * Fetching numbers of tribes friends videos pictures etc...
  */
 $nbSections = $controller->getNumbersSections();
 
-$start_all =  \Xmf\Request::getInt('start_all', 0, 'GET');
-$start_my  =  \Xmf\Request::getInt('start_my', 0, 'GET');
+$start_all = \Xmf\Request::getInt('start_all', 0, 'GET');
+$start_my  = \Xmf\Request::getInt('start_my', 0, 'GET');
 
 $tribe_keyword = trim(htmlspecialchars($_GET['tribe_keyword'], ENT_QUOTES | ENT_HTML5));
 /**
@@ -71,7 +71,7 @@ $barra_navegacao = new \XoopsPageNav($nb_tribes, $xoopsModuleConfig['tribesperpa
 $barrinha        = $barra_navegacao->renderImageNav(2);
 
 //permissions
-$xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('Notes'));
+$xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('notes'));
 $xoopsTpl->assign('allow_friends', $controller->checkPrivilegeBySection('friends'));
 $xoopsTpl->assign('allow_tribes', $controller->checkPrivilegeBySection('tribes'));
 $xoopsTpl->assign('allow_pictures', $controller->checkPrivilegeBySection('pictures'));
@@ -99,7 +99,7 @@ $xoopsTpl->assign('isanonym', $controller->isAnonym);
 //$xoopsTpl->assign('nb_tribes',$nbSections['nbTribes']);look at hte end for this nb
 $xoopsTpl->assign('nb_photos', $nbSections['nbPhotos']);
 $xoopsTpl->assign('nb_videos', $nbSections['nbVideos']);
-$xoopsTpl->assign('nb_Notes', $nbSections['nbNotes']);
+$xoopsTpl->assign('nb_notes', $nbSections['nbNotes']);
 $xoopsTpl->assign('nb_friends', $nbSections['nbFriends']);
 $xoopsTpl->assign('nb_tribes', $nbSections['nbTribes']);
 $xoopsTpl->assign('nb_audio', $nbSections['nbAudio']);
@@ -144,4 +144,4 @@ $xoopsTpl->assign('lang_jointribe', _MD_YOGURT_TRIBE_JOIN);
 $xoopsTpl->assign('lang_searchtribe', _MD_YOGURT_TRIBE_SEARCH);
 $xoopsTpl->assign('lang_tribekeyword', _MD_YOGURT_TRIBE_SEARCHKEYWORD);
 
-require  dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

@@ -27,9 +27,9 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
  * Module classes
  */
 //require_once __DIR__ . '/Image.php';
-//require_once __DIR__ . '/yogurt_visitors.php';
+//require_once __DIR__ . '/Visitors.php';
 //require_once __DIR__ . '/Video.php';
-//require_once __DIR__ . '/yogurt_audio.php';
+//require_once __DIR__ . '/Audio.php';
 //require_once __DIR__ . '/Friendpetition.php';
 //require_once __DIR__ . '/Friendship.php';
 //require_once __DIR__ . '/Reltribeuser.php';
@@ -68,15 +68,15 @@ class ControllerNotes extends YogurtController
     //  }
 
     /**
-     * @param $nb_Notes
+     * @param $nb_notes
      * @param $criteria
      * @return bool
      */
-    public function fecthNotes($nb_Notes, $criteria)
+    public function fetchNotes($nb_notes, $criteria)
     {
-        $Notes = $this->NotesFactory->getNotes($nb_Notes, $criteria);
-        if ($Notes) {
-            return $Notes;
+        $notes = $this->notesFactory->getNotes($nb_notes, $criteria);
+        if ($notes) {
+            return $notes;
         }
 
         return false;
@@ -104,7 +104,7 @@ class ControllerNotes extends YogurtController
         if (1 == $this->configsFactory->getCount($criteria)) {
             $configs = $this->configsFactory->getObjects($criteria);
 
-            $config = $configs[0]->getVar('Notes');
+            $config = $configs[0]->getVar('notes');
 
             if (!$this->checkPrivilegeLevel($config)) {
                 redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, _MD_YOGURT_NOPRIVILEGE);

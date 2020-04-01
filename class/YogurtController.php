@@ -27,9 +27,9 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
  * Module classes
  */
 //require_once __DIR__ . '/Image.php';
-//require_once __DIR__ . '/yogurt_visitors.php';
+//require_once __DIR__ . '/Visitors.php';
 //require_once __DIR__ . '/Video.php';
-//require_once __DIR__ . '/yogurt_audio.php';
+//require_once __DIR__ . '/Audio.php';
 //require_once __DIR__ . '/Friendpetition.php';
 //require_once __DIR__ . '/Friendship.php';
 //require_once __DIR__ . '/Reltribeuser.php';
@@ -64,7 +64,7 @@ class YogurtController extends \XoopsObject
     public $reltribeusersFactory;
     public $suspensionsFactory;
     public $tribesFactory;
-    public $NotesFactory;
+    public $notesFactory;
     public $configsFactory;
     public $section;
     public $privilegeLevel;
@@ -74,7 +74,7 @@ class YogurtController extends \XoopsObject
      * Constructor
      *
      * @param \XoopsDatabase $db
-     * @param $user
+     * @param                $user
      */
     public function __construct(\XoopsDatabase $db, $user)
     {
@@ -233,7 +233,7 @@ class YogurtController extends \XoopsObject
         $criteriaUidVideo        = new \Criteria('uid_owner', $this->uidOwner);
         $nbSections['nbVideos']  = $this->videosFactory->getCount($criteriaUidVideo);
         $criteriaUidNotes        = new \Criteria('note_to', $this->uidOwner);
-        $nbSections['nbNotes']   = $this->NotesFactory->getCount($criteriaUidNotes);
+        $nbSections['nbNotes']   = $this->notesFactory->getCount($criteriaUidNotes);
 
         return $nbSections;
     }
@@ -250,7 +250,7 @@ class YogurtController extends \XoopsObject
         $this->petitionsFactory     = new FriendpetitionHandler($this->db);
         $this->friendshipsFactory   = new FriendshipHandler($this->db);
         $this->reltribeusersFactory = new ReltribeuserHandler($this->db);
-        $this->NotesFactory         = new NotesHandler($this->db);
+        $this->notesFactory         = new NotesHandler($this->db);
         $this->tribesFactory        = new TribesHandler($this->db);
         $this->configsFactory       = new ConfigsHandler($this->db);
         $this->suspensionsFactory   = new SuspensionsHandler($this->db);

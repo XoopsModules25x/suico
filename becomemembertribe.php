@@ -51,4 +51,4 @@ if ($reltribeuserFactory->getCount($criteria) < 1) {
     redirect_header('tribes.php', 1, _MD_YOGURT_YOUAREMEMBERALREADY);
 }
 
-require  dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

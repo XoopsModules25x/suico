@@ -87,7 +87,7 @@ class ConfigsHandler extends \XoopsObjectHandler
         if ($yogurt_configs->isNew()) {
             // ajout/modification d'un Configs
             $yogurt_configs = new Configs();
-            $format         = 'INSERT INTO %s (config_id, config_uid, pictures, audio, videos, tribes, Notes, friends, profile_contact, profile_general, profile_stats, suspension, backup_password, backup_email, end_suspension)';
+            $format         = 'INSERT INTO %s (config_id, config_uid, pictures, audio, videos, tribes, notes, friends, profile_contact, profile_general, profile_stats, suspension, backup_password, backup_email, end_suspension)';
             $format         .= 'VALUES (%u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %s, %s, %s)';
             $sql            = sprintf(
                 $format,
@@ -98,7 +98,7 @@ class ConfigsHandler extends \XoopsObjectHandler
                 $audio,
                 $videos,
                 $tribes,
-                $Notes,
+                $notes,
                 $friends,
                 $profile_contact,
                 $profile_general,
@@ -111,7 +111,7 @@ class ConfigsHandler extends \XoopsObjectHandler
             $force          = true;
         } else {
             $format = 'UPDATE %s SET ';
-            $format .= 'config_id=%u, config_uid=%u, pictures=%u, audio=%u, videos=%u, tribes=%u, Notes=%u, friends=%u, profile_contact=%u, profile_general=%u, profile_stats=%u, suspension=%u, backup_password=%s, backup_email=%s, end_suspension=%s';
+            $format .= 'config_id=%u, config_uid=%u, pictures=%u, audio=%u, videos=%u, tribes=%u, notes=%u, friends=%u, profile_contact=%u, profile_general=%u, profile_stats=%u, suspension=%u, backup_password=%s, backup_email=%s, end_suspension=%s';
             $format .= ' WHERE config_id = %u';
             $sql    = sprintf(
                 $format,
@@ -122,7 +122,7 @@ class ConfigsHandler extends \XoopsObjectHandler
                 $audio,
                 $videos,
                 $tribes,
-                $Notes,
+                $notes,
                 $friends,
                 $profile_contact,
                 $profile_general,

@@ -29,7 +29,7 @@ require __DIR__ . '/header.php';
 /**
  * Factories of tribes
  */
-$NotesFactory = new Yogurt\NotesHandler($xoopsDB);
+$notesFactory = new Yogurt\NotesHandler($xoopsDB);
 
 /**
  * Verify Token
@@ -42,11 +42,11 @@ $myts         = MyTextSanitizer::getInstance();
 $Notebook_uid = $_POST['uid'];
 $note_text    = $myts->displayTarea($_POST['text'], 0, 1, 1, 1, 1);
 $mainform     = (!empty($_POST['mainform'])) ? 1 : 0;
-$Note         = $NotesFactory->create();
+$Note         = $notesFactory->create();
 $Note->setVar('note_text', $note_text);
 $Note->setVar('note_from', $xoopsUser->getVar('uid'));
 $Note->setVar('note_to', $Notebook_uid);
-$NotesFactory->insert($Note);
+$notesFactory->insert($Note);
 $extra_tags['X_OWNER_NAME'] = $xoopsUser::getUnameFromId($Notebook_uid);
 $extra_tags['X_OWNER_UID']  = $Notebook_uid;
 $notificationHandler        = xoops_getHandler('notification');

@@ -65,7 +65,7 @@ if (1 == $marker && $tribe->getVar('owner_uid') == $uid) {
     $xoopsTpl->assign('tribe_id', $tribe->getVar('tribe_id'));
 
     //permissions
-    $xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('Notes'));
+    $xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('notes'));
     $xoopsTpl->assign('allow_friends', $controller->checkPrivilegeBySection('friends'));
     $xoopsTpl->assign('allow_tribes', $controller->checkPrivilegeBySection('tribes'));
     $xoopsTpl->assign('allow_pictures', $controller->checkPrivilegeBySection('pictures'));
@@ -93,7 +93,7 @@ if (1 == $marker && $tribe->getVar('owner_uid') == $uid) {
     $xoopsTpl->assign('nb_tribes', $nbSections['nbTribes']);
     $xoopsTpl->assign('nb_photos', $nbSections['nbPhotos']);
     $xoopsTpl->assign('nb_videos', $nbSections['nbVideos']);
-    $xoopsTpl->assign('nb_Notes', $nbSections['nbNotes']);
+    $xoopsTpl->assign('nb_notes', $nbSections['nbNotes']);
     $xoopsTpl->assign('nb_friends', $nbSections['nbFriends']);
     $xoopsTpl->assign('nb_audio', $nbSections['nbAudio']);
 
@@ -129,4 +129,4 @@ if (false !== strpos(mb_strtolower($_SERVER['HTTP_USER_AGENT']), "msie")) {
     $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css');
 }
 
-require  dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

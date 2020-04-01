@@ -30,7 +30,7 @@
 
     <ul class="tabs-nav">
         <li <{if $section_name==$lang_profile}>class="tabs-selected" <{/if}>><a href="index.php?uid=<{$uid_owner}>"> <span><img class="yogurt-nav-bar-icon" src="assets/images/profile.gif" ><{$lang_profile}></span></a> </li>
-        <{ if $allow_notes!=-1 }> <li <{ if $allow_notes==0 }> class="tabs-disabled" <{/if}> <{if $section_name==$lang_Notebook}>class="tabs-selected" <{/if}>><a href="notebook.php?uid=<{$uid_owner}>"><span><img class="yogurt-nav-bar-icon" src="assets/images/Notebook.gif" ><{$lang_Notebook}> (<{$nb_Notes}>)</span></a> </li>
+        <{ if $allow_notes!=-1 }> <li <{ if $allow_notes==0 }> class="tabs-disabled" <{/if}> <{if $section_name==$lang_Notebook}>class="tabs-selected" <{/if}>><a href="notebook.php?uid=<{$uid_owner}>"><span><img class="yogurt-nav-bar-icon" src="assets/images/Notebook.gif" ><{$lang_Notebook}> (<{$nb_notes}>)</span></a> </li>
         <{/if}>
          <{ if $allow_pictures !=-1 }><li <{ if $allow_pictures == 0 }>class="tabs-disabled"<{/if}><{if $section_name==$lang_photos}>class="tabs-selected" <{/if}>><a href="album.php?uid=<{$uid_owner}>"><span><img class="yogurt-nav-bar-icon" src="assets/images/lphoto.gif" ><{$lang_photos}> ( <{$nb_photos}> )</span></a> </li><{/if}>
          <{ if $allow_audios !=-1 }><li <{ if $allow_audios ==0 }>class="tabs-disabled"<{/if}><{if $section_name==$lang_audio}>class="tabs-selected" <{/if}>> <a href="audio.php?uid=<{$uid_owner}>"><span><img class="yogurt-nav-bar-icon" src="assets/images/audio.gif" ><{$lang_audio}> ( <{$nb_audio}> )</span></a> </li><{/if}>

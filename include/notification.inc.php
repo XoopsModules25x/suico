@@ -74,7 +74,7 @@ function yogurt_iteminfo($category, $item_id)
     }
 
     if ('Note' == $category) {
-        $sql          = 'SELECT note_id, note_from, note_to, note_text FROM ' . $xoopsDB->prefix('yogurt_Notes') . ' WHERE note_from = ' . $item_id . ' LIMIT 1';
+        $sql          = 'SELECT note_id, note_from, note_to, note_text FROM ' . $xoopsDB->prefix('yogurt_notes') . ' WHERE note_from = ' . $item_id . ' LIMIT 1';
         $result       = $xoopsDB->query($sql);
         $result_array = $xoopsDB->fetchArray($result);
         /**

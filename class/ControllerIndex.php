@@ -27,9 +27,9 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
  * Module classes
  */
 //require_once __DIR__ . '/Image.php';
-//require_once __DIR__ . '/yogurt_visitors.php';
+//require_once __DIR__ . '/Visitors.php';
 //require_once __DIR__ . '/Video.php';
-//require_once __DIR__ . '/yogurt_audio.php';
+//require_once __DIR__ . '/Audio.php';
 //require_once __DIR__ . '/Friendpetition.php';
 //require_once __DIR__ . '/Friendship.php';
 //require_once __DIR__ . '/Reltribeuser.php';

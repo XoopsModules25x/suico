@@ -25,18 +25,18 @@
 <div id="yogurt-Notes-container" class="outer">
             <h2 class="head"><{$section_name}></h2>
 <{ if $lang_noNotesyet=="" }>
-<{section name=i loop=$Notes}>
+<{section name=i loop=$notes}>
 
     <div class="yogurt-Note-details <{cycle values="odd,even"}>">
         <div class="yogurt-Note-avatarandname">
-            <p class="yogurt-Note-uname">&nbsp;<a href="index.php?uid=<{$Notes[i].uid}>"><{$Notes[i].uname}></a>
+            <p class="yogurt-Note-uname">&nbsp;<a href="index.php?uid=<{$notes[i].uid}>"><{$notes[i].uname}></a>
             </p>
-            <{ if $Notes[i].user_avatar=="blank.gif" }><img src="assets/images/noavatar.gif"> <{ else }><img width="100"  class="avatar_Note" src="../../uploads/<{$Notes[i].user_avatar}>"> <{/if}>
+            <{ if $notes[i].user_avatar=="blank.gif" }><img src="assets/images/noavatar.gif"> <{ else }><img width="100"  class="avatar_Note" src="../../uploads/<{$notes[i].user_avatar}>"> <{/if}>
             <{ if $isOwner==1}>
                 <p>
                     <form name="delete_Note" method="post" action="delete_Note.php" class="yogurt-Note-form-delete">
-                        <input value="<{$Notes[i].id}>" type="image" id="note_idimage" name="note_idimage" src="assets/images/dele.gif" >
-                        <input value="<{$Notes[i].id}>" type="hidden" id="note_id" name="note_id"  >
+                        <input value="<{$notes[i].id}>" type="image" id="note_idimage" name="note_idimage" src="assets/images/dele.gif" >
+                        <input value="<{$notes[i].id}>" type="hidden" id="note_id" name="note_id"  >
                     </form>
 
                 </p>
@@ -44,14 +44,14 @@
         </div>
         <div class="yogurt-Note-details-texts">
             <p class="yogurt-Note-text"><img src="assets/images/notes.gif" alt="<{$section_name}>" title="<{$section_name}>">
-                &nbsp;<{$Notes[i].text}>
-                <a name="replyform<{$Notes[i].id}>" id="replyform<{$Notes[i].id}>"></a>
+                &nbsp;<{$notes[i].text}>
+                <a name="replyform<{$notes[i].id}>" id="replyform<{$notes[i].id}>"></a>
             </p>
             <{ if $isOwner==1}>
                 <div class="yogurt-Note-details-form">
-                  <form  action="submitNote.php" method="post" name="form_reply_<{$Notes[i].id}>"
-                    id="form_reply_<{$Notes[i].id}>" class="yogurt-Note-form">
-                        <input type="hidden" value="<{$Notes[i].uid}>" name="uid" id="uid">
+                  <form  action="submitNote.php" method="post" name="form_reply_<{$notes[i].id}>"
+                    id="form_reply_<{$notes[i].id}>" class="yogurt-Note-form">
+                        <input type="hidden" value="<{$notes[i].uid}>" name="uid" id="uid">
                         <textarea name="text" id="text" cols="50"></textarea>
                         <{$token}>
                         <div>

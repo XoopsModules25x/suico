@@ -50,7 +50,7 @@ class Notes extends \XoopsObject
      */
     public function load($id)
     {
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_Notes') . ' WHERE note_id=' . $id;
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_notes') . ' WHERE note_id=' . $id;
         $myrow = $this->db->fetchArray($this->db->query($sql));
         $this->assignVars($myrow);
         if (!$myrow) {
@@ -67,7 +67,7 @@ class Notes extends \XoopsObject
      * @param int    $start
      * @return array
      */
-    public function getAllyogurt_Notess($criteria = [], $asobject = false, $sort = 'note_id', $order = 'ASC', $limit = 0, $start = 0)
+    public function getAllyogurt_Notes($criteria = [], $asobject = false, $sort = 'note_id', $order = 'ASC', $limit = 0, $start = 0)
     {
         $db          = \XoopsDatabaseFactory::getDatabaseConnection();
         $ret         = [];
@@ -82,13 +82,13 @@ class Notes extends \XoopsObject
             $where_query = ' WHERE ' . $criteria;
         }
         if (!$asobject) {
-            $sql    = 'SELECT note_id FROM ' . $db->prefix('yogurt_Notes') . "$where_query ORDER BY $sort $order";
+            $sql    = 'SELECT note_id FROM ' . $db->prefix('yogurt_notes') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
-                $ret[] = $myrow['yogurt_Notes_id'];
+                $ret[] = $myrow['yogurt_notes_id'];
             }
         } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_Notes') . "$where_query ORDER BY $sort $order";
+            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_notes') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new self($myrow);

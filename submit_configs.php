@@ -53,7 +53,7 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 //$aud    = $_POST['aud'];
 //$tri  = $_POST['tribes'];
 //$fri  = $_POST['friends'];
-//$scr  = $_POST['Notes'];
+//$scr  = $_POST['notes'];
 //$pcon   = $_POST['profileContact'];
 //$pgen   = $_POST['gen'];
 //$psta   = $_POST['stat'];
@@ -80,8 +80,8 @@ if (isset($_POST['vid'])) {
 if (isset($_POST['tribes'])) {
     $config->setVar('tribes', $_POST['tribes']);
 }
-if (isset($_POST['Notes'])) {
-    $config->setVar('Notes', $_POST['Notes']);
+if (isset($_POST['notes'])) {
+    $config->setVar('notes', $_POST['notes']);
 }
 if (isset($_POST['friends'])) {
     $config->setVar('friends', $_POST['friends']);

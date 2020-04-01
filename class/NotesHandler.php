@@ -15,7 +15,7 @@ require_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';
 // -------------------------------------------------------------------------
 
 /**
- * yogurt_Noteshandler class.
+ * NotesHandler class.
  * This class provides simple mecanisme forNotes object
  */
 class NotesHandler extends \XoopsObjectHandler
@@ -28,14 +28,14 @@ class NotesHandler extends \XoopsObjectHandler
      */
     public function create($isNew = true)
     {
-        $yogurt_Notes = new Notes();
+        $yogurt_notes = new Notes();
         if ($isNew) {
-            $yogurt_Notes->setNew();
+            $yogurt_notes->setNew();
         } else {
-            $yogurt_Notes->unsetNew();
+            $yogurt_notes->unsetNew();
         }
 
-        return $yogurt_Notes;
+        return $yogurt_notes;
     }
 
     /**
@@ -46,16 +46,16 @@ class NotesHandler extends \XoopsObjectHandler
      */
     public function get($id)
     {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_Notes') . ' WHERE note_id=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_notes') . ' WHERE note_id=' . $id;
         if (!$result = $this->db->query($sql)) {
             return false;
         }
         $numrows = $this->db->getRowsNum($result);
         if (1 == $numrows) {
-            $yogurt_Notes = new Notes();
-            $yogurt_Notes->assignVars($this->db->fetchArray($result));
+            $yogurt_notes = new Notes();
+            $yogurt_notes->assignVars($this->db->fetchArray($result));
 
-            return $yogurt_Notes;
+            return $yogurt_notes;
         }
 
         return false;
@@ -64,35 +64,35 @@ class NotesHandler extends \XoopsObjectHandler
     /**
      * insert a new Notes in the database
      *
-     * @param \XoopsObject $yogurt_Notes  reference to the {@linkNotes}
+     * @param \XoopsObject $yogurt_notes  reference to the {@linkNotes}
      *                                    object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(\XoopsObject $yogurt_Notes, $force = false)
+    public function insert(\XoopsObject $yogurt_notes, $force = false)
     {
         global $xoopsConfig;
-        if (!$yogurt_Notes instanceof Notes) {
+        if (!$yogurt_notes instanceof Notes) {
             return false;
         }
-        if (!$yogurt_Notes->isDirty()) {
+        if (!$yogurt_notes->isDirty()) {
             return true;
         }
-        if (!$yogurt_Notes->cleanVars()) {
+        if (!$yogurt_notes->cleanVars()) {
             return false;
         }
-        foreach ($yogurt_Notes->cleanVars as $k => $v) {
+        foreach ($yogurt_notes->cleanVars as $k => $v) {
             ${$k} = $v;
         }
         $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
-        if ($yogurt_Notes->isNew()) {
+        if ($yogurt_notes->isNew()) {
             // ajout/modification d'unNotes
-            $yogurt_Notes = new Notes();
+            $yogurt_notes = new Notes();
             $format       = 'INSERT INTO %s (note_id, note_text, note_from, note_to, private)';
             $format       .= 'VALUES (%u, %s, %u, %u, %u)';
             $sql          = sprintf(
                 $format,
-                $this->db->prefix('yogurt_Notes'),
+                $this->db->prefix('yogurt_notes'),
                 $note_id,
                 $this->db->quoteString($note_text),
                 $note_from,
@@ -104,7 +104,7 @@ class NotesHandler extends \XoopsObjectHandler
             $format = 'UPDATE %s SET ';
             $format .= 'note_id=%u, note_text=%s, note_from=%u, note_to=%u, private=%u';
             $format .= ' WHERE note_id = %u';
-            $sql    = sprintf($format, $this->db->prefix('yogurt_Notes'), $note_id, $this->db->quoteString($note_text), $note_from, $note_to, $private, $note_id);
+            $sql    = sprintf($format, $this->db->prefix('yogurt_notes'), $note_id, $this->db->quoteString($note_text), $note_from, $note_to, $private, $note_id);
         }
         if ($force) {
             $result = $this->db->queryF($sql);
@@ -117,7 +117,7 @@ class NotesHandler extends \XoopsObjectHandler
         if (empty($note_id)) {
             $note_id = $this->db->getInsertId();
         }
-        $yogurt_Notes->assignVar('note_id', $note_id);
+        $yogurt_notes->assignVar('note_id', $note_id);
 
         return true;
     }
@@ -125,16 +125,16 @@ class NotesHandler extends \XoopsObjectHandler
     /**
      * delete aNotes from the database
      *
-     * @param \XoopsObject $yogurt_Notes reference to theNotes to delete
+     * @param \XoopsObject $yogurt_notes reference to theNotes to delete
      * @param bool         $force
      * @return bool FALSE if failed.
      */
-    public function delete(\XoopsObject $yogurt_Notes, $force = false)
+    public function delete(\XoopsObject $yogurt_notes, $force = false)
     {
-        if (!$yogurt_Notes instanceof Notes) {
+        if (!$yogurt_notes instanceof Notes) {
             return false;
         }
-        $sql = sprintf('DELETE FROM %s WHERE note_id = %u', $this->db->prefix('yogurt_Notes'), $yogurt_Notes->getVar('note_id'));
+        $sql = sprintf('DELETE FROM %s WHERE note_id = %u', $this->db->prefix('yogurt_notes'), $yogurt_notes->getVar('note_id'));
         if ($force) {
             $result = $this->db->queryF($sql);
         } else {
@@ -148,7 +148,7 @@ class NotesHandler extends \XoopsObjectHandler
     }
 
     /**
-     * retrieve yogurt_Notess from the database
+     * retrieve yogurt_notes from the database
      *
      * @param \XoopsObject $criteria  {@link CriteriaElement} conditions to be met
      * @param bool         $id_as_key use the UID as key for the array?
@@ -158,7 +158,7 @@ class NotesHandler extends \XoopsObjectHandler
     {
         $ret   = [];
         $limit = $start = 0;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_Notes');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_notes');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
@@ -172,28 +172,28 @@ class NotesHandler extends \XoopsObjectHandler
             return $ret;
         }
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $yogurt_Notes = new Notes();
-            $yogurt_Notes->assignVars($myrow);
+            $yogurt_notes = new Notes();
+            $yogurt_notes->assignVars($myrow);
             if (!$id_as_key) {
-                $ret[] = &$yogurt_Notes;
+                $ret[] = &$yogurt_notes;
             } else {
-                $ret[$myrow['note_id']] = &$yogurt_Notes;
+                $ret[$myrow['note_id']] = &$yogurt_notes;
             }
-            unset($yogurt_Notes);
+            unset($yogurt_notes);
         }
 
         return $ret;
     }
 
     /**
-     * count yogurt_Notess matching a condition
+     * count yogurt_notes matching a condition
      *
      * @param \XoopsObject $criteria {@link CriteriaElement} to match
-     * @return int count of yogurt_Notess
+     * @return int count of yogurt_notes
      */
     public function getCount($criteria = null)
     {
-        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_Notes');
+        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_notes');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
@@ -207,14 +207,14 @@ class NotesHandler extends \XoopsObjectHandler
     }
 
     /**
-     * delete yogurt_Notess matching a set of conditions
+     * delete yogurt_notes matching a set of conditions
      *
      * @param \XoopsObject $criteria {@link CriteriaElement}
      * @return bool FALSE if deletion failed
      */
     public function deleteAll($criteria = null)
     {
-        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_Notes');
+        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_notes');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
@@ -234,7 +234,7 @@ class NotesHandler extends \XoopsObjectHandler
     {
         $myts = new \MyTextSanitizer();
         $ret  = [];
-        $sql  = 'SELECT note_id, uid, uname, user_avatar, note_from, note_text FROM ' . $this->db->prefix('yogurt_Notes') . ', ' . $this->db->prefix('users');
+        $sql  = 'SELECT note_id, uid, uname, user_avatar, note_from, note_text FROM ' . $this->db->prefix('yogurt_notes') . ', ' . $this->db->prefix('users');
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
             //attention here this is kind of a hack

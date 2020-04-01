@@ -63,7 +63,7 @@ class VideoHandler extends \XoopsObjectHandler
     /**
      * insert a new Video in the database
      *
-     * @param \XoopsObject $yogurt_video reference to the {@link Video}
+     * @param \XoopsObject $yogurt_video   reference to the {@link Video}
      *                                     object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
@@ -87,10 +87,10 @@ class VideoHandler extends \XoopsObjectHandler
         if ($yogurt_video->isNew()) {
             // ajout/modification d'un Video
             $yogurt_video = new Video();
-            $format         = 'INSERT INTO %s (video_id, uid_owner, video_desc, youtube_code, main_video)';
-            $format         .= 'VALUES (%u, %u, %s, %s, %s)';
-            $sql            = sprintf($format, $this->db->prefix('yogurt_video'), $video_id, $uid_owner, $this->db->quoteString($video_desc), $this->db->quoteString($youtube_code), $this->db->quoteString($main_video));
-            $force          = true;
+            $format       = 'INSERT INTO %s (video_id, uid_owner, video_desc, youtube_code, main_video)';
+            $format       .= 'VALUES (%u, %u, %s, %s, %s)';
+            $sql          = sprintf($format, $this->db->prefix('yogurt_video'), $video_id, $uid_owner, $this->db->quoteString($video_desc), $this->db->quoteString($youtube_code), $this->db->quoteString($main_video));
+            $force        = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'video_id=%u, uid_owner=%u, video_desc=%s, youtube_code=%s, main_video=%s';

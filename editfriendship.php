@@ -27,7 +27,7 @@ if (!$xoopsUser) {
 
 $friendshipFactory = new Yogurt\FriendshipHandler($xoopsDB);
 $friend2_uid       = \Xmf\Request::getInt('friend_uid', 0, 'POST');
-$marker            =  \Xmf\Request::getInt('marker', 0, 'POST');
+$marker            = \Xmf\Request::getInt('marker', 0, 'POST');
 
 $friend = new \XoopsUser($friend2_uid);
 
@@ -55,4 +55,4 @@ if (1 == $marker) {
     $friendshipFactory->renderFormSubmit($friend);
 }
 
-require  dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

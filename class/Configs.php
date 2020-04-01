@@ -33,7 +33,7 @@ class Configs extends \XoopsObject
         $this->initVar('audio', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('videos', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('tribes', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('Notes', XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('notes', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('friends', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('profile_contact', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('profile_general', XOBJ_DTYPE_INT, null, false, 10);
