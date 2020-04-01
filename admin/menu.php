@@ -46,11 +46,11 @@ $adminmenu[] = [
     'icon'  => $pathIcon32 . '/manage.png',
 ];
 
-$adminmenu[] = [
-    'title' => _MI_YOG_ADMENU2,
-    'link'  => 'admin/main.php?op=about',
-    'icon'  => $pathIcon32 . '/about.png',
-];
+//$adminmenu[] = [
+//    'title' => _MI_YOG_ADMENU2,
+//    'link'  => 'admin/main.php?op=about',
+//    'icon'  => $pathIcon32 . '/about.png',
+//];
 
 $adminmenu[] = [
     'title' => _MI_YOG_ADMENU2,
