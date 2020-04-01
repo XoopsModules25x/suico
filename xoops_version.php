@@ -21,8 +21,8 @@ $moduleDirName = basename(__DIR__);
 // ------------------- Informations ------------------- //
 $modversion = [
     'version'             => 3.4,
-    'module_status'       => 'Beta 2',
-    'release_date'        => '2020/03/28',
+    'module_status'       => 'Beta 3',
+    'release_date'        => '2020/04/01',
     'name'                => _MI_YOGURT_MODULE_NAME,
     'description'         => _MI_YOGURT_MODULEDESC,
     'official'            => 0,
