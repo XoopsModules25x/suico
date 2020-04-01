@@ -125,7 +125,7 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/yogurt.css');
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
-if (preg_match('/msie/', mb_strtolower($_SERVER['HTTP_USER_AGENT']))) {
+if (false !== strpos(mb_strtolower($_SERVER['HTTP_USER_AGENT']), "msie")) {
     $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css');
 }
 
