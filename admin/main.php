@@ -254,15 +254,15 @@ function homedefault()
     $c = explode('.', $b);
     echo "<tr><td class='odd'>";
     if ($c[0] > 4 || (4 == $c[0] && $c[1] > 0)) {
-        echo "<img src='../images/green.gif' align='baseline'> ";
+        echo "<img src='../assets/images/green.gif' align='baseline'> ";
         echo 'Mysql Version:<b>' . $b;
     } else {
-        echo "<img src='../images/red.gif'> ";
+        echo "<img src='../assets/images/red.gif'> ";
         echo 'Mysql Version:<b>' . $b . '</b>. You must use a version higher than 4.1 </td></tr>';
     }
     if (extension_loaded('gd')) {
         echo "        <tr>
-            <td class='even'><img src='../images/green.gif' align='baseline'> " . _MA_YOG_GDEXTENSIONOK . '
+            <td class='even'><img src='../assets/images/green.gif' align='baseline'> " . _MA_YOG_GDEXTENSIONOK . '
 
      ' . _MA_YOG_MOREINFO . " <a href='http://www.libgd.org/Main_Page'> Gd Library</a> </td>
 
@@ -270,20 +270,20 @@ function homedefault()
     } else {
         echo "
 <tr>
-            <td class='even'><img src='../images/red.gif'> " . _MA_YOG_GDEXTENSIONFALSE . ' ' . _MA_YOG_CONFIGPHPINI . '
+            <td class='even'><img src='../assets/images/red.gif'> " . _MA_YOG_GDEXTENSIONFALSE . ' ' . _MA_YOG_CONFIGPHPINI . '
      ' . _MA_YOG_MOREINFO . " <a href='http://www.libgd.org/Main_Page'>Gd Library</a> </td>
 
         </tr>";
     }
     if (str_replace('.', '', PHP_VERSION) > 499) {
         echo "              <tr>
-            <td class='odd'><img src='../images/green.gif' align='baseline'> " . _MA_YOG_PHP5PRESENT . ' ' . PHP_VERSION . '</td>
+            <td class='odd'><img src='../assets/images/green.gif' align='baseline'> " . _MA_YOG_PHP5PRESENT . ' ' . PHP_VERSION . '</td>
 
         </tr>';
     } else {
         echo "
                 <tr>
-            <td class='odd'><img src='../images/red.gif' align='baseline'> " . _MA_YOG_PHP5NOTPRESENT . ' ' . PHP_VERSION . '</td>
+            <td class='odd'><img src='../assets/images/red.gif' align='baseline'> " . _MA_YOG_PHP5NOTPRESENT . ' ' . PHP_VERSION . '</td>
 
         </tr>
 
@@ -294,35 +294,35 @@ function homedefault()
     if ($isframeworksrequirement){
          echo "
            <tr>
-          <td class='even'><img src='../images/green.gif' align='baseline'> ";
+          <td class='even'><img src='../assets/images/green.gif' align='baseline'> ";
              printf(_MA_YOG_FRAMEWORKSTRUE,XOOPS_FRAMEWORKS_VERSION);
               echo "</td>
             </tr>
             ";
     }else {
            echo "<tr>
-                <td class='even'><img src='../images/red.gif' align='baseline'> "._MA_YOG_FRAMEWORKSFALSE."</td>
+                <td class='even'><img src='../assets/images/red.gif' align='baseline'> "._MA_YOG_FRAMEWORKSFALSE."</td>
             </tr>
          ";
     }
     */
     if (!is_dir(XOOPS_ROOT_PATH . '/uploads/yogurt/mp3/')) {
         echo "<tr>
-          <td class='odd'><img src='../images/red.gif'> /uploads/yogurt/mp3/ is not exists</td>
+          <td class='odd'><img src='../assets/images/red.gif'> /uploads/yogurt/mp3/ is not exists</td>
         </tr>";
     } elseif (!is_writable(XOOPS_ROOT_PATH . '/uploads/yogurt/mp3/')) {
         echo "<tr>
-          <td class='odd'><img src='../images/red.gif'> /uploads/yogurt/mp3/ is not writable</td>
+          <td class='odd'><img src='../assets/images/red.gif'> /uploads/yogurt/mp3/ is not writable</td>
         </tr>";
     } else {
         echo "<tr>
-          <td class='odd'><img src='../images/green.gif' align='baseline'> /uploads/yogurt/mp3/ exists and writable</td>
+          <td class='odd'><img src='../assets/images/green.gif' align='baseline'> /uploads/yogurt/mp3/ exists and writable</td>
         </tr>";
     }
 
-    echo "<tr><td class='odd'><img src='../images/messagebox_info.gif'> " . sprintf(_MA_YOG_MAXBYTESPHPINI, ini_get('post_max_size')) . '</td></tr>';
+    echo "<tr><td class='odd'><img src='../assets/images/messagebox_info.gif'> " . sprintf(_MA_YOG_MAXBYTESPHPINI, ini_get('post_max_size')) . '</td></tr>';
     if (function_exists('memory_get_usage')) {
-        echo "<tr><td class='even'><img src='../images/messagebox_info.gif'> " . _MA_YOG_MEMORYLIMIT . ' ' . memory_get_usage() . '</td></tr>';
+        echo "<tr><td class='even'><img src='../assets/images/messagebox_info.gif'> " . _MA_YOG_MEMORYLIMIT . ' ' . memory_get_usage() . '</td></tr>';
     }
     echo '</table>';
 }
