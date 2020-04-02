@@ -67,7 +67,7 @@ if (0 == $nbSections['nbPhotos']) {
     $xoopsTpl->assign('lang_nopicyet', $nopicturesyet);
 } else {
     /**
-     * Lets populate an array with the dati from the pictures
+     * Lets populate an array with the data from the pictures
      */
     $i = 0;
     foreach ($pictures_object_array as $picture) {
@@ -117,7 +117,7 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
 
 /**
- * Criando a barra de navegao caso tenha muitos amigos
+ * Creating the navigation bar if you have a lot of friends
  */
 $barra_navegacao = new \XoopsPageNav($nbSections['nbPhotos'], $xoopsModuleConfig['picturesperpage'], $start, 'start', 'uid=' . (int)$controller->uidOwner);
 $navegacao       = $barra_navegacao->renderImageNav(2);
