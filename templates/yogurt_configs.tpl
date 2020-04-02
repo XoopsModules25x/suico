@@ -55,15 +55,15 @@
 
             </fieldset>
             <br>
-<{*                <fieldset name="sendNotes" id="sendNotes">*}>
-<{*<legend for="sendNotes"><{$lang_configsendNotes}></legend>*}>
+            <{*                <fieldset name="sendNotes" id="sendNotes">*}>
+            <{*<legend for="sendNotes"><{$lang_configsendNotes}></legend>*}>
 
-<{*<p><input type="radio" name="sendNotes" id="sendNotes0" value="0" <{if $sscr==0}>checked<{/if}>>  <label for="sendNotes0"><{$lang_everyone}></label></p>*}>
-<{*<p><input type="radio" name="sendNotes" id="sendNotes1" value="1" <{if $sscr==1}>checked<{/if}>>  <label for="sendNotes1"><{$lang_only_users}></label></p>*}>
-<{*<p><input type="radio" name="sendNotes" id="sendNotes2" value="2" <{if $sscr==2}>checked<{/if}>>  <label for="sendNotes2"><{$lang_only_friends}></label></p>*}>
-<{*<p><input type="radio" name="sendNotes" id="sendNotes3" value="3" <{if $sscr==3}>checked<{/if}>>  <label for="sendNotes3"><{$lang_only_me}></label></p>*}>
+            <{*<p><input type="radio" name="sendNotes" id="sendNotes0" value="0" <{if $sscr==0}>checked<{/if}>>  <label for="sendNotes0"><{$lang_everyone}></label></p>*}>
+            <{*<p><input type="radio" name="sendNotes" id="sendNotes1" value="1" <{if $sscr==1}>checked<{/if}>>  <label for="sendNotes1"><{$lang_only_users}></label></p>*}>
+            <{*<p><input type="radio" name="sendNotes" id="sendNotes2" value="2" <{if $sscr==2}>checked<{/if}>>  <label for="sendNotes2"><{$lang_only_friends}></label></p>*}>
+            <{*<p><input type="radio" name="sendNotes" id="sendNotes3" value="3" <{if $sscr==3}>checked<{/if}>>  <label for="sendNotes3"><{$lang_only_me}></label></p>*}>
 
-<{*</fieldset><br>*}>
+            <{*</fieldset><br>*}>
 
         <{/if}>
 
