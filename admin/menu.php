@@ -46,6 +46,21 @@ $adminmenu[] = [
     'icon'  => $pathIcon32 . '/manage.png',
 ];
 
+// Blocks Admin
+$adminmenu[] = [
+    'title' => constant('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS'),
+    'link' => 'admin/blocksadmin.php',
+    'icon' => $pathIcon32 . '/block.png',
+];
+
+if ($helper->getConfig('displayDeveloperTools')) {
+    $adminmenu[] = [
+        'title' => constant('CO_' . $moduleDirNameUpper . '_' . 'ADMENU_MIGRATE'),
+        'link' => 'admin/migrate.php',
+        'icon' => $pathIcon32 . '/database_go.png',
+    ];
+}
+
 //$adminmenu[] = [
 //    'title' => _MI_YOG_ADMENU2,
 //    'link'  => 'admin/main.php?op=about',
