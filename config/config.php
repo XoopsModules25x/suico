@@ -18,6 +18,7 @@
  */
 $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
+require_once dirname(__DIR__) . '/include/common.php';
 
 return (object)[
     'name'           => mb_strtoupper($moduleDirName) . ' ModuleConfigurator',
@@ -31,14 +32,20 @@ return (object)[
     ],
     'uploadFolders'  => [
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
-        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/category',
-        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/screenshots',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/avatars',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/mp3',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/photos',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/thumbs',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/videos',
         //XOOPS_UPLOAD_PATH . '/flags'
     ],
     'copyBlankFiles' => [
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
-        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/category',
-        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/screenshots',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/avatars',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/mp3',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/photos',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/thumbs',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/videos',
         //XOOPS_UPLOAD_PATH . '/flags'
     ],
 
@@ -73,11 +80,22 @@ return (object)[
         '/js',
         '/tcpdf',
     ],
-
-    'renameTables' => [
+    'renameTables'    => [
         'yogurt_seutubo' => 'yogurt_video',
+        'yogurt_Tribes'  => 'yogurt_tribes',
+        'yogurt_Configs' => 'yogurt_configs',
     ],
-    'moduleStats'  => [
+    'renameColumns'   => [
+        '3.4' => [
+            'yogurt_notes' => [
+                'Note_id'   => 'note_id',
+                'Note_text' => 'yogurt_configs',
+                'Note_from' => 'note_text',
+                'Note_to'   => 'note_from',
+            ],
+        ],
+    ],
+    'moduleStats'     => [
         //            'totalcategories' => $helper->getHandler('Category')->getCategoriesCount(-1),
         //            'totalitems'      => $helper->getHandler('Item')->getItemsCount(),
         //            'totalsubmitted'  => $helper->getHandler('Item')->getItemsCount(-1, [Constants::PUBLISHER_STATUS_SUBMITTED]),

@@ -1,0 +1,293 @@
+yogurt_friendpetition:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: friendpet_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: petitioner_uid
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: petioned_uid
+            attributes: ' int(11)  NOT NULL '
+    keys:
+        PRIMARY:
+            columns: friendpet_id
+            unique: true
+yogurt_friendship:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: friendship_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: friend1_uid
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: friend2_uid
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: level
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: hot
+            attributes: ' tinyint(4)  NOT NULL '
+        -
+            name: trust
+            attributes: ' tinyint(4)  NOT NULL '
+        -
+            name: cool
+            attributes: ' tinyint(4)  NOT NULL '
+        -
+            name: fan
+            attributes: ' tinyint(4)  NOT NULL '
+    keys:
+        PRIMARY:
+            columns: friendship_id
+            unique: true
+yogurt_images:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: cod_img
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: title
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: data_creation
+            attributes: ' date  NOT NULL '
+        -
+            name: data_update
+            attributes: ' date  NOT NULL '
+        -
+            name: uid_owner
+            attributes: ' varchar(50)  NOT NULL '
+        -
+            name: url
+            attributes: ' text  NOT NULL '
+        -
+            name: private
+            attributes: ' varchar(1)  NOT NULL '
+    keys:
+        PRIMARY:
+            columns: cod_img
+            unique: true
+yogurt_visitors:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: cod_visit
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: uid_owner
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: uid_visitor
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: uname_visitor
+            attributes: ' varchar(30)  NOT NULL '
+        -
+            name: datetime
+            attributes: ' timestamp  NOT NULL  DEFAULT ''CURRENT_TIMESTAMP'' '
+    keys:
+        PRIMARY:
+            columns: cod_visit
+            unique: true
+yogurt_seutubo:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: video_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: uid_owner
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: video_desc
+            attributes: ' text  NOT NULL '
+        -
+            name: youtube_code
+            attributes: ' varchar(11)  NOT NULL '
+        -
+            name: main_video
+            attributes: ' varchar(1)  NOT NULL '
+    keys:
+        PRIMARY:
+            columns: video_id
+            unique: true
+yogurt_reltribeuser:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: rel_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: rel_tribe_id
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: rel_user_uid
+            attributes: ' int(11)  NOT NULL '
+    keys:
+        PRIMARY:
+            columns: rel_id
+            unique: true
+yogurt_tribes:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: tribe_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: owner_uid
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: tribe_title
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: tribe_desc
+            attributes: ' tinytext  NOT NULL '
+        -
+            name: tribe_img
+            attributes: ' varchar(255)  NOT NULL '
+    keys:
+        PRIMARY:
+            columns: tribe_id
+            unique: true
+yogurt_notes:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: Note_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: Note_text
+            attributes: ' text  NOT NULL '
+        -
+            name: Note_from
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: Note_to
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: private
+            attributes: ' tinyint(1)  NOT NULL '
+        -
+            name: date
+            attributes: ' timestamp  NOT NULL  DEFAULT ''CURRENT_TIMESTAMP'' '
+    keys:
+        PRIMARY:
+            columns: Note_id
+            unique: true
+yogurt_configs:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: config_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: config_uid
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: pictures
+            attributes: ' tinyint(1)  NOT NULL '
+        -
+            name: audio
+            attributes: ' tinyint(1)  NOT NULL '
+        -
+            name: videos
+            attributes: ' tinyint(1)  NOT NULL '
+        -
+            name: tribes
+            attributes: ' tinyint(1)  NOT NULL '
+        -
+            name: notes
+            attributes: ' tinyint(1)  NOT NULL '
+        -
+            name: friends
+            attributes: ' tinyint(1)  NOT NULL '
+        -
+            name: profile_contact
+            attributes: ' tinyint(1)  NOT NULL '
+        -
+            name: profile_general
+            attributes: ' tinyint(1)  NOT NULL '
+        -
+            name: profile_stats
+            attributes: ' tinyint(1)  NOT NULL '
+        -
+            name: suspension
+            attributes: ' tinyint(1)  NOT NULL '
+        -
+            name: backup_password
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: backup_email
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: end_suspension
+            attributes: ' timestamp  NOT NULL  DEFAULT ''CURRENT_TIMESTAMP'' on update CURRENT_TIMESTAMP'
+    keys:
+        config_uid:
+            columns: config_uid
+            unique: false
+        PRIMARY:
+            columns: config_id
+            unique: true
+yogurt_suspensions:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: uid
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: old_pass
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: old_email
+            attributes: ' varchar(100)  NOT NULL '
+        -
+            name: old_signature
+            attributes: ' text  NOT NULL '
+        -
+            name: suspension_time
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: old_enc_type
+            attributes: ' int(2)  NOT NULL '
+        -
+            name: old_pass_expired
+            attributes: ' int(1)  NOT NULL '
+    keys:
+        PRIMARY:
+            columns: uid
+            unique: true
+yogurt_audio:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: audio_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: title
+            attributes: ' varchar(256)  NOT NULL '
+        -
+            name: author
+            attributes: ' varchar(256)  NOT NULL '
+        -
+            name: url
+            attributes: ' varchar(256)  NOT NULL '
+        -
+            name: uid_owner
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: data_creation
+            attributes: ' date  NOT NULL '
+        -
+            name: data_update
+            attributes: ' date  NOT NULL '
+    keys:
+        PRIMARY:
+            columns: audio_id
+            unique: true
