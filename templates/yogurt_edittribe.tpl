@@ -1,10 +1,10 @@
 <{include file="db:yogurt_navbar.tpl"}>
 
-<form class='outer' name='yogurt-tribe-edit-form' id='yogurt-tribe-edit-form' action='edittribe.php' method='post'  enctype="multipart/form-data">
+<form class='outer' name='yogurt-tribe-edit-form' id='yogurt-tribe-edit-form' action='edittribe.php' method='post' enctype="multipart/form-data">
 
-            <h2 class=head><{$lang_edittribe}></h2>
+    <h2 class=head><{$lang_edittribe}></h2>
 
-        <p class=odd>
+    <p class=odd>
         <label for='' class='xoops-form-element-caption'>
             <span class='caption-text'>
                 <{$lang_tribeimage}>
@@ -13,21 +13,21 @@
             *
             </span>
         </label>
-            <img src="<{$xoops_upload_url}>/<{$tribe_img}>">
-        </p>
-        <p class=even>
-            <label for='' class='xoops-form-element-caption'>
+        <img src="<{$xoops_upload_url}>/<{$tribe_img}>">
+    </p>
+    <p class=even>
+        <label for='' class='xoops-form-element-caption'>
                 <span class='caption-text'>
                     <{$lang_keepimage}>
                 </span>
-                <span class='caption-marker'>
+            <span class='caption-marker'>
                 *
                 </span>
-                </label>
-            <input type='checkbox' value='1' id='flag_oldimg' name='flag_oldimg' onclick="disableElement(img)"  checked>
-        </p>
+        </label>
+        <input type='checkbox' value='1' id='flag_oldimg' name='flag_oldimg' onclick="disableElement(img)" checked>
+    </p>
 
-        <div  >
+    <div>
         <p class="odd">
             <label for='' class='xoops-form-element-caption'>
                 <span class='caption-text'>
@@ -51,73 +51,66 @@
             <input type='file' name='img' id='img' disabled="true">
             <input type='hidden' name='xoops_upload_file[]' id='xoops_upload_file[]' value='img'>
         </p>
-        </div>
-        <p class="odd">
-            <label for='title' class='xoops-form-element-caption'>
+    </div>
+    <p class="odd">
+        <label for='title' class='xoops-form-element-caption'>
                 <span class='caption-text'>
                     <{$lang_titletribe}>
             </span>
-                <span class='caption-marker'>
+            <span class='caption-marker'>
                     *
                 </span>
-            </label>
-            <input type='text' name='title' id='title' size='35' maxlength='55' value='<{$tribe_title}>'>
-        </p>
-        <p class="even">
-            <label for='desc' class='xoops-form-element-caption'>
+        </label>
+        <input type='text' name='title' id='title' size='35' maxlength='55' value='<{$tribe_title}>'>
+    </p>
+    <p class="even">
+        <label for='desc' class='xoops-form-element-caption'>
                 <span class='caption-text'>
                     <{$lang_desctribe}>
                 </span>
-                <span class='caption-marker'>
+            <span class='caption-marker'>
                     *
                 </span>
-            </label>
-            <textarea name='desc' id='desc' rows='5' cols='50'><{$tribe_desc}></textarea>
-        </p>
-            <p class=odd>
-            <input type='submit' class='formButton' name='submit_button'  id='submit_button' value='<{$lang_savetribe}>'>
-            </p>
+        </label>
+        <textarea name='desc' id='desc' rows='5' cols='50'><{$tribe_desc}></textarea>
+    </p>
+    <p class=odd>
+        <input type='submit' class='formButton' name='submit_button' id='submit_button' value='<{$lang_savetribe}>'>
+    </p>
 
-<{$token}>
-<input type='hidden' name='tribe_id' id='tribe_id' value='<{$tribe_id}>'>
-<input type='hidden' name='marker' id='marker' value='1'>
+    <{$token}>
+    <input type='hidden' name='tribe_id' id='tribe_id' value='<{$tribe_id}>'>
+    <input type='hidden' name='marker' id='marker' value='1'>
 </form>
 
 <div id="yogurt-tribe-edit-members" class="outer odd">
-<h2 class="head"><{$lang_membersoftribe}></h2>
-<{section name=i loop=$tribe_members}>
-            <div class="yogurt-tribe-edit-member <{cycle values="odd,even"}>">
-                <h2 class="head">
-                    <{$tribe_members[i].uname}>
-                </h2>
-                <p>
+    <h2 class="head"><{$lang_membersoftribe}></h2>
+    <{section name=i loop=$tribe_members}>
+        <div class="yogurt-tribe-edit-member <{cycle values="odd,even"}>">
+            <h2 class="head">
+                <{$tribe_members[i].uname}>
+            </h2>
+            <p>
 
-                        <img src="<{$xoops_upload_url}>/<{$tribe_members[i].avatar}>">
-                        <p>
-                        <{$tribe_members[i].uname}>
-                        </p>
+                <img src="<{$xoops_upload_url}>/<{$tribe_members[i].avatar}>">
+            <p>
+                <{$tribe_members[i].uname}>
+            </p>
 
-                            <{if $tribe_members[i].isOwner }>
-                            <img src="assets/images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>">
-                            <{else}>
-                            <form action="kickfromtribe.php" method="post">
-                            <input type="hidden" value="<{$tribe_id}>" name="tribe_id" id="tribe_id">
-                            <input type="hidden" value="<{$tribe_members[i].uid}>" name="rel_user_uid" id="rel_user_uid">
-                            <input type="image" src="assets/images/abandontribe.gif">
-                            </form>
-                            <{ /if }>
+            <{if $tribe_members[i].isOwner }>
+                <img src="assets/images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>">
+            <{else}>
+                <form action="kickfromtribe.php" method="post">
+                    <input type="hidden" value="<{$tribe_id}>" name="tribe_id" id="tribe_id">
+                    <input type="hidden" value="<{$tribe_members[i].uid}>" name="rel_user_uid" id="rel_user_uid">
+                    <input type="image" src="assets/images/abandontribe.gif">
+                </form>
+            <{/if}>
 
-                </p>
-            </div>
-        <{/section}>
+            </p>
+        </div>
+    <{/section}>
 </div>
-
-
-
-
-
-
-
 
 
 <{include file="db:yogurt_footer.tpl"}>

@@ -27,6 +27,9 @@ require __DIR__ . '/header.php';
 
 $helper->loadLanguage('user');
 
+$mainvideocode = '';
+$mainvideodesc = '';
+
 //require_once __DIR__ . '/class/yogurt_controller.php';
 //if (!@ require_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/user.php') {
 //    require_once XOOPS_ROOT_PATH . '/language/english/user.php';
@@ -38,6 +41,7 @@ $controller = new \XoopsModules\Yogurt\ControllerIndex($xoopsDB, $xoopsUser);
  * Fetching numbers of tribes friends videos pictures etc...
  */
 $nbSections = $controller->getNumbersSections();
+
 
 /**
  * This variable define the beggining of the navigation must b
@@ -212,7 +216,7 @@ $xoopsTpl->assign('lang_photos', _MD_YOGURT_PHOTOS);
 $xoopsTpl->assign('lang_friends', _MD_YOGURT_FRIENDS);
 $xoopsTpl->assign('lang_audio', _MD_YOGURT_AUDIOS);
 $xoopsTpl->assign('lang_videos', _MD_YOGURT_VIDEOS);
-$xoopsTpl->assign('lang_Notebook', _MD_YOGURT_NOTEBOOK);
+$xoopsTpl->assign('lang_notebook', _MD_YOGURT_NOTEBOOK);
 $xoopsTpl->assign('lang_profile', _MD_YOGURT_PROFILE);
 $xoopsTpl->assign('lang_tribes', _MD_YOGURT_TRIBES);
 $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);

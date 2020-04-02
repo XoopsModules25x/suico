@@ -16,13 +16,14 @@
  * @author       XOOPS Development Team
  * @since
  */
-$moduleDirName = basename(__DIR__);
+$moduleDirName      = basename(__DIR__);
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
 // ------------------- Informations ------------------- //
 $modversion = [
     'version'             => 3.4,
-    'module_status'       => 'Beta 3',
-    'release_date'        => '2020/04/01',
+    'module_status'       => 'Beta 4',
+    'release_date'        => '2020/04/02',
     'name'                => _MI_YOGURT_MODULE_NAME,
     'description'         => _MI_YOGURT_MODULEDESC,
     'official'            => 0,
@@ -79,9 +80,9 @@ $modversion = [
     ],
 
     // ------------------- Install/Update -------------------
-    //    'onInstall'           => 'include/oninstall.php',
-    //    'onUpdate'            => 'include/onupdate.php',
-    //  'onUninstall'         => 'include/onuninstall.php',
+    'onInstall'           => 'include/oninstall.php',
+    'onUpdate'            => 'include/onupdate.php',
+    'onUninstall'         => 'include/onuninstall.php',
     // -------------------  PayPal ---------------------------
     'paypal'              => [
         'business'      => 'xoopsfoundation@gmail.com',
@@ -412,12 +413,36 @@ $modversion['config'][] = [
 ];
 
 $modversion['config'][] = [
-    'name'        => 'Notesperpage',
+    'name'        => 'notesperpage',
     'title'       => '_MI_YOG_NOTESPERPAGE_TITLE',
     'description' => '_MI_YOG_NOTESPERPAGE_DESC',
     'default'     => 20,
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
+];
+
+/**
+ * Make Sample button visible?
+ */
+$modversion['config'][] = [
+    'name'        => 'displaySampleButton',
+    'title'       => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLE_BUTTON',
+    'description' => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLE_BUTTON_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+/**
+ * Show Developer Tools?
+ */
+$modversion['config'][] = [
+    'name'        => 'displayDeveloperTools',
+    'title'       => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_DEV_TOOLS',
+    'description' => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_DEV_TOOLS_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
 ];
 
 $modversion['templates'] = [

@@ -18,7 +18,7 @@ use XoopsModules\Yogurt;
 use XoopsModules\Yogurt\Common;
 use XoopsModules\Yogurt\Utility;
 
-require_once __DIR__ . '/admin_header.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 require dirname(__DIR__) . '/preloads/autoloader.php';
 
 $op = \Xmf\Request::getCmd('op', '');

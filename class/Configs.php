@@ -75,7 +75,7 @@ class Configs extends \XoopsObject
      * @param int    $start
      * @return array
      */
-    public function getAllyogurt_configss($criteria = [], $asobject = false, $sort = 'config_id', $order = 'ASC', $limit = 0, $start = 0)
+    public function getAllyogurt_configs($criteria = [], $asobject = false, $sort = 'config_id', $order = 'ASC', $limit = 0, $start = 0)
     {
         $db          = \XoopsDatabaseFactory::getDatabaseConnection();
         $ret         = [];

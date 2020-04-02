@@ -37,8 +37,9 @@ class Configurator
     public $oldFiles        = [];
     public $oldFolders      = [];
     public $renameTables    = [];
+    public $renameColumns   = [];
     public $moduleStats     = [];
-    public $modCopyright;
+    //    public $modCopyright;
     public $icons;
 
     /**
@@ -63,8 +64,9 @@ class Configurator
         $this->oldFiles        = $config->oldFiles;
         $this->oldFolders      = $config->oldFolders;
         $this->renameTables    = $config->renameTables;
+        $this->renameColumns   = $config->renameColumns;
         $this->moduleStats     = $config->moduleStats;
-        $this->modCopyright    = $config->modCopyright;
+        //        $this->modCopyright    = $config->modCopyright;
 
         $this->icons = include dirname(dirname(__DIR__)) . '/config/icons.php';
         $this->paths = include dirname(dirname(__DIR__)) . '/config/paths.php';

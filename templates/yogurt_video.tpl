@@ -1,41 +1,49 @@
 <{include file="db:yogurt_navbar.tpl"}>
-<{ if $isOwner }>
-    <div id="yogurt-video-form" class="outer">
-        <h2 id="yogurt-video-form-title" class="head">
-            <{$lang_addvideos}>
-        </h2>
-        <form name="form_videos" id="form_videos" action="video_submited.php" method="post" onsubmit="return xoopsFormValidate_form_videos();" enctype="multipart/form-data">
-            <{$token}>
-            <p class="even">
-                <{$lang_videohelp}> <{$xoops_sitename}>.
-            </p>
-            <p class="odd">
-                <label for="codigo">
-                    <{$lang_youtubecodeLabel}>
-                    :
-                </label>
-                <input type='text' name='codigo' id='codigo' size='50' maxlength='250' value=''>
-            </p>
-            <p class="even">
-                <label for="codigo">
-                    <{$lang_captionLabel}>
-                    :
-                </label>
-                <textarea name='caption' id='caption' rows='5' cols='50'></textarea>
-            </p>
-            <p class="foot">
-                <input type='submit' class='formButton' name='submit_button'  id='submit_button' value='<{$lang_submitValue}>'>
-            </p>
-        </form>
-        <!-- Start Form Validation JavaScript //-->
-<script type='text/javascript'>
-<!--//
-function xoopsFormValidate_form_videos() { myform = window.document.form_videos; if ( myform.codigo.value == "" ) { window.alert("Please enter YouTube code"); myform.codigo.focus(); return false; }return true;
-}
-//-->
-</script>
-<!-- End Form Vaidation JavaScript //-->
-    </div>
+<{if $isOwner }>
+<div id="yogurt-video-form" class="outer">
+    <h2 id="yogurt-video-form-title" class="head">
+        <{$lang_addvideos}>
+    </h2>
+    <form name="form_videos" id="form_videos" action="video_submited.php" method="post" onsubmit="return xoopsFormValidate_form_videos();" enctype="multipart/form-data">
+        <{$token}>
+        <p class="even">
+            <{$lang_videohelp}> <{$xoops_sitename}>.
+        </p>
+        <p class="odd">
+            <label for="codigo">
+                <{$lang_youtubecodeLabel}>
+                :
+            </label>
+            <input type='text' name='codigo' id='codigo' size='50' maxlength='250' value=''>
+        </p>
+        <p class="even">
+            <label for="codigo">
+                <{$lang_captionLabel}>
+                :
+            </label>
+            <textarea name='caption' id='caption' rows='5' cols='50'></textarea>
+        </p>
+        <p class="foot">
+            <input type='submit' class='formButton' name='submit_button' id='submit_button' value='<{$lang_submitValue}>'>
+        </p>
+    </form>
+    <!-- Start Form Validation JavaScript //-->
+    <script type='text/javascript'>
+        <!--//
+        function xoopsFormValidate_form_videos() {
+            myform = window.document.form_videos;
+            if (myform.codigo.value == "") {
+                window.alert("Please enter YouTube code");
+                myform.codigo.focus();
+                return false;
+            }
+            return true;
+        }
+
+        //-->
+    </script>
+    <!-- End Form Vaidation JavaScript //-->
+</div>
 <{ /if}>
 
 <div id="yogurt-videos-container" class="outer">
@@ -64,7 +72,7 @@ function xoopsFormValidate_form_videos() { myform = window.document.form_videos;
             <div class="yogurt-video-details">
                 <p class="yogurt-video-desc">
                     <{$videos[i].desc}>
-                </p> <{ if $isOwner==1 }>
+                </p> <{if $isOwner==1 }>
                 <form action="delvideo.php" method="post" id="deleteform" class="yogurt-video-forms">
                     <input type="hidden" value="<{$videos[i].id}>" name="cod_video">
                     <{$token}>

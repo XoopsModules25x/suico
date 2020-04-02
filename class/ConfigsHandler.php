@@ -14,7 +14,7 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 // -------------------------------------------------------------------------
 
 /**
- * yogurt_configshandler class.
+ * ConfigsHandler class.
  * This class provides simple mecanisme for Configs object
  */
 class ConfigsHandler extends \XoopsPersistableObjectHandler
@@ -85,7 +85,8 @@ class ConfigsHandler extends \XoopsPersistableObjectHandler
         }
         $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
         if ($yogurt_configs->isNew()) {
-            // ajout/modification d'un Configs
+            // addition / modification of a Configs
+//            $config_id = null;
             $yogurt_configs = new Configs();
             $format         = 'INSERT INTO %s (config_id, config_uid, pictures, audio, videos, tribes, notes, friends, profile_contact, profile_general, profile_stats, suspension, backup_password, backup_email, end_suspension)';
             $format         .= 'VALUES (%u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %s, %s, %s)';
@@ -176,7 +177,7 @@ class ConfigsHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * retrieve yogurt_configss from the database
+     * retrieve yogurt_configs from the database
      *
      * @param null|\CriteriaElement|\CriteriaCompo  $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool             $id_as_key use the UID as key for the array?
@@ -214,10 +215,10 @@ class ConfigsHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * count yogurt_configss matching a condition
+     * count yogurt_configs matching a condition
      *
      * @param null|\CriteriaElement|\CriteriaCompo  $criteria {@link \CriteriaElement} to match
-     * @return int count of yogurt_configss
+     * @return int count of yogurt_configs
      */
     public function getCount($criteria = null)
     {
@@ -235,7 +236,7 @@ class ConfigsHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * delete yogurt_configss matching a set of conditions
+     * delete yogurt_configs matching a set of conditions
      *
      * @param null|\CriteriaElement|\CriteriaCompo  $criteria {@link \CriteriaElement}
      * @return bool FALSE if deletion failed
