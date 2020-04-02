@@ -163,7 +163,7 @@ define('_MI_YOG_NUMBAUDIO_TITLE', 'Max number of audio for a user');
 define('_MI_YOG_AUDIOSPERPAGE_TITLE', 'Number of mp3 files per page');
 
 //19/04/2008
-define('_MI_YOGURT_MYAUDIOS', 'My audios');
+define('_MI_YOGURT_MYAUDIOS', 'My Audios');
 
 //3.4
 define('_MI_YOGURT_MODULE_NAME', 'Social Network');
