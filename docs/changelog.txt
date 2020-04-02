@@ -1,4 +1,48 @@
-<h5>3.4 Beta 2   [WORK IN PROGRESS - NOT RELEASED]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.3
+<h5>3.4 Beta 4   [WORK IN PROGRESS - NOT RELEASED]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
+<hr>
+- template cleanup (mamba)
+- fix redirection after friendship request (mjoel/mamba)
+- fix config saving (mjoel/mamba)
+- fix missing $this is YogurtController (mamba)
+- type compatibility (mamba)
+
+<h5>3.4 Beta 3   [WORK IN PROGRESS - NOT RELEASED]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
+<hr>
+- Redundant measure unit (mamba)
+- CriteriaElement issues (mamba)
+- Non-optimal regular expression (mamba)
+- Unnecessary double quotes (mamba)
+- moving to XoopsPersistableObjectHandler (mamba)
+- started conversion to \Xmf\Request (mamba)
+- Class autoloading correctness (mamba)
+- Unnecessary boolean check (mamba)
+- null check (mamba)
+- DB renamed table/fields (mamba)
+- moved js, css, and images to /assets (mjoel/mamba)
+- fix redirect to wrong URL after posting in notes (mjoel/mamba)
+- fix for YogurtController, other fixes (mamba)
+- cosmetics (mamba)
+- spelling (mamba)
+- wrong file names (mamba)
+- PhpDocs (mamba)
+- Undefined class (mamba)
+- Typo in Controller (mamba)
+- fixes for wrong regex (mamba)
+- Assignment in condition (mamba)
+- Random API migration (mamba)
+- PhpDoc updates (mamba)
+- Static method called as dynamic (mamba)
+- PSR-12 Missing visibility (mamba)
+- name adjusting (mamba)
+- UTF (mamba)
+- tabs to spaces (mamba)
+- Deprecated HTML tag (mamba)
+- CSS shorthand (mamba)
+- RGB color function instead of #HEX representation (mamba)
+- removed link in menu to the original About  (mjoel/mamba)
+
+
+<h5>3.4 Beta 2   [WORK IN PROGRESS - NOT RELEASED]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
 <hr>
 - namespaces (mamba)
 
