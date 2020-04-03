@@ -33,6 +33,11 @@ class Friendship extends \XoopsObject
      */
     public function __construct($id = null)
     {
+        parent::__construct();
+        /** @var  Helper $helper */
+        $this->helper     = Helper::getInstance();
+        $this->permHelper = new \Xmf\Module\Helper\Permission();
+
         $this->db = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('friendship_id', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('friend1_uid', XOBJ_DTYPE_INT, null, false, 10);
@@ -105,4 +110,44 @@ class Friendship extends \XoopsObject
 
         return $ret;
     }
+
+    /**
+     * Get form
+     *
+     * @param null
+     * @return Yogurt\Form\FriendshipForm
+     */
+    public function getForm()
+    {
+        $form = new Form\FriendshipForm($this);
+        return $form;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getGroupsRead()
+    {
+        //$permHelper = new \Xmf\Module\Helper\Permission();
+        return $this->permHelper->getGroupsForItem('sbcolumns_read', $this->getVar('friendship_id'));
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getGroupsSubmit()
+    {
+        //$permHelper = new \Xmf\Module\Helper\Permission();
+        return $this->permHelper->getGroupsForItem('sbcolumns_submit', $this->getVar('friendship_id'));
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getGroupsModeration()
+    {
+        //$permHelper = new \Xmf\Module\Helper\Permission();
+        return $this->permHelper->getGroupsForItem('sbcolumns_moderation', $this->getVar('friendship_id'));
+    }
+
 }

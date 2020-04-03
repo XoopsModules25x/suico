@@ -103,4 +103,43 @@ class Video extends \XoopsObject
 
         return $ret;
     }
+
+    /**
+     * Get form
+     *
+     * @param null
+     * @return Yogurt\Form\VideoForm
+     */
+    public function getForm()
+    {
+        $form = new Form\VideoForm($this);
+        return $form;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getGroupsRead()
+    {
+        //$permHelper = new \Xmf\Module\Helper\Permission();
+        return $this->permHelper->getGroupsForItem('sbcolumns_read', $this->getVar('video_id'));
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getGroupsSubmit()
+    {
+        //$permHelper = new \Xmf\Module\Helper\Permission();
+        return $this->permHelper->getGroupsForItem('sbcolumns_submit', $this->getVar('video_id'));
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getGroupsModeration()
+    {
+        //$permHelper = new \Xmf\Module\Helper\Permission();
+        return $this->permHelper->getGroupsForItem('sbcolumns_moderation', $this->getVar('video_id'));
+    }
 }

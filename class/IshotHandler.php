@@ -35,21 +35,46 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 class IshotHandler extends \XoopsPersistableObjectHandler
 {
     /**
-     * create a new Ishot
+     * @var Helper
+     */
+    public $helper;
+    public $isAdmin;
+
+    /**
+     * Constructor
+     * @param null|\XoopsDatabase              $db
+     * @param null|\XoopsModules\Yogurt\Helper $helper
+     */
+
+    public function __construct(\XoopsDatabase $db = null, $helper = null)
+    {
+        /** @var \XoopsModules\Yogurt\Helper $this ->helper */
+        if (null === $helper) {
+            $this->helper = \XoopsModules\Yogurt\Helper::getInstance();
+        } else {
+            $this->helper = $helper;
+        }
+        $isAdmin = $this->helper->isUserAdmin();
+        //        parent::__construct($db, 'yogurt_tribes', Image::class, 'tribe_id', 'tribe_title');
+    }
+
+    /**
+     * create a new Tribes
      *
      * @param bool $isNew flag the new objects as "new"?
-     * @return \XoopsObject Ishot
+     * @return \XoopsObject Tribes
      */
     public function create($isNew = true)
     {
-        $yogurt_ishot = new Ishot();
-        if ($isNew) {
-            $yogurt_ishot->setNew();
-        } else {
-            $yogurt_ishot->unsetNew();
-        }
+        {
+            $obj = parent::create($isNew);
+            //        if ($isNew) {
+            //            $obj->setDefaultPermissions();
+            //        }
+            $obj->helper = $this->helper;
 
-        return $yogurt_ishot;
+            return $obj;
+        }
     }
 
     /**
@@ -58,7 +83,7 @@ class IshotHandler extends \XoopsPersistableObjectHandler
      * @param int $id of the Ishot
      * @return mixed reference to the {@link Ishot} object, FALSE if failed
      */
-    public function get($id)
+    public function get($id = null, $fields = null)
     {
         $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_ishot') . ' WHERE cod_ishot=' . $id;
         if (!$result = $this->db->query($sql)) {
@@ -157,10 +182,10 @@ class IshotHandler extends \XoopsPersistableObjectHandler
      * retrieve yogurt_ishots from the database
      *
      * @param null|\CriteriaElement|\CriteriaCompo $criteria  {@link \CriteriaElement} conditions to be met
-     * @param bool         $id_as_key use the UID as key for the array?
+     * @param bool                                 $id_as_key use the UID as key for the array?
      * @return array array of {@link Ishot} objects
      */
-    public function &getObjects($criteria = null, $id_as_key = false)
+    public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
     {
         $ret   = [];
         $limit = $start = 0;
@@ -197,7 +222,7 @@ class IshotHandler extends \XoopsPersistableObjectHandler
      * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link CriteriaElement} to match
      * @return int count of yogurt_ishots
      */
-    public function getCount($criteria = null)
+    public function getCount(\CriteriaElement $criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_ishot');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
@@ -218,7 +243,7 @@ class IshotHandler extends \XoopsPersistableObjectHandler
      * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link CriteriaElement}
      * @return bool FALSE if deletion failed
      */
-    public function deleteAll($criteria = null)
+    public function deleteAll(\CriteriaElement $criteria = null, $force = true, $asObject = false)
     {
         $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_ishot');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {

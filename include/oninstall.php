@@ -14,8 +14,9 @@
  * @license       {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package
  * @since
- * @author       XOOPS Development Team
+ * @author        XOOPS Development Team
  */
+
 use XoopsModules\Yogurt;
 use XoopsModules\Yogurt\Common;
 
@@ -27,7 +28,7 @@ use XoopsModules\Yogurt\Common;
  */
 function xoops_module_pre_install_yogurt(\XoopsModule $module)
 {
-//    include __DIR__ . '/../preloads/autoloader.php';
+    //    include __DIR__ . '/../preloads/autoloader.php';
     include __DIR__ . '/common.php';
     /** @var \XoopsModules\Yogurt\Utility $utility */
     $utility = new \XoopsModules\Yogurt\Utility();
@@ -59,11 +60,10 @@ function xoops_module_install_yogurt(\XoopsModule $module)
 
     $moduleDirName = basename(dirname(__DIR__));
 
-    /** @var \XoopsModules\Yogurt\Helper $helper */
-    /** @var \XoopsModules\Yogurt\Utility $utility */
+    /** @var \XoopsModules\Yogurt\Helper $helper */ /** @var \XoopsModules\Yogurt\Utility $utility */
     /** @var \XoopsModules\Yogurt\Common\Configurator $configurator */
-    $helper = \XoopsModules\Yogurt\Helper::getInstance();
-    $utility = new \XoopsModules\Yogurt\Utility();
+    $helper       = \XoopsModules\Yogurt\Helper::getInstance();
+    $utility      = new \XoopsModules\Yogurt\Utility();
     $configurator = new \XoopsModules\Yogurt\Common\Configurator();
     // Load language files
     $helper->loadLanguage('admin');

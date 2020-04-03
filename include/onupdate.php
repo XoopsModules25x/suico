@@ -16,10 +16,11 @@
  * @since
  * @author       XOOPS Development Team
  */
+
 use XoopsModules\Yogurt;
 
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof XoopsUser)
-    || !$GLOBALS['xoopsUser']->IsAdmin()) {
+    || !$GLOBALS['xoopsUser']->isAdmin()) {
     exit('Restricted access' . PHP_EOL);
 }
 
@@ -45,18 +46,18 @@ function xoops_module_pre_update_yogurt(\XoopsModule $module)
     $moduleDirName = basename(dirname(__DIR__));
     /** @var Yogurt\Helper $helper */
     /** @var Yogurt\Utility $utility */
-    $helper = Yogurt\Helper::getInstance();
+    $helper  = Yogurt\Helper::getInstance();
     $utility = new Yogurt\Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);
-    $phpSuccess = $utility::checkVerPhp($module);
+    $phpSuccess   = $utility::checkVerPhp($module);
 
     /** @var \XoopsModules\Yogurt\Common\Configurator $configurator */
     $configurator = new \XoopsModules\Yogurt\Common\Configurator();
 
     $migrator = new \XoopsModules\Yogurt\Common\Migrate($configurator);
-    
-//    $migrator = new \XoopsModules\Yogurt\Common\Migrate();
+
+    //    $migrator = new \XoopsModules\Yogurt\Common\Migrate();
     $migrator->synchronizeSchema();
 
     return $xoopsSuccess && $phpSuccess;
@@ -65,20 +66,20 @@ function xoops_module_pre_update_yogurt(\XoopsModule $module)
 /**
  * Performs tasks required during update of the module
  * @param \XoopsModule $module {@link XoopsModule}
- * @param null        $previousVersion
+ * @param null         $previousVersion
  *
  * @return bool true if update successful, false if not
  */
 function xoops_module_update_yogurt(\XoopsModule $module, $previousVersion = null)
 {
-    $moduleDirName = basename(dirname(__DIR__));
+    $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
     /** @var Yogurt\Helper $helper */
     /** @var Yogurt\Utility $utility */
     /** @var Yogurt\Common\Configurator $configurator */
-    $helper = Yogurt\Helper::getInstance();
-    $utility = new Yogurt\Utility();
+    $helper       = Yogurt\Helper::getInstance();
+    $utility      = new Yogurt\Utility();
     $configurator = new Yogurt\Common\Configurator();
 
     $helper->loadLanguage('common');
@@ -88,17 +89,17 @@ function xoops_module_update_yogurt(\XoopsModule $module, $previousVersion = nul
 
     if ($previousVersion < 350) {
         //rename column EXAMPLE
-//        $tables = new Tables();
-//        $table = 'xxxx_categories';
-//        $column = 'order';
-//        $newName = 'order';
-//        $attributes = "INT(5) NOT NULL DEFAULT '0'";
-//        if ($tables->useTable($table)) {
-//            $tables->alterColumn($table, $column, $attributes, $newName);
-//            if (!$tables->executeQueue()) {
-//                echo '<br>' . constant('CO_' . $moduleDirNameUpper . '_UPGRADEFAILED0') . ' ' . $migrate->getLastError();
-//            }
-//        }
+        //        $tables = new Tables();
+        //        $table = 'xxxx_categories';
+        //        $column = 'order';
+        //        $newName = 'order';
+        //        $attributes = "INT(5) NOT NULL DEFAULT '0'";
+        //        if ($tables->useTable($table)) {
+        //            $tables->alterColumn($table, $column, $attributes, $newName);
+        //            if (!$tables->executeQueue()) {
+        //                echo '<br>' . constant('CO_' . $moduleDirNameUpper . '_UPGRADEFAILED0') . ' ' . $migrate->getLastError();
+        //            }
+        //        }
 
         //delete old HTML templates
         if (count($configurator->templateFolders) > 0) {

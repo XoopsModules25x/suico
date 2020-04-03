@@ -34,10 +34,38 @@ $helper->loadLanguage('admin');
 $helper->loadLanguage('modinfo');
 $helper->loadLanguage('common');
 
-$myts = MyTextSanitizer::getInstance();
+$db = \XoopsDatabaseFactory::getDatabaseConnection();
 
-if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
-    require_once $GLOBALS['xoops']->path('class/template.php');
+$pathIcon16    = \Xmf\Module\Admin::iconUrl('', 16);
+$pathIcon32    = \Xmf\Module\Admin::iconUrl('', 32);
+$pathModIcon32 = $helper->getModule()->getInfo('modicons32');
+
+/** @var \XoopsPersistableObjectHandler $imagesHandler */
+$imagesHandler = $helper->getHandler('Images');
+/** @var \XoopsPersistableObjectHandler $friendshipHandler */
+$friendshipHandler = $helper->getHandler('Friendship');
+/** @var \XoopsPersistableObjectHandler $visitorsHandler */
+$visitorsHandler = $helper->getHandler('Visitors');
+/** @var \XoopsPersistableObjectHandler $videoHandler */
+$videoHandler = $helper->getHandler('Video');
+/** @var \XoopsPersistableObjectHandler $friendpetitionHandler */
+$friendpetitionHandler = $helper->getHandler('Friendpetition');
+/** @var \XoopsPersistableObjectHandler $tribesHandler */
+$tribesHandler = $helper->getHandler('Tribes');
+/** @var \XoopsPersistableObjectHandler $reltribeuserHandler */
+$reltribeuserHandler = $helper->getHandler('Reltribeuser');
+/** @var \XoopsPersistableObjectHandler $notesHandler */
+$notesHandler = $helper->getHandler('Notes');
+/** @var \XoopsPersistableObjectHandler $configsHandler */
+$configsHandler = $helper->getHandler('Configs');
+/** @var \XoopsPersistableObjectHandler $suspensionsHandler */
+$suspensionsHandler = $helper->getHandler('Suspensions');
+/** @var \XoopsPersistableObjectHandler $audioHandler */
+$audioHandler = $helper->getHandler('Audio');
+
+$myts = \MyTextSanitizer::getInstance();
+if (!isset($xoopsTpl) || !is_object($xoopsTpl)) {
+    require XOOPS_ROOT_PATH . '/class/template.php';
     $xoopsTpl = new \XoopsTpl();
 }
 
