@@ -323,7 +323,7 @@ class FriendshipHandler extends \XoopsPersistableObjectHandler
 
         $form = new \XoopsThemeForm(_MD_YOGURT_EDITFRIENDSHIP, 'form_editfriendship', 'editfriendship.php', 'post', true);
         //$field_friend_avatar      = new XoopsFormLabel(_MD_YOGURT_PHOTO, "<img src=../../uploads/".$friend->getVar('user_avatar').">");
-        if ('blank.gif' == $friend->getVar('user_avatar')) {
+        if ('avatars/blank.gif' == $friend->getVar('user_avatar')) {
             $field_friend_avatar = new \XoopsFormLabel(_MD_YOGURT_PHOTO, '<img src=assets/images/noavatar.gif>');
         } else {
             $field_friend_avatar = new \XoopsFormLabel(_MD_YOGURT_PHOTO, '<img src=../../uploads/' . $friend->getVar('user_avatar') . '>');
