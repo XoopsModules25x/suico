@@ -347,6 +347,7 @@ $xoopsTpl->assign('lang_signature', _US_SIGNATURE);
 $var = $thisUser->getVar('user_sig', 'N');
 $xoopsTpl->assign('user_signature', $myts->displayTarea($var, 0, 1, 1));
 
+$xoopsTpl->assign('user_viewemail', $thisUser->getVar('user_viewemail', 'E'));
 if (1 == $thisUser->getVar('user_viewemail')) {
     $xoopsTpl->assign('user_email', $thisUser->getVar('email', 'E'));
 } else {

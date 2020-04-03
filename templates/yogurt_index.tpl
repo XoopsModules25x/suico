@@ -127,10 +127,21 @@
     <{/if}>
     <{if $allow_profile_contact==1}>
         <div id="yogurt-profile-details" class="outer">
-            <h2 class="yogurt-profile-title head"><{$lang_contactinfo}> <{if $isOwner==1 }><a href="edituser.php" title="<{$lang_editprofile}>"><img src="assets/images/edit.gif"></a><{/if}></h2>
-            <p class="even"><img src="assets/images/url.gif"> <span class="yogurt-profileinfo-label"><{$lang_website}>:</span><span class="yogurt-profileinfo-value"><{$user_websiteurl}></span></p>
-            <p class="odd"><img src="assets/images/email.gif"> <span class="yogurt-profileinfo-label"><{$lang_email}>:</span><span class="yogurt-profileinfo-value"><{ mailto address=$user_email encode="javascript"}></span></p>
-            <{if $isanonym!=1 && $isOwner!=1 }>
+            <{if $user_email}>
+			 <{if $user_viewemail!='0'}>
+			<h2 class="yogurt-profile-title head"><{$lang_contactinfo}> <{if $isOwner==1 }><a href="edituser.php" title="<{$lang_editprofile}>"><img src="assets/images/edit.gif"></a><{/if}></h2>
+             <{/if}>
+			<{/if}>
+			
+			<{if $user_website}>
+			    <p class="even"><img src="assets/images/url.gif"> <span class="yogurt-profileinfo-label"><{$lang_website}>:</span><span class="yogurt-profileinfo-value"><{$user_websiteurl}></span></p>
+            <{/if}>
+			<{if $user_email}>
+			 <{if $user_viewemail!='0'}>
+			<p class="odd"><img src="assets/images/email.gif"> <span class="yogurt-profileinfo-label"><{$lang_email}>:</span><span class="yogurt-profileinfo-value"><{ mailto address=$user_email encode="javascript"}></span></p>
+             <{/if}>
+			<{/if}>
+			<{if $isanonym!=1 && $isOwner!=1 }>
                 <p class="even"><img src="assets/images/email.gif"> <span class="yogurt-profileinfo-label"><{$lang_privmsg}>:</span><span class="yogurt-profileinfo-value"><a href="javascript:openWithSelfMain('<{$xoops_url}>/pmlite.php?send2=1&amp;to_userid=<{$uid_owner}>', 'pmlite', 450, 380);"><img
                                     src="<{$xoops_url}>/images/icons/pm.gif" alt="Send Private Message to suico"></a></span></p>
             <{/if}>
