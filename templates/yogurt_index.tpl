@@ -87,6 +87,7 @@
 
 
     <{if ($isOwner==1) }>
+	     <{if $visitors}>
         <div id="yogurt-album-visitors" class="outer">
             <h2 class="head"><{$lang_visitors}></h2>
             <p>
@@ -96,6 +97,7 @@
                 <{/foreach}>
             </p>
         </div>
+		 <{/if}>
     <{/if}>
 
 
