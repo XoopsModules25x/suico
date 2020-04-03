@@ -21,7 +21,7 @@
         <{if $isOwner}>
             <{$lang_mysection}>
         <{else}>
-            <{$owner_uname}><{$section_name}>
+            <{$owner_uname}> <{$section_name}>
         <{/if}>
     </h2>
     <{if $lang_nopicyet=="" }>
