@@ -43,7 +43,7 @@
                 </div>
                 <div class="yogurt-Note-details-texts">
                     <p class="yogurt-Note-text"><img src="assets/images/notes.gif" alt="<{$section_name}>" title="<{$section_name}>">
-                        &nbsp;<{$notes[i].text}>
+                        &nbsp;<{$notes[i].text}><br>&nbsp;<small><{$notes[i].date}></small>
                         <a name="replyform<{$notes[i].id}>" id="replyform<{$notes[i].id}>"></a>
                     </p>
                     <{if $isOwner==1}>
