@@ -21,21 +21,46 @@ require_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';
 class NotesHandler extends \XoopsPersistableObjectHandler
 {
     /**
-     * create a new Notes
+     * @var Helper
+     */
+    public $helper;
+    public $isAdmin;
+
+    /**
+     * Constructor
+     * @param null|\XoopsDatabase              $db
+     * @param null|\XoopsModules\Yogurt\Helper $helper
+     */
+
+    public function __construct(\XoopsDatabase $db = null, $helper = null)
+    {
+        /** @var \XoopsModules\Yogurt\Helper $this ->helper */
+        if (null === $helper) {
+            $this->helper = \XoopsModules\Yogurt\Helper::getInstance();
+        } else {
+            $this->helper = $helper;
+        }
+        $isAdmin = $this->helper->isUserAdmin();
+        parent::__construct($db, 'yogurt_notes', Notes::class, 'note_id', 'note_id');
+    }
+
+    /**
+     * create a new Tribes
      *
      * @param bool $isNew flag the new objects as "new"?
-     * @return \XoopsModules\Yogurt\Notes
+     * @return \XoopsObject Tribes
      */
     public function create($isNew = true)
     {
-        $yogurt_notes = new Notes();
-        if ($isNew) {
-            $yogurt_notes->setNew();
-        } else {
-            $yogurt_notes->unsetNew();
-        }
+        {
+            $obj = parent::create($isNew);
+            //        if ($isNew) {
+            //            $obj->setDefaultPermissions();
+            //        }
+            $obj->helper = $this->helper;
 
-        return $yogurt_notes;
+            return $obj;
+        }
     }
 
     /**
@@ -44,7 +69,7 @@ class NotesHandler extends \XoopsPersistableObjectHandler
      * @param int $id of theNotes
      * @return mixed reference to the {@linkNotes} object, FALSE if failed
      */
-    public function get($id)
+    public function get($id = null, $fields = null)
     {
         $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_notes') . ' WHERE note_id=' . $id;
         if (!$result = $this->db->query($sql)) {
@@ -151,10 +176,10 @@ class NotesHandler extends \XoopsPersistableObjectHandler
      * retrieve yogurt_notes from the database
      *
      * @param null|\CriteriaElement|\CriteriaCompo $criteria  {@link CriteriaElement} conditions to be met
-     * @param bool         $id_as_key use the UID as key for the array?
+     * @param bool                                 $id_as_key use the UID as key for the array?
      * @return array array of {@linkNotes} objects
      */
-    public function &getObjects($criteria = null, $id_as_key = false)
+    public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
     {
         $ret   = [];
         $limit = $start = 0;
@@ -191,7 +216,7 @@ class NotesHandler extends \XoopsPersistableObjectHandler
      * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link CriteriaElement} to match
      * @return int count of yogurt_notes
      */
-    public function getCount($criteria = null)
+    public function getCount(\CriteriaElement $criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_notes');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
@@ -212,7 +237,7 @@ class NotesHandler extends \XoopsPersistableObjectHandler
      * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link CriteriaElement}
      * @return bool FALSE if deletion failed
      */
-    public function deleteAll($criteria = null)
+    public function deleteAll(\CriteriaElement $criteria = null, $force = true, $asObject = false)
     {
         $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_notes');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
@@ -226,7 +251,7 @@ class NotesHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * @param $nbNotes
+     * @param                                      $nbNotes
      * @param null|\CriteriaElement|\CriteriaCompo $criteria
      * @return array
      */

@@ -42,7 +42,75 @@ $adminObject->addInfoBox(_AM_YOGURT_STATISTICS);
 $adminObject->addInfoBoxLine(sprintf(_AM_YOGURT_THEREARE_QUOTES, $quotesCount));
 */
 
+//count "total Images"
+/** @var \XoopsPersistableObjectHandler $imagesHandler */
+$totalImages = $imagesHandler->getCount();
+//count "total Friendship"
+/** @var \XoopsPersistableObjectHandler $friendshipHandler */
+$totalFriendship = $friendshipHandler->getCount();
+//count "total Visitors"
+/** @var \XoopsPersistableObjectHandler $visitorsHandler */
+$totalVisitors = $visitorsHandler->getCount();
+//count "total Video"
+/** @var \XoopsPersistableObjectHandler $videoHandler */
+$totalVideo = $videoHandler->getCount();
+//count "total Friendpetition"
+/** @var \XoopsPersistableObjectHandler $friendpetitionHandler */
+$totalFriendpetition = $friendpetitionHandler->getCount();
+//count "total Tribes"
+/** @var \XoopsPersistableObjectHandler $tribesHandler */
+$totalTribes = $tribesHandler->getCount();
+//count "total Reltribeuser"
+/** @var \XoopsPersistableObjectHandler $reltribeuserHandler */
+$totalReltribeuser = $reltribeuserHandler->getCount();
+//count "total Notes"
+/** @var \XoopsPersistableObjectHandler $notesHandler */
+$totalNotes = $notesHandler->getCount();
+//count "total Configs"
+/** @var \XoopsPersistableObjectHandler $configsHandler */
+$totalConfigs = $configsHandler->getCount();
+//count "total Suspensions"
+/** @var \XoopsPersistableObjectHandler $suspensionsHandler */
+$totalSuspensions = $suspensionsHandler->getCount();
+//count "total Audio"
+/** @var \XoopsPersistableObjectHandler $audioHandler */
+$totalAudio = $audioHandler->getCount();
+// InfoBox Statistics
+$adminObject->addInfoBox(AM_YOGURT_STATISTICS);
 
+// InfoBox images
+$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_IMAGES, $totalImages));
+
+// InfoBox friendship
+$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_FRIENDS, $totalFriendship));
+
+// InfoBox visitors
+$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_VISITORS, $totalVisitors));
+
+// InfoBox video
+$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_VIDEO, $totalVideo));
+
+// InfoBox friendpetition
+$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_INVITATIONS, $totalFriendpetition));
+
+// InfoBox tribes
+$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_TRIBES, $totalTribes));
+
+// InfoBox reltribeuser
+$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_MEMBERS, $totalReltribeuser));
+
+// InfoBox notes
+$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_NOTES, $totalNotes));
+
+// InfoBox configs
+$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_CONFIGS, $totalConfigs));
+
+// InfoBox suspensions
+$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_SUSPENSIONS, $totalSuspensions));
+
+// InfoBox audio
+$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_AUDIO, $totalAudio));
+// Render Index
 $adminObject->displayNavigation(basename(__FILE__));
 
 //check for latest release

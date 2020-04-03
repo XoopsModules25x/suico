@@ -20,6 +20,30 @@ if (!defined('XOOPS_ROOT_PATH')) {
 class TribesHandler extends \XoopsPersistableObjectHandler
 {
     /**
+     * @var Helper
+     */
+    public $helper;
+    public $isAdmin;
+
+    /**
+     * Constructor
+     * @param null|\XoopsDatabase              $db
+     * @param null|\XoopsModules\Yogurt\Helper $helper
+     */
+
+    public function __construct(\XoopsDatabase $db = null, $helper = null)
+    {
+        /** @var \XoopsModules\Yogurt\Helper $this ->helper */
+        if (null === $helper) {
+            $this->helper = \XoopsModules\Yogurt\Helper::getInstance();
+        } else {
+            $this->helper = $helper;
+        }
+        $isAdmin = $this->helper->isUserAdmin();
+        parent::__construct($db, 'yogurt_tribes', Tribes::class, 'tribe_id', 'tribe_title');
+    }
+
+    /**
      * create a new Tribes
      *
      * @param bool $isNew flag the new objects as "new"?
@@ -27,14 +51,15 @@ class TribesHandler extends \XoopsPersistableObjectHandler
      */
     public function create($isNew = true)
     {
-        $yogurt_tribes = new Tribes();
-        if ($isNew) {
-            $yogurt_tribes->setNew();
-        } else {
-            $yogurt_tribes->unsetNew();
-        }
+        {
+            $obj = parent::create($isNew);
+            //        if ($isNew) {
+            //            $obj->setDefaultPermissions();
+            //        }
+            $obj->helper = $this->helper;
 
-        return $yogurt_tribes;
+            return $obj;
+        }
     }
 
     /**
@@ -43,7 +68,7 @@ class TribesHandler extends \XoopsPersistableObjectHandler
      * @param int $id of the Tribes
      * @return mixed reference to the {@link Tribes} object, FALSE if failed
      */
-    public function get($id)
+    public function get($id = null, $fields = null)
     {
         $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_tribes') . ' WHERE tribe_id=' . $id;
         if (!$result = $this->db->query($sql)) {
@@ -141,11 +166,11 @@ class TribesHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve yogurt_tribess from the database
      *
-     * @param null|\CriteriaElement|\CriteriaCompo  $criteria  {@link \CriteriaElement} conditions to be met
-     * @param bool             $id_as_key use the UID as key for the array?
+     * @param null|\CriteriaElement|\CriteriaCompo $criteria  {@link \CriteriaElement} conditions to be met
+     * @param bool                                 $id_as_key use the UID as key for the array?
      * @return array array of {@link Tribes} objects
      */
-    public function &getObjects($criteria = null, $id_as_key = false)
+    public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
     {
         $ret   = [];
         $limit = $start = 0;
@@ -179,8 +204,8 @@ class TribesHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve yogurt_tribess from the database
      *
-     * @param null|\CriteriaElement|\CriteriaCompo  $criteria  {@link \CriteriaElement} conditions to be met
-     * @param bool             $id_as_key use the UID as key for the array?
+     * @param null|\CriteriaElement|\CriteriaCompo $criteria  {@link \CriteriaElement} conditions to be met
+     * @param bool                                 $id_as_key use the UID as key for the array?
      * @return array array of {@link Tribes} objects
      */
     public function getTribes($criteria = null, $id_as_key = false)
@@ -217,10 +242,10 @@ class TribesHandler extends \XoopsPersistableObjectHandler
     /**
      * count yogurt_tribess matching a condition
      *
-     * @param null|\CriteriaElement|\CriteriaCompo  $criteria {@link \CriteriaElement} to match
+     * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link \CriteriaElement} to match
      * @return int count of yogurt_tribess
      */
-    public function getCount($criteria = null)
+    public function getCount(\CriteriaElement $criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_tribes');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
@@ -238,10 +263,10 @@ class TribesHandler extends \XoopsPersistableObjectHandler
     /**
      * delete yogurt_tribess matching a set of conditions
      *
-     * @param null|\CriteriaElement|\CriteriaCompo  $criteria {@link \CriteriaElement}
+     * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link \CriteriaElement}
      * @return bool FALSE if deletion failed
      */
-    public function deleteAll($criteria = null)
+    public function deleteAll(\CriteriaElement $criteria = null, $force = true, $asObject = false)
     {
         $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_tribes');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {

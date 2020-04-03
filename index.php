@@ -42,7 +42,6 @@ $controller = new \XoopsModules\Yogurt\ControllerIndex($xoopsDB, $xoopsUser);
  */
 $nbSections = $controller->getNumbersSections();
 
-
 /**
  * This variable define the beggining of the navigation must b
  * setted here so all calls to database will take this into account
