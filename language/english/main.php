@@ -26,7 +26,7 @@ define('_MD_YOGURT_YOUCANUPLOAD', "You can only upload jpg's files and up to %s 
 define('_MD_YOGURT_UPLOADPICTURE', 'Upload Picture');
 define(
     '_MD_YOGURT_NOCACHACA',
-    'Bad, Bad Module...No cacha�a for you!<br>
+    'Bad, Bad Module...No cache for you!<br>
 Unfortunately, this module has acted in an unexpected way. Hopefully it will return to its helpful self if you try again. '
 ); //Funny general error message
 define('_MD_YOGURT_PAGETITLE', "%s - %s's Social Network");
@@ -46,7 +46,6 @@ define('_MD_YOGURT_CONFIGSTITLE', 'Settings');
 ##################################################### PICTURES #######################################################
 //submit.php (for pictures submission
 define('_MD_YOGURT_UPLOADED', 'Upload Successful');
-
 
 //delpicture.php
 define('_MD_YOGURT_ASKCONFIRMDELETION', 'Are you sure you want to delete this picture?');

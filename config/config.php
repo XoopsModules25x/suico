@@ -33,6 +33,7 @@ return (object)[
     'uploadFolders'  => [
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/avatars',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/mp3',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/photos',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/thumbs',
@@ -42,6 +43,7 @@ return (object)[
     'copyBlankFiles' => [
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/avatars',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/mp3',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/photos',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/thumbs',
@@ -100,6 +102,6 @@ return (object)[
         //            'totalitems'      => $helper->getHandler('Item')->getItemsCount(),
         //            'totalsubmitted'  => $helper->getHandler('Item')->getItemsCount(-1, [Constants::PUBLISHER_STATUS_SUBMITTED]),
     ],
-    'modCopyright' => "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>
+    'modCopyright'    => "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>
                      <img src='" . constant($moduleDirNameUpper . '_AUTHOR_LOGOIMG') . "' alt='XOOPS Project'></a>",
 ];

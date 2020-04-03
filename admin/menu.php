@@ -41,6 +41,72 @@ $adminmenu[] = [
 ];
 
 $adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU2,
+    'link'  => 'admin/images.php',
+    'icon'  => "{$pathIcon32}/photo.png",
+];
+
+$adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU3,
+    'link'  => 'admin/friendship.php',
+    'icon'  => "{$pathIcon32}/users.png",
+];
+
+$adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU4,
+    'link'  => 'admin/visitors.php',
+    'icon'  => "{$pathIcon32}/user-icon.png",
+];
+
+$adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU5,
+    'link'  => 'admin/video.php',
+    'icon'  => "{$pathIcon32}/marquee.png",
+];
+
+$adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU6,
+    'link'  => 'admin/friendpetition.php',
+    'icon'  => "{$pathIcon32}/face-smile.png",
+];
+
+$adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU7,
+    'link'  => 'admin/tribes.php',
+    'icon'  => "{$pathIcon32}/groupmod.png",
+];
+
+$adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU8,
+    'link'  => 'admin/reltribeuser.php',
+    'icon'  => "{$pathIcon32}/penguin.png",
+];
+
+$adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU9,
+    'link'  => 'admin/notes.php',
+    'icon'  => "{$pathIcon32}/translations.png",
+];
+
+$adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU10,
+    'link'  => 'admin/configs.php',
+    'icon'  => "{$pathIcon32}/administration.png",
+];
+
+$adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU11,
+    'link'  => 'admin/suspensions.php',
+    'icon'  => "{$pathIcon32}/alert.png",
+];
+
+$adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU12,
+    'link'  => 'admin/audio.php',
+    'icon'  => "{$pathIcon32}/playlist.png",
+];
+
+$adminmenu[] = [
     'title' => _MI_YOG_MENU_02,
     'link'  => 'admin/main.php',
     'icon'  => $pathIcon32 . '/manage.png',
@@ -49,15 +115,15 @@ $adminmenu[] = [
 // Blocks Admin
 $adminmenu[] = [
     'title' => constant('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS'),
-    'link' => 'admin/blocksadmin.php',
-    'icon' => $pathIcon32 . '/block.png',
+    'link'  => 'admin/blocksadmin.php',
+    'icon'  => $pathIcon32 . '/block.png',
 ];
 
 if ($helper->getConfig('displayDeveloperTools')) {
     $adminmenu[] = [
         'title' => constant('CO_' . $moduleDirNameUpper . '_' . 'ADMENU_MIGRATE'),
-        'link' => 'admin/migrate.php',
-        'icon' => $pathIcon32 . '/database_go.png',
+        'link'  => 'admin/migrate.php',
+        'icon'  => $pathIcon32 . '/database_go.png',
     ];
 }
 

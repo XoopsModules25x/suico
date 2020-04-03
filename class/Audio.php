@@ -98,4 +98,43 @@ class Audio extends \XoopsObject
 
         return $ret;
     }
+
+    /**
+     * Get form
+     *
+     * @param null
+     * @return Yogurt\Form\AudioForm
+     */
+    public function getForm()
+    {
+        $form = new Form\AudioForm($this);
+        return $form;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getGroupsRead()
+    {
+        //$permHelper = new \Xmf\Module\Helper\Permission();
+        return $this->permHelper->getGroupsForItem('sbcolumns_read', $this->getVar('audio_id'));
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getGroupsSubmit()
+    {
+        //$permHelper = new \Xmf\Module\Helper\Permission();
+        return $this->permHelper->getGroupsForItem('sbcolumns_submit', $this->getVar('audio_id'));
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getGroupsModeration()
+    {
+        //$permHelper = new \Xmf\Module\Helper\Permission();
+        return $this->permHelper->getGroupsForItem('sbcolumns_moderation', $this->getVar('audio_id'));
+    }
 }

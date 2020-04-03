@@ -11,11 +11,12 @@
     <p id="yogurt-tribe-desc" class="even">
         <{$tribe_desc}>
         <{if $isanonym!=1 }>
-    <{if $memberOfTribe ==1}>
+        <{if $memberOfTribe ==1}>
     <form action="abandontribe.php" method="POST" id="form_abandontribe">
         <input type="hidden" value="<{$tribe_id}>" name="reltribe_id" id="reltribe_id">
         <input type="image" src="assets/images/abandontribe.gif" title="<{$lang_abandontribe}>" alt="<{$lang_abandontribe}>">
-    </form><{ else}>
+    </form>
+    <{ else}>
     <form action="becomemembertribe.php" method="POST" id="form_becomemember" class="yogurt-tribes-form-becomemember">
         <input type="hidden" value="<{$tribe_id}>" name="tribe_id" id="tribe_id">
         <input type="image" src="assets/images/makememember.gif" alt="<{$lang_jointribe}>" title="<{$lang_jointribe}>">

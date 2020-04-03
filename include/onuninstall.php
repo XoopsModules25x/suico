@@ -9,6 +9,7 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
 /**
  * uninstall.php - cleanup on module uninstall
  *
@@ -17,6 +18,7 @@
  * @license         {@link http://www.fsf.org/copyleft/gpl.html GNU public license}
  * @link            https://xoops.org XOOPS
  */
+
 use XoopsModules\Yogurt;
 
 /**
@@ -40,13 +42,13 @@ function xoops_module_pre_uninstall_yogurt(\XoopsModule $module)
 function xoops_module_uninstall_yogurt(\XoopsModule $module)
 {
     include __DIR__ . '/common.php';
-    $moduleDirName = basename(dirname(__DIR__));
+    $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
     /** @var Yogurt\Helper $helper */
-    $helper = Yogurt\Helper::getInstance();
+    $helper  = Yogurt\Helper::getInstance();
     $utility = new Yogurt\Utility();
-//    $configurator = new Yogurt\Common\Configurator();
+    //    $configurator = new Yogurt\Common\Configurator();
     // Load language files
     $helper->loadLanguage('admin');
     $helper->loadLanguage('common');

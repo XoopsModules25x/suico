@@ -1,6 +1,3 @@
-
-
-
 CREATE TABLE `yogurt_friendship` (
   `friendship_id` INT(11)    NOT NULL AUTO_INCREMENT,
   `friend1_uid`   INT(11)    NOT NULL,
@@ -69,7 +66,6 @@ CREATE TABLE `yogurt_tribes` (
   `tribe_title` VARCHAR(255) NOT NULL,
   `tribe_desc`  TINYTEXT     NOT NULL,
   `tribe_img`   VARCHAR(255) NOT NULL,
-
   PRIMARY KEY (`tribe_id`)
 )
   ENGINE = MyISAM;
@@ -107,13 +103,13 @@ CREATE TABLE `yogurt_configs` (
   ENGINE = MyISAM;
 
 CREATE TABLE `yogurt_suspensions` (
-  `uid`              INT(11)      NOT NULL,
+  `uid` INT (11)     NOT NULL  AUTO_INCREMENT,
   `old_pass`         VARCHAR(255) NOT NULL,
   `old_email`        VARCHAR(100) NOT NULL,
   `old_signature`    TEXT         NOT NULL,
   `suspension_time`  INT(11)      NOT NULL,
-  `old_enc_type`     INT(2)       NOT NULL,
-  `old_pass_expired` INT(1)       NOT NULL,
+  `old_enc_type`     INT(2)       NOT NULL DEFAULT 0,
+  `old_pass_expired` INT(1)       NOT NULL DEFAULT 0,
   PRIMARY KEY (`uid`)
 )
   ENGINE = MyISAM;

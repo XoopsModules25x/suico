@@ -55,7 +55,6 @@
             <{if $allow_tribes !=-1 }>
                 <li <{if $allow_tribes ==0 }>class="tabs-disabled"<{/if}><{if $section_name==$lang_tribes}>class="tabs-selected" <{/if}>> <a href="tribes.php?uid=<{$uid_owner}>"><span><img class="yogurt-nav-bar-icon" src="assets/images/tribes.gif"><{$lang_tribes}> (<{$nb_tribes}>)</span></a>
                 </li><{/if}>
-
             <{if $isOwner}>
                 <li <{if $section_name==$lang_configs}>class="tabs-selected" <{/if}>><a href="configs.php?uid=<{$uid_owner}>"><span><img class="yogurt-nav-bar-icon" src="assets/images/configs.gif"><{$lang_configs}></span></a></li>
             <{/if}>

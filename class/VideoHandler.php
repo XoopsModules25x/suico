@@ -20,21 +20,46 @@ if (!defined('XOOPS_ROOT_PATH')) {
 class VideoHandler extends \XoopsPersistableObjectHandler
 {
     /**
-     * create a new Video
+     * @var Helper
+     */
+    public $helper;
+    public $isAdmin;
+
+    /**
+     * Constructor
+     * @param null|\XoopsDatabase              $db
+     * @param null|\XoopsModules\Yogurt\Helper $helper
+     */
+
+    public function __construct(\XoopsDatabase $db = null, $helper = null)
+    {
+        /** @var \XoopsModules\Yogurt\Helper $this ->helper */
+        if (null === $helper) {
+            $this->helper = \XoopsModules\Yogurt\Helper::getInstance();
+        } else {
+            $this->helper = $helper;
+        }
+        $isAdmin = $this->helper->isUserAdmin();
+        parent::__construct($db, 'yogurt_video', Video::class, 'video_id', 'video_desc');
+    }
+
+    /**
+     * create a new Tribes
      *
      * @param bool $isNew flag the new objects as "new"?
-     * @return \XoopsObject Video
+     * @return \XoopsObject Tribes
      */
     public function create($isNew = true)
     {
-        $yogurt_video = new Video();
-        if ($isNew) {
-            $yogurt_video->setNew();
-        } else {
-            $yogurt_video->unsetNew();
-        }
+        {
+            $obj = parent::create($isNew);
+            //        if ($isNew) {
+            //            $obj->setDefaultPermissions();
+            //        }
+            $obj->helper = $this->helper;
 
-        return $yogurt_video;
+            return $obj;
+        }
     }
 
     /**
@@ -43,7 +68,7 @@ class VideoHandler extends \XoopsPersistableObjectHandler
      * @param int $id of the Video
      * @return mixed reference to the {@link Video} object, FALSE if failed
      */
-    public function get($id)
+    public function get($id = null, $fields = null)
     {
         $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_video') . ' WHERE video_id=' . $id;
         if (!$result = $this->db->query($sql)) {
@@ -141,11 +166,11 @@ class VideoHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve yogurt_videos from the database
      *
-     * @param null|\CriteriaElement|\CriteriaCompo  $criteria  {@link \CriteriaElement} conditions to be met
-     * @param bool             $id_as_key use the UID as key for the array?
+     * @param null|\CriteriaElement|\CriteriaCompo $criteria  {@link \CriteriaElement} conditions to be met
+     * @param bool                                 $id_as_key use the UID as key for the array?
      * @return array array of {@link Video} objects
      */
-    public function &getObjects($criteria = null, $id_as_key = false)
+    public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
     {
         $ret   = [];
         $limit = $start = 0;
@@ -179,10 +204,10 @@ class VideoHandler extends \XoopsPersistableObjectHandler
     /**
      * count yogurt_videos matching a condition
      *
-     * @param null|\CriteriaElement|\CriteriaCompo  $criteria {@link \CriteriaElement} to match
+     * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link \CriteriaElement} to match
      * @return int count of yogurt_videos
      */
-    public function getCount($criteria = null)
+    public function getCount(\CriteriaElement $criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_video');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
@@ -200,10 +225,10 @@ class VideoHandler extends \XoopsPersistableObjectHandler
     /**
      * delete yogurt_videos matching a set of conditions
      *
-     * @param null|\CriteriaElement|\CriteriaCompo  $criteria {@link \CriteriaElement}
+     * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link \CriteriaElement}
      * @return bool FALSE if deletion failed
      */
-    public function deleteAll($criteria = null)
+    public function deleteAll(\CriteriaElement $criteria = null, $force = true, $asObject = false)
     {
         $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_video');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {

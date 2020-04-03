@@ -1,3 +1,8 @@
+<h5>3.5 Alpha 1   [WORK IN PROGRESS - NOT RELEASED]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
+<hr>
+- added full Admin backend (mamba)
+
+
 <h5>3.4 Beta 4   [WORK IN PROGRESS - NOT RELEASED]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
 <hr>
 - template cleanup (mamba)
@@ -5,6 +10,9 @@
 - fix config saving (mjoel/mamba)
 - fix missing $this is YogurtController (mamba)
 - type compatibility (mamba)
+- added BlocksAdmin (mamba)
+- added Migrate (mamba)
+
 
 <h5>3.4 Beta 3   [WORK IN PROGRESS - NOT RELEASED]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
 <hr>

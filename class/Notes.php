@@ -97,4 +97,43 @@ class Notes extends \XoopsObject
 
         return $ret;
     }
+
+    /**
+     * Get form
+     *
+     * @param null
+     * @return Yogurt\Form\NotesForm
+     */
+    public function getForm()
+    {
+        $form = new Form\NotesForm($this);
+        return $form;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getGroupsRead()
+    {
+        //$permHelper = new \Xmf\Module\Helper\Permission();
+        return $this->permHelper->getGroupsForItem('sbcolumns_read', $this->getVar('note_id'));
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getGroupsSubmit()
+    {
+        //$permHelper = new \Xmf\Module\Helper\Permission();
+        return $this->permHelper->getGroupsForItem('sbcolumns_submit', $this->getVar('note_id'));
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getGroupsModeration()
+    {
+        //$permHelper = new \Xmf\Module\Helper\Permission();
+        return $this->permHelper->getGroupsForItem('sbcolumns_moderation', $this->getVar('note_id'));
+    }
 }

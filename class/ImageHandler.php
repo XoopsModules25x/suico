@@ -45,21 +45,46 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 class ImageHandler extends \XoopsPersistableObjectHandler
 {
     /**
-     * create a new Image
+     * @var Helper
+     */
+    public $helper;
+    public $isAdmin;
+
+    /**
+     * Constructor
+     * @param null|\XoopsDatabase              $db
+     * @param null|\XoopsModules\Yogurt\Helper $helper
+     */
+
+    public function __construct(\XoopsDatabase $db = null, $helper = null)
+    {
+        /** @var \XoopsModules\Yogurt\Helper $this ->helper */
+        if (null === $helper) {
+            $this->helper = \XoopsModules\Yogurt\Helper::getInstance();
+        } else {
+            $this->helper = $helper;
+        }
+        $isAdmin = $this->helper->isUserAdmin();
+        parent::__construct($db, 'yogurt_images', Image::class, 'cod_img', 'title');
+    }
+
+    /**
+     * create a new Tribes
      *
      * @param bool $isNew flag the new objects as "new"?
-     * @return \XoopsObject Image
+     * @return \XoopsObject Tribes
      */
     public function create($isNew = true)
     {
-        $yogurt_images = new Image();
-        if ($isNew) {
-            $yogurt_images->setNew();
-        } else {
-            $yogurt_images->unsetNew();
-        }
+        {
+            $obj = parent::create($isNew);
+            //        if ($isNew) {
+            //            $obj->setDefaultPermissions();
+            //        }
+            $obj->helper = $this->helper;
 
-        return $yogurt_images;
+            return $obj;
+        }
     }
 
     /**
@@ -68,7 +93,7 @@ class ImageHandler extends \XoopsPersistableObjectHandler
      * @param int $id of the Image
      * @return mixed reference to the {@link Image} object, FALSE if failed
      */
-    public function get($id)
+    public function get($id = null, $fields = null)
     {
         $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_images') . ' WHERE cod_img=' . $id;
         if (!$result = $this->db->query($sql)) {
@@ -175,11 +200,11 @@ class ImageHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve yogurt_imagess from the database
      *
-     * @param null|\CriteriaElement|\CriteriaCompo  $criteria  {@link \CriteriaElement} conditions to be met
-     * @param bool             $id_as_key use the UID as key for the array?
+     * @param null|\CriteriaElement|\CriteriaCompo $criteria  {@link \CriteriaElement} conditions to be met
+     * @param bool                                 $id_as_key use the UID as key for the array?
      * @return array array of {@link Image} objects
      */
-    public function &getObjects($criteria = null, $id_as_key = false)
+    public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
     {
         $ret   = [];
         $limit = $start = 0;
@@ -213,10 +238,10 @@ class ImageHandler extends \XoopsPersistableObjectHandler
     /**
      * count yogurt_imagess matching a condition
      *
-     * @param null|\CriteriaElement|\CriteriaCompo  $criteria {@link \CriteriaElement} to match
+     * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link \CriteriaElement} to match
      * @return int count of yogurt_imagess
      */
-    public function getCount($criteria = null)
+    public function getCount(\CriteriaElement $criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_images');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
@@ -234,10 +259,10 @@ class ImageHandler extends \XoopsPersistableObjectHandler
     /**
      * delete yogurt_imagess matching a set of conditions
      *
-     * @param null|\CriteriaElement|\CriteriaCompo  $criteria {@link \CriteriaElement}
+     * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link \CriteriaElement}
      * @return bool FALSE if deletion failed
      */
-    public function deleteAll($criteria = null)
+    public function deleteAll(\CriteriaElement $criteria = null, $force = true, $asObject = false)
     {
         $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_images');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
@@ -253,8 +278,8 @@ class ImageHandler extends \XoopsPersistableObjectHandler
     /**
      * Render a form to send pictures
      *
-     * @param int    $maxbytes the maximum size of a picture
-     * @param  \XoopsTpl $xoopsTpl the one in which the form will be rendered
+     * @param int       $maxbytes the maximum size of a picture
+     * @param \XoopsTpl $xoopsTpl the one in which the form will be rendered
      * @return bool TRUE
      *
      * obs: Some functions wont work on php 4 so edit lines down under acording to your version

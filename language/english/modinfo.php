@@ -183,3 +183,20 @@ define('_MI_YOGURT_OVERVIEW', 'Overview');
 define('_MI_YOGURT_DISCLAIMER', 'Disclaimer');
 define('_MI_YOGURT_LICENSE', 'License');
 define('_MI_YOGURT_SUPPORT', 'Support');
+//Menu
+define('MI_YOGURT_ADMENU1', 'Home');
+define('MI_YOGURT_ADMENU2', 'Images');
+define('MI_YOGURT_ADMENU3', 'Friends');
+define('MI_YOGURT_ADMENU4', 'Visitors');
+define('MI_YOGURT_ADMENU5', 'Video');
+define('MI_YOGURT_ADMENU6', 'Invitations');
+define('MI_YOGURT_ADMENU7', 'Tribes');
+define('MI_YOGURT_ADMENU8', 'Members');
+define('MI_YOGURT_ADMENU9', 'Notes');
+define('MI_YOGURT_ADMENU10', 'Configs');
+define('MI_YOGURT_ADMENU11', 'Suspensions');
+define('MI_YOGURT_ADMENU12', 'Audio');
+define('MI_YOGURT_ADMENU13', 'Feedback');
+define('MI_YOGURT_ADMENU14', 'Migrate');
+define('MI_YOGURT_ADMENU15', 'About');
+//Blocks

@@ -20,21 +20,40 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 class FriendpetitionHandler extends \XoopsPersistableObjectHandler
 {
     /**
-     * create a new Friendpetition
+     * @var Helper
+     */
+    public $helper;
+    public $isAdmin;
+
+    /**
+     * Constructor
+     * @param null|\XoopsDatabase              $db
+     * @param null|\XoopsModules\Yogurt\Helper $helper
+     */
+
+    public function __construct(\XoopsDatabase $db = null, $helper = null)
+    {
+        /** @var \XoopsModules\Yogurt\Helper $this ->helper */
+        if (null === $helper) {
+            $this->helper = \XoopsModules\Yogurt\Helper::getInstance();
+        } else {
+            $this->helper = $helper;
+        }
+        $isAdmin = $this->helper->isUserAdmin();
+        parent::__construct($db, 'yogurt_friendpetition', Friendpetition::class, 'friendpet_id', 'friendpet_id');
+    }
+
+    /**
+     * @param bool $isNew
      *
-     * @param bool $isNew flag the new objects as "new"?
-     * @return \XoopsObject Friendpetition
+     * @return \XoopsObject
      */
     public function create($isNew = true)
     {
-        $yogurt_friendpetition = new Friendpetition();
-        if ($isNew) {
-            $yogurt_friendpetition->setNew();
-        } else {
-            $yogurt_friendpetition->unsetNew();
-        }
+        $obj         = parent::create($isNew);
+        $obj->helper = $this->helper;
 
-        return $yogurt_friendpetition;
+        return $obj;
     }
 
     /**
@@ -43,7 +62,7 @@ class FriendpetitionHandler extends \XoopsPersistableObjectHandler
      * @param int $id of the Friendpetition
      * @return mixed reference to the {@link Friendpetition} object, FALSE if failed
      */
-    public function get($id)
+    public function get($id = null, $fields = null)
     {
         $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendpetition') . ' WHERE friendpet_id=' . $id;
         if (!$result = $this->db->query($sql)) {
@@ -141,11 +160,11 @@ class FriendpetitionHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve yogurt_friendpetitions from the database
      *
-     * @param null|\CriteriaElement|\CriteriaCompo  $criteria  {@link \CriteriaElement} conditions to be met
-     * @param bool             $id_as_key use the UID as key for the array?
+     * @param null|\CriteriaElement|\CriteriaCompo $criteria  {@link \CriteriaElement} conditions to be met
+     * @param bool                                 $id_as_key use the UID as key for the array?
      * @return array array of {@link Friendpetition} objects
      */
-    public function &getObjects($criteria = null, $id_as_key = false)
+    public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
     {
         $ret   = [];
         $limit = $start = 0;
@@ -179,10 +198,10 @@ class FriendpetitionHandler extends \XoopsPersistableObjectHandler
     /**
      * count yogurt_friendpetitions matching a condition
      *
-     * @param null|\CriteriaElement|\CriteriaCompo  $criteria {@link \CriteriaElement} to match
+     * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link \CriteriaElement} to match
      * @return int count of yogurt_friendpetitions
      */
-    public function getCount($criteria = null)
+    public function getCount(\CriteriaElement $criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_friendpetition');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
@@ -200,10 +219,10 @@ class FriendpetitionHandler extends \XoopsPersistableObjectHandler
     /**
      * delete yogurt_friendpetitions matching a set of conditions
      *
-     * @param null|\CriteriaElement|\CriteriaCompo  $criteria {@link \CriteriaElement}
+     * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link \CriteriaElement}
      * @return bool FALSE if deletion failed
      */
-    public function deleteAll($criteria = null)
+    public function deleteAll(\CriteriaElement $criteria = null, $force = true, $asObject = false)
     {
         $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_friendpetition');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
