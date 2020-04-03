@@ -41,7 +41,7 @@ define('_MD_YOGURT_MYTRIBES', 'My Tribes');
 define('_MD_YOGURT_ALLTRIBES', 'All Tribes');
 define('_MD_YOGURT_PROFILE', 'Profile');
 define('_MD_YOGURT_HOME', 'Home');
-define('_MD_YOGURT_CONFIGSTITLE', 'My settings');
+define('_MD_YOGURT_CONFIGSTITLE', 'Settings');
 
 ##################################################### PICTURES #######################################################
 //submit.php (for pictures submission
