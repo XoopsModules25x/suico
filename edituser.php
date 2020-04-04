@@ -286,7 +286,7 @@ if ('avatarform' == $op) {
     $uid = (int)$xoopsUser->getVar('uid');
     echo '<a href="index.php?uid=' . $uid . '">' . _US_PROFILE . '</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;' . _US_UPLOADMYAVATAR . '<br><br>';
     $oldavatar = $xoopsUser->getVar('user_avatar');
-    if (!empty($oldavatar) && 'avatars/blank.gif' != $oldavatar) {
+    if (!empty($oldavatar) && 'avatars/blank.png' != $oldavatar) {
         echo '<div style="text-align:center;"><h4 style="color:#ff0000; font-weight:bold;">' . _US_OLDDELETED . '</h4>';
         echo '<img src="' . XOOPS_UPLOAD_URL . '/' . $oldavatar . '" alt=""></div>';
     }
@@ -396,7 +396,7 @@ if ('avatarchoose' == $op) {
         $criteria_avatar->add(new \Criteria('avatar_type', 'S'));
         $avatars = &$avtHandler->getObjects($criteria_avatar);
         if (!is_array($avatars) || !count($avatars)) {
-            $user_avatar = 'avatars/blank.gif';
+            $user_avatar = 'avatars/blank.png';
         }
         unset($avatars, $criteria_avatar);
     }
@@ -421,7 +421,7 @@ if ('avatarchoose' == $op) {
                 }
             }
         }
-        if ('avatars/blank.gif' != $user_avatar) {
+        if ('avatars/blank.png' != $user_avatar) {
             $avatars = &$avtHandler->getObjects(new \Criteria('avatar_file', $user_avatar));
             if (is_object($avatars[0])) {
                 $avtHandler->addUser($avatars[0]->getVar('avatar_id'), $uid);

@@ -65,7 +65,7 @@
             </h2>
             <{if $allow_pictures }>
                 <div id="yogurt-profile-avatar">
-                    <{if $avatar_url!="" && $avatar_url!="avatars/blank.gif" }>
+                    <{if $avatar_url!="" && $avatar_url!="avatars/blank.png" }>
                         <img src="<{$xoops_url}>/uploads/yogurt/avatars/<{$avatar_url}>">
                     <{else}>
                         <img src="assets/images/noavatar.gif">
@@ -254,7 +254,7 @@
             <{if $nb_friends==0}><p id="nofriends"><{$lang_nofriendsyet}></p><{/if}>
             <{section name=i loop=$friends}>
                 <div class="yogurt-profile-friend <{cycle values="odd,even"}>">
-                    <a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$friends[i].uid}>" alt="<{$friends[i].uname}>" title="<{$friends[i].uname}>"><{if $friends[i].user_avatar=="avatars/blank.gif"}>
+                    <a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$friends[i].uid}>" alt="<{$friends[i].uname}>" title="<{$friends[i].uname}>"><{if $friends[i].user_avatar=="avatars/blank.png"}>
                             <img class="yogurt-profile-friend-photo" src="assets/images/noavatar.gif">
                         <{else}>
                             <imgclass
