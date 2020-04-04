@@ -33,7 +33,7 @@
 
     <{section name=j loop=$tribes}>
         <div class="yogurt-tribe-all <{cycle values="odd,even"}>">
-            <img src="<{$xoops_upload_url}>/<{$tribes[j].img}>" alt="<{$tribes[j].title}>" title="<{$tribes[j].title}>">
+            <img src="<{$xoops_upload_url}>/yogurt/images/<{$tribes[j].img}>" alt="<{$tribes[j].title}>" title="<{$tribes[j].title}>">
             <h4>
                 <{$tribes[j].title}>
             </h4>
@@ -52,11 +52,11 @@
                 <{if $xoops_userid == $tribes[j].uid }>
                     <form action="delete_tribe.php" method="POST" id="form_deletetribe" class="yogurt-tribes-form-delete">
                         <input type="hidden" value="<{$tribes[j].id}>" name="tribe_id" id="tribe_id">
-                        <input type="image" src="assets/images/dele.gif">
+                        <input type="image" src="<{xoModuleIcons16 delete.png}>">
                     </form>
                     <form action="edittribe.php" method="POST" id="form_edittribe" class="yogurt-tribes-form-edit">
                         <input type="hidden" value="<{$tribes[j].id}>" name="tribe_id" id="tribe_id">
-                        <input type="image" src="assets/images/edit.gif">
+                        <input type="image" src="<{xoModuleIcons16 edit.png}>">
                     </form>
                     <form>
                         <img src="assets/images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>">

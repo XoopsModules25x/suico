@@ -5,7 +5,7 @@
     <!-- if not owner and not friend -->
     <div id="yogurt-profile-petition" class="confirmMsg">
         <h4><{$lang_youhavexpetitions}></h4>
-        <img width="30" src="<{$xoops_url}>/uploads/<{$petitioner_avatar}>">
+        <img width="30" src="<{$xoops_url}>/uploads/yogurt/avatars/<{$petitioner_avatar}>">
         <form action="makefriends.php" method="post">
             <{$lang_askingfriend}>
             <ul>
@@ -66,7 +66,7 @@
             <{if $allow_pictures }>
                 <div id="yogurt-profile-avatar">
                     <{if $avatar_url!="" && $avatar_url!="blank.gif" }>
-                        <img src="<{$xoops_url}>/uploads/<{$avatar_url}>">
+                        <img src="<{$xoops_url}>/uploads/yogurt/avatars/<{$avatar_url}>">
                     <{else}>
                         <img src="assets/images/noavatar.gif">
                         <{if $isOwner}>
@@ -102,7 +102,7 @@
 
     <{if $allow_profile_general==1}>
         <div id="yogurt-profile-details" class="outer">
-            <h2 class="yogurt-profile-title head"><{$lang_detailsinfo}> <{if $isOwner==1 }><a href="edituser.php" title="<{$lang_editprofile}>"><img src="assets/images/edit.gif"></a><{/if}></h2>
+            <h2 class="yogurt-profile-title head"><{$lang_detailsinfo}> <{if $isOwner==1 }><a href="edituser.php" title="<{$lang_editprofile}>"><img src="<{xoModuleIcons16 edit.png}>"></a><{/if}></h2>
             <p class="odd"><img src="assets/images/username.gif"><span class="yogurt-profileinfo-label"><{$lang_uname}>:</span><span class="yogurt-profileinfo-value"><{$user_uname}></span></p>
             <p class="even"><img src="assets/images/username.gif"><span class="yogurt-profileinfo-label"><{$lang_realname}>:</span><span class="yogurt-profileinfo-value"><{$user_realname}></span></p>
             <p class="odd"><img src="assets/images/house.gif"> <span class="yogurt-profileinfo-label"><{$lang_location}>:</span><span class="yogurt-profileinfo-value"><{$user_location}></span><a href="http://maps.google.com/?q=<{$user_location}>" target="_blank"><img
@@ -115,7 +115,7 @@
     <{/if}>
     <{if $allow_profile_contact==1}>
         <div id="yogurt-profile-details" class="outer">
-            <h2 class="yogurt-profile-title head"><{$lang_contactinfo}> <{if $isOwner==1 }><a href="edituser.php" title="<{$lang_editprofile}>"><img src="assets/images/edit.gif"></a><{/if}></h2>
+            <h2 class="yogurt-profile-title head"><{$lang_contactinfo}> <{if $isOwner==1 }><a href="edituser.php" title="<{$lang_editprofile}>"><img src="<{xoModuleIcons16 edit.png}>"></a><{/if}></h2>
             <p class="even"><img src="assets/images/url.gif"> <span class="yogurt-profileinfo-label"><{$lang_website}>:</span><span class="yogurt-profileinfo-value"><{$user_websiteurl}></span></p>
             <p class="odd"><img src="assets/images/email.gif"> <span class="yogurt-profileinfo-label"><{$lang_email}>:</span><span class="yogurt-profileinfo-value"><{ mailto address=$user_email encode="javascript"}></span></p>
             <{if $isanonym!=1 && $isOwner!=1 }>
@@ -226,7 +226,7 @@
                             <img class="yogurt-profile-friend-photo" src="assets/images/noavatar.gif">
                         <{else}>
                             <imgclass
-                            = "yogurt-profile-friend-photo" src="<{$xoops_upload_url}>/<{$friends[i].user_avatar}>"><{/if}><{$friends[i].uname}> </a>
+                            = "yogurt-profile-friend-photo" src="<{$xoops_upload_url}>/yogurt/avatars/<{$friends[i].user_avatar}>"><{/if}><{$friends[i].uname}> </a>
                 </div>
             <{/section}>
             <p id="yogurt-profile-friend-viewall" class="foot">
@@ -240,7 +240,7 @@
             <{if $nb_tribes==0}><p id="notribes"><{$lang_notribesyet}></p><{/if}>
             <{section name=i loop=$tribes}>
                 <div class="yogurt-profile-tribe <{cycle values="odd,even"}>">
-                    <a href="tribe.php?tribe_id=<{$tribes[i].tribe_id}>"><img alt="<{$tribes[i].title}>" title="<{$tribes[i].title}>" class="yogurt-profile-tribes-img" src="<{$xoops_upload_url}>/<{$tribes[i].img}>"></a> <h4> <{$tribes[i].title}> </h4>
+                    <a href="tribe.php?tribe_id=<{$tribes[i].tribe_id}>"><img alt="<{$tribes[i].title}>" title="<{$tribes[i].title}>" class="yogurt-profile-tribes-img" src="<{$xoops_upload_url}>/yogurt/images/<{$tribes[i].img}>"></a> <h4> <{$tribes[i].title}> </h4>
                     <p><{$tribes[i].desc}></p>
                 </div>
             <{/section}>

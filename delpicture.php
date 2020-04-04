@@ -51,13 +51,13 @@ if (!isset($_POST['confirm']) || 1 != $_POST['confirm']) {
     if ($albumFactory->deleteAll($criteria)) {
         if (1 == $xoopsModuleConfig['physical_delete']) {
             //unlink($xoopsModuleConfig['path_upload']."\/".$image_name);
-            unlink(XOOPS_ROOT_PATH . '/uploads' . '/' . $image_name);
-            unlink(XOOPS_ROOT_PATH . '/uploads' . '/resized_' . $image_name);
+            unlink(XOOPS_ROOT_PATH . '/uploads' . '/images/yogurt/' . $image_name);
+            unlink(XOOPS_ROOT_PATH . '/uploads' . '/images/yogurt/resized_' . $image_name);
             /**
              * Delete the thumb (avatar now has another name)
              */
             //if ($avatar_image!=$image_name){
-            unlink(XOOPS_ROOT_PATH . '/uploads' . '/thumb_' . $image_name);
+            unlink(XOOPS_ROOT_PATH . '/uploads' . '/images/thumb_' . $image_name);
             //}
         }
         redirect_header('album.php', 2, _MD_YOGURT_DELETED);

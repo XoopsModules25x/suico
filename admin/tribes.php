@@ -34,8 +34,8 @@ $sort  = \Xmf\Request::getString('sort', '');
 $adminObject->displayNavigation(basename(__FILE__));
 /** @var \Xmf\Module\Helper\Permission $permHelper */
 $permHelper = new \Xmf\Module\Helper\Permission();
-$uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/images/';
-$uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/images/';
+$uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/tribes/';
+$uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/tribes/';
 
 switch ($op) {
     case 'new':

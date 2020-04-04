@@ -48,7 +48,7 @@ if (1 == $marker) {
     $tribe_title   = $myts->displayTarea($_POST['tribe_title'], 0, 1, 1, 1, 1);
     $tribe_desc    = $myts->displayTarea($_POST['tribe_desc'], 0, 1, 1, 1, 1);
     $tribe_img     = (!empty($_POST['tribe_img'])) ? $_POST['tribe_img'] : '';
-    $path_upload   = XOOPS_ROOT_PATH . '/uploads';
+    $path_upload   = XOOPS_ROOT_PATH . '/uploads/yogurt';
     $pictwidth     = $xoopsModuleConfig['resized_width'];
     $pictheight    = $xoopsModuleConfig['resized_height'];
     $thumbwidth    = $xoopsModuleConfig['thumb_width'];

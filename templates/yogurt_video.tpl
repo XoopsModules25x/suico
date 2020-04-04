@@ -76,12 +76,12 @@
                 <form action="delvideo.php" method="post" id="deleteform" class="yogurt-video-forms">
                     <input type="hidden" value="<{$videos[i].id}>" name="cod_video">
                     <{$token}>
-                    <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="assets/images/dele.gif">
+                    <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 delete.png}>">
                 </form>
                 <form action="editdescvideo.php" method="post" id="editform" class="yogurt-video-forms">
                     <input type="hidden" alt="<{$lang_edit}>" title="<{$lang_edit}>" value="<{$videos[i].id}>" name="video_id">
                     <{$token}>
-                    <input name="submit" type="image" alt="<{$lang_editdesc}>" title="<{$lang_editdesc}>" src="assets/images/edit.gif">
+                    <input name="submit" type="image" alt="<{$lang_editdesc}>" title="<{$lang_editdesc}>" src="<{xoModuleIcons16 edit.png}>">
                 </form>
                 <form action="mainvideo.php" method="post" id="mainform" class="yogurt-video-forms">
                     <input type="hidden" value="<{$videos[i].id}>" name="video_id">

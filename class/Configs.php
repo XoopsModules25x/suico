@@ -26,6 +26,9 @@ class Configs extends \XoopsObject
      */
     public function __construct($id = null)
     {
+        /** @var  Helper $helper */
+        $this->helper     = Helper::getInstance();
+        $this->permHelper = new \Xmf\Module\Helper\Permission();
         $this->db = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('config_id', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('config_uid', XOBJ_DTYPE_INT, null, false, 10);

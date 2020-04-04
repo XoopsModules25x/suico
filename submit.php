@@ -44,7 +44,7 @@ $title = $_POST['caption'];
 /**
  * Getting parameters defined in admin side
  */
-$path_upload   = XOOPS_ROOT_PATH . '/uploads';
+$path_upload   = XOOPS_ROOT_PATH . '/uploads/yogurt';
 $pictwidth     = $xoopsModuleConfig['resized_width'];
 $pictheight    = $xoopsModuleConfig['resized_height'];
 $thumbwidth    = $xoopsModuleConfig['thumb_width'];
