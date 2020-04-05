@@ -32,7 +32,7 @@ require __DIR__ . '/header.php';
 /**
  * Factory of pictures created
  */
-$albumFactory = new Yogurt\ImageHandler($xoopsDB);
+$imageFactory = new Yogurt\ImageHandler($xoopsDB);
 
 /**
  * Getting the title
@@ -65,7 +65,7 @@ if ('sel_photo' == $_POST['xoops_upload_file'][0]) {
     /**
      * Try to upload picture resize it insert in database and then redirect to index
      */
-    if ($albumFactory->receivePicture($title, $path_upload, $thumbwidth, $thumbheight, $pictwidth, $pictheight, $maxfilebytes, $maxfilewidth, $maxfileheight)) {
+    if ($imageFactory->receivePicture($title, $path_upload, $thumbwidth, $thumbheight, $pictwidth, $pictheight, $maxfilebytes, $maxfilewidth, $maxfileheight)) {
         $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
         $extra_tags['X_OWNER_UID']  = $xoopsUser->getVar('uid');
         $notificationHandler        = xoops_getHandler('notification');
