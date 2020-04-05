@@ -66,7 +66,7 @@
             <{if $allow_pictures }>
                 <div id="yogurt-profile-avatar">
                     <{if $avatar_url!="" && $avatar_url!="avatars/blank.gif" }>
-                        <img src="<{$xoops_url}>/uploads/<{$avatar_url}>">
+                        <img src="<{$xoops_url}>/uploads/yogurt/avatars/<{$avatar_url}>">
                     <{else}>
                         <img src="assets/images/noavatar.gif">
                         <{if $isOwner}>

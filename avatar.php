@@ -28,15 +28,15 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 /**
  * Creating the factory  loading the picture changing its caption
  */
-$pictureFactory = new Yogurt\ImageHandler($xoopsDB);
-$picture        = $pictureFactory->create(false);
+$imageFactory = new Yogurt\ImageHandler($xoopsDB);
+$picture        = $imageFactory->create(false);
 $picture->load($_POST['cod_img']);
 
 $uid = (int)$xoopsUser->getVar('uid');
 
-$image       = XOOPS_ROOT_PATH . '/uploads/avatars/' . 'thumb_' . $picture->getVar('url');
+$image       = XOOPS_ROOT_PATH . '/uploads/yogurt/photos/' . 'thumb_' . $picture->getVar('url');
 $avatar      = 'av' . $uid . '_' . time() . '.jpg';
-$imageavatar = XOOPS_ROOT_PATH . '/uploads/avatars/' . $avatar;
+$imageavatar = XOOPS_ROOT_PATH . '/uploads/yogurt/avatars/' . $avatar;
 
 if (!copy($image, $imageavatar)) {
     echo 'failed to copy $file...\n';
