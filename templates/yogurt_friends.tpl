@@ -7,8 +7,7 @@
             <p><a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$friends[i].uid}>" alt=" <{$friends[i].uname}>" title="<{$friends[i].uname}>"> <{if $friends[i].user_avatar=="avatars/blank.gif" or $friends[i].user_avatar==""}>
                         <img src="assets/images/noavatar.gif">
                     <{else}>
-                        <imgsrc
-                        ="<{$xoops_upload_url}>/yogurt/<{$friends[i].user_avatar}>"><{/if}><{$friends[i].uname}></a></p>
+                        <img src="<{$xoops_upload_url}>/<{$friends[i].user_avatar}>"><{/if}><{$friends[i].uname}></a></p>
             <{if $isOwner }>
                 <form action="editfriendship.php" method="post" class="yogurt-friends-deleteform">
                     <input type="hidden" name="friend_uid" id="friend_uid" value="<{$friends[i].uid}>">
