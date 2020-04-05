@@ -4,7 +4,7 @@
     <{if $lang_nofriendsyet==""}>
     <{section name=i loop=$friends}>
         <div class="yogurt-friend <{cycle values="odd,even"}>">
-            <p><a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$friends[i].uid}>" alt=" <{$friends[i].uname}>" title="<{$friends[i].uname}>"> <{if $friends[i].user_avatar=="avatars/blank.png" or $friends[i].user_avatar==""}>
+            <p><a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$friends[i].uid}>" alt=" <{$friends[i].uname}>" title="<{$friends[i].uname}>"> <{if $friends[i].user_avatar=="avatars/blank.gif" or $friends[i].user_avatar==""}>
                         <img src="assets/images/noavatar.gif">
                     <{else}>
                         <imgsrc
