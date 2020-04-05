@@ -3,12 +3,11 @@ TODO: Planned features in the future
 
 Bugs that are still open:
 - search a tribe is not working properly only number of search tribes is displaying
-- avatar and photos should be uploaded to specific folder avatar and photos and not in root/upload folder for better management
 - outdated ym,icq, aim,msn in yogurt
 - friends appears twice in friend list & my friends blocks
 
 Features that are being considered/planned for the future releases:
 
-- feature 1
+- ????
 
 

@@ -1,7 +1,16 @@
-<h5>3.5 Alpha 1   [WORK IN PROGRESS - NOT RELEASED]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
+<h5>3.5 Alpha 2   [2020-04-04]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
+<hr>
+- template fixes (liomj)
+- fix uploading/resizing tribe logos (mamba)
+- added new test data (mamba)
+- partial fixes for image folders (mamba)
+- renamed language variables from _YOG_ to _YOGURT_ for consistency (mamba)
+- fix install error (mjoel/mamba)
+
+
+<h5>3.5 Alpha 1   [2020-04-03]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
 <hr>
 - added full Admin backend (mamba)
-
 
 <h5>3.4 Beta 4   [WORK IN PROGRESS - NOT RELEASED]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
 <hr>
