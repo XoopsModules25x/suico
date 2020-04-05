@@ -82,7 +82,7 @@
     <h2 id="yogurt-groups-nogroups">
         <{$lang_nogroupsyet}>
     </h2>
-    <{ /if}>
+    <{/if}>
     <{section name=i loop=$mygroups}>
         <div class="yogurt-group-my <{cycle values="odd,even"}>">
             <h4>

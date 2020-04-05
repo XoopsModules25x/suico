@@ -33,7 +33,8 @@
 
     <{section name=j loop=$groups}>
         <div class="yogurt-group-all <{cycle values="odd,even"}>">
-            <img src="<{$xoops_upload_url}>/yogurt/groups/<{$groups[j].img}>" alt="<{$groups[j].title}>" title="<{$groups[j].title}>">
+<{*            <img src="<{$xoops_upload_url}>/yogurt/groups/<{$groups[j].img}>" alt="<{$groups[j].title}>" title="<{$groups[j].title}>">*}>
+            <a href="group.php?group_id=<{$groups[j].id}>"><img src="<{$xoops_upload_url}>/yogurt/groups/<{$groups[j].img}>" alt="<{$groups[j].title}>" title="<{$groups[j].title}>"></a>
             <h4><{$groups[j].title}></h4>
             <p>
             <p>

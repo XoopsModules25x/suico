@@ -13,7 +13,7 @@
             *
             </span>
         </label>
-        <img src="<{$xoops_upload_url}>/yogurt/images/<{$group_img}>">
+        <img src="<{$xoops_upload_url}>/yogurt/groups/<{$group_img}>">
     </p>
     <p class=even>
         <label for='' class='xoops-form-element-caption'>
@@ -91,8 +91,7 @@
                 <{$group_members[i].uname}>
             </h2>
             <p>
-
-                <img src="<{$xoops_upload_url}>/yogurt/avatars/<{$group_members[i].avatar}>">
+                <img src="<{$xoops_upload_url}>/<{$group_members[i].avatar}>">
             <p>
                 <{$group_members[i].uname}>
             </p>

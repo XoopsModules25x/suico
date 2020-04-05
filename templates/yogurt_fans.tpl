@@ -10,7 +10,7 @@
                         <img src="assets/images/noavatar.gif">
                     <{else}>
                         <imgsrc
-                        ="<{$xoops_upload_url}>/yogurt/avatars/<{$friends[i].user_avatar}>"><{/if}><{$friends[i].uname}></a></p>
+                        ="<{$xoops_upload_url}>/<{$friends[i].user_avatar}>"><{/if}><{$friends[i].uname}></a></p>
             <{if $isOwner }>
                 <form action="editfriendship.php" method="post" class="yogurt-friends-deleteform">
                     <input type="hidden" name="friend_uid" id="friend_uid" value="<{$friends[i].uid}>">
