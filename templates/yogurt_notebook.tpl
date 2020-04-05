@@ -34,7 +34,7 @@
                     <{if $isOwner==1}>
                     <p>
                     <form name="delete_Note" method="post" action="delete_Note.php" class="yogurt-Note-form-delete">
-                        <input value="<{$notes[i].id}>" type="image" id="note_idimage" name="note_idimage" src="assets/images/dele.gif">
+                        <input value="<{$notes[i].id}>" type="image" id="note_idimage" name="note_idimage" src="<{xoModuleIcons16 delete.png}>">
                         <input value="<{$notes[i].id}>" type="hidden" id="note_id" name="note_id">
                     </form>
 

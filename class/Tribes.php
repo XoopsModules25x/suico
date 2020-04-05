@@ -16,7 +16,6 @@ require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
-require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
 /**
  * Tribes class.
@@ -35,7 +34,10 @@ class Tribes extends \XoopsObject
      */
     public function __construct($id = null)
     {
-        $this->db = \XoopsDatabaseFactory::getDatabaseConnection();
+        /** @var  Helper $helper */
+        $this->helper     = Helper::getInstance();
+        $this->permHelper = new \Xmf\Module\Helper\Permission();
+        $this->db         = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('tribe_id', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('owner_uid', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('tribe_title', XOBJ_DTYPE_TXTBOX, null, false);

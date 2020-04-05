@@ -13,7 +13,7 @@
             *
             </span>
         </label>
-        <img src="<{$xoops_upload_url}>/<{$tribe_img}>">
+        <img src="<{$xoops_upload_url}>/yogurt/images/<{$tribe_img}>">
     </p>
     <p class=even>
         <label for='' class='xoops-form-element-caption'>
@@ -92,7 +92,7 @@
             </h2>
             <p>
 
-                <img src="<{$xoops_upload_url}>/<{$tribe_members[i].avatar}>">
+                <img src="<{$xoops_upload_url}>/yogurt/avatars/<{$tribe_members[i].avatar}>">
             <p>
                 <{$tribe_members[i].uname}>
             </p>

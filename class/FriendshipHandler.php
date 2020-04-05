@@ -351,7 +351,7 @@ class FriendshipHandler extends \XoopsPersistableObjectHandler
         if ('avatars/blank.gif' == $friend->getVar('user_avatar')) {
             $field_friend_avatar = new \XoopsFormLabel(_MD_YOGURT_PHOTO, '<img src=assets/images/noavatar.gif>');
         } else {
-            $field_friend_avatar = new \XoopsFormLabel(_MD_YOGURT_PHOTO, '<img src=../../uploads/' . $friend->getVar('user_avatar') . '>');
+            $field_friend_avatar = new \XoopsFormLabel(_MD_YOGURT_PHOTO, '<img src=../../uploads/yogurt/avatars/' . $friend->getVar('user_avatar') . '>');
         }
         $field_friend_name = new \XoopsFormLabel(_MD_YOGURT_FRIENDNAME, $friend->getVar('uname'));
 

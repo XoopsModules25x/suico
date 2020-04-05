@@ -357,9 +357,10 @@ class ImageHandler extends \XoopsPersistableObjectHandler
         //$hash = substr($hash1,0,4);
 
         // mimetypes and settings put this in admin part later
-        $allowed_mimetypes = ['image/jpeg', 'image/pjpeg'];
+        $allowed_mimetypes = Helper::getInstance()->getConfig('mimetypes');
         $maxfilesize       = $maxfilebytes;
 
+        $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/images/';
         // create the object to upload
         $uploader = new \XoopsMediaUploader($path_upload, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight);
         // fetch the media

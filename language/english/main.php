@@ -38,7 +38,7 @@ define('_MD_YOGURT_FRIENDS', 'Friends');
 define('_MD_YOGURT_TRIBES', 'Tribes');
 define('_MD_YOGURT_NOTRIBESYET', 'No Tribes yet');
 define('_MD_YOGURT_MYTRIBES', 'My Tribes');
-define('_MD_YOGURT_ALLTRIBES', 'All Tribes');
+//define('_MD_YOGURT_ALLTRIBES', 'All Tribes');
 define('_MD_YOGURT_PROFILE', 'Profile');
 define('_MD_YOGURT_HOME', 'Home');
 define('_MD_YOGURT_CONFIGSTITLE', 'Settings');
@@ -305,8 +305,8 @@ define('_MD_YOGURT_PICTURESNOTENABLED', 'The administrator of the site has disab
 define('_MD_YOGURT_NOTESNOTENABLED', 'The administrator of the site has disabled Notes feature');
 
 //26/01/2008
-define('_MD_YOG_ALLFRIENDS', 'View all friends');
-define('_MD_YOG_ALLTRIBES', 'View all tribes');
+define('_MD_YOGURT_ALLFRIENDS', 'View all friends');
+define('_MD_YOGURT_ALLTRIBES', 'View all tribes');
 
 //31/01/2008
 define('_MD_YOGURT_FRIENDSHIPNOTACCEPTED', 'Friendship rejected');

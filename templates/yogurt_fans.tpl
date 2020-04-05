@@ -6,11 +6,11 @@
 
     <{section name=i loop=$friends}>
         <div class="yogurt-friend <{cycle values="odd,even"}>">
-            <p><a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$friends[i].uid}>" alt=" <{$friends[i].uname}>" title="<{$friends[i].uname}>"> <{if $friends[i].user_avatar=="avatars/blank.gif" }>
+            <p><a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$friends[i].uid}>" alt=" <{$friends[i].uname}>" title="<{$friends[i].uname}>"> <{if $friends[i].user_avatar=="avatars/blank.png" }>
                         <img src="assets/images/noavatar.gif">
                     <{else}>
                         <imgsrc
-                        ="<{$xoops_upload_url}>/<{$friends[i].user_avatar}>"><{/if}><{$friends[i].uname}></a></p>
+                        ="<{$xoops_upload_url}>/yogurt/avatars/<{$friends[i].user_avatar}>"><{/if}><{$friends[i].uname}></a></p>
             <{if $isOwner }>
                 <form action="editfriendship.php" method="post" class="yogurt-friends-deleteform">
                     <input type="hidden" name="friend_uid" id="friend_uid" value="<{$friends[i].uid}>">
@@ -18,7 +18,7 @@
                 </form>
                 <form action="delfriendship.php" method="post" class="yogurt-friends-evaluateform">
                     <input type="hidden" name="friend_uid" id="friend_uid" value="<{$friends[i].uid}>">
-                    <input name="submit" id="submit" src="assets/images/dele.gif" type="image" title="<{$lang_delete}>" alt="<{$lang_delete}>">
+                    <input name="submit" id="submit" src="<{xoModuleIcons16 delete.png}>" type="image" title="<{$lang_delete}>" alt="<{$lang_delete}>">
                 </form>
             <{/if}>
 

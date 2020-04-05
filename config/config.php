@@ -37,6 +37,7 @@ return (object)[
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/mp3',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/photos',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/thumbs',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/tribes',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/videos',
         //XOOPS_UPLOAD_PATH . '/flags'
     ],
@@ -47,6 +48,7 @@ return (object)[
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/mp3',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/photos',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/thumbs',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/tribes',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/videos',
         //XOOPS_UPLOAD_PATH . '/flags'
     ],

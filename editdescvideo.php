@@ -54,7 +54,7 @@ if (1 == $marker) {
  * Creating the factory  and the criteria to edit the desc of the picture
  * The user must be the owner
  */
-$albumFactory   = new Yogurt\VideoHandler($xoopsDB);
+$videoFactory   = new Yogurt\VideoHandler($xoopsDB);
 $criteria_video = new \Criteria('video_id', $cod_img);
 $criteria_uid   = new \Criteria('uid_owner', $uid);
 $criteria       = new \CriteriaCompo($criteria_video);
@@ -64,12 +64,12 @@ $criteria->add($criteria_uid);
  * Lets fetch the info of the pictures to be able to render the form
  * The user must be the owner
  */
-$array_pict = $albumFactory->getObjects($criteria);
+$array_pict = $videoFactory->getObjects($criteria);
 if ($array_pict) {
     $caption = $array_pict[0]->getVar('video_desc');
     $url     = $array_pict[0]->getVar('youtube_code');
 }
 
-$albumFactory->renderFormEdit($caption, $cod_img, $url);
+$videoFactory->renderFormEdit($caption, $cod_img, $url);
 
 require dirname(dirname(__DIR__)) . '/footer.php';

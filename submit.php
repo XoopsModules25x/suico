@@ -19,12 +19,10 @@
 
 use XoopsModules\Yogurt;
 
-/**
- * Xoops header ...
- */
-require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
-require_once dirname(dirname(__DIR__)) . '/header.php';
+require __DIR__ . '/header.php';
+
+//require_once dirname(dirname(__DIR__)) . '/header.php';
 
 /**
  * Modules class includes
@@ -34,7 +32,7 @@ require_once dirname(dirname(__DIR__)) . '/header.php';
 /**
  * Factory of pictures created
  */
-$albumFactory = new Yogurt\ImageHandler($xoopsDB);
+$imageFactory = new Yogurt\ImageHandler($xoopsDB);
 
 /**
  * Getting the title
@@ -44,7 +42,7 @@ $title = $_POST['caption'];
 /**
  * Getting parameters defined in admin side
  */
-$path_upload   = XOOPS_ROOT_PATH . '/uploads';
+$path_upload   = XOOPS_ROOT_PATH . '/uploads/yogurt/photos';
 $pictwidth     = $xoopsModuleConfig['resized_width'];
 $pictheight    = $xoopsModuleConfig['resized_height'];
 $thumbwidth    = $xoopsModuleConfig['thumb_width'];
@@ -67,7 +65,7 @@ if ('sel_photo' == $_POST['xoops_upload_file'][0]) {
     /**
      * Try to upload picture resize it insert in database and then redirect to index
      */
-    if ($albumFactory->receivePicture($title, $path_upload, $thumbwidth, $thumbheight, $pictwidth, $pictheight, $maxfilebytes, $maxfilewidth, $maxfileheight)) {
+    if ($imageFactory->receivePicture($title, $path_upload, $thumbwidth, $thumbheight, $pictwidth, $pictheight, $maxfilebytes, $maxfilewidth, $maxfileheight)) {
         $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
         $extra_tags['X_OWNER_UID']  = $xoopsUser->getVar('uid');
         $notificationHandler        = xoops_getHandler('notification');

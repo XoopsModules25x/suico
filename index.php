@@ -233,7 +233,7 @@ $xoopsTpl->assign('tribes', $tribes);
 if ($nbSections['nbTribes'] <= 0) {
     $xoopsTpl->assign('lang_notribesyet', _MD_YOGURT_NOTRIBESYET);
 }
-$xoopsTpl->assign('lang_viewalltribes', _MD_YOG_ALLTRIBES);
+$xoopsTpl->assign('lang_viewalltribes', _MD_YOGURT_ALLTRIBES);
 
 //evaluations
 $xoopsTpl->assign('lang_fans', _MD_YOGURT_FANS);
@@ -282,7 +282,7 @@ if ($nbSections['nbVideos'] > 0) {
 //friends
 $xoopsTpl->assign('friends', $friends);
 $xoopsTpl->assign('lang_friendstitle', sprintf(_MD_YOGURT_FRIENDSTITLE, $controller->nameOwner));
-$xoopsTpl->assign('lang_viewallfriends', _MD_YOG_ALLFRIENDS);
+$xoopsTpl->assign('lang_viewallfriends', _MD_YOGURT_ALLFRIENDS);
 
 $xoopsTpl->assign('lang_nofriendsyet', _MD_YOGURT_NOFRIENDSYET);
 

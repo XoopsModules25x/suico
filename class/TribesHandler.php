@@ -357,7 +357,7 @@ var elestyle = xoopsGetElementById(img).style;
 
 }
 //--></script>
-<!-- End Form Vaidation JavaScript //-->
+<!-- End Form Validation JavaScript //-->
 
 
 
@@ -383,20 +383,21 @@ var elestyle = xoopsGetElementById(img).style;
     public function receiveTribe($tribe_title, $tribe_desc, $tribe_img, $path_upload, $maxfilebytes, $maxfilewidth, $maxfileheight, $change_img = 1, $tribe = '')
     {
         global $xoopsUser, $xoopsDB, $_POST, $_FILES;
-        //busca id do user logado
+        //search logged user id
         $uid = $xoopsUser->getVar('uid');
-        if (!is_a($tribe, 'Tribes')) {
+        if (!is_a($tribe, Tribes::class)) {
             $tribe = $this->create();
         } else {
             $tribe->unsetNew();
         }
         if (1 == $change_img) {
             // mimetypes and settings put this in admin part later
-            $allowed_mimetypes = ['image/jpeg', 'image/pjpeg'];
+            $allowed_mimetypes = Helper::getInstance()->getConfig('mimetypes');
             $maxfilesize       = $maxfilebytes;
 
+            $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/tribes/';
             // create the object to upload
-            $uploader = new \XoopsMediaUploader($path_upload, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight);
+            $uploader = new \XoopsMediaUploader($uploadDir, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight);
             // fetch the media
             if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
                 //lets create a name for it
@@ -411,11 +412,19 @@ var elestyle = xoopsGetElementById(img).style;
                     return false;
                 }
                 // now let s create a new object picture and set its variables
-
-                $url               = $uploader->getSavedFileName();
-                $saved_destination = $uploader->getSavedDestination();
-                $image_name        = $this->resizeImage2($saved_destination, 125, 80, $path_upload);
-                $tribe->setVar('tribe_img', $image_name);
+                $savedFilename = $uploader->getSavedFileName();
+                $tribe->setVar('tribe_img', $savedFilename);
+                $imageMimetype = $uploader->getMediaType();
+                $tribe->setVar('tribe_img', $savedFilename);
+                $maxWidth_tribelogo     = Helper::getInstance()->getConfig('tribeslogo_width');
+                $maxHeight_tribelogo    = Helper::getInstance()->getConfig('tribeslogo_height');
+                $resizer                = new Common\Resizer();
+                $resizer->sourceFile    = $uploadDir . $savedFilename;
+                $resizer->endFile       = $uploadDir . $savedFilename;
+                $resizer->imageMimetype = $imageMimetype;
+                $resizer->maxWidth      = $maxWidth_tribelogo;
+                $resizer->maxHeight     = $maxHeight_tribelogo;
+                $result                 = $resizer->resizeImage();
             } else {
                 echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
 
@@ -432,83 +441,4 @@ var elestyle = xoopsGetElementById(img).style;
         return true;
     }
 
-    /**
-     * Resize a picture and save it to $path_upload
-     *
-     * @param        $img_path
-     * @param int    $thumbwidth  the width in pixels that the thumbnail will have
-     * @param int    $thumbheight the height in pixels that the thumbnail will have
-     * @param string $path_upload The path to where the files should be saved after resizing
-     */
-    public function resizeImage($img_path, $thumbwidth, $thumbheight, $path_upload)
-    {
-        $path   = pathinfo($img_path);
-        $img    = imagecreatefromjpeg($img_path);
-        $xratio = $thumbwidth / imagesx($img);
-        $yratio = $thumbheight / imagesy($img);
-
-        if ($xratio < 1 || $yratio < 1) {
-            if ($xratio < $yratio) {
-                $resized = imagecreatetruecolor($thumbwidth, floor(imagesy($img) * $xratio));
-            } else {
-                $resized = imagecreatetruecolor(floor(imagesx($img) * $yratio), $thumbheight);
-            }
-            imagecopyresampled($resized, $img, 0, 0, 0, 0, imagesx($resized) + 1, imagesy($resized) + 1, imagesx($img), imagesy($img));
-            imagejpeg($resized, $path_upload . '/thumb_' . $path['basename']);
-            imagedestroy($resized);
-        } else {
-            imagejpeg($img, $path_upload . '/thumb_' . $path['basename']);
-        }
-
-        imagedestroy($img);
-    }
-
-    /**
-     * Resize a picture and save it to $path_upload
-     *
-     * @param        $img_path
-     * @param int    $thumbwidth  the width in pixels that the thumbnail will have
-     * @param int    $thumbheight the height in pixels that the thumbnail will have
-     * @param string $path_upload The path to where the files should be saved after resizing
-     * @return string
-     */
-    public function resizeImage2($img_path, $thumbwidth, $thumbheight, $path_upload)
-    {
-        global $xoopsUser, $xoopsModule;
-
-        $path = pathinfo($img_path);
-        $img  = imagecreatefromjpeg($img_path);
-        if (imagesx($img) < 128) {
-            $x1 = (128 - imagesx($img)) / 2;
-            $x2 = 0;
-            $w  = imagesx($img);
-        } else {
-            $x1 = 0;
-            $x2 = (imagesx($img) - 128) / 2;
-            $w  = 125;
-        }
-
-        if (imagesy($img) < 80) {
-            $y1 = (80 - imagesy($img)) / 2;
-            $y2 = 0;
-            $h  = imagesy($img);
-        } else {
-            $y1 = 0;
-            $y2 = (imagesy($img) - 80) / 2;
-            $h  = 80;
-        }
-
-        $xratio = $thumbwidth / imagesx($img);
-        $yratio = $thumbheight / imagesy($img);
-
-        $resized = imagecreatefromgif('images/tribetemplate.gif');
-
-        $imagem   = imagecopymerge($resized, $img, $x1, $y1, $x2, $y2, $w, $h, 90);
-        $gif_name = 'tribe_' . $xoopsUser->getVar('uid') . mt_rand(1000000, 9999999) . '.gif';
-        imagegif($resized, $path_upload . '/' . $gif_name);
-        imagedestroy($resized);
-        imagedestroy($img);
-
-        return $gif_name;
-    }
 }
