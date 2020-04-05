@@ -86,14 +86,14 @@ define('_MD_YOGURT_AQUAITANCE', 'Bekanntenkreis'); //also present in index.php
 define('_MD_YOGURT_FRIEND', 'Freund'); //also present in index.php
 define('_MD_YOGURT_BESTFRIEND', 'Bester Freund'); //also present in index.php
 define('_MD_YOGURT_FAN', 'Fan'); //also present in index.php
-define('_MD_YOGURT_SEXY', 'Sexy'); //also present in index.php
-define('_MD_YOGURT_SEXYNO', 'Nein');
-define('_MD_YOGURT_SEXYYES', 'Ja');
-define('_MD_YOGURT_SEXYALOT', 'Sehr!');
-define('_MD_YOGURT_TRUSTY', 'Zuverl&auml;ssig');
-define('_MD_YOGURT_TRUSTYNO', 'Nein');
-define('_MD_YOGURT_TRUSTYYES', 'Ja');
-define('_MD_YOGURT_TRUSTYALOT', 'Sehr!');
+define('_MD_YOGURT_FRIENDLY', 'Friendly'); //also present in index.php
+define('_MD_YOGURT_FRIENDLYNO', 'Nein');
+define('_MD_YOGURT_FRIENDLYYES', 'Ja');
+define('_MD_YOGURT_FRIENDLYALOT', 'Sehr!');
+define('_MD_YOGURT_FUNNY', 'Zuverl&auml;ssig');
+define('_MD_YOGURT_FUNNYNO', 'Nein');
+define('_MD_YOGURT_FUNNYYES', 'Ja');
+define('_MD_YOGURT_FUNNYALOT', 'Sehr!');
 define('_MD_YOGURT_COOL', 'Cool');
 define('_MD_YOGURT_COOLNO', 'Nein');
 define('_MD_YOGURT_COOLYES', 'Ja');

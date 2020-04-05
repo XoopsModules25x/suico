@@ -65,7 +65,7 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
 
 /**
- * Criando a barra de navegao caso tenha muitos amigos
+ * Creating the navigation bar if you have a lot of friends
  */
 $barra_navegacao = new \XoopsPageNav($nb_tribes, $xoopsModuleConfig['tribesperpage'], $start_all, 'start_all', 'tribe_keyword=' . $tribe_keyword . '&amp;start_my=' . $start_my);
 $barrinha        = $barra_navegacao->renderImageNav(2);

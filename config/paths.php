@@ -4,8 +4,8 @@ $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
 return (object)[
-    'name'          => mb_strtoupper($moduleDirName) . ' PathConfigurator',
-    'paths'         => [
+    'name'        => mb_strtoupper($moduleDirName) . ' PathConfigurator',
+    'paths'       => [
         'dirname'    => $moduleDirName,
         'admin'      => XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/admin',
         'modPath'    => XOOPS_ROOT_PATH . '/modules/' . $moduleDirName,
@@ -13,10 +13,26 @@ return (object)[
         'uploadPath' => XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
         'uploadUrl'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName,
     ],
-    'uploadFolders' => [
-        XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
-        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/category',
-        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/screenshots',
+    'uploadPaths' => [
+        'yogurt'  => XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
+        'avatars' => XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/avatars',
+        'images'  => XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images',
+        'mp3'     => XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/mp3',
+        'photos'  => XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/photos',
+        'thumbs'  => XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/thumbs',
+        'tribes'  => XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/tribes',
+        'videos'  => XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/videos',
+        //XOOPS_UPLOAD_PATH . '/flags'
+    ],
+    'uploadUrls'  => [
+        'yogurt'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName,
+        'avatars' => XOOPS_UPLOAD_URL . '/' . $moduleDirName . '/avatars',
+        'images'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName . '/images',
+        'mp3'     => XOOPS_UPLOAD_URL . '/' . $moduleDirName . '/mp3',
+        'photos'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName . '/photos',
+        'thumbs'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName . '/thumbs',
+        'tribes'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName . '/tribes',
+        'videos'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName . '/videos',
         //XOOPS_UPLOAD_PATH . '/flags'
     ],
 ];

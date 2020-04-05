@@ -401,17 +401,17 @@ width:300px;
 overflow:hidden;
 }
 
-p#trustybw{
+p#funnybw{
 display:inline;
 height:18px;
-background-image:url(../images/trustybw.gif);
+background-image:url(../images/funnybw.gif);
 background-repeat:no-repeat;
 width:48px;
 }
 
-span#trustycolor {
+span#funnycolor {
 width:32px;
-background-image:url(../images/trustycolor.gif);
+background-image:url(../images/funnycolor.gif);
 background-repeat:no-repeat;
 }
 
@@ -429,17 +429,17 @@ background-image:url(../images/coolcolor.gif);
 background-repeat:no-repeat;
 }
 
-p#sexybw{
+p#friendlybw{
 display:inline;
 height:18px;
-background-image:url(../images/sexybw.gif);
+background-image:url(../images/friendlybw.gif);
 background-repeat:no-repeat;
 width:48px;
 }
 
-span#sexycolor {
+span#friendlycolor {
 width:32px;
-background-image:url(../images/sexycolor.gif);
+background-image:url(../images/friendlycolor.gif);
 background-repeat:no-repeat;
 }
 

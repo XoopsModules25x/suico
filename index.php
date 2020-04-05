@@ -238,12 +238,12 @@ $xoopsTpl->assign('lang_viewalltribes', _MD_YOGURT_ALLTRIBES);
 //evaluations
 $xoopsTpl->assign('lang_fans', _MD_YOGURT_FANS);
 $xoopsTpl->assign('nb_fans', $evaluation['sumfan']);
-$xoopsTpl->assign('lang_trusty', _MD_YOGURT_TRUSTY);
-$xoopsTpl->assign('trusty', $evaluation['mediatrust']);
-$xoopsTpl->assign('trusty_rest', 48 - $evaluation['mediatrust']);
-$xoopsTpl->assign('lang_sexy', _MD_YOGURT_SEXY);
-$xoopsTpl->assign('sexy', $evaluation['mediahot']);
-$xoopsTpl->assign('sexy_rest', 48 - $evaluation['mediahot']);
+$xoopsTpl->assign('lang_funny', _MD_YOGURT_FUNNY);
+$xoopsTpl->assign('funny', $evaluation['mediatrust']);
+$xoopsTpl->assign('funny_rest', 48 - $evaluation['mediatrust']);
+$xoopsTpl->assign('lang_friendly', _MD_YOGURT_FRIENDLY);
+$xoopsTpl->assign('friendly', $evaluation['mediahot']);
+$xoopsTpl->assign('friendly_rest', 48 - $evaluation['mediahot']);
 $xoopsTpl->assign('lang_cool', _MD_YOGURT_COOL);
 $xoopsTpl->assign('cool', $evaluation['mediacool']);
 $xoopsTpl->assign('cool_rest', 48 - $evaluation['mediacool']);

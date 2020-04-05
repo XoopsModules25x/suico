@@ -101,14 +101,14 @@ define('_MD_YOGURT_AQUAITANCE', 'Conhecidos'); //also present in index.php - Gib
 define('_MD_YOGURT_FRIEND', 'Amigo'); //also present in index.php - GibaPhp
 define('_MD_YOGURT_BESTFRIEND', 'Melhor Amigo'); //also present in index.php - GibaPhp
 define('_MD_YOGURT_FAN', 'Fan'); //also present in index.php - GibaPhp
-define('_MD_YOGURT_SEXY', 'Sexy'); //also present in index.php - GibaPhp
-define('_MD_YOGURT_SEXYNO', 'Nope'); //GibaPhp - ??? Dúvida no conteúdo...
-define('_MD_YOGURT_SEXYYES', 'Sim'); //GibaPhp
-define('_MD_YOGURT_SEXYALOT', 'Muito!'); //GibaPhp
-define('_MD_YOGURT_TRUSTY', 'Confiável'); //GibaPhp
-define('_MD_YOGURT_TRUSTYNO', 'Nope'); //GibaPhp ??? Dúvida no conteúdo...
-define('_MD_YOGURT_TRUSTYYES', 'Sim'); //GibaPhp
-define('_MD_YOGURT_TRUSTYALOT', 'Muito'); //GibaPhp
+define('_MD_YOGURT_FRIENDLY', 'Friendly'); //also present in index.php - GibaPhp
+define('_MD_YOGURT_FRIENDLYNO', 'Nope'); //GibaPhp - ??? Dúvida no conteúdo...
+define('_MD_YOGURT_FRIENDLYYES', 'Sim'); //GibaPhp
+define('_MD_YOGURT_FRIENDLYALOT', 'Muito!'); //GibaPhp
+define('_MD_YOGURT_FUNNY', 'Confiável'); //GibaPhp
+define('_MD_YOGURT_FUNNYNO', 'Nope'); //GibaPhp ??? Dúvida no conteúdo...
+define('_MD_YOGURT_FUNNYYES', 'Sim'); //GibaPhp
+define('_MD_YOGURT_FUNNYALOT', 'Muito'); //GibaPhp
 define('_MD_YOGURT_COOL', 'Legal'); //GibaPhp
 define('_MD_YOGURT_COOLNO', 'Nope'); //GibaPhp ??? Dúvida no conteúdo...
 define('_MD_YOGURT_COOLYES', 'Sim'); //GibaPhp

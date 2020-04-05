@@ -48,12 +48,12 @@
 <{if $allow_friends }>
     <div class="yogurt-nav-bar" id="yogurt-nav-bar">
         <p id="yogurt-profile-fans"><a href="fans.php?uid=<{$uid_owner}>" alt="<{$lang_fans}>" title="<{$lang_fans}>"> <{$lang_fans}> </a><img src="assets/images/fans.gif"> (<{$nb_fans}>)
-            | <{$lang_trusty}> </p>
-        <p id="trustybw"><span id="trustycolor">&nbsp;<img width="<{$trusty}>" height="0" src="assets/images/transparent.gif"></span>&nbsp;<img width="<{$trusty_rest}>" height="0" src="assets/images/transparent.gif"></p>
+            | <{$lang_funny}> </p>
+        <p id="funnybw"><span id="funnycolor">&nbsp;<img width="<{$funny}>" height="0" src="assets/images/transparent.gif"></span>&nbsp;<img width="<{$funny_rest}>" height="0" src="assets/images/transparent.gif"></p>
 
         | <{$lang_cool}> <p id="coolbw"><span id="coolcolor">&nbsp;<img width="<{$cool}>" height="0" src="assets/images/transparent.gif"></span>&nbsp;<img width="<{$cool_rest}>" height="0" src="assets/images/transparent.gif"></p>
 
-        | <{$lang_sexy}> <p id="sexybw"><span id="sexycolor">&nbsp;<img width="<{$sexy}>" height="0" src="assets/images/transparent.gif"></span>&nbsp;<img width="<{$sexy_rest}>" height="0" src="assets/images/transparent.gif"></p>
+        | <{$lang_friendly}> <p id="friendlybw"><span id="friendlycolor">&nbsp;<img width="<{$friendly}>" height="0" src="assets/images/transparent.gif"></span>&nbsp;<img width="<{$friendly_rest}>" height="0" src="assets/images/transparent.gif"></p>
     </div>
 <{/if}>
 
