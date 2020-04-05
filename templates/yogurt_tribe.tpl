@@ -35,7 +35,7 @@
                     </h2>
                     <p>
                         <a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$tribe_members[i].uid}>" alt="<{$tribe_members[i].uname}>" title="<{$tribe_members[i].uname}>">
-                            <{if $tribe_members[i].avatar=="avatars/blank.png"}><img src="assets/images/noavatar.gif"><{else}> <img src="<{$xoops_upload_url}>/<{$tribe_members[i].avatar}>"><{/if}></a>
+                            <{if $tribe_members[i].avatar=="avatars/blank.gif"}><img src="assets/images/noavatar.gif"><{else}> <img src="<{$xoops_upload_url}>/<{$tribe_members[i].avatar}>"><{/if}></a>
 
                         <{if $tribe_owneruid==$useruid}>
                     <form action="kickfromtribe.php" method="post">

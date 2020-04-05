@@ -53,10 +53,14 @@ class VideoHandler extends \XoopsPersistableObjectHandler
     {
         {
             $obj = parent::create($isNew);
-            //        if ($isNew) {
-            //            $obj->setDefaultPermissions();
-            //        }
-            $obj->helper = $this->helper;
+            if ($isNew) {
+                $obj->setNew();
+            } else {
+                $obj->unsetNew();
+            }
+            if ($isNew) {
+                $obj->helper = $this->helper;
+            }
 
             return $obj;
         }

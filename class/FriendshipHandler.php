@@ -60,9 +60,11 @@ class FriendshipHandler extends \XoopsPersistableObjectHandler
     {
         {
             $obj = parent::create($isNew);
-            //        if ($isNew) {
-            //            $obj->setDefaultPermissions();
-            //        }
+            if ($isNew) {
+                $obj->setNew();
+            } else {
+                $obj->unsetNew();
+            }
             $obj->helper = $this->helper;
 
             return $obj;

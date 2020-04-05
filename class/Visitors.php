@@ -29,7 +29,7 @@ class Visitors extends \XoopsObject
         /** @var  Helper $helper */
         $this->helper     = Helper::getInstance();
         $this->permHelper = new \Xmf\Module\Helper\Permission();
-        $this->db = \XoopsDatabaseFactory::getDatabaseConnection();
+        $this->db         = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('cod_visit', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('uid_owner', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('uid_visitor', XOBJ_DTYPE_INT, null, false, 10);

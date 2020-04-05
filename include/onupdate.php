@@ -18,11 +18,14 @@
  */
 
 use XoopsModules\Yogurt;
+use XoopsModules\Yogurt\Common;
 
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof XoopsUser)
     || !$GLOBALS['xoopsUser']->isAdmin()) {
     exit('Restricted access' . PHP_EOL);
 }
+
+include dirname(__DIR__) . '/preloads/autoloader.php';
 
 /**
  * @param string $tablename
@@ -75,8 +78,7 @@ function xoops_module_update_yogurt(\XoopsModule $module, $previousVersion = nul
     $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-    /** @var Yogurt\Helper $helper */
-    /** @var Yogurt\Utility $utility */
+    /** @var Yogurt\Helper $helper */ /** @var Yogurt\Utility $utility */
     /** @var Yogurt\Common\Configurator $configurator */
     $helper       = Yogurt\Helper::getInstance();
     $utility      = new Yogurt\Utility();
@@ -87,7 +89,7 @@ function xoops_module_update_yogurt(\XoopsModule $module, $previousVersion = nul
     $migrator = new \XoopsModules\Yogurt\Common\Migrate($configurator);
     $migrator->synchronizeSchema();
 
-    if ($previousVersion < 350) {
+    if ($previousVersion < 360) {
         //rename column EXAMPLE
         //        $tables = new Tables();
         //        $table = 'xxxx_categories';

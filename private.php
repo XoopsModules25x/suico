@@ -32,8 +32,8 @@ $cod_img = $_POST['cod_img'];
 /**
  * Creating the factory  loading the picture changing its caption
  */
-$pictureFactory = new Yogurt\ImageHandler($xoopsDB);
-$picture        = $pictureFactory->create(false);
+$imageFactory = new Yogurt\ImageHandler($xoopsDB);
+$picture      = $imageFactory->create(false);
 $picture->load($cod_img);
 $picture->setVar('private', \Xmf\Request::getInt('private', 0, 'POST'));
 
@@ -42,7 +42,7 @@ $picture->setVar('private', \Xmf\Request::getInt('private', 0, 'POST'));
  */
 $uid = (int)$xoopsUser->getVar('uid');
 if ($uid == $picture->getVar('uid_owner')) {
-    if ($pictureFactory->insert($picture)) {
+    if ($imageFactory->insert($picture)) {
         if (1 == $_POST['private']) {
             redirect_header('album.php', 2, _MD_YOGURT_PRIVATIZED);
         } else {

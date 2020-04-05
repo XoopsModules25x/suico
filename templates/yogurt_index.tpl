@@ -5,7 +5,7 @@
     <!-- if not owner and not friend -->
     <div id="yogurt-profile-petition" class="confirmMsg">
         <h4><{$lang_youhavexpetitions}></h4>
-        <img width="30" src="<{$xoops_url}>/uploads/yogurt/avatars/<{$petitioner_avatar}>">
+        <img width="30" src="<{$xoops_url}>/uploads/<{$petitioner_avatar}>">
         <form action="makefriends.php" method="post">
             <{$lang_askingfriend}>
             <ul>
@@ -47,7 +47,7 @@
 <{/if}>
 <{if $allow_friends }>
     <div class="yogurt-nav-bar" id="yogurt-nav-bar">
-        <p id="yogurt-profile-fans"><a href="fans.php?uid=<{$uid_owner}>" alt="<{$lang_fans}>" title="<{$lang_fans}>"> <{$lang_fans}> </a><img src="assets/images/fans.gif"> ( <{$nb_fans}> )
+        <p id="yogurt-profile-fans"><a href="fans.php?uid=<{$uid_owner}>" alt="<{$lang_fans}>" title="<{$lang_fans}>"> <{$lang_fans}> </a><img src="assets/images/fans.gif"> (<{$nb_fans}>)
             | <{$lang_trusty}> </p>
         <p id="trustybw"><span id="trustycolor">&nbsp;<img width="<{$trusty}>" height="0" src="assets/images/transparent.gif"></span>&nbsp;<img width="<{$trusty_rest}>" height="0" src="assets/images/transparent.gif"></p>
 
@@ -143,7 +143,7 @@
 			<{/if}>
             <{if $isanonym!=1 && $isOwner!=1 }>
                 <p class="even"><img src="assets/images/email.gif"> <span class="yogurt-profileinfo-label"><{$lang_privmsg}>:</span><span class="yogurt-profileinfo-value"><a href="javascript:openWithSelfMain('<{$xoops_url}>/pmlite.php?send2=1&amp;to_userid=<{$uid_owner}>', 'pmlite', 450, 380);"><img
-                                    src="<{$xoops_url}>/images/icons/pm.gif" alt="Send Private Message to suico"></a></span></p>
+                                    src="<{$xoops_url}>/images/icons/pm.gif" alt=""></a></span></p>
             <{/if}>
 			<{if $user_icq}>
             <p class="odd"><img src="assets/images/icq.gif"> <span class="yogurt-profileinfo-label"><{$lang_icq}>:</span><span class="yogurt-profileinfo-value"><{$user_icq}></span> <!-- <{if $user_icq!=""}><img src="http://status.icq.com/online.gif?icq=<{$user_icq}>&img=21"> <{/if}> --></p>
@@ -220,7 +220,7 @@
 <div class="yogurt-profile-group2">
 
     <div id="yogurt-profile-friends" class="outer">
-        <h2 id="titulo-friends" class="head"><{$lang_videos}> ( <{$nb_videos}> )</h2>
+        <h2 id="titulo-friends" class="head"><{$lang_videos}> (<{$nb_videos}>)</h2>
         <{if $allow_videos==1 }>
             <div id="yogurt-profile-tribe">
                 <{if $mainvideocode!="" }>
@@ -250,15 +250,14 @@
 
     <{if $allow_friends==1 }>
         <div id="yogurt-profile-friends" class="outer">
-            <h2 id="titulo-friends" class="head"><{$lang_friendstitle}> ( <{$nb_friends}> )</h2>
+            <h2 id="titulo-friends" class="head"><{$lang_friendstitle}> (<{$nb_friends}>)</h2>
             <{if $nb_friends==0}><p id="nofriends"><{$lang_nofriendsyet}></p><{/if}>
             <{section name=i loop=$friends}>
                 <div class="yogurt-profile-friend <{cycle values="odd,even"}>">
                     <a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$friends[i].uid}>" alt="<{$friends[i].uname}>" title="<{$friends[i].uname}>"><{if $friends[i].user_avatar=="avatars/blank.gif"}>
                             <img class="yogurt-profile-friend-photo" src="assets/images/noavatar.gif">
                         <{else}>
-                            <imgclass
-                            = "yogurt-profile-friend-photo" src="<{$xoops_upload_url}>/<{$friends[i].user_avatar}>"><{/if}><{$friends[i].uname}> </a>
+                            <img class = "yogurt-profile-friend-photo" src="<{$xoops_upload_url}>/<{$friends[i].user_avatar}>"><{/if}><{$friends[i].uname}> </a>
                 </div>
             <{/section}>
             <p id="yogurt-profile-friend-viewall" class="foot">
@@ -272,7 +271,7 @@
             <{if $nb_tribes==0}><p id="notribes"><{$lang_notribesyet}></p><{/if}>
             <{section name=i loop=$tribes}>
                 <div class="yogurt-profile-tribe <{cycle values="odd,even"}>">
-                    <a href="tribe.php?tribe_id=<{$tribes[i].tribe_id}>"><img alt="<{$tribes[i].title}>" title="<{$tribes[i].title}>" class="yogurt-profile-tribes-img" src="<{$xoops_upload_url}>/<{$tribes[i].img}>"></a> <h4> <{$tribes[i].title}> </h4>
+                    <a href="tribe.php?tribe_id=<{$tribes[i].tribe_id}>"><img alt="<{$tribes[i].title}>" title="<{$tribes[i].title}>" class="yogurt-profile-tribes-img" src="<{$xoops_upload_url}>/yogurt/tribes/<{$tribes[i].img}>"></a> <h4> <{$tribes[i].title}> </h4>
                     <p><{$tribes[i].desc}></p>
                 </div>
             <{/section}>

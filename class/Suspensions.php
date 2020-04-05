@@ -29,7 +29,7 @@ class Suspensions extends \XoopsObject
         /** @var  Helper $helper */
         $this->helper     = Helper::getInstance();
         $this->permHelper = new \Xmf\Module\Helper\Permission();
-        $this->db = \XoopsDatabaseFactory::getDatabaseConnection();
+        $this->db         = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('uid', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('old_pass', XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('old_email', XOBJ_DTYPE_TXTBOX, null, false);

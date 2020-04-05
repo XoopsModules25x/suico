@@ -33,8 +33,8 @@ if (1 == $marker) {
     /**
      * Creating the factory loading the picture changing its caption
      */
-    $pictureFactory = new Yogurt\ImageHandler($xoopsDB);
-    $picture        = $pictureFactory->create(false);
+    $imageFactory = new Yogurt\ImageHandler($xoopsDB);
+    $picture      = $imageFactory->create(false);
     $picture->load($cod_img);
     $picture->setVar('title', trim(htmlspecialchars($_POST['caption'], ENT_QUOTES | ENT_HTML5)));
 
@@ -42,7 +42,7 @@ if (1 == $marker) {
      * Verifying who's the owner to allow changes
      */
     if ($uid == $picture->getVar('uid_owner')) {
-        if ($pictureFactory->insert($picture)) {
+        if ($imageFactory->insert($picture)) {
             redirect_header('album.php', 2, _MD_YOGURT_DESC_EDITED);
         } else {
             redirect_header('album.php', 2, _MD_YOGURT_NOCACHACA);
@@ -53,7 +53,7 @@ if (1 == $marker) {
  * Creating the factory  and the criteria to edit the desc of the picture
  * The user must be the owner
  */
-$albumFactory = new Yogurt\ImageHandler($xoopsDB);
+$imageFactory = new Yogurt\ImageHandler($xoopsDB);
 $criteria_img = new \Criteria('cod_img', $cod_img);
 $criteria_uid = new \Criteria('uid_owner', $uid);
 $criteria     = new \CriteriaCompo($criteria_img);
@@ -63,13 +63,13 @@ $criteria->add($criteria_uid);
  * Lets fetch the info of the pictures to be able to render the form
  * The user must be the owner
  */
-$array_pict = $albumFactory->getObjects($criteria);
+$array_pict = $imageFactory->getObjects($criteria);
 if ($array_pict) {
     $caption = $array_pict[0]->getVar('title');
     $url     = $array_pict[0]->getVar('url');
 }
 //$url = $xoopsModuleConfig['link_path_upload']."/thumb_".$url;
 $url = XOOPS_URL . '/uploads/yogurt/photos/thumb_' . $url;
-$albumFactory->renderFormEdit($caption, $cod_img, $url);
+$imageFactory->renderFormEdit($caption, $cod_img, $url);
 
 require dirname(dirname(__DIR__)) . '/footer.php';

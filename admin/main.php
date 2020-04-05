@@ -26,12 +26,12 @@
  */
 
 /**
- * Arquivo de cabe�alho da administra��o do Xoops
+ * Xoops admin header file
  */
 require_once __DIR__ . '/admin_header.php';
 
 /**
- * Fun��o que desenha o cabe�alho da administra��o do Xoops
+ * Function that draws the header of the Xoops administration
  */
 xoops_cp_header();
 

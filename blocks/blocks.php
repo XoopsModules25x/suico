@@ -90,9 +90,9 @@ function b_yogurt_lastpictures_show($options)
      * Creating factories of pictures and votes
      */
     //$albumFactory      = new ImagesHandler($xoopsDB);
-    $picturesFactory = new Yogurt\ImageHandler($xoopsDB);
+    $imageFactory = new Yogurt\ImageHandler($xoopsDB);
 
-    $block = $picturesFactory->getLastPicturesForBlock($options[0]);
+    $block = $imageFactory->getLastPicturesForBlock($options[0]);
 
     return $block;
 }

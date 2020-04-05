@@ -27,7 +27,7 @@ require __DIR__ . '/header.php';
 /**
  * Factory of pictures created
  */
-$albumFactory = new Yogurt\VideoHandler($xoopsDB);
+$videoFactory = new Yogurt\VideoHandler($xoopsDB);
 
 $url = $_POST['codigo'];
 
@@ -38,7 +38,7 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 /**
  * Try to upload picture resize it insert in database and then redirect to index
  */
-$newvideo = $albumFactory->create(true);
+$newvideo = $videoFactory->create(true);
 $newvideo->setVar('uid_owner', (int)$xoopsUser->getVar('uid'));
 $newvideo->setVar('video_desc', trim(htmlspecialchars($_POST['caption'], ENT_QUOTES | ENT_HTML5)));
 
@@ -50,7 +50,7 @@ if (11 == mb_strlen($url)) {
 }
 
 $newvideo->setVar('youtube_code', $code);
-if ($albumFactory->insert($newvideo)) {
+if ($videoFactory->insert($newvideo)) {
     $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
     $extra_tags['X_OWNER_UID']  = (int)$xoopsUser->getVar('uid');
     $notificationHandler        = xoops_getHandler('notification');

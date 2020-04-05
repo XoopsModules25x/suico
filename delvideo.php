@@ -34,7 +34,7 @@ if (1 != $_POST['confirm']) {
      * Creating the factory  and the criteria to delete the picture
      * The user must be the owner
      */
-    $albumFactory = new Yogurt\VideoHandler($xoopsDB);
+    $videoFactory = new Yogurt\VideoHandler($xoopsDB);
     $criteria_img = new \Criteria('video_id', $cod_video);
     $uid          = (int)$xoopsUser->getVar('uid');
     $criteria_uid = new \Criteria('uid_owner', $uid);
@@ -44,7 +44,7 @@ if (1 != $_POST['confirm']) {
     /**
      * Try to delete
      */
-    if ($albumFactory->deleteAll($criteria)) {
+    if ($videoFactory->deleteAll($criteria)) {
         redirect_header('video.php?uid=' . $uid, 2, _MD_YOGURT_VIDEODELETED);
     } else {
         redirect_header('video.php?uid=' . $uid, 2, _MD_YOGURT_NOCACHACA);
