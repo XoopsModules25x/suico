@@ -4,10 +4,10 @@ jQuery(document).ready(function() {
        $('a[@rel*=lightbox]').lightBox({
         overlayBgColor: '#000',
         overlayOpacity: 0.6,
-        imageLoading: 'images/lightbox-ico-loading.gif',
-        imageBtnClose: 'images/close.gif',
-        imageBtnPrev: 'images/prev.gif',
-        imageBtnNext: 'images/next.gif',
+        imageLoading: 'assets/images/lightbox-ico-loading.gif',
+        imageBtnClose: 'assets/images/close.gif',
+        imageBtnPrev: 'assets/images/prev.gif',
+        imageBtnNext: 'assets/images/next.gif',
         containerResizeSpeed: 800,
         txtImage: 'Image',
         txtOf: 'of'

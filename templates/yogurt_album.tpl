@@ -21,7 +21,7 @@
         <{if $isOwner}>
             <{$lang_mysection}>
         <{else}>
-            <{$owner_uname}><{$section_name}>
+            <{$owner_uname}> <{$section_name}>
         <{/if}>
     </h2>
     <{if $lang_nopicyet=="" }>
@@ -32,12 +32,12 @@
     <form action="delpicture.php" method="post" id="deleteform" class="yogurt-album-formquick">
         <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">
         <{$token}>
-        <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="assets/images/dele.gif">
+        <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 delete.png}>">
     </form>
     <form action="editdesc.php" method="post" id="editform" class="yogurt-album-formquick">
         <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">
         <{$token}>
-        <input name="submit" type="image" alt="<{$lang_editdesc}>" title="<{$lang_editdesc}>" src="assets/images/edit.gif">
+        <input name="submit" type="image" alt="<{$lang_editdesc}>" title="<{$lang_editdesc}>" src="<{xoModuleIcons16 edit.png}>">
     </form>
     <form action="avatar.php" method="post" id="setavatar" class="yogurt-album-formquick">
         <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">
@@ -58,8 +58,8 @@
     <{if ($pics_array[i].private == 1) }>
         <p><span class="yogurt-album-private"> Private </span></p>
     <{/if}>
-    <p class="yogurt-album-picture-img"><a href="<{$xoops_url}>/uploads/resized_<{$pics_array[i].url}>" rel="lightbox[album]" title="<{$pics_array[i].desc}>">
-            <img class="thumb" src="<{$xoops_url}>/uploads/thumb_<{$pics_array[i].url}>" rel="lightbox" title="<{$pics_array[i].desc}>">
+    <p class="yogurt-album-picture-img"><a href="<{$xoops_url}>/uploads/yogurt/photos/resized_<{$pics_array[i].url}>" rel="lightbox[album]" title="<{$pics_array[i].desc}>">
+            <img class="thumb" src="<{$xoops_url}>/uploads/yogurt/photos/thumb_<{$pics_array[i].url}>" rel="lightbox" title="<{$pics_array[i].desc}>">
         </a></p>
     <p id="yogurt-album-picture-desc"><{$pics_array[i].desc}></p>
 </div>

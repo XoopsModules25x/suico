@@ -90,7 +90,7 @@ class TribesForm extends \XoopsThemeForm
         // Tribe_img
         $tribe_img = $this->targetObject->getVar('tribe_img') ?: 'blank.png';
 
-        $uploadDir   = '/uploads/yogurt/images/';
+        $uploadDir   = '/uploads/yogurt/tribes/';
         $imgtray     = new \XoopsFormElementTray(AM_YOGURT_TRIBES_TRIBE_IMG, '<br>');
         $imgpath     = sprintf(AM_YOGURT_FORMIMAGE_PATH, $uploadDir);
         $imageselect = new \XoopsFormSelect($imgpath, 'tribe_img', $tribe_img);

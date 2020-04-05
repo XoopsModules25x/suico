@@ -41,21 +41,20 @@
                 </li>
             <{/if}>
             <{if $allow_pictures !=-1 }>
-            <li <{if $allow_pictures == 0 }>class="tabs-disabled" <{/if}><{if $section_name==$lang_photos}>class="tabs-selected" <{/if}>><a href="album.php?uid=<{$uid_owner}>"><span><img class="yogurt-nav-bar-icon" src="assets/images/lphoto.gif"><{$lang_photos}> ( <{$nb_photos}> )</span></a>
+                <li <{if $allow_pictures == 0 }>class="tabs-disabled"<{/if}><{if $section_name==$lang_photos}>class="tabs-selected" <{/if}>><a href="album.php?uid=<{$uid_owner}>"><span><img class="yogurt-nav-bar-icon" src="assets/images/lphoto.gif"><{$lang_photos}> (<{$nb_photos}>)</span></a>
                 </li><{/if}>
             <{if $allow_audios !=-1 }>
-            <li <{if $allow_audios ==0 }>class="tabs-disabled" <{/if}><{if $section_name==$lang_audio}>class="tabs-selected" <{/if}>> <a href="audio.php?uid=<{$uid_owner}>"><span><img class="yogurt-nav-bar-icon" src="assets/images/audio.gif"><{$lang_audio}> ( <{$nb_audio}> )</span></a>
+                <li <{if $allow_audios ==0 }>class="tabs-disabled"<{/if}><{if $section_name==$lang_audio}>class="tabs-selected" <{/if}>> <a href="audio.php?uid=<{$uid_owner}>"><span><img class="yogurt-nav-bar-icon" src="assets/images/audio.gif"><{$lang_audio}> (<{$nb_audio}>)</span></a>
                 </li><{/if}>
             <{if $allow_videos !=-1 }>
-            <li <{if $allow_videos ==0 }>class="tabs-disabled"<{/if}> <{if $section_name==$lang_videos}>class="tabs-selected" <{/if}>><a href="video.php?uid=<{$uid_owner}>"><span><img class="yogurt-nav-bar-icon" src="assets/images/video.gif"><{$lang_videos}> ( <{$nb_videos}> )</span></a>
+                <li <{if $allow_videos ==0 }>class="tabs-disabled"<{/if}> <{if $section_name==$lang_videos}>class="tabs-selected" <{/if}>><a href="video.php?uid=<{$uid_owner}>"><span><img class="yogurt-nav-bar-icon" src="assets/images/video.gif"><{$lang_videos}> (<{$nb_videos}>)</span></a>
                 </li><{/if}>
             <{if $allow_friends !=-1 }>
-            <li <{if $allow_friends ==0 }>class="tabs-disabled" <{/if}><{if $section_name==$lang_friends}>class="tabs-selected" <{/if}>> <a href="friends.php?uid=<{$uid_owner}>"><span><img class="yogurt-nav-bar-icon" src="assets/images/people.gif"><{$lang_friends}> ( <{$nb_friends}> )</span></a>
+                <li <{if $allow_friends ==0 }>class="tabs-disabled"<{/if}><{if $section_name==$lang_friends}>class="tabs-selected" <{/if}>> <a href="friends.php?uid=<{$uid_owner}>"><span><img class="yogurt-nav-bar-icon" src="assets/images/people.gif"><{$lang_friends}> (<{$nb_friends}>)</span></a>
                 </li><{/if}>
             <{if $allow_tribes !=-1 }>
-            <li <{if $allow_tribes ==0 }>class="tabs-disabled" <{/if}><{if $section_name==$lang_tribes}>class="tabs-selected" <{/if}>> <a href="tribes.php?uid=<{$uid_owner}>"><span><img class="yogurt-nav-bar-icon" src="assets/images/tribes.gif"><{$lang_tribes}> ( <{$nb_tribes}> )</span></a>
+                <li <{if $allow_tribes ==0 }>class="tabs-disabled"<{/if}><{if $section_name==$lang_tribes}>class="tabs-selected" <{/if}>> <a href="tribes.php?uid=<{$uid_owner}>"><span><img class="yogurt-nav-bar-icon" src="assets/images/tribes.gif"><{$lang_tribes}> (<{$nb_tribes}>)</span></a>
                 </li><{/if}>
-
             <{if $isOwner}>
                 <li <{if $section_name==$lang_configs}>class="tabs-selected" <{/if}>><a href="configs.php?uid=<{$uid_owner}>"><span><img class="yogurt-nav-bar-icon" src="assets/images/configs.gif"><{$lang_configs}></span></a></li>
             <{/if}>

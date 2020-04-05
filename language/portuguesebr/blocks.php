@@ -31,4 +31,4 @@
  * @Support    : http://br.impresscms.org - Team Brazilian.
  * @Licence    : GNU
  */
-define('_MB_YOG_ALLFRIENDS', 'Ver todos os amigos');
+define('_MB_YOGURT_ALLFRIENDS', 'Ver todos os amigos');

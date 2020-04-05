@@ -43,7 +43,7 @@ if (1 == $marker && $tribe->getVar('owner_uid') == $uid) {
     $img       = $_POST['img'];
     $updateImg = (1 == $_POST['flag_oldimg']) ? 0 : 1;
 
-    $path_upload   = XOOPS_ROOT_PATH . '/uploads';
+    $path_upload   = XOOPS_ROOT_PATH . '/uploads/yogurt/images';
     $maxfilebytes  = $xoopsModuleConfig['maxfilesize'];
     $maxfileheight = $xoopsModuleConfig['max_original_height'];
     $maxfilewidth  = $xoopsModuleConfig['max_original_width'];

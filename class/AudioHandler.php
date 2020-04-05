@@ -258,8 +258,9 @@ class AudioHandler extends \XoopsPersistableObjectHandler
         $allowed_mimetypes = ['audio/mp3', 'audio/x-mp3', 'audio/mpeg'];
         $maxfilesize       = $maxfilebytes;
 
+        $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/audio/';
         // create the object to upload
-        $uploader = new \XoopsMediaUploader($path_upload, $allowed_mimetypes, $maxfilesize);
+        $uploader = new \XoopsMediaUploader($uploadDir, $allowed_mimetypes, $maxfilesize);
         // fetch the media
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
             //lets create a name for it

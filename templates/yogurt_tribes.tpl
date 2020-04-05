@@ -17,7 +17,7 @@
 
     <{$token}>
 </form>
-<{if $isanonym!=1 }>
+<{if $isanonym!=1}>
 
 <form class='outer' name='form_tribe' id='form_tribe' action='submit_tribe.php' method='post' onsubmit='return xoopsFormValidate_form_tribe();' enctype="multipart/form-data">
 
@@ -90,7 +90,7 @@
             </h4>
             <p>
 
-                <a href="tribe.php?tribe_id=<{$mytribes[i].tribe_id}>"><img src="<{$xoops_upload_url}>/<{$mytribes[i].img}>" alt="<{$mytribes[i].title}>" title="<{$mytribes[i].title}>"></a>
+                <a href="tribe.php?tribe_id=<{$mytribes[i].tribe_id}>"><img src="<{$xoops_upload_url}>/yogurt/tribes/<{$mytribes[i].img}>" alt="<{$mytribes[i].title}>" title="<{$mytribes[i].title}>"></a>
             <p>
                 <{$mytribes[i].title}><{$mytribes[i].desc}>
             </p>
@@ -129,7 +129,7 @@
 
     <{section name=j loop=$tribes}>
         <div class="yogurt-tribe-all <{cycle values="odd,even"}>">
-            <a href="tribe.php?tribe_id=<{$tribes[j].id}>"><img src="<{$xoops_upload_url}>/<{$tribes[j].img}>" alt="<{$tribes[j].title}>" title="<{$tribes[j].title}>"></a>
+            <a href="tribe.php?tribe_id=<{$tribes[j].id}>"><img src="<{$xoops_upload_url}>/yogurt/tribes/<{$tribes[j].img}>" alt="<{$tribes[j].title}>" title="<{$tribes[j].title}>"></a>
             <h4>
                 <{$tribes[j].title}>
             </h4>
@@ -148,11 +148,11 @@
                 <{if $xoops_userid == $tribes[j].uid }>
                     <form action="delete_tribe.php" method="POST" id="form_deletetribe" class="yogurt-tribes-form-delete">
                         <input type="hidden" value="<{$tribes[j].id}>" name="tribe_id" id="tribe_id">
-                        <input type="image" src="assets/images/dele.gif">
+                        <input type="image" src="<{xoModuleIcons16 delete.png}>">
                     </form>
                     <form action="edittribe.php" method="POST" id="form_edittribe" class="yogurt-tribes-form-edit">
                         <input type="hidden" value="<{$tribes[j].id}>" name="tribe_id" id="tribe_id">
-                        <input type="image" src="assets/images/edit.gif">
+                        <input type="image" src="<{xoModuleIcons16 edit.png}>">
                     </form>
                     <form>
                         <img src="assets/images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>">

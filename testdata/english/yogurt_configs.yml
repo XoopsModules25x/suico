@@ -1,16 +1,1 @@
--
-    config_id: '1'
-    config_uid: '1'
-    pictures: '1'
-    audio: '0'
-    videos: '1'
-    tribes: '1'
-    notes: '1'
-    friends: '1'
-    profile_contact: '1'
-    profile_general: '1'
-    profile_stats: '2'
-    suspension: '0'
-    backup_password: ''
-    backup_email: ''
-    end_suspension: '2020-04-01 20:35:20'
+{  }

@@ -234,12 +234,12 @@ if ('editprofile' == $op) {
     $notify_method_select->addOptionArray([XOOPS_NOTIFICATION_METHOD_DISABLE => _NOT_METHOD_DISABLE, XOOPS_NOTIFICATION_METHOD_PM => _NOT_METHOD_PM, XOOPS_NOTIFICATION_METHOD_EMAIL => _NOT_METHOD_EMAIL]);
     $notify_mode_select = new \XoopsFormSelect(_NOT_NOTIFYMODE, 'notify_mode', $xoopsUser->getVar('notify_mode'));
     $notify_mode_select->addOptionArray([XOOPS_NOTIFICATION_MODE_SENDALWAYS => _NOT_MODE_SENDALWAYS, XOOPS_NOTIFICATION_MODE_SENDONCETHENDELETE => _NOT_MODE_SENDONCE, XOOPS_NOTIFICATION_MODE_SENDONCETHENWAIT => _NOT_MODE_SENDONCEPERLOGIN]);
-    $bio_tarea          = new \XoopsFormTextArea(_US_EXTRAINFO, 'bio', $xoopsUser->getVar('bio', 'E'));
-    $cookie_radio_value = empty($_COOKIE[$xoopsConfig['usercookie']]) ? 0 : 1;
-    $cookie_radio       = new \XoopsFormRadioYN(_US_USECOOKIE, 'usecookie', $cookie_radio_value, _YES, _NO);
-    $pwd_text           = new \XoopsFormPassword('', 'password', 10, 255);
-    $pwd_text2          = new \XoopsFormPassword('', 'vpass', 10, 255);
-    $pwd_tray           = new \XoopsFormElementTray(_US_PASSWORD . '<br>' . _US_TYPEPASSTWICE);
+    $bio_tarea = new \XoopsFormTextArea(_US_EXTRAINFO, 'bio', $xoopsUser->getVar('bio', 'E'));
+    //    $cookie_radio_value = empty($_COOKIE[$xoopsConfig['usercookie']]) ? 0 : 1;
+    //    $cookie_radio       = new \XoopsFormRadioYN(_US_USECOOKIE, 'usecookie', $cookie_radio_value, _YES, _NO);
+    $pwd_text  = new \XoopsFormPassword('', 'password', 10, 255);
+    $pwd_text2 = new \XoopsFormPassword('', 'vpass', 10, 255);
+    $pwd_tray  = new \XoopsFormElementTray(_US_PASSWORD . '<br>' . _US_TYPEPASSTWICE);
     $pwd_tray->addElement($pwd_text);
     $pwd_tray->addElement($pwd_text2);
     $mailok_radio = new \XoopsFormRadioYN(_US_MAILOK, 'user_mailok', $xoopsUser->getVar('user_mailok'));
@@ -265,14 +265,14 @@ if ('editprofile' == $op) {
     $form->addElement($notify_mode_select);
     $form->addElement($bio_tarea);
     $form->addElement($pwd_tray);
-    $form->addElement($cookie_radio);
+    //    $form->addElement($cookie_radio);
     $form->addElement($mailok_radio);
     if (defined('ICMS_VERSION_NAME')) {
         $form->addElement($salt_hidden);
     }
     $form->addElement($uid_hidden);
     $form->addElement($op_hidden);
-    $form->addElement($token_hidden);
+    //    $form->addElement($token_hidden);
     $form->addElement($submit_button);
     if (1 == $xoopsConfigUser['allow_chgmail']) {
         $form->setRequired($email_text);
@@ -286,7 +286,7 @@ if ('avatarform' == $op) {
     $uid = (int)$xoopsUser->getVar('uid');
     echo '<a href="index.php?uid=' . $uid . '">' . _US_PROFILE . '</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;' . _US_UPLOADMYAVATAR . '<br><br>';
     $oldavatar = $xoopsUser->getVar('user_avatar');
-    if (!empty($oldavatar) && 'blank.gif' != $oldavatar) {
+    if (!empty($oldavatar) && 'avatars/blank.gif' != $oldavatar) {
         echo '<div style="text-align:center;"><h4 style="color:#ff0000; font-weight:bold;">' . _US_OLDDELETED . '</h4>';
         echo '<img src="' . XOOPS_UPLOAD_URL . '/' . $oldavatar . '" alt=""></div>';
     }
@@ -337,9 +337,11 @@ if ('avatarupload' == $op) {
     if (empty($uid) || $xoopsUser->getVar('uid') != $uid) {
         redirect_header('index.php', 3, _US_NOEDITRIGHT);
     }
+    $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/avatars/';
+    $allowed_mimetypes = ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png'];
     if (1 == $xoopsConfigUser['avatar_allow_upload'] && $xoopsUser->getVar('posts') >= $xoopsConfigUser['avatar_minposts']) {
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
-        $uploader = new \XoopsMediaUploader(XOOPS_UPLOAD_PATH, ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png'], $xoopsConfigUser['avatar_maxsize'], $xoopsConfigUser['avatar_width'], $xoopsConfigUser['avatar_height']);
+        $uploader = new \XoopsMediaUploader(XOOPS_UPLOAD_PATH, $allowed_mimetypes, $xoopsConfigUser['avatar_maxsize'], $xoopsConfigUser['avatar_width'], $xoopsConfigUser['avatar_height']);
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
             $uploader->setPrefix('cavt');
             if ($uploader->upload()) {
@@ -396,7 +398,7 @@ if ('avatarchoose' == $op) {
         $criteria_avatar->add(new \Criteria('avatar_type', 'S'));
         $avatars = &$avtHandler->getObjects($criteria_avatar);
         if (!is_array($avatars) || !count($avatars)) {
-            $user_avatar = 'blank.gif';
+            $user_avatar = 'avatars/blank.gif';
         }
         unset($avatars, $criteria_avatar);
     }
@@ -421,7 +423,7 @@ if ('avatarchoose' == $op) {
                 }
             }
         }
-        if ('blank.gif' != $user_avatar) {
+        if ('avatars/blank.gif' != $user_avatar) {
             $avatars = &$avtHandler->getObjects(new \Criteria('avatar_file', $user_avatar));
             if (is_object($avatars[0])) {
                 $avtHandler->addUser($avatars[0]->getVar('avatar_id'), $uid);

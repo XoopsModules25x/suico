@@ -304,8 +304,8 @@ define('_MD_YOGURT_PICTURESNOTENABLED', 'The administrator of the site has disab
 define('_MD_YOGURT_NOTESNOTENABLED', 'The administrator of the site has disabled this feature');
 
 //26/01/2008
-define('_MD_YOG_ALLFRIENDS', 'View all friends');
-define('_MD_YOG_ALLTRIBES', 'View all tribes');
+define('_MD_YOGURT_ALLFRIENDS', 'View all friends');
+define('_MD_YOGURT_ALLTRIBES', 'View all tribes');
 
 //31/01/2008
 define('_MD_YOGURT_FRIENDSHIPNOTACCEPTED', 'Friendship rejected');

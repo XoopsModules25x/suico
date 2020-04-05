@@ -304,8 +304,8 @@ define('_MD_YOGURT_PICTURESNOTENABLED', 'Die Bilder-Funktion ist im Moment deakt
 define('_MD_YOGURT_NOTESNOTENABLED', 'Die G&auml;stebuch-Funktion ist im Moment deaktiviert');
 
 //26/01/2008
-define('_MD_YOG_ALLFRIENDS', 'Zeige alle Freunde');
-define('_MD_YOG_ALLTRIBES', 'Zeige alle Gruppen');
+define('_MD_YOGURT_ALLFRIENDS', 'Zeige alle Freunde');
+define('_MD_YOGURT_ALLTRIBES', 'Zeige alle Gruppen');
 
 //31/01/2008
 define('_MD_YOGURT_FRIENDSHIPNOTACCEPTED', 'Freundschaft abgelehnt');

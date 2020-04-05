@@ -1,18 +1,1 @@
--
-    friendship_id: '1'
-    friend1_uid: '2'
-    friend2_uid: '1'
-    level: '3'
-    hot: '3'
-    trust: '3'
-    cool: '3'
-    fan: '1'
--
-    friendship_id: '2'
-    friend1_uid: '1'
-    friend2_uid: '2'
-    level: '5'
-    hot: '0'
-    trust: '0'
-    cool: '0'
-    fan: '0'
+{  }

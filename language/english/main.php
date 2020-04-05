@@ -38,10 +38,10 @@ define('_MD_YOGURT_FRIENDS', 'Friends');
 define('_MD_YOGURT_TRIBES', 'Tribes');
 define('_MD_YOGURT_NOTRIBESYET', 'No Tribes yet');
 define('_MD_YOGURT_MYTRIBES', 'My Tribes');
-define('_MD_YOGURT_ALLTRIBES', 'All Tribes');
+//define('_MD_YOGURT_ALLTRIBES', 'All Tribes');
 define('_MD_YOGURT_PROFILE', 'Profile');
 define('_MD_YOGURT_HOME', 'Home');
-define('_MD_YOGURT_CONFIGSTITLE', 'My settings');
+define('_MD_YOGURT_CONFIGSTITLE', 'Settings');
 
 ##################################################### PICTURES #######################################################
 //submit.php (for pictures submission
@@ -186,11 +186,11 @@ define('_MD_YOGURT_TRIBE_SEARCHKEYWORD', 'Keyword');
 ######################################### NOTES #####################################################
 //notebook.php
 define('_MD_YOGURT_ENTERTEXTNOTE', 'Enter Text or Xoops Codes');
-define('_MD_YOGURT_SENDNOTE', 'post Note');
+define('_MD_YOGURT_SENDNOTE', 'Post Note');
 define('_MD_YOGURT_ANSWERNOTE', 'Reply'); //also present in configs.php
 define('_MD_YOGURT_MYNOTEBOOK', 'My Notebook');
 define('_MD_YOGURT_CANCEL', 'Cancel'); //also present in configs.php
-define('_MD_YOGURT_NOTETIPS', 'Note tips');
+define('_MD_YOGURT_NOTETIPS', 'Note Tips');
 define('_MD_YOGURT_BOLD', 'bold');
 define('_MD_YOGURT_ITALIC', 'italic');
 define('_MD_YOGURT_UNDERLINE', 'underline');
@@ -305,8 +305,8 @@ define('_MD_YOGURT_PICTURESNOTENABLED', 'The administrator of the site has disab
 define('_MD_YOGURT_NOTESNOTENABLED', 'The administrator of the site has disabled Notes feature');
 
 //26/01/2008
-define('_MD_YOG_ALLFRIENDS', 'View all friends');
-define('_MD_YOG_ALLTRIBES', 'View all tribes');
+define('_MD_YOGURT_ALLFRIENDS', 'View all friends');
+define('_MD_YOGURT_ALLTRIBES', 'View all tribes');
 
 //31/01/2008
 define('_MD_YOGURT_FRIENDSHIPNOTACCEPTED', 'Friendship rejected');

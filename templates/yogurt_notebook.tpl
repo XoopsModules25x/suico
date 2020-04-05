@@ -30,11 +30,11 @@
                 <div class="yogurt-Note-avatarandname">
                     <p class="yogurt-Note-uname">&nbsp;<a href="index.php?uid=<{$notes[i].uid}>"><{$notes[i].uname}></a>
                     </p>
-                    <{if $notes[i].user_avatar=="blank.gif" }><img src="assets/images/noavatar.gif"><{else}><img width="100"  class="avatar_Note" src="../../uploads/<{$notes[i].user_avatar}>"> <{/if}>
+                    <{if $notes[i].user_avatar=="avatars/blank.gif" }><img src="assets/images/noavatar.gif"><{else}><img width="100"  class="avatar_Note" src="../../uploads/<{$notes[i].user_avatar}>"> <{/if}>
                     <{if $isOwner==1}>
                     <p>
                     <form name="delete_Note" method="post" action="delete_Note.php" class="yogurt-Note-form-delete">
-                        <input value="<{$notes[i].id}>" type="image" id="note_idimage" name="note_idimage" src="assets/images/dele.gif">
+                        <input value="<{$notes[i].id}>" type="image" id="note_idimage" name="note_idimage" src="<{xoModuleIcons16 delete.png}>">
                         <input value="<{$notes[i].id}>" type="hidden" id="note_id" name="note_id">
                     </form>
 
@@ -43,7 +43,7 @@
                 </div>
                 <div class="yogurt-Note-details-texts">
                     <p class="yogurt-Note-text"><img src="assets/images/notes.gif" alt="<{$section_name}>" title="<{$section_name}>">
-                        &nbsp;<{$notes[i].text}>
+                        &nbsp;<{$notes[i].text}><br>&nbsp;<small><{$notes[i].date}></small>
                         <a name="replyform<{$notes[i].id}>" id="replyform<{$notes[i].id}>"></a>
                     </p>
                     <{if $isOwner==1}>

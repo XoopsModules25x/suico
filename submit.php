@@ -19,12 +19,10 @@
 
 use XoopsModules\Yogurt;
 
-/**
- * Xoops header ...
- */
-require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
-require_once dirname(dirname(__DIR__)) . '/header.php';
+require __DIR__ . '/header.php';
+
+//require_once dirname(dirname(__DIR__)) . '/header.php';
 
 /**
  * Modules class includes
@@ -44,7 +42,7 @@ $title = $_POST['caption'];
 /**
  * Getting parameters defined in admin side
  */
-$path_upload   = XOOPS_ROOT_PATH . '/uploads';
+$path_upload   = XOOPS_ROOT_PATH . '/uploads/yogurt/photos';
 $pictwidth     = $xoopsModuleConfig['resized_width'];
 $pictheight    = $xoopsModuleConfig['resized_height'];
 $thumbwidth    = $xoopsModuleConfig['thumb_width'];
