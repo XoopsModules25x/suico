@@ -58,8 +58,9 @@ class VideoHandler extends \XoopsPersistableObjectHandler
             } else {
                 $obj->unsetNew();
             }
-            if ($isNew)
-            $obj->helper = $this->helper;
+            if ($isNew) {
+                $obj->helper = $this->helper;
+            }
 
             return $obj;
         }

@@ -34,7 +34,7 @@ if (1 == $marker) {
      * Creating the factory loading the picture changing its caption
      */
     $imageFactory = new Yogurt\ImageHandler($xoopsDB);
-    $picture        = $imageFactory->create(false);
+    $picture      = $imageFactory->create(false);
     $picture->load($cod_img);
     $picture->setVar('title', trim(htmlspecialchars($_POST['caption'], ENT_QUOTES | ENT_HTML5)));
 

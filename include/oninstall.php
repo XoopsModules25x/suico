@@ -20,6 +20,8 @@
 use XoopsModules\Yogurt;
 use XoopsModules\Yogurt\Common;
 
+include dirname(__DIR__) . '/preloads/autoloader.php';
+
 /**
  * Prepares system prior to attempting to install module
  * @param \XoopsModule $module {@link XoopsModule}
@@ -28,7 +30,6 @@ use XoopsModules\Yogurt\Common;
  */
 function xoops_module_pre_install_yogurt(\XoopsModule $module)
 {
-    //    include __DIR__ . '/../preloads/autoloader.php';
     include __DIR__ . '/common.php';
     /** @var \XoopsModules\Yogurt\Utility $utility */
     $utility = new \XoopsModules\Yogurt\Utility();

@@ -44,7 +44,7 @@ class Ishot extends \XoopsObject
         /** @var  Helper $helper */
         $this->helper     = Helper::getInstance();
         $this->permHelper = new \Xmf\Module\Helper\Permission();
-        $this->db = \XoopsDatabaseFactory::getDatabaseConnection();
+        $this->db         = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('cod_ishot', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('uid_voter', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('uid_voted', XOBJ_DTYPE_INT, null, false, 10);

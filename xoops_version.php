@@ -218,7 +218,6 @@ $modversion['config'][] = [
     ],
 ];
 
-
 $modversion['config'][] = [
     'name'        => 'enable_pictures',
     'title'       => '_MI_YOGURT_ENABLEPICT_TITLE',

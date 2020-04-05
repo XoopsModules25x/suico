@@ -283,7 +283,7 @@ class NotesHandler extends \XoopsPersistableObjectHandler
                 $temptext                 = $myts->xoopsCodeDecode($myrow['note_text'], 1);
                 $vetor[$i]['text']        = $myts->nl2Br($temptext);
                 $vetor[$i]['id']          = $myrow['note_id'];
-				$vetor[$i]['date']        = $myrow['date'];
+                $vetor[$i]['date']        = $myrow['date'];
 
                 $i++;
             }

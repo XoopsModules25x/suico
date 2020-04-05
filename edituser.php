@@ -337,7 +337,7 @@ if ('avatarupload' == $op) {
     if (empty($uid) || $xoopsUser->getVar('uid') != $uid) {
         redirect_header('index.php', 3, _US_NOEDITRIGHT);
     }
-    $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/avatars/';
+    $uploadDir         = XOOPS_UPLOAD_PATH . '/yogurt/avatars/';
     $allowed_mimetypes = ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png'];
     if (1 == $xoopsConfigUser['avatar_allow_upload'] && $xoopsUser->getVar('posts') >= $xoopsConfigUser['avatar_minposts']) {
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
