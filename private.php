@@ -33,7 +33,7 @@ $cod_img = $_POST['cod_img'];
  * Creating the factory  loading the picture changing its caption
  */
 $imageFactory = new Yogurt\ImageHandler($xoopsDB);
-$picture        = $imageFactory->create(false);
+$picture      = $imageFactory->create(false);
 $picture->load($cod_img);
 $picture->setVar('private', \Xmf\Request::getInt('private', 0, 'POST'));
 

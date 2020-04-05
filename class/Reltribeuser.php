@@ -29,7 +29,7 @@ class Reltribeuser extends \XoopsObject
         /** @var  Helper $helper */
         $this->helper     = Helper::getInstance();
         $this->permHelper = new \Xmf\Module\Helper\Permission();
-        $this->db = \XoopsDatabaseFactory::getDatabaseConnection();
+        $this->db         = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('rel_id', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('rel_tribe_id', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('rel_user_uid', XOBJ_DTYPE_INT, null, false, 10);

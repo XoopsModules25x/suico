@@ -29,7 +29,7 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
  * Creating the factory  loading the picture changing its caption
  */
 $imageFactory = new Yogurt\ImageHandler($xoopsDB);
-$picture        = $imageFactory->create(false);
+$picture      = $imageFactory->create(false);
 $picture->load($_POST['cod_img']);
 
 $uid = (int)$xoopsUser->getVar('uid');
@@ -41,7 +41,7 @@ $imageavatar = XOOPS_ROOT_PATH . '/uploads/avatars/' . $avatar;
 if (!copy($image, $imageavatar)) {
     echo 'failed to copy $file...\n';
 }
-$xoopsUser->setVar('user_avatar', 'avatars/'.$avatar);
+$xoopsUser->setVar('user_avatar', 'avatars/' . $avatar);
 
 $userHandler = new \XoopsUserHandler($xoopsDB);
 

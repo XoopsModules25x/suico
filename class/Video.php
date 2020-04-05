@@ -37,7 +37,7 @@ class Video extends \XoopsObject
         /** @var  Helper $helper */
         $this->helper     = Helper::getInstance();
         $this->permHelper = new \Xmf\Module\Helper\Permission();
-        $this->db = \XoopsDatabaseFactory::getDatabaseConnection();
+        $this->db         = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('video_id', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('uid_owner', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('video_desc', XOBJ_DTYPE_TXTBOX, null, false);
