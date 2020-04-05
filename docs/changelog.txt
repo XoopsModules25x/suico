@@ -1,6 +1,14 @@
 <h5>3.5 Alpha 2   [2020-04-04]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
 <hr>
-- template fixes (liomj)
+- Missing Post date in notes (liomj)
+- Update yogurt_navbar.tpl (liomj)
+- Fix missing lightbox icons (liomj)
+- hide empty field in profile, text spacing in album template (liomj)
+- Update yogurt_index.tpl (liomj)
+- Update yogurt_searchresults.tpl (liomj)
+- Update main.php (liomj)
+- fix blank.gif avatar (liomj)
+- Hide empty website field and private email address in profile (liomj)
 - fix uploading/resizing tribe logos (mamba)
 - added new test data (mamba)
 - partial fixes for image folders (mamba)
