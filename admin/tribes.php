@@ -62,7 +62,7 @@ switch ($op) {
         $tribesObject->setVar('tribe_desc', Request::getText('tribe_desc', ''));
 
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
-        $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/images/';
+        $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/tribes/';
         $uploader  = new \XoopsMediaUploader(
             $uploadDir, $helper->getConfig('mimetypes'), $helper->getConfig('maxsize'), null, null
         );

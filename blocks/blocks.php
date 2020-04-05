@@ -51,7 +51,7 @@ function b_yogurt_friends_show($options)
 
         $block['friends'] = $friendsFactory->getFriends($options[0], $criteria_2, 0);
     }
-    $block['lang_allfriends'] = _MB_YOG_ALLFRIENDS;
+    $block['lang_allfriends'] = _MB_YOGURT_ALLFRIENDS;
 
     return $block;
 }

@@ -17,7 +17,7 @@
 
     <{$token}>
 </form>
-<{if $isanonym!=1 }>
+<{if $isanonym!=1}>
 
 <form class='outer' name='form_tribe' id='form_tribe' action='submit_tribe.php' method='post' onsubmit='return xoopsFormValidate_form_tribe();' enctype="multipart/form-data">
 

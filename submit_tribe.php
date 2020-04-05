@@ -44,11 +44,11 @@ if (1 == $marker) {
         redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
     }
 
-    $myts          = MyTextSanitizer::getInstance();
+    $myts          = \MyTextSanitizer::getInstance();
     $tribe_title   = $myts->displayTarea($_POST['tribe_title'], 0, 1, 1, 1, 1);
     $tribe_desc    = $myts->displayTarea($_POST['tribe_desc'], 0, 1, 1, 1, 1);
     $tribe_img     = (!empty($_POST['tribe_img'])) ? $_POST['tribe_img'] : '';
-    $path_upload   = XOOPS_ROOT_PATH . '/uploads/yogurt';
+    $path_upload   = XOOPS_UPLOAD_PATH . '/yogurt/tribes';
     $pictwidth     = $xoopsModuleConfig['resized_width'];
     $pictheight    = $xoopsModuleConfig['resized_height'];
     $thumbwidth    = $xoopsModuleConfig['thumb_width'];

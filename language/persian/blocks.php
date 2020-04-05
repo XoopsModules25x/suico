@@ -16,4 +16,4 @@
  * @author       XOOPS Development Team
  * @since
  */
-define('_MB_YOG_ALLFRIENDS', 'View all friends');
+define('_MB_YOGURT_ALLFRIENDS', 'View all friends');

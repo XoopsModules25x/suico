@@ -65,8 +65,8 @@
             </h2>
             <{if $allow_pictures }>
                 <div id="yogurt-profile-avatar">
-                    <{if $avatar_url!="" && $avatar_url!="avatars/blank.png" }>
-                        <img src="<{$xoops_url}>/uploads/yogurt/avatars/<{$avatar_url}>">
+                    <{if $avatar_url!="" && $avatar_url!="avatars/blank.gif" }>
+                        <img src="<{$xoops_url}>/uploads/<{$avatar_url}>">
                     <{else}>
                         <img src="assets/images/noavatar.gif">
                         <{if $isOwner}>
@@ -254,11 +254,11 @@
             <{if $nb_friends==0}><p id="nofriends"><{$lang_nofriendsyet}></p><{/if}>
             <{section name=i loop=$friends}>
                 <div class="yogurt-profile-friend <{cycle values="odd,even"}>">
-                    <a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$friends[i].uid}>" alt="<{$friends[i].uname}>" title="<{$friends[i].uname}>"><{if $friends[i].user_avatar=="avatars/blank.png"}>
+                    <a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$friends[i].uid}>" alt="<{$friends[i].uname}>" title="<{$friends[i].uname}>"><{if $friends[i].user_avatar=="avatars/blank.gif"}>
                             <img class="yogurt-profile-friend-photo" src="assets/images/noavatar.gif">
                         <{else}>
                             <imgclass
-                            = "yogurt-profile-friend-photo" src="<{$xoops_upload_url}>/yogurt/avatars/<{$friends[i].user_avatar}>"><{/if}><{$friends[i].uname}> </a>
+                            = "yogurt-profile-friend-photo" src="<{$xoops_upload_url}>/<{$friends[i].user_avatar}>"><{/if}><{$friends[i].uname}> </a>
                 </div>
             <{/section}>
             <p id="yogurt-profile-friend-viewall" class="foot">
@@ -272,7 +272,7 @@
             <{if $nb_tribes==0}><p id="notribes"><{$lang_notribesyet}></p><{/if}>
             <{section name=i loop=$tribes}>
                 <div class="yogurt-profile-tribe <{cycle values="odd,even"}>">
-                    <a href="tribe.php?tribe_id=<{$tribes[i].tribe_id}>"><img alt="<{$tribes[i].title}>" title="<{$tribes[i].title}>" class="yogurt-profile-tribes-img" src="<{$xoops_upload_url}>/yogurt/images/<{$tribes[i].img}>"></a> <h4> <{$tribes[i].title}> </h4>
+                    <a href="tribe.php?tribe_id=<{$tribes[i].tribe_id}>"><img alt="<{$tribes[i].title}>" title="<{$tribes[i].title}>" class="yogurt-profile-tribes-img" src="<{$xoops_upload_url}>/<{$tribes[i].img}>"></a> <h4> <{$tribes[i].title}> </h4>
                     <p><{$tribes[i].desc}></p>
                 </div>
             <{/section}>

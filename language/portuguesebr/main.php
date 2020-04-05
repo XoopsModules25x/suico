@@ -322,8 +322,8 @@ define('_MD_YOGURT_PICTURESNOTENABLED', 'O administrador do site desabilitou est
 define('_MD_YOGURT_NOTESNOTENABLED', 'O administrador do site desabilitou este recurso'); //GibaPhp
 
 //26/01/2008
-define('_MD_YOG_ALLFRIENDS', 'Ver todos os amigos'); //GibaPhp
-define('_MD_YOG_ALLTRIBES', 'Ver todas as tribos'); //GibaPhp
+define('_MD_YOGURT_ALLFRIENDS', 'Ver todos os amigos'); //GibaPhp
+define('_MD_YOGURT_ALLTRIBES', 'Ver todas as tribos'); //GibaPhp
 
 //31/01/2008
 define('_MD_YOGURT_FRIENDSHIPNOTACCEPTED', 'Amizade Rejeitada'); //GibaPhp

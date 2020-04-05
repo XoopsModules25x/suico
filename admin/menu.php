@@ -35,7 +35,7 @@ if (is_object($helper->getModule())) {
 }
 
 $adminmenu[] = [
-    'title' => _MI_YOG_ADMENU1,
+    'title' => _MI_YOGURT_ADMENU1,
     'link'  => 'admin/index.php',
     'icon'  => $pathIcon32 . '/home.png',
 ];
@@ -107,7 +107,7 @@ $adminmenu[] = [
 ];
 
 $adminmenu[] = [
-    'title' => _MI_YOG_MENU_02,
+    'title' => _MI_YOGURT_MENU_02,
     'link'  => 'admin/main.php',
     'icon'  => $pathIcon32 . '/manage.png',
 ];
@@ -128,13 +128,13 @@ if (is_object($helper->getModule()) && $helper->getConfig('displayDeveloperTools
 }
 
 //$adminmenu[] = [
-//    'title' => _MI_YOG_ADMENU2,
+//    'title' => _MI_YOGURT_ADMENU2,
 //    'link'  => 'admin/main.php?op=about',
 //    'icon'  => $pathIcon32 . '/about.png',
 //];
 
 $adminmenu[] = [
-    'title' => _MI_YOG_ADMENU2,
+    'title' => _MI_YOGURT_ADMENU2,
     'link'  => 'admin/about.php',
     'icon'  => $pathIcon32 . '/about.png',
 ];

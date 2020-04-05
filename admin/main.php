@@ -74,7 +74,7 @@ function about()
     " . $modulo->getInfo('name') . ' ' . $modulo->getInfo('version') . "</div>
 
 <div style='line-height: 16px; font-weight: bold;'>
-    " . _MA_YOG_BY . ' ' . $modulo->getInfo('author') . "
+    " . _MA_YOGURT_BY . ' ' . $modulo->getInfo('author') . "
 </div>
 
 <div style = 'line-height: 16px; '>
@@ -83,7 +83,7 @@ function about()
 </div>
 <table width='100%' cellspacing='1' cellpadding='3' border='0' class='outer' style='margin-top: 15px;'>
     <tr>
-        <td class='bg3'><b>" . _MA_YOG_DESC . "</b></td>
+        <td class='bg3'><b>" . _MA_YOGURT_DESC . "</b></td>
     </tr>
 
     <tr>
@@ -92,7 +92,7 @@ function about()
 </table>
     <table width='100%' cellspacing='1' cellpadding='3' border='0' class='outer' style='margin-top: 15px;'>
         <tr>
-            <td class='bg3'><b>" . _MA_YOG_CREDITS . "</b></td>
+            <td class='bg3'><b>" . _MA_YOGURT_CREDITS . "</b></td>
         </tr>
 
         <tr>
@@ -104,14 +104,14 @@ function about()
 <table width='100%' cellspacing='1' cellpadding='3' border='0' class='outer' style='margin-top: 15px;'>
     <tr>
         <td colspan='2' class='bg3'>
-            <b>" . _MA_YOG_CONTRIBUTORS . "</b>
+            <b>" . _MA_YOGURT_CONTRIBUTORS . "</b>
         </td>
     </tr>
 
 
 
             <tr>
-            <td class='head' style='vertical-align: top;' width = '150px'>" . _MA_YOG_DEVELOPERS . "</td>
+            <td class='head' style='vertical-align: top;' width = '150px'>" . _MA_YOGURT_DEVELOPERS . "</td>
             <td class='even'>
                                     <div>";
 
@@ -126,7 +126,7 @@ function about()
 
             <tr>
 
-            <td class='head' style='vertical-align: top;' width = '150px'>" . _MA_YOG_TESTERS . "</td>
+            <td class='head' style='vertical-align: top;' width = '150px'>" . _MA_YOGURT_TESTERS . "</td>
             <td class='even'>
                                     <div>";
 
@@ -143,7 +143,7 @@ function about()
 
 
             <tr>
-            <td class='head' width = '150px'>" . _MA_YOG_TRANSLATIONS . "</td>
+            <td class='head' width = '150px'>" . _MA_YOGURT_TRANSLATIONS . "</td>
 
             <td class='even'>";
 
@@ -156,30 +156,30 @@ function about()
         </tr>
 
             <tr>
-            <td class='head' width = '150px'>" . _MA_YOG_EMAIL . "</td>
+            <td class='head' width = '150px'>" . _MA_YOGURT_EMAIL . "</td>
             <td class='even'><a href='mailto:" . $modulo->getInfo('developer_email') . "' target='_blank'>" . $modulo->getInfo('developer_email') . "</a></td>
         </tr>
 </table>
 
 <table width='100%' cellspacing='1' cellpadding='3' border='0' class='outer' style='margin-top: 15px;'>
     <tr>
-        <td colspan='2' class='bg3'><b>" . _MA_YOG_MODDEVDET . "</b></td>
+        <td colspan='2' class='bg3'><b>" . _MA_YOGURT_MODDEVDET . "</b></td>
     </tr>
 
     <tr>
-        <td class='head' width = '200px'>" . _MA_YOG_RELEASEDATE . "</td>
+        <td class='head' width = '200px'>" . _MA_YOGURT_RELEASEDATE . "</td>
         <td class='even'>" . $modulo->getInfo('date') . "</td>
 
     </tr>
 
     <tr>
-        <td class='head' width = '200px'>" . _MA_YOG_STATUS . "</td>
+        <td class='head' width = '200px'>" . _MA_YOGURT_STATUS . "</td>
         <td class='even'>" . $modulo->getInfo('status') . "</td>
     </tr>
 
 
             <tr>
-            <td class='head' width = '200px'>" . _MA_YOG_OFCSUPORTSITE . "</td>
+            <td class='head' width = '200px'>" . _MA_YOGURT_OFCSUPORTSITE . "</td>
 
             <td class='even'><a href='" . $modulo->getInfo('support_site_url') . "' target='_blank'>" . $modulo->getInfo('support_site_url') . "</a></td>
         </tr>
@@ -192,7 +192,7 @@ function about()
 
 <table width='100%' cellspacing='1' cellpadding='3' border='0' class='outer' style='margin-top: 15px;'>
     <tr>
-        <td class='bg3'><b>" . _MA_YOG_VERSIONHIST . "</b></td>
+        <td class='bg3'><b>" . _MA_YOGURT_VERSIONHIST . "</b></td>
 
     </tr>
 
@@ -240,12 +240,12 @@ function about()
 function homedefault()
 {
     global $isframeworksrequirement;
-    echo _MA_YOG_CONFIGEVERYTHING;
+    echo _MA_YOGURT_CONFIGEVERYTHING;
     //echo "<a href='../../system/admin.php?fct=modulesadmin&op=update&module=yogurt'>Update</a>";
 
     echo "<table width='100%' cellspacing='1' cellpadding='3' border='0' class='outer' style='margin-top: 15px;'>
         <tr>
-            <td class='bg3'><b>" . _MA_YOG_ALLTESTSOK . '</b></td>
+            <td class='bg3'><b>" . _MA_YOGURT_ALLTESTSOK . '</b></td>
         </tr>';
     $a = $GLOBALS['xoopsDB']->getServerVersion();
     //$b = substr($a, 0, strpos($a, "-"));
@@ -262,28 +262,28 @@ function homedefault()
     }
     if (extension_loaded('gd')) {
         echo "        <tr>
-            <td class='even'><img src='../assets/images/green.gif' align='baseline'> " . _MA_YOG_GDEXTENSIONOK . '
+            <td class='even'><img src='../assets/images/green.gif' align='baseline'> " . _MA_YOGURT_GDEXTENSIONOK . '
 
-     ' . _MA_YOG_MOREINFO . " <a href='http://www.libgd.org/Main_Page'> Gd Library</a> </td>
+     ' . _MA_YOGURT_MOREINFO . " <a href='http://www.libgd.org/Main_Page'> Gd Library</a> </td>
 
         </tr>";
     } else {
         echo "
 <tr>
-            <td class='even'><img src='../assets/images/red.gif'> " . _MA_YOG_GDEXTENSIONFALSE . ' ' . _MA_YOG_CONFIGPHPINI . '
-     ' . _MA_YOG_MOREINFO . " <a href='http://www.libgd.org/Main_Page'>Gd Library</a> </td>
+            <td class='even'><img src='../assets/images/red.gif'> " . _MA_YOGURT_GDEXTENSIONFALSE . ' ' . _MA_YOGURT_CONFIGPHPINI . '
+     ' . _MA_YOGURT_MOREINFO . " <a href='http://www.libgd.org/Main_Page'>Gd Library</a> </td>
 
         </tr>";
     }
     if (str_replace('.', '', PHP_VERSION) > 499) {
         echo "              <tr>
-            <td class='odd'><img src='../assets/images/green.gif' align='baseline'> " . _MA_YOG_PHP5PRESENT . ' ' . PHP_VERSION . '</td>
+            <td class='odd'><img src='../assets/images/green.gif' align='baseline'> " . _MA_YOGURT_PHP5PRESENT . ' ' . PHP_VERSION . '</td>
 
         </tr>';
     } else {
         echo "
                 <tr>
-            <td class='odd'><img src='../assets/images/red.gif' align='baseline'> " . _MA_YOG_PHP5NOTPRESENT . ' ' . PHP_VERSION . '</td>
+            <td class='odd'><img src='../assets/images/red.gif' align='baseline'> " . _MA_YOGURT_PHP5NOTPRESENT . ' ' . PHP_VERSION . '</td>
 
         </tr>
 
@@ -295,13 +295,13 @@ function homedefault()
          echo "
            <tr>
           <td class='even'><img src='../assets/images/green.gif' align='baseline'> ";
-             printf(_MA_YOG_FRAMEWORKSTRUE,XOOPS_FRAMEWORKS_VERSION);
+             printf(_MA_YOGURT_FRAMEWORKSTRUE,XOOPS_FRAMEWORKS_VERSION);
               echo "</td>
             </tr>
             ";
     }else {
            echo "<tr>
-                <td class='even'><img src='../assets/images/red.gif' align='baseline'> "._MA_YOG_FRAMEWORKSFALSE."</td>
+                <td class='even'><img src='../assets/images/red.gif' align='baseline'> "._MA_YOGURT_FRAMEWORKSFALSE."</td>
             </tr>
          ";
     }
@@ -320,9 +320,9 @@ function homedefault()
         </tr>";
     }
 
-    echo "<tr><td class='odd'><img src='../assets/images/messagebox_info.gif'> " . sprintf(_MA_YOG_MAXBYTESPHPINI, ini_get('post_max_size')) . '</td></tr>';
+    echo "<tr><td class='odd'><img src='../assets/images/messagebox_info.gif'> " . sprintf(_MA_YOGURT_MAXBYTESPHPINI, ini_get('post_max_size')) . '</td></tr>';
     if (function_exists('memory_get_usage')) {
-        echo "<tr><td class='even'><img src='../assets/images/messagebox_info.gif'> " . _MA_YOG_MEMORYLIMIT . ' ' . memory_get_usage() . '</td></tr>';
+        echo "<tr><td class='even'><img src='../assets/images/messagebox_info.gif'> " . _MA_YOGURT_MEMORYLIMIT . ' ' . memory_get_usage() . '</td></tr>';
     }
     echo '</table>';
 }
