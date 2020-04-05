@@ -47,7 +47,7 @@
 <{/if}>
 <{if $allow_friends }>
     <div class="yogurt-nav-bar" id="yogurt-nav-bar">
-        <p id="yogurt-profile-fans"><a href="fans.php?uid=<{$uid_owner}>" alt="<{$lang_fans}>" title="<{$lang_fans}>"> <{$lang_fans}> </a><img src="assets/images/fans.gif"> ( <{$nb_fans}> )
+        <p id="yogurt-profile-fans"><a href="fans.php?uid=<{$uid_owner}>" alt="<{$lang_fans}>" title="<{$lang_fans}>"> <{$lang_fans}> </a><img src="assets/images/fans.gif"> (<{$nb_fans}>)
             | <{$lang_trusty}> </p>
         <p id="trustybw"><span id="trustycolor">&nbsp;<img width="<{$trusty}>" height="0" src="assets/images/transparent.gif"></span>&nbsp;<img width="<{$trusty_rest}>" height="0" src="assets/images/transparent.gif"></p>
 
@@ -220,7 +220,7 @@
 <div class="yogurt-profile-group2">
 
     <div id="yogurt-profile-friends" class="outer">
-        <h2 id="titulo-friends" class="head"><{$lang_videos}> ( <{$nb_videos}> )</h2>
+        <h2 id="titulo-friends" class="head"><{$lang_videos}> (<{$nb_videos}>)</h2>
         <{if $allow_videos==1 }>
             <div id="yogurt-profile-tribe">
                 <{if $mainvideocode!="" }>
@@ -250,7 +250,7 @@
 
     <{if $allow_friends==1 }>
         <div id="yogurt-profile-friends" class="outer">
-            <h2 id="titulo-friends" class="head"><{$lang_friendstitle}> ( <{$nb_friends}> )</h2>
+            <h2 id="titulo-friends" class="head"><{$lang_friendstitle}> (<{$nb_friends}>)</h2>
             <{if $nb_friends==0}><p id="nofriends"><{$lang_nofriendsyet}></p><{/if}>
             <{section name=i loop=$friends}>
                 <div class="yogurt-profile-friend <{cycle values="odd,even"}>">
