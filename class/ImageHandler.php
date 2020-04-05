@@ -81,6 +81,11 @@ class ImageHandler extends \XoopsPersistableObjectHandler
             //        if ($isNew) {
             //            $obj->setDefaultPermissions();
             //        }
+            if ($isNew) {
+                $obj->setNew();
+            } else {
+                $obj->unsetNew();
+            }
             $obj->helper = $this->helper;
 
             return $obj;

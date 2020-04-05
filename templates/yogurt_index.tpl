@@ -5,7 +5,7 @@
     <!-- if not owner and not friend -->
     <div id="yogurt-profile-petition" class="confirmMsg">
         <h4><{$lang_youhavexpetitions}></h4>
-        <img width="30" src="<{$xoops_url}>/uploads/yogurt/avatars/<{$petitioner_avatar}>">
+        <img width="30" src="<{$xoops_url}>/uploads/<{$petitioner_avatar}>">
         <form action="makefriends.php" method="post">
             <{$lang_askingfriend}>
             <ul>
@@ -66,7 +66,7 @@
             <{if $allow_pictures }>
                 <div id="yogurt-profile-avatar">
                     <{if $avatar_url!="" && $avatar_url!="avatars/blank.gif" }>
-                        <img src="<{$xoops_url}>/uploads/yogurt/avatars/<{$avatar_url}>">
+                        <img src="<{$xoops_url}>/uploads/<{$avatar_url}>">
                     <{else}>
                         <img src="assets/images/noavatar.gif">
                         <{if $isOwner}>
@@ -257,8 +257,7 @@
                     <a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$friends[i].uid}>" alt="<{$friends[i].uname}>" title="<{$friends[i].uname}>"><{if $friends[i].user_avatar=="avatars/blank.gif"}>
                             <img class="yogurt-profile-friend-photo" src="assets/images/noavatar.gif">
                         <{else}>
-                            <imgclass
-                            = "yogurt-profile-friend-photo" src="<{$xoops_upload_url}>/<{$friends[i].user_avatar}>"><{/if}><{$friends[i].uname}> </a>
+                            <img class = "yogurt-profile-friend-photo" src="<{$xoops_upload_url}>/<{$friends[i].user_avatar}>"><{/if}><{$friends[i].uname}> </a>
                 </div>
             <{/section}>
             <p id="yogurt-profile-friend-viewall" class="foot">
