@@ -222,7 +222,7 @@
     <div id="yogurt-profile-friends" class="outer">
         <h2 id="titulo-friends" class="head"><{$lang_videos}> (<{$nb_videos}>)</h2>
         <{if $allow_videos==1 }>
-            <div id="yogurt-profile-tribe">
+            <div id="yogurt-profile-group">
                 <{if $mainvideocode!="" }>
                     <object width="200" height="150">
                         <param name="movie" value="http://www.youtube.com/v/<{$mainvideocode}>">
@@ -265,18 +265,18 @@
             </p>
         </div>
     <{/if}>
-    <{if $allow_tribes==1}>
-        <div id="yogurt-profile-tribes" class="outer">
-            <h2 class="yogurt-profiletitle head"><{$lang_tribes}> (<{$nb_tribes}>)</h2>
-            <{if $nb_tribes==0}><p id="notribes"><{$lang_notribesyet}></p><{/if}>
-            <{section name=i loop=$tribes}>
-                <div class="yogurt-profile-tribe <{cycle values="odd,even"}>">
-                    <a href="tribe.php?tribe_id=<{$tribes[i].tribe_id}>"><img alt="<{$tribes[i].title}>" title="<{$tribes[i].title}>" class="yogurt-profile-tribes-img" src="<{$xoops_upload_url}>/yogurt/tribes/<{$tribes[i].img}>"></a> <h4> <{$tribes[i].title}> </h4>
-                    <p><{$tribes[i].desc}></p>
+    <{if $allow_groups==1}>
+        <div id="yogurt-profile-groups" class="outer">
+            <h2 class="yogurt-profiletitle head"><{$lang_groups}> (<{$nb_groups}>)</h2>
+            <{if $nb_groups==0}><p id="nogroups"><{$lang_nogroupsyet}></p><{/if}>
+            <{section name=i loop=$groups}>
+                <div class="yogurt-profile-group <{cycle values="odd,even"}>">
+                    <a href="group.php?group_id=<{$groups[i].group_id}>"><img alt="<{$groups[i].title}>" title="<{$groups[i].title}>" class="yogurt-profile-groups-img" src="<{$xoops_upload_url}>/yogurt/groups/<{$groups[i].img}>"></a> <h4> <{$groups[i].title}> </h4>
+                    <p><{$groups[i].desc}></p>
                 </div>
             <{/section}>
             <p id="yogurt-profile-friend-viewall" class="foot">
-                <a href="tribes.php?uid=<{$uid_owner}>"><{$lang_viewalltribes}></a>
+                <a href="groups.php?uid=<{$uid_owner}>"><{$lang_viewallgroups}></a>
             </p>
         </div>
     <{/if}>

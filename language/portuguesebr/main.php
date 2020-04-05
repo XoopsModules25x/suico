@@ -50,10 +50,10 @@ define('_MD_YOGURT_VIDEOS', 'Videos');
 define('_MD_YOGURT_NOTEBOOK', 'Notes');
 define('_MD_YOGURT_PHOTOS', 'Fotos'); //GibaPhp
 define('_MD_YOGURT_FRIENDS', 'Amigos'); //GibaPhp
-define('_MD_YOGURT_TRIBES', 'Tribos'); //GibaPhp
-define('_MD_YOGURT_NOTRIBESYET', 'Nenhuma Tribo ainda'); //GibaPhp
-define('_MD_YOGURT_MYTRIBES', 'Minhas Tribos'); //GibaPhp
-define('_MD_YOGURT_ALLTRIBES', 'Todas as Tribos'); //GibaPhp
+define('_MD_YOGURT_GROUPS', 'Tribos'); //GibaPhp
+define('_MD_YOGURT_NOGROUPSYET', 'Nenhuma Tribo ainda'); //GibaPhp
+define('_MD_YOGURT_MYGROUPS', 'Minhas Tribos'); //GibaPhp
+define('_MD_YOGURT_ALLGROUPS', 'Todas as Tribos'); //GibaPhp
 define('_MD_YOGURT_PROFILE', 'Perfil'); //GibaPhp
 define('_MD_YOGURT_HOME', 'Principal'); //GibaPhp
 define('_MD_YOGURT_CONFIGSTITLE', 'Minhas Preferências'); //GibaPhp
@@ -154,49 +154,49 @@ define('_MD_YOGURT_VIDEODELETED', 'Seu video foi apagado'); //GibaPhp
 //video_submited.php
 define('_MD_YOGURT_VIDEOSAVED', 'Seu video foi gravado'); //GibaPhp
 
-############################## TRIBES ########################################################
-//class/Tribes.php
-define('_MD_YOGURT_SUBMIT_TRIBE', 'Criar uma nova Tribo'); //GibaPhp
-define('_MD_YOGURT_UPLOADTRIBE', 'Salvar Tribo'); //also present in many ther tribes related - GibaPhp
-define('_MD_YOGURT_TRIBE_IMAGE', 'Imagem da Tribo'); //also present in many ther tribes related - GibaPhp
-define('_MD_YOGURT_TRIBE_TITLE', 'Título'); //also present in many ther tribes related - GibaPhp
-define('_MD_YOGURT_TRIBE_DESC', 'Descrição'); //also present in many ther tribes related - GibaPhp
-define('_MD_YOGURTCREATEYOURTRIBE', 'Crie a sua própria Tribo!'); //also present in many ther tribes related - GibaPhp
+############################## GROUPS ########################################################
+//class/Groups.php
+define('_MD_YOGURT_SUBMIT_GROUP', 'Criar uma nova Tribo'); //GibaPhp
+define('_MD_YOGURT_UPLOADGROUP', 'Salvar Tribo'); //also present in many ther groups related - GibaPhp
+define('_MD_YOGURT_GROUP_IMAGE', 'Imagem da Tribo'); //also present in many ther groups related - GibaPhp
+define('_MD_YOGURT_GROUP_TITLE', 'Título'); //also present in many ther groups related - GibaPhp
+define('_MD_YOGURT_GROUP_DESC', 'Descrição'); //also present in many ther groups related - GibaPhp
+define('_MD_YOGURTCREATEYOURGROUP', 'Crie a sua própria Tribo!'); //also present in many ther groups related - GibaPhp
 
-//abandontribe.php
-define('_MD_YOGURT_ASKCONFIRMABANDONTRIBE', 'Tem certeza de que deseja sair desta Tribo?'); //GibaPhp
+//abandongroup.php
+define('_MD_YOGURT_ASKCONFIRMABANDONGROUP', 'Tem certeza de que deseja sair desta Tribo?'); //GibaPhp
 define('_MD_YOGURT_CONFIRMABANDON', 'Sim, remova-me desta Tribo!'); //GibaPhp
-define('_MD_YOGURT_TRIBEABANDONED', 'Você não pertence mais a esta Tribo.'); //GibaPhp
+define('_MD_YOGURT_GROUPABANDONED', 'Você não pertence mais a esta Tribo.'); //GibaPhp
 
-//becomemembertribe.php
+//becomemembergroup.php
 define('_MD_YOGURT_YOUAREMEMBERNOW', 'Você agora é um membro desta comunidade'); //GibaPhp
 define('_MD_YOGURT_YOUAREMEMBERALREADY', 'Você já é um membro desta Tribo'); //GibaPhp
 
-//delete_tribe.php
-define('_MD_YOGURT_ASKCONFIRMTRIBEDELETION', 'Tem certeza que deseja apagar esta Tribo de forma permanente?'); //GibaPhp
-define('_MD_YOGURT_CONFIRMTRIBEDELETION', 'Sim, apague essa Tribo!'); //GibaPhp
-define('_MD_YOGURT_TRIBEDELETED', 'Tribo apagada!'); //GibaPhp
+//delete_group.php
+define('_MD_YOGURT_ASKCONFIRMGROUPDELETION', 'Tem certeza que deseja apagar esta Tribo de forma permanente?'); //GibaPhp
+define('_MD_YOGURT_CONFIRMGROUPDELETION', 'Sim, apague essa Tribo!'); //GibaPhp
+define('_MD_YOGURT_GROUPDELETED', 'Tribo apagada!'); //GibaPhp
 
-//edit_tribe.php
-define('_MD_YOGURT_MAINTAINOLDIMAGE', 'Manter esta imagem'); //also present in other tribes related - GibaPhp
-define('_MD_YOGURT_TRIBEEDITED', 'Tribo editada'); //GibaPhp
-define('_MD_YOGURT_EDIT_TRIBE', 'Editar sua Tribo'); //also present in other tribes related - GibaPhp
-define('_MD_YOGURT_TRIBEOWNER', 'Você é o dono deste Tribo!'); //also present in other tribes related - GibaPhp
-define('_MD_YOGURT_MEMBERSDOFTRIBE', 'Os membros desta Tribo'); //also present in other tribes related - GibaPhp
+//edit_group.php
+define('_MD_YOGURT_MAINTAINOLDIMAGE', 'Manter esta imagem'); //also present in other groups related - GibaPhp
+define('_MD_YOGURT_GROUPEDITED', 'Tribo editada'); //GibaPhp
+define('_MD_YOGURT_EDIT_GROUP', 'Editar sua Tribo'); //also present in other groups related - GibaPhp
+define('_MD_YOGURT_GROUPOWNER', 'Você é o dono deste Tribo!'); //also present in other groups related - GibaPhp
+define('_MD_YOGURT_MEMBERSDOFGROUP', 'Os membros desta Tribo'); //also present in other groups related - GibaPhp
 
-//submit_tribe.php
-define('_MD_YOGURT_TRIBE_CREATED', 'Sua Tribo foi criada'); //GibaPhp
+//submit_group.php
+define('_MD_YOGURT_GROUP_CREATED', 'Sua Tribo foi criada'); //GibaPhp
 
-//kickfromtribe.php
+//kickfromgroup.php
 define('_MD_YOGURT_CONFIRMKICK', 'Sim kick-lo para fora!'); //GibaPhp - Tenho dúvida aqui...
-define('_MD_YOGURT_ASKCONFIRMKICKFROMTRIBE', 'Tem certeza que deseja dar um kick nesta pessoa para fora desta Tribo?'); //GibaPhp
-define('_MD_YOGURT_TRIBEKICKED', 'Você se afastou deste usuário da Tribo, mas quem sabe quando ele vai poderá tentar um novo regresso!'); //GibaPhp - Tenho dúvidas aqui...
+define('_MD_YOGURT_ASKCONFIRMKICKFROMGROUP', 'Tem certeza que deseja dar um kick nesta pessoa para fora desta Tribo?'); //GibaPhp
+define('_MD_YOGURT_GROUPKICKED', 'Você se afastou deste usuário da Tribo, mas quem sabe quando ele vai poderá tentar um novo regresso!'); //GibaPhp - Tenho dúvidas aqui...
 
-//Tribes.php
-define('_MD_YOGURT_TRIBE_ABANDON', 'Deixar esta Tribo'); //GibaPhp
-define('_MD_YOGURT_TRIBE_JOIN', 'Participe desta Tribo e mostre a todos quem você é!'); //GibaPhp
-define('_MD_YOGURT_TRIBE_SEARCH', 'Procurar uma Tribo'); //GibaPhp
-define('_MD_YOGURT_TRIBE_SEARCHKEYWORD', 'Palavra-chave'); //GibaPhp
+//Groups.php
+define('_MD_YOGURT_GROUP_ABANDON', 'Deixar esta Tribo'); //GibaPhp
+define('_MD_YOGURT_GROUP_JOIN', 'Participe desta Tribo e mostre a todos quem você é!'); //GibaPhp
+define('_MD_YOGURT_GROUP_SEARCH', 'Procurar uma Tribo'); //GibaPhp
+define('_MD_YOGURT_GROUP_SEARCHKEYWORD', 'Palavra-chave'); //GibaPhp
 
 ######################################### NOTES #####################################################
 //notebook.php
@@ -227,7 +227,7 @@ define('_MD_YOGURT_CONFIGSONLYEFRIENDS', 'Meus Amigos.'); //GibaPhp
 define('_MD_YOGURT_CONFIGSONLYME', 'Somente Eu'); //GibaPhp
 define('_MD_YOGURT_CONFIGSPICTURES', 'Ver suas Fotos'); //GibaPhp
 define('_MD_YOGURT_CONFIGSVIDEOS', 'Ver seus Videos'); //GibaPhp
-define('_MD_YOGURT_CONFIGSTRIBES', 'Ver suas Tribos'); //GibaPhp
+define('_MD_YOGURT_CONFIGSGROUPS', 'Ver suas Tribos'); //GibaPhp
 define('_MD_YOGURT_CONFIGSNOTES', 'Ver seus Notes'); //GibaPhp
 define('_MD_YOGURT_CONFIGSNOTESSEND', 'Envie você Notes'); //GibaPhp - Tenho dúvida aqui...
 define('_MD_YOGURT_CONFIGSFRIENDS', 'Ver seus Amigos'); //GibaPhp
@@ -317,13 +317,13 @@ define('_MD_YOGURT_RESULTS', 'Resultados da Procura'); //GibaPhp
 //26/10/2007
 define('_MD_YOGURT_VIDEOSNOTENABLED', 'O administrador do site desabilitou este recurso'); //GibaPhp
 define('_MD_YOGURT_FRIENDSNOTENABLED', 'O administrador do site desabilitou este recurso'); //GibaPhp
-define('_MD_YOGURT_TRIBESNOTENABLED', 'O administrador do site desabilitou este recurso'); //GibaPhp
+define('_MD_YOGURT_GROUPSNOTENABLED', 'O administrador do site desabilitou este recurso'); //GibaPhp
 define('_MD_YOGURT_PICTURESNOTENABLED', 'O administrador do site desabilitou este recurso'); //GibaPhp
 define('_MD_YOGURT_NOTESNOTENABLED', 'O administrador do site desabilitou este recurso'); //GibaPhp
 
 //26/01/2008
 define('_MD_YOGURT_ALLFRIENDS', 'Ver todos os amigos'); //GibaPhp
-define('_MD_YOGURT_ALLTRIBES', 'Ver todas as tribos'); //GibaPhp
+define('_MD_YOGURT_ALLGROUPS', 'Ver todas as tribos'); //GibaPhp
 
 //31/01/2008
 define('_MD_YOGURT_FRIENDSHIPNOTACCEPTED', 'Amizade Rejeitada'); //GibaPhp

@@ -57,12 +57,12 @@ $totalVideo = $videoHandler->getCount();
 //count "total Friendpetition"
 /** @var \XoopsPersistableObjectHandler $friendpetitionHandler */
 $totalFriendpetition = $friendpetitionHandler->getCount();
-//count "total Tribes"
-/** @var \XoopsPersistableObjectHandler $tribesHandler */
-$totalTribes = $tribesHandler->getCount();
-//count "total Reltribeuser"
-/** @var \XoopsPersistableObjectHandler $reltribeuserHandler */
-$totalReltribeuser = $reltribeuserHandler->getCount();
+//count "total Groups"
+/** @var \XoopsPersistableObjectHandler $groupsHandler */
+$totalGroups = $groupsHandler->getCount();
+//count "total Relgroupuser"
+/** @var \XoopsPersistableObjectHandler $relgroupuserHandler */
+$totalRelgroupuser = $relgroupuserHandler->getCount();
 //count "total Notes"
 /** @var \XoopsPersistableObjectHandler $notesHandler */
 $totalNotes = $notesHandler->getCount();
@@ -93,11 +93,11 @@ $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_VIDEO, $totalVideo));
 // InfoBox friendpetition
 $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_INVITATIONS, $totalFriendpetition));
 
-// InfoBox tribes
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_TRIBES, $totalTribes));
+// InfoBox groups
+$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_GROUPS, $totalGroups));
 
-// InfoBox reltribeuser
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_MEMBERS, $totalReltribeuser));
+// InfoBox relgroupuser
+$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_MEMBERS, $totalRelgroupuser));
 
 // InfoBox notes
 $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_NOTES, $totalNotes));

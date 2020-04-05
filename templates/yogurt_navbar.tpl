@@ -52,8 +52,8 @@
             <{if $allow_friends !=-1 }>
                 <li <{if $allow_friends ==0 }>class="tabs-disabled"<{/if}><{if $section_name==$lang_friends}>class="tabs-selected" <{/if}>> <a href="friends.php?uid=<{$uid_owner}>"><span><img class="yogurt-nav-bar-icon" src="assets/images/people.gif"><{$lang_friends}> (<{$nb_friends}>)</span></a>
                 </li><{/if}>
-            <{if $allow_tribes !=-1 }>
-                <li <{if $allow_tribes ==0 }>class="tabs-disabled"<{/if}><{if $section_name==$lang_tribes}>class="tabs-selected" <{/if}>> <a href="tribes.php?uid=<{$uid_owner}>"><span><img class="yogurt-nav-bar-icon" src="assets/images/tribes.gif"><{$lang_tribes}> (<{$nb_tribes}>)</span></a>
+            <{if $allow_groups !=-1 }>
+                <li <{if $allow_groups ==0 }>class="tabs-disabled"<{/if}><{if $section_name==$lang_groups}>class="tabs-selected" <{/if}>> <a href="groups.php?uid=<{$uid_owner}>"><span><img class="yogurt-nav-bar-icon" src="assets/images/groups.gif"><{$lang_groups}> (<{$nb_groups}>)</span></a>
                 </li><{/if}>
             <{if $isOwner}>
                 <li <{if $section_name==$lang_configs}>class="tabs-selected" <{/if}>><a href="configs.php?uid=<{$uid_owner}>"><span><img class="yogurt-nav-bar-icon" src="assets/images/configs.gif"><{$lang_configs}></span></a></li>

@@ -1,19 +1,19 @@
 <{include file="db:yogurt_navbar.tpl"}>
 
-<form class='outer' name='yogurt-tribe-edit-form' id='yogurt-tribe-edit-form' action='edittribe.php' method='post' enctype="multipart/form-data">
+<form class='outer' name='yogurt-group-edit-form' id='yogurt-group-edit-form' action='editgroup.php' method='post' enctype="multipart/form-data">
 
-    <h2 class=head><{$lang_edittribe}></h2>
+    <h2 class=head><{$lang_editgroup}></h2>
 
     <p class=odd>
         <label for='' class='xoops-form-element-caption'>
             <span class='caption-text'>
-                <{$lang_tribeimage}>
+                <{$lang_groupimage}>
             </span>
             <span class='caption-marker'>
             *
             </span>
         </label>
-        <img src="<{$xoops_upload_url}>/yogurt/images/<{$tribe_img}>">
+        <img src="<{$xoops_upload_url}>/yogurt/images/<{$group_img}>">
     </p>
     <p class=even>
         <label for='' class='xoops-form-element-caption'>
@@ -41,7 +41,7 @@
         <p class="even">
             <label for='img' class='xoops-form-element-caption'>
                 <span class='caption-text'>
-                    <{$lang_tribeimage}>
+                    <{$lang_groupimage}>
                 </span>
                 <span class='caption-marker'>
                     *
@@ -55,55 +55,55 @@
     <p class="odd">
         <label for='title' class='xoops-form-element-caption'>
                 <span class='caption-text'>
-                    <{$lang_titletribe}>
+                    <{$lang_titlegroup}>
             </span>
             <span class='caption-marker'>
                     *
                 </span>
         </label>
-        <input type='text' name='title' id='title' size='35' maxlength='55' value='<{$tribe_title}>'>
+        <input type='text' name='title' id='title' size='35' maxlength='55' value='<{$group_title}>'>
     </p>
     <p class="even">
         <label for='desc' class='xoops-form-element-caption'>
                 <span class='caption-text'>
-                    <{$lang_desctribe}>
+                    <{$lang_descgroup}>
                 </span>
             <span class='caption-marker'>
                     *
                 </span>
         </label>
-        <textarea name='desc' id='desc' rows='5' cols='50'><{$tribe_desc}></textarea>
+        <textarea name='desc' id='desc' rows='5' cols='50'><{$group_desc}></textarea>
     </p>
     <p class=odd>
-        <input type='submit' class='formButton' name='submit_button' id='submit_button' value='<{$lang_savetribe}>'>
+        <input type='submit' class='formButton' name='submit_button' id='submit_button' value='<{$lang_savegroup}>'>
     </p>
 
     <{$token}>
-    <input type='hidden' name='tribe_id' id='tribe_id' value='<{$tribe_id}>'>
+    <input type='hidden' name='group_id' id='group_id' value='<{$group_id}>'>
     <input type='hidden' name='marker' id='marker' value='1'>
 </form>
 
-<div id="yogurt-tribe-edit-members" class="outer odd">
-    <h2 class="head"><{$lang_membersoftribe}></h2>
-    <{section name=i loop=$tribe_members}>
-        <div class="yogurt-tribe-edit-member <{cycle values="odd,even"}>">
+<div id="yogurt-group-edit-members" class="outer odd">
+    <h2 class="head"><{$lang_membersofgroup}></h2>
+    <{section name=i loop=$group_members}>
+        <div class="yogurt-group-edit-member <{cycle values="odd,even"}>">
             <h2 class="head">
-                <{$tribe_members[i].uname}>
+                <{$group_members[i].uname}>
             </h2>
             <p>
 
-                <img src="<{$xoops_upload_url}>/yogurt/avatars/<{$tribe_members[i].avatar}>">
+                <img src="<{$xoops_upload_url}>/yogurt/avatars/<{$group_members[i].avatar}>">
             <p>
-                <{$tribe_members[i].uname}>
+                <{$group_members[i].uname}>
             </p>
 
-            <{if $tribe_members[i].isOwner }>
+            <{if $group_members[i].isOwner }>
                 <img src="assets/images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>">
             <{else}>
-                <form action="kickfromtribe.php" method="post">
-                    <input type="hidden" value="<{$tribe_id}>" name="tribe_id" id="tribe_id">
-                    <input type="hidden" value="<{$tribe_members[i].uid}>" name="rel_user_uid" id="rel_user_uid">
-                    <input type="image" src="assets/images/abandontribe.gif">
+                <form action="kickfromgroup.php" method="post">
+                    <input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
+                    <input type="hidden" value="<{$group_members[i].uid}>" name="rel_user_uid" id="rel_user_uid">
+                    <input type="image" src="assets/images/abandongroup.gif">
                 </form>
             <{/if}>
 

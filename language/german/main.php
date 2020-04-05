@@ -35,10 +35,10 @@ define('_MD_YOGURT_VIDEOS', 'Videos');
 define('_MD_YOGURT_NOTEBOOK', 'G&auml;stebuch');
 define('_MD_YOGURT_PHOTOS', 'Bilder');
 define('_MD_YOGURT_FRIENDS', 'Freunde');
-define('_MD_YOGURT_TRIBES', 'Gruppen');
-define('_MD_YOGURT_NOTRIBESYET', 'Keine Gruppe vorhanden');
-define('_MD_YOGURT_MYTRIBES', 'Meine Gruppe');
-define('_MD_YOGURT_ALLTRIBES', 'Alle Gruppen');
+define('_MD_YOGURT_GROUPS', 'Gruppen');
+define('_MD_YOGURT_NOGROUPSYET', 'Keine Gruppe vorhanden');
+define('_MD_YOGURT_MYGROUPS', 'Meine Gruppe');
+define('_MD_YOGURT_ALLGROUPS', 'Alle Gruppen');
 define('_MD_YOGURT_PROFILE', 'Profil');
 define('_MD_YOGURT_HOME', 'Startseite');
 define('_MD_YOGURT_CONFIGSTITLE', 'Einstellungen');
@@ -139,49 +139,49 @@ define('_MD_YOGURT_VIDEODELETED', 'Video wurde gel&ouml;scht');
 //video_submited.php
 define('_MD_YOGURT_VIDEOSAVED', 'Video wurde gespeichert');
 
-############################## TRIBES ########################################################
-//class/Tribes.php
-define('_MD_YOGURT_SUBMIT_TRIBE', 'Neue Gruppe anlegen');
-define('_MD_YOGURT_UPLOADTRIBE', 'Gruppe speichern'); //also present in many ther tribes related
-define('_MD_YOGURT_TRIBE_IMAGE', 'Gruppenbild (125 Pixel breit und 80 Pixel hoch f&uuml;r optimale Darstellung)'); //also present in many ther tribes related
-define('_MD_YOGURT_TRIBE_TITLE', 'Titel'); //also present in many ther tribes related
-define('_MD_YOGURT_TRIBE_DESC', 'Beschreibung'); //also present in many ther tribes related
-define('_MD_YOGURTCREATEYOURTRIBE', 'Eigene Gruppe erstellen!'); //also present in many ther tribes related
+############################## GROUPS ########################################################
+//class/Groups.php
+define('_MD_YOGURT_SUBMIT_GROUP', 'Neue Gruppe anlegen');
+define('_MD_YOGURT_UPLOADGROUP', 'Gruppe speichern'); //also present in many ther groups related
+define('_MD_YOGURT_GROUP_IMAGE', 'Gruppenbild (125 Pixel breit und 80 Pixel hoch f&uuml;r optimale Darstellung)'); //also present in many ther groups related
+define('_MD_YOGURT_GROUP_TITLE', 'Titel'); //also present in many ther groups related
+define('_MD_YOGURT_GROUP_DESC', 'Beschreibung'); //also present in many ther groups related
+define('_MD_YOGURTCREATEYOURGROUP', 'Eigene Gruppe erstellen!'); //also present in many ther groups related
 
-//abandontribe.php
-define('_MD_YOGURT_ASKCONFIRMABANDONTRIBE', 'Willst du diese Gruppe wirklich verlassen?');
+//abandongroup.php
+define('_MD_YOGURT_ASKCONFIRMABANDONGROUP', 'Willst du diese Gruppe wirklich verlassen?');
 define('_MD_YOGURT_CONFIRMABANDON', 'Ja, aus dieser Gruppe austreten!');
-define('_MD_YOGURT_TRIBEABANDONED', 'Du bist nun nicht mehr Mitglied dieser Gruppe.');
+define('_MD_YOGURT_GROUPABANDONED', 'Du bist nun nicht mehr Mitglied dieser Gruppe.');
 
-//becomemembertribe.php
+//becomemembergroup.php
 define('_MD_YOGURT_YOUAREMEMBERNOW', 'Du bist jetzt Mitglied dieser Gruppe');
 define('_MD_YOGURT_YOUAREMEMBERALREADY', 'Du bist bereits Mitglied dieser Gruppe');
 
-//delete_tribe.php
-define('_MD_YOGURT_ASKCONFIRMTRIBEDELETION', 'Willst Du diese Gruppe wirklich dauerhaft l&ouml;schen?');
-define('_MD_YOGURT_CONFIRMTRIBEDELETION', 'Ja, diese Gruppe l&ouml;schen!');
-define('_MD_YOGURT_TRIBEDELETED', 'Gruppe gel&ouml;scht!');
+//delete_group.php
+define('_MD_YOGURT_ASKCONFIRMGROUPDELETION', 'Willst Du diese Gruppe wirklich dauerhaft l&ouml;schen?');
+define('_MD_YOGURT_CONFIRMGROUPDELETION', 'Ja, diese Gruppe l&ouml;schen!');
+define('_MD_YOGURT_GROUPDELETED', 'Gruppe gel&ouml;scht!');
 
-//edit_tribe.php
-define('_MD_YOGURT_MAINTAINOLDIMAGE', 'Dieses Bild behalten'); //also present in other tribes related
-define('_MD_YOGURT_TRIBEEDITED', 'Gruppe bearbeitet');
-define('_MD_YOGURT_EDIT_TRIBE', 'Deine Gruppe bearbeiten'); //also present in other tribes related
-define('_MD_YOGURT_TRIBEOWNER', 'Du bist Besitzer dieser Gruppe!'); //also present in other tribes related
-define('_MD_YOGURT_MEMBERSDOFTRIBE', 'Mitglieder dieser Gruppe'); //also present in other tribes related
+//edit_group.php
+define('_MD_YOGURT_MAINTAINOLDIMAGE', 'Dieses Bild behalten'); //also present in other groups related
+define('_MD_YOGURT_GROUPEDITED', 'Gruppe bearbeitet');
+define('_MD_YOGURT_EDIT_GROUP', 'Deine Gruppe bearbeiten'); //also present in other groups related
+define('_MD_YOGURT_GROUPOWNER', 'Du bist Besitzer dieser Gruppe!'); //also present in other groups related
+define('_MD_YOGURT_MEMBERSDOFGROUP', 'Mitglieder dieser Gruppe'); //also present in other groups related
 
-//submit_tribe.php
-define('_MD_YOGURT_TRIBE_CREATED', 'Deine Gruppe wurde erstellt');
+//submit_group.php
+define('_MD_YOGURT_GROUP_CREATED', 'Deine Gruppe wurde erstellt');
 
-//kickfromtribe.php
+//kickfromgroup.php
 define('_MD_YOGURT_CONFIRMKICK', 'Ja, schmei&szlig; ihn raus!');
-define('_MD_YOGURT_ASKCONFIRMKICKFROMTRIBE', 'Willst Du diese Person wirklich aus dieser Gruppe ausschlie&szlig;en?');
-define('_MD_YOGURT_TRIBEKICKED', 'Du hast diesen Benutzer aus dieser Gruppe rausgeschmissen, aber wer wei&szlig;, ob er es nicht wieder neu versucht und zur&uuml;ckkehrt!');
+define('_MD_YOGURT_ASKCONFIRMKICKFROMGROUP', 'Willst Du diese Person wirklich aus dieser Gruppe ausschlie&szlig;en?');
+define('_MD_YOGURT_GROUPKICKED', 'Du hast diesen Benutzer aus dieser Gruppe rausgeschmissen, aber wer wei&szlig;, ob er es nicht wieder neu versucht und zur&uuml;ckkehrt!');
 
-//Tribes.php
-define('_MD_YOGURT_TRIBE_ABANDON', 'Diese Gruppe verlassen');
-define('_MD_YOGURT_TRIBE_JOIN', 'Dieser Gruppe beitreten und jedermann zeigen, wer Du bist!');
-define('_MD_YOGURT_TRIBE_SEARCH', 'Gruppe suchen');
-define('_MD_YOGURT_TRIBE_SEARCHKEYWORD', 'Schl&uuml;sselwort');
+//Groups.php
+define('_MD_YOGURT_GROUP_ABANDON', 'Diese Gruppe verlassen');
+define('_MD_YOGURT_GROUP_JOIN', 'Dieser Gruppe beitreten und jedermann zeigen, wer Du bist!');
+define('_MD_YOGURT_GROUP_SEARCH', 'Gruppe suchen');
+define('_MD_YOGURT_GROUP_SEARCHKEYWORD', 'Schl&uuml;sselwort');
 
 ######################################### NOTES #####################################################
 //notebook.php
@@ -212,7 +212,7 @@ define('_MD_YOGURT_CONFIGSONLYEFRIENDS', 'Meine Freunde.');
 define('_MD_YOGURT_CONFIGSONLYME', 'Nur ich');
 define('_MD_YOGURT_CONFIGSPICTURES', 'Deine Bilder sehen');
 define('_MD_YOGURT_CONFIGSVIDEOS', 'Deine Videos sehen');
-define('_MD_YOGURT_CONFIGSTRIBES', 'Deine Gruppen sehen');
+define('_MD_YOGURT_CONFIGSGROUPS', 'Deine Gruppen sehen');
 define('_MD_YOGURT_CONFIGSNOTES', 'Deine G&auml;stebucheintr&auml;ge sehen');
 define('_MD_YOGURT_CONFIGSNOTESSEND', 'Darf dir ins G&auml;stebuch schreiben');
 define('_MD_YOGURT_CONFIGSFRIENDS', 'Deine Freunde sehen');
@@ -299,13 +299,13 @@ define('_MD_YOGURT_RESULTS', 'Suchergebnis');
 //26/10/2007
 define('_MD_YOGURT_VIDEOSNOTENABLED', 'Die Video-Funktion ist im Moment deaktiviert');
 define('_MD_YOGURT_FRIENDSNOTENABLED', 'Die Freunde-Funktion ist im Moment deaktiviert');
-define('_MD_YOGURT_TRIBESNOTENABLED', 'Die Gruppen-Funktion ist im Moment deaktiviert');
+define('_MD_YOGURT_GROUPSNOTENABLED', 'Die Gruppen-Funktion ist im Moment deaktiviert');
 define('_MD_YOGURT_PICTURESNOTENABLED', 'Die Bilder-Funktion ist im Moment deaktiviert');
 define('_MD_YOGURT_NOTESNOTENABLED', 'Die G&auml;stebuch-Funktion ist im Moment deaktiviert');
 
 //26/01/2008
 define('_MD_YOGURT_ALLFRIENDS', 'Zeige alle Freunde');
-define('_MD_YOGURT_ALLTRIBES', 'Zeige alle Gruppen');
+define('_MD_YOGURT_ALLGROUPS', 'Zeige alle Gruppen');
 
 //31/01/2008
 define('_MD_YOGURT_FRIENDSHIPNOTACCEPTED', 'Freundschaft abgelehnt');

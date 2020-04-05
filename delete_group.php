@@ -22,37 +22,38 @@ use XoopsModules\Yogurt;
 require __DIR__ . '/header.php';
 
 /**
- * Verify Token
+ * Factories of groups
  */
-//if (!($GLOBALS['xoopsSecurity']->check())){
-//            redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 5, _MD_YOGURT_TOKENEXPIRED);
-//}
+$relgroupuserFactory = new Yogurt\RelgroupuserHandler($xoopsDB);
+$groupsFactory       = new Yogurt\GroupsHandler($xoopsDB);
 
-/**
- * Receiving info from get parameters
- */
-$reltribeuser_id = \Xmf\Request::getInt('reltribe_id', 0, 'POST');
+$group_id = \Xmf\Request::getInt('group_id', 0, 'POST');
+
 if (!isset($_POST['confirm']) || 1 != $_POST['confirm']) {
-    xoops_confirm(['reltribe_id' => $reltribeuser_id, 'confirm' => 1], 'abandontribe.php', _MD_YOGURT_ASKCONFIRMABANDONTRIBE, _MD_YOGURT_CONFIRMABANDON);
+    xoops_confirm(['group_id' => $group_id, 'confirm' => 1], 'delete_group.php', _MD_YOGURT_ASKCONFIRMGROUPDELETION, _MD_YOGURT_CONFIRMGROUPDELETION);
 } else {
     /**
      * Creating the factory  and the criteria to delete the picture
      * The user must be the owner
      */
-    $reltribeuserFactory = new Yogurt\ReltribeuserHandler($xoopsDB);
-    $criteria_rel_id     = new \Criteria('rel_id', $reltribeuser_id);
-    $uid                 = (int)$xoopsUser->getVar('uid');
-    $criteria_uid        = new \Criteria('rel_user_uid', $uid);
-    $criteria            = new \CriteriaCompo($criteria_rel_id);
+    $criteria_group_id = new \Criteria('group_id', $group_id);
+    $uid               = (int)$xoopsUser->getVar('uid');
+    $criteria_uid      = new \Criteria('owner_uid', $uid);
+    $criteria          = new \CriteriaCompo($criteria_group_id);
     $criteria->add($criteria_uid);
 
     /**
      * Try to delete
      */
-    if ($reltribeuserFactory->deleteAll($criteria)) {
-        redirect_header('tribes.php', 1, _MD_YOGURT_TRIBEABANDONED);
-    } else {
-        redirect_header('tribes.php', 1, _MD_YOGURT_NOCACHACA);
+    if (1 == $groupsFactory->getCount($criteria)) {
+        if ($groupsFactory->deleteAll($criteria)) {
+            $criteria_rel_group_id = new \Criteria('rel_group_id', $group_id);
+            $relgroupuserFactory->deleteAll($criteria_rel_group_id);
+            redirect_header('groups.php?uid=' . $uid, 3, _MD_YOGURT_GROUPDELETED);
+        } else {
+            redirect_header('groups.php?uid=' . $uid, 3, _MD_YOGURT_NOCACHACA);
+        }
     }
 }
+
 require dirname(dirname(__DIR__)) . '/footer.php';

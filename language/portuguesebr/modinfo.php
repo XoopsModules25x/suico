@@ -89,9 +89,9 @@ define('_MI_YOGURT_TUBEH_TITLE', 'Altura dos vídeos do YouTube'); //GibaPhp
 define('_MI_YOGURT_TUBEH_DESC', 'A altura em pixels do reprodutos de vídeo do YouTube'); //GibaPhp
 define('_MI_YOGURT_PICTURE_TEMPLATENOTEBOOKDESC', 'Template para o Notebook'); //GibaPhp
 define('_MI_YOGURT_PICTURE_TEMPLATESEUTUBODESC', 'Template para a seção de videos'); //GibaPhp
-define('_MI_YOGURT_PICTURE_TEMPLATETRIBESDESC', 'Template para as Tribos'); //GibaPhp
+define('_MI_YOGURT_PICTURE_TEMPLATEGROUPSDESC', 'Template para as Tribos'); //GibaPhp
 define('_MI_YOGURT_MYNOTES', 'Meus Notes'); //GibaPhp
-define('_MI_YOGURT_MYTRIBES', 'Minhas Tribos'); //GibaPhp
+define('_MI_YOGURT_MYGROUPS', 'Minhas Tribos'); //GibaPhp
 define('_MI_YOGURT_TEMPLATENAVBARDESC', 'Template Para a parte superior do navbar utilizado em todas as páginas'); //GibaPhp
 
 define('_MI_YOGURT_VIDEOSPERPAGE_TITLE', 'Videos por Página'); //GibaPhp
@@ -118,14 +118,14 @@ define('_MI_YOGURT_MAINTUBEH_DESC', 'Altura do vídeo que será mostrado na prim
 define('_MI_YOGURT_MYCONFIGS', 'Minhas Preferências'); //GibaPhp
 define('_MI_YOGURT_PICTURE_TEMPLATECONFIGSDESC', 'Template com definições para o usuário'); //GibaPhp
 define('_MI_YOGURT_PICTURE_TEMPLATEFOOTERDESC', 'Template para o rodapé do módulo'); //GibaPhp
-define('_MI_YOGURT_PICTURE_TEMPLATEEDITTRIBE', 'Template para os atributos da página das Tribos'); //GibaPhp
+define('_MI_YOGURT_PICTURE_TEMPLATEEDITGROUP', 'Template para os atributos da página das Tribos'); //GibaPhp
 define('_MI_YOGURT_LICENSE', 'Yogurt foi feito por Marcello Brandão é está sob uma Licença ( confirmar o correto desta licença) Não Atribuida de Obras Derivadas 2,5 Brasil.'); //GibaPhp - Dúvida aqui... Também não entendi nem a tradução que eu fiz, rss :-)
 
 //19/10/2007
-define('_MI_YOGURT_TRIBESPERPAGE_TITLE', 'Tribos por Página'); //GibaPhp
-define('_MI_YOGURT_TRIBESPERPAGE_DESC', 'Tribos por página antes de mostrar a paginação'); //GibaPhp
+define('_MI_YOGURT_GROUPSPERPAGE_TITLE', 'Tribos por Página'); //GibaPhp
+define('_MI_YOGURT_GROUPSPERPAGE_DESC', 'Tribos por página antes de mostrar a paginação'); //GibaPhp
 define('_MI_YOGURT_PICTURE_TEMPLATESEARCHRESULTDESC', 'Este Template mostra os resultados de uma pesquisa de comunidades'); //GibaPhp
-define('_MI_YOGURT_PICTURE_TEMPLATETRIBEDESC', 'Este Template mostra uma Tribo e os seus membros'); //GibaPhp
+define('_MI_YOGURT_PICTURE_TEMPLATEGROUPDESC', 'Este Template mostra uma Tribo e os seus membros'); //GibaPhp
 
 //22/10/2007
 define('_MI_YOGURT_MYPROFILE', 'Meu Perfil'); //GibaPhp
@@ -142,8 +142,8 @@ define('_MI_YOGURT_ENABLEVIDEOS_TITLE', 'Ativando a seção de vídeos'); //Giba
 define('_MI_YOGURT_ENABLEVIDEOS_DESC', 'Ativando a seção de vídeos para os usuários, permitirá que exista uma galera de vídeos para cada usuário'); //GibaPhp
 define('_MI_YOGURT_ENABLENOTES_TITLE', 'Ativar a seção de Notes'); //GibaPhp
 define('_MI_YOGURT_ENABLENOTES_DESC', 'Ativando a seção de Notes, permitirá que os membros possam deixar mensagens públicas no Note de outros usuários. Esse recurso é como você conhece no Facebook'); //GibaPhp
-define('_MI_YOGURT_ENABLETRIBES_TITLE', 'Ativar a seção de Tribos'); //GibaPhp
-define('_MI_YOGURT_ENABLETRIBES_DESC', 'Ativando a seão de Tribos para os usuários, permitirá a criação de tribos. Desta forma alguns grupos de usuários irão se reunir em locais semelhantes de interesse'); //GibaPhp
+define('_MI_YOGURT_ENABLEGROUPS_TITLE', 'Ativar a seção de Tribos'); //GibaPhp
+define('_MI_YOGURT_ENABLEGROUPS_DESC', 'Ativando a seão de Tribos para os usuários, permitirá a criação de tribos. Desta forma alguns grupos de usuários irão se reunir em locais semelhantes de interesse'); //GibaPhp
 define('_MI_YOGURT_NOTESPERPAGE_TITLE', 'Número de Notes por página'); //GibaPhp
 define('_MI_YOGURT_NOTESPERPAGE_DESC', 'Número de Notes em uma página antes de mostrar a navegação e paginação '); //GibaPhp
 

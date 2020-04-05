@@ -30,7 +30,7 @@ if (!$xoopsUser) {
 }
 
 /**
- * Factories of tribes
+ * Factories of groups
  */
 $configsFactory = new Yogurt\ConfigsHandler($xoopsDB);
 
@@ -44,7 +44,7 @@ if ($configsFactory->getCount($criteria) > 0) {
     $pic  = $config->getVar('pictures');
     $aud  = $config->getVar('audio');
     $vid  = $config->getVar('videos');
-    $tri  = $config->getVar('tribes');
+    $tri  = $config->getVar('groups');
     $scr  = $config->getVar('notes');
     $fri  = $config->getVar('friends');
     $pcon = $config->getVar('profile_contact');
@@ -84,7 +84,7 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 //permissions
 $xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('notes'));
 $xoopsTpl->assign('allow_friends', $controller->checkPrivilegeBySection('friends'));
-$xoopsTpl->assign('allow_tribes', $controller->checkPrivilegeBySection('tribes'));
+$xoopsTpl->assign('allow_groups', $controller->checkPrivilegeBySection('groups'));
 $xoopsTpl->assign('allow_pictures', $controller->checkPrivilegeBySection('pictures'));
 $xoopsTpl->assign('allow_videos', $controller->checkPrivilegeBySection('videos'));
 
@@ -99,7 +99,7 @@ $xoopsTpl->assign('lang_configprofilecontact', _MD_YOGURT_CONFIGSPROFILECONTACT)
 $xoopsTpl->assign('lang_configfriends', _MD_YOGURT_CONFIGSFRIENDS);
 $xoopsTpl->assign('lang_confignotes', _MD_YOGURT_CONFIGSNOTES);
 $xoopsTpl->assign('lang_configsendnotes', _MD_YOGURT_CONFIGSNOTESSEND);
-$xoopsTpl->assign('lang_configtribes', _MD_YOGURT_CONFIGSTRIBES);
+$xoopsTpl->assign('lang_configgroups', _MD_YOGURT_CONFIGSGROUPS);
 $xoopsTpl->assign('lang_configaudio', _MD_YOGURT_CONFIGSAUDIOS);
 $xoopsTpl->assign('lang_configvideos', _MD_YOGURT_CONFIGSVIDEOS);
 $xoopsTpl->assign('lang_configpictures', _MD_YOGURT_CONFIGSPICTURES);
@@ -124,7 +124,7 @@ $xoopsTpl->assign('isOwner', $controller->isOwner);
 $xoopsTpl->assign('isanonym', $controller->isAnonym);
 
 //numbers
-$xoopsTpl->assign('nb_tribes', $nbSections['nbTribes']);
+$xoopsTpl->assign('nb_groups', $nbSections['nbGroups']);
 $xoopsTpl->assign('nb_photos', $nbSections['nbPhotos']);
 $xoopsTpl->assign('nb_videos', $nbSections['nbVideos']);
 $xoopsTpl->assign('nb_notes', $nbSections['nbNotes']);
@@ -142,7 +142,7 @@ $xoopsTpl->assign('lang_audio', _MD_YOGURT_AUDIOS);
 $xoopsTpl->assign('lang_videos', _MD_YOGURT_VIDEOS);
 $xoopsTpl->assign('lang_notebook', _MD_YOGURT_NOTEBOOK);
 $xoopsTpl->assign('lang_profile', _MD_YOGURT_PROFILE);
-$xoopsTpl->assign('lang_tribes', _MD_YOGURT_TRIBES);
+$xoopsTpl->assign('lang_groups', _MD_YOGURT_GROUPS);
 $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 
 //xoopsToken

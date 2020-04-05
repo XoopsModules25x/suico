@@ -32,8 +32,8 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 //require_once __DIR__ . '/Audio.php';
 //require_once __DIR__ . '/Friendpetition.php';
 //require_once __DIR__ . '/Friendship.php';
-//require_once __DIR__ . '/Reltribeuser.php';
-//require_once __DIR__ . '/Tribes.php';
+//require_once __DIR__ . '/Relgroupuser.php';
+//require_once __DIR__ . '/Groups.php';
 //require_once __DIR__ . '/Notes.php';
 //require_once __DIR__ . '/Configs.php';
 //require_once __DIR__ . '/Suspensions.php';
@@ -42,9 +42,9 @@ if (str_replace('.', '', PHP_VERSION) > 499) {
 }
 
 /**
- * Class ControllerTribes
+ * Class ControllerGroups
  */
-class ControllerTribes extends YogurtController
+class ControllerGroups extends YogurtController
 {
     /**
      * @return bool|void
@@ -52,14 +52,14 @@ class ControllerTribes extends YogurtController
     public function checkPrivilege()
     {
         global $xoopsModuleConfig;
-        if (0 == $xoopsModuleConfig['enable_tribes']) {
-            redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_TRIBESNOTENABLED);
+        if (0 == $xoopsModuleConfig['enable_groups']) {
+            redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_GROUPSNOTENABLED);
         }
         $criteria = new \Criteria('config_uid', $this->owner->getVar('uid'));
         if (1 == $this->configsFactory->getCount($criteria)) {
             $configs = $this->configsFactory->getObjects($criteria);
 
-            $config = $configs[0]->getVar('tribes');
+            $config = $configs[0]->getVar('groups');
 
             if (!$this->checkPrivilegeLevel($config)) {
                 redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, _MD_YOGURT_NOPRIVILEGE);

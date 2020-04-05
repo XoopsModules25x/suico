@@ -22,7 +22,7 @@ use XoopsModules\Yogurt;
 require __DIR__ . '/header.php';
 
 /**
- * Factories of tribes
+ * Factories of groups
  */
 $notesFactory = new Yogurt\NotesHandler($xoopsDB);
 

@@ -29,14 +29,14 @@
             <br>
         <{/if}>
 
-        <{if $allow_tribes!=-1}>
-            <fieldset class="myconfigs-fieldset" name="tribes" id="tribes">
-                <legend class="myconfigs-legend" for="tribes"><{$lang_configtribes}></legend>
+        <{if $allow_groups!=-1}>
+            <fieldset class="myconfigs-fieldset" name="groups" id="groups">
+                <legend class="myconfigs-legend" for="groups"><{$lang_configgroups}></legend>
 
-                <p><input type="radio" name="tribes" id="tribes0" value="0" <{if $tri==0}>checked<{/if}>><label for="tribes0"><{$lang_everyone}></label></p>
-                <p><input type="radio" name="tribes" id="tribes1" value="1" <{if $tri==1}>checked<{/if}>> <label for="tribes1"><{$lang_only_users}></label></p>
-                <p><input type="radio" name="tribes" id="tribes2" value="2" <{if $tri==2}>checked<{/if}>> <label for="tribes2"><{$lang_only_friends}></label></p>
-                <p><input type="radio" name="tribes" id="tribes3" value="3" <{if $tri==3}>checked<{/if}>> <label for="tribes3"><{$lang_only_me}></label></p>
+                <p><input type="radio" name="groups" id="groups0" value="0" <{if $tri==0}>checked<{/if}>><label for="groups0"><{$lang_everyone}></label></p>
+                <p><input type="radio" name="groups" id="groups1" value="1" <{if $tri==1}>checked<{/if}>> <label for="groups1"><{$lang_only_users}></label></p>
+                <p><input type="radio" name="groups" id="groups2" value="2" <{if $tri==2}>checked<{/if}>> <label for="groups2"><{$lang_only_friends}></label></p>
+                <p><input type="radio" name="groups" id="groups3" value="3" <{if $tri==3}>checked<{/if}>> <label for="groups3"><{$lang_only_me}></label></p>
 
             </fieldset>
             <br>

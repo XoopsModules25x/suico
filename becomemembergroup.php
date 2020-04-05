@@ -22,33 +22,33 @@ use XoopsModules\Yogurt;
 require __DIR__ . '/header.php';
 
 //require_once __DIR__ . '/class/Friendpetition.php';
-//require_once __DIR__ . '/class/Reltribeuser.php';
-//require_once __DIR__ . '/class/Tribes.php';
+//require_once __DIR__ . '/class/Relgroupuser.php';
+//require_once __DIR__ . '/class/Groups.php';
 
 /**
- * Factories of tribes... testing for zend editor
+ * Factories of groups... testing for zend editor
  */
-$reltribeuserFactory = new Yogurt\ReltribeuserHandler($xoopsDB);
-$tribesFactory       = new Yogurt\TribesHandler($xoopsDB);
+$relgroupuserFactory = new Yogurt\RelgroupuserHandler($xoopsDB);
+$groupsFactory       = new Yogurt\GroupsHandler($xoopsDB);
 
-$tribe_id = \Xmf\Request::getInt('tribe_id', 0, 'POST');
+$group_id = \Xmf\Request::getInt('group_id', 0, 'POST');
 $uid      = (int)$xoopsUser->getVar('uid');
 
 $criteria_uid      = new \Criteria('rel_user_uid', $uid);
-$criteria_tribe_id = new \Criteria('rel_tribe_id', $tribe_id);
+$criteria_group_id = new \Criteria('rel_group_id', $group_id);
 $criteria          = new \CriteriaCompo($criteria_uid);
-$criteria->add($criteria_tribe_id);
-if ($reltribeuserFactory->getCount($criteria) < 1) {
-    $reltribeuser = $reltribeuserFactory->create();
-    $reltribeuser->setVar('rel_tribe_id', $tribe_id);
-    $reltribeuser->setVar('rel_user_uid', $uid);
-    if ($reltribeuserFactory->insert($reltribeuser)) {
-        redirect_header('tribes.php', 1, _MD_YOGURT_YOUAREMEMBERNOW);
+$criteria->add($criteria_group_id);
+if ($relgroupuserFactory->getCount($criteria) < 1) {
+    $relgroupuser = $relgroupuserFactory->create();
+    $relgroupuser->setVar('rel_group_id', $group_id);
+    $relgroupuser->setVar('rel_user_uid', $uid);
+    if ($relgroupuserFactory->insert($relgroupuser)) {
+        redirect_header('groups.php', 1, _MD_YOGURT_YOUAREMEMBERNOW);
     } else {
-        redirect_header('tribes.php', 1, _MD_YOGURT_NOCACHACA);
+        redirect_header('groups.php', 1, _MD_YOGURT_NOCACHACA);
     }
 } else {
-    redirect_header('tribes.php', 1, _MD_YOGURT_YOUAREMEMBERALREADY);
+    redirect_header('groups.php', 1, _MD_YOGURT_YOUAREMEMBERALREADY);
 }
 
 require dirname(dirname(__DIR__)) . '/footer.php';

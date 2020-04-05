@@ -22,7 +22,7 @@ use XoopsModules\Yogurt;
 require __DIR__ . '/header.php';
 
 /**
- * Factories of tribes
+ * Factories of groups
  */
 $configsFactory = new Yogurt\ConfigsHandler($xoopsDB);
 
@@ -37,7 +37,7 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 //      $this->initVar("config_uid",XOBJ_DTYPE_INT,null,false,10);
 //      $this->initVar("pictures",XOBJ_DTYPE_INT,null,false,10);
 //      $this->initVar("videos",XOBJ_DTYPE_INT,null,false,10);
-//      $this->initVar("tribes",XOBJ_DTYPE_INT,null,false,10);
+//      $this->initVar("groups",XOBJ_DTYPE_INT,null,false,10);
 //      $this->initVar("Notes",XOBJ_DTYPE_INT,null,false,10);
 //      $this->initVar("friends",XOBJ_DTYPE_INT,null,false,10);
 //      $this->initVar("profile_contact",XOBJ_DTYPE_INT,null,false,10);
@@ -51,7 +51,7 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 //$pic  = $_POST['pic'];
 //$vid  = $_POST['vid'];
 //$aud    = $_POST['aud'];
-//$tri  = $_POST['tribes'];
+//$tri  = $_POST['groups'];
 //$fri  = $_POST['friends'];
 //$scr  = $_POST['notes'];
 //$pcon   = $_POST['profileContact'];
@@ -77,8 +77,8 @@ if (isset($_POST['aud'])) {
 if (isset($_POST['vid'])) {
     $config->setVar('videos', $_POST['vid']);
 }
-if (isset($_POST['tribes'])) {
-    $config->setVar('tribes', $_POST['tribes']);
+if (isset($_POST['groups'])) {
+    $config->setVar('groups', $_POST['groups']);
 }
 if (isset($_POST['notes'])) {
     $config->setVar('notes', $_POST['notes']);

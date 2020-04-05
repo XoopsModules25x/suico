@@ -55,14 +55,14 @@ class IshotHandler extends \XoopsPersistableObjectHandler
             $this->helper = $helper;
         }
         $isAdmin = $this->helper->isUserAdmin();
-        //        parent::__construct($db, 'yogurt_tribes', Image::class, 'tribe_id', 'tribe_title');
+        //        parent::__construct($db, 'yogurt_groups', Image::class, 'group_id', 'group_title');
     }
 
     /**
-     * create a new Tribes
+     * create a new Groups
      *
      * @param bool $isNew flag the new objects as "new"?
-     * @return \XoopsObject Tribes
+     * @return \XoopsObject Groups
      */
     public function create($isNew = true)
     {

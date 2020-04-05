@@ -25,7 +25,7 @@ require __DIR__ . '/header.php';
 $controller = new Yogurt\ControllerPhotos($xoopsDB, $xoopsUser);
 
 /**
- * Fetching numbers of tribes friends videos pictures etc...
+ * Fetching numbers of groups friends videos pictures etc...
  */
 $nbSections = $controller->getNumbersSections();
 
@@ -128,7 +128,7 @@ $navegacao       = $barra_navegacao->renderImageNav(2);
 //permissions
 $xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('notes'));
 $xoopsTpl->assign('allow_friends', $controller->checkPrivilegeBySection('friends'));
-$xoopsTpl->assign('allow_tribes', $controller->checkPrivilegeBySection('tribes'));
+$xoopsTpl->assign('allow_groups', $controller->checkPrivilegeBySection('groups'));
 $xoopsTpl->assign('allow_pictures', $controller->checkPrivilegeBySection('pictures'));
 $xoopsTpl->assign('allow_videos', $controller->checkPrivilegeBySection('videos'));
 $xoopsTpl->assign('allow_audios', $controller->checkPrivilegeBySection('audio'));
@@ -139,7 +139,7 @@ $xoopsTpl->assign('owner_uname', $controller->nameOwner);
 $xoopsTpl->assign('isOwner', $controller->isOwner);
 
 //numbers
-$xoopsTpl->assign('nb_tribes', $nbSections['nbTribes']);
+$xoopsTpl->assign('nb_groups', $nbSections['nbGroups']);
 $xoopsTpl->assign('nb_photos', $nbSections['nbPhotos']);
 $xoopsTpl->assign('nb_videos', $nbSections['nbVideos']);
 $xoopsTpl->assign('nb_notes', $nbSections['nbNotes']);
@@ -157,7 +157,7 @@ $xoopsTpl->assign('lang_audio', _MD_YOGURT_AUDIOS);
 $xoopsTpl->assign('lang_videos', _MD_YOGURT_VIDEOS);
 $xoopsTpl->assign('lang_notebook', _MD_YOGURT_NOTEBOOK);
 $xoopsTpl->assign('lang_profile', _MD_YOGURT_PROFILE);
-$xoopsTpl->assign('lang_tribes', _MD_YOGURT_TRIBES);
+$xoopsTpl->assign('lang_groups', _MD_YOGURT_GROUPS);
 $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 
 //page atributes
