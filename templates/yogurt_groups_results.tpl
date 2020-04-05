@@ -29,20 +29,16 @@
     <h2 id="yogurt-groups-nogroups">
         <{$lang_nogroupsyet}>
     </h2>
-    <{ /if}>
+    <{/if}>
 
     <{section name=j loop=$groups}>
         <div class="yogurt-group-all <{cycle values="odd,even"}>">
-            <img src="<{$xoops_upload_url}>/yogurt/images/<{$groups[j].img}>" alt="<{$groups[j].title}>" title="<{$groups[j].title}>">
-            <h4>
-                <{$groups[j].title}>
-            </h4>
+            <img src="<{$xoops_upload_url}>/yogurt/groups/<{$groups[j].img}>" alt="<{$groups[j].title}>" title="<{$groups[j].title}>">
+            <h4><{$groups[j].title}></h4>
             <p>
-
             <p>
                 <{$groups[j].desc}>
             </p>
-
             </p>
             <{if $isOwner }>
                 <form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">
