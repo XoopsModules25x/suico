@@ -5,7 +5,7 @@
     <!-- if not owner and not friend -->
     <div id="yogurt-profile-petition" class="confirmMsg">
         <h4><{$lang_youhavexpetitions}></h4>
-        <img width="30" src="<{$xoops_url}>/uploads/yogurt/avatars/<{$petitioner_avatar}>">
+        <img width="30" src="<{$xoops_url}>/uploads/<{$petitioner_avatar}>">
         <form action="makefriends.php" method="post">
             <{$lang_askingfriend}>
             <ul>
@@ -66,7 +66,7 @@
             <{if $allow_pictures }>
                 <div id="yogurt-profile-avatar">
                     <{if $avatar_url!="" && $avatar_url!="avatars/blank.gif" }>
-                        <img src="<{$xoops_url}>/uploads/yogurt/avatars/<{$avatar_url}>">
+                        <img src="<{$xoops_url}>/uploads/<{$avatar_url}>">
                     <{else}>
                         <img src="assets/images/noavatar.gif">
                         <{if $isOwner}>

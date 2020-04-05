@@ -36,12 +36,12 @@ $uid = (int)$xoopsUser->getVar('uid');
 
 $image       = XOOPS_ROOT_PATH . '/uploads/yogurt/photos/' . 'thumb_' . $picture->getVar('url');
 $avatar      = 'av' . $uid . '_' . time() . '.jpg';
-$imageavatar = XOOPS_ROOT_PATH . '/uploads/yogurt/avatars/' . $avatar;
+$imageavatar = XOOPS_ROOT_PATH . '/uploads/avatars/' . $avatar;
 
 if (!copy($image, $imageavatar)) {
     echo 'failed to copy $file...\n';
 }
-$xoopsUser->setVar('user_avatar', $avatar);
+$xoopsUser->setVar('user_avatar', 'avatars/'.$avatar);
 
 $userHandler = new \XoopsUserHandler($xoopsDB);
 
