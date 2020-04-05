@@ -272,7 +272,7 @@
             <{if $nb_tribes==0}><p id="notribes"><{$lang_notribesyet}></p><{/if}>
             <{section name=i loop=$tribes}>
                 <div class="yogurt-profile-tribe <{cycle values="odd,even"}>">
-                    <a href="tribe.php?tribe_id=<{$tribes[i].tribe_id}>"><img alt="<{$tribes[i].title}>" title="<{$tribes[i].title}>" class="yogurt-profile-tribes-img" src="<{$xoops_upload_url}>/<{$tribes[i].img}>"></a> <h4> <{$tribes[i].title}> </h4>
+                    <a href="tribe.php?tribe_id=<{$tribes[i].tribe_id}>"><img alt="<{$tribes[i].title}>" title="<{$tribes[i].title}>" class="yogurt-profile-tribes-img" src="<{$xoops_upload_url}>/yogurt/tribes/<{$tribes[i].img}>"></a> <h4> <{$tribes[i].title}> </h4>
                     <p><{$tribes[i].desc}></p>
                 </div>
             <{/section}>
