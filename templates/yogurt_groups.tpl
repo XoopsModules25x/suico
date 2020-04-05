@@ -1,7 +1,7 @@
 <{include file="db:yogurt_navbar.tpl"}>
 <form class='outer' name='form_group_search' id='form_group_search' action='search_group.php' method='get'>
 
-    <h2 class="head"><{$lang_searchgroup}></h2>
+    <h4 class="head"><{$lang_searchgroup}></h4>
 
 
     <p class=even>
@@ -21,7 +21,7 @@
 
 <form class='outer' name='form_group' id='form_group' action='submit_group.php' method='post' onsubmit='return xoopsFormValidate_form_group();' enctype="multipart/form-data">
 
-    <h2 class="head"><{$lang_creategroup}></h2>
+    <h4 class="head"><{$lang_creategroup}></h4>
 
     <p class="odd">
         <label for='' class='xoops-form-element-caption'><span class='caption-text'><{$lang_youcanupload}></span><span class='caption-marker'>*</span></label>
@@ -74,20 +74,20 @@
 <{ /if}>
 
 <div id="yogurt-mygroups-container" class="outer">
-    <h2 class="head">
+    <h4 class="head">
         <{$lang_mygroupstitle}>
-    </h2>
+    </h4>
 
     <{if $nb_groups<=0}>
-    <h2 id="yogurt-groups-nogroups">
+    <h4 id="yogurt-groups-nogroups">
         <{$lang_nogroupsyet}>
-    </h2>
+    </h4>
     <{/if}>
     <{section name=i loop=$mygroups}>
         <div class="yogurt-group-my <{cycle values="odd,even"}>">
-            <h4>
+            <h6>
                 <{$mygroups[i].title}>
-            </h4>
+            </h6>
             <p>
 
                 <a href="group.php?group_id=<{$mygroups[i].group_id}>"><img src="<{$xoops_upload_url}>/yogurt/groups/<{$mygroups[i].img}>" alt="<{$mygroups[i].title}>" title="<{$mygroups[i].title}>"></a>
@@ -117,14 +117,14 @@
 </div>
 
 <div id="yogurt-groups-container" class="outer">
-    <h2 class="head">
+    <h4 class="head">
         <{$lang_groupstitle}>
-    </h2>
+    </h4>
 
     <{if $nb_groups_all<=0}>
-    <h2 id="yogurt-groups-nogroups">
+    <h4 id="yogurt-groups-nogroups">
         <{$lang_nogroupsyet}>
-    </h2>
+    </h4>
     <{ /if}>
 
     <{section name=j loop=$groups}>

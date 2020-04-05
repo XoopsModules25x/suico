@@ -29,9 +29,9 @@
             >
             <{$section_name}>
         </p>
-        <h2>
+        <h4>
             <{if $isOwner}>::<{$lang_mysection}><{else}><{$owner_uname}>::<{$section_name}><{/if}><{if $isWebmaster==1 }><img id="yogurt-suspensiontools" src="assets/images/suspend.gif" alt="<{$lang_suspensionadmin}>" title="<{$lang_suspensionadmin}>"><{/if}>
-        </h2>
+        </h4>
 
 
         <ul class="tabs-nav">

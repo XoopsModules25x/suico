@@ -3,7 +3,7 @@
 <{/if}>
 <form class='outer' name='form_group_search' id='form_group_search' action='search_group.php' method='get'>
 
-    <h2 class=head><{$lang_searchgroup}></h2>
+    <h4 class=head><{$lang_searchgroup}></h4>
 
 
     <p class=even>
@@ -21,14 +21,14 @@
 
 
 <div id="yogurt-groups-container" class="outer">
-    <h2 class="head">
+    <h4 class="head">
         <{$lang_groupstitle}>
-    </h2>
+    </h4>
 
     <{if $nb_groups_all<=0}>
-    <h2 id="yogurt-groups-nogroups">
+    <h4 id="yogurt-groups-nogroups">
         <{$lang_nogroupsyet}>
-    </h2>
+    </h4>
     <{/if}>
 
     <{section name=j loop=$groups}>

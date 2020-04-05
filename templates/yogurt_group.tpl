@@ -2,7 +2,7 @@
 
 <div id="yogurt-group-container" class='outer'>
 
-    <h2 class="head"><{$group_title}></h2>
+    <h4 class="head"><{$group_title}></h4>
 
     <p id="yogurt-group-img" class=odd>
         <img src="<{$xoops_upload_url}>/yogurt/groups/<{$group_img}>">
@@ -26,13 +26,13 @@
 
     <{if $allow_friends }>
         <div id="yogurt-group-edit-members" class="outer odd">
-            <h2 class="head"><{$lang_membersofgroup}></h2>
+            <h4 class="head"><{$lang_membersofgroup}></h4>
             <{section name=i loop=$group_members}>
                 <div class="yogurt-group-edit-member <{cycle values="odd,even"}>">
-                    <h2 class="head">
+                    <h4 class="head">
                         <a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$group_members[i].uid}>" alt="<{$group_members[i].uname}>" title="<{$group_members[i].uname}>"><{$group_members[i].uname}></a>
                         <{if $group_owneruid==$group_members[i].uid}><img src="assets/images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>"><{/if}>
-                    </h2>
+                    </h4>
                     <p>
                         <a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$group_members[i].uid}>" alt="<{$group_members[i].uname}>" title="<{$group_members[i].uname}>">
                             <{if $group_members[i].avatar=="avatars/blank.gif"}><img src="assets/images/noavatar.gif"><{else}> <img src="<{$xoops_upload_url}>/<{$group_members[i].avatar}>"><{/if}></a>

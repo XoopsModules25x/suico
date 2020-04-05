@@ -1,9 +1,9 @@
 <{include file="db:yogurt_navbar.tpl"}>
 <{if $isOwner }>
 <div id="yogurt-audio-form" class="outer">
-    <h2 id="yogurt-audio-form-title" class="head">
+    <h4 id="yogurt-audio-form-title" class="head">
         <{$lang_addaudios}>
-    </h2>
+    </h4>
     <form name="form_audios" id="form_audios" action="submitaudio.php" method="post" onsubmit="return xoopsFormValidate_form_audios();" enctype="multipart/form-data">
         <{$token}>
         <p class="even">
@@ -34,9 +34,9 @@
 
 
 <div id="yogurt-audio-allaudiocontainer" class="outer">
-    <h2 id="yogurt-audio-allaudiotitle" class="head">
+    <h4 id="yogurt-audio-allaudiotitle" class="head">
         <{$player_from_list}>
-    </h2>
+    </h4>
 
     <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="240" height="20" id="dewplayer" align="middle">
         <param name="wmode" value="transparent">
@@ -51,15 +51,15 @@
 </div>
 
 <div id="yogurt-audio-container" class="outer">
-    <h2 id="yogurt-audio-title" class="head">
+    <h4 id="yogurt-audio-title" class="head">
         <a href="<{$xoops_url}>/userinfo.php?uid=<{$owner_uid}>">
             <{$lang_audios}>
         </a>
-    </h2>
+    </h4>
     <{if $nb_audio<=0}>
-        <h2>
+        <h4>
             <{$lang_noaudioyet}>
-        </h2>
+        </h4>
     <{/if}>
 
 

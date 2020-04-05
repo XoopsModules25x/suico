@@ -2,7 +2,7 @@
 
 <{if $isanonym!=1 && $isOwner==1}>
     <form action="submit_configs.php" method="POST" id="form_configs" name="form_configs" class="outer">
-        <h2><{$lang_whocan}></h2>
+        <h4><{$lang_whocan}></h4>
         <{if $allow_pictures!=-1}>
             <fieldset class="myconfigs-fieldset" name="pictures" id="pictures">
                 <legend class="myconfigs-legend" for="pictures"><{$lang_configpictures}></legend>

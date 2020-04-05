@@ -1,6 +1,6 @@
 <{include file="db:yogurt_navbar.tpl"}>
 <div id="yogurt-friends-container" class="outer">
-    <h2 class="head"><{$lang_friendstitle}></h2>
+    <h4 class="head"><{$lang_friendstitle}></h4>
     <{if $lang_nofriendsyet==""}>
     <{section name=i loop=$friends}>
         <div class="yogurt-friend <{cycle values="odd,even"}>">
@@ -21,7 +21,7 @@
         </div>
     <{/section}>
     <{else}>
-    <h2 id="yogurt-friends-nofriends"><{$lang_nofriendsyet}></h2>
+    <h4 id="yogurt-friends-nofriends"><{$lang_nofriendsyet}></h4>
     <{ /if}>
 </div>
 <div style="clear:both"></div>

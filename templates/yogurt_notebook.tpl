@@ -23,7 +23,7 @@
 <{ /if}>
 
 <div id="yogurt-Notes-container" class="outer">
-    <h2 class="head"><{$section_name}></h2>
+    <h4 class="head"><{$section_name}></h4>
     <{if $lang_noNotesyet=="" }>
         <{section name=i loop=$notes}>
             <div class="yogurt-Note-details <{cycle values="odd,even"}>">
@@ -71,7 +71,7 @@
             </div>
         <{/section}>
     <{else}>
-        <h2><{$lang_noNotesyet}></h2>
+        <h4><{$lang_noNotesyet}></h4>
     <{/if}>
 
 

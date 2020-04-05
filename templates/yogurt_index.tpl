@@ -60,9 +60,9 @@
 <div class="yogurt-profile-group1">
     <{if $allow_pictures || $allow_videos }>
         <div id="yogurt-profile-visual" class="outer">
-            <h2 class="yogurt-profile-title head">
+            <h4 class="yogurt-profile-title head">
                 <{$owner_uname}>
-            </h2>
+            </h4>
             <{if $allow_pictures }>
                 <div id="yogurt-profile-avatar">
                     <{if $avatar_url!="" && $avatar_url!="avatars/blank.gif" }>
@@ -89,7 +89,7 @@
     <{if ($isOwner==1) }>
 	     <{if $visitors}>
         <div id="yogurt-album-visitors" class="outer">
-            <h2 class="head"><{$lang_visitors}></h2>
+            <h4 class="head"><{$lang_visitors}></h4>
             <p>
                 <{foreach from=$visitors key=k item=v}>
                     <a href=index.php?uid=<{$k}>> <{$v}> </a>
@@ -104,7 +104,7 @@
 
     <{if $allow_profile_general==1}>
         <div id="yogurt-profile-details" class="outer">
-            <h2 class="yogurt-profile-title head"><{$lang_detailsinfo}> <{if $isOwner==1 }><a href="edituser.php" title="<{$lang_editprofile}>"><img src="<{xoModuleIcons16 edit.png}>"></a><{/if}></h2>
+            <h4 class="yogurt-profile-title head"><{$lang_detailsinfo}> <{if $isOwner==1 }><a href="edituser.php" title="<{$lang_editprofile}>"><img src="<{xoModuleIcons16 edit.png}>"></a><{/if}></h4>
             <p class="odd"><img src="assets/images/username.gif"><span class="yogurt-profileinfo-label"><{$lang_uname}>:</span><span class="yogurt-profileinfo-value"><{$user_uname}></span></p>
             <{if $user_realname}>
             <p class="even"><img src="assets/images/username.gif"><span class="yogurt-profileinfo-label"><{$lang_realname}>:</span><span class="yogurt-profileinfo-value"><{$user_realname}></span></p>
@@ -129,7 +129,7 @@
         <div id="yogurt-profile-details" class="outer">
             <{if $user_email}>
 			 <{if $user_viewemail!='0'}>
-			<h2 class="yogurt-profile-title head"><{$lang_contactinfo}> <{if $isOwner==1 }><a href="edituser.php" title="<{$lang_editprofile}>"><img src="<{xoModuleIcons16 edit.png}>"></a><{/if}></h2>
+			<h4 class="yogurt-profile-title head"><{$lang_contactinfo}> <{if $isOwner==1 }><a href="edituser.php" title="<{$lang_editprofile}>"><img src="<{xoModuleIcons16 edit.png}>"></a><{/if}></h4>
              <{/if}>
 			<{/if}>
 			
@@ -164,7 +164,7 @@
 
     <{if $allow_profile_stats}>
         <div id="yogurt-profile-statistics" class="outer">
-            <h2 class="yogurt-profiletitle head"><{$lang_statistics}></h2>
+            <h4 class="yogurt-profiletitle head"><{$lang_statistics}></h4>
             <p class="odd"><img src="assets/images/birthday.gif"> <span class="yogurt-profileinfo-label"><{$lang_membersince}>:</span><span class="yogurt-profileinfo-value"><{$user_joindate}></span></p>
             <p class="even"><img src="assets/images/rank.gif"> <span class="yogurt-profileinfo-label"><{$lang_rank}>:</span><span class="yogurt-profileinfo-value"><{$user_rankimage}>  <{$user_ranktitle}></span></p>
             <p class="odd"><img src="assets/images/comments.gif"> <span class="yogurt-profileinfo-label"><{$lang_posts}>:</span><span class="yogurt-profileinfo-value"><{$user_posts}></span></p>
@@ -178,7 +178,7 @@
 
     <{if $modules!=''}>
     <div id="yogurt-profile-search-results" class="outer">
-        <h2 class="yogurt-profiletitle head"><{$lang_usercontributions}></h2>
+        <h4 class="yogurt-profiletitle head"><{$lang_usercontributions}></h4>
         <!-- start module search results loop -->
         <{foreach item=module from=$modules name="search_results"}>
             <div class="yogurt-profile-search-module" id="yogurt-profile-search-module-<{$smarty.foreach.search_results.iteration}>">
@@ -220,7 +220,7 @@
 <div class="yogurt-profile-group2">
 
     <div id="yogurt-profile-friends" class="outer">
-        <h2 id="titulo-friends" class="head"><{$lang_videos}> (<{$nb_videos}>)</h2>
+        <h4 id="titulo-friends" class="head"><{$lang_videos}> (<{$nb_videos}>)</h4>
         <{if $allow_videos==1 }>
             <div id="yogurt-profile-group">
                 <{if $mainvideocode!="" }>
@@ -250,7 +250,7 @@
 
     <{if $allow_friends==1 }>
         <div id="yogurt-profile-friends" class="outer">
-            <h2 id="titulo-friends" class="head"><{$lang_friendstitle}> (<{$nb_friends}>)</h2>
+            <h4 id="titulo-friends" class="head"><{$lang_friendstitle}> (<{$nb_friends}>)</h4>
             <{if $nb_friends==0}><p id="nofriends"><{$lang_nofriendsyet}></p><{/if}>
             <{section name=i loop=$friends}>
                 <div class="yogurt-profile-friend <{cycle values="odd,even"}>">
@@ -267,7 +267,7 @@
     <{/if}>
     <{if $allow_groups==1}>
         <div id="yogurt-profile-groups" class="outer">
-            <h2 class="yogurt-profiletitle head"><{$lang_groups}> (<{$nb_groups}>)</h2>
+            <h4 class="yogurt-profiletitle head"><{$lang_groups}> (<{$nb_groups}>)</h4>
             <{if $nb_groups==0}><p id="nogroups"><{$lang_nogroupsyet}></p><{/if}>
             <{section name=i loop=$groups}>
                 <div class="yogurt-profile-group <{cycle values="odd,even"}>">
