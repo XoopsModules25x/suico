@@ -1,13 +1,13 @@
 <{include file="db:yogurt_navbar.tpl"}>
 <{if $isOwner }>
 <div id="yogurt-video-form" class="outer">
-    <h2 id="yogurt-video-form-title" class="head">
-        <{$lang_addvideos}>
-    </h2>
+    <h4 id="yogurt-video-form-title" class="head">
+        <{$lang_addvideos}> 
+    </h4>
     <form name="form_videos" id="form_videos" action="video_submited.php" method="post" onsubmit="return xoopsFormValidate_form_videos();" enctype="multipart/form-data">
         <{$token}>
         <p class="even">
-            <{$lang_videohelp}> <{$xoops_sitename}>.
+            <{$lang_videohelp}> <{$xoops_sitename}>.<br><{$lang_selectmainvideo}>
         </p>
         <p class="odd">
             <label for="codigo">
@@ -44,18 +44,18 @@
     </script>
     <!-- End Form Vaidation JavaScript //-->
 </div>
-<{ /if}>
+<{/if}>
 
 <div id="yogurt-videos-container" class="outer">
-    <h2 id="yogurt-videos-title" class="head">
+    <h4 id="yogurt-videos-title" class="head">
         <a href="<{$xoops_url}>/userinfo.php?uid=<{$owner_uid}>">
             <{$lang_videos}>
         </a>
-    </h2>
+    </h4>
     <{if $nb_videos<=0}>
-        <h2>
-            <{$lang_novideoyet}>
-        </h2>
+        <h4>
+            <{$lang_novideoyet}> 
+        </h4>
     <{/if}>
 
 
@@ -88,7 +88,7 @@
                     <{$token}>
                     <input name="submit" type="image" alt="<{$lang_makemain}>" title="<{$lang_makemain}>" src="assets/images/mainvideo.gif">
                 </form>
-                <{ /if}>
+                <{/if}>
             </div>
         </div>
     <{/section}>

@@ -1,0 +1,24 @@
+-
+    rel_id: '8'
+    rel_group_id: '10'
+    rel_user_uid: '1'
+-
+    rel_id: '7'
+    rel_group_id: '9'
+    rel_user_uid: '1'
+-
+    rel_id: '9'
+    rel_group_id: '11'
+    rel_user_uid: '1'
+-
+    rel_id: '10'
+    rel_group_id: '12'
+    rel_user_uid: '1'
+-
+    rel_id: '11'
+    rel_group_id: '10'
+    rel_user_uid: '2'
+-
+    rel_id: '12'
+    rel_group_id: '9'
+    rel_user_uid: '2'

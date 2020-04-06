@@ -2,7 +2,7 @@ TODO: Planned features in the future
 =====================================
 
 Bugs that are still open:
-- search a tribe is not working properly only number of search tribes is displaying
+- search a group is not working properly only number of search groups is displaying
 - outdated ym,icq, aim,msn in yogurt
 - friends appears twice in friend list & my friends blocks
 

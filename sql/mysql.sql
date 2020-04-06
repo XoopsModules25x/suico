@@ -51,22 +51,22 @@ CREATE TABLE `yogurt_friendpetition` (
   ENGINE = MyISAM;
 
 
-CREATE TABLE `yogurt_reltribeuser` (
+CREATE TABLE `yogurt_relgroupuser` (
   `rel_id`       INT(11) NOT NULL AUTO_INCREMENT,
-  `rel_tribe_id` INT(11) NOT NULL,
+  `rel_group_id` INT(11) NOT NULL,
   `rel_user_uid` INT(11) NOT NULL,
   PRIMARY KEY (`rel_id`)
 )
   ENGINE = MyISAM;
 
 
-CREATE TABLE `yogurt_tribes` (
-  `tribe_id`    INT(11)      NOT NULL AUTO_INCREMENT,
+CREATE TABLE `yogurt_groups` (
+  `group_id`    INT(11)      NOT NULL AUTO_INCREMENT,
   `owner_uid`   INT(11)      NOT NULL,
-  `tribe_title` VARCHAR(255) NOT NULL,
-  `tribe_desc`  TINYTEXT     NOT NULL,
-  `tribe_img`   VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`tribe_id`)
+  `group_title` VARCHAR(255) NOT NULL,
+  `group_desc`  TINYTEXT     NOT NULL,
+  `group_img`   VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`group_id`)
 )
   ENGINE = MyISAM;
 
@@ -87,7 +87,7 @@ CREATE TABLE `yogurt_configs` (
   `pictures`        TINYINT(1)   NOT NULL,
   `audio`           TINYINT(1)   NOT NULL,
   `videos`          TINYINT(1)   NOT NULL,
-  `tribes`          TINYINT(1)   NOT NULL,
+  `groups`          TINYINT(1)   NOT NULL,
   `notes`           TINYINT(1)   NOT NULL,
   `friends`         TINYINT(1)   NOT NULL,
   `profile_contact` TINYINT(1)   NOT NULL,

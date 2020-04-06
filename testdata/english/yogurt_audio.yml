@@ -1,1 +1,7 @@
-{  }
+- audio_id: '1'
+  title: 'MP3 test file'
+  author: 'https://file-examples.com/'
+  url: 'https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3'
+  uid_owner: '1'
+  data_creation: '2020-04-03'
+  data_update: '2020-04-03 10:00:00'

@@ -10,14 +10,14 @@ if (!defined('XOOPS_ROOT_PATH')) {
 }
 
 // -------------------------------------------------------------------------
-// ------------------Tribes user handler class -------------------
+// ------------------Groups user handler class -------------------
 // -------------------------------------------------------------------------
 
 /**
- * yogurt_tribeshandler class.
- * This class provides simple mecanisme for Tribes object
+ * yogurt_groupshandler class.
+ * This class provides simple mecanisme for Groups object
  */
-class TribesHandler extends \XoopsPersistableObjectHandler
+class GroupsHandler extends \XoopsPersistableObjectHandler
 {
     /**
      * @var Helper
@@ -40,14 +40,14 @@ class TribesHandler extends \XoopsPersistableObjectHandler
             $this->helper = $helper;
         }
         $isAdmin = $this->helper->isUserAdmin();
-        parent::__construct($db, 'yogurt_tribes', Tribes::class, 'tribe_id', 'tribe_title');
+        parent::__construct($db, 'yogurt_groups', Groups::class, 'group_id', 'group_title');
     }
 
     /**
-     * create a new Tribes
+     * create a new Groups
      *
      * @param bool $isNew flag the new objects as "new"?
-     * @return \XoopsObject Tribes
+     * @return \XoopsObject Groups
      */
     public function create($isNew = true)
     {
@@ -65,64 +65,64 @@ class TribesHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * retrieve a Tribes
+     * retrieve a Groups
      *
-     * @param int $id of the Tribes
-     * @return mixed reference to the {@link Tribes} object, FALSE if failed
+     * @param int $id of the Groups
+     * @return mixed reference to the {@link Groups} object, FALSE if failed
      */
     public function get($id = null, $fields = null)
     {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_tribes') . ' WHERE tribe_id=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_groups') . ' WHERE group_id=' . $id;
         if (!$result = $this->db->query($sql)) {
             return false;
         }
         $numrows = $this->db->getRowsNum($result);
         if (1 == $numrows) {
-            $yogurt_tribes = new Tribes();
-            $yogurt_tribes->assignVars($this->db->fetchArray($result));
+            $yogurt_groups = new Groups();
+            $yogurt_groups->assignVars($this->db->fetchArray($result));
 
-            return $yogurt_tribes;
+            return $yogurt_groups;
         }
 
         return false;
     }
 
     /**
-     * insert a new Tribes in the database
+     * insert a new Groups in the database
      *
-     * @param \XoopsObject $yogurt_tribes reference to the {@link Tribes}
+     * @param \XoopsObject $yogurt_groups reference to the {@link Groups}
      *                                    object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(\XoopsObject $yogurt_tribes, $force = false)
+    public function insert(\XoopsObject $yogurt_groups, $force = false)
     {
         global $xoopsConfig;
-        if (!$yogurt_tribes instanceof Tribes) {
+        if (!$yogurt_groups instanceof Groups) {
             return false;
         }
-        if (!$yogurt_tribes->isDirty()) {
+        if (!$yogurt_groups->isDirty()) {
             return true;
         }
-        if (!$yogurt_tribes->cleanVars()) {
+        if (!$yogurt_groups->cleanVars()) {
             return false;
         }
-        foreach ($yogurt_tribes->cleanVars as $k => $v) {
+        foreach ($yogurt_groups->cleanVars as $k => $v) {
             ${$k} = $v;
         }
         $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
-        if ($yogurt_tribes->isNew()) {
-            // ajout/modification d'un Tribes
-            $yogurt_tribes = new Tribes();
-            $format        = 'INSERT INTO %s (tribe_id, owner_uid, tribe_title, tribe_desc, tribe_img)';
+        if ($yogurt_groups->isNew()) {
+            // ajout/modification d'un Groups
+            $yogurt_groups = new Groups();
+            $format        = 'INSERT INTO %s (group_id, owner_uid, group_title, group_desc, group_img)';
             $format        .= 'VALUES (%u, %u, %s, %s, %s)';
-            $sql           = sprintf($format, $this->db->prefix('yogurt_tribes'), $tribe_id, $owner_uid, $this->db->quoteString($tribe_title), $this->db->quoteString($tribe_desc), $this->db->quoteString($tribe_img));
+            $sql           = sprintf($format, $this->db->prefix('yogurt_groups'), $group_id, $owner_uid, $this->db->quoteString($group_title), $this->db->quoteString($group_desc), $this->db->quoteString($group_img));
             $force         = true;
         } else {
             $format = 'UPDATE %s SET ';
-            $format .= 'tribe_id=%u, owner_uid=%u, tribe_title=%s, tribe_desc=%s, tribe_img=%s';
-            $format .= ' WHERE tribe_id = %u';
-            $sql    = sprintf($format, $this->db->prefix('yogurt_tribes'), $tribe_id, $owner_uid, $this->db->quoteString($tribe_title), $this->db->quoteString($tribe_desc), $this->db->quoteString($tribe_img), $tribe_id);
+            $format .= 'group_id=%u, owner_uid=%u, group_title=%s, group_desc=%s, group_img=%s';
+            $format .= ' WHERE group_id = %u';
+            $sql    = sprintf($format, $this->db->prefix('yogurt_groups'), $group_id, $owner_uid, $this->db->quoteString($group_title), $this->db->quoteString($group_desc), $this->db->quoteString($group_img), $group_id);
         }
         if ($force) {
             $result = $this->db->queryF($sql);
@@ -132,27 +132,27 @@ class TribesHandler extends \XoopsPersistableObjectHandler
         if (!$result) {
             return false;
         }
-        if (empty($tribe_id)) {
-            $tribe_id = $this->db->getInsertId();
+        if (empty($group_id)) {
+            $group_id = $this->db->getInsertId();
         }
-        $yogurt_tribes->assignVar('tribe_id', $tribe_id);
+        $yogurt_groups->assignVar('group_id', $group_id);
 
         return true;
     }
 
     /**
-     * delete a Tribes from the database
+     * delete a Groups from the database
      *
-     * @param \XoopsObject $yogurt_tribes reference to the Tribes to delete
+     * @param \XoopsObject $yogurt_groups reference to the Groups to delete
      * @param bool         $force
      * @return bool FALSE if failed.
      */
-    public function delete(\XoopsObject $yogurt_tribes, $force = false)
+    public function delete(\XoopsObject $yogurt_groups, $force = false)
     {
-        if (!$yogurt_tribes instanceof Tribes) {
+        if (!$yogurt_groups instanceof Groups) {
             return false;
         }
-        $sql = sprintf('DELETE FROM %s WHERE tribe_id = %u', $this->db->prefix('yogurt_tribes'), $yogurt_tribes->getVar('tribe_id'));
+        $sql = sprintf('DELETE FROM %s WHERE group_id = %u', $this->db->prefix('yogurt_groups'), $yogurt_groups->getVar('group_id'));
         if ($force) {
             $result = $this->db->queryF($sql);
         } else {
@@ -166,17 +166,17 @@ class TribesHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * retrieve yogurt_tribess from the database
+     * retrieve yogurt_groupss from the database
      *
      * @param null|\CriteriaElement|\CriteriaCompo $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key use the UID as key for the array?
-     * @return array array of {@link Tribes} objects
+     * @return array array of {@link Groups} objects
      */
     public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
     {
         $ret   = [];
         $limit = $start = 0;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_tribes');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_groups');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
@@ -190,31 +190,31 @@ class TribesHandler extends \XoopsPersistableObjectHandler
             return $ret;
         }
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $yogurt_tribes = new Tribes();
-            $yogurt_tribes->assignVars($myrow);
+            $yogurt_groups = new Groups();
+            $yogurt_groups->assignVars($myrow);
             if (!$id_as_key) {
-                $ret[] = &$yogurt_tribes;
+                $ret[] = &$yogurt_groups;
             } else {
-                $ret[$myrow['tribe_id']] = &$yogurt_tribes;
+                $ret[$myrow['group_id']] = &$yogurt_groups;
             }
-            unset($yogurt_tribes);
+            unset($yogurt_groups);
         }
 
         return $ret;
     }
 
     /**
-     * retrieve yogurt_tribess from the database
+     * retrieve yogurt_groupss from the database
      *
      * @param null|\CriteriaElement|\CriteriaCompo $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key use the UID as key for the array?
-     * @return array array of {@link Tribes} objects
+     * @return array array of {@link Groups} objects
      */
-    public function getTribes($criteria = null, $id_as_key = false)
+    public function getGroups($criteria = null, $id_as_key = false)
     {
         $ret   = [];
         $limit = $start = 0;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_tribes');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_groups');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
@@ -230,10 +230,10 @@ class TribesHandler extends \XoopsPersistableObjectHandler
 
         $i = 0;
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $ret[$i]['id']    = $myrow['tribe_id'];
-            $ret[$i]['title'] = $myrow['tribe_title'];
-            $ret[$i]['img']   = $myrow['tribe_img'];
-            $ret[$i]['desc']  = $myrow['tribe_desc'];
+            $ret[$i]['id']    = $myrow['group_id'];
+            $ret[$i]['title'] = $myrow['group_title'];
+            $ret[$i]['img']   = $myrow['group_img'];
+            $ret[$i]['desc']  = $myrow['group_desc'];
             $ret[$i]['uid']   = $myrow['owner_uid'];
             $i++;
         }
@@ -242,14 +242,14 @@ class TribesHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * count yogurt_tribess matching a condition
+     * count yogurt_groupss matching a condition
      *
      * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link \CriteriaElement} to match
-     * @return int count of yogurt_tribess
+     * @return int count of yogurt_groupss
      */
     public function getCount(\CriteriaElement $criteria = null)
     {
-        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_tribes');
+        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_groups');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
@@ -263,14 +263,14 @@ class TribesHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * delete yogurt_tribess matching a set of conditions
+     * delete yogurt_groupss matching a set of conditions
      *
      * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link \CriteriaElement}
      * @return bool FALSE if deletion failed
      */
     public function deleteAll(\CriteriaElement $criteria = null, $force = true, $asObject = false)
     {
-        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_tribes');
+        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_groups');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
@@ -288,14 +288,14 @@ class TribesHandler extends \XoopsPersistableObjectHandler
      */
     public function renderFormSubmit($maxbytes, $xoopsTpl)
     {
-        $form = new \XoopsThemeForm(_MD_YOGURT_SUBMIT_TRIBE, 'form_tribe', 'submit_tribe.php', 'post', true);
+        $form = new \XoopsThemeForm(_MD_YOGURT_SUBMIT_GROUP, 'form_group', 'submit_group.php', 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
 
-        $field_url     = new \XoopsFormFile(_MD_YOGURT_TRIBE_IMAGE, 'tribe_img', $maxbytes);
-        $field_title   = new \XoopsFormText(_MD_YOGURT_TRIBE_TITLE, 'tribe_title', 35, 55);
-        $field_desc    = new \XoopsFormText(_MD_YOGURT_TRIBE_DESC, 'tribe_desc', 35, 55);
+        $field_url     = new \XoopsFormFile(_MD_YOGURT_GROUP_IMAGE, 'group_img', $maxbytes);
+        $field_title   = new \XoopsFormText(_MD_YOGURT_GROUP_TITLE, 'group_title', 35, 55);
+        $field_desc    = new \XoopsFormText(_MD_YOGURT_GROUP_DESC, 'group_desc', 35, 55);
         $field_marker  = new \XoopsFormHidden('marker', '1');
-        $button_send   = new \XoopsFormButton('', 'submit_button', _MD_YOGURT_UPLOADTRIBE, 'submit');
+        $button_send   = new \XoopsFormButton('', 'submit_button', _MD_YOGURT_UPLOADGROUP, 'submit');
         $field_warning = new \XoopsFormLabel(sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxbytes / 1024));
 
         $form->addElement($field_warning);
@@ -311,32 +311,32 @@ class TribesHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * @param $tribe
+     * @param $group
      * @param $maxbytes
      * @return bool
      */
-    public function renderFormEdit($tribe, $maxbytes)
+    public function renderFormEdit($group, $maxbytes)
     {
-        $form = new \XoopsThemeForm(_MD_YOGURT_EDIT_TRIBE, 'form_edittribe', 'edittribe.php', 'post', true);
+        $form = new \XoopsThemeForm(_MD_YOGURT_EDIT_GROUP, 'form_editgroup', 'editgroup.php', 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
-        $field_tribeid = new \XoopsFormHidden('tribe_id', $tribe->getVar('tribe_id'));
-        $field_url     = new \XoopsFormFile(_MD_YOGURT_TRIBE_IMAGE, 'img', $maxbytes);
+        $field_groupid = new \XoopsFormHidden('group_id', $group->getVar('group_id'));
+        $field_url     = new \XoopsFormFile(_MD_YOGURT_GROUP_IMAGE, 'img', $maxbytes);
         $field_url->setExtra('style="visibility:hidden;"');
-        $field_title   = new \XoopsFormText(_MD_YOGURT_TRIBE_TITLE, 'title', 35, 55, $tribe->getVar('tribe_title'));
-        $field_desc    = new \XoopsFormTextArea(_MD_YOGURT_TRIBE_DESC, 'desc', $tribe->getVar('tribe_desc'));
+        $field_title   = new \XoopsFormText(_MD_YOGURT_GROUP_TITLE, 'title', 35, 55, $group->getVar('group_title'));
+        $field_desc    = new \XoopsFormTextArea(_MD_YOGURT_GROUP_DESC, 'desc', $group->getVar('group_desc'));
         $field_marker  = new \XoopsFormHidden('marker', '1');
-        $button_send   = new \XoopsFormButton('', 'submit_button', _MD_YOGURT_UPLOADTRIBE, 'submit');
+        $button_send   = new \XoopsFormButton('', 'submit_button', _MD_YOGURT_UPLOADGROUP, 'submit');
         $field_warning = new \XoopsFormLabel(sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxbytes / 1024));
 
-        $field_oldpicture = new \XoopsFormLabel(_MD_YOGURT_TRIBE_IMAGE, '<img src="' . XOOPS_UPLOAD_URL . '/' . $tribe->getVar('tribe_img') . '">');
+        $field_oldpicture = new \XoopsFormLabel(_MD_YOGURT_GROUP_IMAGE, '<img src="' . XOOPS_UPLOAD_URL . '/' . $group->getVar('group_img') . '">');
 
-        $field_maintainimage = new \XoopsFormLabel(_MD_YOGURT_MAINTAINOLDIMAGE, "<input type='checkbox' value='1' id='flag_oldimg' name='flag_oldimg' onclick=\"tribeImgSwitch(img)\"  checked>");
+        $field_maintainimage = new \XoopsFormLabel(_MD_YOGURT_MAINTAINOLDIMAGE, "<input type='checkbox' value='1' id='flag_oldimg' name='flag_oldimg' onclick=\"groupImgSwitch(img)\"  checked>");
 
         $form->addElement($field_oldpicture);
         $form->addElement($field_maintainimage);
         $form->addElement($field_warning);
         $form->addElement($field_url);
-        $form->addElement($field_tribeid);
+        $form->addElement($field_groupid);
         $form->addElement($field_title);
         $form->addElement($field_desc);
         $form->addElement($field_marker);
@@ -346,7 +346,7 @@ class TribesHandler extends \XoopsPersistableObjectHandler
         <!-- Start Form Validation JavaScript //-->
 <script type='text/javascript'>
 <!--//
-function tribeImgSwitch(img) {
+function groupImgSwitch(img) {
 
 var elestyle = xoopsGetElementById(img).style;
 
@@ -371,39 +371,39 @@ var elestyle = xoopsGetElementById(img).style;
     }
 
     /**
-     * @param        $tribe_title
-     * @param        $tribe_desc
-     * @param        $tribe_img
+     * @param        $group_title
+     * @param        $group_desc
+     * @param        $group_img
      * @param        $path_upload
      * @param        $maxfilebytes
      * @param        $maxfilewidth
      * @param        $maxfileheight
      * @param int    $change_img
-     * @param string $tribe
+     * @param string $group
      * @return bool
      */
-    public function receiveTribe($tribe_title, $tribe_desc, $tribe_img, $path_upload, $maxfilebytes, $maxfilewidth, $maxfileheight, $change_img = 1, $tribe = '')
+    public function receiveGroup($group_title, $group_desc, $group_img, $path_upload, $maxfilebytes, $maxfilewidth, $maxfileheight, $change_img = 1, $group = '')
     {
         global $xoopsUser, $xoopsDB, $_POST, $_FILES;
         //search logged user id
         $uid = $xoopsUser->getVar('uid');
-        if (!is_a($tribe, Tribes::class)) {
-            $tribe = $this->create();
+        if (!is_a($group, Groups::class)) {
+            $group = $this->create();
         } else {
-            $tribe->unsetNew();
+            $group->unsetNew();
         }
         if (1 == $change_img) {
             // mimetypes and settings put this in admin part later
             $allowed_mimetypes = Helper::getInstance()->getConfig('mimetypes');
             $maxfilesize       = $maxfilebytes;
 
-            $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/tribes/';
+            $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/groups/';
             // create the object to upload
             $uploader = new \XoopsMediaUploader($uploadDir, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight);
             // fetch the media
             if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
                 //lets create a name for it
-                $uploader->setPrefix('tribe_' . $uid . '_');
+                $uploader->setPrefix('group_' . $uid . '_');
                 //now let s upload the file
 
                 if (!$uploader->upload()) {
@@ -415,17 +415,17 @@ var elestyle = xoopsGetElementById(img).style;
                 }
                 // now let s create a new object picture and set its variables
                 $savedFilename = $uploader->getSavedFileName();
-                $tribe->setVar('tribe_img', $savedFilename);
+                $group->setVar('group_img', $savedFilename);
                 $imageMimetype = $uploader->getMediaType();
-                $tribe->setVar('tribe_img', $savedFilename);
-                $maxWidth_tribelogo     = Helper::getInstance()->getConfig('tribeslogo_width');
-                $maxHeight_tribelogo    = Helper::getInstance()->getConfig('tribeslogo_height');
+                $group->setVar('group_img', $savedFilename);
+                $maxWidth_grouplogo     = Helper::getInstance()->getConfig('groupslogo_width');
+                $maxHeight_grouplogo    = Helper::getInstance()->getConfig('groupslogo_height');
                 $resizer                = new Common\Resizer();
                 $resizer->sourceFile    = $uploadDir . $savedFilename;
                 $resizer->endFile       = $uploadDir . $savedFilename;
                 $resizer->imageMimetype = $imageMimetype;
-                $resizer->maxWidth      = $maxWidth_tribelogo;
-                $resizer->maxHeight     = $maxHeight_tribelogo;
+                $resizer->maxWidth      = $maxWidth_grouplogo;
+                $resizer->maxHeight     = $maxHeight_grouplogo;
                 $result                 = $resizer->resizeImage();
             } else {
                 echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
@@ -434,11 +434,11 @@ var elestyle = xoopsGetElementById(img).style;
             }
         }
 
-        $tribe->setVar('tribe_title', $tribe_title);
-        $tribe->setVar('tribe_desc', $tribe_desc);
-        $tribe->setVar('owner_uid', $uid);
+        $group->setVar('group_title', $group_title);
+        $group->setVar('group_desc', $group_desc);
+        $group->setVar('owner_uid', $uid);
 
-        $this->insert($tribe);
+        $this->insert($group);
 
         return true;
     }

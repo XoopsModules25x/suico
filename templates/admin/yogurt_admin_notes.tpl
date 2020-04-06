@@ -22,7 +22,7 @@
                     <th class="left"><{$selectornote_text}></th>
                     <th class="left"><{$selectornote_from}></th>
                     <th class="left"><{$selectornote_to}></th>
-                    <th class="left"><{$selectorprivate}></th>
+                    <th class="center"><{$selectorprivate}></th>
                     <th class="left"><{$selectordate}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
@@ -35,7 +35,7 @@
                         <td class='left'><{$notesArray.note_text}></td>
                         <td class='left'><{$notesArray.note_from}></td>
                         <td class='left'><{$notesArray.note_to}></td>
-                        <td class='left'><{$notesArray.private}></td>
+                        <td class='center'><{$notesArray.private}></td>
                         <td class='left'><{$notesArray.date}></td>
 
 
@@ -54,7 +54,7 @@
                     <th class="left"><{$selectornote_text}></th>
                     <th class="left"><{$selectornote_from}></th>
                     <th class="left"><{$selectornote_to}></th>
-                    <th class="left"><{$selectorprivate}></th>
+                    <th class="center"><{$selectorprivate}></th>
                     <th class="left"><{$selectordate}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>

@@ -22,8 +22,8 @@ $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 // ------------------- Informations ------------------- //
 $modversion = [
     'version'             => 3.5,
-    'module_status'       => 'Alpha 2',
-    'release_date'        => '2020/04/04',
+    'module_status'       => 'Alpha 4',
+    'release_date'        => '2020/04/05',
     'name'                => _MI_YOGURT_MODULE_NAME,
     'description'         => _MI_YOGURT_MODULEDESC,
     'official'            => 0,
@@ -99,8 +99,8 @@ $modversion = [
         $moduleDirName . '_' . 'images',
         $moduleDirName . '_' . 'visitors',
         $moduleDirName . '_' . 'video',
-        $moduleDirName . '_' . 'reltribeuser',
-        $moduleDirName . '_' . 'tribes',
+        $moduleDirName . '_' . 'relgroupuser',
+        $moduleDirName . '_' . 'groups',
         $moduleDirName . '_' . 'notes',
         $moduleDirName . '_' . 'configs',
         $moduleDirName . '_' . 'suspensions',
@@ -257,18 +257,18 @@ $modversion['config'][] = [
 */
 
 $modversion['config'][] = [
-    'name'        => 'tribeslogo_width',
-    'title'       => '_MI_YOGURT_TRIBES_LOGO_WIDTH',
-    'description' => '_MI_YOGURT_TRIBES_LOGO_WIDTH_DESC',
+    'name'        => 'groupslogo_width',
+    'title'       => '_MI_YOGURT_GROUPS_LOGO_WIDTH',
+    'description' => '_MI_YOGURT_GROUPS_LOGO_WIDTH_DESC',
     'default'     => 125,
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
 ];
 
 $modversion['config'][] = [
-    'name'        => 'tribeslogo_height',
-    'title'       => '_MI_YOGURT_TRIBES_LOGO_HEIGHT',
-    'description' => '_MI_YOGURT_TRIBES_LOGO_HEIGHT_DESC',
+    'name'        => 'groupslogo_height',
+    'title'       => '_MI_YOGURT_GROUPS_LOGO_HEIGHT',
+    'description' => '_MI_YOGURT_GROUPS_LOGO_HEIGHT_DESC',
     'default'     => 80,
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
@@ -464,18 +464,18 @@ $modversion['config'][] = [
 ];
 
 $modversion['config'][] = [
-    'name'        => 'enable_tribes',
-    'title'       => '_MI_YOGURT_ENABLETRIBES_TITLE',
-    'description' => '_MI_YOGURT_ENABLETRIBES_DESC',
+    'name'        => 'enable_groups',
+    'title'       => '_MI_YOGURT_ENABLEGROUPS_TITLE',
+    'description' => '_MI_YOGURT_ENABLEGROUPS_DESC',
     'default'     => 1,
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
 ];
 
 $modversion['config'][] = [
-    'name'        => 'tribesperpage',
-    'title'       => '_MI_YOGURT_TRIBESPERPAGE_TITLE',
-    'description' => '_MI_YOGURT_TRIBESPERPAGE_DESC',
+    'name'        => 'groupsperpage',
+    'title'       => '_MI_YOGURT_GROUPSPERPAGE_TITLE',
+    'description' => '_MI_YOGURT_GROUPSPERPAGE_DESC',
     'default'     => 6,
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
@@ -531,12 +531,12 @@ $modversion['templates'] = [
     ['file' => 'yogurt_audio.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATEAUDIODESC],
     ['file' => 'yogurt_video.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATESEUTUBODESC],
     ['file' => 'yogurt_album.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATEALBUMDESC],
-    ['file' => 'yogurt_tribes.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATETRIBESDESC],
+    ['file' => 'yogurt_groups.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATEGROUPSDESC],
     ['file' => 'yogurt_configs.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATECONFIGSDESC],
     ['file' => 'yogurt_footer.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATEFOOTERDESC],
-    ['file' => 'yogurt_edittribe.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATEEDITTRIBE],
-    ['file' => 'yogurt_tribes_results.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATESEARCHRESULTDESC],
-    ['file' => 'yogurt_tribe.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATETRIBEDESC],
+    ['file' => 'yogurt_editgroup.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATEEDITGROUP],
+    ['file' => 'yogurt_groups_results.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATESEARCHRESULTDESC],
+    ['file' => 'yogurt_group.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATEGROUPDESC],
     ['file' => 'yogurt_searchresults.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATESEARCHRESULTSDESC],
     ['file' => 'yogurt_searchform.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATESEARCHFORMDESC],
     ['file' => 'yogurt_notifications.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATENOTIFICATIONS],
@@ -570,17 +570,17 @@ if (is_object($xoopsModule) && $xoopsModule->dirname() == $modversion['dirname']
         $modversion['sub'][7]['name'] = _MI_YOGURT_MYFRIENDS;
         $modversion['sub'][7]['url']  = 'friends.php';
     }
-    if (1 == $moduleConfig['enable_tribes']) {
-        $modversion['sub'][8]['name'] = _MI_YOGURT_MYTRIBES;
-        $modversion['sub'][8]['url']  = 'tribes.php';
+    if (1 == $moduleConfig['enable_groups']) {
+        $modversion['sub'][8]['name'] = _MI_YOGURT_MYGROUPS;
+        $modversion['sub'][8]['url']  = 'groups.php';
     }
 }
 $modversion['sub'][9]['name'] = _MI_YOGURT_MYCONFIGS;
 $modversion['sub'][9]['url']  = 'configs.php';
 
 $modversion['hasComments']          = 1;
-$modversion['comments']['itemName'] = 'tribe_id';
-$modversion['comments']['pageName'] = 'tribe.php';
+$modversion['comments']['itemName'] = 'group_id';
+$modversion['comments']['pageName'] = 'group.php';
 
 // Search
 $modversion['hasSearch']      = 0; //disabled for version 3.0 will come back in a next release

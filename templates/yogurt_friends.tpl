@@ -1,6 +1,43 @@
 <{include file="db:yogurt_navbar.tpl"}>
+
+<{if $petition==1 && $isOwner==1 && $isfriend==0}>
+
+    <!-- if not owner and not friend -->
+    <div id="yogurt-profile-petition" class="confirmMsg">
+        <h4><{$lang_youhavexpetitions}></h4>
+        <img width="30" src="<{$xoops_url}>/uploads/<{$petitioner_avatar}>">
+        <form action="makefriends.php" method="post">
+            <{$lang_askingfriend}>
+            <ul>
+                <li>
+                    <input name="level" type="radio" value="0">
+                    <{$lang_rejected}>
+                </li>
+                <li>
+                    <input name="level" type="radio" value="1">
+                    <{$lang_accepted}>
+                </li>
+
+                <li>
+                    <input name="level" type="radio" value="3">
+                    <{$lang_acquaintance}>
+                </li>
+
+                <li>
+                    <input name="level" type="radio" value="5">
+                    <{$lang_friend}>
+                </li>
+            </ul>
+            <input type="hidden" name="petition_id" id="petition_id" value="<{$petition_id}>">
+            <input type="submit">
+            <{$token}>
+        </form>
+    </div>
+
+<{/if}>
+
 <div id="yogurt-friends-container" class="outer">
-    <h2 class="head"><{$lang_friendstitle}></h2>
+    <h4 class="head"><{$lang_friendstitle}></h4>
     <{if $lang_nofriendsyet==""}>
     <{section name=i loop=$friends}>
         <div class="yogurt-friend <{cycle values="odd,even"}>">
@@ -21,11 +58,11 @@
         </div>
     <{/section}>
     <{else}>
-    <h2 id="yogurt-friends-nofriends"><{$lang_nofriendsyet}></h2>
-    <{ /if}>
+    <h4 id="yogurt-friends-nofriends"><{$lang_nofriendsyet}></h4>
+    <{/if}>
 </div>
 <div style="clear:both"></div>
 <{if $navegacao!='' }>
 <div id="yogurt-navegacao"><{$navegacao}></div>
-<{ /if}>
+<{/if}>
 <{include file="db:yogurt_footer.tpl"}>

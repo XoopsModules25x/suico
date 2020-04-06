@@ -20,10 +20,10 @@
         [b]<{$lang_bold}>[/b] => <b><{$lang_bold}></b> | [i]<{$lang_italic}>[/i] => <i><{$lang_italic}></i> | [u]<{$lang_underline}>[/u] => <u><{$lang_underline}></u>
     </div>
 </div>
-<{ /if}>
+<{/if}>
 
 <div id="yogurt-Notes-container" class="outer">
-    <h2 class="head"><{$section_name}></h2>
+    <h4 class="head"><{$section_name}></h4>
     <{if $lang_noNotesyet=="" }>
         <{section name=i loop=$notes}>
             <div class="yogurt-Note-details <{cycle values="odd,even"}>">
@@ -39,7 +39,7 @@
                     </form>
 
                     </p>
-                    <{ /if}>
+                    <{/if}>
                 </div>
                 <div class="yogurt-Note-details-texts">
                     <p class="yogurt-Note-text"><img src="assets/images/notes.gif" alt="<{$section_name}>" title="<{$section_name}>">
@@ -66,12 +66,12 @@
           <div><a  class="yogurt-Notes-replyNote">
             <{$lang_answerNote}>
           </a></div>
-        <{ /if}>
+        <{/if}>
         -->
             </div>
         <{/section}>
     <{else}>
-        <h2><{$lang_noNotesyet}></h2>
+        <h4><{$lang_noNotesyet}></h4>
     <{/if}>
 
 

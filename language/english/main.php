@@ -35,10 +35,10 @@ define('_MD_YOGURT_VIDEOS', 'Videos');
 define('_MD_YOGURT_NOTEBOOK', 'Notes');
 define('_MD_YOGURT_PHOTOS', 'Photos');
 define('_MD_YOGURT_FRIENDS', 'Friends');
-define('_MD_YOGURT_TRIBES', 'Tribes');
-define('_MD_YOGURT_NOTRIBESYET', 'No Tribes yet');
-define('_MD_YOGURT_MYTRIBES', 'My Tribes');
-//define('_MD_YOGURT_ALLTRIBES', 'All Tribes');
+define('_MD_YOGURT_GROUPS', 'Groups');
+define('_MD_YOGURT_NOGROUPSYET', 'No Groups yet');
+define('_MD_YOGURT_MYGROUPS', 'My Groups');
+//define('_MD_YOGURT_ALLGROUPS', 'All Groups');
 define('_MD_YOGURT_PROFILE', 'Profile');
 define('_MD_YOGURT_HOME', 'Home');
 define('_MD_YOGURT_CONFIGSTITLE', 'Settings');
@@ -86,14 +86,14 @@ define('_MD_YOGURT_AQUAITANCE', 'Acquaintances'); //also present in index.php
 define('_MD_YOGURT_FRIEND', 'Friend'); //also present in index.php
 define('_MD_YOGURT_BESTFRIEND', 'Best Friend'); //also present in index.php
 define('_MD_YOGURT_FAN', 'Fan'); //also present in index.php
-define('_MD_YOGURT_SEXY', 'Sexy'); //also present in index.php
-define('_MD_YOGURT_SEXYNO', 'Nope');
-define('_MD_YOGURT_SEXYYES', 'Yes');
-define('_MD_YOGURT_SEXYALOT', 'Very much!');
-define('_MD_YOGURT_TRUSTY', 'Trusty');
-define('_MD_YOGURT_TRUSTYNO', 'Nope');
-define('_MD_YOGURT_TRUSTYYES', 'Yes');
-define('_MD_YOGURT_TRUSTYALOT', 'Very much');
+define('_MD_YOGURT_FRIENDLY', 'Friendly'); //also present in index.php
+define('_MD_YOGURT_FRIENDLYNO', 'Nope');
+define('_MD_YOGURT_FRIENDLYYES', 'Yes');
+define('_MD_YOGURT_FRIENDLYALOT', 'Very much!');
+define('_MD_YOGURT_FUNNY', 'Funny');
+define('_MD_YOGURT_FUNNYNO', 'Nope');
+define('_MD_YOGURT_FUNNYYES', 'Yes');
+define('_MD_YOGURT_FUNNYALOT', 'Very much');
 define('_MD_YOGURT_COOL', 'Cool');
 define('_MD_YOGURT_COOLNO', 'Nope');
 define('_MD_YOGURT_COOLYES', 'Yes');
@@ -116,7 +116,7 @@ define('_MD_YOGURT_FRIENDSHIPTERMINATED', 'You have broken your friendship with 
 
 ############################################ VIDEOS ############################################################
 //mainvideo.php
-define('_MD_YOGURT_SETMAINVIDEO', 'This video is selected on your front page from now on');
+define('_MD_YOGURT_SETMAINVIDEO', 'This video is featured on your profile page from now on');
 
 //video.php
 define('_MD_YOGURT_YOUTUBECODE', 'YouTube code or URL');
@@ -124,11 +124,10 @@ define('_MD_YOGURT_ADDVIDEO', 'Add video');
 define('_MD_YOGURT_ADDFAVORITEVIDEOS', 'Add favourite videos');
 define(
     '_MD_YOGURT_ADDVIDEOSHELP',
-    'If you want to upload your own video for sharing, then upload your videos to
-<a href=http://www.youtube.com>YouTube</a> and then add the URL to here '
-); //The name of the site will show after this
+    'If you want to upload your own video for sharing, upload your videos to
+<a href=https://www.youtube.com>YouTube</a> and then add the URL here in'); //The name of the site will show after this
 define('_MD_YOGURT_MYVIDEOS', 'My Videos');
-define('_MD_YOGURT_MAKEMAIN', 'Make this video your main video');
+define('_MD_YOGURT_MAKEMAIN', 'Feature this video in your main page');
 define('_MD_YOGURT_NOVIDEOSYET', 'No videos yet!');
 
 //delvideo.php
@@ -139,49 +138,49 @@ define('_MD_YOGURT_VIDEODELETED', 'Your video was deleted');
 //video_submited.php
 define('_MD_YOGURT_VIDEOSAVED', 'Your video was saved');
 
-############################## TRIBES ########################################################
-//class/Tribes.php
-define('_MD_YOGURT_SUBMIT_TRIBE', 'Create a new tribe');
-define('_MD_YOGURT_UPLOADTRIBE', 'Save Tribe'); //also present in many ther tribes related
-define('_MD_YOGURT_TRIBE_IMAGE', 'Tribe Image'); //also present in many ther tribes related
-define('_MD_YOGURT_TRIBE_TITLE', 'Title'); //also present in many ther tribes related
-define('_MD_YOGURT_TRIBE_DESC', 'Description'); //also present in many ther tribes related
-define('_MD_YOGURTCREATEYOURTRIBE', 'Create your own Tribe!'); //also present in many ther tribes related
+############################## GROUPS ########################################################
+//class/Groups.php
+define('_MD_YOGURT_SUBMIT_GROUP', 'Create a new group');
+define('_MD_YOGURT_UPLOADGROUP', 'Save Group'); //also present in many ther groups related
+define('_MD_YOGURT_GROUP_IMAGE', 'Group Image'); //also present in many ther groups related
+define('_MD_YOGURT_GROUP_TITLE', 'Title'); //also present in many ther groups related
+define('_MD_YOGURT_GROUP_DESC', 'Description'); //also present in many ther groups related
+define('_MD_YOGURTCREATEYOURGROUP', 'Create your own Group!'); //also present in many ther groups related
 
-//abandontribe.php
-define('_MD_YOGURT_ASKCONFIRMABANDONTRIBE', 'Are you sure you want to leave this Tribe?');
-define('_MD_YOGURT_CONFIRMABANDON', 'Yes please remove me from this Tribe!');
-define('_MD_YOGURT_TRIBEABANDONED', "You don't belong to this Tribe anymore.");
+//abandongroup.php
+define('_MD_YOGURT_ASKCONFIRMABANDONGROUP', 'Are you sure you want to leave this Group?');
+define('_MD_YOGURT_CONFIRMABANDON', 'Yes please remove me from this Group!');
+define('_MD_YOGURT_GROUPABANDONED', "You don't belong to this Group anymore.");
 
-//becomemembertribe.php
+//becomemembergroup.php
 define('_MD_YOGURT_YOUAREMEMBERNOW', 'You are now member of this community');
-define('_MD_YOGURT_YOUAREMEMBERALREADY', 'You are already a member of this Tribe');
+define('_MD_YOGURT_YOUAREMEMBERALREADY', 'You are already a member of this Group');
 
-//delete_tribe.php
-define('_MD_YOGURT_ASKCONFIRMTRIBEDELETION', 'Are you sure you want to delete this Tribe permanently?');
-define('_MD_YOGURT_CONFIRMTRIBEDELETION', 'Yes, please delete this Tribe!');
-define('_MD_YOGURT_TRIBEDELETED', 'Tribe deleted!');
+//delete_group.php
+define('_MD_YOGURT_ASKCONFIRMGROUPDELETION', 'Are you sure you want to delete this Group permanently?');
+define('_MD_YOGURT_CONFIRMGROUPDELETION', 'Yes, please delete this Group!');
+define('_MD_YOGURT_GROUPDELETED', 'Group deleted!');
 
-//edit_tribe.php
-define('_MD_YOGURT_MAINTAINOLDIMAGE', 'Keep this image'); //also present in other tribes related
-define('_MD_YOGURT_TRIBEEDITED', 'Tribe edited');
-define('_MD_YOGURT_EDIT_TRIBE', 'Edit your Tribe'); //also present in other tribes related
-define('_MD_YOGURT_TRIBEOWNER', 'You are the owner of this Tribe!'); //also present in other tribes related
-define('_MD_YOGURT_MEMBERSDOFTRIBE', 'Members of Tribe'); //also present in other tribes related
+//edit_group.php
+define('_MD_YOGURT_MAINTAINOLDIMAGE', 'Keep this image'); //also present in other groups related
+define('_MD_YOGURT_GROUPEDITED', 'Group edited');
+define('_MD_YOGURT_EDIT_GROUP', 'Edit your Group'); //also present in other groups related
+define('_MD_YOGURT_GROUPOWNER', 'You are the owner of this Group!'); //also present in other groups related
+define('_MD_YOGURT_MEMBERSDOFGROUP', 'Members of Group'); //also present in other groups related
 
-//submit_tribe.php
-define('_MD_YOGURT_TRIBE_CREATED', 'Your Tribe was created');
+//submit_group.php
+define('_MD_YOGURT_GROUP_CREATED', 'Your Group was created');
 
-//kickfromtribe.php
+//kickfromgroup.php
 define('_MD_YOGURT_CONFIRMKICK', 'Yes kick him out!');
-define('_MD_YOGURT_ASKCONFIRMKICKFROMTRIBE', 'Are you sure you want to kick this person out of the Tribe?');
-define('_MD_YOGURT_TRIBEKICKED', "You've banished this user from the Tribe, but who knows when he'll try and comeback!");
+define('_MD_YOGURT_ASKCONFIRMKICKFROMGROUP', 'Are you sure you want to kick this person out of the Group?');
+define('_MD_YOGURT_GROUPKICKED', "You've banished this user from the Group, but who knows when he'll try and comeback!");
 
-//Tribes.php
-define('_MD_YOGURT_TRIBE_ABANDON', 'Leave this Tribe');
-define('_MD_YOGURT_TRIBE_JOIN', 'Join this Tribe and show everyone who you are!');
-define('_MD_YOGURT_TRIBE_SEARCH', 'Search a Tribe');
-define('_MD_YOGURT_TRIBE_SEARCHKEYWORD', 'Keyword');
+//Groups.php
+define('_MD_YOGURT_GROUP_ABANDON', 'Leave this Group');
+define('_MD_YOGURT_GROUP_JOIN', 'Join this Group and show everyone who you are!');
+define('_MD_YOGURT_GROUP_SEARCH', 'Search a Group');
+define('_MD_YOGURT_GROUP_SEARCHKEYWORD', 'Keyword');
 
 ######################################### NOTES #####################################################
 //notebook.php
@@ -212,7 +211,7 @@ define('_MD_YOGURT_CONFIGSONLYEFRIENDS', 'My friends.');
 define('_MD_YOGURT_CONFIGSONLYME', 'Only Me');
 define('_MD_YOGURT_CONFIGSPICTURES', 'See your Photos');
 define('_MD_YOGURT_CONFIGSVIDEOS', 'See your Videos');
-define('_MD_YOGURT_CONFIGSTRIBES', 'See your Tribes');
+define('_MD_YOGURT_CONFIGSGROUPS', 'See your Groups');
 define('_MD_YOGURT_CONFIGSNOTES', 'See your Notes');
 define('_MD_YOGURT_CONFIGSNOTESSEND', 'Send you Notes');
 define('_MD_YOGURT_CONFIGSFRIENDS', 'See your Friends');
@@ -241,7 +240,7 @@ define('_MD_YOGURT_ASKINGFRIEND', 'Is %s your friend?');
 define('_MD_YOGURT_ASKBEFRIEND', 'Ask this user to be your friend?');
 define('_MD_YOGURT_EDITPROFILE', 'Edit your profile');
 define('_MD_YOGURT_SELECTAVATAR', 'Upload pictures to your album and select one as your avatar.');
-define('_MD_YOGURT_SELECTMAINVIDEO', 'Add a video to your videos album and then select it as your main video');
+define('_MD_YOGURT_SELECTMAINVIDEO', 'Then you can select a video to feature in your profile page');
 define('_MD_YOGURT_NOAVATARYET', 'No avatar yet');
 define('_MD_YOGURT_NOMAINVIDEOYET', 'No main video yet');
 define('_MD_YOGURT_MYPROFILE', 'My Profile');
@@ -300,13 +299,13 @@ define('_MD_YOGURT_RESULTS', 'Search results');
 //26/10/2007
 define('_MD_YOGURT_VIDEOSNOTENABLED', 'The administrator of the site has disabled videos feature');
 define('_MD_YOGURT_FRIENDSNOTENABLED', 'The administrator of the site has disabled friends feature');
-define('_MD_YOGURT_TRIBESNOTENABLED', 'The administrator of the site has disabled tribes feature');
+define('_MD_YOGURT_GROUPSNOTENABLED', 'The administrator of the site has disabled groups feature');
 define('_MD_YOGURT_PICTURESNOTENABLED', 'The administrator of the site has disabled pictures feature');
 define('_MD_YOGURT_NOTESNOTENABLED', 'The administrator of the site has disabled Notes feature');
 
 //26/01/2008
 define('_MD_YOGURT_ALLFRIENDS', 'View all friends');
-define('_MD_YOGURT_ALLTRIBES', 'View all tribes');
+define('_MD_YOGURT_ALLGROUPS', 'View all groups');
 
 //31/01/2008
 define('_MD_YOGURT_FRIENDSHIPNOTACCEPTED', 'Friendship rejected');
@@ -343,3 +342,9 @@ define('_MD_YOGURT_META_YEAR', 'Year');
 
 // v3.3RC2
 define('_MD_YOGURT_PLAYER', 'Your audio player');
+
+// 3.5
+define('_MD_YOGURT_ADDASAFRIEND', 'Add as a Friend');
+define('_MD_YOGURT_PROFILEVISITORS', 'Profile Visitors');
+define('_MD_YOGURT_FEATUREDVIDEO', 'Featured Video');
+define('_MD_YOGURT_ALLVIDEOS', 'View all videos');

@@ -75,9 +75,9 @@ define('_MI_YOGURT_TUBEH_TITLE', 'Height of the YouTube videos');
 define('_MI_YOGURT_TUBEH_DESC', 'The height in pixels of the YouTube video player');
 define('_MI_YOGURT_PICTURE_TEMPLATENOTEBOOKDESC', 'Template for the Notebook');
 define('_MI_YOGURT_PICTURE_TEMPLATESEUTUBODESC', 'Template for the videos section');
-define('_MI_YOGURT_PICTURE_TEMPLATETRIBESDESC', 'Template for the Tribes');
+define('_MI_YOGURT_PICTURE_TEMPLATEGROUPSDESC', 'Template for the Groups');
 define('_MI_YOGURT_MYNOTES', 'My Notes');
-define('_MI_YOGURT_MYTRIBES', 'My Tribes');
+define('_MI_YOGURT_MYGROUPS', 'My Groups');
 define('_MI_YOGURT_TEMPLATENAVBARDESC', 'Template for the upper navbar used in all pages');
 
 define('_MI_YOGURT_VIDEOSPERPAGE_TITLE', 'Videos per Page');
@@ -104,14 +104,14 @@ define('_MI_YOGURT_MAINTUBEH_DESC', 'Height of the video, that shows in the fron
 define('_MI_YOGURT_MYCONFIGS', 'My Settings');
 define('_MI_YOGURT_PICTURE_TEMPLATECONFIGSDESC', 'Template settings for the user');
 define('_MI_YOGURT_PICTURE_TEMPLATEFOOTERDESC', 'Template for the footer of the module');
-define('_MI_YOGURT_PICTURE_TEMPLATEEDITTRIBE', 'Template for the Tribes page atributes');
+define('_MI_YOGURT_PICTURE_TEMPLATEEDITGROUP', 'Template for the Groups page atributes');
 //define('_MI_YOGURT_LICENSE', 'Yogurt by Marcello Brand�o is licensed under a Attribution-No Derivative Works 2.5 Brazil.');
 
 //19/10/2007
-define('_MI_YOGURT_TRIBESPERPAGE_TITLE', 'Tribes per page');
-define('_MI_YOGURT_TRIBESPERPAGE_DESC', 'Tribes per page before pagination show up');
+define('_MI_YOGURT_GROUPSPERPAGE_TITLE', 'Groups per page');
+define('_MI_YOGURT_GROUPSPERPAGE_DESC', 'Groups per page before pagination show up');
 define('_MI_YOGURT_PICTURE_TEMPLATESEARCHRESULTDESC', 'This template shows the results of a search for comunities');
-define('_MI_YOGURT_PICTURE_TEMPLATETRIBEDESC', 'This template shows a Tribe and its members');
+define('_MI_YOGURT_PICTURE_TEMPLATEGROUPDESC', 'This template shows a Group and its members');
 
 //22/10/2007
 define('_MI_YOGURT_MYPROFILE', 'My Profile');
@@ -128,8 +128,8 @@ define('_MI_YOGURT_ENABLEVIDEOS_TITLE', 'Enable videos section');
 define('_MI_YOGURT_ENABLEVIDEOS_DESC', 'Enabling videos section for the users, will enable the video gallery');
 define('_MI_YOGURT_ENABLENOTES_TITLE', 'Enable Notes section');
 define('_MI_YOGURT_ENABLENOTES_DESC', 'Enabling Notes section, will enable members to leave public messages to other users. This feature is like the Wall on Facebook');
-define('_MI_YOGURT_ENABLETRIBES_TITLE', 'Enable Tribes section');
-define('_MI_YOGURT_ENABLETRIBES_DESC', 'Enabling Tribes section for the users, will enable them to create Tribes, which group users that have similar interests');
+define('_MI_YOGURT_ENABLEGROUPS_TITLE', 'Enable Groups section');
+define('_MI_YOGURT_ENABLEGROUPS_DESC', 'Enabling Groups section for the users, will enable them to create Groups, which group users that have similar interests');
 define('_MI_YOGURT_NOTESPERPAGE_TITLE', 'Number of Notes per page');
 define('_MI_YOGURT_NOTESPERPAGE_DESC', 'Number of Notes in a page before the page navigation shows ');
 
@@ -190,7 +190,7 @@ define('MI_YOGURT_ADMENU3', 'Friends');
 define('MI_YOGURT_ADMENU4', 'Visitors');
 define('MI_YOGURT_ADMENU5', 'Video');
 define('MI_YOGURT_ADMENU6', 'Invitations');
-define('MI_YOGURT_ADMENU7', 'Tribes');
+define('MI_YOGURT_ADMENU7', 'Groups');
 define('MI_YOGURT_ADMENU8', 'Members');
 define('MI_YOGURT_ADMENU9', 'Notes');
 define('MI_YOGURT_ADMENU10', 'Configs');
@@ -215,8 +215,8 @@ define('MI_YOGURT_ADMINGROUPS', 'Admin Group Permissions');
 define('MI_YOGURT_ADMINGROUPS_DESC', 'Which groups have access to tools and permissions page');
 
 //3.5
-define('_MI_YOGURT_TRIBES_LOGO_WIDTH', 'Tribe Logo Width');
-define('_MI_YOGURT_TRIBES_LOGO_WIDTH_DESC', 'Tribe Logo width in pixels<br>This means that the logo will be most of this size in width<br>All proportions are maintained');
-define('_MI_YOGURT_TRIBES_LOGO_HEIGHT', 'Tribe Logo Height');
-define('_MI_YOGURT_TRIBES_LOGO_HEIGHT_DESC', 'Tribe Logo Height in pixels<br>This means your logo will be most of this size in height<br>All proportions are maintained');
+define('_MI_YOGURT_GROUPS_LOGO_WIDTH', 'Group Logo Width');
+define('_MI_YOGURT_GROUPS_LOGO_WIDTH_DESC', 'Group Logo width in pixels<br>This means that the logo will be most of this size in width<br>All proportions are maintained');
+define('_MI_YOGURT_GROUPS_LOGO_HEIGHT', 'Group Logo Height');
+define('_MI_YOGURT_GROUPS_LOGO_HEIGHT_DESC', 'Group Logo Height in pixels<br>This means your logo will be most of this size in height<br>All proportions are maintained');
 

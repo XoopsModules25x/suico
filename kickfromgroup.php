@@ -21,36 +21,36 @@ use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
 
-$tribe_id     = \Xmf\Request::getInt('tribe_id', 0, 'POST');
+$group_id     = \Xmf\Request::getInt('group_id', 0, 'POST');
 $rel_user_uid = \Xmf\Request::getInt('rel_user_uid', 0, 'POST');
 
 if (1 != $_POST['confirm']) {
-    xoops_confirm(['rel_user_uid' => $rel_user_uid, 'tribe_id' => $tribe_id, 'confirm' => 1], 'kickfromtribe.php', _MD_YOGURT_ASKCONFIRMKICKFROMTRIBE, _MD_YOGURT_CONFIRMKICK);
+    xoops_confirm(['rel_user_uid' => $rel_user_uid, 'group_id' => $group_id, 'confirm' => 1], 'kickfromgroup.php', _MD_YOGURT_ASKCONFIRMKICKFROMGROUP, _MD_YOGURT_CONFIRMKICK);
 } else {
     /**
      * Creating the factory  and the criteria to delete the picture
      * The user must be the owner
      */
-    $reltribeuserFactory = new Yogurt\ReltribeuserHandler($xoopsDB);
-    $tribesFactory       = new Yogurt\TribesHandler($xoopsDB);
-    $tribe               = $tribesFactory->get($tribe_id);
+    $relgroupuserFactory = new Yogurt\RelgroupuserHandler($xoopsDB);
+    $groupsFactory       = new Yogurt\GroupsHandler($xoopsDB);
+    $group               = $groupsFactory->get($group_id);
     //  echo "<pre>";
-    //  print_r($tribe);
-    if ($xoopsUser->getVar('uid') == $tribe->getVar('owner_uid')) {
+    //  print_r($group);
+    if ($xoopsUser->getVar('uid') == $group->getVar('owner_uid')) {
         $criteria_rel_user_uid = new \Criteria('rel_user_uid', $rel_user_uid);
-        $criteria_tribe_id     = new \Criteria('rel_tribe_id', $tribe_id);
+        $criteria_group_id     = new \Criteria('rel_group_id', $group_id);
         $criteria              = new \CriteriaCompo($criteria_rel_user_uid);
-        $criteria->add($criteria_tribe_id);
+        $criteria->add($criteria_group_id);
         /**
          * Try to delete
          */
-        if ($reltribeuserFactory->deleteAll($criteria)) {
-            redirect_header('tribes.php', 2, _MD_YOGURT_TRIBEKICKED);
+        if ($relgroupuserFactory->deleteAll($criteria)) {
+            redirect_header('groups.php', 2, _MD_YOGURT_GROUPKICKED);
         } else {
-            redirect_header('tribes.php', 2, _MD_YOGURT_NOCACHACA);
+            redirect_header('groups.php', 2, _MD_YOGURT_NOCACHACA);
         }
     } else {
-        redirect_header('tribes.php', 2, _MD_YOGURT_NOCACHACA);
+        redirect_header('groups.php', 2, _MD_YOGURT_NOCACHACA);
     }
 }
 

@@ -1,6 +1,22 @@
+<h5>3.5 Alpha 4   [2020-04-05]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
+<hr>
+- add friend petition in friend section & change add as a friend image (liomj)
+- correction for pettition in yogurt_friends.tpl (liomj)
+- language - profile & video template updates (liomj)
+- /photos renamed to /images
+- CSS from h2 to h4
+- fix group view from search
+- updated images
+- renaming tribes to groups
+- required Group name & description
+- fix for Group search - it shows now individual groups
+- changed group icon
+- language changes
+
+
 <h5>3.5 Alpha 3   [2020-04-05]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
 <hr>
-- fix for missing tribe logos in Profile (liomj/mamba)
+- fix for missing group logos in Profile (liomj/mamba)
 - fix for changing avatar (mamba)
 - Factory names based on Handlers for consistency (mamba)
 - reversing avatar folder (liomj/mamba)
@@ -24,7 +40,7 @@
 - Update main.php (liomj)
 - fix blank.gif avatar (liomj)
 - Hide empty website field and private email address in profile (liomj)
-- fix uploading/resizing tribe logos (mamba)
+- fix uploading/resizing group logos (mamba)
 - added new test data (mamba)
 - partial fixes for image folders (mamba)
 - renamed language variables from _YOG_ to _YOGURT_ for consistency (mamba)
@@ -171,7 +187,7 @@ Translations removed from the release as it was too hard to maintain
 all of them up to date :D
 Bugs report treated. Most of them corrected, some I could not reproduce
 
-1844542     tribes insert [saba]
+1844542     groups insert [saba]
 1844582     Some definitions not in lang files [irmtfan]
 1849511     If I use yogurt as profile page I can't upload avatar
 1844586     place holder for main video and avatar [irtmfan]
@@ -237,7 +253,7 @@ and help this project reporting your bugs too
 ## 26/11/2007
 First Beta Release Version 2.9
 Changed the project to yogurt social network
-Picures, Videos, Notes, Tribes, Configs, Friends
+Picures, Videos, Notes, Groups, Configs, Friends
 
 ## 26/08/2007
 First Candidate Release Version 1.0

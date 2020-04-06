@@ -32,8 +32,8 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 //require_once __DIR__ . '/Audio.php';
 //require_once __DIR__ . '/Friendpetition.php';
 //require_once __DIR__ . '/Friendship.php';
-//require_once __DIR__ . '/Reltribeuser.php';
-//require_once __DIR__ . '/Tribes.php';
+//require_once __DIR__ . '/Relgroupuser.php';
+//require_once __DIR__ . '/Groups.php';
 //require_once __DIR__ . '/Notes.php';
 //require_once __DIR__ . '/Configs.php';
 //require_once __DIR__ . '/Suspensions.php';
@@ -61,9 +61,9 @@ class YogurtController extends \XoopsObject
     public $videosFactory;
     public $petitionsFactory;
     public $friendshipsFactory;
-    public $reltribeusersFactory;
+    public $relgroupusersFactory;
     public $suspensionsFactory;
-    public $tribesFactory;
+    public $groupsFactory;
     public $notesFactory;
     public $configsFactory;
     public $section;
@@ -214,12 +214,12 @@ class YogurtController extends \XoopsObject
     /**
      * Get for each section the number of objects the user possess
      *
-     * @return array(nbTribes=>"",nbPhotos=>"",nbFriends=>"",nbVideos=>"")
+     * @return array(nbGroups=>"",nbPhotos=>"",nbFriends=>"",nbVideos=>"")
      */
     public function getNumbersSections()
     {
-        $criteriaTribes         = new \Criteria('rel_user_uid', $this->uidOwner);
-        $nbSections['nbTribes'] = $this->reltribeusersFactory->getCount($criteriaTribes);
+        $criteriaGroups         = new \Criteria('rel_user_uid', $this->uidOwner);
+        $nbSections['nbGroups'] = $this->relgroupusersFactory->getCount($criteriaGroups);
         $criteriaUid            = new \Criteria('uid_owner', $this->uidOwner);
         $criteriaAlbum          = new \CriteriaCompo($criteriaUid);
         if (0 == $this->isOwner) {
@@ -250,9 +250,9 @@ class YogurtController extends \XoopsObject
         $this->videosFactory        = new VideoHandler($this->db);
         $this->petitionsFactory     = new FriendpetitionHandler($this->db);
         $this->friendshipsFactory   = new FriendshipHandler($this->db);
-        $this->reltribeusersFactory = new ReltribeuserHandler($this->db);
+        $this->relgroupusersFactory = new RelgroupuserHandler($this->db);
         $this->notesFactory         = new NotesHandler($this->db);
-        $this->tribesFactory        = new TribesHandler($this->db);
+        $this->groupsFactory        = new GroupsHandler($this->db);
         $this->configsFactory       = new ConfigsHandler($this->db);
         $this->suspensionsFactory   = new SuspensionsHandler($this->db);
     }

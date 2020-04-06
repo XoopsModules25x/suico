@@ -25,18 +25,18 @@ use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
 
-$controller = new Yogurt\ControllerTribes($xoopsDB, $xoopsUser);
+$controller = new Yogurt\ControllerGroups($xoopsDB, $xoopsUser);
 
 /**
  * Receiving info from get parameters
  */
-$tribe_id = $_GET['com_itemid'];
-$criteria = new \Criteria('tribe_id', $tribe_id);
-$tribes   = $controller->tribesFactory->getObjects($criteria);
-$tribe    = $tribes[0];
+$group_id = $_GET['com_itemid'];
+$criteria = new \Criteria('group_id', $group_id);
+$groups   = $controller->groupsFactory->getObjects($criteria);
+$group    = $groups[0];
 
 $com_itemid = \Xmf\Request::getInt('com_itemid', 0, 'GET');
 if ($com_itemid > 0) {
-    $com_replytitle = _MD_YOGURT_TRIBES . ': ' . $tribe->getVar('tribe_title');
+    $com_replytitle = _MD_YOGURT_GROUPS . ': ' . $group->getVar('group_title');
     require XOOPS_ROOT_PATH . '/include/comment_new.php';
 }

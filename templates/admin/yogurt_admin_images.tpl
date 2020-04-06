@@ -24,7 +24,7 @@
                     <th class="left"><{$selectordata_update}></th>
                     <th class="left"><{$selectoruid_owner}></th>
                     <th class="left"><{$selectorurl}></th>
-                    <th class="left"><{$selectorprivate}></th>
+                    <th class="center"><{$selectorprivate}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
@@ -38,7 +38,7 @@
                         <td class='left'><{$imagesArray.data_update}></td>
                         <td class='left'><{$imagesArray.uid_owner}></td>
                         <td class='left'><{$imagesArray.url}></td>
-                        <td class='left'><{$imagesArray.private}></td>
+                        <td class='center'><{$imagesArray.private}></td>
 
 
                         <td class="center width5"><{$imagesArray.edit_delete}></td>
@@ -58,7 +58,7 @@
                     <th class="left"><{$selectordata_update}></th>
                     <th class="left"><{$selectoruid_owner}></th>
                     <th class="left"><{$selectorurl}></th>
-                    <th class="left"><{$selectorprivate}></th>
+                    <th class="center"><{$selectorprivate}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>

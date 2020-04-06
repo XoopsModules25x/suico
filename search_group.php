@@ -19,38 +19,38 @@
 
 use XoopsModules\Yogurt;
 
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_tribes_results.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'yogurt_groups_results.tpl';
 require __DIR__ . '/header.php';
 
-$controller = new Yogurt\ControllerTribes($xoopsDB, $xoopsUser);
+$controller = new Yogurt\ControllerGroups($xoopsDB, $xoopsUser);
 
 /**
- * Fetching numbers of tribes friends videos pictures etc...
+ * Fetching numbers of groups friends videos pictures etc...
  */
 $nbSections = $controller->getNumbersSections();
 
 $start_all = \Xmf\Request::getInt('start_all', 0, 'GET');
 $start_my  = \Xmf\Request::getInt('start_my', 0, 'GET');
 
-$tribe_keyword = trim(htmlspecialchars($_GET['tribe_keyword'], ENT_QUOTES | ENT_HTML5));
+$group_keyword = trim(htmlspecialchars($_GET['group_keyword'], ENT_QUOTES | ENT_HTML5));
 /**
- * All Tribes
+ * All Groups
  */
-$criteria_title  = new \Criteria('tribe_title', '%' . $tribe_keyword . '%', 'LIKE');
-$criteria_desc   = new \Criteria('tribe_desc', '%' . $tribe_keyword . '%', 'LIKE');
-$criteria_tribes = new \CriteriaCompo($criteria_title);
-$criteria_tribes->add($criteria_desc, 'OR');
-$nb_tribes = $controller->tribesFactory->getCount($criteria_tribes);
-$criteria_tribes->setLimit($xoopsModuleConfig['tribesperpage']);
-$criteria_tribes->setStart($start_all);
-$tribes_objects = $controller->tribesFactory->getObjects($criteria_tribes);
+$criteria_title  = new \Criteria('group_title', '%' . $group_keyword . '%', 'LIKE');
+$criteria_desc   = new \Criteria('group_desc', '%' . $group_keyword . '%', 'LIKE');
+$criteria_groups = new \CriteriaCompo($criteria_title);
+$criteria_groups->add($criteria_desc, 'OR');
+$nb_groups = $controller->groupsFactory->getCount($criteria_groups);
+$criteria_groups->setLimit($xoopsModuleConfig['groupsperpage']);
+$criteria_groups->setStart($start_all);
+$groups_objects = $controller->groupsFactory->getObjects($criteria_groups);
 $i              = 0;
-foreach ($tribes_objects as $tribe_object) {
-    $tribes[$i]['id']    = $tribe_object->getVar('tribe_id');
-    $tribes[$i]['title'] = $tribe_object->getVar('tribe_title');
-    $tribes[$i]['img']   = $tribe_object->getVar('tribe_img');
-    $tribes[$i]['desc']  = $tribe_object->getVar('tribe_desc');
-    $tribes[$i]['uid']   = $tribe_object->getVar('owner_uid');
+foreach ($groups_objects as $group_object) {
+    $groups[$i]['id']    = $group_object->getVar('group_id');
+    $groups[$i]['title'] = $group_object->getVar('group_title');
+    $groups[$i]['img']   = $group_object->getVar('group_img');
+    $groups[$i]['desc']  = $group_object->getVar('group_desc');
+    $groups[$i]['uid']   = $group_object->getVar('owner_uid');
     $i++;
 }
 
@@ -65,15 +65,15 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
 
 /**
- * Criando a barra de navegao caso tenha muitos amigos
+ * Creating the navigation bar if you have a lot of friends
  */
-$barra_navegacao = new \XoopsPageNav($nb_tribes, $xoopsModuleConfig['tribesperpage'], $start_all, 'start_all', 'tribe_keyword=' . $tribe_keyword . '&amp;start_my=' . $start_my);
+$barra_navegacao = new \XoopsPageNav($nb_groups, $xoopsModuleConfig['groupsperpage'], $start_all, 'start_all', 'group_keyword=' . $group_keyword . '&amp;start_my=' . $start_my);
 $barrinha        = $barra_navegacao->renderImageNav(2);
 
 //permissions
 $xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('notes'));
 $xoopsTpl->assign('allow_friends', $controller->checkPrivilegeBySection('friends'));
-$xoopsTpl->assign('allow_tribes', $controller->checkPrivilegeBySection('tribes'));
+$xoopsTpl->assign('allow_groups', $controller->checkPrivilegeBySection('groups'));
 $xoopsTpl->assign('allow_pictures', $controller->checkPrivilegeBySection('pictures'));
 $xoopsTpl->assign('allow_videos', $controller->checkPrivilegeBySection('videos'));
 $xoopsTpl->assign('allow_audios', $controller->checkPrivilegeBySection('audio'));
@@ -83,11 +83,11 @@ $xoopsTpl->assign('allow_profile_stats', $controller->checkPrivilege('profile_st
 
 //form
 //$xoopsTpl->assign('lang_youcanupload',sprintf(_MD_YOGURT_YOUCANUPLOAD,$maxfilebytes/1024));
-$xoopsTpl->assign('lang_tribeimage', _MD_YOGURT_TRIBE_IMAGE);
+$xoopsTpl->assign('lang_groupimage', _MD_YOGURT_GROUP_IMAGE);
 //$xoopsTpl->assign('maxfilesize',$maxfilebytes);
-$xoopsTpl->assign('lang_title', _MD_YOGURT_TRIBE_TITLE);
-$xoopsTpl->assign('lang_description', _MD_YOGURT_TRIBE_DESC);
-$xoopsTpl->assign('lang_savetribe', _MD_YOGURT_UPLOADTRIBE);
+$xoopsTpl->assign('lang_title', _MD_YOGURT_GROUP_TITLE);
+$xoopsTpl->assign('lang_description', _MD_YOGURT_GROUP_DESC);
+$xoopsTpl->assign('lang_savegroup', _MD_YOGURT_UPLOADGROUP);
 
 //Owner data
 $xoopsTpl->assign('uid_owner', $controller->uidOwner);
@@ -96,25 +96,25 @@ $xoopsTpl->assign('isOwner', $controller->isOwner);
 $xoopsTpl->assign('isanonym', $controller->isAnonym);
 
 //numbers
-//$xoopsTpl->assign('nb_tribes',$nbSections['nbTribes']);look at hte end for this nb
+//$xoopsTpl->assign('nb_groups',$nbSections['nbGroups']);look at hte end for this nb
 $xoopsTpl->assign('nb_photos', $nbSections['nbPhotos']);
 $xoopsTpl->assign('nb_videos', $nbSections['nbVideos']);
 $xoopsTpl->assign('nb_notes', $nbSections['nbNotes']);
 $xoopsTpl->assign('nb_friends', $nbSections['nbFriends']);
-$xoopsTpl->assign('nb_tribes', $nbSections['nbTribes']);
+$xoopsTpl->assign('nb_groups', $nbSections['nbGroups']);
 $xoopsTpl->assign('nb_audio', $nbSections['nbAudio']);
 
 //navbar
 $xoopsTpl->assign('module_name', $xoopsModule->getVar('name'));
-$xoopsTpl->assign('lang_mysection', _MD_YOGURT_MYTRIBES);
-$xoopsTpl->assign('section_name', _MD_YOGURT_TRIBES);
+$xoopsTpl->assign('lang_mysection', _MD_YOGURT_MYGROUPS);
+$xoopsTpl->assign('section_name', _MD_YOGURT_GROUPS);
 $xoopsTpl->assign('lang_home', _MD_YOGURT_HOME);
 $xoopsTpl->assign('lang_photos', _MD_YOGURT_PHOTOS);
 $xoopsTpl->assign('lang_friends', _MD_YOGURT_FRIENDS);
 $xoopsTpl->assign('lang_videos', _MD_YOGURT_VIDEOS);
 $xoopsTpl->assign('lang_notebook', _MD_YOGURT_NOTEBOOK);
 $xoopsTpl->assign('lang_profile', _MD_YOGURT_PROFILE);
-$xoopsTpl->assign('lang_tribes', _MD_YOGURT_TRIBES);
+$xoopsTpl->assign('lang_groups', _MD_YOGURT_GROUPS);
 $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 $xoopsTpl->assign('lang_audio', _MD_YOGURT_AUDIOS);
 
@@ -125,23 +125,23 @@ $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 $xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner));
 
 //$xoopsTpl->assign('path_yogurt_uploads',$xoopsModuleConfig['link_path_upload']);
-//$xoopsTpl->assign('tribes',$tribes);
-//$xoopsTpl->assign('mytribes',$mytribes);
-$xoopsTpl->assign('lang_mytribestitle', _MD_YOGURT_MYTRIBES);
-$xoopsTpl->assign('lang_tribestitle', _MD_YOGURT_ALLTRIBES . ' (' . $nb_tribes . ')');
-$xoopsTpl->assign('lang_notribesyet', _MD_YOGURT_NOTRIBESYET);
+$xoopsTpl->assign('groups', $groups);
+//$xoopsTpl->assign('mygroups',$mygroups);
+$xoopsTpl->assign('lang_mygroupstitle', _MD_YOGURT_MYGROUPS);
+$xoopsTpl->assign('lang_groupstitle', _MD_YOGURT_ALLGROUPS . ' (' . $nb_groups . ')');
+$xoopsTpl->assign('lang_nogroupsyet', _MD_YOGURT_NOGROUPSYET);
 
 //page nav
 $xoopsTpl->assign('barra_navegacao', $barrinha);
 //$xoopsTpl->assign('barra_navegacao_my',$barrinha_my);
-//$xoopsTpl->assign('nb_tribes',$nb_mytribes);// this is the one wich shows in the upper bar actually is about the mytribes
-$xoopsTpl->assign('nb_tribes_all', $nb_tribes); //this is total number of tribes
+//$xoopsTpl->assign('nb_groups',$nb_mygroups);// this is the one wich shows in the upper bar actually is about the mygroups
+$xoopsTpl->assign('nb_groups_all', $nb_groups); //this is total number of groups
 
-$xoopsTpl->assign('lang_createtribe', _MD_YOGURTCREATEYOURTRIBE);
-$xoopsTpl->assign('lang_owner', _MD_YOGURT_TRIBEOWNER);
-$xoopsTpl->assign('lang_abandontribe', _MD_YOGURT_TRIBE_ABANDON);
-$xoopsTpl->assign('lang_jointribe', _MD_YOGURT_TRIBE_JOIN);
-$xoopsTpl->assign('lang_searchtribe', _MD_YOGURT_TRIBE_SEARCH);
-$xoopsTpl->assign('lang_tribekeyword', _MD_YOGURT_TRIBE_SEARCHKEYWORD);
+$xoopsTpl->assign('lang_creategroup', _MD_YOGURTCREATEYOURGROUP);
+$xoopsTpl->assign('lang_owner', _MD_YOGURT_GROUPOWNER);
+$xoopsTpl->assign('lang_abandongroup', _MD_YOGURT_GROUP_ABANDON);
+$xoopsTpl->assign('lang_joingroup', _MD_YOGURT_GROUP_JOIN);
+$xoopsTpl->assign('lang_searchgroup', _MD_YOGURT_GROUP_SEARCH);
+$xoopsTpl->assign('lang_groupkeyword', _MD_YOGURT_GROUP_SEARCHKEYWORD);
 
 require dirname(dirname(__DIR__)) . '/footer.php';

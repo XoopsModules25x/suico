@@ -61,7 +61,7 @@ switch ($op) {
         $configsObject->setVar('pictures', Request::getVar('pictures', ''));
         $configsObject->setVar('audio', Request::getVar('audio', ''));
         $configsObject->setVar('videos', Request::getVar('videos', ''));
-        $configsObject->setVar('tribes', Request::getVar('tribes', ''));
+        $configsObject->setVar('groups', Request::getVar('groups', ''));
         $configsObject->setVar('notes', Request::getVar('notes', ''));
         $configsObject->setVar('friends', Request::getVar('friends', ''));
         $configsObject->setVar('profile_contact', Request::getVar('profile_contact', ''));
@@ -151,7 +151,7 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('configsRows', $configsTempRows);
         $configsArray = [];
 
-        //    $fields = explode('|', config_id:int:11::NOT NULL::primary:config_id|config_uid:int:11::NOT NULL:::config_uid|pictures:tinyint:1::NOT NULL:::pictures|audio:tinyint:1::NOT NULL:::audio|videos:tinyint:1::NOT NULL:::videos|tribes:tinyint:1::NOT NULL:::tribes|notes:tinyint:1::NOT NULL:::notes|friends:tinyint:1::NOT NULL:::friends|profile_contact:tinyint:1::NOT NULL:::profile_contact|profile_general:tinyint:1::NOT NULL:::profile_general|profile_stats:tinyint:1::NOT NULL:::profile_stats|suspension:tinyint:1::NOT NULL:::suspension|backup_password:varchar:255::NOT NULL:::backup_password|backup_email:varchar:255::NOT NULL:::backup_email|end_suspension:timestamp:0::NOT NULL:CURRENT_TIMESTAMP::end_suspension);
+        //    $fields = explode('|', config_id:int:11::NOT NULL::primary:config_id|config_uid:int:11::NOT NULL:::config_uid|pictures:tinyint:1::NOT NULL:::pictures|audio:tinyint:1::NOT NULL:::audio|videos:tinyint:1::NOT NULL:::videos|groups:tinyint:1::NOT NULL:::groups|notes:tinyint:1::NOT NULL:::notes|friends:tinyint:1::NOT NULL:::friends|profile_contact:tinyint:1::NOT NULL:::profile_contact|profile_general:tinyint:1::NOT NULL:::profile_general|profile_stats:tinyint:1::NOT NULL:::profile_stats|suspension:tinyint:1::NOT NULL:::suspension|backup_password:varchar:255::NOT NULL:::backup_password|backup_email:varchar:255::NOT NULL:::backup_email|end_suspension:timestamp:0::NOT NULL:CURRENT_TIMESTAMP::end_suspension);
         //    $fieldsCount    = count($fields);
 
         $criteria = new \CriteriaCompo();
@@ -185,8 +185,8 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('selectorvideos', AM_YOGURT_CONFIGS_VIDEOS);
                 $configsArray['videos'] = $videoHandler->get($configsTempArray[$i]->getVar('videos'))->getVar('title');
 
-                $GLOBALS['xoopsTpl']->assign('selectortribes', AM_YOGURT_CONFIGS_TRIBES);
-                $configsArray['tribes'] = $tribesHandler->get($configsTempArray[$i]->getVar('tribes'))->getVar('tribe_title');
+                $GLOBALS['xoopsTpl']->assign('selectorgroups', AM_YOGURT_CONFIGS_GROUPS);
+                $configsArray['groups'] = $groupsHandler->get($configsTempArray[$i]->getVar('groups'))->getVar('group_title');
 
                 $GLOBALS['xoopsTpl']->assign('selectornotes', AM_YOGURT_CONFIGS_NOTES);
                 $configsArray['notes'] = $notesHandler->get($configsTempArray[$i]->getVar('notes'))->getVar('note_id');

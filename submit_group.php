@@ -25,14 +25,14 @@ require __DIR__ . '/header.php';
  * Modules class includes
  */
 //require_once __DIR__ . '/class/Friendpetition.php';
-//require_once __DIR__ . '/class/Reltribeuser.php';
-//require_once __DIR__ . '/class/Tribes.php';
+//require_once __DIR__ . '/class/Relgroupuser.php';
+//require_once __DIR__ . '/class/Groups.php';
 
 /**
- * Factories of tribes
+ * Factories of groups
  */
-$reltribeuserFactory = new Yogurt\ReltribeuserHandler($xoopsDB);
-$tribesFactory       = new Yogurt\TribesHandler($xoopsDB);
+$relgroupuserFactory = new Yogurt\RelgroupuserHandler($xoopsDB);
+$groupsFactory       = new Yogurt\GroupsHandler($xoopsDB);
 
 $marker = isset($_POST['marker']) ? $_POST['marker'] : 0;
 
@@ -45,10 +45,10 @@ if (1 == $marker) {
     }
 
     $myts          = \MyTextSanitizer::getInstance();
-    $tribe_title   = $myts->displayTarea($_POST['tribe_title'], 0, 1, 1, 1, 1);
-    $tribe_desc    = $myts->displayTarea($_POST['tribe_desc'], 0, 1, 1, 1, 1);
-    $tribe_img     = (!empty($_POST['tribe_img'])) ? $_POST['tribe_img'] : '';
-    $path_upload   = XOOPS_UPLOAD_PATH . '/yogurt/tribes';
+    $group_title   = $myts->displayTarea($_POST['group_title'], 0, 1, 1, 1, 1);
+    $group_desc    = $myts->displayTarea($_POST['group_desc'], 0, 1, 1, 1, 1);
+    $group_img     = (!empty($_POST['group_img'])) ? $_POST['group_img'] : '';
+    $path_upload   = XOOPS_UPLOAD_PATH . '/yogurt/groups';
     $pictwidth     = $xoopsModuleConfig['resized_width'];
     $pictheight    = $xoopsModuleConfig['resized_height'];
     $thumbwidth    = $xoopsModuleConfig['thumb_width'];
@@ -56,17 +56,17 @@ if (1 == $marker) {
     $maxfilebytes  = $xoopsModuleConfig['maxfilesize'];
     $maxfileheight = $xoopsModuleConfig['max_original_height'];
     $maxfilewidth  = $xoopsModuleConfig['max_original_width'];
-    if ($tribesFactory->receiveTribe($tribe_title, $tribe_desc, '', $path_upload, $maxfilebytes, $maxfilewidth, $maxfileheight)) {
-        $reltribeuser = $reltribeuserFactory->create();
-        $reltribeuser->setVar('rel_tribe_id', $xoopsDB->getInsertId());
-        $reltribeuser->setVar('rel_user_uid', $xoopsUser->getVar('uid'));
-        $reltribeuserFactory->insert($reltribeuser);
-        redirect_header('tribes.php', 500, _MD_YOGURT_TRIBE_CREATED);
+    if ($groupsFactory->receiveGroup($group_title, $group_desc, '', $path_upload, $maxfilebytes, $maxfilewidth, $maxfileheight)) {
+        $relgroupuser = $relgroupuserFactory->create();
+        $relgroupuser->setVar('rel_group_id', $xoopsDB->getInsertId());
+        $relgroupuser->setVar('rel_user_uid', $xoopsUser->getVar('uid'));
+        $relgroupuserFactory->insert($relgroupuser);
+        redirect_header('groups.php', 500, _MD_YOGURT_GROUP_CREATED);
     } else {
-        $tribesFactory->renderFormSubmit(120000, $xoopsTpl);
+        $groupsFactory->renderFormSubmit(120000, $xoopsTpl);
     }
 } else {
-    $tribesFactory->renderFormSubmit(120000, $xoopsTpl);
+    $groupsFactory->renderFormSubmit(120000, $xoopsTpl);
 }
 
 /**

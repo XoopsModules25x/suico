@@ -34,8 +34,8 @@ $friend = new \XoopsUser($friend2_uid);
 if (1 == $marker) {
     $level         = $_POST['level'];
     $cool          = $_POST['cool'];
-    $sexy          = $_POST['hot'];
-    $trusty        = $_POST['trust'];
+    $friendly      = $_POST['hot'];
+    $funny         = $_POST['trust'];
     $fan           = $_POST['fan'];
     $friendship_id = \Xmf\Request::getInt('friendship_id', 0, 'POST');
 
@@ -44,8 +44,8 @@ if (1 == $marker) {
     $friendship  = $friendships[0];
     $friendship->setVar('level', $level);
     $friendship->setVar('cool', $cool);
-    $friendship->setVar('hot', $sexy);
-    $friendship->setVar('trust', $trusty);
+    $friendship->setVar('hot', $friendly);
+    $friendship->setVar('trust', $funny);
     $friendship->setVar('fan', $fan);
     $friend2_uid = (int)$friendship->getVar('friend2_uid');
     $friendship->unsetNew();

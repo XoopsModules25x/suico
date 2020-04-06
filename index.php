@@ -38,7 +38,7 @@ $mainvideodesc = '';
 $controller = new \XoopsModules\Yogurt\ControllerIndex($xoopsDB, $xoopsUser);
 
 /**
- * Fetching numbers of tribes friends videos pictures etc...
+ * Fetching numbers of groups friends videos pictures etc...
  */
 $nbSections = $controller->getNumbersSections();
 
@@ -90,10 +90,10 @@ $controller->visitorsFactory->purgeVisits();
 $evaluation = $controller->friendshipsFactory->getMoyennes($controller->uidOwner);
 
 /**
- * Tribes
+ * Groups
  */
-$criteria_tribes = new \Criteria('rel_user_uid', $controller->uidOwner);
-$tribes          = $controller->reltribeusersFactory->getTribes(9, $criteria_tribes);
+$criteria_groups = new \Criteria('rel_user_uid', $controller->uidOwner);
+$groups          = $controller->relgroupusersFactory->getGroups(9, $criteria_groups);
 
 /**
  * Visitors
@@ -164,7 +164,7 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 //permissions
 $xoopsTpl->assign('allow_friends', $controller->checkPrivilege('friends'));
 $xoopsTpl->assign('allow_notes', $controller->checkPrivilege('notes'));
-$xoopsTpl->assign('allow_tribes', $controller->checkPrivilege('tribes'));
+$xoopsTpl->assign('allow_groups', $controller->checkPrivilege('groups'));
 $xoopsTpl->assign('allow_pictures', $controller->checkPrivilege('pictures'));
 $xoopsTpl->assign('allow_videos', $controller->checkPrivilege('videos'));
 $xoopsTpl->assign('allow_audios', $controller->checkPrivilegeBySection('audio'));
@@ -199,7 +199,7 @@ $xoopsTpl->assign('isanonym', $controller->isAnonym);
 $xoopsTpl->assign('isfriend', $controller->isFriend);
 
 //numbers
-$xoopsTpl->assign('nb_tribes', $nbSections['nbTribes']);
+$xoopsTpl->assign('nb_groups', $nbSections['nbGroups']);
 $xoopsTpl->assign('nb_photos', $nbSections['nbPhotos']);
 $xoopsTpl->assign('nb_videos', $nbSections['nbVideos']);
 $xoopsTpl->assign('nb_notes', $nbSections['nbNotes']);
@@ -217,7 +217,7 @@ $xoopsTpl->assign('lang_audio', _MD_YOGURT_AUDIOS);
 $xoopsTpl->assign('lang_videos', _MD_YOGURT_VIDEOS);
 $xoopsTpl->assign('lang_notebook', _MD_YOGURT_NOTEBOOK);
 $xoopsTpl->assign('lang_profile', _MD_YOGURT_PROFILE);
-$xoopsTpl->assign('lang_tribes', _MD_YOGURT_TRIBES);
+$xoopsTpl->assign('lang_groups', _MD_YOGURT_GROUPS);
 $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 
 //xoopsToken
@@ -228,22 +228,22 @@ $xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule-
 
 //$xoopsTpl->assign('path_yogurt_uploads',$xoopsModuleConfig['link_path_upload']);
 
-//tribes
-$xoopsTpl->assign('tribes', $tribes);
-if ($nbSections['nbTribes'] <= 0) {
-    $xoopsTpl->assign('lang_notribesyet', _MD_YOGURT_NOTRIBESYET);
+//groups
+$xoopsTpl->assign('groups', $groups);
+if ($nbSections['nbGroups'] <= 0) {
+    $xoopsTpl->assign('lang_nogroupsyet', _MD_YOGURT_NOGROUPSYET);
 }
-$xoopsTpl->assign('lang_viewalltribes', _MD_YOGURT_ALLTRIBES);
+$xoopsTpl->assign('lang_viewallgroups', _MD_YOGURT_ALLGROUPS);
 
 //evaluations
 $xoopsTpl->assign('lang_fans', _MD_YOGURT_FANS);
 $xoopsTpl->assign('nb_fans', $evaluation['sumfan']);
-$xoopsTpl->assign('lang_trusty', _MD_YOGURT_TRUSTY);
-$xoopsTpl->assign('trusty', $evaluation['mediatrust']);
-$xoopsTpl->assign('trusty_rest', 48 - $evaluation['mediatrust']);
-$xoopsTpl->assign('lang_sexy', _MD_YOGURT_SEXY);
-$xoopsTpl->assign('sexy', $evaluation['mediahot']);
-$xoopsTpl->assign('sexy_rest', 48 - $evaluation['mediahot']);
+$xoopsTpl->assign('lang_funny', _MD_YOGURT_FUNNY);
+$xoopsTpl->assign('funny', $evaluation['mediatrust']);
+$xoopsTpl->assign('funny_rest', 48 - $evaluation['mediatrust']);
+$xoopsTpl->assign('lang_friendly', _MD_YOGURT_FRIENDLY);
+$xoopsTpl->assign('friendly', $evaluation['mediahot']);
+$xoopsTpl->assign('friendly_rest', 48 - $evaluation['mediahot']);
 $xoopsTpl->assign('lang_cool', _MD_YOGURT_COOL);
 $xoopsTpl->assign('cool', $evaluation['mediacool']);
 $xoopsTpl->assign('cool_rest', 48 - $evaluation['mediacool']);
@@ -265,13 +265,16 @@ if (1 == $petition) {
     $xoopsTpl->assign('lang_askingfriend', sprintf(_MD_YOGURT_ASKINGFRIEND, $linkedpetioner));
 }
 $xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
+$xoopsTpl->assign('lang_addasafriend', _MD_YOGURT_ADDASAFRIEND);
 
-//Avatar and Main Video
+//Avatar and Main 
 $xoopsTpl->assign('avatar_url', $avatar);
 $xoopsTpl->assign('lang_selectavatar', _MD_YOGURT_SELECTAVATAR);
 $xoopsTpl->assign('lang_selectmainvideo', _MD_YOGURT_SELECTMAINVIDEO);
 $xoopsTpl->assign('lang_noavatar', _MD_YOGURT_NOAVATARYET);
 $xoopsTpl->assign('lang_nomainvideo', _MD_YOGURT_NOMAINVIDEOYET);
+$xoopsTpl->assign('lang_featuredvideo', _MD_YOGURT_FEATUREDVIDEO);
+$xoopsTpl->assign('lang_viewallvideos', _MD_YOGURT_ALLVIDEOS);
 
 if ($nbSections['nbVideos'] > 0) {
     $xoopsTpl->assign('mainvideocode', $mainvideocode);
@@ -297,6 +300,7 @@ $xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
 $xoopsTpl->assign('lang_editdesc', _MD_YOGURT_EDITDESC);
 
 $xoopsTpl->assign('lang_visitors', _MD_YOGURT_VISITORS);
+$xoopsTpl->assign('lang_profilevisitors', _MD_YOGURT_PROFILEVISITORS);
 
 $xoopsTpl->assign('lang_editprofile', _MD_YOGURT_EDITPROFILE);
 

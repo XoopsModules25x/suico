@@ -2,9 +2,9 @@
 
 <{if ($showForm==1) }>
 <div id="yogurt-album-form" class="outer">
-    <h2 class="head">
+    <h4 class="head">
         <{$lang_formtitle}>
-    </h2>
+    </h4>
     <form name="form_picture" id="form_picture" action="submit.php" method="post" enctype="multipart/form-data">
         <p class="odd"><{$token}><label class="yogurt-album-label-alert"><{$lang_youcanupload}></label></p>
         <p class="even"><label class="yogurt-album-label-alert"><{$lang_nb_pict}> <{$lang_max_nb_pict}></label></p>
@@ -15,15 +15,15 @@
         <p class="foot"><input type='submit' class='formButton' name='submit_button' id='submit_button' value='<{$lang_uploadpicture}>'></p>
     </form>
 </div>
-<{ /if}>
+<{/if}>
 <div id="yogurt-album-container" class="outer">
-    <h2 class="head">
+    <h4 class="head">
         <{if $isOwner}>
             <{$lang_mysection}>
         <{else}>
             <{$owner_uname}> <{$section_name}>
         <{/if}>
-    </h2>
+    </h4>
     <{if $lang_nopicyet=="" }>
     <{section name=i loop=$pics_array}>
     <{if (($pics_array[i].private == 0) || ($isOwner==1)) }>
@@ -58,19 +58,19 @@
     <{if ($pics_array[i].private == 1) }>
         <p><span class="yogurt-album-private"> Private </span></p>
     <{/if}>
-    <p class="yogurt-album-picture-img"><a href="<{$xoops_url}>/uploads/yogurt/photos/resized_<{$pics_array[i].url}>" rel="lightbox[album]" title="<{$pics_array[i].desc}>">
-            <img class="thumb" src="<{$xoops_url}>/uploads/yogurt/photos/thumb_<{$pics_array[i].url}>" rel="lightbox" title="<{$pics_array[i].desc}>">
+    <p class="yogurt-album-picture-img"><a href="<{$xoops_url}>/uploads/yogurt/images/resized_<{$pics_array[i].url}>" rel="lightbox[album]" title="<{$pics_array[i].desc}>">
+            <img class="thumb" src="<{$xoops_url}>/uploads/yogurt/images/thumb_<{$pics_array[i].url}>" rel="lightbox" title="<{$pics_array[i].desc}>">
         </a></p>
     <p id="yogurt-album-picture-desc"><{$pics_array[i].desc}></p>
 </div>
     <{/if}>
     <{/section}>
 <{else}>
-    <h2 id="yogurt-album-nopic"><{$lang_nopicyet}></h2>
+    <h4 id="yogurt-album-nopic"><{$lang_nopicyet}></h4>
 <{/if}>
 </div>
 <{if $navegacao!='' }>
 <div id="yogurt-navegacao"><{$navegacao}></div>
-<{ /if}>
+<{/if}>
 <div style="clear:both;width:100%"></div>
 <{include file="db:yogurt_footer.tpl"}>

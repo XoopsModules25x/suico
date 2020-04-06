@@ -2,7 +2,7 @@
 
 namespace XoopsModules\Yogurt;
 
-// Reltribeuser.php,v 1
+// Relgroupuser.php,v 1
 //  ---------------------------------------------------------------- //
 // Author: Bruno Barthez                                               //
 // ----------------------------------------------------------------- //
@@ -10,14 +10,14 @@ namespace XoopsModules\Yogurt;
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
 // -------------------------------------------------------------------------
-// ------------------Reltribeuser user handler class -------------------
+// ------------------Relgroupuser user handler class -------------------
 // -------------------------------------------------------------------------
 
 /**
- * yogurt_reltribeuserhandler class.
- * This class provides simple mecanisme for Reltribeuser object
+ * yogurt_relgroupuserhandler class.
+ * This class provides simple mecanisme for Relgroupuser object
  */
-class ReltribeuserHandler extends \XoopsPersistableObjectHandler
+class RelgroupuserHandler extends \XoopsPersistableObjectHandler
 {
     /**
      * @var Helper
@@ -40,14 +40,14 @@ class ReltribeuserHandler extends \XoopsPersistableObjectHandler
             $this->helper = $helper;
         }
         $isAdmin = $this->helper->isUserAdmin();
-        parent::__construct($db, 'yogurt_reltribeuser', Reltribeuser::class, 'rel_id', 'rel_id');
+        parent::__construct($db, 'yogurt_relgroupuser', Relgroupuser::class, 'rel_id', 'rel_id');
     }
 
     /**
-     * create a new Tribes
+     * create a new Groups
      *
      * @param bool $isNew flag the new objects as "new"?
-     * @return \XoopsObject Tribes
+     * @return \XoopsObject Groups
      */
     public function create($isNew = true)
     {
@@ -65,64 +65,64 @@ class ReltribeuserHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * retrieve a Reltribeuser
+     * retrieve a Relgroupuser
      *
-     * @param int $id of the Reltribeuser
-     * @return mixed reference to the {@link Reltribeuser} object, FALSE if failed
+     * @param int $id of the Relgroupuser
+     * @return mixed reference to the {@link Relgroupuser} object, FALSE if failed
      */
     public function get($id = null, $fields = null)
     {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_reltribeuser') . ' WHERE rel_id=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_relgroupuser') . ' WHERE rel_id=' . $id;
         if (!$result = $this->db->query($sql)) {
             return false;
         }
         $numrows = $this->db->getRowsNum($result);
         if (1 == $numrows) {
-            $yogurt_reltribeuser = new Reltribeuser();
-            $yogurt_reltribeuser->assignVars($this->db->fetchArray($result));
+            $yogurt_relgroupuser = new Relgroupuser();
+            $yogurt_relgroupuser->assignVars($this->db->fetchArray($result));
 
-            return $yogurt_reltribeuser;
+            return $yogurt_relgroupuser;
         }
 
         return false;
     }
 
     /**
-     * insert a new Reltribeuser in the database
+     * insert a new Relgroupuser in the database
      *
-     * @param \XoopsObject $yogurt_reltribeuser reference to the {@link Reltribeuser}
+     * @param \XoopsObject $yogurt_relgroupuser reference to the {@link Relgroupuser}
      *                                          object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(\XoopsObject $yogurt_reltribeuser, $force = false)
+    public function insert(\XoopsObject $yogurt_relgroupuser, $force = false)
     {
         global $xoopsConfig;
-        if (!$yogurt_reltribeuser instanceof Reltribeuser) {
+        if (!$yogurt_relgroupuser instanceof Relgroupuser) {
             return false;
         }
-        if (!$yogurt_reltribeuser->isDirty()) {
+        if (!$yogurt_relgroupuser->isDirty()) {
             return true;
         }
-        if (!$yogurt_reltribeuser->cleanVars()) {
+        if (!$yogurt_relgroupuser->cleanVars()) {
             return false;
         }
-        foreach ($yogurt_reltribeuser->cleanVars as $k => $v) {
+        foreach ($yogurt_relgroupuser->cleanVars as $k => $v) {
             ${$k} = $v;
         }
         $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
-        if ($yogurt_reltribeuser->isNew()) {
-            // ajout/modification d'un Reltribeuser
-            $yogurt_reltribeuser = new Reltribeuser();
-            $format              = 'INSERT INTO %s (rel_id, rel_tribe_id, rel_user_uid)';
+        if ($yogurt_relgroupuser->isNew()) {
+            // ajout/modification d'un Relgroupuser
+            $yogurt_relgroupuser = new Relgroupuser();
+            $format              = 'INSERT INTO %s (rel_id, rel_group_id, rel_user_uid)';
             $format              .= 'VALUES (%u, %u, %u)';
-            $sql                 = sprintf($format, $this->db->prefix('yogurt_reltribeuser'), $rel_id, $rel_tribe_id, $rel_user_uid);
+            $sql                 = sprintf($format, $this->db->prefix('yogurt_relgroupuser'), $rel_id, $rel_group_id, $rel_user_uid);
             $force               = true;
         } else {
             $format = 'UPDATE %s SET ';
-            $format .= 'rel_id=%u, rel_tribe_id=%u, rel_user_uid=%u';
+            $format .= 'rel_id=%u, rel_group_id=%u, rel_user_uid=%u';
             $format .= ' WHERE rel_id = %u';
-            $sql    = sprintf($format, $this->db->prefix('yogurt_reltribeuser'), $rel_id, $rel_tribe_id, $rel_user_uid, $rel_id);
+            $sql    = sprintf($format, $this->db->prefix('yogurt_relgroupuser'), $rel_id, $rel_group_id, $rel_user_uid, $rel_id);
         }
         if ($force) {
             $result = $this->db->queryF($sql);
@@ -135,24 +135,24 @@ class ReltribeuserHandler extends \XoopsPersistableObjectHandler
         if (empty($rel_id)) {
             $rel_id = $this->db->getInsertId();
         }
-        $yogurt_reltribeuser->assignVar('rel_id', $rel_id);
+        $yogurt_relgroupuser->assignVar('rel_id', $rel_id);
 
         return true;
     }
 
     /**
-     * delete a Reltribeuser from the database
+     * delete a Relgroupuser from the database
      *
-     * @param \XoopsObject $yogurt_reltribeuser reference to the Reltribeuser to delete
+     * @param \XoopsObject $yogurt_relgroupuser reference to the Relgroupuser to delete
      * @param bool         $force
      * @return bool FALSE if failed.
      */
-    public function delete(\XoopsObject $yogurt_reltribeuser, $force = false)
+    public function delete(\XoopsObject $yogurt_relgroupuser, $force = false)
     {
-        if (!$yogurt_reltribeuser instanceof Reltribeuser) {
+        if (!$yogurt_relgroupuser instanceof Relgroupuser) {
             return false;
         }
-        $sql = sprintf('DELETE FROM %s WHERE rel_id = %u', $this->db->prefix('yogurt_reltribeuser'), $yogurt_reltribeuser->getVar('rel_id'));
+        $sql = sprintf('DELETE FROM %s WHERE rel_id = %u', $this->db->prefix('yogurt_relgroupuser'), $yogurt_relgroupuser->getVar('rel_id'));
         if ($force) {
             $result = $this->db->queryF($sql);
         } else {
@@ -166,17 +166,17 @@ class ReltribeuserHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * retrieve yogurt_reltribeusers from the database
+     * retrieve yogurt_relgroupusers from the database
      *
      * @param null|\CriteriaElement|\CriteriaCompo $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key use the UID as key for the array?
-     * @return array array of {@link Reltribeuser} objects
+     * @return array array of {@link Relgroupuser} objects
      */
     public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
     {
         $ret   = [];
         $limit = $start = 0;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_reltribeuser');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_relgroupuser');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' != $criteria->getSort()) {
@@ -190,28 +190,28 @@ class ReltribeuserHandler extends \XoopsPersistableObjectHandler
             return $ret;
         }
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $yogurt_reltribeuser = new Reltribeuser();
-            $yogurt_reltribeuser->assignVars($myrow);
+            $yogurt_relgroupuser = new Relgroupuser();
+            $yogurt_relgroupuser->assignVars($myrow);
             if (!$id_as_key) {
-                $ret[] = &$yogurt_reltribeuser;
+                $ret[] = &$yogurt_relgroupuser;
             } else {
-                $ret[$myrow['rel_id']] = &$yogurt_reltribeuser;
+                $ret[$myrow['rel_id']] = &$yogurt_relgroupuser;
             }
-            unset($yogurt_reltribeuser);
+            unset($yogurt_relgroupuser);
         }
 
         return $ret;
     }
 
     /**
-     * count yogurt_reltribeusers matching a condition
+     * count yogurt_relgroupusers matching a condition
      *
      * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link \CriteriaElement} to match
-     * @return int count of yogurt_reltribeusers
+     * @return int count of yogurt_relgroupusers
      */
     public function getCount(\CriteriaElement $criteria = null)
     {
-        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_reltribeuser');
+        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_relgroupuser');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
@@ -225,14 +225,14 @@ class ReltribeuserHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * delete yogurt_reltribeusers matching a set of conditions
+     * delete yogurt_relgroupusers matching a set of conditions
      *
      * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link \CriteriaElement}
      * @return bool FALSE if deletion failed
      */
     public function deleteAll(\CriteriaElement $criteria = null, $force = true, $asObject = false)
     {
-        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_reltribeuser');
+        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_relgroupuser');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
@@ -244,20 +244,20 @@ class ReltribeuserHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * @param      $nbtribes
+     * @param      $nbgroups
      * @param null $criteria
      * @param int  $shuffle
      * @return array
      */
-    public function getTribes($nbtribes, $criteria = null, $shuffle = 1)
+    public function getGroups($nbgroups, $criteria = null, $shuffle = 1)
     {
         $ret = [];
 
-        $sql = 'SELECT rel_id, rel_tribe_id, rel_user_uid, tribe_title, tribe_desc, tribe_img, owner_uid FROM ' . $this->db->prefix('yogurt_tribes') . ', ' . $this->db->prefix('yogurt_reltribeuser');
+        $sql = 'SELECT rel_id, rel_group_id, rel_user_uid, group_title, group_desc, group_img, owner_uid FROM ' . $this->db->prefix('yogurt_groups') . ', ' . $this->db->prefix('yogurt_relgroupuser');
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             //attention here this is kind of a hack
-            $sql .= ' AND tribe_id = rel_tribe_id ';
+            $sql .= ' AND group_id = rel_group_id ';
             if ('' != $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
@@ -269,19 +269,19 @@ class ReltribeuserHandler extends \XoopsPersistableObjectHandler
             $i      = 0;
 
             while (false !== ($myrow = $this->db->fetchArray($result))) {
-                $vetor[$i]['title']    = $myrow['tribe_title'];
-                $vetor[$i]['desc']     = $myrow['tribe_desc'];
-                $vetor[$i]['img']      = $myrow['tribe_img'];
+                $vetor[$i]['title']    = $myrow['group_title'];
+                $vetor[$i]['desc']     = $myrow['group_desc'];
+                $vetor[$i]['img']      = $myrow['group_img'];
                 $vetor[$i]['id']       = $myrow['rel_id'];
                 $vetor[$i]['uid']      = $myrow['owner_uid'];
-                $vetor[$i]['tribe_id'] = $myrow['rel_tribe_id'];
+                $vetor[$i]['group_id'] = $myrow['rel_group_id'];
 
                 $i++;
             }
 
             if (1 == $shuffle) {
                 shuffle($vetor);
-                $vetor = array_slice($vetor, 0, $nbtribes);
+                $vetor = array_slice($vetor, 0, $nbgroups);
             }
 
             return $vetor;
@@ -289,18 +289,18 @@ class ReltribeuserHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * @param     $tribeId
+     * @param     $groupId
      * @param     $start
      * @param     $nbUsers
      * @param int $isShuffle
      * @return array
      */
-    public function getUsersFromTribe($tribeId, $start, $nbUsers, $isShuffle = 0)
+    public function getUsersFromGroup($groupId, $start, $nbUsers, $isShuffle = 0)
     {
         $ret = [];
 
-        $sql = 'SELECT rel_tribe_id, rel_user_uid, owner_uid, uname, user_avatar, uid FROM ' . $this->db->prefix('users') . ', ' . $this->db->prefix('yogurt_tribes') . ', ' . $this->db->prefix('yogurt_reltribeuser');
-        $sql .= ' WHERE rel_user_uid = uid AND rel_tribe_id = tribe_id AND tribe_id =' . $tribeId . ' GROUP BY rel_user_uid ';
+        $sql = 'SELECT rel_group_id, rel_user_uid, owner_uid, uname, user_avatar, uid FROM ' . $this->db->prefix('users') . ', ' . $this->db->prefix('yogurt_groups') . ', ' . $this->db->prefix('yogurt_relgroupuser');
+        $sql .= ' WHERE rel_user_uid = uid AND rel_group_id = group_id AND group_id =' . $groupId . ' GROUP BY rel_user_uid ';
 
         $result = $this->db->query($sql, $nbUsers, $start);
         $ret    = [];
