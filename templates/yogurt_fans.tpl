@@ -27,10 +27,10 @@
     <{/section}>
     <{else}>
     <h4 id="yogurt-friends-nofriends"><{$lang_nofansyet}></h4>
-    <{ /if}>
+    <{/if}>
 </div>
 <{if $navegacao!='' }>
 <div id="yogurt-navegacao"><{$navegacao}></div>
-<{ /if}>
+<{/if}>
 
 <{include file="db:yogurt_footer.tpl"}>
