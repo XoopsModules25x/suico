@@ -219,10 +219,9 @@
 </div><!-- end of div of group1 -->
 
 <div class="yogurt-profile-group2">
-
-    <div id="yogurt-profile-friends" class="outer">
-        <h4 id="titulo-friends" class="head"><{$lang_featuredvideo}></h4>
-        <{if $allow_videos==1 }>
+    <{if $allow_videos==1 }>
+        <div id="yogurt-profile-friends" class="outer">
+            <h4 id="titulo-friends" class="head"><{$lang_featuredvideo}></h4>
             <div id="yogurt-profile-group">
                 <{if $mainvideocode!="" }>
                     <object width="200" height="150">
@@ -242,9 +241,8 @@
                         </p>
                 <{/if}>
             </div>
-        <{/if}>
-    </div>
-
+        </div>
+    <{/if}>
     <{if $allow_friends==1 }>
         <div id="yogurt-profile-friends" class="outer">
             <h4 id="titulo-friends" class="head"><{$lang_friendstitle}> (<{$nb_friends}>)</h4>
