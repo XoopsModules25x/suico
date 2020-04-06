@@ -114,7 +114,7 @@ overflow:hidden;
 }
 
 
-div#yogurt-profile-tribes, div#yogurt-profile-friends {
+div#yogurt-profile-groups, div#yogurt-profile-friends {
 margin:3px;
 padding:1px;
 width:95%;
@@ -184,7 +184,7 @@ width:100%;
 overflow:hidden;
 }
 
-div#yogurt-profile-tribes h2, div#yogurt-profile-search-results p, div#yogurt-profile-statistics p, div#yogurt-profile-details p, div#yogurt-profile-search-results h2, div#yogurt-profile-search-results h4, div#yogurt-profile-friends h2, div#yogurt-profile-visual h2, div#yogurt-profile-statistics h2, div#yogurt-profile-details h2 {
+div#yogurt-profile-groups h2, div#yogurt-profile-search-results p, div#yogurt-profile-statistics p, div#yogurt-profile-details p, div#yogurt-profile-search-results h2, div#yogurt-profile-search-results h4, div#yogurt-profile-friends h2, div#yogurt-profile-visual h2, div#yogurt-profile-statistics h2, div#yogurt-profile-details h2 {
 margin:0;
 }
 
@@ -401,17 +401,17 @@ width:300px;
 overflow:hidden;
 }
 
-p#trustybw{
+p#funnybw{
 display:inline;
 height:18px;
-background-image:url(../images/trustybw.gif);
+background-image:url(../images/funnybw.gif);
 background-repeat:no-repeat;
 width:48px;
 }
 
-span#trustycolor {
+span#funnycolor {
 width:32px;
-background-image:url(../images/trustycolor.gif);
+background-image:url(../images/funnycolor.gif);
 background-repeat:no-repeat;
 }
 
@@ -429,17 +429,17 @@ background-image:url(../images/coolcolor.gif);
 background-repeat:no-repeat;
 }
 
-p#sexybw{
+p#friendlybw{
 display:inline;
 height:18px;
-background-image:url(../images/sexybw.gif);
+background-image:url(../images/friendlybw.gif);
 background-repeat:no-repeat;
 width:48px;
 }
 
-span#sexycolor {
+span#friendlycolor {
 width:32px;
-background-image:url(../images/sexycolor.gif);
+background-image:url(../images/friendlycolor.gif);
 background-repeat:no-repeat;
 }
 
@@ -497,10 +497,10 @@ display:inline;
 
 
 /*********************************************************************************************************
-tribes
+groups
 */
 
-div#yogurt-tribe-edit-members, form#yogurt-tribe-edit-form, form#form_tribe_search, form#form_tribe, div#yogurt-tribe-container, div#yogurt-tribes-container, div#yogurt-mytribes-container{
+div#yogurt-group-edit-members, form#yogurt-group-edit-form, form#form_group_search, form#form_group, div#yogurt-group-container, div#yogurt-groups-container, div#yogurt-mygroups-container{
 margin:3px;
 float:left;
 padding:1px;
@@ -508,13 +508,13 @@ width:95%;
 overflow:hidden;
 }
 
-div#yogurt-tribe-edit-members h2, div.yogurt-tribe-edit-member h2, form#yogurt-tribe-edit-form h2, form#form_tribe_search h2, form#form_tribe h2, div#yogurt-tribes-container h2, div#yogurt-mytribes-container h2, div#yogurt-tribe-container p,div#yogurt-tribe-container h2{
+div#yogurt-group-edit-members h2, div.yogurt-group-edit-member h2, form#yogurt-group-edit-form h2, form#form_group_search h2, form#form_group h2, div#yogurt-groups-container h2, div#yogurt-mygroups-container h2, div#yogurt-group-container p,div#yogurt-group-container h2{
 margin:0;
 }
 
 
 
-div.yogurt-tribe-edit-member, div.yogurt-tribe-my{
+div.yogurt-group-edit-member, div.yogurt-group-my{
 margin:1px;
 width:23%;
 height:250px;
@@ -522,20 +522,20 @@ float:left;
 text-align:center;
 }
 
-div.yogurt-tribe-all{
+div.yogurt-group-all{
 min-height:100px;
 }
 
-div.yogurt-tribe-all img{
+div.yogurt-group-all img{
 float:left;
 margin:3px;
 }
 
-form#form_tribe_search p, form#yogurt-tribe-edit-form p, form#form_tribe p, div.yogurt-tribe-all h4, div.yogurt-tribe-all p{
+form#form_group_search p, form#yogurt-group-edit-form p, form#form_group p, div.yogurt-group-all h4, div.yogurt-group-all p{
 margin:1px;
 }
 
-form.yogurt-tribes-form-becomemember,form.yogurt-tribes-form-delete,form.yogurt-tribes-form-edit {
+form.yogurt-groups-form-becomemember,form.yogurt-groups-form-delete,form.yogurt-groups-form-edit {
 display:inline;
 }
 

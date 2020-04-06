@@ -75,9 +75,9 @@ define('_MI_YOGURT_TUBEH_TITLE', 'H&ouml;he von YouTube-Videos');
 define('_MI_YOGURT_TUBEH_DESC', 'H&ouml;he in Pixel f&uuml;r den YouTube-Videoplayer');
 define('_MI_YOGURT_PICTURE_TEMPLATENOTEBOOKDESC', 'Vorlage f&uuml;r das G&auml;stebuch');
 define('_MI_YOGURT_PICTURE_TEMPLATESEUTUBODESC', 'Vorlage f&uuml;r die Video-Sektion');
-define('_MI_YOGURT_PICTURE_TEMPLATETRIBESDESC', 'Vorlage f&uuml;r die Gruppen');
+define('_MI_YOGURT_PICTURE_TEMPLATEGROUPSDESC', 'Vorlage f&uuml;r die Gruppen');
 define('_MI_YOGURT_MYNOTES', 'Mein G&auml;stebuch');
-define('_MI_YOGURT_MYTRIBES', 'Meine Gruppen');
+define('_MI_YOGURT_MYGROUPS', 'Meine Gruppen');
 define('_MI_YOGURT_TEMPLATENAVBARDESC', 'Vorlage f&uuml;r die obere Navigationsleiste, die in allen Seiten verwendet wird');
 
 define('_MI_YOGURT_VIDEOSPERPAGE_TITLE', 'Videos je Seite');
@@ -104,14 +104,14 @@ define('_MI_YOGURT_MAINTUBEH_DESC', 'H&ouml;he des Videos, welches in der Starts
 define('_MI_YOGURT_MYCONFIGS', 'Meine Einstellungen');
 define('_MI_YOGURT_PICTURE_TEMPLATECONFIGSDESC', 'Vorlage Einstellungen f&uuml;r den User');
 define('_MI_YOGURT_PICTURE_TEMPLATEFOOTERDESC', 'Vorlage f&uuml;r den Footer des Moduls');
-define('_MI_YOGURT_PICTURE_TEMPLATEEDITTRIBE', 'Vorlage f&uuml;r die Attribute der Gruppenseite');
+define('_MI_YOGURT_PICTURE_TEMPLATEEDITGROUP', 'Vorlage f&uuml;r die Attribute der Gruppenseite');
 define('_MI_YOGURT_LICENSE', 'Creative Commons Lizenz - Version 2.5 Brazil Lizenz');
 
 //19/10/2007
-define('_MI_YOGURT_TRIBESPERPAGE_TITLE', 'Gruppen je Seite');
-define('_MI_YOGURT_TRIBESPERPAGE_DESC', 'Gruppen je Seite vor Seitenumruch');
+define('_MI_YOGURT_GROUPSPERPAGE_TITLE', 'Gruppen je Seite');
+define('_MI_YOGURT_GROUPSPERPAGE_DESC', 'Gruppen je Seite vor Seitenumruch');
 define('_MI_YOGURT_PICTURE_TEMPLATESEARCHRESULTDESC', 'Diese Vorlage zeigt das Ergebnis einer Suche nach Gruppen');
-define('_MI_YOGURT_PICTURE_TEMPLATETRIBEDESC', 'Diese Vorlage zeigt eine Gruppe und seine Mitglieder');
+define('_MI_YOGURT_PICTURE_TEMPLATEGROUPDESC', 'Diese Vorlage zeigt eine Gruppe und seine Mitglieder');
 
 //22/10/2007
 define('_MI_YOGURT_MYPROFILE', 'Mein Profil');
@@ -128,8 +128,8 @@ define('_MI_YOGURT_ENABLEVIDEOS_TITLE', 'Aktiviere Video-Sektion');
 define('_MI_YOGURT_ENABLEVIDEOS_DESC', 'Das Aktivieren der Videogallerie erm&ouml;glicht den Usern ein Verlinken von Videos in ihrem Profil');
 define('_MI_YOGURT_ENABLENOTES_TITLE', 'Aktiviere G&auml;stebuch-Sektion');
 define('_MI_YOGURT_ENABLENOTES_DESC', "Das Aktivieren der G&auml;stebuchfunktion erm&ouml;glicht Usern, Nachrichten bei anderen Usern zu hinterlassen. Diese Funktion ist wie die 'Wall' bei Facebook ");
-define('_MI_YOGURT_ENABLETRIBES_TITLE', 'Aktiviere Gruppen-Sektion');
-define('_MI_YOGURT_ENABLETRIBES_DESC', 'Das Aktivieren dieser Funktion erm&ouml;glicht das Anlegen von Gruppen, die die Interessen von Usern wiedergeben');
+define('_MI_YOGURT_ENABLEGROUPS_TITLE', 'Aktiviere Gruppen-Sektion');
+define('_MI_YOGURT_ENABLEGROUPS_DESC', 'Das Aktivieren dieser Funktion erm&ouml;glicht das Anlegen von Gruppen, die die Interessen von Usern wiedergeben');
 define('_MI_YOGURT_NOTESPERPAGE_TITLE', 'Anzahl G&auml;stebucheintr&auml;ge je Seite');
 define('_MI_YOGURT_NOTESPERPAGE_DESC', 'Anzahl G&auml;stebucheintr&auml;ge, bevor die Seitennavigation angezeigt wird');
 

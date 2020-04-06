@@ -1,7 +1,7 @@
-<{if $reltribeuserRows > 0}>
+<{if $relgroupuserRows > 0}>
     <div class="outer">
-        <form name="select" action="reltribeuser.php?op=" method="POST"
-              onsubmit="if(window.document.select.op.value =='') {return false;} else if (window.document.select.op.value =='delete') {return deleteSubmitValid('reltribeuserId[]');} else if (isOneChecked('reltribeuserId[]')) {return true;} else {alert('<{$smarty.const.AM_RELTRIBEUSER_SELECTED_ERROR}>'); return false;}">
+        <form name="select" action="relgroupuser.php?op=" method="POST"
+              onsubmit="if(window.document.select.op.value =='') {return false;} else if (window.document.select.op.value =='delete') {return deleteSubmitValid('relgroupuserId[]');} else if (isOneChecked('relgroupuserId[]')) {return true;} else {alert('<{$smarty.const.AM_RELGROUPUSER_SELECTED_ERROR}>'); return false;}">
             <input type="hidden" name="confirm" value="1"/>
             <div class="floatleft">
                 <select name="op">
@@ -15,25 +15,25 @@
             </div>
 
 
-            <table class="$reltribeuser" cellpadding="0" cellspacing="0" width="100%">
+            <table class="$relgroupuser" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                     <th align="center" width="5%"><input name="allbox" title="allbox" id="allbox" onclick="xoopsCheckAll('select', 'allbox');" type="checkbox" title="Check All" value="Check All"/></th>
                     <th class="left"><{$selectorrel_id}></th>
-                    <th class="left"><{$selectorrel_tribe_id}></th>
+                    <th class="left"><{$selectorrel_group_id}></th>
                     <th class="left"><{$selectorrel_user_uid}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
-                <{foreach item=reltribeuserArray from=$reltribeuserArrays}>
+                <{foreach item=relgroupuserArray from=$relgroupuserArrays}>
                     <tr class="<{cycle values="odd,even"}>">
 
-                        <td align="center" style="vertical-align:middle;"><input type="checkbox" name="reltribeuser_id[]" title="reltribeuser_id[]" id="reltribeuser_id[]" value="<{$reltribeuserArray.reltribeuser_id}>"/></td>
-                        <td class='left'><{$reltribeuserArray.rel_id}></td>
-                        <td class='left'><{$reltribeuserArray.rel_tribe_id}></td>
-                        <td class='left'><{$reltribeuserArray.rel_user_uid}></td>
+                        <td align="center" style="vertical-align:middle;"><input type="checkbox" name="relgroupuser_id[]" title="relgroupuser_id[]" id="relgroupuser_id[]" value="<{$relgroupuserArray.relgroupuser_id}>"/></td>
+                        <td class='left'><{$relgroupuserArray.rel_id}></td>
+                        <td class='left'><{$relgroupuserArray.rel_group_id}></td>
+                        <td class='left'><{$relgroupuserArray.rel_user_uid}></td>
 
 
-                        <td class="center width5"><{$reltribeuserArray.edit_delete}></td>
+                        <td class="center width5"><{$relgroupuserArray.edit_delete}></td>
                     </tr>
                 <{/foreach}>
             </table>
@@ -45,13 +45,13 @@
 
                     <th align="center" width="5%"><input name="allbox" title="allbox" id="allbox" onclick="xoopsCheckAll('select', 'allbox');" type="checkbox" title="Check All" value="Check All"/></th>
                     <th class="left"><{$selectorrel_id}></th>
-                    <th class="left"><{$selectorrel_tribe_id}></th>
+                    <th class="left"><{$selectorrel_group_id}></th>
                     <th class="left"><{$selectorrel_user_uid}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
                 <tr>
-                    <td class="errorMsg" colspan="11">There are no $reltribeuser</td>
+                    <td class="errorMsg" colspan="11">There are no $relgroupuser</td>
                 </tr>
             </table>
     </div>

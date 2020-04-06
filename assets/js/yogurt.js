@@ -233,7 +233,7 @@ function changeReplyVisibility(idform) {
 changeVisibility(idform);
 }
 
-function tribeImgSwitch(img) {
+function groupImgSwitch(img) {
 
 var elestyle = xoopsGetElementById(img).style;
 

@@ -107,7 +107,7 @@ class ConfigsHandler extends \XoopsPersistableObjectHandler
             // addition / modification of a Configs
             //            $config_id = null;
             $yogurt_configs = new Configs();
-            $format         = 'INSERT INTO %s (config_id, config_uid, pictures, audio, videos, tribes, notes, friends, profile_contact, profile_general, profile_stats, suspension, backup_password, backup_email, end_suspension)';
+            $format         = 'INSERT INTO %s (config_id, config_uid, pictures, audio, videos, groups, notes, friends, profile_contact, profile_general, profile_stats, suspension, backup_password, backup_email, end_suspension)';
             $format         .= 'VALUES (%u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %s, %s, %s)';
             $sql            = sprintf(
                 $format,
@@ -117,7 +117,7 @@ class ConfigsHandler extends \XoopsPersistableObjectHandler
                 $pictures,
                 $audio,
                 $videos,
-                $tribes,
+                $groups,
                 $notes,
                 $friends,
                 $profile_contact,
@@ -131,7 +131,7 @@ class ConfigsHandler extends \XoopsPersistableObjectHandler
             $force          = true;
         } else {
             $format = 'UPDATE %s SET ';
-            $format .= 'config_id=%u, config_uid=%u, pictures=%u, audio=%u, videos=%u, tribes=%u, notes=%u, friends=%u, profile_contact=%u, profile_general=%u, profile_stats=%u, suspension=%u, backup_password=%s, backup_email=%s, end_suspension=%s';
+            $format .= 'config_id=%u, config_uid=%u, pictures=%u, audio=%u, videos=%u, groups=%u, notes=%u, friends=%u, profile_contact=%u, profile_general=%u, profile_stats=%u, suspension=%u, backup_password=%s, backup_email=%s, end_suspension=%s';
             $format .= ' WHERE config_id = %u';
             $sql    = sprintf(
                 $format,
@@ -141,7 +141,7 @@ class ConfigsHandler extends \XoopsPersistableObjectHandler
                 $pictures,
                 $audio,
                 $videos,
-                $tribes,
+                $groups,
                 $notes,
                 $friends,
                 $profile_contact,

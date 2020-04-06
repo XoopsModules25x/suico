@@ -3,7 +3,7 @@
 <{/if}>
 
 <{$searchform.javascript}>
-<h2><{$searchform.title}></h2>
+<h4><{$searchform.title}></h4>
 <form name="<{$searchform.name}>" action="<{$searchform.action}>" method="<{$searchform.method}>" <{$searchform.extra}>>
     <div>
         <!-- start of form elements loop -->

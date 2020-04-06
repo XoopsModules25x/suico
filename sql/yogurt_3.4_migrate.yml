@@ -117,14 +117,14 @@ yogurt_video:
         PRIMARY:
             columns: video_id
             unique: true
-yogurt_reltribeuser:
+yogurt_relgroupuser:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
         -
             name: rel_id
             attributes: ' int(11)  NOT NULL auto_increment'
         -
-            name: rel_tribe_id
+            name: rel_group_id
             attributes: ' int(11)  NOT NULL '
         -
             name: rel_user_uid
@@ -133,27 +133,27 @@ yogurt_reltribeuser:
         PRIMARY:
             columns: rel_id
             unique: true
-yogurt_tribes:
+yogurt_groups:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
         -
-            name: tribe_id
+            name: group_id
             attributes: ' int(11)  NOT NULL auto_increment'
         -
             name: owner_uid
             attributes: ' int(11)  NOT NULL '
         -
-            name: tribe_title
+            name: group_title
             attributes: ' varchar(255)  NOT NULL '
         -
-            name: tribe_desc
+            name: group_desc
             attributes: ' tinytext  NOT NULL '
         -
-            name: tribe_img
+            name: group_img
             attributes: ' varchar(255)  NOT NULL '
     keys:
         PRIMARY:
-            columns: tribe_id
+            columns: group_id
             unique: true
 yogurt_notes:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
@@ -199,7 +199,7 @@ yogurt_configs:
             name: videos
             attributes: ' tinyint(1)  NOT NULL '
         -
-            name: tribes
+            name: groups
             attributes: ' tinyint(1)  NOT NULL '
         -
             name: notes

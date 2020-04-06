@@ -1,7 +1,7 @@
 <{include file="db:yogurt_navbar.tpl"}>
 
 <div id="yogurt-friends-container" class="outer">
-    <h2 class="head"><{$lang_fanstitle}></h2>
+    <h4 class="head"><{$lang_fanstitle}></h4>
     <{if $lang_nofansyet==""}>
 
     <{section name=i loop=$friends}>
@@ -10,7 +10,7 @@
                         <img src="assets/images/noavatar.gif">
                     <{else}>
                         <imgsrc
-                        ="<{$xoops_upload_url}>/yogurt/avatars/<{$friends[i].user_avatar}>"><{/if}><{$friends[i].uname}></a></p>
+                        ="<{$xoops_upload_url}>/<{$friends[i].user_avatar}>"><{/if}><{$friends[i].uname}></a></p>
             <{if $isOwner }>
                 <form action="editfriendship.php" method="post" class="yogurt-friends-deleteform">
                     <input type="hidden" name="friend_uid" id="friend_uid" value="<{$friends[i].uid}>">
@@ -26,7 +26,7 @@
         </div>
     <{/section}>
     <{else}>
-    <h2 id="yogurt-friends-nofriends"><{$lang_nofansyet}></h2>
+    <h4 id="yogurt-friends-nofriends"><{$lang_nofansyet}></h4>
     <{ /if}>
 </div>
 <{if $navegacao!='' }>

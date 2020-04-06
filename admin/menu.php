@@ -72,13 +72,13 @@ $adminmenu[] = [
 
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU7,
-    'link'  => 'admin/tribes.php',
+    'link'  => 'admin/groups.php',
     'icon'  => "{$pathIcon32}/groupmod.png",
 ];
 
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU8,
-    'link'  => 'admin/reltribeuser.php',
+    'link'  => 'admin/relgroupuser.php',
     'icon'  => "{$pathIcon32}/penguin.png",
 ];
 

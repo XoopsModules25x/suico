@@ -37,7 +37,7 @@ return (object)[
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/mp3',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/photos',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/thumbs',
-        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/tribes',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/groups',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/videos',
         //XOOPS_UPLOAD_PATH . '/flags'
     ],
@@ -48,7 +48,7 @@ return (object)[
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/mp3',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/photos',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/thumbs',
-        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/tribes',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/groups',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/videos',
         //XOOPS_UPLOAD_PATH . '/flags'
     ],
@@ -86,7 +86,7 @@ return (object)[
     ],
     'renameTables'    => [
         'yogurt_seutubo' => 'yogurt_video',
-        'yogurt_Tribes'  => 'yogurt_tribes',
+        'yogurt_Groups'  => 'yogurt_groups',
         'yogurt_Configs' => 'yogurt_configs',
     ],
     'renameColumns'   => [

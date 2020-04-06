@@ -34,9 +34,9 @@ $permHelper = new \Xmf\Module\Helper\Permission();
 xoops_load('XoopsFormLoader');
 
 /**
- * Class ReltribeuserForm
+ * Class RelgroupuserForm
  */
-class ReltribeuserForm extends \XoopsThemeForm
+class RelgroupuserForm extends \XoopsThemeForm
 {
     public $targetObject;
     public $helper;
@@ -51,7 +51,7 @@ class ReltribeuserForm extends \XoopsThemeForm
         $this->helper       = $target->helper;
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? sprintf(AM_YOGURT_RELTRIBEUSER_ADD) : sprintf(AM_YOGURT_RELTRIBEUSER_EDIT);
+        $title = $this->targetObject->isNew() ? sprintf(AM_YOGURT_RELGROUPUSER_ADD) : sprintf(AM_YOGURT_RELGROUPUSER_EDIT);
         parent::__construct($title, 'form', xoops_getenv('PHP_SELF'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
 
@@ -62,18 +62,18 @@ class ReltribeuserForm extends \XoopsThemeForm
         unset($hidden);
 
         // Rel_id
-        $this->addElement(new \XoopsFormLabel(AM_YOGURT_RELTRIBEUSER_REL_ID, $this->targetObject->getVar('rel_id'), 'rel_id'));
-        // Rel_tribe_id
-        //$tribesHandler = $this->helper->getHandler('Tribes');
+        $this->addElement(new \XoopsFormLabel(AM_YOGURT_RELGROUPUSER_REL_ID, $this->targetObject->getVar('rel_id'), 'rel_id'));
+        // Rel_group_id
+        //$groupsHandler = $this->helper->getHandler('Groups');
         //$db     = \XoopsDatabaseFactory::getDatabaseConnection();
-        /** @var \XoopsPersistableObjectHandler $tribesHandler */
-        $tribesHandler = $this->helper->getHandler('Tribes');
+        /** @var \XoopsPersistableObjectHandler $groupsHandler */
+        $groupsHandler = $this->helper->getHandler('Groups');
 
-        $tribes_id_select = new \XoopsFormSelect(AM_YOGURT_RELTRIBEUSER_REL_TRIBE_ID, 'rel_tribe_id', $this->targetObject->getVar('rel_tribe_id'));
-        $tribes_id_select->addOptionArray($tribesHandler->getList());
-        $this->addElement($tribes_id_select, false);
+        $groups_id_select = new \XoopsFormSelect(AM_YOGURT_RELGROUPUSER_REL_GROUP_ID, 'rel_group_id', $this->targetObject->getVar('rel_group_id'));
+        $groups_id_select->addOptionArray($groupsHandler->getList());
+        $this->addElement($groups_id_select, false);
         // Rel_user_uid
-        $this->addElement(new \XoopsFormSelectUser(AM_YOGURT_RELTRIBEUSER_REL_USER_UID, 'rel_user_uid', false, $this->targetObject->getVar('rel_user_uid'), 1, false), false);
+        $this->addElement(new \XoopsFormSelectUser(AM_YOGURT_RELGROUPUSER_REL_USER_UID, 'rel_user_uid', false, $this->targetObject->getVar('rel_user_uid'), 1, false), false);
 
         $this->addElement(new \XoopsFormHidden('op', 'save'));
         $this->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));

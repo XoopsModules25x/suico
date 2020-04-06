@@ -23,7 +23,7 @@
                     <th class="left"><{$selectorpictures}></th>
                     <th class="left"><{$selectoraudio}></th>
                     <th class="left"><{$selectorvideos}></th>
-                    <th class="left"><{$selectortribes}></th>
+                    <th class="left"><{$selectorgroups}></th>
                     <th class="left"><{$selectornotes}></th>
                     <th class="left"><{$selectorfriends}></th>
                     <th class="left"><{$selectorprofile_contact}></th>
@@ -45,7 +45,7 @@
                         <td class='left'><{$configsArray.pictures}></td>
                         <td class='left'><{$configsArray.audio}></td>
                         <td class='left'><{$configsArray.videos}></td>
-                        <td class='left'><{$configsArray.tribes}></td>
+                        <td class='left'><{$configsArray.groups}></td>
                         <td class='left'><{$configsArray.notes}></td>
                         <td class='left'><{$configsArray.friends}></td>
                         <td class='left'><{$configsArray.profile_contact}></td>
@@ -73,7 +73,7 @@
                     <th class="left"><{$selectorpictures}></th>
                     <th class="left"><{$selectoraudio}></th>
                     <th class="left"><{$selectorvideos}></th>
-                    <th class="left"><{$selectortribes}></th>
+                    <th class="left"><{$selectorgroups}></th>
                     <th class="left"><{$selectornotes}></th>
                     <th class="left"><{$selectorfriends}></th>
                     <th class="left"><{$selectorprofile_contact}></th>

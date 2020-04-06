@@ -92,15 +92,15 @@ class ConfigsForm extends \XoopsThemeForm
         $video_id_select = new \XoopsFormSelect(AM_YOGURT_CONFIGS_VIDEOS, 'videos', $this->targetObject->getVar('videos'));
         $video_id_select->addOptionArray($videoHandler->getList());
         $this->addElement($video_id_select, false);
-        // Tribes
-        //$tribesHandler = $this->helper->getHandler('Tribes');
+        // Groups
+        //$groupsHandler = $this->helper->getHandler('Groups');
         //$db     = \XoopsDatabaseFactory::getDatabaseConnection();
-        /** @var \XoopsPersistableObjectHandler $tribesHandler */
-        $tribesHandler = $this->helper->getHandler('Tribes');
+        /** @var \XoopsPersistableObjectHandler $groupsHandler */
+        $groupsHandler = $this->helper->getHandler('Groups');
 
-        $tribes_id_select = new \XoopsFormSelect(AM_YOGURT_CONFIGS_TRIBES, 'tribes', $this->targetObject->getVar('tribes'));
-        $tribes_id_select->addOptionArray($tribesHandler->getList());
-        $this->addElement($tribes_id_select, false);
+        $groups_id_select = new \XoopsFormSelect(AM_YOGURT_CONFIGS_GROUPS, 'groups', $this->targetObject->getVar('groups'));
+        $groups_id_select->addOptionArray($groupsHandler->getList());
+        $this->addElement($groups_id_select, false);
         // Notes
         //$notesHandler = $this->helper->getHandler('Notes');
         //$db     = \XoopsDatabaseFactory::getDatabaseConnection();

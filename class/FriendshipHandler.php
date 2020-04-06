@@ -51,10 +51,10 @@ class FriendshipHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * create a new Tribes
+     * create a new Groups
      *
      * @param bool $isNew flag the new objects as "new"?
-     * @return \XoopsObject Tribes
+     * @return \XoopsObject Groups
      */
     public function create($isNew = true)
     {
@@ -353,7 +353,7 @@ class FriendshipHandler extends \XoopsPersistableObjectHandler
         if ('avatars/blank.gif' == $friend->getVar('user_avatar')) {
             $field_friend_avatar = new \XoopsFormLabel(_MD_YOGURT_PHOTO, '<img src=assets/images/noavatar.gif>');
         } else {
-            $field_friend_avatar = new \XoopsFormLabel(_MD_YOGURT_PHOTO, '<img src=../../uploads/yogurt/avatars/' . $friend->getVar('user_avatar') . '>');
+            $field_friend_avatar = new \XoopsFormLabel(_MD_YOGURT_PHOTO, '<img src=../../uploads/' . $friend->getVar('user_avatar') . '>');
         }
         $field_friend_name = new \XoopsFormLabel(_MD_YOGURT_FRIENDNAME, $friend->getVar('uname'));
 
@@ -366,15 +366,15 @@ class FriendshipHandler extends \XoopsPersistableObjectHandler
         $field_friend_level->addOption('5', _MD_YOGURT_FRIEND);
         $field_friend_level->addOption('7', _MD_YOGURT_BESTFRIEND);
 
-        $field_friend_sexy = new \XoopsFormRadio(_MD_YOGURT_SEXY, 'hot', $friendship->getVar('hot'));
-        $field_friend_sexy->addOption('1', '<img src="assets/images/sexya.gif" alt="' . _MD_YOGURT_SEXYNO . '" title="' . _MD_YOGURT_SEXYNO . '">');
-        $field_friend_sexy->addOption('2', '<img src="assets/images/sexyb.gif" alt="' . _MD_YOGURT_SEXYYES . '" title="' . _MD_YOGURT_SEXYYES . '">');
-        $field_friend_sexy->addOption('3', '<img src="assets/images/sexyc.gif" alt="' . _MD_YOGURT_SEXYALOT . '" title="' . _MD_YOGURT_SEXYALOT . '">');
+        $field_friend_friendly = new \XoopsFormRadio(_MD_YOGURT_FRIENDLY, 'hot', $friendship->getVar('hot'));
+        $field_friend_friendly->addOption('1', '<img src="assets/images/friendlya.gif" alt="' . _MD_YOGURT_FRIENDLYNO . '" title="' . _MD_YOGURT_FRIENDLYNO . '">');
+        $field_friend_friendly->addOption('2', '<img src="assets/images/friendlyb.gif" alt="' . _MD_YOGURT_FRIENDLYYES . '" title="' . _MD_YOGURT_FRIENDLYYES . '">');
+        $field_friend_friendly->addOption('3', '<img src="assets/images/friendlyc.gif" alt="' . _MD_YOGURT_FRIENDLYALOT . '" title="' . _MD_YOGURT_FRIENDLYALOT . '">');
 
-        $field_friend_trusty = new \XoopsFormRadio(_MD_YOGURT_TRUSTY, 'trust', $friendship->getVar('trust'));
-        $field_friend_trusty->addOption('1', '<img src="assets/images/trustya.gif" alt="' . _MD_YOGURT_TRUSTYNO . '" title="' . _MD_YOGURT_TRUSTYNO . '">');
-        $field_friend_trusty->addOption('2', '<img src="assets/images/trustyb.gif" alt="' . _MD_YOGURT_TRUSTYYES . '" title="' . _MD_YOGURT_TRUSTYYES . '">');
-        $field_friend_trusty->addOption('3', '<img src="assets/images/trustyc.gif" alt="' . _MD_YOGURT_TRUSTYALOT . '" title="' . _MD_YOGURT_TRUSTYALOT . '">');
+        $field_friend_funny = new \XoopsFormRadio(_MD_YOGURT_FUNNY, 'trust', $friendship->getVar('trust'));
+        $field_friend_funny->addOption('1', '<img src="assets/images/funnya.gif" alt="' . _MD_YOGURT_FUNNYNO . '" title="' . _MD_YOGURT_FUNNYNO . '">');
+        $field_friend_funny->addOption('2', '<img src="assets/images/funnyb.gif" alt="' . _MD_YOGURT_FUNNYYES . '" title="' . _MD_YOGURT_FUNNYYES . '">');
+        $field_friend_funny->addOption('3', '<img src="assets/images/funnyc.gif" alt="' . _MD_YOGURT_FUNNYALOT . '" title="' . _MD_YOGURT_FUNNYALOT . '">');
 
         $field_friend_cool = new \XoopsFormRadio(_MD_YOGURT_COOL, 'cool', $friendship->getVar('cool'));
         $field_friend_cool->addOption('1', '<img src="assets/images/coola.gif" alt="' . _MD_YOGURT_COOLNO . '" title="' . _MD_YOGURT_COOLNO . '">');
@@ -393,8 +393,8 @@ class FriendshipHandler extends \XoopsPersistableObjectHandler
         $form->addElement($field_friend_name);
         $form->addElement($field_friend_level);
         $form->addElement($field_friend_fan);
-        $form->addElement($field_friend_sexy);
-        $form->addElement($field_friend_trusty);
+        $form->addElement($field_friend_friendly);
+        $form->addElement($field_friend_funny);
         $form->addElement($field_friend_cool);
 
         $form->addElement($button_send);
@@ -403,7 +403,7 @@ class FriendshipHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * Get the averages of each evaluation hot trusty etc...
+     * Get the averages of each evaluation hot funny etc...
      *
      * @param int $user_uid
      * @return array $vetor with averages

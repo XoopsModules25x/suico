@@ -2,34 +2,26 @@
 
 namespace XoopsModules\Yogurt;
 
-/**
- * Protection against inclusion outside the site
- */
-if (!defined('XOOPS_ROOT_PATH')) {
-    die('XOOPS root path not defined');
-}
+// Relgroupuser.php,v 1
+//  ---------------------------------------------------------------- //
+// Author: Bruno Barthez                                               //
+// ----------------------------------------------------------------- //
 
-/**
- * Includes of form objects and uploader
- */
-require_once XOOPS_ROOT_PATH . '/class/uploader.php';
-require_once XOOPS_ROOT_PATH . '/kernel/object.php';
-require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
 /**
- * Tribes class.
+ * Relgroupuser class.
  * $this class is responsible for providing data access mechanisms to the data source
  * of XOOPS user class objects.
  */
-class Tribes extends \XoopsObject
+class Relgroupuser extends \XoopsObject
 {
     public $db;
 
     // constructor
 
     /**
-     * Tribes constructor.
+     * Relgroupuser constructor.
      * @param null $id
      */
     public function __construct($id = null)
@@ -38,11 +30,9 @@ class Tribes extends \XoopsObject
         $this->helper     = Helper::getInstance();
         $this->permHelper = new \Xmf\Module\Helper\Permission();
         $this->db         = \XoopsDatabaseFactory::getDatabaseConnection();
-        $this->initVar('tribe_id', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('owner_uid', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('tribe_title', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('tribe_desc', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('tribe_img', XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('rel_id', XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('rel_group_id', XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('rel_user_uid', XOBJ_DTYPE_INT, null, false, 10);
         if (!empty($id)) {
             if (is_array($id)) {
                 $this->assignVars($id);
@@ -59,7 +49,7 @@ class Tribes extends \XoopsObject
      */
     public function load($id)
     {
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_tribes') . ' WHERE tribe_id=' . $id;
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_relgroupuser') . ' WHERE rel_id=' . $id;
         $myrow = $this->db->fetchArray($this->db->query($sql));
         $this->assignVars($myrow);
         if (!$myrow) {
@@ -76,7 +66,7 @@ class Tribes extends \XoopsObject
      * @param int    $start
      * @return array
      */
-    public function getAllyogurt_tribess($criteria = [], $asobject = false, $sort = 'tribe_id', $order = 'ASC', $limit = 0, $start = 0)
+    public function getAllyogurt_relgroupusers($criteria = [], $asobject = false, $sort = 'rel_id', $order = 'ASC', $limit = 0, $start = 0)
     {
         $db          = \XoopsDatabaseFactory::getDatabaseConnection();
         $ret         = [];
@@ -91,13 +81,13 @@ class Tribes extends \XoopsObject
             $where_query = ' WHERE ' . $criteria;
         }
         if (!$asobject) {
-            $sql    = 'SELECT tribe_id FROM ' . $db->prefix('yogurt_tribes') . "$where_query ORDER BY $sort $order";
+            $sql    = 'SELECT rel_id FROM ' . $db->prefix('yogurt_relgroupuser') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
-                $ret[] = $myrow['yogurt_tribes_id'];
+                $ret[] = $myrow['yogurt_relgroupuser_id'];
             }
         } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_tribes') . "$where_query ORDER BY $sort $order";
+            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_relgroupuser') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new self($myrow);
@@ -111,11 +101,11 @@ class Tribes extends \XoopsObject
      * Get form
      *
      * @param null
-     * @return Yogurt\Form\TribesForm
+     * @return Yogurt\Form\RelgroupuserForm
      */
     public function getForm()
     {
-        $form = new Form\TribesForm($this);
+        $form = new Form\RelgroupuserForm($this);
         return $form;
     }
 
@@ -125,7 +115,7 @@ class Tribes extends \XoopsObject
     public function getGroupsRead()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
-        return $this->permHelper->getGroupsForItem('sbcolumns_read', $this->getVar('tribe_id'));
+        return $this->permHelper->getGroupsForItem('sbcolumns_read', $this->getVar('rel_id'));
     }
 
     /**
@@ -134,7 +124,7 @@ class Tribes extends \XoopsObject
     public function getGroupsSubmit()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
-        return $this->permHelper->getGroupsForItem('sbcolumns_submit', $this->getVar('tribe_id'));
+        return $this->permHelper->getGroupsForItem('sbcolumns_submit', $this->getVar('rel_id'));
     }
 
     /**
@@ -143,6 +133,6 @@ class Tribes extends \XoopsObject
     public function getGroupsModeration()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
-        return $this->permHelper->getGroupsForItem('sbcolumns_moderation', $this->getVar('tribe_id'));
+        return $this->permHelper->getGroupsForItem('sbcolumns_moderation', $this->getVar('rel_id'));
     }
 }

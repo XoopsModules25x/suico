@@ -1,9 +1,9 @@
 <{include file="db:yogurt_navbar.tpl"}>
 <{if $isOwner }>
 <div id="yogurt-video-form" class="outer">
-    <h2 id="yogurt-video-form-title" class="head">
+    <h4 id="yogurt-video-form-title" class="head">
         <{$lang_addvideos}>
-    </h2>
+    </h4>
     <form name="form_videos" id="form_videos" action="video_submited.php" method="post" onsubmit="return xoopsFormValidate_form_videos();" enctype="multipart/form-data">
         <{$token}>
         <p class="even">
@@ -47,15 +47,15 @@
 <{ /if}>
 
 <div id="yogurt-videos-container" class="outer">
-    <h2 id="yogurt-videos-title" class="head">
+    <h4 id="yogurt-videos-title" class="head">
         <a href="<{$xoops_url}>/userinfo.php?uid=<{$owner_uid}>">
             <{$lang_videos}>
         </a>
-    </h2>
+    </h4>
     <{if $nb_videos<=0}>
-        <h2>
+        <h4>
             <{$lang_novideoyet}>
-        </h2>
+        </h4>
     <{/if}>
 
 

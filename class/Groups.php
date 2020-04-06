@@ -2,26 +2,34 @@
 
 namespace XoopsModules\Yogurt;
 
-// Reltribeuser.php,v 1
-//  ---------------------------------------------------------------- //
-// Author: Bruno Barthez                                               //
-// ----------------------------------------------------------------- //
+/**
+ * Protection against inclusion outside the site
+ */
+if (!defined('XOOPS_ROOT_PATH')) {
+    die('XOOPS root path not defined');
+}
 
+/**
+ * Includes of form objects and uploader
+ */
+require_once XOOPS_ROOT_PATH . '/class/uploader.php';
+require_once XOOPS_ROOT_PATH . '/kernel/object.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
 /**
- * Reltribeuser class.
+ * Groups class.
  * $this class is responsible for providing data access mechanisms to the data source
  * of XOOPS user class objects.
  */
-class Reltribeuser extends \XoopsObject
+class Groups extends \XoopsObject
 {
     public $db;
 
     // constructor
 
     /**
-     * Reltribeuser constructor.
+     * Groups constructor.
      * @param null $id
      */
     public function __construct($id = null)
@@ -30,9 +38,11 @@ class Reltribeuser extends \XoopsObject
         $this->helper     = Helper::getInstance();
         $this->permHelper = new \Xmf\Module\Helper\Permission();
         $this->db         = \XoopsDatabaseFactory::getDatabaseConnection();
-        $this->initVar('rel_id', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('rel_tribe_id', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('rel_user_uid', XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('group_id', XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('owner_uid', XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('group_title', XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('group_desc', XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('group_img', XOBJ_DTYPE_TXTBOX, null, false);
         if (!empty($id)) {
             if (is_array($id)) {
                 $this->assignVars($id);
@@ -49,7 +59,7 @@ class Reltribeuser extends \XoopsObject
      */
     public function load($id)
     {
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_reltribeuser') . ' WHERE rel_id=' . $id;
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_groups') . ' WHERE group_id=' . $id;
         $myrow = $this->db->fetchArray($this->db->query($sql));
         $this->assignVars($myrow);
         if (!$myrow) {
@@ -66,7 +76,7 @@ class Reltribeuser extends \XoopsObject
      * @param int    $start
      * @return array
      */
-    public function getAllyogurt_reltribeusers($criteria = [], $asobject = false, $sort = 'rel_id', $order = 'ASC', $limit = 0, $start = 0)
+    public function getAllyogurt_groupss($criteria = [], $asobject = false, $sort = 'group_id', $order = 'ASC', $limit = 0, $start = 0)
     {
         $db          = \XoopsDatabaseFactory::getDatabaseConnection();
         $ret         = [];
@@ -81,13 +91,13 @@ class Reltribeuser extends \XoopsObject
             $where_query = ' WHERE ' . $criteria;
         }
         if (!$asobject) {
-            $sql    = 'SELECT rel_id FROM ' . $db->prefix('yogurt_reltribeuser') . "$where_query ORDER BY $sort $order";
+            $sql    = 'SELECT group_id FROM ' . $db->prefix('yogurt_groups') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
-                $ret[] = $myrow['yogurt_reltribeuser_id'];
+                $ret[] = $myrow['yogurt_groups_id'];
             }
         } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_reltribeuser') . "$where_query ORDER BY $sort $order";
+            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_groups') . "$where_query ORDER BY $sort $order";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new self($myrow);
@@ -101,11 +111,11 @@ class Reltribeuser extends \XoopsObject
      * Get form
      *
      * @param null
-     * @return Yogurt\Form\ReltribeuserForm
+     * @return Yogurt\Form\GroupsForm
      */
     public function getForm()
     {
-        $form = new Form\ReltribeuserForm($this);
+        $form = new Form\GroupsForm($this);
         return $form;
     }
 
@@ -115,7 +125,7 @@ class Reltribeuser extends \XoopsObject
     public function getGroupsRead()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
-        return $this->permHelper->getGroupsForItem('sbcolumns_read', $this->getVar('rel_id'));
+        return $this->permHelper->getGroupsForItem('sbcolumns_read', $this->getVar('group_id'));
     }
 
     /**
@@ -124,7 +134,7 @@ class Reltribeuser extends \XoopsObject
     public function getGroupsSubmit()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
-        return $this->permHelper->getGroupsForItem('sbcolumns_submit', $this->getVar('rel_id'));
+        return $this->permHelper->getGroupsForItem('sbcolumns_submit', $this->getVar('group_id'));
     }
 
     /**
@@ -133,6 +143,6 @@ class Reltribeuser extends \XoopsObject
     public function getGroupsModeration()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
-        return $this->permHelper->getGroupsForItem('sbcolumns_moderation', $this->getVar('rel_id'));
+        return $this->permHelper->getGroupsForItem('sbcolumns_moderation', $this->getVar('group_id'));
     }
 }
