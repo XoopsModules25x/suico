@@ -58,8 +58,8 @@
     <{if ($pics_array[i].private == 1) }>
         <p><span class="yogurt-album-private"> Private </span></p>
     <{/if}>
-    <p class="yogurt-album-picture-img"><a href="<{$xoops_url}>/uploads/yogurt/photos/resized_<{$pics_array[i].url}>" rel="lightbox[album]" title="<{$pics_array[i].desc}>">
-            <img class="thumb" src="<{$xoops_url}>/uploads/yogurt/photos/thumb_<{$pics_array[i].url}>" rel="lightbox" title="<{$pics_array[i].desc}>">
+    <p class="yogurt-album-picture-img"><a href="<{$xoops_url}>/uploads/yogurt/images/resized_<{$pics_array[i].url}>" rel="lightbox[album]" title="<{$pics_array[i].desc}>">
+            <img class="thumb" src="<{$xoops_url}>/uploads/yogurt/images/thumb_<{$pics_array[i].url}>" rel="lightbox" title="<{$pics_array[i].desc}>">
         </a></p>
     <p id="yogurt-album-picture-desc"><{$pics_array[i].desc}></p>
 </div>
@@ -71,6 +71,6 @@
 </div>
 <{if $navegacao!='' }>
 <div id="yogurt-navegacao"><{$navegacao}></div>
-<{ /if}>
+<{/if}>
 <div style="clear:both;width:100%"></div>
 <{include file="db:yogurt_footer.tpl"}>

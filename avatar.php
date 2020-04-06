@@ -34,7 +34,7 @@ $picture->load($_POST['cod_img']);
 
 $uid = (int)$xoopsUser->getVar('uid');
 
-$image       = XOOPS_ROOT_PATH . '/uploads/yogurt/photos/' . 'thumb_' . $picture->getVar('url');
+$image       = XOOPS_ROOT_PATH . '/uploads/yogurt/images/' . 'thumb_' . $picture->getVar('url');
 $avatar      = 'av' . $uid . '_' . time() . '.jpg';
 $imageavatar = XOOPS_ROOT_PATH . '/uploads/avatars/' . $avatar;
 

@@ -70,16 +70,16 @@ function yogurt_search($queryarray, $andor, $limit, $offset, $userid)
     while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
         if (0 != $userid) {
             if ($limit > 5) {
-                $ret[$i]['image'] = "assets/images/search.png'><a href='" . XOOPS_URL . '/modules/yogurt/album.php?uid=' . $myrow['uid_owner'] . "'><img src='" . $path_uploadimages . '/thumb_' . $myrow['url'] . "'></a><br>" . '<img src=' . XOOPS_URL . '/modules/yogurt/images/search.png';
+                $ret[$i]['image'] = "assets/images/search.png'><a href='" . XOOPS_URL . '/modules/yogurt/album.php?uid=' . $myrow['uid_owner'] . "'><img src='" . $path_uploadimages . '/yogurt/images/thumb_' . $myrow['url'] . "'></a><br>" . '<img src=' . XOOPS_URL . '/modules/yogurt/images/search.png';
                 $ret[$i]['link']  = 'album.php?uid=' . $myrow['uid_owner'];
                 $ret[$i]['title'] = $myrow['title'];
                 //$ret[$i]['time'] = $myrow['data_creation'];
                 $ret[$i]['uid'] = $myrow['uid_owner'];
             } else {
-                $stringofimage .= '<a href="' . XOOPS_URL . '/modules/yogurt/album.php?uid=' . $myrow['uid_owner'] . '" title="' . $myrow['title'] . '"><img src="' . $path_uploadimages . '/thumb_' . $myrow['url'] . '"></a>&nbsp;';
+                $stringofimage .= '<a href="' . XOOPS_URL . '/modules/yogurt/album.php?uid=' . $myrow['uid_owner'] . '" title="' . $myrow['title'] . '"><img src="' . $path_uploadimages . '/yogurt/images/thumb_' . $myrow['url'] . '"></a>&nbsp;';
             }
         } else {
-            $ret[$i]['image'] = "assets/images/search.png'><a href='" . XOOPS_URL . '/modules/yogurt/album.php?uid=' . $myrow['uid_owner'] . "'><img src='" . $path_uploadimages . '/thumb_' . $myrow['url'] . "'></a><br>" . "<img src='" . XOOPS_URL . '/modules/yogurt/images/search.png';
+            $ret[$i]['image'] = "assets/images/search.png'><a href='" . XOOPS_URL . '/modules/yogurt/album.php?uid=' . $myrow['uid_owner'] . "'><img src='" . $path_uploadimages . '/yogurt/images/thumb_' . $myrow['url'] . "'></a><br>" . "<img src='" . XOOPS_URL . '/modules/yogurt/images/search.png';
             $ret[$i]['link']  = 'album.php?uid=' . $myrow['uid_owner'];
             $ret[$i]['title'] = $myrow['title'];
             //$ret[$i]['time'] = $myrow['data_creation'];
@@ -96,7 +96,7 @@ function yogurt_search($queryarray, $andor, $limit, $offset, $userid)
             $ret[0]['time']  = time();
             $ret[0]['uid']   = $userid;
             $ret[0]['link']  = 'album.php?uid=' . $userid;
-            $stringofimage   .= '<img src="' . XOOPS_URL . '/modules/yogurt/images/search.png';
+            $stringofimage   .= '<img src="' . XOOPS_URL . '/modules/yogurt/assets/images/search.png';
             $ret[0]['image'] = $stringofimage;
         }
     }

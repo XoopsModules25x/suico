@@ -22,7 +22,7 @@
                     <th class="left"><{$selectoruid_owner}></th>
                     <th class="left"><{$selectorvideo_desc}></th>
                     <th class="left"><{$selectoryoutube_code}></th>
-                    <th class="left"><{$selectormain_video}></th>
+                    <th class="center"><{$selectormain_video}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
@@ -34,7 +34,7 @@
                         <td class='left'><{$videoArray.uid_owner}></td>
                         <td class='left'><{$videoArray.video_desc}></td>
                         <td class='left'><{$videoArray.youtube_code}></td>
-                        <td class='left'><{$videoArray.main_video}></td>
+                        <td class='center'><{$videoArray.main_video}></td>
 
 
                         <td class="center width5"><{$videoArray.edit_delete}></td>
@@ -52,7 +52,7 @@
                     <th class="left"><{$selectoruid_owner}></th>
                     <th class="left"><{$selectorvideo_desc}></th>
                     <th class="left"><{$selectoryoutube_code}></th>
-                    <th class="left"><{$selectormain_video}></th>
+                    <th class="center"><{$selectormain_video}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>

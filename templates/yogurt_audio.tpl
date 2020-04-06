@@ -1,5 +1,5 @@
 <{include file="db:yogurt_navbar.tpl"}>
-<{if $isOwner }>
+<{if $isOwner}>
 <div id="yogurt-audio-form" class="outer">
     <h4 id="yogurt-audio-form-title" class="head">
         <{$lang_addaudios}>
@@ -30,7 +30,7 @@
     </form>
 
 </div>
-<{ /if}>
+<{/if}>
 
 
 <div id="yogurt-audio-allaudiocontainer" class="outer">
@@ -96,7 +96,7 @@
         </form>
 
 
-        <{ /if}>
+        <{/if}>
     </div>
 </div>
 <{/section}>

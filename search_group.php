@@ -125,7 +125,7 @@ $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 $xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner));
 
 //$xoopsTpl->assign('path_yogurt_uploads',$xoopsModuleConfig['link_path_upload']);
-$xoopsTpl->assign('groups',$groups);
+$xoopsTpl->assign('groups', $groups);
 //$xoopsTpl->assign('mygroups',$mygroups);
 $xoopsTpl->assign('lang_mygroupstitle', _MD_YOGURT_MYGROUPS);
 $xoopsTpl->assign('lang_groupstitle', _MD_YOGURT_ALLGROUPS . ' (' . $nb_groups . ')');

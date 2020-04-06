@@ -22,8 +22,8 @@ $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 // ------------------- Informations ------------------- //
 $modversion = [
     'version'             => 3.5,
-    'module_status'       => 'Alpha 2',
-    'release_date'        => '2020/04/04',
+    'module_status'       => 'Alpha 4',
+    'release_date'        => '2020/04/05',
     'name'                => _MI_YOGURT_MODULE_NAME,
     'description'         => _MI_YOGURT_MODULEDESC,
     'official'            => 0,

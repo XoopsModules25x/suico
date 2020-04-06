@@ -21,11 +21,11 @@
                     <th class="left"><{$selectorfriendship_id}></th>
                     <th class="left"><{$selectorfriend1_uid}></th>
                     <th class="left"><{$selectorfriend2_uid}></th>
-                    <th class="left"><{$selectorlevel}></th>
-                    <th class="left"><{$selectorhot}></th>
-                    <th class="left"><{$selectortrust}></th>
-                    <th class="left"><{$selectorcool}></th>
-                    <th class="left"><{$selectorfan}></th>
+                    <th class="center"><{$selectorlevel}></th>
+                    <th class="center"><{$selectorhot}></th>
+                    <th class="center"><{$selectortrust}></th>
+                    <th class="center"><{$selectorcool}></th>
+                    <th class="center"><{$selectorfan}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
@@ -36,11 +36,11 @@
                         <td class='left'><{$friendshipArray.friendship_id}></td>
                         <td class='left'><{$friendshipArray.friend1_uid}></td>
                         <td class='left'><{$friendshipArray.friend2_uid}></td>
-                        <td class='left'><{$friendshipArray.level}></td>
-                        <td class='left'><{$friendshipArray.hot}></td>
-                        <td class='left'><{$friendshipArray.trust}></td>
-                        <td class='left'><{$friendshipArray.cool}></td>
-                        <td class='left'><{$friendshipArray.fan}></td>
+                        <td class='center'><{$friendshipArray.level}></td>
+                        <td class='center'><{$friendshipArray.hot}></td>
+                        <td class='center'><{$friendshipArray.trust}></td>
+                        <td class='center'><{$friendshipArray.cool}></td>
+                        <td class='center'><{$friendshipArray.fan}></td>
 
 
                         <td class="center width5"><{$friendshipArray.edit_delete}></td>
@@ -57,11 +57,11 @@
                     <th class="left"><{$selectorfriendship_id}></th>
                     <th class="left"><{$selectorfriend1_uid}></th>
                     <th class="left"><{$selectorfriend2_uid}></th>
-                    <th class="left"><{$selectorlevel}></th>
-                    <th class="left"><{$selectorhot}></th>
-                    <th class="left"><{$selectortrust}></th>
-                    <th class="left"><{$selectorcool}></th>
-                    <th class="left"><{$selectorfan}></th>
+                    <th class="center"><{$selectorlevel}></th>
+                    <th class="center"><{$selectorhot}></th>
+                    <th class="center"><{$selectortrust}></th>
+                    <th class="center"><{$selectorcool}></th>
+                    <th class="center"><{$selectorfan}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>

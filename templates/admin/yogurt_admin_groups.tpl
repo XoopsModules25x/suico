@@ -22,7 +22,7 @@
                     <th class="left"><{$selectorowner_uid}></th>
                     <th class="left"><{$selectorgroup_title}></th>
                     <th class="left"><{$selectorgroup_desc}></th>
-                    <th class="left"><{$selectorgroup_img}></th>
+                    <th class="center"><{$selectorgroup_img}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
@@ -34,7 +34,7 @@
                         <td class='left'><{$groupsArray.owner_uid}></td>
                         <td class='left'><{$groupsArray.group_title}></td>
                         <td class='left'><{$groupsArray.group_desc}></td>
-                        <td class='left'><{$groupsArray.group_img}></td>
+                        <td class='center'><{$groupsArray.group_img}></td>
 
 
                         <td class="center width5"><{$groupsArray.edit_delete}></td>
@@ -52,7 +52,7 @@
                     <th class="left"><{$selectorowner_uid}></th>
                     <th class="left"><{$selectorgroup_title}></th>
                     <th class="left"><{$selectorgroup_desc}></th>
-                    <th class="left"><{$selectorgroup_img}></th>
+                    <th class="center"><{$selectorgroup_img}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>

@@ -38,14 +38,14 @@
     <p class=odd>
         <label for='group_title' class='xoops-form-element-caption'>
             <span class='caption-text'><{$lang_title}></span><span class='caption-marker'>*</span></label>
-        <input type='text' name='group_title' id='group_title' size='35' maxlength='55' value=''>
+        <input type='text' name='group_title' id='group_title' size='35' maxlength='55' value='' required>
     </p>
 
     <p class=even>
         <label for='group_desc' class='xoops-form-element-caption'>
             <span class='caption-text'><{$lang_description}></span>
             <span class='caption-marker'>*</span></label>
-        <input type='text' name='group_desc' id='group_desc' size='35' maxlength='55' value=''>
+        <input type='text' name='group_desc' id='group_desc' size='35' maxlength='55' value='' required>
     </p>
 
     <p class=odd>
@@ -71,7 +71,7 @@
     //--></script>
 <!-- End Form Vaidation JavaScript //-->
 
-<{ /if}>
+<{/if}>
 
 <div id="yogurt-mygroups-container" class="outer">
     <h4 class="head">
@@ -122,7 +122,7 @@
     <h4 id="yogurt-groups-nogroups">
         <{$lang_nogroupsyet}>
     </h4>
-    <{ /if}>
+    <{/if}>
 
     <{section name=j loop=$groups}>
         <div class="yogurt-group-all <{cycle values="odd,even"}>">

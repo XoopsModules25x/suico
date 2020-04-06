@@ -44,7 +44,7 @@
     </script>
     <!-- End Form Vaidation JavaScript //-->
 </div>
-<{ /if}>
+<{/if}>
 
 <div id="yogurt-videos-container" class="outer">
     <h4 id="yogurt-videos-title" class="head">
@@ -88,7 +88,7 @@
                     <{$token}>
                     <input name="submit" type="image" alt="<{$lang_makemain}>" title="<{$lang_makemain}>" src="assets/images/mainvideo.gif">
                 </form>
-                <{ /if}>
+                <{/if}>
             </div>
         </div>
     <{/section}>

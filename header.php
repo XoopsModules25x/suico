@@ -23,7 +23,34 @@ if (!isset($GLOBALS['xoTheme']) || !is_object($GLOBALS['xoTheme'])) {
 //Handlers
 //$XXXHandler = xoops_getModuleHandler('XXX', $moduleDirName);
 
+/** @var \XoopsPersistableObjectHandler $imagesHandler */
+$imagesHandler = $helper->getHandler('Images');
+/** @var \XoopsPersistableObjectHandler $friendshipHandler */
+$friendshipHandler = $helper->getHandler('Friendship');
+/** @var \XoopsPersistableObjectHandler $visitorsHandler */
+$visitorsHandler = $helper->getHandler('Visitors');
+/** @var \XoopsPersistableObjectHandler $videoHandler */
+$videoHandler = $helper->getHandler('Video');
+/** @var \XoopsPersistableObjectHandler $friendpetitionHandler */
+$friendpetitionHandler = $helper->getHandler('Friendpetition');
+/** @var \XoopsPersistableObjectHandler $groupsHandler */
+$groupsHandler = $helper->getHandler('Groups');
+/** @var \XoopsPersistableObjectHandler $relgroupuserHandler */
+$relgroupuserHandler = $helper->getHandler('Relgroupuser');
+/** @var \XoopsPersistableObjectHandler $notesHandler */
+$notesHandler = $helper->getHandler('Notes');
+/** @var \XoopsPersistableObjectHandler $configsHandler */
+$configsHandler = $helper->getHandler('Configs');
+/** @var \XoopsPersistableObjectHandler $suspensionsHandler */
+$suspensionsHandler = $helper->getHandler('Suspensions');
+/** @var \XoopsPersistableObjectHandler $audioHandler */
+$audioHandler = $helper->getHandler('Audio');
+
 // Load language files
+$helper->loadLanguage('blocks');
+$helper->loadLanguage('common');
+$helper->loadLanguage('main');
+$helper->loadLanguage('modinfo');
 $helper->loadLanguage('main');
 //$helper->loadLanguage('user');
 xoops_loadLanguage('user');
