@@ -34,7 +34,7 @@
         <{$token}>
         <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 delete.png}>">
     </form>
-    <form action="editdesc.php" method="post" id="editform" class="yogurt-album-formquick">
+    <form action="editdescpicture.php" method="post" id="editform" class="yogurt-album-formquick">
         <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">
         <{$token}>
         <input name="submit" type="image" alt="<{$lang_editdesc}>" title="<{$lang_editdesc}>" src="<{xoModuleIcons16 edit.png}>">
