@@ -242,7 +242,7 @@ define('_MD_YOGURT_EDITPROFILE', 'Edit your profile');
 define('_MD_YOGURT_SELECTAVATAR', 'Upload pictures to your album and select one as your avatar.');
 define('_MD_YOGURT_SELECTMAINVIDEO', 'Then you can select a video to feature in your profile page');
 define('_MD_YOGURT_NOAVATARYET', 'No avatar yet');
-define('_MD_YOGURT_NOMAINVIDEOYET', 'No main video yet');
+define('_MD_YOGURT_NOMAINVIDEOYET', 'No featured video yet');
 define('_MD_YOGURT_MYPROFILE', 'My Profile');
 define('_MD_YOGURT_YOUHAVEXPETITIONS', 'You have %u requests for friendship.');
 define('_MD_YOGURT_CONTACTINFO', 'Contact Info');

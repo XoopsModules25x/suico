@@ -219,11 +219,12 @@
 </div><!-- end of div of group1 -->
 
 <div class="yogurt-profile-group2">
-        <{if $allow_videos==1 }>
-            <{if $mainvideocode!="" }>
+
     <div id="yogurt-profile-friends" class="outer">
         <h4 id="titulo-friends" class="head"><{$lang_featuredvideo}></h4>
-			    <div id="yogurt-profile-group">
+        <{if $allow_videos==1 }>
+            <div id="yogurt-profile-group">
+                <{if $mainvideocode!="" }>
                     <object width="200" height="150">
                         <param name="movie" value="http://www.youtube.com/v/<{$mainvideocode}>">
                         <param name="wmode" value="transparent">
@@ -232,13 +233,19 @@
                     <p id="yogurt-profile-mainvideo-desc">
                         <{$mainvideodesc}>
                     </p>
-					<p id="yogurt-profile-friend-viewall" class="foot">
+                    <p id="yogurt-profile-friend-viewall" class="foot">
                         <a href="video.php?uid=<{$uid_owner}>"><{$lang_viewallvideos}></a>
                     </p>
-                </div>	
-    </div>
-	        <{/if}>  
+                <{else}>
+                    <{if $isOwner}>
+                        <p>
+                            <{$lang_nomainvideo}>
+                        </p>
+                    <{/if}>
+                <{/if}>
+            </div>
         <{/if}>
+    </div>
 
     <{if $allow_friends==1 }>
         <div id="yogurt-profile-friends" class="outer">
