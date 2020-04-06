@@ -69,7 +69,7 @@ if ($array_pict) {
     $url     = $array_pict[0]->getVar('url');
 }
 //$url = $xoopsModuleConfig['link_path_upload']."/thumb_".$url;
-$url = XOOPS_URL . '/uploads/yogurt/photos/thumb_' . $url;
+$url = XOOPS_URL . '/uploads/yogurt/images/thumb_' . $url;
 $imageFactory->renderFormEdit($caption, $cod_img, $url);
 
 require dirname(dirname(__DIR__)) . '/footer.php';
