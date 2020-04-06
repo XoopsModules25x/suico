@@ -38,8 +38,9 @@
     <{if (($isfriend!=1) && ($isOwner==0) && ($isanonym!=1))}>
         <div id="yogurt-profile-petition">
             <form action=submit_friendpetition.php method="post">
-                <{$lang_askusertobefriend}><input type="hidden" name="petitioned_uid" id="petitioned_uid" value="<{$uid_owner}>">
-                <input name="" type="image" src="assets/images/addfriend.jpg"><{$token}>
+               <input type="hidden" name="petitioned_uid" id="petitioned_uid" value="<{$uid_owner}>">
+               <button name="" type="image"><{$lang_addasafriend}></button>			 
+				<{$token}>
             </form>
         </div>
         <!-- end if -->
@@ -89,7 +90,7 @@
     <{if ($isOwner==1) }>
 	     <{if $visitors}>
         <div id="yogurt-album-visitors" class="outer">
-            <h4 class="head"><{$lang_visitors}></h4>
+            <h4 class="head"><{$lang_profilevisitors}></h4>
             <p>
                 <{foreach from=$visitors key=k item=v}>
                     <a href=index.php?uid=<{$k}>> <{$v}> </a>
@@ -218,12 +219,11 @@
 </div><!-- end of div of group1 -->
 
 <div class="yogurt-profile-group2">
-
-    <div id="yogurt-profile-friends" class="outer">
-        <h4 id="titulo-friends" class="head"><{$lang_videos}> (<{$nb_videos}>)</h4>
         <{if $allow_videos==1 }>
-            <div id="yogurt-profile-group">
-                <{if $mainvideocode!="" }>
+            <{if $mainvideocode!="" }>
+    <div id="yogurt-profile-friends" class="outer">
+        <h4 id="titulo-friends" class="head"><{$lang_featuredvideo}></h4>
+			    <div id="yogurt-profile-group">
                     <object width="200" height="150">
                         <param name="movie" value="http://www.youtube.com/v/<{$mainvideocode}>">
                         <param name="wmode" value="transparent">
@@ -232,21 +232,13 @@
                     <p id="yogurt-profile-mainvideo-desc">
                         <{$mainvideodesc}>
                     </p>
-                <{else}>
-                    <img src="assets/images/novideo.gif">
-                    <{if $isOwner}>
-                        <p>
-                            <{$lang_selectmainvideo}>
-                        </p>
-                    <{else}>
-                        <p>
-                            <{$lang_nomainvideo}>
-                        </p>
-                    <{/if}>
-                <{/if}>
-            </div>
-        <{/if}>
+					<p id="yogurt-profile-friend-viewall" class="foot">
+                        <a href="video.php?uid=<{$uid_owner}>"><{$lang_viewallvideos}></a>
+                    </p>
+                </div>	
     </div>
+	        <{/if}>  
+        <{/if}>
 
     <{if $allow_friends==1 }>
         <div id="yogurt-profile-friends" class="outer">

@@ -116,7 +116,7 @@ define('_MD_YOGURT_FRIENDSHIPTERMINATED', 'You have broken your friendship with 
 
 ############################################ VIDEOS ############################################################
 //mainvideo.php
-define('_MD_YOGURT_SETMAINVIDEO', 'This video is selected on your front page from now on');
+define('_MD_YOGURT_SETMAINVIDEO', 'This video is featured on your profile page from now on');
 
 //video.php
 define('_MD_YOGURT_YOUTUBECODE', 'YouTube code or URL');
@@ -124,11 +124,10 @@ define('_MD_YOGURT_ADDVIDEO', 'Add video');
 define('_MD_YOGURT_ADDFAVORITEVIDEOS', 'Add favourite videos');
 define(
     '_MD_YOGURT_ADDVIDEOSHELP',
-    'If you want to upload your own video for sharing, then upload your videos to
-<a href=http://www.youtube.com>YouTube</a> and then add the URL to here '
-); //The name of the site will show after this
+    'If you want to upload your own video for sharing, upload your videos to
+<a href=https://www.youtube.com>YouTube</a> and then add the URL here in'); //The name of the site will show after this
 define('_MD_YOGURT_MYVIDEOS', 'My Videos');
-define('_MD_YOGURT_MAKEMAIN', 'Make this video your main video');
+define('_MD_YOGURT_MAKEMAIN', 'Feature this video in your main page');
 define('_MD_YOGURT_NOVIDEOSYET', 'No videos yet!');
 
 //delvideo.php
@@ -241,7 +240,7 @@ define('_MD_YOGURT_ASKINGFRIEND', 'Is %s your friend?');
 define('_MD_YOGURT_ASKBEFRIEND', 'Ask this user to be your friend?');
 define('_MD_YOGURT_EDITPROFILE', 'Edit your profile');
 define('_MD_YOGURT_SELECTAVATAR', 'Upload pictures to your album and select one as your avatar.');
-define('_MD_YOGURT_SELECTMAINVIDEO', 'Add a video to your videos album and then select it as your main video');
+define('_MD_YOGURT_SELECTMAINVIDEO', 'Then you can select a video to feature in your profile page');
 define('_MD_YOGURT_NOAVATARYET', 'No avatar yet');
 define('_MD_YOGURT_NOMAINVIDEOYET', 'No main video yet');
 define('_MD_YOGURT_MYPROFILE', 'My Profile');
@@ -343,3 +342,9 @@ define('_MD_YOGURT_META_YEAR', 'Year');
 
 // v3.3RC2
 define('_MD_YOGURT_PLAYER', 'Your audio player');
+
+// 3.5
+define('_MD_YOGURT_ADDASAFRIEND', 'Add as a Friend');
+define('_MD_YOGURT_PROFILEVISITORS', 'Profile Visitors');
+define('_MD_YOGURT_FEATUREDVIDEO', 'Featured Video');
+define('_MD_YOGURT_ALLVIDEOS', 'View all videos');

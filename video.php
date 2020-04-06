@@ -49,7 +49,8 @@ if (is_array($videos_array)) {
 } else {
     $xoopsTpl->assign('lang_novideoyet', _MD_YOGURT_NOVIDEOSYET);
 }
-
+$xoopsTpl->assign('lang_selectmainvideo', _MD_YOGURT_SELECTMAINVIDEO);
+	
 $pageNav = $controller->VideosNavBar($nbSections['nbVideos'], $xoopsModuleConfig['videosperpage'], $start, 2);
 
 /**
