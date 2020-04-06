@@ -237,11 +237,9 @@
                         <a href="video.php?uid=<{$uid_owner}>"><{$lang_viewallvideos}></a>
                     </p>
                 <{else}>
-                    <{if $isOwner}>
                         <p>
                             <{$lang_nomainvideo}>
                         </p>
-                    <{/if}>
                 <{/if}>
             </div>
         <{/if}>
