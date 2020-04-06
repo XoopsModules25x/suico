@@ -1,1 +1,3 @@
-{  }
+- friendpet_id: '1'
+  petitioner_uid: '1'
+  petioned_uid: '3'
