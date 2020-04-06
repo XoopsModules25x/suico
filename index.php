@@ -267,12 +267,14 @@ if (1 == $petition) {
 $xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
 $xoopsTpl->assign('lang_addasafriend', _MD_YOGURT_ADDASAFRIEND);
 
-//Avatar and Main Video
+//Avatar and Main 
 $xoopsTpl->assign('avatar_url', $avatar);
 $xoopsTpl->assign('lang_selectavatar', _MD_YOGURT_SELECTAVATAR);
 $xoopsTpl->assign('lang_selectmainvideo', _MD_YOGURT_SELECTMAINVIDEO);
 $xoopsTpl->assign('lang_noavatar', _MD_YOGURT_NOAVATARYET);
 $xoopsTpl->assign('lang_nomainvideo', _MD_YOGURT_NOMAINVIDEOYET);
+$xoopsTpl->assign('lang_featuredvideo', _MD_YOGURT_FEATUREDVIDEO);
+$xoopsTpl->assign('lang_viewallvideos', _MD_YOGURT_ALLVIDEOS);
 
 if ($nbSections['nbVideos'] > 0) {
     $xoopsTpl->assign('mainvideocode', $mainvideocode);
@@ -298,6 +300,7 @@ $xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
 $xoopsTpl->assign('lang_editdesc', _MD_YOGURT_EDITDESC);
 
 $xoopsTpl->assign('lang_visitors', _MD_YOGURT_VISITORS);
+$xoopsTpl->assign('lang_profilevisitors', _MD_YOGURT_PROFILEVISITORS);
 
 $xoopsTpl->assign('lang_editprofile', _MD_YOGURT_EDITPROFILE);
 

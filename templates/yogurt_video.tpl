@@ -2,12 +2,12 @@
 <{if $isOwner }>
 <div id="yogurt-video-form" class="outer">
     <h4 id="yogurt-video-form-title" class="head">
-        <{$lang_addvideos}>
+        <{$lang_addvideos}> 
     </h4>
     <form name="form_videos" id="form_videos" action="video_submited.php" method="post" onsubmit="return xoopsFormValidate_form_videos();" enctype="multipart/form-data">
         <{$token}>
         <p class="even">
-            <{$lang_videohelp}> <{$xoops_sitename}>.
+            <{$lang_videohelp}> <{$xoops_sitename}>.<br><{$lang_selectmainvideo}>
         </p>
         <p class="odd">
             <label for="codigo">
@@ -54,7 +54,7 @@
     </h4>
     <{if $nb_videos<=0}>
         <h4>
-            <{$lang_novideoyet}>
+            <{$lang_novideoyet}> 
         </h4>
     <{/if}>
 
