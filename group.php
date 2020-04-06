@@ -66,6 +66,8 @@ $xoopsTpl->assign('lang_keepimage', _MD_YOGURT_MAINTAINOLDIMAGE);
 $xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxfilebytes / 1024));
 $xoopsTpl->assign('lang_titlegroup', _MD_YOGURT_GROUP_TITLE);
 $xoopsTpl->assign('lang_descgroup', _MD_YOGURT_GROUP_DESC);
+$xoopsTpl->assign('lang_abandongroup', _MD_YOGURT_GROUP_ABANDON);
+$xoopsTpl->assign('lang_joingroup', _MD_YOGURT_GROUP_JOIN);
 
 //permissions
 $xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('notes'));

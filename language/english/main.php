@@ -178,7 +178,7 @@ define('_MD_YOGURT_GROUPKICKED', "You've banished this user from the Group, but 
 
 //Groups.php
 define('_MD_YOGURT_GROUP_ABANDON', 'Leave this Group');
-define('_MD_YOGURT_GROUP_JOIN', 'Join this Group and show everyone who you are!');
+define('_MD_YOGURT_GROUP_JOIN', 'Join this Group');
 define('_MD_YOGURT_GROUP_SEARCH', 'Search a Group');
 define('_MD_YOGURT_GROUP_SEARCHKEYWORD', 'Keyword');
 
