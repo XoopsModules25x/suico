@@ -343,3 +343,7 @@ define('_MD_YOGURT_META_YEAR', 'Year');
 
 // v3.3RC2
 define('_MD_YOGURT_PLAYER', 'Your audio player');
+
+// 3.5
+define('_MD_YOGURT_ADDASAFRIEND', 'Add as a Friend');
+

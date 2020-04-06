@@ -265,6 +265,7 @@ if (1 == $petition) {
     $xoopsTpl->assign('lang_askingfriend', sprintf(_MD_YOGURT_ASKINGFRIEND, $linkedpetioner));
 }
 $xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
+$xoopsTpl->assign('lang_addasafriend', _MD_YOGURT_ADDASAFRIEND);
 
 //Avatar and Main Video
 $xoopsTpl->assign('avatar_url', $avatar);
