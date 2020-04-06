@@ -1,10 +1,6 @@
-<{if $xoops_isuser === true}>
-    <{include file="db:yogurt_navbar.tpl"}>
-<{/if}>
+ <{include file="db:yogurt_navbar.tpl"}>
 <form class='outer' name='form_group_search' id='form_group_search' action='search_group.php' method='get'>
-
     <h4 class=head><{$lang_searchgroup}></h4>
-
 
     <p class=even>
         <label for='group_keyword' class='xoops-form-element-caption-required'>
