@@ -33,18 +33,7 @@
             <{$token}>
         </form>
     </div>
-<{else}>
 
-    <{if (($isfriend!=1) && ($isOwner==0) && ($isanonym!=1))}>
-        <div id="yogurt-profile-petition">
-            <form action=submit_friendpetition.php method="post">
-                <{$lang_askusertobefriend}><input type="hidden" name="petitioned_uid" id="petitioned_uid" value="<{$uid_owner}>">
-                <button name="" type="image"><{$lang_addasafriend}></button>			 
-				<{$token}>
-            </form>
-        </div>
-        <!-- end if -->
-    <{/if}>
 <{/if}>
 
 <div id="yogurt-friends-container" class="outer">
