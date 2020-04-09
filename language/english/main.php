@@ -75,7 +75,7 @@ define('_MD_YOGURT_UNPRIVATIZED', 'From now everyone can see this image in your 
 define('_MD_YOGURT_FRIENDSTITLE', "%s's Friends");
 define('_MD_YOGURT_NOFRIENDSYET', 'No friends yet'); //also present in index.php
 define('_MD_YOGURT_MYFRIENDS', 'My Friends');
-define('_MD_YOGURT_FRIENDSHIPCONFIGS', 'Set the configs of this friendship. Evaluate your friend.');
+define('_MD_YOGURT_FRIENDSHIPCONFIGS', 'Set the configs of this friendship.');
 
 //class/yogurtfriendship.php
 define('_MD_YOGURT_EDITFRIENDSHIP', 'Your friendship with this member:');

@@ -220,3 +220,5 @@ define('_MI_YOGURT_GROUPS_LOGO_WIDTH_DESC', 'Group Logo width in pixels<br>This 
 define('_MI_YOGURT_GROUPS_LOGO_HEIGHT', 'Group Logo Height');
 define('_MI_YOGURT_GROUPS_LOGO_HEIGHT_DESC', 'Group Logo Height in pixels<br>This means your logo will be most of this size in height<br>All proportions are maintained');
 
+define('_MI_YOGURT_ENABLEFRIENDSEVALUATION_TITLE', 'Enable Friendship Evaluation Ranking');
+define('_MI_YOGURT_ENABLEFRIENDSEVALUATION_DESC', 'Options to evaluate friendship ranking');

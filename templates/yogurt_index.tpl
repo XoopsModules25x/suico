@@ -47,6 +47,7 @@
     <{/if}>
 <{/if}>
 <{if $allow_friends }>
+<{if $friendsevaluation == 1}>
     <div class="yogurt-nav-bar" id="yogurt-nav-bar">
         <p id="yogurt-profile-fans"><a href="fans.php?uid=<{$uid_owner}>" alt="<{$lang_fans}>" title="<{$lang_fans}>"> <{$lang_fans}> </a><img src="assets/images/fans.gif"> (<{$nb_fans}>)
             | <{$lang_funny}> </p>
@@ -56,6 +57,7 @@
 
         | <{$lang_friendly}> <p id="friendlybw"><span id="friendlycolor">&nbsp;<img width="<{$friendly}>" height="0" src="assets/images/transparent.gif"></span>&nbsp;<img width="<{$friendly_rest}>" height="0" src="assets/images/transparent.gif"></p>
     </div>
+<{/if}>
 <{/if}>
 
 <div class="yogurt-profile-group1">

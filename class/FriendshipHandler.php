@@ -357,14 +357,15 @@ class FriendshipHandler extends \XoopsPersistableObjectHandler
         }
         $field_friend_name = new \XoopsFormLabel(_MD_YOGURT_FRIENDNAME, $friend->getVar('uname'));
 
-        $field_friend_fan = new \XoopsFormRadioYN(_MD_YOGURT_FAN, 'fan', $friendship->getVar('fan'), '<img src="assets/images/fans.gif" alt="' . _YES . '" title="' . _YES . '">', '<img src="assets/images/fansbw.gif" alt="' . _NO . '" title="' . _NO . '">');
-
         $field_friend_level = new \XoopsFormRadio(_MD_YOGURT_LEVEL, 'level', $friendship->getVar('level'), '<br>');
 
         $field_friend_level->addOption('1', _MD_YOGURT_UNKNOWNACCEPTED);
         $field_friend_level->addOption('3', _MD_YOGURT_AQUAITANCE);
         $field_friend_level->addOption('5', _MD_YOGURT_FRIEND);
         $field_friend_level->addOption('7', _MD_YOGURT_BESTFRIEND);
+        
+		if (1 == $xoopsModuleConfig['enable_friendsevaluation']) {
+        $field_friend_fan = new \XoopsFormRadioYN(_MD_YOGURT_FAN, 'fan', $friendship->getVar('fan'), '<img src="assets/images/fans.gif" alt="' . _YES . '" title="' . _YES . '">', '<img src="assets/images/fansbw.gif" alt="' . _NO . '" title="' . _NO . '">');
 
         $field_friend_friendly = new \XoopsFormRadio(_MD_YOGURT_FRIENDLY, 'hot', $friendship->getVar('hot'));
         $field_friend_friendly->addOption('1', '<img src="assets/images/friendlya.gif" alt="' . _MD_YOGURT_FRIENDLYNO . '" title="' . _MD_YOGURT_FRIENDLYNO . '">');
@@ -380,7 +381,7 @@ class FriendshipHandler extends \XoopsPersistableObjectHandler
         $field_friend_cool->addOption('1', '<img src="assets/images/coola.gif" alt="' . _MD_YOGURT_COOLNO . '" title="' . _MD_YOGURT_COOLNO . '">');
         $field_friend_cool->addOption('2', '<img src="assets/images/coolb.gif" alt="' . _MD_YOGURT_COOLYES . '" title="' . _MD_YOGURT_COOLYES . '">');
         $field_friend_cool->addOption('3', '<img src="assets/images/coolc.gif" alt="' . _MD_YOGURT_COOLALOT . '" title="' . _MD_YOGURT_COOLALOT . '">');
-
+        }
         $form->setExtra('enctype="multipart/form-data"');
         $button_send                = new \XoopsFormButton('', 'submit_button', _MD_YOGURT_UPDATEFRIEND, 'submit');
         $field_friend_friendid      = new \XoopsFormHidden('friend_uid', $friend->getVar('uid'));
