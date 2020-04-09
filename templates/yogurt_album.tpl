@@ -26,10 +26,9 @@
     </h4>
     <{if $lang_nopicyet=="" }>
     <{section name=i loop=$pics_array}>
-    <{if $pics_array[i].private == 0 }>
+    <{if (($pics_array[i].private == 0) || ($isOwner==1)) }>
     <div class="yogurt-album-picture <{ cycle values=" odd,even
     "}>">
-	<{if $isOwner==1}>
     <form action="delpicture.php" method="post" id="deleteform" class="yogurt-album-formquick">
         <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">
         <{$token}>
@@ -59,7 +58,6 @@
     <{if ($pics_array[i].private == 1) }>
         <p><span class="yogurt-album-private"> Private </span></p>
     <{/if}>
-	<{/if}>
     <p class="yogurt-album-picture-img"><a href="<{$xoops_url}>/uploads/yogurt/images/resized_<{$pics_array[i].url}>" rel="lightbox[album]" title="<{$pics_array[i].desc}>">
             <img class="thumb" src="<{$xoops_url}>/uploads/yogurt/images/thumb_<{$pics_array[i].url}>" rel="lightbox" title="<{$pics_array[i].desc}>">
         </a></p>
