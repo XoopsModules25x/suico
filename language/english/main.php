@@ -81,7 +81,7 @@ define('_MD_YOGURT_FRIENDSHIPCONFIGS', 'Set the configs of this friendship.');
 define('_MD_YOGURT_EDITFRIENDSHIP', 'Your friendship with this member:');
 define('_MD_YOGURT_FRIENDNAME', 'Username');
 define('_MD_YOGURT_LEVEL', 'Friendship level:');
-define('_MD_YOGURT_UNKNOWNACCEPTED', "Haven't met accepted");
+define('_MD_YOGURT_UNKNOWNACCEPTED', "Unknown Friend");
 define('_MD_YOGURT_AQUAITANCE', 'Acquaintances'); //also present in index.php
 define('_MD_YOGURT_FRIEND', 'Friend'); //also present in index.php
 define('_MD_YOGURT_BESTFRIEND', 'Best Friend'); //also present in index.php
