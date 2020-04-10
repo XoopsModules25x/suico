@@ -54,20 +54,20 @@ $adminmenu[] = [
 
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU4,
+    'link'  => 'admin/friendpetition.php',
+    'icon'  => "{$pathIcon32}/face-smile.png",
+];
+
+$adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU5,
     'link'  => 'admin/visitors.php',
     'icon'  => "{$pathIcon32}/user-icon.png",
 ];
 
 $adminmenu[] = [
-    'title' => MI_YOGURT_ADMENU5,
+    'title' => MI_YOGURT_ADMENU6,
     'link'  => 'admin/video.php',
     'icon'  => "{$pathIcon32}/marquee.png",
-];
-
-$adminmenu[] = [
-    'title' => MI_YOGURT_ADMENU6,
-    'link'  => 'admin/friendpetition.php',
-    'icon'  => "{$pathIcon32}/face-smile.png",
 ];
 
 $adminmenu[] = [

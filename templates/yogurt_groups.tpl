@@ -85,21 +85,18 @@
     <{/if}>
     <{section name=i loop=$mygroups}>
         <div class="yogurt-group-my <{cycle values="odd,even"}>">
-            <h6>
-                <{$mygroups[i].title}>
-            </h6>
             <p>
 
                 <a href="group.php?group_id=<{$mygroups[i].group_id}>"><img src="<{$xoops_upload_url}>/yogurt/groups/<{$mygroups[i].img}>" alt="<{$mygroups[i].title}>" title="<{$mygroups[i].title}>"></a>
             <p>
-                <{$mygroups[i].title}><{$mygroups[i].desc}>
+                <a href="group.php?group_id=<{$mygroups[i].group_id}>"><{$mygroups[i].title}></a><br><{$mygroups[i].desc}>
             </p>
 
             <{if $isOwner }>
                 <form action="abandongroup.php" method="POST" id="form_abandongroup">
                     <input type="hidden" value="<{$mygroups[i].id}>" name="relgroup_id" id="relgroup_id">
-                    <input type="image" src="assets/images/abandongroup.gif" title="<{$lang_abandongroup}>" alt="<{$lang_abandongroup}>">
-                </form>
+                    <button name="" type="image"><{$lang_abandongroup}></button>		
+				</form>
                 <{if $xoops_userid == $mygroups[i].uid }>
                     <form>
                         <img src="assets/images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>">
@@ -131,7 +128,7 @@
         <div class="yogurt-group-all <{cycle values="odd,even"}>">
             <a href="group.php?group_id=<{$groups[j].id}>"><img src="<{$xoops_upload_url}>/yogurt/groups/<{$groups[j].img}>" alt="<{$groups[j].title}>" title="<{$groups[j].title}>"></a>
             <h4>
-                <{$groups[j].title}>
+                <a href="group.php?group_id=<{$groups[j].id}>"><{$groups[j].title}></a>
             </h4>
             <p>
 
@@ -143,7 +140,7 @@
             <{if $isOwner }>
                 <form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">
                     <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
-                    <input type="image" src="assets/images/makememember.gif" alt="<{$lang_joingroup}>" title="<{$lang_joingroup}>">
+                    <button name="" type="image"><{$lang_joingroup}></button>
                 </form>
                 <{if $xoops_userid == $groups[j].uid }>
                     <form action="delete_group.php" method="POST" id="form_deletegroup" class="yogurt-groups-form-delete">

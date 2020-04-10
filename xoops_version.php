@@ -383,6 +383,15 @@ $modversion['config'][] = [
 ];
 
 $modversion['config'][] = [
+    'name'        => 'enable_friendsevaluation',
+    'title'       => '_MI_YOGURT_ENABLEFRIENDSEVALUATION_TITLE',
+    'description' => '_MI_YOGURT_ENABLEFRIENDSEVALUATION_DESC',
+    'default'     => 0,
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
     'name'        => 'enable_audio',
     'title'       => '_MI_YOGURT_ENABLEAUDIO_TITLE',
     'description' => '_MI_YOGURT_ENABLEAUDIO_DESC',

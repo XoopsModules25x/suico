@@ -1,6 +1,4 @@
-<{if $isanonym!=1 }>
-    <{include file="db:yogurt_navbar.tpl"}>
-<{/if}>
+<{include file="db:yogurt_navbar.tpl"}>
 
 <{$searchform.javascript}>
 <h4><{$searchform.title}></h4>
