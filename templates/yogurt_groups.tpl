@@ -36,13 +36,13 @@
     </p>
 
     <p class=odd>
-        <label for='group_title' class='xoops-form-element-caption'>
+        <label for='group_title' class='xoops-form-element-caption-required'>
             <span class='caption-text'><{$lang_title}></span><span class='caption-marker'>*</span></label>
         <input type='text' name='group_title' id='group_title' size='35' maxlength='55' value='' required>
     </p>
 
     <p class=even>
-        <label for='group_desc' class='xoops-form-element-caption'>
+        <label for='group_desc' class='xoops-form-element-caption-required'>
             <span class='caption-text'><{$lang_description}></span>
             <span class='caption-marker'>*</span></label>
         <input type='text' name='group_desc' id='group_desc' size='35' maxlength='55' value='' required>
