@@ -39,7 +39,7 @@
         <div id="yogurt-profile-petition">
             <form action=submit_friendpetition.php method="post">
                <input type="hidden" name="petitioned_uid" id="petitioned_uid" value="<{$uid_owner}>">
-               <button name="" type="image"><{$lang_addasafriend}></button>			 
+               <button name="" type="image"><{$lang_addasafriend}></button>			 	   
 				<{$token}>
             </form>
         </div>
@@ -247,7 +247,7 @@
     <{/if}>
     <{if $allow_friends==1 }>
         <div id="yogurt-profile-friends" class="outer">
-            <h4 id="titulo-friends" class="head"><{$lang_friendstitle}> (<{$nb_friends}>)</h4>
+            <h4 id="titulo-friends" class="head"><{$lang_friends}> (<{$nb_friends}>)</h4>
             <{if $nb_friends==0}><p id="nofriends"><{$lang_nofriendsyet}></p><{/if}>
             <{section name=i loop=$friends}>
                 <div class="yogurt-profile-friend <{cycle values="odd,even"}>">
