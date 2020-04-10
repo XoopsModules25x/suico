@@ -54,7 +54,7 @@ $mygroups = $controller->relgroupusersFactory->getGroups('', $criteria_mygroups,
 <<<<<<< HEAD
 
 // Group Members
-$group_members = $controller->relgroupusersFactory->getUsersFromGroup('group_id', 0, 50);
+$group_members = $controller->relgroupusersFactory->getUsersFromGroup(1, 0, 50);
 foreach ($group_members as $group_member) {
     $uids[] = (int)$group_member['uid'];
 }
@@ -67,6 +67,11 @@ if ($xoopsUser) {
     }
     $xoopsTpl->assign('useruid', $uid);
 }
+$xoopsTpl->assign('group_members', $group_members);
+
+
+
+
 
 =======
 >>>>>>> parent of 95458c6... Fix Join Group Button visible to member of group
