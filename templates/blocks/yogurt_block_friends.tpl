@@ -6,7 +6,7 @@
     </div>
     <br>
 <{/section}>
-<{if $block.friends == 1}>
+<{if $block.friends}>
 <a href="<{$xoops_url}>/modules/yogurt/friends.php"><{$block.lang_allfriends}></a>
  <{else}>
  <{$block.lang_nofriends}>
