@@ -51,6 +51,7 @@ $criteria_mygroups->setLimit($xoopsModuleConfig['groupsperpage']);
 $criteria_mygroups->setStart($start_my);
 $mygroups = $controller->relgroupusersFactory->getGroups('', $criteria_mygroups, 0);
 
+<<<<<<< HEAD
 
 // Group Members
 $group_members = $controller->relgroupusersFactory->getUsersFromGroup('group_id', 0, 50);
@@ -67,6 +68,8 @@ if ($xoopsUser) {
     $xoopsTpl->assign('useruid', $uid);
 }
 
+=======
+>>>>>>> parent of 95458c6... Fix Join Group Button visible to member of group
 /**
  * Adding to the module js and css of the lightbox and new ones
  */
