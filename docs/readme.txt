@@ -1,4 +1,4 @@
 README FIRST
 -----------------------
 
-This module is for ...
+Yogurt is a simple Social Network module for your XOOPS site.
