@@ -1,5 +1,6 @@
 <{include file="db:yogurt_navbar.tpl"}>
 <form class='outer' name='form_group_search' id='form_group_search' action='search_group.php' method='get'>
+
     <h4 class="head"><{$lang_searchgroup}></h4>
 
 
@@ -136,13 +137,11 @@
             </p>
 
             </p>
-			<{if $memberOfGroup!=1}>
+            <{if $isOwner }>
                 <form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">
                     <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
                     <button name="" type="image"><{$lang_joingroup}></button>
                 </form>
-            <{/if}>
-			<{if $isOwner }>				
                 <{if $xoops_userid == $groups[j].uid }>
                     <form action="delete_group.php" method="POST" id="form_deletegroup" class="yogurt-groups-form-delete">
                         <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
