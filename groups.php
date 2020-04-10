@@ -53,7 +53,7 @@ $mygroups = $controller->relgroupusersFactory->getGroups('', $criteria_mygroups,
 
 
 // Group Members
-$group_members = $controller->relgroupusersFactory->getUsersFromGroup(1, 0, 50);
+$group_members = $controller->relgroupusersFactory->getUsersFromGroup('group_id', 0, 50);
 foreach ($group_members as $group_member) {
     $uids[] = (int)$group_member['uid'];
 }
@@ -66,11 +66,6 @@ if ($xoopsUser) {
     }
     $xoopsTpl->assign('useruid', $uid);
 }
-$xoopsTpl->assign('group_members', $group_members);
-
-
-
-
 
 /**
  * Adding to the module js and css of the lightbox and new ones
