@@ -36,7 +36,7 @@ function b_yogurt_friends_show($options)
     $myts  = MyTextSanitizer::getInstance();
     $block = [];
 
-    if (!empty($xoopsUser)) {
+    if ($xoopsUser) {
         /**
          * Filter for fetch votes ishot and isnothot
          */
@@ -50,10 +50,12 @@ function b_yogurt_friends_show($options)
         $friendsFactory = new Yogurt\FriendshipHandler($xoopsDB);
 
         $block['friends'] = $friendsFactory->getFriends($options[0], $criteria_2, 0);
-    }
+    
     $block['lang_allfriends'] = _MB_YOGURT_ALLFRIENDS;
-
+    $block['lang_nofriends'] = _MB_YOGURT_NOFRIENDSYET;
+	
     return $block;
+	}
 }
 
 /**

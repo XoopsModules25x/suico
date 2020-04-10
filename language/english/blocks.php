@@ -17,3 +17,4 @@
  * @since
  */
 define('_MB_YOGURT_ALLFRIENDS', 'View all friends');
+define('_MB_YOGURT_NOFRIENDSYET', 'You have no friends yet. Make some Friends');
