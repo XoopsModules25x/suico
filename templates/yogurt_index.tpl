@@ -47,6 +47,7 @@
     <{/if}>
 <{/if}>
 <{if $allow_friends }>
+<{if $friendsevaluation == 1}>
     <div class="yogurt-nav-bar" id="yogurt-nav-bar">
         <p id="yogurt-profile-fans"><a href="fans.php?uid=<{$uid_owner}>" alt="<{$lang_fans}>" title="<{$lang_fans}>"> <{$lang_fans}> </a><img src="assets/images/fans.gif"> (<{$nb_fans}>)
             | <{$lang_funny}> </p>
@@ -56,6 +57,7 @@
 
         | <{$lang_friendly}> <p id="friendlybw"><span id="friendlycolor">&nbsp;<img width="<{$friendly}>" height="0" src="assets/images/transparent.gif"></span>&nbsp;<img width="<{$friendly_rest}>" height="0" src="assets/images/transparent.gif"></p>
     </div>
+<{/if}>
 <{/if}>
 
 <div class="yogurt-profile-group1">
@@ -219,11 +221,11 @@
 </div><!-- end of div of group1 -->
 
 <div class="yogurt-profile-group2">
-        <{if $allow_videos==1 }>
-            <{if $mainvideocode!="" }>
-    <div id="yogurt-profile-friends" class="outer">
-        <h4 id="titulo-friends" class="head"><{$lang_featuredvideo}></h4>
-			    <div id="yogurt-profile-group">
+    <{if $allow_videos==1 }>
+        <div id="yogurt-profile-friends" class="outer">
+            <h4 id="titulo-friends" class="head"><{$lang_featuredvideo}></h4>
+            <div id="yogurt-profile-group">
+                <{if $mainvideocode!="" }>
                     <object width="200" height="150">
                         <param name="movie" value="http://www.youtube.com/v/<{$mainvideocode}>">
                         <param name="wmode" value="transparent">
@@ -232,14 +234,17 @@
                     <p id="yogurt-profile-mainvideo-desc">
                         <{$mainvideodesc}>
                     </p>
-					<p id="yogurt-profile-friend-viewall" class="foot">
+                    <p id="yogurt-profile-friend-viewall" class="foot">
                         <a href="video.php?uid=<{$uid_owner}>"><{$lang_viewallvideos}></a>
                     </p>
-                </div>	
-    </div>
-	        <{/if}>  
-        <{/if}>
-
+                <{else}>
+                        <p>
+                            <{$lang_nomainvideo}>
+                        </p>
+                <{/if}>
+            </div>
+        </div>
+    <{/if}>
     <{if $allow_friends==1 }>
         <div id="yogurt-profile-friends" class="outer">
             <h4 id="titulo-friends" class="head"><{$lang_friendstitle}> (<{$nb_friends}>)</h4>

@@ -383,6 +383,15 @@ $modversion['config'][] = [
 ];
 
 $modversion['config'][] = [
+    'name'        => 'enable_friendsevaluation',
+    'title'       => '_MI_YOGURT_ENABLEFRIENDSEVALUATION_TITLE',
+    'description' => '_MI_YOGURT_ENABLEFRIENDSEVALUATION_DESC',
+    'default'     => 1,
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
     'name'        => 'enable_audio',
     'title'       => '_MI_YOGURT_ENABLEAUDIO_TITLE',
     'description' => '_MI_YOGURT_ENABLEAUDIO_DESC',
@@ -655,7 +664,7 @@ $modversion['blocks'][] = [
     'name'        => _MI_YOGURT_FRIENDS,
     'description' => _MI_YOGURT_FRIENDS_DESC,
     'show_func'   => 'b_yogurt_friends_show',
-    'options'     => '5',
+    'options'     => '6|0',
     'edit_func'   => 'b_yogurt_friends_edit',
     'template'    => 'yogurt_block_friends.tpl',
 ];

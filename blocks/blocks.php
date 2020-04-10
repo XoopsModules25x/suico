@@ -36,7 +36,7 @@ function b_yogurt_friends_show($options)
     $myts  = MyTextSanitizer::getInstance();
     $block = [];
 
-    if (!empty($xoopsUser)) {
+    if ($xoopsUser) {
         /**
          * Filter for fetch votes ishot and isnothot
          */
@@ -49,11 +49,14 @@ function b_yogurt_friends_show($options)
         //$albumFactory      = new ImagesHandler($xoopsDB);
         $friendsFactory = new Yogurt\FriendshipHandler($xoopsDB);
 
-        $block['friends'] = $friendsFactory->getFriends($options[0], $criteria_2, 0);
-    }
-    $block['lang_allfriends'] = _MB_YOGURT_ALLFRIENDS;
+        $block['friends'] = $friendsFactory->getFriends($options[0], $criteria_2);
 
+    $block['lang_allfriends'] = _MB_YOGURT_ALLFRIENDS;
+    $block['lang_nofriends'] = _MB_YOGURT_NOFRIENDSYET;
+	$block['enablepm'] = $options[1];
+	
     return $block;
+	}
 }
 
 /**
@@ -62,7 +65,20 @@ function b_yogurt_friends_show($options)
  */
 function b_yogurt_friends_edit($options)
 {
-    $form = "<input type='text' value='" . $options['0'] . "'id='options[]' name='options[]'>";
+	
+	$form .=_MB_YOGURT_TOTALFRIENDSTOSHOW."&nbsp;";
+    $form .= "<input type='text' name='options[0]' value='".$options[0]."'/><br />";
+	
+	$form .= _MB_YOGURT_ENABLEPM."&nbsp;";
+	if ( $options[1] == 1 ) {
+		$chk = " checked='checked'";
+	}
+	$form .= "<input type='radio' name='options[1]' value='1'".$chk." />&nbsp;"._YES."";
+	$chk = "";
+	if ( $options[1] == 0 ) {
+		$chk = " checked='checked'";
+	}
+	$form .= "&nbsp;<input type='radio' name='options[1]' value='0'".$chk." />"._NO."<br />";
 
     return $form;
 }

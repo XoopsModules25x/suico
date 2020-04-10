@@ -321,7 +321,7 @@ class ImageHandler extends \XoopsPersistableObjectHandler
      */
     public function renderFormEdit($caption, $cod_img, $filename)
     {
-        $form       = new \XoopsThemeForm(_MD_YOGURT_EDITDESC, 'form_picture', 'editdesc.php', 'post', true);
+        $form       = new \XoopsThemeForm(_MD_YOGURT_EDITDESC, 'form_picture', 'editdescpicture.php', 'post', true);
         $field_desc = new \XoopsFormText($caption, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
         $button_send   = new \XoopsFormButton('', 'submit_button', _MD_YOGURT_SUBMIT, 'submit');

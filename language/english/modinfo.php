@@ -187,9 +187,9 @@ define('_MI_YOGURT_SUPPORT', 'Support');
 define('MI_YOGURT_ADMENU1', 'Home');
 define('MI_YOGURT_ADMENU2', 'Images');
 define('MI_YOGURT_ADMENU3', 'Friends');
-define('MI_YOGURT_ADMENU4', 'Visitors');
-define('MI_YOGURT_ADMENU5', 'Video');
-define('MI_YOGURT_ADMENU6', 'Invitations');
+define('MI_YOGURT_ADMENU4', 'Friendship Request');
+define('MI_YOGURT_ADMENU5', 'Visitors');
+define('MI_YOGURT_ADMENU6', 'Video');
 define('MI_YOGURT_ADMENU7', 'Groups');
 define('MI_YOGURT_ADMENU8', 'Members');
 define('MI_YOGURT_ADMENU9', 'Notes');
@@ -220,3 +220,5 @@ define('_MI_YOGURT_GROUPS_LOGO_WIDTH_DESC', 'Group Logo width in pixels<br>This 
 define('_MI_YOGURT_GROUPS_LOGO_HEIGHT', 'Group Logo Height');
 define('_MI_YOGURT_GROUPS_LOGO_HEIGHT_DESC', 'Group Logo Height in pixels<br>This means your logo will be most of this size in height<br>All proportions are maintained');
 
+define('_MI_YOGURT_ENABLEFRIENDSEVALUATION_TITLE', 'Enable Friendship Evaluation Ranking');
+define('_MI_YOGURT_ENABLEFRIENDSEVALUATION_DESC', 'Options to evaluate friendship ranking');

@@ -75,13 +75,13 @@ define('_MD_YOGURT_UNPRIVATIZED', 'From now everyone can see this image in your 
 define('_MD_YOGURT_FRIENDSTITLE', "%s's Friends");
 define('_MD_YOGURT_NOFRIENDSYET', 'No friends yet'); //also present in index.php
 define('_MD_YOGURT_MYFRIENDS', 'My Friends');
-define('_MD_YOGURT_FRIENDSHIPCONFIGS', 'Set the configs of this friendship. Evaluate your friend.');
+define('_MD_YOGURT_FRIENDSHIPCONFIGS', 'Set the configs of this friendship.');
 
 //class/yogurtfriendship.php
 define('_MD_YOGURT_EDITFRIENDSHIP', 'Your friendship with this member:');
 define('_MD_YOGURT_FRIENDNAME', 'Username');
 define('_MD_YOGURT_LEVEL', 'Friendship level:');
-define('_MD_YOGURT_UNKNOWNACCEPTED', "Haven't met accepted");
+define('_MD_YOGURT_UNKNOWNACCEPTED', "Unknown Friend");
 define('_MD_YOGURT_AQUAITANCE', 'Acquaintances'); //also present in index.php
 define('_MD_YOGURT_FRIEND', 'Friend'); //also present in index.php
 define('_MD_YOGURT_BESTFRIEND', 'Best Friend'); //also present in index.php
@@ -178,7 +178,7 @@ define('_MD_YOGURT_GROUPKICKED', "You've banished this user from the Group, but 
 
 //Groups.php
 define('_MD_YOGURT_GROUP_ABANDON', 'Leave this Group');
-define('_MD_YOGURT_GROUP_JOIN', 'Join this Group and show everyone who you are!');
+define('_MD_YOGURT_GROUP_JOIN', 'Join this Group');
 define('_MD_YOGURT_GROUP_SEARCH', 'Search a Group');
 define('_MD_YOGURT_GROUP_SEARCHKEYWORD', 'Keyword');
 
@@ -242,7 +242,7 @@ define('_MD_YOGURT_EDITPROFILE', 'Edit your profile');
 define('_MD_YOGURT_SELECTAVATAR', 'Upload pictures to your album and select one as your avatar.');
 define('_MD_YOGURT_SELECTMAINVIDEO', 'Then you can select a video to feature in your profile page');
 define('_MD_YOGURT_NOAVATARYET', 'No avatar yet');
-define('_MD_YOGURT_NOMAINVIDEOYET', 'No main video yet');
+define('_MD_YOGURT_NOMAINVIDEOYET', 'No featured video yet');
 define('_MD_YOGURT_MYPROFILE', 'My Profile');
 define('_MD_YOGURT_YOUHAVEXPETITIONS', 'You have %u requests for friendship.');
 define('_MD_YOGURT_CONTACTINFO', 'Contact Info');

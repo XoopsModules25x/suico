@@ -84,14 +84,14 @@ $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_IMAGES, $totalImages));
 // InfoBox friendship
 $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_FRIENDS, $totalFriendship));
 
+// InfoBox friendpetition
+$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_FRIENDPETITION, $totalFriendpetition));
+
 // InfoBox visitors
 $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_VISITORS, $totalVisitors));
 
 // InfoBox video
 $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_VIDEO, $totalVideo));
-
-// InfoBox friendpetition
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_INVITATIONS, $totalFriendpetition));
 
 // InfoBox groups
 $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_GROUPS, $totalGroups));

@@ -1,10 +1,6 @@
-<{if $xoops_isuser === true}>
-    <{include file="db:yogurt_navbar.tpl"}>
-<{/if}>
+ <{include file="db:yogurt_navbar.tpl"}>
 <form class='outer' name='form_group_search' id='form_group_search' action='search_group.php' method='get'>
-
     <h4 class=head><{$lang_searchgroup}></h4>
-
 
     <p class=even>
         <label for='group_keyword' class='xoops-form-element-caption-required'>
@@ -35,7 +31,7 @@
         <div class="yogurt-group-all <{cycle values="odd,even"}>">
 <{*            <img src="<{$xoops_upload_url}>/yogurt/groups/<{$groups[j].img}>" alt="<{$groups[j].title}>" title="<{$groups[j].title}>">*}>
             <a href="group.php?group_id=<{$groups[j].id}>"><img src="<{$xoops_upload_url}>/yogurt/groups/<{$groups[j].img}>" alt="<{$groups[j].title}>" title="<{$groups[j].title}>"></a>
-            <h4><{$groups[j].title}></h4>
+            <h4> <a href="group.php?group_id=<{$groups[j].id}>"><{$groups[j].title}></a></h4>
             <p>
             <p>
                 <{$groups[j].desc}>
@@ -44,7 +40,7 @@
             <{if $isOwner }>
                 <form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">
                     <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
-                    <input type="image" src="assets/images/makememember.gif" alt="<{$lang_joingroup}>" title="<{$lang_joingroup}>">
+                    <button name="" type="image"><{$lang_joingroup}></button>
                 </form>
                 <{if $xoops_userid == $groups[j].uid }>
                     <form action="delete_group.php" method="POST" id="form_deletegroup" class="yogurt-groups-form-delete">

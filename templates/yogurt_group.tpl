@@ -14,13 +14,13 @@
         <{if $memberOfGroup ==1}>
     <form action="abandongroup.php" method="POST" id="form_abandongroup">
         <input type="hidden" value="<{$group_id}>" name="relgroup_id" id="relgroup_id">
-        <input type="image" src="assets/images/abandongroup.gif" title="<{$lang_abandongroup}>" alt="<{$lang_abandongroup}>">
+        <button name="" type="image"><{$lang_abandongroup}></button>
     </form>
     <{ else}>
     <form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">
         <input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
-        <input type="image" src="assets/images/makememember.gif" alt="<{$lang_joingroup}>" title="<{$lang_joingroup}>">
-    </form><{/if}>
+        <button name="" type="image"><{$lang_joingroup}></button>
+	</form><{/if}>
     <{/if}>
     </p>
 
@@ -41,7 +41,7 @@
                     <form action="kickfromgroup.php" method="post">
                         <input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
                         <input type="hidden" value="<{$group_members[i].uid}>" name="rel_user_uid" id="rel_user_uid">
-                        <input type="image" src="assets/images/abandongroup.gif">
+                         <button name="" type="image"><{$lang_abandongroup}></button>
                     </form>
                     <{/if}>
                     </p>
