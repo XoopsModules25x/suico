@@ -364,6 +364,7 @@ class FriendshipHandler extends \XoopsPersistableObjectHandler
         $field_friend_level->addOption('5', _MD_YOGURT_FRIEND);
         $field_friend_level->addOption('7', _MD_YOGURT_BESTFRIEND);
         
+		global $xoopsModuleConfig;
 		if (1 == $xoopsModuleConfig['enable_friendsevaluation']) {
         $field_friend_fan = new \XoopsFormRadioYN(_MD_YOGURT_FAN, 'fan', $friendship->getVar('fan'), '<img src="assets/images/fans.gif" alt="' . _YES . '" title="' . _YES . '">', '<img src="assets/images/fansbw.gif" alt="' . _NO . '" title="' . _NO . '">');
 
