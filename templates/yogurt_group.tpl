@@ -9,7 +9,10 @@
     </p>
 
     <p id="yogurt-group-desc" class="even">
-        <{$group_desc}>
+        <{$group_desc}><br>
+		<b><{$lang_groupowner}></b><br>
+		<{$group_ownername}>
+		
         <{if $isanonym!=1 }>
         <{if $memberOfGroup ==1}>
     <form action="abandongroup.php" method="POST" id="form_abandongroup">
