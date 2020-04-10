@@ -51,6 +51,27 @@ $criteria_mygroups->setLimit($xoopsModuleConfig['groupsperpage']);
 $criteria_mygroups->setStart($start_my);
 $mygroups = $controller->relgroupusersFactory->getGroups('', $criteria_mygroups, 0);
 
+
+// Group Members
+$group_members = $controller->relgroupusersFactory->getUsersFromGroup(1, 0, 50);
+foreach ($group_members as $group_member) {
+    $uids[] = (int)$group_member['uid'];
+}
+
+global $xoopsUser;
+$uid = (int)$xoopsUser->getVar('uid');
+if ($xoopsUser) {
+    if (in_array($uid, $uids)) {
+        $xoopsTpl->assign('memberOfGroup', 1);
+    }
+    $xoopsTpl->assign('useruid', $uid);
+}
+$xoopsTpl->assign('group_members', $group_members);
+
+
+
+
+
 /**
  * Adding to the module js and css of the lightbox and new ones
  */
