@@ -52,7 +52,7 @@
             <{/section}>
         </div>
     <{/if}>
-
+</div>
 
     <div style="clear:both;">
         <{$commentsnav}>
