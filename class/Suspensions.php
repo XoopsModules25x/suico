@@ -102,8 +102,7 @@ class Suspensions extends \XoopsObject
     /**
      * Get form
      *
-     * @param null
-     * @return Yogurt\Form\SuspensionsForm
+     * @return \XoopsModules\Yogurt\Form\SuspensionsForm
      */
     public function getForm()
     {

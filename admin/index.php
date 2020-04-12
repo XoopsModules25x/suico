@@ -46,34 +46,24 @@ $adminObject->addInfoBoxLine(sprintf(_AM_YOGURT_THEREARE_QUOTES, $quotesCount));
 /** @var \XoopsPersistableObjectHandler $imageHandler */
 $totalImages = $imageHandler->getCount();
 //count "total Friendship"
-/** @var \XoopsPersistableObjectHandler $friendshipHandler */
 $totalFriendship = $friendshipHandler->getCount();
 //count "total Visitors"
-/** @var \XoopsPersistableObjectHandler $visitorsHandler */
 $totalVisitors = $visitorsHandler->getCount();
 //count "total Video"
-/** @var \XoopsPersistableObjectHandler $videoHandler */
 $totalVideo = $videoHandler->getCount();
 //count "total Friendpetition"
-/** @var \XoopsPersistableObjectHandler $friendpetitionHandler */
 $totalFriendpetition = $friendpetitionHandler->getCount();
 //count "total Groups"
-/** @var \XoopsPersistableObjectHandler $groupsHandler */
 $totalGroups = $groupsHandler->getCount();
 //count "total Relgroupuser"
-/** @var \XoopsPersistableObjectHandler $relgroupuserHandler */
 $totalRelgroupuser = $relgroupuserHandler->getCount();
 //count "total Notes"
-/** @var \XoopsPersistableObjectHandler $notesHandler */
 $totalNotes = $notesHandler->getCount();
 //count "total Configs"
-/** @var \XoopsPersistableObjectHandler $configsHandler */
 $totalConfigs = $configsHandler->getCount();
 //count "total Suspensions"
-/** @var \XoopsPersistableObjectHandler $suspensionsHandler */
 $totalSuspensions = $suspensionsHandler->getCount();
 //count "total Audio"
-/** @var \XoopsPersistableObjectHandler $audioHandler */
 $totalAudio = $audioHandler->getCount();
 // InfoBox Statistics
 $adminObject->addInfoBox(AM_YOGURT_STATISTICS);

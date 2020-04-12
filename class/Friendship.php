@@ -114,8 +114,7 @@ class Friendship extends \XoopsObject
     /**
      * Get form
      *
-     * @param null
-     * @return Yogurt\Form\FriendshipForm
+     * @return \XoopsModules\Yogurt\Form\FriendshipForm
      */
     public function getForm()
     {

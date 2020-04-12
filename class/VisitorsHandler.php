@@ -67,7 +67,8 @@ class VisitorsHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve a Yogurt\Visitors
      *
-     * @param int $id of the Yogurt\Visitors
+     * @param int  $id of the Yogurt\Visitors
+     * @param null $fields
      * @return mixed reference to the {@link yogurt_visitors} object, FALSE if failed
      */
     public function get($id = null, $fields = null)
@@ -170,6 +171,7 @@ class VisitorsHandler extends \XoopsPersistableObjectHandler
      *
      * @param null|\CriteriaElement|\CriteriaCompo $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key use the UID as key for the array?
+     * @param bool                                 $as_object
      * @return array array of {@link Yogurt\Visitors} objects
      */
     public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
@@ -229,6 +231,7 @@ class VisitorsHandler extends \XoopsPersistableObjectHandler
      *
      * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link \CriteriaElement}
      * @param bool                                 $force
+     * @param bool                                 $asObject
      * @return bool FALSE if deletion failed
      */
     public function deleteAll(\CriteriaElement $criteria = null, $force = true, $asObject = false)

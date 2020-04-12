@@ -45,7 +45,6 @@ function xoops_module_uninstall_yogurt(\XoopsModule $module)
     $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-    /** @var Yogurt\Helper $helper */
     $helper  = Yogurt\Helper::getInstance();
     $utility = new Yogurt\Utility();
     //    $configurator = new Yogurt\Common\Configurator();

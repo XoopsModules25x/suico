@@ -104,8 +104,7 @@ class Notes extends \XoopsObject
     /**
      * Get form
      *
-     * @param null
-     * @return Yogurt\Form\NotesForm
+     * @return \XoopsModules\Yogurt\Form\NotesForm
      */
     public function getForm()
     {

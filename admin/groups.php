@@ -32,7 +32,6 @@ $order = \Xmf\Request::getString('order', 'desc');
 $sort  = \Xmf\Request::getString('sort', '');
 
 $adminObject->displayNavigation(basename(__FILE__));
-/** @var \Xmf\Module\Helper\Permission $permHelper */
 $permHelper = new \Xmf\Module\Helper\Permission();
 $uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/groups/';
 $uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/groups/';

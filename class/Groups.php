@@ -110,8 +110,7 @@ class Groups extends \XoopsObject
     /**
      * Get form
      *
-     * @param null
-     * @return Yogurt\Form\GroupsForm
+     * @return \XoopsModules\Yogurt\Form\GroupsForm
      */
     public function getForm()
     {

@@ -55,7 +55,6 @@ function xoops_module_pre_update_yogurt(\XoopsModule $module)
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
 
-    /** @var \XoopsModules\Yogurt\Common\Configurator $configurator */
     $configurator = new \XoopsModules\Yogurt\Common\Configurator();
 
     $migrator = new \XoopsModules\Yogurt\Common\Migrate($configurator);

@@ -65,7 +65,8 @@ class AudioHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve a yogurt_audio
      *
-     * @param int $id of the yogurt_audio
+     * @param int  $id of the yogurt_audio
+     * @param null $fields
      * @return mixed reference to the {@link yogurt_audio} object, FALSE if failed
      */
     public function get($id = null, $fields = null)
@@ -168,6 +169,7 @@ class AudioHandler extends \XoopsPersistableObjectHandler
      *
      * @param null|\CriteriaElement|\CriteriaCompo $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key use the UID as key for the array?
+     * @param bool                                 $as_object
      * @return array array of {@link yogurt_audio} objects
      */
     public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
@@ -226,6 +228,8 @@ class AudioHandler extends \XoopsPersistableObjectHandler
      * delete yogurt_audios matching a set of conditions
      *
      * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link \CriteriaElement}
+     * @param bool                                 $force
+     * @param bool                                 $asObject
      * @return bool FALSE if deletion failed
      */
     public function deleteAll(\CriteriaElement $criteria = null, $force = true, $asObject = false)

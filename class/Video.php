@@ -110,8 +110,7 @@ class Video extends \XoopsObject
     /**
      * Get form
      *
-     * @param null
-     * @return Yogurt\Form\VideoForm
+     * @return \XoopsModules\Yogurt\Form\VideoForm
      */
     public function getForm()
     {

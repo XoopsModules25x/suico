@@ -345,7 +345,6 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         xoops_loadLanguage('admin/blocksadmin', 'system');
         xoops_loadLanguage('admin/groups', 'system');
 
-        /** @var \XoopsBlock $block */
         $block = new \XoopsBlock($bid);
         $clone = $block->xoopsClone();
         if (empty($bmodule)) {

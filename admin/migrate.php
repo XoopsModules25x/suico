@@ -45,10 +45,8 @@ EOF;
 
 //XoopsLoad::load('migrate', 'newbb');
 
-/** @var Yogurt\Common\Configurator $configurator */
 $configurator = new Yogurt\Common\Configurator();
 
-/** @var \XoopsModules\Yogurt\Common\Migrate $migrator */
 $migrator = new \XoopsModules\Yogurt\Common\Migrate($configurator);
 
 $op        = Request::getCmd('op', 'default');

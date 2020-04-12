@@ -112,8 +112,7 @@ class Configs extends \XoopsObject
     /**
      * Get form
      *
-     * @param null
-     * @return Yogurt\Form\ConfigsForm
+     * @return \XoopsModules\Yogurt\Form\ConfigsForm
      */
     public function getForm()
     {

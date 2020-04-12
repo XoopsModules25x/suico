@@ -28,7 +28,6 @@ require dirname(__DIR__) . '/include/common.php';
 
 $moduleDirName = basename(dirname(__DIR__));
 
-/** @var \XoopsModules\Yogurt\Helper $helper */
 $helper = \XoopsModules\Yogurt\Helper::getInstance();
 
 /** @var \Xmf\Module\Admin $adminObject */

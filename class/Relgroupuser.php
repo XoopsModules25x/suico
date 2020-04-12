@@ -100,8 +100,7 @@ class Relgroupuser extends \XoopsObject
     /**
      * Get form
      *
-     * @param null
-     * @return Yogurt\Form\RelgroupuserForm
+     * @return \XoopsModules\Yogurt\Form\RelgroupuserForm
      */
     public function getForm()
     {

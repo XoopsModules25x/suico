@@ -68,7 +68,8 @@ class NotesHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve aNotes
      *
-     * @param int $id of theNotes
+     * @param int  $id of theNotes
+     * @param null $fields
      * @return mixed reference to the {@linkNotes} object, FALSE if failed
      */
     public function get($id = null, $fields = null)
@@ -179,6 +180,7 @@ class NotesHandler extends \XoopsPersistableObjectHandler
      *
      * @param null|\CriteriaElement|\CriteriaCompo $criteria  {@link CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key use the UID as key for the array?
+     * @param bool                                 $as_object
      * @return array array of {@linkNotes} objects
      */
     public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
@@ -237,6 +239,8 @@ class NotesHandler extends \XoopsPersistableObjectHandler
      * delete yogurt_notes matching a set of conditions
      *
      * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link CriteriaElement}
+     * @param bool                                 $force
+     * @param bool                                 $asObject
      * @return bool FALSE if deletion failed
      */
     public function deleteAll(\CriteriaElement $criteria = null, $force = true, $asObject = false)

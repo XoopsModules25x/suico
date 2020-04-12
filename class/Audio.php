@@ -105,8 +105,7 @@ class Audio extends \XoopsObject
     /**
      * Get form
      *
-     * @param null
-     * @return Yogurt\Form\AudioForm
+     * @return \XoopsModules\Yogurt\Form\AudioForm
      */
     public function getForm()
     {

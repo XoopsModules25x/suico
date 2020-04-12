@@ -31,7 +31,6 @@ include dirname(__DIR__) . '/preloads/autoloader.php';
 function xoops_module_pre_install_yogurt(\XoopsModule $module)
 {
     include __DIR__ . '/common.php';
-    /** @var \XoopsModules\Yogurt\Utility $utility */
     $utility = new \XoopsModules\Yogurt\Utility();
     //check for minimum XOOPS version
     $xoopsSuccess = $utility::checkVerXoops($module);

@@ -64,7 +64,8 @@ class FriendpetitionHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve a Friendpetition
      *
-     * @param int $id of the Friendpetition
+     * @param int  $id of the Friendpetition
+     * @param null $fields
      * @return mixed reference to the {@link Friendpetition} object, FALSE if failed
      */
     public function get($id = null, $fields = null)
@@ -167,6 +168,7 @@ class FriendpetitionHandler extends \XoopsPersistableObjectHandler
      *
      * @param null|\CriteriaElement|\CriteriaCompo $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key use the UID as key for the array?
+     * @param bool                                 $as_object
      * @return array array of {@link Friendpetition} objects
      */
     public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
@@ -225,6 +227,8 @@ class FriendpetitionHandler extends \XoopsPersistableObjectHandler
      * delete yogurt_friendpetitions matching a set of conditions
      *
      * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link \CriteriaElement}
+     * @param bool                                 $force
+     * @param bool                                 $asObject
      * @return bool FALSE if deletion failed
      */
     public function deleteAll(\CriteriaElement $criteria = null, $force = true, $asObject = false)

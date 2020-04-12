@@ -100,8 +100,7 @@ class Friendpetition extends \XoopsObject
     /**
      * Get form
      *
-     * @param null
-     * @return Yogurt\Form\FriendpetitionForm
+     * @return \XoopsModules\Yogurt\Form\FriendpetitionForm
      */
     public function getForm()
     {

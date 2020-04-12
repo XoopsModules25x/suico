@@ -129,8 +129,7 @@ class Image extends \XoopsObject
     /**
      * Get form
      *
-     * @param null
-     * @return Yogurt\Form\ImagesForm
+     * @return \XoopsModules\Yogurt\Form\ImagesForm
      */
     public function getForm()
     {

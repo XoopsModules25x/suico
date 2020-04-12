@@ -64,7 +64,8 @@ class ConfigsHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve a Configs
      *
-     * @param int $id of the Configs
+     * @param int  $id of the Configs
+     * @param null $fields
      * @return mixed reference to the {@link Configs} object, FALSE if failed
      */
     public function get($id = null, $fields = null)
@@ -205,6 +206,7 @@ class ConfigsHandler extends \XoopsPersistableObjectHandler
      *
      * @param null|\CriteriaElement|\CriteriaCompo $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key use the UID as key for the array?
+     * @param bool                                 $as_object
      * @return array array of {@link Configs} objects
      */
     public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
@@ -263,6 +265,8 @@ class ConfigsHandler extends \XoopsPersistableObjectHandler
      * delete yogurt_configs matching a set of conditions
      *
      * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link \CriteriaElement}
+     * @param bool                                 $force
+     * @param bool                                 $asObject
      * @return bool FALSE if deletion failed
      */
     public function deleteAll(\CriteriaElement $criteria = null, $force = true, $asObject = false)

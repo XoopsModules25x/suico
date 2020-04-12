@@ -47,8 +47,7 @@ switch ($op) {
         $feedback->name  = $GLOBALS['xoopsUser']->getVar('name');
         $feedback->email = $GLOBALS['xoopsUser']->getVar('email');
         $feedback->site  = XOOPS_URL;
-        /** @var \XoopsThemeForm $form */
-        $form = $feedback->getFormFeedback();
+    $form = $feedback->getFormFeedback();
         echo $form->render();
         break;
 

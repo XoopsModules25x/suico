@@ -101,8 +101,7 @@ class Visitors extends \XoopsObject
     /**
      * Get form
      *
-     * @param null
-     * @return Yogurt\Form\VisitorsForm
+     * @return \XoopsModules\Yogurt\Form\VisitorsForm
      */
     public function getForm()
     {
