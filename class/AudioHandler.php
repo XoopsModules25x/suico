@@ -52,6 +52,11 @@ class AudioHandler extends \XoopsPersistableObjectHandler
     public function create($isNew = true)
     {
         $obj         = parent::create($isNew);
+        if ($isNew) {
+            $obj->setNew();
+        } else {
+            $obj->unsetNew();
+        }
         $obj->helper = $this->helper;
 
         return $obj;
@@ -91,7 +96,7 @@ class AudioHandler extends \XoopsPersistableObjectHandler
     public function insert(\XoopsObject $yogurtAudio, $force = false)
     {
         global $xoopsConfig;
-        if ('yogurt_audio' != get_class($yogurtAudio)) {
+        if (Audio::class != get_class($yogurtAudio)) {
             return false;
         }
         if (!$yogurtAudio->isDirty()) {

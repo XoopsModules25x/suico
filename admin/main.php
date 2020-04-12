@@ -275,20 +275,10 @@ function homedefault()
 
         </tr>";
     }
-    if (str_replace('.', '', PHP_VERSION) > 499) {
         echo "              <tr>
             <td class='odd'><img src='../assets/images/green.gif' align='baseline'> " . _MA_YOGURT_PHP5PRESENT . ' ' . PHP_VERSION . '</td>
 
         </tr>';
-    } else {
-        echo "
-                <tr>
-            <td class='odd'><img src='../assets/images/red.gif' align='baseline'> " . _MA_YOGURT_PHP5NOTPRESENT . ' ' . PHP_VERSION . '</td>
-
-        </tr>
-
-     ';
-    }
 
     /*
     if ($isframeworksrequirement){
@@ -306,17 +296,17 @@ function homedefault()
          ";
     }
     */
-    if (!is_dir(XOOPS_ROOT_PATH . '/uploads/yogurt/mp3/')) {
+    if (!is_dir(XOOPS_ROOT_PATH . '/uploads/yogurt/audio/')) {
         echo "<tr>
-          <td class='odd'><img src='../assets/images/red.gif'> /uploads/yogurt/mp3/ is not exists</td>
+          <td class='odd'><img src='../assets/images/red.gif'> /uploads/yogurt/audio/ is not exists</td>
         </tr>";
-    } elseif (!is_writable(XOOPS_ROOT_PATH . '/uploads/yogurt/mp3/')) {
+    } elseif (!is_writable(XOOPS_ROOT_PATH . '/uploads/yogurt/audio/')) {
         echo "<tr>
-          <td class='odd'><img src='../assets/images/red.gif'> /uploads/yogurt/mp3/ is not writable</td>
+          <td class='odd'><img src='../assets/images/red.gif'> /uploads/yogurt/audio/ is not writable</td>
         </tr>";
     } else {
         echo "<tr>
-          <td class='odd'><img src='../assets/images/green.gif' align='baseline'> /uploads/yogurt/mp3/ exists and writable</td>
+          <td class='odd'><img src='../assets/images/green.gif' align='baseline'> /uploads/yogurt/audio/ exists and writable</td>
         </tr>";
     }
 

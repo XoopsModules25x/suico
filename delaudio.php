@@ -50,7 +50,7 @@ if (!isset($_POST['confirm']) || 1 != $_POST['confirm']) {
      * Try to delete
      */
     if ($audioFactory->deleteAll($criteria)) {
-        unlink(XOOPS_ROOT_PATH . '/uploads/yogurt/mp3/' . $audio_name);
+        unlink(XOOPS_ROOT_PATH . '/uploads/yogurt/audio/' . $audio_name);
         redirect_header('audio.php', 2, _MD_YOGURT_AUDIODELETED);
     } else {
         redirect_header('audio.php', 2, _MD_YOGURT_NOCACHACA);

@@ -42,7 +42,7 @@ switch ($op) {
         $adminObject->addItemButton(AM_YOGURT_IMAGES_LIST, 'images.php', 'list');
         $adminObject->displayButton('left');
 
-        $imagesObject = $imagesHandler->create();
+        $imagesObject = $imageHandler->create();
         $form         = $imagesObject->getForm();
         $form->display();
         break;
@@ -52,9 +52,9 @@ switch ($op) {
             redirect_header('images.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         if (0 !== \Xmf\Request::getInt('cod_img', 0)) {
-            $imagesObject = $imagesHandler->get(Request::getInt('cod_img', 0));
+            $imagesObject = $imageHandler->get(Request::getInt('cod_img', 0));
         } else {
-            $imagesObject = $imagesHandler->create();
+            $imagesObject = $imageHandler->create();
         }
         // Form save fields
         $imagesObject->setVar('title', Request::getVar('title', ''));
@@ -63,7 +63,7 @@ switch ($op) {
         $imagesObject->setVar('uid_owner', Request::getVar('uid_owner', ''));
         $imagesObject->setVar('url', Request::getVar('url', ''));
         $imagesObject->setVar('private', Request::getVar('private', ''));
-        if ($imagesHandler->insert($imagesObject)) {
+        if ($imageHandler->insert($imagesObject)) {
             redirect_header('images.php?op=list', 2, AM_YOGURT_FORMOK);
         }
 
@@ -76,18 +76,18 @@ switch ($op) {
         $adminObject->addItemButton(AM_YOGURT_ADD_IMAGES, 'images.php?op=new', 'add');
         $adminObject->addItemButton(AM_YOGURT_IMAGES_LIST, 'images.php', 'list');
         $adminObject->displayButton('left');
-        $imagesObject = $imagesHandler->get(Request::getString('cod_img', ''));
+        $imagesObject = $imageHandler->get(Request::getString('cod_img', ''));
         $form         = $imagesObject->getForm();
         $form->display();
         break;
 
     case 'delete':
-        $imagesObject = $imagesHandler->get(Request::getString('cod_img', ''));
+        $imagesObject = $imageHandler->get(Request::getString('cod_img', ''));
         if (1 == \Xmf\Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('images.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
-            if ($imagesHandler->delete($imagesObject)) {
+            if ($imageHandler->delete($imagesObject)) {
                 redirect_header('images.php', 3, AM_YOGURT_FORMDELOK);
             } else {
                 echo $imagesObject->getHtmlErrors();
@@ -120,8 +120,8 @@ switch ($op) {
         $criteria->setOrder('ASC');
         $criteria->setLimit($imagesPaginationLimit);
         $criteria->setStart($start);
-        $imagesTempRows  = $imagesHandler->getCount();
-        $imagesTempArray = $imagesHandler->getAll($criteria);
+        $imagesTempRows  = $imageHandler->getCount();
+        $imagesTempArray = $imageHandler->getAll($criteria);
         /*
         //
         //
@@ -154,8 +154,8 @@ switch ($op) {
         $criteria->setLimit($imagesPaginationLimit);
         $criteria->setStart($start);
 
-        $imagesCount     = $imagesHandler->getCount($criteria);
-        $imagesTempArray = $imagesHandler->getAll($criteria);
+        $imagesCount     = $imageHandler->getCount($criteria);
+        $imagesTempArray = $imageHandler->getAll($criteria);
 
         //    for ($i = 0; $i < $fieldsCount; ++$i) {
         if ($imagesCount > 0) {

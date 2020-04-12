@@ -266,12 +266,8 @@ class VideoHandler extends \XoopsPersistableObjectHandler
         $form->addElement($field_desc);
 
         $form->addElement($button_send);
-        if (str_replace('.', '', PHP_VERSION) > 499) {
-            $form->assign($xoopsTpl); //If your server is php 5
-            //$form->display();
-        } else {
-            $form->display(); //If your server is php 4.4
-        }
+        $form->assign($xoopsTpl); //If your server is php 5
+        //$form->display();
 
         return true;
     }

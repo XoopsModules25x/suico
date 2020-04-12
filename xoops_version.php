@@ -332,7 +332,7 @@ $modversion['config'][] = [
     'name'        => 'maxfilesize',
     'title'       => '_MI_YOGURT_MAXFILEBYTES_TITLE',
     'description' => '_MI_YOGURT_MAXFILEBYTES_DESC',
-    'default'     => 512000,
+    'default'     => 2048000,
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
 ];

@@ -177,7 +177,7 @@ switch ($op) {
                 $configsArray['config_uid'] = strip_tags(\XoopsUser::getUnameFromId($configsTempArray[$i]->getVar('config_uid')));
 
                 $GLOBALS['xoopsTpl']->assign('selectorpictures', AM_YOGURT_CONFIGS_PICTURES);
-                $configsArray['pictures'] = $imagesHandler->get($configsTempArray[$i]->getVar('pictures'))->getVar('title');
+                $configsArray['pictures'] = $imageHandler->get($configsTempArray[$i]->getVar('pictures'))->getVar('title');
 
                 $GLOBALS['xoopsTpl']->assign('selectoraudio', AM_YOGURT_CONFIGS_AUDIO);
                 $configsArray['audio'] = $audioHandler->get($configsTempArray[$i]->getVar('audio'))->getVar('title');

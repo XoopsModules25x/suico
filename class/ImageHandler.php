@@ -40,7 +40,7 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
 /**
  * yogurt_imageshandler class.
- * This class provides simple mecanisme for Image object and generate forms for inclusion etc
+ * This class provides simple mechanism for Image object and generate forms for inclusion etc
  */
 class ImageHandler extends \XoopsPersistableObjectHandler
 {
@@ -302,12 +302,7 @@ class ImageHandler extends \XoopsPersistableObjectHandler
         $form->addElement($field_desc);
 
         $form->addElement($button_send);
-        if (str_replace('.', '', PHP_VERSION) > 499) {
-            $form->assign($xoopsTpl); //If your server is php 5
-        } else {
-            $form->display(); //If your server is php 4.4
-        }
-
+        $form->assign($xoopsTpl); //If your server is php 5
         return true;
     }
 

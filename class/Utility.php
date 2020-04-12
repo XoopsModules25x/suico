@@ -22,6 +22,8 @@ namespace XoopsModules\Yogurt;
  * @author       Mamba <mambax7@gmail.com>
  */
 
+use XoopsModules\Yogurt\Common;
+
 /**
  * Class Utility
  */

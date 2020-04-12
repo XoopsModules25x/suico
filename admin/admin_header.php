@@ -45,8 +45,8 @@ $pathIcon16    = \Xmf\Module\Admin::iconUrl('', 16);
 $pathIcon32    = \Xmf\Module\Admin::iconUrl('', 32);
 $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 
-/** @var \XoopsPersistableObjectHandler $imagesHandler */
-$imagesHandler = $helper->getHandler('Images');
+/** @var \XoopsPersistableObjectHandler $imageHandler */
+$imageHandler = $helper->getHandler('Image');
 /** @var \XoopsPersistableObjectHandler $friendshipHandler */
 $friendshipHandler = $helper->getHandler('Friendship');
 /** @var \XoopsPersistableObjectHandler $visitorsHandler */

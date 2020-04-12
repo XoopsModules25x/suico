@@ -23,8 +23,8 @@ if (!isset($GLOBALS['xoTheme']) || !is_object($GLOBALS['xoTheme'])) {
 //Handlers
 //$XXXHandler = xoops_getModuleHandler('XXX', $moduleDirName);
 
-/** @var \XoopsPersistableObjectHandler $imagesHandler */
-$imagesHandler = $helper->getHandler('Images');
+/** @var \XoopsPersistableObjectHandler $imageHandler */
+$imageHandler = $helper->getHandler('Image');
 /** @var \XoopsPersistableObjectHandler $friendshipHandler */
 $friendshipHandler = $helper->getHandler('Friendship');
 /** @var \XoopsPersistableObjectHandler $visitorsHandler */

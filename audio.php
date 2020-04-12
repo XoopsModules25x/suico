@@ -46,9 +46,9 @@ $audios_array = $controller->assignAudioContent($nbSections['nbAudio'], $audios)
 
 if (is_array($audios_array)) {
     $xoopsTpl->assign('audios', $audios_array);
-    $audio_list = '';
+    $audio_list = [];
     foreach ($audios_array as $audio_item) {
-        $audio_list .= '../../uploads/yogurt/mp3/' . $audio_item['url'] . ' | ';
+        $audio_list[] = XOOPS_UPLOAD_URL . '/yogurt/audio/' . $audio_item['url'];// . ' | ';
     }
     //$audio_list = substr($audio_list,-2);
     $xoopsTpl->assign('audio_list', $audio_list);
@@ -56,7 +56,7 @@ if (is_array($audios_array)) {
     $xoopsTpl->assign('lang_noaudioyet', _MD_YOGURT_NOAUDIOYET);
 }
 
-$pageNav = $controller->AudiosNavBar($nbSections['nbAudio'], $xoopsModuleConfig['audiosperpage'], $start, 2);
+$pageNav = $controller->getAudiosNavBar($nbSections['nbAudio'], $xoopsModuleConfig['audiosperpage'], $start, 2);
 
 //linking style and js
 /**
@@ -75,7 +75,7 @@ if (false !== strpos(mb_strtolower($_SERVER['HTTP_USER_AGENT']), 'msie')) {
 //$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/include/jquery.lightbox-0.3.css');
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.js');
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js');
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
+$xoTheme->addScript('https://unpkg.com/wavesurfer.js');
 
 //meta language names
 $xoopsTpl->assign('lang_meta', _MD_YOGURT_META);

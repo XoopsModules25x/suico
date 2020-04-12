@@ -66,13 +66,13 @@ class ConfigsForm extends \XoopsThemeForm
         // Config_uid
         $this->addElement(new \XoopsFormSelectUser(AM_YOGURT_CONFIGS_CONFIG_UID, 'config_uid', false, $this->targetObject->getVar('config_uid'), 1, false), false);
         // Pictures
-        //$imagesHandler = $this->helper->getHandler('Images');
+        //$imageHandler = $this->helper->getHandler('Image');
         //$db     = \XoopsDatabaseFactory::getDatabaseConnection();
-        /** @var \XoopsPersistableObjectHandler $imagesHandler */
-        $imagesHandler = $this->helper->getHandler('Images');
+        /** @var \XoopsPersistableObjectHandler $imageHandler */
+        $imageHandler = $this->helper->getHandler('Image');
 
         $images_id_select = new \XoopsFormSelect(AM_YOGURT_CONFIGS_PICTURES, 'pictures', $this->targetObject->getVar('pictures'));
-        $images_id_select->addOptionArray($imagesHandler->getList());
+        $images_id_select->addOptionArray($imageHandler->getList());
         $this->addElement($images_id_select, false);
         // Audio
         //$audioHandler = $this->helper->getHandler('Audio');

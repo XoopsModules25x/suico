@@ -51,6 +51,11 @@ class ConfigsHandler extends \XoopsPersistableObjectHandler
     public function create($isNew = true)
     {
         $obj         = parent::create($isNew);
+        if ($isNew) {
+            $obj->setNew();
+        } else {
+            $obj->unsetNew();
+        }
         $obj->helper = $this->helper;
 
         return $obj;

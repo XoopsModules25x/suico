@@ -43,8 +43,8 @@ $adminObject->addInfoBoxLine(sprintf(_AM_YOGURT_THEREARE_QUOTES, $quotesCount));
 */
 
 //count "total Images"
-/** @var \XoopsPersistableObjectHandler $imagesHandler */
-$totalImages = $imagesHandler->getCount();
+/** @var \XoopsPersistableObjectHandler $imageHandler */
+$totalImages = $imageHandler->getCount();
 //count "total Friendship"
 /** @var \XoopsPersistableObjectHandler $friendshipHandler */
 $totalFriendship = $friendshipHandler->getCount();
