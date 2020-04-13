@@ -387,4 +387,3 @@ define('_MD_YOGURT_PROFILEVISITORS', 'Profile Visitors');
 define('_MD_YOGURT_FEATUREDVIDEO', 'Featured Video');
 define('_MD_YOGURT_ALLVIDEOS', 'View all videos');
 define('_MD_YOGURT_OWNEROFGROUP', 'Group Owner');
-

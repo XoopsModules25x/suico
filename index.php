@@ -121,7 +121,7 @@ if (0 === $controller->isAnonym) {
     $visitors_object_array = $controller->visitorsFactory->getObjects(
         $criteria_visitors
     );
-    
+
     /**
      * Lets populate an array with the dati from visitors
      */
@@ -285,7 +285,7 @@ if (1 === $petition) {
 $xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
 $xoopsTpl->assign('lang_addasafriend', _MD_YOGURT_ADDASAFRIEND);
 
-//Avatar and Main 
+//Avatar and Main
 $xoopsTpl->assign('avatar_url', $avatar);
 $xoopsTpl->assign('lang_selectavatar', _MD_YOGURT_SELECTAVATAR);
 $xoopsTpl->assign('lang_selectmainvideo', _MD_YOGURT_SELECTMAINVIDEO);
