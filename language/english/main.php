@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -81,7 +82,7 @@ define('_MD_YOGURT_FRIENDSHIPCONFIGS', 'Set the configs of this friendship.');
 define('_MD_YOGURT_EDITFRIENDSHIP', 'Your friendship with this member:');
 define('_MD_YOGURT_FRIENDNAME', 'Username');
 define('_MD_YOGURT_LEVEL', 'Friendship level:');
-define('_MD_YOGURT_UNKNOWNACCEPTED', "Unknown Friend");
+define('_MD_YOGURT_UNKNOWNACCEPTED', 'Unknown Friend');
 define('_MD_YOGURT_AQUAITANCE', 'Acquaintances'); //also present in index.php
 define('_MD_YOGURT_FRIEND', 'Friend'); //also present in index.php
 define('_MD_YOGURT_BESTFRIEND', 'Best Friend'); //also present in index.php
@@ -105,8 +106,14 @@ define('_MD_YOGURT_UPDATEFRIEND', 'Update Friendship');
 define('_MD_YOGURT_FRIENDSHIPUPDATED', 'Friendship Updated');
 
 //submitfriendpetition.php
-define('_MD_YOGURT_PETITIONED', 'A friend request has been sent to this user, Wait until he accepts to have him in your friends list.');
-define('_MD_YOGURT_ALREADY_PETITIONED', 'You have already sent a friendship request to this user or vice-versa <br>, Wait untill he accepts or rejects it or check if he has asked you as a friend visiting your profile page.');
+define(
+    '_MD_YOGURT_PETITIONED',
+    'A friend request has been sent to this user, Wait until he accepts to have him in your friends list.'
+);
+define(
+    '_MD_YOGURT_ALREADY_PETITIONED',
+    'You have already sent a friendship request to this user or vice-versa <br>, Wait untill he accepts or rejects it or check if he has asked you as a friend visiting your profile page.'
+);
 
 //makefriends.php
 define('_MD_YOGURT_FRIENDMADE', 'Added as a friend!');
@@ -125,7 +132,8 @@ define('_MD_YOGURT_ADDFAVORITEVIDEOS', 'Add favourite videos');
 define(
     '_MD_YOGURT_ADDVIDEOSHELP',
     'If you want to upload your own video for sharing, upload your videos to
-<a href=https://www.youtube.com>YouTube</a> and then add the URL here in'); //The name of the site will show after this
+<a href=https://www.youtube.com>YouTube</a> and then add the URL here in'
+); //The name of the site will show after this
 define('_MD_YOGURT_MYVIDEOS', 'My Videos');
 define('_MD_YOGURT_MAKEMAIN', 'Feature this video in your main page');
 define('_MD_YOGURT_NOVIDEOSYET', 'No videos yet!');
@@ -142,10 +150,22 @@ define('_MD_YOGURT_VIDEOSAVED', 'Your video was saved');
 //class/Groups.php
 define('_MD_YOGURT_SUBMIT_GROUP', 'Create a new group');
 define('_MD_YOGURT_UPLOADGROUP', 'Save Group'); //also present in many ther groups related
-define('_MD_YOGURT_GROUP_IMAGE', 'Group Image'); //also present in many ther groups related
-define('_MD_YOGURT_GROUP_TITLE', 'Title'); //also present in many ther groups related
-define('_MD_YOGURT_GROUP_DESC', 'Description'); //also present in many ther groups related
-define('_MD_YOGURTCREATEYOURGROUP', 'Create your own Group!'); //also present in many ther groups related
+define(
+    '_MD_YOGURT_GROUP_IMAGE',
+    'Group Image'
+); //also present in many ther groups related
+define(
+    '_MD_YOGURT_GROUP_TITLE',
+    'Title'
+); //also present in many ther groups related
+define(
+    '_MD_YOGURT_GROUP_DESC',
+    'Description'
+); //also present in many ther groups related
+define(
+    '_MD_YOGURTCREATEYOURGROUP',
+    'Create your own Group!'
+); //also present in many ther groups related
 
 //abandongroup.php
 define('_MD_YOGURT_ASKCONFIRMABANDONGROUP', 'Are you sure you want to leave this Group?');
@@ -157,7 +177,10 @@ define('_MD_YOGURT_YOUAREMEMBERNOW', 'You are now member of this community');
 define('_MD_YOGURT_YOUAREMEMBERALREADY', 'You are already a member of this Group');
 
 //delete_group.php
-define('_MD_YOGURT_ASKCONFIRMGROUPDELETION', 'Are you sure you want to delete this Group permanently?');
+define(
+    '_MD_YOGURT_ASKCONFIRMGROUPDELETION',
+    'Are you sure you want to delete this Group permanently?'
+);
 define('_MD_YOGURT_CONFIRMGROUPDELETION', 'Yes, please delete this Group!');
 define('_MD_YOGURT_GROUPDELETED', 'Group deleted!');
 
@@ -165,8 +188,14 @@ define('_MD_YOGURT_GROUPDELETED', 'Group deleted!');
 define('_MD_YOGURT_MAINTAINOLDIMAGE', 'Keep this image'); //also present in other groups related
 define('_MD_YOGURT_GROUPEDITED', 'Group edited');
 define('_MD_YOGURT_EDIT_GROUP', 'Edit your Group'); //also present in other groups related
-define('_MD_YOGURT_GROUPOWNER', 'You are the owner of this Group!'); //also present in other groups related
-define('_MD_YOGURT_MEMBERSDOFGROUP', 'Members of Group'); //also present in other groups related
+define(
+    '_MD_YOGURT_GROUPOWNER',
+    'You are the owner of this Group!'
+); //also present in other groups related
+define(
+    '_MD_YOGURT_MEMBERSDOFGROUP',
+    'Members of Group'
+); //also present in other groups related
 
 //submit_group.php
 define('_MD_YOGURT_GROUP_CREATED', 'Your Group was created');
@@ -174,7 +203,10 @@ define('_MD_YOGURT_GROUP_CREATED', 'Your Group was created');
 //kickfromgroup.php
 define('_MD_YOGURT_CONFIRMKICK', 'Yes kick him out!');
 define('_MD_YOGURT_ASKCONFIRMKICKFROMGROUP', 'Are you sure you want to kick this person out of the Group?');
-define('_MD_YOGURT_GROUPKICKED', "You've banished this user from the Group, but who knows when he'll try and comeback!");
+define(
+    '_MD_YOGURT_GROUPKICKED',
+    "You've banished this user from the Group, but who knows when he'll try and comeback!"
+);
 
 //Groups.php
 define('_MD_YOGURT_GROUP_ABANDON', 'Leave this Group');
@@ -225,7 +257,10 @@ define('_MD_YOGURT_CONFIGSSAVE', 'Configuration saved!');
 define('_MD_YOGURT_CONFIGSSAVE_FAILED', 'ERROR: Configuration has not been saved');
 
 //class/yogurt_controller.php
-define('_MD_YOGURT_NOPRIVILEGE', "The owner of this profile has set the privileges to see it, <br>higher than you have now. <br>Login to become their friend. <br>If they haven't set it, so only they can see, <br>then you will be able to view it.");
+define(
+    '_MD_YOGURT_NOPRIVILEGE',
+    "The owner of this profile has set the privileges to see it, <br>higher than you have now. <br>Login to become their friend. <br>If they haven't set it, so only they can see, <br>then you will be able to view it."
+);
 
 ###################################### OTHERS ##############################
 
@@ -327,7 +362,10 @@ define('_MD_YOGURT_AUTHORAUDIO', 'Author/Singer');
 define('_MD_YOGURT_TITLEAUDIO', 'Title of file or song');
 define('_MD_YOGURT_ADDAUDIO', 'Add an mp3 file');
 define('_MD_YOGURT_SUBMITAUDIO', 'Upload file');
-define('_MD_YOGURT_ADDAUDIOHELP', 'Choose an mp3 file on your computer, max size %s ,<br> Leave title and author fields blank if your file has metainfo already');
+define(
+    '_MD_YOGURT_ADDAUDIOHELP',
+    'Choose an mp3 file on your computer, max size %s ,<br> Leave title and author fields blank if your file has metainfo already'
+);
 
 //19/04/2008
 define('_MD_YOGURT_AUDIODELETED', 'Your mp3 file was deleted!');
@@ -349,3 +387,4 @@ define('_MD_YOGURT_PROFILEVISITORS', 'Profile Visitors');
 define('_MD_YOGURT_FEATUREDVIDEO', 'Featured Video');
 define('_MD_YOGURT_ALLVIDEOS', 'View all videos');
 define('_MD_YOGURT_OWNEROFGROUP', 'Group Owner');
+
