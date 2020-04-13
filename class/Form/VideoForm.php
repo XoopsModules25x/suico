@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Yogurt\Form;
+<?php declare(strict_types=1);
+
+namespace XoopsModules\Yogurt\Form;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -22,23 +24,31 @@
  * @since           1.0.0
  */
 
-use Xmf\Request;
+use Xmf\Module\Helper\Permission;
+use XoopsFormButton;
+use XoopsFormHidden;
+use XoopsFormLabel;
+use XoopsFormSelectUser;
+use XoopsFormText;
+use XoopsFormTextArea;
 use XoopsModules\Yogurt;
+use XoopsThemeForm;
 
 require_once dirname(dirname(__DIR__)) . '/include/common.php';
 
 $moduleDirName = basename(dirname(dirname(__DIR__)));
 //$helper = Yogurt\Helper::getInstance();
-$permHelper = new \Xmf\Module\Helper\Permission();
+$permHelper = new Permission();
 
 xoops_load('XoopsFormLoader');
 
 /**
  * Class VideoForm
  */
-class VideoForm extends \XoopsThemeForm
+class VideoForm extends XoopsThemeForm
 {
     public $targetObject;
+
     public $helper;
 
     /**
@@ -57,22 +67,56 @@ class VideoForm extends \XoopsThemeForm
 
         //include ID field, it's needed so the module knows if it is a new form or an edited form
 
-        $hidden = new \XoopsFormHidden('video_id', $this->targetObject->getVar('video_id'));
+        $hidden = new XoopsFormHidden(
+            'video_id', $this->targetObject->getVar(
+            'video_id'
+        )
+        );
         $this->addElement($hidden);
         unset($hidden);
 
         // Video_id
-        $this->addElement(new \XoopsFormLabel(AM_YOGURT_VIDEO_VIDEO_ID, $this->targetObject->getVar('video_id'), 'video_id'));
+        $this->addElement(
+            new XoopsFormLabel(AM_YOGURT_VIDEO_VIDEO_ID, $this->targetObject->getVar('video_id'), 'video_id')
+        );
         // Uid_owner
-        $this->addElement(new \XoopsFormSelectUser(AM_YOGURT_VIDEO_UID_OWNER, 'uid_owner', false, $this->targetObject->getVar('uid_owner'), 1, false), false);
+        $this->addElement(
+            new XoopsFormSelectUser(
+                AM_YOGURT_VIDEO_UID_OWNER, 'uid_owner', false, $this->targetObject->getVar(
+                'uid_owner'
+            ), 1, false
+            ),
+            false
+        );
         // Video_desc
-        $this->addElement(new \XoopsFormTextArea(AM_YOGURT_VIDEO_VIDEO_DESC, 'video_desc', $this->targetObject->getVar('video_desc'), 4, 47), false);
+        $this->addElement(
+            new XoopsFormTextArea(
+                AM_YOGURT_VIDEO_VIDEO_DESC, 'video_desc', $this->targetObject->getVar(
+                'video_desc'
+            ), 4, 47
+            ),
+            false
+        );
         // Youtube_code
-        $this->addElement(new \XoopsFormText(AM_YOGURT_VIDEO_YOUTUBE_CODE, 'youtube_code', 50, 255, $this->targetObject->getVar('youtube_code')), false);
+        $this->addElement(
+            new XoopsFormText(
+                AM_YOGURT_VIDEO_YOUTUBE_CODE, 'youtube_code', 50, 255, $this->targetObject->getVar(
+                'youtube_code'
+            )
+            ),
+            false
+        );
         // Main_video
-        $this->addElement(new \XoopsFormText(AM_YOGURT_VIDEO_MAIN_VIDEO, 'main_video', 50, 255, $this->targetObject->getVar('main_video')), false);
+        $this->addElement(
+            new XoopsFormText(
+                AM_YOGURT_VIDEO_MAIN_VIDEO, 'main_video', 50, 255, $this->targetObject->getVar(
+                'main_video'
+            )
+            ),
+            false
+        );
 
-        $this->addElement(new \XoopsFormHidden('op', 'save'));
-        $this->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $this->addElement(new XoopsFormHidden('op', 'save'));
+        $this->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
     }
 }

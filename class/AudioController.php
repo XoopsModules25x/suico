@@ -1,6 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace XoopsModules\Yogurt;
+
+use XoopsPageNav;
+use Criteria;
+use Exception;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -51,24 +57,25 @@ class AudioController extends YogurtController
      * @param object $criteria
      * @return array of video objects
      */
-    public function getAudio($criteria)
-    {
-        $audios = $this->audioFactory->getObjects($criteria);
-
-        return $audios;
+    public function getAudio(
+        $criteria
+    ) {
+        return $this->audioFactory->getObjects($criteria);
     }
 
     /**
      * Assign Audio Content to Template
      * @param $nbAudios
      * @param $audios
-     * @return bool
-     * @throws \Exception
-     * @throws \Exception
+     * @return bool|array
+     * @throws Exception
+     * @throws Exception
      */
-    public function assignAudioContent($nbAudios, $audios)
-    {
-        if (0 == $nbAudios) {
+    public function assignAudioContent(
+        $nbAudios,
+        $audios
+    ) {
+        if (0 === $nbAudios) {
             return false;
         }
         //audio info
@@ -91,7 +98,7 @@ class AudioController extends YogurtController
             $mp3filemetainfoarray['Album']  = $mp3filemetainfo->getAlbum();
             $mp3filemetainfoarray['Year']   = $mp3filemetainfo->getYear();
 
-            $audios_array[$i]['meta']       = $mp3filemetainfoarray;
+            $audios_array[$i]['meta'] = $mp3filemetainfoarray;
 
             $i++;
         }
@@ -108,12 +115,14 @@ class AudioController extends YogurtController
      * @return string|null
      * @return string|null
      */
-    public function getAudiosNavBar($nbAudios, $audiosPerPage, $start, $interval)
-    {
-        $pageNav = new \XoopsPageNav($nbAudios, $audiosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
-        $navBar  = $pageNav->renderImageNav($interval);
-
-        return $navBar;
+    public function getAudiosNavBar(
+        $nbAudios,
+        $audiosPerPage,
+        $start,
+        $interval
+    )  {
+        $pageNav = new XoopsPageNav($nbAudios, $audiosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
+        return $pageNav->renderImageNav($interval);
     }
 
     /**
@@ -121,12 +130,11 @@ class AudioController extends YogurtController
      */
     public function checkPrivilege()
     {
-        global $xoopsModuleConfig;
-        if (0 == $xoopsModuleConfig['enable_audio']) {
+        if (0 === $this->helper->getConfig('enable_audio')) {
             redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_AUDIONOTENABLED);
         }
-        $criteria = new \Criteria('config_uid', $this->owner->getVar('uid'));
-        if (1 == $this->configsFactory->getCount($criteria)) {
+        $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
+        if (1 === $this->configsFactory->getCount($criteria)) {
             $configs = $this->configsFactory->getObjects($criteria);
 
             $config = $configs[0]->getVar('audio');

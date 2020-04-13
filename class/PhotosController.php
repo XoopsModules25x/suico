@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
@@ -11,6 +11,8 @@ namespace XoopsModules\Yogurt;
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
+use Criteria;
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
@@ -42,48 +44,29 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 //}
 
 /**
- * Class ControllerIndex
+ * Class PhotosController
  */
-class ControllerIndex extends YogurtController
+class PhotosController extends YogurtController
 {
     /**
-     * @param null|string $section
-     * @return int|void
+     * @return bool|void
      */
-    public function checkPrivilege($section = null)
+    public function checkPrivilege()
     {
-        global $xoopsModuleConfig;
-        if ('' == trim($section)) {
-            return -1;
+        if (0 === $this->helper->getConfig('enable_pictures')) {
+            redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_PICTURESNOTENABLED);
         }
-        $configsectionname = 'enable_' . $section;
-        if (array_key_exists($configsectionname, $xoopsModuleConfig)) {
-            if (0 == $xoopsModuleConfig[$configsectionname]) {
-                return -1;
-            }
-        }
-
-        //  if ($section=="Notes" && $xoopsModuleConfig['enable_notes']==0){
-        //          return false;
-        //      }
-        //      if ($section=="pictures" && $xoopsModuleConfig['enable_pictures']==0){
-        //          return false;
-        //      }
-        //
-        //      if ($section=="pictures" && $xoopsModuleConfig['enable_pictures']==0){
-        //          return false;
-        //      }
-        $criteria = new \Criteria('config_uid', $this->owner->getVar('uid'));
-        if (1 == $this->configsFactory->getCount($criteria)) {
+        $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
+        if (1 === $this->configsFactory->getCount($criteria)) {
             $configs = $this->configsFactory->getObjects($criteria);
 
-            $config = $configs[0]->getVar($section);
+            $config = $configs[0]->getVar('pictures');
 
             if (!$this->checkPrivilegeLevel($config)) {
-                return 0;
+                redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, _MD_YOGURT_NOPRIVILEGE);
             }
         }
 
-        return 1;
+        return true;
     }
 }

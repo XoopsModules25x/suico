@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -35,7 +38,7 @@ require_once __DIR__ . '/admin_header.php';
  */
 xoops_cp_header();
 
-$op = isset($_GET['op']) ? $_GET['op'] : '';
+$op = $_GET['op'] ?? '';
 
 /*
 if (!@file_exists(XOOPS_ROOT_PATH."/Frameworks/art/functions.admin.php")) {
@@ -69,7 +72,9 @@ function about()
     $moduleHandler = xoops_getHandler('module');
     $modulo        = $moduleHandler->getByDirname('yogurt');
     echo "<br style='clear: both;'>
-<img src='" . XOOPS_URL . '/modules/' . $modulo->getInfo('dirname') . '/' . $modulo->getInfo('image') . "' alt='Yogurt' style='float: left; margin-right: 10px;'></a>
+<img src='" . XOOPS_URL . '/modules/' . $modulo->getInfo('dirname') . '/' . $modulo->getInfo(
+            'image'
+        ) . "' alt='Yogurt' style='float: left; margin-right: 10px;'></a>
 <div style='margin-top: 1px; color: #33538e; margin-bottom: 4px; font-size: 18px; line-height: 18px; font-weight: bold;'>
     " . $modulo->getInfo('name') . ' ' . $modulo->getInfo('version') . "</div>
 
@@ -157,7 +162,11 @@ function about()
 
             <tr>
             <td class='head' width = '150px'>" . _MA_YOGURT_EMAIL . "</td>
-            <td class='even'><a href='mailto:" . $modulo->getInfo('developer_email') . "' target='_blank'>" . $modulo->getInfo('developer_email') . "</a></td>
+            <td class='even'><a href='mailto:" . $modulo->getInfo(
+            'developer_email'
+        ) . "' target='_blank'>" . $modulo->getInfo(
+            'developer_email'
+        ) . "</a></td>
         </tr>
 </table>
 
@@ -181,7 +190,11 @@ function about()
             <tr>
             <td class='head' width = '200px'>" . _MA_YOGURT_OFCSUPORTSITE . "</td>
 
-            <td class='even'><a href='" . $modulo->getInfo('support_site_url') . "' target='_blank'>" . $modulo->getInfo('support_site_url') . "</a></td>
+            <td class='even'><a href='" . $modulo->getInfo(
+            'support_site_url'
+        ) . "' target='_blank'>" . $modulo->getInfo(
+            'support_site_url'
+        ) . "</a></td>
         </tr>
 
 
@@ -253,7 +266,7 @@ function homedefault()
     $b = $b[0];
     $c = explode('.', $b);
     echo "<tr><td class='odd'>";
-    if ($c[0] > 4 || (4 == $c[0] && $c[1] > 0)) {
+    if ($c[0] > 4 || (4 === $c[0] && $c[1] > 0)) {
         echo "<img src='../assets/images/green.gif' align='baseline'> ";
         echo 'Mysql Version:<b>' . $b;
     } else {
@@ -275,7 +288,7 @@ function homedefault()
 
         </tr>";
     }
-        echo "              <tr>
+    echo "              <tr>
             <td class='odd'><img src='../assets/images/green.gif' align='baseline'> " . _MA_YOGURT_PHP5PRESENT . ' ' . PHP_VERSION . '</td>
 
         </tr>';
@@ -296,7 +309,9 @@ function homedefault()
          ";
     }
     */
-    if (!is_dir(XOOPS_ROOT_PATH . '/uploads/yogurt/audio/')) {
+    if (!is_dir(
+        XOOPS_ROOT_PATH . '/uploads/yogurt/audio/'
+    )) {
         echo "<tr>
           <td class='odd'><img src='../assets/images/red.gif'> /uploads/yogurt/audio/ is not exists</td>
         </tr>";
@@ -310,7 +325,10 @@ function homedefault()
         </tr>";
     }
 
-    echo "<tr><td class='odd'><img src='../assets/images/messagebox_info.gif'> " . sprintf(_MA_YOGURT_MAXBYTESPHPINI, ini_get('post_max_size')) . '</td></tr>';
+    echo "<tr><td class='odd'><img src='../assets/images/messagebox_info.gif'> " . sprintf(
+            _MA_YOGURT_MAXBYTESPHPINI,
+            ini_get('post_max_size')
+        ) . '</td></tr>';
     if (function_exists('memory_get_usage')) {
         echo "<tr><td class='even'><img src='../assets/images/messagebox_info.gif'> " . _MA_YOGURT_MEMORYLIMIT . ' ' . memory_get_usage() . '</td></tr>';
     }

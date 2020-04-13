@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
@@ -24,6 +24,8 @@ namespace XoopsModules\Yogurt;
     Inc., 51 Franklin St, Fifth Floor, Boston,
     MA 02110, USA
 */
+
+use RuntimeException;
 
 /**
  * @author      Karol Babioch <karol@babioch.de>
@@ -52,17 +54,16 @@ class Id3v1
     /**
      * Represents Id3v1.0
      */
-    const ID3V1_0 = 'ID3V1_0';
+    public const ID3V1_0 = 'ID3V1_0';
 
     /**
      * Represents Id3v1.1
      */
-    const ID3V1_1 = 'ID3V1_1';
+    public const ID3V1_1 = 'ID3V1_1';
 
     /**
      * Holds the tags
      *
-     * @var array
      * @see __construct
      * @see getTitle()
      * @see getArtist()
@@ -86,7 +87,6 @@ class Id3v1
     /**
      * Holds the PHP stream
      *
-     * @var null|stream
      * @see __construct()
      */
     protected $_stream = null;
@@ -94,7 +94,6 @@ class Id3v1
     /**
      * Holds the Id3v1 version
      *
-     * @var null|string
      * @see self::ID3V1_0
      * @see self::ID3V1_1
      * @see setId3v1Version()
@@ -105,7 +104,6 @@ class Id3v1
     /**
      * Indicates if the source is read-only
      *
-     * @var bool
      * @see __construct()
      */
     protected $_readOnly = false;
@@ -114,7 +112,6 @@ class Id3v1
      * Holds all known ID3 Genres
      *
      * @link http://id3.org/d3v2.3.0
-     * @var array
      * @see  getGenreList()
      * @see  getGenreNameByid()
      * @see  getGenreIdByName()
@@ -254,28 +251,30 @@ class Id3v1
      * Checks if the parameters are valid and then gets ID3 tags, if there
      * are some.
      *
-     * @param mixed $filename
-     * @param bool  $readOnly
+     * @param      $filename
+     * @param bool $readOnly
      * @see $_tags
      */
-    public function __construct($filename, $readOnly = false)
-    {
+    public function __construct(
+        $filename,
+        $readOnly = false
+    ) {
         if (is_bool($readOnly)) {
             $this->_readOnly = $readOnly;
         }
 
         if (!is_string($filename)) {
-            throw new \RuntimeException('Filename must be a string');
+            throw new RuntimeException('Filename must be a string');
         }
 
         if (!is_file($filename)) {
-            throw new \RuntimeException('File doesn\'t exist');
+            throw new RuntimeException('File doesn\'t exist');
         }
 
         $mode = $this->_readOnly ? 'rb' : 'rb+';
 
         if (!$this->_stream = @fopen($filename, $mode, false)) {
-            throw new \RuntimeException('File cannot be opened');
+            throw new RuntimeException('File cannot be opened');
         }
 
         if (!$this->_readOnly) {
@@ -285,7 +284,7 @@ class Id3v1
         fseek($this->_stream, -128, SEEK_END);
         $rawTag = fread($this->_stream, 128);
 
-        if ($rawTag[125] == chr(0) && $rawTag[126] != chr(0)) {
+        if ($rawTag[125] === chr(0) && $rawTag[126] !== chr(0)) {
             $format = 'a3marking/a30title/a30artist/a30album/a4year' . '/a28comment/x1/C1track/C1genre';
 
             $this->_version = self::ID3V1_1;
@@ -299,8 +298,133 @@ class Id3v1
 
         $this->clearAllTags();
 
-        if ('TAG' == $tags['marking']) {
+        if ('TAG' === $tags['marking']) {
             $this->_tags = $tags;
+        }
+    }
+
+    /**
+     * Short way to access tags
+     *
+     * This method allows a shorter way to access tags.
+     * You can access the tags like normal properties,
+     * and don't have to call methods.
+     *
+     * Here an example:
+     * <code>
+     * <?php
+     *     // two ways to do the same
+     *     $id3v1->title;
+     *     $id3v1->getTitle();
+     * ?>
+     * </code>
+     *
+     * @param string $name
+     * @return mixed Depends on tag, which will be returned
+     * @throws \Exception
+     */
+    public function __get(
+        $name
+    ) {
+        $validNames = [
+            'title',
+            'artist',
+            'album',
+            'year',
+            'comment',
+            'track',
+            'genre',
+        ];
+
+        if (in_array($name, $validNames, true)) {
+            return $this->{'get' . ucfirst($name)}();
+        }
+
+        throw new RuntimeException('Property doesn\'t exist');
+    }
+
+    /**
+     * Short way to assign tags
+     *
+     * This method allows a shorter way to assign tags.
+     * You can assign the tags like normal properties,
+     * and don't have to call methods.
+     *
+     * Here an example:
+     * <code>
+     * <?php
+     *     // two ways to do the same
+     *     $id3v1->title = 'Something';
+     *     $id3v1->setTitle('Something);
+     * ?>
+     * </code>
+     *
+     * @param string $name
+     * @param string $value
+     * @return mixed Depends on tag
+     * @throws \Exception
+     */
+    public function __set(
+        $name,
+        $value
+    ) {
+        $validNames = [
+            'title',
+            'artist',
+            'album',
+            'year',
+            'comment',
+            'track',
+            'genre',
+        ];
+
+        if (in_array($name, $validNames, true)) {
+            return $this->{'set' . ucfirst($name)}($value);
+        }
+
+        throw new RuntimeException('Property doesn\'t exist');
+    }
+
+    /**
+     * Magic method, which gets called when casting to string
+     *
+     * This method will get called when the object will be used
+     * in a context, which requires a string. You will get a
+     * short overview over all meaningfully tags.
+     *
+     * Here an example:
+     * <code>
+     * <?php
+     *     // casting to string
+     *     echo $id3v1;
+     * ?>
+     * </code>
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        $returnedTags = [];
+
+        foreach ($this->_tags as $tagKey => $tagVal) {
+            if ('TAG' === $tagVal) {
+                continue;
+            }
+
+            if (null === $tagVal || !$tagVal) {
+                continue;
+            }
+
+            if ('genre' === $tagKey) {
+                $returnedTags[] = self::getGenreNameById($tagVal);
+                continue;
+            }
+
+            $returnedTags[] = $tagVal;
+        }
+
+        if (count($returnedTags) > 0) {
+            return implode(', ', $returnedTags);
         }
     }
 
@@ -314,6 +438,7 @@ class Id3v1
         if (!empty($this->_tags['title'])) {
             return $this->_tags['title'];
         }
+        return null;
     }
 
     /**
@@ -326,6 +451,7 @@ class Id3v1
         if (!empty($this->_tags['artists'])) {
             return $this->_tags['artist'];
         }
+        return null;
     }
 
     /**
@@ -338,6 +464,7 @@ class Id3v1
         if (!empty($this->_tags['album'])) {
             return $this->_tags['album'];
         }
+        return null;
     }
 
     /**
@@ -345,9 +472,9 @@ class Id3v1
      *
      * @return string
      */
-    public function getComment()
+    public function getComment() 
     {
-        if (self::ID3V1_1 == $this->_version) {
+        if ($this->_version === self::ID3V1_1) {
             return mb_substr($this->_tags['comment'], 0, 28);
         }
 
@@ -385,6 +512,7 @@ class Id3v1
         if (!empty($this->_tags['year'])) {
             return (int)$this->_tags['year'];
         }
+        return null;
     }
 
     /**
@@ -394,7 +522,7 @@ class Id3v1
      */
     public function getTrack()
     {
-        if (self::ID3V1_0 == $this->_version || !isset($this->_tags['track'])) {
+        if ($this->_version === self::ID3V1_0 || !isset($this->_tags['track'])) {
             return false;
         }
 
@@ -408,7 +536,7 @@ class Id3v1
      * @see self::ID3V1_1
      * @see self::ID3V1_0
      */
-    public function getId3v1Version()
+    public function getId3v1Version() 
     {
         return constant('self::' . $this->_version);
     }
@@ -422,8 +550,9 @@ class Id3v1
      * @see self::ID3V1_1
      * @see self::ID3V1_0
      */
-    public function setId3v1Version($version)
-    {
+    public function setId3v1Version(
+        $version
+    )  {
         if ($this->_readOnly) {
             return $this;
         }
@@ -433,7 +562,7 @@ class Id3v1
             case self::ID3V1_1:
                 break;
             default:
-                throw new \RuntimeException('Invalid version');
+                throw new RuntimeException('Invalid version');
         }
 
         $this->_version = $version;
@@ -452,8 +581,9 @@ class Id3v1
      * @throws \Exception
      * @see $_tags
      */
-    public function setTitle($title)
-    {
+    public function setTitle(
+        $title
+    )  {
         if ($this->_readOnly) {
             return $this;
         }
@@ -461,7 +591,7 @@ class Id3v1
         if (is_string($title)) {
             $this->_tags['title'] = $title;
         } else {
-            throw new \RuntimeException('Title has to be a string');
+            throw new RuntimeException('Title has to be a string');
         }
 
         return $this;
@@ -478,8 +608,9 @@ class Id3v1
      * @throws \Exception
      * @see $_tags
      */
-    public function setArtist($artist)
-    {
+    public function setArtist(
+        $artist
+    )  {
         if ($this->_readOnly) {
             return $this;
         }
@@ -487,7 +618,7 @@ class Id3v1
         if (is_string($artist)) {
             $this->_tags['artist'] = $artist;
         } else {
-            throw new \RuntimeException('Artist has to be a string');
+            throw new RuntimeException('Artist has to be a string');
         }
 
         return $this;
@@ -504,8 +635,9 @@ class Id3v1
      * @throws \Exception
      * @see $_tags
      */
-    public function setAlbum($album)
-    {
+    public function setAlbum(
+        $album
+    )  {
         if ($this->_readOnly) {
             return $this;
         }
@@ -513,7 +645,7 @@ class Id3v1
         if (is_string($album)) {
             $this->_tags['album'] = $album;
         } else {
-            throw new \RuntimeException('Album has to be a string');
+            throw new RuntimeException('Album has to be a string');
         }
 
         return $this;
@@ -532,8 +664,9 @@ class Id3v1
      * @throws \Exception
      * @see $_tags
      */
-    public function setComment($comment)
-    {
+    public function setComment(
+        $comment
+    )  {
         if ($this->_readOnly) {
             return $this;
         }
@@ -541,7 +674,7 @@ class Id3v1
         if (is_string($comment)) {
             $this->_tags['comment'] = $comment;
         } else {
-            throw new \RuntimeException('Comment has to be a string');
+            throw new RuntimeException('Comment has to be a string');
         }
 
         return $this;
@@ -557,8 +690,9 @@ class Id3v1
      * @throws \Exception
      * @see $_tags
      */
-    public function setGenre($genre)
-    {
+    public function setGenre(
+        $genre
+    )  {
         if ($this->_readOnly) {
             return $this;
         }
@@ -568,7 +702,7 @@ class Id3v1
         } elseif (is_string($genre)) {
             $this->_tags['genre'] = self::getGenreIdByName($genre);
         } else {
-            throw new \RuntimeException('Genre type invalid');
+            throw new RuntimeException('Genre type invalid');
         }
 
         return $this;
@@ -582,8 +716,9 @@ class Id3v1
      * @throws \Exception
      * @see $_tags
      */
-    public function setYear($year)
-    {
+    public function setYear(
+        $year
+    )  {
         if ($this->_readOnly) {
             return $this;
         }
@@ -591,7 +726,7 @@ class Id3v1
         if (is_int($year)) {
             $this->_tags['year'] = $year;
         } else {
-            throw new \RuntimeException('Year has to be an interger');
+            throw new RuntimeException('Year has to be an interger');
         }
 
         return $this;
@@ -611,17 +746,18 @@ class Id3v1
      * @see setId3v1Version()
      * @see getId3v1Version()
      */
-    public function setTrack($track)
-    {
+    public function setTrack(
+        $track
+    )  {
         if ($this->_readOnly) {
             return $this;
         }
 
-        if (is_int($track) && 0 != $track) {
+        if (is_int($track) && 0 !== $track) {
             $this->_tags['track'] = $track;
             $this->_version       = self::ID3V1_1;
         } else {
-            throw new \RuntimeException('Track type invalid or zero');
+            throw new RuntimeException('Track type invalid or zero');
         }
 
         return $this;
@@ -660,8 +796,9 @@ class Id3v1
      * @return int
      * @see $_genres
      */
-    public static function getGenreIdByName($genreName)
-    {
+    public static function getGenreIdByName(
+        $genreName
+    ) {
         $genres = array_flip(self::$_genres);
 
         if (!isset($genres[$genreName])) {
@@ -678,13 +815,10 @@ class Id3v1
      * @return string|bool
      * @see $_genres
      */
-    public static function getGenreNameById($genreId)
-    {
-        if (!isset(self::$_genres[$genreId])) {
-            return false;
-        }
-
-        return self::$_genres[$genreId];
+    public static function getGenreNameById(
+        $genreId
+    ) {
+        return self::$_genres[$genreId] ?? false;
     }
 
     /**
@@ -693,7 +827,7 @@ class Id3v1
      * @return array
      * @see $_genres
      */
-    public static function getGenreList()
+    public static function getGenreList() 
     {
         return self::$_genres;
     }
@@ -723,144 +857,41 @@ class Id3v1
 
         fseek($this->_stream, -128, SEEK_END);
 
-        if ('TAG' != $this->_tags['marking']) {
+        if ('TAG' !== $this->_tags['marking']) {
             fseek($this->_stream, 0, SEEK_END);
         }
 
         $newTag = '';
 
-        if (self::ID3V1_0 == $this->_version) {
-            $newTag = pack('a3a30a30a30a4a30C1', 'TAG', $this->_tags['title'], $this->_tags['artist'], $this->_tags['album'], $this->_tags['year'], $this->_tags['comment'], $this->_tags['genre']);
+        if ($this->_version === self::ID3V1_0) {
+            $newTag = pack(
+                'a3a30a30a30a4a30C1',
+                'TAG',
+                $this->_tags['title'],
+                $this->_tags['artist'],
+                $this->_tags['album'],
+                $this->_tags['year'],
+                $this->_tags['comment'],
+                $this->_tags['genre']
+            );
         } else {
-            $newTag = pack('a3a30a30a30a4a28x1C1C1', 'TAG', $this->_tags['title'], $this->_tags['artist'], $this->_tags['album'], $this->_tags['year'], $this->_tags['comment'], $this->_tags['track'], $this->_tags['genre']);
+            $newTag = pack(
+                'a3a30a30a30a4a28x1C1C1',
+                'TAG',
+                $this->_tags['title'],
+                $this->_tags['artist'],
+                $this->_tags['album'],
+                $this->_tags['year'],
+                $this->_tags['comment'],
+                $this->_tags['track'],
+                $this->_tags['genre']
+            );
         }
 
         if (false === fwrite($this->_stream, $newTag, 128)) {
-            throw new \RuntimeException('Not possible to write ID3 tags');
+            throw new RuntimeException('Not possible to write ID3 tags');
         }
 
         return $this;
-    }
-
-    /**
-     * Short way to access tags
-     *
-     * This method allows a shorter way to access tags.
-     * You can access the tags like normal properties,
-     * and don't have to call methods.
-     *
-     * Here an example:
-     * <code>
-     * <?php
-     *     // two ways to do the same
-     *     $id3v1->title;
-     *     $id3v1->getTitle();
-     * ?>
-     * </code>
-     *
-     * @param string $name
-     * @return mixed Depends on tag, which will be returned
-     * @throws \Exception
-     */
-    public function __get($name)
-    {
-        $validNames = [
-            'title',
-            'artist',
-            'album',
-            'year',
-            'comment',
-            'track',
-            'genre',
-        ];
-
-        if (in_array($name, $validNames)) {
-            return $this->{'get' . ucfirst($name)}();
-        }
-
-        throw new \RuntimeException('Property doesn\'t exist');
-    }
-
-    /**
-     * Short way to assign tags
-     *
-     * This method allows a shorter way to assign tags.
-     * You can assign the tags like normal properties,
-     * and don't have to call methods.
-     *
-     * Here an example:
-     * <code>
-     * <?php
-     *     // two ways to do the same
-     *     $id3v1->title = 'Something';
-     *     $id3v1->setTitle('Something);
-     * ?>
-     * </code>
-     *
-     * @param string $name
-     * @param string $value
-     * @return mixed Depends on tag
-     * @throws \Exception
-     */
-    public function __set($name, $value)
-    {
-        $validNames = [
-            'title',
-            'artist',
-            'album',
-            'year',
-            'comment',
-            'track',
-            'genre',
-        ];
-
-        if (in_array($name, $validNames)) {
-            return $this->{'set' . ucfirst($name)}($value);
-        }
-
-        throw new \RuntimeException('Property doesn\'t exist');
-    }
-
-    /**
-     * Magic method, which gets called when casting to string
-     *
-     * This method will get called when the object will be used
-     * in a context, which requires a string. You will get a
-     * short overview over all meaningfully tags.
-     *
-     * Here an example:
-     * <code>
-     * <?php
-     *     // casting to string
-     *     echo $id3v1;
-     * ?>
-     * </code>
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        $returnedTags = [];
-
-        foreach ($this->_tags as $tagKey => $tagVal) {
-            if ('TAG' == $tagVal) {
-                continue;
-            }
-
-            if (null === $tagVal || !$tagVal) {
-                continue;
-            }
-
-            if ('genre' == $tagKey) {
-                $returnedTags[] = self::getGenreNameById($tagVal);
-                continue;
-            }
-
-            $returnedTags[] = $tagVal;
-        }
-
-        if (count($returnedTags) > 0) {
-            return implode(', ', $returnedTags);
-        }
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
@@ -11,6 +11,15 @@ namespace XoopsModules\Yogurt;
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
+use Criteria;
+use CriteriaCompo;
+use Xmf\Request;
+use XoopsDatabase;
+use XoopsObject;
+use XoopsUser;
+use XoopsUserHandler;
+use XoopsModules\Yogurt\Helper;
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
@@ -69,16 +78,20 @@ class YogurtController extends \XoopsObject
     public $section;
     public $privilegeLevel;
     public $isSuspended;
+    public $helper;
 
     /**
      * Constructor
      *
-     * @param \XoopsDatabase $db
+     * @param \XoopsDatabase $xoopsDatabase
      * @param                $user
      */
-    public function __construct(\XoopsDatabase $db, $user)
-    {
-        $this->db       = $db;
+    public function __construct(
+        XoopsDatabase $xoopsDatabase,
+        $user
+    ) {
+        $this->helper = Helper::getInstance();
+        $this->db       = $xoopsDatabase;
         $this->user     = $user;
         $this->isOwner  = 0;
         $this->isAnonym = 1;
@@ -90,10 +103,10 @@ class YogurtController extends \XoopsObject
         $this->checkSuspension();
     }
 
-    public function checkSuspension()
+    public function checkSuspension() 
     {
-        $criteria_suspended = new \Criteria('uid', $this->uidOwner);
-        if (1 == $this->isSuspended) {
+        $criteria_suspended = new Criteria('uid', $this->uidOwner);
+        if (1 === $this->isSuspended) {
             $suspensions = $this->suspensionsFactory->getObjects($criteria_suspended);
             $suspension  = $suspensions[0];
             if (time() > $suspension->getVar('suspension_time')) {
@@ -102,9 +115,9 @@ class YogurtController extends \XoopsObject
                 $this->owner->setVar('email', $suspension->getVar('old_email', 'n'));
                 $this->owner->setVar('pass', $suspension->getVar('old_pass', 'n'));
                 $this->owner->setVar('user_sig', $suspension->getVar('old_signature', 'n'));
-                $userHandler = new \XoopsUserHandler($this->db);
+                $userHandler = new XoopsUserHandler($this->db);
                 $userHandler->insert($this->owner, true);
-                $criteria = new \Criteria('uid', $this->uidOwner);
+                $criteria = new Criteria('uid', $this->uidOwner);
                 $this->suspensionsFactory->deleteAll($criteria);
             }
         }
@@ -120,8 +133,9 @@ class YogurtController extends \XoopsObject
      * @param int $privilegeNeeded 0 anonym 1 member 2 friend 3 owner
      * @return bool true if privilege enough
      */
-    public function checkPrivilegeLevel($privilegeNeeded = 0)
-    {
+    public function checkPrivilegeLevel(
+        $privilegeNeeded = 0
+    ) {
         if ($privilegeNeeded <= $this->privilegeLevel) {
             return true;
         }
@@ -132,7 +146,7 @@ class YogurtController extends \XoopsObject
     /**
      * Set permissions according to user is logged or not , is owner or not etc..
      */
-    public function getPermissions()
+    public function getPermissions() 
     {
         global $_GET, $xoopsUser;
         /**
@@ -141,7 +155,7 @@ class YogurtController extends \XoopsObject
         if (!empty($_GET['uid'])) {
             /** @var \XoopsMemberHandler $memberHandler */
             $memberHandler = xoops_getHandler('member');
-            $user          = $memberHandler->getUser(\Xmf\Request::getInt('uid', 0, 'GET'));
+            $user          = $memberHandler->getUser(Request::getInt('uid', 0, 'GET'));
             if (!is_object($user)) {
                 redirect_header('index.php', 3, _MD_YOGURT_USERDOESNTEXIST);
             }
@@ -156,7 +170,7 @@ class YogurtController extends \XoopsObject
             $this->isUser   = 0;
 
             if (!empty($_GET['uid'])) {
-                $this->uidOwner = \Xmf\Request::getInt('uid', 0, 'GET');
+                $this->uidOwner = Request::getInt('uid', 0, 'GET');
             } else {
                 $this->uidOwner = 1;
                 $this->isOwner  = 0;
@@ -166,47 +180,47 @@ class YogurtController extends \XoopsObject
             $this->isUser   = 1;
 
             if (!empty($_GET['uid'])) {
-                $this->uidOwner = \Xmf\Request::getInt('uid', 0, 'GET');
-                $this->isOwner  = ($this->user->getVar('uid') == (int)$_GET['uid']) ? 1 : 0;
+                $this->uidOwner = Request::getInt('uid', 0, 'GET');
+                $this->isOwner  = $this->user->getVar('uid') === (int)$_GET['uid'] ? 1 : 0;
             } else {
                 $this->uidOwner = $this->user->getVar('uid');
                 $this->isOwner  = 1;
             }
         }
 
-        $this->owner        = new \XoopsUser($this->uidOwner);
-        $criteria_suspended = new \Criteria('uid', $this->uidOwner);
+        $this->owner        = new XoopsUser($this->uidOwner);
+        $criteria_suspended = new Criteria('uid', $this->uidOwner);
 
-        $this->isSuspended = ($this->suspensionsFactory->getCount($criteria_suspended) > 0) ? 1 : 0;
+        $this->isSuspended = $this->suspensionsFactory->getCount($criteria_suspended) > 0 ? 1 : 0;
 
-        if ('' == $this->owner->getVar('name')) {
+        if ('' === $this->owner->getVar('name')) {
             $this->nameOwner = $this->owner->getVar('uname');
         } else {
             $this->nameOwner = $this->owner->getVar('name');
         }
 
         //isfriend?
-        $criteria_friends = new \Criteria('friend1_uid', $this->uidOwner);
+        $criteria_friends = new Criteria('friend1_uid', $this->uidOwner);
 
         if (!$xoopsUser) {
             $this->isFriend = 0;
         } else {
-            $criteria_isfriend = new \CriteriaCompo(new \Criteria('friend2_uid', $this->user->getVar('uid')));
+            $criteria_isfriend = new CriteriaCompo(new Criteria('friend2_uid', $this->user->getVar('uid')));
             $criteria_isfriend->add($criteria_friends);
             $this->isFriend = $this->friendshipsFactory->getCount($criteria_isfriend);
         }
 
         $this->privilegeLevel = 0;
-        if (1 == $this->isAnonym) {
+        if (1 === $this->isAnonym) {
             $this->privilegeLevel = 0;
         }
-        if (1 == $this->isUser) {
+        if (1 === $this->isUser) {
             $this->privilegeLevel = 1;
         }
-        if (1 == $this->isFriend) {
+        if (1 === $this->isFriend) {
             $this->privilegeLevel = 2;
         }
-        if (1 == $this->isOwner) {
+        if (1 === $this->isOwner) {
             $this->privilegeLevel = 3;
         }
     }
@@ -216,24 +230,24 @@ class YogurtController extends \XoopsObject
      *
      * @return array(nbGroups=>"",nbPhotos=>"",nbFriends=>"",nbVideos=>"")
      */
-    public function getNumbersSections()
+    public function getNumbersSections() 
     {
-        $criteriaGroups         = new \Criteria('rel_user_uid', $this->uidOwner);
+        $criteriaGroups         = new Criteria('rel_user_uid', $this->uidOwner);
         $nbSections['nbGroups'] = $this->relgroupusersFactory->getCount($criteriaGroups);
-        $criteriaUid            = new \Criteria('uid_owner', $this->uidOwner);
-        $criteriaAlbum          = new \CriteriaCompo($criteriaUid);
-        if (0 == $this->isOwner) {
-            $criteriaPrivate = new \Criteria('private', 0);
+        $criteriaUid            = new Criteria('uid_owner', $this->uidOwner);
+        $criteriaAlbum          = new CriteriaCompo($criteriaUid);
+        if (0 === $this->isOwner) {
+            $criteriaPrivate = new Criteria('private', 0);
             $criteriaAlbum->add($criteriaPrivate);
         }
         $nbSections['nbPhotos']  = $this->albumFactory->getCount($criteriaAlbum);
-        $criteriaFriends         = new \Criteria('friend1_uid', $this->uidOwner);
+        $criteriaFriends         = new Criteria('friend1_uid', $this->uidOwner);
         $nbSections['nbFriends'] = $this->friendshipsFactory->getCount($criteriaFriends);
-        $criteriaUidAudio        = new \Criteria('uid_owner', $this->uidOwner);
+        $criteriaUidAudio        = new Criteria('uid_owner', $this->uidOwner);
         $nbSections['nbAudio']   = $this->audioFactory->getCount($criteriaUidAudio);
-        $criteriaUidVideo        = new \Criteria('uid_owner', $this->uidOwner);
+        $criteriaUidVideo        = new Criteria('uid_owner', $this->uidOwner);
         $nbSections['nbVideos']  = $this->videosFactory->getCount($criteriaUidVideo);
-        $criteriaUidNotes        = new \Criteria('note_to', $this->uidOwner);
+        $criteriaUidNotes        = new Criteria('note_to', $this->uidOwner);
         $nbSections['nbNotes']   = $this->notesFactory->getCount($criteriaUidNotes);
 
         return $nbSections;
@@ -242,7 +256,7 @@ class YogurtController extends \XoopsObject
     /**
      * This creates the module factories
      */
-    public function createFactories()
+    public function createFactories() 
     {
         $this->albumFactory         = new ImageHandler($this->db);
         $this->visitorsFactory      = new VisitorsHandler($this->db);
@@ -266,7 +280,7 @@ class YogurtController extends \XoopsObject
         global $xoopsModuleConfig;
         $configsectionname = 'enable_' . $section;
         if (array_key_exists($configsectionname, $xoopsModuleConfig)) {
-            if (0 == $xoopsModuleConfig[$configsectionname]) {
+            if (0 === $this->helper->getConfig($configsectionname)) {
                 return -1;
             }
         }
@@ -281,8 +295,8 @@ class YogurtController extends \XoopsObject
         //      if ($section=="pictures" && $xoopsModuleConfig['enable_pictures']==0){
         //          return false;
         //      }
-        $criteria = new \Criteria('config_uid', $this->owner->getVar('uid'));
-        if (1 == $this->configsFactory->getCount($criteria)) {
+        $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
+        if (1 === $this->configsFactory->getCount($criteria)) {
             $configs = $this->configsFactory->getObjects($criteria);
 
             $config = $configs[0]->getVar($section);

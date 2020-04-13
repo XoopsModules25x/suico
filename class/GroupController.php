@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
@@ -11,6 +11,8 @@ namespace XoopsModules\Yogurt;
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
+use Criteria;
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
@@ -42,21 +44,20 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 //}
 
 /**
- * Class ControllerGroups
+ * Class GroupController
  */
-class ControllerGroups extends YogurtController
+class GroupController extends YogurtController
 {
     /**
      * @return bool|void
      */
     public function checkPrivilege()
     {
-        global $xoopsModuleConfig;
-        if (0 == $xoopsModuleConfig['enable_groups']) {
+        if (0 === $this->helper->getConfig('enable_groups')) {
             redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_GROUPSNOTENABLED);
         }
-        $criteria = new \Criteria('config_uid', $this->owner->getVar('uid'));
-        if (1 == $this->configsFactory->getCount($criteria)) {
+        $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
+        if (1 === $this->configsFactory->getCount($criteria)) {
             $configs = $this->configsFactory->getObjects($criteria);
 
             $config = $configs[0]->getVar('groups');

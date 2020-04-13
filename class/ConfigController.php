@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
@@ -42,30 +42,15 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 //}
 
 /**
- * Class ControllerPhotos
+ * Class YogurtConfigController
  */
-class ControllerPhotos extends YogurtController
+class ConfigController extends YogurtController
 {
     /**
      * @return bool|void
      */
     public function checkPrivilege()
     {
-        global $xoopsModuleConfig;
-        if (0 == $xoopsModuleConfig['enable_pictures']) {
-            redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_PICTURESNOTENABLED);
-        }
-        $criteria = new \Criteria('config_uid', $this->owner->getVar('uid'));
-        if (1 == $this->configsFactory->getCount($criteria)) {
-            $configs = $this->configsFactory->getObjects($criteria);
-
-            $config = $configs[0]->getVar('pictures');
-
-            if (!$this->checkPrivilegeLevel($config)) {
-                redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, _MD_YOGURT_NOPRIVILEGE);
-            }
-        }
-
         return true;
     }
 }

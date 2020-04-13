@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
@@ -11,6 +11,9 @@ namespace XoopsModules\Yogurt;
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
+use Criteria;
+use XoopsPageNav;
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
@@ -51,11 +54,10 @@ class VideoController extends YogurtController
      * @param object $criteria
      * @return array of video objects
      */
-    public function getVideos($criteria)
-    {
-        $videos = $this->videosFactory->getObjects($criteria);
-
-        return $videos;
+    public function getVideos(
+        $criteria
+    ) {
+        return $this->videosFactory->getObjects($criteria);
     }
 
     /**
@@ -63,12 +65,14 @@ class VideoController extends YogurtController
      * @param int $maxNbVideos the maximum number of videos a user can have
      * @param     $presentNb
      */
-    public function showFormSubmitVideos($maxNbVideos, $presentNb)
-    {
+    public function showFormSubmitVideos(
+        $maxNbVideos,
+        $presentNb
+    )  {
         global $xoopsTpl;
 
         if ($this->isUser) {
-            if ((1 == $this->isOwner) && ($maxNbVideos > $presentNb)) {
+            if ((1 === $this->isOwner) && ($maxNbVideos > $presentNb)) {
                 echo '&nbsp;';
                 $this->videosFactory->renderFormSubmit($xoopsTpl);
             }
@@ -81,9 +85,11 @@ class VideoController extends YogurtController
      * @param $videos
      * @return bool
      */
-    public function assignVideoContent($nbVideos, $videos)
-    {
-        if (0 == $nbVideos) {
+    public function assignVideoContent(
+        $nbVideos,
+        $videos
+    ) {
+        if (0 === $nbVideos) {
             return false;
         }
         /**
@@ -110,12 +116,14 @@ class VideoController extends YogurtController
      * @return string|null
      * @return string|null
      */
-    public function VideosNavBar($nbVideos, $videosPerPage, $start, $interval)
-    {
-        $pageNav = new \XoopsPageNav($nbVideos, $videosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
-        $navBar  = $pageNav->renderImageNav($interval);
-
-        return $navBar;
+    public function VideosNavBar(
+        $nbVideos,
+        $videosPerPage,
+        $start,
+        $interval
+    )  {
+        $pageNav = new XoopsPageNav($nbVideos, $videosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
+        return $pageNav->renderImageNav($interval);
     }
 
     /**
@@ -123,12 +131,11 @@ class VideoController extends YogurtController
      */
     public function checkPrivilege()
     {
-        global $xoopsModuleConfig;
-        if (0 == $xoopsModuleConfig['enable_videos']) {
+        if (0 === $this->helper->getConfig('enable_videos')) {
             redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_VIDEOSNOTENABLED);
         }
-        $criteria = new \Criteria('config_uid', $this->owner->getVar('uid'));
-        if (1 == $this->configsFactory->getCount($criteria)) {
+        $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
+        if (1 === $this->configsFactory->getCount($criteria)) {
             $configs = $this->configsFactory->getObjects($criteria);
 
             $config = $configs[0]->getVar('videos');

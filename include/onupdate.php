@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -18,7 +19,8 @@
  */
 
 use XoopsModules\Yogurt;
-use XoopsModules\Yogurt\Common;
+use XoopsModules\Yogurt\Common\Configurator;
+use XoopsModules\Yogurt\Common\Migrate;
 
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof XoopsUser)
     || !$GLOBALS['xoopsUser']->isAdmin()) {
@@ -34,9 +36,9 @@ include dirname(__DIR__) . '/preloads/autoloader.php';
  */
 function tableExists($tablename)
 {
-    $result = $GLOBALS['xoopsDB']->queryF("SHOW TABLES LIKE '$tablename'");
+    $result = $GLOBALS['xoopsDB']->queryF("SHOW TABLES LIKE '${tablename}'");
 
-    return ($GLOBALS['xoopsDB']->getRowsNum($result) > 0);
+    return $GLOBALS['xoopsDB']->getRowsNum($result) > 0;
 }
 
 /**
@@ -44,8 +46,9 @@ function tableExists($tablename)
  * @param \XoopsModule $module {@link XoopsModule}
  * @return bool true if ready to install, false if not
  */
-function xoops_module_pre_update_yogurt(\XoopsModule $module)
-{
+function xoops_module_pre_update_yogurt(
+    XoopsModule $module
+) {
     $moduleDirName = basename(dirname(__DIR__));
     /** @var Yogurt\Helper $helper */
     /** @var Yogurt\Utility $utility */
@@ -55,9 +58,9 @@ function xoops_module_pre_update_yogurt(\XoopsModule $module)
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
 
-    $configurator = new \XoopsModules\Yogurt\Common\Configurator();
+    $configurator = new Configurator();
 
-    $migrator = new \XoopsModules\Yogurt\Common\Migrate($configurator);
+    $migrator = new Migrate($configurator);
 
     //    $migrator = new \XoopsModules\Yogurt\Common\Migrate();
     $migrator->synchronizeSchema();
@@ -72,8 +75,10 @@ function xoops_module_pre_update_yogurt(\XoopsModule $module)
  *
  * @return bool true if update successful, false if not
  */
-function xoops_module_update_yogurt(\XoopsModule $module, $previousVersion = null)
-{
+function xoops_module_update_yogurt(
+    XoopsModule $module,
+    $previousVersion = null
+) {
     $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
@@ -81,11 +86,11 @@ function xoops_module_update_yogurt(\XoopsModule $module, $previousVersion = nul
     /** @var Yogurt\Common\Configurator $configurator */
     $helper       = Yogurt\Helper::getInstance();
     $utility      = new Yogurt\Utility();
-    $configurator = new Yogurt\Common\Configurator();
+    $configurator = new Configurator();
 
     $helper->loadLanguage('common');
 
-    $migrator = new \XoopsModules\Yogurt\Common\Migrate($configurator);
+    $migrator = new Migrate($configurator);
     $migrator->synchronizeSchema();
 
     if ($previousVersion < 360) {
@@ -123,7 +128,11 @@ function xoops_module_update_yogurt(\XoopsModule $module, $previousVersion = nul
         //  ---  DELETE OLD FILES ---------------
         if (count($configurator->oldFiles) > 0) {
             //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
-            foreach (array_keys($configurator->oldFiles) as $i) {
+            foreach (
+                array_keys(
+                    $configurator->oldFiles
+                ) as $i
+            ) {
                 $tempFile = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $configurator->oldFiles[$i]);
                 if (is_file($tempFile)) {
                     unlink($tempFile);
@@ -135,10 +144,17 @@ function xoops_module_update_yogurt(\XoopsModule $module, $previousVersion = nul
         xoops_load('XoopsFile');
         if (count($configurator->oldFolders) > 0) {
             //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
-            foreach (array_keys($configurator->oldFolders) as $i) {
+            foreach (
+                array_keys(
+                    $configurator->oldFolders
+                ) as $i
+            ) {
                 $tempFolder = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $configurator->oldFolders[$i]);
                 /** @var XoopsObjectHandler $folderHandler */
-                $folderHandler = \XoopsFile::getHandler('folder', $tempFolder);
+                $folderHandler = XoopsFile::getHandler(
+                    'folder',
+                    $tempFolder
+                );
                 $folderHandler->delete($tempFolder);
             }
         }
@@ -146,7 +162,11 @@ function xoops_module_update_yogurt(\XoopsModule $module, $previousVersion = nul
         //  ---  CREATE UPLOAD FOLDERS ---------------
         if (count($configurator->uploadFolders) > 0) {
             //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
-            foreach (array_keys($configurator->uploadFolders) as $i) {
+            foreach (
+                array_keys(
+                    $configurator->uploadFolders
+                ) as $i
+            ) {
                 $utility::createFolder($configurator->uploadFolders[$i]);
             }
         }
@@ -161,7 +181,12 @@ function xoops_module_update_yogurt(\XoopsModule $module, $previousVersion = nul
         }
 
         //delete .html entries from the tpl table
-        $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $module->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
+        $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix(
+                'tplfile'
+            ) . " WHERE `tpl_module` = '" . $module->getVar(
+                'dirname',
+                'n'
+            ) . "' AND `tpl_file` LIKE '%.html%'";
         $GLOBALS['xoopsDB']->queryF($sql);
 
         /** @var XoopsGroupPermHandler $gpermHandler */

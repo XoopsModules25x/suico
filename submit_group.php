@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,6 +18,7 @@
  * @since
  */
 
+use Xmf\Request;
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
@@ -34,29 +36,37 @@ require __DIR__ . '/header.php';
 $relgroupuserFactory = new Yogurt\RelgroupuserHandler($xoopsDB);
 $groupsFactory       = new Yogurt\GroupsHandler($xoopsDB);
 
-$marker = isset($_POST['marker']) ? $_POST['marker'] : 0;
+$marker = $_POST['marker'] ?? 0;
 
-if (1 == $marker) {
+if (1 === $marker) {
     /**
      * Verify Token
      */
     if (!$GLOBALS['xoopsSecurity']->check()) {
-        redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+        redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
     }
 
-    $myts          = \MyTextSanitizer::getInstance();
+    $myts          = MyTextSanitizer::getInstance();
     $group_title   = $myts->displayTarea($_POST['group_title'], 0, 1, 1, 1, 1);
     $group_desc    = $myts->displayTarea($_POST['group_desc'], 0, 1, 1, 1, 1);
-    $group_img     = (!empty($_POST['group_img'])) ? $_POST['group_img'] : '';
+    $group_img     = !empty($_POST['group_img']) ? $_POST['group_img'] : '';
     $path_upload   = XOOPS_UPLOAD_PATH . '/yogurt/groups';
-    $pictwidth     = $xoopsModuleConfig['resized_width'];
-    $pictheight    = $xoopsModuleConfig['resized_height'];
-    $thumbwidth    = $xoopsModuleConfig['thumb_width'];
-    $thumbheight   = $xoopsModuleConfig['thumb_height'];
-    $maxfilebytes  = $xoopsModuleConfig['maxfilesize'];
-    $maxfileheight = $xoopsModuleConfig['max_original_height'];
-    $maxfilewidth  = $xoopsModuleConfig['max_original_width'];
-    if ($groupsFactory->receiveGroup($group_title, $group_desc, '', $path_upload, $maxfilebytes, $maxfilewidth, $maxfileheight)) {
+    $pictwidth     = $helper->getConfig('resized_width');
+    $pictheight    = $helper->getConfig('resized_height');
+    $thumbwidth    = $helper->getConfig('thumb_width');
+    $thumbheight   = $helper->getConfig('thumb_height');
+    $maxfilebytes  = $helper->getConfig('maxfilesize');
+    $maxfileheight = $helper->getConfig('max_original_height');
+    $maxfilewidth  = $helper->getConfig('max_original_width');
+    if ($groupsFactory->receiveGroup(
+        $group_title,
+        $group_desc,
+        '',
+        $path_upload,
+        $maxfilebytes,
+        $maxfilewidth,
+        $maxfileheight
+    )) {
         $relgroupuser = $relgroupuserFactory->create();
         $relgroupuser->setVar('rel_group_id', $xoopsDB->getInsertId());
         $relgroupuser->setVar('rel_user_uid', $xoopsUser->getVar('uid'));

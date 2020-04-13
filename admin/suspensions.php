@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -23,16 +25,17 @@
  */
 
 use Xmf\Request;
+use Xmf\Module\Helper\Permission;
 
 require __DIR__ . '/admin_header.php';
 xoops_cp_header();
 //It recovered the value of argument op in URL$
-$op    = \Xmf\Request::getString('op', 'list');
-$order = \Xmf\Request::getString('order', 'desc');
-$sort  = \Xmf\Request::getString('sort', '');
+$op    = Request::getString('op', 'list');
+$order = Request::getString('order', 'desc');
+$sort  = Request::getString('sort', '');
 
 $adminObject->displayNavigation(basename(__FILE__));
-$permHelper = new \Xmf\Module\Helper\Permission();
+$permHelper = new Permission();
 $uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/images/';
 $uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/images/';
 
@@ -50,7 +53,7 @@ switch ($op) {
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('suspensions.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
-        if (0 !== \Xmf\Request::getInt('uid', 0)) {
+        if (0 !== Request::getInt('uid', 0)) {
             $suspensionsObject = $suspensionsHandler->get(Request::getInt('uid', 0));
         } else {
             $suspensionsObject = $suspensionsHandler->create();
@@ -82,7 +85,7 @@ switch ($op) {
 
     case 'delete':
         $suspensionsObject = $suspensionsHandler->get(Request::getString('uid', ''));
-        if (1 == \Xmf\Request::getInt('ok', 0)) {
+        if (1 === Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('suspensions.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
@@ -92,13 +95,24 @@ switch ($op) {
                 echo $suspensionsObject->getHtmlErrors();
             }
         } else {
-            xoops_confirm(['ok' => 1, 'uid' => Request::getString('uid', ''), 'op' => 'delete',], Request::getUrl('REQUEST_URI', '', 'SERVER'), sprintf(AM_YOGURT_FORMSUREDEL, $suspensionsObject->getVar('uid')));
+            xoops_confirm(
+                [
+                    'ok'  => 1,
+                    'uid' => Request::getString('uid', ''),
+                    'op'  => 'delete',
+                ],
+                Request::getUrl('REQUEST_URI', '', 'SERVER'),
+                sprintf(
+                    AM_YOGURT_FORMSUREDEL,
+                    $suspensionsObject->getVar('uid')
+                )
+            );
         }
         break;
 
     case 'clone':
 
-        $id_field = \Xmf\Request::getString('uid', '');
+        $id_field = Request::getString('uid', '');
 
         if ($utility::cloneRecord('yogurt_suspensions', 'uid', $id_field)) {
             redirect_header('suspensions.php', 3, AM_YOGURT_CLONED_OK);
@@ -111,10 +125,10 @@ switch ($op) {
     default:
         $adminObject->addItemButton(AM_YOGURT_ADD_SUSPENSIONS, 'suspensions.php?op=new', 'add');
         $adminObject->displayButton('left');
-        $start                      = \Xmf\Request::getInt('start', 0);
+        $start                      = Request::getInt('start', 0);
         $suspensionsPaginationLimit = $helper->getConfig('userpager');
 
-        $criteria = new \CriteriaCompo();
+        $criteria = new CriteriaCompo();
         $criteria->setSort('uid ASC, uid');
         $criteria->setOrder('ASC');
         $criteria->setLimit($suspensionsPaginationLimit);
@@ -133,7 +147,7 @@ switch ($op) {
         if ($suspensionsTempRows > $suspensionsPaginationLimit) {
             xoops_load('XoopsPageNav');
 
-            $pagenav = new \XoopsPageNav(
+            $pagenav = new XoopsPageNav(
                 $suspensionsTempRows, $suspensionsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
@@ -145,7 +159,7 @@ switch ($op) {
         //    $fields = explode('|', uid:int:11::NOT NULL::primary:uid|old_pass:varchar:255::NOT NULL:::old_pass|old_email:varchar:100::NOT NULL:::old_email|old_signature:text:0::NOT NULL:::old_signature|suspension_time:int:11::NOT NULL:::suspension_time|old_enc_type:int:2::NOT NULL:::old_enc_type|old_pass_expired:int:1::NOT NULL:::old_pass_expired);
         //    $fieldsCount    = count($fields);
 
-        $criteria = new \CriteriaCompo();
+        $criteria = new CriteriaCompo();
 
         //$criteria->setOrder('DESC');
         $criteria->setSort($sort);
@@ -161,7 +175,10 @@ switch ($op) {
             foreach (array_keys($suspensionsTempArray) as $i) {
                 //        $field = explode(':', $fields[$i]);
 
-                $GLOBALS['xoopsTpl']->assign('selectoruid', AM_YOGURT_SUSPENSIONS_UID);
+                $GLOBALS['xoopsTpl']->assign(
+                    'selectoruid',
+                    AM_YOGURT_SUSPENSIONS_UID
+                );
                 $suspensionsArray['uid'] = $suspensionsTempArray[$i]->getVar('uid');
 
                 $GLOBALS['xoopsTpl']->assign('selectorold_pass', AM_YOGURT_SUSPENSIONS_OLD_PASS);
@@ -192,7 +209,7 @@ switch ($op) {
             // Display Navigation
             if ($suspensionsCount > $suspensionsPaginationLimit) {
                 xoops_load('XoopsPageNav');
-                $pagenav = new \XoopsPageNav(
+                $pagenav = new XoopsPageNav(
                     $suspensionsCount, $suspensionsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
@@ -223,7 +240,9 @@ switch ($op) {
             //-------------------------------------------
 
             echo $GLOBALS['xoopsTpl']->fetch(
-                XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname') . '/templates/admin/yogurt_admin_suspensions.tpl'
+                XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar(
+                    'dirname'
+                ) . '/templates/admin/yogurt_admin_suspensions.tpl'
             );
         }
 

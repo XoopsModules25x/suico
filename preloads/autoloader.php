@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -24,7 +24,7 @@
 // @see http://www.php-fig.org/psr/psr-4/examples/
 
 spl_autoload_register(
-    static function ($class) {
+    static function ($class)  {
         // project-specific namespace prefix
         $prefix = 'XoopsModules\\' . ucfirst(basename(dirname(__DIR__)));
 

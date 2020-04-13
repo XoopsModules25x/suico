@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Yogurt\Common;
 
@@ -24,16 +24,25 @@ namespace XoopsModules\Yogurt\Common;
  */
 class Resizer
 {
-    public $sourceFile    = '';
-    public $endFile       = '';
-    public $maxWidth      = 0;
-    public $maxHeight     = 0;
+    public $sourceFile = '';
+
+    public $endFile = '';
+
+    public $maxWidth = 0;
+
+    public $maxHeight = 0;
+
     public $imageMimetype = '';
-    public $jpgQuality    = 90;
-    public $mergeType     = 0;
-    public $mergePos      = 0;
-    public $degrees       = 0;
-    public $error         = '';
+
+    public $jpgQuality = 90;
+
+    public $mergeType = 0;
+
+    public $mergePos = 0;
+
+    public $degrees = 0;
+
+    public $error = '';
 
     /**
      * resize image if size exceed given width/height
@@ -86,7 +95,18 @@ class Resizer
             imagesavealpha($tmpimg, true);
 
             // Copy and resize old image into new image.
-            imagecopyresampled($tmpimg, $img, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+            imagecopyresampled(
+                $tmpimg,
+                $img,
+                0,
+                0,
+                0,
+                0,
+                $new_width,
+                $new_height,
+                $width,
+                $height
+            );
 
             unlink($this->endFile);
             //compressing the file
@@ -136,7 +156,7 @@ class Resizer
             return false;
         }
         // GET ORIGINAL IMAGE DIMENSIONS
-        list($original_w, $original_h) = getimagesize($this->sourceFile);
+        [$original_w, $original_h] = getimagesize($this->sourceFile);
 
         // RESIZE IMAGE AND PRESERVE PROPORTIONS
         $max_width_resize  = $this->maxWidth;
@@ -156,11 +176,25 @@ class Resizer
 
         // CREATE THE PROPORTIONAL IMAGE RESOURCE
         $thumb = imagecreatetruecolor($max_width_resize, $max_height_resize);
-        if (!imagecopyresampled($thumb, $original, 0, 0, 0, 0, $max_width_resize, $max_height_resize, $original_w, $original_h)) {
+        if (!imagecopyresampled(
+            $thumb,
+            $original,
+            0,
+            0,
+            0,
+            0,
+            $max_width_resize,
+            $max_height_resize,
+            $original_w,
+            $original_h
+        )) {
             return false;
         }
         // CREATE THE CENTERED CROPPED IMAGE TO THE SPECIFIED DIMENSIONS
-        $final = imagecreatetruecolor($this->maxWidth, $this->maxHeight);
+        $final = imagecreatetruecolor(
+            $this->maxWidth,
+            $this->maxHeight
+        );
 
         $max_width_offset  = 0;
         $max_height_offset = 0;
@@ -170,11 +204,24 @@ class Resizer
             $max_height_offset = (int)round(($max_height_resize - $this->maxHeight) / 2);
         }
 
-        if (!imagecopy($final, $thumb, 0, 0, $max_width_offset, $max_height_offset, $max_width_resize, $max_height_resize)) {
+        if (!imagecopy(
+            $final,
+            $thumb,
+            0,
+            0,
+            $max_width_offset,
+            $max_height_offset,
+            $max_width_resize,
+            $max_height_resize
+        )) {
             return false;
         }
         // STORE THE FINAL IMAGE - WILL OVERWRITE $this->endFile
-        if (!imagejpeg($final, $this->endFile, $this->jpgQuality)) {
+        if (!imagejpeg(
+            $final,
+            $this->endFile,
+            $this->jpgQuality
+        )) {
             return false;
         }
 
@@ -185,7 +232,7 @@ class Resizer
     {
         $dest = imagecreatefromjpeg($this->endFile);
         $src  = imagecreatefromjpeg($this->sourceFile);
-        if (4 == $this->mergeType) {
+        if (4 === $this->mergeType) {
             $imgWidth  = (int)round($this->maxWidth / 2 - 1);
             $imgHeight = (int)round($this->maxHeight / 2 - 1);
             $posCol2   = (int)round($this->maxWidth / 2 + 1);
@@ -205,7 +252,7 @@ class Resizer
                     break;
             }
         }
-        if (6 == $this->mergeType) {
+        if (6 === $this->mergeType) {
             $imgWidth  = (int)round($this->maxWidth / 3 - 1);
             $imgHeight = (int)round($this->maxHeight / 2 - 1);
             $posCol2   = (int)round($this->maxWidth / 3 + 1);

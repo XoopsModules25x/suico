@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,7 +18,9 @@
  * @since
  */
 
+use Xmf\Request;
 use XoopsModules\Yogurt;
+use XoopsModules\Yogurt\IndexController;
 
 /**
  * Xoops header
@@ -35,7 +38,7 @@ $mainvideodesc = '';
 //    require_once XOOPS_ROOT_PATH . '/language/english/user.php';
 //}
 
-$controller = new \XoopsModules\Yogurt\ControllerIndex($xoopsDB, $xoopsUser);
+$controller = new IndexController($xoopsDB, $xoopsUser);
 
 /**
  * Fetching numbers of groups friends videos pictures etc...
@@ -46,14 +49,18 @@ $nbSections = $controller->getNumbersSections();
  * This variable define the beggining of the navigation must b
  * setted here so all calls to database will take this into account
  */
-$start = \Xmf\Request::getInt('start', 0, 'GET');
+$start = Request::getInt(
+    'start',
+    0,
+    'GET'
+);
 
 /**
  * Filter for new friend petition
  */
 $petition = 0;
-if (1 == $controller->isOwner) {
-    $criteria_uidpetition = new \Criteria('petioned_uid', $controller->uidOwner);
+if (1 === $controller->isOwner) {
+    $criteria_uidpetition = new Criteria('petioned_uid', $controller->uidOwner);
     $newpetition          = $controller->petitionsFactory->getObjects($criteria_uidpetition);
     if ($newpetition) {
         $nb_petitions      = count($newpetition);
@@ -70,9 +77,9 @@ if (1 == $controller->isOwner) {
 /**
  * Criteria for mainvideo
  */
-$criteria_uidvideo  = new \Criteria('uid_owner', $controller->uidOwner);
-$criteria_mainvideo = new \Criteria('main_video', '1');
-$criteria_video     = new \CriteriaCompo($criteria_mainvideo);
+$criteria_uidvideo  = new Criteria('uid_owner', $controller->uidOwner);
+$criteria_mainvideo = new Criteria('main_video', '1');
+$criteria_video     = new CriteriaCompo($criteria_mainvideo);
 $criteria_video->add($criteria_uidvideo);
 
 if (($nbSections['nbVideos'] > 0) && ($videos = $controller->videosFactory->getObjects($criteria_video))) {
@@ -83,7 +90,7 @@ if (($nbSections['nbVideos'] > 0) && ($videos = $controller->videosFactory->getO
 /**
  * Friends
  */
-$criteria_friends = new \Criteria('friend1_uid', $controller->uidOwner);
+$criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
 $friends          = $controller->friendshipsFactory->getFriends(9, $criteria_friends);
 
 $controller->visitorsFactory->purgeVisits();
@@ -92,26 +99,28 @@ $evaluation = $controller->friendshipsFactory->getMoyennes($controller->uidOwner
 /**
  * Groups
  */
-$criteria_groups = new \Criteria('rel_user_uid', $controller->uidOwner);
+$criteria_groups = new Criteria('rel_user_uid', $controller->uidOwner);
 $groups          = $controller->relgroupusersFactory->getGroups(9, $criteria_groups);
 
 /**
  * Visitors
  */
-if (0 == $controller->isAnonym) {
+if (0 === $controller->isAnonym) {
     /**
      * Fectching last visitors
      */
-    if ($controller->uidOwner != $xoopsUser->getVar('uid')) {
+    if ($controller->uidOwner !== $xoopsUser->getVar('uid')) {
         $visitor_now = $controller->visitorsFactory->create();
         $visitor_now->setVar('uid_owner', $controller->uidOwner);
         $visitor_now->setVar('uid_visitor', $xoopsUser->getVar('uid'));
         $visitor_now->setVar('uname_visitor', $xoopsUser->getVar('uname'));
         $controller->visitorsFactory->insert($visitor_now);
     }
-    $criteria_visitors = new \Criteria('uid_owner', $controller->uidOwner);
+    $criteria_visitors = new Criteria('uid_owner', $controller->uidOwner);
     //$criteria_visitors->setLimit(5);
-    $visitors_object_array = $controller->visitorsFactory->getObjects($criteria_visitors);
+    $visitors_object_array = $controller->visitorsFactory->getObjects(
+        $criteria_visitors
+    );
 
     /**
      * Lets populate an array with the dati from visitors
@@ -144,18 +153,23 @@ $myts          = MyTextSanitizer::getInstance();
 /**
  * Adding to the module js and css of the lightbox and new ones
  */
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/yogurt.css');
+$xoTheme->addStylesheet(
+    XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/yogurt.css'
+);
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
 if (false !== stripos($_SERVER['HTTP_USER_AGENT'], 'msie')) {
-    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css');
+    $xoTheme->addStylesheet(
+        XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css'
+    );
 }
 //$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/css/lightbox.css');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/prototype.js');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/scriptaculous.js?load=effects');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/lightbox.js');
-//
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.lightbox-0.3.css');
+$xoTheme->addStylesheet(
+    XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.lightbox-0.3.css'
+);
 
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.js');
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js');
@@ -172,7 +186,7 @@ $xoopsTpl->assign('allow_profile_contact', $controller->checkPrivilege('profile_
 $xoopsTpl->assign('allow_profile_general', $controller->checkPrivilege('profile_general') ? 1 : 0);
 $xoopsTpl->assign('allow_profile_stats', $controller->checkPrivilege('profile_stats') ? 1 : 0);
 $xoopsTpl->assign('lang_suspensionadmin', _MD_YOGURT_SUSPENSIONADMIN);
-if (0 == $controller->isSuspended) {
+if (0 === $controller->isSuspended) {
     $xoopsTpl->assign('isSuspended', 0);
     $xoopsTpl->assign('lang_suspend', _MD_YOGURT_SUSPENDUSER);
     $xoopsTpl->assign('lang_timeinseconds', _MD_YOGURT_SUSPENDTIME);
@@ -224,9 +238,12 @@ $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
 //page atributes
-$xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner));
+$xoopsTpl->assign(
+    'xoops_pagetitle',
+    sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner)
+);
 
-//$xoopsTpl->assign('path_yogurt_uploads',$xoopsModuleConfig['link_path_upload']);
+//$xoopsTpl->assign('path_yogurt_uploads',$helper->getConfig('link_path_upload'));
 
 //groups
 $xoopsTpl->assign('groups', $groups);
@@ -247,10 +264,10 @@ $xoopsTpl->assign('friendly_rest', 48 - $evaluation['mediahot']);
 $xoopsTpl->assign('lang_cool', _MD_YOGURT_COOL);
 $xoopsTpl->assign('cool', $evaluation['mediacool']);
 $xoopsTpl->assign('cool_rest', 48 - $evaluation['mediacool']);
-$xoopsTpl->assign('enable_friendsevaluation', $xoopsModuleConfig['enable_friendsevaluation']);
+$xoopsTpl->assign('enable_friendsevaluation', $helper->getConfig('enable_friendsevaluation'));
 
 //petitions to become friend
-if (1 == $petition) {
+if (1 === $petition) {
     $xoopsTpl->assign('lang_youhavexpetitions', sprintf(_MD_YOGURT_YOUHAVEXPETITIONS, $nb_petitions));
     $xoopsTpl->assign('petitioner_uid', $petitioner_uid);
     $xoopsTpl->assign('petitioner_uname', $petitioner_uname);
@@ -268,7 +285,7 @@ if (1 == $petition) {
 $xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
 $xoopsTpl->assign('lang_addasafriend', _MD_YOGURT_ADDASAFRIEND);
 
-//Avatar and Main 
+//Avatar and Main
 $xoopsTpl->assign('avatar_url', $avatar);
 $xoopsTpl->assign('lang_selectavatar', _MD_YOGURT_SELECTAVATAR);
 $xoopsTpl->assign('lang_selectmainvideo', _MD_YOGURT_SELECTMAINVIDEO);
@@ -280,8 +297,14 @@ $xoopsTpl->assign('lang_viewallvideos', _MD_YOGURT_ALLVIDEOS);
 if ($nbSections['nbVideos'] > 0) {
     $xoopsTpl->assign('mainvideocode', $mainvideocode);
     $xoopsTpl->assign('mainvideodesc', $mainvideodesc);
-    $xoopsTpl->assign('width', $xoopsModuleConfig['width_maintube']); // Falta configurar o tamnho do main nas configs e alterar no template
-    $xoopsTpl->assign('height', $xoopsModuleConfig['height_maintube']);
+    $xoopsTpl->assign(
+        'width',
+        $helper->getConfig('width_maintube')
+    ); // Falta configurar o tamnho do main nas configs e alterar no template
+    $xoopsTpl->assign(
+        'height',
+        $helper->getConfig('height_maintube')
+    );
 }
 //friends
 $xoopsTpl->assign('friends', $friends);
@@ -295,8 +318,11 @@ $xoopsTpl->assign('lang_usercontributions', _MD_YOGURT_USERCONTRIBUTIONS);
 
 $xoopsTpl->assign('lang_detailsinfo', _MD_YOGURT_USERDETAILS);
 $xoopsTpl->assign('lang_contactinfo', _MD_YOGURT_CONTACTINFO);
-//$xoopsTpl->assign('path_yogurt_uploads',$xoopsModuleConfig['link_path_upload']);
-$xoopsTpl->assign('lang_max_nb_pict', sprintf(_MD_YOGURT_YOUCANHAVE, $xoopsModuleConfig['nb_pict']));
+//$xoopsTpl->assign('path_yogurt_uploads',$helper->getConfig('link_path_upload'));
+$xoopsTpl->assign(
+    'lang_max_nb_pict',
+    sprintf(_MD_YOGURT_YOUCANHAVE, $helper->getConfig('nb_pict'))
+);
 $xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
 $xoopsTpl->assign('lang_editdesc', _MD_YOGURT_EDITDESC);
 
@@ -309,7 +335,12 @@ $xoopsTpl->assign('user_uname', $thisUser->getVar('uname'));
 $xoopsTpl->assign('user_realname', $thisUser->getVar('name'));
 $xoopsTpl->assign('lang_uname', _US_NICKNAME);
 $xoopsTpl->assign('lang_website', _US_WEBSITE);
-$userwebsite = ('' != $thisUser->getVar('url', 'E')) ? '<a href="' . $thisUser->getVar('url', 'E') . '" target="_blank">' . $thisUser->getVar('url') . '</a>' : '';
+$userwebsite = '' !== $thisUser->getVar('url', 'E') ? '<a href="' . $thisUser->getVar(
+        'url',
+        'E'
+    ) . '" target="_blank">' . $thisUser->getVar(
+        'url'
+    ) . '</a>' : '';
 $xoopsTpl->assign('user_websiteurl', $userwebsite);
 $xoopsTpl->assign('lang_email', _US_EMAIL);
 $xoopsTpl->assign('lang_privmsg', _US_PM);
@@ -352,7 +383,7 @@ $var = $thisUser->getVar('user_sig', 'N');
 $xoopsTpl->assign('user_signature', $myts->displayTarea($var, 0, 1, 1));
 
 $xoopsTpl->assign('user_viewemail', $thisUser->getVar('user_viewemail', 'E'));
-if (1 == $thisUser->getVar('user_viewemail')) {
+if (1 === $thisUser->getVar('user_viewemail')) {
     $xoopsTpl->assign('user_email', $thisUser->getVar('email', 'E'));
 } else {
     $xoopsTpl->assign('user_email', '&nbsp;');
@@ -365,8 +396,8 @@ $xoopsTpl->assign('name', $thisUser->getVar('name'));
 $gpermHandler  = xoops_getHandler('groupperm');
 $groups        = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
 $moduleHandler = xoops_getHandler('module');
-$criteria      = new \CriteriaCompo(new \Criteria('hassearch', 1));
-$criteria->add(new \Criteria('isactive', 1));
+$criteria      = new CriteriaCompo(new Criteria('hassearch', 1));
+$criteria->add(new Criteria('isactive', 1));
 $mids = array_keys($moduleHandler->getList($criteria));
 
 //userranl
@@ -386,25 +417,34 @@ foreach ($mids as $mid) {
         }
         if (is_array($results) && $count > 0) {
             for ($i = 0; $i < $count; $i++) {
-                if (isset($results[$i]['image']) && '' != $results[$i]['image']) {
+                if (isset($results[$i]['image']) && '' !== $results[$i]['image']) {
                     $results[$i]['image'] = 'modules/' . $module->getVar('dirname') . '/' . $results[$i]['image'];
                 } else {
                     $results[$i]['image'] = 'images/icons/posticon2.gif';
                 }
 
-                if (!preg_match("/^http[s]*:\/\//i", $results[$i]['link'])) {
+                if (!preg_match("#^http[s]*:\/\/#i", $results[$i]['link'])) {
                     $results[$i]['link'] = 'modules/' . $module->getVar('dirname') . '/' . $results[$i]['link'];
                 }
 
                 $results[$i]['title'] = $myts->makeTboxData4Show($results[$i]['title']);
                 $results[$i]['time']  = $results[$i]['time'] ? formatTimestamp($results[$i]['time']) : '';
             }
-            if (5 == $count) {
-                $showall_link = '<a href="../../search.php?action=showallbyuser&amp;mid=' . $mid . '&amp;uid=' . $thisUser->getVar('uid') . '">' . _US_SHOWALL . '</a>';
+            if (5 === $count) {
+                $showall_link = '<a href="../../search.php?action=showallbyuser&amp;mid=' . $mid . '&amp;uid=' . $thisUser->getVar(
+                        'uid'
+                    ) . '">' . _US_SHOWALL . '</a>';
             } else {
                 $showall_link = '';
             }
-            $xoopsTpl->append('modules', ['name' => $module->getVar('name'), 'results' => $results, 'showall_link' => $showall_link]);
+            $xoopsTpl->append(
+                'modules',
+                [
+                    'name'         => $module->getVar('name'),
+                    'results'      => $results,
+                    'showall_link' => $showall_link,
+                ]
+            );
         }
         unset($module);
     }

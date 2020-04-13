@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
@@ -6,6 +6,11 @@ namespace XoopsModules\Yogurt;
 //  ---------------------------------------------------------------- //
 // Author: Bruno Barthez                                               //
 // ----------------------------------------------------------------- //
+
+use CriteriaElement;
+use XoopsDatabase;
+use XoopsObject;
+use XoopsPersistableObjectHandler;
 
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
@@ -17,30 +22,29 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  * yogurt_relgroupuserhandler class.
  * This class provides simple mecanisme for Relgroupuser object
  */
-class RelgroupuserHandler extends \XoopsPersistableObjectHandler
+class RelgroupuserHandler extends XoopsPersistableObjectHandler
 {
-    /**
-     * @var Helper
-     */
     public $helper;
+
     public $isAdmin;
 
     /**
      * Constructor
-     * @param null|\XoopsDatabase              $db
-     * @param null|\XoopsModules\Yogurt\Helper $helper
+     * @param \XoopsDatabase|null              $xoopsDatabase
+     * @param \XoopsModules\Yogurt\Helper|null $helper
      */
-
-    public function __construct(\XoopsDatabase $db = null, $helper = null)
-    {
+    public function __construct(
+        ?XoopsDatabase $xoopsDatabase = null,
+        $helper = null
+    ) {
         /** @var \XoopsModules\Yogurt\Helper $this ->helper */
         if (null === $helper) {
-            $this->helper = \XoopsModules\Yogurt\Helper::getInstance();
+            $this->helper = Helper::getInstance();
         } else {
             $this->helper = $helper;
         }
         $isAdmin = $this->helper->isUserAdmin();
-        parent::__construct($db, 'yogurt_relgroupuser', Relgroupuser::class, 'rel_id', 'rel_id');
+        parent::__construct($xoopsDatabase, 'yogurt_relgroupuser', Relgroupuser::class, 'rel_id', 'rel_id');
     }
 
     /**
@@ -49,19 +53,18 @@ class RelgroupuserHandler extends \XoopsPersistableObjectHandler
      * @param bool $isNew flag the new objects as "new"?
      * @return \XoopsObject Groups
      */
-    public function create($isNew = true)
-    {
-        {
-            $obj = parent::create($isNew);
-            if ($isNew) {
-                $obj->setNew();
-            } else {
-                $obj->unsetNew();
-            }
-            $obj->helper = $this->helper;
-
-            return $obj;
+    public function create(
+        $isNew = true
+    ) {
+        $obj = parent::create($isNew);
+        if ($isNew) {
+            $obj->setNew();
+        } else {
+            $obj->unsetNew();
         }
+        $obj->helper = $this->helper;
+
+        return $obj;
     }
 
     /**
@@ -71,14 +74,16 @@ class RelgroupuserHandler extends \XoopsPersistableObjectHandler
      * @param null $fields
      * @return mixed reference to the {@link Relgroupuser} object, FALSE if failed
      */
-    public function get($id = null, $fields = null)
-    {
+    public function get(
+        $id = null,
+        $fields = null
+    ) {
         $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_relgroupuser') . ' WHERE rel_id=' . $id;
         if (!$result = $this->db->query($sql)) {
             return false;
         }
         $numrows = $this->db->getRowsNum($result);
-        if (1 == $numrows) {
+        if (1 === $numrows) {
             $yogurt_relgroupuser = new Relgroupuser();
             $yogurt_relgroupuser->assignVars($this->db->fetchArray($result));
 
@@ -91,39 +96,48 @@ class RelgroupuserHandler extends \XoopsPersistableObjectHandler
     /**
      * insert a new Relgroupuser in the database
      *
-     * @param \XoopsObject $yogurt_relgroupuser reference to the {@link Relgroupuser}
+     * @param \XoopsObject $xoopsObject         reference to the {@link Relgroupuser}
      *                                          object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(\XoopsObject $yogurt_relgroupuser, $force = false)
-    {
+    public function insert(
+        XoopsObject $xoopsObject,
+        $force = false
+    ) {
         global $xoopsConfig;
-        if (!$yogurt_relgroupuser instanceof Relgroupuser) {
+        if (!$xoopsObject instanceof Relgroupuser) {
             return false;
         }
-        if (!$yogurt_relgroupuser->isDirty()) {
+        if (!$xoopsObject->isDirty()) {
             return true;
         }
-        if (!$yogurt_relgroupuser->cleanVars()) {
+        if (!$xoopsObject->cleanVars()) {
             return false;
         }
-        foreach ($yogurt_relgroupuser->cleanVars as $k => $v) {
+        foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
         $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
-        if ($yogurt_relgroupuser->isNew()) {
+        if ($xoopsObject->isNew()) {
             // ajout/modification d'un Relgroupuser
-            $yogurt_relgroupuser = new Relgroupuser();
-            $format              = 'INSERT INTO %s (rel_id, rel_group_id, rel_user_uid)';
-            $format              .= 'VALUES (%u, %u, %u)';
-            $sql                 = sprintf($format, $this->db->prefix('yogurt_relgroupuser'), $rel_id, $rel_group_id, $rel_user_uid);
-            $force               = true;
+            $xoopsObject = new Relgroupuser();
+            $format      = 'INSERT INTO %s (rel_id, rel_group_id, rel_user_uid)';
+            $format      .= 'VALUES (%u, %u, %u)';
+            $sql         = sprintf($format, $this->db->prefix('yogurt_relgroupuser'), $rel_id, $rel_group_id, $rel_user_uid);
+            $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'rel_id=%u, rel_group_id=%u, rel_user_uid=%u';
             $format .= ' WHERE rel_id = %u';
-            $sql    = sprintf($format, $this->db->prefix('yogurt_relgroupuser'), $rel_id, $rel_group_id, $rel_user_uid, $rel_id);
+            $sql    = sprintf(
+                $format,
+                $this->db->prefix('yogurt_relgroupuser'),
+                $rel_id,
+                $rel_group_id,
+                $rel_user_uid,
+                $rel_id
+            );
         }
         if ($force) {
             $result = $this->db->queryF($sql);
@@ -136,7 +150,7 @@ class RelgroupuserHandler extends \XoopsPersistableObjectHandler
         if (empty($rel_id)) {
             $rel_id = $this->db->getInsertId();
         }
-        $yogurt_relgroupuser->assignVar('rel_id', $rel_id);
+        $xoopsObject->assignVar('rel_id', $rel_id);
 
         return true;
     }
@@ -144,16 +158,22 @@ class RelgroupuserHandler extends \XoopsPersistableObjectHandler
     /**
      * delete a Relgroupuser from the database
      *
-     * @param \XoopsObject $yogurt_relgroupuser reference to the Relgroupuser to delete
+     * @param \XoopsObject $xoopsObject reference to the Relgroupuser to delete
      * @param bool         $force
      * @return bool FALSE if failed.
      */
-    public function delete(\XoopsObject $yogurt_relgroupuser, $force = false)
-    {
-        if (!$yogurt_relgroupuser instanceof Relgroupuser) {
+    public function delete(
+        XoopsObject $xoopsObject,
+        $force = false
+    ) {
+        if (!$xoopsObject instanceof Relgroupuser) {
             return false;
         }
-        $sql = sprintf('DELETE FROM %s WHERE rel_id = %u', $this->db->prefix('yogurt_relgroupuser'), $yogurt_relgroupuser->getVar('rel_id'));
+        $sql = sprintf(
+            'DELETE FROM %s WHERE rel_id = %u',
+            $this->db->prefix('yogurt_relgroupuser'),
+            $xoopsObject->getVar('rel_id')
+        );
         if ($force) {
             $result = $this->db->queryF($sql);
         } else {
@@ -169,23 +189,26 @@ class RelgroupuserHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve yogurt_relgroupusers from the database
      *
-     * @param null|\CriteriaElement|\CriteriaCompo $criteria  {@link \CriteriaElement} conditions to be met
-     * @param bool                                 $id_as_key use the UID as key for the array?
+     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} conditions to be met
+     * @param bool                                 $id_as_key       use the UID as key for the array?
      * @param bool                                 $as_object
      * @return array array of {@link Relgroupuser} objects
      */
-    public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
-    {
+    public function &getObjects(
+        ?CriteriaElement $criteriaElement = null,
+        $id_as_key = false,
+        $as_object = true
+    ) {
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_relgroupuser');
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
-            $sql .= ' ' . $criteria->renderWhere();
-            if ('' != $criteria->getSort()) {
-                $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
+        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
+            $sql .= ' ' . $criteriaElement->renderWhere();
+            if ('' !== $criteriaElement->getSort()) {
+                $sql .= ' ORDER BY ' . $criteriaElement->getSort() . ' ' . $criteriaElement->getOrder();
             }
-            $limit = $criteria->getLimit();
-            $start = $criteria->getStart();
+            $limit = $criteriaElement->getLimit();
+            $start = $criteriaElement->getStart();
         }
         $result = $this->db->query($sql, $limit, $start);
         if (!$result) {
@@ -208,37 +231,41 @@ class RelgroupuserHandler extends \XoopsPersistableObjectHandler
     /**
      * count yogurt_relgroupusers matching a condition
      *
-     * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link \CriteriaElement} to match
+     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} to match
      * @return int count of yogurt_relgroupusers
      */
-    public function getCount(\CriteriaElement $criteria = null)
-    {
+    public function getCount(
+        ?CriteriaElement $criteriaElement = null
+    ) {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_relgroupuser');
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
-            $sql .= ' ' . $criteria->renderWhere();
+        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
+            $sql .= ' ' . $criteriaElement->renderWhere();
         }
         $result = $this->db->query($sql);
         if (!$result) {
             return 0;
         }
-        list($count) = $this->db->fetchRow($result);
+        [$count] = $this->db->fetchRow($result);
 
-        return $count;
+        return (int)$count;
     }
 
     /**
      * delete yogurt_relgroupusers matching a set of conditions
      *
-     * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link \CriteriaElement}
+     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement}
      * @param bool                                 $force
      * @param bool                                 $asObject
      * @return bool FALSE if deletion failed
      */
-    public function deleteAll(\CriteriaElement $criteria = null, $force = true, $asObject = false)
-    {
+    public function deleteAll(
+        ?CriteriaElement $criteriaElement = null,
+        $force = true,
+        $asObject = false
+    ) {
         $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_relgroupuser');
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
-            $sql .= ' ' . $criteria->renderWhere();
+        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
+            $sql .= ' ' . $criteriaElement->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {
             return false;
@@ -253,16 +280,23 @@ class RelgroupuserHandler extends \XoopsPersistableObjectHandler
      * @param int  $shuffle
      * @return array
      */
-    public function getGroups($nbgroups, $criteria = null, $shuffle = 1)
-    {
+    public function getGroups(
+        $nbgroups,
+        $criteria = null,
+        $shuffle = 1
+    ) {
         $ret = [];
 
-        $sql = 'SELECT rel_id, rel_group_id, rel_user_uid, group_title, group_desc, group_img, owner_uid FROM ' . $this->db->prefix('yogurt_groups') . ', ' . $this->db->prefix('yogurt_relgroupuser');
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
+        $sql = 'SELECT rel_id, rel_group_id, rel_user_uid, group_title, group_desc, group_img, owner_uid FROM ' . $this->db->prefix(
+                'yogurt_groups'
+            ) . ', ' . $this->db->prefix(
+                'yogurt_relgroupuser'
+            );
+        if (isset($criteria) && $criteria instanceof CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             //attention here this is kind of a hack
             $sql .= ' AND group_id = rel_group_id ';
-            if ('' != $criteria->getSort()) {
+            if ('' !== $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
             $limit = $criteria->getLimit();
@@ -283,7 +317,7 @@ class RelgroupuserHandler extends \XoopsPersistableObjectHandler
                 $i++;
             }
 
-            if (1 == $shuffle) {
+            if (1 === $shuffle) {
                 shuffle($vetor);
                 $vetor = array_slice($vetor, 0, $nbgroups);
             }
@@ -299,11 +333,21 @@ class RelgroupuserHandler extends \XoopsPersistableObjectHandler
      * @param int $isShuffle
      * @return array
      */
-    public function getUsersFromGroup($groupId, $start, $nbUsers, $isShuffle = 0)
-    {
+    public function getUsersFromGroup(
+        $groupId,
+        $start,
+        $nbUsers,
+        $isShuffle = 0
+    ) {
         $ret = [];
 
-        $sql = 'SELECT rel_group_id, rel_user_uid, owner_uid, uname, user_avatar, uid FROM ' . $this->db->prefix('users') . ', ' . $this->db->prefix('yogurt_groups') . ', ' . $this->db->prefix('yogurt_relgroupuser');
+        $sql = 'SELECT rel_group_id, rel_user_uid, owner_uid, uname, user_avatar, uid FROM ' . $this->db->prefix(
+                'users'
+            ) . ', ' . $this->db->prefix(
+                'yogurt_groups'
+            ) . ', ' . $this->db->prefix(
+                'yogurt_relgroupuser'
+            );
         $sql .= ' WHERE rel_user_uid = uid AND rel_group_id = group_id AND group_id =' . $groupId . ' GROUP BY rel_user_uid ';
 
         $result = $this->db->query($sql, $nbUsers, $start);
@@ -314,12 +358,12 @@ class RelgroupuserHandler extends \XoopsPersistableObjectHandler
             $ret[$i]['uid']     = $myrow['uid'];
             $ret[$i]['uname']   = $myrow['uname'];
             $ret[$i]['avatar']  = $myrow['user_avatar'];
-            $isOwner            = ($myrow['rel_user_uid'] == $myrow['owner_uid']) ? 1 : 0;
+            $isOwner            = $myrow['rel_user_uid'] === $myrow['owner_uid'] ? 1 : 0;
             $ret[$i]['isOwner'] = $isOwner;
             $i++;
         }
 
-        if (1 == $isShuffle) {
+        if (1 === $isShuffle) {
             shuffle($ret);
             $ret = array_slice($ret, 0, $nbUsers);
         }

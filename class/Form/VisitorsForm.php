@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Yogurt\Form;
+<?php declare(strict_types=1);
+
+namespace XoopsModules\Yogurt\Form;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -22,23 +24,31 @@
  * @since           1.0.0
  */
 
-use Xmf\Request;
+use Xmf\Module\Helper\Permission;
+use XoopsFormButton;
+use XoopsFormHidden;
+use XoopsFormLabel;
+use XoopsFormSelectUser;
+use XoopsFormText;
+use XoopsFormTextDateSelect;
 use XoopsModules\Yogurt;
+use XoopsThemeForm;
 
 require_once dirname(dirname(__DIR__)) . '/include/common.php';
 
 $moduleDirName = basename(dirname(dirname(__DIR__)));
 //$helper = Yogurt\Helper::getInstance();
-$permHelper = new \Xmf\Module\Helper\Permission();
+$permHelper = new Permission();
 
 xoops_load('XoopsFormLoader');
 
 /**
  * Class VisitorsForm
  */
-class VisitorsForm extends \XoopsThemeForm
+class VisitorsForm extends XoopsThemeForm
 {
     public $targetObject;
+
     public $helper;
 
     /**
@@ -57,22 +67,55 @@ class VisitorsForm extends \XoopsThemeForm
 
         //include ID field, it's needed so the module knows if it is a new form or an edited form
 
-        $hidden = new \XoopsFormHidden('cod_visit', $this->targetObject->getVar('cod_visit'));
+        $hidden = new XoopsFormHidden(
+            'cod_visit', $this->targetObject->getVar(
+            'cod_visit'
+        )
+        );
         $this->addElement($hidden);
         unset($hidden);
 
         // Cod_visit
-        $this->addElement(new \XoopsFormLabel(AM_YOGURT_VISITORS_COD_VISIT, $this->targetObject->getVar('cod_visit'), 'cod_visit'));
+        $this->addElement(
+            new XoopsFormLabel(AM_YOGURT_VISITORS_COD_VISIT, $this->targetObject->getVar('cod_visit'), 'cod_visit')
+        );
         // Uid_owner
-        $this->addElement(new \XoopsFormSelectUser(AM_YOGURT_VISITORS_UID_OWNER, 'uid_owner', false, $this->targetObject->getVar('uid_owner'), 1, false), false);
+        $this->addElement(
+            new XoopsFormSelectUser(
+                AM_YOGURT_VISITORS_UID_OWNER, 'uid_owner', false, $this->targetObject->getVar(
+                'uid_owner'
+            ), 1, false
+            ),
+            false
+        );
         // Uid_visitor
-        $this->addElement(new \XoopsFormSelectUser(AM_YOGURT_VISITORS_UID_VISITOR, 'uid_visitor', false, $this->targetObject->getVar('uid_visitor'), 1, false), false);
+        $this->addElement(
+            new XoopsFormSelectUser(
+                AM_YOGURT_VISITORS_UID_VISITOR, 'uid_visitor', false, $this->targetObject->getVar(
+                'uid_visitor'
+            ), 1, false
+            ),
+            false
+        );
         // Uname_visitor
-        $this->addElement(new \XoopsFormText(AM_YOGURT_VISITORS_UNAME_VISITOR, 'uname_visitor', 50, 255, $this->targetObject->getVar('uname_visitor')), false);
+        $this->addElement(
+            new XoopsFormText(
+                AM_YOGURT_VISITORS_UNAME_VISITOR, 'uname_visitor', 50, 255, $this->targetObject->getVar(
+                'uname_visitor'
+            )
+            ),
+            false
+        );
         // Datetime
-        $this->addElement(new \XoopsFormTextDateSelect(AM_YOGURT_VISITORS_DATETIME, 'datetime', 0, strtotime($this->targetObject->getVar('datetime'))));
+        $this->addElement(
+            new XoopsFormTextDateSelect(
+                AM_YOGURT_VISITORS_DATETIME, 'datetime', 0, strtotime(
+                                               $this->targetObject->getVar('datetime')
+                                           )
+            )
+        );
 
-        $this->addElement(new \XoopsFormHidden('op', 'save'));
-        $this->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $this->addElement(new XoopsFormHidden('op', 'save'));
+        $this->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
     }
 }

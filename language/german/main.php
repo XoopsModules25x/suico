@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -22,7 +23,10 @@ define('_MD_YOGURT_EDITDESC', 'Beschreibung bearbeiten');
 define('_MD_YOGURT_TOKENEXPIRED', 'Dein Sicherheitstoken ist abgelaufen<br>Bitte nochmal versuchen');
 define('_MD_YOGURT_DESC_EDITED', 'Die Beschreibung wurde erfolgreich ge&auml;ndert');
 define('_MD_YOGURT_CAPTION', 'Titel');
-define('_MD_YOGURT_YOUCANUPLOAD', 'Du kannst nur JPG-Dateien mit einer maximalen Dateigr&ouml;&szlig;e von %s KBytes hochladen!<br><b>Bilder kannst Du ganz einfach unter <a href=http://www.bilder-editieren.de target=_blank>www.bilder-editieren.de</a> bearbeiten.</b>');
+define(
+    '_MD_YOGURT_YOUCANUPLOAD',
+    'Du kannst nur JPG-Dateien mit einer maximalen Dateigr&ouml;&szlig;e von %s KBytes hochladen!<br><b>Bilder kannst Du ganz einfach unter <a href=http://www.bilder-editieren.de target=_blank>www.bilder-editieren.de</a> bearbeiten.</b>'
+);
 define('_MD_YOGURT_UPLOADPICTURE', 'Bild hochladen');
 define(
     '_MD_YOGURT_NOCACHACA',
@@ -105,14 +109,23 @@ define('_MD_YOGURT_UPDATEFRIEND', 'Freundschaft aktualisieren');
 define('_MD_YOGURT_FRIENDSHIPUPDATED', 'Freundschaft aktualisiert');
 
 //submitfriendpetition.php
-define('_MD_YOGURT_PETITIONED', 'Eine Anfrage wurde an diesen Benutzer gesendet. Wenn er zustimmt wird er in deiner Freundesliste erscheinen.');
-define('_MD_YOGURT_ALREADY_PETITIONED', 'Du hast bereits eine Anfrage auf Freundschaft an dieses Mitglied gesendet (oder umgekehrt). <br>Warte bitte auf Zustimmtung oder Ablehnung.');
+define(
+    '_MD_YOGURT_PETITIONED',
+    'Eine Anfrage wurde an diesen Benutzer gesendet. Wenn er zustimmt wird er in deiner Freundesliste erscheinen.'
+);
+define(
+    '_MD_YOGURT_ALREADY_PETITIONED',
+    'Du hast bereits eine Anfrage auf Freundschaft an dieses Mitglied gesendet (oder umgekehrt). <br>Warte bitte auf Zustimmtung oder Ablehnung.'
+);
 
 //makefriends.php
 define('_MD_YOGURT_FRIENDMADE', 'Als Freund hinzugef&uuml;gt!');
 
 //delfriendship.php
-define('_MD_YOGURT_FRIENDSHIPTERMINATED', 'Du hast deine Freundschaft mit diesem Benutzer beendet!');
+define(
+    '_MD_YOGURT_FRIENDSHIPTERMINATED',
+    'Du hast deine Freundschaft mit diesem Benutzer beendet!'
+);
 
 ############################################ VIDEOS ############################################################
 //mainvideo.php
@@ -143,10 +156,22 @@ define('_MD_YOGURT_VIDEOSAVED', 'Video wurde gespeichert');
 //class/Groups.php
 define('_MD_YOGURT_SUBMIT_GROUP', 'Neue Gruppe anlegen');
 define('_MD_YOGURT_UPLOADGROUP', 'Gruppe speichern'); //also present in many ther groups related
-define('_MD_YOGURT_GROUP_IMAGE', 'Gruppenbild (125 Pixel breit und 80 Pixel hoch f&uuml;r optimale Darstellung)'); //also present in many ther groups related
-define('_MD_YOGURT_GROUP_TITLE', 'Titel'); //also present in many ther groups related
-define('_MD_YOGURT_GROUP_DESC', 'Beschreibung'); //also present in many ther groups related
-define('_MD_YOGURTCREATEYOURGROUP', 'Eigene Gruppe erstellen!'); //also present in many ther groups related
+define(
+    '_MD_YOGURT_GROUP_IMAGE',
+    'Gruppenbild (125 Pixel breit und 80 Pixel hoch f&uuml;r optimale Darstellung)'
+); //also present in many ther groups related
+define(
+    '_MD_YOGURT_GROUP_TITLE',
+    'Titel'
+); //also present in many ther groups related
+define(
+    '_MD_YOGURT_GROUP_DESC',
+    'Beschreibung'
+); //also present in many ther groups related
+define(
+    '_MD_YOGURTCREATEYOURGROUP',
+    'Eigene Gruppe erstellen!'
+); //also present in many ther groups related
 
 //abandongroup.php
 define('_MD_YOGURT_ASKCONFIRMABANDONGROUP', 'Willst du diese Gruppe wirklich verlassen?');
@@ -158,7 +183,10 @@ define('_MD_YOGURT_YOUAREMEMBERNOW', 'Du bist jetzt Mitglied dieser Gruppe');
 define('_MD_YOGURT_YOUAREMEMBERALREADY', 'Du bist bereits Mitglied dieser Gruppe');
 
 //delete_group.php
-define('_MD_YOGURT_ASKCONFIRMGROUPDELETION', 'Willst Du diese Gruppe wirklich dauerhaft l&ouml;schen?');
+define(
+    '_MD_YOGURT_ASKCONFIRMGROUPDELETION',
+    'Willst Du diese Gruppe wirklich dauerhaft l&ouml;schen?'
+);
 define('_MD_YOGURT_CONFIRMGROUPDELETION', 'Ja, diese Gruppe l&ouml;schen!');
 define('_MD_YOGURT_GROUPDELETED', 'Gruppe gel&ouml;scht!');
 
@@ -166,8 +194,14 @@ define('_MD_YOGURT_GROUPDELETED', 'Gruppe gel&ouml;scht!');
 define('_MD_YOGURT_MAINTAINOLDIMAGE', 'Dieses Bild behalten'); //also present in other groups related
 define('_MD_YOGURT_GROUPEDITED', 'Gruppe bearbeitet');
 define('_MD_YOGURT_EDIT_GROUP', 'Deine Gruppe bearbeiten'); //also present in other groups related
-define('_MD_YOGURT_GROUPOWNER', 'Du bist Besitzer dieser Gruppe!'); //also present in other groups related
-define('_MD_YOGURT_MEMBERSDOFGROUP', 'Mitglieder dieser Gruppe'); //also present in other groups related
+define(
+    '_MD_YOGURT_GROUPOWNER',
+    'Du bist Besitzer dieser Gruppe!'
+); //also present in other groups related
+define(
+    '_MD_YOGURT_MEMBERSDOFGROUP',
+    'Mitglieder dieser Gruppe'
+); //also present in other groups related
 
 //submit_group.php
 define('_MD_YOGURT_GROUP_CREATED', 'Deine Gruppe wurde erstellt');
@@ -175,7 +209,10 @@ define('_MD_YOGURT_GROUP_CREATED', 'Deine Gruppe wurde erstellt');
 //kickfromgroup.php
 define('_MD_YOGURT_CONFIRMKICK', 'Ja, schmei&szlig; ihn raus!');
 define('_MD_YOGURT_ASKCONFIRMKICKFROMGROUP', 'Willst Du diese Person wirklich aus dieser Gruppe ausschlie&szlig;en?');
-define('_MD_YOGURT_GROUPKICKED', 'Du hast diesen Benutzer aus dieser Gruppe rausgeschmissen, aber wer wei&szlig;, ob er es nicht wieder neu versucht und zur&uuml;ckkehrt!');
+define(
+    '_MD_YOGURT_GROUPKICKED',
+    'Du hast diesen Benutzer aus dieser Gruppe rausgeschmissen, aber wer wei&szlig;, ob er es nicht wieder neu versucht und zur&uuml;ckkehrt!'
+);
 
 //Groups.php
 define('_MD_YOGURT_GROUP_ABANDON', 'Diese Gruppe verlassen');
@@ -225,7 +262,10 @@ define('_MD_YOGURT_WHOCAN', 'Wer kann:');
 define('_MD_YOGURT_CONFIGSSAVE', 'Einstellungen gespeichert!');
 
 //class/yogurt_controller.php
-define('_MD_YOGURT_NOPRIVILEGE', 'Du ben&ouml;tigst mehr Rechte, um dieses Profil zu sehen.<br>Schlie&szlig;e Freundschaft mit diesem Mitglied.');
+define(
+    '_MD_YOGURT_NOPRIVILEGE',
+    'Du ben&ouml;tigst mehr Rechte, um dieses Profil zu sehen.<br>Schlie&szlig;e Freundschaft mit diesem Mitglied.'
+);
 
 ###################################### OTHERS ##############################
 
@@ -239,7 +279,10 @@ define('_MD_YOGURT_UNKNOWNACCEPTING', 'Diese Person ist mir unbekannt, trotzdem 
 define('_MD_YOGURT_ASKINGFRIEND', 'Ist %s dein Freund?');
 define('_MD_YOGURT_ASKBEFRIEND', 'Willst Du mit diesem Mitglied Freundschaft schlie&szlig;en?');
 define('_MD_YOGURT_EDITPROFILE', 'Dein Profil bearbeiten');
-define('_MD_YOGURT_SELECTAVATAR', 'Lade Bilder in dein Album hoch und w&auml;hle eines als deinen eigenen Avatar aus.');
+define(
+    '_MD_YOGURT_SELECTAVATAR',
+    'Lade Bilder in dein Album hoch und w&auml;hle eines als deinen eigenen Avatar aus.'
+);
 define('_MD_YOGURT_SELECTMAINVIDEO', 'F&uuml;ge ein Video zu deinen Videos hinzu und w&auml;hle es als Hauptvideo');
 define('_MD_YOGURT_NOAVATARYET', 'Noch kein Avatar');
 define('_MD_YOGURT_NOMAINVIDEOYET', 'Noch kein Hauptvideo');
@@ -327,7 +370,10 @@ define('_MD_YOGURT_AUTHORAUDIO', 'Interpret');
 define('_MD_YOGURT_TITLEAUDIO', 'Titel oder Songname');
 define('_MD_YOGURT_ADDAUDIO', 'F&uuml;ge eine MP3-Datei hinzu');
 define('_MD_YOGURT_SUBMITAUDIO', 'Datei hochgeladen');
-define('_MD_YOGURT_ADDAUDIOHELP', 'W&auml;hle eine MP3-Datei von deinem Rechner (max. %s KBytes)<br> Lasse die Felder Titel/Songname und Interpret frei, wenn ID-Tags vorhanden sind');
+define(
+    '_MD_YOGURT_ADDAUDIOHELP',
+    'W&auml;hle eine MP3-Datei von deinem Rechner (max. %s KBytes)<br> Lasse die Felder Titel/Songname und Interpret frei, wenn ID-Tags vorhanden sind'
+);
 
 //19/04/2008
 define('_MD_YOGURT_AUDIODELETED', 'Dein MP3 wurde gel&ouml;scht!');

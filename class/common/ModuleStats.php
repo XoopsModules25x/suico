@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Yogurt\Common;
 
@@ -26,8 +26,10 @@ trait ModuleStats
      * @param array                                    $moduleStats
      * @return array
      */
-    public static function getModuleStats($configurator, $moduleStats)
-    {
+    public static function getModuleStats(
+        $configurator,
+        $moduleStats
+    ) {
         if (count($configurator->moduleStats) > 0) {
             foreach (array_keys($configurator->moduleStats) as $i) {
                 $moduleStats[$i] = $configurator->moduleStats[$i];

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -28,7 +31,9 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 /**
  * Creating the factory  loading the picture changing its caption
  */
-$imageFactory = new Yogurt\ImageHandler($xoopsDB);
+$imageFactory = new Yogurt\ImageHandler(
+    $xoopsDB
+);
 $picture      = $imageFactory->create(false);
 $picture->load($_POST['cod_img']);
 
@@ -43,12 +48,12 @@ if (!copy($image, $imageavatar)) {
 }
 $xoopsUser->setVar('user_avatar', 'avatars/' . $avatar);
 
-$userHandler = new \XoopsUserHandler($xoopsDB);
+$userHandler = new XoopsUserHandler($xoopsDB);
 
 /**
  * Verifying who's the owner to allow changes
  */
-if ($uid == $picture->getVar('uid_owner')) {
+if ($uid === $picture->getVar('uid_owner')) {
     if ($userHandler->insert($xoopsUser)) {
         redirect_header('album.php', 2, _MD_YOGURT_AVATAR_EDITED);
     } else {

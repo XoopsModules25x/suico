@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,6 +18,7 @@
  * @since
  */
 
+use Xmf\Request;
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
@@ -32,17 +34,19 @@ $videoFactory = new Yogurt\VideoHandler($xoopsDB);
 $url = $_POST['codigo'];
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
 /**
  * Try to upload picture resize it insert in database and then redirect to index
  */
-$newvideo = $videoFactory->create(true);
+$newvideo = $videoFactory->create(
+    true
+);
 $newvideo->setVar('uid_owner', (int)$xoopsUser->getVar('uid'));
 $newvideo->setVar('video_desc', trim(htmlspecialchars($_POST['caption'], ENT_QUOTES | ENT_HTML5)));
 
-if (11 == mb_strlen($url)) {
+if (11 === mb_strlen($url)) {
     $code = $url;
 } else {
     $position_of_code = mb_strpos($url, 'v=');
@@ -55,9 +59,17 @@ if ($videoFactory->insert($newvideo)) {
     $extra_tags['X_OWNER_UID']  = (int)$xoopsUser->getVar('uid');
     $notificationHandler        = xoops_getHandler('notification');
     $notificationHandler->triggerEvent('video', (int)$xoopsUser->getVar('uid'), 'new_video', $extra_tags);
-    redirect_header(XOOPS_URL . '/modules/yogurt/video.php?uid=' . (int)$xoopsUser->getVar('uid'), 2, _MD_YOGURT_VIDEOSAVED);
+    redirect_header(
+        XOOPS_URL . '/modules/yogurt/video.php?uid=' . (int)$xoopsUser->getVar('uid'),
+        2,
+        _MD_YOGURT_VIDEOSAVED
+    );
 } else {
-    redirect_header(XOOPS_URL . '/modules/yogurt/video.php?uid=' . (int)$xoopsUser->getVar('uid'), 2, _MD_YOGURT_NOCACHACA);
+    redirect_header(
+        XOOPS_URL . '/modules/yogurt/video.php?uid=' . (int)$xoopsUser->getVar('uid'),
+        2,
+        _MD_YOGURT_NOCACHACA
+    );
 }
 
 require dirname(dirname(__DIR__)) . '/footer.php';

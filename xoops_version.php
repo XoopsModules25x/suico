@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -16,7 +17,9 @@
  * @author       XOOPS Development Team
  * @since
  */
-$moduleDirName      = basename(__DIR__);
+$moduleDirName      = basename(
+    __DIR__
+);
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
 // ------------------- Informations ------------------- //
@@ -38,10 +41,10 @@ $modversion = [
     'help'                => 'page=help',
     // ------------------- Folders & Files -------------------
     'release_info'        => 'Changelog',
-    'release_file'        => XOOPS_URL . "/modules/$moduleDirName/docs/changelog.txt",
+    'release_file'        => XOOPS_URL . "/modules/${moduleDirName}/docs/changelog.txt",
 
     'manual'              => 'link to manual file',
-    'manual_file'         => XOOPS_URL . "/modules/$moduleDirName/docs/install.txt",
+    'manual_file'         => XOOPS_URL . "/modules/${moduleDirName}/docs/install.txt",
     // images
     'image'               => 'assets/images/logoModule.png',
     'iconsmall'           => 'assets/images/iconsmall.png',
@@ -60,7 +63,9 @@ $modversion = [
     'min_php'             => '7.1',
     'min_xoops'           => '2.5.10',
     'min_admin'           => '1.2',
-    'min_db'              => ['mysql' => '5.5'],
+    'min_db'              => [
+        'mysql' => '5.5',
+    ],
     // ------------------- Admin Menu -------------------
     'system_menu'         => 1,
     'hasAdmin'            => 1,
@@ -91,7 +96,9 @@ $modversion = [
         'currency_code' => 'USD',
     ],
     // ------------------- Mysql -----------------------------
-    'sqlfile'             => ['mysql' => 'sql/mysql.sql'],
+    'sqlfile'             => [
+        'mysql' => 'sql/mysql.sql',
+    ],
     // ------------------- Tables ----------------------------
     'tables'              => [
         $moduleDirName . '_' . 'friendpetition',
@@ -110,10 +117,22 @@ $modversion = [
 
 // ------------------- Help files ------------------- //
 $modversion['helpsection'] = [
-    ['name' => _MI_YOGURT_OVERVIEW, 'link' => 'page=help'],
-    ['name' => _MI_YOGURT_DISCLAIMER, 'link' => 'page=disclaimer'],
-    ['name' => _MI_YOGURT_LICENSE, 'link' => 'page=license'],
-    ['name' => _MI_YOGURT_SUPPORT, 'link' => 'page=support'],
+    [
+        'name' => _MI_YOGURT_OVERVIEW,
+        'link' => 'page=help',
+    ],
+    [
+        'name' => _MI_YOGURT_DISCLAIMER,
+        'link' => 'page=disclaimer',
+    ],
+    [
+        'name' => _MI_YOGURT_LICENSE,
+        'link' => 'page=license',
+    ],
+    [
+        'name' => _MI_YOGURT_SUPPORT,
+        'link' => 'page=support',
+    ],
 ];
 
 // SX Updater/Installer
@@ -158,8 +177,10 @@ $modversion['submit_feature']    = 'http://sourceforge.net/tracker/?func=add&gro
 //$modversion['config'][1]['valuetype'] = 'int';
 //can be 'int', 'float', 'textarea' or 'array'. All items with formtype 'multi_xxx' must have the valuetype 'array'
 
-xoops_load('xoopseditorhandler');
-$editorHandler          = \XoopsEditorHandler::getInstance();
+xoops_load(
+    'xoopseditorhandler'
+);
+$editorHandler          = XoopsEditorHandler::getInstance();
 $modversion['config'][] = [
     'name'        => 'yogurtEditorAdmin',
     'title'       => 'MI_YOGURT_EDITOR_ADMIN',
@@ -181,8 +202,8 @@ $modversion['config'][] = [
 ];
 
 // -------------- Get Admin groups --------------
-$criteria = new \CriteriaCompo ();
-$criteria->add(new \Criteria ('group_type', 'Admin'));
+$criteria = new CriteriaCompo();
+$criteria->add(new Criteria('group_type', 'Admin'));
 /** @var \XoopsMemberHandler $memberHandler */
 $memberHandler    = xoops_getHandler('member');
 $adminXoopsGroups = $memberHandler->getGroupList($criteria);
@@ -533,53 +554,104 @@ $modversion['config'][] = [
 ];
 
 $modversion['templates'] = [
-    ['file' => 'yogurt_navbar.tpl', 'description' => _MI_YOGURT_TEMPLATENAVBARDESC],
-    ['file' => 'yogurt_index.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATEINDEXDESC],
-    ['file' => 'yogurt_friends.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATEFRIENDSDESC],
-    ['file' => 'yogurt_notebook.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATENOTEBOOKDESC],
-    ['file' => 'yogurt_audio.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATEAUDIODESC],
-    ['file' => 'yogurt_video.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATESEUTUBODESC],
-    ['file' => 'yogurt_album.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATEALBUMDESC],
-    ['file' => 'yogurt_groups.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATEGROUPSDESC],
-    ['file' => 'yogurt_configs.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATECONFIGSDESC],
-    ['file' => 'yogurt_footer.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATEFOOTERDESC],
-    ['file' => 'yogurt_editgroup.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATEEDITGROUP],
-    ['file' => 'yogurt_groups_results.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATESEARCHRESULTDESC],
-    ['file' => 'yogurt_group.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATEGROUPDESC],
-    ['file' => 'yogurt_searchresults.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATESEARCHRESULTSDESC],
-    ['file' => 'yogurt_searchform.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATESEARCHFORMDESC],
-    ['file' => 'yogurt_notifications.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATENOTIFICATIONS],
-    ['file' => 'yogurt_fans.tpl', 'description' => _MI_YOGURT_PICTURE_TEMPLATEFANS],
+    [
+        'file'        => 'yogurt_navbar.tpl',
+        'description' => _MI_YOGURT_TEMPLATENAVBARDESC,
+    ],
+    [
+        'file'        => 'yogurt_index.tpl',
+        'description' => _MI_YOGURT_PICTURE_TEMPLATEINDEXDESC,
+    ],
+    [
+        'file'        => 'yogurt_friends.tpl',
+        'description' => _MI_YOGURT_PICTURE_TEMPLATEFRIENDSDESC,
+    ],
+    [
+        'file'        => 'yogurt_notebook.tpl',
+        'description' => _MI_YOGURT_PICTURE_TEMPLATENOTEBOOKDESC,
+    ],
+    [
+        'file'        => 'yogurt_audio.tpl',
+        'description' => _MI_YOGURT_PICTURE_TEMPLATEAUDIODESC,
+    ],
+    [
+        'file'        => 'yogurt_video.tpl',
+        'description' => _MI_YOGURT_PICTURE_TEMPLATESEUTUBODESC,
+    ],
+    [
+        'file'        => 'yogurt_album.tpl',
+        'description' => _MI_YOGURT_PICTURE_TEMPLATEALBUMDESC,
+    ],
+    [
+        'file'        => 'yogurt_groups.tpl',
+        'description' => _MI_YOGURT_PICTURE_TEMPLATEGROUPSDESC,
+    ],
+    [
+        'file'        => 'yogurt_configs.tpl',
+        'description' => _MI_YOGURT_PICTURE_TEMPLATECONFIGSDESC,
+    ],
+    [
+        'file'        => 'yogurt_footer.tpl',
+        'description' => _MI_YOGURT_PICTURE_TEMPLATEFOOTERDESC,
+    ],
+    [
+        'file'        => 'yogurt_editgroup.tpl',
+        'description' => _MI_YOGURT_PICTURE_TEMPLATEEDITGROUP,
+    ],
+    [
+        'file'        => 'yogurt_groups_results.tpl',
+        'description' => _MI_YOGURT_PICTURE_TEMPLATESEARCHRESULTDESC,
+    ],
+    [
+        'file'        => 'yogurt_group.tpl',
+        'description' => _MI_YOGURT_PICTURE_TEMPLATEGROUPDESC,
+    ],
+    [
+        'file'        => 'yogurt_searchresults.tpl',
+        'description' => _MI_YOGURT_PICTURE_TEMPLATESEARCHRESULTSDESC,
+    ],
+    [
+        'file'        => 'yogurt_searchform.tpl',
+        'description' => _MI_YOGURT_PICTURE_TEMPLATESEARCHFORMDESC,
+    ],
+    [
+        'file'        => 'yogurt_notifications.tpl',
+        'description' => _MI_YOGURT_PICTURE_TEMPLATENOTIFICATIONS,
+    ],
+    [
+        'file'        => 'yogurt_fans.tpl',
+        'description' => _MI_YOGURT_PICTURE_TEMPLATEFANS,
+    ],
 ];
 
 global $xoopsModule;
-if (is_object($xoopsModule) && $xoopsModule->dirname() == $modversion['dirname']) {
+if (is_object($xoopsModule) && $xoopsModule->dirname() === $modversion['dirname']) {
     $moduleHandler = xoops_getHandler('module');
     $mod_yogurt    = $moduleHandler->getByDirname('yogurt');
     $confHandler   = xoops_getHandler('config');
     $moduleConfig  = $confHandler->getConfigsByCat(0, $mod_yogurt->getVar('mid'));
 
-    if (1 == $moduleConfig['enable_notes']) {
+    if (1 === $moduleConfig['enable_notes']) {
         $modversion['sub'][3]['name'] = _MI_YOGURT_MYNOTES;
         $modversion['sub'][3]['url']  = 'notebook.php';
     }
-    if (1 == $moduleConfig['enable_pictures']) {
+    if (1 === $moduleConfig['enable_pictures']) {
         $modversion['sub'][4]['name'] = _MI_YOGURT_MYPICTURES;
         $modversion['sub'][4]['url']  = 'album.php';
     }
-    if (1 == $moduleConfig['enable_audio']) {
+    if (1 === $moduleConfig['enable_audio']) {
         $modversion['sub'][5]['name'] = _MI_YOGURT_MYAUDIOS;
         $modversion['sub'][5]['url']  = 'audio.php';
     }
-    if (1 == $moduleConfig['enable_videos']) {
+    if (1 === $moduleConfig['enable_videos']) {
         $modversion['sub'][6]['name'] = _MI_YOGURT_MYVIDEOS;
         $modversion['sub'][6]['url']  = 'video.php';
     }
-    if (1 == $moduleConfig['enable_friends']) {
+    if (1 === $moduleConfig['enable_friends']) {
         $modversion['sub'][7]['name'] = _MI_YOGURT_MYFRIENDS;
         $modversion['sub'][7]['url']  = 'friends.php';
     }
-    if (1 == $moduleConfig['enable_groups']) {
+    if (1 === $moduleConfig['enable_groups']) {
         $modversion['sub'][8]['name'] = _MI_YOGURT_MYGROUPS;
         $modversion['sub'][8]['url']  = 'groups.php';
     }

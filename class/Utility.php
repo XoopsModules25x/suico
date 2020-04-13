@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
@@ -21,8 +21,6 @@ namespace XoopsModules\Yogurt;
  * @copyright    https://xoops.org 2000-2020 &copy; XOOPS Project
  * @author       Mamba <mambax7@gmail.com>
  */
-
-use XoopsModules\Yogurt\Common;
 
 /**
  * Class Utility

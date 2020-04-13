@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Yogurt\Form;
+<?php declare(strict_types=1);
+
+namespace XoopsModules\Yogurt\Form;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -22,23 +24,29 @@
  * @since           1.0.0
  */
 
-use Xmf\Request;
+use Xmf\Module\Helper\Permission;
+use XoopsFormButton;
+use XoopsFormHidden;
+use XoopsFormLabel;
+use XoopsFormSelectUser;
 use XoopsModules\Yogurt;
+use XoopsThemeForm;
 
 require_once dirname(dirname(__DIR__)) . '/include/common.php';
 
 $moduleDirName = basename(dirname(dirname(__DIR__)));
 //$helper = Yogurt\Helper::getInstance();
-$permHelper = new \Xmf\Module\Helper\Permission();
+$permHelper = new Permission();
 
 xoops_load('XoopsFormLoader');
 
 /**
  * Class FriendpetitionForm
  */
-class FriendpetitionForm extends \XoopsThemeForm
+class FriendpetitionForm extends XoopsThemeForm
 {
     public $targetObject;
+
     public $helper;
 
     /**
@@ -51,24 +59,50 @@ class FriendpetitionForm extends \XoopsThemeForm
         $this->helper       = $target->helper;
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? sprintf(AM_YOGURT_FRIENDPETITION_ADD) : sprintf(AM_YOGURT_FRIENDPETITION_EDIT);
+        $title = $this->targetObject->isNew() ? sprintf(AM_YOGURT_FRIENDPETITION_ADD) : sprintf(
+            AM_YOGURT_FRIENDPETITION_EDIT
+        );
         parent::__construct($title, 'form', xoops_getenv('PHP_SELF'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
 
         //include ID field, it's needed so the module knows if it is a new form or an edited form
 
-        $hidden = new \XoopsFormHidden('friendpet_id', $this->targetObject->getVar('friendpet_id'));
+        $hidden = new XoopsFormHidden(
+            'friendpet_id', $this->targetObject->getVar(
+            'friendpet_id'
+        )
+        );
         $this->addElement($hidden);
         unset($hidden);
 
         // Friendpet_id
-        $this->addElement(new \XoopsFormLabel(AM_YOGURT_FRIENDPETITION_FRIENDPET_ID, $this->targetObject->getVar('friendpet_id'), 'friendpet_id'));
+        $this->addElement(
+            new XoopsFormLabel(
+                AM_YOGURT_FRIENDPETITION_FRIENDPET_ID, $this->targetObject->getVar(
+                'friendpet_id'
+            ), 'friendpet_id'
+            )
+        );
         // Petitioner_uid
-        $this->addElement(new \XoopsFormSelectUser(AM_YOGURT_FRIENDPETITION_PETITIONER_UID, 'petitioner_uid', false, $this->targetObject->getVar('petitioner_uid'), 1, false), false);
+        $this->addElement(
+            new XoopsFormSelectUser(
+                AM_YOGURT_FRIENDPETITION_PETITIONER_UID, 'petitioner_uid', false, $this->targetObject->getVar(
+                'petitioner_uid'
+            ), 1, false
+            ),
+            false
+        );
         // Petioned_uid
-        $this->addElement(new \XoopsFormSelectUser(AM_YOGURT_FRIENDPETITION_PETIONED_UID, 'petioned_uid', false, $this->targetObject->getVar('petioned_uid'), 1, false), false);
+        $this->addElement(
+            new XoopsFormSelectUser(
+                AM_YOGURT_FRIENDPETITION_PETIONED_UID, 'petioned_uid', false, $this->targetObject->getVar(
+                'petioned_uid'
+            ), 1, false
+            ),
+            false
+        );
 
-        $this->addElement(new \XoopsFormHidden('op', 'save'));
-        $this->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $this->addElement(new XoopsFormHidden('op', 'save'));
+        $this->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -23,16 +25,17 @@
  */
 
 use Xmf\Request;
+use Xmf\Module\Helper\Permission;
 
 require __DIR__ . '/admin_header.php';
 xoops_cp_header();
 //It recovered the value of argument op in URL$
-$op    = \Xmf\Request::getString('op', 'list');
-$order = \Xmf\Request::getString('order', 'desc');
-$sort  = \Xmf\Request::getString('sort', '');
+$op    = Request::getString('op', 'list');
+$order = Request::getString('order', 'desc');
+$sort  = Request::getString('sort', '');
 
 $adminObject->displayNavigation(basename(__FILE__));
-$permHelper = new \Xmf\Module\Helper\Permission();
+$permHelper = new Permission();
 $uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/images/';
 $uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/images/';
 
@@ -50,7 +53,7 @@ switch ($op) {
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('friendpetition.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
-        if (0 !== \Xmf\Request::getInt('friendpet_id', 0)) {
+        if (0 !== Request::getInt('friendpet_id', 0)) {
             $friendpetitionObject = $friendpetitionHandler->get(Request::getInt('friendpet_id', 0));
         } else {
             $friendpetitionObject = $friendpetitionHandler->create();
@@ -78,7 +81,7 @@ switch ($op) {
 
     case 'delete':
         $friendpetitionObject = $friendpetitionHandler->get(Request::getString('friendpet_id', ''));
-        if (1 == \Xmf\Request::getInt('ok', 0)) {
+        if (1 === Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('friendpetition.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
@@ -88,13 +91,24 @@ switch ($op) {
                 echo $friendpetitionObject->getHtmlErrors();
             }
         } else {
-            xoops_confirm(['ok' => 1, 'friendpet_id' => Request::getString('friendpet_id', ''), 'op' => 'delete',], Request::getUrl('REQUEST_URI', '', 'SERVER'), sprintf(AM_YOGURT_FORMSUREDEL, $friendpetitionObject->getVar('friendpet_id')));
+            xoops_confirm(
+                [
+                    'ok'           => 1,
+                    'friendpet_id' => Request::getString('friendpet_id', ''),
+                    'op'           => 'delete',
+                ],
+                Request::getUrl('REQUEST_URI', '', 'SERVER'),
+                sprintf(
+                    AM_YOGURT_FORMSUREDEL,
+                    $friendpetitionObject->getVar('friendpet_id')
+                )
+            );
         }
         break;
 
     case 'clone':
 
-        $id_field = \Xmf\Request::getString('friendpet_id', '');
+        $id_field = Request::getString('friendpet_id', '');
 
         if ($utility::cloneRecord('yogurt_friendpetition', 'friendpet_id', $id_field)) {
             redirect_header('friendpetition.php', 3, AM_YOGURT_CLONED_OK);
@@ -107,10 +121,10 @@ switch ($op) {
     default:
         $adminObject->addItemButton(AM_YOGURT_ADD_FRIENDPETITION, 'friendpetition.php?op=new', 'add');
         $adminObject->displayButton('left');
-        $start                         = \Xmf\Request::getInt('start', 0);
+        $start                         = Request::getInt('start', 0);
         $friendpetitionPaginationLimit = $helper->getConfig('userpager');
 
-        $criteria = new \CriteriaCompo();
+        $criteria = new CriteriaCompo();
         $criteria->setSort('friendpet_id ASC, friendpet_id');
         $criteria->setOrder('ASC');
         $criteria->setLimit($friendpetitionPaginationLimit);
@@ -129,7 +143,7 @@ switch ($op) {
         if ($friendpetitionTempRows > $friendpetitionPaginationLimit) {
             xoops_load('XoopsPageNav');
 
-            $pagenav = new \XoopsPageNav(
+            $pagenav = new XoopsPageNav(
                 $friendpetitionTempRows, $friendpetitionPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
@@ -141,7 +155,7 @@ switch ($op) {
         //    $fields = explode('|', friendpet_id:int:11::NOT NULL::primary:friendpet_id|petitioner_uid:int:11::NOT NULL:::petitioner_uid|petioned_uid:int:11::NOT NULL:::petioned_uid);
         //    $fieldsCount    = count($fields);
 
-        $criteria = new \CriteriaCompo();
+        $criteria = new CriteriaCompo();
 
         //$criteria->setOrder('DESC');
         $criteria->setSort($sort);
@@ -157,14 +171,21 @@ switch ($op) {
             foreach (array_keys($friendpetitionTempArray) as $i) {
                 //        $field = explode(':', $fields[$i]);
 
-                $GLOBALS['xoopsTpl']->assign('selectorfriendpet_id', AM_YOGURT_FRIENDPETITION_FRIENDPET_ID);
+                $GLOBALS['xoopsTpl']->assign(
+                    'selectorfriendpet_id',
+                    AM_YOGURT_FRIENDPETITION_FRIENDPET_ID
+                );
                 $friendpetitionArray['friendpet_id'] = $friendpetitionTempArray[$i]->getVar('friendpet_id');
 
                 $GLOBALS['xoopsTpl']->assign('selectorpetitioner_uid', AM_YOGURT_FRIENDPETITION_PETITIONER_UID);
-                $friendpetitionArray['petitioner_uid'] = strip_tags(\XoopsUser::getUnameFromId($friendpetitionTempArray[$i]->getVar('petitioner_uid')));
+                $friendpetitionArray['petitioner_uid'] = strip_tags(
+                    XoopsUser::getUnameFromId($friendpetitionTempArray[$i]->getVar('petitioner_uid'))
+                );
 
                 $GLOBALS['xoopsTpl']->assign('selectorpetioned_uid', AM_YOGURT_FRIENDPETITION_PETIONED_UID);
-                $friendpetitionArray['petioned_uid'] = strip_tags(\XoopsUser::getUnameFromId($friendpetitionTempArray[$i]->getVar('petioned_uid')));
+                $friendpetitionArray['petioned_uid'] = strip_tags(
+                    XoopsUser::getUnameFromId($friendpetitionTempArray[$i]->getVar('petioned_uid'))
+                );
                 $friendpetitionArray['edit_delete']  = "<a href='friendpetition.php?op=edit&friendpet_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='friendpetition.php?op=delete&friendpet_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='friendpetition.php?op=clone&friendpet_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
@@ -176,7 +197,7 @@ switch ($op) {
             // Display Navigation
             if ($friendpetitionCount > $friendpetitionPaginationLimit) {
                 xoops_load('XoopsPageNav');
-                $pagenav = new \XoopsPageNav(
+                $pagenav = new XoopsPageNav(
                     $friendpetitionCount, $friendpetitionPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
@@ -207,7 +228,9 @@ switch ($op) {
             //-------------------------------------------
 
             echo $GLOBALS['xoopsTpl']->fetch(
-                XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname') . '/templates/admin/yogurt_admin_friendpetition.tpl'
+                XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar(
+                    'dirname'
+                ) . '/templates/admin/yogurt_admin_friendpetition.tpl'
             );
         }
 

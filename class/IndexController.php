@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
@@ -11,6 +11,8 @@ namespace XoopsModules\Yogurt;
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
+use Criteria;
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
@@ -42,15 +44,49 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 //}
 
 /**
- * Class YogurtControllerConfigs
+ * Class IndexController
  */
-class ControllerConfigs extends YogurtController
+class IndexController extends YogurtController
 {
     /**
-     * @return bool|void
+     * @param string|null $section
+     * @return int|void
      */
-    public function checkPrivilege()
-    {
-        return true;
+    public function checkPrivilege(
+        $section = null
+    ) {
+        global $xoopsModuleConfig;
+        if ('' === trim($section)) {
+            return -1;
+        }
+        $configsectionname = 'enable_' . $section;
+        if (array_key_exists($configsectionname, $xoopsModuleConfig)) {
+            if (0 === $this->helper->getConfig($configsectionname)) {
+                return -1;
+            }
+        }
+
+        //  if ($section=="Notes" && $xoopsModuleConfig['enable_notes']==0){
+        //          return false;
+        //      }
+        //      if ($section=="pictures" && $xoopsModuleConfig['enable_pictures']==0){
+        //          return false;
+        //      }
+        //
+        //      if ($section=="pictures" && $xoopsModuleConfig['enable_pictures']==0){
+        //          return false;
+        //      }
+        $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
+        if (1 === $this->configsFactory->getCount($criteria)) {
+            $configs = $this->configsFactory->getObjects($criteria);
+
+            $config = $configs[0]->getVar($section);
+
+            if (!$this->checkPrivilegeLevel($config)) {
+                return 0;
+            }
+        }
+
+        return 1;
     }
 }

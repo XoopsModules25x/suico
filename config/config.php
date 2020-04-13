@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -16,7 +17,9 @@
  * @since
  * @author       XOOPS Development Team
  */
-$moduleDirName      = basename(dirname(__DIR__));
+$moduleDirName      = basename(
+    dirname(__DIR__)
+);
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 require_once dirname(__DIR__) . '/include/common.php';
 

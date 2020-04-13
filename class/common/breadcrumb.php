@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace XoopsModules\Yogurt\Common;
 
 /*
@@ -30,6 +32,8 @@ namespace XoopsModules\Yogurt\Common;
 
 use XoopsModules\Yogurt;
 use XoopsModules\Yogurt\Common;
+use XoopsTpl;
+use xos_opal_Theme;
 
 defined('XOOPS_ROOT_PATH') || die('XOOPS Root Path not defined');
 
@@ -38,7 +42,8 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS Root Path not defined');
  */
 class Breadcrumb
 {
-    public  $dirname;
+    public $dirname;
+
     private $bread = [];
 
     public function __construct()
@@ -52,8 +57,10 @@ class Breadcrumb
      * @param string $title
      * @param string $link
      */
-    public function addLink($title = '', $link = '')
-    {
+    public function addLink(
+        $title = '',
+        $link = ''
+    )  {
         $this->bread[] = [
             'link'  => $link,
             'title' => $title,
@@ -67,11 +74,11 @@ class Breadcrumb
     {
         if (!isset($GLOBALS['xoTheme']) || !is_object($GLOBALS['xoTheme'])) {
             require $GLOBALS['xoops']->path('class/theme.php');
-            $GLOBALS['xoTheme'] = new \xos_opal_Theme();
+            $GLOBALS['xoTheme'] = new xos_opal_Theme();
         }
 
         require $GLOBALS['xoops']->path('class/template.php');
-        $breadcrumbTpl = new \XoopsTpl();
+        $breadcrumbTpl = new XoopsTpl();
         $breadcrumbTpl->assign('breadcrumb', $this->bread);
         $html = $breadcrumbTpl->fetch('db:' . $this->dirname . '_common_breadcrumb.tpl');
         unset($breadcrumbTpl);
