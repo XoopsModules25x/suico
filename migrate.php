@@ -1,5 +1,5 @@
-<?php
-//
+<?php declare(strict_types=1);
+
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                  Copyright (c) 2000-2016 XOOPS.org                        //
@@ -31,6 +31,7 @@
 
 use Xmf\Request;
 use XoopsModules\Yogurt;
+use XoopsModules\Yogurt\Common\Migrate;
 
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
@@ -53,11 +54,9 @@ EOF;
 
 //XoopsLoad::load('migrate', 'newbb');
 
-/** @var Yogurt\Common\Configurator $configurator */
 $configurator = new Yogurt\Common\Configurator();
 
-/** @var \XoopsModules\Yogurt\Common\Migrate $migrator */
-$migrator = new \XoopsModules\Yogurt\Common\Migrate($configurator);
+$migrator = new Migrate($configurator);
 
 $op        = Request::getCmd('op', 'default');
 $opShow    = Request::getCmd('show', null, 'POST');
@@ -85,7 +84,12 @@ switch ($op) {
         $message = 'Database migrated to current schema.';
         break;
     case 'schema':
-        xoops_confirm(['op' => 'confirmwrite'], 'migrate.php', 'Warning! This is intended for developers only. Confirm write schema file from current database.', 'Confirm');
+        xoops_confirm(
+            ['op' => 'confirmwrite'],
+            'migrate.php',
+            'Warning! This is intended for developers only. Confirm write schema file from current database.',
+            'Confirm'
+        );
         break;
     case 'confirmwrite':
         if ($GLOBALS['xoopsSecurity']->check()) {
@@ -95,6 +99,6 @@ switch ($op) {
         break;
 }
 
-echo "<div>$message</div>";
+echo "<div>${message}</div>";
 
 require_once __DIR__ . '/admin_footer.php';

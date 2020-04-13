@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
@@ -6,6 +6,11 @@ namespace XoopsModules\Yogurt;
 //  ---------------------------------------------------------------- //
 // Author: Bruno Barthez                                               //
 // ----------------------------------------------------------------- //
+
+use CriteriaElement;
+use XoopsDatabase;
+use XoopsObject;
+use XoopsPersistableObjectHandler;
 
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
@@ -17,30 +22,29 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  * Suspensionshandler class.
  * This class provides simple mecanisme for Suspensions object
  */
-class SuspensionsHandler extends \XoopsPersistableObjectHandler
+class SuspensionsHandler extends XoopsPersistableObjectHandler
 {
-    /**
-     * @var Helper
-     */
     public $helper;
+
     public $isAdmin;
 
     /**
      * Constructor
-     * @param null|\XoopsDatabase              $db
-     * @param null|\XoopsModules\Yogurt\Helper $helper
+     * @param \XoopsDatabase|null              $xoopsDatabase
+     * @param \XoopsModules\Yogurt\Helper|null $helper
      */
-
-    public function __construct(\XoopsDatabase $db = null, $helper = null)
-    {
+    public function __construct(
+        ?XoopsDatabase $xoopsDatabase = null,
+        $helper = null
+    ) {
         /** @var \XoopsModules\Yogurt\Helper $this ->helper */
         if (null === $helper) {
-            $this->helper = \XoopsModules\Yogurt\Helper::getInstance();
+            $this->helper = Helper::getInstance();
         } else {
             $this->helper = $helper;
         }
         $isAdmin = $this->helper->isUserAdmin();
-        parent::__construct($db, 'yogurt_suspensions', Suspensions::class, 'uid', 'uid');
+        parent::__construct($xoopsDatabase, 'yogurt_suspensions', Suspensions::class, 'uid', 'uid');
     }
 
     /**
@@ -49,35 +53,37 @@ class SuspensionsHandler extends \XoopsPersistableObjectHandler
      * @param bool $isNew flag the new objects as "new"?
      * @return \XoopsObject Groups
      */
-    public function create($isNew = true)
-    {
-        {
-            $obj = parent::create($isNew);
-            if ($isNew) {
-                $obj->setNew();
-            } else {
-                $obj->unsetNew();
-            }
-            $obj->helper = $this->helper;
-
-            return $obj;
+    public function create(
+        $isNew = true
+    ) {
+        $obj = parent::create($isNew);
+        if ($isNew) {
+            $obj->setNew();
+        } else {
+            $obj->unsetNew();
         }
+        $obj->helper = $this->helper;
+
+        return $obj;
     }
 
     /**
      * retrieve a Suspensions
      *
-     * @param int $id of the Suspensions
+     * @param int  $id of the Suspensions
+     * @param null $fields
      * @return mixed reference to the {@link Suspensions} object, FALSE if failed
      */
-    public function get($id = null, $fields = null)
-    {
+    public function get(
+        $id = null,
+        $fields = null
+    ) {
         $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_suspensions') . ' WHERE uid=' . $id;
         if (!$result = $this->db->query($sql)) {
             return false;
         }
         $numrows = $this->db->getRowsNum($result);
-        if (1 == $numrows) {
+        if (1 === $numrows) {
             $suspensions = new Suspensions();
             $suspensions->assignVars($this->db->fetchArray($result));
 
@@ -90,39 +96,58 @@ class SuspensionsHandler extends \XoopsPersistableObjectHandler
     /**
      * insert a new Suspensions in the database
      *
-     * @param \XoopsObject $suspensions        reference to the {@link Suspensions}
+     * @param \XoopsObject $xoopsObject        reference to the {@link Suspensions}
      *                                         object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(\XoopsObject $suspensions, $force = false)
-    {
+    public function insert(
+        XoopsObject $xoopsObject,
+        $force = false
+    ) {
         global $xoopsConfig;
-        if (!$suspensions instanceof Suspensions) {
+        if (!$xoopsObject instanceof Suspensions) {
             return false;
         }
-        if (!$suspensions->isDirty()) {
+        if (!$xoopsObject->isDirty()) {
             return true;
         }
-        if (!$suspensions->cleanVars()) {
+        if (!$xoopsObject->cleanVars()) {
             return false;
         }
-        foreach ($suspensions->cleanVars as $k => $v) {
+        foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
         $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
-        if ($suspensions->isNew()) {
+        if ($xoopsObject->isNew()) {
             // ajout/modification d'un Suspensions
-            $suspensions = new Suspensions();
+            $xoopsObject = new Suspensions();
             $format      = 'INSERT INTO %s (uid, old_pass, old_email, old_signature, suspension_time)';
             $format      .= 'VALUES (%u, %s, %s, %s, %u)';
-            $sql         = sprintf($format, $this->db->prefix('yogurt_suspensions'), $uid, $this->db->quoteString($old_pass), $this->db->quoteString($old_email), $this->db->quoteString($old_signature), $suspension_time);
+            $sql         = sprintf(
+                $format,
+                $this->db->prefix('yogurt_suspensions'),
+                $uid,
+                $this->db->quoteString($old_pass),
+                $this->db->quoteString($old_email),
+                $this->db->quoteString($old_signature),
+                $suspension_time
+            );
             $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'uid=%u, old_pass=%s, old_email=%s, old_signature=%s, suspension_time=%u';
             $format .= ' WHERE uid = %u';
-            $sql    = sprintf($format, $this->db->prefix('yogurt_suspensions'), $uid, $this->db->quoteString($old_pass), $this->db->quoteString($old_email), $this->db->quoteString($old_signature), $suspension_time, $uid);
+            $sql    = sprintf(
+                $format,
+                $this->db->prefix('yogurt_suspensions'),
+                $uid,
+                $this->db->quoteString($old_pass),
+                $this->db->quoteString($old_email),
+                $this->db->quoteString($old_signature),
+                $suspension_time,
+                $uid
+            );
         }
         if ($force) {
             $result = $this->db->queryF($sql);
@@ -135,7 +160,7 @@ class SuspensionsHandler extends \XoopsPersistableObjectHandler
         if (empty($uid)) {
             $uid = $this->db->getInsertId();
         }
-        $suspensions->assignVar('uid', $uid);
+        $xoopsObject->assignVar('uid', $uid);
 
         return true;
     }
@@ -143,16 +168,22 @@ class SuspensionsHandler extends \XoopsPersistableObjectHandler
     /**
      * delete a Suspensions from the database
      *
-     * @param \XoopsObject $suspensions reference to the Suspensions to delete
+     * @param \XoopsObject $xoopsObject reference to the Suspensions to delete
      * @param bool         $force
      * @return bool FALSE if failed.
      */
-    public function delete(\XoopsObject $suspensions, $force = false)
-    {
-        if (!$suspensions instanceof Suspensions) {
+    public function delete(
+        XoopsObject $xoopsObject,
+        $force = false
+    ) {
+        if (!$xoopsObject instanceof Suspensions) {
             return false;
         }
-        $sql = sprintf('DELETE FROM %s WHERE uid = %u', $this->db->prefix('yogurt_suspensions'), $suspensions->getVar('uid'));
+        $sql = sprintf(
+            'DELETE FROM %s WHERE uid = %u',
+            $this->db->prefix('yogurt_suspensions'),
+            $xoopsObject->getVar('uid')
+        );
         if ($force) {
             $result = $this->db->queryF($sql);
         } else {
@@ -168,22 +199,26 @@ class SuspensionsHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve yogurt_suspensionss from the database
      *
-     * @param null|\CriteriaElement|\CriteriaCompo $criteria  {@link \CriteriaElement} conditions to be met
-     * @param bool                                 $id_as_key use the UID as key for the array?
+     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} conditions to be met
+     * @param bool                                 $id_as_key       use the UID as key for the array?
+     * @param bool                                 $as_object
      * @return array array of {@link Suspensions} objects
      */
-    public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
-    {
+    public function &getObjects(
+        ?CriteriaElement $criteriaElement = null,
+        $id_as_key = false,
+        $as_object = true
+    ) {
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_suspensions');
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
-            $sql .= ' ' . $criteria->renderWhere();
-            if ('' != $criteria->getSort()) {
-                $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
+        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
+            $sql .= ' ' . $criteriaElement->renderWhere();
+            if ('' !== $criteriaElement->getSort()) {
+                $sql .= ' ORDER BY ' . $criteriaElement->getSort() . ' ' . $criteriaElement->getOrder();
             }
-            $limit = $criteria->getLimit();
-            $start = $criteria->getStart();
+            $limit = $criteriaElement->getLimit();
+            $start = $criteriaElement->getStart();
         }
         $result = $this->db->query($sql, $limit, $start);
         if (!$result) {
@@ -206,35 +241,41 @@ class SuspensionsHandler extends \XoopsPersistableObjectHandler
     /**
      * count yogurt_suspensionss matching a condition
      *
-     * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link \CriteriaElement} to match
+     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} to match
      * @return int count of yogurt_suspensionss
      */
-    public function getCount(\CriteriaElement $criteria = null)
-    {
+    public function getCount(
+        ?CriteriaElement $criteriaElement = null
+    ) {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_suspensions');
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
-            $sql .= ' ' . $criteria->renderWhere();
+        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
+            $sql .= ' ' . $criteriaElement->renderWhere();
         }
         $result = $this->db->query($sql);
         if (!$result) {
             return 0;
         }
-        list($count) = $this->db->fetchRow($result);
+        [$count] = $this->db->fetchRow($result);
 
-        return $count;
+        return (int)$count;
     }
 
     /**
      * delete yogurt_suspensionss matching a set of conditions
      *
-     * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link \CriteriaElement}
+     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement}
+     * @param bool                                 $force
+     * @param bool                                 $asObject
      * @return bool FALSE if deletion failed
      */
-    public function deleteAll(\CriteriaElement $criteria = null, $force = true, $asObject = false)
-    {
+    public function deleteAll(
+        ?CriteriaElement $criteriaElement = null,
+        $force = true,
+        $asObject = false
+    ) {
         $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_suspensions');
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
-            $sql .= ' ' . $criteria->renderWhere();
+        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
+            $sql .= ' ' . $criteriaElement->renderWhere();
         }
         if (!$result = $this->db->queryF($sql)) {
             return false;

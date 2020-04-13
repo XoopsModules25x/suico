@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -18,6 +21,7 @@
  */
 
 use XoopsModules\Yogurt;
+use Xmf\Request;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_audio.tpl';
 require __DIR__ . '/header.php';
@@ -29,14 +33,14 @@ $controller = new Yogurt\AudioController($xoopsDB, $xoopsUser);
  */
 $nbSections = $controller->getNumbersSections();
 
-$start = \Xmf\Request::getInt('start', 0, 'GET');
+$start = Request::getInt('start', 0, 'GET');
 
 /**
  * Criteria for Audio
  */
-$criteriaUidAudio = new \Criteria('uid_owner', $controller->uidOwner);
+$criteriaUidAudio = new Criteria('uid_owner', $controller->uidOwner);
 $criteriaUidAudio->setStart($start);
-$criteriaUidAudio->setLimit($xoopsModuleConfig['audiosperpage']);
+$criteriaUidAudio->setLimit($helper->getConfig('audiosperpage'));
 
 /**
  * Get all audios of this user and assign them to template
@@ -46,9 +50,9 @@ $audios_array = $controller->assignAudioContent($nbSections['nbAudio'], $audios)
 
 if (is_array($audios_array)) {
     $xoopsTpl->assign('audios', $audios_array);
-    $audio_list = '';
+    $audio_list = [];
     foreach ($audios_array as $audio_item) {
-        $audio_list .= '../../uploads/yogurt/mp3/' . $audio_item['url'] . ' | ';
+        $audio_list[] = XOOPS_UPLOAD_URL . '/yogurt/audio/' . $audio_item['url']; // . ' | ';
     }
     //$audio_list = substr($audio_list,-2);
     $xoopsTpl->assign('audio_list', $audio_list);
@@ -56,26 +60,32 @@ if (is_array($audios_array)) {
     $xoopsTpl->assign('lang_noaudioyet', _MD_YOGURT_NOAUDIOYET);
 }
 
-$pageNav = $controller->AudiosNavBar($nbSections['nbAudio'], $xoopsModuleConfig['audiosperpage'], $start, 2);
+$pageNav = $controller->getAudiosNavBar($nbSections['nbAudio'], $helper->getConfig('audiosperpage'), $start, 2);
 
 //linking style and js
 /**
  * Adding to the module js and css of the lightbox and new ones
  */
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/yogurt.css');
+$xoTheme->addStylesheet(
+    XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/yogurt.css'
+);
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
-if (false !== strpos(mb_strtolower($_SERVER['HTTP_USER_AGENT']), 'msie')) {
-    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css');
+if (false !== stripos($_SERVER['HTTP_USER_AGENT'], 'msie')) {
+    $xoTheme->addStylesheet(
+        XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css'
+    );
 }
 //$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/css/lightbox.css');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/prototype.js');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/scriptaculous.js?load=effects');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/lightbox.js');
 //$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/include/jquery.lightbox-0.3.css');
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.js');
+$xoTheme->addScript(
+    XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.js'
+);
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js');
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
+$xoTheme->addScript('https://unpkg.com/wavesurfer.js');
 
 //meta language names
 $xoopsTpl->assign('lang_meta', _MD_YOGURT_META);
@@ -125,7 +135,10 @@ $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
 //page atributes
-$xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner));
+$xoopsTpl->assign(
+    'xoops_pagetitle',
+    sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner)
+);
 
 //form actions
 $xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
@@ -139,11 +152,11 @@ $xoopsTpl->assign('lang_titleLabel', _MD_YOGURT_TITLEAUDIO);
 $xoopsTpl->assign('lang_submitValue', _MD_YOGURT_SUBMITAUDIO);
 $xoopsTpl->assign('lang_addaudios', _MD_YOGURT_ADDAUDIO);
 
-$xoopsTpl->assign('width', $xoopsModuleConfig['width_tube']);
-$xoopsTpl->assign('height', $xoopsModuleConfig['height_tube']);
+$xoopsTpl->assign('width', $helper->getConfig('width_tube'));
+$xoopsTpl->assign('height', $helper->getConfig('height_tube'));
 $xoopsTpl->assign('player_from_list', _MD_YOGURT_PLAYER);
-$xoopsTpl->assign('lang_audiohelp', sprintf(_MD_YOGURT_ADDAUDIOHELP, $xoopsModuleConfig['maxfilesize']));
-$xoopsTpl->assign('max_youcanupload', $xoopsModuleConfig['maxfilesize']);
+$xoopsTpl->assign('lang_audiohelp', sprintf(_MD_YOGURT_ADDAUDIOHELP, $helper->getConfig('maxfilesize')));
+$xoopsTpl->assign('max_youcanupload', $helper->getConfig('maxfilesize'));
 //Videos NAvBAr
 $xoopsTpl->assign('pageNav', $pageNav);
 

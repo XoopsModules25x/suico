@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Yogurt\Common;
 
@@ -11,6 +11,7 @@ namespace XoopsModules\Yogurt\Common;
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
+
 /**
  * Configurator Class
  *
@@ -21,25 +22,33 @@ namespace XoopsModules\Yogurt\Common;
  * @since       1.05
  */
 
-// require_once dirname(dirname(__DIR__)) . '/include/common.php';
-
 /**
  * Class Configurator
  */
 class Configurator
 {
     public $name;
-    public $paths           = [];
-    public $uploadFolders   = [];
-    public $copyBlankFiles  = [];
+
+    public $paths = [];
+
+    public $uploadFolders = [];
+
+    public $copyBlankFiles = [];
+
     public $copyTestFolders = [];
+
     public $templateFolders = [];
-    public $oldFiles        = [];
-    public $oldFolders      = [];
-    public $renameTables    = [];
-    public $renameColumns   = [];
-    public $moduleStats     = [];
-    //    public $modCopyright;
+
+    public $oldFiles = [];
+
+    public $oldFolders = [];
+
+    public $renameTables = [];
+
+    public $renameColumns = [];
+
+    public $moduleStats = [];
+
     public $icons;
 
     /**
@@ -49,7 +58,6 @@ class Configurator
     {
         //        $moduleDirName      = basename(dirname(dirname(__DIR__)));
         //        $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-
         //        require dirname(dirname(__DIR__)) . '/config/config.php';
         //        $config = getConfig();
 

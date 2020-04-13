@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
@@ -11,6 +11,8 @@ namespace XoopsModules\Yogurt;
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
+use Criteria;
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
@@ -37,14 +39,14 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 //require_once __DIR__ . '/Notes.php';
 //require_once __DIR__ . '/Configs.php';
 //require_once __DIR__ . '/Suspensions.php';
-if (str_replace('.', '', PHP_VERSION) > 499) {
-    require_once __DIR__ . '/Id3v1.php';
-}
+//if (str_replace('.', '', PHP_VERSION) > 499) {
+//    require_once __DIR__ . '/Id3v1.php';
+//}
 
 /**
- * Class ControllerNotes
+ * Class NotesController
  */
-class ControllerNotes extends YogurtController
+class NotesController extends YogurtController
 {
     //  function renderFormNewPost($tpl){
     //
@@ -69,11 +71,13 @@ class ControllerNotes extends YogurtController
 
     /**
      * @param                                      $nb_notes
-     * @param null|\CriteriaElement|\CriteriaCompo $criteria
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria
      * @return bool|array
      */
-    public function fetchNotes($nb_notes, $criteria)
-    {
+    public function fetchNotes(
+        $nb_notes,
+        $criteria
+    ) {
         $notes = $this->notesFactory->getNotes($nb_notes, $criteria);
         if ($notes) {
             return $notes;
@@ -86,22 +90,22 @@ class ControllerNotes extends YogurtController
      * @param string $privilegeType
      * @return bool|void
      */
-    public function checkPrivilege($privilegeType = '')
-    {
-        global $xoopsModuleConfig;
-        if (0 == $xoopsModuleConfig['enable_notes']) {
+    public function checkPrivilege(
+        $privilegeType = ''
+    ) {
+        if (0 === $this->helper->getConfig('enable_notes')) {
             redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_NOTESNOTENABLED);
         }
-        if ('sendNotes' == $privilegeType) {
-            $criteria = new \Criteria('config_uid', $this->owner->getVar('uid'));
-            if (1 == $this->configsFactory->getCount($criteria)) {
+        if ('sendNotes' === $privilegeType) {
+            $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
+            if (1 === $this->configsFactory->getCount($criteria)) {
                 $configs = $this->configsFactory->getObjects($criteria);
 
                 $config = $configs[0]->getVar('sendNotes');
             }
         }
-        $criteria = new \Criteria('config_uid', $this->owner->getVar('uid'));
-        if (1 == $this->configsFactory->getCount($criteria)) {
+        $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
+        if (1 === $this->configsFactory->getCount($criteria)) {
             $configs = $this->configsFactory->getObjects($criteria);
 
             $config = $configs[0]->getVar('notes');

@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -16,5 +17,7 @@
  * @author       XOOPS Development Team
  * @since
  */
-include dirname(dirname(__DIR__)) . '/mainfile.php';
+include dirname(
+            dirname(__DIR__)
+        ) . '/mainfile.php';
 require XOOPS_ROOT_PATH . '/include/comment_edit.php';

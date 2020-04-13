@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -31,4 +32,7 @@
  * @Support    : http://br.impresscms.org - Team Brazilian.
  * @Licence    : GNU
  */
-define('_MB_YOGURT_ALLFRIENDS', 'Ver todos os amigos');
+define(
+    '_MB_YOGURT_ALLFRIENDS',
+    'Ver todos os amigos'
+);

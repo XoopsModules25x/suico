@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -36,13 +37,25 @@ define('_MA_YOGURT_RELEASEDATE', 'Ver&ouml;ffentlichungsdatum');
 define('_MA_YOGURT_STATUS', 'Status');
 define('_MA_YOGURT_OFCSUPORTSITE', 'Offizielle Support-Site');
 define('_MA_YOGURT_VERSIONHIST', 'Versions-Historie');
-define('_MA_YOGURT_CONFIGEVERYTHING', 'Vergewisserns Sie sich, das Sie alles in den Voreinstellungen konfiguriert haben ');
-define('_MA_YOGURT_ALLTESTSOK', 'Alle &Uuml;berpr&uuml;fungen m&uuml;ssen OK sein, damit dieses Modul 100% funktioniert:');
+define(
+    '_MA_YOGURT_CONFIGEVERYTHING',
+    'Vergewisserns Sie sich, das Sie alles in den Voreinstellungen konfiguriert haben '
+);
+define(
+    '_MA_YOGURT_ALLTESTSOK',
+    'Alle &Uuml;berpr&uuml;fungen m&uuml;ssen OK sein, damit dieses Modul 100% funktioniert:'
+);
 define('_MA_YOGURT_GDEXTENSIONOK', 'GD-Erweiterung geladen: OK!');
 define('_MA_YOGURT_MOREINFO', 'Hier ist mehr Info zu:');
 define('_MA_YOGURT_GDEXTENSIONFALSE', 'GD-Erweiterung geladen: FEHLGESCHLAGEN ');
-define('_MA_YOGURT_CONFIGPHPINI', 'Konfigurieren Sie Ihre PHP.INI oder beauftragen Sie Ihren Server-Adminstrator, diese Erweiterung f&uuml;r Sie zu aktivieren.');
+define(
+    '_MA_YOGURT_CONFIGPHPINI',
+    'Konfigurieren Sie Ihre PHP.INI oder beauftragen Sie Ihren Server-Adminstrator, diese Erweiterung f&uuml;r Sie zu aktivieren.'
+);
 define('_MA_YOGURT_PHP5PRESENT', 'Sie haben eine kompatible PHP-Version:');
-define('_MA_YOGURT_PHP5NOTPRESENT', 'Ihre PHP-Version ist kompatibel, aber viele Details w&uuml;rden besser auf einem Server mit PHP5-Unterst&uuml;tzung oder h&ouml;her funktionieren.');
+define(
+    '_MA_YOGURT_PHP5NOTPRESENT',
+    'Ihre PHP-Version ist kompatibel, aber viele Details w&uuml;rden besser auf einem Server mit PHP5-Unterst&uuml;tzung oder h&ouml;her funktionieren.'
+);
 define('_MA_YOGURT_MAXBYTESPHPINI', 'Ihr Server limitiert die Gr&ouml;&szlig;e von hochzuladenden Dateien auf %s');
 define('_MA_YOGURT_MEMORYLIMIT', 'Das Speicherlimit Ihres Servers ist:');

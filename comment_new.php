@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -21,21 +22,22 @@
  * Xoops header
  */
 
+use Xmf\Request;
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
 
-$controller = new Yogurt\ControllerGroups($xoopsDB, $xoopsUser);
+$controller = new Yogurt\GroupController($xoopsDB, $xoopsUser);
 
 /**
  * Receiving info from get parameters
  */
 $group_id = $_GET['com_itemid'];
-$criteria = new \Criteria('group_id', $group_id);
+$criteria = new Criteria('group_id', $group_id);
 $groups   = $controller->groupsFactory->getObjects($criteria);
 $group    = $groups[0];
 
-$com_itemid = \Xmf\Request::getInt('com_itemid', 0, 'GET');
+$com_itemid = Request::getInt('com_itemid', 0, 'GET');
 if ($com_itemid > 0) {
     $com_replytitle = _MD_YOGURT_GROUPS . ': ' . $group->getVar('group_title');
     require XOOPS_ROOT_PATH . '/include/comment_new.php';

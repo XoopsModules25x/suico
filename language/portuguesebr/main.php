@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -90,7 +91,10 @@ define('_MD_YOGURT_UNPRIVATIZED', 'Agora todos poderão ver esta foto em seu ál
 define('_MD_YOGURT_FRIENDSTITLE', 'Amigos do %s');
 define('_MD_YOGURT_NOFRIENDSYET', 'Nenhum Amigo ainda'); //also present in index.php - GibaPhp
 define('_MD_YOGURT_MYFRIENDS', 'Meus Amigos'); //GibaPhp
-define('_MD_YOGURT_FRIENDSHIPCONFIGS', 'Defina as configurações desta amizade. Avalie seu amigo.'); //GibaPhp
+define(
+    '_MD_YOGURT_FRIENDSHIPCONFIGS',
+    'Defina as configurações desta amizade. Avalie seu amigo.'
+); //GibaPhp
 
 //class/yogurtfriendship.php
 define('_MD_YOGURT_EDITFRIENDSHIP', 'Sua amizade com este membro:'); //GibaPhp
@@ -99,7 +103,10 @@ define('_MD_YOGURT_LEVEL', 'Grau de amizade:'); //GibaPhp
 define('_MD_YOGURT_UNKNOWNACCEPTED', 'Não conheço mas aceito'); //GibaPhp
 define('_MD_YOGURT_AQUAITANCE', 'Conhecidos'); //also present in index.php - GibaPhp
 define('_MD_YOGURT_FRIEND', 'Amigo'); //also present in index.php - GibaPhp
-define('_MD_YOGURT_BESTFRIEND', 'Melhor Amigo'); //also present in index.php - GibaPhp
+define(
+    '_MD_YOGURT_BESTFRIEND',
+    'Melhor Amigo'
+); //also present in index.php - GibaPhp
 define('_MD_YOGURT_FAN', 'Fan'); //also present in index.php - GibaPhp
 define('_MD_YOGURT_FRIENDLY', 'Friendly'); //also present in index.php - GibaPhp
 define('_MD_YOGURT_FRIENDLYNO', 'Nope'); //GibaPhp - ??? Dúvida no conteúdo...
@@ -120,14 +127,23 @@ define('_MD_YOGURT_UPDATEFRIEND', 'Atualizar Amigo(s)'); //GibaPhp
 define('_MD_YOGURT_FRIENDSHIPUPDATED', 'Atualizou Amizade(s)'); //GibaPhp
 
 //submitfriendpetition.php
-define('_MD_YOGURT_PETITIONED', 'Um pedido de amizade foi enviado para este usuário. Espere até que ele aceite para aparecer em sua lista de amigos.'); //GibaPhp
-define('_MD_YOGURT_ALREADY_PETITIONED', 'Você já enviou um pedido de amizade para este usuário ou vice-versa. <br> Espere até que ele aceite ou rejeite, ou consultando a página de perfil de amigos deste usuário em questão como um visitante.'); //GibaPhp
+define(
+    '_MD_YOGURT_PETITIONED',
+    'Um pedido de amizade foi enviado para este usuário. Espere até que ele aceite para aparecer em sua lista de amigos.'
+); //GibaPhp
+define(
+    '_MD_YOGURT_ALREADY_PETITIONED',
+    'Você já enviou um pedido de amizade para este usuário ou vice-versa. <br> Espere até que ele aceite ou rejeite, ou consultando a página de perfil de amigos deste usuário em questão como um visitante.'
+); //GibaPhp
 
 //makefriends.php
 define('_MD_YOGURT_FRIENDMADE', 'Adicionado como amigo!'); //GibaPhp
 
 //delfriendship.php
-define('_MD_YOGURT_FRIENDSHIPTERMINATED', 'Você terminou a sua amizade com este usuário!'); //GibaPhp
+define(
+    '_MD_YOGURT_FRIENDSHIPTERMINATED',
+    'Você terminou a sua amizade com este usuário!'
+); //GibaPhp
 
 ############################################ VIDEOS ############################################################
 //mainvideo.php
@@ -158,10 +174,22 @@ define('_MD_YOGURT_VIDEOSAVED', 'Seu video foi gravado'); //GibaPhp
 //class/Groups.php
 define('_MD_YOGURT_SUBMIT_GROUP', 'Criar uma nova Tribo'); //GibaPhp
 define('_MD_YOGURT_UPLOADGROUP', 'Salvar Tribo'); //also present in many ther groups related - GibaPhp
-define('_MD_YOGURT_GROUP_IMAGE', 'Imagem da Tribo'); //also present in many ther groups related - GibaPhp
-define('_MD_YOGURT_GROUP_TITLE', 'Título'); //also present in many ther groups related - GibaPhp
-define('_MD_YOGURT_GROUP_DESC', 'Descrição'); //also present in many ther groups related - GibaPhp
-define('_MD_YOGURTCREATEYOURGROUP', 'Crie a sua própria Tribo!'); //also present in many ther groups related - GibaPhp
+define(
+    '_MD_YOGURT_GROUP_IMAGE',
+    'Imagem da Tribo'
+); //also present in many ther groups related - GibaPhp
+define(
+    '_MD_YOGURT_GROUP_TITLE',
+    'Título'
+); //also present in many ther groups related - GibaPhp
+define(
+    '_MD_YOGURT_GROUP_DESC',
+    'Descrição'
+); //also present in many ther groups related - GibaPhp
+define(
+    '_MD_YOGURTCREATEYOURGROUP',
+    'Crie a sua própria Tribo!'
+); //also present in many ther groups related - GibaPhp
 
 //abandongroup.php
 define('_MD_YOGURT_ASKCONFIRMABANDONGROUP', 'Tem certeza de que deseja sair desta Tribo?'); //GibaPhp
@@ -173,24 +201,42 @@ define('_MD_YOGURT_YOUAREMEMBERNOW', 'Você agora é um membro desta comunidade'
 define('_MD_YOGURT_YOUAREMEMBERALREADY', 'Você já é um membro desta Tribo'); //GibaPhp
 
 //delete_group.php
-define('_MD_YOGURT_ASKCONFIRMGROUPDELETION', 'Tem certeza que deseja apagar esta Tribo de forma permanente?'); //GibaPhp
+define(
+    '_MD_YOGURT_ASKCONFIRMGROUPDELETION',
+    'Tem certeza que deseja apagar esta Tribo de forma permanente?'
+); //GibaPhp
 define('_MD_YOGURT_CONFIRMGROUPDELETION', 'Sim, apague essa Tribo!'); //GibaPhp
 define('_MD_YOGURT_GROUPDELETED', 'Tribo apagada!'); //GibaPhp
 
 //edit_group.php
-define('_MD_YOGURT_MAINTAINOLDIMAGE', 'Manter esta imagem'); //also present in other groups related - GibaPhp
+define(
+    '_MD_YOGURT_MAINTAINOLDIMAGE',
+    'Manter esta imagem'
+); //also present in other groups related - GibaPhp
 define('_MD_YOGURT_GROUPEDITED', 'Tribo editada'); //GibaPhp
 define('_MD_YOGURT_EDIT_GROUP', 'Editar sua Tribo'); //also present in other groups related - GibaPhp
-define('_MD_YOGURT_GROUPOWNER', 'Você é o dono deste Tribo!'); //also present in other groups related - GibaPhp
-define('_MD_YOGURT_MEMBERSDOFGROUP', 'Os membros desta Tribo'); //also present in other groups related - GibaPhp
+define(
+    '_MD_YOGURT_GROUPOWNER',
+    'Você é o dono deste Tribo!'
+); //also present in other groups related - GibaPhp
+define(
+    '_MD_YOGURT_MEMBERSDOFGROUP',
+    'Os membros desta Tribo'
+); //also present in other groups related - GibaPhp
 
 //submit_group.php
 define('_MD_YOGURT_GROUP_CREATED', 'Sua Tribo foi criada'); //GibaPhp
 
 //kickfromgroup.php
 define('_MD_YOGURT_CONFIRMKICK', 'Sim kick-lo para fora!'); //GibaPhp - Tenho dúvida aqui...
-define('_MD_YOGURT_ASKCONFIRMKICKFROMGROUP', 'Tem certeza que deseja dar um kick nesta pessoa para fora desta Tribo?'); //GibaPhp
-define('_MD_YOGURT_GROUPKICKED', 'Você se afastou deste usuário da Tribo, mas quem sabe quando ele vai poderá tentar um novo regresso!'); //GibaPhp - Tenho dúvidas aqui...
+define(
+    '_MD_YOGURT_ASKCONFIRMKICKFROMGROUP',
+    'Tem certeza que deseja dar um kick nesta pessoa para fora desta Tribo?'
+); //GibaPhp
+define(
+    '_MD_YOGURT_GROUPKICKED',
+    'Você se afastou deste usuário da Tribo, mas quem sabe quando ele vai poderá tentar um novo regresso!'
+); //GibaPhp - Tenho dúvidas aqui...
 
 //Groups.php
 define('_MD_YOGURT_GROUP_ABANDON', 'Deixar esta Tribo'); //GibaPhp
@@ -252,13 +298,25 @@ define('_MD_YOGURT_VISITORS', 'Visitantes');
 define('_MD_YOGURT_USERDETAILS', 'Detalhes do Usuário'); //GibaPhp
 define('_MD_YOGURT_USERCONTRIBUTIONS', 'Contribuições deste Usuário'); //GibaPhp
 define('_MD_YOGURT_FANS', 'Fans'); //GibaPhp
-define('_MD_YOGURT_UNKNOWNREJECTING', 'Eu não conheço essa pessoa, por isto não irei adiciona-lo à minha lista de amigos'); //GibaPhp
-define('_MD_YOGURT_UNKNOWNACCEPTING', 'Eu não conheço essa pessoa, Porém vou adicioná-la à minha lista de amigos'); //GibaPhp
+define(
+    '_MD_YOGURT_UNKNOWNREJECTING',
+    'Eu não conheço essa pessoa, por isto não irei adiciona-lo à minha lista de amigos'
+); //GibaPhp
+define(
+    '_MD_YOGURT_UNKNOWNACCEPTING',
+    'Eu não conheço essa pessoa, Porém vou adicioná-la à minha lista de amigos'
+); //GibaPhp
 define('_MD_YOGURT_ASKINGFRIEND', 'É %s seu Amigo?'); //GibaPhp
 define('_MD_YOGURT_ASKBEFRIEND', 'Pergunte a este usuário se deseja ser seu amigo?'); //GibaPhp
 define('_MD_YOGURT_EDITPROFILE', 'Editar seu Perfil'); //GibaPhp
-define('_MD_YOGURT_SELECTAVATAR', 'Upload de fotos para a capa do álbum e poderá selecionar um como sendo o seu avatar.'); //GibaPhp
-define('_MD_YOGURT_SELECTMAINVIDEO', 'Adicione um vídeo para o seu álbum, em seguida, selecione-o como sendo o seu Vídeo principal'); //GibaPhp
+define(
+    '_MD_YOGURT_SELECTAVATAR',
+    'Upload de fotos para a capa do álbum e poderá selecionar um como sendo o seu avatar.'
+); //GibaPhp
+define(
+    '_MD_YOGURT_SELECTMAINVIDEO',
+    'Adicione um vídeo para o seu álbum, em seguida, selecione-o como sendo o seu Vídeo principal'
+); //GibaPhp
 define('_MD_YOGURT_NOAVATARYET', 'Nenhum avatar ainda'); //GibaPhp
 define('_MD_YOGURT_NOMAINVIDEOYET', 'Nenhum Vídeo principal ainda'); //GibaPhp
 define('_MD_YOGURT_MYPROFILE', 'Meu Perfil'); //GibaPhp
@@ -299,12 +357,24 @@ define('_MD_YOGURT_LOCATION', 'Localização contém'); //GibaPhp
 define('_MD_YOGURT_OCCUPATION', 'Ocupação contém'); //GibaPhp
 define('_MD_YOGURT_INTEREST', 'Interesses contém'); //GibaPhp
 define('_MD_YOGURT_URLC', 'URL contém'); //GibaPhp
-define('_MD_YOGURT_LASTLOGMORE', "Última visita há mais de <span style='color:#ff0000;'>X</span> dias"); //GibaPhp
-define('_MD_YOGURT_LASTLOGLESS', "Última visita há menos de <span style='color:#ff0000;'>X</span> dias"); //GibaPhp
+define(
+    '_MD_YOGURT_LASTLOGMORE',
+    "Última visita há mais de <span style='color:#ff0000;'>X</span> dias"
+); //GibaPhp
+define(
+    '_MD_YOGURT_LASTLOGLESS',
+    "Última visita há menos de <span style='color:#ff0000;'>X</span> dias"
+); //GibaPhp
 define('_MD_YOGURT_REGMORE', "Usuário há mais de <span style='color:#ff0000;'>X</span> dias"); //GibaPhp
 define('_MD_YOGURT_REGLESS', "Usuário há menos de <span style='color:#ff0000;'>X</span> dias"); //GibaPhp
-define('_MD_YOGURT_POSTSMORE', "Número de mensagens acima de <span style='color:#ff0000;'>X</span>"); //GibaPhp
-define('_MD_YOGURT_POSTSLESS', "Número de mensagens abaixo de <span style='color:#ff0000;'>X</span>"); //GibaPhp
+define(
+    '_MD_YOGURT_POSTSMORE',
+    "Número de mensagens acima de <span style='color:#ff0000;'>X</span>"
+); //GibaPhp
+define(
+    '_MD_YOGURT_POSTSLESS',
+    "Número de mensagens abaixo de <span style='color:#ff0000;'>X</span>"
+); //GibaPhp
 define('_MD_YOGURT_SORT', 'Ordenar por'); //GibaPhp
 define('_MD_YOGURT_ORDER', 'Ordem'); //GibaPhp
 define('_MD_YOGURT_LASTLOGIN', 'Último Acesso'); //GibaPhp
@@ -334,7 +404,10 @@ define('_MD_YOGURT_FANSTITLE', "%s's Fans"); //GibaPhp
 define('_MD_YOGURT_NOFANSYET', 'Nenhum fã ainda'); //GibaPhp
 
 //17/04/2008 - 3.2
-define('_MD_YOGURT_AUDIONOTENABLED', 'O administrador do site tem recurso de áudio com deficiência');
+define(
+    '_MD_YOGURT_AUDIONOTENABLED',
+    'O administrador do site tem recurso de áudio com deficiência'
+);
 define('_MD_YOGURT_NOAUDIOYET', 'Este usuário não carregou nenhum arquivo de áudio ainda');
 define('_MD_YOGURT_AUDIOS', 'Audio');
 define('_MD_YOGURT_CONFIGSAUDIOS', 'Veja seu arquivos de áudio');
@@ -345,7 +418,10 @@ define('_MD_YOGURT_AUTHORAUDIO', 'Autor/Cantor');
 define('_MD_YOGURT_TITLEAUDIO', 'Título do arquivo ou canção');
 define('_MD_YOGURT_ADDAUDIO', 'Adicionar um arquivo MP3');
 define('_MD_YOGURT_SUBMITAUDIO', 'Carregar arquivo');
-define('_MD_YOGURT_ADDAUDIOHELP', 'Escolha um arquivo mp3 no seu computador, tamanho máximo %s ,<br> Deixe os campos de título e autor em branco se o seu arquivo já tem metainfo');
+define(
+    '_MD_YOGURT_ADDAUDIOHELP',
+    'Escolha um arquivo mp3 no seu computador, tamanho máximo %s ,<br> Deixe os campos de título e autor em branco se o seu arquivo já tem metainfo'
+);
 
 //19/04/2008 - 3.3
 define('_MD_YOGURT_AUDIODELETED', 'Seu arquivo MP3 foi excluído!');

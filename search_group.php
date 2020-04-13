@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,31 +18,32 @@
  * @since
  */
 
+use Xmf\Request;
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_groups_results.tpl';
 require __DIR__ . '/header.php';
 
-$controller = new Yogurt\ControllerGroups($xoopsDB, $xoopsUser);
+$controller = new Yogurt\GroupController($xoopsDB, $xoopsUser);
 
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
 $nbSections = $controller->getNumbersSections();
 
-$start_all = \Xmf\Request::getInt('start_all', 0, 'GET');
-$start_my  = \Xmf\Request::getInt('start_my', 0, 'GET');
+$start_all = Request::getInt('start_all', 0, 'GET');
+$start_my  = Request::getInt('start_my', 0, 'GET');
 
 $group_keyword = trim(htmlspecialchars($_GET['group_keyword'], ENT_QUOTES | ENT_HTML5));
 /**
  * All Groups
  */
-$criteria_title  = new \Criteria('group_title', '%' . $group_keyword . '%', 'LIKE');
-$criteria_desc   = new \Criteria('group_desc', '%' . $group_keyword . '%', 'LIKE');
-$criteria_groups = new \CriteriaCompo($criteria_title);
+$criteria_title  = new Criteria('group_title', '%' . $group_keyword . '%', 'LIKE');
+$criteria_desc   = new Criteria('group_desc', '%' . $group_keyword . '%', 'LIKE');
+$criteria_groups = new CriteriaCompo($criteria_title);
 $criteria_groups->add($criteria_desc, 'OR');
 $nb_groups = $controller->groupsFactory->getCount($criteria_groups);
-$criteria_groups->setLimit($xoopsModuleConfig['groupsperpage']);
+$criteria_groups->setLimit($helper->getConfig('groupsperpage'));
 $criteria_groups->setStart($start_all);
 $groups_objects = $controller->groupsFactory->getObjects($criteria_groups);
 $i              = 0;
@@ -57,8 +59,10 @@ foreach ($groups_objects as $group_object) {
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/yogurt.css');
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
-if (false !== strpos(mb_strtolower($_SERVER['HTTP_USER_AGENT']), 'msie')) {
-    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css');
+if (false !== stripos($_SERVER['HTTP_USER_AGENT'], 'msie')) {
+    $xoTheme->addStylesheet(
+        XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css'
+    );
 }
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.js');
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.tabs.pack.js');
@@ -67,7 +71,9 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 /**
  * Creating the navigation bar if you have a lot of friends
  */
-$barra_navegacao = new \XoopsPageNav($nb_groups, $xoopsModuleConfig['groupsperpage'], $start_all, 'start_all', 'group_keyword=' . $group_keyword . '&amp;start_my=' . $start_my);
+$barra_navegacao = new XoopsPageNav(
+    $nb_groups, $helper->getConfig('groupsperpage'), $start_all, 'start_all', 'group_keyword=' . $group_keyword . '&amp;start_my=' . $start_my
+);
 $barrinha        = $barra_navegacao->renderImageNav(2);
 
 //permissions
@@ -83,7 +89,10 @@ $xoopsTpl->assign('allow_profile_stats', $controller->checkPrivilege('profile_st
 
 //form
 //$xoopsTpl->assign('lang_youcanupload',sprintf(_MD_YOGURT_YOUCANUPLOAD,$maxfilebytes/1024));
-$xoopsTpl->assign('lang_groupimage', _MD_YOGURT_GROUP_IMAGE);
+$xoopsTpl->assign(
+    'lang_groupimage',
+    _MD_YOGURT_GROUP_IMAGE
+);
 //$xoopsTpl->assign('maxfilesize',$maxfilebytes);
 $xoopsTpl->assign('lang_title', _MD_YOGURT_GROUP_TITLE);
 $xoopsTpl->assign('lang_description', _MD_YOGURT_GROUP_DESC);
@@ -97,7 +106,10 @@ $xoopsTpl->assign('isanonym', $controller->isAnonym);
 
 //numbers
 //$xoopsTpl->assign('nb_groups',$nbSections['nbGroups']);look at hte end for this nb
-$xoopsTpl->assign('nb_photos', $nbSections['nbPhotos']);
+$xoopsTpl->assign(
+    'nb_photos',
+    $nbSections['nbPhotos']
+);
 $xoopsTpl->assign('nb_videos', $nbSections['nbVideos']);
 $xoopsTpl->assign('nb_notes', $nbSections['nbNotes']);
 $xoopsTpl->assign('nb_friends', $nbSections['nbFriends']);
@@ -122,9 +134,12 @@ $xoopsTpl->assign('lang_audio', _MD_YOGURT_AUDIOS);
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
 //page atributes
-$xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner));
+$xoopsTpl->assign(
+    'xoops_pagetitle',
+    sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner)
+);
 
-//$xoopsTpl->assign('path_yogurt_uploads',$xoopsModuleConfig['link_path_upload']);
+//$xoopsTpl->assign('path_yogurt_uploads',$helper->getConfig('link_path_upload'));
 $xoopsTpl->assign('groups', $groups);
 //$xoopsTpl->assign('mygroups',$mygroups);
 $xoopsTpl->assign('lang_mygroupstitle', _MD_YOGURT_MYGROUPS);
@@ -135,7 +150,10 @@ $xoopsTpl->assign('lang_nogroupsyet', _MD_YOGURT_NOGROUPSYET);
 $xoopsTpl->assign('barra_navegacao', $barrinha);
 //$xoopsTpl->assign('barra_navegacao_my',$barrinha_my);
 //$xoopsTpl->assign('nb_groups',$nb_mygroups);// this is the one wich shows in the upper bar actually is about the mygroups
-$xoopsTpl->assign('nb_groups_all', $nb_groups); //this is total number of groups
+$xoopsTpl->assign(
+    'nb_groups_all',
+    $nb_groups
+); //this is total number of groups
 
 $xoopsTpl->assign('lang_creategroup', _MD_YOGURTCREATEYOURGROUP);
 $xoopsTpl->assign('lang_owner', _MD_YOGURT_GROUPOWNER);

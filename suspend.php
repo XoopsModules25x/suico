@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,21 +18,23 @@
  * @since
  */
 
+use Xmf\Request;
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
-//
 //require_once __DIR__ . '/class/Suspensions.php';
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 5, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 5, _MD_YOGURT_TOKENEXPIRED);
 }
 
-$uid = \Xmf\Request::getInt('uid', 0, 'POST');
+$uid = Request::getInt('uid', 0, 'POST');
 /**
  * Creating the factory  loading the picture changing its caption
  */
-$suspensionsFactory = new Yogurt\SuspensionsHandler($xoopsDB);
+$suspensionsFactory = new Yogurt\SuspensionsHandler(
+    $xoopsDB
+);
 $suspension         = $suspensionsFactory->create(false);
 $suspension->load($uid);
 

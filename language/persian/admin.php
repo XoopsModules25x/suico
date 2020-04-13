@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -41,8 +42,14 @@ define('_MA_YOGURT_ALLTESTSOK', 'All tests must be OK for this module to work 10
 define('_MA_YOGURT_GDEXTENSIONOK', 'GD extension loaded: OK!');
 define('_MA_YOGURT_MOREINFO', 'Here is more info on:');
 define('_MA_YOGURT_GDEXTENSIONFALSE', 'GD extension loaded: FAILED ');
-define('_MA_YOGURT_CONFIGPHPINI', 'Configure your php.ini or ask your server manager to install it and enable it for you.');
+define(
+    '_MA_YOGURT_CONFIGPHPINI',
+    'Configure your php.ini or ask your server manager to install it and enable it for you.'
+);
 define('_MA_YOGURT_PHP5PRESENT', 'You have a compatible version of PHP:');
-define('_MA_YOGURT_PHP5NOTPRESENT', 'Your PHP version is compatible, but many details would work better on a php5 server and above.');
+define(
+    '_MA_YOGURT_PHP5NOTPRESENT',
+    'Your PHP version is compatible, but many details would work better on a php5 server and above.'
+);
 define('_MA_YOGURT_MAXBYTESPHPINI', 'Your server limits the size of uploads to %s');
 define('_MA_YOGURT_MEMORYLIMIT', 'The Memory Limit of your server is:');

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Yogurt\Common;
 
@@ -26,6 +26,7 @@ use XoopsModules\Yogurt\Common;
 class Migrate extends \Xmf\Database\Migrate
 {
     private $renameTables;
+
     private $renameColumns;
 
     /**
@@ -34,36 +35,15 @@ class Migrate extends \Xmf\Database\Migrate
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function __construct(Common\Configurator $configurator = null)
-    {
+    public function __construct(
+        ?Common\Configurator $configurator = null
+    ) {
         if (null !== $configurator) {
             $this->renameTables  = $configurator->renameTables;
             $this->renameColumns = $configurator->renameColumns;
 
             $moduleDirName = basename(dirname(dirname(__DIR__)));
             parent::__construct($moduleDirName);
-        }
-    }
-
-    /**
-     * rename table if needed
-     */
-    private function renameTable()
-    {
-        foreach ($this->renameTables as $oldName => $newName) {
-            if ($this->tableHandler->useTable($oldName) && !$this->tableHandler->useTable($newName)) {
-                $this->tableHandler->renameTable($oldName, $newName);
-            }
-        }
-    }
-
-    private function renameColumn($tableName, $columnName, $newName)
-    {
-        if ($this->tableHandler->useTable($tableName)) {
-            $attributes = $this->tableHandler->getColumnAttributes($tableName, $columnName);
-            //            if (false !== strpos($attributes, ' int(')) {
-            $this->tableHandler->alterColumn($tableName, $columnName, $attributes, $newName);
-            //            }
         }
     }
 
@@ -84,5 +64,40 @@ class Migrate extends \Xmf\Database\Migrate
         $this->renameColumn('yogurt_notes', 'Note_text', 'note_text');
         $this->renameColumn('yogurt_notes', 'Note_from', 'note_from');
         $this->renameColumn('yogurt_notes', 'Note_to', 'note_to');
+    }
+
+    /**
+     * rename table if needed
+     */
+    private function renameTable()
+    {
+        foreach ($this->renameTables as $oldName => $newName) {
+            if ($this->tableHandler->useTable($oldName) && !$this->tableHandler->useTable($newName)) {
+                $this->tableHandler->renameTable($oldName, $newName);
+            }
+        }
+    }
+
+    /**
+     * @param $tableName
+     * @param $columnName
+     * @param $newName
+     */
+    private function renameColumn(
+        $tableName,
+        $columnName,
+        $newName
+    )  {
+        if ($this->tableHandler->useTable($tableName)) {
+            $attributes = $this->tableHandler->getColumnAttributes($tableName, $columnName);
+            //            if (false !== strpos($attributes, ' int(')) {
+            $this->tableHandler->alterColumn(
+                $tableName,
+                $columnName,
+                $attributes,
+                $newName
+            );
+            //            }
+        }
     }
 }

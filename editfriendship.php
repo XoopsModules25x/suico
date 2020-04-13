@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,6 +18,7 @@
  * @since
  */
 
+use Xmf\Request;
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
@@ -26,20 +28,20 @@ if (!$xoopsUser) {
 }
 
 $friendshipFactory = new Yogurt\FriendshipHandler($xoopsDB);
-$friend2_uid       = \Xmf\Request::getInt('friend_uid', 0, 'POST');
-$marker            = \Xmf\Request::getInt('marker', 0, 'POST');
+$friend2_uid       = Request::getInt('friend_uid', 0, 'POST');
+$marker            = Request::getInt('marker', 0, 'POST');
 
-$friend = new \XoopsUser($friend2_uid);
+$friend = new XoopsUser($friend2_uid);
 
-if (1 == $marker) {
+if (1 === $marker) {
     $level         = $_POST['level'];
     $cool          = $_POST['cool'];
     $friendly      = $_POST['hot'];
     $funny         = $_POST['trust'];
     $fan           = $_POST['fan'];
-    $friendship_id = \Xmf\Request::getInt('friendship_id', 0, 'POST');
+    $friendship_id = Request::getInt('friendship_id', 0, 'POST');
 
-    $criteria    = new \Criteria('friendship_id', $friendship_id);
+    $criteria    = new Criteria('friendship_id', $friendship_id);
     $friendships = $friendshipFactory->getObjects($criteria);
     $friendship  = $friendships[0];
     $friendship->setVar('level', $level);

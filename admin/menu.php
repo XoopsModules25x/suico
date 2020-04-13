@@ -1,4 +1,10 @@
 <?php
+
+declare(strict_types=1);
+
+use XoopsModules\Yogurt\Helper;
+use Xmf\Module\Admin;
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -16,22 +22,26 @@
  * @author       XOOPS Development Team
  * @since
  */
-include dirname(__DIR__) . '/preloads/autoloader.php';
+include dirname(
+            __DIR__
+        ) . '/preloads/autoloader.php';
 
 $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-$helper = \XoopsModules\Yogurt\Helper::getInstance();
+$helper = Helper::getInstance();
 $helper->loadLanguage('common');
 $helper->loadLanguage('feedback');
 $helper->loadLanguage('admin');
 $helper->loadLanguage('modinfo');
 $helper->loadLanguage('main');
 
-$pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
+$pathIcon32 = Admin::menuIconPath('');
 if (is_object($helper->getModule())) {
-    //    $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
-    $pathModIcon32 = $helper->url($helper->getModule()->getInfo('modicons32'));
+    //    $pathModIcon32 = $helper->getConfig('modicons32');
+    $pathModIcon32 = $helper->url(
+        $helper->getConfig('modicons32')
+    );
 }
 
 $adminmenu[] = [

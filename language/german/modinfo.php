@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -16,29 +17,59 @@
  * @author       XOOPS Development Team
  * @since
  */
-define('_MI_YOGURT_NUMBPICT_TITLE', 'Anzahl Bilder');
+define(
+    '_MI_YOGURT_NUMBPICT_TITLE',
+    'Anzahl Bilder'
+);
 define('_MI_YOGURT_NUMBPICT_DESC', 'Anzahl Bilder, die ein User in seinem Album haben darf');
 define('_MI_YOGURT_ADMENU1', 'Startseite');
 define('_MI_YOGURT_ADMENU2', '&Uuml;ber');
 define('_MI_YOGURT_SMNAME1', 'Absenden');
 define('_MI_YOGURT_THUMW_TITLE', 'Miniaturansicht Breite');
-define('_MI_YOGURT_THUMBW_DESC', 'Miniaturansicht Breite in Pixel.<br>Die Miniaturansichten werden auf diese Breite reduziert,<br>Proportionen bleiben erhalten');
+define(
+    '_MI_YOGURT_THUMBW_DESC',
+    'Miniaturansicht Breite in Pixel.<br>Die Miniaturansichten werden auf diese Breite reduziert,<br>Proportionen bleiben erhalten'
+);
 define('_MI_YOGURT_THUMBH_TITLE', 'Miniaturansicht H&ouml;he');
-define('_MI_YOGURT_THUMBH_DESC', 'Miniaturansicht H&ouml;he in Pixel.<br>Die Miniaturansichten werden auf diese H&ouml;he reduziert,<br>Proportionen bleiben erhalten');
+define(
+    '_MI_YOGURT_THUMBH_DESC',
+    'Miniaturansicht H&ouml;he in Pixel.<br>Die Miniaturansichten werden auf diese H&ouml;he reduziert,<br>Proportionen bleiben erhalten'
+);
 define('_MI_YOGURT_RESIZEDW_TITLE', 'Angepasste Bilder Breite');
-define('_MI_YOGURT_RESIZEDW_DESC', 'Maximale Breite der Bilder in Pixel.<br>Proportionen bleiben erhalten.<br>Ist das Original Bild breiter, wird es reduziert.<br>Dadurch wird Ihre Layout nicht zerst&ouml;rt.');
+define(
+    '_MI_YOGURT_RESIZEDW_DESC',
+    'Maximale Breite der Bilder in Pixel.<br>Proportionen bleiben erhalten.<br>Ist das Original Bild breiter, wird es reduziert.<br>Dadurch wird Ihre Layout nicht zerst&ouml;rt.'
+);
 define('_MI_YOGURT_RESIZEDH_TITLE', 'Angepasste Bilder H&ouml;he');
-define('_MI_YOGURT_RESIZEDH_DESC', 'Maximale H&ouml;he Ihrer Bilder in Pixel.<br>Proportionen bleiben erhalten.<br>Ist das Original Bild h&ouml;her, wird es reduziert.<br>Dadurch wird Ihre Layout nicht zerst&ouml;rt.');
+define(
+    '_MI_YOGURT_RESIZEDH_DESC',
+    'Maximale H&ouml;he Ihrer Bilder in Pixel.<br>Proportionen bleiben erhalten.<br>Ist das Original Bild h&ouml;her, wird es reduziert.<br>Dadurch wird Ihre Layout nicht zerst&ouml;rt.'
+);
 define('_MI_YOGURT_ORIGINALW_TITLE', 'Maximale Breite der Originalbilder');
-define('_MI_YOGURT_ORIGINALW_DESC', 'Maximale Breite des Originalbildes in Pixel.<br>Bei &Uuml;berschreiten ist ein Hochladen nicht m&ouml;glich.');
+define(
+    '_MI_YOGURT_ORIGINALW_DESC',
+    'Maximale Breite des Originalbildes in Pixel.<br>Bei &Uuml;berschreiten ist ein Hochladen nicht m&ouml;glich.'
+);
 define('_MI_YOGURT_ORIGINALH_TITLE', 'Maximale H&ouml;he der Originalbilder');
-define('_MI_YOGURT_ORIGINALH_DESC', 'Maximale H&ouml;he des Originalbildes in Pixel.<br>Bei &Uuml;berschreiten ist ein Hochladen nicht m&ouml;glich.');
+define(
+    '_MI_YOGURT_ORIGINALH_DESC',
+    'Maximale H&ouml;he des Originalbildes in Pixel.<br>Bei &Uuml;berschreiten ist ein Hochladen nicht m&ouml;glich.'
+);
 define('_MI_YOGURT_PATHUPLOAD_TITLE', 'Upload-Pfad');
-define('_MI_YOGURT_PATHUPLOAD_DESC', 'Pfad zum Upload-Verzeichnis<br>in Linux zB.: /var/www/uploads<br>in Windows zB.: C:/Programme/www');
+define(
+    '_MI_YOGURT_PATHUPLOAD_DESC',
+    'Pfad zum Upload-Verzeichnis<br>in Linux zB.: /var/www/uploads<br>in Windows zB.: C:/Programme/www'
+);
 define('_MI_YOGURT_LINKPATHUPLOAD_TITLE', 'Link zu Ihrem Upload-Verzeichnis');
-define('_MI_YOGURT_LINKPATHUPLOAD_DESC', 'Adresse zum Root-Pfad des Upload-Verzeichnis<br>zB.: http://www.yoursite.com/uploads');
+define(
+    '_MI_YOGURT_LINKPATHUPLOAD_DESC',
+    'Adresse zum Root-Pfad des Upload-Verzeichnis<br>zB.: http://www.yoursite.com/uploads'
+);
 define('_MI_YOGURT_MAXFILEBYTES_TITLE', 'Maximale Dateigr&ouml;&szlig;e in bytes');
-define('_MI_YOGURT_MAXFILEBYTES_DESC', 'Maximale Dateigr&ouml;&szlig;e von Bildern<br>Angabe in bytes, zB.: 512000 for 500 KB<br>Wert kann nicht gr&ouml;&szlig;er sein als in der PHP.INI des Servers.<br>Der Server akzeptiert maximal ' . ini_get('post_max_size'));
+define(
+    '_MI_YOGURT_MAXFILEBYTES_DESC',
+    'Maximale Dateigr&ouml;&szlig;e von Bildern<br>Angabe in bytes, zB.: 512000 for 500 KB<br>Wert kann nicht gr&ouml;&szlig;er sein als in der PHP.INI des Servers.<br>Der Server akzeptiert maximal ' . ini_get('post_max_size')
+);
 
 define('_MI_YOGURT_PICTURE_NOTIFYTIT', 'Album');
 define('_MI_YOGURT_PICTURE_NOTIFYDSC', 'Benachrichtigungen bezogen auf das User-Album');
@@ -50,11 +81,17 @@ define('_MI_YOGURT_PICTURE_NEWPIC_NOTIFYSBJ', '{X_OWNER_NAME} hat ein neues Bild
 //define("_MI_YOGURT_HOTTEST_DESC","Dieser Block zeigt die begehrtesten Alben");
 //define("_MI_YOGURT_HOTFRIENDS","Begehrteste Freunde");
 //define("_MI_YOGURT_HOTFRIENDS_DESC","Dieser Block zeit Benutzern begehrteste Freunde, die hinzugef&uuml;gt wurden");
-define('_MI_YOGURT_PICTURE_TEMPLATEINDEXDESC', 'Diese Vorlage zeigt das Profil des Users');
+define(
+    '_MI_YOGURT_PICTURE_TEMPLATEINDEXDESC',
+    'Diese Vorlage zeigt das Profil des Users'
+);
 define('_MI_YOGURT_PICTURE_TEMPLATEFRIENDSDESC', 'Diese Vorlage zeigt die Freunde des Users');
 define('_MI_YOGURT_MYFRIENDS', 'Meine Freunde');
 define('_MI_YOGURT_FRIENDSPERPAGE_TITLE', 'Freunde je Seite');
-define('_MI_YOGURT_FRIENDSPERPAGE_DESC', "Anzahl der Freunde, die je Seite angezeigt werden<br>in der 'Meine Freunde' Seite");
+define(
+    '_MI_YOGURT_FRIENDSPERPAGE_DESC',
+    "Anzahl der Freunde, die je Seite angezeigt werden<br>in der 'Meine Freunde' Seite"
+);
 define('_MI_YOGURT_PICTURESPERPAGE_TITLE', 'Bilder je Seite vor Seitenumbruch');
 
 define('_MI_YOGURT_LAST', 'Letzte Bilder-Block');
@@ -78,7 +115,10 @@ define('_MI_YOGURT_PICTURE_TEMPLATESEUTUBODESC', 'Vorlage f&uuml;r die Video-Sek
 define('_MI_YOGURT_PICTURE_TEMPLATEGROUPSDESC', 'Vorlage f&uuml;r die Gruppen');
 define('_MI_YOGURT_MYNOTES', 'Mein G&auml;stebuch');
 define('_MI_YOGURT_MYGROUPS', 'Meine Gruppen');
-define('_MI_YOGURT_TEMPLATENAVBARDESC', 'Vorlage f&uuml;r die obere Navigationsleiste, die in allen Seiten verwendet wird');
+define(
+    '_MI_YOGURT_TEMPLATENAVBARDESC',
+    'Vorlage f&uuml;r die obere Navigationsleiste, die in allen Seiten verwendet wird'
+);
 
 define('_MI_YOGURT_VIDEOSPERPAGE_TITLE', 'Videos je Seite');
 define('_MI_YOGURT_VIDEO_NOTIFYTIT', 'Videos');
@@ -91,7 +131,10 @@ define('_MI_YOGURT_VIDEO_NEWVIDEO_NOTIFYSBJ', '{X_OWNER_NAME} hat eine neues Vid
 define('_MI_YOGURT_NOTE_NOTIFYTIT', 'G&auml;stebuch');
 define('_MI_YOGURT_NOTE_NOTIFYDSC', 'G&auml;stebuch-Benachrichtigungen');
 define('_MI_YOGURT_NOTE_NEWNOTE_NOTIFY', 'Neuer G&auml;stebucheintrag');
-define('_MI_YOGURT_NOTE_NEWNOTE_NOTIFYCAP', 'Benachrichtige mich, wenn ein neuer Eintrag in diesem G&auml;stebuch erstellt wurde');
+define(
+    '_MI_YOGURT_NOTE_NEWNOTE_NOTIFYCAP',
+    'Benachrichtige mich, wenn ein neuer Eintrag in diesem G&auml;stebuch erstellt wurde'
+);
 define('_MI_YOGURT_NOTE_NEWNOTE_NOTIFYDSC', 'Benachrichtigt den User &uuml;ber neue G&auml;stebucheintr&auml;ge');
 define('_MI_YOGURT_NOTE_NEWNOTE_NOTIFYSBJ', '{X_OWNER_NAME} hat einen Eintrag im G&auml;stebuch erhalten');
 
@@ -121,17 +164,35 @@ define('_MI_YOGURT_PICTURE_TEMPLATESEARCHFORMDESC', 'Vorlage f&uuml;r das Suchfo
 
 //26/10/2007
 define('_MI_YOGURT_ENABLEPICT_TITLE', 'Aktiviere Bilder-Sektion');
-define('_MI_YOGURT_ENABLEPICT_DESC', 'Das Aktivieren der Bildergallerie erm&ouml;glicht den Usern den Upload von Bildern');
+define(
+    '_MI_YOGURT_ENABLEPICT_DESC',
+    'Das Aktivieren der Bildergallerie erm&ouml;glicht den Usern den Upload von Bildern'
+);
 define('_MI_YOGURT_ENABLEFRIENDS_TITLE', 'Aktiviere Freunde-Sektion');
-define('_MI_YOGURT_ENABLEFRIENDS_DESC', 'Das Aktivieren der Freunde-Sektion erm&ouml;glicht den Usern Freundschaften zu schlie&szlig;en und Freunde zu bewerten');
+define(
+    '_MI_YOGURT_ENABLEFRIENDS_DESC',
+    'Das Aktivieren der Freunde-Sektion erm&ouml;glicht den Usern Freundschaften zu schlie&szlig;en und Freunde zu bewerten'
+);
 define('_MI_YOGURT_ENABLEVIDEOS_TITLE', 'Aktiviere Video-Sektion');
-define('_MI_YOGURT_ENABLEVIDEOS_DESC', 'Das Aktivieren der Videogallerie erm&ouml;glicht den Usern ein Verlinken von Videos in ihrem Profil');
+define(
+    '_MI_YOGURT_ENABLEVIDEOS_DESC',
+    'Das Aktivieren der Videogallerie erm&ouml;glicht den Usern ein Verlinken von Videos in ihrem Profil'
+);
 define('_MI_YOGURT_ENABLENOTES_TITLE', 'Aktiviere G&auml;stebuch-Sektion');
-define('_MI_YOGURT_ENABLENOTES_DESC', "Das Aktivieren der G&auml;stebuchfunktion erm&ouml;glicht Usern, Nachrichten bei anderen Usern zu hinterlassen. Diese Funktion ist wie die 'Wall' bei Facebook ");
+define(
+    '_MI_YOGURT_ENABLENOTES_DESC',
+    "Das Aktivieren der G&auml;stebuchfunktion erm&ouml;glicht Usern, Nachrichten bei anderen Usern zu hinterlassen. Diese Funktion ist wie die 'Wall' bei Facebook "
+);
 define('_MI_YOGURT_ENABLEGROUPS_TITLE', 'Aktiviere Gruppen-Sektion');
-define('_MI_YOGURT_ENABLEGROUPS_DESC', 'Das Aktivieren dieser Funktion erm&ouml;glicht das Anlegen von Gruppen, die die Interessen von Usern wiedergeben');
+define(
+    '_MI_YOGURT_ENABLEGROUPS_DESC',
+    'Das Aktivieren dieser Funktion erm&ouml;glicht das Anlegen von Gruppen, die die Interessen von Usern wiedergeben'
+);
 define('_MI_YOGURT_NOTESPERPAGE_TITLE', 'Anzahl G&auml;stebucheintr&auml;ge je Seite');
-define('_MI_YOGURT_NOTESPERPAGE_DESC', 'Anzahl G&auml;stebucheintr&auml;ge, bevor die Seitennavigation angezeigt wird');
+define(
+    '_MI_YOGURT_NOTESPERPAGE_DESC',
+    'Anzahl G&auml;stebucheintr&auml;ge, bevor die Seitennavigation angezeigt wird'
+);
 
 //25/11/2007
 define('_MI_YOGURT_FRIENDS', 'Meine Freunde');
@@ -157,7 +218,10 @@ define('_MI_YOGURT_PICTURE_TEMPLATEFANS', 'Vorlage f&uuml;r die Fan-Seite');
 
 //17/07/2008
 define('_MI_YOGURT_ENABLEAUDIO_TITLE', 'Aktivierte die Audio-Sektion');
-define('_MI_YOGURT_ENABLEAUDIO_DESC', 'Das Aktivieren der Audio-Sektion erm&ouml;glichts den Usern das Einstellen und Hochladen eigener Playlists');
+define(
+    '_MI_YOGURT_ENABLEAUDIO_DESC',
+    'Das Aktivieren der Audio-Sektion erm&ouml;glichts den Usern das Einstellen und Hochladen eigener Playlists'
+);
 define('_MI_YOGURT_PICTURE_TEMPLATEAUDIODESC', 'Vorlage f&uuml;r die Autio-Sektion');
 define('_MI_YOGURT_NUMBAUDIO_TITLE', 'Maximale Audio-Dateien die ein User haben darf');
 define('_MI_YOGURT_AUDIOSPERPAGE_TITLE', 'Anzahl der Audio-Dateien pro Seite vor Seitenumbruch');

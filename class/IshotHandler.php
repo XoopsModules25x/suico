@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
@@ -12,6 +12,11 @@ namespace XoopsModules\Yogurt;
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 
+use CriteriaElement;
+use XoopsDatabase;
+use XoopsObject;
+use XoopsPersistableObjectHandler;
+
 /**
  * @copyright    XOOPS Project https://xoops.org/
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
@@ -19,7 +24,9 @@ namespace XoopsModules\Yogurt;
  * @author       XOOPS Development Team
  * @since
  */
-if (!defined('XOOPS_ROOT_PATH')) {
+if (!defined(
+    'XOOPS_ROOT_PATH'
+)) {
     exit();
 }
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
@@ -32,25 +39,24 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  * yogurt_ishothandler class.
  * This class provides simple mecanisme for Ishot object
  */
-class IshotHandler extends \XoopsPersistableObjectHandler
+class IshotHandler extends XoopsPersistableObjectHandler
 {
-    /**
-     * @var Helper
-     */
     public $helper;
+
     public $isAdmin;
 
     /**
      * Constructor
-     * @param null|\XoopsDatabase              $db
-     * @param null|\XoopsModules\Yogurt\Helper $helper
+     * @param \XoopsDatabase|null              $xoopsDatabase
+     * @param \XoopsModules\Yogurt\Helper|null $helper
      */
-
-    public function __construct(\XoopsDatabase $db = null, $helper = null)
-    {
+    public function __construct(
+        ?XoopsDatabase $xoopsDatabase = null,
+        $helper = null
+    ) {
         /** @var \XoopsModules\Yogurt\Helper $this ->helper */
         if (null === $helper) {
-            $this->helper = \XoopsModules\Yogurt\Helper::getInstance();
+            $this->helper = Helper::getInstance();
         } else {
             $this->helper = $helper;
         }
@@ -64,35 +70,37 @@ class IshotHandler extends \XoopsPersistableObjectHandler
      * @param bool $isNew flag the new objects as "new"?
      * @return \XoopsObject Groups
      */
-    public function create($isNew = true)
-    {
-        {
-            $obj = parent::create($isNew);
-            if ($isNew) {
-                $obj->setNew();
-            } else {
-                $obj->unsetNew();
-            }
-            $obj->helper = $this->helper;
-
-            return $obj;
+    public function create(
+        $isNew = true
+    ) {
+        $obj = parent::create($isNew);
+        if ($isNew) {
+            $obj->setNew();
+        } else {
+            $obj->unsetNew();
         }
+        $obj->helper = $this->helper;
+
+        return $obj;
     }
 
     /**
      * retrieve a Ishot
      *
-     * @param int $id of the Ishot
+     * @param int  $id of the Ishot
+     * @param null $fields
      * @return mixed reference to the {@link Ishot} object, FALSE if failed
      */
-    public function get($id = null, $fields = null)
-    {
+    public function get(
+        $id = null,
+        $fields = null
+    ) {
         $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_ishot') . ' WHERE cod_ishot=' . $id;
         if (!$result = $this->db->query($sql)) {
             return false;
         }
         $numrows = $this->db->getRowsNum($result);
-        if (1 == $numrows) {
+        if (1 === $numrows) {
             $yogurt_ishot = new Ishot();
             $yogurt_ishot->assignVars($this->db->fetchArray($result));
 
@@ -105,39 +113,58 @@ class IshotHandler extends \XoopsPersistableObjectHandler
     /**
      * insert a new Ishot in the database
      *
-     * @param \XoopsObject $yogurt_ishot reference to the {@link Ishot}
+     * @param \XoopsObject $xoopsObject  reference to the {@link Ishot}
      *                                   object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(\XoopsObject $yogurt_ishot, $force = false)
-    {
+    public function insert(
+        XoopsObject $xoopsObject,
+        $force = false
+    ) {
         global $xoopsConfig;
-        if (!$yogurt_ishot instanceof Ishot) {
+        if (!$xoopsObject instanceof Ishot) {
             return false;
         }
-        if (!$yogurt_ishot->isDirty()) {
+        if (!$xoopsObject->isDirty()) {
             return true;
         }
-        if (!$yogurt_ishot->cleanVars()) {
+        if (!$xoopsObject->cleanVars()) {
             return false;
         }
-        foreach ($yogurt_ishot->cleanVars as $k => $v) {
+        foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
         $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
-        if ($yogurt_ishot->isNew()) {
+        if ($xoopsObject->isNew()) {
             // ajout/modification d'un Ishot
-            $yogurt_ishot = new Ishot();
-            $format       = 'INSERT INTO %s (cod_ishot, uid_voter, uid_voted, ishot, DATE)';
-            $format       .= 'VALUES (%u, %u, %u, %u, %s)';
-            $sql          = sprintf($format, $this->db->prefix('yogurt_ishot'), $cod_ishot, $uid_voter, $uid_voted, $ishot, $this->db->quoteString($date));
-            $force        = true;
+            $xoopsObject = new Ishot();
+            $format      = 'INSERT INTO %s (cod_ishot, uid_voter, uid_voted, ishot, DATE)';
+            $format      .= 'VALUES (%u, %u, %u, %u, %s)';
+            $sql         = sprintf(
+                $format,
+                $this->db->prefix('yogurt_ishot'),
+                $cod_ishot,
+                $uid_voter,
+                $uid_voted,
+                $ishot,
+                $this->db->quoteString($date)
+            );
+            $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'cod_ishot=%u, uid_voter=%u, uid_voted=%u, ishot=%u, date=%s';
             $format .= ' WHERE cod_ishot = %u';
-            $sql    = sprintf($format, $this->db->prefix('yogurt_ishot'), $cod_ishot, $uid_voter, $uid_voted, $ishot, $this->db->quoteString($date), $cod_ishot);
+            $sql    = sprintf(
+                $format,
+                $this->db->prefix('yogurt_ishot'),
+                $cod_ishot,
+                $uid_voter,
+                $uid_voted,
+                $ishot,
+                $this->db->quoteString($date),
+                $cod_ishot
+            );
         }
         if ($force) {
             $result = $this->db->queryF($sql);
@@ -150,7 +177,7 @@ class IshotHandler extends \XoopsPersistableObjectHandler
         if (empty($cod_ishot)) {
             $cod_ishot = $this->db->getInsertId();
         }
-        $yogurt_ishot->assignVar('cod_ishot', $cod_ishot);
+        $xoopsObject->assignVar('cod_ishot', $cod_ishot);
 
         return true;
     }
@@ -158,16 +185,22 @@ class IshotHandler extends \XoopsPersistableObjectHandler
     /**
      * delete a Ishot from the database
      *
-     * @param \XoopsObject $yogurt_ishot reference to the Ishot to delete
+     * @param \XoopsObject $xoopsObject reference to the Ishot to delete
      * @param bool         $force
      * @return bool FALSE if failed.
      */
-    public function delete(\XoopsObject $yogurt_ishot, $force = false)
-    {
-        if (!$yogurt_ishot instanceof Ishot) {
+    public function delete(
+        XoopsObject $xoopsObject,
+        $force = false
+    ) {
+        if (!$xoopsObject instanceof Ishot) {
             return false;
         }
-        $sql = sprintf('DELETE FROM %s WHERE cod_ishot = %u', $this->db->prefix('yogurt_ishot'), $yogurt_ishot->getVar('cod_ishot'));
+        $sql = sprintf(
+            'DELETE FROM %s WHERE cod_ishot = %u',
+            $this->db->prefix('yogurt_ishot'),
+            $xoopsObject->getVar('cod_ishot')
+        );
         if ($force) {
             $result = $this->db->queryF($sql);
         } else {
@@ -183,22 +216,26 @@ class IshotHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve yogurt_ishots from the database
      *
-     * @param null|\CriteriaElement|\CriteriaCompo $criteria  {@link \CriteriaElement} conditions to be met
-     * @param bool                                 $id_as_key use the UID as key for the array?
+     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} conditions to be met
+     * @param bool                                 $id_as_key       use the UID as key for the array?
+     * @param bool                                 $as_object
      * @return array array of {@link Ishot} objects
      */
-    public function &getObjects(\CriteriaElement $criteria = null, $id_as_key = false, $as_object = true)
-    {
+    public function &getObjects(
+        ?CriteriaElement $criteriaElement = null,
+        $id_as_key = false,
+        $as_object = true
+    ) {
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_ishot');
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
-            $sql .= ' ' . $criteria->renderWhere();
-            if ('' != $criteria->getSort()) {
-                $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
+        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
+            $sql .= ' ' . $criteriaElement->renderWhere();
+            if ('' !== $criteriaElement->getSort()) {
+                $sql .= ' ORDER BY ' . $criteriaElement->getSort() . ' ' . $criteriaElement->getOrder();
             }
-            $limit = $criteria->getLimit();
-            $start = $criteria->getStart();
+            $limit = $criteriaElement->getLimit();
+            $start = $criteriaElement->getStart();
         }
         $result = $this->db->query($sql, $limit, $start);
         if (!$result) {
@@ -221,20 +258,21 @@ class IshotHandler extends \XoopsPersistableObjectHandler
     /**
      * count yogurt_ishots matching a condition
      *
-     * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link CriteriaElement} to match
+     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link CriteriaElement} to match
      * @return int count of yogurt_ishots
      */
-    public function getCount(\CriteriaElement $criteria = null)
-    {
+    public function getCount(
+        ?CriteriaElement $criteriaElement = null
+    ) {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_ishot');
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
-            $sql .= ' ' . $criteria->renderWhere();
+        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
+            $sql .= ' ' . $criteriaElement->renderWhere();
         }
         $result = $this->db->query($sql);
         if (!$result) {
             return 0;
         }
-        list($count) = $this->db->fetchRow($result);
+        [$count] = $this->db->fetchRow($result);
 
         return $count;
     }
@@ -242,14 +280,19 @@ class IshotHandler extends \XoopsPersistableObjectHandler
     /**
      * delete yogurt_ishots matching a set of conditions
      *
-     * @param null|\CriteriaElement|\CriteriaCompo $criteria {@link CriteriaElement}
+     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link CriteriaElement}
+     * @param bool                                 $force
+     * @param bool                                 $asObject
      * @return bool FALSE if deletion failed
      */
-    public function deleteAll(\CriteriaElement $criteria = null, $force = true, $asObject = false)
-    {
+    public function deleteAll(
+        ?CriteriaElement $criteriaElement = null,
+        $force = true,
+        $asObject = false
+    ) {
         $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_ishot');
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
-            $sql .= ' ' . $criteria->renderWhere();
+        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
+            $sql .= ' ' . $criteriaElement->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {
             return false;
@@ -262,18 +305,22 @@ class IshotHandler extends \XoopsPersistableObjectHandler
      * @param null $criteria
      * @return array
      */
-    public function getHottest($criteria = null)
+    public function getHottest($criteria = null) 
     {
-        $sql = 'SELECT DISTINCTROW uname, user_avatar, uid_voted, COUNT(cod_ishot) AS qtd FROM ' . $this->db->prefix('yogurt_ishot') . ', ' . $this->db->prefix('users');
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
+        $sql = 'SELECT DISTINCTROW uname, user_avatar, uid_voted, COUNT(cod_ishot) AS qtd FROM ' . $this->db->prefix(
+                'yogurt_ishot'
+            ) . ', ' . $this->db->prefix(
+                'users'
+            );
+        if (isset($criteria) && $criteria instanceof CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         //attention here this is kind of a hack
         $sql .= ' AND uid = uid_voted';
-        if ('' != $criteria->getGroupby()) {
+        if ('' !== $criteria->getGroupby()) {
             $sql .= $criteria->getGroupby();
         }
-        if ('' != $criteria->getSort()) {
+        if ('' !== $criteria->getSort()) {
             $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
         }
         $limit = $criteria->getLimit();
@@ -298,16 +345,22 @@ class IshotHandler extends \XoopsPersistableObjectHandler
      * @param bool $id_as_key
      * @return array
      */
-    public function getHotFriends($criteria = null, $id_as_key = false)
-    {
+    public function getHotFriends(
+        $criteria = null,
+        $id_as_key = false
+    ) {
         $ret   = [];
         $limit = $start = 0;
-        $sql   = 'SELECT uname, user_avatar, uid_voted FROM ' . $this->db->prefix('yogurt_ishot') . ', ' . $this->db->prefix('users');
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
+        $sql   = 'SELECT uname, user_avatar, uid_voted FROM ' . $this->db->prefix(
+                'yogurt_ishot'
+            ) . ', ' . $this->db->prefix(
+                'users'
+            );
+        if (isset($criteria) && $criteria instanceof CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             //attention here this is kind of a hack
             $sql .= ' AND uid = uid_voted AND ishot=1';
-            if ('' != $criteria->getSort()) {
+            if ('' !== $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
             $limit = $criteria->getLimit();

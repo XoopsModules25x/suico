@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,6 +18,7 @@
  * @since
  */
 
+use Xmf\Request;
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_video.tpl';
@@ -29,14 +31,14 @@ $controller = new Yogurt\VideoController($xoopsDB, $xoopsUser);
  */
 $nbSections = $controller->getNumbersSections();
 
-$start = \Xmf\Request::getInt('start', 0, 'GET');
+$start = Request::getInt('start', 0, 'GET');
 
 /**
  * Criteria for Videos
  */
-$criteriaUidVideo = new \Criteria('uid_owner', $controller->uidOwner);
+$criteriaUidVideo = new Criteria('uid_owner', $controller->uidOwner);
 $criteriaUidVideo->setStart($start);
-$criteriaUidVideo->setLimit($xoopsModuleConfig['videosperpage']);
+$criteriaUidVideo->setLimit($helper->getConfig('videosperpage'));
 
 /**
  * Get all videos of this user and assign them to template
@@ -50,24 +52,30 @@ if (is_array($videos_array)) {
     $xoopsTpl->assign('lang_novideoyet', _MD_YOGURT_NOVIDEOSYET);
 }
 $xoopsTpl->assign('lang_selectmainvideo', _MD_YOGURT_SELECTMAINVIDEO);
-	
-$pageNav = $controller->VideosNavBar($nbSections['nbVideos'], $xoopsModuleConfig['videosperpage'], $start, 2);
+
+$pageNav = $controller->VideosNavBar($nbSections['nbVideos'], $helper->getConfig('videosperpage'), $start, 2);
 
 /**
  * Adding to the module js and css of the lightbox and new ones
  */
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/yogurt.css');
+$xoTheme->addStylesheet(
+    XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/yogurt.css'
+);
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
-if (false !== strpos(mb_strtolower($_SERVER['HTTP_USER_AGENT']), 'msie')) {
-    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css');
+if (false !== stripos($_SERVER['HTTP_USER_AGENT'], 'msie')) {
+    $xoTheme->addStylesheet(
+        XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css'
+    );
 }
 //$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/css/lightbox.css');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/prototype.js');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/scriptaculous.js?load=effects');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/lightbox.js');
 //$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/include/jquery.lightbox-0.3.css');
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.js');
+$xoTheme->addScript(
+    XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.js'
+);
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js');
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
 
@@ -111,7 +119,10 @@ $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
 //page atributes
-$xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner));
+$xoopsTpl->assign(
+    'xoops_pagetitle',
+    sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner)
+);
 
 //form actions
 $xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
@@ -124,8 +135,8 @@ $xoopsTpl->assign('lang_youtubecodeLabel', _MD_YOGURT_YOUTUBECODE);
 $xoopsTpl->assign('lang_captionLabel', _MD_YOGURT_CAPTION);
 $xoopsTpl->assign('lang_submitValue', _MD_YOGURT_ADDVIDEO);
 
-$xoopsTpl->assign('width', $xoopsModuleConfig['width_tube']);
-$xoopsTpl->assign('height', $xoopsModuleConfig['height_tube']);
+$xoopsTpl->assign('width', $helper->getConfig('width_tube'));
+$xoopsTpl->assign('height', $helper->getConfig('height_tube'));
 $xoopsTpl->assign('lang_videohelp', _MD_YOGURT_ADDVIDEOSHELP);
 
 //Videos NAvBAr

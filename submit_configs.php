@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,6 +18,7 @@
  * @since
  */
 
+use Xmf\Request;
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
@@ -30,7 +32,7 @@ $configsFactory = new Yogurt\ConfigsHandler($xoopsDB);
  * Verify Token
  */
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
 //      $this->initVar("config_id",XOBJ_DTYPE_INT,null,false,10);
@@ -58,7 +60,7 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 //$pgen   = $_POST['gen'];
 //$psta   = $_POST['stat'];
 
-$criteria = new \Criteria('config_uid', $xoopsUser->getVar('uid'));
+$criteria = new Criteria('config_uid', $xoopsUser->getVar('uid'));
 if ($configsFactory->getCount($criteria) > 0) {
     $configs = $configsFactory->getObjects($criteria);
     $config  = $configs[0];

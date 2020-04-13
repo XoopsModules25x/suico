@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -41,9 +42,15 @@ define('_MA_YOGURT_ALLTESTSOK', 'All tests must be OK for this module to work 10
 define('_MA_YOGURT_GDEXTENSIONOK', 'GD extension loaded: OK!');
 define('_MA_YOGURT_MOREINFO', 'Here is more info on:');
 define('_MA_YOGURT_GDEXTENSIONFALSE', 'GD extension loaded: FAILED ');
-define('_MA_YOGURT_CONFIGPHPINI', 'Configure your php.ini or ask your server manager to install it and enable it for you.');
+define(
+    '_MA_YOGURT_CONFIGPHPINI',
+    'Configure your php.ini or ask your server manager to install it and enable it for you.'
+);
 define('_MA_YOGURT_PHP5PRESENT', 'You have a compatible version of PHP:');
-define('_MA_YOGURT_PHP5NOTPRESENT', 'Your PHP version is compatible, but many details would work better on a php5 server and above.');
+define(
+    '_MA_YOGURT_PHP5NOTPRESENT',
+    'Your PHP version is compatible, but many details would work better on a php5 server and above.'
+);
 define('_MA_YOGURT_MAXBYTESPHPINI', 'Your server limits the size of uploads to %s');
 define('_MA_YOGURT_MEMORYLIMIT', 'The Memory Limit of your server is:');
 //3.4
@@ -69,7 +76,10 @@ define('AM_YOGURT_THEREARE_IMAGES', "There are <span class='bold'>%s</span> Imag
 define('AM_YOGURT_THEREARE_FRIENDS', "There are <span class='bold'>%s</span> Friends in the database");
 define('AM_YOGURT_THEREARE_VISITORS', "There are <span class='bold'>%s</span> Visitors in the database");
 define('AM_YOGURT_THEREARE_VIDEO', "There are <span class='bold'>%s</span> Video in the database");
-define('AM_YOGURT_THEREARE_FRIENDPETITION', "There are <span class='bold'>%s</span> Friendship Requests in the database");
+define(
+    'AM_YOGURT_THEREARE_FRIENDPETITION',
+    "There are <span class='bold'>%s</span> Friendship Requests in the database"
+);
 define('AM_YOGURT_THEREARE_GROUPS', "There are <span class='bold'>%s</span> Groups in the database");
 define('AM_YOGURT_THEREARE_MEMBERS', "There are <span class='bold'>%s</span> Members in the database");
 define('AM_YOGURT_THEREARE_NOTES', "There are <span class='bold'>%s</span> Notes in the database");
@@ -244,7 +254,10 @@ define('AM_YOGURT_PERMISSIONS_VIEW_DESC', 'Only users in the group that you sele
 define('AM_YOGURT_PERMISSIONS_SUBMIT', 'Permissions to submit');
 define('AM_YOGURT_PERMISSIONS_SUBMIT_DESC', 'Only users in the group that you select may submit this');
 define('AM_YOGURT_PERMISSIONS_GPERMUPDATED', 'Permissions have been changed successfully');
-define('AM_YOGURT_PERMISSIONS_NOPERMSSET', 'Permission cannot be set: No audio created yet! Please create a audio first.');
+define(
+    'AM_YOGURT_PERMISSIONS_NOPERMSSET',
+    'Permission cannot be set: No audio created yet! Please create a audio first.'
+);
 
 //Errors
 define('AM_YOGURT_UPGRADEFAILED0', "Update failed - couldn't rename field '%s'");
@@ -257,7 +270,10 @@ define('AM_YOGURT_ERROR_TAG_REMOVAL', 'Could not remove tags from Tag Module');
 //directories
 define('AM_YOGURT_AVAILABLE', "<span style='color : #008000;'>Available. </span>");
 define('AM_YOGURT_NOTAVAILABLE', "<span style='color : #ff0000;'>is not available. </span>");
-define('AM_YOGURT_NOTWRITABLE', "<span style='color : #ff0000;'>" . ' should have permission ( %1$d ), but it has ( %2$d )' . '</span>');
+define(
+    'AM_YOGURT_NOTWRITABLE',
+    "<span style='color : #ff0000;'>" . ' should have permission ( %1$d ), but it has ( %2$d )' . '</span>'
+);
 define('AM_YOGURT_CREATETHEDIR', 'Create it');
 define('AM_YOGURT_SETMPERM', 'Set the permission');
 define('AM_YOGURT_DIRCREATED', 'The directory has been created');
@@ -270,5 +286,8 @@ define('AM_YOGURT_ADD_SAMPLEDATA', 'Import Sample Data (will delete ALL current 
 define('AM_YOGURT_SAMPLEDATA_SUCCESS', 'Sample Date uploaded successfully');
 
 //Error NoFrameworks
-define('_AM_ERROR_NOFRAMEWORKS', 'Error: You don&#39;t use the Frameworks \'admin module\'. Please install this Frameworks');
+define(
+    '_AM_ERROR_NOFRAMEWORKS',
+    'Error: You don&#39;t use the Frameworks \'admin module\'. Please install this Frameworks'
+);
 define('AM_YOGURT_MAINTAINEDBY', 'is maintained by the');

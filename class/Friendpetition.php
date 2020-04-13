@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
@@ -7,6 +7,10 @@ namespace XoopsModules\Yogurt;
 // Author: Bruno Barthez                                               //
 // ----------------------------------------------------------------- //
 
+use Xmf\Module\Helper\Permission;
+use XoopsDatabaseFactory;
+use XoopsObject;
+
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
 /**
@@ -14,7 +18,7 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  * $this class is responsible for providing data access mechanisms to the data source
  * of XOOPS user class objects.
  */
-class Friendpetition extends \XoopsObject
+class Friendpetition extends XoopsObject
 {
     public $db;
 
@@ -26,10 +30,10 @@ class Friendpetition extends \XoopsObject
      */
     public function __construct($id = null)
     {
-        /** @var  Helper $helper */
+        /** @var Helper $helper */
         $this->helper     = Helper::getInstance();
-        $this->permHelper = new \Xmf\Module\Helper\Permission();
-        $this->db         = \XoopsDatabaseFactory::getDatabaseConnection();
+        $this->permHelper = new Permission();
+        $this->db         = XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('friendpet_id', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('petitioner_uid', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('petioned_uid', XOBJ_DTYPE_INT, null, false, 10);
@@ -66,28 +70,38 @@ class Friendpetition extends \XoopsObject
      * @param int    $start
      * @return array
      */
-    public function getAllyogurt_friendpetitions($criteria = [], $asobject = false, $sort = 'friendpet_id', $order = 'ASC', $limit = 0, $start = 0)
-    {
-        $db          = \XoopsDatabaseFactory::getDatabaseConnection();
+    public function getAllyogurt_friendpetitions(
+        $criteria = [],
+        $asobject = false,
+        $sort = 'friendpet_id',
+        $order = 'ASC',
+        $limit = 0,
+        $start = 0
+    ) {
+        $db          = XoopsDatabaseFactory::getDatabaseConnection();
         $ret         = [];
         $where_query = '';
         if (is_array($criteria) && count($criteria) > 0) {
             $where_query = ' WHERE';
             foreach ($criteria as $c) {
-                $where_query .= " $c AND";
+                $where_query .= " ${c} AND";
             }
             $where_query = mb_substr($where_query, 0, -4);
         } elseif (!is_array($criteria) && $criteria) {
             $where_query = ' WHERE ' . $criteria;
         }
         if (!$asobject) {
-            $sql    = 'SELECT friendpet_id FROM ' . $db->prefix('yogurt_friendpetition') . "$where_query ORDER BY $sort $order";
+            $sql    = 'SELECT friendpet_id FROM ' . $db->prefix(
+                    'yogurt_friendpetition'
+                ) . "${where_query} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['yogurt_friendpetition_id'];
             }
         } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_friendpetition') . "$where_query ORDER BY $sort $order";
+            $sql    = 'SELECT * FROM ' . $db->prefix(
+                    'yogurt_friendpetition'
+                ) . "${where_query} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new self($myrow);
@@ -100,13 +114,11 @@ class Friendpetition extends \XoopsObject
     /**
      * Get form
      *
-     * @param null
-     * @return Yogurt\Form\FriendpetitionForm
+     * @return \XoopsModules\Yogurt\Form\FriendpetitionForm
      */
     public function getForm()
     {
-        $form = new Form\FriendpetitionForm($this);
-        return $form;
+        return new Form\FriendpetitionForm($this);
     }
 
     /**
@@ -115,7 +127,10 @@ class Friendpetition extends \XoopsObject
     public function getGroupsRead()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
-        return $this->permHelper->getGroupsForItem('sbcolumns_read', $this->getVar('friendpet_id'));
+        return $this->permHelper->getGroupsForItem(
+            'sbcolumns_read',
+            $this->getVar('friendpet_id')
+        );
     }
 
     /**
@@ -124,7 +139,10 @@ class Friendpetition extends \XoopsObject
     public function getGroupsSubmit()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
-        return $this->permHelper->getGroupsForItem('sbcolumns_submit', $this->getVar('friendpet_id'));
+        return $this->permHelper->getGroupsForItem(
+            'sbcolumns_submit',
+            $this->getVar('friendpet_id')
+        );
     }
 
     /**
@@ -133,6 +151,9 @@ class Friendpetition extends \XoopsObject
     public function getGroupsModeration()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
-        return $this->permHelper->getGroupsForItem('sbcolumns_moderation', $this->getVar('friendpet_id'));
+        return $this->permHelper->getGroupsForItem(
+            'sbcolumns_moderation',
+            $this->getVar('friendpet_id')
+        );
     }
 }

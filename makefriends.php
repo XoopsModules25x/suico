@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,6 +18,7 @@
  * @since
  */
 
+use Xmf\Request;
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
@@ -31,16 +33,16 @@ require __DIR__ . '/header.php';
 $friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
 $friendshipFactory     = new Yogurt\FriendshipHandler($xoopsDB);
 
-$petition_id      = \Xmf\Request::getInt('petition_id', 0, 'POST');
-$friendship_level = \Xmf\Request::getInt('level', 0, 'POST');
+$petition_id      = Request::getInt('petition_id', 0, 'POST');
+$friendship_level = Request::getInt('level', 0, 'POST');
 $uid              = (int)$xoopsUser->getVar('uid');
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
-$criteria = new \CriteriaCompo(new \Criteria('friendpet_id', $petition_id));
-$criteria->add(new \Criteria('petioned_uid', $uid));
+$criteria = new CriteriaCompo(new Criteria('friendpet_id', $petition_id));
+$criteria->add(new Criteria('petioned_uid', $uid));
 if ($friendpetitionFactory->getCount($criteria) > 0) {
     if (($friendship_level > 0) && ($petition = $friendpetitionFactory->getObjects($criteria))) {
         $friend1_uid = $petition[0]->getVar('petitioner_uid');
@@ -60,7 +62,7 @@ if ($friendpetitionFactory->getCount($criteria) > 0) {
 
         redirect_header(XOOPS_URL . '/modules/yogurt/friends.php?uid=' . $friend2_uid, 3, _MD_YOGURT_FRIENDMADE);
     } else {
-        if (0 == $friendship_level) {
+        if (0 === $friendship_level) {
             $friendpetitionFactory->deleteAll($criteria);
             redirect_header(XOOPS_URL . '/modules/yogurt/index.php?uid=' . $uid, 3, _MD_YOGURT_FRIENDSHIPNOTACCEPTED);
         }

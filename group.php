@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,34 +18,39 @@
  * @since
  */
 
+use Xmf\Request;
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_group.tpl';
 require __DIR__ . '/header.php';
 
-$controller = new Yogurt\ControllerGroups($xoopsDB, $xoopsUser);
+$controller = new Yogurt\GroupController($xoopsDB, $xoopsUser);
 
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
 $nbSections = $controller->getNumbersSections();
 
-$group_id = \Xmf\Request::getInt('group_id', 0, 'GET');
-$criteria = new \Criteria('group_id', $group_id);
+$group_id = Request::getInt('group_id', 0, 'GET');
+$criteria = new Criteria('group_id', $group_id);
 $groups   = $controller->groupsFactory->getObjects($criteria);
 $group    = $groups[0];
 
 /**
  * Render a form with the info of the user
  */
-$group_members = $controller->relgroupusersFactory->getUsersFromGroup($group_id, 0, 50);
+$group_members = $controller->relgroupusersFactory->getUsersFromGroup(
+    $group_id,
+    0,
+    50
+);
 foreach ($group_members as $group_member) {
     $uids[] = (int)$group_member['uid'];
 }
 
 $uid = (int)$xoopsUser->getVar('uid');
 if ($xoopsUser) {
-    if (in_array($uid, $uids)) {
+    if (in_array($uid, $uids, true)) {
         $xoopsTpl->assign('memberOfGroup', 1);
     }
     $xoopsTpl->assign('useruid', $uid);
@@ -53,7 +59,7 @@ $owner_uid=$group->getVar('owner_uid');
 $group_ownername = XoopsUser::getUnameFromId($owner_uid);
 
 $xoopsTpl->assign('group_members', $group_members);
-$maxfilebytes = $xoopsModuleConfig['maxfilesize'];
+$maxfilebytes = $helper->getConfig('maxfilesize');
 $xoopsTpl->assign('lang_savegroup', _MD_YOGURT_UPLOADGROUP);
 $xoopsTpl->assign('maxfilesize', $maxfilebytes);
 $xoopsTpl->assign('group_title', $group->getVar('group_title'));
@@ -116,25 +122,37 @@ $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
 //page atributes
-$xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner));
+$xoopsTpl->assign(
+    'xoops_pagetitle',
+    sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner)
+);
 
-//$xoopsTpl->assign('path_yogurt_uploads',$xoopsModuleConfig['link_path_upload']);
-$xoopsTpl->assign('lang_owner', _MD_YOGURT_GROUPOWNER);
+//$xoopsTpl->assign('path_yogurt_uploads',$helper->getConfig('link_path_upload'));
+$xoopsTpl->assign(
+    'lang_owner',
+    _MD_YOGURT_GROUPOWNER
+);
 
 /**
  * Adding to the module js and css of the lightbox and new ones
  */
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/yogurt.css');
+$xoTheme->addStylesheet(
+    XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/yogurt.css'
+);
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
-if (false !== strpos(mb_strtolower($_SERVER['HTTP_USER_AGENT']), 'msie')) {
-    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css');
+if (false !== stripos($_SERVER['HTTP_USER_AGENT'], 'msie')) {
+    $xoTheme->addStylesheet(
+        XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css'
+    );
 }
 //$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/css/lightbox.css');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/prototype.js');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/scriptaculous.js?load=effects');
 //$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/lightbox.js');
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.lightbox-0.3.css');
+$xoTheme->addStylesheet(
+    XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.lightbox-0.3.css'
+);
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.js');
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js');
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');

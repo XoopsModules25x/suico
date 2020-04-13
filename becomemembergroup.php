@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -18,6 +21,7 @@
  */
 
 use XoopsModules\Yogurt;
+use Xmf\Request;
 
 require __DIR__ . '/header.php';
 
@@ -28,15 +32,17 @@ require __DIR__ . '/header.php';
 /**
  * Factories of groups... testing for zend editor
  */
-$relgroupuserFactory = new Yogurt\RelgroupuserHandler($xoopsDB);
+$relgroupuserFactory = new Yogurt\RelgroupuserHandler(
+    $xoopsDB
+);
 $groupsFactory       = new Yogurt\GroupsHandler($xoopsDB);
 
-$group_id = \Xmf\Request::getInt('group_id', 0, 'POST');
+$group_id = Request::getInt('group_id', 0, 'POST');
 $uid      = (int)$xoopsUser->getVar('uid');
 
-$criteria_uid      = new \Criteria('rel_user_uid', $uid);
-$criteria_group_id = new \Criteria('rel_group_id', $group_id);
-$criteria          = new \CriteriaCompo($criteria_uid);
+$criteria_uid      = new Criteria('rel_user_uid', $uid);
+$criteria_group_id = new Criteria('rel_group_id', $group_id);
+$criteria          = new CriteriaCompo($criteria_uid);
 $criteria->add($criteria_group_id);
 if ($relgroupuserFactory->getCount($criteria) < 1) {
     $relgroupuser = $relgroupuserFactory->create();

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
@@ -11,6 +11,8 @@ namespace XoopsModules\Yogurt;
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
+use Criteria;
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
@@ -37,28 +39,29 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 //require_once __DIR__ . '/Notes.php';
 //require_once __DIR__ . '/Configs.php';
 //require_once __DIR__ . '/Suspensions.php';
-if (str_replace('.', '', PHP_VERSION) > 499) {
-    require_once __DIR__ . '/Id3v1.php';
-}
+//if (str_replace('.', '', PHP_VERSION) > 499) {
+//    require_once __DIR__ . '/Id3v1.php';
+//}
 
 /**
- * Class ControllerIndex
+ * Class IndexController
  */
-class ControllerIndex extends YogurtController
+class IndexController extends YogurtController
 {
     /**
-     * @param null|string $section
+     * @param string|null $section
      * @return int|void
      */
-    public function checkPrivilege($section = null)
-    {
+    public function checkPrivilege(
+        $section = null
+    ) {
         global $xoopsModuleConfig;
-        if ('' == trim($section)) {
+        if ('' === trim($section)) {
             return -1;
         }
         $configsectionname = 'enable_' . $section;
         if (array_key_exists($configsectionname, $xoopsModuleConfig)) {
-            if (0 == $xoopsModuleConfig[$configsectionname]) {
+            if (0 === $this->helper->getConfig($configsectionname)) {
                 return -1;
             }
         }
@@ -73,8 +76,8 @@ class ControllerIndex extends YogurtController
         //      if ($section=="pictures" && $xoopsModuleConfig['enable_pictures']==0){
         //          return false;
         //      }
-        $criteria = new \Criteria('config_uid', $this->owner->getVar('uid'));
-        if (1 == $this->configsFactory->getCount($criteria)) {
+        $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
+        if (1 === $this->configsFactory->getCount($criteria)) {
             $configs = $this->configsFactory->getObjects($criteria);
 
             $config = $configs[0]->getVar($section);

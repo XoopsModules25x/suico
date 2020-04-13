@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -32,10 +33,15 @@ if (!defined('XOOPS_ROOT_PATH')) {
  * @param int    $limit      The number of maximum results
  * @param int    $offset     from wich register start
  * @param int    $userid     from which user to look
- * @return array $ret with all results
+ * @return array with all results
  */
-function yogurt_search($queryarray, $andor, $limit, $offset, $userid)
-{
+function yogurt_search(
+    $queryarray,
+    $andor,
+    $limit,
+    $offset,
+    $userid
+) {
     global $xoopsDB, $module;
     //getting the url to the uploads directory
     $moduleHandler     = xoops_getHandler('module');
@@ -45,8 +51,10 @@ function yogurt_search($queryarray, $andor, $limit, $offset, $userid)
     $path_uploadimages = XOOPS_UPLOAD_URL;
 
     $ret = [];
-    $sql = 'SELECT cod_img, title,  data_creation,  uid_owner, url FROM ' . $xoopsDB->prefix('yogurt_images') . ' WHERE ';
-    if (0 != $userid) {
+    $sql = 'SELECT cod_img, title,  data_creation,  uid_owner, url FROM ' . $xoopsDB->prefix(
+            'yogurt_images'
+        ) . ' WHERE ';
+    if (0 !== $userid) {
         $sql .= '(uid_owner =' . (int)$userid . ')';
     }
 
@@ -56,7 +64,7 @@ function yogurt_search($queryarray, $andor, $limit, $offset, $userid)
     if ($count > 0 && is_array($queryarray)) {
         $sql .= " ((title LIKE '%" . $queryarray[0] . "%')";
         for ($i = 1; $i < $count; $i++) {
-            $sql .= " $andor ";
+            $sql .= " ${andor} ";
             $sql .= "(title LIKE '%" . $queryarray[$i] . "%')";
         }
         $sql .= ') ';
@@ -68,9 +76,20 @@ function yogurt_search($queryarray, $andor, $limit, $offset, $userid)
     $i             = 0;
     $stringofimage = 'images/search.png">';
     while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
-        if (0 != $userid) {
+        if (0 !== $userid) {
             if ($limit > 5) {
-                $ret[$i]['image'] = "assets/images/search.png'><a href='" . XOOPS_URL . '/modules/yogurt/album.php?uid=' . $myrow['uid_owner'] . "'><img src='" . $path_uploadimages . '/yogurt/images/thumb_' . $myrow['url'] . "'></a><br>" . '<img src=' . XOOPS_URL . '/modules/yogurt/images/search.png';
+                $ret[$i]['image'] = "assets/images/search.png'><a href='"
+                                    . XOOPS_URL
+                                    . '/modules/yogurt/album.php?uid='
+                                    . $myrow['uid_owner']
+                                    . "'><img src='"
+                                    . $path_uploadimages
+                                    . '/yogurt/images/thumb_'
+                                    . $myrow['url']
+                                    . "'></a><br>"
+                                    . '<img src='
+                                    . XOOPS_URL
+                                    . '/modules/yogurt/images/search.png';
                 $ret[$i]['link']  = 'album.php?uid=' . $myrow['uid_owner'];
                 $ret[$i]['title'] = $myrow['title'];
                 //$ret[$i]['time'] = $myrow['data_creation'];
@@ -88,7 +107,7 @@ function yogurt_search($queryarray, $andor, $limit, $offset, $userid)
 
         $i++;
     }
-    if (0 != $userid && $i > 0) {
+    if (0 !== $userid && $i > 0) {
         if ($limit < 6) {
             $ret = [];
 

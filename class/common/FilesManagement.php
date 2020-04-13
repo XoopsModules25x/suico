@@ -1,6 +1,12 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Yogurt\Common;
+
+use RuntimeException;
+use Throwable;
+use XoopsUser;
+use SplFileInfo;
+use DirectoryIterator;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -25,20 +31,21 @@ trait FilesManagement
      * @param string $folder The full path of the directory to check
      *
      * @return void
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
-    public static function createFolder($folder)
-    {
+    public static function createFolder(
+        $folder
+    )  {
         try {
             if (!file_exists($folder)) {
                 if (!is_dir($folder) && !mkdir($folder) && !is_dir($folder)) {
-                    throw new \RuntimeException(sprintf('Unable to create the %s directory', $folder));
+                    throw new RuntimeException(sprintf('Unable to create the %s directory', $folder));
                 }
 
                 file_put_contents($folder . '/index.html', '<script>history.go(-1);</script>');
             }
-        } catch (\Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), '<br>';
+        } catch (Throwable $throwable) {
+            echo 'Caught exception: ', $throwable->getMessage(), '<br>';
         }
     }
 
@@ -47,8 +54,10 @@ trait FilesManagement
      * @param $folder
      * @return bool
      */
-    public static function copyFile($file, $folder)
-    {
+    public static function copyFile(
+        $file,
+        $folder
+    ) {
         return copy($file, $folder);
     }
 
@@ -61,7 +70,7 @@ trait FilesManagement
         $dir = opendir($src);
         //        @mkdir($dst);
         if (!@mkdir($dst) && !is_dir($dst)) {
-            throw new \RuntimeException('The directory ' . $dst . ' could not be created.');
+            throw new RuntimeException('The directory ' . $dst . ' could not be created.');
         }
         while (false !== ($file = readdir($dir))) {
             if (('.' !== $file) && ('..' !== $file)) {
@@ -84,8 +93,10 @@ trait FilesManagement
      * @version     1.0.1
      * @link        http://aidanlister.com/2004/04/recursively-copying-directories-in-php/
      */
-    public static function xcopy($source, $dest)
-    {
+    public static function xcopy(
+        $source,
+        $dest
+    ) {
         // Check for symlinks
         if (is_link($source)) {
             return symlink(readlink($source), $dest);
@@ -99,7 +110,7 @@ trait FilesManagement
         // Make destination directory
         if (!is_dir($dest)) {
             if (!mkdir($dest) && !is_dir($dest)) {
-                throw new \RuntimeException(sprintf('Directory "%s" was not created', $dest));
+                throw new RuntimeException(sprintf('Directory "%s" was not created', $dest));
             }
         }
 
@@ -112,7 +123,7 @@ trait FilesManagement
                     continue;
                 }
                 // Deep copy directories
-                self::xcopy("$source/$entry", "$dest/$entry");
+                self::xcopy("${source}/${entry}", "${dest}/${entry}");
             }
             // Clean up
             $dir->close();
@@ -131,24 +142,27 @@ trait FilesManagement
      *
      * @uses \Xmf\Module\Helper::getHelper()
      */
-    public static function deleteDirectory($src)
-    {
+    public static function deleteDirectory(
+        $src
+    ) {
         // Only continue if user is a 'global' Admin
-        if (!($GLOBALS['xoopsUser'] instanceof \XoopsUser) || !$GLOBALS['xoopsUser']->isAdmin()) {
+        if (!($GLOBALS['xoopsUser'] instanceof XoopsUser) || !$GLOBALS['xoopsUser']->isAdmin()) {
             return false;
         }
 
         $success = true;
         // remove old files
-        $dirInfo = new \SplFileInfo($src);
+        $dirInfo = new SplFileInfo($src);
         // validate is a directory
         if ($dirInfo->isDir()) {
             $fileList = array_diff(scandir($src, SCANDIR_SORT_NONE), ['..', '.']);
             foreach ($fileList as $k => $v) {
-                $fileInfo = new \SplFileInfo("{$src}/{$v}");
+                $fileInfo = new SplFileInfo("{$src}/{$v}");
                 if ($fileInfo->isDir()) {
                     // recursively handle subdirectories
-                    if (!$success = self::deleteDirectory($fileInfo->getRealPath())) {
+                    if (!$success = self::deleteDirectory(
+                        $fileInfo->getRealPath()
+                    )) {
                         break;
                     }
                 } elseif (!($success = unlink($fileInfo->getRealPath()))) {
@@ -176,10 +190,11 @@ trait FilesManagement
      *
      * @return bool true on success
      */
-    public static function rrmdir($src)
-    {
+    public static function rrmdir(
+        $src
+    ) {
         // Only continue if user is a 'global' Admin
-        if (!($GLOBALS['xoopsUser'] instanceof \XoopsUser) || !$GLOBALS['xoopsUser']->isAdmin()) {
+        if (!($GLOBALS['xoopsUser'] instanceof XoopsUser) || !$GLOBALS['xoopsUser']->isAdmin()) {
             return false;
         }
 
@@ -191,7 +206,7 @@ trait FilesManagement
         $success = true;
 
         // Open the source directory to read in files
-        $iterator = new \DirectoryIterator($src);
+        $iterator = new DirectoryIterator($src);
         foreach ($iterator as $fObj) {
             if ($fObj->isFile()) {
                 $filename = $fObj->getPathname();
@@ -216,10 +231,12 @@ trait FilesManagement
      *
      * @return bool true on success
      */
-    public static function rmove($src, $dest)
-    {
+    public static function rmove(
+        $src,
+        $dest
+    ) {
         // Only continue if user is a 'global' Admin
-        if (!($GLOBALS['xoopsUser'] instanceof \XoopsUser) || !$GLOBALS['xoopsUser']->isAdmin()) {
+        if (!($GLOBALS['xoopsUser'] instanceof XoopsUser) || !$GLOBALS['xoopsUser']->isAdmin()) {
             return false;
         }
 
@@ -229,12 +246,20 @@ trait FilesManagement
         }
 
         // If the destination directory does not exist and could not be created stop processing
-        if (!is_dir($dest) && !mkdir($dest) && !is_dir($dest)) {
+        if (!is_dir(
+                $dest
+            )
+            && !mkdir(
+                $dest
+            )
+            && !is_dir(
+                $dest
+            )) {
             return false;
         }
 
         // Open the source directory to read in files
-        $iterator = new \DirectoryIterator($src);
+        $iterator = new DirectoryIterator($src);
         foreach ($iterator as $fObj) {
             if ($fObj->isFile()) {
                 rename($fObj->getPathname(), "{$dest}/" . $fObj->getFilename());
@@ -259,10 +284,12 @@ trait FilesManagement
      *
      * @uses \Xmf\Module\Helper::getHelper()
      */
-    public static function rcopy($src, $dest)
-    {
+    public static function rcopy(
+        $src,
+        $dest
+    ) {
         // Only continue if user is a 'global' Admin
-        if (!($GLOBALS['xoopsUser'] instanceof \XoopsUser) || !$GLOBALS['xoopsUser']->isAdmin()) {
+        if (!($GLOBALS['xoopsUser'] instanceof XoopsUser) || !$GLOBALS['xoopsUser']->isAdmin()) {
             return false;
         }
 
@@ -272,12 +299,20 @@ trait FilesManagement
         }
 
         // If the destination directory does not exist and could not be created stop processing
-        if (!is_dir($dest) && !mkdir($dest) && !is_dir($dest)) {
+        if (!is_dir(
+                $dest
+            )
+            && !mkdir(
+                $dest
+            )
+            && !is_dir(
+                $dest
+            )) {
             return false;
         }
 
         // Open the source directory to read in files
-        $iterator = new \DirectoryIterator($src);
+        $iterator = new DirectoryIterator($src);
         foreach ($iterator as $fObj) {
             if ($fObj->isFile()) {
                 copy($fObj->getPathname(), "{$dest}/" . $fObj->getFilename());

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -41,7 +44,11 @@ function b_yogurt_friends_show($options)
          * Filter for fetch votes ishot and isnothot
          */
 
-        $criteria_2 = new \Criteria('friend1_uid', $xoopsUser->getVar('uid'));
+        $criteria_2 = new Criteria(
+            'friend1_uid', $xoopsUser->getVar(
+            'uid'
+        )
+        );
 
         /**
          * Creating factories of pictures and votes
@@ -51,12 +58,12 @@ function b_yogurt_friends_show($options)
 
         $block['friends'] = $friendsFactory->getFriends($options[0], $criteria_2);
 
-    $block['lang_allfriends'] = _MB_YOGURT_ALLFRIENDS;
-    $block['lang_nofriends'] = _MB_YOGURT_NOFRIENDSYET;
-	$block['enablepm'] = $options[1];
-	
-    return $block;
-	}
+        $block['lang_allfriends'] = _MB_YOGURT_ALLFRIENDS;
+        $block['lang_nofriends']  = _MB_YOGURT_NOFRIENDSYET;
+        $block['enablepm']        = $options[1];
+
+        return $block;
+    }
 }
 
 /**
@@ -65,20 +72,19 @@ function b_yogurt_friends_show($options)
  */
 function b_yogurt_friends_edit($options)
 {
-	
-	$form .=_MB_YOGURT_TOTALFRIENDSTOSHOW."&nbsp;";
-    $form .= "<input type='text' name='options[0]' value='".$options[0]."'/><br />";
-	
-	$form .= _MB_YOGURT_ENABLEPM."&nbsp;";
-	if ( $options[1] == 1 ) {
-		$chk = " checked='checked'";
-	}
-	$form .= "<input type='radio' name='options[1]' value='1'".$chk." />&nbsp;"._YES."";
-	$chk = "";
-	if ( $options[1] == 0 ) {
-		$chk = " checked='checked'";
-	}
-	$form .= "&nbsp;<input type='radio' name='options[1]' value='0'".$chk." />"._NO."<br />";
+    $form .= _MB_YOGURT_TOTALFRIENDSTOSHOW . '&nbsp;';
+    $form .= "<input type='text' name='options[0]' value='" . $options[0] . "'/><br />";
+
+    $form .= _MB_YOGURT_ENABLEPM . '&nbsp;';
+    if (1 === $options[1]) {
+        $chk = " checked='checked'";
+    }
+    $form .= "<input type='radio' name='options[1]' value='1'" . $chk . ' />&nbsp;' . _YES . '';
+    $chk  = '';
+    if (0 === $options[1]) {
+        $chk = " checked='checked'";
+    }
+    $form .= "&nbsp;<input type='radio' name='options[1]' value='0'" . $chk . ' />' . _NO . '<br />';
 
     return $form;
 }
@@ -97,7 +103,7 @@ function b_yogurt_lastpictures_show($options)
      * Filter for fetch votes ishot and isnothot
      */
 
-    $criteria = new \Criteria('cod_img', 0, '>');
+    $criteria = new Criteria('cod_img', 0, '>');
     $criteria->setSort('cod_img');
     $criteria->setOrder('DESC');
     $criteria->setLimit($options[0]);
@@ -108,9 +114,7 @@ function b_yogurt_lastpictures_show($options)
     //$albumFactory      = new ImagesHandler($xoopsDB);
     $imageFactory = new Yogurt\ImageHandler($xoopsDB);
 
-    $block = $imageFactory->getLastPicturesForBlock($options[0]);
-
-    return $block;
+    return $imageFactory->getLastPicturesForBlock($options[0]);
 }
 
 /**
@@ -119,7 +123,5 @@ function b_yogurt_lastpictures_show($options)
  */
 function b_yogurt_lastpictures_edit($options)
 {
-    $form = "<input type='text' value='" . $options['0'] . "'id='options[]' name='options[]'>";
-
-    return $form;
+    return "<input type='text' value='" . $options['0'] . "'id='options[]' name='options[]'>";
 }

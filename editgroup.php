@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,46 +18,61 @@
  * @since
  */
 
+use Xmf\Request;
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_editgroup.tpl';
 require __DIR__ . '/header.php';
 
-$controller = new Yogurt\ControllerGroups($xoopsDB, $xoopsUser);
+$controller = new Yogurt\GroupController($xoopsDB, $xoopsUser);
 
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
 $nbSections = $controller->getNumbersSections();
 
-$group_id = \Xmf\Request::getInt('group_id', 0, 'POST');
-$marker   = \Xmf\Request::getInt('marker', 0, 'POST');
-$criteria = new \Criteria('group_id', $group_id);
+$group_id = Request::getInt('group_id', 0, 'POST');
+$marker   = Request::getInt('marker', 0, 'POST');
+$criteria = new Criteria('group_id', $group_id);
 $groups   = $controller->groupsFactory->getObjects($criteria);
 $group    = $groups[0];
 
 $uid = $xoopsUser->getVar('uid');
 
-if (1 == $marker && $group->getVar('owner_uid') == $uid) {
+if (1 === $marker && $group->getVar('owner_uid') === $uid) {
     $title     = trim(htmlspecialchars($_POST['title'], ENT_QUOTES | ENT_HTML5));
     $desc      = $_POST['desc'];
     $img       = $_POST['img'];
-    $updateImg = (1 == $_POST['flag_oldimg']) ? 0 : 1;
+    $updateImg = 1 === $_POST['flag_oldimg'] ? 0 : 1;
 
     $path_upload   = XOOPS_ROOT_PATH . '/uploads/yogurt/images';
-    $maxfilebytes  = $xoopsModuleConfig['maxfilesize'];
-    $maxfileheight = $xoopsModuleConfig['max_original_height'];
-    $maxfilewidth  = $xoopsModuleConfig['max_original_width'];
-    $controller->groupsFactory->receiveGroup($title, $desc, $img, $path_upload, $maxfilebytes, $maxfilewidth, $maxfileheight, $updateImg, $group);
+    $maxfilebytes  = $helper->getConfig('maxfilesize');
+    $maxfileheight = $helper->getConfig('max_original_height');
+    $maxfilewidth  = $helper->getConfig('max_original_width');
+    $controller->groupsFactory->receiveGroup(
+        $title,
+        $desc,
+        $img,
+        $path_upload,
+        $maxfilebytes,
+        $maxfilewidth,
+        $maxfileheight,
+        $updateImg,
+        $group
+    );
 
     redirect_header('groups.php?uid=' . $uid, 3, _MD_YOGURT_GROUPEDITED);
 } else {
     /**
      * Render a form with the info of the user
      */
-    $group_members = $controller->relgroupusersFactory->getUsersFromGroup($group_id, 0, 50);
+    $group_members = $controller->relgroupusersFactory->getUsersFromGroup(
+        $group_id,
+        0,
+        50
+    );
     $xoopsTpl->assign('group_members', $group_members);
-    $maxfilebytes = $xoopsModuleConfig['maxfilesize'];
+    $maxfilebytes = $helper->getConfig('maxfilesize');
     $xoopsTpl->assign('lang_savegroup', _MD_YOGURT_UPLOADGROUP);
     $xoopsTpl->assign('maxfilesize', $maxfilebytes);
     $xoopsTpl->assign('group_title', $group->getVar('group_title'));
@@ -115,18 +131,26 @@ if (1 == $marker && $group->getVar('owner_uid') == $uid) {
     $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 
     //page atributes
-    $xoopsTpl->assign('xoops_pagetitle', sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner));
+    $xoopsTpl->assign(
+        'xoops_pagetitle',
+        sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner)
+    );
 
-    //$xoopsTpl->assign('path_yogurt_uploads',$xoopsModuleConfig['link_path_upload']);
-    $xoopsTpl->assign('lang_owner', _MD_YOGURT_GROUPOWNER);
+    //$xoopsTpl->assign('path_yogurt_uploads',$helper->getConfig('link_path_upload'));
+    $xoopsTpl->assign(
+        'lang_owner',
+        _MD_YOGURT_GROUPOWNER
+    );
 }
 
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/yogurt.css');
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
-if (false !== strpos(mb_strtolower($_SERVER['HTTP_USER_AGENT']), 'msie')) {
-    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css');
+if (false !== stripos($_SERVER['HTTP_USER_AGENT'], 'msie')) {
+    $xoTheme->addStylesheet(
+        XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css'
+    );
 }
 
 require dirname(dirname(__DIR__)) . '/footer.php';

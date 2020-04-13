@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Yogurt\Common;
 
@@ -22,6 +22,8 @@ namespace XoopsModules\Yogurt\Common;
  * @author       Mamba <mambax7@gmail.com>
  */
 
+use XoopsFormDhtmlTextArea;
+use XoopsFormEditor;
 use XoopsModules\Yogurt\Helper;
 
 /**
@@ -30,13 +32,7 @@ use XoopsModules\Yogurt\Helper;
 class SysUtility
 {
     use VersionChecks;
-
-    //checkVerXoops, checkVerPhp Traits
-
     use ServerStats;
-
-    // getServerStats Trait
-
     use FilesManagement;
 
     // Files Management Trait
@@ -54,15 +50,27 @@ class SysUtility
      *
      * @return string Trimmed string.
      */
-    public static function truncateHtml($text, $length = 100, $ending = '...', $exact = false, $considerHtml = true)
-    {
+    public static function truncateHtml(
+        $text,
+        $length = 100,
+        $ending = '...',
+        $exact = false,
+        $considerHtml = true
+    )  {
         if ($considerHtml) {
             // if the plain text is shorter than the maximum length, return the whole text
-            if (mb_strlen(preg_replace('/<.*?' . '>/', '', $text)) <= $length) {
+            if (mb_strlen(
+                    preg_replace('/<.*?' . '>/', '', $text)
+                ) <= $length) {
                 return $text;
             }
             // splits all html-tags to scanable lines
-            preg_match_all('/(<.+?' . '>)?([^<>]*)/s', $text, $lines, PREG_SET_ORDER);
+            preg_match_all(
+                '/(<.+?' . '>)?([^<>]*)/s',
+                $text,
+                $lines,
+                PREG_SET_ORDER
+            );
             $total_length = mb_strlen($ending);
             $open_tags    = [];
             $truncate     = '';
@@ -70,31 +78,52 @@ class SysUtility
                 // if there is any html-tag in this line, handle it and add it (uncounted) to the output
                 if (!empty($line_matchings[1])) {
                     // if it's an "empty element" with or without xhtml-conform closing slash
-                    if (preg_match('/^<(\s*.+?\/\s*|\s*(img|br|input|hr|area|base|basefont|col|frame|isindex|link|meta|param)(\s.+?)?)>$/is', $line_matchings[1])) {
+                    if (preg_match(
+                        '/^<(\s*.+?\/\s*|\s*(img|br|input|hr|area|base|basefont|col|frame|isindex|link|meta|param)(\s.+?)?)>$/is',
+                        $line_matchings[1]
+                    )) {
                         // do nothing
                         // if tag is a closing tag
-                    } elseif (preg_match('/^<\s*\/(\S+?)\s*>$/s', $line_matchings[1], $tag_matchings)) {
+                    } elseif (preg_match(
+                        '#^<\s*\/(\S+?)\s*>$#s',
+                        $line_matchings[1],
+                        $tag_matchings
+                    )) {
                         // delete tag from $open_tags list
                         $pos = array_search($tag_matchings[1], $open_tags, true);
                         if (false !== $pos) {
                             unset($open_tags[$pos]);
                         }
                         // if tag is an opening tag
-                    } elseif (preg_match('/^<\s*([^\s>!]+).*?' . '>$/s', $line_matchings[1], $tag_matchings)) {
+                    } elseif (preg_match(
+                        '/^<\s*([^\s>!]+).*?' . '>$/s',
+                        $line_matchings[1],
+                        $tag_matchings
+                    )) {
                         // add tag to the beginning of $open_tags list
-                        array_unshift($open_tags, mb_strtolower($tag_matchings[1]));
+                        array_unshift(
+                            $open_tags,
+                            mb_strtolower($tag_matchings[1])
+                        );
                     }
                     // add html-tag to $truncate'd text
                     $truncate .= $line_matchings[1];
                 }
                 // calculate the length of the plain text part of the line; handle entities as one character
-                $content_length = mb_strlen(preg_replace('/&[0-9a-z]{2,8};|&#\d{1,7};|[0-9a-f]{1,6};/i', ' ', $line_matchings[2]));
+                $content_length = mb_strlen(
+                    preg_replace('/&[0-9a-z]{2,8};|&#\d{1,7};|[0-9a-f]{1,6};/i', ' ', $line_matchings[2])
+                );
                 if ($total_length + $content_length > $length) {
                     // the number of characters which are left
                     $left            = $length - $total_length;
                     $entities_length = 0;
                     // search for html entities
-                    if (preg_match_all('/&[0-9a-z]{2,8};|&#\d{1,7};|[0-9a-f]{1,6};/i', $line_matchings[2], $entities, PREG_OFFSET_CAPTURE)) {
+                    if (preg_match_all(
+                        '/&[0-9a-z]{2,8};|&#\d{1,7};|[0-9a-f]{1,6};/i',
+                        $line_matchings[2],
+                        $entities,
+                        PREG_OFFSET_CAPTURE
+                    )) {
                         // calculate the real length of all entities in the legal range
                         foreach ($entities[0] as $entity) {
                             if ($left >= $entity[1] + 1 - $entities_length) {
@@ -150,8 +179,10 @@ class SysUtility
      * @param array|null         $options
      * @return \XoopsFormDhtmlTextArea|\XoopsFormEditor
      */
-    public static function getEditor($helper = null, $options = null)
-    {
+    public static function getEditor(
+        $helper = null,
+        $options = null
+    ) {
         /** @var Helper $helper */
         if (null === $options) {
             $options           = [];
@@ -171,12 +202,24 @@ class SysUtility
 
         if (class_exists('XoopsFormEditor')) {
             if ($isAdmin) {
-                $descEditor = new \XoopsFormEditor(ucfirst($options['name']), $helper->getConfig('editorAdmin'), $options, $nohtml = false, $onfailure = 'textarea');
+                $descEditor = new XoopsFormEditor(
+                    ucfirst($options['name']), $helper->getConfig(
+                    'editorAdmin'
+                ), $options, $nohtml = false, $onfailure = 'textarea'
+                );
             } else {
-                $descEditor = new \XoopsFormEditor(ucfirst($options['name']), $helper->getConfig('editorUser'), $options, $nohtml = false, $onfailure = 'textarea');
+                $descEditor = new XoopsFormEditor(
+                    ucfirst($options['name']), $helper->getConfig(
+                    'editorUser'
+                ), $options, $nohtml = false, $onfailure = 'textarea'
+                );
             }
         } else {
-            $descEditor = new \XoopsFormDhtmlTextArea(ucfirst($options['name']), $options['name'], $options['value'], '100%', '100%');
+            $descEditor = new XoopsFormDhtmlTextArea(
+                ucfirst(
+                    $options['name']
+                ), $options['name'], $options['value'], '100%', '100%'
+            );
         }
 
         //        $form->addElement($descEditor);
@@ -190,11 +233,13 @@ class SysUtility
      *
      * @return bool
      */
-    public function fieldExists($fieldname, $table)
-    {
+    public function fieldExists(
+        $fieldname,
+        $table
+    ) {
         global $xoopsDB;
-        $result = $xoopsDB->queryF("SHOW COLUMNS FROM   $table LIKE '$fieldname'");
+        $result = $xoopsDB->queryF("SHOW COLUMNS FROM   ${table} LIKE '${fieldname}'");
 
-        return ($xoopsDB->getRowsNum($result) > 0);
+        return $xoopsDB->getRowsNum($result) > 0;
     }
 }

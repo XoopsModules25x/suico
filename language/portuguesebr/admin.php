@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -57,8 +58,14 @@ define('_MA_YOGURT_ALLTESTSOK', 'Todos os testes devem ser APROVADOS (OK) para q
 define('_MA_YOGURT_GDEXTENSIONOK', 'Extensão GD carregada: OK');
 define('_MA_YOGURT_MOREINFO', 'Mais informações em:');
 define('_MA_YOGURT_GDEXTENSIONFALSE', "Extensão GD carregada: <span style='color:#ff0000;'>NEGATIVO</span> ");
-define('_MA_YOGURT_CONFIGPHPINI', 'Configure seu php.ini ou peça para o seu host para instalar e habilitar para você.');
+define(
+    '_MA_YOGURT_CONFIGPHPINI',
+    'Configure seu php.ini ou peça para o seu host para instalar e habilitar para você.'
+);
 define('_MA_YOGURT_PHP5PRESENT', 'Você tem uma versão do PHP compatível:');
-define('_MA_YOGURT_PHP5NOTPRESENT', 'A versão do seu PHP é compatível, mas alguns detalhes serão visualizados melhor em PHP5 ou superior.');
+define(
+    '_MA_YOGURT_PHP5NOTPRESENT',
+    'A versão do seu PHP é compatível, mas alguns detalhes serão visualizados melhor em PHP5 ou superior.'
+);
 define('_MA_YOGURT_MAXBYTESPHPINI', 'Seu servidor limita o tamanho dos uploads a %s');
 define('_MA_YOGURT_MEMORYLIMIT', 'A Memória Limite do seu servidor é:'); //GibaPhp

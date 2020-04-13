@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,6 +18,7 @@
  * @since
  */
 
+use Xmf\Request;
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
@@ -43,37 +45,55 @@ $title = $_POST['caption'];
  * Getting parameters defined in admin side
  */
 $path_upload   = XOOPS_ROOT_PATH . '/uploads/yogurt/images';
-$pictwidth     = $xoopsModuleConfig['resized_width'];
-$pictheight    = $xoopsModuleConfig['resized_height'];
-$thumbwidth    = $xoopsModuleConfig['thumb_width'];
-$thumbheight   = $xoopsModuleConfig['thumb_height'];
-$maxfilebytes  = $xoopsModuleConfig['maxfilesize'];
-$maxfileheight = $xoopsModuleConfig['max_original_height'];
-$maxfilewidth  = $xoopsModuleConfig['max_original_width'];
+$pictwidth     = $helper->getConfig('resized_width');
+$pictheight    = $helper->getConfig('resized_height');
+$thumbwidth    = $helper->getConfig('thumb_width');
+$thumbheight   = $helper->getConfig('thumb_height');
+$maxfilebytes  = $helper->getConfig('maxfilesize');
+$maxfileheight = $helper->getConfig('max_original_height');
+$maxfilewidth  = $helper->getConfig('max_original_width');
 
 /**
  * If we are receiving a file
  */
-if ('sel_photo' == $_POST['xoops_upload_file'][0]) {
+if ('sel_photo' === $_POST['xoops_upload_file'][0]) {
     /**
      * Verify Token
      */
     if (!$GLOBALS['xoopsSecurity']->check()) {
-        redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+        redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
     }
     ini_set('memory_limit', '50M');
     /**
      * Try to upload picture resize it insert in database and then redirect to index
      */
-    if ($imageFactory->receivePicture($title, $path_upload, $thumbwidth, $thumbheight, $pictwidth, $pictheight, $maxfilebytes, $maxfilewidth, $maxfileheight)) {
+    if ($imageFactory->receivePicture(
+        $title,
+        $path_upload,
+        $thumbwidth,
+        $thumbheight,
+        $pictwidth,
+        $pictheight,
+        $maxfilebytes,
+        $maxfilewidth,
+        $maxfileheight
+    )) {
         $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
         $extra_tags['X_OWNER_UID']  = $xoopsUser->getVar('uid');
         $notificationHandler        = xoops_getHandler('notification');
         $notificationHandler->triggerEvent('picture', $xoopsUser->getVar('uid'), 'new_picture', $extra_tags);
         //header("Location: ".XOOPS_URL."/modules/yogurt/index.php?uid=".$xoopsUser->getVar('uid'));
-        redirect_header(XOOPS_URL . '/modules/yogurt/album.php?uid=' . $xoopsUser->getVar('uid'), 3, _MD_YOGURT_UPLOADED);
+        redirect_header(
+            XOOPS_URL . '/modules/yogurt/album.php?uid=' . $xoopsUser->getVar('uid'),
+            3,
+            _MD_YOGURT_UPLOADED
+        );
     } else {
-        redirect_header(XOOPS_URL . '/modules/yogurt/album.php?uid=' . $xoopsUser->getVar('uid'), 3, _MD_YOGURT_NOCACHACA);
+        redirect_header(
+            XOOPS_URL . '/modules/yogurt/album.php?uid=' . $xoopsUser->getVar('uid'),
+            3,
+            _MD_YOGURT_NOCACHACA
+        );
     }
 }
 

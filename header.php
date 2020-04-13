@@ -1,6 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
+use Xmf\Request;
 use XoopsModules\Yogurt;
+use XoopsModules\Yogurt\Helper;
 
 require __DIR__ . '/preloads/autoloader.php';
 
@@ -9,22 +11,22 @@ require XOOPS_ROOT_PATH . '/header.php';
 
 $moduleDirName = basename(__DIR__);
 
-$helper = \XoopsModules\Yogurt\Helper::getInstance();
+$helper = Helper::getInstance();
 
 $modulePath = XOOPS_ROOT_PATH . '/modules/' . $moduleDirName;
 
-$myts = \MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 
 if (!isset($GLOBALS['xoTheme']) || !is_object($GLOBALS['xoTheme'])) {
     require $GLOBALS['xoops']->path('class/theme.php');
-    $GLOBALS['xoTheme'] = new \xos_opal_Theme();
+    $GLOBALS['xoTheme'] = new xos_opal_Theme();
 }
 
 //Handlers
 //$XXXHandler = xoops_getModuleHandler('XXX', $moduleDirName);
 
-/** @var \XoopsPersistableObjectHandler $imagesHandler */
-$imagesHandler = $helper->getHandler('Images');
+/** @var \XoopsPersistableObjectHandler $imageHandler */
+$imageHandler = $helper->getHandler('Image');
 /** @var \XoopsPersistableObjectHandler $friendshipHandler */
 $friendshipHandler = $helper->getHandler('Friendship');
 /** @var \XoopsPersistableObjectHandler $visitorsHandler */
@@ -32,11 +34,15 @@ $visitorsHandler = $helper->getHandler('Visitors');
 /** @var \XoopsPersistableObjectHandler $videoHandler */
 $videoHandler = $helper->getHandler('Video');
 /** @var \XoopsPersistableObjectHandler $friendpetitionHandler */
-$friendpetitionHandler = $helper->getHandler('Friendpetition');
+$friendpetitionHandler = $helper->getHandler(
+    'Friendpetition'
+);
 /** @var \XoopsPersistableObjectHandler $groupsHandler */
 $groupsHandler = $helper->getHandler('Groups');
 /** @var \XoopsPersistableObjectHandler $relgroupuserHandler */
-$relgroupuserHandler = $helper->getHandler('Relgroupuser');
+$relgroupuserHandler = $helper->getHandler(
+    'Relgroupuser'
+);
 /** @var \XoopsPersistableObjectHandler $notesHandler */
 $notesHandler = $helper->getHandler('Notes');
 /** @var \XoopsPersistableObjectHandler $configsHandler */
@@ -57,7 +63,7 @@ xoops_loadLanguage('user');
 
 if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
     require $GLOBALS['xoops']->path('class/template.php');
-    $xoopsTpl = new \XoopsTpl();
+    $xoopsTpl = new XoopsTpl();
 }
 
 $imageFactory          = new Yogurt\ImageHandler($xoopsDB);
@@ -77,7 +83,7 @@ $isfriend = 0;
 if (empty($xoopsUser)) {
     $isanonym = 1;
     if (isset($_GET['uid'])) {
-        $uid_owner = \Xmf\Request::getInt('uid', 0, 'GET');
+        $uid_owner = Request::getInt('uid', 0, 'GET');
     } else {
         $uid_owner = 1;
         $isOwner   = 0;
@@ -85,8 +91,8 @@ if (empty($xoopsUser)) {
 } else {
     $isanonym = 0;
     if (isset($_GET['uid'])) {
-        $uid_owner = \Xmf\Request::getInt('uid', 0, 'GET');
-        $isOwner   = ($xoopsUser->getVar('uid') == $uid_owner) ? 1 : 0;
+        $uid_owner = Request::getInt('uid', 0, 'GET');
+        $isOwner   = $xoopsUser->getVar('uid') === $uid_owner ? 1 : 0;
     } else {
         $uid_owner = (int)$xoopsUser->getVar('uid');
         $isOwner   = 1;

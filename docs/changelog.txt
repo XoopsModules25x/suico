@@ -153,7 +153,7 @@
 Bugs fixed
 
 fixed #2074440 file upload size on the search page (m0nty_)
-fixed #2074263 check for /uploads/yogurt/mp3 in the backend (dhcst)
+fixed #2074263 check for /uploads/yogurt/audio in the backend (dhcst)
 fixed #2074362 MP3 player read now ID3v1 and v2 (dhcst)
 fixed #1993627 deleting Photos with errors (dhcst)
 fixed #1939798 Smarty error: mailto: missing (dhcst)
@@ -165,7 +165,7 @@ fixed sanitize $_GET['uid'] (dhcst)
 fixed some sanitizing (m0nty_)
 fixed configuration> cosmetic (sato-san)
 added tables for impresscms (m0nty_)
-added folder uploads/yogurt/mp3 (sato-san)
+added folder uploads/yogurt/audio (sato-san)
 added yogurt works now without Frameworks (dhcst)
 added code for simple-xoops updater
 deleted URL is not available (sato-san)

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -22,18 +24,18 @@
  * @since           1.0.0
  */
 
+use Xmf\Module\Helper\Permission;
 use Xmf\Request;
 
 require __DIR__ . '/admin_header.php';
 xoops_cp_header();
 //It recovered the value of argument op in URL$
-$op    = \Xmf\Request::getString('op', 'list');
-$order = \Xmf\Request::getString('order', 'desc');
-$sort  = \Xmf\Request::getString('sort', '');
+$op    = Request::getString('op', 'list');
+$order = Request::getString('order', 'desc');
+$sort  = Request::getString('sort', '');
 
 $adminObject->displayNavigation(basename(__FILE__));
-/** @var \Xmf\Module\Helper\Permission $permHelper */
-$permHelper = new \Xmf\Module\Helper\Permission();
+$permHelper = new Permission();
 $uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/images/';
 $uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/images/';
 
@@ -51,7 +53,7 @@ switch ($op) {
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('audio.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
-        if (0 !== \Xmf\Request::getInt('audio_id', 0)) {
+        if (0 !== Request::getInt('audio_id', 0)) {
             $audioObject = $audioHandler->get(Request::getInt('audio_id', 0));
         } else {
             $audioObject = $audioHandler->create();
@@ -62,7 +64,10 @@ switch ($op) {
         $audioObject->setVar('url', Request::getVar('url', ''));
         $audioObject->setVar('uid_owner', Request::getVar('uid_owner', ''));
         $audioObject->setVar('data_creation', $_REQUEST['data_creation']);
-        $audioObject->setVar('data_update', date('Y-m-d H:i:s', strtotime($_REQUEST['data_update']['date']) + $_REQUEST['data_update']['time']));
+        $audioObject->setVar(
+            'data_update',
+            date('Y-m-d H:i:s', strtotime($_REQUEST['data_update']['date']) + $_REQUEST['data_update']['time'])
+        );
         if ($audioHandler->insert($audioObject)) {
             redirect_header('audio.php?op=list', 2, AM_YOGURT_FORMOK);
         }
@@ -83,7 +88,7 @@ switch ($op) {
 
     case 'delete':
         $audioObject = $audioHandler->get(Request::getString('audio_id', ''));
-        if (1 == \Xmf\Request::getInt('ok', 0)) {
+        if (1 === Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('audio.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
@@ -93,13 +98,24 @@ switch ($op) {
                 echo $audioObject->getHtmlErrors();
             }
         } else {
-            xoops_confirm(['ok' => 1, 'audio_id' => Request::getString('audio_id', ''), 'op' => 'delete',], Request::getUrl('REQUEST_URI', '', 'SERVER'), sprintf(AM_YOGURT_FORMSUREDEL, $audioObject->getVar('title')));
+            xoops_confirm(
+                [
+                    'ok'       => 1,
+                    'audio_id' => Request::getString('audio_id', ''),
+                    'op'       => 'delete',
+                ],
+                Request::getUrl('REQUEST_URI', '', 'SERVER'),
+                sprintf(
+                    AM_YOGURT_FORMSUREDEL,
+                    $audioObject->getVar('title')
+                )
+            );
         }
         break;
 
     case 'clone':
 
-        $id_field = \Xmf\Request::getString('audio_id', '');
+        $id_field = Request::getString('audio_id', '');
 
         if ($utility::cloneRecord('yogurt_audio', 'audio_id', $id_field)) {
             redirect_header('audio.php', 3, AM_YOGURT_CLONED_OK);
@@ -112,10 +128,10 @@ switch ($op) {
     default:
         $adminObject->addItemButton(AM_YOGURT_ADD_AUDIO, 'audio.php?op=new', 'add');
         $adminObject->displayButton('left');
-        $start                = \Xmf\Request::getInt('start', 0);
+        $start                = Request::getInt('start', 0);
         $audioPaginationLimit = $helper->getConfig('userpager');
 
-        $criteria = new \CriteriaCompo();
+        $criteria = new CriteriaCompo();
         $criteria->setSort('audio_id ASC, title');
         $criteria->setOrder('ASC');
         $criteria->setLimit($audioPaginationLimit);
@@ -134,7 +150,7 @@ switch ($op) {
         if ($audioTempRows > $audioPaginationLimit) {
             xoops_load('XoopsPageNav');
 
-            $pagenav = new \XoopsPageNav(
+            $pagenav = new XoopsPageNav(
                 $audioTempRows, $audioPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
@@ -146,7 +162,7 @@ switch ($op) {
         //    $fields = explode('|', audio_id:int:11::NOT NULL::primary:audio_id|title:varchar:256::NOT NULL:::title|author:varchar:256::NOT NULL:::author|url:varchar:256::NOT NULL:::url|uid_owner:int:11::NOT NULL:::uid_owner|data_creation:date:0::NOT NULL:::data_creation|data_update:timestamp:CURRENT_TIMESTAMP::NOT NULL:::data_update);
         //    $fieldsCount    = count($fields);
 
-        $criteria = new \CriteriaCompo();
+        $criteria = new CriteriaCompo();
 
         //$criteria->setOrder('DESC');
         $criteria->setSort($sort);
@@ -162,7 +178,10 @@ switch ($op) {
             foreach (array_keys($audioTempArray) as $i) {
                 //        $field = explode(':', $fields[$i]);
 
-                $GLOBALS['xoopsTpl']->assign('selectoraudio_id', AM_YOGURT_AUDIO_AUDIO_ID);
+                $GLOBALS['xoopsTpl']->assign(
+                    'selectoraudio_id',
+                    AM_YOGURT_AUDIO_AUDIO_ID
+                );
                 $audioArray['audio_id'] = $audioTempArray[$i]->getVar('audio_id');
 
                 $GLOBALS['xoopsTpl']->assign('selectortitle', AM_YOGURT_AUDIO_TITLE);
@@ -175,10 +194,15 @@ switch ($op) {
                 $audioArray['url'] = $audioTempArray[$i]->getVar('url');
 
                 $GLOBALS['xoopsTpl']->assign('selectoruid_owner', AM_YOGURT_AUDIO_UID_OWNER);
-                $audioArray['uid_owner'] = strip_tags(\XoopsUser::getUnameFromId($audioTempArray[$i]->getVar('uid_owner')));
+                $audioArray['uid_owner'] = strip_tags(
+                    XoopsUser::getUnameFromId($audioTempArray[$i]->getVar('uid_owner'))
+                );
 
                 $GLOBALS['xoopsTpl']->assign('selectordata_creation', AM_YOGURT_AUDIO_DATA_CREATION);
-                $audioArray['data_creation'] = date(_SHORTDATESTRING, strtotime((string)$audioTempArray[$i]->getVar('data_creation')));
+                $audioArray['data_creation'] = date(
+                    _SHORTDATESTRING,
+                    strtotime((string)$audioTempArray[$i]->getVar('data_creation'))
+                );
 
                 $GLOBALS['xoopsTpl']->assign('selectordata_update', AM_YOGURT_AUDIO_DATA_UPDATE);
                 $audioArray['data_update'] = date(_DATESTRING, strtotime($audioTempArray[$i]->getVar('data_update')));
@@ -193,7 +217,7 @@ switch ($op) {
             // Display Navigation
             if ($audioCount > $audioPaginationLimit) {
                 xoops_load('XoopsPageNav');
-                $pagenav = new \XoopsPageNav(
+                $pagenav = new XoopsPageNav(
                     $audioCount, $audioPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
@@ -224,7 +248,9 @@ switch ($op) {
             //-------------------------------------------
 
             echo $GLOBALS['xoopsTpl']->fetch(
-                XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname') . '/templates/admin/yogurt_admin_audio.tpl'
+                XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar(
+                    'dirname'
+                ) . '/templates/admin/yogurt_admin_audio.tpl'
             );
         }
 

@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -17,10 +18,13 @@
  * @author        XOOPS Development Team
  */
 
-use XoopsModules\Yogurt;
-use XoopsModules\Yogurt\Common;
+use XoopsModules\Yogurt\Common\Configurator;
+use XoopsModules\Yogurt\Helper;
+use XoopsModules\Yogurt\Utility;
 
-include dirname(__DIR__) . '/preloads/autoloader.php';
+include dirname(
+            __DIR__
+        ) . '/preloads/autoloader.php';
 
 /**
  * Prepares system prior to attempting to install module
@@ -28,11 +32,11 @@ include dirname(__DIR__) . '/preloads/autoloader.php';
  *
  * @return bool true if ready to install, false if not
  */
-function xoops_module_pre_install_yogurt(\XoopsModule $module)
-{
+function xoops_module_pre_install_yogurt(
+    XoopsModule $module
+) {
     include __DIR__ . '/common.php';
-    /** @var \XoopsModules\Yogurt\Utility $utility */
-    $utility = new \XoopsModules\Yogurt\Utility();
+    $utility = new Utility();
     //check for minimum XOOPS version
     $xoopsSuccess = $utility::checkVerXoops($module);
 
@@ -55,17 +59,18 @@ function xoops_module_pre_install_yogurt(\XoopsModule $module)
  *
  * @return bool true if installation successful, false if not
  */
-function xoops_module_install_yogurt(\XoopsModule $module)
-{
+function xoops_module_install_yogurt(
+    XoopsModule $module
+) {
     require_once dirname(__DIR__) . '/preloads/autoloader.php';
 
     $moduleDirName = basename(dirname(__DIR__));
 
     /** @var \XoopsModules\Yogurt\Helper $helper */ /** @var \XoopsModules\Yogurt\Utility $utility */
     /** @var \XoopsModules\Yogurt\Common\Configurator $configurator */
-    $helper       = \XoopsModules\Yogurt\Helper::getInstance();
-    $utility      = new \XoopsModules\Yogurt\Utility();
-    $configurator = new \XoopsModules\Yogurt\Common\Configurator();
+    $helper       = Helper::getInstance();
+    $utility      = new Utility();
+    $configurator = new Configurator();
     // Load language files
     $helper->loadLanguage('admin');
     $helper->loadLanguage('modinfo');
@@ -76,7 +81,12 @@ function xoops_module_install_yogurt(\XoopsModule $module)
     //$moduleName = $module->getVar('name');
     $grouppermHandler = xoops_getHandler('groupperm');
     // access rights ------------------------------------------
-    $grouppermHandler->addRight($moduleDirName . '_approve', 1, XOOPS_GROUP_ADMIN, $moduleId);
+    $grouppermHandler->addRight(
+        $moduleDirName . '_approve',
+        1,
+        XOOPS_GROUP_ADMIN,
+        $moduleId
+    );
     $grouppermHandler->addRight($moduleDirName . '_submit', 1, XOOPS_GROUP_ADMIN, $moduleId);
     $grouppermHandler->addRight($moduleDirName . '_view', 1, XOOPS_GROUP_ADMIN, $moduleId);
     $grouppermHandler->addRight($moduleDirName . '_view', 1, XOOPS_GROUP_USERS, $moduleId);
@@ -85,7 +95,11 @@ function xoops_module_install_yogurt(\XoopsModule $module)
     //  ---  CREATE FOLDERS ---------------
     if (count($configurator->uploadFolders) > 0) {
         //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
-        foreach (array_keys($configurator->uploadFolders) as $i) {
+        foreach (
+            array_keys(
+                $configurator->uploadFolders
+            ) as $i
+        ) {
             $utility::createFolder($configurator->uploadFolders[$i]);
         }
     }
@@ -112,7 +126,12 @@ function xoops_module_install_yogurt(\XoopsModule $module)
     */
 
     //delete .html entries from the tpl table
-    $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $module->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
+    $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix(
+            'tplfile'
+        ) . " WHERE `tpl_module` = '" . $module->getVar(
+            'dirname',
+            'n'
+        ) . "' AND `tpl_file` LIKE '%.html%'";
     $GLOBALS['xoopsDB']->queryF($sql);
 
     return true;

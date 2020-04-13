@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -18,11 +21,14 @@
  */
 
 use XoopsModules\Yogurt\Common;
+use Xmf\Module\Admin;
+use Xmf\Yaml;
+use Xmf\Request;
 
 require __DIR__ . '/admin_header.php';
 // Display Admin header
 xoops_cp_header();
-$adminObject = \Xmf\Module\Admin::getInstance();
+$adminObject = Admin::getInstance();
 
 //check or upload folders
 $configurator = new Common\Configurator();
@@ -43,37 +49,27 @@ $adminObject->addInfoBoxLine(sprintf(_AM_YOGURT_THEREARE_QUOTES, $quotesCount));
 */
 
 //count "total Images"
-/** @var \XoopsPersistableObjectHandler $imagesHandler */
-$totalImages = $imagesHandler->getCount();
+/** @var XoopsPersistableObjectHandler $imageHandler */
+$totalImages = $imageHandler->getCount();
 //count "total Friendship"
-/** @var \XoopsPersistableObjectHandler $friendshipHandler */
 $totalFriendship = $friendshipHandler->getCount();
 //count "total Visitors"
-/** @var \XoopsPersistableObjectHandler $visitorsHandler */
 $totalVisitors = $visitorsHandler->getCount();
 //count "total Video"
-/** @var \XoopsPersistableObjectHandler $videoHandler */
 $totalVideo = $videoHandler->getCount();
 //count "total Friendpetition"
-/** @var \XoopsPersistableObjectHandler $friendpetitionHandler */
 $totalFriendpetition = $friendpetitionHandler->getCount();
 //count "total Groups"
-/** @var \XoopsPersistableObjectHandler $groupsHandler */
 $totalGroups = $groupsHandler->getCount();
 //count "total Relgroupuser"
-/** @var \XoopsPersistableObjectHandler $relgroupuserHandler */
 $totalRelgroupuser = $relgroupuserHandler->getCount();
 //count "total Notes"
-/** @var \XoopsPersistableObjectHandler $notesHandler */
 $totalNotes = $notesHandler->getCount();
 //count "total Configs"
-/** @var \XoopsPersistableObjectHandler $configsHandler */
 $totalConfigs = $configsHandler->getCount();
 //count "total Suspensions"
-/** @var \XoopsPersistableObjectHandler $suspensionsHandler */
 $totalSuspensions = $suspensionsHandler->getCount();
 //count "total Audio"
-/** @var \XoopsPersistableObjectHandler $audioHandler */
 $totalAudio = $audioHandler->getCount();
 // InfoBox Statistics
 $adminObject->addInfoBox(AM_YOGURT_STATISTICS);
@@ -85,7 +81,9 @@ $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_IMAGES, $totalImages));
 $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_FRIENDS, $totalFriendship));
 
 // InfoBox friendpetition
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_FRIENDPETITION, $totalFriendpetition));
+$adminObject->addInfoBoxLine(
+    sprintf(AM_YOGURT_THEREARE_FRIENDPETITION, $totalFriendpetition)
+);
 
 // InfoBox visitors
 $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_VISITORS, $totalVisitors));
@@ -126,16 +124,32 @@ if ($helper->getConfig('displaySampleButton')) {
     $config              = loadAdminConfig($yamlFile);
     $displaySampleButton = $config['displaySampleButton'];
 
-    if (1 == $displaySampleButton) {
+    if (1 === $displaySampleButton) {
         xoops_loadLanguage('admin/modulesadmin', 'system');
         require_once dirname(__DIR__) . '/testdata/index.php';
 
-        $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=load', 'add');
-        $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'SAVE_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=save', 'add');
+        $adminObject->addItemButton(
+            constant('CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA'),
+            '__DIR__ . /../../testdata/index.php?op=load',
+            'add'
+        );
+        $adminObject->addItemButton(
+            constant('CO_' . $moduleDirNameUpper . '_' . 'SAVE_SAMPLEDATA'),
+            '__DIR__ . /../../testdata/index.php?op=save',
+            'add'
+        );
         //    $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'EXPORT_SCHEMA'), '__DIR__ . /../../testdata/index.php?op=exportschema', 'add');
-        $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'HIDE_SAMPLEDATA_BUTTONS'), '?op=hide_buttons', 'delete');
+        $adminObject->addItemButton(
+            constant('CO_' . $moduleDirNameUpper . '_' . 'HIDE_SAMPLEDATA_BUTTONS'),
+            '?op=hide_buttons',
+            'delete'
+        );
     } else {
-        $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLEDATA_BUTTONS'), '?op=show_buttons', 'add');
+        $adminObject->addItemButton(
+            constant('CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLEDATA_BUTTONS'),
+            '?op=show_buttons',
+            'add'
+        );
         $displaySampleButton = $config['displaySampleButton'];
     }
     $adminObject->displayButton('left', '');
@@ -151,8 +165,7 @@ $adminObject->displayIndex();
  */
 function loadAdminConfig($yamlFile)
 {
-    $config = \Xmf\Yaml::readWrapped($yamlFile); // work with phpmyadmin YAML dumps
-    return $config;
+    return Yaml::readWrapped($yamlFile); // work with phpmyadmin YAML dumps
 }
 
 /**
@@ -161,7 +174,7 @@ function loadAdminConfig($yamlFile)
 function hideButtons($yamlFile)
 {
     $app['displaySampleButton'] = 0;
-    \Xmf\Yaml::save($app, $yamlFile);
+    Yaml::save($app, $yamlFile);
     redirect_header('index.php', 0, '');
 }
 
@@ -172,11 +185,11 @@ function showButtons($yamlFile)
 {
     $app                        = [];
     $app['displaySampleButton'] = 1;
-    \Xmf\Yaml::save($app, $yamlFile);
+    Yaml::save($app, $yamlFile);
     redirect_header('index.php', 0, '');
 }
 
-$op = \Xmf\Request::getString('op', 0, 'GET');
+$op = Request::getString('op', 0, 'GET');
 
 switch ($op) {
     case 'hide_buttons':

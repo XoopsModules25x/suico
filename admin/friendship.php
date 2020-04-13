@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -23,17 +25,17 @@
  */
 
 use Xmf\Request;
+use Xmf\Module\Helper\Permission;
 
 require __DIR__ . '/admin_header.php';
 xoops_cp_header();
 //It recovered the value of argument op in URL$
-$op    = \Xmf\Request::getString('op', 'list');
-$order = \Xmf\Request::getString('order', 'desc');
-$sort  = \Xmf\Request::getString('sort', '');
+$op    = Request::getString('op', 'list');
+$order = Request::getString('order', 'desc');
+$sort  = Request::getString('sort', '');
 
 $adminObject->displayNavigation(basename(__FILE__));
-/** @var \Xmf\Module\Helper\Permission $permHelper */
-$permHelper = new \Xmf\Module\Helper\Permission();
+$permHelper = new Permission();
 $uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/images/';
 $uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/images/';
 
@@ -51,7 +53,7 @@ switch ($op) {
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('friendship.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
-        if (0 !== \Xmf\Request::getInt('friendship_id', 0)) {
+        if (0 !== Request::getInt('friendship_id', 0)) {
             $friendshipObject = $friendshipHandler->get(Request::getInt('friendship_id', 0));
         } else {
             $friendshipObject = $friendshipHandler->create();
@@ -84,7 +86,7 @@ switch ($op) {
 
     case 'delete':
         $friendshipObject = $friendshipHandler->get(Request::getString('friendship_id', ''));
-        if (1 == \Xmf\Request::getInt('ok', 0)) {
+        if (1 === Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('friendship.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
@@ -94,13 +96,24 @@ switch ($op) {
                 echo $friendshipObject->getHtmlErrors();
             }
         } else {
-            xoops_confirm(['ok' => 1, 'friendship_id' => Request::getString('friendship_id', ''), 'op' => 'delete',], Request::getUrl('REQUEST_URI', '', 'SERVER'), sprintf(AM_YOGURT_FORMSUREDEL, $friendshipObject->getVar('friendship_id')));
+            xoops_confirm(
+                [
+                    'ok'            => 1,
+                    'friendship_id' => Request::getString('friendship_id', ''),
+                    'op'            => 'delete',
+                ],
+                Request::getUrl('REQUEST_URI', '', 'SERVER'),
+                sprintf(
+                    AM_YOGURT_FORMSUREDEL,
+                    $friendshipObject->getVar('friendship_id')
+                )
+            );
         }
         break;
 
     case 'clone':
 
-        $id_field = \Xmf\Request::getString('friendship_id', '');
+        $id_field = Request::getString('friendship_id', '');
 
         if ($utility::cloneRecord('yogurt_friendship', 'friendship_id', $id_field)) {
             redirect_header('friendship.php', 3, AM_YOGURT_CLONED_OK);
@@ -113,10 +126,10 @@ switch ($op) {
     default:
         $adminObject->addItemButton(AM_YOGURT_ADD_FRIENDSHIP, 'friendship.php?op=new', 'add');
         $adminObject->displayButton('left');
-        $start                     = \Xmf\Request::getInt('start', 0);
+        $start                     = Request::getInt('start', 0);
         $friendshipPaginationLimit = $helper->getConfig('userpager');
 
-        $criteria = new \CriteriaCompo();
+        $criteria = new CriteriaCompo();
         $criteria->setSort('friendship_id ASC, friendship_id');
         $criteria->setOrder('ASC');
         $criteria->setLimit($friendshipPaginationLimit);
@@ -135,7 +148,7 @@ switch ($op) {
         if ($friendshipTempRows > $friendshipPaginationLimit) {
             xoops_load('XoopsPageNav');
 
-            $pagenav = new \XoopsPageNav(
+            $pagenav = new XoopsPageNav(
                 $friendshipTempRows, $friendshipPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
@@ -147,7 +160,7 @@ switch ($op) {
         //    $fields = explode('|', friendship_id:int:11::NOT NULL::primary:friendship_id|friend1_uid:int:11::NOT NULL:::friend1_uid|friend2_uid:int:11::NOT NULL:::friend2_uid|level:int:11::NOT NULL:::level|hot:tinyint:4::NOT NULL:::hot|trust:tinyint:4::NOT NULL:::trust|cool:tinyint:4::NOT NULL:::cool|fan:tinyint:4::NOT NULL:::fan);
         //    $fieldsCount    = count($fields);
 
-        $criteria = new \CriteriaCompo();
+        $criteria = new CriteriaCompo();
 
         //$criteria->setOrder('DESC');
         $criteria->setSort($sort);
@@ -163,14 +176,21 @@ switch ($op) {
             foreach (array_keys($friendshipTempArray) as $i) {
                 //        $field = explode(':', $fields[$i]);
 
-                $GLOBALS['xoopsTpl']->assign('selectorfriendship_id', AM_YOGURT_FRIENDSHIP_FRIENDSHIP_ID);
+                $GLOBALS['xoopsTpl']->assign(
+                    'selectorfriendship_id',
+                    AM_YOGURT_FRIENDSHIP_FRIENDSHIP_ID
+                );
                 $friendshipArray['friendship_id'] = $friendshipTempArray[$i]->getVar('friendship_id');
 
                 $GLOBALS['xoopsTpl']->assign('selectorfriend1_uid', AM_YOGURT_FRIENDSHIP_FRIEND1_UID);
-                $friendshipArray['friend1_uid'] = strip_tags(\XoopsUser::getUnameFromId($friendshipTempArray[$i]->getVar('friend1_uid')));
+                $friendshipArray['friend1_uid'] = strip_tags(
+                    XoopsUser::getUnameFromId($friendshipTempArray[$i]->getVar('friend1_uid'))
+                );
 
                 $GLOBALS['xoopsTpl']->assign('selectorfriend2_uid', AM_YOGURT_FRIENDSHIP_FRIEND2_UID);
-                $friendshipArray['friend2_uid'] = strip_tags(\XoopsUser::getUnameFromId($friendshipTempArray[$i]->getVar('friend2_uid')));
+                $friendshipArray['friend2_uid'] = strip_tags(
+                    XoopsUser::getUnameFromId($friendshipTempArray[$i]->getVar('friend2_uid'))
+                );
 
                 $GLOBALS['xoopsTpl']->assign('selectorlevel', AM_YOGURT_FRIENDSHIP_LEVEL);
                 $friendshipArray['level'] = $friendshipTempArray[$i]->getVar('level');
@@ -197,7 +217,7 @@ switch ($op) {
             // Display Navigation
             if ($friendshipCount > $friendshipPaginationLimit) {
                 xoops_load('XoopsPageNav');
-                $pagenav = new \XoopsPageNav(
+                $pagenav = new XoopsPageNav(
                     $friendshipCount, $friendshipPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
@@ -228,7 +248,9 @@ switch ($op) {
             //-------------------------------------------
 
             echo $GLOBALS['xoopsTpl']->fetch(
-                XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname') . '/templates/admin/yogurt_admin_friendship.tpl'
+                XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar(
+                    'dirname'
+                ) . '/templates/admin/yogurt_admin_friendship.tpl'
             );
         }
 

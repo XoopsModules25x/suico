@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
@@ -11,6 +11,8 @@ namespace XoopsModules\Yogurt;
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
+use Criteria;
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
@@ -37,20 +39,35 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 //require_once __DIR__ . '/Notes.php';
 //require_once __DIR__ . '/Configs.php';
 //require_once __DIR__ . '/Suspensions.php';
-if (str_replace('.', '', PHP_VERSION) > 499) {
-    require_once __DIR__ . '/Id3v1.php';
-}
+//if (str_replace('.', '', PHP_VERSION) > 499) {
+//    require_once __DIR__ . '/Id3v1.php';
+//}
 
 /**
- * Class YogurtControllerConfigs
+ * Class FriendsController
  */
-class ControllerConfigs extends YogurtController
+class FriendsController extends YogurtController
 {
     /**
      * @return bool|void
      */
     public function checkPrivilege()
     {
+
+        if (0 === $this->helper->getConfig('enable_friends')) {
+            redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_FRIENDSNOTENABLED);
+        }
+        $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
+        if (1 === $this->configsFactory->getCount($criteria)) {
+            $configs = $this->configsFactory->getObjects($criteria);
+
+            $config = $configs[0]->getVar('friends');
+
+            if (!$this->checkPrivilegeLevel($config)) {
+                redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, _MD_YOGURT_NOPRIVILEGE);
+            }
+        }
+
         return true;
     }
 }
