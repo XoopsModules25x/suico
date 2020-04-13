@@ -404,7 +404,7 @@ $modversion['config'][] = [
 ];
 
 $modversion['config'][] = [
-    'name'        => 'enable_friendsevaluation',
+    'name'        => 'allow_friendsevaluation',
     'title'       => '_MI_YOGURT_ENABLEFRIENDSEVALUATION_TITLE',
     'description' => '_MI_YOGURT_ENABLEFRIENDSEVALUATION_DESC',
     'default'     => 1,

@@ -264,7 +264,7 @@ $xoopsTpl->assign('friendly_rest', 48 - $evaluation['mediahot']);
 $xoopsTpl->assign('lang_cool', _MD_YOGURT_COOL);
 $xoopsTpl->assign('cool', $evaluation['mediacool']);
 $xoopsTpl->assign('cool_rest', 48 - $evaluation['mediacool']);
-$xoopsTpl->assign('enable_friendsevaluation', $helper->getConfig('enable_friendsevaluation'));
+$xoopsTpl->assign('allow_friendsevaluation', $helper->getConfig('allow_friendsevaluation'));
 
 //petitions to become friend
 if (1 === $petition) {
