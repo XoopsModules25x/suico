@@ -1,6 +1,5 @@
 <{include file="db:yogurt_navbar.tpl"}>
 <form class='outer' name='form_group_search' id='form_group_search' action='search_group.php' method='get'>
-
     <h4 class="head"><{$lang_searchgroup}></h4>
 
 
@@ -36,13 +35,13 @@
     </p>
 
     <p class=odd>
-        <label for='group_title' class='xoops-form-element-caption'>
+        <label for='group_title' class='xoops-form-element-caption-required'>
             <span class='caption-text'><{$lang_title}></span><span class='caption-marker'>*</span></label>
         <input type='text' name='group_title' id='group_title' size='35' maxlength='55' value='' required>
     </p>
 
     <p class=even>
-        <label for='group_desc' class='xoops-form-element-caption'>
+        <label for='group_desc' class='xoops-form-element-caption-required'>
             <span class='caption-text'><{$lang_description}></span>
             <span class='caption-marker'>*</span></label>
         <input type='text' name='group_desc' id='group_desc' size='35' maxlength='55' value='' required>
@@ -137,11 +136,11 @@
             </p>
 
             </p>
-            <{if $isOwner }>
+			<{if $isOwner }>
                 <form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">
                     <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
                     <button name="" type="image"><{$lang_joingroup}></button>
-                </form>
+                </form>         				
                 <{if $xoops_userid == $groups[j].uid }>
                     <form action="delete_group.php" method="POST" id="form_deletegroup" class="yogurt-groups-form-delete">
                         <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
@@ -155,9 +154,9 @@
                         <img src="assets/images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>">
                     </form>
                 <{/if}>
-
             <{/if}>
         </div>
+		<br>
     <{/section}>
 
 </div>

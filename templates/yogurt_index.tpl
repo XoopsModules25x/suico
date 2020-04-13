@@ -39,7 +39,7 @@
         <div id="yogurt-profile-petition">
             <form action=submit_friendpetition.php method="post">
                <input type="hidden" name="petitioned_uid" id="petitioned_uid" value="<{$uid_owner}>">
-               <button name="" type="image"><{$lang_addasafriend}></button>			 
+               <button name="" type="image"><{$lang_addasafriend}></button>			 	   
 				<{$token}>
             </form>
         </div>
@@ -47,7 +47,7 @@
     <{/if}>
 <{/if}>
 <{if $allow_friends }>
-<{if $friendsevaluation == 1}>
+<{if $allow_friendsevaluation == 1}>
     <div class="yogurt-nav-bar" id="yogurt-nav-bar">
         <p id="yogurt-profile-fans"><a href="fans.php?uid=<{$uid_owner}>" alt="<{$lang_fans}>" title="<{$lang_fans}>"> <{$lang_fans}> </a><img src="assets/images/fans.gif"> (<{$nb_fans}>)
             | <{$lang_funny}> </p>
@@ -247,7 +247,7 @@
     <{/if}>
     <{if $allow_friends==1 }>
         <div id="yogurt-profile-friends" class="outer">
-            <h4 id="titulo-friends" class="head"><{$lang_friendstitle}> (<{$nb_friends}>)</h4>
+            <h4 id="titulo-friends" class="head"><{$lang_friends}> (<{$nb_friends}>)</h4>
             <{if $nb_friends==0}><p id="nofriends"><{$lang_nofriendsyet}></p><{/if}>
             <{section name=i loop=$friends}>
                 <div class="yogurt-profile-friend <{cycle values="odd,even"}>">
@@ -257,9 +257,11 @@
                             <img class = "yogurt-profile-friend-photo" src="<{$xoops_upload_url}>/<{$friends[i].user_avatar}>"><{/if}><{$friends[i].uname}> </a>
                 </div>
             <{/section}>
+			<{if $nb_friends!=0}>
             <p id="yogurt-profile-friend-viewall" class="foot">
                 <a href="friends.php?uid=<{$uid_owner}>"><{$lang_viewallfriends}></a>
             </p>
+			<{/if}>
         </div>
     <{/if}>
     <{if $allow_groups==1}>
@@ -272,9 +274,11 @@
                     <p><{$groups[i].desc}></p>
                 </div>
             <{/section}>
+			<{if $nb_groups!=0}>
             <p id="yogurt-profile-friend-viewall" class="foot">
                 <a href="groups.php?uid=<{$uid_owner}>"><{$lang_viewallgroups}></a>
             </p>
+			<{/if}>
         </div>
     <{/if}>
 </div><!-- end of group2 -->

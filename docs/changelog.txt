@@ -1,3 +1,19 @@
+<h5>3.5 Alpha xxx </h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
+<hr>
+- fix missing closing div in group page template (liomj)
+- add group owner name in group page (liomj)
+- changed photo description to be a required field (liomj)
+- Fix required caption marker for groups (liomj)
+- More Templates update and fix (liomj)
+- Languages changes (liomj)
+- Added option to disable pm button in my friend block (liomj)
+- Fix my friend block errors (liomj)
+- Added the ability to disable the friendship evaluation ranking (liomj)
+- Fix featured video template in profile page (liomj)
+- Rename editdesc.php to editdescpciture.php (liomj)
+- Change join and leave groups image to button (liomj)
+
+
 <h5>3.5 Alpha 4   [2020-04-05]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
 <hr>
 - add friend petition in friend section & change add as a friend image (liomj)

@@ -55,6 +55,9 @@ if ($xoopsUser) {
     }
     $xoopsTpl->assign('useruid', $uid);
 }
+$owner_uid=$group->getVar('owner_uid');
+$group_ownername = XoopsUser::getUnameFromId($owner_uid);
+
 $xoopsTpl->assign('group_members', $group_members);
 $maxfilebytes = $helper->getConfig('maxfilesize');
 $xoopsTpl->assign('lang_savegroup', _MD_YOGURT_UPLOADGROUP);
@@ -64,6 +67,8 @@ $xoopsTpl->assign('group_desc', $group->getVar('group_desc'));
 $xoopsTpl->assign('group_img', $group->getVar('group_img'));
 $xoopsTpl->assign('group_id', $group->getVar('group_id'));
 $xoopsTpl->assign('group_owneruid', $group->getVar('owner_uid'));
+$xoopsTpl->assign('group_ownername', $group_ownername);
+
 
 $xoopsTpl->assign('lang_membersofgroup', _MD_YOGURT_MEMBERSDOFGROUP);
 $xoopsTpl->assign('lang_editgroup', _MD_YOGURT_EDIT_GROUP);
@@ -74,6 +79,8 @@ $xoopsTpl->assign('lang_titlegroup', _MD_YOGURT_GROUP_TITLE);
 $xoopsTpl->assign('lang_descgroup', _MD_YOGURT_GROUP_DESC);
 $xoopsTpl->assign('lang_abandongroup', _MD_YOGURT_GROUP_ABANDON);
 $xoopsTpl->assign('lang_joingroup', _MD_YOGURT_GROUP_JOIN);
+$xoopsTpl->assign('lang_groupowner', _MD_YOGURT_OWNEROFGROUP);
+
 
 //permissions
 $xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('notes'));

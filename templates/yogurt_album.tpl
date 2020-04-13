@@ -10,8 +10,8 @@
         <p class="even"><label class="yogurt-album-label-alert"><{$lang_nb_pict}> <{$lang_max_nb_pict}></label></p>
         <p class="odd"><label class="yogurt-album-label" for="sel_photo"><{$lang_selectphoto}></label><input type='hidden' name='MAX_FILE_SIZE' value='<{$maxfilebytes}>'><input type='file' name='sel_photo' id='sel_photo'><input type='hidden' name='xoops_upload_file[]' id='xoops_upload_file[]'
                                                                                                                                                                                                                                     value='sel_photo'></p>
-        <p class="even"><label class="yogurt-album-label" for="caption"><{$lang_caption}>:
-                <input type='text' name='caption' id='caption' size='35' maxlength='55' value=''></p>
+        <p class="even"><label  for="caption" class="yogurt-album-label xoops-form-element-caption-required"><{$lang_caption}><span class='caption-marker'>*</span> :
+                <input type='text' name='caption' id='caption' size='35' maxlength='55' value='' required></p>
         <p class="foot"><input type='submit' class='formButton' name='submit_button' id='submit_button' value='<{$lang_uploadpicture}>'></p>
     </form>
 </div>
