@@ -1,5 +1,6 @@
 <h5>3.5 Alpha xxx </h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
 <hr>
+- change preferences order (liomj)
 - fix missing closing div in group page template (liomj)
 - add group owner name in group page (liomj)
 - changed photo description to be a required field (liomj)
