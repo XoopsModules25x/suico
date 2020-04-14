@@ -68,28 +68,6 @@ if ('form' === $op) {
     $url_text = new XoopsFormText(_MD_YOGURT_URLC, 'user_url', 30, 100);
     //$theme_select = new XoopsFormSelectTheme(_MD_YOGURT_THEME, "user_theme");
     //$timezone_select = new XoopsFormSelectTimezone(_MD_YOGURT_TIMEZONE, "user_timezone_offset");
-    $icq_text  = new XoopsFormText(
-        '', 'user_icq', 30, 100
-    );
-    $icq_match = new XoopsFormSelectMatchOption('', 'user_icq_match');
-    $icq_tray  = new XoopsFormElementTray(_MD_YOGURT_ICQ, '&nbsp;');
-    $icq_tray->addElement($icq_match);
-    $icq_tray->addElement($icq_text);
-    $aim_text  = new XoopsFormText('', 'user_aim', 30, 100);
-    $aim_match = new XoopsFormSelectMatchOption('', 'user_aim_match');
-    $aim_tray  = new XoopsFormElementTray(_MD_YOGURT_AIM, '&nbsp;');
-    $aim_tray->addElement($aim_match);
-    $aim_tray->addElement($aim_text);
-    $yim_text  = new XoopsFormText('', 'user_yim', 30, 100);
-    $yim_match = new XoopsFormSelectMatchOption('', 'user_yim_match');
-    $yim_tray  = new XoopsFormElementTray(_MD_YOGURT_YIM, '&nbsp;');
-    $yim_tray->addElement($yim_match);
-    $yim_tray->addElement($yim_text);
-    $msnm_text  = new XoopsFormText('', 'user_msnm', 30, 100);
-    $msnm_match = new XoopsFormSelectMatchOption('', 'user_msnm_match');
-    $msnm_tray  = new XoopsFormElementTray(_MD_YOGURT_MSNM, '&nbsp;');
-    $msnm_tray->addElement($msnm_match);
-    $msnm_tray->addElement($msnm_text);
     $location_text   = new XoopsFormText(_MD_YOGURT_LOCATION, 'user_from', 30, 100);
     $occupation_text = new XoopsFormText(_MD_YOGURT_OCCUPATION, 'user_occ', 30, 100);
     $interest_text   = new XoopsFormText(_MD_YOGURT_INTEREST, 'user_intrest', 30, 100);
@@ -130,10 +108,6 @@ if ('form' === $op) {
     $form->addElement($email_tray);
     //$form->addElement($theme_select);
     //$form->addElement($timezone_select);
-    $form->addElement($icq_tray);
-    $form->addElement($aim_tray);
-    $form->addElement($yim_tray);
-    $form->addElement($msnm_tray);
     $form->addElement($url_text);
     $form->addElement($location_text);
     $form->addElement($occupation_text);
@@ -229,86 +203,6 @@ if ('submit' === $op) {
     if (!empty($_POST['user_url'])) {
         $url = formatURL(trim($_POST['user_url']));
         $criteria->add(new Criteria('url', $myts->addSlashes($url) . '%', 'LIKE'));
-    }
-    if (!empty($_POST['user_icq'])) {
-        $match = !empty($_POST['user_icq_match']) ? (int)$_POST['user_icq_match'] : XOOPS_MATCH_START;
-        switch ($match) {
-            case XOOPS_MATCH_START:
-                $criteria->add(new Criteria('user_icq', $myts->addSlashes(trim($_POST['user_icq'])) . '%', 'LIKE'));
-                break;
-            case XOOPS_MATCH_END:
-                $criteria->add(new Criteria('user_icq', '%' . $myts->addSlashes(trim($_POST['user_icq'])), 'LIKE'));
-                break;
-            case XOOPS_MATCH_EQUAL:
-                $criteria->add(new Criteria('user_icq', $myts->addSlashes(trim($_POST['user_icq']))));
-                break;
-            case XOOPS_MATCH_CONTAIN:
-                $criteria->add(
-                    new Criteria('user_icq', '%' . $myts->addSlashes(trim($_POST['user_icq'])) . '%', 'LIKE')
-                );
-                break;
-        }
-    }
-    if (!empty($_POST['user_aim'])) {
-        $match = !empty($_POST['user_aim_match']) ? (int)$_POST['user_aim_match'] : XOOPS_MATCH_START;
-        switch ($match) {
-            case XOOPS_MATCH_START:
-                $criteria->add(new Criteria('user_aim', $myts->addSlashes(trim($_POST['user_aim'])) . '%', 'LIKE'));
-                break;
-            case XOOPS_MATCH_END:
-                $criteria->add(new Criteria('user_aim', '%' . $myts->addSlashes(trim($_POST['user_aim'])), 'LIKE'));
-                break;
-            case XOOPS_MATCH_EQUAL:
-                $criteria->add(new Criteria('user_aim', $myts->addSlashes(trim($_POST['user_aim']))));
-                break;
-            case XOOPS_MATCH_CONTAIN:
-                $criteria->add(
-                    new Criteria('user_aim', '%' . $myts->addSlashes(trim($_POST['user_aim'])) . '%', 'LIKE')
-                );
-                break;
-        }
-    }
-    if (!empty($_POST['user_yim'])) {
-        $match = !empty($_POST['user_yim_match']) ? (int)$_POST['user_yim_match'] : XOOPS_MATCH_START;
-        switch ($match) {
-            case XOOPS_MATCH_START:
-                $criteria->add(new Criteria('user_yim', $myts->addSlashes(trim($_POST['user_yim'])) . '%', 'LIKE'));
-                break;
-            case XOOPS_MATCH_END:
-                $criteria->add(new Criteria('user_yim', '%' . $myts->addSlashes(trim($_POST['user_yim'])), 'LIKE'));
-                break;
-            case XOOPS_MATCH_EQUAL:
-                $criteria->add(new Criteria('user_yim', $myts->addSlashes(trim($_POST['user_yim']))));
-                break;
-            case XOOPS_MATCH_CONTAIN:
-                $criteria->add(
-                    new Criteria('user_yim', '%' . $myts->addSlashes(trim($_POST['user_yim'])) . '%', 'LIKE')
-                );
-                break;
-        }
-    }
-    if (!empty($_POST['user_msnm'])) {
-        $match = !empty($_POST['user_msnm_match']) ? (int)$_POST['user_msnm_match'] : XOOPS_MATCH_START;
-        switch ($match) {
-            case XOOPS_MATCH_START:
-                $criteria->add(
-                    new Criteria('user_msnm', $myts->addSlashes(trim($_POST['user_msnm'])) . '%', 'LIKE')
-                );
-                break;
-            case XOOPS_MATCH_END:
-                $criteria->add(
-                    new Criteria('user_msnm', '%' . $myts->addSlashes(trim($_POST['user_msnm'])), 'LIKE')
-                );
-                break;
-            case XOOPS_MATCH_EQUAL:
-                $criteria->add(new Criteria('user_msnm', $myts->addSlashes(trim($_POST['user_msnm']))));
-                break;
-            case XOOPS_MATCH_CONTAIN:
-                $criteria->add(
-                    new Criteria('user_msnm', '%' . $myts->addSlashes(trim($_POST['user_msnm'])) . '%', 'LIKE')
-                );
-                break;
-        }
     }
     if (!empty($_POST['user_from'])) {
         $criteria->add(new Criteria('user_from', '%' . $myts->addSlashes(trim($_POST['user_from'])) . '%', 'LIKE'));

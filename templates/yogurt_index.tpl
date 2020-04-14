@@ -148,18 +148,6 @@
                 <p class="even"><img src="assets/images/email.gif"> <span class="yogurt-profileinfo-label"><{$lang_privmsg}>:</span><span class="yogurt-profileinfo-value"><a href="javascript:openWithSelfMain('<{$xoops_url}>/pmlite.php?send2=1&amp;to_userid=<{$uid_owner}>', 'pmlite', 450, 380);"><img
                                     src="<{$xoops_url}>/images/icons/pm.gif" alt=""></a></span></p>
             <{/if}>
-			<{if $user_icq}>
-            <p class="odd"><img src="assets/images/icq.gif"> <span class="yogurt-profileinfo-label"><{$lang_icq}>:</span><span class="yogurt-profileinfo-value"><{$user_icq}></span> <!-- <{if $user_icq!=""}><img src="http://status.icq.com/online.gif?icq=<{$user_icq}>&img=21"> <{/if}> --></p>
-            <{/if}>
-			<{if $user_aim}>
-            <p class="even"><img src="assets/images/aim.gif"> <span class="yogurt-profileinfo-label"><{$lang_aim}>:</span><span class="yogurt-profileinfo-value"><{$user_aim}></span></p>
-            <{/if}>
-			<{if $user_yim}>
-            <p class="odd"><img src="assets/images/ym.gif"> <span class="yogurt-profileinfo-label"><{$lang_yim}>:</span><span class="yogurt-profileinfo-value"><{$user_yim}></span></p>
-            <{/if}>
-			<{if $user_msnm}>
-            <p class="even"><img src="assets/images/amsn.gif"> <span class="yogurt-profileinfo-label"><{$lang_msnm}>:</span><span class="yogurt-profileinfo-value"><{$user_msnm}></span></p>
-            <{/if}>
         </div>
     <{/if}>
 
