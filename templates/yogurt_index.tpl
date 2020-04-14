@@ -134,9 +134,8 @@
 			 <{if $user_viewemail!='0'}>
 			<h4 class="yogurt-profile-title head"><{$lang_contactinfo}> <{if $isOwner==1 }><a href="edituser.php" title="<{$lang_editprofile}>"><img src="<{xoModuleIcons16 edit.png}>"></a><{/if}></h4>
              <{/if}>
-			<{/if}>
-			
-			<{if $user_website}>
+			<{/if}>		
+			<{if $user_websiteurl}>
             <p class="even"><img src="assets/images/url.gif"> <span class="yogurt-profileinfo-label"><{$lang_website}>:</span><span class="yogurt-profileinfo-value"><{$user_websiteurl}></span></p>
             <{/if}>
 			<{if $user_email}>
