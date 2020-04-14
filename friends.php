@@ -38,7 +38,7 @@ $start = Request::getInt('start', 0, 'GET');
  */
 $petition = 0;
 if (1 === $controller->isOwner) {
-    $criteria_uidpetition = new Criteria('petioned_uid', $controller->uidOwner);
+    $criteria_uidpetition = new Criteria('petitionfrom_uid', $controller->uidOwner);
     $newpetition          = $controller->petitionsFactory->getObjects($criteria_uidpetition);
     if ($newpetition) {
         $nb_petitions      = count($newpetition);
