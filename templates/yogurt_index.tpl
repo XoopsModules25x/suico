@@ -75,38 +75,11 @@
                         <img src="<{$xoops_url}>/uploads/<{$avatar_url}>">
                     <{else}>
                         <img src="assets/images/noavatar.gif">
-                        <{if $isOwner}>
-                            <p>
-                                <{$lang_selectavatar}>
-                            </p>
-                        <{else}>
-                            <p>
-                                <{$lang_noavatar}>
-                            </p>
-                        <{/if}>
                     <{/if}>
                 </div>
             <{/if}>
         </div>
     <{/if}>
-
-
-
-    <{if ($isOwner==1) }>
-	     <{if $visitors}>
-        <div id="yogurt-album-visitors" class="outer">
-            <h4 class="head"><{$lang_profilevisitors}></h4>
-            <p>
-                <{foreach from=$visitors key=k item=v}>
-                    <a href=index.php?uid=<{$k}>> <{$v}> </a>
-                    &nbsp;
-                <{/foreach}>
-            </p>
-        </div>
-    <{/if}>
-    <{/if}>
-
-
 
     <{if $allow_profile_general==1}>
         <div id="yogurt-profile-details" class="outer">
@@ -153,8 +126,6 @@
         </div>
     <{/if}>
 
-
-
     <{if $allow_profile_stats}>
         <div id="yogurt-profile-statistics" class="outer">
             <h4 class="yogurt-profiletitle head"><{$lang_statistics}></h4>
@@ -169,10 +140,25 @@
         </div>
     <{/if}>
 
+	<{if ($isOwner==1) }>
+	    <{if $visitors}>
+        <div id="yogurt-album-visitors" class="outer">
+            <h4 class="head"><{$lang_profilevisitors}></h4>
+            <p class="even">
+                <{foreach from=$visitors key=k item=v}>
+                    <a href=index.php?uid=<{$k}>> <{$v}> </a>
+                    &nbsp;
+                <{/foreach}>
+            </p>
+        </div>
+		<{/if}>
+    <{/if}>
+	
     <{if $modules!=''}>
     <div id="yogurt-profile-search-results" class="outer">
         <h4 class="yogurt-profiletitle head"><{$lang_usercontributions}></h4>
         <!-- start module search results loop -->
+		<p>
         <{foreach item=module from=$modules name="search_results"}>
             <div class="yogurt-profile-search-module" id="yogurt-profile-search-module-<{$smarty.foreach.search_results.iteration}>">
                 <h4 class="yogurt-profiletitle head">
@@ -205,6 +191,7 @@
                 </div>
             </div>
         <{/foreach}>
+		</p>
         <!-- end module search results loop -->
     </div>
     <{/if}>
