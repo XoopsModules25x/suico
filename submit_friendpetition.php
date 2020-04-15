@@ -52,13 +52,13 @@ $criteria = new CriteriaCompo(
 $criteria->add(new Criteria('petitioner_uid', $xoopsUser->getVar('uid')));
 if ($friendpetitionFactory->getCount($criteria) > 0) {
     redirect_header(
-        XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('petitionto_uid', 0, 'POST'), 3, _MD_YOGURT_ALREADY_PETITIONED);
+        XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('petitionto_uid', 0, 'POST'), 3, _MD_YOGURT_ALREADY_PETITIONTO);
 } else {
     $criteria2 = new CriteriaCompo(new Criteria('petitioner_uid', $petitionto_uid));
     $criteria2->add(new Criteria('petitionfrom_uid', $xoopsUser->getVar('uid')));
     if ($friendpetitionFactory->getCount($criteria2) > 0) {
         redirect_header(
-            XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('petitionto_uid', 0, 'POST'), 3, _MD_YOGURT_ALREADY_PETITIONED);
+            XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('petitionto_uid', 0, 'POST'), 3, _MD_YOGURT_ALREADY_PETITIONTO);
     }
 }
 /**
@@ -75,7 +75,7 @@ if ($friendpetitionFactory->insert($newpetition)) {
     $notificationHandler->triggerEvent('friendship', Request::getInt('petitionto_uid', 0, 'POST'), 'new_friendship', $extra_tags);
 
     redirect_header(
-        XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('petitionto_uid', 0, 'POST'), 3, _MD_YOGURT_PETITIONED);
+        XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('petitionto_uid', 0, 'POST'), 3, _MD_YOGURT_PETITIONTO);
 } else {
     redirect_header(
         XOOPS_URL . '/modules/yogurt/index.php?uid=' . $xoopsUser->getVar('uid'),

@@ -182,7 +182,7 @@ switch ($op) {
                     XoopsUser::getUnameFromId($friendpetitionTempArray[$i]->getVar('petitioner_uid'))
                 );
 
-                $GLOBALS['xoopsTpl']->assign('selectorpetitionfrom_uid', AM_YOGURT_FRIENDPETITION_PETIONED_UID);
+                $GLOBALS['xoopsTpl']->assign('selectorpetitionfrom_uid', AM_YOGURT_FRIENDPETITION_PETITIONFROM_UID);
                 $friendpetitionArray['petitionfrom_uid'] = strip_tags(
                     XoopsUser::getUnameFromId($friendpetitionTempArray[$i]->getVar('petitionfrom_uid'))
                 );
