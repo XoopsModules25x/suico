@@ -86,6 +86,8 @@ $criteria = new CriteriaCompo(
         'petitionfrom_uid', $petitionto_uid
     )
 );
+
+if ($xoopsUser){
 $criteria->add(new Criteria('petitioner_uid', $xoopsUser->getVar('uid')));
 if ($friendpetitionFactory->getCount($criteria) > 0) {
 	$xoopsTpl->assign('petitionto_uid', $petitionto_uid);
@@ -99,7 +101,7 @@ else {
       global $xoopsUser;	
 	  $xoopsTpl->assign('petitionfrom_uid', $xoopsUser->getVar('uid'));    
     }
-}
+}}
 
 /**
  * Criteria for mainvideo

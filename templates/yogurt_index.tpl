@@ -45,7 +45,7 @@
         <!-- end if -->
     <{/if}>
 <{/if}>
-	<{if $petitionto_uid == $uid_owner OR $petitionfrom_uid == $xoops_userid}>
+	<{if $petitionto_uid == $uid_owner OR $petitionfrom_uid == $xoops_userid && $isanonym!=1}>
 		<button type="button"><{$lang_friendshippending}></button>	
 	<{/if}>
 
