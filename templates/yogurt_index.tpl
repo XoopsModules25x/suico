@@ -1,6 +1,6 @@
 <{include file="db:yogurt_navbar.tpl"}>
 
-<{if $petition==1 && $isOwner==1 && $isfriend==0}>
+<{if $allow_friends !=-1 && $petition==1 && $isOwner==1 && $isfriend==0}>
 
     <!-- if not owner and not friend -->
     <div id="yogurt-profile-petition" class="confirmMsg">
@@ -34,7 +34,7 @@
         </form>
     </div>
 <{else}>
-    <{if (($isfriend!=1) && ($isOwner==0) && ($isanonym!=1) && $petitionto_uid != $uid_owner) && $petitionfrom_uid != $xoops_userid}>
+    <{if (($allow_friends !=-1) && ($isfriend!=1) && ($isOwner==0) && ($isanonym!=1) && $petitionto_uid != $uid_owner) && $petitionfrom_uid != $xoops_userid}>
         <div id="yogurt-profile-petition">
             <form action=submit_friendpetition.php method="post">
                <input type="hidden" name="petitionto_uid" id="petitionto_uid" value="<{$uid_owner}>">
@@ -45,11 +45,16 @@
         <!-- end if -->
     <{/if}>
 <{/if}>
+ <{if $allow_friends !=-1 }>
+	<{if $isfriend == 1 && $isanonym!=1}>
+		<button type="button">Friend</button>	
+	<{/if}>
 	<{if $petitionto_uid == $uid_owner OR $petitionfrom_uid == $xoops_userid && $isanonym!=1}>
 		<button type="button"><{$lang_friendshippending}></button>	
 	<{/if}>
-
-<{if $allow_friends }>
+<{/if}>	
+	
+<{if $allow_friends !=-1}>
 <{if $allow_friendsevaluation == 1}>
     <div class="yogurt-nav-bar" id="yogurt-nav-bar">
         <p id="yogurt-profile-fans"><a href="fans.php?uid=<{$uid_owner}>" alt="<{$lang_fans}>" title="<{$lang_fans}>"> <{$lang_fans}> </a><img src="assets/images/fans.gif"> (<{$nb_fans}>)
