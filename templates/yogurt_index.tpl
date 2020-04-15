@@ -47,7 +47,7 @@
 <{/if}>
  <{if $allow_friends !=-1 }>
 	<{if $isfriend == 1 && $isanonym!=1}>
-		<button type="button">Friend</button>	
+		<button type="button"><{$lang_myfriend}></button>	
 	<{/if}>
 	<{if $petitionfrom_uid == $uid_owner OR $petitionto_uid == $xoops_userid && $isanonym!=1}>
 		<button type="button"><{$lang_friendshippending}></button>	
