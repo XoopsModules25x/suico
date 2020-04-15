@@ -457,11 +457,7 @@ if ('submit' === $op) {
         if ($totalpages > 1) {
             $hiddenform = "<form name='findnext' action='searchmembers.php' method='post'>";
             foreach ($_POST as $k => $v) {
-                $hiddenform .= "<input type='hidden' name='" . $myts->oopsHtmlSpecialChars(
-                        $k
-                    ) . "' value='" . $myts->makeTboxData4PreviewInForm(
-                        $v
-                    ) . "'>\n";
+                $hiddenform .= "<input type='hidden' name='" . $myts->htmlSpecialChars($k) . "' value='" . $myts->htmlSpecialChars($v) . "'>\n";
             }
             if (!isset($_POST['limit'])) {
                 $hiddenform .= "<input type='hidden' name='limit' value='" . $limit . "'>\n";
