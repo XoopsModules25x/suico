@@ -378,9 +378,11 @@ define('_MD_YOGURT_META_YEAR', 'Year');
 define('_MD_YOGURT_PLAYER', 'Your audio player');
 
 // 3.5
-define('_MD_YOGURT_ADDASAFRIEND', 'Add as a Friend');
-define('_MD_YOGURT_FRIENDSHIPPENDING', 'Friendship Pending');
+define('_MD_YOGURT_ADDFRIEND', 'Add Friend');
+define('_MD_YOGURT_FRIENDREQUESTPENDING', 'Friend Request Pending');
 define('_MD_YOGURT_MYFRIEND', 'Friend');
+define('_MD_YOGURT_FRIENDREQUESTSENT', 'Friend Request Sent');
+define('_MD_YOGURT_FRIENDSHIPSTATUS', 'Friendship Status');
 define('_MD_YOGURT_PROFILEVISITORS', 'Profile Visitors');
 define('_MD_YOGURT_FEATUREDVIDEO', 'Featured Video');
 define('_MD_YOGURT_ALLVIDEOS', 'View all videos');

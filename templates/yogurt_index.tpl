@@ -38,7 +38,7 @@
         <div id="yogurt-profile-petition">
             <form action=submit_friendpetition.php method="post">
                <input type="hidden" name="petitionfrom_uid" id="petitionfrom_uid" value="<{$uid_owner}>">
-               <button name="" type="image"><{$lang_addasafriend}></button>			 	   
+               <button name="" type="image"><{$lang_addfriend}></button>			 	   
 				<{$token}>
             </form>
         </div>
