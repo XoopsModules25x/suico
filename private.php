@@ -45,7 +45,7 @@ $picture->setVar('private', Request::getInt('private', 0, 'POST'));
  * Verifying who's the owner to allow changes
  */
 $uid = (int)$xoopsUser->getVar('uid');
-if ($uid === $picture->getVar('uid_owner')) {
+if ($uid === (int)$picture->getVar('uid_owner')) {
     if ($imageFactory->insert($picture)) {
         if (1 === Request::getInt('private', 0, 'POST')) {
             redirect_header('album.php', 2, _MD_YOGURT_PRIVATIZED);
