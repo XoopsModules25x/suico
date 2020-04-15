@@ -308,10 +308,6 @@ define('_MD_YOGURT_USERSFOUND', '%s member(s) found');
 define('_MD_YOGURT_TOTALUSERS', 'Total: %s members');
 define('_MD_YOGURT_NOFOUND', 'No Members Found');
 define('_MD_YOGURT_UNAME', 'User Name');
-define('_MD_YOGURT_ICQ', 'ICQ Number');
-define('_MD_YOGURT_AIM', 'AIM Handle');
-define('_MD_YOGURT_YIM', 'YIM Handle');
-define('_MD_YOGURT_MSNM', 'MSNM Handle');
 define('_MD_YOGURT_LOCATION', 'Location contains');
 define('_MD_YOGURT_OCCUPATION', 'Occupation contains');
 define('_MD_YOGURT_INTEREST', 'Interest contains');
@@ -383,6 +379,7 @@ define('_MD_YOGURT_PLAYER', 'Your audio player');
 
 // 3.5
 define('_MD_YOGURT_ADDASAFRIEND', 'Add as a Friend');
+define('_MD_YOGURT_FRIENDSHIPPENDING', 'Friendship Pending');
 define('_MD_YOGURT_PROFILEVISITORS', 'Profile Visitors');
 define('_MD_YOGURT_FEATUREDVIDEO', 'Featured Video');
 define('_MD_YOGURT_ALLVIDEOS', 'View all videos');

@@ -34,11 +34,10 @@
         </form>
     </div>
 <{else}>
-
-    <{if (($isfriend!=1) && ($isOwner==0) && ($isanonym!=1))}>
+    <{if (($isfriend!=1) && ($isOwner==0) && ($isanonym!=1) && $petitionto_uid != $uid_owner) && $petitionfrom_uid != $xoops_userid}>
         <div id="yogurt-profile-petition">
             <form action=submit_friendpetition.php method="post">
-               <input type="hidden" name="petitioned_uid" id="petitioned_uid" value="<{$uid_owner}>">
+               <input type="hidden" name="petitionto_uid" id="petitionto_uid" value="<{$uid_owner}>">
                <button name="" type="image"><{$lang_addasafriend}></button>			 	   
 				<{$token}>
             </form>
@@ -46,6 +45,10 @@
         <!-- end if -->
     <{/if}>
 <{/if}>
+	<{if $petitionto_uid == $uid_owner OR $petitionfrom_uid == $xoops_userid && $isanonym!=1}>
+		<button type="button"><{$lang_friendshippending}></button>	
+	<{/if}>
+
 <{if $allow_friends }>
 <{if $allow_friendsevaluation == 1}>
     <div class="yogurt-nav-bar" id="yogurt-nav-bar">
@@ -72,38 +75,11 @@
                         <img src="<{$xoops_url}>/uploads/<{$avatar_url}>">
                     <{else}>
                         <img src="assets/images/noavatar.gif">
-                        <{if $isOwner}>
-                            <p>
-                                <{$lang_selectavatar}>
-                            </p>
-                        <{else}>
-                            <p>
-                                <{$lang_noavatar}>
-                            </p>
-                        <{/if}>
                     <{/if}>
                 </div>
             <{/if}>
         </div>
     <{/if}>
-
-
-
-    <{if ($isOwner==1) }>
-	     <{if $visitors}>
-        <div id="yogurt-album-visitors" class="outer">
-            <h4 class="head"><{$lang_profilevisitors}></h4>
-            <p>
-                <{foreach from=$visitors key=k item=v}>
-                    <a href=index.php?uid=<{$k}>> <{$v}> </a>
-                    &nbsp;
-                <{/foreach}>
-            </p>
-        </div>
-    <{/if}>
-    <{/if}>
-
-
 
     <{if $allow_profile_general==1}>
         <div id="yogurt-profile-details" class="outer">
@@ -134,9 +110,8 @@
 			 <{if $user_viewemail!='0'}>
 			<h4 class="yogurt-profile-title head"><{$lang_contactinfo}> <{if $isOwner==1 }><a href="edituser.php" title="<{$lang_editprofile}>"><img src="<{xoModuleIcons16 edit.png}>"></a><{/if}></h4>
              <{/if}>
-			<{/if}>
-			
-			<{if $user_website}>
+			<{/if}>		
+			<{if $user_websiteurl}>
             <p class="even"><img src="assets/images/url.gif"> <span class="yogurt-profileinfo-label"><{$lang_website}>:</span><span class="yogurt-profileinfo-value"><{$user_websiteurl}></span></p>
             <{/if}>
 			<{if $user_email}>
@@ -148,22 +123,8 @@
                 <p class="even"><img src="assets/images/email.gif"> <span class="yogurt-profileinfo-label"><{$lang_privmsg}>:</span><span class="yogurt-profileinfo-value"><a href="javascript:openWithSelfMain('<{$xoops_url}>/pmlite.php?send2=1&amp;to_userid=<{$uid_owner}>', 'pmlite', 450, 380);"><img
                                     src="<{$xoops_url}>/images/icons/pm.gif" alt=""></a></span></p>
             <{/if}>
-			<{if $user_icq}>
-            <p class="odd"><img src="assets/images/icq.gif"> <span class="yogurt-profileinfo-label"><{$lang_icq}>:</span><span class="yogurt-profileinfo-value"><{$user_icq}></span> <!-- <{if $user_icq!=""}><img src="http://status.icq.com/online.gif?icq=<{$user_icq}>&img=21"> <{/if}> --></p>
-            <{/if}>
-			<{if $user_aim}>
-            <p class="even"><img src="assets/images/aim.gif"> <span class="yogurt-profileinfo-label"><{$lang_aim}>:</span><span class="yogurt-profileinfo-value"><{$user_aim}></span></p>
-            <{/if}>
-			<{if $user_yim}>
-            <p class="odd"><img src="assets/images/ym.gif"> <span class="yogurt-profileinfo-label"><{$lang_yim}>:</span><span class="yogurt-profileinfo-value"><{$user_yim}></span></p>
-            <{/if}>
-			<{if $user_msnm}>
-            <p class="even"><img src="assets/images/amsn.gif"> <span class="yogurt-profileinfo-label"><{$lang_msnm}>:</span><span class="yogurt-profileinfo-value"><{$user_msnm}></span></p>
-            <{/if}>
         </div>
     <{/if}>
-
-
 
     <{if $allow_profile_stats}>
         <div id="yogurt-profile-statistics" class="outer">
@@ -179,10 +140,25 @@
         </div>
     <{/if}>
 
+	<{if ($isOwner==1) }>
+	    <{if $visitors}>
+        <div id="yogurt-album-visitors" class="outer">
+            <h4 class="head"><{$lang_profilevisitors}></h4>
+            <p class="even">
+                <{foreach from=$visitors key=k item=v}>
+                    <a href=index.php?uid=<{$k}>> <{$v}> </a>
+                    &nbsp;
+                <{/foreach}>
+            </p>
+        </div>
+		<{/if}>
+    <{/if}>
+	
     <{if $modules!=''}>
     <div id="yogurt-profile-search-results" class="outer">
         <h4 class="yogurt-profiletitle head"><{$lang_usercontributions}></h4>
         <!-- start module search results loop -->
+		<p>
         <{foreach item=module from=$modules name="search_results"}>
             <div class="yogurt-profile-search-module" id="yogurt-profile-search-module-<{$smarty.foreach.search_results.iteration}>">
                 <h4 class="yogurt-profiletitle head">
@@ -215,6 +191,7 @@
                 </div>
             </div>
         <{/foreach}>
+		</p>
         <!-- end module search results loop -->
     </div>
     <{/if}>
