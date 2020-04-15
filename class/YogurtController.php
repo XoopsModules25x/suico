@@ -181,7 +181,7 @@ class YogurtController extends \XoopsObject
 
             if (!empty($_GET['uid'])) {
                 $this->uidOwner = Request::getInt('uid', 0, 'GET');
-                $this->isOwner  = $this->user->getVar('uid') === (int)$_GET['uid'] ? 1 : 0;
+                $this->isOwner  = $this->user->getVar('uid') === Request::getInt('uid', 0, 'GET') ? 1 : 0;
             } else {
                 $this->uidOwner = $this->user->getVar('uid');
                 $this->isOwner  = 1;

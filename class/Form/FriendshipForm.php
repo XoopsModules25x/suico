@@ -63,7 +63,7 @@ class FriendshipForm extends XoopsThemeForm
         $title = $this->targetObject->isNew() ? sprintf(AM_YOGURT_FRIENDSHIP_ADD) : sprintf(
             AM_YOGURT_FRIENDSHIP_EDIT
         );
-        parent::__construct($title, 'form', xoops_getenv('PHP_SELF'), 'post', true);
+        parent::__construct($title, 'form', xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
 
         //include ID field, it's needed so the module knows if it is a new form or an edited form

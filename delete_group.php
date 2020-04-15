@@ -31,7 +31,7 @@ $groupsFactory       = new Yogurt\GroupsHandler($xoopsDB);
 
 $group_id = Request::getInt('group_id', 0, 'POST');
 
-if (!isset($_POST['confirm']) || 1 !== $_POST['confirm']) {
+if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
     xoops_confirm(
         [
             'group_id' => $group_id,

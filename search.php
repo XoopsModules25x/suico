@@ -223,8 +223,8 @@ switch ($op) {
         $searchvars        = [];
 
         $criteria = new CriteriaCompo(new Criteria('level', 0, '>'));
-        if (isset($_REQUEST['uname']) && '' !== $_REQUEST['uname']) {
-            $string = $myts->addSlashes(trim($_REQUEST['uname']));
+        if (isset($_REQUEST['uname']) && '' !== Request::getString('uname', '', 'REQUEST')) {
+            $string = $myts->addSlashes(trim(Request::getString('uname', '', 'REQUEST')));
             switch ($_REQUEST['uname_match']) {
                 case XOOPS_MATCH_START:
                     $string .= '%';
@@ -239,8 +239,8 @@ switch ($op) {
             $criteria->add(new Criteria('uname', $string, 'LIKE'));
             $searchvars[] = 'uname';
         }
-        if (isset($_REQUEST['email']) && '' !== $_REQUEST['email']) {
-            $string = $myts->addSlashes(trim($_REQUEST['email']));
+        if (isset($_REQUEST['email']) && '' !== Request::getString('email', '', 'REQUEST')) {
+            $string = $myts->addSlashes(trim(Request::getString('email', '', 'REQUEST')));
             switch ($_REQUEST['email_match']) {
                 case XOOPS_MATCH_START:
                     $string .= '%';
@@ -411,19 +411,19 @@ switch ($op) {
             break;
         }
 
-        if ('name' === $_REQUEST['sortby']) {
+        if ('name' === Request::getString('sortby', '', 'REQUEST')) {
             $criteria->setSort('name');
-        } elseif ('email' === $_REQUEST['sortby']) {
+        } elseif ('email' === Request::getString('sortby', '', 'REQUEST')) {
             $criteria->setSort('email');
-        } elseif ('uname' === $_REQUEST['sortby']) {
+        } elseif ('uname' === Request::getString('sortby', '', 'REQUEST')) {
             $criteria->setSort('uname');
-        } elseif (isset($fields[$_REQUEST['sortby']])) {
-            $criteria->setSort($fields[$_REQUEST['sortby']]->getVar('field_name'));
+        } elseif (isset($fields[Request::getString('sortby', '', 'REQUEST')])) {
+            $criteria->setSort($fields[Request::getString('sortby', '', 'REQUEST')]->getVar('field_name'));
         }
         $order = 0 === $_REQUEST['order'] ? 'ASC' : 'DESC';
         $criteria->setOrder($order);
 
-        $limit = isset($_REQUEST['limit']) && (int)$_REQUEST['limit'] > 0 ? (int)$_REQUEST['limit'] : 20;
+        $limit = isset($_REQUEST['limit']) && Request::getInt('limit', 0, 'REQUEST') > 0 ? Request::getInt('limit', 0, 'REQUEST') : 20;
         $criteria->setLimit($limit);
 
         $start = Request::getInt('start', 0, 'REQUEST');
@@ -489,7 +489,7 @@ switch ($op) {
         if ($total_users > $limit) {
             $search_url[] = 'op=results';
             $search_url[] = 'order=' . $order;
-            $search_url[] = 'sortby=' . $_REQUEST['sortby'];
+            $search_url[] = 'sortby=' . Request::getString('sortby', '', 'REQUEST');
             $search_url[] = 'limit=' . $limit;
             if (isset($search_url)) {
                 $args = implode('&amp;', $search_url);

@@ -34,7 +34,7 @@ $nbSections = $controller->getNumbersSections();
 $start_all = Request::getInt('start_all', 0, 'GET');
 $start_my  = Request::getInt('start_my', 0, 'GET');
 
-$group_keyword = trim(htmlspecialchars($_GET['group_keyword'], ENT_QUOTES | ENT_HTML5));
+$group_keyword = trim(htmlspecialchars(Request::getString('group_keyword', '', 'GET'), ENT_QUOTES | ENT_HTML5));
 /**
  * All Groups
  */

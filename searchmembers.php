@@ -165,7 +165,7 @@ if ('submit' === $op) {
     $myts     = MyTextSanitizer::getInstance();
     $criteria = new CriteriaCompo();
     if (!empty($_POST['user_uname'])) {
-        $match = !empty($_POST['user_uname_match']) ? (int)$_POST['user_uname_match'] : XOOPS_MATCH_START;
+        $match = !empty($_POST['user_uname_match']) ? Request::getInt('user_uname_match', 0, 'POST') : XOOPS_MATCH_START;
         switch ($match) {
             case XOOPS_MATCH_START:
                 $criteria->add(new Criteria('uname', $myts->addSlashes(trim($_POST['user_uname'])) . '%', 'LIKE'));
@@ -184,7 +184,7 @@ if ('submit' === $op) {
         }
     }
     if (!empty($_POST['user_name'])) {
-        $match = !empty($_POST['user_name_match']) ? (int)$_POST['user_name_match'] : XOOPS_MATCH_START;
+        $match = !empty($_POST['user_name_match']) ? Request::getInt('user_name_match', 0, 'POST') : XOOPS_MATCH_START;
         switch ($match) {
             case XOOPS_MATCH_START:
                 $criteria->add(new Criteria('name', $myts->addSlashes(trim($_POST['user_name'])) . '%', 'LIKE'));
@@ -205,7 +205,7 @@ if ('submit' === $op) {
         }
     }
     if (!empty($_POST['user_email'])) {
-        $match = !empty($_POST['user_email_match']) ? (int)$_POST['user_email_match'] : XOOPS_MATCH_START;
+        $match = !empty($_POST['user_email_match']) ? Request::getInt('user_email_match', 0, 'POST') : XOOPS_MATCH_START;
         switch ($match) {
             case XOOPS_MATCH_START:
                 $criteria->add(new Criteria('email', $myts->addSlashes(trim($_POST['user_email'])) . '%', 'LIKE'));
@@ -231,7 +231,7 @@ if ('submit' === $op) {
         $criteria->add(new Criteria('url', $myts->addSlashes($url) . '%', 'LIKE'));
     }
     if (!empty($_POST['user_icq'])) {
-        $match = !empty($_POST['user_icq_match']) ? (int)$_POST['user_icq_match'] : XOOPS_MATCH_START;
+        $match = !empty($_POST['user_icq_match']) ? Request::getInt('user_icq_match', 0, 'POST') : XOOPS_MATCH_START;
         switch ($match) {
             case XOOPS_MATCH_START:
                 $criteria->add(new Criteria('user_icq', $myts->addSlashes(trim($_POST['user_icq'])) . '%', 'LIKE'));
@@ -250,7 +250,7 @@ if ('submit' === $op) {
         }
     }
     if (!empty($_POST['user_aim'])) {
-        $match = !empty($_POST['user_aim_match']) ? (int)$_POST['user_aim_match'] : XOOPS_MATCH_START;
+        $match = !empty($_POST['user_aim_match']) ? Request::getInt('user_aim_match', 0, 'POST') : XOOPS_MATCH_START;
         switch ($match) {
             case XOOPS_MATCH_START:
                 $criteria->add(new Criteria('user_aim', $myts->addSlashes(trim($_POST['user_aim'])) . '%', 'LIKE'));
@@ -269,7 +269,7 @@ if ('submit' === $op) {
         }
     }
     if (!empty($_POST['user_yim'])) {
-        $match = !empty($_POST['user_yim_match']) ? (int)$_POST['user_yim_match'] : XOOPS_MATCH_START;
+        $match = !empty($_POST['user_yim_match']) ? Request::getInt('user_yim_match', 0, 'POST') : XOOPS_MATCH_START;
         switch ($match) {
             case XOOPS_MATCH_START:
                 $criteria->add(new Criteria('user_yim', $myts->addSlashes(trim($_POST['user_yim'])) . '%', 'LIKE'));
@@ -288,7 +288,7 @@ if ('submit' === $op) {
         }
     }
     if (!empty($_POST['user_msnm'])) {
-        $match = !empty($_POST['user_msnm_match']) ? (int)$_POST['user_msnm_match'] : XOOPS_MATCH_START;
+        $match = !empty($_POST['user_msnm_match']) ? Request::getInt('user_msnm_match', 0, 'POST') : XOOPS_MATCH_START;
         switch ($match) {
             case XOOPS_MATCH_START:
                 $criteria->add(
@@ -350,10 +350,10 @@ if ('submit' === $op) {
         }
     }
     if (isset($_POST['user_posts_more']) && is_numeric($_POST['user_posts_more'])) {
-        $criteria->add(new Criteria('posts', (int)$_POST['user_posts_more'], '>'));
+        $criteria->add(new Criteria('posts', Request::getInt('user_posts_more', 0, 'POST'), '>'));
     }
     if (!empty($_POST['user_posts_less']) && is_numeric($_POST['user_posts_less'])) {
-        $criteria->add(new Criteria('posts', (int)$_POST['user_posts_less'], '<'));
+        $criteria->add(new Criteria('posts', Request::getInt('user_posts_less', 0, 'POST'), '<'));
     }
     $criteria->add(new Criteria('level', 0, '>'));
     $validsort = ['uname', 'email', 'last_login', 'user_regdate', 'posts'];

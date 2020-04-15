@@ -43,7 +43,7 @@ if (1 === $marker && $group->getVar('owner_uid') === $uid) {
     $title     = trim(htmlspecialchars($_POST['title'], ENT_QUOTES | ENT_HTML5));
     $desc      = $_POST['desc'];
     $img       = $_POST['img'];
-    $updateImg = 1 === $_POST['flag_oldimg'] ? 0 : 1;
+    $updateImg = 1 === Request::getInt('flag_oldimg', 0, 'POST') ? 0 : 1;
 
     $path_upload   = XOOPS_ROOT_PATH . '/uploads/yogurt/images';
     $maxfilebytes  = $helper->getConfig('maxfilesize');
