@@ -902,7 +902,7 @@ $modversion['notification']['lookup_func'] = 'yogurt_iteminfo';
 //$modversion['notification']['tags_func'] = 'yogurt_tags';
 
 $modversion['blocks'][] = [
-    'file'        => 'blocks.php',
+    'file'        => 'friends_block.php',
     'name'        => _MI_YOGURT_FRIENDS,
     'description' => _MI_YOGURT_FRIENDS_DESC,
     'show_func'   => 'b_yogurt_friends_show',
@@ -912,7 +912,7 @@ $modversion['blocks'][] = [
 ];
 
 $modversion['blocks'][] = [
-    'file'        => 'blocks.php',
+    'file'        => 'photos_block.php',
     'name'        => _MI_YOGURT_LAST,
     'description' => _MI_YOGURT_LAST_DESC,
     'show_func'   => 'b_yogurt_lastpictures_show',
