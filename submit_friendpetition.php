@@ -52,19 +52,13 @@ $criteria = new CriteriaCompo(
 $criteria->add(new Criteria('petitioner_uid', $xoopsUser->getVar('uid')));
 if ($friendpetitionFactory->getCount($criteria) > 0) {
     redirect_header(
-        XOOPS_URL . '/modules/yogurt/index.php?uid=' . $_POST['petitionto_uid'],
-        3,
-        _MD_YOGURT_ALREADY_PETITIONED
-    );
+        XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('petitioned_uid', 0, 'POST'), 3, _MD_YOGURT_ALREADY_PETITIONED);
 } else {
     $criteria2 = new CriteriaCompo(new Criteria('petitioner_uid', $petitionto_uid));
     $criteria2->add(new Criteria('petitionfrom_uid', $xoopsUser->getVar('uid')));
     if ($friendpetitionFactory->getCount($criteria2) > 0) {
         redirect_header(
-            XOOPS_URL . '/modules/yogurt/index.php?uid=' . $_POST['petitionto_uid'],
-            3,
-            _MD_YOGURT_ALREADY_PETITIONED
-        );
+            XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('petitioned_uid', 0, 'POST'), 3, _MD_YOGURT_ALREADY_PETITIONED);
     }
 }
 /**
@@ -72,19 +66,16 @@ if ($friendpetitionFactory->getCount($criteria) > 0) {
  */
 $newpetition = $friendpetitionFactory->create(true);
 $newpetition->setVar('petitioner_uid', $xoopsUser->getVar('uid'));
-$newpetition->setVar('petitionfrom_uid', $_POST['petitionto_uid']);
+$newpetition->setVar('petitionfrom_uid', Request::getInt('petitionto_uid', 0, 'POST'));
 
 if ($friendpetitionFactory->insert($newpetition)) {
     $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
     $extra_tags['X_OWNER_UID']  = $xoopsUser->getVar('uid');
     $notificationHandler        = xoops_getHandler('notification');
-    $notificationHandler->triggerEvent('friendship', $_POST['petitionto_uid'], 'new_friendship', $extra_tags);
+    $notificationHandler->triggerEvent('friendship', Request::getInt('petitionto_uid', 0, 'POST'), 'new_friendship', $extra_tags);
 
     redirect_header(
-        XOOPS_URL . '/modules/yogurt/index.php?uid=' . $_POST['petitionto_uid'],
-        3,
-        _MD_YOGURT_PETITIONED
-    );
+        XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('petitionto_uid', 0, 'POST'), 3, _MD_YOGURT_PETITIONED);
 } else {
     redirect_header(
         XOOPS_URL . '/modules/yogurt/index.php?uid=' . $xoopsUser->getVar('uid'),

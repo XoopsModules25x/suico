@@ -120,15 +120,15 @@ if ('saveuser' === $op) {
     } else {
         $memberHandler = xoops_getHandler('member');
         $edituser      = $memberHandler->getUser($uid);
-        $edituser->setVar('name', $_POST['name']);
+        $edituser->setVar('name', Request::getString('name', '', 'POST'));
         if (1 === $xoopsConfigUser['allow_chgmail']) {
             $edituser->setVar('email', $email, true);
         }
         $edituser->setVar('url', formatURL($_POST['url']));
-        $edituser->setVar('user_icq', $_POST['user_icq']);
-        $edituser->setVar('user_from', $_POST['user_from']);
-        $edituser->setVar('user_sig', xoops_substr($_POST['user_sig'], 0, 255));
-        $user_viewemail = !empty($_POST['user_viewemail']) ? 1 : 0;
+        $edituser->setVar('user_icq', Request::getString('user_icq', '', 'POST'));
+        $edituser->setVar('user_from', Request::getString('user_from', '', 'POST'));
+        $edituser->setVar('user_sig', xoops_substr(Request::getString('user_sig', '', 'POST'), 0, 255));
+        $user_viewemail = !empty(Request::getString('user_viewemail', '', 'POST')) ? 1 : 0;
         $edituser->setVar('user_viewemail', $user_viewemail);
         if (defined('ICMS_VERSION_NAME')) {
             $edituser->setVar('openid', isset($_POST['openid']) ? trim($_POST['openid']) : '');
@@ -136,9 +136,9 @@ if ('saveuser' === $op) {
             $edituser->setVar('user_viewoid', $user_viewoid);
         }
         $edituser->setVar('user_viewoid', $user_viewoid);
-        $edituser->setVar('user_aim', $_POST['user_aim']);
-        $edituser->setVar('user_yim', $_POST['user_yim']);
-        $edituser->setVar('user_msnm', $_POST['user_msnm']);
+        $edituser->setVar('user_aim', Request::getString('user_aim', '', 'POST'));
+        $edituser->setVar('user_yim', Request::getString('user_yim', '', 'POST'));
+        $edituser->setVar('user_msnm', Request::getString('user_msnm', '', 'POST'));
         if ('' !== $password) {
             if (defined('ICMS_VERSION_NAME')) {
                 $salt = icms_createSalt();

@@ -37,7 +37,7 @@ $helper->loadLanguage('common');
 
 switch ($op) {
     case 'load':
-        if (Request::hasVar('ok', 'REQUEST') && 1 === $_REQUEST['ok']) {
+        if (Request::hasVar('ok', 'REQUEST') && 1 ===  Request::getInt('ok', 0, 'REQUEST')) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('../admin/index.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }

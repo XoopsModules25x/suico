@@ -30,7 +30,7 @@ $notesFactory = new Yogurt\NotesHandler($xoopsDB);
 
 $note_id = Request::getInt('note_id', 0, 'POST');
 
-if (1 !== $_POST['confirm']) {
+if (1 !== Request::getInt('confirm', 0, 'POST')) {
     xoops_confirm(
         [
             'note_id' => $note_id,

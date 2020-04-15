@@ -50,12 +50,12 @@ if ($xoopsUser->isAdmin(1)) {
         $thisUser->setVar('old_enc_type', $thisUser->getVar('enc_type'));
     }
     $suspension->setVar('old_signature', $thisUser->getVar('user_sig'));
-    $suspension->setVar('suspension_time', time() + (int)$_POST['time']);
+    $suspension->setVar('suspension_time', time() + Request::getInt('time', 0, 'POST'));
     $suspensionsFactory->insert($suspension);
     $thisUser->setVar('email', md5(time()));
     $thisUser->setVar('pass', md5(time()));
 
-    $thisUser->setVar('user_sig', sprintf(_MD_YOGURT_SUSPENDED, formatTimestamp(time() + (int)$_POST['time'], 'm')));
+    $thisUser->setVar('user_sig', sprintf(_MD_YOGURT_SUSPENDED, formatTimestamp(time() + Request::getInt('time', 0, 'POST'), 'm')));
     $memberHandler->insertUser($thisUser);
     redirect_header('index.php?uid=' . $uid, 300, _MD_YOGURT_USERSUSPENDED);
 }

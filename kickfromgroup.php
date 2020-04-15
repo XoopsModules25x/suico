@@ -26,7 +26,7 @@ require __DIR__ . '/header.php';
 $group_id     = Request::getInt('group_id', 0, 'POST');
 $rel_user_uid = Request::getInt('rel_user_uid', 0, 'POST');
 
-if (1 !== $_POST['confirm']) {
+if (1 !== Request::getInt('confirm', 0, 'POST')) {
     xoops_confirm(
         [
             'rel_user_uid' => $rel_user_uid,

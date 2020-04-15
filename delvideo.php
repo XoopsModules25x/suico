@@ -27,9 +27,9 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
-$cod_video = $_POST['cod_video'];
+$cod_video = Request::getInt('cod_video', 0, 'POST');
 
-if (1 !== $_POST['confirm']) {
+if (!Request::hasVar('confirm', 'POST') || 1 !== Request::getInt('confirm', 0, 'POST')) {
     xoops_confirm(
         [
             'cod_video' => $cod_video,

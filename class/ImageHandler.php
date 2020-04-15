@@ -491,9 +491,9 @@ class ImageHandler extends XoopsPersistableObjectHandler
 
         if ($xratio < 1 || $yratio < 1) {
             if ($xratio < $yratio) {
-                $resized = imagecreatetruecolor($thumbwidth, floor(imagesy($img) * $xratio));
+                $resized = imagecreatetruecolor($thumbwidth, (int)floor(imagesy($img) * $xratio));
             } else {
-                $resized = imagecreatetruecolor(floor(imagesx($img) * $yratio), $thumbheight);
+                $resized = imagecreatetruecolor((int)floor(imagesx($img) * $yratio), $thumbheight);
             }
             imagecopyresampled(
                 $resized,
@@ -520,9 +520,9 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $yratio2 = $pictheight / imagesy($img2);
         if ($xratio2 < 1 || $yratio2 < 1) {
             if ($xratio2 < $yratio2) {
-                $resized2 = imagecreatetruecolor($pictwidth, floor(imagesy($img2) * $xratio2));
+                $resized2 = imagecreatetruecolor($pictwidth, (int)floor(imagesy($img2) * $xratio2));
             } else {
-                $resized2 = imagecreatetruecolor(floor(imagesx($img2) * $yratio2), $pictheight);
+                $resized2 = imagecreatetruecolor((int)floor(imagesx($img2) * $yratio2), $pictheight);
             }
 
             imagecopyresampled(
@@ -625,9 +625,9 @@ class ImageHandler extends XoopsPersistableObjectHandler
 
         if ($xratio < 1 || $yratio < 1) {
             if ($xratio < $yratio) {
-                $resized = imagecreatetruecolor($thumbwidth, floor(imagesy($img) * $xratio));
+                $resized = imagecreatetruecolor($thumbwidth, (int)floor(imagesy($img) * $xratio));
             } else {
-                $resized = imagecreatetruecolor(floor(imagesx($img) * $yratio), $thumbheight);
+                $resized = imagecreatetruecolor((int)floor(imagesx($img) * $yratio), $thumbheight);
             }
             imagecopyresampled(
                 $resized,
@@ -654,9 +654,9 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $yratio2 = $pictheight / imagesy($img2);
         if ($xratio2 < 1 || $yratio2 < 1) {
             if ($xratio2 < $yratio2) {
-                $resized2 = imagecreatetruecolor($pictwidth, floor(imagesy($img2) * $xratio2));
+                $resized2 = imagecreatetruecolor($pictwidth, (int)floor(imagesy($img2) * $xratio2));
             } else {
-                $resized2 = imagecreatetruecolor(floor(imagesx($img2) * $yratio2), $pictheight);
+                $resized2 = imagecreatetruecolor((int)floor(imagesx($img2) * $yratio2), $pictheight);
             }
 
             imagecopyresampled(

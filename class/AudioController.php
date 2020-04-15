@@ -65,8 +65,8 @@ class AudioController extends YogurtController
 
     /**
      * Assign Audio Content to Template
-     * @param $nbAudios
-     * @param $audios
+     * @param int $nbAudios
+     * @param array $audios
      * @return bool|array
      * @throws Exception
      * @throws Exception

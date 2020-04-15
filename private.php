@@ -29,7 +29,7 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
-$cod_img = $_POST['cod_img'];
+$cod_img = Request::getInt('cod_img', 0, 'POST');
 
 /**
  * Creating the factory  loading the picture changing its caption
@@ -45,9 +45,9 @@ $picture->setVar('private', Request::getInt('private', 0, 'POST'));
  * Verifying who's the owner to allow changes
  */
 $uid = (int)$xoopsUser->getVar('uid');
-if ($uid === $picture->getVar('uid_owner')) {
+if ($uid === (int)$picture->getVar('uid_owner')) {
     if ($imageFactory->insert($picture)) {
-        if (1 === $_POST['private']) {
+        if (1 === Request::getInt('private', 0, 'POST')) {
             redirect_header('album.php', 2, _MD_YOGURT_PRIVATIZED);
         } else {
             redirect_header('album.php', 2, _MD_YOGURT_UNPRIVATIZED);
