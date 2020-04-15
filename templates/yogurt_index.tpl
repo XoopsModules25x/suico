@@ -159,6 +159,7 @@
 		<{/if}>
     <{/if}>
 	
+	<{if $allow_profile_stats}>
     <{if $modules!=''}>
     <div id="yogurt-profile-search-results" class="outer">
         <h4 class="yogurt-profiletitle head"><{$lang_usercontributions}></h4>
@@ -200,6 +201,8 @@
         <!-- end module search results loop -->
     </div>
     <{/if}>
+	<{/if}>
+	
 </div><!-- end of div of group1 -->
 
 <div class="yogurt-profile-group2">
