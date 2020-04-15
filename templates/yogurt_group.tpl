@@ -10,7 +10,7 @@
 
     <p id="yogurt-group-desc" class="even">
         <{$group_desc}><br>
-		<b><{$lang_groupowner}></b><br>
+		<b><{$lang_ownerofgroup}></b><br>
 		<{$group_ownername}>
 		
         <{if $isanonym!=1 }>
