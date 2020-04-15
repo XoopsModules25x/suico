@@ -20,7 +20,7 @@
                     <th align="center" width="5%"><input name="allbox" title="allbox" id="allbox" onclick="xoopsCheckAll('select', 'allbox');" type="checkbox" title="Check All" value="Check All"/></th>
                     <th class="left"><{$selectorfriendpet_id}></th>
                     <th class="left"><{$selectorpetitioner_uid}></th>
-                    <th class="left"><{$selectorpetitionfrom_uid}></th>
+                    <th class="left"><{$selectorpetioned_uid}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
@@ -30,7 +30,7 @@
                         <td align="center" style="vertical-align:middle;"><input type="checkbox" name="friendpetition_id[]" title="friendpetition_id[]" id="friendpetition_id[]" value="<{$friendpetitionArray.friendpetition_id}>"/></td>
                         <td class='left'><{$friendpetitionArray.friendpet_id}></td>
                         <td class='left'><{$friendpetitionArray.petitioner_uid}></td>
-                        <td class='left'><{$friendpetitionArray.petitionfrom_uid}></td>
+                        <td class='left'><{$friendpetitionArray.petioned_uid}></td>
 
 
                         <td class="center width5"><{$friendpetitionArray.edit_delete}></td>
@@ -46,7 +46,7 @@
                     <th align="center" width="5%"><input name="allbox" title="allbox" id="allbox" onclick="xoopsCheckAll('select', 'allbox');" type="checkbox" title="Check All" value="Check All"/></th>
                     <th class="left"><{$selectorfriendpet_id}></th>
                     <th class="left"><{$selectorpetitioner_uid}></th>
-                    <th class="left"><{$selectorpetitionfrom_uid}></th>
+                    <th class="left"><{$selectorpetioned_uid}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>

@@ -7,7 +7,7 @@
     <form name="form_videos" id="form_videos" action="video_submited.php" method="post" onsubmit="return xoopsFormValidate_form_videos();" enctype="multipart/form-data">
         <{$token}>
         <p class="even">
-            <{$lang_videohelp}> <{$xoops_sitename}>. <{$lang_selectmainvideo}>
+            <{$lang_videohelp}> <{$xoops_sitename}>.<br><{$lang_selectmainvideo}>
         </p>
         <p class="odd">
             <label for="codigo">

@@ -36,7 +36,7 @@ class Friendpetition extends XoopsObject
         $this->db         = XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('friendpet_id', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('petitioner_uid', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('petitionfrom_uid', XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('petioned_uid', XOBJ_DTYPE_INT, null, false, 10);
         if (!empty($id)) {
             if (is_array($id)) {
                 $this->assignVars($id);

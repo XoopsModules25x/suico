@@ -180,468 +180,6 @@ $modversion['submit_feature']    = 'http://sourceforge.net/tracker/?func=add&gro
 xoops_load(
     'xoopseditorhandler'
 );
-
-$modversion['configcat']['friends']      = [
-    'name'        => _MI_YOGURT_CONFCAT_NOTES,
-    'description' => _MI_YOGURT_CONFCAT_NOTES_DSC,
-];
-
-// Config categories
-$modversion['configcat']['photos'] = [
-    'name'        => _MI_YOGURT_CONFCAT_PHOTOS,
-    'description' => _MI_YOGURT_CONFCAT_PHOTOS_DSC,
-];
-
-$modversion['configcat']['audios']      = [
-    'name'        => _MI_YOGURT_CONFCAT_AUDIOS,
-    'description' => _MI_YOGURT_CONFCAT_AUDIOS_DSC,
-];
-
-$modversion['configcat']['videos']      = [
-    'name'        => _MI_YOGURT_CONFCAT_VIDEOS,
-    'description' => _MI_YOGURT_CONFCAT_VIDEOS_DSC,
-];
-
-$modversion['configcat']['friends']      = [
-    'name'        => _MI_YOGURT_CONFCAT_FRIENDS,
-    'description' => _MI_YOGURT_CONFCAT_FRIENDS_DSC,
-];
-
-$modversion['configcat']['groups']      = [
-    'name'        => _MI_YOGURT_CONFCAT_GROUPS,
-    'description' => _MI_YOGURT_CONFCAT_GROUPS_DSC,
-];
-
-$modversion['configcat']['editor']      = [
-    'name'        => _MI_YOGURT_CONFCAT_EDITOR,
-    'description' => _MI_YOGURT_CONFCAT_EDITOR_DSC,
-];
-
-$modversion['configcat']['upload']      = [
-    'name'        => _MI_YOGURT_CONFCAT_UPLOAD,
-    'description' => _MI_YOGURT_CONFCAT_UPLOAD_DSC,
-];
-
-$modversion['configcat']['admin']      = [
-    'name'        => _MI_YOGURT_CONFCAT_ADMIN,
-    'description' => _MI_YOGURT_CONFCAT_ADMIN_DSC,
-];
-
-//Configs
-
-// group header
-$modversion['config'][] = [
-    'name'        => 'notes_config',
-    'title'       => '_MI_YOGURT_CONFIG_NOTES',
-    'description' => '_MI_YOGURT_CONFIG_NOTESDSC',
-    'formtype'    => 'line_break',
-    'valuetype'   => 'textbox',
-    'default'     => 'odd',
-    'category'    => 'group_header',
-];
-
-$modversion['config'][] = [
-    'name'        => 'enable_notes',
-    'title'       => '_MI_YOGURT_ENABLENOTES_TITLE',
-    'description' => '_MI_YOGURT_ENABLENOTES_DESC',
-    'default'     => 1,
-    'formtype'    => 'yesno',
-    'valuetype'   => 'int',
-	'category'    => 'notes',
-];
-
-$modversion['config'][] = [
-    'name'        => 'notesperpage',
-    'title'       => '_MI_YOGURT_NOTESPERPAGE_TITLE',
-    'description' => '_MI_YOGURT_NOTESPERPAGE_DESC',
-    'default'     => 20,
-    'formtype'    => 'textbox',
-    'valuetype'   => 'int',
-	'category'    => 'notes',
-];
-
-// group header
-$modversion['config'][] = [
-    'name'        => 'photos_config',
-    'title'       => '_MI_YOGURT_CONFIG_PHOTOS',
-    'description' => '_MI_YOGURT_CONFIG_PHOTOSDSC',
-    'formtype'    => 'line_break',
-    'valuetype'   => 'textbox',
-    'default'     => 'odd',
-    'category'    => 'group_header',
-];
-
-$modversion['config'][] = [
-    'name'        => 'enable_pictures',
-    'title'       => '_MI_YOGURT_ENABLEPICT_TITLE',
-    'description' => '_MI_YOGURT_ENABLEPICT_DESC',
-    'default'     => 1,
-    'formtype'    => 'yesno',
-    'valuetype'   => 'int',
-	'category'    => 'photos',
-];
-
-$modversion['config'][] = [
-    'name'        => 'nb_pict',
-    'title'       => '_MI_YOGURT_NUMBPICT_TITLE',
-    'description' => '_MI_YOGURT_NUMBPICT_DESC',
-    'default'     => 12,
-    'formtype'    => 'textbox',
-    'valuetype'   => 'int',
-	'category'    => 'photos',
-];
-
-$modversion['config'][] = [
-    'name'        => 'resized_width',
-    'title'       => '_MI_YOGURT_RESIZEDW_TITLE',
-    'description' => '_MI_YOGURT_RESIZEDW_DESC',
-    'default'     => 650,
-    'formtype'    => 'textbox',
-    'valuetype'   => 'int',
-	'category'    => 'photos',
-];
-
-$modversion['config'][] = [
-    'name'        => 'resized_height',
-    'title'       => '_MI_YOGURT_RESIZEDH_TITLE',
-    'description' => '_MI_YOGURT_RESIZEDH_DESC',
-    'default'     => 450,
-    'formtype'    => 'textbox',
-    'valuetype'   => 'int',
-	'category'    => 'photos',
-];
-
-$modversion['config'][] = [
-    'name'        => 'max_original_width',
-    'title'       => '_MI_YOGURT_ORIGINALW_TITLE',
-    'description' => '_MI_YOGURT_ORIGINALW_DESC',
-    'default'     => 2048,
-    'formtype'    => 'textbox',
-    'valuetype'   => 'int',
-	'category'    => 'photos',
-];
-
-$modversion['config'][] = [
-    'name'        => 'max_original_height',
-    'title'       => '_MI_YOGURT_ORIGINALH_TITLE',
-    'description' => '_MI_YOGURT_ORIGINALH_DESC',
-    'default'     => 1600,
-    'formtype'    => 'textbox',
-    'valuetype'   => 'int',
-	'category'    => 'photos',
-];
-
-$modversion['config'][] = [
-    'name'        => 'maxfilesize',
-    'title'       => '_MI_YOGURT_MAXFILEBYTES_TITLE',
-    'description' => '_MI_YOGURT_MAXFILEBYTES_DESC',
-    'default'     => 2048000,
-    'formtype'    => 'textbox',
-    'valuetype'   => 'int',
-	'category'    => 'photos',
-];
-
-$modversion['config'][] = [
-    'name'        => 'thumb_width',
-    'title'       => '_MI_YOGURT_THUMW_TITLE',
-    'description' => '_MI_YOGURT_THUMBW_DESC',
-    'default'     => 125,
-    'formtype'    => 'textbox',
-    'valuetype'   => 'int',
-	'category'    => 'photos',
-];
-
-$modversion['config'][] = [
-    'name'        => 'thumb_height',
-    'title'       => '_MI_YOGURT_THUMBH_TITLE',
-    'description' => '_MI_YOGURT_THUMBH_DESC',
-    'default'     => 175,
-    'formtype'    => 'textbox',
-    'valuetype'   => 'int',
-	'category'    => 'photos',
-];
-
-$modversion['config'][] = [
-    'name'        => 'picturesperpage',
-    'title'       => '_MI_YOGURT_PICTURESPERPAGE_TITLE',
-    'description' => '_MI_YOGURT_PICTURESPERPAGE_DESC',
-    'default'     => 6,
-    'formtype'    => 'textbox',
-    'valuetype'   => 'int',
-	'category'    => 'photos',
-];
-
-
-
-$modversion['config'][] = [
-    'name'        => 'images_order',
-    'title'       => '_MI_YOGURT_IMGORDER_TITLE',
-    'description' => '_MI_YOGURT_IMGORDER_DESC',
-    'default'     => 1,
-    'formtype'    => 'yesno',
-    'valuetype'   => 'int',
-	'category'    => 'photos',
-];
-
-// group header
-$modversion['config'][] = [
-    'name'        => 'audios_config',
-    'title'       => '_MI_YOGURT_CONFIG_AUDIOS',
-    'description' => '_MI_YOGURT_CONFIG_AUDIOSDSC',
-    'formtype'    => 'line_break',
-    'valuetype'   => 'textbox',
-    'default'     => 'odd',
-    'category'    => 'group_header',
-];
-
-$modversion['config'][] = [
-    'name'        => 'enable_audio',
-    'title'       => '_MI_YOGURT_ENABLEAUDIO_TITLE',
-    'description' => '_MI_YOGURT_ENABLEAUDIO_DESC',
-    'default'     => 1,
-    'formtype'    => 'yesno',
-    'valuetype'   => 'int',
-	'category'    => 'audios',
-];
-
-$modversion['config'][] = [
-    'name'        => 'nb_audio',
-    'title'       => '_MI_YOGURT_NUMBAUDIO_TITLE',
-    'description' => '_MI_YOGURT_NUMBAUDIO_DESC',
-    'default'     => 12,
-    'formtype'    => 'textbox',
-    'valuetype'   => 'int',
-	'category'    => 'audios',
-];
-
-$modversion['config'][] = [
-    'name'        => 'audiosperpage',
-    'title'       => '_MI_YOGURT_AUDIOSPERPAGE_TITLE',
-    'description' => '_MI_YOGURT_AUDIOSPERPAGE_DESC',
-    'default'     => 20,
-    'formtype'    => 'textbox',
-    'valuetype'   => 'int',
-	'category'    => 'audios',
-];
-
-// group header
-$modversion['config'][] = [
-    'name'        => 'videos_config',
-    'title'       => '_MI_YOGURT_CONFIG_VIDEOS',
-    'description' => '_MI_YOGURT_CONFIG_VIDEOSDSC',
-    'formtype'    => 'line_break',
-    'valuetype'   => 'textbox',
-    'default'     => 'odd',
-    'category'    => 'group_header',
-];
-
-$modversion['config'][] = [
-    'name'        => 'enable_videos',
-    'title'       => '_MI_YOGURT_ENABLEVIDEOS_TITLE',
-    'description' => '_MI_YOGURT_ENABLEVIDEOS_DESC',
-    'default'     => 1,
-    'formtype'    => 'yesno',
-    'valuetype'   => 'int',
-	'category'    => 'videos',
-];
-
-$modversion['config'][] = [
-    'name'        => 'videosperpage',
-    'title'       => '_MI_YOGURT_VIDEOSPERPAGE_TITLE',
-    'description' => '_MI_YOGURT_VIDEOSPERPAGE_DESC',
-    'default'     => 6,
-    'formtype'    => 'textbox',
-    'valuetype'   => 'int',
-	'category'    => 'videos',
-];
-
-$modversion['config'][] = [
-    'name'        => 'width_tube',
-    'title'       => '_MI_YOGURT_TUBEW_TITLE',
-    'description' => '_MI_YOGURT_TUBEW_DESC',
-    'default'     => 450,
-    'formtype'    => 'textbox',
-    'valuetype'   => 'int',
-	'category'    => 'videos',
-];
-
-$modversion['config'][] = [
-    'name'        => 'height_tube',
-    'title'       => '_MI_YOGURT_TUBEH_TITLE',
-    'description' => '_MI_YOGURT_TUBEH_DESC',
-    'default'     => 350,
-    'formtype'    => 'textbox',
-    'valuetype'   => 'int',
-	'category'    => 'videos',
-];
-
-$modversion['config'][] = [
-    'name'        => 'width_maintube',
-    'title'       => '_MI_YOGURT_MAINTUBEW_TITLE',
-    'description' => '_MI_YOGURT_MAINTUBEW_DESC',
-    'default'     => 250,
-    'formtype'    => 'textbox',
-    'valuetype'   => 'int',
-	'category'    => 'videos',
-];
-
-$modversion['config'][] = [
-    'name'        => 'height_maintube',
-    'title'       => '_MI_YOGURT_MAINTUBEH_TITLE',
-    'description' => '_MI_YOGURT_MAINTUBEH_DESC',
-    'default'     => 210,
-    'formtype'    => 'textbox',
-    'valuetype'   => 'int',
-	'category'    => 'videos',
-];
-
-// group header
-$modversion['config'][] = [
-    'name'        => 'friends_config',
-    'title'       => '_MI_YOGURT_CONFIG_FRIENDS',
-    'description' => '_MI_YOGURT_CONFIG_FRIENDSDSC',
-    'formtype'    => 'line_break',
-    'valuetype'   => 'textbox',
-    'default'     => 'odd',
-    'category'    => 'group_header',
-];
-
-$modversion['config'][] = [
-    'name'        => 'enable_friends',
-    'title'       => '_MI_YOGURT_ENABLEFRIENDS_TITLE',
-    'description' => '_MI_YOGURT_ENABLEFRIENDS_DESC',
-    'default'     => 1,
-    'formtype'    => 'yesno',
-    'valuetype'   => 'int',
-	'category'    => 'friends',
-];
-
-$modversion['config'][] = [
-    'name'        => 'friendsperpage',
-    'title'       => '_MI_YOGURT_FRIENDSPERPAGE_TITLE',
-    'description' => '_MI_YOGURT_FRIENDSPERPAGE_DESC',
-    'default'     => 12,
-    'formtype'    => 'textbox',
-    'valuetype'   => 'int',
-	'category'    => 'friends',
-];
-
-$modversion['config'][] = [
-    'name'        => 'allow_friendsevaluation',
-    'title'       => '_MI_YOGURT_ENABLEFRIENDSEVALUATION_TITLE',
-    'description' => '_MI_YOGURT_ENABLEFRIENDSEVALUATION_DESC',
-    'default'     => 1,
-    'formtype'    => 'yesno',
-    'valuetype'   => 'int',
-	'category'    => 'friends',
-];
-
-// group header
-$modversion['config'][] = [
-    'name'        => 'groups_config',
-    'title'       => '_MI_YOGURT_CONFIG_GROUPS',
-    'description' => '_MI_YOGURT_CONFIG_GROUPSDSC',
-    'formtype'    => 'line_break',
-    'valuetype'   => 'textbox',
-    'default'     => 'odd',
-    'category'    => 'group_header',
-];
-
-$modversion['config'][] = [
-    'name'        => 'enable_groups',
-    'title'       => '_MI_YOGURT_ENABLEGROUPS_TITLE',
-    'description' => '_MI_YOGURT_ENABLEGROUPS_DESC',
-    'default'     => 1,
-    'formtype'    => 'yesno',
-    'valuetype'   => 'int',
-	'category'    => 'groups',
-];
-
-$modversion['config'][] = [
-    'name'        => 'groupsperpage',
-    'title'       => '_MI_YOGURT_GROUPSPERPAGE_TITLE',
-    'description' => '_MI_YOGURT_GROUPSPERPAGE_DESC',
-    'default'     => 6,
-    'formtype'    => 'textbox',
-    'valuetype'   => 'int',
-	'category'    => 'groups',
-];
-
-
-
-$modversion['config'][] = [
-    'name'        => 'groupslogo_width',
-    'title'       => '_MI_YOGURT_GROUPS_LOGO_WIDTH',
-    'description' => '_MI_YOGURT_GROUPS_LOGO_WIDTH_DESC',
-    'default'     => 125,
-    'formtype'    => 'textbox',
-    'valuetype'   => 'int',
-	'category'    => 'groups',
-];
-
-$modversion['config'][] = [
-    'name'        => 'groupslogo_height',
-    'title'       => '_MI_YOGURT_GROUPS_LOGO_HEIGHT',
-    'description' => '_MI_YOGURT_GROUPS_LOGO_HEIGHT_DESC',
-    'default'     => 80,
-    'formtype'    => 'textbox',
-    'valuetype'   => 'int',
-	'category'    => 'groups',
-];
-
-// group header
-$modversion['config'][] = [
-    'name'        => 'uploads_config',
-    'title'       => '_MI_YOGURT_CONFIG_UPLOAD',
-    'description' => '_MI_YOGURT_CONFIG_UPLOADDSC',
-    'formtype'    => 'line_break',
-    'valuetype'   => 'textbox',
-    'default'     => 'odd',
-    'category'    => 'group_header',
-];
-
-// --------------Uploads : mimetypes of image --------------
-$modversion['config'][] = [
-    'name'        => 'mimetypes',
-    'title'       => 'MI_YOGURT_MIMETYPES',
-    'description' => 'MI_YOGURT_MIMETYPES_DESC',
-    'formtype'    => 'select_multi',
-    'valuetype'   => 'array',
-    'default'     => ['image/gif', 'image/jpeg', 'image/png'],
-    'options'     => [
-        'bmp'   => 'image/bmp',
-        'gif'   => 'image/gif',
-        'pjpeg' => 'image/pjpeg',
-        'jpeg'  => 'image/jpeg',
-        'jpg'   => 'image/jpg',
-        'jpe'   => 'image/jpe',
-        'png'   => 'image/png',
-    ],
-	'category'    => 'editor',
-];
-
-$modversion['config'][] = [
-    'name'        => 'physical_delete',
-    'title'       => '_MI_YOGURT_DELETEPHYSICAL_TITLE',
-    'description' => '_MI_YOGURT_DELETEPHYSICAL_DESC',
-    'default'     => 1,
-    'formtype'    => 'yesno',
-    'valuetype'   => 'int',
-	'category'    => 'upload',
-];
-
-// group header
-$modversion['config'][] = [
-    'name'        => 'editor_config',
-    'title'       => '_MI_YOGURT_CONFIG_EDITOR',
-    'description' => '_MI_YOGURT_CONFIG_EDITORDSC',
-    'formtype'    => 'line_break',
-    'valuetype'   => 'textbox',
-    'default'     => 'odd',
-    'category'    => 'group_header',
-];
-
-
 $editorHandler          = XoopsEditorHandler::getInstance();
 $modversion['config'][] = [
     'name'        => 'yogurtEditorAdmin',
@@ -651,7 +189,6 @@ $modversion['config'][] = [
     'valuetype'   => 'text',
     'options'     => array_flip($editorHandler->getList()),
     'default'     => 'tinymce',
-	'category'    => 'editor',
 ];
 
 $modversion['config'][] = [
@@ -662,19 +199,6 @@ $modversion['config'][] = [
     'valuetype'   => 'text',
     'options'     => array_flip($editorHandler->getList()),
     'default'     => 'dhtmltextarea',
-	'category'    => 'editor',
-];
-
-
-// group header
-$modversion['config'][] = [
-    'name'        => 'admin_config',
-    'title'       => '_MI_YOGURT_CONFIG_ADMIN',
-    'description' => '_MI_YOGURT_CONFIG_ADMINDSC',
-    'formtype'    => 'line_break',
-    'valuetype'   => 'textbox',
-    'default'     => 'odd',
-    'category'    => 'group_header',
 ];
 
 // -------------- Get Admin groups --------------
@@ -694,7 +218,315 @@ $modversion['config'][] = [
     'valuetype'   => 'array',
     'options'     => $admin_groups,
     'default'     => $admin_groups,
-	'category'    => 'admin',
+];
+
+// --------------Uploads : mimetypes of image --------------
+$modversion['config'][] = [
+    'name'        => 'mimetypes',
+    'title'       => 'MI_YOGURT_MIMETYPES',
+    'description' => 'MI_YOGURT_MIMETYPES_DESC',
+    'formtype'    => 'select_multi',
+    'valuetype'   => 'array',
+    'default'     => ['image/gif', 'image/jpeg', 'image/png'],
+    'options'     => [
+        'bmp'   => 'image/bmp',
+        'gif'   => 'image/gif',
+        'pjpeg' => 'image/pjpeg',
+        'jpeg'  => 'image/jpeg',
+        'jpg'   => 'image/jpg',
+        'jpe'   => 'image/jpe',
+        'png'   => 'image/png',
+    ],
+];
+
+$modversion['config'][] = [
+    'name'        => 'enable_pictures',
+    'title'       => '_MI_YOGURT_ENABLEPICT_TITLE',
+    'description' => '_MI_YOGURT_ENABLEPICT_DESC',
+    'default'     => 1,
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'nb_pict',
+    'title'       => '_MI_YOGURT_NUMBPICT_TITLE',
+    'description' => '_MI_YOGURT_NUMBPICT_DESC',
+    'default'     => 12,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+/*
+ $modversion['config'][] = [
+'name' =>  'path_upload',
+'title' =>  '_MI_YOGURT_PATHUPLOAD_TITLE',
+'description' =>  '_MI_YOGURT_PATHUPLOAD_DESC',
+'default' =>  XOOPS_ROOT_PATH."/uploads/",
+'formtype' =>  'textbox',
+'valuetype' =>  'text',
+];
+
+$modversion['config'][] = [
+'name' =>  'link_path_upload',
+'title' =>  '_MI_YOGURT_LINKPATHUPLOAD_TITLE',
+'description' =>  '_MI_YOGURT_LINKPATHUPLOAD_DESC',
+'default' =>  XOOPS_UPLOAD_URL,
+'formtype' =>  'textbox',
+'valuetype' =>  'text',
+];
+*/
+
+$modversion['config'][] = [
+    'name'        => 'groupslogo_width',
+    'title'       => '_MI_YOGURT_GROUPS_LOGO_WIDTH',
+    'description' => '_MI_YOGURT_GROUPS_LOGO_WIDTH_DESC',
+    'default'     => 125,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'groupslogo_height',
+    'title'       => '_MI_YOGURT_GROUPS_LOGO_HEIGHT',
+    'description' => '_MI_YOGURT_GROUPS_LOGO_HEIGHT_DESC',
+    'default'     => 80,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'thumb_width',
+    'title'       => '_MI_YOGURT_THUMW_TITLE',
+    'description' => '_MI_YOGURT_THUMBW_DESC',
+    'default'     => 125,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'thumb_height',
+    'title'       => '_MI_YOGURT_THUMBH_TITLE',
+    'description' => '_MI_YOGURT_THUMBH_DESC',
+    'default'     => 175,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'resized_width',
+    'title'       => '_MI_YOGURT_RESIZEDW_TITLE',
+    'description' => '_MI_YOGURT_RESIZEDW_DESC',
+    'default'     => 650,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'resized_height',
+    'title'       => '_MI_YOGURT_RESIZEDH_TITLE',
+    'description' => '_MI_YOGURT_RESIZEDH_DESC',
+    'default'     => 450,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'max_original_width',
+    'title'       => '_MI_YOGURT_ORIGINALW_TITLE',
+    'description' => '_MI_YOGURT_ORIGINALW_DESC',
+    'default'     => 2048,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'max_original_height',
+    'title'       => '_MI_YOGURT_ORIGINALH_TITLE',
+    'description' => '_MI_YOGURT_ORIGINALH_DESC',
+    'default'     => 1600,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'maxfilesize',
+    'title'       => '_MI_YOGURT_MAXFILEBYTES_TITLE',
+    'description' => '_MI_YOGURT_MAXFILEBYTES_DESC',
+    'default'     => 2048000,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'picturesperpage',
+    'title'       => '_MI_YOGURT_PICTURESPERPAGE_TITLE',
+    'description' => '_MI_YOGURT_PICTURESPERPAGE_DESC',
+    'default'     => 6,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'physical_delete',
+    'title'       => '_MI_YOGURT_DELETEPHYSICAL_TITLE',
+    'description' => '_MI_YOGURT_DELETEPHYSICAL_DESC',
+    'default'     => 1,
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'images_order',
+    'title'       => '_MI_YOGURT_IMGORDER_TITLE',
+    'description' => '_MI_YOGURT_IMGORDER_DESC',
+    'default'     => 1,
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'enable_friends',
+    'title'       => '_MI_YOGURT_ENABLEFRIENDS_TITLE',
+    'description' => '_MI_YOGURT_ENABLEFRIENDS_DESC',
+    'default'     => 1,
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'friendsperpage',
+    'title'       => '_MI_YOGURT_FRIENDSPERPAGE_TITLE',
+    'description' => '_MI_YOGURT_FRIENDSPERPAGE_DESC',
+    'default'     => 12,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'enable_friendsevaluation',
+    'title'       => '_MI_YOGURT_ENABLEFRIENDSEVALUATION_TITLE',
+    'description' => '_MI_YOGURT_ENABLEFRIENDSEVALUATION_DESC',
+    'default'     => 1,
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'enable_audio',
+    'title'       => '_MI_YOGURT_ENABLEAUDIO_TITLE',
+    'description' => '_MI_YOGURT_ENABLEAUDIO_DESC',
+    'default'     => 1,
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'nb_audio',
+    'title'       => '_MI_YOGURT_NUMBAUDIO_TITLE',
+    'description' => '_MI_YOGURT_NUMBAUDIO_DESC',
+    'default'     => 12,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'audiosperpage',
+    'title'       => '_MI_YOGURT_AUDIOSPERPAGE_TITLE',
+    'description' => '_MI_YOGURT_AUDIOSPERPAGE_DESC',
+    'default'     => 20,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'enable_videos',
+    'title'       => '_MI_YOGURT_ENABLEVIDEOS_TITLE',
+    'description' => '_MI_YOGURT_ENABLEVIDEOS_DESC',
+    'default'     => 1,
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'videosperpage',
+    'title'       => '_MI_YOGURT_VIDEOSPERPAGE_TITLE',
+    'description' => '_MI_YOGURT_VIDEOSPERPAGE_DESC',
+    'default'     => 6,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'width_tube',
+    'title'       => '_MI_YOGURT_TUBEW_TITLE',
+    'description' => '_MI_YOGURT_TUBEW_DESC',
+    'default'     => 450,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'height_tube',
+    'title'       => '_MI_YOGURT_TUBEH_TITLE',
+    'description' => '_MI_YOGURT_TUBEH_DESC',
+    'default'     => 350,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'width_maintube',
+    'title'       => '_MI_YOGURT_MAINTUBEW_TITLE',
+    'description' => '_MI_YOGURT_MAINTUBEW_DESC',
+    'default'     => 250,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'height_maintube',
+    'title'       => '_MI_YOGURT_MAINTUBEH_TITLE',
+    'description' => '_MI_YOGURT_MAINTUBEH_DESC',
+    'default'     => 210,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'enable_groups',
+    'title'       => '_MI_YOGURT_ENABLEGROUPS_TITLE',
+    'description' => '_MI_YOGURT_ENABLEGROUPS_DESC',
+    'default'     => 1,
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'groupsperpage',
+    'title'       => '_MI_YOGURT_GROUPSPERPAGE_TITLE',
+    'description' => '_MI_YOGURT_GROUPSPERPAGE_DESC',
+    'default'     => 6,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'enable_notes',
+    'title'       => '_MI_YOGURT_ENABLENOTES_TITLE',
+    'description' => '_MI_YOGURT_ENABLENOTES_DESC',
+    'default'     => 1,
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+];
+
+$modversion['config'][] = [
+    'name'        => 'notesperpage',
+    'title'       => '_MI_YOGURT_NOTESPERPAGE_TITLE',
+    'description' => '_MI_YOGURT_NOTESPERPAGE_DESC',
+    'default'     => 20,
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
 ];
 
 /**
@@ -707,7 +539,6 @@ $modversion['config'][] = [
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
     'default'     => 1,
-	'category'    => 'admin',
 ];
 
 /**
@@ -720,7 +551,6 @@ $modversion['config'][] = [
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
     'default'     => 0,
-	'category'    => 'admin',
 ];
 
 $modversion['templates'] = [

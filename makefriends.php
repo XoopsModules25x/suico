@@ -42,11 +42,11 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 }
 
 $criteria = new CriteriaCompo(new Criteria('friendpet_id', $petition_id));
-$criteria->add(new Criteria('petitionfrom_uid', $uid));
+$criteria->add(new Criteria('petioned_uid', $uid));
 if ($friendpetitionFactory->getCount($criteria) > 0) {
     if (($friendship_level > 0) && ($petition = $friendpetitionFactory->getObjects($criteria))) {
         $friend1_uid = $petition[0]->getVar('petitioner_uid');
-        $friend2_uid = $petition[0]->getVar('petitionfrom_uid');
+        $friend2_uid = $petition[0]->getVar('petioned_uid');
 
         $newfriendship1 = $friendshipFactory->create(true);
         $newfriendship1->setVar('level', 3);

@@ -60,7 +60,7 @@ $start = Request::getInt(
  */
 $petition = 0;
 if (1 === $controller->isOwner) {
-    $criteria_uidpetition = new Criteria('petitionfrom_uid', $controller->uidOwner);
+    $criteria_uidpetition = new Criteria('petioned_uid', $controller->uidOwner);
     $newpetition          = $controller->petitionsFactory->getObjects($criteria_uidpetition);
     if ($newpetition) {
         $nb_petitions      = count($newpetition);
@@ -71,33 +71,6 @@ if (1 === $controller->isOwner) {
         $petitioner_avatar = $petitioner->getVar('user_avatar');
         $petition_id       = $newpetition[0]->getVar('friendpet_id');
         $petition          = 1;
-    }
-}
-
-$friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
-/**
- * Getting the uid of the user which user want to ask to be friend
- */
-$petitionto_uid = $controller->uidOwner;
-
-//Verify if the user has already asked for friendship or if the user he s asking to be a friend has already asked him
-$criteria = new CriteriaCompo(
-    new Criteria(
-        'petitionfrom_uid', $petitionto_uid
-    )
-);
-$criteria->add(new Criteria('petitioner_uid', $xoopsUser->getVar('uid')));
-if ($friendpetitionFactory->getCount($criteria) > 0) {
-	$xoopsTpl->assign('petitionto_uid', $petitionto_uid);
-	
-}
-else {
-    $criteria2 = new CriteriaCompo(new Criteria('petitioner_uid', $petitionto_uid));
-    $criteria2->add(new Criteria('petitionfrom_uid', $xoopsUser->getVar('uid')));
-    if ($friendpetitionFactory->getCount($criteria2) > 0) {
-       $xoopsTpl->assign('petitionfrom_uid', $xoopsUser->getVar('uid'));  
-      global $xoopsUser;	
-	  $xoopsTpl->assign('petitionfrom_uid', $xoopsUser->getVar('uid'));    
     }
 }
 
@@ -291,7 +264,7 @@ $xoopsTpl->assign('friendly_rest', 48 - $evaluation['mediahot']);
 $xoopsTpl->assign('lang_cool', _MD_YOGURT_COOL);
 $xoopsTpl->assign('cool', $evaluation['mediacool']);
 $xoopsTpl->assign('cool_rest', 48 - $evaluation['mediacool']);
-$xoopsTpl->assign('allow_friendsevaluation', $helper->getConfig('allow_friendsevaluation'));
+$xoopsTpl->assign('enable_friendsevaluation', $helper->getConfig('enable_friendsevaluation'));
 
 //petitions to become friend
 if (1 === $petition) {
@@ -311,7 +284,6 @@ if (1 === $petition) {
 }
 $xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
 $xoopsTpl->assign('lang_addasafriend', _MD_YOGURT_ADDASAFRIEND);
-$xoopsTpl->assign('lang_friendshippending', _MD_YOGURT_FRIENDSHIPPENDING);
 
 //Avatar and Main
 $xoopsTpl->assign('avatar_url', $avatar);

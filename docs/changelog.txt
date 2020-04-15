@@ -1,7 +1,5 @@
 <h5>3.5 Alpha xxx </h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
 <hr>
-- separate photos and friends block (liomj)
-- add pending status after friend request (liomj)
 - remove icq,aim,yim,msnm (liomj)
 - add preferences group order (liomj)
 - fix missing closing div in group page template (liomj)

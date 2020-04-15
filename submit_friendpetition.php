@@ -37,8 +37,11 @@ $friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
 /**
  * Getting the uid of the user which user want to ask to be friend
  */
-$petitionto_uid = $_POST['petitionto_uid'];
+$petitioned_uid = $_POST['petitioned_uid'];
 
+/**
+ * Verify Token
+ */
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
@@ -46,22 +49,22 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 //Verify if the user has already asked for friendship or if the user he s asking to be a friend has already asked him
 $criteria = new CriteriaCompo(
     new Criteria(
-        'petitionfrom_uid', $petitionto_uid
+        'petioned_uid', $petitioned_uid
     )
 );
 $criteria->add(new Criteria('petitioner_uid', $xoopsUser->getVar('uid')));
 if ($friendpetitionFactory->getCount($criteria) > 0) {
     redirect_header(
-        XOOPS_URL . '/modules/yogurt/index.php?uid=' . $_POST['petitionto_uid'],
+        XOOPS_URL . '/modules/yogurt/index.php?uid=' . $_POST['petitioned_uid'],
         3,
         _MD_YOGURT_ALREADY_PETITIONED
     );
 } else {
-    $criteria2 = new CriteriaCompo(new Criteria('petitioner_uid', $petitionto_uid));
-    $criteria2->add(new Criteria('petitionfrom_uid', $xoopsUser->getVar('uid')));
+    $criteria2 = new CriteriaCompo(new Criteria('petitioner_uid', $petitioned_uid));
+    $criteria2->add(new Criteria('petioned_uid', $xoopsUser->getVar('uid')));
     if ($friendpetitionFactory->getCount($criteria2) > 0) {
         redirect_header(
-            XOOPS_URL . '/modules/yogurt/index.php?uid=' . $_POST['petitionto_uid'],
+            XOOPS_URL . '/modules/yogurt/index.php?uid=' . $_POST['petitioned_uid'],
             3,
             _MD_YOGURT_ALREADY_PETITIONED
         );
@@ -72,16 +75,16 @@ if ($friendpetitionFactory->getCount($criteria) > 0) {
  */
 $newpetition = $friendpetitionFactory->create(true);
 $newpetition->setVar('petitioner_uid', $xoopsUser->getVar('uid'));
-$newpetition->setVar('petitionfrom_uid', $_POST['petitionto_uid']);
+$newpetition->setVar('petioned_uid', $_POST['petitioned_uid']);
 
 if ($friendpetitionFactory->insert($newpetition)) {
     $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
     $extra_tags['X_OWNER_UID']  = $xoopsUser->getVar('uid');
     $notificationHandler        = xoops_getHandler('notification');
-    $notificationHandler->triggerEvent('friendship', $_POST['petitionto_uid'], 'new_friendship', $extra_tags);
+    $notificationHandler->triggerEvent('friendship', $_POST['petitioned_uid'], 'new_friendship', $extra_tags);
 
     redirect_header(
-        XOOPS_URL . '/modules/yogurt/index.php?uid=' . $_POST['petitionto_uid'],
+        XOOPS_URL . '/modules/yogurt/index.php?uid=' . $_POST['petitioned_uid'],
         3,
         _MD_YOGURT_PETITIONED
     );
