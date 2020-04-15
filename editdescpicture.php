@@ -45,7 +45,7 @@ if (1 === $marker) {
     /**
      * Verifying who's the owner to allow changes
      */
-    if ($uid === $picture->getVar('uid_owner')) {
+    if ($uid === (int)$picture->getVar('uid_owner')) {
         if ($imageFactory->insert($picture)) {
             redirect_header('album.php', 2, _MD_YOGURT_DESC_EDITED);
         } else {
