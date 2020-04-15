@@ -188,8 +188,8 @@ $modversion['configcat']['friends']      = [
 
 // Config categories
 $modversion['configcat']['photos'] = [
-    'name'        => _MI_YOGURT_CONFCAT_PICTURES,
-    'description' => _MI_YOGURT_CONFCAT_PICTURES_DSC,
+    'name'        => _MI_YOGURT_CONFCAT_PHOTOS,
+    'description' => _MI_YOGURT_CONFCAT_PHOTOS_DSC,
 ];
 
 $modversion['configcat']['audios']      = [
