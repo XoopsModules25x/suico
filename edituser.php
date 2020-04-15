@@ -52,8 +52,7 @@ if (!defined('XOOPS_CONF_USER')) {
         $xoopsConfigUser = $configHandler->getConfigsByCat(0, $mod_yogurt->getVar('mid'));
         unset($moduleHandler);
         unset($mod_yogurt);
-    } else {
-        if (defined('SXVERSION')) {
+    } elseif (defined('SXVERSION')) {
             define('XOOPS_CONF_USER', 1);
             $xoopsConfigUser = $configHandler->getConfigsByCat(0, XOOPS_CONF_USER);
             unset($moduleHandler);
@@ -62,7 +61,7 @@ if (!defined('XOOPS_CONF_USER')) {
             redirect_header('index.php', 3, _TAKINGBACK);
             exit();
         }
-    }
+
 } else {
     $xoopsConfigUser = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
 }
@@ -87,7 +86,7 @@ if ('saveuser' === $op) {
     if (1 === $xoopsConfigUser['allow_chgmail']) {
         $email = '';
         if (!empty($_POST['email'])) {
-            $email = $myts->stripSlashesGPC(trim($_POST['email']));
+            $email =  Request::getEmail('email', '', 'POST');
         }
         if ('' === $email || !checkEmail($email)) {
             $errors[] = _US_INVALIDMAIL;
@@ -95,7 +94,7 @@ if ('saveuser' === $op) {
     }
     $password = '';
     if (!empty($_POST['password'])) {
-        $password = $myts->stripSlashesGPC(trim($_POST['password']));
+        $password = Request::getString('password', '', 'POST');
     }
     if ('' !== $password) {
         if (mb_strlen($password) < $xoopsConfigUser['minpass']) {
@@ -103,7 +102,7 @@ if ('saveuser' === $op) {
         }
         $vpass = '';
         if (!empty($_POST['vpass'])) {
-            $vpass = $myts->stripSlashesGPC(trim($_POST['vpass']));
+            $vpass = Request::getString('vpass', '', 'POST');
         }
         if ($password !== $vpass) {
             $errors[] = _US_PASSNOTSAME;

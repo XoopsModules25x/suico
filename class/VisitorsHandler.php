@@ -279,10 +279,8 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
             if (!$result = $this->db->queryF($sql)) {
                 return false;
             }
-        } else {
-            if (!$result = $this->db->query($sql)) {
-                return false;
-            }
+        } elseif (!$result = $this->db->query($sql)) {
+            return false;
         }
 
         return true;

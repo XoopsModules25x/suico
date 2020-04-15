@@ -71,8 +71,7 @@ class FileChecker
                         'CO_' . $moduleDirNameUpper . '_' . 'FC_NOTAVAILABLE'
                     ) . ') ';
             }
-        } else {
-            if (self::compareFiles($file_path, $original_file_path)) {
+        } elseif (self::compareFiles($file_path, $original_file_path)) {
                 $path_status = "<img src='${pathIcon16}/1.png'>";
                 $path_status .= "${file_path} (" . constant(
                         'CO_' . $moduleDirNameUpper . '_' . 'FC_AVAILABLE'
@@ -92,7 +91,7 @@ class FileChecker
                     ) . '</button>';
                 $path_status .= '</form>';
             }
-        }
+
 
         return $path_status;
     }

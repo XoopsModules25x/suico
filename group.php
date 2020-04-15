@@ -24,6 +24,8 @@ use XoopsModules\Yogurt;
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_group.tpl';
 require __DIR__ . '/header.php';
 
+$helper->loadLanguage('main');
+
 $controller = new Yogurt\GroupController($xoopsDB, $xoopsUser);
 
 /**
@@ -79,7 +81,7 @@ $xoopsTpl->assign('lang_titlegroup', _MD_YOGURT_GROUP_TITLE);
 $xoopsTpl->assign('lang_descgroup', _MD_YOGURT_GROUP_DESC);
 $xoopsTpl->assign('lang_abandongroup', _MD_YOGURT_GROUP_ABANDON);
 $xoopsTpl->assign('lang_joingroup', _MD_YOGURT_GROUP_JOIN);
-$xoopsTpl->assign('lang_groupowner', _MD_YOGURT_OWNEROFGROUP);
+$xoopsTpl->assign('lang_groupowner', _MD_YOGURT_GROUPOWNER);
 
 
 //permissions

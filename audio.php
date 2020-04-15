@@ -46,7 +46,10 @@ $criteriaUidAudio->setLimit($helper->getConfig('audiosperpage'));
  * Get all audios of this user and assign them to template
  */
 $audios       = $controller->getAudio($criteriaUidAudio);
-$audios_array = $controller->assignAudioContent($nbSections['nbAudio'], $audios);
+try {
+    $audios_array = $controller->assignAudioContent($nbSections['nbAudio'], $audios);
+} catch (\RuntimeException $e) {
+}
 
 if (is_array($audios_array)) {
     $xoopsTpl->assign('audios', $audios_array);
