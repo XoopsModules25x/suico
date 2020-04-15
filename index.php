@@ -97,9 +97,7 @@ else {
     $criteria2 = new CriteriaCompo(new Criteria('petitioner_uid', $petitionto_uid));
     $criteria2->add(new Criteria('petitionfrom_uid', $xoopsUser->getVar('uid')));
     if ($friendpetitionFactory->getCount($criteria2) > 0) {
-       $xoopsTpl->assign('petitionfrom_uid', $xoopsUser->getVar('uid'));  
-      global $xoopsUser;	
-	  $xoopsTpl->assign('petitionfrom_uid', $xoopsUser->getVar('uid'));    
+       $xoopsTpl->assign('petitionfrom_uid', $xoopsUser->getVar('uid'));    
     }
 }}
 
