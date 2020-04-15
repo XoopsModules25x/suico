@@ -36,7 +36,7 @@ require __DIR__ . '/header.php';
 $relgroupuserFactory = new Yogurt\RelgroupuserHandler($xoopsDB);
 $groupsFactory       = new Yogurt\GroupsHandler($xoopsDB);
 
-$marker = $_POST['marker'] ?? 0;
+$marker = Request::getInt('marker', 0, 'POST');
 
 if (1 === $marker) {
     /**
