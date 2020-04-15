@@ -52,8 +52,7 @@ if (!defined('XOOPS_CONF_USER')) {
         $xoopsConfigUser = $configHandler->getConfigsByCat(0, $mod_yogurt->getVar('mid'));
         unset($moduleHandler);
         unset($mod_yogurt);
-    } else {
-        if (defined('SXVERSION')) {
+    } elseif (defined('SXVERSION')) {
             define('XOOPS_CONF_USER', 1);
             $xoopsConfigUser = $configHandler->getConfigsByCat(0, XOOPS_CONF_USER);
             unset($moduleHandler);
@@ -62,7 +61,7 @@ if (!defined('XOOPS_CONF_USER')) {
             redirect_header('index.php', 3, _TAKINGBACK);
             exit();
         }
-    }
+
 } else {
     $xoopsConfigUser = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
 }
