@@ -107,11 +107,11 @@ define('_MD_YOGURT_FRIENDSHIPUPDATED', 'Friendship Updated');
 
 //submitfriendpetition.php
 define(
-    '_MD_YOGURT_PETITIONTO',
+    '_MD_YOGURT_PETITIONFROM',
     'A friend request has been sent to this user, Wait until he accepts to have him in your friends list.'
 );
 define(
-    '_MD_YOGURT_ALREADY_PETITIONTO',
+    '_MD_YOGURT_ALREADY_PETITIONFROM',
     'You have already sent a friendship request to this user or vice-versa <br>, Wait untill he accepts or rejects it or check if he has asked you as a friend visiting your profile page.'
 );
 

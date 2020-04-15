@@ -60,7 +60,7 @@ $start = Request::getInt(
  */
 $petition = 0;
 if (1 === $controller->isOwner) {
-    $criteria_uidpetition = new Criteria('petitionfrom_uid', $controller->uidOwner);
+    $criteria_uidpetition = new Criteria('petitionto_uid', $controller->uidOwner);
     $newpetition          = $controller->petitionsFactory->getObjects($criteria_uidpetition);
     if ($newpetition) {
         $nb_petitions      = count($newpetition);
@@ -78,26 +78,26 @@ $friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
 /**
  * Getting the uid of the user which user want to ask to be friend
  */
-$petitionto_uid = $controller->uidOwner;
+$petitionfrom_uid = $controller->uidOwner;
 
 //Verify if the user has already asked for friendship or if the user he s asking to be a friend has already asked him
 $criteria = new CriteriaCompo(
     new Criteria(
-        'petitionfrom_uid', $petitionto_uid
+        'petitionto_uid', $petitionfrom_uid
     )
 );
 
 if ($xoopsUser){
 $criteria->add(new Criteria('petitioner_uid', $xoopsUser->getVar('uid')));
 if ($friendpetitionFactory->getCount($criteria) > 0) {
-	$xoopsTpl->assign('petitionto_uid', $petitionto_uid);
+	$xoopsTpl->assign('petitionfrom_uid', $petitionfrom_uid);
 	
 }
 else {
-    $criteria2 = new CriteriaCompo(new Criteria('petitioner_uid', $petitionto_uid));
-    $criteria2->add(new Criteria('petitionfrom_uid', $xoopsUser->getVar('uid')));
+    $criteria2 = new CriteriaCompo(new Criteria('petitioner_uid', $petitionfrom_uid));
+    $criteria2->add(new Criteria('petitionto_uid', $xoopsUser->getVar('uid')));
     if ($friendpetitionFactory->getCount($criteria2) > 0) {
-       $xoopsTpl->assign('petitionfrom_uid', $xoopsUser->getVar('uid'));    
+       $xoopsTpl->assign('petitionto_uid', $xoopsUser->getVar('uid'));    
     }
 }}
 

@@ -120,26 +120,26 @@ class FriendpetitionHandler extends XoopsPersistableObjectHandler
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Friendpetition
             $xoopsObject = new Friendpetition();
-            $format      = 'INSERT INTO %s (friendpet_id, petitioner_uid, petitionfrom_uid)';
+            $format      = 'INSERT INTO %s (friendpet_id, petitioner_uid, petitionto_uid)';
             $format      .= 'VALUES (%u, %u, %u)';
             $sql         = sprintf(
                 $format,
                 $this->db->prefix('yogurt_friendpetition'),
                 $friendpet_id,
                 $petitioner_uid,
-                $petitionfrom_uid
+                $petitionto_uid
             );
             $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
-            $format .= 'friendpet_id=%u, petitioner_uid=%u, petitionfrom_uid=%u';
+            $format .= 'friendpet_id=%u, petitioner_uid=%u, petitionto_uid=%u';
             $format .= ' WHERE friendpet_id = %u';
             $sql    = sprintf(
                 $format,
                 $this->db->prefix('yogurt_friendpetition'),
                 $friendpet_id,
                 $petitioner_uid,
-                $petitionfrom_uid,
+                $petitionto_uid,
                 $friendpet_id
             );
         }

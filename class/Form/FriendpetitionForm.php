@@ -95,8 +95,8 @@ class FriendpetitionForm extends XoopsThemeForm
         // Petioned_uid
         $this->addElement(
             new XoopsFormSelectUser(
-                AM_YOGURT_FRIENDPETITION_PETITIONFROM_UID, 'petitionfrom_uid', false, $this->targetObject->getVar(
-                'petitionfrom_uid'
+                AM_YOGURT_FRIENDPETITION_PETITIONTO_UID, 'petitionto_uid', false, $this->targetObject->getVar(
+                'petitionto_uid'
             ), 1, false
             ),
             false

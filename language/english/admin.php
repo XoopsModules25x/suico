@@ -172,7 +172,7 @@ define('AM_YOGURT_FRIENDPETITION_EDIT', 'Edit friendpetition');
 define('AM_YOGURT_FRIENDPETITION_DELETE', 'Delete friendpetition');
 define('AM_YOGURT_FRIENDPETITION_FRIENDPET_ID', 'ID');
 define('AM_YOGURT_FRIENDPETITION_PETITIONER_UID', 'From');
-define('AM_YOGURT_FRIENDPETITION_PETITIONFROM_UID', 'To');
+define('AM_YOGURT_FRIENDPETITION_PETITIONTO_UID', 'To');
 // Groups
 define('AM_YOGURT_GROUPS_ADD', 'Add a groups');
 define('AM_YOGURT_GROUPS_EDIT', 'Edit groups');

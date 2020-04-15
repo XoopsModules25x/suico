@@ -34,10 +34,10 @@
         </form>
     </div>
 <{else}>
-    <{if (($allow_friends !=-1) && ($isfriend!=1) && ($isOwner==0) && ($isanonym!=1) && $petitionto_uid != $uid_owner) && $petitionfrom_uid != $xoops_userid}>
+    <{if (($allow_friends !=-1) && ($isfriend!=1) && ($isOwner==0) && ($isanonym!=1) && $petitionfrom_uid != $uid_owner) && $petitionto_uid != $xoops_userid}>
         <div id="yogurt-profile-petition">
             <form action=submit_friendpetition.php method="post">
-               <input type="hidden" name="petitionto_uid" id="petitionto_uid" value="<{$uid_owner}>">
+               <input type="hidden" name="petitionfrom_uid" id="petitionfrom_uid" value="<{$uid_owner}>">
                <button name="" type="image"><{$lang_addasafriend}></button>			 	   
 				<{$token}>
             </form>
@@ -49,7 +49,7 @@
 	<{if $isfriend == 1 && $isanonym!=1}>
 		<button type="button">Friend</button>	
 	<{/if}>
-	<{if $petitionto_uid == $uid_owner OR $petitionfrom_uid == $xoops_userid && $isanonym!=1}>
+	<{if $petitionfrom_uid == $uid_owner OR $petitionto_uid == $xoops_userid && $isanonym!=1}>
 		<button type="button"><{$lang_friendshippending}></button>	
 	<{/if}>
 <{/if}>	
