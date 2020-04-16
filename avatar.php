@@ -53,7 +53,7 @@ $userHandler = new XoopsUserHandler($xoopsDB);
 /**
  * Verifying who's the owner to allow changes
  */
-if ($uid === $picture->getVar('uid_owner')) {
+if ($uid === (int)$picture->getVar('uid_owner')) {
     if ($userHandler->insert($xoopsUser)) {
         redirect_header('album.php', 2, _MD_YOGURT_AVATAR_EDITED);
     } else {

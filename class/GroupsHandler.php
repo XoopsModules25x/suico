@@ -421,11 +421,6 @@ var elestyle = xoopsGetElementById(img).style;
 }
 //--></script>
 <!-- End Form Validation JavaScript //-->
-
-
-
-
-
         ";
 
         return true;
@@ -457,7 +452,7 @@ var elestyle = xoopsGetElementById(img).style;
         global $xoopsUser, $xoopsDB, $_POST, $_FILES;
         //search logged user id
         $uid = $xoopsUser->getVar('uid');
-        if (get_class($group) !== Groups::class) {
+        if ('' === $group || get_class($group) !== Groups::class) {
             $group = $this->create();
         } else {
             $group->unsetNew();
