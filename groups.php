@@ -99,6 +99,29 @@ $barrinha_my        = $navigationBar_my->renderImageNav(2);
 
 $maxfilebytes = $helper->getConfig('maxfilesize');
 
+
+
+
+
+
+
+
+$maxfilebytes = $helper->getConfig('maxfilesize');
+$xoopsTpl->assign('maxfilebytes', $maxfilebytes);
+
+//form
+$xoopsTpl->assign('lang_formtitle', _MD_YOGURT_SUBMIT_PIC_TITLE);
+$xoopsTpl->assign('lang_selectphoto', _MD_YOGURT_SELECT_PHOTO);
+$xoopsTpl->assign('lang_caption', _MD_YOGURT_CAPTION);
+$xoopsTpl->assign('lang_uploadpicture', _MD_YOGURT_UPLOADPICTURE);
+$xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxfilebytes / 1024));
+
+
+
+
+
+
+
 //permissions
 $xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('notes'));
 $xoopsTpl->assign('allow_friends', $controller->checkPrivilegeBySection('friends'));
