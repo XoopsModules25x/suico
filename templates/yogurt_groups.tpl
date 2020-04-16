@@ -16,59 +16,57 @@
 
     <{$token}>
 </form>
-<{if $isanonym!=1}>
+<{if $isAnonym!=1}>
+    <form class='outer' name='form_group' id='form_group' action='submit_group.php' method='post' onsubmit='return xoopsFormValidate_form_group();' enctype="multipart/form-data">
 
-<form class='outer' name='form_group' id='form_group' action='submit_group.php' method='post' onsubmit='return xoopsFormValidate_form_group();' enctype="multipart/form-data">
+        <h4 class="head"><{$lang_creategroup}></h4>
 
-    <h4 class="head"><{$lang_creategroup}></h4>
+        <p class="odd">
+            <label for='' class='xoops-form-element-caption'><span class='caption-text'><{$lang_youcanupload}></span><span class='caption-marker'>*</span></label>
+        </p>
 
-    <p class="odd">
-        <label for='' class='xoops-form-element-caption'><span class='caption-text'><{$lang_youcanupload}></span><span class='caption-marker'>*</span></label>
-    </p>
+        <p class=even>
+            <label for='group_img' class='xoops-form-element-caption-required'>
+                <span class='caption-text'><{$lang_groupimage}></span><span class='caption-marker'>*</span></label>
+            <input type='hidden' name='MAX_FILE_SIZE' value='<{$maxfilesize}>'>
+            <input type='file' name='group_img' id='group_img'>
+            <input type='hidden' name='xoops_upload_file[]' id='xoops_upload_file[]' value='group_img'>
+        </p>
 
-    <p class=even>
-        <label for='group_img' class='xoops-form-element-caption-required'>
-            <span class='caption-text'><{$lang_groupimage}></span><span class='caption-marker'>*</span></label>
-        <input type='hidden' name='MAX_FILE_SIZE' value='<{$maxfilesize}>'>
-        <input type='file' name='group_img' id='group_img'>
-        <input type='hidden' name='xoops_upload_file[]' id='xoops_upload_file[]' value='group_img'>
-    </p>
+        <p class=odd>
+            <label for='group_title' class='xoops-form-element-caption-required'>
+                <span class='caption-text'><{$lang_title}></span><span class='caption-marker'>*</span></label>
+            <input type='text' name='group_title' id='group_title' size='35' maxlength='55' value='' required>
+        </p>
 
-    <p class=odd>
-        <label for='group_title' class='xoops-form-element-caption-required'>
-            <span class='caption-text'><{$lang_title}></span><span class='caption-marker'>*</span></label>
-        <input type='text' name='group_title' id='group_title' size='35' maxlength='55' value='' required>
-    </p>
+        <p class=even>
+            <label for='group_desc' class='xoops-form-element-caption-required'>
+                <span class='caption-text'><{$lang_description}></span>
+                <span class='caption-marker'>*</span></label>
+            <input type='text' name='group_desc' id='group_desc' size='35' maxlength='55' value='' required>
+        </p>
 
-    <p class=even>
-        <label for='group_desc' class='xoops-form-element-caption-required'>
-            <span class='caption-text'><{$lang_description}></span>
-            <span class='caption-marker'>*</span></label>
-        <input type='text' name='group_desc' id='group_desc' size='35' maxlength='55' value='' required>
-    </p>
+        <p class=odd>
+            <input type='submit' class='formButton' name='submit_button' id='submit_button' value='<{$lang_savegroup}>'>
+        </p>
 
-    <p class=odd>
-        <input type='submit' class='formButton' name='submit_button' id='submit_button' value='<{$lang_savegroup}>'>
-    </p>
-
-    <{$token}><input type='hidden' name='marker' id='marker' value='1'>
-</form>
-
-<!-- Start Form Validation JavaScript //-->
-<script type='text/javascript'>
-    <!--//
-    function xoopsFormValidate_form_group() {
-        myform = window.document.form_group;
-        if (myform.group_img.value == "") {
-            window.alert("Please enter Group Image");
-            myform.group_img.focus();
-            return false;
+        <{$token}><input type='hidden' name='marker' id='marker' value='1'>
+    </form>
+    <!-- Start Form Validation JavaScript //-->
+    <script type='text/javascript'>
+        <!--//
+        function xoopsFormValidate_form_group() {
+            myform = window.document.form_group;
+            if (myform.group_img.value == "") {
+                window.alert("Please enter Group Image");
+                myform.group_img.focus();
+                return false;
+            }
+            return true;
         }
-        return true;
-    }
 
-    //--></script>
-<!-- End Form Vaidation JavaScript //-->
+        //--></script>
+    <!-- End Form Vaidation JavaScript //-->
 
 <{/if}>
 
@@ -78,14 +76,13 @@
     </h4>
 
     <{if $nb_groups<=0}>
-    <h4 id="yogurt-groups-nogroups">
-        <{$lang_nogroupsyet}>
-    </h4>
+        <h4 id="yogurt-groups-nogroups">
+            <{$lang_nogroupsyet}>
+        </h4>
     <{/if}>
     <{section name=i loop=$mygroups}>
         <div class="yogurt-group-my <{cycle values="odd,even"}>">
             <p>
-
                 <a href="group.php?group_id=<{$mygroups[i].group_id}>"><img src="<{$xoops_upload_url}>/yogurt/groups/<{$mygroups[i].img}>" alt="<{$mygroups[i].title}>" title="<{$mygroups[i].title}>"></a>
             <p>
                 <a href="group.php?group_id=<{$mygroups[i].group_id}>"><{$mygroups[i].title}></a><br><{$mygroups[i].desc}>
@@ -94,8 +91,8 @@
             <{if $isOwner }>
                 <form action="abandongroup.php" method="POST" id="form_abandongroup">
                     <input type="hidden" value="<{$mygroups[i].id}>" name="relgroup_id" id="relgroup_id">
-                    <button name="" type="image"><{$lang_abandongroup}></button>		
-				</form>
+                    <button name="" type="image"><{$lang_abandongroup}></button>
+                </form>
                 <{if $xoops_userid == $mygroups[i].uid }>
                     <form>
                         <img src="assets/images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>">
@@ -109,7 +106,7 @@
 </div>
 
 <div id="yogurt-navegacao">
-    <{$barra_navegacao_my}>
+    <{$navigationBar_my}>
 </div>
 
 <div id="yogurt-groups-container" class="outer">
@@ -118,9 +115,9 @@
     </h4>
 
     <{if $nb_groups_all<=0}>
-    <h4 id="yogurt-groups-nogroups">
-        <{$lang_nogroupsyet}>
-    </h4>
+        <h4 id="yogurt-groups-nogroups">
+            <{$lang_nogroupsyet}>
+        </h4>
     <{/if}>
 
     <{section name=j loop=$groups}>
@@ -130,17 +127,16 @@
                 <a href="group.php?group_id=<{$groups[j].id}>"><{$groups[j].title}></a>
             </h4>
             <p>
-
             <p>
                 <{$groups[j].desc}>
             </p>
-
             </p>
-			<{if $isOwner }>
-                <form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">
-                    <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
-                    <button name="" type="image"><{$lang_joingroup}></button>
-                </form>         				
+            <{if ($xoops_userid == $groups[j].uid)}>
+                <br>
+                <form action="abandongroup.php" method="POST" id="form_abandongroup">
+                    <input type="hidden" value="<{$mygroups[i].id}>" name="relgroup_id" id="relgroup_id">
+                    <button name="" type="image"><{$lang_abandongroup}></button>
+                </form>
                 <{if $xoops_userid == $groups[j].uid }>
                     <form action="delete_group.php" method="POST" id="form_deletegroup" class="yogurt-groups-form-delete">
                         <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
@@ -155,14 +151,29 @@
                     </form>
                 <{/if}>
             <{/if}>
+
+            <{if ($xoops_userid != $groups[j].uid)}>
+
+                <{if in_array($groups[j].id, $mygroupsid)}>
+                    <form action="abandongroup.php" method="POST" id="form_abandongroup">
+                        <input type="hidden" value="<{$mygroups[i].id}>" name="relgroup_id" id="relgroup_id">
+                        <button name="" type="image"><{$lang_abandongroup}></button>
+                    </form>
+                <{else}>
+                    <form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">
+                        <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
+                        <button name="" type="image"><{$lang_joingroup}></button>
+                    </form>
+                <{/if}>
+            <{/if}>
         </div>
-		<br>
+        <br>
     <{/section}>
 
 </div>
 
 <div id="yogurt-navegacao">
-    <{$barra_navegacao}>
+    <{$navigationBar}>
 </div>
 
 

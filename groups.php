@@ -53,6 +53,13 @@ $criteria_mygroups->setLimit($helper->getConfig('groupsperpage'));
 $criteria_mygroups->setStart($start_my);
 $mygroups = $controller->relgroupusersFactory->getGroups('', $criteria_mygroups, 0);
 
+
+$mygroupsid =[];
+foreach($mygroups as $value){
+    $mygroupsid[] = $value['group_id'];
+}
+
+
 /**
  * Adding to the module js and css of the lightbox and new ones
  */
@@ -80,15 +87,15 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 /**
  * Creating the navigation bar if you have a lot of friends
  */
-$barra_navegacao = new XoopsPageNav(
+$navigationBar = new XoopsPageNav(
     $nb_groups, $helper->getConfig('groupsperpage'), $start_all, 'start_all', 'uid=' . (int)$controller->uidOwner . '&amp;start_my=' . $start_my
 );
-$barrinha        = $barra_navegacao->renderImageNav(2); //allgroups
+$barrinha        = $navigationBar->renderImageNav(2); //allgroups
 
-$barra_navegacao_my = new XoopsPageNav(
+$navigationBar_my = new XoopsPageNav(
     $nb_mygroups, $helper->getConfig('groupsperpage'), $start_my, 'start_my', 'uid=' . (int)$controller->uidOwner . '&amp;start_all=' . $start_all
 );
-$barrinha_my        = $barra_navegacao_my->renderImageNav(2);
+$barrinha_my        = $navigationBar_my->renderImageNav(2);
 
 $maxfilebytes = $helper->getConfig('maxfilesize');
 
@@ -112,10 +119,11 @@ $xoopsTpl->assign('lang_savegroup', _MD_YOGURT_UPLOADGROUP);
 $xoopsTpl->assign('uid_owner', $controller->uidOwner);
 $xoopsTpl->assign('owner_uname', $controller->nameOwner);
 $xoopsTpl->assign('isOwner', $controller->isOwner);
-$xoopsTpl->assign('isanonym', $controller->isAnonym);
+$xoopsTpl->assign('isUser', $controller->isUser);
+$xoopsTpl->assign('isAnonym', $controller->isAnonym);
 
 //numbers
-//$xoopsTpl->assign('nb_groups',$nbSections['nbGroups']);look at hte end for this nb
+//$xoopsTpl->assign('nb_groups',$nbSections['nbGroups']);look at the end for this nb
 $xoopsTpl->assign(
     'nb_photos',
     $nbSections['nbPhotos']
@@ -156,13 +164,16 @@ $xoopsTpl->assign('lang_mygroupstitle', _MD_YOGURT_MYGROUPS);
 $xoopsTpl->assign('lang_groupstitle', _MD_YOGURT_ALLGROUPS . ' (' . $nb_groups . ')');
 $xoopsTpl->assign('lang_nogroupsyet', _MD_YOGURT_NOGROUPSYET);
 
+$xoopsTpl->assign('mygroupsid', $mygroupsid);
+
+
 //page nav
-$xoopsTpl->assign('barra_navegacao', $barrinha); //allgroups
-$xoopsTpl->assign('barra_navegacao_my', $barrinha_my);
+$xoopsTpl->assign('navigationBar', $barrinha); //allgroups
+$xoopsTpl->assign('navigationBar_my', $barrinha_my);
 $xoopsTpl->assign(
     'nb_groups',
     $nb_mygroups
-); // this is the one wich shows in the upper bar actually is about the mygroups
+); // this is the one which shows in the upper bar actually is about the mygroups
 $xoopsTpl->assign(
     'nb_groups_all',
     $nb_groups
