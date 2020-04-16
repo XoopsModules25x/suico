@@ -267,7 +267,7 @@ define(
 );
 
 define('_MI_YOGURT_ENABLEFANSSEVALUATION_TITLE', 'Enable Fans Evaluation Ranking');
-define('_MI_YOGURT_ENABLEFANSSEVALUATION_DESC', 'Options to evaluate friendship ranking');
+define('_MI_YOGURT_ENABLEFANSSEVALUATION_DESC', 'Options to evaluate fans ranking');
 define('_MI_YOGURT_MEMBERSLIST', 'Members List');
 define('_MI_YOGURT_TEMPLATEMEMBERSDESC', 'Template of members list page');
 
