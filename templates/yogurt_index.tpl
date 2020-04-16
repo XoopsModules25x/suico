@@ -1,6 +1,6 @@
 <{include file="db:yogurt_navbar.tpl"}>
 
-<{if $petition==1 && $isOwner==1 && $isfriend==0}>
+<{if $petition==1 && $isOwner==1 && $isFriend==0}>
 
     <!-- if not owner and not friend -->
     <div id="yogurt-profile-petition" class="confirmMsg">
@@ -34,7 +34,7 @@
         </form>
     </div>
 <{else}>
-    <{if (($isfriend!=1) && ($isOwner==0) && ($isanonym!=1) && $petitionto_uid != $uid_owner) && $petitionfrom_uid != $xoops_userid}>
+    <{if (($isFriend!=1) && ($isOwner==0) && ($isAnonym!=1) && $petitionto_uid != $uid_owner) && $petitionfrom_uid != $xoops_userid}>
         <div id="yogurt-profile-petition">
             <form action=submit_friendpetition.php method="post">
                <input type="hidden" name="petitionto_uid" id="petitionto_uid" value="<{$uid_owner}>">
@@ -45,7 +45,7 @@
         <!-- end if -->
     <{/if}>
 <{/if}>
-	<{if $petitionto_uid == $uid_owner OR $petitionfrom_uid == $xoops_userid && $isanonym!=1}>
+	<{if $petitionto_uid == $uid_owner OR $petitionfrom_uid == $xoops_userid && $isAnonym!=1}>
 		<button type="button"><{$lang_friendshippending}></button>	
 	<{/if}>
 
@@ -119,7 +119,7 @@
             <p class="odd"><img src="assets/images/email.gif"> <span class="yogurt-profileinfo-label"><{$lang_email}>:</span><span class="yogurt-profileinfo-value"><{ mailto address=$user_email encode="javascript"}></span></p>
              <{/if}>
 			<{/if}>
-            <{if $isanonym!=1 && $isOwner!=1 }>
+            <{if $isAnonym!=1 && $isOwner!=1 }>
                 <p class="even"><img src="assets/images/email.gif"> <span class="yogurt-profileinfo-label"><{$lang_privmsg}>:</span><span class="yogurt-profileinfo-value"><a href="javascript:openWithSelfMain('<{$xoops_url}>/pmlite.php?send2=1&amp;to_userid=<{$uid_owner}>', 'pmlite', 450, 380);"><img
                                     src="<{$xoops_url}>/images/icons/pm.gif" alt=""></a></span></p>
             <{/if}>

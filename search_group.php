@@ -71,10 +71,10 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 /**
  * Creating the navigation bar if you have a lot of friends
  */
-$barra_navegacao = new XoopsPageNav(
+$navigationBar = new XoopsPageNav(
     $nb_groups, $helper->getConfig('groupsperpage'), $start_all, 'start_all', 'group_keyword=' . $group_keyword . '&amp;start_my=' . $start_my
 );
-$barrinha        = $barra_navegacao->renderImageNav(2);
+$barrinha        = $navigationBar->renderImageNav(2);
 
 //permissions
 $xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('notes'));
@@ -102,7 +102,7 @@ $xoopsTpl->assign('lang_savegroup', _MD_YOGURT_UPLOADGROUP);
 $xoopsTpl->assign('uid_owner', $controller->uidOwner);
 $xoopsTpl->assign('owner_uname', $controller->nameOwner);
 $xoopsTpl->assign('isOwner', $controller->isOwner);
-$xoopsTpl->assign('isanonym', $controller->isAnonym);
+$xoopsTpl->assign('isAnonym', $controller->isAnonym);
 
 //numbers
 //$xoopsTpl->assign('nb_groups',$nbSections['nbGroups']);look at hte end for this nb
@@ -147,8 +147,8 @@ $xoopsTpl->assign('lang_groupstitle', _MD_YOGURT_ALLGROUPS . ' (' . $nb_groups .
 $xoopsTpl->assign('lang_nogroupsyet', _MD_YOGURT_NOGROUPSYET);
 
 //page nav
-$xoopsTpl->assign('barra_navegacao', $barrinha);
-//$xoopsTpl->assign('barra_navegacao_my',$barrinha_my);
+$xoopsTpl->assign('navigationBar', $barrinha);
+//$xoopsTpl->assign('navigationBar_my',$barrinha_my);
 //$xoopsTpl->assign('nb_groups',$nb_mygroups);// this is the one wich shows in the upper bar actually is about the mygroups
 $xoopsTpl->assign(
     'nb_groups_all',

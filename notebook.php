@@ -87,7 +87,7 @@ $xoopsTpl->assign('lang_underline', _MD_YOGURT_UNDERLINE);
 $xoopsTpl->assign('uid_owner', $controller->uidOwner);
 $xoopsTpl->assign('owner_uname', $controller->nameOwner);
 $xoopsTpl->assign('isOwner', $controller->isOwner);
-$xoopsTpl->assign('isanonym', $controller->isAnonym);
+$xoopsTpl->assign('isAnonym', $controller->isAnonym);
 //numbers
 $xoopsTpl->assign('nb_groups', $nbSections['nbGroups']);
 $xoopsTpl->assign('nb_photos', $nbSections['nbPhotos']);

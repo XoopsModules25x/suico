@@ -1,6 +1,6 @@
 <{include file="db:yogurt_navbar.tpl"}>
 
-<{if $petition==1 && $isOwner==1 && $isfriend==0}>
+<{if $petition==1 && $isOwner==1 && $isFriend==0}>
 
     <!-- if not owner and not friend -->
     <div id="yogurt-profile-petition" class="confirmMsg">

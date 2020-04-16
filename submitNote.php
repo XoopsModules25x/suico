@@ -41,14 +41,14 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 }
 
 $myts         = MyTextSanitizer::getInstance();
-$Notebook_uid = $_POST['uid'];
+$noteObjbook_uid = $_POST['uid'];
 $note_text    = $myts->displayTarea($_POST['text'], 0, 1, 1, 1, 1);
 $mainform     = !empty($_POST['mainform']) ? 1 : 0;
-$Note         = $notesFactory->create();
-$Note->setVar('note_text', $note_text);
-$Note->setVar('note_from', $xoopsUser->getVar('uid'));
-$Note->setVar('note_to', $Notebook_uid);
-$notesFactory->insert($Note);
+$noteObj         = $notesFactory->create();
+$noteObj->setVar('note_text', $note_text);
+$noteObj->setVar('note_from', $xoopsUser->getVar('uid'));
+$noteObj->setVar('note_to', $Notebook_uid);
+$notesFactory->insert($noteObj);
 $extra_tags['X_OWNER_NAME'] = $xoopsUser::getUnameFromId($Notebook_uid);
 $extra_tags['X_OWNER_UID']  = $Notebook_uid;
 $notificationHandler        = xoops_getHandler('notification');

@@ -199,15 +199,15 @@ class YogurtController extends \XoopsObject
             $this->nameOwner = $this->owner->getVar('name');
         }
 
-        //isfriend?
+        //isFriend?
         $criteria_friends = new Criteria('friend1_uid', $this->uidOwner);
 
         if (!$xoopsUser) {
             $this->isFriend = 0;
         } else {
-            $criteria_isfriend = new CriteriaCompo(new Criteria('friend2_uid', $this->user->getVar('uid')));
-            $criteria_isfriend->add($criteria_friends);
-            $this->isFriend = $this->friendshipsFactory->getCount($criteria_isfriend);
+            $criteria_isFriend = new CriteriaCompo(new Criteria('friend2_uid', $this->user->getVar('uid')));
+            $criteria_isFriend->add($criteria_friends);
+            $this->isFriend = $this->friendshipsFactory->getCount($criteria_isFriend);
         }
 
         $this->privilegeLevel = 0;

@@ -133,10 +133,10 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 /**
  * Creating the navigation bar if you have a lot of friends
  */
-$barra_navegacao = new XoopsPageNav(
+$navigationBar = new XoopsPageNav(
     $nbSections['nbPhotos'], $helper->getConfig('picturesperpage'), $start, 'start', 'uid=' . (int)$controller->uidOwner
 );
-$navegacao       = $barra_navegacao->renderImageNav(2);
+$navegacao       = $navigationBar->renderImageNav(2);
 
 /**
  * Assigning smarty variables
@@ -181,7 +181,7 @@ $xoopsTpl->assign(
     'xoops_pagetitle',
     sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner)
 );
-$xoopsTpl->assign('isanonym', $controller->isAnonym);
+$xoopsTpl->assign('isAnonym', $controller->isAnonym);
 
 //form
 $xoopsTpl->assign('lang_formtitle', _MD_YOGURT_SUBMIT_PIC_TITLE);

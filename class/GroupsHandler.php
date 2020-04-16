@@ -432,13 +432,13 @@ var elestyle = xoopsGetElementById(img).style;
     }
 
     /**
-     * @param        $group_title
-     * @param        $group_desc
-     * @param        $group_img
-     * @param        $path_upload
-     * @param        $maxfilebytes
-     * @param        $maxfilewidth
-     * @param        $maxfileheight
+     * @param string $group_title
+     * @param string $group_desc
+     * @param string $group_img
+     * @param string $path_upload
+     * @param int    $maxfilebytes
+     * @param int    $maxfilewidth
+     * @param int    $maxfileheight
      * @param int    $change_img
      * @param string $group
      * @return bool
@@ -457,7 +457,7 @@ var elestyle = xoopsGetElementById(img).style;
         global $xoopsUser, $xoopsDB, $_POST, $_FILES;
         //search logged user id
         $uid = $xoopsUser->getVar('uid');
-        if (!is_a($group, Groups::class)) {
+        if (get_class($group) !== Groups::class) {
             $group = $this->create();
         } else {
             $group->unsetNew();

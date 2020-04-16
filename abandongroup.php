@@ -36,6 +36,7 @@ require __DIR__ . '/header.php';
  * Receiving info from get parameters
  */
 $relgroupuser_id = Request::getInt('relgroup_id', 0, 'POST');
+
 if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
     xoops_confirm(
         [

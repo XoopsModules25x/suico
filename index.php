@@ -238,8 +238,8 @@ if ($xoopsUser && $xoopsUser->isAdmin(1)) {
 $xoopsTpl->assign('uid_owner', $controller->uidOwner);
 $xoopsTpl->assign('owner_uname', $controller->nameOwner);
 $xoopsTpl->assign('isOwner', $controller->isOwner);
-$xoopsTpl->assign('isanonym', $controller->isAnonym);
-$xoopsTpl->assign('isfriend', $controller->isFriend);
+$xoopsTpl->assign('isAnonym', $controller->isAnonym);
+$xoopsTpl->assign('isFriend', $controller->isFriend);
 
 //numbers
 $xoopsTpl->assign('nb_groups', $nbSections['nbGroups']);

@@ -103,7 +103,7 @@ if (1 === $marker && $group->getVar('owner_uid') === $uid) {
     $xoopsTpl->assign('uid_owner', $controller->uidOwner);
     $xoopsTpl->assign('owner_uname', $controller->nameOwner);
     $xoopsTpl->assign('isOwner', $controller->isOwner);
-    $xoopsTpl->assign('isanonym', $controller->isAnonym);
+    $xoopsTpl->assign('isAnonym', $controller->isAnonym);
 
     //numbers
     $xoopsTpl->assign('nb_groups', $nbSections['nbGroups']);

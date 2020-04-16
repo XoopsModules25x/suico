@@ -73,15 +73,15 @@ $friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
 $friendshipFactory     = new Yogurt\FriendshipHandler($xoopsDB);
 
 $isOwner  = 0;
-$isanonym = 1;
-$isfriend = 0;
+$isAnonym = 1;
+$isFriend = 0;
 
 /**
  * If anonym and uid not set then redirect to admins profile
  * Else redirects to own profile
  */
 if (empty($xoopsUser)) {
-    $isanonym = 1;
+    $isAnonym = 1;
     if (isset($_GET['uid'])) {
         $uid_owner = Request::getInt('uid', 0, 'GET');
     } else {
@@ -89,7 +89,7 @@ if (empty($xoopsUser)) {
         $isOwner   = 0;
     }
 } else {
-    $isanonym = 0;
+    $isAnonym = 0;
     if (isset($_GET['uid'])) {
         $uid_owner = Request::getInt('uid', 0, 'GET');
         $isOwner   = $xoopsUser->getVar('uid') === $uid_owner ? 1 : 0;
