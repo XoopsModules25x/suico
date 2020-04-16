@@ -301,7 +301,7 @@ define('_MD_YOGURT_REGDATE', 'Joined Date');
 define('_MD_YOGURT_EMAIL', 'Email');
 define('_MD_YOGURT_PM', 'PM');
 define('_MD_YOGURT_URL', 'URL');
-define('_MD_YOGURT_ADMIN', 'ADMIN');
+define('_MD_YOGURT_ADMIN', 'Admin');
 define('_MD_YOGURT_PREVIOUS', 'Previous');
 define('_MD_YOGURT_NEXT', 'Next');
 define('_MD_YOGURT_USERSFOUND', '%s member(s) found');
