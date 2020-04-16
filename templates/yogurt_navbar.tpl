@@ -13,8 +13,8 @@
             <input type="submit" value="<{$lang_unsuspend}>">
             </form><{/if}></div><{/if}>
 			
- <div class="yogurt-nav-bar" id="yogurt-nav-bar">
-		<{if $displaybreadcrumb == 1}>
+			<div class="yogurt-nav-bar" id="yogurt-nav-bar">
+		<{if $displaybreadcrumb!=-1}>
         <p id="breadcrumbs">
             <a href="index.php" title="<{$module_name}>">
                 <{$module_name}>
