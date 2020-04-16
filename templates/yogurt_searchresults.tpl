@@ -22,10 +22,10 @@
                 <{/if}>
 				<{if $xoops_isuser && $allow_friends !=-1}>		
 					<td class="odd">	
-						<{if $users[i].isfriend!=1 && $users[i].uid != $uid_owner && $users[i].selffriendrequest!=1 && $users[i].otherfriendrequest!=1}>
+						<{if $users[i].isFriend!=1 && $users[i].uid != $uid_owner && $users[i].selffriendrequest!=1 && $users[i].otherfriendrequest!=1}>
 							<a href="index.php?uid=<{$users[i].id}>" target="_blank" role="button" class="btn btn-info"><{$lang_addfriend}></a>
 						<{/if}>			
-						<{if $users[i].isfriend ==1 && $users[i].uid != $uid_owner}>
+						<{if $users[i].isFriend ==1 && $users[i].uid != $uid_owner}>
 							<button type="button"><{$lang_myfriend}></button>	
 						<{/if}>
 						<{if $users[i].uid != $uid_owner}>

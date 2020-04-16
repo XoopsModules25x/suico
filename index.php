@@ -311,8 +311,9 @@ if (1 === $petition) {
 }
 $xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
 $xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
-$xoopsTpl->assign('lang_friendshippending', _MD_YOGURT_FRIENDREQUESTPENDING);
+$xoopsTpl->assign('lang_friendrequestpending', _MD_YOGURT_FRIENDREQUESTPENDING);
 $xoopsTpl->assign('lang_myfriend', _MD_YOGURT_MYFRIEND);
+$xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUESTSENT);
 
 //Avatar and Main
 $xoopsTpl->assign('avatar_url', $avatar);

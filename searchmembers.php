@@ -324,7 +324,7 @@ if ('submit' === $op) {
 			$criteria_isfriend = new CriteriaCompo(new Criteria('friend2_uid', $userdata['uid']));
             $criteria_isfriend->add($criteria_friends);
 			$controller->isFriend = $controller->friendshipsFactory->getCount($criteria_isfriend);
-			$userdata['isfriend'] = $controller->isFriend;  
+			$userdata['isFriend'] = $controller->isFriend;  
 			
 			$friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
 			

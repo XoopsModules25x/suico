@@ -49,8 +49,11 @@
 	<{if $isFriend == 1 && $isAnonym!=1}>
 		<button type="button"><{$lang_myfriend}></button>	
 	<{/if}>
-	<{if $petitionfrom_uid == $uid_owner OR $petitionto_uid == $xoops_userid && $isAnonym!=1}>
-		<button type="button"><{$lang_friendshippending}></button>	
+	<{if $petitionfrom_uid == $uid_owner && $isAnonym!=1}>
+		<button type="button"><{$lang_friendrequestsent}></button>	
+	<{/if}>
+	<{if $petitionto_uid == $xoops_userid && $isAnonym!=1}>
+		<button type="button"><{$lang_friendrequestpending}></button>	
 	<{/if}>
 <{/if}>	
 	
