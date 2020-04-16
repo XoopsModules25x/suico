@@ -1,6 +1,6 @@
 <{include file="db:yogurt_navbar.tpl"}>
 
-<{if $allow_friends !=-1 && $petition==1 && $isOwner==1 && $isfriend==0}>
+<{if $allow_friends !=-1 && $petition==1 && $isOwner==1 && $isFriend==0}>
 
     <!-- if not owner and not friend -->
     <div id="yogurt-profile-petition" class="confirmMsg">
@@ -34,7 +34,7 @@
         </form>
     </div>
 <{else}>
-    <{if (($allow_friends !=-1) && ($isfriend!=1) && ($isOwner==0) && ($isanonym!=1) && $petitionfrom_uid != $uid_owner) && $petitionto_uid != $xoops_userid}>
+    <{if (($allow_friends !=-1) && ($isFriend!=1) && ($isOwner==0) && ($isAnonym!=1) && $petitionfrom_uid != $uid_owner) && $petitionto_uid != $xoops_userid}>
         <div id="yogurt-profile-petition">
             <form action=submit_friendpetition.php method="post">
                <input type="hidden" name="petitionfrom_uid" id="petitionfrom_uid" value="<{$uid_owner}>">
@@ -46,10 +46,10 @@
     <{/if}>
 <{/if}>
  <{if $allow_friends !=-1 }>
-	<{if $isfriend == 1 && $isanonym!=1}>
+	<{if $isFriend == 1 && $isAnonym!=1}>
 		<button type="button"><{$lang_myfriend}></button>	
 	<{/if}>
-	<{if $petitionfrom_uid == $uid_owner OR $petitionto_uid == $xoops_userid && $isanonym!=1}>
+	<{if $petitionfrom_uid == $uid_owner OR $petitionto_uid == $xoops_userid && $isAnonym!=1}>
 		<button type="button"><{$lang_friendshippending}></button>	
 	<{/if}>
 <{/if}>	
@@ -124,7 +124,7 @@
             <p class="odd"><img src="assets/images/email.gif"> <span class="yogurt-profileinfo-label"><{$lang_email}>:</span><span class="yogurt-profileinfo-value"><{ mailto address=$user_email encode="javascript"}></span></p>
              <{/if}>
 			<{/if}>
-            <{if $isanonym!=1 && $isOwner!=1 }>
+            <{if $isAnonym!=1 && $isOwner!=1 }>
                 <p class="even"><img src="assets/images/email.gif"> <span class="yogurt-profileinfo-label"><{$lang_privmsg}>:</span><span class="yogurt-profileinfo-value"><a href="javascript:openWithSelfMain('<{$xoops_url}>/pmlite.php?send2=1&amp;to_userid=<{$uid_owner}>', 'pmlite', 450, 380);"><img
                                     src="<{$xoops_url}>/images/icons/pm.gif" alt=""></a></span></p>
             <{/if}>
