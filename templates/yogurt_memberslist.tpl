@@ -1,10 +1,18 @@
 <{include file="db:yogurt_navbar.tpl"}>
+	
+	<h4><{$smarty.const._MD_YOGURT_WELCOMETO}></h4>
+    <{if $displaywelcomemessage == 1}><{$welcomemessage}><br><{/if}>
+
+    <{if $displaytotalmember == 1}>
+        <b><{$smarty.const._MD_YOGURT_TOTALUSERS}>:</b> <{$totalmember}>
+    <{/if}>
+
+    <{if $displaylatestmember == 1}>
+         &nbsp;&nbsp;<b><{$smarty.const._MD_YOGURT_LATESTMEMBER}>:</b> <{$latestmember}> <br><br>
+    <{/if}>
 
 
-<{if $total_found != 0}>
-
- <{$lang_numfound}>
-	<table class="table table-hover table-striped " cellspacing="1" cellpadding="4">
+    <table class="table table-hover table-striped outer" cellspacing="1" cellpadding="4">
             <tr>
             <{if $displayavatar == 1}>  
 				<th align="center"><{$lang_avatar}></th>
@@ -19,7 +27,6 @@
 			<{if $is_admin === true}>
 				<th align="center"><{$smarty.const._MD_YOGURT_ADMIN}></th>
 			<{/if}>	
-
 		</tr>
         <{section name=i loop=$users}>
             <tr valign="middle">
@@ -27,8 +34,8 @@
 					<td class="even"><a href="<{$xoops_url}>/userinfo.php?uid=<{$users[i].id}>"><img src='<{$xoops_url}>/uploads/<{$users[i].avatar}>' title='<{$users[i].name}>' alt='<{$users[i].name}>' style='padding:10px' width='100' height='100'></a></td>
 				<{/if}>
 				<td class="odd"><a href="index.php?uid=<{$users[i].id}>"><{$users[i].name}></a></td>
-                <{if $displayrealname == 1}>
-					<td class="even"><{$users[i].realname}></td>
+				<{if $displayrealname == 1}>
+				  <td class="even"><{$users[i].realname}></td>
                 <{/if}>
 				<{if $xoops_isuser && $allow_friends !=-1}>		
 					<td class="odd">	
@@ -53,16 +60,13 @@
 				<td>
 					<p class="float-right"><br><{$users[i].adminlink}></p>
 				<td>
-				<{/if}>				
+				<{/if}>					
 			</tr>
         <{/section}>
     </table>
     <div style="text-align:center">
         <{$pagenav}>
-       
     </div>
-<{else}>
-    <{$lang_nonefound}>
-<{/if}>
+
 
 <{include file="db:yogurt_footer.tpl"}>

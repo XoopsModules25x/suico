@@ -74,7 +74,11 @@ $modversion = [
     // ------------------- Main Menu -------------------
     'hasMain'             => 1,
     'sub'                 => [
-        [
+         [
+            'name' => _MI_YOGURT_MEMBERSLIST,
+            'url'  => 'memberslist.php',
+        ],
+		[
             'name' => _MI_YOGURT_SEARCH,
             'url'  => 'searchmembers.php',
         ],
@@ -222,12 +226,49 @@ $modversion['configcat']['upload']      = [
     'description' => _MI_YOGURT_CONFCAT_UPLOAD_DSC,
 ];
 
+// Config categories
+
+$modversion['configcat']['memberslist'] = [
+    'name'        => _MI_YOGURT_CONFCAT_MEMBERSLIST,
+    'description' => _MI_YOGURT_CONFCAT_MEMBERSLIST_DSC,
+];
+
+$modversion['configcat']['memberslistsearch']      = [
+    'name'        => _MI_YOGURT_CONFCAT_MEMBERSLISTSEARCH,
+    'description' => _MI_YOGURT_CONFCAT_MEMBERSLISTSEARCH_DSC,
+];
+
+$modversion['configcat']['general']      = [
+    'name'        => _MI_YOGURT_CONFCAT_GENERAL,
+    'description' => _MI_YOGURT_CONFCAT_GENERAL_DSC,
+];
+
 $modversion['configcat']['admin']      = [
     'name'        => _MI_YOGURT_CONFCAT_ADMIN,
     'description' => _MI_YOGURT_CONFCAT_ADMIN_DSC,
 ];
 
 //Configs
+
+$modversion['config'][] = [
+    'name'        => 'general_configs',
+    'title'       => '_MI_YOGURT_CONFIG_GENERAL',
+    'description' => '_MI_YOGURT_CONFIG_GENERALDSC',
+    'formtype'    => 'line_break',
+    'valuetype'   => 'textbox',
+    'default'     => 'odd',
+    'category'    => 'group_header',
+];
+
+$modversion['config'][] = [
+    'name'        => 'displaybreadcrumb',
+    'title'       => '_MI_YOGURT_DISPLAYBREADCRUMB',
+    'description' => '_MI_YOGURT_DISPLAYBREADCRUMB_DSC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+    'category'    => 'general',
+];
 
 // group header
 $modversion['config'][] = [
@@ -525,11 +566,21 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
 	'category'    => 'friends',
 ];
+                      
+$modversion['config'][] = [
+    'name'        => 'allow_friendshiplevel',
+    'title'       => '_MI_YOGURT_ENABLEFRIENDSHIPLEVEL_TITLE',
+    'description' => '_MI_YOGURT_ENABLEFRIENDSHIPLEVEL_DESC',
+    'default'     => 1,
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+	'category'    => 'friends',
+];
 
 $modversion['config'][] = [
-    'name'        => 'allow_friendsevaluation',
-    'title'       => '_MI_YOGURT_ENABLEFRIENDSEVALUATION_TITLE',
-    'description' => '_MI_YOGURT_ENABLEFRIENDSEVALUATION_DESC',
+    'name'        => 'allow_fanssevaluation',
+    'title'       => '_MI_YOGURT_ENABLEFANSSEVALUATION_TITLE',
+    'description' => '_MI_YOGURT_ENABLEFANSSEVALUATION_DESC',
     'default'     => 1,
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
@@ -665,6 +716,232 @@ $modversion['config'][] = [
 	'category'    => 'editor',
 ];
 
+$modversion['config'][] = [
+    'name'        => 'memberslist_configs',
+    'title'       => '_MI_YOGURT_CONFIG_MEMBERLIST',
+    'description' => '_MI_YOGURT_CONFIG_MEMBERLIST',
+    'formtype'    => 'line_break',
+    'valuetype'   => 'textbox',
+    'default'     => 'odd',
+    'category'    => 'group_header',
+];
+
+$modversion['config'][] = [
+    'name'        => 'displaywelcomemessage',
+    'title'       => '_MI_YOGURT_MEMBERLISTDISPLAYWELCOMEMSG',
+    'description' => '_MI_YOGURT_MEMBERLISTDISPLAYWELCOMEMSG_DSC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+    'category'    => 'memberslist',
+];
+
+$modversion['config'][] = [
+    'name'        => 'welcomemessage',
+    'title'       => '_MI_YOGURT_MEMBERLISTWELCOMEMSG',
+    'description' => '_MI_YOGURT_MEMBERLISTWELCOMEMSGDSC',
+    'formtype'    => 'textarea',
+    'valuetype'   => 'text',
+    'default'     => _MI_YOGURT_MEMBERLISTDEFAULTWELCOMEMSG,
+    'category'    => 'memberslist',
+];
+
+$modversion['config'][] = [
+    'name'        => 'displaylatestmember',
+    'title'       => '_MI_YOGURT_MEMBERLISTLATESTMEMBER',
+    'description' => '_MI_YOGURT_MEMBERLISTLATESTMEMBER_DSC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+    'category'    => 'memberslist',
+];
+
+$modversion['config'][] = [
+    'name'        => 'membersperpage',
+    'title'       => '_MI_YOGURT_MEMBERLISTMPAGE',
+    'description' => '_MI_YOGURT_MEMBERLISTMPAGE_DSC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 15,
+    'category'    => 'memberslist',
+];
+
+$modversion['config'][] = [
+    'name'        => 'sortmembers',
+    'title'       => '_MI_YOGURT_MEMBERLISTSORT',
+    'description' => '_MI_YOGURT_MEMBERLISTSORT_DSC',
+    'formtype'    => 'select',
+    'valuetype'   => 'text',
+    'default'     => 'uname',
+    'options'     => [
+        _MI_YOGURT_UNAME     => 'uname',
+        _MI_YOGURT_REALNAME  => 'name',
+        _MI_YOGURT_LASTLOGIN => 'last_login',
+        _MI_YOGURT_REGDATE   => 'user_regdate',
+        _MI_YOGURT_POSTS     => 'posts',
+    ],
+    'category'    => 'memberslist',
+];
+
+$modversion['config'][] = [
+    'name'        => 'membersorder',
+    'title'       => '_MI_YOGURT_MEMBERLISTORDER',
+    'description' => '_MI_YOGURT_MEMBERLISTORDER_DSC',
+    'formtype'    => 'select',
+    'valuetype'   => 'text',
+    'default'     => 'ASC',
+    'options'     => [
+        _MI_YOGURT_ASCORDER  => 'ASC',
+        _MI_YOGURT_DESCORDER => 'DESC',
+    ],
+    'category'    => 'memberslist',
+];
+
+//$modversion['config'][] = [
+  //  'name'        => 'memberlisttemplate',
+   // 'title'       => '_MI_YOGURT_MEMBERLISTTEMPSTYLE',
+   // 'description' => '_MI_YOGURT_MEMBERLISTTEMPSTYLE_DSC',
+   // 'formtype'    => 'select',
+  //  'valuetype'   => 'text',
+  //  'default'     => 'normal',
+  //  'options'     => [
+   //     _MI_YOGURT_NORMALTEMPLATE  => 'normal',
+   // ],
+   // 'category'    => 'memberslist',
+//];
+
+// group header
+$modversion['config'][] = [
+    'name'        => 'memberslistsearch_configs',
+    'title'       => '_MI_YOGURT_CONFIG_MEMBERLISTSEARCH',
+    'description' => '_MI_YOGURT_CONFIG_MEMBERLISTSEARCH',
+    'formtype'    => 'line_break',
+    'valuetype'   => 'textbox',
+    'default'     => 'even',
+    'category'    => 'group_header',
+];
+
+$modversion['config'][] = [
+    'name'        => 'displaytotalmember',
+    'title'       => '_MI_YOGURT_DISPLAYTOTALMEMBER',
+    'description' => '_MI_YOGURT_DISPLAYTOTALMEMBER_DSC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+    'category'    => 'memberlistsearch',
+];
+
+$modversion['config'][] = [
+    'name'        => 'displayavatar',
+    'title'       => '_MI_YOGURT_DISPLAYAVATAR',
+    'description' => '_MI_YOGURT_DISPLAYAVATAR_DSC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+    'category'    => 'memberlistsearch',
+];
+
+$modversion['config'][] = [
+    'name'        => 'displayrealname',
+    'title'       => '_MI_YOGURT_DISPLAYREALNAME',
+    'description' => '_MI_YOGURT_DISPLAYREALNAME_DSC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+    'category'    => 'memberlistsearch',
+];
+
+$modversion['config'][] = [
+    'name'        => 'displayemail',
+    'title'       => '_MI_YOGURT_DISPLAYEMAIL',
+    'description' => '_MI_YOGURT_DISPLAYEMAIL_DSC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+    'category'    => 'memberlistsearch',
+];
+
+$modversion['config'][] = [
+    'name'        => 'displaypm',
+    'title'       => '_MI_YOGURT_DISPLAYPM',
+    'description' => '_MI_YOGURT_DISPLAYPM_DSC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+    'category'    => 'memberlistsearch',
+];
+
+
+$modversion['config'][] = [
+    'name'        => 'displayurl',
+    'title'       => '_MI_YOGURT_DISPLAYURL',
+    'description' => '_MI_YOGURT_DISPLAYURL_DSC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+    'category'    => 'memberlistsearch',
+];
+
+
+$modversion['config'][] = [
+    'name'        => 'displayregdate',
+    'title'       => '_MI_YOGURT_DISPLAYREGDATE',
+    'description' => '_MI_YOGURT_DISPLAYREGDATE_DSC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+    'category'    => 'memberlistsearch',
+];
+
+$modversion['config'][] = [
+    'name'        => 'displayfrom',
+    'title'       => '_MI_YOGURT_DISPLAYFROM',
+    'description' => '_MI_YOGURT_DISPLAYFROM_DSC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+    'category'    => 'memberlistsearch',
+];
+
+$modversion['config'][] = [
+    'name'        => 'displayposts',
+    'title'       => '_MI_YOGURT_DISPLAYPOSTS',
+    'description' => '_MI_YOGURT_DISPLAYPOSTS_DSC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+    'category'    => 'memberlistsearch',
+];
+
+$modversion['config'][] = [
+    'name'        => 'displaylastlogin',
+    'title'       => '_MI_YOGURT_DISPLAYLASTLOGIN',
+    'description' => '_MI_YOGURT_DISPLAYLASTLOGIN_DSC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+    'category'    => 'memberlistsearch',
+];
+
+$modversion['config'][] = [
+    'name'        => 'displayoccupation',
+    'title'       => '_MI_YOGURT_DISPLAYOCC',
+    'description' => '_MI_YOGURT_DISPLAYOCC_DSC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+    'category'    => 'memberlistsearch',
+];
+
+$modversion['config'][] = [
+    'name'        => 'displayinterest',
+    'title'       => '_MI_YOGURT_DISPLAYINTEREST',
+    'description' => '_MI_YOGURT_DISPLAYINTEREST_DSC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+    'category'    => 'memberlistsearch',
+];
 
 // group header
 $modversion['config'][] = [
@@ -730,68 +1007,73 @@ $modversion['templates'] = [
     ],
     [
         'file'        => 'yogurt_index.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATEINDEXDESC,
+        'description' => _MI_YOGURT_TEMPLATEINDEXDESC,
     ],
     [
         'file'        => 'yogurt_friends.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATEFRIENDSDESC,
+        'description' => _MI_YOGURT_TEMPLATEFRIENDSDESC,
     ],
     [
         'file'        => 'yogurt_notebook.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATENOTEBOOKDESC,
+        'description' => _MI_YOGURT_TEMPLATENOTEBOOKDESC,
     ],
     [
         'file'        => 'yogurt_audio.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATEAUDIODESC,
+        'description' => _MI_YOGURT_TEMPLATEAUDIOSDESC,
     ],
     [
         'file'        => 'yogurt_video.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATESEUTUBODESC,
+        'description' => _MI_YOGURT_TEMPLATEVIDEOSDESC,
     ],
     [
         'file'        => 'yogurt_album.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATEALBUMDESC,
+        'description' => _MI_YOGURT_TEMPLATEALBUMDESC,
     ],
     [
         'file'        => 'yogurt_groups.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATEGROUPSDESC,
+        'description' => _MI_YOGURT_TEMPLATEGROUPSDESC,
     ],
     [
         'file'        => 'yogurt_configs.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATECONFIGSDESC,
+        'description' => _MI_YOGURT_TEMPLATECONFIGSDESC,
     ],
     [
         'file'        => 'yogurt_footer.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATEFOOTERDESC,
+        'description' => _MI_YOGURT_TEMPLATEFOOTERDESC,
     ],
     [
         'file'        => 'yogurt_editgroup.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATEEDITGROUP,
+        'description' => _MI_YOGURT_TEMPLATEEDITGROUP,
     ],
     [
         'file'        => 'yogurt_groups_results.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATESEARCHRESULTDESC,
+        'description' => _MI_YOGURT_TEMPLATESEARCHRESULTDESC,
     ],
     [
         'file'        => 'yogurt_group.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATEGROUPDESC,
+        'description' => _MI_YOGURT_TEMPLATEGROUPDESC,
     ],
     [
         'file'        => 'yogurt_searchresults.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATESEARCHRESULTSDESC,
+        'description' => _MI_YOGURT_TEMPLATESEARCHRESULTSDESC,
     ],
     [
         'file'        => 'yogurt_searchform.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATESEARCHFORMDESC,
+        'description' => _MI_YOGURT_TEMPLATESEARCHFORMDESC,
     ],
     [
         'file'        => 'yogurt_notifications.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATENOTIFICATIONS,
+        'description' => _MI_YOGURT_TEMPLATENOTIFICATIONS,
     ],
     [
         'file'        => 'yogurt_fans.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATEFANS,
+        'description' => _MI_YOGURT_TEMPLATEFANS,
     ],
+	[
+        'file'        => 'yogurt_memberslist.tpl',
+        'description' => _MI_YOGURT_TEMPLATEMEMBERSDESC,
+    ],
+
 ];
 
 global $xoopsModule;

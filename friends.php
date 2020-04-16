@@ -119,6 +119,12 @@ if (1 === $petition) {
     $xoopsTpl->assign('lang_askingfriend', sprintf(_MD_YOGURT_ASKINGFRIEND, $linkedpetioner));
 }
 $xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
+$xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
+$xoopsTpl->assign('lang_friendrequestpending', _MD_YOGURT_FRIENDREQUESTPENDING);
+$xoopsTpl->assign('lang_myfriend', _MD_YOGURT_MYFRIEND);
+$xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUESTSENT);
+$xoopsTpl->assign('lang_acceptfriend', _MD_YOGURT_ACCEPTFRIEND);
+$xoopsTpl->assign('lang_rejectfriend', _MD_YOGURT_REJECTFRIEND);
 
 //permissions
 $xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('notes'));
@@ -176,5 +182,8 @@ $xoopsTpl->assign('friends', $vetor);
 
 $xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
 $xoopsTpl->assign('lang_evaluate', _MD_YOGURT_FRIENDSHIPCONFIGS);
+$xoopsTpl->assign('allow_friendshiplevel', $helper->getConfig('allow_friendshiplevel'));
+$xoopsTpl->assign('allow_fanssevaluation', $helper->getConfig('allow_fanssevaluation'));
+
 
 require dirname(dirname(__DIR__)) . '/footer.php';

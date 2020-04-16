@@ -32,11 +32,7 @@ use XoopsModules\Yogurt\IndexController;
 require __DIR__ . '/header.php';
 
 $op = 'form';
-$op = isset($_POST['op']) ? trim(htmlspecialchars($_POST['op'], ENT_QUOTES | ENT_HTML5)) : 'form';
 
-if (isset($_POST['op']) && 'submit' === $_POST['op']) {
-    $op = 'submit';
-}
 //require_once __DIR__ . '/class/yogurt_controller.php';
 $controller = new Yogurt\IndexController($xoopsDB, $xoopsUser);
 
@@ -45,115 +41,7 @@ $controller = new Yogurt\IndexController($xoopsDB, $xoopsUser);
  */
 $nbSections = $controller->getNumbersSections();
 
-if ('form' === $op) {
-    $GLOBALS['xoopsOption']['template_main'] = 'yogurt_searchform.tpl';
-    require XOOPS_ROOT_PATH . '/header.php';
-    $memberHandler = xoops_getHandler('member');
-    $total         = $memberHandler->getUserCount(new Criteria('level', 0, '>'));
-    require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-    $uname_text  = new XoopsFormText('', 'user_uname', 30, 60);
-    $uname_match = new XoopsFormSelectMatchOption('', 'user_uname_match');
-    $uname_tray  = new XoopsFormElementTray(_MD_YOGURT_UNAME, '&nbsp;');
-    $uname_tray->addElement($uname_match);
-    $uname_tray->addElement($uname_text);
-    $name_text  = new XoopsFormText('', 'user_name', 30, 60);
-    $name_match = new XoopsFormSelectMatchOption('', 'user_name_match');
-    $name_tray  = new XoopsFormElementTray(_MD_YOGURT_REALNAME, '&nbsp;');
-    $name_tray->addElement($name_match);
-    $name_tray->addElement($name_text);
-    $email_text  = new XoopsFormText('', 'user_email', 30, 60);
-    $email_match = new XoopsFormSelectMatchOption('', 'user_email_match');
-    $email_tray  = new XoopsFormElementTray(_MD_YOGURT_EMAIL, '&nbsp;');
-    $email_tray->addElement($email_match);
-    $email_tray->addElement($email_text);
-    $url_text = new XoopsFormText(_MD_YOGURT_URLC, 'user_url', 30, 100);
-    //$theme_select = new XoopsFormSelectTheme(_MD_YOGURT_THEME, "user_theme");
-    //$timezone_select = new XoopsFormSelectTimezone(_MD_YOGURT_TIMEZONE, "user_timezone_offset");
-    $location_text   = new XoopsFormText(_MD_YOGURT_LOCATION, 'user_from', 30, 100);
-    $occupation_text = new XoopsFormText(_MD_YOGURT_OCCUPATION, 'user_occ', 30, 100);
-    $interest_text   = new XoopsFormText(_MD_YOGURT_INTEREST, 'user_intrest', 30, 100);
-
-    //$bio_text = new XoopsFormText(_MD_YOGURT_EXTRAINFO, "user_bio", 30, 100);
-    $lastlog_more = new XoopsFormText(
-        _MD_YOGURT_LASTLOGMORE, 'user_lastlog_more', 10, 5
-    );
-    $lastlog_less = new XoopsFormText(_MD_YOGURT_LASTLOGLESS, 'user_lastlog_less', 10, 5);
-    $reg_more     = new XoopsFormText(_MD_YOGURT_REGMORE, 'user_reg_more', 10, 5);
-    $reg_less     = new XoopsFormText(_MD_YOGURT_REGLESS, 'user_reg_less', 10, 5);
-    $posts_more   = new XoopsFormText(_MD_YOGURT_POSTSMORE, 'user_posts_more', 10, 5);
-    $posts_less   = new XoopsFormText(_MD_YOGURT_POSTSLESS, 'user_posts_less', 10, 5);
-    $sort_select  = new XoopsFormSelect(_MD_YOGURT_SORT, 'user_sort');
-    $sort_select->addOptionArray(
-        [
-            'uname'        => _MD_YOGURT_UNAME,
-            'email'        => _MD_YOGURT_EMAIL,
-            'last_login'   => _MD_YOGURT_LASTLOGIN,
-            'user_regdate' => _MD_YOGURT_REGDATE,
-            'posts'        => _MD_YOGURT_POSTS,
-        ]
-    );
-    $order_select = new XoopsFormSelect(_MD_YOGURT_ORDER, 'user_order');
-    $order_select->addOptionArray(
-        [
-            'ASC'  => _MD_YOGURT_ASC,
-            'DESC' => _MD_YOGURT_DESC,
-        ]
-    );
-    $limit_text    = new XoopsFormText(_MD_YOGURT_LIMIT, 'limit', 6, 2);
-    $op_hidden     = new XoopsFormHidden('op', 'submit');
-    $submit_button = new XoopsFormButton('', 'user_submit', _SUBMIT, 'submit');
-
-    $form = new XoopsThemeForm('', 'searchform', 'searchmembers.php');
-    $form->addElement($uname_tray);
-    $form->addElement($name_tray);
-    $form->addElement($email_tray);
-    
-	if (1 == $xoopsModuleConfig['displayurl']){
-    $form->addElement($url_text);
-	}
-	
-	if (1 == $xoopsModuleConfig['displayfrom']){
-    $form->addElement($location_text);
-	}
-	
-	if (1 == $xoopsModuleConfig['displayoccupation']){
-    $form->addElement($occupation_text);
-	}
-	 
-	if (1 == $xoopsModuleConfig['displayinterest']){
-    $form->addElement($interest_text); 
-	}
-    
-	if (1 == $xoopsModuleConfig['displaylastlogin']){
-	$form->addElement($lastlog_more);
-    $form->addElement($lastlog_less);
-	}
-	
-	if (1 == $xoopsModuleConfig['displayregdate']){
-    $form->addElement($reg_more);
-    $form->addElement($reg_less);
-	}
-	
-	if (1 == $xoopsModuleConfig['displayposts']){
-    $form->addElement($posts_more);
-    $form->addElement($posts_less);
-	}
-	
-    $form->addElement($sort_select);
-    $form->addElement($order_select);
-    $form->addElement($limit_text);
-    $form->addElement($op_hidden);
-    $form->addElement($submit_button);
-    $form->assign($xoopsTpl);
-    $xoopsTpl->assign('lang_search', _MD_YOGURT_SEARCH);
-    $xoopsTpl->assign(
-        'lang_totalusers',
-        sprintf(_MD_YOGURT_TOTALUSERS, '<span style="color:#ff0000;">' . $total . '</span>')
-    );
-}
-
-if ('submit' === $op) {
-    $GLOBALS['xoopsOption']['template_main'] = 'yogurt_searchresults.tpl';
+    $GLOBALS['xoopsOption']['template_main'] = 'yogurt_memberslist.tpl';
     require XOOPS_ROOT_PATH . '/header.php';
     $iamadmin = $xoopsUserIsAdmin;
     $myts     = MyTextSanitizer::getInstance();
@@ -272,15 +160,13 @@ if ('submit' === $op) {
     }
     $criteria->add(new Criteria('level', 0, '>'));
     $validsort = ['uname', 'email', 'last_login', 'user_regdate', 'posts'];
-    $sort      = !in_array($_POST['user_sort'], $validsort, true) ? 'uname' : htmlspecialchars(
-        $_POST['user_sort'],
-        ENT_QUOTES | ENT_HTML5
-    );
+    $sort = (!in_array($xoopsModuleConfig['sortmembers'], $validsort ) ) ? 'uname' : $xoopsModuleConfig['sortmembers'];
+
     $order     = 'ASC';
-    if (isset($_POST['user_order']) && 'DESC' === $_POST['user_order']) {
+	if ( isset($xoopsModuleConfig['membersorder']) && $xoopsModuleConfig['membersorder'] == 'DESC' ) {
         $order = 'DESC';
     }
-    $limit = Request::getInt('limit', 20, 'POST');
+    $limit = (!empty($xoopsModuleConfig['membersperpage'])) ? intval($xoopsModuleConfig['membersperpage']) : 20;
     if (0 === $limit || $limit > 50) {
         $limit = 50;
     }
@@ -288,9 +174,17 @@ if ('submit' === $op) {
     $start         = Request::getInt('start', 0, 'POST');
     $memberHandler = xoops_getHandler('member');
     $total         = $memberHandler->getUserCount($criteria);
+	$total = $memberHandler->getUserCount($criteria);
+    $xoopsTpl->assign('totalmember', $total);
+	//Show last member
+	$result = $GLOBALS['xoopsDB']->query('SELECT uid, uname FROM ' . $GLOBALS['xoopsDB']->prefix('users') . ' WHERE level > 0 ORDER BY uid DESC', 1, 0);
+	list($latestuid, $latestuser) = $GLOBALS['xoopsDB']->fetchRow($result);
+	$xoopsTpl->assign('latestmember', " <a href='" . XOOPS_URL . '/userinfo.php?uid=' . $latestuid . "'>" . $latestuser . '</a>');
+	$xoopsTpl->assign('welcomemessage', $xoopsModuleConfig['welcomemessage']);
+	
+	
     $xoopsTpl->assign('lang_search', _MD_YOGURT_SEARCH);
     $xoopsTpl->assign('lang_results', _MD_YOGURT_RESULTS);
-    $xoopsTpl->assign('total_found', $total);
     if (0 === $total) {
         $xoopsTpl->assign('lang_nonefound', _MD_YOGURT_NOFOUND);
     } elseif ($start < $total) {
@@ -307,13 +201,13 @@ if ('submit' === $op) {
         if ($iamadmin) {
             $xoopsTpl->assign('is_admin', true);
         }
-        $criteria->setSort($sort);
+      //  $criteria->setSort($sort);
         $criteria->setOrder($order);
         $criteria->setStart($start);
         $criteria->setLimit($limit);
         $foundusers = $memberHandler->getUsers($criteria, true);
         foreach (array_keys($foundusers) as $j) {
-            $userdata['avatar']   = $foundusers[$j]->getVar('user_avatar');   
+            $userdata['avatar']   = $foundusers[$j]->getVar('user_avatar');
             $userdata['realname'] = $foundusers[$j]->getVar('name');
             $userdata['name']     = $foundusers[$j]->getVar('uname');
             $userdata['id']       = $foundusers[$j]->getVar('uid');
@@ -451,7 +345,7 @@ if ('submit' === $op) {
             $xoopsTpl->assign('lang_numfound', sprintf(_MD_YOGURT_USERSFOUND, $total));
         }
     }
-}
+
 
 /**
  * Adding to the module js and css of the lightbox and new ones

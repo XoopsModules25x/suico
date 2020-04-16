@@ -9,24 +9,15 @@
         <form action="makefriends.php" method="post">
             <{$lang_askingfriend}>
             <ul>
-                <li>
-                    <input name="level" type="radio" value="0">
-                    <{$lang_rejected}>
-                </li>
-                <li>
-                    <input name="level" type="radio" value="1">
-                    <{$lang_accepted}>
-                </li>
-
-                <li>
-                    <input name="level" type="radio" value="3">
-                    <{$lang_acquaintance}>
-                </li>
-
-                <li>
+           		<li>
                     <input name="level" type="radio" value="5">
-                    <{$lang_friend}>
+                    <{$lang_acceptfriend}>
                 </li>
+			    <li>
+                    <input name="level" type="radio" value="0">
+                    <{$lang_rejectfriend}>
+                </li>
+			
             </ul>
             <input type="hidden" name="petition_id" id="petition_id" value="<{$petition_id}>">
             <input type="submit">
@@ -58,7 +49,7 @@
 <{/if}>	
 	
 <{if $allow_friends !=-1}>
-<{if $allow_friendsevaluation == 1}>
+<{if $allow_fanssevaluation == 1}>
     <div class="yogurt-nav-bar" id="yogurt-nav-bar">
         <p id="yogurt-profile-fans"><a href="fans.php?uid=<{$uid_owner}>" alt="<{$lang_fans}>" title="<{$lang_fans}>"> <{$lang_fans}> </a><img src="assets/images/fans.gif"> (<{$nb_fans}>)
             | <{$lang_funny}> </p>

@@ -12,8 +12,9 @@
             <form action="unsuspenduser.php" method="POST"><{$token}><input type="hidden" value="<{$uid_owner}>" id="uid" name="uid">
             <input type="submit" value="<{$lang_unsuspend}>">
             </form><{/if}></div><{/if}>
-
-    <div class="yogurt-nav-bar" id="yogurt-nav-bar">
+			
+			<div class="yogurt-nav-bar" id="yogurt-nav-bar">
+		<{if $displaybreadcrumb!=-1}>
         <p id="breadcrumbs">
             <a href="index.php" title="<{$module_name}>">
                 <{$module_name}>
@@ -25,6 +26,7 @@
             >
             <{$section_name}>
         </p>
+		<{/if}>
         <h4>
             <{if $isOwner}>::<{$lang_mysection}><{else}><{$owner_uname}>::<{$section_name}><{/if}><{if $isWebmaster==1 }><img id="yogurt-suspensiontools" src="assets/images/suspend.gif" alt="<{$lang_suspensionadmin}>" title="<{$lang_suspensionadmin}>"><{/if}>
         </h4>
