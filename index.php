@@ -291,7 +291,7 @@ $xoopsTpl->assign('friendly_rest', 48 - $evaluation['mediahot']);
 $xoopsTpl->assign('lang_cool', _MD_YOGURT_COOL);
 $xoopsTpl->assign('cool', $evaluation['mediacool']);
 $xoopsTpl->assign('cool_rest', 48 - $evaluation['mediacool']);
-$xoopsTpl->assign('allow_friendsevaluation', $helper->getConfig('allow_friendsevaluation'));
+$xoopsTpl->assign('allow_fanssevaluation', $helper->getConfig('allow_fanssevaluation'));
 
 //petitions to become friend
 if (1 === $petition) {
@@ -314,6 +314,9 @@ $xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
 $xoopsTpl->assign('lang_friendrequestpending', _MD_YOGURT_FRIENDREQUESTPENDING);
 $xoopsTpl->assign('lang_myfriend', _MD_YOGURT_MYFRIEND);
 $xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUESTSENT);
+$xoopsTpl->assign('lang_acceptfriend', _MD_YOGURT_ACCEPTFRIEND);
+$xoopsTpl->assign('lang_rejectfriend', _MD_YOGURT_REJECTFRIEND);
+
 
 //Avatar and Main
 $xoopsTpl->assign('avatar_url', $avatar);
