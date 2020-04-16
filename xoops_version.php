@@ -747,17 +747,6 @@ $modversion['config'][] = [
 ];
 
 $modversion['config'][] = [
-    'name'        => 'displaytotalmember',
-    'title'       => '_MI_YOGURT_DISPLAYTOTALMEMBER',
-    'description' => '_MI_YOGURT_DISPLAYTOTALMEMBER_DSC',
-    'formtype'    => 'yesno',
-    'valuetype'   => 'int',
-    'default'     => 1,
-    'category'    => 'memberlist',
-];
-
-
-$modversion['config'][] = [
     'name'        => 'membersperpage',
     'title'       => '_MI_YOGURT_MEMBERLISTMPAGE',
     'description' => '_MI_YOGURT_MEMBERLISTMPAGE_DSC',
@@ -820,6 +809,16 @@ $modversion['config'][] = [
     'valuetype'   => 'textbox',
     'default'     => 'even',
     'category'    => 'group_header',
+];
+
+$modversion['config'][] = [
+    'name'        => 'displaytotalmember',
+    'title'       => '_MI_YOGURT_DISPLAYTOTALMEMBER',
+    'description' => '_MI_YOGURT_DISPLAYTOTALMEMBER_DSC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+    'category'    => 'memberlistsearch',
 ];
 
 $modversion['config'][] = [
