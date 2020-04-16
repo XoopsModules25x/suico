@@ -74,7 +74,11 @@ $modversion = [
     // ------------------- Main Menu -------------------
     'hasMain'             => 1,
     'sub'                 => [
-        [
+         [
+            'name' => _MI_YOGURT_MEMBERSLIST,
+            'url'  => 'memberslist.php',
+        ],
+		[
             'name' => _MI_YOGURT_SEARCH,
             'url'  => 'searchmembers.php',
         ],
@@ -730,68 +734,73 @@ $modversion['templates'] = [
     ],
     [
         'file'        => 'yogurt_index.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATEINDEXDESC,
+        'description' => _MI_YOGURT_TEMPLATEINDEXDESC,
     ],
     [
         'file'        => 'yogurt_friends.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATEFRIENDSDESC,
+        'description' => _MI_YOGURT_TEMPLATEFRIENDSDESC,
     ],
     [
         'file'        => 'yogurt_notebook.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATENOTEBOOKDESC,
+        'description' => _MI_YOGURT_TEMPLATENOTEBOOKDESC,
     ],
     [
         'file'        => 'yogurt_audio.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATEAUDIODESC,
+        'description' => _MI_YOGURT_TEMPLATEAUDIOSDESC,
     ],
     [
         'file'        => 'yogurt_video.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATESEUTUBODESC,
+        'description' => _MI_YOGURT_TEMPLATEVIDEOSDESC,
     ],
     [
         'file'        => 'yogurt_album.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATEALBUMDESC,
+        'description' => _MI_YOGURT_TEMPLATEALBUMDESC,
     ],
     [
         'file'        => 'yogurt_groups.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATEGROUPSDESC,
+        'description' => _MI_YOGURT_TEMPLATEGROUPSDESC,
     ],
     [
         'file'        => 'yogurt_configs.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATECONFIGSDESC,
+        'description' => _MI_YOGURT_TEMPLATECONFIGSDESC,
     ],
     [
         'file'        => 'yogurt_footer.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATEFOOTERDESC,
+        'description' => _MI_YOGURT_TEMPLATEFOOTERDESC,
     ],
     [
         'file'        => 'yogurt_editgroup.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATEEDITGROUP,
+        'description' => _MI_YOGURT_TEMPLATEEDITGROUP,
     ],
     [
         'file'        => 'yogurt_groups_results.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATESEARCHRESULTDESC,
+        'description' => _MI_YOGURT_TEMPLATESEARCHRESULTDESC,
     ],
     [
         'file'        => 'yogurt_group.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATEGROUPDESC,
+        'description' => _MI_YOGURT_TEMPLATEGROUPDESC,
     ],
     [
         'file'        => 'yogurt_searchresults.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATESEARCHRESULTSDESC,
+        'description' => _MI_YOGURT_TEMPLATESEARCHRESULTSDESC,
     ],
     [
         'file'        => 'yogurt_searchform.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATESEARCHFORMDESC,
+        'description' => _MI_YOGURT_TEMPLATESEARCHFORMDESC,
     ],
     [
         'file'        => 'yogurt_notifications.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATENOTIFICATIONS,
+        'description' => _MI_YOGURT_TEMPLATENOTIFICATIONS,
     ],
     [
         'file'        => 'yogurt_fans.tpl',
-        'description' => _MI_YOGURT_PICTURE_TEMPLATEFANS,
+        'description' => _MI_YOGURT_TEMPLATEFANS,
     ],
+	[
+        'file'        => 'yogurt_members.tpl',
+        'description' => _MI_YOGURT_TEMPLATEMEMBERSDESC,
+    ],
+
 ];
 
 global $xoopsModule;

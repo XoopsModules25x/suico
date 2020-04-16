@@ -82,10 +82,10 @@ define('_MI_YOGURT_PICTURE_NEWPIC_NOTIFYSBJ', '{X_OWNER_NAME} has submitted a ne
 //define("_MI_YOGURT_HOTFRIENDS","Hot Friends");
 //define("_MI_YOGURT_HOTFRIENDS_DESC","This block shows the users hot friends that have been added");
 define(
-    '_MI_YOGURT_PICTURE_TEMPLATEINDEXDESC',
+    '_MI_YOGURT_TEMPLATEINDEXDESC',
     'This template shows the pictures of the user'
 );
-define('_MI_YOGURT_PICTURE_TEMPLATEFRIENDSDESC', 'This template shows the friends of the user');
+define('_MI_YOGURT_TEMPLATEFRIENDSDESC', 'This template shows the friends of the user');
 define('_MI_YOGURT_MYFRIENDS', 'My Friends');
 define('_MI_YOGURT_FRIENDSPERPAGE_TITLE', 'Friends per page');
 define('_MI_YOGURT_FRIENDSPERPAGE_DESC', 'Set the number of friends to show per page<br>In the my Friends page');
@@ -100,16 +100,16 @@ define(
 );
 
 define('_MI_YOGURT_MYVIDEOS', 'My Videos');
-define('_MI_YOGURT_PICTURE_TEMPLATEALBUMDESC', 'Template for the picture gallery');
+define('_MI_YOGURT_TEMPLATEALBUMDESC', 'Template for the picture gallery');
 define('_MI_YOGURT_MYPICTURES', 'My Photos');
 define('_MI_YOGURT_MODULEDESC', 'This module simulates a social network software like MySpace or Orkut.');
 define('_MI_YOGURT_TUBEW_TITLE', 'Width of the YouTube videos');
 define('_MI_YOGURT_TUBEW_DESC', 'The width in pixels of the YouTube video player');
 define('_MI_YOGURT_TUBEH_TITLE', 'Height of the YouTube videos');
 define('_MI_YOGURT_TUBEH_DESC', 'The height in pixels of the YouTube video player');
-define('_MI_YOGURT_PICTURE_TEMPLATENOTEBOOKDESC', 'Template for the Notebook');
-define('_MI_YOGURT_PICTURE_TEMPLATESEUTUBODESC', 'Template for the videos section');
-define('_MI_YOGURT_PICTURE_TEMPLATEGROUPSDESC', 'Template for the Groups');
+define('_MI_YOGURT_TEMPLATENOTEBOOKDESC', 'Template for the Notebook');
+define('_MI_YOGURT_TEMPLATEVIDEOSDESC', 'Template for the videos section');
+define('_MI_YOGURT_TEMPLATEGROUPSDESC', 'Template for the Groups');
 define('_MI_YOGURT_MYNOTES', 'My Notes');
 define('_MI_YOGURT_MYGROUPS', 'My Groups');
 define('_MI_YOGURT_TEMPLATENAVBARDESC', 'Template for the upper navbar used in all pages');
@@ -136,22 +136,22 @@ define('_MI_YOGURT_MAINTUBEH_DESC', 'Height of the video, that shows in the fron
 
 //24/09/2007
 define('_MI_YOGURT_MYCONFIGS', 'My Settings');
-define('_MI_YOGURT_PICTURE_TEMPLATECONFIGSDESC', 'Template settings for the user');
-define('_MI_YOGURT_PICTURE_TEMPLATEFOOTERDESC', 'Template for the footer of the module');
-define('_MI_YOGURT_PICTURE_TEMPLATEEDITGROUP', 'Template for the Groups page atributes');
+define('_MI_YOGURT_TEMPLATECONFIGSDESC', 'Template settings for the user');
+define('_MI_YOGURT_TEMPLATEFOOTERDESC', 'Template for the footer of the module');
+define('_MI_YOGURT_TEMPLATEEDITGROUP', 'Template for the Groups page atributes');
 //define('_MI_YOGURT_LICENSE', 'Yogurt by Marcello Brand�o is licensed under a Attribution-No Derivative Works 2.5 Brazil.');
 
 //19/10/2007
 define('_MI_YOGURT_GROUPSPERPAGE_TITLE', 'Groups per page');
 define('_MI_YOGURT_GROUPSPERPAGE_DESC', 'Groups per page before pagination show up');
-define('_MI_YOGURT_PICTURE_TEMPLATESEARCHRESULTDESC', 'This template shows the results of a search for comunities');
-define('_MI_YOGURT_PICTURE_TEMPLATEGROUPDESC', 'This template shows a Group and its members');
+define('_MI_YOGURT_TEMPLATESEARCHRESULTDESC', 'This template shows the results of a search for comunities');
+define('_MI_YOGURT_TEMPLATEGROUPDESC', 'This template shows a Group and its members');
 
 //22/10/2007
 define('_MI_YOGURT_MYPROFILE', 'My Profile');
 define('_MI_YOGURT_SEARCH', 'Search Members');
-define('_MI_YOGURT_PICTURE_TEMPLATESEARCHRESULTSDESC', 'Template for the search results');
-define('_MI_YOGURT_PICTURE_TEMPLATESEARCHFORMDESC', 'Template for the search form');
+define('_MI_YOGURT_TEMPLATESEARCHRESULTSDESC', 'Template for the search results');
+define('_MI_YOGURT_TEMPLATESEARCHFORMDESC', 'Template for the search form');
 
 //26/10/2007
 define('_MI_YOGURT_ENABLEPICT_TITLE', 'Enable pictures section');
@@ -182,7 +182,7 @@ define('_MI_YOGURT_IMGORDER_TITLE', 'Pictures Order');
 define('_MI_YOGURT_IMGORDER_DESC', 'Show the newest pictures first?');
 
 //08/04/2008
-define('_MI_YOGURT_PICTURE_TEMPLATENOTIFICATIONS', 'Template for the notifications');
+define('_MI_YOGURT_TEMPLATENOTIFICATIONS', 'Template for the notifications');
 
 //11/04/2008
 define('_MI_YOGURT_FRIENDSHIP_NOTIFYTIT', 'Friendships');
@@ -193,12 +193,12 @@ define('_MI_YOGURT_FRIEND_NEWPETITION_NOTIFYDSC', 'Notify me when someone ask fo
 define('_MI_YOGURT_FRIEND_NEWPETITION_NOTIFYSBJ', 'Someone has just asked to be your friend');
 
 //13/04/2008
-define('_MI_YOGURT_PICTURE_TEMPLATEFANS', 'Template for the fans page');
+define('_MI_YOGURT_TEMPLATEFANS', 'Template for the fans page');
 
 //17/07/2008
 define('_MI_YOGURT_ENABLEAUDIO_TITLE', 'Enable audio section');
 define('_MI_YOGURT_ENABLEAUDIO_DESC', 'Enabling audio section for the users, will enable the audio playlist');
-define('_MI_YOGURT_PICTURE_TEMPLATEAUDIODESC', 'Template of audios page');
+define('_MI_YOGURT_TEMPLATEAUDIOSDESC', 'Template of audios page');
 define('_MI_YOGURT_NUMBAUDIO_TITLE', 'Max number of audio for a user');
 define('_MI_YOGURT_AUDIOSPERPAGE_TITLE', 'Number of mp3 files per page');
 
@@ -268,6 +268,9 @@ define(
 
 define('_MI_YOGURT_ENABLEFRIENDSEVALUATION_TITLE', 'Enable Friendship Evaluation Ranking');
 define('_MI_YOGURT_ENABLEFRIENDSEVALUATION_DESC', 'Options to evaluate friendship ranking');
+define('_MI_YOGURT_MEMBERSLIST', 'Members List');
+define('_MI_YOGURT_TEMPLATEMEMBERSDESC', 'Template of members list page');
+
 
 define('_MI_YOGURT_CONFCAT_NOTES', 'Notes Preferences');
 define('_MI_YOGURT_CONFCAT_NOTES_DSC', '');
