@@ -16,7 +16,7 @@
 
     <{$token}>
 </form>
-<{if $isAnonym!=1}>
+<{if $isAnonym!=1 && $isOwner}>
     <form class='outer' name='form_group' id='form_group' action='submit_group.php' method='post' onsubmit='return xoopsFormValidate_form_group();' enctype="multipart/form-data">
 
         <h4 class="head"><{$lang_creategroup}></h4>
