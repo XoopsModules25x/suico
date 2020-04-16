@@ -57,7 +57,7 @@ if ($xoopsUser) {
     }
     $xoopsTpl->assign('useruid', $uid);
 }
-$owner_uid=$group->getVar('owner_uid');
+$owner_uid       = $group->getVar('owner_uid');
 $group_ownername = XoopsUser::getUnameFromId($owner_uid);
 
 $xoopsTpl->assign('group_members', $group_members);
@@ -71,7 +71,6 @@ $xoopsTpl->assign('group_id', $group->getVar('group_id'));
 $xoopsTpl->assign('group_owneruid', $group->getVar('owner_uid'));
 $xoopsTpl->assign('group_ownername', $group_ownername);
 
-
 $xoopsTpl->assign('lang_membersofgroup', _MD_YOGURT_MEMBERSDOFGROUP);
 $xoopsTpl->assign('lang_editgroup', _MD_YOGURT_EDIT_GROUP);
 $xoopsTpl->assign('lang_groupimage', _MD_YOGURT_GROUP_IMAGE);
@@ -82,7 +81,6 @@ $xoopsTpl->assign('lang_descgroup', _MD_YOGURT_GROUP_DESC);
 $xoopsTpl->assign('lang_abandongroup', _MD_YOGURT_GROUP_ABANDON);
 $xoopsTpl->assign('lang_joingroup', _MD_YOGURT_GROUP_JOIN);
 $xoopsTpl->assign('lang_ownerofgroup', _MD_YOGURT_OWNEROFGROUP);
-
 
 //permissions
 $xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('notes'));
@@ -96,7 +94,7 @@ $xoopsTpl->assign('allow_audios', $controller->checkPrivilegeBySection('audio'))
 $xoopsTpl->assign('uid_owner', $controller->uidOwner);
 $xoopsTpl->assign('owner_uname', $controller->nameOwner);
 $xoopsTpl->assign('isOwner', $controller->isOwner);
-$xoopsTpl->assign('isanonym', $controller->isAnonym);
+$xoopsTpl->assign('isAnonym', $controller->isAnonym);
 
 //numbers
 $xoopsTpl->assign('nb_groups', $nbSections['nbGroups']);

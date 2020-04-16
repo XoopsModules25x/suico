@@ -63,7 +63,7 @@
 </div>
 
 <div id="yogurt-navegacao">
-    <{$barra_navegacao}>
+    <{$navigationBar}>
 </div>
 
 

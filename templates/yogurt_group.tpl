@@ -13,7 +13,7 @@
 		<b><{$lang_ownerofgroup}></b><br>
 		<{$group_ownername}>
 		
-        <{if $isanonym!=1 }>
+        <{if $isAnonym!=1 }>
         <{if $memberOfGroup ==1}>
     <form action="abandongroup.php" method="POST" id="form_abandongroup">
         <input type="hidden" value="<{$group_id}>" name="relgroup_id" id="relgroup_id">

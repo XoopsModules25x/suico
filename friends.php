@@ -97,10 +97,10 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 /**
  * Criando a barra de navegao caso tenha muitos amigos
  */
-$barra_navegacao = new XoopsPageNav(
+$navigationBar = new XoopsPageNav(
     $nbSections['nbFriends'], $helper->getConfig('friendsperpage'), $start, 'start', 'uid=' . (int)$controller->uidOwner
 );
-$navegacao       = $barra_navegacao->renderImageNav(2);
+$navegacao       = $navigationBar->renderImageNav(2);
 
 //petitions to become friend
 if (1 === $petition) {
@@ -132,8 +132,8 @@ $xoopsTpl->assign('allow_audios', $controller->checkPrivilegeBySection('audio'))
 $xoopsTpl->assign('uid_owner', $controller->uidOwner);
 $xoopsTpl->assign('owner_uname', $controller->nameOwner);
 $xoopsTpl->assign('isOwner', $controller->isOwner);
-$xoopsTpl->assign('isanonym', $controller->isAnonym);
-$xoopsTpl->assign('isfriend', $controller->isFriend);
+$xoopsTpl->assign('isAnonym', $controller->isAnonym);
+$xoopsTpl->assign('isFriend', $controller->isFriend);
 
 //numbers
 $xoopsTpl->assign('nb_groups', $nbSections['nbGroups']);

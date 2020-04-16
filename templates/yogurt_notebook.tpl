@@ -1,6 +1,6 @@
 <{include file='db:yogurt_navbar.tpl'}>
 
-<{if $isanonym!=1 }>
+<{if $isAnonym!=1 }>
 <div id="yogurt-Notes-form" class="outer">
     <form name="formNoteNew" id="formNoteNew" action="submitNote.php" method="post">
         <p>
