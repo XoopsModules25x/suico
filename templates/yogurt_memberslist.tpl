@@ -1,21 +1,40 @@
 <{include file="db:yogurt_navbar.tpl"}>
+	
+	<h4><{$smarty.const._MD_YOGURT_WELCOMETO}></h4>
+    <{if $displaywelcomemessage == 1}><{$welcomemessage}><br><{/if}>
 
-    <table class="outer" cellspacing="1" cellpadding="4">
-        <tr>
-            <th align="center"><{$lang_avatar}></th>
-            <th align="center"><{$lang_username}></th>
-            <{if $user_realname}>
+    <{if $displaytotalmember == 1}>
+        <b><{$smarty.const._MD_YOGURT_TOTALUSERS}>:</b> <{$totalmember}>
+    <{/if}>
+
+    <{if $displaylatestmember == 1}>
+         &nbsp;&nbsp;<b><{$smarty.const._MD_YOGURT_LATESTMEMBER}>:</b> <{$latestmember}> <br><br>
+    <{/if}>
+
+
+    <table class="table table-hover table-striped outer" cellspacing="1" cellpadding="4">
+            <tr>
+            <{if $displayavatar == 1}>  
+				<th align="center"><{$lang_avatar}></th>
+			<{/if}>    
+			<th align="center"><{$lang_username}></th>
+            <{if $displayrealname == 1}>
 				<th align="center"><{$lang_realname}></th>
 			<{/if}>
 			<{if $xoops_isuser && $allow_friends !=-1}>
 				<th align="center"><{$lang_friendshipstatus}></th>
 			<{/if}>
+			<{if $is_admin === true}>
+				<th align="center"><{$smarty.const._MD_YOGURT_ADMIN}></th>
+			<{/if}>	
 		</tr>
         <{section name=i loop=$users}>
             <tr valign="middle">
-                <td class="even"><{$users[i].avatar}></td>
-                <td class="odd"><a href="index.php?uid=<{$users[i].id}>"><{$users[i].name}></a><br><{if $is_admin === true}><{$users[i].adminlink}><{/if}></td>
-                <{if $user_realname}>
+              	<{if $displayavatar == 1}>  
+					<td class="even"><a href="<{$xoops_url}>/userinfo.php?uid=<{$users[i].id}>"><img src='<{$xoops_url}>/uploads/<{$users[i].avatar}>' title='<{$users[i].name}>' alt='<{$users[i].name}>' style='padding:10px' width='100' height='100'></a></td>
+				<{/if}>
+				<td class="odd"><a href="index.php?uid=<{$users[i].id}>"><{$users[i].name}></a></td>
+				<{if $displayrealname == 1}>
 				  <td class="even"><{$users[i].realname}></td>
                 <{/if}>
 				<{if $xoops_isuser && $allow_friends !=-1}>		
@@ -36,7 +55,12 @@
 							<{/if}>
 						<{/if}>
 					</td>	
-				<{/if}>			
+				<{/if}>	
+				<{if $is_admin === true}>
+				<td>
+					<p class="float-right"><br><{$users[i].adminlink}></p>
+				<td>
+				<{/if}>					
 			</tr>
         <{/section}>
     </table>

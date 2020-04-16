@@ -2,23 +2,33 @@
 
 
 <{if $total_found != 0}>
-    <table class="outer" cellspacing="1" cellpadding="4">
-        <tr>
-            <th align="center"><{$lang_avatar}></th>
-            <th align="center"><{$lang_username}></th>
-            <{if $user_realname}>
+
+ <{$lang_numfound}>
+	<table class="table table-hover table-striped " cellspacing="1" cellpadding="4">
+            <tr>
+            <{if $displayavatar == 1}>  
+				<th align="center"><{$lang_avatar}></th>
+			<{/if}>    
+			<th align="center"><{$lang_username}></th>
+            <{if $displayrealname == 1}>
 				<th align="center"><{$lang_realname}></th>
 			<{/if}>
 			<{if $xoops_isuser && $allow_friends !=-1}>
 				<th align="center"><{$lang_friendshipstatus}></th>
 			<{/if}>
+			<{if $is_admin === true}>
+				<th align="center"><{$smarty.const._MD_YOGURT_ADMIN}></th>
+			<{/if}>	
+
 		</tr>
         <{section name=i loop=$users}>
             <tr valign="middle">
-                <td class="even"><{$users[i].avatar}></td>
-                <td class="odd"><a href="index.php?uid=<{$users[i].id}>"><{$users[i].name}></a><br><{if $is_admin === true}><{$users[i].adminlink}><{/if}></td>
-                <{if $user_realname}>
-				  <td class="even"><{$users[i].realname}></td>
+              	<{if $displayavatar == 1}>  
+					<td class="even"><a href="<{$xoops_url}>/userinfo.php?uid=<{$users[i].id}>"><img src='<{$xoops_url}>/uploads/<{$users[i].avatar}>' title='<{$users[i].name}>' alt='<{$users[i].name}>' style='padding:10px' width='100' height='100'></a></td>
+				<{/if}>
+				<td class="odd"><a href="index.php?uid=<{$users[i].id}>"><{$users[i].name}></a></td>
+                <{if $displayrealname == 1}>
+					<td class="even"><{$users[i].realname}></td>
                 <{/if}>
 				<{if $xoops_isuser && $allow_friends !=-1}>		
 					<td class="odd">	
@@ -38,13 +48,18 @@
 							<{/if}>
 						<{/if}>
 					</td>	
-				<{/if}>			
+				<{/if}>	
+				<{if $is_admin === true}>
+				<td>
+					<p class="float-right"><br><{$users[i].adminlink}></p>
+				<td>
+				<{/if}>				
 			</tr>
         <{/section}>
     </table>
     <div style="text-align:center">
         <{$pagenav}>
-        <{$lang_numfound}>
+       
     </div>
 <{else}>
     <{$lang_nonefound}>

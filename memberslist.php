@@ -41,7 +41,7 @@ $controller = new Yogurt\IndexController($xoopsDB, $xoopsUser);
  */
 $nbSections = $controller->getNumbersSections();
 
-    $GLOBALS['xoopsOption']['template_main'] = 'yogurt_members.tpl';
+    $GLOBALS['xoopsOption']['template_main'] = 'yogurt_memberslist.tpl';
     require XOOPS_ROOT_PATH . '/header.php';
     $iamadmin = $xoopsUserIsAdmin;
     $myts     = MyTextSanitizer::getInstance();
@@ -160,15 +160,13 @@ $nbSections = $controller->getNumbersSections();
     }
     $criteria->add(new Criteria('level', 0, '>'));
     $validsort = ['uname', 'email', 'last_login', 'user_regdate', 'posts'];
-   // $sort      = !in_array($_POST['user_sort'], $validsort, true) ? 'uname' : htmlspecialchars(
-   //     $_POST['user_sort'],
-     //   ENT_QUOTES | ENT_HTML5
-    //);
+    $sort = (!in_array($xoopsModuleConfig['sortmembers'], $validsort ) ) ? 'uname' : $xoopsModuleConfig['sortmembers'];
+
     $order     = 'ASC';
-    if (isset($_POST['user_order']) && 'DESC' === $_POST['user_order']) {
+	if ( isset($xoopsModuleConfig['membersorder']) && $xoopsModuleConfig['membersorder'] == 'DESC' ) {
         $order = 'DESC';
     }
-    $limit = Request::getInt('limit', 20, 'POST');
+    $limit = (!empty($xoopsModuleConfig['membersperpage'])) ? intval($xoopsModuleConfig['membersperpage']) : 20;
     if (0 === $limit || $limit > 50) {
         $limit = 50;
     }
@@ -176,9 +174,17 @@ $nbSections = $controller->getNumbersSections();
     $start         = Request::getInt('start', 0, 'POST');
     $memberHandler = xoops_getHandler('member');
     $total         = $memberHandler->getUserCount($criteria);
+	$total = $memberHandler->getUserCount($criteria);
+    $xoopsTpl->assign('totalmember', $total);
+	//Show last member
+	$result = $GLOBALS['xoopsDB']->query('SELECT uid, uname FROM ' . $GLOBALS['xoopsDB']->prefix('users') . ' WHERE level > 0 ORDER BY uid DESC', 1, 0);
+	list($latestuid, $latestuser) = $GLOBALS['xoopsDB']->fetchRow($result);
+	$xoopsTpl->assign('latestmember', " <a href='" . XOOPS_URL . '/userinfo.php?uid=' . $latestuid . "'>" . $latestuser . '</a>');
+	$xoopsTpl->assign('welcomemessage', $xoopsModuleConfig['welcomemessage']);
+	
+	
     $xoopsTpl->assign('lang_search', _MD_YOGURT_SEARCH);
     $xoopsTpl->assign('lang_results', _MD_YOGURT_RESULTS);
-    $xoopsTpl->assign('total_found', $total);
     if (0 === $total) {
         $xoopsTpl->assign('lang_nonefound', _MD_YOGURT_NOFOUND);
     } elseif ($start < $total) {
@@ -201,12 +207,8 @@ $nbSections = $controller->getNumbersSections();
         $criteria->setLimit($limit);
         $foundusers = $memberHandler->getUsers($criteria, true);
         foreach (array_keys($foundusers) as $j) {
-            $userdata['avatar']   = $foundusers[$j]->getVar(
-                'user_avatar'
-            ) ? "<img src='" . XOOPS_UPLOAD_URL . '/' . $foundusers[$j]->getVar(
-                    'user_avatar'
-                ) . "' alt=''>" : '&nbsp;';
-            $userdata['realname'] = $foundusers[$j]->getVar('name') ?: '&nbsp;';
+            $userdata['avatar']   = $foundusers[$j]->getVar('user_avatar');
+            $userdata['realname'] = $foundusers[$j]->getVar('name');
             $userdata['name']     = $foundusers[$j]->getVar('uname');
             $userdata['id']       = $foundusers[$j]->getVar('uid');
 			$userdata['uid']      = $foundusers[$j]->getVar('uid');  
@@ -434,4 +436,5 @@ $xoopsTpl->assign('lang_profile', _MD_YOGURT_PROFILE);
 $xoopsTpl->assign('lang_groups', _MD_YOGURT_GROUPS);
 $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 
+require __DIR__ . '/footer.php';
 require_once XOOPS_ROOT_PATH . '/footer.php';

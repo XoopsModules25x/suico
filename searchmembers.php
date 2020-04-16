@@ -107,19 +107,38 @@ if ('form' === $op) {
     $form->addElement($uname_tray);
     $form->addElement($name_tray);
     $form->addElement($email_tray);
-    //$form->addElement($theme_select);
-    //$form->addElement($timezone_select);
+    
+	if (1 == $xoopsModuleConfig['displayurl']){
     $form->addElement($url_text);
+	}
+	
+	if (1 == $xoopsModuleConfig['displayfrom']){
     $form->addElement($location_text);
+	}
+	
+	if (1 == $xoopsModuleConfig['displayoccupation']){
     $form->addElement($occupation_text);
-    $form->addElement($interest_text);
-    //$form->addElement($bio_text);
-    $form->addElement($lastlog_more);
+	}
+	 
+	if (1 == $xoopsModuleConfig['displayinterest']){
+    $form->addElement($interest_text); 
+	}
+    
+	if (1 == $xoopsModuleConfig['displaylastlogin']){
+	$form->addElement($lastlog_more);
     $form->addElement($lastlog_less);
+	}
+	
+	if (1 == $xoopsModuleConfig['displayregdate']){
     $form->addElement($reg_more);
     $form->addElement($reg_less);
+	}
+	
+	if (1 == $xoopsModuleConfig['displayposts']){
     $form->addElement($posts_more);
     $form->addElement($posts_less);
+	}
+	
     $form->addElement($sort_select);
     $form->addElement($order_select);
     $form->addElement($limit_text);
@@ -294,12 +313,8 @@ if ('submit' === $op) {
         $criteria->setLimit($limit);
         $foundusers = $memberHandler->getUsers($criteria, true);
         foreach (array_keys($foundusers) as $j) {
-            $userdata['avatar']   = $foundusers[$j]->getVar(
-                'user_avatar'
-            ) ? "<img src='" . XOOPS_UPLOAD_URL . '/' . $foundusers[$j]->getVar(
-                    'user_avatar'
-                ) . "' alt=''>" : '&nbsp;';
-            $userdata['realname'] = $foundusers[$j]->getVar('name') ?: '&nbsp;';
+            $userdata['avatar']   = $foundusers[$j]->getVar('user_avatar');   
+            $userdata['realname'] = $foundusers[$j]->getVar('name');
             $userdata['name']     = $foundusers[$j]->getVar('uname');
             $userdata['id']       = $foundusers[$j]->getVar('uid');
 			$userdata['uid']      = $foundusers[$j]->getVar('uid');  
@@ -527,4 +542,5 @@ $xoopsTpl->assign('lang_profile', _MD_YOGURT_PROFILE);
 $xoopsTpl->assign('lang_groups', _MD_YOGURT_GROUPS);
 $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 
+require __DIR__ . '/footer.php';
 require_once XOOPS_ROOT_PATH . '/footer.php';
