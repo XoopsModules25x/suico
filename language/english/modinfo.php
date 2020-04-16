@@ -266,6 +266,8 @@ define(
     'Group Logo Height in pixels<br>This means your logo will be most of this size in height<br>All proportions are maintained'
 );
 
+define('_MI_YOGURT_ENABLEFRIENDSHIPLEVEL_TITLE', 'Enable Friendship Level');
+define('_MI_YOGURT_ENABLEFRIENDSHIPLEVEL_DESC', 'Options to set level of friendship');
 define('_MI_YOGURT_ENABLEFANSSEVALUATION_TITLE', 'Enable Fans Evaluation Ranking');
 define('_MI_YOGURT_ENABLEFANSSEVALUATION_DESC', 'Options to evaluate fans ranking');
 define('_MI_YOGURT_MEMBERSLIST', 'Members List');

@@ -566,6 +566,16 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
 	'category'    => 'friends',
 ];
+                      
+$modversion['config'][] = [
+    'name'        => 'allow_friendshiplevel',
+    'title'       => '_MI_YOGURT_ENABLEFRIENDSHIPLEVEL_TITLE',
+    'description' => '_MI_YOGURT_ENABLEFRIENDSHIPLEVEL_DESC',
+    'default'     => 1,
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+	'category'    => 'friends',
+];
 
 $modversion['config'][] = [
     'name'        => 'allow_fanssevaluation',
