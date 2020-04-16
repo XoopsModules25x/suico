@@ -27,6 +27,7 @@
 
 use Xmf\Request;
 use XoopsModules\Yogurt;
+use XoopsModules\Yogurt\IndexController;
 
 require __DIR__ . '/header.php';
 
@@ -301,6 +302,52 @@ if ('submit' === $op) {
             $userdata['realname'] = $foundusers[$j]->getVar('name') ?: '&nbsp;';
             $userdata['name']     = $foundusers[$j]->getVar('uname');
             $userdata['id']       = $foundusers[$j]->getVar('uid');
+			$userdata['uid']      = $foundusers[$j]->getVar('uid');  
+	        
+			$petition = 0;
+			if (1 === $controller->isOwner) {
+			$criteria_uidpetition = new Criteria('petitionfrom_uid', $controller->uidOwner);
+			$newpetition          = $controller->petitionsFactory->getObjects($criteria_uidpetition);
+			if ($newpetition) {
+			$nb_petitions      = count($newpetition);
+			$petitionerHandler = xoops_getHandler('member');
+			$petitioner        = $petitionerHandler->getUser($newpetition[0]->getVar('petitioner_uid'));
+			$petitioner_uid    = $petitioner->getVar('uid');
+			$petitioner_uname  = $petitioner->getVar('uname');
+			$petitioner_avatar = $petitioner->getVar('user_avatar');
+			$petition_id       = $newpetition[0]->getVar('friendpet_id');
+			$petition          = 1;
+				}
+			}
+			
+			$criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
+			$criteria_isfriend = new CriteriaCompo(new Criteria('friend2_uid', $userdata['uid']));
+            $criteria_isfriend->add($criteria_friends);
+			$controller->isFriend = $controller->friendshipsFactory->getCount($criteria_isfriend);
+			$userdata['isFriend'] = $controller->isFriend;  
+			
+			$friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
+			
+			$criteria_selfrequest = new Criteria('petitioner_uid', $controller->uidOwner);
+			$criteria_isselfrequest = new CriteriaCompo(new Criteria('petitionto_uid', $userdata['uid']));
+            $criteria_isselfrequest->add($criteria_selfrequest);
+			$controller->isSelfRequest = $friendpetitionFactory->getCount($criteria_isselfrequest);
+			$userdata['selffriendrequest'] = $controller->isSelfRequest; 
+			if ($controller->isSelfRequest > 0) { 
+			$xoopsTpl->assign('self_uid', $controller->uidOwner); }
+			$xoopsTpl->assign('lang_myfriend', _MD_YOGURT_MYFRIEND);
+			$xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUESTSENT);
+     		$xoopsTpl->assign('lang_friendshipstatus', _MD_YOGURT_FRIENDSHIPSTATUS);
+		
+     		$criteria_otherrequest = new Criteria('petitioner_uid', $userdata['uid']);
+			$criteria_isotherrequest = new CriteriaCompo(new Criteria('petitionto_uid', $controller->uidOwner));
+            $criteria_isotherrequest->add($criteria_otherrequest);
+			$controller->isOtherRequest = $friendpetitionFactory->getCount($criteria_isotherrequest);
+			$userdata['otherfriendrequest'] = $controller->isOtherRequest; 
+			if ($controller->isOtherRequest > 0) { 
+			$xoopsTpl->assign('other_uid', $userdata['uid']); }
+	
+			
             if (1 === $foundusers[$j]->getVar('user_viewemail') || $iamadmin) {
                 $userdata['email'] = "<a href='mailto:" . $foundusers[$j]->getVar(
                         'email'
@@ -422,6 +469,32 @@ $xoopsTpl->assign('allow_groups', $controller->checkPrivilegeBySection('groups')
 $xoopsTpl->assign('allow_pictures', $controller->checkPrivilegeBySection('pictures'));
 $xoopsTpl->assign('allow_videos', $controller->checkPrivilegeBySection('videos'));
 $xoopsTpl->assign('allow_audios', $controller->checkPrivilegeBySection('audio'));
+
+//xoopsToken
+$xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
+//petitions to become friend
+if (1 === $petition) {
+    $xoopsTpl->assign('lang_youhavexpetitions', sprintf(_MD_YOGURT_YOUHAVEXPETITIONS, $nb_petitions));
+    $xoopsTpl->assign('petitioner_uid', $petitioner_uid);
+    $xoopsTpl->assign('petitioner_uname', $petitioner_uname);
+    $xoopsTpl->assign('petitioner_avatar', $petitioner_avatar);
+    $xoopsTpl->assign('petition', $petition);
+    $xoopsTpl->assign('petition_id', $petition_id);
+    $xoopsTpl->assign('lang_rejected', _MD_YOGURT_UNKNOWNREJECTING);
+    $xoopsTpl->assign('lang_accepted', _MD_YOGURT_UNKNOWNACCEPTING);
+    $xoopsTpl->assign('lang_acquaintance', _MD_YOGURT_AQUAITANCE);
+    $xoopsTpl->assign('lang_friend', _MD_YOGURT_FRIEND);
+    $xoopsTpl->assign('lang_bestfriend', _MD_YOGURT_BESTFRIEND);
+    $linkedpetioner = '<a href="index.php?uid=' . $petitioner_uid . '">' . $petitioner_uname . '</a>';
+    $xoopsTpl->assign('lang_askingfriend', sprintf(_MD_YOGURT_ASKINGFRIEND, $linkedpetioner));
+}
+$xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
+$xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
+$xoopsTpl->assign('lang_friendshippending', _MD_YOGURT_FRIENDREQUESTPENDING);
+
+$memberHandler = xoops_getHandler('member');
+$thisUser      = $memberHandler->getUser($controller->uidOwner);
+$myts          = MyTextSanitizer::getInstance();
 
 //Owner data
 $xoopsTpl->assign('uid_owner', $controller->uidOwner);

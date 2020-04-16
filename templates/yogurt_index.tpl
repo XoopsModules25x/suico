@@ -1,6 +1,6 @@
 <{include file="db:yogurt_navbar.tpl"}>
 
-<{if $petition==1 && $isOwner==1 && $isFriend==0}>
+<{if $allow_friends !=-1 && $petition==1 && $isOwner==1 && $isFriend==0}>
 
     <!-- if not owner and not friend -->
     <div id="yogurt-profile-petition" class="confirmMsg">
@@ -34,22 +34,30 @@
         </form>
     </div>
 <{else}>
-    <{if (($isFriend!=1) && ($isOwner==0) && ($isAnonym!=1) && $petitionto_uid != $uid_owner) && $petitionfrom_uid != $xoops_userid}>
+    <{if (($allow_friends !=-1) && ($isFriend!=1) && ($isOwner==0) && ($isAnonym!=1) && $petitionfrom_uid != $uid_owner) && $petitionto_uid != $xoops_userid}>
         <div id="yogurt-profile-petition">
             <form action=submit_friendpetition.php method="post">
-               <input type="hidden" name="petitionto_uid" id="petitionto_uid" value="<{$uid_owner}>">
-               <button name="" type="image"><{$lang_addasafriend}></button>			 	   
+               <input type="hidden" name="petitionfrom_uid" id="petitionfrom_uid" value="<{$uid_owner}>">
+               <button name="" type="image"><{$lang_addfriend}></button>			 	   
 				<{$token}>
             </form>
         </div>
         <!-- end if -->
     <{/if}>
 <{/if}>
-	<{if $petitionto_uid == $uid_owner OR $petitionfrom_uid == $xoops_userid && $isAnonym!=1}>
-		<button type="button"><{$lang_friendshippending}></button>	
+ <{if $allow_friends !=-1 }>
+	<{if $isFriend == 1 && $isAnonym!=1}>
+		<button type="button"><{$lang_myfriend}></button>	
 	<{/if}>
-
-<{if $allow_friends }>
+	<{if $petitionfrom_uid == $uid_owner && $isAnonym!=1}>
+		<button type="button"><{$lang_friendrequestsent}></button>	
+	<{/if}>
+	<{if $petitionto_uid == $xoops_userid && $isAnonym!=1}>
+		<button type="button"><{$lang_friendrequestpending}></button>	
+	<{/if}>
+<{/if}>	
+	
+<{if $allow_friends !=-1}>
 <{if $allow_friendsevaluation == 1}>
     <div class="yogurt-nav-bar" id="yogurt-nav-bar">
         <p id="yogurt-profile-fans"><a href="fans.php?uid=<{$uid_owner}>" alt="<{$lang_fans}>" title="<{$lang_fans}>"> <{$lang_fans}> </a><img src="assets/images/fans.gif"> (<{$nb_fans}>)
@@ -154,6 +162,7 @@
 		<{/if}>
     <{/if}>
 	
+	<{if $allow_profile_stats}>
     <{if $modules!=''}>
     <div id="yogurt-profile-search-results" class="outer">
         <h4 class="yogurt-profiletitle head"><{$lang_usercontributions}></h4>
@@ -195,6 +204,8 @@
         <!-- end module search results loop -->
     </div>
     <{/if}>
+	<{/if}>
+	
 </div><!-- end of div of group1 -->
 
 <div class="yogurt-profile-group2">

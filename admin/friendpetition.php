@@ -60,7 +60,7 @@ switch ($op) {
         }
         // Form save fields
         $friendpetitionObject->setVar('petitioner_uid', Request::getVar('petitioner_uid', ''));
-        $friendpetitionObject->setVar('petitionfrom_uid', Request::getVar('petitionfrom_uid', ''));
+        $friendpetitionObject->setVar('petitionto_uid', Request::getVar('petitionto_uid', ''));
         if ($friendpetitionHandler->insert($friendpetitionObject)) {
             redirect_header('friendpetition.php?op=list', 2, AM_YOGURT_FORMOK);
         }
@@ -152,7 +152,7 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('friendpetitionRows', $friendpetitionTempRows);
         $friendpetitionArray = [];
 
-        //    $fields = explode('|', friendpet_id:int:11::NOT NULL::primary:friendpet_id|petitioner_uid:int:11::NOT NULL:::petitioner_uid|petitionfrom_uid:int:11::NOT NULL:::petitionfrom_uid);
+        //    $fields = explode('|', friendpet_id:int:11::NOT NULL::primary:friendpet_id|petitioner_uid:int:11::NOT NULL:::petitioner_uid|petitionto_uid:int:11::NOT NULL:::petitionto_uid);
         //    $fieldsCount    = count($fields);
 
         $criteria = new CriteriaCompo();
@@ -182,9 +182,9 @@ switch ($op) {
                     XoopsUser::getUnameFromId($friendpetitionTempArray[$i]->getVar('petitioner_uid'))
                 );
 
-                $GLOBALS['xoopsTpl']->assign('selectorpetitionfrom_uid', AM_YOGURT_FRIENDPETITION_PETIONED_UID);
-                $friendpetitionArray['petitionfrom_uid'] = strip_tags(
-                    XoopsUser::getUnameFromId($friendpetitionTempArray[$i]->getVar('petitionfrom_uid'))
+                $GLOBALS['xoopsTpl']->assign('selectorpetitionto_uid', AM_YOGURT_FRIENDPETITION_PETITIONTO_UID);
+                $friendpetitionArray['petitionto_uid'] = strip_tags(
+                    XoopsUser::getUnameFromId($friendpetitionTempArray[$i]->getVar('petitionto_uid'))
                 );
                 $friendpetitionArray['edit_delete']  = "<a href='friendpetition.php?op=edit&friendpet_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='friendpetition.php?op=delete&friendpet_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>

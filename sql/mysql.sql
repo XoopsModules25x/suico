@@ -45,7 +45,7 @@ CREATE TABLE `yogurt_video` (
 CREATE TABLE `yogurt_friendpetition` (
   `friendpet_id`   INT(11) NOT NULL AUTO_INCREMENT,
   `petitioner_uid` INT(11) NOT NULL,
-  `petitionfrom_uid`   INT(11) NOT NULL,
+  `petitionto_uid`   INT(11) NOT NULL,
   PRIMARY KEY (`friendpet_id`)
 )
   ENGINE = MyISAM;

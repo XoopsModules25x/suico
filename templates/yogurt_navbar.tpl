@@ -15,10 +15,6 @@
 
     <div class="yogurt-nav-bar" id="yogurt-nav-bar">
         <p id="breadcrumbs">
-            <a href="<{$xoops_url}>" title="<{$xoops_sitename}> - <{$xoops_slogan}>">
-                <{$lang_home}>
-            </a>
-            >
             <a href="index.php" title="<{$module_name}>">
                 <{$module_name}>
             </a>

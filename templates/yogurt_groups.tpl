@@ -16,7 +16,7 @@
 
     <{$token}>
 </form>
-<{if $isAnonym!=1}>
+<{if $isAnonym!=1 && $isOwner}>
     <form class='outer' name='form_group' id='form_group' action='submit_group.php' method='post' onsubmit='return xoopsFormValidate_form_group();' enctype="multipart/form-data">
 
         <h4 class="head"><{$lang_creategroup}></h4>
@@ -72,7 +72,11 @@
 
 <div id="yogurt-mygroups-container" class="outer">
     <h4 class="head">
-        <{$lang_mygroupstitle}>
+		 <{if $isOwner}>
+            <{$lang_mysection}>
+        <{else}>
+            <{$owner_uname}> <{$section_name}>
+        <{/if}>
     </h4>
 
     <{if $nb_groups<=0}>

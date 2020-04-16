@@ -107,11 +107,11 @@ define('_MD_YOGURT_FRIENDSHIPUPDATED', 'Friendship Updated');
 
 //submitfriendpetition.php
 define(
-    '_MD_YOGURT_PETITIONED',
+    '_MD_YOGURT_PETITIONFROM',
     'A friend request has been sent to this user, Wait until he accepts to have him in your friends list.'
 );
 define(
-    '_MD_YOGURT_ALREADY_PETITIONED',
+    '_MD_YOGURT_ALREADY_PETITIONFROM',
     'You have already sent a friendship request to this user or vice-versa <br>, Wait untill he accepts or rejects it or check if he has asked you as a friend visiting your profile page.'
 );
 
@@ -378,8 +378,13 @@ define('_MD_YOGURT_META_YEAR', 'Year');
 define('_MD_YOGURT_PLAYER', 'Your audio player');
 
 // 3.5
-define('_MD_YOGURT_ADDASAFRIEND', 'Add as a Friend');
-define('_MD_YOGURT_FRIENDSHIPPENDING', 'Friendship Pending');
+define('_MD_YOGURT_ADDFRIEND', 'Add Friend');
+define('_MD_YOGURT_FRIENDREQUESTPENDING', 'Friend Request Pending');
+define('_MD_YOGURT_MYFRIEND', 'Friend');
+define('_MD_YOGURT_FRIENDREQUESTSENT', 'Friend Request Sent');
+define('_MD_YOGURT_FRIENDSHIPSTATUS', 'Friendship Status');
 define('_MD_YOGURT_PROFILEVISITORS', 'Profile Visitors');
 define('_MD_YOGURT_FEATUREDVIDEO', 'Featured Video');
 define('_MD_YOGURT_ALLVIDEOS', 'View all videos');
+define('_MD_YOGURT_OWNEROFGROUP','Owner of Group!'
+);
