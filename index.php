@@ -314,6 +314,9 @@ $xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
 $xoopsTpl->assign('lang_friendrequestpending', _MD_YOGURT_FRIENDREQUESTPENDING);
 $xoopsTpl->assign('lang_myfriend', _MD_YOGURT_MYFRIEND);
 $xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUESTSENT);
+$xoopsTpl->assign('lang_acceptfriend', _MD_YOGURT_ACCEPTFRIEND);
+$xoopsTpl->assign('lang_rejectfriend', _MD_YOGURT_REJECTFRIEND);
+
 
 //Avatar and Main
 $xoopsTpl->assign('avatar_url', $avatar);
