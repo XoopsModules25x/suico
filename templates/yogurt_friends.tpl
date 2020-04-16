@@ -10,22 +10,12 @@
             <{$lang_askingfriend}>
             <ul>
                 <li>
-                    <input name="level" type="radio" value="0">
-                    <{$lang_rejected}>
-                </li>
-                <li>
-                    <input name="level" type="radio" value="1">
-                    <{$lang_accepted}>
-                </li>
-
-                <li>
-                    <input name="level" type="radio" value="3">
-                    <{$lang_acquaintance}>
-                </li>
-
-                <li>
                     <input name="level" type="radio" value="5">
-                    <{$lang_friend}>
+                    <{$lang_acceptfriend}>
+                </li>
+			    <li>
+                    <input name="level" type="radio" value="0">
+                    <{$lang_rejectfriend}>
                 </li>
             </ul>
             <input type="hidden" name="petition_id" id="petition_id" value="<{$petition_id}>">

@@ -393,3 +393,5 @@ define('_MD_YOGURT_WELCOMETO', 'Welcome to Members List');
 define('_MD_YOGURT_NEVERLOGIN', 'Never Login');
 define('_MD_YOGURT_MEMBERSINCE', 'Member Since');
 define('_MD_YOGURT_CONTACT', 'Contact');
+define('_MD_YOGURT_ACCEPTFRIEND', 'Accept');
+define('_MD_YOGURT_REJECTFRIEND', 'Reject');

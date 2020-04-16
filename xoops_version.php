@@ -568,9 +568,9 @@ $modversion['config'][] = [
 ];
 
 $modversion['config'][] = [
-    'name'        => 'allow_friendsevaluation',
-    'title'       => '_MI_YOGURT_ENABLEFRIENDSEVALUATION_TITLE',
-    'description' => '_MI_YOGURT_ENABLEFRIENDSEVALUATION_DESC',
+    'name'        => 'allow_fanssevaluation',
+    'title'       => '_MI_YOGURT_ENABLEFANSSEVALUATION_TITLE',
+    'description' => '_MI_YOGURT_ENABLEFANSSEVALUATION_DESC',
     'default'     => 1,
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
