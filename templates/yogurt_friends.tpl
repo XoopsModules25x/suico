@@ -36,11 +36,13 @@
                     <{else}>
                         <img src="<{$xoops_upload_url}>/<{$friends[i].user_avatar}>"><{/if}><{$friends[i].uname}></a></p>
             <{if $isOwner }>
+				<{if $allow_fanssevaluation == 1 OR $allow_friendshiplevel == 1}>
                 <form action="editfriendship.php" method="post" class="yogurt-friends-deleteform">
                     <input type="hidden" name="friend_uid" id="friend_uid" value="<{$friends[i].uid}>">
                     <input name="submit" id="submit" src="assets/images/evaluate.gif" type="image" title="<{$lang_evaluate}>" alt="<{$lang_evaluate}>">
                 </form>
-                <form action="delfriendship.php" method="post" class="yogurt-friends-evaluateform">
+				<{/if}>
+				<form action="delfriendship.php" method="post" class="yogurt-friends-evaluateform">
                     <input type="hidden" name="friend_uid" id="friend_uid" value="<{$friends[i].uid}>">
                     <input name="submit" id="submit" src="<{xoModuleIcons16 delete.png}>" type="image" title="<{$lang_delete}>" alt="<{$lang_delete}>">
                 </form>

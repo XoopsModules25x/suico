@@ -422,6 +422,8 @@ if (1 === $thisUser->getVar('user_viewemail')) {
     $xoopsTpl->assign('user_email', '&nbsp;');
 }
 
+$xoopsTpl->assign('user_onlinestatus', $thisUser->isOnline());
+$xoopsTpl->assign('lang_onlinestatus', _MD_YOGURT_ONLINESTATUS);
 $xoopsTpl->assign('uname', $thisUser->getVar('uname'));
 $xoopsTpl->assign('lang_realname', _US_REALNAME);
 $xoopsTpl->assign('name', $thisUser->getVar('name'));

@@ -29,5 +29,10 @@ $xoopsTpl->assign('displaylatestmember', $xoopsModuleConfig['displaylatestmember
 $xoopsTpl->assign('displaywelcomemessage', $xoopsModuleConfig['displaywelcomemessage']);
 $xoopsTpl->assign('displaybreadcrumb', $xoopsModuleConfig['displaybreadcrumb']);
 $xoopsTpl->assign('displaytotalmember', $xoopsModuleConfig['displaytotalmember']);
+$xoopsTpl->assign('displaysignature', $xoopsModuleConfig['displaysignature']);
+$xoopsTpl->assign('displayrank', $xoopsModuleConfig['displayrank']);
+$xoopsTpl->assign('displaygroups', $xoopsModuleConfig['displaygroups']);
+$xoopsTpl->assign('displayonlinestatus', $xoopsModuleConfig['displayonlinestatus']);
+$xoopsTpl->assign('displayextrainfo', $xoopsModuleConfig['displayextrainfo']);
 $xoopsTpl->assign('membersperpage', $xoopsModuleConfig['membersperpage']);
 //$xoopsTpl->assign('memberlisttemplate', $xoopsModuleConfig['memberlisttemplate']);

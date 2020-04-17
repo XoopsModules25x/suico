@@ -182,5 +182,8 @@ $xoopsTpl->assign('friends', $vetor);
 
 $xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
 $xoopsTpl->assign('lang_evaluate', _MD_YOGURT_FRIENDSHIPCONFIGS);
+$xoopsTpl->assign('allow_friendshiplevel', $helper->getConfig('allow_friendshiplevel'));
+$xoopsTpl->assign('allow_fanssevaluation', $helper->getConfig('allow_fanssevaluation'));
+
 
 require dirname(dirname(__DIR__)) . '/footer.php';

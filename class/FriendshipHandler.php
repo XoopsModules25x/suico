@@ -441,12 +441,14 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         }
         $field_friend_name = new XoopsFormLabel(_MD_YOGURT_FRIENDNAME, $friend->getVar('uname'));
 
+        if (1 === $this->helper->getConfig('allow_friendshiplevel')) {
         $field_friend_level = new XoopsFormRadio(_MD_YOGURT_LEVEL, 'level', $friendship->getVar('level'), '<br>');
 
         $field_friend_level->addOption('1', _MD_YOGURT_UNKNOWNACCEPTED);
         $field_friend_level->addOption('3', _MD_YOGURT_AQUAITANCE);
         $field_friend_level->addOption('5', _MD_YOGURT_FRIEND);
         $field_friend_level->addOption('7', _MD_YOGURT_BESTFRIEND);
+		}
 
         if (1 === $this->helper->getConfig('allow_fanssevaluation')) {
             $field_friend_fan = new XoopsFormRadioYN(

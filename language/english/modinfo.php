@@ -266,6 +266,8 @@ define(
     'Group Logo Height in pixels<br>This means your logo will be most of this size in height<br>All proportions are maintained'
 );
 
+define('_MI_YOGURT_ENABLEFRIENDSHIPLEVEL_TITLE', 'Enable Friendship Level');
+define('_MI_YOGURT_ENABLEFRIENDSHIPLEVEL_DESC', 'Options to set level of friendship');
 define('_MI_YOGURT_ENABLEFANSSEVALUATION_TITLE', 'Enable Fans Evaluation Ranking');
 define('_MI_YOGURT_ENABLEFANSSEVALUATION_DESC', 'Options to evaluate fans ranking');
 define('_MI_YOGURT_MEMBERSLIST', 'Members List');
@@ -348,7 +350,16 @@ define('_MI_YOGURT_DISPLAYBREADCRUMB', 'Display Breadcrumb');
 define('_MI_YOGURT_DISPLAYBREADCRUMB_DSC', 'Hide or Display Breadcrumb');
 define('_MI_YOGURT_DISPLAYTOTALMEMBER', 'Display Total Member');
 define('_MI_YOGURT_DISPLAYTOTALMEMBER_DSC', 'Hide or Display Total Member');
-
+define('_MI_YOGURT_DISPLAYBIO', 'Display Bio/Extra Info');
+define('_MI_YOGURT_DISPLAYBIO_DSC', 'Hide or Display Bio/Extra Info');
+define('_MI_YOGURT_DISPLAYSIGNATURE', 'Display Signature');
+define('_MI_YOGURT_DISPLAYSIGNATURE_DSC', 'Hide or Display Signature');
+define('_MI_YOGURT_DISPLAYRANK', 'Display Members Rank');
+define('_MI_YOGURT_DISPLAYRANK_DSC', 'Hide or Display Members Rank');
+define('_MI_YOGURT_DISPLAYGROUPS', 'Display Groups');
+define('_MI_YOGURT_DISPLAYGROUPS_DSC', 'Hide or Display Members Groups');
+define('_MI_YOGURT_DISPLAYONLINESTATUS', 'Display Members Online Status');
+define('_MI_YOGURT_DISPLAYONLINESTATUS_DSC', 'Hide or Display Members Online Status');
 
 define('_MI_YOGURT_CONFIG_GENERAL', '<h4>:: General Preferences ::</h4>');
 define('_MI_YOGURT_CONFIG_GENERAL_DSC', '');

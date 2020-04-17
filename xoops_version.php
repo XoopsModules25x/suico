@@ -566,6 +566,16 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
 	'category'    => 'friends',
 ];
+                      
+$modversion['config'][] = [
+    'name'        => 'allow_friendshiplevel',
+    'title'       => '_MI_YOGURT_ENABLEFRIENDSHIPLEVEL_TITLE',
+    'description' => '_MI_YOGURT_ENABLEFRIENDSHIPLEVEL_DESC',
+    'default'     => 1,
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+	'category'    => 'friends',
+];
 
 $modversion['config'][] = [
     'name'        => 'allow_fanssevaluation',
@@ -932,6 +942,60 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'memberlistsearch',
 ];
+
+
+$modversion['config'][] = [
+    'name'        => 'displayextrainfo',
+    'title'       => '_MI_YOGURT_DISPLAYBIO',
+    'description' => '_MI_YOGURT_DISPLAYBIO_DSC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+    'category'    => 'memberlistsearch',
+];
+
+$modversion['config'][] = [
+    'name'        => 'displayonlinestatus',
+    'title'       => '_MI_YOGURT_DISPLAYONLINESTATUS',
+    'description' => '_MI_YOGURT_DISPLAYONLINESTATUS_DSC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+    'category'    => 'memberlistsearch',
+];
+
+$modversion['config'][] = [
+    'name'        => 'displaysignature',
+    'title'       => '_MI_YOGURT_DISPLAYSIGNATURE',
+    'description' => '_MI_YOGURT_DISPLAYSIGNATURE_DSC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+    'category'    => 'memberlistsearch',
+];
+
+
+$modversion['config'][] = [
+    'name'        => 'displayrank',
+    'title'       => '_MI_YOGURT_DISPLAYRANK',
+    'description' => '_MI_YOGURT_DISPLAYRANK_DSC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+    'category'    => 'memberlistsearch',
+];
+
+
+$modversion['config'][] = [
+    'name'        => 'displaygroups',
+    'title'       => '_MI_YOGURT_DISPLAYGROUPS',
+    'description' => '_MI_YOGURT_DISPLAYGROUPS_DSC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+    'category'    => 'memberlistsearch',
+];
+
 
 // group header
 $modversion['config'][] = [
