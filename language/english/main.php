@@ -285,6 +285,9 @@ define('_MD_YOGURT_SUSPENDUSER', 'Suspend user');
 define('_MD_YOGURT_SUSPENDTIME', 'Time of suspension(in secs)');
 define('_MD_YOGURT_UNSUSPEND', 'Unsuspend User');
 define('_MD_YOGURT_SUSPENSIONADMIN', 'Suspension Admin Tools');
+define('_MD_YOGURT_USERPERSONAL', 'Personal');
+define('_MD_YOGURT_ACTIVITY', 'Activity');
+define('_MD_YOGURT_COMMUNITY', 'Community');
 
 //suspend.php
 define('_MD_YOGURT_SUSPENDED', 'User under suspension until %s');
@@ -411,8 +414,11 @@ define('_MD_YOGURT_OCCUPATION', 'Occupation');
 define('_MD_YOGURT_INTEREST', 'Interest');
 define('_MD_YOGURT_MYAUDIOS', 'My Audios');
 define('_MD_YOGURT_MYFANS', 'My Fans');
+define('_MD_YOGURT_EXTRAINFOCONTAINS', 'Extra Info Contains');
+define('_MD_YOGURT_BIOGRAPHYINFOCONTAINS', 'Biography Contains');
+define('_MD_YOGURT_SIGNATURECONTAINS', 'Signature Contains');
 
-//user.php
+//users
 define('_MD_YOGURT_USERNAME', 'Username');
 define('_MD_YOGURT_PASSWORD', 'Password');
 define('_MD_YOGURT_REMEMBERME', 'Remember Me');
@@ -430,3 +436,29 @@ define('_MD_YOGURT_NOTAMEMBER', 'Not a member?');
 define('_MD_YOGURT_SOCIALNETWORK','Social Network');
 define('_MD_YOGURT_USERWELCOME','Enlarge friends network.');
 define('_MD_YOGURT_JOINUS','Join our community today and start to search for new friends!');
+define('_MD_YOGURT_FINDFRIENDS','Find Friends');
+
+//Data Tables
+define('_MD_YOGURT_DTDECIMAL','');
+define('_MD_YOGURT_DTEMPTYTABLE','No data available in table');
+define('_MD_YOGURT_DTINFOSHOWING','Showing');
+define('_MD_YOGURT_DTINFOTO','to');
+define('_MD_YOGURT_DTINFOOF','of');
+define('_MD_YOGURT_DTINFOENTRIES','entries');
+define('_MD_YOGURT_DTINFOEMPTY','Showing 0 to 0 of 0 entries');
+define('_MD_YOGURT_DTINFOFILTEREDFROM','filtered from');
+define('_MD_YOGURT_DTINFOFILTEREDTOTALENTRIES','total entries');
+define('_MD_YOGURT_DTINFOPOSTFIX','');
+define('_MD_YOGURT_DTTHOUSANDS',',');
+define('_MD_YOGURT_DTLENGTHMENUSHOW','Show');
+define('_MD_YOGURT_DTLENGTHMENUENTRIES','entries');
+define('_MD_YOGURT_DTLOADINGRECORDS','Loading...');
+define('_MD_YOGURT_DTPROCESSING','Processing...');
+define('_MD_YOGURT_DTSEARCH','Search');
+define('_MD_YOGURT_DTZERORECORDS','No matching records found');
+define('_MD_YOGURT_DTFIRST','First');
+define('_MD_YOGURT_DTLAST','Last');
+define('_MD_YOGURT_DTNEXT','Next');
+define('_MD_YOGURT_DTPREVIOUS','Previous');
+define('_MD_YOGURT_DTSORTASCENDING',': activate to sort column ascending');
+define('_MD_YOGURT_DTSORTDESCENSING',': activate to sort column descending');

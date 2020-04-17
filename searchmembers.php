@@ -67,13 +67,12 @@ if ('form' === $op) {
     $email_tray->addElement($email_match);
     $email_tray->addElement($email_text);
     $url_text = new XoopsFormText(_MD_YOGURT_URLCONTAINS, 'user_url', 30, 100);
-    //$theme_select = new XoopsFormSelectTheme(_MD_YOGURT_THEME, "user_theme");
-    //$timezone_select = new XoopsFormSelectTimezone(_MD_YOGURT_TIMEZONE, "user_timezone_offset");
     $location_text   = new XoopsFormText(_MD_YOGURT_LOCATIONCONTAINS, 'user_from', 30, 100);
     $occupation_text = new XoopsFormText(_MD_YOGURT_OCCUPATIONCONTAINS, 'user_occ', 30, 100);
     $interest_text   = new XoopsFormText(_MD_YOGURT_INTERESTCONTAINS, 'user_intrest', 30, 100);
-
-    //$bio_text = new XoopsFormText(_MD_YOGURT_EXTRAINFO, "user_bio", 30, 100);
+	$extrainfo_text   = new XoopsFormText(_MD_YOGURT_EXTRAINFOCONTAINS, 'bio', 30, 100);
+	$signature_text   = new XoopsFormText(_MD_YOGURT_SIGNATURECONTAINS, 'user_sig', 30, 100);
+	
     $lastlog_more = new XoopsFormText(
         _MD_YOGURT_LASTLOGMORE, 'user_lastlog_more', 10, 5
     );
@@ -124,6 +123,14 @@ if ('form' === $op) {
     $form->addElement($interest_text); 
 	}
     
+	if (1 == $xoopsModuleConfig['displayextrainfo']){
+    $form->addElement($extrainfo_text); 
+	}
+    
+	if (1 == $xoopsModuleConfig['displaysignature']){
+    $form->addElement($signature_text); 
+	}
+	
 	if (1 == $xoopsModuleConfig['displaylastlogin']){
 	$form->addElement($lastlog_more);
     $form->addElement($lastlog_less);
@@ -237,6 +244,15 @@ if ('submit' === $op) {
     if (!empty($_POST['user_occ'])) {
         $criteria->add(new Criteria('user_occ', '%' . $myts->addSlashes(trim($_POST['user_occ'])) . '%', 'LIKE'));
     }
+
+	if (!empty($_POST['bio'])) {
+        $criteria->add(new Criteria('bio', '%' . $myts->addSlashes(trim($_POST['bio'])) . '%', 'LIKE'));
+    }
+
+	if (!empty($_POST['user_sig'])) {
+        $criteria->add(new Criteria('user_sig', '%' . $myts->addSlashes(trim($_POST['user_sig'])) . '%', 'LIKE'));
+    }
+
     if (!empty($_POST['user_lastlog_more']) && is_numeric($_POST['user_lastlog_more'])) {
         $f_user_lastlog_more = (int)trim($_POST['user_lastlog_more']);
         $time                = time() - (60 * 60 * 24 * $f_user_lastlog_more);
