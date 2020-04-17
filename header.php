@@ -77,24 +77,23 @@ $isAnonym = 1;
 $isFriend = 0;
 
 /**
- * If anonym and uid not set then redirect to admins profile
+ * If anonym redirect to landing guest page
  * Else redirects to own profile
  */
+
 if (empty($xoopsUser)) {
     $isAnonym = 1;
-    if (isset($_GET['uid'])) {
-        $uid_owner = Request::getInt('uid', 0, 'GET');
-    } else {
-        $uid_owner = 1;
-        $isOwner   = 0;
-    }
-} else {
-    $isAnonym = 0;
-    if (isset($_GET['uid'])) {
-        $uid_owner = Request::getInt('uid', 0, 'GET');
-        $isOwner   = $xoopsUser->getVar('uid') === $uid_owner ? 1 : 0;
-    } else {
-        $uid_owner = (int)$xoopsUser->getVar('uid');
-        $isOwner   = 1;
-    }
+	if (!stripos($_SERVER['REQUEST_URI'], 'user.php')){
+     $xoopsUser or redirect_header("user.php", 3, _NOPERM);
+	}
+}
+else {
+	$isAnonym = 0;
+		if (isset($_GET['uid'])) {
+			$uid_owner = Request::getInt('uid', 0, 'GET');
+			$isOwner   = $xoopsUser->getVar('uid') === $uid_owner ? 1 : 0;
+		} else {
+			$uid_owner = (int)$xoopsUser->getVar('uid');
+			$isOwner   = 1;
+		}
 }
