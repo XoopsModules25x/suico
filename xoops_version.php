@@ -261,6 +261,17 @@ $modversion['config'][] = [
 ];
 
 $modversion['config'][] = [
+    'name'        => 'enable_guestaccess',
+    'title'       => '_MI_YOGURT_ENABLEGUESTACCESS_TITLE',
+    'description' => '_MI_YOGURT_ENABLEGUESTACCESS_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+    'category'    => 'general',
+];
+
+
+$modversion['config'][] = [
     'name'        => 'displaybreadcrumb',
     'title'       => '_MI_YOGURT_DISPLAYBREADCRUMB',
     'description' => '_MI_YOGURT_DISPLAYBREADCRUMB_DSC',
@@ -273,10 +284,10 @@ $modversion['config'][] = [
 $modversion['config'][] = [
     'name'        => 'allow_usersuspension',
     'title'       => '_MI_YOGURT_ENABLEUSERSUSPENSION_TITLE',
-    'description' => '_MI_YOGURT_ENABLEUSERUSPENSION_DSC',
+    'description' => '_MI_YOGURT_ENABLEUSERSUSPENSION_DESC',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
-    'default'     => 1,
+    'default'     => 0,
     'category'    => 'general',
 ];
 
@@ -591,7 +602,7 @@ $modversion['config'][] = [
     'name'        => 'allow_fanssevaluation',
     'title'       => '_MI_YOGURT_ENABLEFANSSEVALUATION_TITLE',
     'description' => '_MI_YOGURT_ENABLEFANSSEVALUATION_DESC',
-    'default'     => 1,
+    'default'     => 0,
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
 	'category'    => 'friends',

@@ -274,7 +274,9 @@ define('_MI_YOGURT_MEMBERSLIST', 'Members List');
 define('_MI_YOGURT_TEMPLATEMEMBERSDESC', 'Template of members list page');
 define('_MI_YOGURT_TEMPLATEUSERDESC', 'Template for Guest');
 define('_MI_YOGURT_ENABLEUSERSUSPENSION_TITLE', 'Enable user suspension');
-define('_MI_YOGURT_ENABLEUSERSUSPENSION_DESC', 'Options to enable user suspension');
+define('_MI_YOGURT_ENABLEUSERSUSPENSION_DESC', 'Option to enable user suspension');
+define('_MI_YOGURT_ENABLEGUESTACCESS_TITLE', 'Enable access by Guest');
+define('_MI_YOGURT_ENABLEGUESTACCESS_DESC', 'Option to enable access by guest user');
 
 
 define('_MI_YOGURT_CONFCAT_NOTES', 'Notes Preferences');
