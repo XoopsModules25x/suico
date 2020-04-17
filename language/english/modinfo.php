@@ -319,6 +319,7 @@ define('_MI_YOGURT_MEMBERLISTORDER', 'Order By Option');
 define('_MI_YOGURT_MEMBERLISTORDER_DSC', 'Order by option for the members list in index page?');
 define('_MI_YOGURT_MEMBERLISTTEMPSTYLE', 'Member List Template Style');
 define('_MI_YOGURT_MEMBERLISTTEMPSTYLE_DSC', 'Change Member List template style in index page?');
+define('_MI_YOGURT_DATATABLESBASICTEMPLATE', 'Data Tables Basic');
 define('_MI_YOGURT_NORMALTEMPLATE', 'Normal');
 define('_MI_YOGURT_REALNAME', 'Real Name');
 define('_MI_YOGURT_REGDATE', 'Joined Date');

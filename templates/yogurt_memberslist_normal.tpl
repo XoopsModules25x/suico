@@ -1,20 +1,5 @@
-<{include file="db:yogurt_navbar.tpl"}>
-	
-	<h4><{$smarty.const._MD_YOGURT_MEMBERSLISTSECTION}></h4>
-    <{if $displaywelcomemessage == 1}><{$welcomemessage}><br><{/if}>
-
-    <{if $displaytotalmember == 1}>
-        <b><{$smarty.const._MD_YOGURT_TOTALUSERS}>:</b> <{$totalmember}>
-    <{/if}>
-
-    <{if $displaylatestmember == 1}>
-         &nbsp;&nbsp;<b><{$smarty.const._MD_YOGURT_LATESTMEMBER}>:</b> <{$latestmember}> <br><br>
-    <{/if}>
-
-<{if $memberslisttemplate == 'datatables'}>
-
 <div class="table-responsive">
-<table id="memberslist" class="table table-striped table-hover">
+<table class="table table-striped table-hover">
   <thead>
   <tr>
     <th bgcolor="#38a8e8"><{$smarty.const._MD_YOGURT_MEMBERSLIST}></th>
@@ -109,43 +94,3 @@
 </table>
 </div>
 <{$pagenav}><br><br>
-
-<script>
-$(document).ready(function() {
-$('#memberslist').DataTable({
-   "ordering": false,
-   "lengthChange": false,
-   "displayLength": <{$membersperpage}>,
-   "language": {
-    "decimal":        "<{$smarty.const._MD_XOOPSMEMBERS_DTDECIMAL}>",
-    "emptyTable":     "<{$smarty.const._MD_XOOPSMEMBERS_DTEMPTYTABLE}>",
-    "info":           "<{$smarty.const._MD_XOOPSMEMBERS_DTINFOSHOWING}> _START_ <{$smarty.const._MD_XOOPSMEMBERS_DTINFOTO}> _END_ <{$smarty.const._MD_XOOPSMEMBERS_DTINFOOF}> _TOTAL_ <{$smarty.const._MD_XOOPSMEMBERS_DTINFOENTRIES}>",
-    "infoEmpty":      "<{$smarty.const._MD_XOOPSMEMBERS_DTINFOEMPTY}>",
-    "infoFiltered":   "(<{$smarty.const._MD_XOOPSMEMBERS_DTINFOFILTEREDFROM}> _MAX_ <{$smarty.const._MD_XOOPSMEMBERS_DTINFOFILTEREDTOTALENTRIES}>)",
-    "infoPostFix":    "<{$smarty.const._MD_XOOPSMEMBERS_DTINFOPOSTFIX}>",
-    "thousands":      "<{$smarty.const._MD_XOOPSMEMBERS_DTTHOUSANDS}>",
-    "lengthMenu":     "<{$smarty.const._MD_XOOPSMEMBERS_DTLENGTHMENUSHOW}> _MENU_ <{$smarty.const._MD_XOOPSMEMBERS_DTLENGTHMENUENTRIES}>",
-    "loadingRecords": "<{$smarty.const._MD_XOOPSMEMBERS_DTLOADINGRECORDS}>",
-    "processing":     "<{$smarty.const._MD_XOOPSMEMBERS_DTPROCESSING}>",
-    "search":         "<{$smarty.const._MD_XOOPSMEMBERS_DTSEARCH}>",
-    "zeroRecords":    "<{$smarty.const._MD_XOOPSMEMBERS_DTZERORECORDS}>",
-    "paginate": {
-        "first":      "<{$smarty.const._MD_XOOPSMEMBERS_DTFIRST}>",
-        "last":       "<{$smarty.const._MD_XOOPSMEMBERS_DTLAST}>",
-        "next":       "<{$smarty.const._MD_XOOPSMEMBERS_DTNEXT}>",
-        "previous":   "<{$smarty.const._MD_XOOPSMEMBERS_DTPREVIOUS}>"
-    },
-    "aria": {
-        "sortAscending":  "<{$smarty.const._MD_XOOPSMEMBERS_DTSORTASCENDING}>",
-        "sortDescending": "<{$smarty.const._MD_XOOPSMEMBERS_DTSORTDESCENSING}>"
-    }
-}
-});
-} );
-</script>
-
-<{elseif $memberslisttemplate == 'normal'}>
-<{include file='db:yogurt_memberslist_normal.tpl'}>
-<{/if}>
-
-<{include file="db:yogurt_footer.tpl"}>

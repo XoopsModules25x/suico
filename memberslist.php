@@ -55,11 +55,12 @@ $nbSections = $controller->getNumbersSections();
 	if ( isset($xoopsModuleConfig['membersorder']) && $xoopsModuleConfig['membersorder'] == 'DESC' ) {
         $order = 'DESC';
     }
+	if ('normal' == $xoopsModuleConfig['memberslisttemplate']) {
     $limit = (!empty($xoopsModuleConfig['membersperpage'])) ? intval($xoopsModuleConfig['membersperpage']) : 20;
     if (0 === $limit || $limit > 50) {
         $limit = 50;
     }
-
+	}
     $start         = Request::getInt('start', 0, 'POST');
     $memberHandler = xoops_getHandler('member');
     $total         = $memberHandler->getUserCount($criteria);
@@ -92,7 +93,9 @@ $nbSections = $controller->getNumbersSections();
         $criteria->setSort($sort);
         $criteria->setOrder($order);
         $criteria->setStart($start);
+		if ('normal' == $xoopsModuleConfig['memberslisttemplate']) {
         $criteria->setLimit($limit);
+		}
         $foundusers = $memberHandler->getUsers($criteria, true);
         foreach (array_keys($foundusers) as $j) {
             $userdata['avatar']   = $foundusers[$j]->getVar('user_avatar');
@@ -216,6 +219,7 @@ $nbSections = $controller->getNumbersSections();
 			
 			$xoopsTpl->append('users', $userdata);
         }
+		if ('normal' == $xoopsModuleConfig['memberslisttemplate']) {
         $totalpages = ceil($total / $limit);
         if ($totalpages > 1) {
             $hiddenform = "<form name='findnext' action='memberslist.php' method='post'>";
@@ -256,7 +260,8 @@ $nbSections = $controller->getNumbersSections();
             $xoopsTpl->assign('pagenav', $hiddenform);
             $xoopsTpl->assign('lang_numfound', sprintf(_MD_YOGURT_USERSFOUND, $total));
         }
-    }
+    } 
+}
 
 //petitions to become friend
 if (1 === $petition) {

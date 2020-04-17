@@ -818,18 +818,19 @@ $modversion['config'][] = [
     'category'    => 'memberslist',
 ];
 
-//$modversion['config'][] = [
-  //  'name'        => 'memberlisttemplate',
-   // 'title'       => '_MI_YOGURT_MEMBERLISTTEMPSTYLE',
-   // 'description' => '_MI_YOGURT_MEMBERLISTTEMPSTYLE_DSC',
-   // 'formtype'    => 'select',
-  //  'valuetype'   => 'text',
-  //  'default'     => 'normal',
-  //  'options'     => [
-   //     _MI_YOGURT_NORMALTEMPLATE  => 'normal',
-   // ],
-   // 'category'    => 'memberslist',
-//];
+$modversion['config'][] = [
+	'name'        	=> 'memberslisttemplate',
+	'title'      	=> '_MI_YOGURT_MEMBERLISTTEMPSTYLE',
+	'description' 	=> '_MI_YOGURT_MEMBERLISTTEMPSTYLE_DSC',
+	'formtype'   	=> 'select',
+	'valuetype'  	=> 'text',
+    'default'    	=> 'normal',
+	'options'    	=> [
+		_MI_YOGURT_DATATABLESBASICTEMPLATE  => 'datatables',
+		_MI_YOGURT_NORMALTEMPLATE  => 'normal',
+	],
+   'category'    => 'memberslist',
+];
 
 // group header
 $modversion['config'][] = [
@@ -1146,6 +1147,10 @@ $modversion['templates'] = [
     ],
 	[
         'file'        => 'yogurt_memberslist.tpl',
+        'description' => _MI_YOGURT_TEMPLATEMEMBERSDESC,
+    ],
+	[
+        'file'        => 'yogurt_memberslist_normal.tpl',
         'description' => _MI_YOGURT_TEMPLATEMEMBERSDESC,
     ],
 	[

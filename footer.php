@@ -115,4 +115,4 @@ $xoopsTpl->assign('displaygroups', $xoopsModuleConfig['displaygroups']);
 $xoopsTpl->assign('displayonlinestatus', $xoopsModuleConfig['displayonlinestatus']);
 $xoopsTpl->assign('displayextrainfo', $xoopsModuleConfig['displayextrainfo']);
 $xoopsTpl->assign('membersperpage', $xoopsModuleConfig['membersperpage']);
-//$xoopsTpl->assign('memberlisttemplate', $xoopsModuleConfig['memberlisttemplate']);
+$xoopsTpl->assign('memberslisttemplate', $xoopsModuleConfig['memberslisttemplate']);
