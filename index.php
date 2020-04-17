@@ -177,41 +177,6 @@ $memberHandler = xoops_getHandler('member');
 $thisUser      = $memberHandler->getUser($controller->uidOwner);
 $myts          = MyTextSanitizer::getInstance();
 
-/**
- * Adding to the module js and css of the lightbox and new ones
- */
-$xoTheme->addStylesheet(
-    XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/yogurt.css'
-);
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs.css');
-// what browser they use if IE then add corrective script.
-if (false !== stripos($_SERVER['HTTP_USER_AGENT'], 'msie')) {
-    $xoTheme->addStylesheet(
-        XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css'
-    );
-}
-//$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/css/lightbox.css');
-//$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/prototype.js');
-//$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/scriptaculous.js?load=effects');
-//$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/lightbox.js');
-$xoTheme->addStylesheet(
-    XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.lightbox-0.3.css'
-);
-
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.js');
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js');
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
-
-//permissions
-$xoopsTpl->assign('allow_friends', $controller->checkPrivilege('friends'));
-$xoopsTpl->assign('allow_notes', $controller->checkPrivilege('notes'));
-$xoopsTpl->assign('allow_groups', $controller->checkPrivilege('groups'));
-$xoopsTpl->assign('allow_pictures', $controller->checkPrivilege('pictures'));
-$xoopsTpl->assign('allow_videos', $controller->checkPrivilege('videos'));
-$xoopsTpl->assign('allow_audios', $controller->checkPrivilegeBySection('audio'));
-$xoopsTpl->assign('allow_profile_contact', $controller->checkPrivilege('profile_contact') ? 1 : 0);
-$xoopsTpl->assign('allow_profile_general', $controller->checkPrivilege('profile_general') ? 1 : 0);
-$xoopsTpl->assign('allow_profile_stats', $controller->checkPrivilege('profile_stats') ? 1 : 0);
 $xoopsTpl->assign('lang_suspensionadmin', _MD_YOGURT_SUSPENSIONADMIN);
 if (0 === $controller->isSuspended) {
     $xoopsTpl->assign('isSuspended', 0);
@@ -228,47 +193,9 @@ if ($xoopsUser && $xoopsUser->isAdmin(1)) {
     $xoopsTpl->assign('isWebmaster', '0');
 }
 
-/**
- * Assigning smarty variables
- */
-
-//Owner data
-$xoopsTpl->assign('uid_owner', $controller->uidOwner);
-$xoopsTpl->assign('owner_uname', $controller->nameOwner);
-$xoopsTpl->assign('isOwner', $controller->isOwner);
-$xoopsTpl->assign('isAnonym', $controller->isAnonym);
-$xoopsTpl->assign('isFriend', $controller->isFriend);
-
-//numbers
-$xoopsTpl->assign('nb_groups', $nbSections['nbGroups']);
-$xoopsTpl->assign('nb_photos', $nbSections['nbPhotos']);
-$xoopsTpl->assign('nb_videos', $nbSections['nbVideos']);
-$xoopsTpl->assign('nb_notes', $nbSections['nbNotes']);
-$xoopsTpl->assign('nb_friends', $nbSections['nbFriends']);
-$xoopsTpl->assign('nb_audio', $nbSections['nbAudio']);
-
 //navbar
-$xoopsTpl->assign('module_name', $xoopsModule->getVar('name'));
 $xoopsTpl->assign('lang_mysection', _MD_YOGURT_MYPROFILE);
 $xoopsTpl->assign('section_name', _MD_YOGURT_PROFILE);
-$xoopsTpl->assign('lang_home', _MD_YOGURT_HOME);
-$xoopsTpl->assign('lang_photos', _MD_YOGURT_PHOTOS);
-$xoopsTpl->assign('lang_friends', _MD_YOGURT_FRIENDS);
-$xoopsTpl->assign('lang_audio', _MD_YOGURT_AUDIOS);
-$xoopsTpl->assign('lang_videos', _MD_YOGURT_VIDEOS);
-$xoopsTpl->assign('lang_notebook', _MD_YOGURT_NOTEBOOK);
-$xoopsTpl->assign('lang_profile', _MD_YOGURT_PROFILE);
-$xoopsTpl->assign('lang_groups', _MD_YOGURT_GROUPS);
-$xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
-
-//xoopsToken
-$xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
-
-//page atributes
-$xoopsTpl->assign(
-    'xoops_pagetitle',
-    sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner)
-);
 
 //$xoopsTpl->assign('path_yogurt_uploads',$helper->getConfig('link_path_upload'));
 
@@ -317,7 +244,6 @@ $xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUESTSENT);
 $xoopsTpl->assign('lang_acceptfriend', _MD_YOGURT_ACCEPTFRIEND);
 $xoopsTpl->assign('lang_rejectfriend', _MD_YOGURT_REJECTFRIEND);
 
-
 //Avatar and Main
 $xoopsTpl->assign('avatar_url', $avatar);
 $xoopsTpl->assign('lang_selectavatar', _MD_YOGURT_SELECTAVATAR);
@@ -339,16 +265,17 @@ if ($nbSections['nbVideos'] > 0) {
         $helper->getConfig('height_maintube')
     );
 }
+
 //friends
 $xoopsTpl->assign('friends', $friends);
 $xoopsTpl->assign('lang_friendstitle', sprintf(_MD_YOGURT_FRIENDSTITLE, $controller->nameOwner));
 $xoopsTpl->assign('lang_viewallfriends', _MD_YOGURT_ALLFRIENDS);
-
 $xoopsTpl->assign('lang_nofriendsyet', _MD_YOGURT_NOFRIENDSYET);
 
 //search
 $xoopsTpl->assign('lang_usercontributions', _MD_YOGURT_USERCONTRIBUTIONS);
 
+//Profile
 $xoopsTpl->assign('lang_detailsinfo', _MD_YOGURT_USERDETAILS);
 $xoopsTpl->assign('lang_contactinfo', _MD_YOGURT_CONTACTINFO);
 //$xoopsTpl->assign('path_yogurt_uploads',$helper->getConfig('link_path_upload'));
@@ -358,10 +285,8 @@ $xoopsTpl->assign(
 );
 $xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
 $xoopsTpl->assign('lang_editdesc', _MD_YOGURT_EDITDESC);
-
 $xoopsTpl->assign('lang_visitors', _MD_YOGURT_VISITORS);
 $xoopsTpl->assign('lang_profilevisitors', _MD_YOGURT_PROFILEVISITORS);
-
 $xoopsTpl->assign('lang_editprofile', _MD_YOGURT_EDITPROFILE);
 
 $xoopsTpl->assign('user_uname', $thisUser->getVar('uname'));
@@ -435,7 +360,7 @@ $criteria      = new CriteriaCompo(new Criteria('hassearch', 1));
 $criteria->add(new Criteria('isactive', 1));
 $mids = array_keys($moduleHandler->getList($criteria));
 
-//userranl
+//user rank
 $userrank = $thisUser->rank();
 if ($userrank['image']) {
     $xoopsTpl->assign('user_rankimage', '<img src="' . XOOPS_UPLOAD_URL . '/' . $userrank['image'] . '" alt="">');
@@ -488,4 +413,6 @@ foreach ($mids as $mid) {
 /**
  * Closing the page
  */
+
+require __DIR__ . '/footer.php';
 require dirname(dirname(__DIR__)) . '/footer.php';
