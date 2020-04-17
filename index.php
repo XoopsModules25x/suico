@@ -187,11 +187,7 @@ if (0 === $controller->isSuspended) {
     $xoopsTpl->assign('isSuspended', 1);
     $xoopsTpl->assign('lang_suspended', _MD_YOGURT_USERSUSPENDED);
 }
-if ($xoopsUser && $xoopsUser->isAdmin(1)) {
-    $xoopsTpl->assign('isWebmaster', '1');
-} else {
-    $xoopsTpl->assign('isWebmaster', '0');
-}
+
 
 //navbar
 $xoopsTpl->assign('lang_mysection', _MD_YOGURT_MYPROFILE);

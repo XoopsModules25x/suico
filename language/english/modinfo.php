@@ -273,6 +273,8 @@ define('_MI_YOGURT_ENABLEFANSSEVALUATION_DESC', 'Options to evaluate fans rankin
 define('_MI_YOGURT_MEMBERSLIST', 'Members List');
 define('_MI_YOGURT_TEMPLATEMEMBERSDESC', 'Template of members list page');
 define('_MI_YOGURT_TEMPLATEUSERDESC', 'Template for Guest');
+define('_MI_YOGURT_ENABLEUSERSUSPENSION_TITLE', 'Enable user suspension');
+define('_MI_YOGURT_ENABLEUSERSUSPENSION_DESC', 'Options to enable user suspension');
 
 
 define('_MI_YOGURT_CONFCAT_NOTES', 'Notes Preferences');

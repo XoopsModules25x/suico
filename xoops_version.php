@@ -270,6 +270,16 @@ $modversion['config'][] = [
     'category'    => 'general',
 ];
 
+$modversion['config'][] = [
+    'name'        => 'allow_usersuspension',
+    'title'       => '_MI_YOGURT_ENABLEUSERSUSPENSION_TITLE',
+    'description' => '_MI_YOGURT_ENABLEUSERUSPENSION_DSC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+    'category'    => 'general',
+];
+
 // group header
 $modversion['config'][] = [
     'name'        => 'notes_config',

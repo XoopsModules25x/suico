@@ -57,6 +57,13 @@ $xoopsTpl->assign('isAnonym', $controller->isAnonym);
 $xoopsTpl->assign('isUser', $controller->isUser);
 $xoopsTpl->assign('isFriend', $controller->isFriend);
 
+//Is Webmaster/Administrator
+if ($xoopsUser && $xoopsUser->isAdmin(1)) {
+    $xoopsTpl->assign('isWebmaster', '1');
+} else {
+    $xoopsTpl->assign('isWebmaster', '0');
+}
+
 //numbers
 $xoopsTpl->assign('nb_groups', $nbSections['nbGroups']);
 $xoopsTpl->assign('nb_photos', $nbSections['nbPhotos']);
