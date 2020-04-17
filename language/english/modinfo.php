@@ -272,6 +272,7 @@ define('_MI_YOGURT_ENABLEFANSSEVALUATION_TITLE', 'Enable Fans Evaluation Ranking
 define('_MI_YOGURT_ENABLEFANSSEVALUATION_DESC', 'Options to evaluate fans ranking');
 define('_MI_YOGURT_MEMBERSLIST', 'Members List');
 define('_MI_YOGURT_TEMPLATEMEMBERSDESC', 'Template of members list page');
+define('_MI_YOGURT_TEMPLATEUSERDESC', 'Template for Guest');
 
 
 define('_MI_YOGURT_CONFCAT_NOTES', 'Notes Preferences');
