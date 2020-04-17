@@ -1,5 +1,6 @@
 <h5>3.5 Alpha xxx </h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
 <hr>
+- redirect guest to guest page (liomj/young)
 - move variables to footer.php (liomj)
 - add members online status (liomj)
 - add new members list page (liomj)

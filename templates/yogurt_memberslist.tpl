@@ -1,6 +1,6 @@
 <{include file="db:yogurt_navbar.tpl"}>
 	
-	<h4><{$smarty.const._MD_YOGURT_WELCOMETO}></h4>
+	<h4><{$smarty.const._MD_YOGURT_MEMBERSLISTSECTION}></h4>
     <{if $displaywelcomemessage == 1}><{$welcomemessage}><br><{/if}>
 
     <{if $displaytotalmember == 1}>

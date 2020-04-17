@@ -1127,7 +1127,10 @@ $modversion['templates'] = [
         'file'        => 'yogurt_memberslist.tpl',
         'description' => _MI_YOGURT_TEMPLATEMEMBERSDESC,
     ],
-
+	[
+        'file'        => 'yogurt_user.tpl',
+        'description' => _MI_YOGURT_TEMPLATEUSERDESC,
+    ],
 ];
 
 global $xoopsModule;
