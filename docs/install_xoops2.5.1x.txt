@@ -1,8 +1,6 @@
 Install:
 ============================
 1. Upload the yogurt-module directory to ROOT_URL/modules/
-1a. Create in Folder /uploads a Folder yogurt and yogurt/audio
-1b. set the Permission of 2 Folders to 0777
 
 2. Log in to your site as administrator.
 
