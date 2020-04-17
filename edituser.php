@@ -124,7 +124,6 @@ if ('saveuser' === $op) {
             $edituser->setVar('email', $email, true);
         }
         $edituser->setVar('url', formatURL($_POST['url']));
-        $edituser->setVar('user_icq', Request::getString('user_icq', '', 'POST'));
         $edituser->setVar('user_from', Request::getString('user_from', '', 'POST'));
         $edituser->setVar('user_sig', xoops_substr(Request::getString('user_sig', '', 'POST'), 0, 255));
         $user_viewemail = !empty(Request::getString('user_viewemail', '', 'POST')) ? 1 : 0;
@@ -135,9 +134,6 @@ if ('saveuser' === $op) {
             $edituser->setVar('user_viewoid', $user_viewoid);
         }
         $edituser->setVar('user_viewoid', $user_viewoid);
-        $edituser->setVar('user_aim', Request::getString('user_aim', '', 'POST'));
-        $edituser->setVar('user_yim', Request::getString('user_yim', '', 'POST'));
-        $edituser->setVar('user_msnm', Request::getString('user_msnm', '', 'POST'));
         if ('' !== $password) {
             if (defined('ICMS_VERSION_NAME')) {
                 $salt = icms_createSalt();
@@ -222,10 +218,6 @@ if ('editprofile' === $op) {
         'timezone_offset'
     )
     );
-    $icq_text        = new XoopsFormText(_US_ICQ, 'user_icq', 15, 15, $xoopsUser->getVar('user_icq', 'E'));
-    $aim_text        = new XoopsFormText(_US_AIM, 'user_aim', 18, 18, $xoopsUser->getVar('user_aim', 'E'));
-    $yim_text        = new XoopsFormText(_US_YIM, 'user_yim', 25, 25, $xoopsUser->getVar('user_yim', 'E'));
-    $msnm_text       = new XoopsFormText(_US_MSNM, 'user_msnm', 30, 100, $xoopsUser->getVar('user_msnm', 'E'));
     $location_text   = new XoopsFormText(_US_LOCATION, 'user_from', 30, 100, $xoopsUser->getVar('user_from', 'E'));
     $occupation_text = new XoopsFormText(_US_OCCUPATION, 'user_occ', 30, 100, $xoopsUser->getVar('user_occ', 'E'));
     $interest_text   = new XoopsFormText(
@@ -300,10 +292,6 @@ if ('editprofile' === $op) {
     $submit_button = new XoopsFormButton('', 'submit', _US_SAVECHANGES, 'submit');
 
     $form->addElement($timezone_select);
-    $form->addElement($icq_text);
-    $form->addElement($aim_text);
-    $form->addElement($yim_text);
-    $form->addElement($msnm_text);
     $form->addElement($location_text);
     $form->addElement($occupation_text);
     $form->addElement($interest_text);

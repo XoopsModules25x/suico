@@ -350,7 +350,16 @@ define('_MI_YOGURT_DISPLAYBREADCRUMB', 'Display Breadcrumb');
 define('_MI_YOGURT_DISPLAYBREADCRUMB_DSC', 'Hide or Display Breadcrumb');
 define('_MI_YOGURT_DISPLAYTOTALMEMBER', 'Display Total Member');
 define('_MI_YOGURT_DISPLAYTOTALMEMBER_DSC', 'Hide or Display Total Member');
-
+define('_MI_YOGURT_DISPLAYBIO', 'Display Bio/Extra Info');
+define('_MI_YOGURT_DISPLAYBIO_DSC', 'Hide or Display Bio/Extra Info');
+define('_MI_YOGURT_DISPLAYSIGNATURE', 'Display Signature');
+define('_MI_YOGURT_DISPLAYSIGNATURE_DSC', 'Hide or Display Signature');
+define('_MI_YOGURT_DISPLAYRANK', 'Display Members Rank');
+define('_MI_YOGURT_DISPLAYRANK_DSC', 'Hide or Display Members Rank');
+define('_MI_YOGURT_DISPLAYGROUPS', 'Display Groups');
+define('_MI_YOGURT_DISPLAYGROUPS_DSC', 'Hide or Display Members Groups');
+define('_MI_YOGURT_DISPLAYONLINESTATUS', 'Display Members Online Status');
+define('_MI_YOGURT_DISPLAYONLINESTATUS_DSC', 'Hide or Display Members Online Status');
 
 define('_MI_YOGURT_CONFIG_GENERAL', '<h4>:: General Preferences ::</h4>');
 define('_MI_YOGURT_CONFIG_GENERAL_DSC', '');

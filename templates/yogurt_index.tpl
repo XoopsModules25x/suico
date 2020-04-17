@@ -77,6 +77,11 @@
                     <{/if}>
                 </div>
             <{/if}>
+		<{if $user_onlinestatus == 1}> 
+			<button type="button" class="btn btn-danger btn-sm"> <{$smarty.const._MD_YOGURT_ONLINE}></button>
+		<{else}> 
+			<button type="button" class="btn btn-dark btn-sm"> <{$smarty.const._MD_YOGURT_OFFLINE}></button>
+		<{/if}>	
         </div>
     <{/if}>
 

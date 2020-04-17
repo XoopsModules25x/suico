@@ -1,7 +1,9 @@
 <h5>3.5 Alpha xxx </h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
 <hr>
-- add new member list page liomj)
-- add friendship status in searchmembers.php (liomj)
+- move variables to footer.php (liomj)
+- add members online status (liomj)
+- add new members list page (liomj)
+- add friendship status (liomj)
 - separate photos and friends block (liomj)
 - add pending status after friend request (liomj)
 - remove icq,aim,yim,msnm (liomj)

@@ -66,12 +66,12 @@ if ('form' === $op) {
     $email_tray  = new XoopsFormElementTray(_MD_YOGURT_EMAIL, '&nbsp;');
     $email_tray->addElement($email_match);
     $email_tray->addElement($email_text);
-    $url_text = new XoopsFormText(_MD_YOGURT_URLC, 'user_url', 30, 100);
+    $url_text = new XoopsFormText(_MD_YOGURT_URLCONTAINS, 'user_url', 30, 100);
     //$theme_select = new XoopsFormSelectTheme(_MD_YOGURT_THEME, "user_theme");
     //$timezone_select = new XoopsFormSelectTimezone(_MD_YOGURT_TIMEZONE, "user_timezone_offset");
-    $location_text   = new XoopsFormText(_MD_YOGURT_LOCATION, 'user_from', 30, 100);
-    $occupation_text = new XoopsFormText(_MD_YOGURT_OCCUPATION, 'user_occ', 30, 100);
-    $interest_text   = new XoopsFormText(_MD_YOGURT_INTEREST, 'user_intrest', 30, 100);
+    $location_text   = new XoopsFormText(_MD_YOGURT_LOCATIONCONTAINS, 'user_from', 30, 100);
+    $occupation_text = new XoopsFormText(_MD_YOGURT_OCCUPATIONCONTAINS, 'user_occ', 30, 100);
+    $interest_text   = new XoopsFormText(_MD_YOGURT_INTERESTCONTAINS, 'user_intrest', 30, 100);
 
     //$bio_text = new XoopsFormText(_MD_YOGURT_EXTRAINFO, "user_bio", 30, 100);
     $lastlog_more = new XoopsFormText(
@@ -150,6 +150,7 @@ if ('form' === $op) {
         'lang_totalusers',
         sprintf(_MD_YOGURT_TOTALUSERS, '<span style="color:#ff0000;">' . $total . '</span>')
     );
+    $xoopsTpl->assign('totalmember', $total);
 }
 
 if ('submit' === $op) {
@@ -313,7 +314,7 @@ if ('submit' === $op) {
         $criteria->setLimit($limit);
         $foundusers = $memberHandler->getUsers($criteria, true);
         foreach (array_keys($foundusers) as $j) {
-            $userdata['avatar']   = $foundusers[$j]->getVar('user_avatar');   
+            $userdata['avatar']   = $foundusers[$j]->getVar('user_avatar');
             $userdata['realname'] = $foundusers[$j]->getVar('name');
             $userdata['name']     = $foundusers[$j]->getVar('uname');
             $userdata['id']       = $foundusers[$j]->getVar('uid');
@@ -361,7 +362,6 @@ if ('submit' === $op) {
 			$userdata['otherfriendrequest'] = $controller->isOtherRequest; 
 			if ($controller->isOtherRequest > 0) { 
 			$xoopsTpl->assign('other_uid', $userdata['uid']); }
-	
 			
             if (1 === $foundusers[$j]->getVar('user_viewemail') || $iamadmin) {
                 $userdata['email'] = "<a href='mailto:" . $foundusers[$j]->getVar(
@@ -370,6 +370,7 @@ if ('submit' === $op) {
                                          _SENDEMAILTO,
                                          $foundusers[$j]->getVar('uname', 'E')
                                      ) . "'></a>";
+				$userdata['emailaddress'] = $foundusers[$j]->getVar('email');
             } else {
                 $userdata['email'] = '&nbsp;';
             }
@@ -383,9 +384,11 @@ if ('submit' === $op) {
                                               'E'
                                           )
                                       ) . "'></a>";
-            } else {
+            	$userdata['pm'] = $foundusers[$j]->getVar('uid');
+			} else {
                 $userdata['pmlink'] = '&nbsp;';
             }
+			
             if ('' !== $foundusers[$j]->getVar('url', 'E')) {
                 $userdata['website'] = "<a href='" . $foundusers[$j]->getVar(
                         'url',
@@ -394,21 +397,43 @@ if ('submit' === $op) {
             } else {
                 $userdata['website'] = '&nbsp;';
             }
-            $userdata['registerdate'] = formatTimestamp($foundusers[$j]->getVar('user_regdate'), 's');
+			$userdata['url'] = $foundusers[$j]->getVar('url', 'e');
+			$userdata['registerdate'] = formatTimestamp($foundusers[$j]->getVar('user_regdate'), 's');
             if (0 !== $foundusers[$j]->getVar('last_login')) {
                 $userdata['lastlogin'] = formatTimestamp($foundusers[$j]->getVar('last_login'), 'm');
             } else {
-                $userdata['lastlogin'] = '&nbsp;';
-            }
+            $userdata['lastlogin'] = _MD_YOGURT_NEVERLOGIN;
+			}
             $userdata['posts'] = $foundusers[$j]->getVar('posts');
             if ($iamadmin) {
                 $userdata['adminlink'] = "<a href='" . XOOPS_URL . '/modules/system/admin.php?fct=users&amp;uid=' . (int)$foundusers[$j]->getVar(
                         'uid'
-                    ) . "&amp;op=modifyUser'>" . _EDIT . "</a> | <a href='" . XOOPS_URL . '/modules/system/admin.php?fct=users&amp;op=delUser&amp;uid=' . (int)$foundusers[$j]->getVar(
+                    ) . "&amp;op=modifyUser'>" . _EDIT . "</a>  <a href='" . XOOPS_URL . '/modules/system/admin.php?fct=users&amp;op=delUser&amp;uid=' . (int)$foundusers[$j]->getVar(
                         'uid'
                     ) . "'>" . _DELETE . '</a>';
             }
-            $xoopsTpl->append('users', $userdata);
+            
+			$userdata['location']       = $foundusers[$j]->getVar('user_from');
+			$userdata['occupation']     = $foundusers[$j]->getVar('user_occ');
+			$userdata['interest']       = $foundusers[$j]->getVar('user_intrest');
+			$userdata['extrainfo']      = $foundusers[$j]->getVar('bio');
+			$userdata['signature']      = $foundusers[$j]->getVar('user_sig');
+			$userdata['onlinestatus']   = $foundusers[$j]->isOnline();
+			$userrank = $foundusers[$j]->rank();
+			if ($userrank['image']) {
+				$userdata['rankimage']='<img src="' . XOOPS_UPLOAD_URL . '/' . $userrank['image'] . '" alt="">';
+			}
+				$userdata['ranktitle']=$userrank['title'];
+		
+			$uid=$userdata['id'];
+			$groups =$member_handler->getGroupsByUser($uid, true); 
+			$usergroups = array(); 
+			foreach ($groups as $group) { 
+			$usergroups[] = $group->getVar('name'); 
+			}  		
+			$userdata['groups']= implode(', ', $usergroups);
+			
+			$xoopsTpl->append('users', $userdata);
         }
         $totalpages = ceil($total / $limit);
         if ($totalpages > 1) {
@@ -453,40 +478,6 @@ if ('submit' === $op) {
     }
 }
 
-/**
- * Adding to the module js and css of the lightbox and new ones
- */
-$xoTheme->addStylesheet(
-    XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/yogurt.css'
-);
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs.css');
-// what browser they use if IE then add corrective script.
-if (false !== stripos($_SERVER['HTTP_USER_AGENT'], 'msie')) {
-    $xoTheme->addStylesheet(
-        XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css'
-    );
-}
-//$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/css/lightbox.css');
-//$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/prototype.js');
-//$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/scriptaculous.js?load=effects');
-//$xoTheme->addScript(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/lightbox/js/lightbox.js');
-//$xoTheme->addStylesheet(XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/include/jquery.lightbox-0.3.css');
-$xoTheme->addScript(
-    XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.js'
-);
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js');
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
-
-//permissions
-$xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('notes'));
-$xoopsTpl->assign('allow_friends', $controller->checkPrivilegeBySection('friends'));
-$xoopsTpl->assign('allow_groups', $controller->checkPrivilegeBySection('groups'));
-$xoopsTpl->assign('allow_pictures', $controller->checkPrivilegeBySection('pictures'));
-$xoopsTpl->assign('allow_videos', $controller->checkPrivilegeBySection('videos'));
-$xoopsTpl->assign('allow_audios', $controller->checkPrivilegeBySection('audio'));
-
-//xoopsToken
-$xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 //petitions to become friend
 if (1 === $petition) {
     $xoopsTpl->assign('lang_youhavexpetitions', sprintf(_MD_YOGURT_YOUHAVEXPETITIONS, $nb_petitions));
@@ -511,36 +502,9 @@ $memberHandler = xoops_getHandler('member');
 $thisUser      = $memberHandler->getUser($controller->uidOwner);
 $myts          = MyTextSanitizer::getInstance();
 
-//Owner data
-$xoopsTpl->assign('uid_owner', $controller->uidOwner);
-$xoopsTpl->assign('owner_uname', $controller->nameOwner);
-$xoopsTpl->assign('isOwner', $controller->isOwner);
-$xoopsTpl->assign('isAnonym', $controller->isAnonym);
-
-//numbers
-$xoopsTpl->assign('nb_groups', $nbSections['nbGroups']);
-$xoopsTpl->assign('nb_photos', $nbSections['nbPhotos']);
-$xoopsTpl->assign('nb_videos', $nbSections['nbVideos']);
-$xoopsTpl->assign('nb_notes', $nbSections['nbNotes']);
-$xoopsTpl->assign('nb_friends', $nbSections['nbFriends']);
-$xoopsTpl->assign('nb_audio', $nbSections['nbAudio']);
-
 //navbar
-$xoopsTpl->assign('module_name', $xoopsModule->getVar('name'));
-$xoopsTpl->assign(
-    'lang_mysection',
-    _MD_YOGURT_SEARCH . ' ' . sprintf(_MD_YOGURT_TOTALUSERS, '<span style="color:#ff0000;">' . $total . '</span>')
-);
+$xoopsTpl->assign('lang_mysection', _MD_YOGURT_SEARCH);
 $xoopsTpl->assign('section_name', _MD_YOGURT_SEARCH);
-$xoopsTpl->assign('lang_home', _MD_YOGURT_HOME);
-$xoopsTpl->assign('lang_photos', _MD_YOGURT_PHOTOS);
-$xoopsTpl->assign('lang_friends', _MD_YOGURT_FRIENDS);
-$xoopsTpl->assign('lang_audio', _MD_YOGURT_AUDIOS);
-$xoopsTpl->assign('lang_videos', _MD_YOGURT_VIDEOS);
-$xoopsTpl->assign('lang_notebook', _MD_YOGURT_NOTEBOOK);
-$xoopsTpl->assign('lang_profile', _MD_YOGURT_PROFILE);
-$xoopsTpl->assign('lang_groups', _MD_YOGURT_GROUPS);
-$xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
 
 require __DIR__ . '/footer.php';
 require_once XOOPS_ROOT_PATH . '/footer.php';
