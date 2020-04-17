@@ -23,8 +23,6 @@ namespace XoopsModules\Yogurt\Common;
 use Xmf\Request;
 use XoopsModules\Yogurt;
 
-//defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
-
 require_once dirname(
                  dirname(dirname(dirname(__DIR__)))
              ) . '/mainfile.php';

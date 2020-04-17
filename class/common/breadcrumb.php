@@ -35,8 +35,6 @@ use XoopsModules\Yogurt\Common;
 use XoopsTpl;
 use xos_opal_Theme;
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS Root Path not defined');
-
 /**
  * Class Breadcrumb
  */

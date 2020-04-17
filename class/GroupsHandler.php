@@ -448,6 +448,10 @@ var elestyle = xoopsGetElementById(img).style;
         $maxfileheight,
         $change_img = 1,
         $group = ''
+//        $pictwidth,
+//        $pictheight,
+//        $thumbwidth,
+//        $thumbheight
     ) {
         global $xoopsUser, $xoopsDB, $_POST, $_FILES;
         //search logged user id
@@ -457,6 +461,16 @@ var elestyle = xoopsGetElementById(img).style;
         } else {
             $group->unsetNew();
         }
+
+
+        $helper = Helper::getInstance();
+        $pictwidth     = $helper->getConfig('resized_width');
+        $pictheight    = $helper->getConfig('resized_height');
+        $thumbwidth    = $helper->getConfig('thumb_width');
+        $thumbheight   = $helper->getConfig('thumb_height');
+
+
+
         if (1 === $change_img) {
             // mimetypes and settings put this in admin part later
             $allowed_mimetypes = Helper::getInstance()->getConfig(
@@ -496,6 +510,38 @@ var elestyle = xoopsGetElementById(img).style;
                 $resizer->maxWidth      = $maxWidth_grouplogo;
                 $resizer->maxHeight     = $maxHeight_grouplogo;
                 $result                 = $resizer->resizeImage();
+
+
+                $maxWidth_grouplogo     = Helper::getInstance()->getConfig('thumb_width');
+                $maxHeight_grouplogo    = Helper::getInstance()->getConfig('thumb_height');
+
+
+
+                $resizer->endFile       = $uploadDir . '/thumb_' . $savedFilename;
+                $resizer->imageMimetype = $imageMimetype;
+                $resizer->maxWidth      = $maxWidth_grouplogo;
+                $resizer->maxHeight     = $maxHeight_grouplogo;
+                $result                 = $resizer->resizeImage();
+
+
+                $maxWidth_grouplogo     = Helper::getInstance()->getConfig('resized_width');
+                $maxHeight_grouplogo    = Helper::getInstance()->getConfig('resized_height');
+
+
+
+                $resizer->endFile       = $uploadDir . '/resized_' .$savedFilename;
+                $resizer->imageMimetype = $imageMimetype;
+                $resizer->maxWidth      = $maxWidth_grouplogo;
+                $resizer->maxHeight     = $maxHeight_grouplogo;
+                $result                 = $resizer->resizeImage();
+
+
+
+
+
+
+
+
             } else {
                 echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
 

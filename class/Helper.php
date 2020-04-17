@@ -22,7 +22,6 @@ use XoopsDatabaseFactory;
  * @since
  * @author       XOOPS Development Team
  */
-//defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Class Helper

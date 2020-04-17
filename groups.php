@@ -74,6 +74,7 @@ $barrinha_my        = $navigationBar_my->renderImageNav(2);
 
 $maxfilebytes = $helper->getConfig('maxfilesize');
 
+
 //form
 $xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxfilebytes / 1024));
 $xoopsTpl->assign('lang_groupimage', _MD_YOGURT_GROUP_IMAGE);
