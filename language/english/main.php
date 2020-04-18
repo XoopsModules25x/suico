@@ -115,6 +115,15 @@ define(
     'You have already sent a friendship request to this user or vice-versa <br>, Wait untill he accepts or rejects it or check if he has asked you as a friend visiting your profile page.'
 );
 
+define(
+    '_MD_YOGURT_PETITIONTO',
+    'A friend request has been sent to this user, Wait until he accepts to have him in your friends list.'
+);
+define(
+    '_MD_YOGURT_ALREADY_PETITIONTO',
+    'You have already sent a friendship request to this user or vice-versa <br>, Wait untill he accepts or rejects it or check if he has asked you as a friend visiting your profile page.'
+);
+
 //makefriends.php
 define('_MD_YOGURT_FRIENDMADE', 'Added as a friend!');
 
@@ -201,8 +210,9 @@ define(
 define('_MD_YOGURT_GROUP_CREATED', 'Your Group was created');
 
 //kickfromgroup.php
-define('_MD_YOGURT_CONFIRMKICK', 'Yes kick him out!');
-define('_MD_YOGURT_ASKCONFIRMKICKFROMGROUP', 'Are you sure you want to kick this person out of the Group?');
+define('_MD_YOGURT_KICKOUT', 'Remove!');
+define('_MD_YOGURT_CONFIRMKICK', 'Yes remove this member!');
+define('_MD_YOGURT_ASKCONFIRMKICKFROMGROUP', 'Are you sure you want to remove this person out of the Group?');
 define(
     '_MD_YOGURT_GROUPKICKED',
     "You've banished this user from the Group, but who knows when he'll try and comeback!"

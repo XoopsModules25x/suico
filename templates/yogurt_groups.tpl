@@ -18,40 +18,6 @@
 </form>
 <{if $isAnonym!=1 && $isOwner}>
 
-
-
-    <h4 class="head"><{$lang_creategroup}>-1</h4>
-
-    <form name="form_picture" id="form_picture" action="submit_group.php" method="post" enctype="multipart/form-data">
-        <p class="odd"><{$token}><label class="yogurt-album-label-alert"><{$lang_youcanupload}></label></p>
-        <p class="even"><label class="yogurt-album-label-alert"><{$lang_nb_pict}> <{$lang_max_nb_pict}></label></p>
-        <p class="odd"><label class="yogurt-album-label" for="sel_photo"><{$lang_selectphoto}></label>
-            <input type='hidden' name='MAX_FILE_SIZE' value='<{$maxfilebytes}>'>
-            <input type='file' name='sel_photo' id='sel_photo'>
-            <input type='hidden' name='xoops_upload_file[]' id='xoops_upload_file[]'                                                                                                                                                                                                                                    value='sel_photo'></p>
-
-        <p class=odd>
-            <label for='group_title' class='xoops-form-element-caption-required'>
-                <span class='caption-text'><{$lang_title}></span><span class='caption-marker'>*</span></label>
-            <input type='text' name='group_title' id='group_title' size='35' maxlength='55' value='' required>
-        </p>
-
-        <p class=even>
-            <label for='group_desc' class='xoops-form-element-caption-required'>
-                <span class='caption-text'><{$lang_description}></span>
-                <span class='caption-marker'>*</span></label>
-            <input type='text' name='group_desc' id='group_desc' size='35' maxlength='55' value='' required>
-        <p class=odd>
-            <input type='submit' class='formButton' name='submit_button' id='submit_button' value='<{$lang_savegroup}>'>
-        </p>
-
-        <{$token}><input type='hidden' name='marker' id='marker' value='1'>
-
-    </form>
-
-
-
-
     <form class='outer' name='form_group' id='form_group' action='submit_group.php' method='post' onsubmit='return xoopsFormValidate_form_group();' enctype="multipart/form-data">
 
         <h4 class="head"><{$lang_creategroup}></h4>
@@ -94,7 +60,6 @@
             }
             return true;
         }
-
         //--></script>
     <!-- End Form Vaidation JavaScript //-->
 
