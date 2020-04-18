@@ -50,8 +50,9 @@ foreach ($group_members as $group_member) {
     $uids[] = (int)$group_member['uid'];
 }
 
-$uid = (int)$xoopsUser->getVar('uid');
+
 if ($xoopsUser) {
+$uid = (int)$xoopsUser->getVar('uid');
     if (in_array($uid, $uids, true)) {
         $xoopsTpl->assign('memberOfGroup', 1);
     }

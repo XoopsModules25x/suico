@@ -1,5 +1,6 @@
 <h5>3.5 Alpha xxx </h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
 <hr>
+- Fix Guest can't access group page (liomj)
 - Fix edit,delete,avatar,private button visible to guest (liomj)
 - Fix Group Redirection (liomj)
 - Option to disable user suspension (liomj)
