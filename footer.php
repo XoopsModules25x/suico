@@ -28,14 +28,17 @@ if (false !== stripos($_SERVER['HTTP_USER_AGENT'], 'msie')) {
         XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css'
     );
 }
+if (stripos($_SERVER['REQUEST_URI'], 'album.php')) {
 $xoTheme->addStylesheet(
     XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.lightbox-0.3.css'
 );
+}
 
 $xoTheme->addScript(
     XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.js'
 );
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js');
+if (stripos($_SERVER['REQUEST_URI'], 'album.php')) {
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js'); }
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
 
 //permissions
