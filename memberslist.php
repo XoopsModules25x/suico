@@ -41,7 +41,7 @@ $controller = new Yogurt\IndexController($xoopsDB, $xoopsUser);
  */
 $nbSections = $controller->getNumbersSections();
 
-    $GLOBALS['xoopsOption']['template_main'] = 'yogurt_memberslist.tpl';
+    $GLOBALS['xoopsOption']['template_main'] = 'yogurt_memberslist_datatables.tpl';
     require XOOPS_ROOT_PATH . '/header.php';
     $iamadmin = $xoopsUserIsAdmin;
     $myts     = MyTextSanitizer::getInstance();

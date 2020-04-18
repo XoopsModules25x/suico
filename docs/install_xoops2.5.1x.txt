@@ -8,10 +8,10 @@ Install:
 
 Compability Important Note
 ---------------------------
-XOOPS and Jquery have a javascript function with the same name.
-I have changed the calls using $ instead of jquery to jquery in my yogurt.js file ,
+XOOPS and jQuery have a javascript function with the same name.
+I have changed the calls using jQuery instead of $ in my yogurt.js file ,
 I am not sure that the compability problem is over with this but maybe it is.
-Anyone please do report or help me on this
+Anyone please do report or help me on this 
 
 Optional Procedure
 -------------------

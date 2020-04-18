@@ -111,33 +111,33 @@
 <{$pagenav}><br><br>
 
 <script>
-$(document).ready(function() {
-$('#memberslist').DataTable({
+jQuery(document).ready(function() {
+jQuery('#memberslist').DataTable({
    "ordering": false,
    "lengthChange": false,
    "displayLength": <{$membersperpage}>,
    "language": {
-    "decimal":        "<{$smarty.const._MD_XOOPSMEMBERS_DTDECIMAL}>",
-    "emptyTable":     "<{$smarty.const._MD_XOOPSMEMBERS_DTEMPTYTABLE}>",
-    "info":           "<{$smarty.const._MD_XOOPSMEMBERS_DTINFOSHOWING}> _START_ <{$smarty.const._MD_XOOPSMEMBERS_DTINFOTO}> _END_ <{$smarty.const._MD_XOOPSMEMBERS_DTINFOOF}> _TOTAL_ <{$smarty.const._MD_XOOPSMEMBERS_DTINFOENTRIES}>",
-    "infoEmpty":      "<{$smarty.const._MD_XOOPSMEMBERS_DTINFOEMPTY}>",
-    "infoFiltered":   "(<{$smarty.const._MD_XOOPSMEMBERS_DTINFOFILTEREDFROM}> _MAX_ <{$smarty.const._MD_XOOPSMEMBERS_DTINFOFILTEREDTOTALENTRIES}>)",
-    "infoPostFix":    "<{$smarty.const._MD_XOOPSMEMBERS_DTINFOPOSTFIX}>",
-    "thousands":      "<{$smarty.const._MD_XOOPSMEMBERS_DTTHOUSANDS}>",
-    "lengthMenu":     "<{$smarty.const._MD_XOOPSMEMBERS_DTLENGTHMENUSHOW}> _MENU_ <{$smarty.const._MD_XOOPSMEMBERS_DTLENGTHMENUENTRIES}>",
-    "loadingRecords": "<{$smarty.const._MD_XOOPSMEMBERS_DTLOADINGRECORDS}>",
-    "processing":     "<{$smarty.const._MD_XOOPSMEMBERS_DTPROCESSING}>",
-    "search":         "<{$smarty.const._MD_XOOPSMEMBERS_DTSEARCH}>",
-    "zeroRecords":    "<{$smarty.const._MD_XOOPSMEMBERS_DTZERORECORDS}>",
+    "decimal":        "<{$smarty.const._MD_YOGURT_DTDECIMAL}>",
+    "emptyTable":     "<{$smarty.const._MD_YOGURT_DTEMPTYTABLE}>",
+    "info":           "<{$smarty.const._MD_YOGURT_DTINFOSHOWING}> _START_ <{$smarty.const._MD_YOGURT_DTINFOTO}> _END_ <{$smarty.const._MD_YOGURT_DTINFOOF}> _TOTAL_ <{$smarty.const._MD_YOGURT_DTINFOENTRIES}>",
+    "infoEmpty":      "<{$smarty.const._MD_YOGURT_DTINFOEMPTY}>",
+    "infoFiltered":   "(<{$smarty.const._MD_YOGURT_DTINFOFILTEREDFROM}> _MAX_ <{$smarty.const._MD_YOGURT_DTINFOFILTEREDTOTALENTRIES}>)",
+    "infoPostFix":    "<{$smarty.const._MD_YOGURT_DTINFOPOSTFIX}>",
+    "thousands":      "<{$smarty.const._MD_YOGURT_DTTHOUSANDS}>",
+    "lengthMenu":     "<{$smarty.const._MD_YOGURT_DTLENGTHMENUSHOW}> _MENU_ <{$smarty.const._MD_YOGURT_DTLENGTHMENUENTRIES}>",
+    "loadingRecords": "<{$smarty.const._MD_YOGURT_DTLOADINGRECORDS}>",
+    "processing":     "<{$smarty.const._MD_YOGURT_DTPROCESSING}>",
+    "search":         "<{$smarty.const._MD_YOGURT_DTSEARCH}>",
+    "zeroRecords":    "<{$smarty.const._MD_YOGURT_DTZERORECORDS}>",
     "paginate": {
-        "first":      "<{$smarty.const._MD_XOOPSMEMBERS_DTFIRST}>",
-        "last":       "<{$smarty.const._MD_XOOPSMEMBERS_DTLAST}>",
-        "next":       "<{$smarty.const._MD_XOOPSMEMBERS_DTNEXT}>",
-        "previous":   "<{$smarty.const._MD_XOOPSMEMBERS_DTPREVIOUS}>"
+        "first":      "<{$smarty.const._MD_YOGURT_DTFIRST}>",
+        "last":       "<{$smarty.const._MD_YOGURT_DTLAST}>",
+        "next":       "<{$smarty.const._MD_YOGURT_DTNEXT}>",
+        "previous":   "<{$smarty.const._MD_YOGURT_DTPREVIOUS}>"
     },
     "aria": {
-        "sortAscending":  "<{$smarty.const._MD_XOOPSMEMBERS_DTSORTASCENDING}>",
-        "sortDescending": "<{$smarty.const._MD_XOOPSMEMBERS_DTSORTDESCENSING}>"
+        "sortAscending":  "<{$smarty.const._MD_YOGURT_DTSORTASCENDING}>",
+        "sortDescending": "<{$smarty.const._MD_YOGURT_DTSORTDESCENSING}>"
     }
 }
 });

@@ -1146,7 +1146,7 @@ $modversion['templates'] = [
         'description' => _MI_YOGURT_TEMPLATEFANS,
     ],
 	[
-        'file'        => 'yogurt_memberslist.tpl',
+        'file'        => 'yogurt_memberslist_datatables.tpl',
         'description' => _MI_YOGURT_TEMPLATEMEMBERSDESC,
     ],
 	[
