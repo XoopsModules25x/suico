@@ -32,7 +32,7 @@ $modversion = [
     'official'            => 0,
     //1 indicates official XOOPS module supported by XOOPS Dev Team, 0 means 3rd party supported
     'author'              => 'Marcello Brandao',
-    'credits'             => 'XOOPS Development Team, The ImpressCMS Project, Jquery Lightbox, Komeia, vaughan,',
+    'credits'             => 'XOOPS Development Team, The ImpressCMS Project, Jquery Lightbox, Komeia, vaughan, mamba, liomj',
     'author_mail'         => 'author-email',
     'author_website_url'  => 'https://xoops.org',
     'author_website_name' => 'XOOPS',
@@ -52,12 +52,12 @@ $modversion = [
     'dirname'             => $moduleDirName,
     'modicons16'          => 'assets/images/icons/16',
     'modicons32'          => 'assets/images/icons/32',
-    'demo_site_url'       => 'https://xoops.org',
+    'demo_site_url'       => 'https://www.xoops.org',
     'demo_site_name'      => 'XOOPS Demo Site',
-    'support_url'         => 'https://xoops.org/modules/newbb/viewforum.php?forum=28/',
+    'support_url'         => 'https://github.com/XoopsModules25x/' . $moduleDirName . '/issues',
     'support_name'        => 'Support Forum',
     'submit_bug'          => 'https://github.com/XoopsModules25x/' . $moduleDirName . '/issues',
-    'module_website_url'  => 'www.xoops.org',
+    'module_website_url'  => 'https://www.xoops.org',
     'module_website_name' => 'XOOPS Project',
     // ------------------- Min Requirements -------------------
     'min_php'             => '7.1',
@@ -262,12 +262,33 @@ $modversion['config'][] = [
 ];
 
 $modversion['config'][] = [
+    'name'        => 'enable_guestaccess',
+    'title'       => '_MI_YOGURT_ENABLEGUESTACCESS_TITLE',
+    'description' => '_MI_YOGURT_ENABLEGUESTACCESS_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+    'category'    => 'general',
+];
+
+
+$modversion['config'][] = [
     'name'        => 'displaybreadcrumb',
     'title'       => '_MI_YOGURT_DISPLAYBREADCRUMB',
     'description' => '_MI_YOGURT_DISPLAYBREADCRUMB_DSC',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
     'default'     => 1,
+    'category'    => 'general',
+];
+
+$modversion['config'][] = [
+    'name'        => 'allow_usersuspension',
+    'title'       => '_MI_YOGURT_ENABLEUSERSUSPENSION_TITLE',
+    'description' => '_MI_YOGURT_ENABLEUSERSUSPENSION_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
     'category'    => 'general',
 ];
 
@@ -582,7 +603,7 @@ $modversion['config'][] = [
     'name'        => 'allow_fanssevaluation',
     'title'       => '_MI_YOGURT_ENABLEFANSSEVALUATION_TITLE',
     'description' => '_MI_YOGURT_ENABLEFANSSEVALUATION_DESC',
-    'default'     => 1,
+    'default'     => 0,
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
 	'category'    => 'friends',
@@ -798,18 +819,19 @@ $modversion['config'][] = [
     'category'    => 'memberslist',
 ];
 
-//$modversion['config'][] = [
-  //  'name'        => 'memberlisttemplate',
-   // 'title'       => '_MI_YOGURT_MEMBERLISTTEMPSTYLE',
-   // 'description' => '_MI_YOGURT_MEMBERLISTTEMPSTYLE_DSC',
-   // 'formtype'    => 'select',
-  //  'valuetype'   => 'text',
-  //  'default'     => 'normal',
-  //  'options'     => [
-   //     _MI_YOGURT_NORMALTEMPLATE  => 'normal',
-   // ],
-   // 'category'    => 'memberslist',
-//];
+$modversion['config'][] = [
+	'name'        	=> 'memberslisttemplate',
+	'title'      	=> '_MI_YOGURT_MEMBERLISTTEMPSTYLE',
+	'description' 	=> '_MI_YOGURT_MEMBERLISTTEMPSTYLE_DSC',
+	'formtype'   	=> 'select',
+	'valuetype'  	=> 'text',
+    'default'    	=> 'datatables',
+	'options'    	=> [
+		_MI_YOGURT_DATATABLESBASICTEMPLATE  => 'datatables',
+		_MI_YOGURT_NORMALTEMPLATE  => 'normal',
+	],
+   'category'    => 'memberslist',
+];
 
 // group header
 $modversion['config'][] = [
@@ -1125,7 +1147,11 @@ $modversion['templates'] = [
         'description' => _MI_YOGURT_TEMPLATEFANS,
     ],
 	[
-        'file'        => 'yogurt_memberslist.tpl',
+        'file'        => 'yogurt_memberslist_datatables.tpl',
+        'description' => _MI_YOGURT_TEMPLATEMEMBERSDESC,
+    ],
+	[
+        'file'        => 'yogurt_memberslist_normal.tpl',
         'description' => _MI_YOGURT_TEMPLATEMEMBERSDESC,
     ],
 	[

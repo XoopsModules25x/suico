@@ -50,8 +50,9 @@ foreach ($group_members as $group_member) {
     $uids[] = (int)$group_member['uid'];
 }
 
-$uid = (int)$xoopsUser->getVar('uid');
+
 if ($xoopsUser) {
+$uid = (int)$xoopsUser->getVar('uid');
     if (in_array($uid, $uids, true)) {
         $xoopsTpl->assign('memberOfGroup', 1);
     }
@@ -81,6 +82,7 @@ $xoopsTpl->assign('lang_descgroup', _MD_YOGURT_GROUP_DESC);
 $xoopsTpl->assign('lang_abandongroup', _MD_YOGURT_GROUP_ABANDON);
 $xoopsTpl->assign('lang_joingroup', _MD_YOGURT_GROUP_JOIN);
 $xoopsTpl->assign('lang_ownerofgroup', _MD_YOGURT_OWNEROFGROUP);
+$xoopsTpl->assign('lang_removemember', _MD_YOGURT_KICKOUT);
 
 //$xoopsTpl->assign('path_yogurt_uploads',$helper->getConfig('link_path_upload'));
 $xoopsTpl->assign(

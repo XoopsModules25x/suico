@@ -1,7 +1,0 @@
-Install:
-============================
-1. Login in your Simple-Xoops as Admin
-2. Go to the Administration
-3. Open the Installer
-4. Use Yogurt module for install
-

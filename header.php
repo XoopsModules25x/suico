@@ -76,7 +76,40 @@ $isOwner  = 0;
 $isAnonym = 1;
 $isFriend = 0;
 
+
+if (1 === $helper->getConfig('enable_guestaccess')) {	
+
 /**
+ * Enable Guest Access
+ * If anonym and uid not set then redirect to admins profile
+ * Else redirects to own profile
+ */
+if (empty($xoopsUser)) {
+    $isAnonym = 1;
+    if (isset($_GET['uid'])) {
+        $uid_owner = Request::getInt('uid', 0, 'GET');
+    } else {
+        $uid_owner = 1;
+        $isOwner   = 0;
+    }
+} else {
+    $isAnonym = 0;
+    if (isset($_GET['uid'])) {
+        $uid_owner = Request::getInt('uid', 0, 'GET');
+        $isOwner   = $xoopsUser->getVar('uid') === $uid_owner ? 1 : 0;
+    } else {
+        $uid_owner = (int)$xoopsUser->getVar('uid');
+        $isOwner   = 1;
+    }
+}
+
+
+}
+
+else {
+	
+/**
+ * Disable Guest Access
  * If anonym redirect to landing guest page
  * Else redirects to own profile
  */
@@ -96,4 +129,5 @@ else {
 			$uid_owner = (int)$xoopsUser->getVar('uid');
 			$isOwner   = 1;
 		}
+}
 }

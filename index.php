@@ -187,11 +187,7 @@ if (0 === $controller->isSuspended) {
     $xoopsTpl->assign('isSuspended', 1);
     $xoopsTpl->assign('lang_suspended', _MD_YOGURT_USERSUSPENDED);
 }
-if ($xoopsUser && $xoopsUser->isAdmin(1)) {
-    $xoopsTpl->assign('isWebmaster', '1');
-} else {
-    $xoopsTpl->assign('isWebmaster', '0');
-}
+
 
 //navbar
 $xoopsTpl->assign('lang_mysection', _MD_YOGURT_MYPROFILE);
@@ -410,9 +406,24 @@ foreach ($mids as $mid) {
     }
 }
 
-/**
- * Closing the page
- */
+// temporary solution for profile module integration
+if (xoops_isActiveModule('profile')) {
+$profile_handler=xoops_getmodulehandler('profile','profile');
+$uid = $controller->uidOwner;
+if ($uid <= 0) { 
+ if (is_object($xoopsUser))  {
+        $profile = $profile_handler->get($uid);
+		} 
+        else {
+             header('location: ' . XOOPS_URL); 
+             exit();
+             }
+ }
+else 
+{
+$profile = $profile_handler->get($uid);
+}
+}
 
 require __DIR__ . '/footer.php';
 require dirname(dirname(__DIR__)) . '/footer.php';
