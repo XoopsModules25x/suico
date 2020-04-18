@@ -291,5 +291,25 @@ $myts          = MyTextSanitizer::getInstance();
 $xoopsTpl->assign('lang_mysection', _MD_YOGURT_MEMBERSLIST);
 $xoopsTpl->assign('section_name', _MD_YOGURT_MEMBERSLIST);
 
+
+// temporary solution for profile module integration
+if (xoops_isActiveModule('profile')) {
+$profile_handler=xoops_getmodulehandler('profile','profile');
+$uid = $controller->uidOwner;
+if ($uid <= 0) { 
+ if (is_object($xoopsUser))  {
+        $profile = $profile_handler->get($uid);
+		} 
+        else {
+             header('location: ' . XOOPS_URL); 
+             exit();
+             }
+ }
+else 
+{
+$profile = $profile_handler->get($uid);
+}
+}
+
 require __DIR__ . '/footer.php';
 require_once XOOPS_ROOT_PATH . '/footer.php';

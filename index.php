@@ -406,6 +406,7 @@ foreach ($mids as $mid) {
     }
 }
 
+// temporary solution for profile module integration
 if (xoops_isActiveModule('profile')) {
 $profile_handler=xoops_getmodulehandler('profile','profile');
 $uid = $controller->uidOwner;
