@@ -40,11 +40,11 @@
                         <a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$group_members[i].uid}>" alt="<{$group_members[i].uname}>" title="<{$group_members[i].uname}>">
                             <{if $group_members[i].avatar=="avatars/blank.gif"}><img src="assets/images/noavatar.gif"><{else}> <img src="<{$xoops_upload_url}>/<{$group_members[i].avatar}>"><{/if}></a>
 
-                        <{if $group_owneruid==$useruid}>
+                        <{if $group_owneruid==$useruid && $group_owneruid!=$group_members[i].uid}>
                     <form action="kickfromgroup.php" method="post">
                         <input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
                         <input type="hidden" value="<{$group_members[i].uid}>" name="rel_user_uid" id="rel_user_uid">
-                         <button name="" type="image"><{$lang_abandongroup}></button>
+                         <button name="" type="image"><{$lang_removemember}></button>
                     </form>
                     <{/if}>
                     </p>

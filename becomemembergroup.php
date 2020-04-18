@@ -49,12 +49,12 @@ if ($relgroupuserFactory->getCount($criteria) < 1) {
     $relgroupuser->setVar('rel_group_id', $group_id);
     $relgroupuser->setVar('rel_user_uid', $uid);
     if ($relgroupuserFactory->insert($relgroupuser)) {
-        redirect_header('groups.php', 1, _MD_YOGURT_YOUAREMEMBERNOW);
+        redirect_header('group.php?group_id='.$group_id.'', 1, _MD_YOGURT_YOUAREMEMBERNOW);
     } else {
         redirect_header('groups.php', 1, _MD_YOGURT_NOCACHACA);
     }
 } else {
-    redirect_header('groups.php', 1, _MD_YOGURT_YOUAREMEMBERALREADY);
+    redirect_header('group.php?group_id='.$group_id.'', 1, _MD_YOGURT_YOUAREMEMBERALREADY);
 }
 
 require dirname(dirname(__DIR__)) . '/footer.php';

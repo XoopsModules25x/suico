@@ -273,6 +273,10 @@ define('_MI_YOGURT_ENABLEFANSSEVALUATION_DESC', 'Options to evaluate fans rankin
 define('_MI_YOGURT_MEMBERSLIST', 'Members List');
 define('_MI_YOGURT_TEMPLATEMEMBERSDESC', 'Template of members list page');
 define('_MI_YOGURT_TEMPLATEUSERDESC', 'Template for Guest');
+define('_MI_YOGURT_ENABLEUSERSUSPENSION_TITLE', 'Enable user suspension');
+define('_MI_YOGURT_ENABLEUSERSUSPENSION_DESC', 'Option to enable user suspension');
+define('_MI_YOGURT_ENABLEGUESTACCESS_TITLE', 'Enable access by Guest');
+define('_MI_YOGURT_ENABLEGUESTACCESS_DESC', 'Option to enable access by guest user');
 
 
 define('_MI_YOGURT_CONFCAT_NOTES', 'Notes Preferences');
@@ -315,6 +319,7 @@ define('_MI_YOGURT_MEMBERLISTORDER', 'Order By Option');
 define('_MI_YOGURT_MEMBERLISTORDER_DSC', 'Order by option for the members list in index page?');
 define('_MI_YOGURT_MEMBERLISTTEMPSTYLE', 'Member List Template Style');
 define('_MI_YOGURT_MEMBERLISTTEMPSTYLE_DSC', 'Change Member List template style in index page?');
+define('_MI_YOGURT_DATATABLESBASICTEMPLATE', 'Data Tables Basic');
 define('_MI_YOGURT_NORMALTEMPLATE', 'Normal');
 define('_MI_YOGURT_REALNAME', 'Real Name');
 define('_MI_YOGURT_REGDATE', 'Joined Date');

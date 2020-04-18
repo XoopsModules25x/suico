@@ -67,13 +67,12 @@ if ('form' === $op) {
     $email_tray->addElement($email_match);
     $email_tray->addElement($email_text);
     $url_text = new XoopsFormText(_MD_YOGURT_URLCONTAINS, 'user_url', 30, 100);
-    //$theme_select = new XoopsFormSelectTheme(_MD_YOGURT_THEME, "user_theme");
-    //$timezone_select = new XoopsFormSelectTimezone(_MD_YOGURT_TIMEZONE, "user_timezone_offset");
     $location_text   = new XoopsFormText(_MD_YOGURT_LOCATIONCONTAINS, 'user_from', 30, 100);
     $occupation_text = new XoopsFormText(_MD_YOGURT_OCCUPATIONCONTAINS, 'user_occ', 30, 100);
     $interest_text   = new XoopsFormText(_MD_YOGURT_INTERESTCONTAINS, 'user_intrest', 30, 100);
-
-    //$bio_text = new XoopsFormText(_MD_YOGURT_EXTRAINFO, "user_bio", 30, 100);
+	$extrainfo_text   = new XoopsFormText(_MD_YOGURT_EXTRAINFOCONTAINS, 'bio', 30, 100);
+	$signature_text   = new XoopsFormText(_MD_YOGURT_SIGNATURECONTAINS, 'user_sig', 30, 100);
+	
     $lastlog_more = new XoopsFormText(
         _MD_YOGURT_LASTLOGMORE, 'user_lastlog_more', 10, 5
     );
@@ -124,6 +123,14 @@ if ('form' === $op) {
     $form->addElement($interest_text); 
 	}
     
+	if (1 == $xoopsModuleConfig['displayextrainfo']){
+    $form->addElement($extrainfo_text); 
+	}
+    
+	if (1 == $xoopsModuleConfig['displaysignature']){
+    $form->addElement($signature_text); 
+	}
+	
 	if (1 == $xoopsModuleConfig['displaylastlogin']){
 	$form->addElement($lastlog_more);
     $form->addElement($lastlog_less);
@@ -237,6 +244,15 @@ if ('submit' === $op) {
     if (!empty($_POST['user_occ'])) {
         $criteria->add(new Criteria('user_occ', '%' . $myts->addSlashes(trim($_POST['user_occ'])) . '%', 'LIKE'));
     }
+
+	if (!empty($_POST['bio'])) {
+        $criteria->add(new Criteria('bio', '%' . $myts->addSlashes(trim($_POST['bio'])) . '%', 'LIKE'));
+    }
+
+	if (!empty($_POST['user_sig'])) {
+        $criteria->add(new Criteria('user_sig', '%' . $myts->addSlashes(trim($_POST['user_sig'])) . '%', 'LIKE'));
+    }
+
     if (!empty($_POST['user_lastlog_more']) && is_numeric($_POST['user_lastlog_more'])) {
         $f_user_lastlog_more = (int)trim($_POST['user_lastlog_more']);
         $time                = time() - (60 * 60 * 24 * $f_user_lastlog_more);
@@ -319,23 +335,7 @@ if ('submit' === $op) {
             $userdata['name']     = $foundusers[$j]->getVar('uname');
             $userdata['id']       = $foundusers[$j]->getVar('uid');
 			$userdata['uid']      = $foundusers[$j]->getVar('uid');  
-	        
-			$petition = 0;
-			if (1 === $controller->isOwner) {
-			$criteria_uidpetition = new Criteria('petitionfrom_uid', $controller->uidOwner);
-			$newpetition          = $controller->petitionsFactory->getObjects($criteria_uidpetition);
-			if ($newpetition) {
-			$nb_petitions      = count($newpetition);
-			$petitionerHandler = xoops_getHandler('member');
-			$petitioner        = $petitionerHandler->getUser($newpetition[0]->getVar('petitioner_uid'));
-			$petitioner_uid    = $petitioner->getVar('uid');
-			$petitioner_uname  = $petitioner->getVar('uname');
-			$petitioner_avatar = $petitioner->getVar('user_avatar');
-			$petition_id       = $newpetition[0]->getVar('friendpet_id');
-			$petition          = 1;
-				}
-			}
-			
+	       
 			$criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
 			$criteria_isfriend = new CriteriaCompo(new Criteria('friend2_uid', $userdata['uid']));
             $criteria_isfriend->add($criteria_friends);
@@ -479,24 +479,19 @@ if ('submit' === $op) {
 }
 
 //petitions to become friend
-if (1 === $petition) {
-    $xoopsTpl->assign('lang_youhavexpetitions', sprintf(_MD_YOGURT_YOUHAVEXPETITIONS, $nb_petitions));
-    $xoopsTpl->assign('petitioner_uid', $petitioner_uid);
-    $xoopsTpl->assign('petitioner_uname', $petitioner_uname);
-    $xoopsTpl->assign('petitioner_avatar', $petitioner_avatar);
-    $xoopsTpl->assign('petition', $petition);
-    $xoopsTpl->assign('petition_id', $petition_id);
-    $xoopsTpl->assign('lang_rejected', _MD_YOGURT_UNKNOWNREJECTING);
-    $xoopsTpl->assign('lang_accepted', _MD_YOGURT_UNKNOWNACCEPTING);
-    $xoopsTpl->assign('lang_acquaintance', _MD_YOGURT_AQUAITANCE);
-    $xoopsTpl->assign('lang_friend', _MD_YOGURT_FRIEND);
-    $xoopsTpl->assign('lang_bestfriend', _MD_YOGURT_BESTFRIEND);
-    $linkedpetioner = '<a href="index.php?uid=' . $petitioner_uid . '">' . $petitioner_uname . '</a>';
-    $xoopsTpl->assign('lang_askingfriend', sprintf(_MD_YOGURT_ASKINGFRIEND, $linkedpetioner));
-}
+
 $xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
 $xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
 $xoopsTpl->assign('lang_friendshippending', _MD_YOGURT_FRIENDREQUESTPENDING);
+
+if(isset($_POST["addfriend"])){
+			$newpetition = $friendpetitionFactory->create(true);
+			$newpetition->setVar('petitioner_uid', $controller->uidOwner);
+			$newpetition->setVar('petitionto_uid', 5, 0, 'POST');
+			$friendpetitionFactory->insert($newpetition);
+			redirect_header(
+			XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('petitionfrom_uid', 0, 'POST'), 3, _MD_YOGURT_PETITIONFROM);
+			}
 
 $memberHandler = xoops_getHandler('member');
 $thisUser      = $memberHandler->getUser($controller->uidOwner);
@@ -505,6 +500,26 @@ $myts          = MyTextSanitizer::getInstance();
 //navbar
 $xoopsTpl->assign('lang_mysection', _MD_YOGURT_SEARCH);
 $xoopsTpl->assign('section_name', _MD_YOGURT_SEARCH);
+
+
+// temporary solution for profile module integration
+if (xoops_isActiveModule('profile')) {
+$profile_handler=xoops_getmodulehandler('profile','profile');
+$uid = $controller->uidOwner;
+if ($uid <= 0) { 
+ if (is_object($xoopsUser))  {
+        $profile = $profile_handler->get($uid);
+		} 
+        else {
+             header('location: ' . XOOPS_URL); 
+             exit();
+             }
+ }
+else 
+{
+$profile = $profile_handler->get($uid);
+}
+}
 
 require __DIR__ . '/footer.php';
 require_once XOOPS_ROOT_PATH . '/footer.php';

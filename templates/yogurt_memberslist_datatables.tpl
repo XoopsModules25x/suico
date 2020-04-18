@@ -1,11 +1,20 @@
 <{include file="db:yogurt_navbar.tpl"}>
+	
+	<h4><{$smarty.const._MD_YOGURT_MEMBERSLISTSECTION}></h4>
+    <{if $displaywelcomemessage == 1}><{$welcomemessage}><br><{/if}>
 
-<h4><{$smarty.const._MD_YOGURT_RESULTS}></h4>
+    <{if $displaytotalmember == 1}>
+        <b><{$smarty.const._MD_YOGURT_TOTALUSERS}>:</b> <{$totalmember}>
+    <{/if}>
 
-<{if $total_found != 0}>
+    <{if $displaylatestmember == 1}>
+         &nbsp;&nbsp;<b><{$smarty.const._MD_YOGURT_LATESTMEMBER}>:</b> <{$latestmember}> <br><br>
+    <{/if}>
 
- <{$lang_numfound}>
-	<table class="table table-striped table-hover">
+<{if $memberslisttemplate == 'datatables'}>
+
+<div class="table-responsive">
+<table id="memberslist" class="table table-striped table-hover">
   <thead>
   <tr>
     <th bgcolor="#38a8e8"><{$smarty.const._MD_YOGURT_MEMBERSLIST}></th>
@@ -102,9 +111,45 @@
   <{/section}> 
   </tbody>
 </table>
-<{$pagenav}> <br>
-<{else}>
-    <{$lang_nonefound}>
+</div>
+<{$pagenav}><br><br>
+
+<script>
+jQuery(document).ready(function() {
+jQuery('#memberslist').DataTable({
+   "ordering": false,
+   "lengthChange": false,
+   "displayLength": <{$membersperpage}>,
+   "language": {
+    "decimal":        "<{$smarty.const._MD_YOGURT_DTDECIMAL}>",
+    "emptyTable":     "<{$smarty.const._MD_YOGURT_DTEMPTYTABLE}>",
+    "info":           "<{$smarty.const._MD_YOGURT_DTINFOSHOWING}> _START_ <{$smarty.const._MD_YOGURT_DTINFOTO}> _END_ <{$smarty.const._MD_YOGURT_DTINFOOF}> _TOTAL_ <{$smarty.const._MD_YOGURT_DTINFOENTRIES}>",
+    "infoEmpty":      "<{$smarty.const._MD_YOGURT_DTINFOEMPTY}>",
+    "infoFiltered":   "(<{$smarty.const._MD_YOGURT_DTINFOFILTEREDFROM}> _MAX_ <{$smarty.const._MD_YOGURT_DTINFOFILTEREDTOTALENTRIES}>)",
+    "infoPostFix":    "<{$smarty.const._MD_YOGURT_DTINFOPOSTFIX}>",
+    "thousands":      "<{$smarty.const._MD_YOGURT_DTTHOUSANDS}>",
+    "lengthMenu":     "<{$smarty.const._MD_YOGURT_DTLENGTHMENUSHOW}> _MENU_ <{$smarty.const._MD_YOGURT_DTLENGTHMENUENTRIES}>",
+    "loadingRecords": "<{$smarty.const._MD_YOGURT_DTLOADINGRECORDS}>",
+    "processing":     "<{$smarty.const._MD_YOGURT_DTPROCESSING}>",
+    "search":         "<{$smarty.const._MD_YOGURT_DTSEARCH}>",
+    "zeroRecords":    "<{$smarty.const._MD_YOGURT_DTZERORECORDS}>",
+    "paginate": {
+        "first":      "<{$smarty.const._MD_YOGURT_DTFIRST}>",
+        "last":       "<{$smarty.const._MD_YOGURT_DTLAST}>",
+        "next":       "<{$smarty.const._MD_YOGURT_DTNEXT}>",
+        "previous":   "<{$smarty.const._MD_YOGURT_DTPREVIOUS}>"
+    },
+    "aria": {
+        "sortAscending":  "<{$smarty.const._MD_YOGURT_DTSORTASCENDING}>",
+        "sortDescending": "<{$smarty.const._MD_YOGURT_DTSORTDESCENSING}>"
+    }
+}
+});
+} );
+</script>
+
+<{elseif $memberslisttemplate == 'normal'}>
+<{include file='db:yogurt_memberslist_normal.tpl'}>
 <{/if}>
 
 <{include file="db:yogurt_footer.tpl"}>

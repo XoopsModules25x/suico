@@ -1,20 +1,5 @@
 TODO: Planned features in the future
 =====================================
 
-Bugs/Errors that are still open:
-user configuration setting is still not saving ERROR: Configuration has not been saved
-In album the edit,delete,avatar, private button is displayed to guest user
-group original large image is not uploaded and inserted to db
-in friend blocks - missing no friend yet text if no friends
-uploading mp3 in audios not working - flash audio player is not working and blocked by browser 
-outdated ym,icq, aim,msn in yogurt
-friends appears twice in friend list ....
-Guest can't access group own page - Error: Call to a member function getVar() on string
-join tribe button is display to current member of tribe
-need to delete video to remove it from main page
-Guest can't access group own page - Error: Call to a member function getVar() on string
-
-Features that are being considered/planned for the future releases:
--
-
-
+Please refer here
+https://github.com/XoopsModules25x/yogurt/issues

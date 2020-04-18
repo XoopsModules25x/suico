@@ -41,7 +41,7 @@ $controller = new Yogurt\IndexController($xoopsDB, $xoopsUser);
  */
 $nbSections = $controller->getNumbersSections();
 
-    $GLOBALS['xoopsOption']['template_main'] = 'yogurt_memberslist.tpl';
+    $GLOBALS['xoopsOption']['template_main'] = 'yogurt_memberslist_datatables.tpl';
     require XOOPS_ROOT_PATH . '/header.php';
     $iamadmin = $xoopsUserIsAdmin;
     $myts     = MyTextSanitizer::getInstance();
@@ -55,11 +55,12 @@ $nbSections = $controller->getNumbersSections();
 	if ( isset($xoopsModuleConfig['membersorder']) && $xoopsModuleConfig['membersorder'] == 'DESC' ) {
         $order = 'DESC';
     }
+	if ('normal' == $xoopsModuleConfig['memberslisttemplate']) {
     $limit = (!empty($xoopsModuleConfig['membersperpage'])) ? intval($xoopsModuleConfig['membersperpage']) : 20;
     if (0 === $limit || $limit > 50) {
         $limit = 50;
     }
-
+	}
     $start         = Request::getInt('start', 0, 'POST');
     $memberHandler = xoops_getHandler('member');
     $total         = $memberHandler->getUserCount($criteria);
@@ -67,7 +68,7 @@ $nbSections = $controller->getNumbersSections();
 	//Show last member
 	$result = $GLOBALS['xoopsDB']->query('SELECT uid, uname FROM ' . $GLOBALS['xoopsDB']->prefix('users') . ' WHERE level > 0 ORDER BY uid DESC', 1, 0);
 	list($latestuid, $latestuser) = $GLOBALS['xoopsDB']->fetchRow($result);
-	$xoopsTpl->assign('latestmember', " <a href='" . XOOPS_URL . '/userinfo.php?uid=' . $latestuid . "'>" . $latestuser . '</a>');
+	$xoopsTpl->assign('latestmember', " <a href='" . XOOPS_URL . '/modules/yogurt/index.php?uid=' . $latestuid . "'>" . $latestuser . '</a>');
 	$xoopsTpl->assign('welcomemessage', $xoopsModuleConfig['welcomemessage']);
 	
 	
@@ -92,31 +93,18 @@ $nbSections = $controller->getNumbersSections();
         $criteria->setSort($sort);
         $criteria->setOrder($order);
         $criteria->setStart($start);
+		if ('normal' == $xoopsModuleConfig['memberslisttemplate']) {
         $criteria->setLimit($limit);
+		}
         $foundusers = $memberHandler->getUsers($criteria, true);
-        foreach (array_keys($foundusers) as $j) {
+        
+		foreach (array_keys($foundusers) as $j) {
             $userdata['avatar']   = $foundusers[$j]->getVar('user_avatar');
             $userdata['realname'] = $foundusers[$j]->getVar('name');
             $userdata['name']     = $foundusers[$j]->getVar('uname');
             $userdata['id']       = $foundusers[$j]->getVar('uid');
 			$userdata['uid']      = $foundusers[$j]->getVar('uid');  
-	        
-			$petition = 0;
-			if (1 === $controller->isOwner) {
-			$criteria_uidpetition = new Criteria('petitionfrom_uid', $controller->uidOwner);
-			$newpetition          = $controller->petitionsFactory->getObjects($criteria_uidpetition);
-			if ($newpetition) {
-			$nb_petitions      = count($newpetition);
-			$petitionerHandler = xoops_getHandler('member');
-			$petitioner        = $petitionerHandler->getUser($newpetition[0]->getVar('petitioner_uid'));
-			$petitioner_uid    = $petitioner->getVar('uid');
-			$petitioner_uname  = $petitioner->getVar('uname');
-			$petitioner_avatar = $petitioner->getVar('user_avatar');
-			$petition_id       = $newpetition[0]->getVar('friendpet_id');
-			$petition          = 1;
-				}
-			}
-			
+	        		
 			$criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
 			$criteria_isfriend = new CriteriaCompo(new Criteria('friend2_uid', $userdata['uid']));
             $criteria_isfriend->add($criteria_friends);
@@ -216,6 +204,7 @@ $nbSections = $controller->getNumbersSections();
 			
 			$xoopsTpl->append('users', $userdata);
         }
+		if ('normal' == $xoopsModuleConfig['memberslisttemplate']) {
         $totalpages = ceil($total / $limit);
         if ($totalpages > 1) {
             $hiddenform = "<form name='findnext' action='memberslist.php' method='post'>";
@@ -256,27 +245,22 @@ $nbSections = $controller->getNumbersSections();
             $xoopsTpl->assign('pagenav', $hiddenform);
             $xoopsTpl->assign('lang_numfound', sprintf(_MD_YOGURT_USERSFOUND, $total));
         }
-    }
-
-//petitions to become friend
-if (1 === $petition) {
-    $xoopsTpl->assign('lang_youhavexpetitions', sprintf(_MD_YOGURT_YOUHAVEXPETITIONS, $nb_petitions));
-    $xoopsTpl->assign('petitioner_uid', $petitioner_uid);
-    $xoopsTpl->assign('petitioner_uname', $petitioner_uname);
-    $xoopsTpl->assign('petitioner_avatar', $petitioner_avatar);
-    $xoopsTpl->assign('petition', $petition);
-    $xoopsTpl->assign('petition_id', $petition_id);
-    $xoopsTpl->assign('lang_rejected', _MD_YOGURT_UNKNOWNREJECTING);
-    $xoopsTpl->assign('lang_accepted', _MD_YOGURT_UNKNOWNACCEPTING);
-    $xoopsTpl->assign('lang_acquaintance', _MD_YOGURT_AQUAITANCE);
-    $xoopsTpl->assign('lang_friend', _MD_YOGURT_FRIEND);
-    $xoopsTpl->assign('lang_bestfriend', _MD_YOGURT_BESTFRIEND);
-    $linkedpetioner = '<a href="index.php?uid=' . $petitioner_uid . '">' . $petitioner_uname . '</a>';
-    $xoopsTpl->assign('lang_askingfriend', sprintf(_MD_YOGURT_ASKINGFRIEND, $linkedpetioner));
+    } 
 }
+
 $xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
 $xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
 $xoopsTpl->assign('lang_friendshippending', _MD_YOGURT_FRIENDREQUESTPENDING);
+
+if(isset($_POST["addfriend"])){
+			$newpetition = $friendpetitionFactory->create(true);
+			$newpetition->setVar('petitioner_uid', $controller->uidOwner);
+			$newpetition->setVar('petitionto_uid', 5, 0, 'POST');
+			$friendpetitionFactory->insert($newpetition);
+			redirect_header(
+			XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('petitionfrom_uid', 0, 'POST'), 3, _MD_YOGURT_PETITIONFROM);
+			}
+			
 
 $memberHandler = xoops_getHandler('member');
 $thisUser      = $memberHandler->getUser($controller->uidOwner);
@@ -285,6 +269,26 @@ $myts          = MyTextSanitizer::getInstance();
 //navbar
 $xoopsTpl->assign('lang_mysection', _MD_YOGURT_MEMBERSLIST);
 $xoopsTpl->assign('section_name', _MD_YOGURT_MEMBERSLIST);
+
+
+// temporary solution for profile module integration
+if (xoops_isActiveModule('profile')) {
+$profile_handler=xoops_getmodulehandler('profile','profile');
+$uid = $controller->uidOwner;
+if ($uid <= 0) { 
+ if (is_object($xoopsUser))  {
+        $profile = $profile_handler->get($uid);
+		} 
+        else {
+             header('location: ' . XOOPS_URL); 
+             exit();
+             }
+ }
+else 
+{
+$profile = $profile_handler->get($uid);
+}
+}
 
 require __DIR__ . '/footer.php';
 require_once XOOPS_ROOT_PATH . '/footer.php';

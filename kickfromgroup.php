@@ -58,12 +58,12 @@ if (1 !== Request::getInt('confirm', 0, 'POST')) {
          * Try to delete
          */
         if ($relgroupuserFactory->deleteAll($criteria)) {
-            redirect_header('groups.php', 2, _MD_YOGURT_GROUPKICKED);
+            redirect_header('group.php?group_id='.$group_id.'', 2, _MD_YOGURT_GROUPKICKED);
         } else {
-            redirect_header('groups.php', 2, _MD_YOGURT_NOCACHACA);
+            redirect_header('group.php?group_id='.$group_id.'', 2, _MD_YOGURT_NOCACHACA);
         }
     } else {
-        redirect_header('groups.php', 2, _MD_YOGURT_NOCACHACA);
+        redirect_header('group.php?group_id='.$group_id.'', 2, _MD_YOGURT_NOCACHACA);
     }
 }
 

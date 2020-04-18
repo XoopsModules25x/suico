@@ -28,15 +28,31 @@ if (false !== stripos($_SERVER['HTTP_USER_AGENT'], 'msie')) {
         XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css'
     );
 }
+if (stripos($_SERVER['REQUEST_URI'], 'album.php')) {
 $xoTheme->addStylesheet(
     XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.lightbox-0.3.css'
 );
+}
 
+if (!stripos($_SERVER['REQUEST_URI'], 'memberslist.php')) {
 $xoTheme->addScript(
     XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.js'
 );
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js');
+}
+
+if (stripos($_SERVER['REQUEST_URI'], 'album.php')) {
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js'); }
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
+
+if (stripos($_SERVER['REQUEST_URI'], 'memberslist.php')) {
+if ('datatables' == $xoopsModuleConfig['memberslisttemplate']) {
+	$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.dataTables.css');
+	$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/responsive.dataTables.min.css');
+	$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.dataTables.js');
+	$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/dataTables.responsive.min.js');
+}
+}
+
 
 //permissions
 $xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('notes'));
@@ -56,6 +72,13 @@ $xoopsTpl->assign('isOwner', $controller->isOwner);
 $xoopsTpl->assign('isAnonym', $controller->isAnonym);
 $xoopsTpl->assign('isUser', $controller->isUser);
 $xoopsTpl->assign('isFriend', $controller->isFriend);
+
+//Is Webmaster/Administrator
+if ($xoopsUser && $xoopsUser->isAdmin(1)) {
+    $xoopsTpl->assign('isWebmaster', '1');
+} else {
+    $xoopsTpl->assign('isWebmaster', '0');
+}
 
 //numbers
 $xoopsTpl->assign('nb_groups', $nbSections['nbGroups']);
@@ -108,4 +131,4 @@ $xoopsTpl->assign('displaygroups', $xoopsModuleConfig['displaygroups']);
 $xoopsTpl->assign('displayonlinestatus', $xoopsModuleConfig['displayonlinestatus']);
 $xoopsTpl->assign('displayextrainfo', $xoopsModuleConfig['displayextrainfo']);
 $xoopsTpl->assign('membersperpage', $xoopsModuleConfig['membersperpage']);
-//$xoopsTpl->assign('memberlisttemplate', $xoopsModuleConfig['memberlisttemplate']);
+$xoopsTpl->assign('memberslisttemplate', $xoopsModuleConfig['memberslisttemplate']);

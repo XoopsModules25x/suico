@@ -1,17 +1,4 @@
-<{include file="db:yogurt_navbar.tpl"}>
-	
-	<h4><{$smarty.const._MD_YOGURT_MEMBERSLISTSECTION}></h4>
-    <{if $displaywelcomemessage == 1}><{$welcomemessage}><br><{/if}>
-
-    <{if $displaytotalmember == 1}>
-        <b><{$smarty.const._MD_YOGURT_TOTALUSERS}>:</b> <{$totalmember}>
-    <{/if}>
-
-    <{if $displaylatestmember == 1}>
-         &nbsp;&nbsp;<b><{$smarty.const._MD_YOGURT_LATESTMEMBER}>:</b> <{$latestmember}> <br><br>
-    <{/if}>
-
-
+<div class="table-responsive">
 <table class="table table-striped table-hover">
   <thead>
   <tr>
@@ -25,7 +12,11 @@
 		<{if $xoops_isuser && $allow_friends !=-1}>		
 		<p class="float-right">
 		<{if $users[i].isFriend!=1 && $users[i].uid != $uid_owner && $users[i].selffriendrequest!=1 && $users[i].otherfriendrequest!=1}>
-			<a href="index.php?uid=<{$users[i].id}>" target="_blank" role="button" class="btn btn-info btn-sm"><{$lang_addfriend}></a>
+			<form action=send_friendpetition.php method="post">
+				<input type="hidden" name="petitionto_uid" id="petitionto_uid" value="<{$users[i].id}>">
+				<input name="addfriend" type="submit" value="<{$lang_addfriend}>" class="btn btn-info btn-sm float-right">			 	   
+				<{$token}>
+            </form>
 		<{/if}>			
 		<{if $users[i].isFriend ==1 && $users[i].uid != $uid_owner}>
 			<button type="button" class="btn btn-dark btn-sm"><{$lang_myfriend}></button>	
@@ -41,12 +32,12 @@
 		</p>
 	<{/if}>	
 	
-	<h5><a href="<{$xoops_url}>/userinfo.php?uid=<{$users[i].id}>"><{$users[i].name}></a></h5>
+	<h5><a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$users[i].id}>"><{$users[i].name}></a></h5>
     <{if $displayavatar == 1}>  
-        <a href="<{$xoops_url}>/userinfo.php?uid=<{$users[i].id}>"><img src='<{$xoops_url}>/uploads/<{$users[i].avatar}>' class='rounded-circle float-left' title='<{$users[i].name}>' alt='<{$users[i].name}>' style='padding:10px' width='100' height='100'></a>
+        <a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$users[i].id}>"><img src='<{$xoops_url}>/uploads/<{$users[i].avatar}>' class='rounded-circle float-left' title='<{$users[i].name}>' alt='<{$users[i].name}>' style='padding:10px' width='100' height='100'></a>
     <{/if}>
     <{if $displayrealname == 1 && $users[i].realname!=''}>
-        <span class="text-muted"><b><{$smarty.const._MD_YOGURT_REALNAME}> :</b> <a href="<{$xoops_url}>/userinfo.php?uid=<{$users[i].id}>"><{$users[i].realname}></a></span>
+        <span class="text-muted"><b><{$smarty.const._MD_YOGURT_REALNAME}> :</b> <a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$users[i].id}>"><{$users[i].realname}></a></span>
     <{/if}>
 	<{if $displayfrom == 1 && $users[i].location!=''}>
         <br><span class='text-muted'><small><b><{$smarty.const._MD_YOGURT_LOCATION}> :</b> <{$users[i].location}></small></span>
@@ -105,8 +96,5 @@
   <{/section}> 
   </tbody>
 </table>
+</div>
 <{$pagenav}><br><br>
-    
-
-
-<{include file="db:yogurt_footer.tpl"}>

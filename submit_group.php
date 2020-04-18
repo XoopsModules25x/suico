@@ -166,7 +166,8 @@ if (1 === $marker) {//if (1 === $marker) {
         $relgroupuser->setVar('rel_group_id', $xoopsDB->getInsertId());
         $relgroupuser->setVar('rel_user_uid', $xoopsUser->getVar('uid'));
         $relgroupuserFactory->insert($relgroupuser);
-        redirect_header('groups.php', 500, _MD_YOGURT_GROUP_CREATED);
+		$group_id=$relgroupuser->getVar('rel_group_id', $xoopsDB->getInsertId());
+        redirect_header('group.php?group_id='.$group_id.'', 500, _MD_YOGURT_GROUP_CREATED);
     } else {
         $groupsFactory->renderFormSubmit(120000, $xoopsTpl);
     }
