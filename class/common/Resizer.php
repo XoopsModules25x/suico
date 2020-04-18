@@ -25,23 +25,14 @@ namespace XoopsModules\Yogurt\Common;
 class Resizer
 {
     public $sourceFile = '';
-
     public $endFile = '';
-
     public $maxWidth = 0;
-
     public $maxHeight = 0;
-
     public $imageMimetype = '';
-
     public $jpgQuality = 90;
-
     public $mergeType = 0;
-
     public $mergePos = 0;
-
     public $degrees = 0;
-
     public $error = '';
 
     /**
