@@ -28,12 +28,12 @@
 		</p>
 	<{/if}>	
 	
-	<h5><a href="<{$xoops_url}>/userinfo.php?uid=<{$users[i].id}>"><{$users[i].name}></a></h5>
+	<h5><a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$users[i].id}>"><{$users[i].name}></a></h5>
     <{if $displayavatar == 1}>  
-        <a href="<{$xoops_url}>/userinfo.php?uid=<{$users[i].id}>"><img src='<{$xoops_url}>/uploads/<{$users[i].avatar}>' class='rounded-circle float-left' title='<{$users[i].name}>' alt='<{$users[i].name}>' style='padding:10px' width='100' height='100'></a>
+        <a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$users[i].id}>"><img src='<{$xoops_url}>/uploads/<{$users[i].avatar}>' class='rounded-circle float-left' title='<{$users[i].name}>' alt='<{$users[i].name}>' style='padding:10px' width='100' height='100'></a>
     <{/if}>
     <{if $displayrealname == 1 && $users[i].realname!=''}>
-        <span class="text-muted"><b><{$smarty.const._MD_YOGURT_REALNAME}> :</b> <a href="<{$xoops_url}>/userinfo.php?uid=<{$users[i].id}>"><{$users[i].realname}></a></span>
+        <span class="text-muted"><b><{$smarty.const._MD_YOGURT_REALNAME}> :</b> <a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$users[i].id}>"><{$users[i].realname}></a></span>
     <{/if}>
 	<{if $displayfrom == 1 && $users[i].location!=''}>
         <br><span class='text-muted'><small><b><{$smarty.const._MD_YOGURT_LOCATION}> :</b> <{$users[i].location}></small></span>
