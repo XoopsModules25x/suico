@@ -27,8 +27,8 @@ define('_MD_YOGURT_YOUCANUPLOAD', "You can only upload jpg's files and up to %s 
 define('_MD_YOGURT_UPLOADPICTURE', 'Upload Picture');
 define(
     '_MD_YOGURT_NOCACHACA',
-    'Bad, Bad Module...No cache for you!<br>
-Unfortunately, this module has acted in an unexpected way. Hopefully it will return to its helpful self if you try again. '
+    'Error : No cache !<br>
+Unfortunately, this module has acted in an unexpected way. Please try again. '
 ); //Funny general error message
 define('_MD_YOGURT_PAGETITLE', "%s - %s's Social Network");
 define('_MD_YOGURT_SUBMIT', 'Submit');
