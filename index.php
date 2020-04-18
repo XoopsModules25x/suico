@@ -406,9 +406,23 @@ foreach ($mids as $mid) {
     }
 }
 
-/**
- * Closing the page
- */
+if (xoops_isActiveModule('profile')) {
+$profile_handler=xoops_getmodulehandler('profile','profile');
+$uid = $controller->uidOwner;
+if ($uid <= 0) { 
+ if (is_object($xoopsUser))  {
+        $profile = $profile_handler->get($uid);
+		} 
+        else {
+             header('location: ' . XOOPS_URL); 
+             exit();
+             }
+ }
+else 
+{
+$profile = $profile_handler->get($uid);
+}
+}
 
 require __DIR__ . '/footer.php';
 require dirname(dirname(__DIR__)) . '/footer.php';
