@@ -18,7 +18,11 @@
 		<{if $xoops_isuser && $allow_friends !=-1}>		
 		<p class="float-right">
 		<{if $users[i].isFriend!=1 && $users[i].uid != $uid_owner && $users[i].selffriendrequest!=1 && $users[i].otherfriendrequest!=1}>
-			<a href="index.php?uid=<{$users[i].id}>" target="_blank" role="button" class="btn btn-info btn-sm"><{$lang_addfriend}></a>
+			<form action=send_friendpetition.php method="post">
+				<input type="hidden" name="petitionto_uid" id="petitionto_uid" value="<{$users[i].id}>">
+				<input name="addfriend" type="submit" value="<{$lang_addfriend}>" class="btn btn-info btn-sm float-right">			 	   
+				<{$token}>
+            </form>
 		<{/if}>			
 		<{if $users[i].isFriend ==1 && $users[i].uid != $uid_owner}>
 			<button type="button" class="btn btn-dark btn-sm"><{$lang_myfriend}></button>	
