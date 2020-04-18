@@ -1,5 +1,0 @@
-This module works now with:
-
-- Xoops 2.5.1x
-
-Read for your System the install textfile.
