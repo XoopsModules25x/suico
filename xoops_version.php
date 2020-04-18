@@ -184,7 +184,7 @@ $modversion['submit_feature']    = 'http://sourceforge.net/tracker/?func=add&gro
 xoops_load(
     'xoopseditorhandler'
 );
-
+/*
 $modversion['configcat']['friends']      = [
     'name'        => _MI_YOGURT_CONFCAT_NOTES,
     'description' => _MI_YOGURT_CONFCAT_NOTES_DSC,
@@ -247,6 +247,7 @@ $modversion['configcat']['admin']      = [
     'name'        => _MI_YOGURT_CONFCAT_ADMIN,
     'description' => _MI_YOGURT_CONFCAT_ADMIN_DSC,
 ];
+*/
 
 //Configs
 
