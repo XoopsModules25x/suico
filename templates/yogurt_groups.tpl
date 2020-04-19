@@ -88,14 +88,18 @@
             </p>
 
             <{if $isOwner }>
-                <form action="abandongroup.php" method="POST" id="form_abandongroup">
-                    <input type="hidden" value="<{$mygroups[i].id}>" name="relgroup_id" id="relgroup_id">
-                    <button name="" type="image"><{$lang_abandongroup}></button>
-                </form>
                 <{if $xoops_userid == $mygroups[i].uid }>
-                    <form>
-                        <img src="assets/images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>">
+                    
+					 <form action="delete_group.php" method="POST" id="form_deletegroup" class="yogurt-groups-form-delete">
+                        <input type="hidden" value="<{$mygroups[i].group_id}>" name="group_id" id="group_id">
+                        <input type="image" src="<{xoModuleIcons16 delete.png}>">
                     </form>
+                    <form action="editgroup.php" method="POST" id="form_editgroup" class="yogurt-groups-form-edit">
+                        <input type="hidden" value="<{$mygroups[i].group_id}>" name="group_id" id="group_id">
+                        <input type="image" src="<{xoModuleIcons16 edit.png}>">
+                    </form>
+                        <img src="assets/images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>">
+                  
                 <{/if}>
             <{/if}>
 
@@ -131,13 +135,8 @@
             </p>
             </p>
             <{if ($xoops_userid == $groups[j].uid)}>
-                <br>
-                <form action="abandongroup.php" method="POST" id="form_abandongroup">
-                    <input type="hidden" value="<{$mygroups[i].id}>" name="relgroup_id" id="relgroup_id">
-                    <button name="" type="image"><{$lang_abandongroup}></button>
-                </form>
-                <{if $xoops_userid == $groups[j].uid }>
-                    <form action="delete_group.php" method="POST" id="form_deletegroup" class="yogurt-groups-form-delete">
+         	
+                  <form action="delete_group.php" method="POST" id="form_deletegroup" class="yogurt-groups-form-delete">
                         <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
                         <input type="image" src="<{xoModuleIcons16 delete.png}>">
                     </form>
@@ -149,23 +148,19 @@
                         <img src="assets/images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>">
                     </form>
                 <{/if}>
-            <{/if}>
-
-            <{if ($xoops_userid != $groups[j].uid)}>
-
-                <{if in_array($groups[j].id, $mygroupsid)}>
-                    <form action="abandongroup.php" method="POST" id="form_abandongroup">
-                        <input type="hidden" value="<{$mygroups[i].id}>" name="relgroup_id" id="relgroup_id">
-                        <button name="" type="image"><{$lang_abandongroup}></button>
-                    </form>
-                <{else}>
+            
+             <{if $isAnonym!=1}>
+                <{if !in_array($groups[j].id, $mygroupsid)}>
                     <form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">
                         <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
                         <button name="" type="image"><{$lang_joingroup}></button>
                     </form>
+				<{else}>
+				    <button name="" type="image"><{$lang_memberofgroup}></button>
                 <{/if}>
             <{/if}>
-        </div>
+         
+		</div>
         <br>
     <{/section}>
 

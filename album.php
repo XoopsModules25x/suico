@@ -29,9 +29,9 @@ require __DIR__ . '/header.php';
 $controller = new Yogurt\PhotosController($xoopsDB, $xoopsUser);
 
 /**
- * Fetching numbers of groups friends videos pictures etc...
+
  */
-$nbSections = $controller->getNumbersSections();
+
 
 /**
  * This variable define the beggining of the navigation must b

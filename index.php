@@ -41,9 +41,9 @@ $mainvideodesc = '';
 $controller = new IndexController($xoopsDB, $xoopsUser);
 
 /**
- * Fetching numbers of groups friends videos pictures etc...
+
  */
-$nbSections = $controller->getNumbersSections();
+
 
 /**
  * This variable define the beggining of the navigation must b
