@@ -25,6 +25,11 @@ require __DIR__ . '/header.php';
 
 $controller = new Yogurt\ConfigController($xoopsDB, $xoopsUser);
 
+/**
+ * Fetching numbers of groups friends videos pictures etc...
+ */
+$nbSections = $controller->getNumbersSections();
+
 
 if (!$xoopsUser) {
     redirect_header('index.php');

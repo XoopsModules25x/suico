@@ -36,6 +36,11 @@ $nbSections = $controller->getNumbersSections();
 $start = Request::getInt('start', 0, 'GET');
 
 /**
+ * Fetching numbers of groups friends videos pictures etc...
+ */
+$nbSections = $controller->getNumbersSections();
+
+/**
  * Criteria for Audio
  */
 $criteriaUidAudio = new Criteria('uid_owner', $controller->uidOwner);

@@ -28,6 +28,11 @@ $controller = new Yogurt\FriendsController($xoopsDB, $xoopsUser);
 $start = Request::getInt('start', 0, 'GET');
 
 /**
+ * Fetching numbers of groups friends videos pictures etc...
+ */
+$nbSections = $controller->getNumbersSections();
+
+/**
  * Friends
  */
 $criteria_friends    = new Criteria('friend2_uid', $controller->uidOwner);

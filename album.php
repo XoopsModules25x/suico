@@ -44,6 +44,11 @@ $start = Request::getInt(
 );
 
 /**
+ * Fetching numbers of groups friends videos pictures etc...
+ */
+$nbSections = $controller->getNumbersSections();
+
+/**
  * Filter for search pictures in database
  */
 if (1 === $controller->isOwner) {

@@ -24,6 +24,10 @@ $GLOBALS['xoopsOption']['template_main'] = 'yogurt_notebook.tpl';
 require __DIR__ . '/header.php';
 
 $controller = new Yogurt\NotesController($xoopsDB, $xoopsUser);
+
+/**
+ * Fetching numbers of groups friends videos pictures etc...
+ */
 $nbSections = $controller->getNumbersSections();
 
 //$controller->renderFormNewPost($xoopsTpl);

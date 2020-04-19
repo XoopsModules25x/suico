@@ -36,6 +36,12 @@ $op = Request::getCmd('op', 'form', 'POST');
 //require_once __DIR__ . '/class/yogurt_controller.php';
 $controller = new Yogurt\IndexController($xoopsDB, $xoopsUser);
 
+/**
+ * Fetching numbers of groups friends videos pictures etc...
+ */
+$nbSections = $controller->getNumbersSections();
+
+
 if ('form' === $op) {
     $GLOBALS['xoopsOption']['template_main'] = 'yogurt_searchform.tpl';
     require XOOPS_ROOT_PATH . '/header.php';

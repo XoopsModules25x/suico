@@ -71,6 +71,7 @@ $newpetition->setVar('petitionto_uid', Request::getInt('petitionfrom_uid', 0, 'P
 if ($friendpetitionFactory->insert2($newpetition)) {
     $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
     $extra_tags['X_OWNER_UID']  = $xoopsUser->getVar('uid');
+    /** @var \XoopsNotificationHandler $notificationHandler */
     $notificationHandler        = xoops_getHandler('notification');
     $notificationHandler->triggerEvent('friendship', Request::getInt('petitionfrom_uid', 0, 'POST'), 'new_friendship', $extra_tags);
 
@@ -87,4 +88,4 @@ if ($friendpetitionFactory->insert2($newpetition)) {
 /**
  * Close page
  */
-require dirname(__DIR__, 2) . '/footer.php';
+require dirname(dirname(__DIR__)) . '/footer.php';

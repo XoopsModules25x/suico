@@ -30,11 +30,11 @@ if (false !== stripos($_SERVER['HTTP_USER_AGENT'], 'msie')) {
         XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css'
     );
 }
-if (stripos($_SERVER['REQUEST_URI'], 'album.php')) {
+//if (stripos($_SERVER['REQUEST_URI'], 'album.php')) {
 $xoTheme->addStylesheet(
     XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.lightbox-0.3.css'
 );
-}
+//}
 
 if (!stripos($_SERVER['REQUEST_URI'], 'memberslist.php')) {
 $xoTheme->addScript(
@@ -42,8 +42,9 @@ $xoTheme->addScript(
 );
 }
 
-if (stripos($_SERVER['REQUEST_URI'], 'album.php')) {
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js'); }
+//if (stripos($_SERVER['REQUEST_URI'], 'album.php')) {
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js'); 
+//}
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
 
 if (stripos($_SERVER['REQUEST_URI'], 'memberslist.php')) {
@@ -86,7 +87,6 @@ if ($xoopsUser && $xoopsUser->isAdmin(1)) {
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
-$nbSections = $controller->getNumbersSections();
 $xoopsTpl->assign('nb_groups', $nbSections['nbGroups']);
 $xoopsTpl->assign('nb_photos', $nbSections['nbPhotos']);
 $xoopsTpl->assign('nb_videos', $nbSections['nbVideos']);
