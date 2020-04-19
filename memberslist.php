@@ -37,9 +37,9 @@ $op = 'form';
 $controller = new Yogurt\IndexController($xoopsDB, $xoopsUser);
 
 /**
-
+ * Fetching numbers of groups friends videos pictures etc...
  */
-
+$nbSections = $controller->getNumbersSections();
 
     $GLOBALS['xoopsOption']['template_main'] = 'yogurt_memberslist_datatables.tpl';
     require XOOPS_ROOT_PATH . '/header.php';

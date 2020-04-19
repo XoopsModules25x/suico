@@ -27,9 +27,9 @@ require __DIR__ . '/header.php';
 $controller = new Yogurt\GroupController($xoopsDB, $xoopsUser);
 
 /**
-
+ * Fetching numbers of groups friends videos pictures etc...
  */
-
+$nbSections = $controller->getNumbersSections();
 
 $start_all = Request::getInt('start_all', 0, 'GET');
 $start_my  = Request::getInt('start_my', 0, 'GET');
@@ -54,22 +54,6 @@ foreach ($groups_objects as $group_object) {
     $groups[$i]['desc']  = $group_object->getVar('group_desc');
     $groups[$i]['uid']   = $group_object->getVar('owner_uid');
     $i++;
-}
-
-/**
- * My Groups
- */
-$mygroups          = '';
-$criteria_mygroups = new Criteria('rel_user_uid', $controller->uidOwner);
-$nb_mygroups       = $controller->relgroupusersFactory->getCount($criteria_mygroups);
-$criteria_mygroups->setLimit($helper->getConfig('groupsperpage'));
-$criteria_mygroups->setStart($start_my);
-$mygroups = $controller->relgroupusersFactory->getGroups('', $criteria_mygroups, 0);
-
-
-$mygroupsid =[];
-foreach($mygroups as $value){
-    $mygroupsid[] = $value['group_id'];
 }
 
 /**
@@ -118,7 +102,6 @@ $xoopsTpl->assign('lang_abandongroup', _MD_YOGURT_GROUP_ABANDON);
 $xoopsTpl->assign('lang_joingroup', _MD_YOGURT_GROUP_JOIN);
 $xoopsTpl->assign('lang_searchgroup', _MD_YOGURT_GROUP_SEARCH);
 $xoopsTpl->assign('lang_groupkeyword', _MD_YOGURT_GROUP_SEARCHKEYWORD);
-$xoopsTpl->assign('lang_memberofgroup', _MD_YOGURT_MEMBEROFGROUP);
 
 require __DIR__ . '/footer.php';
 require dirname(dirname(__DIR__)) . '/footer.php';

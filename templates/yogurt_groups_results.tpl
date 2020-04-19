@@ -37,6 +37,11 @@
                 <{$groups[j].desc}>
             </p>
             </p>
+            <{if $isOwner }>
+                <form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">
+                    <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
+                    <button name="" type="image"><{$lang_joingroup}></button>
+                </form>
                 <{if $xoops_userid == $groups[j].uid }>
                     <form action="delete_group.php" method="POST" id="form_deletegroup" class="yogurt-groups-form-delete">
                         <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
@@ -50,7 +55,9 @@
                         <img src="assets/images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>">
                     </form>
                 <{/if}>
-                 </div>
+
+            <{/if}>
+        </div>
     <{/section}>
 
 </div>

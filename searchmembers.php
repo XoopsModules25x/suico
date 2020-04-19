@@ -41,9 +41,9 @@ if (isset($_POST['op']) && 'submit' === $_POST['op']) {
 $controller = new Yogurt\IndexController($xoopsDB, $xoopsUser);
 
 /**
-
+ * Fetching numbers of groups friends videos pictures etc...
  */
-
+$nbSections = $controller->getNumbersSections();
 
 if ('form' === $op) {
     $GLOBALS['xoopsOption']['template_main'] = 'yogurt_searchform.tpl';

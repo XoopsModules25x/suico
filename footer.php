@@ -66,7 +66,6 @@ $xoopsTpl->assign('allow_profile_general', $controller->checkPrivilege('profile_
 $xoopsTpl->assign('allow_profile_stats', $controller->checkPrivilege('profile_stats') ? 1 : 0);
 
 //Owner data
-
 $xoopsTpl->assign('uid_owner', $controller->uidOwner);
 $xoopsTpl->assign('owner_uname', $controller->nameOwner);
 $xoopsTpl->assign('isOwner', $controller->isOwner);
@@ -81,10 +80,7 @@ if ($xoopsUser && $xoopsUser->isAdmin(1)) {
     $xoopsTpl->assign('isWebmaster', '0');
 }
 
-/**
- * Fetching numbers of groups friends videos pictures etc...
- */
-$nbSections = $controller->getNumbersSections();
+//numbers
 $xoopsTpl->assign('nb_groups', $nbSections['nbGroups']);
 $xoopsTpl->assign('nb_photos', $nbSections['nbPhotos']);
 $xoopsTpl->assign('nb_videos', $nbSections['nbVideos']);
