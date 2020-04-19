@@ -63,8 +63,29 @@ switch ($op) {
         $imagesObject->setVar('data_creation', $_REQUEST['data_creation']);
         $imagesObject->setVar('data_update', $_REQUEST['data_update']);
         $imagesObject->setVar('uid_owner', Request::getVar('uid_owner', ''));
+
+        require_once XOOPS_ROOT_PATH . '/class/uploader.php';
+        $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/images/';
+        $uploader  = new \XoopsMediaUploader(
+            $uploadDir, $helper->getConfig('mimetypes'), $helper->getConfig('maxsize'), null, null
+        );
+        if ($uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0])) {
+            //$extension = preg_replace( '/^.+\.([^.]+)$/sU' , '' , $_FILES['attachedfile']['name']);
+            //$imgName = str_replace(' ', '', $_POST['url']).'.'.$extension;
+
+            $uploader->setPrefix('url_');
+            $uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0]);
+            if (!$uploader->upload()) {
+                $errors = $uploader->getErrors();
+                redirect_header('javascript:history.go(-1)', 3, $errors);
+            } else {
+                $imagesObject->setVar('url', $uploader->getSavedFileName());
+            }
+        } else {
         $imagesObject->setVar('url', Request::getVar('url', ''));
-        $imagesObject->setVar('private', Request::getVar('private', ''));
+        }
+
+        $imagesObject->setVar('private', ((1 == \Xmf\Request::getInt('private', 0)) ? '1' : '0'));
         if ($imageHandler->insert($imagesObject)) {
             redirect_header('images.php?op=list', 2, AM_YOGURT_FORMOK);
         }
@@ -202,7 +223,7 @@ switch ($op) {
                 );
 
                 $GLOBALS['xoopsTpl']->assign('selectorurl', AM_YOGURT_IMAGES_URL);
-                $imagesArray['url'] = strip_tags($imagesTempArray[$i]->getVar('url'));
+                $imagesArray['url'] = "<img src='" . $uploadUrl . $imagesTempArray[$i]->getVar('url') . "' name='" . 'name' . "' id=" . 'id' . " alt='' style='max-width:100px'>";
 
                 $GLOBALS['xoopsTpl']->assign('selectorprivate', AM_YOGURT_IMAGES_PRIVATE);
                 $imagesArray['private']     = $imagesTempArray[$i]->getVar('private');

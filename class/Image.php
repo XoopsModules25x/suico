@@ -64,7 +64,7 @@ class Image extends XoopsObject
         $this->initVar('data_creation', XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('data_update', XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('uid_owner', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('url', XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('url', XOBJ_DTYPE_OTHER, null, false);
         $this->initVar('private', XOBJ_DTYPE_TXTBOX, null, false);
         if (!empty($id)) {
             if (is_array($id)) {
