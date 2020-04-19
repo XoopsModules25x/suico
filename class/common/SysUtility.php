@@ -52,7 +52,6 @@ class SysUtility
 
         $select_view   = '';
         $moduleDirName = basename(dirname(dirname(__DIR__)));
-        /** @var Helper $helper */
         $helper = Helper::getInstance();
 
         $pathModIcon16 = XOOPS_URL . '/modules/' . $moduleDirName . '/' . $helper->getModule()->getInfo('modicons16');

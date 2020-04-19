@@ -72,7 +72,6 @@ $totalSuspensions = $suspensionsHandler->getCount();
 //count "total Audio"
 $totalAudio = $audioHandler->getCount();
 //count "total Privacy"
-/** @var \XoopsPersistableObjectHandler $privacyHandler */
 $totalPrivacy = $privacyHandler->getCount();
 // InfoBox Statistics
 $adminObject->addInfoBox(AM_YOGURT_STATISTICS);
