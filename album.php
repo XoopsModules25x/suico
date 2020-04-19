@@ -111,7 +111,7 @@ $avatar     = $owner->getVar('user_avatar');
 /**
  * Creating the navigation bar if you have a lot of friends
  */
-$nbPhotos = isset($nbSections['nbPhotos']) ? $nbSections['nbPhotos']:'';
+$nbPhotos = $nbSections['nbPhotos'] ?? '';
 $navigationBar = new XoopsPageNav(
     $nbPhotos, $helper->getConfig('picturesperpage'), $start, 'start', 'uid=' . (int)$controller->uidOwner
 );
@@ -131,7 +131,7 @@ $xoopsTpl->assign(
 );
 $xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
 $xoopsTpl->assign('lang_editdesc', _MD_YOGURT_EDITDESC);
-$xoopsTpl->assign('lang_nb_pict', sprintf(_MD_YOGURT_YOUHAVE, (isset($nbSections['nbPhotos']) ? $nbSections['nbPhotos']:'')));
+$xoopsTpl->assign('lang_nb_pict', sprintf(_MD_YOGURT_YOUHAVE, ($nbSections['nbPhotos'] ?? '')));
 
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 $xoopsTpl->assign('navegacao', $navegacao);

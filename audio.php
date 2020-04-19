@@ -46,7 +46,7 @@ $criteriaUidAudio->setLimit($helper->getConfig('audiosperpage'));
  * Get all audios of this user and assign them to template
  */
 $audios       = $controller->getAudio($criteriaUidAudio);
-$nbAudio = isset($nbSections['nbAudio']) ?  $nbSections['nbAudio'] : '';
+$nbAudio = $nbSections['nbAudio'] ?? '';
 try {
     $audios_array = $controller->assignAudioContent($nbAudio, $audios);
 } catch (\RuntimeException $e) {
