@@ -1,52 +1,33 @@
 <{include file="db:yogurt_navbar.tpl"}>
-<form class='outer' name='form_group_search' id='form_group_search' action='search_group.php' method='get'>
-    <h4 class="head"><{$lang_searchgroup}></h4>
 
-
-    <p class=even>
-        <label for='group_keyword' class='xoops-form-element-caption-required'>
-            <span class='yogurt-groups-search-keyword'><{$lang_groupkeyword}></span><span class='caption-marker'>*</span></label>
-        <input type='text' name='group_keyword' id='group_keyword' size='35' maxlength='55' value=''>
-        <input type='hidden' name='uid' id='uid' value='<{$uid_owner}>'>
-    </p>
-
-    <p class=odd>
-        <input type='submit' class='formButton' name='submit_button' id='submit_button' value='<{$lang_searchgroup}>'>
-    </p>
-
-    <{$token}>
-</form>
 <{if $isAnonym!=1 && $isOwner}>
     <form class='outer' name='form_group' id='form_group' action='submit_group.php' method='post' onsubmit='return xoopsFormValidate_form_group();' enctype="multipart/form-data">
+<div class="alert alert-info">
+        <h5><{$lang_creategroup}></h5>
 
-        <h4 class="head"><{$lang_creategroup}></h4>
+		<div class="form-group">
+			<label for="group"><strong><{$lang_title}></strong></label>
+			<input type='text' name='group_title' id='group_title' class='form-control' value='' required>
+		</div>
 
-        <p class="odd"><label for='' class='xoops-form-element-caption'><span class='caption-text'><{$lang_youcanupload}></span><span class='caption-marker'>*</span></label></p>
-        <p class=even><label for='group_img' class='xoops-form-element-caption-required'><span class='caption-text'><{$lang_groupimage}></span><span class='caption-marker'>*</span></label>
-            <input type='hidden' name='MAX_FILE_SIZE' value='<{$maxfilesize}>'>
-            <input type='file' name='group_img' id='group_img'>
-            <input type='hidden' name='xoops_upload_file[]' id='xoops_upload_file[]' value='group_img'>
-        </p>
+		<div class="form-group">
+			<label for="group"><strong><{$lang_description}></strong></label>
+			<input type='text' name='group_desc' id='group_desc' class="form-control" value='' required>
+		</div>
 
-        <p class=odd>
-            <label for='group_title' class='xoops-form-element-caption-required'>
-                <span class='caption-text'><{$lang_title}></span><span class='caption-marker'>*</span></label>
-            <input type='text' name='group_title' id='group_title' size='35' maxlength='55' value='' required>
-        </p>
+		<div class="form-group">
+			<label for="group"><strong><{$lang_groupimage}></strong><br><{$lang_youcanupload}></label>
+			 <input type='hidden' name='MAX_FILE_SIZE' value='<{$maxfilesize}>'>
+			 <input type='file' name='group_img' id='group_img' class='form-control-file'>
+		    <input type='hidden' name='xoops_upload_file[]' id='xoops_upload_file[]' value='group_img'>			
+		</div>
 
-        <p class=even>
-            <label for='group_desc' class='xoops-form-element-caption-required'>
-                <span class='caption-text'><{$lang_description}></span>
-                <span class='caption-marker'>*</span></label>
-            <input type='text' name='group_desc' id='group_desc' size='35' maxlength='55' value='' required>
-        </p>
-
-        <p class=odd>
-            <input type='submit' class='formButton' name='submit_button' id='submit_button' value='<{$lang_savegroup}>'>
-        </p>
-
+		<input type='submit' class='btn btn-primary' name='submit_button' id='submit_button' value='<{$lang_savegroup}>'>
         <{$token}><input type='hidden' name='marker' id='marker' value='1'>
+	</div>	
     </form>
+	
+
     <!-- Start Form Validation JavaScript //-->
     <script type='text/javascript'>
         <!--//
@@ -112,6 +93,25 @@
     <{$navigationBar_my}>
 </div>
 
+
+<form class='outer' name='form_group_search' id='form_group_search' action='search_group.php' method='get'>
+<div class="alert alert-primary">    
+<h4 class="head"><{$lang_searchgroup}></h4>
+
+		<div class="form-group">
+			<label for="group_keyword"><strong> <{$lang_groupkeyword}></strong></label> 
+			<input type='text' name='group_keyword' id='group_keyword' class="form-control" value=''>
+			<input type='hidden' name='uid' id='uid' value='<{$uid_owner}>'>
+			</div>
+
+        <input type='submit' class='btn btn-primary' name='submit_button' id='submit_button' value='<{$lang_searchgroup}>'>
+
+    <{$token}>
+</div>
+</form>
+
+
+
 <div id="yogurt-groups-container" class="outer">
     <h4 class="head">
         <{$lang_groupstitle}>
@@ -122,6 +122,8 @@
             <{$lang_nogroupsyet}>
         </h4>
     <{/if}>
+
+
 
     <{section name=j loop=$groups}>
         <div class="yogurt-group-all <{cycle values="odd,even"}>">
@@ -153,10 +155,10 @@
                 <{if !in_array($groups[j].id, $mygroupsid)}>
                     <form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">
                         <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
-                        <button name="" type="image"><{$lang_joingroup}></button>
+                        <button name="" type="image" class="btn btn-dark btn-sm"><{$lang_joingroup}></button>
                     </form>
 				<{else}>
-				    <button name="" type="image"><{$lang_memberofgroup}></button>
+				    <button name="" type="image" class="btn btn-success btn-sm"><{$lang_memberofgroup}></button>
                 <{/if}>
             <{/if}>
          
