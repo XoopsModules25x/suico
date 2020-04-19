@@ -25,6 +25,10 @@ require __DIR__ . '/header.php';
 
 $controller = new Yogurt\NotesController($xoopsDB, $xoopsUser);
 
+/**
+ * Fetching numbers of groups friends videos pictures etc...
+ */
+$nbSections = $controller->getNumbersSections();
 
 //$controller->renderFormNewPost($xoopsTpl);
 $criteria_uid = new Criteria('note_to', $controller->uidOwner);

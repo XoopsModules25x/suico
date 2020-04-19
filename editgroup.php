@@ -27,8 +27,9 @@ require __DIR__ . '/header.php';
 $controller = new Yogurt\GroupController($xoopsDB, $xoopsUser);
 
 /**
-
+ * Fetching numbers of groups friends videos pictures etc...
  */
+$nbSections = $controller->getNumbersSections();
 
 
 $group_id = Request::getInt('group_id', 0, 'POST');

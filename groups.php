@@ -30,6 +30,11 @@ $start_all = Request::getInt('start_all', 0, 'GET');
 $start_my  = Request::getInt('start_my', 0, 'GET');
 
 /**
+ * Fetching numbers of groups friends videos pictures etc...
+ */
+$nbSections = $controller->getNumbersSections();
+
+/**
  * All Groups
  */
 $criteria_groups = new Criteria('group_id', 0, '>');
