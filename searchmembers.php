@@ -31,12 +31,8 @@ use XoopsModules\Yogurt\IndexController;
 
 require __DIR__ . '/header.php';
 
-$op = 'form';
-$op = isset($_POST['op']) ? trim(htmlspecialchars($_POST['op'], ENT_QUOTES | ENT_HTML5)) : 'form';
+$op = Request::getCmd('op', 'form', 'POST');
 
-if (isset($_POST['op']) && 'submit' === $_POST['op']) {
-    $op = 'submit';
-}
 //require_once __DIR__ . '/class/yogurt_controller.php';
 $controller = new Yogurt\IndexController($xoopsDB, $xoopsUser);
 
