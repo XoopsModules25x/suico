@@ -36,11 +36,13 @@ require __DIR__ . '/header.php';
  * Receiving info from get parameters
  */
 $relgroupuser_id = Request::getInt('relgroup_id', 0, 'POST');
+$group_id = Request::getInt('group_id', 0, 'POST');
 
 if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
     xoops_confirm(
         [
             'relgroup_id' => $relgroupuser_id,
+			'group_id' => $group_id,
             'confirm'     => 1,
         ],
         'abandongroup.php',
@@ -65,9 +67,9 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
      * Try to delete
      */
     if ($relgroupuserFactory->deleteAll($criteria)) {
-        redirect_header('groups.php', 1, _MD_YOGURT_GROUPABANDONED);
+        redirect_header('group.php?group_id='.$group_id.'', 1, _MD_YOGURT_GROUPABANDONED);
     } else {
-        redirect_header('groups.php', 1, _MD_YOGURT_NOCACHACA);
+        redirect_header('group.php?group_id='.$group_id.'', 1, _MD_YOGURT_NOCACHACA);
     }
 }
 require dirname(dirname(__DIR__)) . '/footer.php';
