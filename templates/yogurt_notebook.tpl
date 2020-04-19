@@ -1,25 +1,25 @@
 <{include file='db:yogurt_navbar.tpl'}>
 
 <{if $isAnonym!=1 }>
-<div id="yogurt-Notes-form" class="outer">
-    <form name="formNoteNew" id="formNoteNew" action="submitNote.php" method="post">
-        <p>
-            <input type='hidden' name='uid' id='uid' value='<{$uid_owner}>'><input type='hidden' name='mainform' id='mainform' value='1'>
-            <{$token}>
-            <textarea name='text' id='text' rows='5' cols='50'><{$lang_entertext}></textarea>
-        </p>
+    <div id="yogurt-Notes-form" class="outer">
+        <form name="formNoteNew" id="formNoteNew" action="submitNote.php" method="post">
+            <p>
+                <input type='hidden' name='uid' id='uid' value='<{$uid_owner}>'><input type='hidden' name='mainform' id='mainform' value='1'>
+                <{$token}>
+                <textarea name='text' id='text' rows='5' cols='50'><{$lang_entertext}></textarea>
+            </p>
 
-        <p>
-            <input type='submit' class='formButton' name='post_Note' id='post_Note' value='<{$lang_submit}>'>
-            <a href="#" name='show_tips' id='show_tips' value='Notetips'>
-                <{$lang_tips}>
-            </a>
-        </p>
-    </form>
-    <div id="xtips" name="xtips" style="width:500px;height:50px;" action="">
-        [b]<{$lang_bold}>[/b] => <b><{$lang_bold}></b> | [i]<{$lang_italic}>[/i] => <i><{$lang_italic}></i> | [u]<{$lang_underline}>[/u] => <u><{$lang_underline}></u>
+            <p>
+                <input type='submit' class='formButton' name='post_Note' id='post_Note' value='<{$lang_submit}>'>
+                <a href="#" name='show_tips' id='show_tips' value='Notetips'>
+                    <{$lang_tips}>
+                </a>
+            </p>
+        </form>
+        <div id="xtips" name="xtips" style="width:500px;height:50px;" action="">
+            [b]<{$lang_bold}>[/b] => <b><{$lang_bold}></b> | [i]<{$lang_italic}>[/i] => <i><{$lang_italic}></i> | [u]<{$lang_underline}>[/u] => <u><{$lang_underline}></u>
+        </div>
     </div>
-</div>
 <{/if}>
 
 <div id="yogurt-Notes-container" class="outer">
@@ -32,13 +32,12 @@
                     </p>
                     <{if $notes[i].user_avatar=="avatars/blank.gif" }><img src="assets/images/noavatar.gif"><{else}><img width="100"  class="avatar_Note" src="../../uploads/<{$notes[i].user_avatar}>"> <{/if}>
                     <{if $isOwner==1}>
-                    <p>
-                    <form name="delete_Note" method="post" action="delete_Note.php" class="yogurt-Note-form-delete">
-                        <input value="<{$notes[i].id}>" type="image" id="note_idimage" name="note_idimage" src="<{xoModuleIcons16 delete.png}>">
-                        <input value="<{$notes[i].id}>" type="hidden" id="note_id" name="note_id">
-                    </form>
-
-                    </p>
+                        <p>
+                        <form name="delete_Note" method="post" action="delete_Note.php" class="yogurt-Note-form-delete">
+                            <input value="<{$notes[i].id}>" type="image" id="note_idimage" name="note_idimage" src="<{xoModuleIcons16 delete.png}>">
+                            <input value="<{$notes[i].id}>" type="hidden" id="note_id" name="note_id">
+                        </form>
+                        </p>
                     <{/if}>
                 </div>
                 <div class="yogurt-Note-details-texts">

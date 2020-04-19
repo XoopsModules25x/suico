@@ -3,7 +3,8 @@
 <{$searchform.javascript}>
 <h4><{$smarty.const._MD_YOGURT_SEARCH}></h4>
 <{if $displaytotalmember == 1}>
-    <b><{$smarty.const._MD_YOGURT_TOTALUSERS}>:</b> <{$totalmember}>
+    <b><{$smarty.const._MD_YOGURT_TOTALUSERS}>:</b>
+    <{$totalmember}>
 <{/if}>
 
 <br><br>
