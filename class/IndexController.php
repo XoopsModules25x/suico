@@ -56,11 +56,11 @@ class IndexController extends YogurtController
         $section = null
     ) {
         global $xoopsModuleConfig;
-        if ('' === trim($section)) {
+        if ('' === \trim($section)) {
             return -1;
         }
         $configsectionname = 'enable_' . $section;
-        if (array_key_exists($configsectionname, $xoopsModuleConfig)) {
+        if (\array_key_exists($configsectionname, $xoopsModuleConfig)) {
             if (0 === $this->helper->getConfig($configsectionname)) {
                 return -1;
             }

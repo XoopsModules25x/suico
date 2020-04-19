@@ -131,7 +131,7 @@ class AudioController extends YogurtController
     public function checkPrivilege()
     {
         if (0 === $this->helper->getConfig('enable_audio')) {
-            redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_AUDIONOTENABLED);
+            \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_AUDIONOTENABLED);
         }
         $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
         if (1 === $this->configsFactory->getCount($criteria)) {
@@ -140,7 +140,7 @@ class AudioController extends YogurtController
             $config = $configs[0]->getVar('audio');
 
             if (!$this->checkPrivilegeLevel($config)) {
-                redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, _MD_YOGURT_NOPRIVILEGE);
+                \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, _MD_YOGURT_NOPRIVILEGE);
             }
         }
 

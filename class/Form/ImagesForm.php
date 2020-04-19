@@ -35,13 +35,13 @@ use XoopsFormTextDateSelect;
 use XoopsModules\Yogurt;
 use XoopsThemeForm;
 
-require_once dirname(__DIR__, 2) . '/include/common.php';
+require_once \dirname(__DIR__, 2) . '/include/common.php';
 
-$moduleDirName = basename(dirname(__DIR__, 2));
+$moduleDirName = \basename(\dirname(__DIR__, 2));
 //$helper = Yogurt\Helper::getInstance();
 $permHelper = new Permission();
 
-xoops_load('XoopsFormLoader');
+\xoops_load('XoopsFormLoader');
 
 /**
  * Class ImagesForm
@@ -62,8 +62,8 @@ class ImagesForm extends XoopsThemeForm
         $this->helper       = $target->helper;
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? sprintf(AM_YOGURT_IMAGES_ADD) : sprintf(AM_YOGURT_IMAGES_EDIT);
-        parent::__construct($title, 'form', xoops_getenv('SCRIPT_NAME'), 'post', true);
+        $title = $this->targetObject->isNew() ? \sprintf(AM_YOGURT_IMAGES_ADD) : \sprintf(AM_YOGURT_IMAGES_EDIT);
+        parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
 
         //include ID field, it's needed so the module knows if it is a new form or an edited form
@@ -88,7 +88,7 @@ class ImagesForm extends XoopsThemeForm
         // Data_creation
         $this->addElement(
             new XoopsFormTextDateSelect(
-                AM_YOGURT_IMAGES_DATA_CREATION, 'data_creation', 0, strtotime(
+                AM_YOGURT_IMAGES_DATA_CREATION, 'data_creation', 0, \strtotime(
                                                   $this->targetObject->getVar('data_creation')
                                               )
             )
@@ -96,7 +96,7 @@ class ImagesForm extends XoopsThemeForm
         // Data_update
         $this->addElement(
             new XoopsFormTextDateSelect(
-                AM_YOGURT_IMAGES_DATA_UPDATE, 'data_update', 0, strtotime(
+                AM_YOGURT_IMAGES_DATA_UPDATE, 'data_update', 0, \strtotime(
                                                 $this->targetObject->getVar('data_update')
                                             )
             )
@@ -120,7 +120,7 @@ class ImagesForm extends XoopsThemeForm
         
         $uploadDir   = '/uploads/yogurt/images/';
         $imgtray     = new \XoopsFormElementTray(AM_YOGURT_IMAGES_URL, '<br>');
-        $imgpath     = sprintf(AM_YOGURT_FORMIMAGE_PATH, $uploadDir);
+        $imgpath     = \sprintf(AM_YOGURT_FORMIMAGE_PATH, $uploadDir);
         $imageselect = new \XoopsFormSelect($imgpath, 'url', $url);
         $imageArray  = \XoopsLists::getImgListAsArray(XOOPS_ROOT_PATH . $uploadDir);
         foreach ($imageArray as $image) {
@@ -146,6 +146,6 @@ class ImagesForm extends XoopsThemeForm
         $this->addElement($check_private);
 
         $this->addElement(new XoopsFormHidden('op', 'save'));
-        $this->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $this->addElement(new XoopsFormButton('', 'submit', \_SUBMIT, 'submit'));
     }
 }

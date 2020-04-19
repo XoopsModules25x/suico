@@ -123,7 +123,7 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
             $xoopsObject = new Configs();
             $format      = 'INSERT INTO %s (config_id, config_uid, pictures, audio, videos, groups, notes, friends, profile_contact, profile_general, profile_stats, suspension, backup_password, backup_email, end_suspension)';
             $format      .= 'VALUES (%u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %s, %s, %s)';
-            $sql         = sprintf(
+            $sql         = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_configs'),
                 $config_id,
@@ -147,7 +147,7 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
             $format = 'UPDATE %s SET ';
             $format .= 'config_id=%u, config_uid=%u, pictures=%u, audio=%u, videos=%u, groups=%u, notes=%u, friends=%u, profile_contact=%u, profile_general=%u, profile_stats=%u, suspension=%u, backup_password=%s, backup_email=%s, end_suspension=%s';
             $format .= ' WHERE config_id = %u';
-            $sql    = sprintf(
+            $sql    = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_configs'),
                 $config_id,
@@ -198,7 +198,7 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject instanceof Configs) {
             return false;
         }
-        $sql = sprintf(
+        $sql = \sprintf(
             'DELETE FROM %s WHERE config_id = %u',
             $this->db->prefix('yogurt_configs'),
             $xoopsObject->getVar('config_id')

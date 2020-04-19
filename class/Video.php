@@ -9,7 +9,7 @@ use XoopsObject;
 /**
  * Protection against inclusion outside the site
  */
-if (!defined('XOOPS_ROOT_PATH')) {
+if (!\defined('XOOPS_ROOT_PATH')) {
     die('XOOPS root path not defined');
 }
 
@@ -42,13 +42,13 @@ class Video extends XoopsObject
         $this->helper     = Helper::getInstance();
         $this->permHelper = new Permission();
         $this->db         = XoopsDatabaseFactory::getDatabaseConnection();
-        $this->initVar('video_id', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('uid_owner', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('video_desc', XOBJ_DTYPE_OTHER, null, false);
-        $this->initVar('youtube_code', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('main_video', XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('video_id', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('uid_owner', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('video_desc', \XOBJ_DTYPE_OTHER, null, false);
+        $this->initVar('youtube_code', \XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('main_video', \XOBJ_DTYPE_TXTBOX, null, false);
         if (!empty($id)) {
-            if (is_array($id)) {
+            if (\is_array($id)) {
                 $this->assignVars($id);
             } else {
                 $this->load((int)$id);
@@ -91,13 +91,13 @@ class Video extends XoopsObject
         $db          = XoopsDatabaseFactory::getDatabaseConnection();
         $ret         = [];
         $where_query = '';
-        if (is_array($criteria) && count($criteria) > 0) {
+        if (\is_array($criteria) && \count($criteria) > 0) {
             $where_query = ' WHERE';
             foreach ($criteria as $c) {
                 $where_query .= " ${c} AND";
             }
             $where_query = mb_substr($where_query, 0, -4);
-        } elseif (!is_array($criteria) && $criteria) {
+        } elseif (!\is_array($criteria) && $criteria) {
             $where_query = ' WHERE ' . $criteria;
         }
         if (!$asobject) {

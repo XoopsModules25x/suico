@@ -42,7 +42,7 @@ class Migrate extends \Xmf\Database\Migrate
             $this->renameTables  = $configurator->renameTables;
             $this->renameColumns = $configurator->renameColumns;
 
-            $moduleDirName = basename(dirname(__DIR__, 2));
+            $moduleDirName = \basename(\dirname(__DIR__, 2));
             parent::__construct($moduleDirName);
         }
     }
@@ -57,7 +57,7 @@ class Migrate extends \Xmf\Database\Migrate
     protected function preSyncActions()
     {
         // rename table
-        if ($this->renameTables && is_array($this->renameTables)) {
+        if ($this->renameTables && \is_array($this->renameTables)) {
             $this->renameTable();
         }
         $this->renameColumn('yogurt_notes', 'Note_id', 'note_id');

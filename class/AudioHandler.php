@@ -110,7 +110,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         $force = false
     ) {
         global $xoopsConfig;
-        if (get_class($xoopsObject) !== Audio::class) {
+        if (\get_class($xoopsObject) !== Audio::class) {
             return false;
         }
         if (!$xoopsObject->isDirty()) {
@@ -128,7 +128,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
             $xoopsObject = new Audio();
             $format      = 'INSERT INTO %s (audio_id, title, author, url, uid_owner, data_creation, data_update)';
             $format      .= ' VALUES (%u, %s, %s, %s, %u, %s, %s)';
-            $sql         = sprintf(
+            $sql         = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_audio'),
                 $audio_id,
@@ -144,7 +144,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
             $format = 'UPDATE %s SET ';
             $format .= 'audio_id=%u, title=%s, author=%s, url=%s, uid_owner=%u, data_creation=%s, data_update=%s';
             $format .= ' WHERE audio_id = %u';
-            $sql    = sprintf(
+            $sql    = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_audio'),
                 $audio_id,
@@ -184,10 +184,10 @@ class AudioHandler extends XoopsPersistableObjectHandler
         XoopsObject $xoopsObject,
         $force = false
     ) {
-        if ('yogurt_audio' !== get_class($xoopsObject)) {
+        if ('yogurt_audio' !== \get_class($xoopsObject)) {
             return false;
         }
-        $sql = sprintf(
+        $sql = \sprintf(
             'DELETE FROM %s WHERE audio_id = %u',
             $this->db->prefix('yogurt_audio'),
             $xoopsObject->getVar('audio_id')
@@ -322,7 +322,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         ];
         $maxfilesize       = $maxfilebytes;
 
-        $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/audio/';
+        $uploadDir = \XOOPS_UPLOAD_PATH . '/yogurt/audio/';
         // create the object to upload
         $uploader = new XoopsMediaUploader(
             $uploadDir, $allowed_mimetypes, $maxfilesize

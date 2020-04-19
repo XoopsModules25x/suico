@@ -132,7 +132,7 @@ class VideoController extends YogurtController
     public function checkPrivilege()
     {
         if (0 === $this->helper->getConfig('enable_videos')) {
-            redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_VIDEOSNOTENABLED);
+            \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_VIDEOSNOTENABLED);
         }
         $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
         if (1 === $this->configsFactory->getCount($criteria)) {
@@ -141,7 +141,7 @@ class VideoController extends YogurtController
             $config = $configs[0]->getVar('videos');
 
             if (!$this->checkPrivilegeLevel($config)) {
-                redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, _MD_YOGURT_NOPRIVILEGE);
+                \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, _MD_YOGURT_NOPRIVILEGE);
             }
         }
 

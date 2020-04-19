@@ -124,7 +124,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
             $xoopsObject = new Visitors();
             $format      = 'INSERT INTO %s (cod_visit, uid_owner, uid_visitor,uname_visitor)';
             $format      .= 'VALUES (%u, %u, %u, %s)';
-            $sql         = sprintf(
+            $sql         = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_visitors'),
                 $cod_visit,
@@ -137,7 +137,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
             $format = 'UPDATE %s SET ';
             $format .= 'cod_visit=%u, uid_owner=%u, uid_visitor=%u, uname_visitor=%s ';
             $format .= ' WHERE cod_visit = %u';
-            $sql    = sprintf(
+            $sql    = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_visitors'),
                 $cod_visit,
@@ -177,7 +177,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject instanceof Visitors) {
             return false;
         }
-        $sql = sprintf(
+        $sql = \sprintf(
             'DELETE FROM %s WHERE cod_visit = %u',
             $this->db->prefix('yogurt_visitors'),
             $xoopsObject->getVar('cod_visit')

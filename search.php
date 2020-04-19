@@ -283,7 +283,7 @@ switch ($op) {
                         )) {
                             case XOBJ_DTYPE_OTHER:
                             case XOBJ_DTYPE_INT:
-                                $value        = array_map('intval', $_REQUEST[$fieldname]);
+                                $value        = array_map('\intval', $_REQUEST[$fieldname]);
                                 $searchvars[] = $fieldname;
                                 $criteria->add(new Criteria($fieldname, '(' . implode(',', $value) . ')', 'IN'));
                                 break;
@@ -370,7 +370,7 @@ switch ($op) {
                                     $search_url[] = $fieldname . '=' . $value;
                                     $criteria->add(new Criteria($fieldname, $value, '='));
                                 } else {
-                                    $value = array_map('intval', $_REQUEST[$fieldname]);
+                                    $value = array_map('\intval', $_REQUEST[$fieldname]);
                                     foreach ($value as $thisvalue) {
                                         $search_url[] = $fieldname . '[]=' . $thisvalue;
                                     }

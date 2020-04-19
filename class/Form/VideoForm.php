@@ -34,13 +34,13 @@ use XoopsFormTextArea;
 use XoopsModules\Yogurt;
 use XoopsThemeForm;
 
-require_once dirname(__DIR__, 2) . '/include/common.php';
+require_once \dirname(__DIR__, 2) . '/include/common.php';
 
-$moduleDirName = basename(dirname(__DIR__, 2));
+$moduleDirName = \basename(\dirname(__DIR__, 2));
 //$helper = Yogurt\Helper::getInstance();
 $permHelper = new Permission();
 
-xoops_load('XoopsFormLoader');
+\xoops_load('XoopsFormLoader');
 
 /**
  * Class VideoForm
@@ -61,8 +61,8 @@ class VideoForm extends XoopsThemeForm
         $this->helper       = $target->helper;
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? sprintf(AM_YOGURT_VIDEO_ADD) : sprintf(AM_YOGURT_VIDEO_EDIT);
-        parent::__construct($title, 'form', xoops_getenv('SCRIPT_NAME'), 'post', true);
+        $title = $this->targetObject->isNew() ? \sprintf(AM_YOGURT_VIDEO_ADD) : \sprintf(AM_YOGURT_VIDEO_EDIT);
+        parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
 
         //include ID field, it's needed so the module knows if it is a new form or an edited form
@@ -117,6 +117,6 @@ class VideoForm extends XoopsThemeForm
         );
 
         $this->addElement(new XoopsFormHidden('op', 'save'));
-        $this->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $this->addElement(new XoopsFormButton('', 'submit', \_SUBMIT, 'submit'));
     }
 }

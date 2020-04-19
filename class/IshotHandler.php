@@ -24,7 +24,7 @@ use XoopsPersistableObjectHandler;
  * @author       XOOPS Development Team
  * @since
  */
-if (!defined(
+if (!\defined(
     'XOOPS_ROOT_PATH'
 )) {
     exit();
@@ -141,7 +141,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
             $xoopsObject = new Ishot();
             $format      = 'INSERT INTO %s (cod_ishot, uid_voter, uid_voted, ishot, DATE)';
             $format      .= 'VALUES (%u, %u, %u, %u, %s)';
-            $sql         = sprintf(
+            $sql         = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_ishot'),
                 $cod_ishot,
@@ -155,7 +155,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
             $format = 'UPDATE %s SET ';
             $format .= 'cod_ishot=%u, uid_voter=%u, uid_voted=%u, ishot=%u, date=%s';
             $format .= ' WHERE cod_ishot = %u';
-            $sql    = sprintf(
+            $sql    = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_ishot'),
                 $cod_ishot,
@@ -196,7 +196,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject instanceof Ishot) {
             return false;
         }
-        $sql = sprintf(
+        $sql = \sprintf(
             'DELETE FROM %s WHERE cod_ishot = %u',
             $this->db->prefix('yogurt_ishot'),
             $xoopsObject->getVar('cod_ishot')

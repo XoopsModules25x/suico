@@ -259,32 +259,32 @@ class Id3v1
         $filename,
         $readOnly = false
     ) {
-        if (is_bool($readOnly)) {
+        if (\is_bool($readOnly)) {
             $this->_readOnly = $readOnly;
         }
 
-        if (!is_string($filename)) {
+        if (!\is_string($filename)) {
             throw new RuntimeException('Filename must be a string');
         }
 
-        if (!is_file($filename)) {
+        if (!\is_file($filename)) {
             throw new RuntimeException('File doesn\'t exist');
         }
 
         $mode = $this->_readOnly ? 'rb' : 'rb+';
 
-        if (!$this->_stream = @fopen($filename, $mode, false)) {
+        if (!$this->_stream = @\fopen($filename, $mode, false)) {
             throw new RuntimeException('File cannot be opened');
         }
 
         if (!$this->_readOnly) {
-            flock($this->_stream, LOCK_SH);
+            \flock($this->_stream, \LOCK_SH);
         }
 
-        fseek($this->_stream, -128, SEEK_END);
-        $rawTag = fread($this->_stream, 128);
+        \fseek($this->_stream, -128, \SEEK_END);
+        $rawTag = \fread($this->_stream, 128);
 
-        if ($rawTag[125] === chr(0) && $rawTag[126] !== chr(0)) {
+        if ($rawTag[125] === \chr(0) && $rawTag[126] !== \chr(0)) {
             $format = 'a3marking/a30title/a30artist/a30album/a4year' . '/a28comment/x1/C1track/C1genre';
 
             $this->_version = self::ID3V1_1;
@@ -294,7 +294,7 @@ class Id3v1
             $this->_version = self::ID3V1_0;
         }
 
-        $tags = unpack($format, $rawTag);
+        $tags = \unpack($format, $rawTag);
 
         $this->clearAllTags();
 
@@ -336,8 +336,8 @@ class Id3v1
             'genre',
         ];
 
-        if (in_array($name, $validNames, true)) {
-            return $this->{'get' . ucfirst($name)}();
+        if (\in_array($name, $validNames, true)) {
+            return $this->{'get' . \ucfirst($name)}();
         }
 
         throw new RuntimeException('Property doesn\'t exist');
@@ -378,8 +378,8 @@ class Id3v1
             'genre',
         ];
 
-        if (in_array($name, $validNames, true)) {
-            return $this->{'set' . ucfirst($name)}($value);
+        if (\in_array($name, $validNames, true)) {
+            return $this->{'set' . \ucfirst($name)}($value);
         }
 
         throw new RuntimeException('Property doesn\'t exist');
@@ -423,8 +423,8 @@ class Id3v1
             $returnedTags[] = $tagVal;
         }
 
-        if (count($returnedTags) > 0) {
-            return implode(', ', $returnedTags);
+        if (\count($returnedTags) > 0) {
+            return \implode(', ', $returnedTags);
         }
     }
 
@@ -538,7 +538,7 @@ class Id3v1
      */
     public function getId3v1Version() 
     {
-        return constant('self::' . $this->_version);
+        return \constant('self::' . $this->_version);
     }
 
     /**
@@ -588,7 +588,7 @@ class Id3v1
             return $this;
         }
 
-        if (is_string($title)) {
+        if (\is_string($title)) {
             $this->_tags['title'] = $title;
         } else {
             throw new RuntimeException('Title has to be a string');
@@ -615,7 +615,7 @@ class Id3v1
             return $this;
         }
 
-        if (is_string($artist)) {
+        if (\is_string($artist)) {
             $this->_tags['artist'] = $artist;
         } else {
             throw new RuntimeException('Artist has to be a string');
@@ -642,7 +642,7 @@ class Id3v1
             return $this;
         }
 
-        if (is_string($album)) {
+        if (\is_string($album)) {
             $this->_tags['album'] = $album;
         } else {
             throw new RuntimeException('Album has to be a string');
@@ -671,7 +671,7 @@ class Id3v1
             return $this;
         }
 
-        if (is_string($comment)) {
+        if (\is_string($comment)) {
             $this->_tags['comment'] = $comment;
         } else {
             throw new RuntimeException('Comment has to be a string');
@@ -697,9 +697,9 @@ class Id3v1
             return $this;
         }
 
-        if (is_int($genre)) {
+        if (\is_int($genre)) {
             $this->_tags['genre'] = $genre;
-        } elseif (is_string($genre)) {
+        } elseif (\is_string($genre)) {
             $this->_tags['genre'] = self::getGenreIdByName($genre);
         } else {
             throw new RuntimeException('Genre type invalid');
@@ -723,7 +723,7 @@ class Id3v1
             return $this;
         }
 
-        if (is_int($year)) {
+        if (\is_int($year)) {
             $this->_tags['year'] = $year;
         } else {
             throw new RuntimeException('Year has to be an interger');
@@ -753,7 +753,7 @@ class Id3v1
             return $this;
         }
 
-        if (is_int($track) && 0 !== $track) {
+        if (\is_int($track) && 0 !== $track) {
             $this->_tags['track'] = $track;
             $this->_version       = self::ID3V1_1;
         } else {
@@ -799,7 +799,7 @@ class Id3v1
     public static function getGenreIdByName(
         $genreName
     ) {
-        $genres = array_flip(self::$_genres);
+        $genres = \array_flip(self::$_genres);
 
         if (!isset($genres[$genreName])) {
             return 255;
@@ -855,16 +855,16 @@ class Id3v1
             return $this;
         }
 
-        fseek($this->_stream, -128, SEEK_END);
+        \fseek($this->_stream, -128, \SEEK_END);
 
         if ('TAG' !== $this->_tags['marking']) {
-            fseek($this->_stream, 0, SEEK_END);
+            \fseek($this->_stream, 0, \SEEK_END);
         }
 
         $newTag = '';
 
         if ($this->_version === self::ID3V1_0) {
-            $newTag = pack(
+            $newTag = \pack(
                 'a3a30a30a30a4a30C1',
                 'TAG',
                 $this->_tags['title'],
@@ -875,7 +875,7 @@ class Id3v1
                 $this->_tags['genre']
             );
         } else {
-            $newTag = pack(
+            $newTag = \pack(
                 'a3a30a30a30a4a28x1C1C1',
                 'TAG',
                 $this->_tags['title'],
@@ -888,7 +888,7 @@ class Id3v1
             );
         }
 
-        if (false === fwrite($this->_stream, $newTag, 128)) {
+        if (false === \fwrite($this->_stream, $newTag, 128)) {
             throw new RuntimeException('Not possible to write ID3 tags');
         }
 

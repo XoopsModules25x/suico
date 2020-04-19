@@ -46,10 +46,10 @@ class Privacy extends \XoopsObject
         //        $this->helper = Yogurt\Helper::getInstance();
         $this->permHelper = new \Xmf\Module\Helper\Permission();
 
-        $this->initVar('id', XOBJ_DTYPE_INT);
-        $this->initVar('level', XOBJ_DTYPE_INT);
-        $this->initVar('name', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('description', XOBJ_DTYPE_OTHER);
+        $this->initVar('id', \XOBJ_DTYPE_INT);
+        $this->initVar('level', \XOBJ_DTYPE_INT);
+        $this->initVar('name', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('description', \XOBJ_DTYPE_OTHER);
     }
 
     /**

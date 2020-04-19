@@ -35,7 +35,7 @@ use XoopsThemeForm;
 /**
  * Protection against inclusion outside the site
  */
-if (!defined('XOOPS_ROOT_PATH')) {
+if (!\defined('XOOPS_ROOT_PATH')) {
     die('XOOPS root path not defined');
 }
 
@@ -159,7 +159,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $xoopsObject = new Image();
             $format      = 'INSERT INTO %s (cod_img, title, data_creation, data_update, uid_owner, url, private)';
             $format      .= 'VALUES (%u, %s, %s, %s, %s, %s, 0)';
-            $sql         = sprintf(
+            $sql         = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_images'),
                 $cod_img,
@@ -174,7 +174,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $format = 'UPDATE %s SET ';
             $format .= 'cod_img=%u, title=%s, data_creation=%s, data_update=%s, uid_owner=%s, url=%s, private=%s';
             $format .= ' WHERE cod_img = %u';
-            $sql    = sprintf(
+            $sql    = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_images'),
                 $cod_img,
@@ -217,7 +217,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject instanceof Image) {
             return false;
         }
-        $sql = sprintf(
+        $sql = \sprintf(
             'DELETE FROM %s WHERE cod_img = %u',
             $this->db->prefix('yogurt_images'),
             $xoopsObject->getVar('cod_img')
@@ -340,7 +340,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $field_desc = new XoopsFormText(_MD_YOGURT_CAPTION, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
         $button_send   = new XoopsFormButton('', 'submit_button', _MD_YOGURT_UPLOADPICTURE, 'submit');
-        $field_warning = new XoopsFormLabel(sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxbytes / 1024));
+        $field_warning = new XoopsFormLabel(\sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxbytes / 1024));
         $form->addElement($field_warning);
         $form->addElement($field_url, true);
         $form->addElement($field_desc);
@@ -418,7 +418,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         );
         $maxfilesize       = $maxfilebytes;
 
-        $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/images/';
+        $uploadDir = \XOOPS_UPLOAD_PATH . '/yogurt/images/';
         // create the object to upload
         $uploader = new XoopsMediaUploader(
             $path_upload, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight
@@ -484,65 +484,65 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $path_upload
     )  {
         $img2   = $img;
-        $path   = pathinfo($img);
-        $img    = imagecreatefromjpeg($img);
-        $xratio = $thumbwidth / imagesx($img);
-        $yratio = $thumbheight / imagesy($img);
+        $path   = \pathinfo($img);
+        $img    = \imagecreatefromjpeg($img);
+        $xratio = $thumbwidth / \imagesx($img);
+        $yratio = $thumbheight / \imagesy($img);
 
         if ($xratio < 1 || $yratio < 1) {
             if ($xratio < $yratio) {
-                $resized = imagecreatetruecolor($thumbwidth, (int)floor(imagesy($img) * $xratio));
+                $resized = \imagecreatetruecolor($thumbwidth, (int)\floor(\imagesy($img) * $xratio));
             } else {
-                $resized = imagecreatetruecolor((int)floor(imagesx($img) * $yratio), $thumbheight);
+                $resized = \imagecreatetruecolor((int)\floor(\imagesx($img) * $yratio), $thumbheight);
             }
-            imagecopyresampled(
+            \imagecopyresampled(
                 $resized,
                 $img,
                 0,
                 0,
                 0,
                 0,
-                imagesx($resized) + 1,
-                imagesy($resized) + 1,
-                imagesx($img),
-                imagesy($img)
+                \imagesx($resized) + 1,
+                \imagesy($resized) + 1,
+                \imagesx($img),
+                \imagesy($img)
             );
-            imagejpeg($resized, $path_upload . '/thumb_' . $path['basename']);
-            imagedestroy($resized);
+            \imagejpeg($resized, $path_upload . '/thumb_' . $path['basename']);
+            \imagedestroy($resized);
         } else {
-            imagejpeg($img, $path_upload . '/thumb_' . $path['basename']);
+            \imagejpeg($img, $path_upload . '/thumb_' . $path['basename']);
         }
 
-        imagedestroy($img);
-        $path2   = pathinfo($img2);
-        $img2    = imagecreatefromjpeg($img2);
-        $xratio2 = $pictwidth / imagesx($img2);
-        $yratio2 = $pictheight / imagesy($img2);
+        \imagedestroy($img);
+        $path2   = \pathinfo($img2);
+        $img2    = \imagecreatefromjpeg($img2);
+        $xratio2 = $pictwidth / \imagesx($img2);
+        $yratio2 = $pictheight / \imagesy($img2);
         if ($xratio2 < 1 || $yratio2 < 1) {
             if ($xratio2 < $yratio2) {
-                $resized2 = imagecreatetruecolor($pictwidth, (int)floor(imagesy($img2) * $xratio2));
+                $resized2 = \imagecreatetruecolor($pictwidth, (int)\floor(\imagesy($img2) * $xratio2));
             } else {
-                $resized2 = imagecreatetruecolor((int)floor(imagesx($img2) * $yratio2), $pictheight);
+                $resized2 = \imagecreatetruecolor((int)\floor(\imagesx($img2) * $yratio2), $pictheight);
             }
 
-            imagecopyresampled(
+            \imagecopyresampled(
                 $resized2,
                 $img2,
                 0,
                 0,
                 0,
                 0,
-                imagesx($resized2) + 1,
-                imagesy($resized2) + 1,
-                imagesx($img2),
-                imagesy($img2)
+                \imagesx($resized2) + 1,
+                \imagesy($resized2) + 1,
+                \imagesx($img2),
+                \imagesy($img2)
             );
-            imagejpeg($resized2, $path_upload . '/resized_' . $path2['basename']);
-            imagedestroy($resized2);
+            \imagejpeg($resized2, $path_upload . '/resized_' . $path2['basename']);
+            \imagedestroy($resized2);
         } else {
-            imagejpeg($img2, $path_upload . '/resized_' . $path2['basename']);
+            \imagejpeg($img2, $path_upload . '/resized_' . $path2['basename']);
         }
-        imagedestroy($img2);
+        \imagedestroy($img2);
     }
 
     /**
@@ -618,64 +618,64 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $path_upload
     )  {
         $img2   = $img;
-        $path   = pathinfo($img);
-        $img    = imagecreatefromjpeg($img);
-        $xratio = $thumbwidth / imagesx($img);
-        $yratio = $thumbheight / imagesy($img);
+        $path   = \pathinfo($img);
+        $img    = \imagecreatefromjpeg($img);
+        $xratio = $thumbwidth / \imagesx($img);
+        $yratio = $thumbheight / \imagesy($img);
 
         if ($xratio < 1 || $yratio < 1) {
             if ($xratio < $yratio) {
-                $resized = imagecreatetruecolor($thumbwidth, (int)floor(imagesy($img) * $xratio));
+                $resized = \imagecreatetruecolor($thumbwidth, (int)\floor(\imagesy($img) * $xratio));
             } else {
-                $resized = imagecreatetruecolor((int)floor(imagesx($img) * $yratio), $thumbheight);
+                $resized = \imagecreatetruecolor((int)\floor(\imagesx($img) * $yratio), $thumbheight);
             }
-            imagecopyresampled(
+            \imagecopyresampled(
                 $resized,
                 $img,
                 0,
                 0,
                 0,
                 0,
-                imagesx($resized) + 1,
-                imagesy($resized) + 1,
-                imagesx($img),
-                imagesy($img)
+                \imagesx($resized) + 1,
+                \imagesy($resized) + 1,
+                \imagesx($img),
+                \imagesy($img)
             );
-            imagejpeg($resized, $path_upload . '/thumb_' . $path['basename']);
-            imagedestroy($resized);
+            \imagejpeg($resized, $path_upload . '/thumb_' . $path['basename']);
+            \imagedestroy($resized);
         } else {
-            imagejpeg($img, $path_upload . '/thumb_' . $path['basename']);
+            \imagejpeg($img, $path_upload . '/thumb_' . $path['basename']);
         }
 
-        imagedestroy($img);
-        $path2   = pathinfo($img2);
-        $img2    = imagecreatefromjpeg($img2);
-        $xratio2 = $pictwidth / imagesx($img2);
-        $yratio2 = $pictheight / imagesy($img2);
+        \imagedestroy($img);
+        $path2   = \pathinfo($img2);
+        $img2    = \imagecreatefromjpeg($img2);
+        $xratio2 = $pictwidth / \imagesx($img2);
+        $yratio2 = $pictheight / \imagesy($img2);
         if ($xratio2 < 1 || $yratio2 < 1) {
             if ($xratio2 < $yratio2) {
-                $resized2 = imagecreatetruecolor($pictwidth, (int)floor(imagesy($img2) * $xratio2));
+                $resized2 = \imagecreatetruecolor($pictwidth, (int)\floor(\imagesy($img2) * $xratio2));
             } else {
-                $resized2 = imagecreatetruecolor((int)floor(imagesx($img2) * $yratio2), $pictheight);
+                $resized2 = \imagecreatetruecolor((int)\floor(\imagesx($img2) * $yratio2), $pictheight);
             }
 
-            imagecopyresampled(
+            \imagecopyresampled(
                 $resized2,
                 $img2,
                 0,
                 0,
                 0,
                 0,
-                imagesx($resized2) + 1,
-                imagesy($resized2) + 1,
-                imagesx($img2),
-                imagesy($img2)
+                \imagesx($resized2) + 1,
+                \imagesy($resized2) + 1,
+                \imagesx($img2),
+                \imagesy($img2)
             );
-            imagejpeg($resized2, $path_upload . '/resized_' . $path2['basename']);
-            imagedestroy($resized2);
+            \imagejpeg($resized2, $path_upload . '/resized_' . $path2['basename']);
+            \imagedestroy($resized2);
         } else {
-            imagejpeg($img2, $path_upload . '/resized_' . $path2['basename']);
+            \imagejpeg($img2, $path_upload . '/resized_' . $path2['basename']);
         }
-        imagedestroy($img2);
+        \imagedestroy($img2);
     }
 }

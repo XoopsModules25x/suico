@@ -51,7 +51,7 @@ class SysUtility
         global $start, $order, $file_cat, $sort, $xoopsModule;
 
         $select_view   = '';
-        $moduleDirName = basename(dirname(__DIR__, 2));
+        $moduleDirName = \basename(\dirname(__DIR__, 2));
         $helper = Helper::getInstance();
 
         $pathModIcon16 = XOOPS_URL . '/modules/' . $moduleDirName . '/' . $helper->getModule()->getInfo('modicons16');
@@ -80,9 +80,9 @@ class SysUtility
     public static function blockAddCatSelect($cats)
     {
         $cat_sql = '';
-        if (is_array($cats) && !empty($cats)) {
-            $cat_sql = '(' . current($cats);
-            array_shift($cats);
+        if (\is_array($cats) && !empty($cats)) {
+            $cat_sql = '(' . \current($cats);
+            \array_shift($cats);
             foreach ($cats as $cat) {
                 $cat_sql .= ',' . $cat;
             }
@@ -100,10 +100,10 @@ class SysUtility
         global $xoopsTpl, $xoTheme;
         $myts    = \MyTextSanitizer::getInstance();
         $content = $myts->undoHtmlSpecialChars($myts->displayTarea($content));
-        if (null !== $xoTheme && is_object($xoTheme)) {
-            $xoTheme->addMeta('meta', 'keywords', strip_tags($content));
+        if (null !== $xoTheme && \is_object($xoTheme)) {
+            $xoTheme->addMeta('meta', 'keywords', \strip_tags($content));
         } else {    // Compatibility for old Xoops versions
-            $xoopsTpl->assign('xoops_metaKeywords', strip_tags($content));
+            $xoopsTpl->assign('xoops_metaKeywords', \strip_tags($content));
         }
     }
 
@@ -115,10 +115,10 @@ class SysUtility
         global $xoopsTpl, $xoTheme;
         $myts    = \MyTextSanitizer::getInstance();
         $content = $myts->undoHtmlSpecialChars($myts->displayTarea($content));
-        if (null !== $xoTheme && is_object($xoTheme)) {
-            $xoTheme->addMeta('meta', 'description', strip_tags($content));
+        if (null !== $xoTheme && \is_object($xoTheme)) {
+            $xoTheme->addMeta('meta', 'description', \strip_tags($content));
         } else {    // Compatibility for old Xoops versions
-            $xoopsTpl->assign('xoops_metaDescription', strip_tags($content));
+            $xoopsTpl->assign('xoops_metaDescription', \strip_tags($content));
         }
     }
 
@@ -143,7 +143,7 @@ class SysUtility
         }
 
         $row      = $GLOBALS['xoopsDB']->fetchBoth($result);
-        $enumList = explode(',', str_replace("'", '', substr($row['COLUMN_TYPE'], 5, -6)));
+        $enumList = \explode(',', \str_replace("'", '', \substr($row['COLUMN_TYPE'], 5, -6)));
         return $enumList;
     }
 
@@ -159,11 +159,11 @@ class SysUtility
         $new_id = false;
         $table  = $GLOBALS['xoopsDB']->prefix($tableName);
         // copy content of the record you wish to clone
-        $tempTable = $GLOBALS['xoopsDB']->fetchArray($GLOBALS['xoopsDB']->query("SELECT * FROM $table WHERE $id_field='$id' "), MYSQLI_ASSOC) or exit('Could not select record');
+        $tempTable = $GLOBALS['xoopsDB']->fetchArray($GLOBALS['xoopsDB']->query("SELECT * FROM $table WHERE $id_field='$id' "), \MYSQLI_ASSOC) or exit('Could not select record');
         // set the auto-incremented id's value to blank.
         unset($tempTable[$id_field]);
         // insert cloned copy of the original  record
-        $result = $GLOBALS['xoopsDB']->queryF("INSERT INTO $table (" . implode(', ', array_keys($tempTable)) . ") VALUES ('" . implode("', '", $tempTable) . "')") or exit($GLOBALS['xoopsDB']->error());
+        $result = $GLOBALS['xoopsDB']->queryF("INSERT INTO $table (" . \implode(', ', \array_keys($tempTable)) . ") VALUES ('" . \implode("', '", $tempTable) . "')") or exit($GLOBALS['xoopsDB']->error());
 
         if ($result) {
             // Return the new id
@@ -190,11 +190,11 @@ class SysUtility
         $openTags = [];
         if ($considerHtml) {
             // if the plain text is shorter than the maximum length, return the whole text
-            if (strlen(preg_replace('/<.*?' . '>/', '', $text)) <= $length) {
+            if (\strlen(\preg_replace('/<.*?' . '>/', '', $text)) <= $length) {
                 return $text;
             }
             // splits all html-tags to scanable lines
-            preg_match_all('/(<.+?' . '>)?([^<>]*)/s', $text, $lines, PREG_SET_ORDER);
+            \preg_match_all('/(<.+?' . '>)?([^<>]*)/s', $text, $lines, \PREG_SET_ORDER);
             $total_length = mb_strlen($ending);
             //$openTags    = [];
             $truncate     = '';
@@ -202,43 +202,43 @@ class SysUtility
                 // if there is any html-tag in this line, handle it and add it (uncounted) to the output
                 if (!empty($line_matchings[1])) {
                     // if it's an "empty element" with or without xhtml-conform closing slash
-                    if (preg_match('/^<(\s*.+?\/\s*|\s*(img|br|input|hr|area|base|basefont|col|frame|isindex|link|meta|param)(\s.+?)?)>$/is', $line_matchings[1])) {
+                    if (\preg_match('/^<(\s*.+?\/\s*|\s*(img|br|input|hr|area|base|basefont|col|frame|isindex|link|meta|param)(\s.+?)?)>$/is', $line_matchings[1])) {
                         // do nothing
                         // if tag is a closing tag
-                    } elseif (preg_match('/^<\s*\/(\S+?)\s*>$/s', $line_matchings[1], $tag_matchings)) {
+                    } elseif (\preg_match('/^<\s*\/(\S+?)\s*>$/s', $line_matchings[1], $tag_matchings)) {
                         // delete tag from $openTags list
-                        $pos = array_search($tag_matchings[1], $openTags);
+                        $pos = \array_search($tag_matchings[1], $openTags);
                         if (false !== $pos) {
                             unset($openTags[$pos]);
                         }
                         // if tag is an opening tag
-                    } elseif (preg_match('/^<\s*([^\s>!]+).*?' . '>$/s', $line_matchings[1], $tag_matchings)) {
+                    } elseif (\preg_match('/^<\s*([^\s>!]+).*?' . '>$/s', $line_matchings[1], $tag_matchings)) {
                         // add tag to the beginning of $openTags list
-                        array_unshift($openTags, strtolower($tag_matchings[1]));
+                        \array_unshift($openTags, \strtolower($tag_matchings[1]));
                     }
                     // add html-tag to $truncate'd text
                     $truncate .= $line_matchings[1];
                 }
                 // calculate the length of the plain text part of the line; handle entities as one character
-                $content_length = strlen(preg_replace('/&[0-9a-z]{2,8};|&#\d{1,7};|[0-9a-f]{1,6};/i', ' ', $line_matchings[2]));
+                $content_length = \strlen(\preg_replace('/&[0-9a-z]{2,8};|&#\d{1,7};|[0-9a-f]{1,6};/i', ' ', $line_matchings[2]));
                 if ($total_length + $content_length > $length) {
                     // the number of characters which are left
                     $left            = $length - $total_length;
                     $entities_length = 0;
                     // search for html entities
-                    if (preg_match_all('/&[0-9a-z]{2,8};|&#\d{1,7};|[0-9a-f]{1,6};/i', $line_matchings[2], $entities, PREG_OFFSET_CAPTURE)) {
+                    if (\preg_match_all('/&[0-9a-z]{2,8};|&#\d{1,7};|[0-9a-f]{1,6};/i', $line_matchings[2], $entities, \PREG_OFFSET_CAPTURE)) {
                         // calculate the real length of all entities in the legal range
                         foreach ($entities[0] as $entity) {
                             if ($entity[1] + 1 - $entities_length <= $left) {
                                 $left--;
-                                $entities_length += strlen($entity[0]);
+                                $entities_length += \strlen($entity[0]);
                             } else {
                                 // no more characters left
                                 break;
                             }
                         }
                     }
-                    $truncate .= substr($line_matchings[2], 0, $left + $entities_length);
+                    $truncate .= \substr($line_matchings[2], 0, $left + $entities_length);
                     // maximum lenght is reached, so get off the loop
                     break;
                 } else {
@@ -250,19 +250,19 @@ class SysUtility
                     break;
                 }
             }
-        } elseif (strlen($text) <= $length) {
+        } elseif (\strlen($text) <= $length) {
             return $text;
         }
 
-        $truncate = substr($text, 0, $length - strlen($ending));
+        $truncate = \substr($text, 0, $length - \strlen($ending));
 
         // if the words shouldn't be cut in the middle...
         if (!$exact) {
             // ...search the last occurance of a space...
-            $spacepos = strrpos($truncate, ' ');
+            $spacepos = \strrpos($truncate, ' ');
             if (isset($spacepos)) {
                 // ...and cut the text in this position
-                $truncate = substr($truncate, 0, $spacepos);
+                $truncate = \substr($truncate, 0, $spacepos);
             }
         }
         // add the defined ending to the text
@@ -303,23 +303,23 @@ class SysUtility
 
         $isAdmin = $helper->isUserAdmin();
 
-        if (class_exists('XoopsFormEditor')) {
+        if (\class_exists('XoopsFormEditor')) {
             if ($isAdmin) {
                 $descEditor = new XoopsFormEditor(
-                    ucfirst($options['name']), $helper->getConfig(
+                    \ucfirst($options['name']), $helper->getConfig(
                     'editorAdmin'
                 ), $options, $nohtml = false, $onfailure = 'textarea'
                 );
             } else {
                 $descEditor = new XoopsFormEditor(
-                    ucfirst($options['name']), $helper->getConfig(
+                    \ucfirst($options['name']), $helper->getConfig(
                     'editorUser'
                 ), $options, $nohtml = false, $onfailure = 'textarea'
                 );
             }
         } else {
             $descEditor = new XoopsFormDhtmlTextArea(
-                ucfirst(
+                \ucfirst(
                     $options['name']
                 ), $options['name'], $options['value'], '100%', '100%'
             );

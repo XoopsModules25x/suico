@@ -124,13 +124,13 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
             $xoopsObject = new Relgroupuser();
             $format      = 'INSERT INTO %s (rel_id, rel_group_id, rel_user_uid)';
             $format      .= 'VALUES (%u, %u, %u)';
-            $sql         = sprintf($format, $this->db->prefix('yogurt_relgroupuser'), $rel_id, $rel_group_id, $rel_user_uid);
+            $sql         = \sprintf($format, $this->db->prefix('yogurt_relgroupuser'), $rel_id, $rel_group_id, $rel_user_uid);
             $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'rel_id=%u, rel_group_id=%u, rel_user_uid=%u';
             $format .= ' WHERE rel_id = %u';
-            $sql    = sprintf(
+            $sql    = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_relgroupuser'),
                 $rel_id,
@@ -169,7 +169,7 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject instanceof Relgroupuser) {
             return false;
         }
-        $sql = sprintf(
+        $sql = \sprintf(
             'DELETE FROM %s WHERE rel_id = %u',
             $this->db->prefix('yogurt_relgroupuser'),
             $xoopsObject->getVar('rel_id')
@@ -318,8 +318,8 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
             }
 
             if (1 === $shuffle) {
-                shuffle($vetor);
-                $vetor = array_slice($vetor, 0, $nbgroups);
+                \shuffle($vetor);
+                $vetor = \array_slice($vetor, 0, $nbgroups);
             }
 
             return $vetor;
@@ -364,8 +364,8 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
         }
 
         if (1 === $isShuffle) {
-            shuffle($ret);
-            $ret = array_slice($ret, 0, $nbUsers);
+            \shuffle($ret);
+            $ret = \array_slice($ret, 0, $nbUsers);
         }
 
         return $ret;

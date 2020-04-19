@@ -35,13 +35,13 @@ use XoopsFormTextDateSelect;
 use XoopsModules\Yogurt;
 use XoopsThemeForm;
 
-require_once dirname(__DIR__, 2) . '/include/common.php';
+require_once \dirname(__DIR__, 2) . '/include/common.php';
 
-$moduleDirName = basename(dirname(__DIR__, 2));
+$moduleDirName = \basename(\dirname(__DIR__, 2));
 //$helper = Yogurt\Helper::getInstance();
 $permHelper = new Permission();
 
-xoops_load('XoopsFormLoader');
+\xoops_load('XoopsFormLoader');
 
 /**
  * Class ConfigsForm
@@ -62,8 +62,8 @@ class ConfigsForm extends XoopsThemeForm
         $this->helper       = $target->helper;
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? sprintf(AM_YOGURT_CONFIGS_ADD) : sprintf(AM_YOGURT_CONFIGS_EDIT);
-        parent::__construct($title, 'form', xoops_getenv('SCRIPT_NAME'), 'post', true);
+        $title = $this->targetObject->isNew() ? \sprintf(AM_YOGURT_CONFIGS_ADD) : \sprintf(AM_YOGURT_CONFIGS_EDIT);
+        parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
 
         //include ID field, it's needed so the module knows if it is a new form or an edited form
@@ -194,9 +194,9 @@ class ConfigsForm extends XoopsThemeForm
             false
         );
         // End_suspension
-        $this->addElement(new \XoopsFormDateTime(AM_YOGURT_CONFIGS_END_SUSPENSION, 'end_suspension', '', strtotime($this->targetObject->getVar('end_suspension'))));
+        $this->addElement(new \XoopsFormDateTime(AM_YOGURT_CONFIGS_END_SUSPENSION, 'end_suspension', '', \strtotime($this->targetObject->getVar('end_suspension'))));
 
         $this->addElement(new XoopsFormHidden('op', 'save'));
-        $this->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $this->addElement(new XoopsFormButton('', 'submit', \_SUBMIT, 'submit'));
     }
 }

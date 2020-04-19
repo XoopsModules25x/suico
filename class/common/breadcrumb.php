@@ -46,7 +46,7 @@ class Breadcrumb
 
     public function __construct()
     {
-        $this->dirname = basename(dirname(__DIR__, 2));
+        $this->dirname = \basename(\dirname(__DIR__, 2));
     }
 
     /**
@@ -70,7 +70,7 @@ class Breadcrumb
      */
     public function render()
     {
-        if (!isset($GLOBALS['xoTheme']) || !is_object($GLOBALS['xoTheme'])) {
+        if (!isset($GLOBALS['xoTheme']) || !\is_object($GLOBALS['xoTheme'])) {
             require $GLOBALS['xoops']->path('class/theme.php');
             $GLOBALS['xoTheme'] = new xos_opal_Theme();
         }

@@ -109,7 +109,7 @@ class YogurtController extends \XoopsObject
         if (1 === $this->isSuspended) {
             $suspensions = $this->suspensionsFactory->getObjects($criteria_suspended);
             $suspension  = $suspensions[0];
-            if (time() > $suspension->getVar('suspension_time')) {
+            if (\time() > $suspension->getVar('suspension_time')) {
                 $suspension = $this->suspensionsFactory->create(false);
                 $suspension->load($this->uidOwner);
                 $this->owner->setVar('email', $suspension->getVar('old_email', 'n'));
@@ -154,10 +154,10 @@ class YogurtController extends \XoopsObject
          */
         if (!empty($_GET['uid'])) {
             /** @var \XoopsMemberHandler $memberHandler */
-            $memberHandler = xoops_getHandler('member');
+            $memberHandler = \xoops_getHandler('member');
             $user          = $memberHandler->getUser(Request::getInt('uid', 0, 'GET'));
-            if (!is_object($user)) {
-                redirect_header('index.php', 3, _MD_YOGURT_USERDOESNTEXIST);
+            if (!\is_object($user)) {
+                \redirect_header('index.php', 3, _MD_YOGURT_USERDOESNTEXIST);
             }
         }
 
@@ -279,7 +279,7 @@ class YogurtController extends \XoopsObject
     {
         global $xoopsModuleConfig;
         $configsectionname = 'enable_' . $section;
-        if (array_key_exists($configsectionname, $xoopsModuleConfig)) {
+        if (\array_key_exists($configsectionname, $xoopsModuleConfig)) {
             if (0 === $this->helper->getConfig($configsectionname)) {
                 return -1;
             }

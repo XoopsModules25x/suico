@@ -139,7 +139,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
             $xoopsObject = new Friendship();
             $format      = 'INSERT INTO %s (friendship_id, friend1_uid, friend2_uid, LEVEL, hot, trust, cool, fan)';
             $format      .= 'VALUES (%u, %u, %u, %u, %u, %u, %u, %u)';
-            $sql         = sprintf(
+            $sql         = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_friendship'),
                 $friendship_id,
@@ -156,7 +156,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
             $format = 'UPDATE %s SET ';
             $format .= 'friendship_id=%u, friend1_uid=%u, friend2_uid=%u, level=%u, hot=%u, trust=%u, cool=%u, fan=%u';
             $format .= ' WHERE friendship_id = %u';
-            $sql    = sprintf(
+            $sql    = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_friendship'),
                 $friendship_id,
@@ -200,7 +200,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject instanceof Friendship) {
             return false;
         }
-        $sql = sprintf(
+        $sql = \sprintf(
             'DELETE FROM %s WHERE friendship_id = %u',
             $this->db->prefix('yogurt_friendship'),
             $xoopsObject->getVar('friendship_id')
@@ -345,8 +345,8 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
                 $i++;
             }
             if (1 === $shuffle) {
-                shuffle($vetor);
-                $vetor = array_slice($vetor, 0, $nbfriends);
+                \shuffle($vetor);
+                $vetor = \array_slice($vetor, 0, $nbfriends);
             }
 
             return $vetor;
@@ -393,8 +393,8 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
                 $i++;
             }
             if (1 === $shuffle) {
-                shuffle($vetor);
-                $vetor = array_slice($vetor, 0, $nbfriends);
+                \shuffle($vetor);
+                $vetor = \array_slice($vetor, 0, $nbfriends);
             }
 
             return $vetor;
@@ -454,7 +454,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
             $field_friend_fan = new XoopsFormRadioYN(
                 _MD_YOGURT_FAN, 'fan', $friendship->getVar(
                 'fan'
-            ), '<img src="assets/images/fans.gif" alt="' . _YES . '" title="' . _YES . '">', '<img src="assets/images/fansbw.gif" alt="' . _NO . '" title="' . _NO . '">'
+            ), '<img src="assets/images/fans.gif" alt="' . \_YES . '" title="' . \_YES . '">', '<img src="assets/images/fansbw.gif" alt="' . \_NO . '" title="' . \_NO . '">'
             );
 
             $field_friend_friendly = new XoopsFormRadio(_MD_YOGURT_FRIENDLY, 'hot', $friendship->getVar('hot'));

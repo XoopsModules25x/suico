@@ -122,7 +122,7 @@ class FriendpetitionHandler extends XoopsPersistableObjectHandler
             $xoopsObject = new Friendpetition();
             $format      = 'INSERT INTO %s (friendpet_id, petitioner_uid, petitionto_uid)';
             $format      .= 'VALUES (%u, %u, %u)';
-            $sql         = sprintf(
+            $sql         = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_friendpetition'),
                 $friendpet_id,
@@ -134,7 +134,7 @@ class FriendpetitionHandler extends XoopsPersistableObjectHandler
             $format = 'UPDATE %s SET ';
             $format .= 'friendpet_id=%u, petitioner_uid=%u, petitionto_uid=%u';
             $format .= ' WHERE friendpet_id = %u';
-            $sql    = sprintf(
+            $sql    = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_friendpetition'),
                 $friendpet_id,
@@ -173,7 +173,7 @@ class FriendpetitionHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject instanceof Friendpetition) {
             return false;
         }
-        $sql = sprintf(
+        $sql = \sprintf(
             'DELETE FROM %s WHERE friendpet_id = %u',
             $this->db->prefix('yogurt_friendpetition'),
             $xoopsObject->getVar('friendpet_id')

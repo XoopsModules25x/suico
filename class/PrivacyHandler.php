@@ -24,7 +24,7 @@
 
 use XoopsModules\Yogurt;
 
-$moduleDirName = basename(dirname(__DIR__));
+$moduleDirName = \basename(\dirname(__DIR__));
 
 $permHelper = new \Xmf\Module\Helper\Permission();
 

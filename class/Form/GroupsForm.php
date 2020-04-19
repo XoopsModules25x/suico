@@ -39,13 +39,13 @@ use XoopsLists;
 use XoopsModules\Yogurt;
 use XoopsThemeForm;
 
-require_once dirname(__DIR__, 2) . '/include/common.php';
+require_once \dirname(__DIR__, 2) . '/include/common.php';
 
-$moduleDirName = basename(dirname(__DIR__, 2));
+$moduleDirName = \basename(\dirname(__DIR__, 2));
 //$helper = Yogurt\Helper::getInstance();
 $permHelper = new Permission();
 
-xoops_load('XoopsFormLoader');
+\xoops_load('XoopsFormLoader');
 
 /**
  * Class GroupsForm
@@ -66,8 +66,8 @@ class GroupsForm extends XoopsThemeForm
         $this->helper       = $target->helper;
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? sprintf(AM_YOGURT_GROUPS_ADD) : sprintf(AM_YOGURT_GROUPS_EDIT);
-        parent::__construct($title, 'form', xoops_getenv('SCRIPT_NAME'), 'post', true);
+        $title = $this->targetObject->isNew() ? \sprintf(AM_YOGURT_GROUPS_ADD) : \sprintf(AM_YOGURT_GROUPS_EDIT);
+        parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
 
         //include ID field, it's needed so the module knows if it is a new form or an edited form
@@ -103,7 +103,7 @@ class GroupsForm extends XoopsThemeForm
             false
         );
         // Group_desc
-        if (class_exists('XoopsFormEditor')) {
+        if (\class_exists('XoopsFormEditor')) {
             $editorOptions           = [];
             $editorOptions['name']   = 'group_desc';
             $editorOptions['value']  = $this->targetObject->getVar('group_desc', 'e');
@@ -140,7 +140,7 @@ class GroupsForm extends XoopsThemeForm
 
         $uploadDir   = '/uploads/yogurt/groups/';
         $imgtray     = new XoopsFormElementTray(AM_YOGURT_GROUPS_GROUP_IMG, '<br>');
-        $imgpath     = sprintf(AM_YOGURT_FORMIMAGE_PATH, $uploadDir);
+        $imgpath     = \sprintf(AM_YOGURT_FORMIMAGE_PATH, $uploadDir);
         $imageselect = new XoopsFormSelect($imgpath, 'group_img', $group_img);
         $imageArray  = XoopsLists::getImgListAsArray(XOOPS_ROOT_PATH . $uploadDir);
         foreach ($imageArray as $image) {
@@ -164,6 +164,6 @@ class GroupsForm extends XoopsThemeForm
         $this->addElement($imgtray);
 
         $this->addElement(new XoopsFormHidden('op', 'save'));
-        $this->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $this->addElement(new XoopsFormButton('', 'submit', \_SUBMIT, 'submit'));
     }
 }

@@ -55,7 +55,7 @@ class FriendsController extends YogurtController
     {
 
         if (0 === $this->helper->getConfig('enable_friends')) {
-            redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_FRIENDSNOTENABLED);
+            \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_FRIENDSNOTENABLED);
         }
         $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
         if (1 === $this->configsFactory->getCount($criteria)) {
@@ -64,7 +64,7 @@ class FriendsController extends YogurtController
             $config = $configs[0]->getVar('friends');
 
             if (!$this->checkPrivilegeLevel($config)) {
-                redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, _MD_YOGURT_NOPRIVILEGE);
+                \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, _MD_YOGURT_NOPRIVILEGE);
             }
         }
 

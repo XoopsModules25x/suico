@@ -16,7 +16,7 @@ use XoopsThemeForm;
 /**
  * Protection against inclusion outside the site
  */
-if (!defined('XOOPS_ROOT_PATH')) {
+if (!\defined('XOOPS_ROOT_PATH')) {
     die('XOOPS root path not defined');
 }
 
@@ -132,7 +132,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
             $xoopsObject = new Video();
             $format      = 'INSERT INTO %s (video_id, uid_owner, video_desc, youtube_code, main_video)';
             $format      .= 'VALUES (%u, %u, %s, %s, %s)';
-            $sql         = sprintf(
+            $sql         = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_video'),
                 $video_id,
@@ -146,7 +146,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
             $format = 'UPDATE %s SET ';
             $format .= 'video_id=%u, uid_owner=%u, video_desc=%s, youtube_code=%s, main_video=%s';
             $format .= ' WHERE video_id = %u';
-            $sql    = sprintf(
+            $sql    = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_video'),
                 $video_id,
@@ -187,7 +187,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject instanceof Video) {
             return false;
         }
-        $sql = sprintf(
+        $sql = \sprintf(
             'DELETE FROM %s WHERE video_id = %u',
             $this->db->prefix('yogurt_video'),
             $xoopsObject->getVar('video_id')
