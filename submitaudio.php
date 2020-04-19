@@ -72,6 +72,7 @@ if ('sel_audio' === $_POST['xoops_upload_file'][0]) {
     )) {
         //$extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
         //                     $extra_tags['X_OWNER_UID'] = $xoopsUser->getVar('uid');
+        // /** @var \XoopsNotificationHandler $notificationHandler */
         //                     $notificationHandler = xoops_getHandler('notification');
         //                     $notificationHandler->triggerEvent ("picture", $xoopsUser->getVar('uid'), "new_picture",$extra_tags);
         //header("Location: ".XOOPS_URL."/modules/yogurt/index.php?uid=".$xoopsUser->getVar('uid'));

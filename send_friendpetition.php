@@ -34,7 +34,8 @@ $newpetition->setVar('petitionto_uid', Request::getInt('petitionto_uid', 0, 'POS
 if ($friendpetitionFactory->insert($newpetition)) {
     $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
     $extra_tags['X_OWNER_UID']  = $xoopsUser->getVar('uid');
-    $notificationHandler        = xoops_getHandler('notification');
+    /** @var \XoopsNotificationHandler $notificationHandler */
+    $notificationHandler = xoops_getHandler('notification');
     $notificationHandler->triggerEvent('friendship', Request::getInt('petitionto_uid', 0, 'POST'), 'new_friendship', $extra_tags);
 
     redirect_header(

@@ -79,6 +79,8 @@ class YogurtController extends \XoopsObject
     public $privilegeLevel;
     public $isSuspended;
     public $helper;
+    public $isSelfRequest;
+    public $isOtherRequest;
 
     /**
      * Constructor
@@ -97,6 +99,8 @@ class YogurtController extends \XoopsObject
         $this->isAnonym = 1;
         $this->isFriend = 0;
         $this->isUser   = 0;
+        $this->isSelfRequest = 0;
+        $this->isOtherRequest = 0;
         $this->createFactories();
         $this->getPermissions();
         $this->checkPrivilege('');
