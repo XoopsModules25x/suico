@@ -111,15 +111,39 @@ class ImagesForm extends XoopsThemeForm
             false
         );
         // Url
-        $this->addElement(
-            new XoopsFormTextArea(AM_YOGURT_IMAGES_URL, 'url', $this->targetObject->getVar('url'), 4, 47),
-            false
-        );
+//        $this->addElement(
+//            new XoopsFormTextArea(AM_YOGURT_IMAGES_URL, 'url', $this->targetObject->getVar('url'), 4, 47),
+//            false
+//        );
+
+        $url = $this->targetObject->getVar('url') ?: 'blank.png';
+        
+        $uploadDir   = '/uploads/yogurt/images/';
+        $imgtray     = new \XoopsFormElementTray(AM_YOGURT_IMAGES_URL, '<br>');
+        $imgpath     = sprintf(AM_YOGURT_FORMIMAGE_PATH, $uploadDir);
+        $imageselect = new \XoopsFormSelect($imgpath, 'url', $url);
+        $imageArray  = \XoopsLists::getImgListAsArray(XOOPS_ROOT_PATH . $uploadDir);
+        foreach ($imageArray as $image) {
+            $imageselect->addOption((string)$image, $image);
+        }
+        $imageselect->setExtra("onchange='showImgSelected(\"image_url\", \"url\", \"" . $uploadDir . '", "", "' . XOOPS_URL . "\")'");
+        $imgtray->addElement($imageselect);
+        $imgtray->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $uploadDir . '/' . $url . "' name='image_url' id='image_url' alt='' style='max-width:300px' />"));
+        $fileseltray = new \XoopsFormElementTray('', '<br>');
+        $fileseltray->addElement(new \XoopsFormFile(AM_YOGURT_FORMUPLOAD, 'url', $this->helper->getConfig('maxsize')));
+        $fileseltray->addElement(new \XoopsFormLabel(''));
+        $imgtray->addElement($fileseltray);
+        $this->addElement($imgtray);
         // Private
-        $this->addElement(
-            new XoopsFormText(AM_YOGURT_IMAGES_PRIVATE, 'private', 50, 255, $this->targetObject->getVar('private')),
-            false
-        );
+//        $this->addElement(
+//            new XoopsFormText(AM_YOGURT_IMAGES_PRIVATE, 'private', 50, 255, $this->targetObject->getVar('private')),
+//            false
+//        );
+
+        $private       = $this->targetObject->isNew() ? 0 : $this->targetObject->getVar('private');
+        $check_private = new \XoopsFormCheckBox(AM_YOGURT_IMAGES_PRIVATE, 'private', $private);
+        $check_private->addOption(1, ' ');
+        $this->addElement($check_private);
 
         $this->addElement(new XoopsFormHidden('op', 'save'));
         $this->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
