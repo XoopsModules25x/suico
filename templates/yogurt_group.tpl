@@ -11,23 +11,23 @@
     <p id="yogurt-group-desc" class="even">
         <{$group_desc}><br>
 		<b><{$lang_ownerofgroup}></b><br>
-		<{$group_ownername}>
+		<{$group_ownername}><br>
 		
-        <{if $isAnonym!=1 }>
-        <{if $memberOfGroup ==1}>
+		<{if $isAnonym!=1 && $memberOfGroup ==1}>
     <form action="abandongroup.php" method="POST" id="form_abandongroup">
-        <input type="hidden" value="<{$group_id}>" name="relgroup_id" id="relgroup_id">
+        <input type="hidden" value="<{$group_rel_id}>" name="relgroup_id" id="relgroup_id">
+		<input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
         <button name="" type="image"><{$lang_abandongroup}></button>
     </form>
-    <{ else}>
+    <{else}>
     <form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">
         <input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
         <button name="" type="image"><{$lang_joingroup}></button>
-	</form><{/if}>
+	</form>
     <{/if}>
-    </p>
 
-    <{if $allow_friends }>
+    </p>
+<br>
         <div id="yogurt-group-edit-members" class="outer odd">
             <h4 class="head"><{$lang_membersofgroup}></h4>
             <{section name=i loop=$group_members}>
@@ -51,7 +51,7 @@
                 </div>
             <{/section}>
         </div>
-    <{/if}>
+    
 </div>
 
     <div style="clear:both;">

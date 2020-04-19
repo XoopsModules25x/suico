@@ -24,7 +24,7 @@ $GLOBALS['xoopsOption']['template_main'] = 'yogurt_notebook.tpl';
 require __DIR__ . '/header.php';
 
 $controller = new Yogurt\NotesController($xoopsDB, $xoopsUser);
-$nbSections = $controller->getNumbersSections();
+
 
 //$controller->renderFormNewPost($xoopsTpl);
 $criteria_uid = new Criteria('note_to', $controller->uidOwner);
