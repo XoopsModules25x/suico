@@ -1,18 +1,17 @@
  <{include file="db:yogurt_navbar.tpl"}>
 <form class='outer' name='form_group_search' id='form_group_search' action='search_group.php' method='get'>
-    <h4 class=head><{$lang_searchgroup}></h4>
+<div class="alert alert-primary">    
+<h5><{$lang_searchgroup}></h5>
 
-    <p class=even>
-        <label for='group_keyword' class='xoops-form-element-caption-required'>
-            <span class='yogurt-groups-search-keyword'><{$lang_groupkeyword}></span><span class='caption-marker'>*</span></label>
-        <input type='text' name='group_keyword' id='group_keyword' size='35' maxlength='55' value=''>
-    </p>
+		<div class="form-group">
+			<label for="group_keyword"><strong> <{$lang_groupkeyword}></strong></label> 
+			<input type='text' name='group_keyword' id='group_keyword' class="form-control" value=''>
+			</div>
 
-    <p class=odd>
-        <input type='submit' class='formButton' name='submit_button' id='submit_button' value='<{$lang_searchgroup}>'>
-    </p>
+        <input type='submit' class='btn btn-primary' name='submit_button' id='submit_button' value='<{$lang_searchgroup}>'>
 
     <{$token}>
+</div>
 </form>
 
 

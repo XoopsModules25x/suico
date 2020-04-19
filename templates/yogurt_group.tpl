@@ -2,7 +2,7 @@
 
 <div id="yogurt-group-container" class='outer'>
 
-    <h4 class="head"><{$group_title}></h4>
+    <h5><{$group_title}></h5>
 
     <p id="yogurt-group-img" class=odd>
         <img src="<{$xoops_upload_url}>/yogurt/groups/<{$group_img}>">
@@ -34,12 +34,12 @@
     <form action="abandongroup.php" method="POST" id="form_abandongroup">
         <input type="hidden" value="<{$group_rel_id}>" name="relgroup_id" id="relgroup_id">
 		<input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
-        <button name="" type="image"><{$lang_abandongroup}></button>
+        <button name="" type="image" class="btn btn-danger btn-sm"><{$lang_abandongroup}></button>
     </form>
     <{else}>
     <form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">
         <input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
-        <button name="" type="image"><{$lang_joingroup}></button>
+        <button name="" type="image" class="btn btn-dark btn-sm"><{$lang_joingroup}></button>
 	</form>
     <{/if}>
 <{/if}>
