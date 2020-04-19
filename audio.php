@@ -23,6 +23,8 @@ declare(strict_types=1);
 use XoopsModules\Yogurt;
 use Xmf\Request;
 
+ const NBAUDIO = 'nbAudio';
+
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_audio.tpl';
 require __DIR__ . '/header.php';
 
@@ -51,7 +53,7 @@ $criteriaUidAudio->setLimit($helper->getConfig('audiosperpage'));
  * Get all audios of this user and assign them to template
  */
 $audios       = $controller->getAudio($criteriaUidAudio);
-$nbAudio = $nbSections['nbAudio'] ?? '';
+$nbAudio = $nbSections[NBAUDIO] ?? '';
 try {
     $audios_array = $controller->assignAudioContent($nbAudio, $audios);
 } catch (\RuntimeException $e) {
@@ -69,8 +71,8 @@ if (is_array($audios_array)) {
     $xoopsTpl->assign('lang_noaudioyet', _MD_YOGURT_NOAUDIOYET);
 }
 $pageNav = '';
-if (isset($nbSections['nbAudio']) && $nbSections['nbAudio'] > 0) {
-    $pageNav = $controller->getAudiosNavBar($nbSections['nbAudio'], $helper->getConfig('audiosperpage'), $start, 2);
+if (isset($nbSections[NBAUDIO]) && $nbSections[NBAUDIO] > 0) {
+    $pageNav = $controller->getAudiosNavBar($nbSections[NBAUDIO], $helper->getConfig('audiosperpage'), $start, 2);
 }
 $xoTheme->addScript('https://unpkg.com/wavesurfer.js');
 
