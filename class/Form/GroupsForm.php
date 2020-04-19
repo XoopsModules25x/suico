@@ -144,7 +144,7 @@ class GroupsForm extends XoopsThemeForm
         $imageselect = new XoopsFormSelect($imgpath, 'group_img', $group_img);
         $imageArray  = XoopsLists::getImgListAsArray(XOOPS_ROOT_PATH . $uploadDir);
         foreach ($imageArray as $image) {
-            $imageselect->addOption((string)$image, $image);
+            $imageselect->addOption($image, $image);
         }
         $imageselect->setExtra(
             "onchange='showImgSelected(\"image_group_img\", \"group_img\", \"" . $uploadDir . '", "", "' . XOOPS_URL . "\")'"

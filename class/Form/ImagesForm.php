@@ -124,7 +124,7 @@ class ImagesForm extends XoopsThemeForm
         $imageselect = new \XoopsFormSelect($imgpath, 'url', $url);
         $imageArray  = \XoopsLists::getImgListAsArray(XOOPS_ROOT_PATH . $uploadDir);
         foreach ($imageArray as $image) {
-            $imageselect->addOption((string)$image, $image);
+            $imageselect->addOption($image, $image);
         }
         $imageselect->setExtra("onchange='showImgSelected(\"image_url\", \"url\", \"" . $uploadDir . '", "", "' . XOOPS_URL . "\")'");
         $imgtray->addElement($imageselect);
