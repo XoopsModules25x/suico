@@ -55,16 +55,17 @@ $nbSections = $controller->getNumbersSections();
     $sort = (!in_array($xoopsModuleConfig['sortmembers'], $validsort ) ) ? 'uname' : $xoopsModuleConfig['sortmembers'];
 
     $order     = 'ASC';
-	if ( isset($xoopsModuleConfig['membersorder']) && $xoopsModuleConfig['membersorder'] == 'DESC' ) {
+	if ( isset($xoopsModuleConfig['membersorder']) && 'DESC' == $xoopsModuleConfig['membersorder']) {
         $order = 'DESC';
     }
 	if ('normal' == $xoopsModuleConfig['memberslisttemplate']) {
-    $limit = (!empty($xoopsModuleConfig['membersperpage'])) ? intval($xoopsModuleConfig['membersperpage']) : 20;
+    $limit = (!empty($xoopsModuleConfig['membersperpage'])) ? (int)$xoopsModuleConfig['membersperpage'] : 20;
     if (0 === $limit || $limit > 50) {
         $limit = 50;
     }
 	}
     $start         = Request::getInt('start', 0, 'POST');
+   /** @var \XoopsMemberHandler $memberHandler */
     $memberHandler = xoops_getHandler('member');
     $total         = $memberHandler->getUserCount($criteria);
     $xoopsTpl->assign('totalmember', $total);
@@ -199,7 +200,7 @@ $nbSections = $controller->getNumbersSections();
 		
 			$uid=$userdata['id'];
 			$groups =$member_handler->getGroupsByUser($uid, true); 
-			$usergroups = array(); 
+			$usergroups = [];
 			foreach ($groups as $group) { 
 			$usergroups[] = $group->getVar('name'); 
 			}  		
@@ -255,11 +256,11 @@ $xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
 $xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
 $xoopsTpl->assign('lang_friendshippending', _MD_YOGURT_FRIENDREQUESTPENDING);
 
-if(isset($_POST["addfriend"])){
+if(isset($_POST['addfriend'])){
 			$newpetition = $friendpetitionFactory->create(true);
 			$newpetition->setVar('petitioner_uid', $controller->uidOwner);
 			$newpetition->setVar('petitionto_uid', 5, 0, 'POST');
-			$friendpetitionFactory->insert($newpetition);
+			$friendpetitionFactory->insert2($newpetition);
 			redirect_header(
 			XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('petitionfrom_uid', 0, 'POST'), 3, _MD_YOGURT_PETITIONFROM);
 			}
@@ -276,11 +277,11 @@ $xoopsTpl->assign('section_name', _MD_YOGURT_MEMBERSLIST);
 
 // temporary solution for profile module integration
 if (xoops_isActiveModule('profile')) {
-$profile_handler=xoops_getmodulehandler('profile','profile');
+$profileHandler=xoops_getModuleHandler('profile','profile');
 $uid = $controller->uidOwner;
 if ($uid <= 0) { 
  if (is_object($xoopsUser))  {
-        $profile = $profile_handler->get($uid);
+        $profile = $profileHandler->get($uid);
 		} 
         else {
              header('location: ' . XOOPS_URL); 
@@ -289,7 +290,7 @@ if ($uid <= 0) {
  }
 else 
 {
-$profile = $profile_handler->get($uid);
+$profile = $profileHandler->get($uid);
 }
 }
 

@@ -17,7 +17,6 @@
     <div id="xtips" name="xtips" style="width:500px;height:50px;" action="">
         [b]<{$lang_bold}>[/b] => <b><{$lang_bold}></b> | [i]<{$lang_italic}>[/i] => <i><{$lang_italic}></i> | [u]<{$lang_underline}>[/u] => <u><{$lang_underline}></u>
     </div>
-</div>
 <{/if}>
 
 <div id="yogurt-Notes-container" class="outer">
@@ -30,13 +29,12 @@
                     </p>
                     <{if $notes[i].user_avatar=="avatars/blank.gif" }><img src="assets/images/noavatar.gif"><{else}><img width="100"  class="avatar_Note" src="../../uploads/<{$notes[i].user_avatar}>"> <{/if}>
                     <{if $isOwner==1}>
-                    <p>
-                    <form name="delete_Note" method="post" action="delete_Note.php" class="yogurt-Note-form-delete">
-                        <input value="<{$notes[i].id}>" type="image" id="note_idimage" name="note_idimage" src="<{xoModuleIcons16 delete.png}>">
-                        <input value="<{$notes[i].id}>" type="hidden" id="note_id" name="note_id">
-                    </form>
-
-                    </p>
+                        <p>
+                        <form name="delete_Note" method="post" action="delete_Note.php" class="yogurt-Note-form-delete">
+                            <input value="<{$notes[i].id}>" type="image" id="note_idimage" name="note_idimage" src="<{xoModuleIcons16 delete.png}>">
+                            <input value="<{$notes[i].id}>" type="hidden" id="note_id" name="note_id">
+                        </form>
+                        </p>
                     <{/if}>
                 </div>
                 <div class="yogurt-Note-details-texts">

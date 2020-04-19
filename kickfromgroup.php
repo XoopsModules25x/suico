@@ -46,7 +46,7 @@ if (1 !== Request::getInt('confirm', 0, 'POST')) {
         $xoopsDB
     );
     $groupsFactory       = new Yogurt\GroupsHandler($xoopsDB);
-    $group               = $groupsFactory->get($group_id);
+    $group               = $groupsFactory->get2($group_id);
     //  echo "<pre>";
     //  print_r($group);
     if ($xoopsUser->getVar('uid') === $group->getVar('owner_uid')) {
@@ -67,4 +67,4 @@ if (1 !== Request::getInt('confirm', 0, 'POST')) {
     }
 }
 
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

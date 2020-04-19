@@ -74,7 +74,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
      * @param null $fields
      * @return mixed reference to the {@link yogurt_visitors} object, FALSE if failed
      */
-    public function get(
+    public function get2(
         $id = null,
         $fields = null
     ) {
@@ -101,7 +101,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(
+    public function insert2(
         XoopsObject $xoopsObject,
         $force = false
     ) {
@@ -124,7 +124,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
             $xoopsObject = new Visitors();
             $format      = 'INSERT INTO %s (cod_visit, uid_owner, uid_visitor,uname_visitor)';
             $format      .= 'VALUES (%u, %u, %u, %s)';
-            $sql         = sprintf(
+            $sql         = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_visitors'),
                 $cod_visit,
@@ -137,7 +137,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
             $format = 'UPDATE %s SET ';
             $format .= 'cod_visit=%u, uid_owner=%u, uid_visitor=%u, uname_visitor=%s ';
             $format .= ' WHERE cod_visit = %u';
-            $sql    = sprintf(
+            $sql    = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_visitors'),
                 $cod_visit,
@@ -170,14 +170,14 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
      * @param bool         $force
      * @return bool FALSE if failed.
      */
-    public function delete(
+    public function delete2(
         XoopsObject $xoopsObject,
         $force = false
     ) {
         if (!$xoopsObject instanceof Visitors) {
             return false;
         }
-        $sql = sprintf(
+        $sql = \sprintf(
             'DELETE FROM %s WHERE cod_visit = %u',
             $this->db->prefix('yogurt_visitors'),
             $xoopsObject->getVar('cod_visit')

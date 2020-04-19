@@ -1,4 +1,4 @@
- <{include file="db:yogurt_navbar.tpl"}>
+<{include file="db:yogurt_navbar.tpl"}>
 <form class='outer' name='form_group_search' id='form_group_search' action='search_group.php' method='get'>
 <div class="alert alert-primary">    
 <h5><{$lang_searchgroup}></h5>
@@ -21,16 +21,16 @@
     </h4>
 
     <{if $nb_groups_all<=0}>
-    <h4 id="yogurt-groups-nogroups">
-        <{$lang_nogroupsyet}>
-    </h4>
+        <h4 id="yogurt-groups-nogroups">
+            <{$lang_nogroupsyet}>
+        </h4>
     <{/if}>
 
     <{section name=j loop=$groups}>
         <div class="yogurt-group-all <{cycle values="odd,even"}>">
-<{*            <img src="<{$xoops_upload_url}>/yogurt/groups/<{$groups[j].img}>" alt="<{$groups[j].title}>" title="<{$groups[j].title}>">*}>
+            <{*            <img src="<{$xoops_upload_url}>/yogurt/groups/<{$groups[j].img}>" alt="<{$groups[j].title}>" title="<{$groups[j].title}>">*}>
             <a href="group.php?group_id=<{$groups[j].id}>"><img src="<{$xoops_upload_url}>/yogurt/groups/<{$groups[j].img}>" alt="<{$groups[j].title}>" title="<{$groups[j].title}>"></a>
-            <h4> <a href="group.php?group_id=<{$groups[j].id}>"><{$groups[j].title}></a></h4>
+            <h4><a href="group.php?group_id=<{$groups[j].id}>"><{$groups[j].title}></a></h4>
             <p>
             <p>
                 <{$groups[j].desc}>

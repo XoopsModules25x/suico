@@ -193,10 +193,7 @@ switch ($op) {
                 $visitorsArray['uname_visitor'] = $visitorsTempArray[$i]->getVar('uname_visitor');
 
                 $GLOBALS['xoopsTpl']->assign('selectordatetime', AM_YOGURT_VISITORS_DATETIME);
-                $visitorsArray['datetime']    = date(
-                    _SHORTDATESTRING,
-                    strtotime((string)$visitorsTempArray[$i]->getVar('datetime'))
-                );
+                $visitorsArray['datetime']    = date(_SHORTDATESTRING, strtotime((string)$visitorsTempArray[$i]->getVar('datetime')));
                 $visitorsArray['edit_delete'] = "<a href='visitors.php?op=edit&cod_visit=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='visitors.php?op=delete&cod_visit=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='visitors.php?op=clone&cod_visit=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";

@@ -74,7 +74,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
      * @param null $fields
      * @return mixed reference to the {@link Suspensions} object, FALSE if failed
      */
-    public function get(
+    public function get2(
         $id = null,
         $fields = null
     ) {
@@ -101,7 +101,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(
+    public function insert2(
         XoopsObject $xoopsObject,
         $force = false
     ) {
@@ -124,7 +124,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
             $xoopsObject = new Suspensions();
             $format      = 'INSERT INTO %s (uid, old_pass, old_email, old_signature, suspension_time)';
             $format      .= 'VALUES (%u, %s, %s, %s, %u)';
-            $sql         = sprintf(
+            $sql         = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_suspensions'),
                 $uid,
@@ -138,7 +138,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
             $format = 'UPDATE %s SET ';
             $format .= 'uid=%u, old_pass=%s, old_email=%s, old_signature=%s, suspension_time=%u';
             $format .= ' WHERE uid = %u';
-            $sql    = sprintf(
+            $sql    = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_suspensions'),
                 $uid,
@@ -179,7 +179,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject instanceof Suspensions) {
             return false;
         }
-        $sql = sprintf(
+        $sql = \sprintf(
             'DELETE FROM %s WHERE uid = %u',
             $this->db->prefix('yogurt_suspensions'),
             $xoopsObject->getVar('uid')

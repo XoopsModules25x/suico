@@ -48,7 +48,7 @@ if ($relgroupuserFactory->getCount($criteria) < 1) {
     $relgroupuser = $relgroupuserFactory->create();
     $relgroupuser->setVar('rel_group_id', $group_id);
     $relgroupuser->setVar('rel_user_uid', $uid);
-    if ($relgroupuserFactory->insert($relgroupuser)) {
+    if ($relgroupuserFactory->insert2($relgroupuser)) {
         redirect_header('group.php?group_id='.$group_id.'', 1, _MD_YOGURT_YOUAREMEMBERNOW);
     } else {
         redirect_header('groups.php', 1, _MD_YOGURT_NOCACHACA);
@@ -57,4 +57,4 @@ if ($relgroupuserFactory->getCount($criteria) < 1) {
     redirect_header('group.php?group_id='.$group_id.'', 1, _MD_YOGURT_YOUAREMEMBERALREADY);
 }
 
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

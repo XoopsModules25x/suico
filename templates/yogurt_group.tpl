@@ -36,7 +36,7 @@
 		<input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
         <button name="" type="image" class="btn btn-danger btn-sm"><{$lang_abandongroup}></button>
     </form>
-    <{else}>
+    <{ else}>
     <form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">
         <input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
         <button name="" type="image" class="btn btn-dark btn-sm"><{$lang_joingroup}></button>

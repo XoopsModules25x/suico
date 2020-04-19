@@ -27,7 +27,7 @@ require __DIR__ . '/header.php';
 //    require_once XOOPS_ROOT_PATH . '/language/english/user.php';
 //}
 
-require_once dirname(dirname(__DIR__)) . '/class/pagenav.php';
+require_once dirname(__DIR__, 2) . '/class/pagenav.php';
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
@@ -117,6 +117,7 @@ if ('saveuser' === $op) {
         echo '</div><br>';
         $op = 'editprofile';
     } else {
+        /** @var \XoopsMemberHandler $memberHandler */
         $memberHandler = xoops_getHandler('member');
         $edituser      = $memberHandler->getUser($uid);
         $edituser->setVar('name', Request::getString('name', '', 'POST'));
@@ -128,23 +129,9 @@ if ('saveuser' === $op) {
         $edituser->setVar('user_sig', xoops_substr(Request::getString('user_sig', '', 'POST'), 0, 255));
         $user_viewemail = !empty(Request::getString('user_viewemail', '', 'POST')) ? 1 : 0;
         $edituser->setVar('user_viewemail', $user_viewemail);
-        if (defined('ICMS_VERSION_NAME')) {
-            $edituser->setVar('openid', isset($_POST['openid']) ? trim($_POST['openid']) : '');
-            $user_viewoid = !empty($_POST['user_viewoid']) ? 1 : 0;
-            $edituser->setVar('user_viewoid', $user_viewoid);
-        }
         $edituser->setVar('user_viewoid', $user_viewoid);
         if ('' !== $password) {
-            if (defined('ICMS_VERSION_NAME')) {
-                $salt = icms_createSalt();
-                $edituser->setVar('salt', $salt, true);
-                $edituser->setVar('enc_type', $xoopsConfigUser['enc_type'], true);
-                $pass = icms_encryptPass($password, $salt);
-                $edituser->setVar('pass', $pass, true);
-                $edituser->setVar('pass_expired', 0);
-            } else {
                 $edituser->setVar('pass', md5($password), true);
-            }
         }
         $attachsig = !empty($_POST['attachsig']) ? 1 : 0;
         $edituser->setVar('attachsig', $attachsig);
@@ -194,21 +181,6 @@ if ('editprofile' === $op) {
     $email_cbox       = new XoopsFormCheckBox('', 'user_viewemail', $email_cbox_value);
     $email_cbox->addOption(1, _US_ALLOWVIEWEMAIL);
     $email_tray->addElement($email_cbox);
-    if (defined('ICMS_VERSION_NAME')) {
-        $configHandler  = xoops_getHandler('config');
-        $icmsauthConfig = $configHandler->getConfigsByCat(XOOPS_CONF_AUTH);
-        if (1 === $icmsauthConfig['auth_openid']) {
-            $openid_tray = new XoopsFormElementTray(_US_OPENID_FORM_CAPTION, '<br>');
-            $openid_text = new XoopsFormText('', 'openid', 30, 255, $xoopsUser->getVar('openid'));
-            $openid_tray->setDescription(_US_OPENID_FORM_DSC);
-            $openid_tray->addElement($openid_text);
-            $openid_cbox_value = $xoopsUser->user_viewoid() ? 1 : 0;
-            $openid_cbox       = new XoopsFormCheckBox('', 'user_viewoid', $openid_cbox_value);
-            $openid_cbox->addOption(1, _US_ALLOWVIEWEMAILOPENID);
-            $openid_tray->addElement($openid_cbox);
-            $form->addElement($openid_tray);
-        }
-    }
     $form->addElement($email_tray);
     $url_text = new XoopsFormText(_US_WEBSITE, 'url', 30, 100, $xoopsUser->getVar('url', 'E'));
     $form->addElement($url_text);
@@ -284,9 +256,6 @@ if ('editprofile' === $op) {
     $pwd_tray->addElement($pwd_text);
     $pwd_tray->addElement($pwd_text2);
     $mailok_radio = new XoopsFormRadioYN(_US_MAILOK, 'user_mailok', $xoopsUser->getVar('user_mailok'));
-    if (defined('ICMS_VERSION_NAME')) {
-        $salt_hidden = new XoopsFormHidden('salt', $xoopsUser->getVar('salt'));
-    }
     $uid_hidden    = new XoopsFormHidden('uid', $uid);
     $op_hidden     = new XoopsFormHidden('op', 'saveuser');
     $submit_button = new XoopsFormButton('', 'submit', _US_SAVECHANGES, 'submit');
@@ -304,9 +273,6 @@ if ('editprofile' === $op) {
     $form->addElement($pwd_tray);
     //    $form->addElement($cookie_radio);
     $form->addElement($mailok_radio);
-    if (defined('ICMS_VERSION_NAME')) {
-        $form->addElement($salt_hidden);
-    }
     $form->addElement($uid_hidden);
     $form->addElement($op_hidden);
     //    $form->addElement($token_hidden);

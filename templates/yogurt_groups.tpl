@@ -1,7 +1,6 @@
 <{include file="db:yogurt_navbar.tpl"}>
 
 <{if $isAnonym!=1 && $isOwner}>
-
     <form class='outer' name='form_group' id='form_group' action='submit_group.php' method='post' onsubmit='return xoopsFormValidate_form_group();' enctype="multipart/form-data">
 <div class="alert alert-info">
         <h5><{$lang_creategroup}></h5>
@@ -41,6 +40,7 @@
             }
             return true;
         }
+
         //--></script>
     <!-- End Form Vaidation JavaScript //-->
 
@@ -48,7 +48,7 @@
 
 <div id="yogurt-mygroups-container" class="outer">
     <h4 class="head">
-		 <{if $isOwner}>
+        <{if $isOwner}>
             <{$lang_mysection}>
         <{else}>
             <{$owner_uname}> <{$section_name}>

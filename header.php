@@ -6,7 +6,7 @@ use XoopsModules\Yogurt\Helper;
 
 require __DIR__ . '/preloads/autoloader.php';
 
-require dirname(dirname(__DIR__)) . '/mainfile.php';
+require dirname(__DIR__, 2) . '/mainfile.php';
 require XOOPS_ROOT_PATH . '/header.php';
 
 $moduleDirName = basename(__DIR__);
@@ -40,9 +40,7 @@ $friendpetitionHandler = $helper->getHandler(
 /** @var \XoopsPersistableObjectHandler $groupsHandler */
 $groupsHandler = $helper->getHandler('Groups');
 /** @var \XoopsPersistableObjectHandler $relgroupuserHandler */
-$relgroupuserHandler = $helper->getHandler(
-    'Relgroupuser'
-);
+$relgroupuserHandler = $helper->getHandler('Relgroupuser');
 /** @var \XoopsPersistableObjectHandler $notesHandler */
 $notesHandler = $helper->getHandler('Notes');
 /** @var \XoopsPersistableObjectHandler $configsHandler */
@@ -117,7 +115,7 @@ else {
 if (empty($xoopsUser)) {
     $isAnonym = 1;
 	if (!stripos($_SERVER['REQUEST_URI'], 'user.php')){
-     $xoopsUser or redirect_header("user.php", 3, _NOPERM);
+     $xoopsUser || redirect_header('user.php', 3, _NOPERM);
 	}
 }
 else {

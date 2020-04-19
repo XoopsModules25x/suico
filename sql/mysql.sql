@@ -1,15 +1,3 @@
-CREATE TABLE `yogurt_friendship` (
-  `friendship_id` INT(11)    NOT NULL AUTO_INCREMENT,
-  `friend1_uid`   INT(11)    NOT NULL,
-  `friend2_uid`   INT(11)    NOT NULL,
-  `level`         INT(11)    NOT NULL,
-  `hot`           TINYINT(4) NOT NULL,
-  `trust`         TINYINT(4) NOT NULL,
-  `cool`          TINYINT(4) NOT NULL,
-  `fan`           TINYINT(4) NOT NULL,
-  PRIMARY KEY (`friendship_id`)
-)
-  ENGINE = MyISAM;
 
 CREATE TABLE `yogurt_images` (
   `cod_img`       INT(11)      NOT NULL AUTO_INCREMENT,
@@ -20,6 +8,18 @@ CREATE TABLE `yogurt_images` (
   `url`           TEXT         NOT NULL,
   `private`       VARCHAR(1)   NOT NULL,
   PRIMARY KEY (`cod_img`)
+)
+  ENGINE = MyISAM;
+CREATE TABLE `yogurt_friendship` (
+  `friendship_id` INT(11)    NOT NULL AUTO_INCREMENT,
+  `friend1_uid`   INT(11)    NOT NULL,
+  `friend2_uid`   INT(11)    NOT NULL,
+  `level`         INT(11)    NOT NULL,
+  `hot`           TINYINT(4) NOT NULL,
+  `trust`         TINYINT(4) NOT NULL,
+  `cool`          TINYINT(4) NOT NULL,
+  `fan`           TINYINT(4) NOT NULL,
+  PRIMARY KEY (`friendship_id`)
 )
   ENGINE = MyISAM;
 
@@ -51,13 +51,6 @@ CREATE TABLE `yogurt_friendpetition` (
   ENGINE = MyISAM;
 
 
-CREATE TABLE `yogurt_relgroupuser` (
-  `rel_id`       INT(11) NOT NULL AUTO_INCREMENT,
-  `rel_group_id` INT(11) NOT NULL,
-  `rel_user_uid` INT(11) NOT NULL,
-  PRIMARY KEY (`rel_id`)
-)
-  ENGINE = MyISAM;
 
 
 CREATE TABLE `yogurt_groups` (
@@ -67,6 +60,14 @@ CREATE TABLE `yogurt_groups` (
   `group_desc`  TINYTEXT     NOT NULL,
   `group_img`   VARCHAR(255) NOT NULL,
   PRIMARY KEY (`group_id`)
+)
+  ENGINE = MyISAM;
+
+CREATE TABLE `yogurt_relgroupuser` (
+  `rel_id`       INT(11) NOT NULL AUTO_INCREMENT,
+  `rel_group_id` INT(11) NOT NULL,
+  `rel_user_uid` INT(11) NOT NULL,
+  PRIMARY KEY (`rel_id`)
 )
   ENGINE = MyISAM;
 
@@ -125,3 +126,13 @@ CREATE TABLE `yogurt_audio` (
   PRIMARY KEY (`audio_id`)
 )
   ENGINE = MyISAM;
+
+
+CREATE TABLE `yogurt_privacy` (
+    `id`          INT(8)      NOT NULL AUTO_INCREMENT,
+    `level`       INT(8)      NOT NULL,
+    `name`        VARCHAR(20) NOT NULL,
+    `description` TEXT        NOT NULL,
+    PRIMARY KEY (`id`)
+)
+    ENGINE = MyISAM;

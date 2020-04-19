@@ -36,8 +36,8 @@ $sort  = Request::getString('sort', '');
 
 $adminObject->displayNavigation(basename(__FILE__));
 $permHelper = new Permission();
-$uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/images/';
-$uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/images/';
+//$uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/images/';
+//$uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/images/';
 
 switch ($op) {
     case 'new':
@@ -69,10 +69,10 @@ switch ($op) {
         $configsObject->setVar('profile_contact', Request::getVar('profile_contact', ''));
         $configsObject->setVar('profile_general', Request::getVar('profile_general', ''));
         $configsObject->setVar('profile_stats', Request::getVar('profile_stats', ''));
-        $configsObject->setVar('suspension', Request::getVar('suspension', ''));
+        $configsObject->setVar('suspension', ((1 == Request::getInt('suspension', 0)) ? '1' : '0'));
         $configsObject->setVar('backup_password', Request::getVar('backup_password', ''));
         $configsObject->setVar('backup_email', Request::getVar('backup_email', ''));
-        $configsObject->setVar('end_suspension', $_REQUEST['end_suspension']);
+        $configsObject->setVar('end_suspension', date('Y-m-d H:i:s',strtotime($_REQUEST['end_suspension']['date']) + $_REQUEST['end_suspension']['time']));
         if ($configsHandler->insert($configsObject)) {
             redirect_header('configs.php?op=list', 2, AM_YOGURT_FORMOK);
         }
@@ -103,18 +103,7 @@ switch ($op) {
                 echo $configsObject->getHtmlErrors();
             }
         } else {
-            xoops_confirm(
-                [
-                    'ok'        => 1,
-                    'config_id' => Request::getString('config_id', ''),
-                    'op'        => 'delete',
-                ],
-                Request::getUrl('REQUEST_URI', '', 'SERVER'),
-                sprintf(
-                    AM_YOGURT_FORMSUREDEL,
-                    $configsObject->getVar('config_id')
-                )
-            );
+            xoops_confirm(['ok' => 1, 'config_id' => Request::getString('config_id', ''), 'op' => 'delete',], Request::getUrl('REQUEST_URI', '', 'SERVER'), sprintf(AM_YOGURT_FORMSUREDEL, $configsObject->getVar('config_uid')));
         }
         break;
 
@@ -181,68 +170,43 @@ switch ($op) {
         //    for ($i = 0; $i < $fieldsCount; ++$i) {
         if ($configsCount > 0) {
             foreach (array_keys($configsTempArray) as $i) {
-                //        $field = explode(':', $fields[$i]);
 
-                $GLOBALS['xoopsTpl']->assign(
-                    'selectorconfig_id',
-                    AM_YOGURT_CONFIGS_CONFIG_ID
-                );
+
+                $GLOBALS['xoopsTpl']->assign('selectorconfig_id', AM_YOGURT_CONFIGS_CONFIG_ID);
                 $configsArray['config_id'] = $configsTempArray[$i]->getVar('config_id');
 
                 $GLOBALS['xoopsTpl']->assign('selectorconfig_uid', AM_YOGURT_CONFIGS_CONFIG_UID);
-                $configsArray['config_uid'] = strip_tags(
-                    XoopsUser::getUnameFromId($configsTempArray[$i]->getVar('config_uid'))
-                );
+                $configsArray['config_uid'] = strip_tags(\XoopsUser::getUnameFromId($configsTempArray[$i]->getVar('config_uid')));
 
                 $GLOBALS['xoopsTpl']->assign('selectorpictures', AM_YOGURT_CONFIGS_PICTURES);
-                $configsArray['pictures'] = $imageHandler->get($configsTempArray[$i]->getVar('pictures'))->getVar(
-                    'title'
-                );
+                $configsArray['pictures'] = $privacyHandler->get($configsTempArray[$i]->getVar('pictures'))->getVar('name');
 
                 $GLOBALS['xoopsTpl']->assign('selectoraudio', AM_YOGURT_CONFIGS_AUDIO);
-                $configsArray['audio'] = $audioHandler->get($configsTempArray[$i]->getVar('audio'))->getVar('title');
+                $configsArray['audio'] = $privacyHandler->get($configsTempArray[$i]->getVar('audio'))->getVar('name');
 
                 $GLOBALS['xoopsTpl']->assign('selectorvideos', AM_YOGURT_CONFIGS_VIDEOS);
-                $configsArray['videos'] = $videoHandler->get($configsTempArray[$i]->getVar('videos'))->getVar(
-                    'title'
-                );
+                $configsArray['videos'] = $privacyHandler->get($configsTempArray[$i]->getVar('videos'))->getVar('name');
 
                 $GLOBALS['xoopsTpl']->assign('selectorgroups', AM_YOGURT_CONFIGS_GROUPS);
-                $configsArray['groups'] = $groupsHandler->get($configsTempArray[$i]->getVar('groups'))->getVar(
-                    'group_title'
-                );
+                $configsArray['groups'] = $privacyHandler->get($configsTempArray[$i]->getVar('groups'))->getVar('name');
 
                 $GLOBALS['xoopsTpl']->assign('selectornotes', AM_YOGURT_CONFIGS_NOTES);
-                $configsArray['notes'] = $notesHandler->get($configsTempArray[$i]->getVar('notes'))->getVar(
-                    'note_id'
-                );
+                $configsArray['notes'] = $privacyHandler->get($configsTempArray[$i]->getVar('notes'))->getVar('name');
 
                 $GLOBALS['xoopsTpl']->assign('selectorfriends', AM_YOGURT_CONFIGS_FRIENDS);
-                $configsArray['friends'] = $friendshipHandler->get($configsTempArray[$i]->getVar('friends'))->getVar(
-                    'friendship_id'
-                );
+                $configsArray['friends'] = $privacyHandler->get($configsTempArray[$i]->getVar('friends'))->getVar('name');
 
                 $GLOBALS['xoopsTpl']->assign('selectorprofile_contact', AM_YOGURT_CONFIGS_PROFILE_CONTACT);
-                $configsArray['profile_contact'] = strip_tags(
-                    XoopsUser::getUnameFromId($configsTempArray[$i]->getVar('profile_contact'))
-                );
+                $configsArray['profile_contact'] = $privacyHandler->get($configsTempArray[$i]->getVar('profile_contact'))->getVar('name');
 
                 $GLOBALS['xoopsTpl']->assign('selectorprofile_general', AM_YOGURT_CONFIGS_PROFILE_GENERAL);
-                $configsArray['profile_general'] = strip_tags(
-                    XoopsUser::getUnameFromId($configsTempArray[$i]->getVar('profile_general'))
-                );
+                $configsArray['profile_general'] = $privacyHandler->get($configsTempArray[$i]->getVar('profile_general'))->getVar('name');
 
                 $GLOBALS['xoopsTpl']->assign('selectorprofile_stats', AM_YOGURT_CONFIGS_PROFILE_STATS);
-                $configsArray['profile_stats'] = strip_tags(
-                    XoopsUser::getUnameFromId($configsTempArray[$i]->getVar('profile_stats'))
-                );
+                $configsArray['profile_stats'] = $privacyHandler->get($configsTempArray[$i]->getVar('profile_stats'))->getVar('name');
 
                 $GLOBALS['xoopsTpl']->assign('selectorsuspension', AM_YOGURT_CONFIGS_SUSPENSION);
-                $configsArray['suspension'] = $suspensionsHandler->get(
-                    $configsTempArray[$i]->getVar('suspension')
-                )->getVar(
-                    'uid'
-                );
+                $configsArray['suspension'] = $configsTempArray[$i]->getVar('suspension');
 
                 $GLOBALS['xoopsTpl']->assign('selectorbackup_password', AM_YOGURT_CONFIGS_BACKUP_PASSWORD);
                 $configsArray['backup_password'] = $configsTempArray[$i]->getVar('backup_password');
@@ -251,10 +215,10 @@ switch ($op) {
                 $configsArray['backup_email'] = $configsTempArray[$i]->getVar('backup_email');
 
                 $GLOBALS['xoopsTpl']->assign('selectorend_suspension', AM_YOGURT_CONFIGS_END_SUSPENSION);
-                $configsArray['end_suspension'] = date(
-                    _SHORTDATESTRING,
-                    strtotime((string)$configsTempArray[$i]->getVar('end_suspension'))
-                );
+                $configsArray['end_suspension'] = date(_DATESTRING, strtotime($configsTempArray[$i]->getVar('end_suspension')));
+
+
+
                 $configsArray['edit_delete']    = "<a href='configs.php?op=edit&config_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='configs.php?op=delete&config_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='configs.php?op=clone&config_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";

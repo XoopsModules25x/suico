@@ -21,6 +21,8 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 class Configs extends XoopsObject
 {
     public $db;
+    public $helper;
+    public $permHelper;
 
     // constructor
 
@@ -34,23 +36,23 @@ class Configs extends XoopsObject
         $this->helper     = Helper::getInstance();
         $this->permHelper = new Permission();
         $this->db         = XoopsDatabaseFactory::getDatabaseConnection();
-        $this->initVar('config_id', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('config_uid', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('pictures', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('audio', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('videos', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('groups', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('notes', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('friends', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('profile_contact', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('profile_general', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('profile_stats', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('suspension', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('backup_password', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('backup_email', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('end_suspension', XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('config_id', \XOBJ_DTYPE_INT);
+        $this->initVar('config_uid', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('pictures', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('audio', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('videos', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('groups', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('notes', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('friends', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('profile_contact', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('profile_general', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('profile_stats', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('suspension', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('backup_password', \XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('backup_email', \XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('end_suspension', \XOBJ_DTYPE_TIMESTAMP);
         if (!empty($id)) {
-            if (is_array($id)) {
+            if (\is_array($id)) {
                 $this->assignVars($id);
             } else {
                 $this->load((int)$id);
@@ -93,13 +95,13 @@ class Configs extends XoopsObject
         $db          = XoopsDatabaseFactory::getDatabaseConnection();
         $ret         = [];
         $where_query = '';
-        if (is_array($criteria) && count($criteria) > 0) {
+        if (\is_array($criteria) && \count($criteria) > 0) {
             $where_query = ' WHERE';
             foreach ($criteria as $c) {
                 $where_query .= " ${c} AND";
             }
             $where_query = mb_substr($where_query, 0, -4);
-        } elseif (!is_array($criteria) && $criteria) {
+        } elseif (!\is_array($criteria) && $criteria) {
             $where_query = ' WHERE ' . $criteria;
         }
         if (!$asobject) {

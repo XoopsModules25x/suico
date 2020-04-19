@@ -121,4 +121,4 @@ $xoopsTpl->assign('lang_groupkeyword', _MD_YOGURT_GROUP_SEARCHKEYWORD);
 $xoopsTpl->assign('lang_memberofgroup', _MD_YOGURT_MEMBEROFGROUP);
 
 require __DIR__ . '/footer.php';
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

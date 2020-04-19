@@ -93,6 +93,7 @@ $groupsFactory       = new Yogurt\GroupsHandler($xoopsDB);
 //    )) {
 //        $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
 //        $extra_tags['X_OWNER_UID']  = $xoopsUser->getVar('uid');
+//        ** @var \XoopsNotificationHandler $notificationHandler */
 //        $notificationHandler        = xoops_getHandler('notification');
 //        $notificationHandler->triggerEvent('picture', $xoopsUser->getVar('uid'), 'new_picture', $extra_tags);
 //        //header("Location: ".XOOPS_URL."/modules/yogurt/index.php?uid=".$xoopsUser->getVar('uid'));
@@ -101,7 +102,7 @@ $groupsFactory       = new Yogurt\GroupsHandler($xoopsDB);
 //        $relgroupuser = $relgroupuserFactory->create();
 //        $relgroupuser->setVar('rel_group_id', $xoopsDB->getInsertId());
 //        $relgroupuser->setVar('rel_user_uid', $xoopsUser->getVar('uid'));
-//        $relgroupuserFactory->insert($relgroupuser);
+//        $relgroupuserFactory->insert2($relgroupuser);
 //        redirect_header('groups.php', 500, _MD_YOGURT_GROUP_CREATED);
 //    } else {
 //        $groupsFactory->renderFormSubmit(120000, $xoopsTpl);
@@ -165,7 +166,7 @@ if (1 === $marker) {//if (1 === $marker) {
         $relgroupuser = $relgroupuserFactory->create();
         $relgroupuser->setVar('rel_group_id', $xoopsDB->getInsertId());
         $relgroupuser->setVar('rel_user_uid', $xoopsUser->getVar('uid'));
-        $relgroupuserFactory->insert($relgroupuser);
+        $relgroupuserFactory->insert2($relgroupuser);
 		$group_id=$relgroupuser->getVar('rel_group_id', $xoopsDB->getInsertId());
         redirect_header('group.php?group_id='.$group_id.'', 500, _MD_YOGURT_GROUP_CREATED);
     } else {
@@ -178,4 +179,4 @@ if (1 === $marker) {//if (1 === $marker) {
 /**
  * Close page
  */
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

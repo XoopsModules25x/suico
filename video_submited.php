@@ -54,9 +54,10 @@ if (11 === mb_strlen($url)) {
 }
 
 $newvideo->setVar('youtube_code', $code);
-if ($videoFactory->insert($newvideo)) {
+if ($videoFactory->insert2($newvideo)) {
     $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
     $extra_tags['X_OWNER_UID']  = (int)$xoopsUser->getVar('uid');
+    /** @var \XoopsNotificationHandler $notificationHandler */
     $notificationHandler        = xoops_getHandler('notification');
     $notificationHandler->triggerEvent('video', (int)$xoopsUser->getVar('uid'), 'new_video', $extra_tags);
     redirect_header(
@@ -72,4 +73,4 @@ if ($videoFactory->insert($newvideo)) {
     );
 }
 
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

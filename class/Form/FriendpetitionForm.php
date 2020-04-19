@@ -32,13 +32,13 @@ use XoopsFormSelectUser;
 use XoopsModules\Yogurt;
 use XoopsThemeForm;
 
-require_once dirname(dirname(__DIR__)) . '/include/common.php';
+require_once \dirname(__DIR__, 2) . '/include/common.php';
 
-$moduleDirName = basename(dirname(dirname(__DIR__)));
+$moduleDirName = \basename(\dirname(__DIR__, 2));
 //$helper = Yogurt\Helper::getInstance();
 $permHelper = new Permission();
 
-xoops_load('XoopsFormLoader');
+\xoops_load('XoopsFormLoader');
 
 /**
  * Class FriendpetitionForm
@@ -59,10 +59,10 @@ class FriendpetitionForm extends XoopsThemeForm
         $this->helper       = $target->helper;
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? sprintf(AM_YOGURT_FRIENDPETITION_ADD) : sprintf(
+        $title = $this->targetObject->isNew() ? \sprintf(AM_YOGURT_FRIENDPETITION_ADD) : \sprintf(
             AM_YOGURT_FRIENDPETITION_EDIT
         );
-        parent::__construct($title, 'form', xoops_getenv('SCRIPT_NAME'), 'post', true);
+        parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
 
         //include ID field, it's needed so the module knows if it is a new form or an edited form
@@ -83,7 +83,7 @@ class FriendpetitionForm extends XoopsThemeForm
             ), 'friendpet_id'
             )
         );
-        // Petitioner_uid
+        // Inviting by Friend_uid
         $this->addElement(
             new XoopsFormSelectUser(
                 AM_YOGURT_FRIENDPETITION_PETITIONER_UID, 'petitioner_uid', false, $this->targetObject->getVar(
@@ -92,10 +92,10 @@ class FriendpetitionForm extends XoopsThemeForm
             ),
             false
         );
-        // Petioned_uid
+        // Invited Friend_uid
         $this->addElement(
             new XoopsFormSelectUser(
-                AM_YOGURT_FRIENDPETITION_PETITIONTO_UID, 'petitionto_uid', false, $this->targetObject->getVar(
+                \AM_YOGURT_FRIENDPETITION_PETITIONTO_UID, 'petitionto_uid', false, $this->targetObject->getVar(
                 'petitionto_uid'
             ), 1, false
             ),
@@ -103,6 +103,6 @@ class FriendpetitionForm extends XoopsThemeForm
         );
 
         $this->addElement(new XoopsFormHidden('op', 'save'));
-        $this->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $this->addElement(new XoopsFormButton('', 'submit', \_SUBMIT, 'submit'));
     }
 }

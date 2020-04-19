@@ -39,19 +39,15 @@ $suspension         = $suspensionsFactory->create(false);
 $suspension->load($uid);
 
 if ($xoopsUser->isAdmin(1)) {
+    /** @var \XoopsMemberHandler $memberHandler */
     $memberHandler = xoops_getHandler('member');
     $thisUser      = $memberHandler->getUser($uid);
     $suspension->setVar('uid', $uid);
     $suspension->setVar('old_email', $thisUser->getVar('email'));
     $suspension->setVar('old_pass', $thisUser->getVar('pass'));
-    if (defined(ICMS_VERSION_NAME)) {
-        $thisUser->setVar('old_salt', $thisUser->getVar('salt'));
-        $thisUser->setVar('old_pass_expired', $thisUser->getVar('pass_expired'));
-        $thisUser->setVar('old_enc_type', $thisUser->getVar('enc_type'));
-    }
     $suspension->setVar('old_signature', $thisUser->getVar('user_sig'));
     $suspension->setVar('suspension_time', time() + Request::getInt('time', 0, 'POST'));
-    $suspensionsFactory->insert($suspension);
+    $suspensionsFactory->insert2($suspension);
     $thisUser->setVar('email', md5(time()));
     $thisUser->setVar('pass', md5(time()));
 
@@ -60,4 +56,4 @@ if ($xoopsUser->isAdmin(1)) {
     redirect_header('index.php?uid=' . $uid, 300, _MD_YOGURT_USERSUSPENDED);
 }
 
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

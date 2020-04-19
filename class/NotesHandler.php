@@ -76,7 +76,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
      * @param null $fields
      * @return mixed reference to the {@linkNotes} object, FALSE if failed
      */
-    public function get(
+    public function get2(
         $id = null,
         $fields = null
     ) {
@@ -103,7 +103,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(
+    public function insert2(
         XoopsObject $xoopsObject,
         $force = false
     ) {
@@ -126,7 +126,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
             $xoopsObject = new Notes();
             $format      = 'INSERT INTO %s (note_id, note_text, note_from, note_to, private)';
             $format      .= 'VALUES (%u, %s, %u, %u, %u)';
-            $sql         = sprintf(
+            $sql         = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_notes'),
                 $note_id,
@@ -140,7 +140,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
             $format = 'UPDATE %s SET ';
             $format .= 'note_id=%u, note_text=%s, note_from=%u, note_to=%u, private=%u';
             $format .= ' WHERE note_id = %u';
-            $sql    = sprintf(
+            $sql    = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_notes'),
                 $note_id,
@@ -181,7 +181,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject instanceof Notes) {
             return false;
         }
-        $sql = sprintf(
+        $sql = \sprintf(
             'DELETE FROM %s WHERE note_id = %u',
             $this->db->prefix('yogurt_notes'),
             $xoopsObject->getVar('note_id')

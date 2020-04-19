@@ -31,12 +31,8 @@ use XoopsModules\Yogurt\IndexController;
 
 require __DIR__ . '/header.php';
 
-$op = 'form';
-$op = isset($_POST['op']) ? trim(htmlspecialchars($_POST['op'], ENT_QUOTES | ENT_HTML5)) : 'form';
+$op = Request::getCmd('op', 'form', 'POST');
 
-if (isset($_POST['op']) && 'submit' === $_POST['op']) {
-    $op = 'submit';
-}
 //require_once __DIR__ . '/class/yogurt_controller.php';
 $controller = new Yogurt\IndexController($xoopsDB, $xoopsUser);
 
@@ -49,6 +45,7 @@ $nbSections = $controller->getNumbersSections();
 if ('form' === $op) {
     $GLOBALS['xoopsOption']['template_main'] = 'yogurt_searchform.tpl';
     require XOOPS_ROOT_PATH . '/header.php';
+    /** @var \XoopsMemberHandler $memberHandler */
     $memberHandler = xoops_getHandler('member');
     $total         = $memberHandler->getUserCount(new Criteria('level', 0, '>'));
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
@@ -428,7 +425,7 @@ if ('submit' === $op) {
 		
 			$uid=$userdata['id'];
 			$groups =$member_handler->getGroupsByUser($uid, true); 
-			$usergroups = array(); 
+			$usergroups = [];
 			foreach ($groups as $group) { 
 			$usergroups[] = $group->getVar('name'); 
 			}  		
@@ -485,11 +482,11 @@ $xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
 $xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
 $xoopsTpl->assign('lang_friendshippending', _MD_YOGURT_FRIENDREQUESTPENDING);
 
-if(isset($_POST["addfriend"])){
+if(isset($_POST['addfriend'])){
 			$newpetition = $friendpetitionFactory->create(true);
 			$newpetition->setVar('petitioner_uid', $controller->uidOwner);
 			$newpetition->setVar('petitionto_uid', 5, 0, 'POST');
-			$friendpetitionFactory->insert($newpetition);
+			$friendpetitionFactory->insert2($newpetition);
 			redirect_header(
 			XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('petitionfrom_uid', 0, 'POST'), 3, _MD_YOGURT_PETITIONFROM);
 			}
@@ -505,11 +502,11 @@ $xoopsTpl->assign('section_name', _MD_YOGURT_SEARCH);
 
 // temporary solution for profile module integration
 if (xoops_isActiveModule('profile')) {
-$profile_handler=xoops_getmodulehandler('profile','profile');
+$profileHandler=xoops_getModuleHandler('profile','profile');
 $uid = $controller->uidOwner;
 if ($uid <= 0) { 
  if (is_object($xoopsUser))  {
-        $profile = $profile_handler->get($uid);
+        $profile = $profileHandler->get($uid);
 		} 
         else {
              header('location: ' . XOOPS_URL); 
@@ -518,7 +515,7 @@ if ($uid <= 0) {
  }
 else 
 {
-$profile = $profile_handler->get($uid);
+$profile = $profileHandler->get($uid);
 }
 }
 

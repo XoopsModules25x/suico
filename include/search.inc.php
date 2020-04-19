@@ -46,6 +46,7 @@ function yogurt_search(
     //getting the url to the uploads directory
     $moduleHandler     = xoops_getHandler('module');
     $modulo            = $moduleHandler->getByDirname('yogurt');
+    /** @var \XoopsConfigHandler $configHandler */
     $configHandler     = xoops_getHandler('config');
     $moduleConfig      = $configHandler->getConfigsByCat(0, $modulo->getVar('mid'));
     $path_uploadimages = XOOPS_UPLOAD_URL;

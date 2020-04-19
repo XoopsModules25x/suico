@@ -25,6 +25,8 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 
+use Xmf\Request;
+
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_user.tpl';
 require __DIR__ . '/header.php';
 
@@ -41,7 +43,7 @@ if (($xoopsUser)) {
 			$uid_owner = (int)$xoopsUser->getVar('uid');
 			$isOwner   = 1;
 		}
-redirect_header("" . XOOPS_URL . "/modules/yogurt/index.php?uid=$uid_owner");
+redirect_header('' . XOOPS_URL . "/modules/yogurt/index.php?uid=$uid_owner");
 }
 
 

@@ -48,9 +48,10 @@ $noteObj         = $notesFactory->create();
 $noteObj->setVar('note_text', $note_text);
 $noteObj->setVar('note_from', $xoopsUser->getVar('uid'));
 $noteObj->setVar('note_to', $Notebook_uid);
-$notesFactory->insert($noteObj);
+$notesFactory->insert2($noteObj);
 $extra_tags['X_OWNER_NAME'] = $xoopsUser::getUnameFromId($Notebook_uid);
 $extra_tags['X_OWNER_UID']  = $Notebook_uid;
+/** @var \XoopsNotificationHandler $notificationHandler */
 $notificationHandler        = xoops_getHandler('notification');
 $notificationHandler->triggerEvent('Note', $xoopsUser->getVar('uid'), 'new_Note', $extra_tags);
 if (1 === $mainform) {
@@ -62,4 +63,4 @@ if (1 === $mainform) {
 /**
  * Close page
  */
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

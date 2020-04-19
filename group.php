@@ -109,4 +109,4 @@ $xoopsTpl->assign('section_name', _MD_YOGURT_GROUPS . '> ' . $group->getVar('gro
 require_once XOOPS_ROOT_PATH . '/include/comment_view.php';
 
 require __DIR__ . '/footer.php';
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

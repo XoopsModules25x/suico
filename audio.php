@@ -23,10 +23,17 @@ declare(strict_types=1);
 use XoopsModules\Yogurt;
 use Xmf\Request;
 
+ const NBAUDIO = 'nbAudio';
+
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_audio.tpl';
 require __DIR__ . '/header.php';
 
 $controller = new Yogurt\AudioController($xoopsDB, $xoopsUser);
+
+/**
+ * Fetching numbers of groups friends videos pictures etc...
+ */
+$nbSections = $controller->getNumbersSections();
 
 $start = Request::getInt('start', 0, 'GET');
 
@@ -46,8 +53,9 @@ $criteriaUidAudio->setLimit($helper->getConfig('audiosperpage'));
  * Get all audios of this user and assign them to template
  */
 $audios       = $controller->getAudio($criteriaUidAudio);
+$nbAudio = $nbSections[NBAUDIO] ?? '';
 try {
-    $audios_array = $controller->assignAudioContent($nbSections['nbAudio'], $audios);
+    $audios_array = $controller->assignAudioContent($nbAudio, $audios);
 } catch (\RuntimeException $e) {
 }
 
@@ -62,9 +70,10 @@ if (is_array($audios_array)) {
 } else {
     $xoopsTpl->assign('lang_noaudioyet', _MD_YOGURT_NOAUDIOYET);
 }
-
-$pageNav = $controller->getAudiosNavBar($nbSections['nbAudio'], $helper->getConfig('audiosperpage'), $start, 2);
-
+$pageNav = '';
+if (isset($nbSections[NBAUDIO]) && $nbSections[NBAUDIO] > 0) {
+    $pageNav = $controller->getAudiosNavBar($nbSections[NBAUDIO], $helper->getConfig('audiosperpage'), $start, 2);
+}
 $xoTheme->addScript('https://unpkg.com/wavesurfer.js');
 
 //meta language names
@@ -100,4 +109,4 @@ $xoopsTpl->assign('pageNav', $pageNav);
 
 
 require __DIR__ . '/footer.php';
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

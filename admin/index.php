@@ -71,6 +71,8 @@ $totalConfigs = $configsHandler->getCount();
 $totalSuspensions = $suspensionsHandler->getCount();
 //count "total Audio"
 $totalAudio = $audioHandler->getCount();
+//count "total Privacy"
+$totalPrivacy = $privacyHandler->getCount();
 // InfoBox Statistics
 $adminObject->addInfoBox(AM_YOGURT_STATISTICS);
 
@@ -91,6 +93,9 @@ $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_VISITORS, $totalVisitors
 // InfoBox video
 $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_VIDEO, $totalVideo));
 
+// InfoBox friendpetition
+$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_FRIENDPETITION, $totalFriendpetition));
+
 // InfoBox groups
 $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_GROUPS, $totalGroups));
 
@@ -108,6 +113,9 @@ $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_SUSPENSIONS, $totalSuspe
 
 // InfoBox audio
 $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_AUDIO, $totalAudio));
+
+// InfoBox privacy
+$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_PRIVACY, $totalPrivacy));
 // Render Index
 $adminObject->displayNavigation(basename(__FILE__));
 

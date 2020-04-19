@@ -72,7 +72,7 @@ class FriendpetitionHandler extends XoopsPersistableObjectHandler
      * @param null $fields
      * @return mixed reference to the {@link Friendpetition} object, FALSE if failed
      */
-    public function get(
+    public function get2(
         $id = null,
         $fields = null
     ) {
@@ -99,7 +99,7 @@ class FriendpetitionHandler extends XoopsPersistableObjectHandler
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(
+    public function insert2(
         XoopsObject $xoopsObject,
         $force = false
     ) {
@@ -122,7 +122,7 @@ class FriendpetitionHandler extends XoopsPersistableObjectHandler
             $xoopsObject = new Friendpetition();
             $format      = 'INSERT INTO %s (friendpet_id, petitioner_uid, petitionto_uid)';
             $format      .= 'VALUES (%u, %u, %u)';
-            $sql         = sprintf(
+            $sql         = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_friendpetition'),
                 $friendpet_id,
@@ -134,7 +134,7 @@ class FriendpetitionHandler extends XoopsPersistableObjectHandler
             $format = 'UPDATE %s SET ';
             $format .= 'friendpet_id=%u, petitioner_uid=%u, petitionto_uid=%u';
             $format .= ' WHERE friendpet_id = %u';
-            $sql    = sprintf(
+            $sql    = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_friendpetition'),
                 $friendpet_id,
@@ -173,7 +173,7 @@ class FriendpetitionHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject instanceof Friendpetition) {
             return false;
         }
-        $sql = sprintf(
+        $sql = \sprintf(
             'DELETE FROM %s WHERE friendpet_id = %u',
             $this->db->prefix('yogurt_friendpetition'),
             $xoopsObject->getVar('friendpet_id')

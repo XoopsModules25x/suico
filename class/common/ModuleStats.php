@@ -30,8 +30,8 @@ trait ModuleStats
         $configurator,
         $moduleStats
     ) {
-        if (count($configurator->moduleStats) > 0) {
-            foreach (array_keys($configurator->moduleStats) as $i) {
+        if (\count($configurator->moduleStats) > 0) {
+            foreach (\array_keys($configurator->moduleStats) as $i) {
                 $moduleStats[$i] = $configurator->moduleStats[$i];
             }
         }

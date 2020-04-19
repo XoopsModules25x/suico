@@ -23,10 +23,17 @@ declare(strict_types=1);
 use XoopsModules\Yogurt;
 use Xmf\Request;
 
+const NBPHOTOS = 'nbPhotos';
+
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_album.tpl';
 require __DIR__ . '/header.php';
 
 $controller = new Yogurt\PhotosController($xoopsDB, $xoopsUser);
+
+/**
+ * Fetching numbers of groups friends videos pictures etc...
+ */
+$nbSections = $controller->getNumbersSections();
 
 /**
  * This variable define the beggining of the navigation must b
@@ -70,7 +77,7 @@ $criteria_uid->setStart(0);
 /**
  * If there is no pictures in the album show in template lang_nopicyet
  */
-if (0 === $nbSections['nbPhotos']) {
+if (isset($nbSections[NBPHOTOS]) && 0 === $nbSections[NBPHOTOS]) {
     $nopicturesyet = _MD_YOGURT_NOTHINGYET;
     $xoopsTpl->assign('lang_nopicyet', $nopicturesyet);
 } else {
@@ -91,9 +98,10 @@ if (0 === $nbSections['nbPhotos']) {
 /**
  * Show the form if it is the owner and he can still upload pictures
  */
+$maxfilebytes = $helper->getConfig('maxfilesize');
 if (!empty($xoopsUser)) {
-    if ((1 === $controller->isOwner) && $helper->getConfig('nb_pict') > $nbSections['nbPhotos']) {
-        $maxfilebytes = $helper->getConfig('maxfilesize');
+    if ((isset($nbSections[NBPHOTOS]) && 1 === $controller->isOwner) && $helper->getConfig('nb_pict') > $nbSections[NBPHOTOS]) {
+//        $maxfilebytes = $helper->getConfig('maxfilesize');
         $xoopsTpl->assign('maxfilebytes', $maxfilebytes);
         $xoopsTpl->assign('showForm', '1');
     }
@@ -110,8 +118,9 @@ $avatar     = $owner->getVar('user_avatar');
 /**
  * Creating the navigation bar if you have a lot of friends
  */
+$nbPhotos = $nbSections[NBPHOTOS] ?? '';
 $navigationBar = new XoopsPageNav(
-    $nbSections['nbPhotos'], $helper->getConfig('picturesperpage'), $start, 'start', 'uid=' . (int)$controller->uidOwner
+    $nbPhotos, $helper->getConfig('picturesperpage'), $start, 'start', 'uid=' . (int)$controller->uidOwner
 );
 $navegacao       = $navigationBar->renderImageNav(2);
 
@@ -129,7 +138,7 @@ $xoopsTpl->assign(
 );
 $xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
 $xoopsTpl->assign('lang_editdesc', _MD_YOGURT_EDITDESC);
-$xoopsTpl->assign('lang_nb_pict', sprintf(_MD_YOGURT_YOUHAVE, $nbSections['nbPhotos']));
+$xoopsTpl->assign('lang_nb_pict', sprintf(_MD_YOGURT_YOUHAVE, ($nbSections[NBPHOTOS] ?? '')));
 
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 $xoopsTpl->assign('navegacao', $navegacao);
@@ -145,4 +154,4 @@ $xoopsTpl->assign('section_name', _MD_YOGURT_PHOTOS);
 require XOOPS_ROOT_PATH . '/include/comment_view.php';
 
 require __DIR__ . '/footer.php';
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

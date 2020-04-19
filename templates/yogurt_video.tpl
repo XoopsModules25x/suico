@@ -33,13 +33,10 @@
                 myform.codigo.focus();
                 return false;
             }
-            return true;
-        }
-
-        //-->
-    </script>
-    <!-- End Form Vaidation JavaScript //-->
-</div>
+            //-->
+        </script>
+        <!-- End Form Vaidation JavaScript //-->
+    </div>
 <{/if}>
 
 <div id="yogurt-videos-container" class="outer">
@@ -50,7 +47,7 @@
     </h4>
     <{if $nb_videos<=0}>
         <h4>
-            <{$lang_novideoyet}> 
+            <{$lang_novideoyet}>
         </h4>
     <{/if}>
 
@@ -69,21 +66,21 @@
                 <p class="yogurt-video-desc">
                     <{$videos[i].desc}>
                 </p> <{if $isOwner==1 }>
-                <form action="delvideo.php" method="post" id="deleteform" class="yogurt-video-forms">
-                    <input type="hidden" value="<{$videos[i].id}>" name="cod_video">
-                    <{$token}>
-                    <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 delete.png}>">
-                </form>
-                <form action="editdescvideo.php" method="post" id="editform" class="yogurt-video-forms">
-                    <input type="hidden" alt="<{$lang_edit}>" title="<{$lang_edit}>" value="<{$videos[i].id}>" name="video_id">
-                    <{$token}>
-                    <input name="submit" type="image" alt="<{$lang_editdesc}>" title="<{$lang_editdesc}>" src="<{xoModuleIcons16 edit.png}>">
-                </form>
-                <form action="mainvideo.php" method="post" id="mainform" class="yogurt-video-forms">
-                    <input type="hidden" value="<{$videos[i].id}>" name="video_id">
-                    <{$token}>
-                    <input name="submit" type="image" alt="<{$lang_makemain}>" title="<{$lang_makemain}>" src="assets/images/mainvideo.gif">
-                </form>
+                    <form action="delvideo.php" method="post" id="deleteform" class="yogurt-video-forms">
+                        <input type="hidden" value="<{$videos[i].id}>" name="cod_video">
+                        <{$token}>
+                        <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 delete.png}>">
+                    </form>
+                    <form action="editdescvideo.php" method="post" id="editform" class="yogurt-video-forms">
+                        <input type="hidden" alt="<{$lang_edit}>" title="<{$lang_edit}>" value="<{$videos[i].id}>" name="video_id">
+                        <{$token}>
+                        <input name="submit" type="image" alt="<{$lang_editdesc}>" title="<{$lang_editdesc}>" src="<{xoModuleIcons16 edit.png}>">
+                    </form>
+                    <form action="mainvideo.php" method="post" id="mainform" class="yogurt-video-forms">
+                        <input type="hidden" value="<{$videos[i].id}>" name="video_id">
+                        <{$token}>
+                        <input name="submit" type="image" alt="<{$lang_makemain}>" title="<{$lang_makemain}>" src="assets/images/mainvideo.gif">
+                    </form>
                 <{/if}>
             </div>
         </div>

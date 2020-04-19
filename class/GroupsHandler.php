@@ -18,7 +18,7 @@ use XoopsThemeForm;
 /**
  * Protection against inclusion outside the site
  */
-if (!defined('XOOPS_ROOT_PATH')) {
+if (!\defined('XOOPS_ROOT_PATH')) {
     die('XOOPS root path not defined');
 }
 
@@ -82,7 +82,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
      * @param null $fields
      * @return mixed reference to the {@link Groups} object, FALSE if failed
      */
-    public function get(
+    public function get2(
         $id = null,
         $fields = null
     ) {
@@ -109,7 +109,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(
+    public function insert2(
         XoopsObject $xoopsObject,
         $force = false
     ) {
@@ -132,7 +132,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
             $xoopsObject = new Groups();
             $format      = 'INSERT INTO %s (group_id, owner_uid, group_title, group_desc, group_img)';
             $format      .= 'VALUES (%u, %u, %s, %s, %s)';
-            $sql         = sprintf(
+            $sql         = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_groups'),
                 $group_id,
@@ -146,7 +146,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
             $format = 'UPDATE %s SET ';
             $format .= 'group_id=%u, owner_uid=%u, group_title=%s, group_desc=%s, group_img=%s';
             $format .= ' WHERE group_id = %u';
-            $sql    = sprintf(
+            $sql    = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_groups'),
                 $group_id,
@@ -187,7 +187,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject instanceof Groups) {
             return false;
         }
-        $sql = sprintf(
+        $sql = \sprintf(
             'DELETE FROM %s WHERE group_id = %u',
             $this->db->prefix('yogurt_groups'),
             $xoopsObject->getVar('group_id')
@@ -349,7 +349,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $field_desc    = new XoopsFormText(_MD_YOGURT_GROUP_DESC, 'group_desc', 35, 55);
         $field_marker  = new XoopsFormHidden('marker', '1');
         $button_send   = new XoopsFormButton('', 'submit_button', _MD_YOGURT_UPLOADGROUP, 'submit');
-        $field_warning = new XoopsFormLabel(sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxbytes / 1024));
+        $field_warning = new XoopsFormLabel(\sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxbytes / 1024));
 
         $form->addElement($field_warning);
         $form->addElement($field_url, true);
@@ -381,10 +381,10 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $field_desc    = new XoopsFormTextArea(_MD_YOGURT_GROUP_DESC, 'desc', $group->getVar('group_desc'));
         $field_marker  = new XoopsFormHidden('marker', '1');
         $button_send   = new XoopsFormButton('', 'submit_button', _MD_YOGURT_UPLOADGROUP, 'submit');
-        $field_warning = new XoopsFormLabel(sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxbytes / 1024));
+        $field_warning = new XoopsFormLabel(\sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxbytes / 1024));
 
         $field_oldpicture = new XoopsFormLabel(
-            _MD_YOGURT_GROUP_IMAGE, '<img src="' . XOOPS_UPLOAD_URL . '/' . $group->getVar(
+            _MD_YOGURT_GROUP_IMAGE, '<img src="' . \XOOPS_UPLOAD_URL . '/' . $group->getVar(
                                       'group_img'
                                   ) . '">'
         );
@@ -456,7 +456,7 @@ var elestyle = xoopsGetElementById(img).style;
         global $xoopsUser, $xoopsDB, $_POST, $_FILES;
         //search logged user id
         $uid = $xoopsUser->getVar('uid');
-        if ('' === $group || get_class($group) !== Groups::class) {
+        if ('' === $group || \get_class($group) !== Groups::class) {
             $group = $this->create();
         } else {
             $group->unsetNew();
@@ -478,7 +478,7 @@ var elestyle = xoopsGetElementById(img).style;
             );
             $maxfilesize       = $maxfilebytes;
 
-            $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/groups/';
+            $uploadDir = \XOOPS_UPLOAD_PATH . '/yogurt/groups/';
             // create the object to upload
             $uploader = new XoopsMediaUploader(
                 $uploadDir, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight

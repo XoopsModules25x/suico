@@ -34,7 +34,7 @@ $moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
 $db      = XoopsDatabaseFactory::getDatabaseConnection();
 $debug   = false;
 $helper  = Helper::getInstance($debug);
-$utility = new Utility();
+$utility = Utility::getInstance();
 
 $helper->loadLanguage('common');
 
@@ -60,16 +60,12 @@ if (!defined($moduleDirNameUpper . '_CONSTANTS_DEFINED')) {
     define($moduleDirNameUpper . '_ADMIN_PATH', constant($moduleDirNameUpper . '_ROOT_PATH') . '/admin/');
     define($moduleDirNameUpper . '_ADMIN', constant($moduleDirNameUpper . '_URL') . '/admin/index.php');
     //    define($moduleDirNameUpper . '_AUTHOR_LOGOIMG', constant($moduleDirNameUpper . '_URL') . '/assets/images/logoModule.png');
-    define(
-        $moduleDirNameUpper . '_UPLOAD_URL',
-        XOOPS_UPLOAD_URL . '/' . $moduleDirName
-    ); // WITHOUT Trailing slash
-    define(
-        $moduleDirNameUpper . '_UPLOAD_PATH',
-        XOOPS_UPLOAD_PATH . '/' . $moduleDirName
-    ); // WITHOUT Trailing slash
+    define($moduleDirNameUpper . '_UPLOAD_URL', XOOPS_UPLOAD_URL . '/' . $moduleDirName); // WITHOUT Trailing slash
+    define($moduleDirNameUpper . '_UPLOAD_PATH', XOOPS_UPLOAD_PATH . '/' . $moduleDirName); // WITHOUT Trailing slash
     define($moduleDirNameUpper . '_AUTHOR_LOGOIMG', $pathIcon32 . '/xoopsmicrobutton.gif');
     define($moduleDirNameUpper . '_CONSTANTS_DEFINED', 1);
+    // Do we resize pictures when they are smaller than defined dimensions  ?
+    define($moduleDirNameUpper . '_DONT_RESIZE_IF_SMALLER', true);
 }
 
 $icons = [

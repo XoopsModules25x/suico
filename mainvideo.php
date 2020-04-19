@@ -45,7 +45,7 @@ $video->setVar('main_video', 1);
 $uid = (int)$xoopsUser->getVar('uid');
 if ($uid === $video->getVar('uid_owner')) {
     if ($videoFactory->unsetAllMainsbyID($uid)) {
-        if ($videoFactory->insert($video)) {
+        if ($videoFactory->insert2($video)) {
             redirect_header('video.php', 2, _MD_YOGURT_SETMAINVIDEO);
         } else {
             redirect_header('video.php', 2, _MD_YOGURT_NOCACHACA);
@@ -55,4 +55,4 @@ if ($uid === $video->getVar('uid_owner')) {
     }
 }
 
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

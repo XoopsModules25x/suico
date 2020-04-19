@@ -28,6 +28,8 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 class Friendship extends XoopsObject
 {
     public $db;
+    public $helper;
+    public $permHelper;
 
     // constructor
 
@@ -43,16 +45,16 @@ class Friendship extends XoopsObject
         $this->permHelper = new Permission();
 
         $this->db = XoopsDatabaseFactory::getDatabaseConnection();
-        $this->initVar('friendship_id', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('friend1_uid', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('friend2_uid', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('level', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('hot', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('trust', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('cool', XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('fan', XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('friendship_id', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('friend1_uid', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('friend2_uid', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('level', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('hot', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('trust', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('cool', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('fan', \XOBJ_DTYPE_INT, null, false, 10);
         if (!empty($id)) {
-            if (is_array($id)) {
+            if (\is_array($id)) {
                 $this->assignVars($id);
             } else {
                 $this->load((int)$id);
@@ -95,13 +97,13 @@ class Friendship extends XoopsObject
         $db          = XoopsDatabaseFactory::getDatabaseConnection();
         $ret         = [];
         $where_query = '';
-        if (is_array($criteria) && count($criteria) > 0) {
+        if (\is_array($criteria) && \count($criteria) > 0) {
             $where_query = ' WHERE';
             foreach ($criteria as $c) {
                 $where_query .= " ${c} AND";
             }
             $where_query = mb_substr($where_query, 0, -4);
-        } elseif (!is_array($criteria) && $criteria) {
+        } elseif (!\is_array($criteria) && $criteria) {
             $where_query = ' WHERE ' . $criteria;
         }
         if (!$asobject) {
