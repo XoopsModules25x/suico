@@ -28,15 +28,20 @@ $helper->loadLanguage('main');
 
 $controller = new Yogurt\GroupController($xoopsDB, $xoopsUser);
 
-/**
- * Fetching numbers of groups friends videos pictures etc...
- */
-$nbSections = $controller->getNumbersSections();
-
 $group_id = Request::getInt('group_id', 0, 'GET');
 $criteria = new Criteria('group_id', $group_id);
 $groups   = $controller->groupsFactory->getObjects($criteria);
 $group    = $groups[0];
+
+/**
+ * Fetching rel_id
+ */
+
+$sql                 = 'SELECT * FROM ' . $GLOBALS['xoopsDB']->prefix('yogurt_relgroupuser') . ' WHERE rel_group_id='.$group_id.' AND rel_user_uid='.$controller->uidOwner.'';
+$result              = $GLOBALS['xoopsDB']->query($sql);
+$myrow               = $GLOBALS['xoopsDB']->fetchArray($result);
+$mygroup['rel_id']   = $myrow['rel_id'];
+$xoopsTpl->assign('group_rel_id', $mygroup['rel_id']);
 
 /**
  * Render a form with the info of the user
