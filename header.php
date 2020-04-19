@@ -115,7 +115,7 @@ else {
 if (empty($xoopsUser)) {
     $isAnonym = 1;
 	if (!stripos($_SERVER['REQUEST_URI'], 'user.php')){
-     $xoopsUser or redirect_header("user.php", 3, _NOPERM);
+     $xoopsUser or redirect_header('user.php', 3, _NOPERM);
 	}
 }
 else {

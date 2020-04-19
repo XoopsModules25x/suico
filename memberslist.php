@@ -247,7 +247,7 @@ $xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
 $xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
 $xoopsTpl->assign('lang_friendshippending', _MD_YOGURT_FRIENDREQUESTPENDING);
 
-if(isset($_POST["addfriend"])){
+if(isset($_POST['addfriend'])){
 			$newpetition = $friendpetitionFactory->create(true);
 			$newpetition->setVar('petitioner_uid', $controller->uidOwner);
 			$newpetition->setVar('petitionto_uid', 5, 0, 'POST');

@@ -41,7 +41,7 @@ if (($xoopsUser)) {
 			$uid_owner = (int)$xoopsUser->getVar('uid');
 			$isOwner   = 1;
 		}
-redirect_header("" . XOOPS_URL . "/modules/yogurt/index.php?uid=$uid_owner");
+redirect_header('' . XOOPS_URL . "/modules/yogurt/index.php?uid=$uid_owner");
 }
 
 
