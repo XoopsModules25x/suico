@@ -57,6 +57,7 @@ $controller = new Yogurt\IndexController($xoopsDB, $xoopsUser);
     }
 	}
     $start         = Request::getInt('start', 0, 'POST');
+   /** @var \XoopsMemberHandler $memberHandler */
     $memberHandler = xoops_getHandler('member');
     $total         = $memberHandler->getUserCount($criteria);
     $xoopsTpl->assign('totalmember', $total);

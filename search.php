@@ -43,17 +43,17 @@ switch ($op) {
         require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
         $searchform = new XoopsThemeForm('', 'searchform', 'search.php', 'post');
 
-        $name_tray = new XoopsFormElementTray(_PROFILE_MA_DISPLAYNAME);
+        $name_tray = new XoopsFormElementTray(_MD_YOGURT_PROFILE_DISPLAYNAME);
         $name_tray->addElement(new XoopsFormSelectMatchOption('', 'uname_match'));
         $name_tray->addElement(new XoopsFormText('', 'uname', 35, 255));
         $searchform->addElement($name_tray);
-        $sortby_arr['uname'] = _PROFILE_MA_DISPLAYNAME;
+        $sortby_arr['uname'] = _MD_YOGURT_PROFILE_DISPLAYNAME;
 
-        $email_tray = new XoopsFormElementTray(_PROFILE_MA_EMAIL);
+        $email_tray = new XoopsFormElementTray(_MD_YOGURT_PROFILE_EMAIL);
         $email_tray->addElement(new XoopsFormSelectMatchOption('', 'email_match'));
         $email_tray->addElement(new XoopsFormText('', 'email', 35, 255));
         $searchform->addElement($email_tray);
-        $sortby_arr['email'] = _PROFILE_MA_EMAIL;
+        $sortby_arr['email'] = _MD_YOGURT_PROFILE_EMAIL;
 
         $searchable_types = [
             'textbox',
@@ -79,7 +79,7 @@ switch ($op) {
                             $searchform->addElement(
                                 new XoopsFormText(
                                     sprintf(
-                                        _PROFILE_MA_LARGERTHAN,
+                                        _MD_YOGURT_PROFILE_LARGERTHAN,
                                         $fields[$i]->getVar('field_title')
                                     ), $fields[$i]->getVar(
                                          'field_name'
@@ -89,7 +89,7 @@ switch ($op) {
                             $searchform->addElement(
                                 new XoopsFormText(
                                     sprintf(
-                                        _PROFILE_MA_SMALLERTHAN,
+                                        _MD_YOGURT_PROFILE_SMALLERTHAN,
                                         $fields[$i]->getVar('field_title')
                                     ), $fields[$i]->getVar(
                                          'field_name'
@@ -144,7 +144,7 @@ switch ($op) {
                         $searchform->addElement(
                             new XoopsFormTextDateSelect(
                                 sprintf(
-                                    _PROFILE_MA_LATERTHAN,
+                                    _MD_YOGURT_PROFILE_LATERTHAN,
                                     $fields[$i]->getVar('field_title')
                                 ), $fields[$i]->getVar(
                                      'field_name'
@@ -154,7 +154,7 @@ switch ($op) {
                         $searchform->addElement(
                             new XoopsFormTextDateSelect(
                                 sprintf(
-                                    _PROFILE_MA_EARLIERTHAN,
+                                    _MD_YOGURT_PROFILE_EARLIERTHAN,
                                     $fields[$i]->getVar('field_title')
                                 ), $fields[$i]->getVar(
                                      'field_name'
@@ -163,8 +163,8 @@ switch ($op) {
                         );
                         break;
                     //                    case "datetime":
-                    //                        $searchform->addElement(new XoopsFormDateTime(sprintf(_PROFILE_MA_LATERTHAN, $fields[$i]->getVar('field_title')), $fields[$i]->getVar('field_name')."_larger", 15, 1));
-                    //                        $searchform->addElement(new XoopsFormDateTime(sprintf(_PROFILE_MA_EARLIERTHAN, $fields[$i]->getVar('field_title')), $fields[$i]->getVar('field_name')."_smaller", 15, 0));
+                    //                        $searchform->addElement(new XoopsFormDateTime(sprintf(_MD_YOGURT_PROFILE_LATERTHAN, $fields[$i]->getVar('field_title')), $fields[$i]->getVar('field_name')."_larger", 15, 1));
+                    //                        $searchform->addElement(new XoopsFormDateTime(sprintf(_MD_YOGURT_PROFILE_EARLIERTHAN, $fields[$i]->getVar('field_title')), $fields[$i]->getVar('field_name')."_smaller", 15, 0));
                     //                        break;
 
                     case 'timezone':
@@ -191,16 +191,16 @@ switch ($op) {
             }
         }
         asort($sortby_arr);
-        $sortby_select = new XoopsFormSelect(_PROFILE_MA_SORTBY, 'sortby');
+        $sortby_select = new XoopsFormSelect(_MD_YOGURT_PROFILE_SORTBY, 'sortby');
         $sortby_select->addOptionArray($sortby_arr);
         $searchform->addElement($sortby_select);
 
-        $order_select = new XoopsFormRadio(_PROFILE_MA_ORDER, 'order', 0);
+        $order_select = new XoopsFormRadio(_MD_YOGURT_PROFILE_ORDER, 'order', 0);
         $order_select->addOption(0, _ASCENDING);
         $order_select->addOption(1, _DESCENDING);
         $searchform->addElement($order_select);
 
-        $limit_text = new XoopsFormText(_PROFILE_MA_PERPAGE, 'limit', 15, 10);
+        $limit_text = new XoopsFormText(_MD_YOGURT_PROFILE_PERPAGE, 'limit', 15, 10);
         $searchform->addElement($limit_text);
         $searchform->addElement(new XoopsFormHidden('op', 'results'));
 
@@ -467,8 +467,8 @@ switch ($op) {
         }
 
         //Get captions
-        $captions[] = _PROFILE_MA_DISPLAYNAME;
-        $captions[] = _PROFILE_MA_EMAIL;
+        $captions[] = _MD_YOGURT_PROFILE_DISPLAYNAME;
+        $captions[] = _MD_YOGURT_PROFILE_EMAIL;
         foreach (array_keys($fields) as $i) {
             if (in_array($fields[$i]->getVar('fieldid'), $searchable_fields, true)
                 && in_array(

@@ -29,6 +29,8 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 class Video extends XoopsObject
 {
     public $db;
+    public $helper;
+    public $permHelper;
 
     // constructor
 

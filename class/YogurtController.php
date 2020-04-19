@@ -64,7 +64,7 @@ class YogurtController extends \XoopsObject
     public $uidOwner;
     public $nameOwner;
     public $owner;
-    public $imageFactory;
+    public $albumFactory;
     public $visitorsFactory;
     public $audioFactory;
     public $videosFactory;

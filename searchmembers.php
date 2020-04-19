@@ -39,6 +39,7 @@ $controller = new Yogurt\IndexController($xoopsDB, $xoopsUser);
 if ('form' === $op) {
     $GLOBALS['xoopsOption']['template_main'] = 'yogurt_searchform.tpl';
     require XOOPS_ROOT_PATH . '/header.php';
+    /** @var \XoopsMemberHandler $memberHandler */
     $memberHandler = xoops_getHandler('member');
     $total         = $memberHandler->getUserCount(new Criteria('level', 0, '>'));
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';

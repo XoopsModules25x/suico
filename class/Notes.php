@@ -22,6 +22,8 @@ require_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';
 class Notes extends XoopsObject
 {
     public $db;
+    public $helper;
+    public $permHelper;
 
     // constructor
 

@@ -46,6 +46,8 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 class Image extends XoopsObject
 {
     public $db;
+    public $helper;
+    public $permHelper;
 
     // constructor
 

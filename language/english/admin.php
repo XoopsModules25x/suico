@@ -297,3 +297,8 @@ define(
     'Error: You don&#39;t use the Frameworks \'admin module\'. Please install this Frameworks'
 );
 define('AM_YOGURT_MAINTAINEDBY', 'is maintained by the');
+
+define('AM_YOGURT_ADD_PRIVACY', 'Add new Privacy');
+define('AM_YOGURT_PRIVACY_LIST', 'List of Privacy');
+define('_AM_YOGURT_UPLOAD_ERROR', 'Upload Error');
+

@@ -1094,8 +1094,9 @@ global $xoopsModule;
 if (is_object($xoopsModule) && $xoopsModule->dirname() === $modversion['dirname']) {
     $moduleHandler = xoops_getHandler('module');
     $mod_yogurt    = $moduleHandler->getByDirname('yogurt');
-    $confHandler   = xoops_getHandler('config');
-    $moduleConfig  = $confHandler->getConfigsByCat(0, $mod_yogurt->getVar('mid'));
+    /** @var \XoopsConfigHandler $confHandler */
+    $confHandler  = xoops_getHandler('config');
+    $moduleConfig = $confHandler->getConfigsByCat(0, $mod_yogurt->getVar('mid'));
 
     if (1 === $moduleConfig['enable_notes']) {
         $modversion['sub'][3]['name'] = _MI_YOGURT_MYNOTES;

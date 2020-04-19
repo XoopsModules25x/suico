@@ -28,6 +28,8 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 class Friendship extends XoopsObject
 {
     public $db;
+    public $helper;
+    public $permHelper;
 
     // constructor
 

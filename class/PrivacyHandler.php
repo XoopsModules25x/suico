@@ -52,7 +52,11 @@ class PrivacyHandler extends \XoopsPersistableObjectHandler
     public function __construct(\XoopsDatabase $db = null, $helper = null)
     {
         /** @var \XoopsModules\Yogurt\Helper $this ->helper */
-        $this->helper = $helper;
+        if (null === $helper) {
+            $this->helper = Helper::getInstance();
+        } else {
+            $this->helper = $helper;
+        }
         parent::__construct($db, 'yogurt_privacy', Privacy::class, 'id', 'name');
     }
 

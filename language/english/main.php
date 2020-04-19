@@ -472,3 +472,22 @@ define('_MD_YOGURT_DTNEXT','Next');
 define('_MD_YOGURT_DTPREVIOUS','Previous');
 define('_MD_YOGURT_DTSORTASCENDING',': activate to sort column ascending');
 define('_MD_YOGURT_DTSORTDESCENSING',': activate to sort column descending');
+
+define('_MD_YOGURT_CANTVOTEOWN','You can not vote for yourself');
+define('_MD_YOGURT_VOTED','Vote');
+define('_MD_YOGURT_ALREADYVOTED', 'Sorry, you have already voted once.');
+
+
+define('_MD_YOGURT_PROFILE_DISPLAYNAME', 'Display Name');
+define('_MD_YOGURT_PROFILE_EMAIL', 'Email');
+
+define('_MD_YOGURT_PROFILE_SORTBY', 'Sort by');
+define('_MD_YOGURT_PROFILE_ORDER', 'Ordering');
+define('_MD_YOGURT_PROFILE_PERPAGE', 'Items per page');
+define('_MD_YOGURT_PROFILE_LATERTHAN', ' %s  is later than');
+define('_MD_YOGURT_PROFILE_EARLIERTHAN', ' %s  is earlier than');
+define('_MD_YOGURT_PROFILE_LARGERTHAN', ' %s  is greater than');
+define('_MD_YOGURT_PROFILE_SMALLERTHAN', ' %s  is smaller than');
+
+
+
