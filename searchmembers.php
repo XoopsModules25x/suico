@@ -499,7 +499,7 @@ $xoopsTpl->assign('section_name', _MD_YOGURT_SEARCH);
 
 // temporary solution for profile module integration
 if (xoops_isActiveModule('profile')) {
-$profileHandler=xoops_getmodulehandler('profile','profile');
+$profileHandler=xoops_getModuleHandler('profile','profile');
 $uid = $controller->uidOwner;
 if ($uid <= 0) { 
  if (is_object($xoopsUser))  {
