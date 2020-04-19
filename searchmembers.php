@@ -422,7 +422,7 @@ if ('submit' === $op) {
 		
 			$uid=$userdata['id'];
 			$groups =$member_handler->getGroupsByUser($uid, true); 
-			$usergroups = array(); 
+			$usergroups = [];
 			foreach ($groups as $group) { 
 			$usergroups[] = $group->getVar('name'); 
 			}  		
