@@ -34,7 +34,7 @@ class Configs extends XoopsObject
         $this->helper     = Helper::getInstance();
         $this->permHelper = new Permission();
         $this->db         = XoopsDatabaseFactory::getDatabaseConnection();
-        $this->initVar('config_id', XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('config_id', XOBJ_DTYPE_INT);
         $this->initVar('config_uid', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('pictures', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('audio', XOBJ_DTYPE_INT, null, false, 10);
@@ -48,7 +48,7 @@ class Configs extends XoopsObject
         $this->initVar('suspension', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('backup_password', XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('backup_email', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('end_suspension', XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('end_suspension', XOBJ_DTYPE_TIMESTAMP);
         if (!empty($id)) {
             if (is_array($id)) {
                 $this->assignVars($id);

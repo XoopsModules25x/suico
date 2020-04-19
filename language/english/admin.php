@@ -86,6 +86,7 @@ define('AM_YOGURT_THEREARE_NOTES', "There are <span class='bold'>%s</span> Notes
 define('AM_YOGURT_THEREARE_CONFIGS', "There are <span class='bold'>%s</span> Configs in the database");
 define('AM_YOGURT_THEREARE_SUSPENSIONS', "There are <span class='bold'>%s</span> Suspensions in the database");
 define('AM_YOGURT_THEREARE_AUDIO', "There are <span class='bold'>%s</span> Audio in the database");
+define('AM_YOGURT_THEREARE_PRIVACY', "There are <span class='bold'>%s</span> Privacy in the database");
 //Buttons
 define('AM_YOGURT_ADD_IMAGES', 'Add new Images');
 define('AM_YOGURT_IMAGES_LIST', 'List of Images');
@@ -212,8 +213,8 @@ define('AM_YOGURT_CONFIGS_GROUPS', 'Groups');
 define('AM_YOGURT_CONFIGS_NOTES', 'Notes');
 define('AM_YOGURT_CONFIGS_FRIENDS', 'Friends');
 define('AM_YOGURT_CONFIGS_PROFILE_CONTACT', 'Contact');
-define('AM_YOGURT_CONFIGS_PROFILE_GENERAL', 'Profile_general');
-define('AM_YOGURT_CONFIGS_PROFILE_STATS', 'Profile_stats');
+define('AM_YOGURT_CONFIGS_PROFILE_GENERAL', 'Profile Info');
+define('AM_YOGURT_CONFIGS_PROFILE_STATS', 'Profile Stats');
 define('AM_YOGURT_CONFIGS_SUSPENSION', 'Suspension');
 define('AM_YOGURT_CONFIGS_BACKUP_PASSWORD', 'BackupPassword');
 define('AM_YOGURT_CONFIGS_BACKUP_EMAIL', 'BackupEmail');

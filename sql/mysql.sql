@@ -126,3 +126,13 @@ CREATE TABLE `yogurt_audio` (
   PRIMARY KEY (`audio_id`)
 )
   ENGINE = MyISAM;
+
+
+CREATE TABLE `yogurt_privacy` (
+    `id`          INT(8)      NOT NULL AUTO_INCREMENT,
+    `level`       INT(8)      NOT NULL,
+    `name`        VARCHAR(20) NOT NULL,
+    `description` TEXT        NOT NULL,
+    PRIMARY KEY (`id`)
+)
+    ENGINE = MyISAM;

@@ -22,19 +22,19 @@ declare(strict_types=1);
 
 use Xmf\Module\Admin;
 use XoopsModules\Yogurt\Helper;
+use XoopsModules\Yogurt\Utility;
+
+include dirname(__DIR__) . '/preloads/autoloader.php';
 
 require dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 //require $GLOBALS['xoops']->path('www/class/xoopsformloader.php');
-
-include dirname(
-            __DIR__
-        ) . '/preloads/autoloader.php';
 
 require dirname(__DIR__) . '/include/common.php';
 
 $moduleDirName = basename(dirname(__DIR__));
 
 $helper = Helper::getInstance();
+$utility = Utility::getInstance();
 
 /** @var Admin $adminObject */
 $adminObject = Admin::getInstance();
@@ -59,15 +59,11 @@ $visitorsHandler = $helper->getHandler('Visitors');
 /** @var XoopsPersistableObjectHandler $videoHandler */
 $videoHandler = $helper->getHandler('Video');
 /** @var XoopsPersistableObjectHandler $friendpetitionHandler */
-$friendpetitionHandler = $helper->getHandler(
-    'Friendpetition'
-);
+$friendpetitionHandler = $helper->getHandler('Friendpetition');
 /** @var XoopsPersistableObjectHandler $groupsHandler */
 $groupsHandler = $helper->getHandler('Groups');
 /** @var XoopsPersistableObjectHandler $relgroupuserHandler */
-$relgroupuserHandler = $helper->getHandler(
-    'Relgroupuser'
-);
+$relgroupuserHandler = $helper->getHandler('Relgroupuser');
 /** @var XoopsPersistableObjectHandler $notesHandler */
 $notesHandler = $helper->getHandler('Notes');
 /** @var XoopsPersistableObjectHandler $configsHandler */
@@ -76,6 +72,8 @@ $configsHandler = $helper->getHandler('Configs');
 $suspensionsHandler = $helper->getHandler('Suspensions');
 /** @var XoopsPersistableObjectHandler $audioHandler */
 $audioHandler = $helper->getHandler('Audio');
+/** @var XoopsPersistableObjectHandler $privacyHandler */
+$privacyHandler = $helper->getHandler('Privacy');
 
 $myts = MyTextSanitizer::getInstance();
 if (!isset($xoopsTpl) || !is_object($xoopsTpl)) {
