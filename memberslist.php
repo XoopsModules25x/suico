@@ -51,7 +51,7 @@ $controller = new Yogurt\IndexController($xoopsDB, $xoopsUser);
         $order = 'DESC';
     }
 	if ('normal' == $xoopsModuleConfig['memberslisttemplate']) {
-    $limit = (!empty($xoopsModuleConfig['membersperpage'])) ? intval($xoopsModuleConfig['membersperpage']) : 20;
+    $limit = (!empty($xoopsModuleConfig['membersperpage'])) ? (int)$xoopsModuleConfig['membersperpage'] : 20;
     if (0 === $limit || $limit > 50) {
         $limit = 50;
     }
