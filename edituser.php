@@ -27,7 +27,7 @@ require __DIR__ . '/header.php';
 //    require_once XOOPS_ROOT_PATH . '/language/english/user.php';
 //}
 
-require_once dirname(dirname(__DIR__)) . '/class/pagenav.php';
+require_once dirname(__DIR__, 2) . '/class/pagenav.php';
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 

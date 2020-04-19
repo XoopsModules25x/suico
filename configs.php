@@ -92,4 +92,4 @@ $xoopsTpl->assign('lang_mysection', _MD_YOGURT_CONFIGSTITLE);
 $xoopsTpl->assign('section_name', _MD_YOGURT_CONFIGSTITLE);
 
 require __DIR__ . '/footer.php';
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

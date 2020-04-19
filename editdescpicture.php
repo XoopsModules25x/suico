@@ -80,4 +80,4 @@ if ($array_pict) {
 $url = XOOPS_URL . '/uploads/yogurt/images/thumb_' . $url;
 $imageFactory->renderFormEdit($caption, $cod_img, $url);
 
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

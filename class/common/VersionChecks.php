@@ -33,7 +33,7 @@ trait VersionChecks
         ?XoopsModule $xoopsModule = null,
         $requiredVer = null
     ) {
-        $moduleDirName      = basename(dirname(dirname(__DIR__)));
+        $moduleDirName      = basename(dirname(__DIR__, 2));
         $moduleDirNameUpper = mb_strtoupper($moduleDirName);
         if (null === $xoopsModule) {
             $xoopsModule = XoopsModule::getByDirname($moduleDirName);
@@ -68,7 +68,7 @@ trait VersionChecks
     public static function checkVerPhp(
         ?XoopsModule $xoopsModule = null
     ) {
-        $moduleDirName      = basename(dirname(dirname(__DIR__)));
+        $moduleDirName      = basename(dirname(__DIR__, 2));
         $moduleDirNameUpper = mb_strtoupper($moduleDirName);
         if (null === $xoopsModule) {
             $xoopsModule = XoopsModule::getByDirname($moduleDirName);
@@ -108,7 +108,7 @@ trait VersionChecks
         $source = 'github',
         $default = 'master'
     ) {
-        $moduleDirName      = basename(dirname(dirname(__DIR__)));
+        $moduleDirName      = basename(dirname(__DIR__, 2));
         $moduleDirNameUpper = mb_strtoupper($moduleDirName);
         $update             = '';
         $repository         = 'XoopsModules25x/' . $moduleDirName;

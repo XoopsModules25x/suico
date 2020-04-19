@@ -51,7 +51,7 @@ class SysUtility
         global $start, $order, $file_cat, $sort, $xoopsModule;
 
         $select_view   = '';
-        $moduleDirName = basename(dirname(dirname(__DIR__)));
+        $moduleDirName = basename(dirname(__DIR__, 2));
         $helper = Helper::getInstance();
 
         $pathModIcon16 = XOOPS_URL . '/modules/' . $moduleDirName . '/' . $helper->getModule()->getInfo('modicons16');
@@ -252,9 +252,9 @@ class SysUtility
             }
         } elseif (strlen($text) <= $length) {
             return $text;
-        } else {
-            $truncate = substr($text, 0, $length - strlen($ending));
         }
+
+        $truncate = substr($text, 0, $length - strlen($ending));
 
         // if the words shouldn't be cut in the middle...
         if (!$exact) {

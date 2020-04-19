@@ -72,4 +72,4 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
         redirect_header('group.php?group_id='.$group_id.'', 1, _MD_YOGURT_NOCACHACA);
     }
 }
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

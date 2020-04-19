@@ -178,4 +178,4 @@ if (1 === $marker) {//if (1 === $marker) {
 /**
  * Close page
  */
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

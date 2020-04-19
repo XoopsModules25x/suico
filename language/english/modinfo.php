@@ -212,7 +212,7 @@ define('_MI_YOGURT_NAME', _MI_YOGURT_MODULE_NAME);
 define('_MI_YOGURT_MENU_02', 'Admin');
 
 //Help
-define('_MI_YOGURT_DIRNAME', basename(dirname(dirname(__DIR__))));
+define('_MI_YOGURT_DIRNAME', basename(dirname(__DIR__, 2)));
 define('_MI_YOGURT_HELP_HEADER', __DIR__ . '/help/helpheader.tpl');
 define('_MI_YOGURT_BACK_2_ADMIN', 'Back to Administration of ');
 define('_MI_YOGURT_OVERVIEW', 'Overview');

@@ -56,4 +56,4 @@ $friendshipFactory->deleteAll($criteria_delete1);
 
 redirect_header('friends.php', 3, _MD_YOGURT_FRIENDSHIPTERMINATED);
 
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

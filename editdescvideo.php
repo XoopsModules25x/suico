@@ -80,4 +80,4 @@ if ($array_pict) {
 
 $videoFactory->renderFormEdit($caption, $cod_img, $url);
 
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

@@ -100,4 +100,4 @@ if ('sel_photo' === $_POST['xoops_upload_file'][0]) {
 /**
  * Close page
  */
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

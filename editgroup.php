@@ -154,4 +154,4 @@ if (false !== stripos($_SERVER['HTTP_USER_AGENT'], 'msie')) {
 }
 
 require __DIR__ . '/footer.php';
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

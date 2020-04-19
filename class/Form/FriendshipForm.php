@@ -33,9 +33,9 @@ use XoopsFormText;
 use XoopsModules\Yogurt;
 use XoopsThemeForm;
 
-require_once dirname(dirname(__DIR__)) . '/include/common.php';
+require_once dirname(__DIR__, 2) . '/include/common.php';
 
-$moduleDirName = basename(dirname(dirname(__DIR__)));
+$moduleDirName = basename(dirname(__DIR__, 2));
 //$helper = Yogurt\Helper::getInstance();
 $permHelper = new Permission();
 

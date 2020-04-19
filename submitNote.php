@@ -62,4 +62,4 @@ if (1 === $mainform) {
 /**
  * Close page
  */
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';
