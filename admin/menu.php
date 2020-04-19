@@ -117,12 +117,6 @@ $adminmenu[] = [
 ];
 
 $adminmenu[] = [
-    'title' => _MI_YOGURT_MENU_02,
-    'link'  => 'admin/main.php',
-    'icon'  => $pathIcon32 . '/manage.png',
-];
-
-$adminmenu[] = [
     'title' => MI_YOGURT_ADMENU13,
     'link'  => 'admin/privacy.php',
     'icon'  => "{$pathIcon32}/album.png",
@@ -143,6 +137,13 @@ if (is_object($helper->getModule()) && $helper->getConfig('displayDeveloperTools
         'icon'  => $pathIcon32 . '/database_go.png',
     ];
 }
+
+$adminmenu[] = [
+    'title' => _MI_YOGURT_MENU_02,
+    'link'  => 'admin/main.php',
+    'icon'  => $pathIcon32 . '/manage.png',
+];
+
 
 //$adminmenu[] = [
 //    'title' => _MI_YOGURT_ADMENU2,
