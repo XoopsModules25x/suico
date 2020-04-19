@@ -186,8 +186,8 @@ define('_MI_YOGURT_TEMPLATENOTIFICATIONS', 'Template for the notifications');
 
 //11/04/2008
 define('_MI_YOGURT_FRIENDSHIP_NOTIFYTIT', 'Friendships');
-define('_MI_YOGURT_FRIENDSHIP_NOTIFYDSC', 'Petitions of friendship');
-define('_MI_YOGURT_FRIEND_NEWPETITION_NOTIFY', 'Petition');
+define('_MI_YOGURT_FRIENDSHIP_NOTIFYDSC', 'Friends Requests');
+define('_MI_YOGURT_FRIEND_NEWPETITION_NOTIFY', 'New Friend Requests');
 define('_MI_YOGURT_FRIEND_NEWPETITION_NOTIFYCAP', 'Notify me when someone ask for friendship');
 define('_MI_YOGURT_FRIEND_NEWPETITION_NOTIFYDSC', 'Notify me when someone ask for friendship');
 define('_MI_YOGURT_FRIEND_NEWPETITION_NOTIFYSBJ', 'Someone has just asked to be your friend');

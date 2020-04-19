@@ -83,7 +83,7 @@ class FriendpetitionForm extends XoopsThemeForm
             ), 'friendpet_id'
             )
         );
-        // Petitioner_uid
+        // Inviting by Friend_uid
         $this->addElement(
             new XoopsFormSelectUser(
                 AM_YOGURT_FRIENDPETITION_PETITIONER_UID, 'petitioner_uid', false, $this->targetObject->getVar(
@@ -92,7 +92,7 @@ class FriendpetitionForm extends XoopsThemeForm
             ),
             false
         );
-        // Petioned_uid
+        // Invited Friend_uid
         $this->addElement(
             new XoopsFormSelectUser(
                 AM_YOGURT_FRIENDPETITION_PETITIONTO_UID, 'petitionto_uid', false, $this->targetObject->getVar(
