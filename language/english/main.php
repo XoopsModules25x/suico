@@ -427,7 +427,7 @@ define('_MD_YOGURT_MYFANS', 'My Fans');
 define('_MD_YOGURT_EXTRAINFOCONTAINS', 'Extra Info Contains');
 define('_MD_YOGURT_BIOGRAPHYINFOCONTAINS', 'Biography Contains');
 define('_MD_YOGURT_SIGNATURECONTAINS', 'Signature Contains');
-
+define('_MD_YOGURT_MEMBEROFGROUP', 'Member');
 //users
 define('_MD_YOGURT_USERNAME', 'Username');
 define('_MD_YOGURT_PASSWORD', 'Password');

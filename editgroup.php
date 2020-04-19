@@ -26,6 +26,11 @@ require __DIR__ . '/header.php';
 
 $controller = new Yogurt\GroupController($xoopsDB, $xoopsUser);
 
+/**
+
+ */
+
+
 $group_id = Request::getInt('group_id', 0, 'POST');
 $marker   = Request::getInt('marker', 0, 'POST');
 $criteria = new Criteria('group_id', $group_id);
@@ -56,7 +61,7 @@ if (1 === $marker && $group->getVar('owner_uid') === $uid) {
         $group
     );
 
-    redirect_header('groups.php?uid=' . $uid, 3, _MD_YOGURT_GROUPEDITED);
+    redirect_header('group.php?group_id='.$group_id.'', 3, _MD_YOGURT_GROUPEDITED);
 } else {
     /**
      * Render a form with the info of the user
