@@ -26,11 +26,6 @@ require __DIR__ . '/header.php';
 
 $controller = new Yogurt\GroupController($xoopsDB, $xoopsUser);
 
-/**
- * Fetching numbers of groups friends videos pictures etc...
- */
-$nbSections = $controller->getNumbersSections();
-
 $start_all = Request::getInt('start_all', 0, 'GET');
 $start_my  = Request::getInt('start_my', 0, 'GET');
 
@@ -58,6 +53,9 @@ $mygroupsid =[];
 foreach($mygroups as $value){
     $mygroupsid[] = $value['group_id'];
 }
+
+
+
 
 /**
  * Creating the navigation bar if you have a lot of friends
@@ -111,6 +109,7 @@ $xoopsTpl->assign('lang_abandongroup', _MD_YOGURT_GROUP_ABANDON);
 $xoopsTpl->assign('lang_joingroup', _MD_YOGURT_GROUP_JOIN);
 $xoopsTpl->assign('lang_searchgroup', _MD_YOGURT_GROUP_SEARCH);
 $xoopsTpl->assign('lang_groupkeyword', _MD_YOGURT_GROUP_SEARCHKEYWORD);
+$xoopsTpl->assign('lang_memberofgroup', _MD_YOGURT_MEMBEROFGROUP);
 
 $xoopsTpl->assign('lang_mysection', _MD_YOGURT_MYGROUPS);
 $xoopsTpl->assign('section_name', _MD_YOGURT_GROUPS);
