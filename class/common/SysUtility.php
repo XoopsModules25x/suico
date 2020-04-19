@@ -251,13 +251,12 @@ class SysUtility
                     break;
                 }
             }
+        } elseif (strlen($text) <= $length) {
+            return $text;
         } else {
-            if (strlen($text) <= $length) {
-                return $text;
-            } else {
-                $truncate = substr($text, 0, $length - strlen($ending));
-            }
+            $truncate = substr($text, 0, $length - strlen($ending));
         }
+
         // if the words shouldn't be cut in the middle...
         if (!$exact) {
             // ...search the last occurance of a space...
