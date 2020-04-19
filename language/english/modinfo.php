@@ -227,18 +227,19 @@ define('_MI_YOGURT_SUPPORT', 'Support');
 define('MI_YOGURT_ADMENU1', 'Home');
 define('MI_YOGURT_ADMENU2', 'Images');
 define('MI_YOGURT_ADMENU3', 'Friends');
-define('MI_YOGURT_ADMENU4', 'Friendship Request');
-define('MI_YOGURT_ADMENU5', 'Visitors');
-define('MI_YOGURT_ADMENU6', 'Video');
+define('MI_YOGURT_ADMENU4', 'Visitors');
+define('MI_YOGURT_ADMENU5', 'Video');
+define('MI_YOGURT_ADMENU6', 'Invitations');
 define('MI_YOGURT_ADMENU7', 'Groups');
 define('MI_YOGURT_ADMENU8', 'Members');
 define('MI_YOGURT_ADMENU9', 'Notes');
 define('MI_YOGURT_ADMENU10', 'Configs');
 define('MI_YOGURT_ADMENU11', 'Suspensions');
 define('MI_YOGURT_ADMENU12', 'Audio');
-define('MI_YOGURT_ADMENU13', 'Feedback');
-define('MI_YOGURT_ADMENU14', 'Migrate');
-define('MI_YOGURT_ADMENU15', 'About');
+define('MI_YOGURT_ADMENU13', 'Privacy');
+define('MI_YOGURT_ADMENU14', 'Feedback');
+define('MI_YOGURT_ADMENU15', 'Migrate');
+define('MI_YOGURT_ADMENU16', 'About');
 
 //Config
 define('MI_YOGURT_EDITOR_ADMIN', 'Editor: Admin');
