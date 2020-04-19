@@ -85,7 +85,6 @@ if ($xoopsUser && $xoopsUser->isAdmin(1)) {
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
-$nbSections = $controller->getNumbersSections();
 $xoopsTpl->assign('nb_groups', $nbSections['nbGroups']);
 $xoopsTpl->assign('nb_photos', $nbSections['nbPhotos']);
 $xoopsTpl->assign('nb_videos', $nbSections['nbVideos']);
