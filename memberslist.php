@@ -47,7 +47,7 @@ $controller = new Yogurt\IndexController($xoopsDB, $xoopsUser);
     $sort = (!in_array($xoopsModuleConfig['sortmembers'], $validsort ) ) ? 'uname' : $xoopsModuleConfig['sortmembers'];
 
     $order     = 'ASC';
-	if ( isset($xoopsModuleConfig['membersorder']) && $xoopsModuleConfig['membersorder'] == 'DESC' ) {
+	if ( isset($xoopsModuleConfig['membersorder']) && 'DESC' == $xoopsModuleConfig['membersorder']) {
         $order = 'DESC';
     }
 	if ('normal' == $xoopsModuleConfig['memberslisttemplate']) {
