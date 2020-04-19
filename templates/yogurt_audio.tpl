@@ -1,32 +1,33 @@
 <{include file="db:yogurt_navbar.tpl"}>
 <{if $isOwner}>
-    <div id="yogurt-audio-form" class="outer">
-        <h4 id="yogurt-audio-form-title" class="head">
+    <div class="alert alert-info">
+        <h5>
             <{$lang_addaudios}>
-        </h4>
+        </h5>
         <form name="form_audios" id="form_audios" action="submitaudio.php" method="post" onsubmit="return xoopsFormValidate_form_audios();" enctype="multipart/form-data">
             <{$token}>
-            <p class="even">
-                <{$lang_audiohelp}></p>
-            <p class="odd">
-                <label for="title">
-                    <{$lang_titleLabel}>
-                    :
-                </label>
-                <input type='text' name='title' id='title' size='50' maxlength='250' value=''>
-            </p>
-            <p class="even">
-                <label for="author">
-                    <{$lang_authorLabel}>
-                    :
-                </label>
-                <input type='text' name='author' id='author' size='50' maxlength='250' value=''>
-            </p>
-            <p class="odd"><label class="yogurt-audio-label" for="sel_file"><{$lang_selectaudio}></label><input type='hidden' name='MAX_FILE_SIZE' value='<{$max_youcanupload}>'><input type='file' name='sel_audio' id='sel_audio'><input type='hidden' name='xoops_upload_file[]' id='xoops_upload_file[]'
-                                                                                                                                                                                                                                           value='sel_audio'></p>
-            <p class="foot">
-                <input type='submit' class='formButton' name='submit_button' id='submit_button' value='<{$lang_submitValue}>'>
-            </p>
+			<div class="form-group">
+			<label for="audio"><{$lang_audiohelp}></label>
+			</div>
+			
+			<div class="form-group">
+			<label for="audio"><strong><{$lang_titleLabel}></strong></label>
+			<input type='text' name='title' id='title' class="form-control" value=''>
+			</div>
+ 
+			<div class="form-group">
+			<label for="audio"><strong><{$lang_authorLabel}></strong></label>
+			<input type='text' name='author' id='author' class="form-control" value=''>
+			</div>
+
+			<div class="form-group">
+			<label for="audio"><strong><{$lang_selectaudio}></strong></label>
+			<input type='hidden' name='MAX_FILE_SIZE' value='<{$max_youcanupload}>'>
+			<input type='file' name='sel_audio' id='sel_audio' class='form-control-file'>
+			<input type='hidden' name='xoops_upload_file[]' id='xoops_upload_file[]' value='sel_audio'>
+			</div>
+            
+			<input type='submit' class='btn btn-primary' name='submit_button' id='submit_button' value='<{$lang_submitValue}>'>
         </form>
 
     </div>

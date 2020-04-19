@@ -1,20 +1,34 @@
 <{include file="db:yogurt_navbar.tpl"}>
 
 <{if ($showForm==1) }>
-    <div id="yogurt-album-form" class="outer">
-        <h4 class="head">
-            <{$lang_formtitle}>
-        </h4>
-        <form name="form_picture" id="form_picture" action="submit.php" method="post" enctype="multipart/form-data">
-            <p class="odd"><{$token}><label class="yogurt-album-label-alert"><{$lang_youcanupload}></label></p>
-            <p class="even"><label class="yogurt-album-label-alert"><{$lang_nb_pict}> <{$lang_max_nb_pict}></label></p>
-            <p class="odd"><label class="yogurt-album-label" for="sel_photo"><{$lang_selectphoto}></label><input type='hidden' name='MAX_FILE_SIZE' value='<{$maxfilebytes}>'><input type='file' name='sel_photo' id='sel_photo'><input type='hidden' name='xoops_upload_file[]' id='xoops_upload_file[]'
-                                                                                                                                                                                                                                        value='sel_photo'></p>
-            <p class="even"><label for="caption" class="yogurt-album-label xoops-form-element-caption-required"><{$lang_caption}><span class='caption-marker'>*</span> :
-                    <input type='text' name='caption' id='caption' size='35' maxlength='55' value='' required></p>
-            <p class="foot"><input type='submit' class='formButton' name='submit_button' id='submit_button' value='<{$lang_uploadpicture}>'></p>
-        </form>
-    </div>
+<div class="alert alert-info">
+    <h5>
+        <{$lang_formtitle}>
+    </h5>
+	
+    <form name="form_picture" id="form_picture" action="submit.php" method="post" enctype="multipart/form-data">
+       <{$token}>
+		<div class="form-group">
+		<label for="album"><{$lang_youcanupload}><br><{$lang_nb_pict}> <{$lang_max_nb_pict}></label>
+        </div>
+		<div class="form-group">
+		<label for="selectphoto"><strong><{$lang_selectphoto}> :</strong></label>		
+		<input type='hidden' name='MAX_FILE_SIZE' value='<{$maxfilebytes}>'>
+		<input type='file' name='sel_photo' id="sel_photo" class='form-control-file'>
+		<input type='hidden' name='xoops_upload_file[]' id='xoops_upload_file[]' value='sel_photo'>
+        </div> 
+		
+		<div class="form-group">
+		<label><strong><{$lang_caption}> :</strong></label>
+		<input type='text' class='form-control' name='caption' id='caption' size='35' maxlength='55' value='' required>
+		</div>
+  
+		<div class="form-group">
+		<input type='submit' class='formButton btn btn-primary' name='submit_button'  id='submit_button' value='<{$lang_uploadpicture}>'>
+		</div>
+     
+    </form>
+</div>
 <{/if}>
 <div id="yogurt-album-container" class="outer">
     <h4 class="head">
