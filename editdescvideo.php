@@ -47,7 +47,7 @@ if (1 === $marker) {
      * Verifying who's the owner to allow changes
      */
     if ($uid === $video->getVar('uid_owner')) {
-        if ($videoFactory->insert($video)) {
+        if ($videoFactory->insert2($video)) {
             redirect_header('video.php?uid=' . $uid, 2, _MD_YOGURT_DESC_EDITED);
         } else {
             redirect_header('index.php?uid=' . $uid, 2, _MD_YOGURT_NOCACHACA);

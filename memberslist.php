@@ -36,11 +36,6 @@ $op = 'form';
 //require_once __DIR__ . '/class/yogurt_controller.php';
 $controller = new Yogurt\IndexController($xoopsDB, $xoopsUser);
 
-/**
- * Fetching numbers of groups friends videos pictures etc...
- */
-$nbSections = $controller->getNumbersSections();
-
     $GLOBALS['xoopsOption']['template_main'] = 'yogurt_memberslist_datatables.tpl';
     require XOOPS_ROOT_PATH . '/header.php';
     $iamadmin = $xoopsUserIsAdmin;
@@ -256,7 +251,7 @@ if(isset($_POST["addfriend"])){
 			$newpetition = $friendpetitionFactory->create(true);
 			$newpetition->setVar('petitioner_uid', $controller->uidOwner);
 			$newpetition->setVar('petitionto_uid', 5, 0, 'POST');
-			$friendpetitionFactory->insert($newpetition);
+			$friendpetitionFactory->insert2($newpetition);
 			redirect_header(
 			XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('petitionfrom_uid', 0, 'POST'), 3, _MD_YOGURT_PETITIONFROM);
 			}
@@ -273,11 +268,11 @@ $xoopsTpl->assign('section_name', _MD_YOGURT_MEMBERSLIST);
 
 // temporary solution for profile module integration
 if (xoops_isActiveModule('profile')) {
-$profile_handler=xoops_getmodulehandler('profile','profile');
+$profileHandler=xoops_getmodulehandler('profile','profile');
 $uid = $controller->uidOwner;
 if ($uid <= 0) { 
  if (is_object($xoopsUser))  {
-        $profile = $profile_handler->get($uid);
+        $profile = $profileHandler->get($uid);
 		} 
         else {
              header('location: ' . XOOPS_URL); 
@@ -286,7 +281,7 @@ if ($uid <= 0) {
  }
 else 
 {
-$profile = $profile_handler->get($uid);
+$profile = $profileHandler->get($uid);
 }
 }
 

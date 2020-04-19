@@ -46,8 +46,8 @@ $controller = new IndexController($xoopsDB, $xoopsUser);
 $nbSections = $controller->getNumbersSections();
 
 /**
- * This variable define the beggining of the navigation must b
- * setted here so all calls to database will take this into account
+ * This variable define the beginning of the navigation must be
+ * set here so all calls to database will take this into account
  */
 $start = Request::getInt(
     'start',
@@ -109,7 +109,7 @@ $criteria_mainvideo = new Criteria('main_video', '1');
 $criteria_video     = new CriteriaCompo($criteria_mainvideo);
 $criteria_video->add($criteria_uidvideo);
 
-if (($nbSections['nbVideos'] > 0) && ($videos = $controller->videosFactory->getObjects($criteria_video))) {
+if ((isset($nbSections['nbVideos']) && $nbSections['nbVideos'] > 0) && ($videos = $controller->videosFactory->getObjects($criteria_video))) {
     $mainvideocode = $videos[0]->getVar('youtube_code');
     $mainvideodesc = $videos[0]->getVar('video_desc');
 }
@@ -141,7 +141,7 @@ if (0 === $controller->isAnonym) {
         $visitor_now->setVar('uid_owner', $controller->uidOwner);
         $visitor_now->setVar('uid_visitor', $xoopsUser->getVar('uid'));
         $visitor_now->setVar('uname_visitor', $xoopsUser->getVar('uname'));
-        $controller->visitorsFactory->insert($visitor_now);
+        $controller->visitorsFactory->insert2($visitor_now);
     }
     $criteria_visitors = new Criteria('uid_owner', $controller->uidOwner);
     //$criteria_visitors->setLimit(5);
@@ -197,7 +197,7 @@ $xoopsTpl->assign('section_name', _MD_YOGURT_PROFILE);
 
 //groups
 $xoopsTpl->assign('groups', $groups);
-if ($nbSections['nbGroups'] <= 0) {
+if (isset($nbSections['nbGroups']) && $nbSections['nbGroups'] <= 0) {
     $xoopsTpl->assign('lang_nogroupsyet', _MD_YOGURT_NOGROUPSYET);
 }
 $xoopsTpl->assign('lang_viewallgroups', _MD_YOGURT_ALLGROUPS);
@@ -249,7 +249,7 @@ $xoopsTpl->assign('lang_nomainvideo', _MD_YOGURT_NOMAINVIDEOYET);
 $xoopsTpl->assign('lang_featuredvideo', _MD_YOGURT_FEATUREDVIDEO);
 $xoopsTpl->assign('lang_viewallvideos', _MD_YOGURT_ALLVIDEOS);
 
-if ($nbSections['nbVideos'] > 0) {
+if (isset($nbSections['nbVideos']) && $nbSections['nbVideos'] > 0) {
     $xoopsTpl->assign('mainvideocode', $mainvideocode);
     $xoopsTpl->assign('mainvideodesc', $mainvideodesc);
     $xoopsTpl->assign(
@@ -408,11 +408,11 @@ foreach ($mids as $mid) {
 
 // temporary solution for profile module integration
 if (xoops_isActiveModule('profile')) {
-$profile_handler=xoops_getmodulehandler('profile','profile');
+$profileHandler=xoops_getmodulehandler('profile','profile');
 $uid = $controller->uidOwner;
 if ($uid <= 0) { 
  if (is_object($xoopsUser))  {
-        $profile = $profile_handler->get($uid);
+        $profile = $profileHandler->get($uid);
 		} 
         else {
              header('location: ' . XOOPS_URL); 
@@ -421,7 +421,7 @@ if ($uid <= 0) {
  }
 else 
 {
-$profile = $profile_handler->get($uid);
+$profile = $profileHandler->get($uid);
 }
 }
 

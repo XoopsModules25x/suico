@@ -10,24 +10,24 @@
 
     <p id="yogurt-group-desc" class="even">
         <{$group_desc}><br>
-        <b><{$lang_ownerofgroup}></b><br>
-        <{$group_ownername}>
-
-        <{if $isAnonym!=1 }>
-        <{if $memberOfGroup ==1}>
+		<b><{$lang_ownerofgroup}></b><br>
+		<{$group_ownername}><br>
+		
+		<{if $isAnonym!=1 && $memberOfGroup ==1}>
     <form action="abandongroup.php" method="POST" id="form_abandongroup">
-        <input type="hidden" value="<{$group_id}>" name="relgroup_id" id="relgroup_id">
+        <input type="hidden" value="<{$group_rel_id}>" name="relgroup_id" id="relgroup_id">
+		<input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
         <button name="" type="image"><{$lang_abandongroup}></button>
     </form>
     <{ else}>
     <form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">
         <input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
         <button name="" type="image"><{$lang_joingroup}></button>
-    </form><{/if}>
+	</form>
     <{/if}>
-    </p>
 
-    <{if $allow_friends }>
+    </p>
+<br>
         <div id="yogurt-group-edit-members" class="outer odd">
             <h4 class="head"><{$lang_membersofgroup}></h4>
             <{section name=i loop=$group_members}>
@@ -44,27 +44,27 @@
                     <form action="kickfromgroup.php" method="post">
                         <input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
                         <input type="hidden" value="<{$group_members[i].uid}>" name="rel_user_uid" id="rel_user_uid">
-                        <button name="" type="image"><{$lang_removemember}></button>
+                         <button name="" type="image"><{$lang_removemember}></button>
                     </form>
                     <{/if}>
                     </p>
                 </div>
             <{/section}>
         </div>
-    <{/if}>
+    
 </div>
 
-<div style="clear:both;">
-    <{$commentsnav}>
-    <{$lang_notice}>
-</div>
-<div style="clear:both;">
-    <{if $comment_mode == "flat"}>
-        <{include file="db:system_comments_flat.tpl"}>
-    <{elseif $comment_mode == "thread"}>
-        <{include file="db:system_comments_thread.tpl"}>
-    <{elseif $comment_mode == "nest"}>
-        <{include file="db:system_comments_nest.tpl"}>
-    <{/if}>
-</div>
-<{include file="db:yogurt_footer.tpl"}>
+    <div style="clear:both;">
+        <{$commentsnav}>
+        <{$lang_notice}>
+    </div>
+    <div style="clear:both;">
+        <{if $comment_mode == "flat"}>
+            <{include file="db:system_comments_flat.tpl"}>
+        <{elseif $comment_mode == "thread"}>
+            <{include file="db:system_comments_thread.tpl"}>
+        <{elseif $comment_mode == "nest"}>
+            <{include file="db:system_comments_nest.tpl"}>
+        <{/if}>
+    </div>
+    <{include file="db:yogurt_footer.tpl"}>

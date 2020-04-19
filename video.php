@@ -44,7 +44,11 @@ $criteriaUidVideo->setLimit($helper->getConfig('videosperpage'));
  * Get all videos of this user and assign them to template
  */
 $videos       = $controller->getVideos($criteriaUidVideo);
-$videos_array = $controller->assignVideoContent($nbSections['nbVideos'], $videos);
+$videos_array = '';
+$pageNav = '';
+if (isset($nbSections['nbVideos'])) {
+    $videos_array = $controller->assignVideoContent($nbSections['nbVideos'], $videos);
+}
 
 if (is_array($videos_array)) {
     $xoopsTpl->assign('videos', $videos_array);
@@ -53,8 +57,9 @@ if (is_array($videos_array)) {
 }
 $xoopsTpl->assign('lang_selectmainvideo', _MD_YOGURT_SELECTMAINVIDEO);
 
-$pageNav = $controller->VideosNavBar($nbSections['nbVideos'], $helper->getConfig('videosperpage'), $start, 2);
-
+if (isset($nbSections['nbVideos']) && $nbSections['nbVideos'] > 0) {
+    $pageNav = $controller->VideosNavBar($nbSections['nbVideos'], $helper->getConfig('videosperpage'), $start, 2);
+}
 //form actions
 $xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
 $xoopsTpl->assign('lang_editdesc', _MD_YOGURT_EDITDESC);

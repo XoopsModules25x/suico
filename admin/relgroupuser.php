@@ -171,23 +171,23 @@ switch ($op) {
             foreach (array_keys($relgroupuserTempArray) as $i) {
                 //        $field = explode(':', $fields[$i]);
 
-                $GLOBALS['xoopsTpl']->assign(
-                    'selectorrel_id',
-                    AM_YOGURT_RELGROUPUSER_REL_ID
-                );
+                $GLOBALS['xoopsTpl']->assign('selectorrel_id', AM_YOGURT_RELGROUPUSER_REL_ID);
                 $relgroupuserArray['rel_id'] = $relgroupuserTempArray[$i]->getVar('rel_id');
 
                 $GLOBALS['xoopsTpl']->assign('selectorrel_group_id', AM_YOGURT_RELGROUPUSER_REL_GROUP_ID);
-                $relgroupuserArray['rel_group_id'] = $groupsHandler->get(
-                    $relgroupuserTempArray[$i]->getVar('rel_group_id')
-                )->getVar(
-                    'group_title'
-                );
+                $relgroupuserArray['rel_group_id'] = $groupsHandler->get($relgroupuserTempArray[$i]->getVar('rel_group_id'))
+                                                                   ->getVar('group_title');
 
-                $GLOBALS['xoopsTpl']->assign('selectorrel_user_uid', AM_YOGURT_RELGROUPUSER_REL_USER_UID);
-                $relgroupuserArray['rel_user_uid'] = strip_tags(
-                    XoopsUser::getUnameFromId($relgroupuserTempArray[$i]->getVar('rel_user_uid'))
-                );
+//                $GLOBALS['xoopsTpl']->assign('selectorrel_user_uid', AM_YOGURT_RELGROUPUSER_REL_USER_UID);
+//                $relgroupuserArray['rel_user_uid'] = strip_tags(
+//                    XoopsUser::getUnameFromId($relgroupuserTempArray[$i]->getVar('rel_user_uid'))
+//                );
+
+                $selectorrel_user_uid = $utility::selectSorting(AM_YOGURT_RELGROUPUSER_REL_USER_UID, 'rel_user_uid');
+                $GLOBALS['xoopsTpl']->assign('selectorrel_user_uid', $selectorrel_user_uid);
+                $relgroupuserArray['rel_user_uid'] = strip_tags(\XoopsUser::getUnameFromId($relgroupuserTempArray[$i]->getVar('rel_user_uid')));
+
+
                 $relgroupuserArray['edit_delete']  = "<a href='relgroupuser.php?op=edit&rel_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='relgroupuser.php?op=delete&rel_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='relgroupuser.php?op=clone&rel_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";

@@ -65,7 +65,7 @@ if (0 === $ishotFactory->getCount($criteria)) {
         $vote->setVar('ishot', 0);
     }
 
-    $ishotFactory->insert($vote);
+    $ishotFactory->insert2($vote);
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_VOTED);
 } else {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_ALREADYVOTED);

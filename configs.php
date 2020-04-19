@@ -24,7 +24,7 @@ $GLOBALS['xoopsOption']['template_main'] = 'yogurt_configs.tpl';
 require __DIR__ . '/header.php';
 
 $controller = new Yogurt\ConfigController($xoopsDB, $xoopsUser);
-$nbSections = $controller->getNumbersSections();
+
 
 if (!$xoopsUser) {
     redirect_header('index.php');

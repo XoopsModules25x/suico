@@ -82,7 +82,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
      * @param null $fields
      * @return mixed reference to the {@link Groups} object, FALSE if failed
      */
-    public function get(
+    public function get2(
         $id = null,
         $fields = null
     ) {
@@ -109,7 +109,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(
+    public function insert2(
         XoopsObject $xoopsObject,
         $force = false
     ) {

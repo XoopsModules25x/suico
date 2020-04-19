@@ -54,7 +54,7 @@ if (11 === mb_strlen($url)) {
 }
 
 $newvideo->setVar('youtube_code', $code);
-if ($videoFactory->insert($newvideo)) {
+if ($videoFactory->insert2($newvideo)) {
     $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
     $extra_tags['X_OWNER_UID']  = (int)$xoopsUser->getVar('uid');
     $notificationHandler        = xoops_getHandler('notification');

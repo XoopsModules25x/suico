@@ -40,9 +40,7 @@ $friendpetitionHandler = $helper->getHandler(
 /** @var \XoopsPersistableObjectHandler $groupsHandler */
 $groupsHandler = $helper->getHandler('Groups');
 /** @var \XoopsPersistableObjectHandler $relgroupuserHandler */
-$relgroupuserHandler = $helper->getHandler(
-    'Relgroupuser'
-);
+$relgroupuserHandler = $helper->getHandler('Relgroupuser');
 /** @var \XoopsPersistableObjectHandler $notesHandler */
 $notesHandler = $helper->getHandler('Notes');
 /** @var \XoopsPersistableObjectHandler $configsHandler */

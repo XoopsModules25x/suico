@@ -24,8 +24,7 @@ namespace XoopsModules\Yogurt;
 
 use WideImage\WideImage;
 use Xmf\Request;
-
-require dirname(__DIR__) . '/include/common.php';
+use XoopsModules\Yogurt\Common;
 
 /**
  * Class Utility
@@ -52,35 +51,34 @@ class Utility extends Common\SysUtility
     /**
      * Create a unique upload filename
      *
-     * @param string $folder   The folder where the file will be saved
-     * @param string $fileName Original filename (coming from the user)
-     * @param bool   $trimName Do we need to create a short unique name ?
+     * @param string $folder The folder where the file will be saved
+     * @param        $filename
+     * @param bool   $trimname
      * @return string  The unique filename to use (with its extension)
-     * @return string
      */
     public static function createUploadName($folder, $filename, $trimname = false)
     {
         $workingfolder = $folder;
-        if ('/' !== xoops_substr($workingfolder, mb_strlen($workingfolder) - 1, 1)) {
+        if ('/' !== \xoops_substr($workingfolder, mb_strlen($workingfolder) - 1, 1)) {
             $workingfolder .= '/';
         }
-        $ext  = basename($filename);
-        $ext  = explode('.', $ext);
-        $ext  = '.' . $ext[count($ext) - 1];
+        $ext  = \basename($filename);
+        $ext  = \explode('.', $ext);
+        $ext  = '.' . $ext[\count($ext) - 1];
         $true = true;
         while ($true) {
-            $ipbits = explode('.', $_SERVER['REMOTE_ADDR']);
-            [$usec, $sec] = explode(' ', microtime());
+            $ipbits = \explode('.', $_SERVER['REMOTE_ADDR']);
+            [$usec, $sec] = \explode(' ', \microtime());
 
             $usec *= 65536;
             $sec  = ((int)$sec) & 0xFFFF;
 
             if ($trimname) {
-                $uid = sprintf('%06x%04x%04x', ($ipbits[0] << 24) | ($ipbits[1] << 16) | ($ipbits[2] << 8) | $ipbits[3], $sec, $usec);
+                $uid = \sprintf('%06x%04x%04x', ($ipbits[0] << 24) | ($ipbits[1] << 16) | ($ipbits[2] << 8) | $ipbits[3], $sec, $usec);
             } else {
-                $uid = sprintf('%08x-%04x-%04x', ($ipbits[0] << 24) | ($ipbits[1] << 16) | ($ipbits[2] << 8) | $ipbits[3], $sec, $usec);
+                $uid = \sprintf('%08x-%04x-%04x', ($ipbits[0] << 24) | ($ipbits[1] << 16) | ($ipbits[2] << 8) | $ipbits[3], $sec, $usec);
             }
-            if (!file_exists($workingfolder . $uid . $ext)) {
+            if (!\file_exists($workingfolder . $uid . $ext)) {
                 $true = false;
             }
         }
@@ -111,8 +109,8 @@ class Utility extends Common\SysUtility
 
         $resize = true;
         if ($moduleDirNameUpper . '_DONT_RESIZE_IF_SMALLER') {
-            $pictureDimensions = getimagesize($src_path);
-            if (is_array($pictureDimensions)) {
+            $pictureDimensions = \getimagesize($src_path);
+            if (\is_array($pictureDimensions)) {
                 $width  = $pictureDimensions[0];
                 $height = $pictureDimensions[1];
                 if ($width < $param_width && $height < $param_height) {
@@ -126,16 +124,24 @@ class Utility extends Common\SysUtility
             $result = $img->resize($param_width, $param_height, $fit);
             $result->saveToFile($dst_path);
         } else {
-            @copy($src_path, $dst_path);
+            @\copy($src_path, $dst_path);
         }
 
         if (!$keep_original) {
-            @unlink($src_path);
+            @\unlink($src_path);
         }
 
         return true;
     }
 
+    /**
+     * @param        $srcPath
+     * @param        $destPath
+     * @param        $paramWidth
+     * @param        $paramHeight
+     * @param bool   $keepOriginal
+     * @param string $fit
+     */
     public static function resizeSavePicture(
         $srcPath,
         $destPath,
@@ -144,12 +150,12 @@ class Utility extends Common\SysUtility
         $keepOriginal = false,
         $fit = 'inside'
     ) {
-        if ($allowupload) { // L'image            
+        if ($allowupload) { // L'image
             if (Request::hasVar('xoops_upload_file', 'POST')) {
                 $helper = Helper::getInstance();
                 $fldname = $_FILES[$_POST['xoops_upload_file'][1]];
                 $fldname = $fldname['name'];
-                if (xoops_trim('' !== $fldname)) {
+                if (\xoops_trim('' !== $fldname)) {
                     $destname       = self::createUploadName($destPath, $fldname);
 
                     $permittedTypes = $helper->getConfig('mimetypes');//['image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png'];
@@ -158,14 +164,14 @@ class Utility extends Common\SysUtility
                     $uploader->setTargetFileName($destname);
                     if ($uploader->fetchMedia($_POST['xoops_upload_file'][1])) {
                         if ($uploader->upload()) {
-                            $fullPictureName = XOOPS_ROOT_PATH . '/uploads/news/image/' . basename($destname);
-                            $newName         = XOOPS_ROOT_PATH . '/uploads/news/image/redim_' . basename($destname);
+                            $fullPictureName = XOOPS_ROOT_PATH . '/uploads/news/image/' . \basename($destname);
+                            $newName         = XOOPS_ROOT_PATH . '/uploads/news/image/redim_' . \basename($destname);
                             self::resizePicture($fullPictureName, $newName, $helper->getConfig('maxwidth'), $helper->getConfig('maxheight'));
-                            if (file_exists($newName)) {
-                                @unlink($fullPictureName);
-                                rename($newName, $fullPictureName);
+                            if (\file_exists($newName)) {
+                                @\unlink($fullPictureName);
+                                \rename($newName, $fullPictureName);
                             }
-                            $story->setPicture(basename($destname));
+                            $story->setPicture(\basename($destname));
                         } else {
                             echo _AM_UPLOAD_ERROR . ' ' . $uploader->getErrors();
                         }

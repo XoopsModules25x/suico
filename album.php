@@ -70,7 +70,7 @@ $criteria_uid->setStart(0);
 /**
  * If there is no pictures in the album show in template lang_nopicyet
  */
-if (0 === $nbSections['nbPhotos']) {
+if (isset($nbSections['nbPhotos']) && 0 === $nbSections['nbPhotos']) {
     $nopicturesyet = _MD_YOGURT_NOTHINGYET;
     $xoopsTpl->assign('lang_nopicyet', $nopicturesyet);
 } else {
@@ -91,9 +91,10 @@ if (0 === $nbSections['nbPhotos']) {
 /**
  * Show the form if it is the owner and he can still upload pictures
  */
+$maxfilebytes = $helper->getConfig('maxfilesize');
 if (!empty($xoopsUser)) {
-    if ((1 === $controller->isOwner) && $helper->getConfig('nb_pict') > $nbSections['nbPhotos']) {
-        $maxfilebytes = $helper->getConfig('maxfilesize');
+    if ((isset($nbSections['nbPhotos']) && 1 === $controller->isOwner) && $helper->getConfig('nb_pict') > $nbSections['nbPhotos']) {
+//        $maxfilebytes = $helper->getConfig('maxfilesize');
         $xoopsTpl->assign('maxfilebytes', $maxfilebytes);
         $xoopsTpl->assign('showForm', '1');
     }
@@ -110,8 +111,9 @@ $avatar     = $owner->getVar('user_avatar');
 /**
  * Creating the navigation bar if you have a lot of friends
  */
+$nbPhotos = isset($nbSections['nbPhotos']) ? $nbSections['nbPhotos']:'';
 $navigationBar = new XoopsPageNav(
-    $nbSections['nbPhotos'], $helper->getConfig('picturesperpage'), $start, 'start', 'uid=' . (int)$controller->uidOwner
+    $nbPhotos, $helper->getConfig('picturesperpage'), $start, 'start', 'uid=' . (int)$controller->uidOwner
 );
 $navegacao       = $navigationBar->renderImageNav(2);
 
@@ -129,7 +131,7 @@ $xoopsTpl->assign(
 );
 $xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
 $xoopsTpl->assign('lang_editdesc', _MD_YOGURT_EDITDESC);
-$xoopsTpl->assign('lang_nb_pict', sprintf(_MD_YOGURT_YOUHAVE, $nbSections['nbPhotos']));
+$xoopsTpl->assign('lang_nb_pict', sprintf(_MD_YOGURT_YOUHAVE, (isset($nbSections['nbPhotos']) ? $nbSections['nbPhotos']:'')));
 
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 $xoopsTpl->assign('navegacao', $navegacao);

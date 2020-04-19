@@ -51,7 +51,7 @@ if ($xoopsUser->isAdmin(1)) {
     }
     $suspension->setVar('old_signature', $thisUser->getVar('user_sig'));
     $suspension->setVar('suspension_time', time() + Request::getInt('time', 0, 'POST'));
-    $suspensionsFactory->insert($suspension);
+    $suspensionsFactory->insert2($suspension);
     $thisUser->setVar('email', md5(time()));
     $thisUser->setVar('pass', md5(time()));
 

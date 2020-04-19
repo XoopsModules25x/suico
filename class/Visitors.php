@@ -38,6 +38,7 @@ class Visitors extends XoopsObject
         $this->initVar('uid_owner', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('uid_visitor', XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('uname_visitor', XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('datetime', XOBJ_DTYPE_TIMESTAMP, null, false);
         if (!empty($id)) {
             if (is_array($id)) {
                 $this->assignVars($id);

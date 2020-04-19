@@ -57,8 +57,8 @@ if ($friendpetitionFactory->getCount($criteria) > 0) {
         $newfriendship2->setVar('friend1_uid', $friend2_uid);
         $newfriendship2->setVar('friend2_uid', $friend1_uid);
         $friendpetitionFactory->deleteAll($criteria);
-        $friendshipFactory->insert($newfriendship1);
-        $friendshipFactory->insert($newfriendship2);
+        $friendshipFactory->insert2($newfriendship1);
+        $friendshipFactory->insert2($newfriendship2);
 
         redirect_header(XOOPS_URL . '/modules/yogurt/friends.php?uid=' . $friend2_uid, 3, _MD_YOGURT_FRIENDMADE);
     } else {

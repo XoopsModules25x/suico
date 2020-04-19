@@ -46,8 +46,9 @@ $criteriaUidAudio->setLimit($helper->getConfig('audiosperpage'));
  * Get all audios of this user and assign them to template
  */
 $audios       = $controller->getAudio($criteriaUidAudio);
+$nbAudio = isset($nbSections['nbAudio']) ?  $nbSections['nbAudio'] : '';
 try {
-    $audios_array = $controller->assignAudioContent($nbSections['nbAudio'], $audios);
+    $audios_array = $controller->assignAudioContent($nbAudio, $audios);
 } catch (\RuntimeException $e) {
 }
 
@@ -62,9 +63,10 @@ if (is_array($audios_array)) {
 } else {
     $xoopsTpl->assign('lang_noaudioyet', _MD_YOGURT_NOAUDIOYET);
 }
-
-$pageNav = $controller->getAudiosNavBar($nbSections['nbAudio'], $helper->getConfig('audiosperpage'), $start, 2);
-
+$pageNav = '';
+if (isset($nbSections['nbAudio']) && $nbSections['nbAudio'] > 0) {
+    $pageNav = $controller->getAudiosNavBar($nbSections['nbAudio'], $helper->getConfig('audiosperpage'), $start, 2);
+}
 $xoTheme->addScript('https://unpkg.com/wavesurfer.js');
 
 //meta language names

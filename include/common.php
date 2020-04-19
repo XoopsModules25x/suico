@@ -34,7 +34,7 @@ $moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
 $db      = XoopsDatabaseFactory::getDatabaseConnection();
 $debug   = false;
 $helper  = Helper::getInstance($debug);
-$utility = new Utility();
+$utility = Utility::getInstance();
 
 $helper->loadLanguage('common');
 
