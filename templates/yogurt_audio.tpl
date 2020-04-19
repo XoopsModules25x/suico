@@ -88,13 +88,7 @@
         <div id="waveform"></div>
         <div id="waveform<{$audios[i].id}>" class="waveform-player"></div>
         <script>
-            var wavesurfer<{$audios[i].id}> = WaveSurfer.create({
-                container: '#waveform<{$audios[i].id}>',
-                waveColor: '#aaa',
-                progressColor: '#333',
-                cursorColor: '#aaa',
-                height: 100
-            });
+            const wavesurfer
             wavesurfer<{$audios[i].id}>.load('<{$audio_list[i]}>');
             $('#waveform<{$audios[i].id}>').click(function () {
                 wavesurfer<{$audios[i].id}>.play();
