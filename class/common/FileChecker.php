@@ -57,39 +57,39 @@ class FileChecker
         $moduleDirNameUpper = mb_strtoupper($moduleDirName);
         if (null === $original_file_path) {
             if (self::fileExists($file_path)) {
-                $path_status = "<img src='${pathIcon16}/1.png'>";
-                $path_status .= "${file_path} (" . \constant(
+                $pathStatus = "<img src='${pathIcon16}/1.png'>";
+                $pathStatus .= "${file_path} (" . \constant(
                     'CO_' . $moduleDirNameUpper . '_' . 'FC_AVAILABLE'
                 ) . ') ';
             } else {
-                $path_status = "<img src='${pathIcon16}/0.png'>";
-                $path_status .= "${file_path} (" . \constant(
+                $pathStatus = "<img src='${pathIcon16}/0.png'>";
+                $pathStatus .= "${file_path} (" . \constant(
                     'CO_' . $moduleDirNameUpper . '_' . 'FC_NOTAVAILABLE'
                 ) . ') ';
             }
         } elseif (self::compareFiles($file_path, $original_file_path)) {
-            $path_status = "<img src='${pathIcon16}/1.png'>";
-            $path_status .= "${file_path} (" . \constant(
+            $pathStatus = "<img src='${pathIcon16}/1.png'>";
+            $pathStatus .= "${file_path} (" . \constant(
                 'CO_' . $moduleDirNameUpper . '_' . 'FC_AVAILABLE'
             ) . ') ';
         } else {
-            $path_status = "<img src='${pathIcon16}/0.png'>";
-            $path_status .= "${file_path} (" . \constant(
+            $pathStatus = "<img src='${pathIcon16}/0.png'>";
+            $pathStatus .= "${file_path} (" . \constant(
                 'CO_' . $moduleDirNameUpper . '_' . 'FC_NOTAVAILABLE'
             ) . ') ';
-            $path_status .= "<form action='" . $_SERVER['SCRIPT_NAME'] . "' method='post'>";
-            $path_status .= "<input type='hidden' name='op' value='copyfile'>";
-            $path_status .= "<input type='hidden' name='file_path' value='${file_path}'>";
-            $path_status .= "<input type='hidden' name='original_file_path' value='${original_file_path}'>";
-            $path_status .= "<input type='hidden' name='redirect' value='${redirectFile}'>";
-            $path_status .= "<button class='submit' onClick='this.form.submit();'>" . \constant(
+            $pathStatus .= "<form action='" . $_SERVER['SCRIPT_NAME'] . "' method='post'>";
+            $pathStatus .= "<input type='hidden' name='op' value='copyfile'>";
+            $pathStatus .= "<input type='hidden' name='file_path' value='${file_path}'>";
+            $pathStatus .= "<input type='hidden' name='original_file_path' value='${original_file_path}'>";
+            $pathStatus .= "<input type='hidden' name='redirect' value='${redirectFile}'>";
+            $pathStatus .= "<button class='submit' onClick='this.form.submit();'>" . \constant(
                 'CO_' . $moduleDirNameUpper . '_' . 'FC_CREATETHEFILE'
             ) . '</button>';
-            $path_status .= '</form>';
+            $pathStatus .= '</form>';
         }
 
 
-        return $path_status;
+        return $pathStatus;
     }
 
     /**
