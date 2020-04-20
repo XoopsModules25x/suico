@@ -23,7 +23,7 @@ use Xmf\Request;
 require __DIR__ . '/header.php';
 
 $myts   = MyTextSanitizer::getInstance();
-$op     = isset($_REQUEST['op']) ? htmlspecialchars($_REQUEST['op'], ENT_QUOTES | ENT_HTML5) : 'search';
+$op     = Request::getString('op', 'search');
 $groups = $xoopsUser ? $xoopsUser->getGroups() : [XOOPS_GROUP_ANONYMOUS];
 switch ($op) {
     default:
@@ -271,7 +271,7 @@ switch ($op) {
         }
         if (isset($_REQUEST['email']) && '' !== Request::getString('email', '', 'REQUEST')) {
             $string = $myts->addSlashes(trim(Request::getString('email', '', 'REQUEST')));
-            switch ($_REQUEST['email_match']) {
+            switch (Request::getString('email_match', '', 'REQUEST')) {
                 case XOOPS_MATCH_START:
                     $string .= '%';
                     break;

@@ -163,13 +163,13 @@ $op = Request::getString('op', '', 'POST');
 switch ($op) {
     case 'copyfile':
         if (Request::hasVar('original_file_path', 'POST')) {
-            $original_file_path = $_POST['original_file_path'];
+            $original_file_path = Request::getString('original_file_path', '', 'POST');
         }
         if (Request::hasVar('file_path', 'POST')) {
-            $file_path = $_POST['file_path'];
+            $file_path = Request::getString('file_path', '', 'POST');
         }
         if (Request::hasVar('redirect', 'POST')) {
-            $redirect = $_POST['redirect'];
+            $redirect = Request::getString('redirect', '', 'POST');
         }
         $msg = FileChecker::copyFile($original_file_path, $file_path) ? \constant(
             'CO_' . $moduleDirNameUpper . '_' . 'FC_FILECOPIED'

@@ -167,10 +167,10 @@ $op = Request::getString('op', '', 'POST');
 switch ($op) {
     case 'createdir':
         if (Request::hasVar('path', 'POST')) {
-            $path = $_POST['path'];
+            $path = Request::getString('path', '', 'POST');
         }
         if (Request::hasVar('redirect', 'POST')) {
-            $redirect = $_POST['redirect'];
+            $redirect = Request::getString('redirect', '', 'POST');
         }
         $msg = DirectoryChecker::createDirectory($path) ? \constant(
             'CO_' . $moduleDirNameUpper . '_' . 'DC_DIRCREATED'
@@ -181,13 +181,13 @@ switch ($op) {
         break;
     case 'setdirperm':
         if (Request::hasVar('path', 'POST')) {
-            $path = $_POST['path'];
+            $path = Request::getString('path', '', 'POST');
         }
         if (Request::hasVar('redirect', 'POST')) {
-            $redirect = $_POST['redirect'];
+            $redirect = Request::getString('redirect', '', 'POST');
         }
         if (Request::hasVar('mode', 'POST')) {
-            $mode = $_POST['mode'];
+            $mode = Request::getString('mode', '', 'POST');
         }
         $msg = DirectoryChecker::setDirectoryPermissions($path, $mode) ? \constant(
             'CO_' . $moduleDirNameUpper . '_' . 'DC_PERMSET'

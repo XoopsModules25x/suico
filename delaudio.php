@@ -30,7 +30,7 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 /**
  * Receiving info from get parameters
  */
-$cod_audio = $_POST['cod_audio'];
+$cod_audio = Request::getString('cod_audio', '', 'POST');
 if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
     xoops_confirm(
         [

@@ -38,7 +38,7 @@ require_once __DIR__ . '/admin_header.php';
  */
 xoops_cp_header();
 
-$op = $_GET['op'] ?? '';
+$op = Request::getCmd('op', '', 'GET');
 
 /*
 if (!@file_exists(XOOPS_ROOT_PATH."/Frameworks/art/functions.admin.php")) {

@@ -41,8 +41,8 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 }
 
 $myts         = MyTextSanitizer::getInstance();
-$noteObjbook_uid = $_POST['uid'];
-$note_text    = $myts->displayTarea($_POST['text'], 0, 1, 1, 1, 1);
+$noteObjbook_uid = Request::getInt('uid', 0, 'POST');
+$note_text    = $myts->displayTarea(Request::getText('text', '', 'POST'), 0, 1, 1, 1, 1);
 $mainform     = !empty($_POST['mainform']) ? 1 : 0;
 $noteObj         = $notesFactory->create();
 $noteObj->setVar('note_text', $note_text);

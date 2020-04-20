@@ -40,7 +40,7 @@ if (1 === $marker) {
     );
     $picture      = $imageFactory->create(false);
     $picture->load($cod_img);
-    $picture->setVar('title', trim(htmlspecialchars($_POST['caption'], ENT_QUOTES | ENT_HTML5)));
+    $picture->setVar('title', Request::getString('caption', '', 'POST'));
 
     /**
      * Verifying who's the owner to allow changes

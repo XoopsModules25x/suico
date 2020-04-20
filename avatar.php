@@ -35,7 +35,7 @@ $imageFactory = new Yogurt\ImageHandler(
     $xoopsDB
 );
 $picture      = $imageFactory->create(false);
-$picture->load($_POST['cod_img']);
+$picture->load(Request::getString('cod_img', '', 'POST'));
 
 $uid = (int)$xoopsUser->getVar('uid');
 

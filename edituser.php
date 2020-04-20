@@ -36,11 +36,12 @@ if (!is_object($xoopsUser)) {
 }
 
 // initialize $op variable
-$op = isset($_GET['op']) ? trim(
-    htmlspecialchars($_GET['op'], ENT_QUOTES | ENT_HTML5)
-) : (isset($_POST['op']) ? trim(
-    htmlspecialchars($_POST['op'], ENT_QUOTES | ENT_HTML5)
-) : 'editprofile');
+//$op = 'editprofile';
+$op = Request::getCmd('op',editprofile );
+
+//$op =  isset($_GET['op']) ? trim(htmlspecialchars($_GET['op'], ENT_QUOTES | ENT_HTML5)
+//) : (isset($_POST['op']) ? trim(htmlspecialchars($_POST['op'], ENT_QUOTES | ENT_HTML5)
+//) : 'editprofile');
 
 $configHandler = xoops_getHandler('config');
 //Fix for XOOPS 2.2 and SX
@@ -123,11 +124,11 @@ if ('saveuser' === $op) {
         if (1 === $xoopsConfigUser['allow_chgmail']) {
             $edituser->setVar('email', $email, true);
         }
-        $edituser->setVar('url', formatURL($_POST['url']));
+        $edituser->setVar('url', formatURL(Request::getUrl('url', '', 'POST')));
         $edituser->setVar('user_from', Request::getString('user_from', '', 'POST'));
         $edituser->setVar('user_sig', xoops_substr(Request::getString('user_sig', '', 'POST'), 0, 255));
-        $user_viewemail = !empty(Request::getString('user_viewemail', '', 'POST')) ? 1 : 0;
-        $edituser->setVar('user_viewemail', $user_viewemail);
+        $userViewEmail = !empty(Request::getString('user_viewemail', '', 'POST')) ? 1 : 0;
+        $edituser->setVar('user_viewemail', $userViewEmail);
         $edituser->setVar('user_viewoid', $user_viewoid);
         if ('' !== $password) {
             $edituser->setVar('pass', md5($password), true);
@@ -137,11 +138,11 @@ if ('saveuser' === $op) {
         $edituser->setVar('timezone_offset', $_POST['timezone_offset']);
         $edituser->setVar('uorder', $_POST['uorder']);
         $edituser->setVar('umode', $_POST['umode']);
-        $edituser->setVar('notify_method', $_POST['notify_method']);
-        $edituser->setVar('notify_mode', $_POST['notify_mode']);
-        $edituser->setVar('bio', xoops_substr($_POST['bio'], 0, 255));
+        $edituser->setVar('notify_method', Request::getString('notify_method', '', 'POST'));
+        $edituser->setVar('notify_mode', Request::getString('notify_mode', '', 'POST'));
+        $edituser->setVar('bio', xoops_substr(Request::getString('bio', '', 'POST'), 0, 255));
         $edituser->setVar('user_occ', $_POST['user_occ']);
-        $edituser->setVar('user_intrest', $_POST['user_intrest']);
+        $edituser->setVar('user_intrest', Request::getString('user_intrest', '', 'POST'));
         $edituser->setVar('user_mailok', $_POST['user_mailok']);
         if (!empty($_POST['usecookie'])) {
             setcookie($xoopsConfig['usercookie'], $xoopsUser->getVar('uname'), time() + 31536000);
@@ -442,7 +443,7 @@ if ('avatarchoose' === $op) {
     $user_avatar = '';
     $avtHandler  = xoops_getHandler('avatar');
     if (!empty($_POST['user_avatar'])) {
-        $user_avatar     = $myts->addSlashes(trim($_POST['user_avatar']));
+        $user_avatar     = Request::getString('user_avatar', '', 'POST');
         $criteria_avatar = new CriteriaCompo(new Criteria('avatar_file', $user_avatar));
         $criteria_avatar->add(new Criteria('avatar_type', 'S'));
         $avatars = &$avtHandler->getObjects($criteria_avatar);

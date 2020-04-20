@@ -39,7 +39,7 @@ $imageFactory = new Yogurt\ImageHandler($xoopsDB);
 /**
  * Getting the title
  */
-$title = $_POST['caption'];
+$title = Request::getString('caption', '', 'POST');
 
 /**
  * Getting parameters defined in admin side

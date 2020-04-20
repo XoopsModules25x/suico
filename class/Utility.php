@@ -178,7 +178,7 @@ class Utility extends Common\SysUtility
                         echo $uploader->getErrors();
                     }
                 }
-                $story->setPictureinfo($_POST['pictureinfo']);
+                $story->setPictureinfo(Request::getString('pictureinfo', '', 'POST'));
             }
         }
     }

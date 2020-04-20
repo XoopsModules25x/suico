@@ -31,7 +31,7 @@ require __DIR__ . '/header.php';
  */
 $videoFactory = new Yogurt\VideoHandler($xoopsDB);
 
-$url = $_POST['codigo'];
+$url = Request::getUrl('codigo', '', 'POST');
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
@@ -44,7 +44,7 @@ $newvideo = $videoFactory->create(
     true
 );
 $newvideo->setVar('uid_owner', (int)$xoopsUser->getVar('uid'));
-$newvideo->setVar('video_desc', trim(htmlspecialchars($_POST['caption'], ENT_QUOTES | ENT_HTML5)));
+$newvideo->setVar('video_desc', Request::getString('caption', '', 'POST'));
 
 if (11 === mb_strlen($url)) {
     $code = $url;

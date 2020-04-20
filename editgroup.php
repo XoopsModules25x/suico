@@ -41,9 +41,9 @@ $group    = $groups[0];
 $uid = $xoopsUser->getVar('uid');
 
 if (1 === $marker && $group->getVar('owner_uid') === $uid) {
-    $title     = trim(htmlspecialchars($_POST['title'], ENT_QUOTES | ENT_HTML5));
-    $desc      = $_POST['desc'];
-    $img       = $_POST['img'];
+    $title     = Request::getString('title', '', 'POST');
+    $desc      = Request::getString('desc', '', 'POST');
+    $img       = Request::getString('img', '', 'POST');
     $updateImg = 1 === Request::getInt('flag_oldimg', 0, 'POST') ? 0 : 1;
 
     $path_upload   = XOOPS_ROOT_PATH . '/uploads/yogurt/images';

@@ -377,7 +377,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         $clone->setVar('side', $bside);
         $clone->setVar('weight', $bweight);
         $clone->setVar('visible', $bvisible);
-        //$clone->setVar('content', $_POST['bcontent']);
+        //$clone->setVar('content', Request::getString('bcontent', '', 'POST'));
         $clone->setVar(
             'title',
             Request::getString('btitle', '', 'POST')

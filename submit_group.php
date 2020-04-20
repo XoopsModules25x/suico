@@ -143,9 +143,9 @@ if (1 === $marker) {//if (1 === $marker) {
     }
 
     $myts          = MyTextSanitizer::getInstance();
-    $group_title   = $myts->displayTarea($_POST['group_title'], 0, 1, 1, 1, 1);
-    $group_desc    = $myts->displayTarea($_POST['group_desc'], 0, 1, 1, 1, 1);
-    $group_img     = !empty($_POST['group_img']) ? $_POST['group_img'] : '';
+    $group_title   = $myts->displayTarea(Request::getString('group_title', '', 'POST'), 0, 1, 1, 1, 1);
+    $group_desc    = $myts->displayTarea(Request::getString('group_desc', '', 'POST'), 0, 1, 1, 1, 1);
+    $group_img     = !empty($_POST['group_img']) ? Request::getString('group_img', '', 'POST') : '';
     $path_upload   = XOOPS_UPLOAD_PATH . '/yogurt/groups';
     $pictwidth     = $helper->getConfig('resized_width');
     $pictheight    = $helper->getConfig('resized_height');
