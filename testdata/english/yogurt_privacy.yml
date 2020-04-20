@@ -2,7 +2,7 @@
     id: '1'
     level: '0'
     name: 'Only Me'
-    description: '<p>Highest level of privacy - only the author can see it</p>'
+    description: '<p>Highest level of privace - only the author can see it</p>'
 -
     id: '2'
     level: '1'
