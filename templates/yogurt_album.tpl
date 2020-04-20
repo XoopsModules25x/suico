@@ -20,7 +20,7 @@
 		
 		<div class="form-group">
 		<label><strong><{$lang_caption}> :</strong></label>
-		<input type='text' class='form-control' name='caption' id='caption' size='35' maxlength='55' value='' required>
+            <label for='caption'></label><input type='text' class='form-control' name='caption' id='caption' size='35' maxlength='55' value='' required>
 		</div>
   
 		<div class="form-group">

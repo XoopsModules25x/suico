@@ -10,11 +10,15 @@
             <{$lang_askingfriend}>
             <ul>
                 <li>
-                    <input name="level" type="radio" value="5">
+                    <label>
+                        <input name="level" type="radio" value="5">
+                    </label>
                     <{$lang_acceptfriend}>
                 </li>
                 <li>
-                    <input name="level" type="radio" value="0">
+                    <label>
+                        <input name="level" type="radio" value="0">
+                    </label>
                     <{$lang_rejectfriend}>
                 </li>
 
