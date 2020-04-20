@@ -46,7 +46,8 @@ if (1 !== Request::getInt('confirm', 0, 'POST')) {
      * The user must be the owner
      */
     $criteria_note_id = new Criteria(
-        'note_id', $note_id
+        'note_id',
+        $note_id
     );
     $uid              = (int)$xoopsUser->getVar('uid');
     $criteria_uid     = new Criteria('note_to', $uid);

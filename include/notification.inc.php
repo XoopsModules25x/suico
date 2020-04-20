@@ -46,8 +46,8 @@ function yogurt_iteminfo($category, $item_id)
 
     if ('picture' === $category) {
         $sql          = 'SELECT title,uid_owner,url FROM ' . $xoopsDB->prefix(
-                'yogurt_images'
-            ) . ' WHERE uid_owner = ' . $item_id . ' LIMIT 1';
+            'yogurt_images'
+        ) . ' WHERE uid_owner = ' . $item_id . ' LIMIT 1';
         $result       = $xoopsDB->query($sql);
         $result_array = $xoopsDB->fetchArray($result);
         /**
@@ -57,16 +57,16 @@ function yogurt_iteminfo($category, $item_id)
         $identifier   = $owner::getUnameFromId($result_array['uid_owner']);
         $item['name'] = $identifier . "'s Album";
         $item['url']  = XOOPS_URL . '/modules/' . $module->getVar(
-                'dirname'
-            ) . '/album.php?uid=' . $result_array['uid_owner'];
+            'dirname'
+        ) . '/album.php?uid=' . $result_array['uid_owner'];
 
         return $item;
     }
 
     if ('video' === $category) {
         $sql          = 'SELECT video_id,uid_owner,video_desc,youtube_code, mainvideo FROM ' . $xoopsDB->prefix(
-                'yogurt_images'
-            ) . ' WHERE uid_owner = ' . $item_id . ' LIMIT 1';
+            'yogurt_images'
+        ) . ' WHERE uid_owner = ' . $item_id . ' LIMIT 1';
         $result       = $xoopsDB->query($sql);
         $result_array = $xoopsDB->fetchArray($result);
         /**
@@ -76,16 +76,16 @@ function yogurt_iteminfo($category, $item_id)
         $identifier   = $owner::getUnameFromId($result_array['uid_owner']);
         $item['name'] = $identifier . "'s Videos";
         $item['url']  = XOOPS_URL . '/modules/' . $module->getVar(
-                'dirname'
-            ) . '/video.php?uid=' . $result_array['uid_owner'];
+            'dirname'
+        ) . '/video.php?uid=' . $result_array['uid_owner'];
 
         return $item;
     }
 
     if ('Note' === $category) {
         $sql          = 'SELECT note_id, note_from, note_to, note_text FROM ' . $xoopsDB->prefix(
-                'yogurt_notes'
-            ) . ' WHERE note_from = ' . $item_id . ' LIMIT 1';
+            'yogurt_notes'
+        ) . ' WHERE note_from = ' . $item_id . ' LIMIT 1';
         $result       = $xoopsDB->query($sql);
         $result_array = $xoopsDB->fetchArray($result);
         /**
@@ -95,8 +95,8 @@ function yogurt_iteminfo($category, $item_id)
         $identifier   = $owner::getUnameFromId($result_array['note_from']);
         $item['name'] = $identifier . "'s Notes";
         $item['url']  = XOOPS_URL . '/modules/' . $module->getVar(
-                'dirname'
-            ) . '/notebook.php?uid=' . $result_array['note_from'];
+            'dirname'
+        ) . '/notebook.php?uid=' . $result_array['note_from'];
 
         return $item;
     }

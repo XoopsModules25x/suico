@@ -55,7 +55,7 @@ $mygroups = $controller->relgroupusersFactory->getGroups('', $criteria_mygroups,
 
 
 $mygroupsid =[];
-foreach($mygroups as $value){
+foreach ($mygroups as $value) {
     $mygroupsid[] = $value['group_id'];
 }
 
@@ -66,12 +66,20 @@ foreach($mygroups as $value){
  * Creating the navigation bar if you have a lot of friends
  */
 $navigationBar = new XoopsPageNav(
-    $nb_groups, $helper->getConfig('groupsperpage'), $start_all, 'start_all', 'uid=' . (int)$controller->uidOwner . '&amp;start_my=' . $start_my
+    $nb_groups,
+    $helper->getConfig('groupsperpage'),
+    $start_all,
+    'start_all',
+    'uid=' . (int)$controller->uidOwner . '&amp;start_my=' . $start_my
 );
 $barrinha        = $navigationBar->renderImageNav(2); //allgroups
 
 $navigationBar_my = new XoopsPageNav(
-    $nb_mygroups, $helper->getConfig('groupsperpage'), $start_my, 'start_my', 'uid=' . (int)$controller->uidOwner . '&amp;start_all=' . $start_all
+    $nb_mygroups,
+    $helper->getConfig('groupsperpage'),
+    $start_my,
+    'start_my',
+    'uid=' . (int)$controller->uidOwner . '&amp;start_all=' . $start_all
 );
 $barrinha_my        = $navigationBar_my->renderImageNav(2);
 

@@ -68,7 +68,7 @@ class VideoController extends YogurtController
     public function showFormSubmitVideos(
         $maxNbVideos,
         $presentNb
-    )  {
+    ) {
         global $xoopsTpl;
 
         if ($this->isUser) {
@@ -121,7 +121,7 @@ class VideoController extends YogurtController
         $videosPerPage,
         $start,
         $interval
-    )  {
+    ) {
         $pageNav = new XoopsPageNav($nbVideos, $videosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
         return $pageNav->renderImageNav($interval);
     }

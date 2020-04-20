@@ -42,7 +42,7 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
     xoops_confirm(
         [
             'relgroup_id' => $relgroupuser_id,
-			'group_id' => $group_id,
+            'group_id' => $group_id,
             'confirm'     => 1,
         ],
         'abandongroup.php',

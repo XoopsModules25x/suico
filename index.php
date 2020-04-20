@@ -83,23 +83,23 @@ $petitionfrom_uid = $controller->uidOwner;
 //Verify if the user has already asked for friendship or if the user he s asking to be a friend has already asked him
 $criteria = new CriteriaCompo(
     new Criteria(
-        'petitionto_uid', $petitionfrom_uid
+        'petitionto_uid',
+        $petitionfrom_uid
     )
 );
 
-if ($xoopsUser){
-$criteria->add(new Criteria('petitioner_uid', $xoopsUser->getVar('uid')));
-if ($friendpetitionFactory->getCount($criteria) > 0) {
-	$xoopsTpl->assign('petitionfrom_uid', $petitionfrom_uid);
-	
-}
-else {
-    $criteria2 = new CriteriaCompo(new Criteria('petitioner_uid', $petitionfrom_uid));
-    $criteria2->add(new Criteria('petitionto_uid', $xoopsUser->getVar('uid')));
-    if ($friendpetitionFactory->getCount($criteria2) > 0) {
-       $xoopsTpl->assign('petitionto_uid', $xoopsUser->getVar('uid'));    
+if ($xoopsUser) {
+    $criteria->add(new Criteria('petitioner_uid', $xoopsUser->getVar('uid')));
+    if ($friendpetitionFactory->getCount($criteria) > 0) {
+        $xoopsTpl->assign('petitionfrom_uid', $petitionfrom_uid);
+    } else {
+        $criteria2 = new CriteriaCompo(new Criteria('petitioner_uid', $petitionfrom_uid));
+        $criteria2->add(new Criteria('petitionto_uid', $xoopsUser->getVar('uid')));
+        if ($friendpetitionFactory->getCount($criteria2) > 0) {
+            $xoopsTpl->assign('petitionto_uid', $xoopsUser->getVar('uid'));
+        }
     }
-}}
+}
 
 /**
  * Criteria for mainvideo
@@ -290,9 +290,9 @@ $xoopsTpl->assign('user_realname', $thisUser->getVar('name'));
 $xoopsTpl->assign('lang_uname', _US_NICKNAME);
 $xoopsTpl->assign('lang_website', _US_WEBSITE);
 $userwebsite = '' !== $thisUser->getVar('url', 'E') ? '<a href="' . $thisUser->getVar(
-        'url',
-        'E'
-    ) . '" target="_blank">' . $thisUser->getVar(
+    'url',
+    'E'
+) . '" target="_blank">' . $thisUser->getVar(
         'url'
     ) . '</a>' : '';
 $xoopsTpl->assign('user_websiteurl', $userwebsite);
@@ -388,8 +388,8 @@ foreach ($mids as $mid) {
             }
             if (5 === $count) {
                 $showall_link = '<a href="../../search.php?action=showallbyuser&amp;mid=' . $mid . '&amp;uid=' . $thisUser->getVar(
-                        'uid'
-                    ) . '">' . _US_SHOWALL . '</a>';
+                    'uid'
+                ) . '">' . _US_SHOWALL . '</a>';
             } else {
                 $showall_link = '';
             }
@@ -408,21 +408,18 @@ foreach ($mids as $mid) {
 
 // temporary solution for profile module integration
 if (xoops_isActiveModule('profile')) {
-$profileHandler=xoops_getModuleHandler('profile','profile');
-$uid = $controller->uidOwner;
-if ($uid <= 0) { 
- if (is_object($xoopsUser))  {
+    $profileHandler=xoops_getModuleHandler('profile', 'profile');
+    $uid = $controller->uidOwner;
+    if ($uid <= 0) {
+        if (is_object($xoopsUser)) {
+            $profile = $profileHandler->get($uid);
+        } else {
+            header('location: ' . XOOPS_URL);
+            exit();
+        }
+    } else {
         $profile = $profileHandler->get($uid);
-		} 
-        else {
-             header('location: ' . XOOPS_URL); 
-             exit();
-             }
- }
-else 
-{
-$profile = $profileHandler->get($uid);
-}
+    }
 }
 
 require __DIR__ . '/footer.php';

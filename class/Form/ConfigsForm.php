@@ -69,9 +69,10 @@ class ConfigsForm extends XoopsThemeForm
         //include ID field, it's needed so the module knows if it is a new form or an edited form
 
         $hidden = new XoopsFormHidden(
-            'config_id', $this->targetObject->getVar(
-            'config_id'
-        )
+            'config_id',
+            $this->targetObject->getVar(
+                'config_id'
+            )
         );
         $this->addElement($hidden);
         unset($hidden);
@@ -83,9 +84,14 @@ class ConfigsForm extends XoopsThemeForm
         // Config_uid
         $this->addElement(
             new XoopsFormSelectUser(
-                AM_YOGURT_CONFIGS_CONFIG_UID, 'config_uid', false, $this->targetObject->getVar(
-                'config_uid'
-            ), 1, false
+                AM_YOGURT_CONFIGS_CONFIG_UID,
+                'config_uid',
+                false,
+                $this->targetObject->getVar(
+                    'config_uid'
+                ),
+                1,
+                false
             ),
             false
         );
@@ -178,18 +184,26 @@ class ConfigsForm extends XoopsThemeForm
         // Backup_password
         $this->addElement(
             new XoopsFormText(
-                AM_YOGURT_CONFIGS_BACKUP_PASSWORD, 'backup_password', 50, 255, $this->targetObject->getVar(
-                'backup_password'
-            )
+                AM_YOGURT_CONFIGS_BACKUP_PASSWORD,
+                'backup_password',
+                50,
+                255,
+                $this->targetObject->getVar(
+                    'backup_password'
+                )
             ),
             false
         );
         // Backup_email
         $this->addElement(
             new XoopsFormText(
-                AM_YOGURT_CONFIGS_BACKUP_EMAIL, 'backup_email', 50, 255, $this->targetObject->getVar(
-                'backup_email'
-            )
+                AM_YOGURT_CONFIGS_BACKUP_EMAIL,
+                'backup_email',
+                50,
+                255,
+                $this->targetObject->getVar(
+                    'backup_email'
+                )
             ),
             false
         );

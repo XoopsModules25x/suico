@@ -305,11 +305,11 @@ class IshotHandler extends XoopsPersistableObjectHandler
      * @param null $criteria
      * @return array
      */
-    public function getHottest($criteria = null) 
+    public function getHottest($criteria = null)
     {
         $sql = 'SELECT DISTINCTROW uname, user_avatar, uid_voted, COUNT(cod_ishot) AS qtd FROM ' . $this->db->prefix(
-                'yogurt_ishot'
-            ) . ', ' . $this->db->prefix(
+            'yogurt_ishot'
+        ) . ', ' . $this->db->prefix(
                 'users'
             );
         if (isset($criteria) && $criteria instanceof CriteriaElement) {
@@ -352,8 +352,8 @@ class IshotHandler extends XoopsPersistableObjectHandler
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT uname, user_avatar, uid_voted FROM ' . $this->db->prefix(
-                'yogurt_ishot'
-            ) . ', ' . $this->db->prefix(
+            'yogurt_ishot'
+        ) . ', ' . $this->db->prefix(
                 'users'
             );
         if (isset($criteria) && $criteria instanceof CriteriaElement) {

@@ -61,15 +61,14 @@ foreach ($group_members as $group_member) {
     $uids[] = (int)$group_member['uid'];
 }
 
-if(!empty($uids)) 
-{	
-if ($xoopsUser) {
-$uid = (int)$xoopsUser->getVar('uid');
-    if (in_array($uid, $uids, true)) {
-        $xoopsTpl->assign('memberOfGroup', 1);
+if (!empty($uids)) {
+    if ($xoopsUser) {
+        $uid = (int)$xoopsUser->getVar('uid');
+        if (in_array($uid, $uids, true)) {
+            $xoopsTpl->assign('memberOfGroup', 1);
+        }
+        $xoopsTpl->assign('useruid', $uid);
     }
-    $xoopsTpl->assign('useruid', $uid);
-}
 }
 $owner_uid       = $group->getVar('owner_uid');
 $group_ownername = XoopsUser::getUnameFromId($owner_uid);

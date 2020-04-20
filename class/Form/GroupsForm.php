@@ -73,9 +73,10 @@ class GroupsForm extends XoopsThemeForm
         //include ID field, it's needed so the module knows if it is a new form or an edited form
 
         $hidden = new XoopsFormHidden(
-            'group_id', $this->targetObject->getVar(
-            'group_id'
-        )
+            'group_id',
+            $this->targetObject->getVar(
+                'group_id'
+            )
         );
         $this->addElement($hidden);
         unset($hidden);
@@ -87,18 +88,27 @@ class GroupsForm extends XoopsThemeForm
         // Owner_uid
         $this->addElement(
             new XoopsFormSelectUser(
-                AM_YOGURT_GROUPS_OWNER_UID, 'owner_uid', false, $this->targetObject->getVar(
-                'owner_uid'
-            ), 1, false
+                AM_YOGURT_GROUPS_OWNER_UID,
+                'owner_uid',
+                false,
+                $this->targetObject->getVar(
+                    'owner_uid'
+                ),
+                1,
+                false
             ),
             false
         );
         // Group_title
         $this->addElement(
             new XoopsFormText(
-                AM_YOGURT_GROUPS_GROUP_TITLE, 'group_title', 50, 255, $this->targetObject->getVar(
-                'group_title'
-            )
+                AM_YOGURT_GROUPS_GROUP_TITLE,
+                'group_title',
+                50,
+                255,
+                $this->targetObject->getVar(
+                    'group_title'
+                )
             ),
             false
         );
@@ -115,23 +125,35 @@ class GroupsForm extends XoopsThemeForm
             //$this->addElement( new \XoopsFormEditor(AM_YOGURT_GROUPS_GROUP_DESC, 'group_desc', $editorOptions), false  );
             if ($this->helper->isUserAdmin()) {
                 $descEditor = new XoopsFormEditor(
-                    AM_YOGURT_GROUPS_GROUP_DESC, $this->helper->getConfig(
-                    'yogurtEditorAdmin'
-                ), $editorOptions, $nohtml = false, $onfailure = 'textarea'
+                    AM_YOGURT_GROUPS_GROUP_DESC,
+                    $this->helper->getConfig(
+                        'yogurtEditorAdmin'
+                    ),
+                    $editorOptions,
+                    $nohtml = false,
+                    $onfailure = 'textarea'
                 );
             } else {
                 $descEditor = new XoopsFormEditor(
-                    AM_YOGURT_GROUPS_GROUP_DESC, $this->helper->getConfig(
-                    'yogurtEditorUser'
-                ), $editorOptions, $nohtml = false, $onfailure = 'textarea'
+                    AM_YOGURT_GROUPS_GROUP_DESC,
+                    $this->helper->getConfig(
+                        'yogurtEditorUser'
+                    ),
+                    $editorOptions,
+                    $nohtml = false,
+                    $onfailure = 'textarea'
                 );
             }
         } else {
             $descEditor = new XoopsFormDhtmlTextArea(
-                AM_YOGURT_GROUPS_GROUP_DESC, 'description', $this->targetObject->getVar(
+                AM_YOGURT_GROUPS_GROUP_DESC,
                 'description',
-                'e'
-            ), 5, 50
+                $this->targetObject->getVar(
+                    'description',
+                    'e'
+                ),
+                5,
+                50
             );
         }
         $this->addElement($descEditor);
@@ -152,7 +174,8 @@ class GroupsForm extends XoopsThemeForm
         $imgtray->addElement($imageselect);
         $imgtray->addElement(
             new XoopsFormLabel(
-                '', "<br><img src='" . XOOPS_URL . '/' . $uploadDir . '/' . $group_img . "' name='image_group_img' id='image_group_img' alt='' style='max-width:300px' />"
+                '',
+                "<br><img src='" . XOOPS_URL . '/' . $uploadDir . '/' . $group_img . "' name='image_group_img' id='image_group_img' alt='' style='max-width:300px' />"
             )
         );
         $fileseltray = new XoopsFormElementTray('', '<br>');

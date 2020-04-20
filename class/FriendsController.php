@@ -53,7 +53,6 @@ class FriendsController extends YogurtController
      */
     public function checkPrivilege()
     {
-
         if (0 === $this->helper->getConfig('enable_friends')) {
             \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_FRIENDSNOTENABLED);
         }

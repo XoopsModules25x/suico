@@ -421,7 +421,11 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $uploadDir = \XOOPS_UPLOAD_PATH . '/yogurt/images/';
         // create the object to upload
         $uploader = new XoopsMediaUploader(
-            $path_upload, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight
+            $path_upload,
+            $allowed_mimetypes,
+            $maxfilesize,
+            $maxfilewidth,
+            $maxfileheight
         );
         // fetch the media
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
@@ -482,7 +486,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $pictwidth,
         $pictheight,
         $path_upload
-    )  {
+    ) {
         $img2   = $img;
         $path   = \pathinfo($img);
         $img    = \imagecreatefromjpeg($img);
@@ -549,13 +553,13 @@ class ImageHandler extends XoopsPersistableObjectHandler
      * @param $limit
      * @return array
      */
-    public function getLastPictures($limit) 
+    public function getLastPictures($limit)
     {
         $ret = [];
 
         $sql = 'SELECT uname, t.uid_owner, t.url FROM ' . $this->db->prefix(
-                'yogurt_images'
-            ) . ' AS t, ' . $this->db->prefix(
+            'yogurt_images'
+        ) . ' AS t, ' . $this->db->prefix(
                 'users'
             );
 
@@ -577,13 +581,13 @@ class ImageHandler extends XoopsPersistableObjectHandler
      * @param $limit
      * @return array
      */
-    public function getLastPicturesForBlock($limit) 
+    public function getLastPicturesForBlock($limit)
     {
         $ret = [];
 
         $sql = 'SELECT uname, t.uid_owner, t.url, t.title FROM ' . $this->db->prefix(
-                'yogurt_images'
-            ) . ' AS t, ' . $this->db->prefix(
+            'yogurt_images'
+        ) . ' AS t, ' . $this->db->prefix(
                 'users'
             );
 
@@ -616,7 +620,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $width,
         $height,
         $path_upload
-    )  {
+    ) {
         $img2   = $img;
         $path   = \pathinfo($img);
         $img    = \imagecreatefromjpeg($img);

@@ -120,7 +120,11 @@ $avatar     = $owner->getVar('user_avatar');
  */
 $nbPhotos = $nbSections[NBPHOTOS] ?? '';
 $navigationBar = new XoopsPageNav(
-    $nbPhotos, $helper->getConfig('picturesperpage'), $start, 'start', 'uid=' . (int)$controller->uidOwner
+    $nbPhotos,
+    $helper->getConfig('picturesperpage'),
+    $start,
+    'start',
+    'uid=' . (int)$controller->uidOwner
 );
 $navegacao       = $navigationBar->renderImageNav(2);
 

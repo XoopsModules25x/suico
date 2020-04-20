@@ -53,15 +53,14 @@ if (!defined('XOOPS_CONF_USER')) {
         unset($moduleHandler);
         unset($mod_yogurt);
     } elseif (defined('SXVERSION')) {
-            define('XOOPS_CONF_USER', 1);
-            $xoopsConfigUser = $configHandler->getConfigsByCat(0, XOOPS_CONF_USER);
-            unset($moduleHandler);
-            unset($mod_yogurt);
-        } else {
-            redirect_header('index.php', 3, _TAKINGBACK);
-            exit();
-        }
-
+        define('XOOPS_CONF_USER', 1);
+        $xoopsConfigUser = $configHandler->getConfigsByCat(0, XOOPS_CONF_USER);
+        unset($moduleHandler);
+        unset($mod_yogurt);
+    } else {
+        redirect_header('index.php', 3, _TAKINGBACK);
+        exit();
+    }
 } else {
     $xoopsConfigUser = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
 }
@@ -131,7 +130,7 @@ if ('saveuser' === $op) {
         $edituser->setVar('user_viewemail', $user_viewemail);
         $edituser->setVar('user_viewoid', $user_viewoid);
         if ('' !== $password) {
-                $edituser->setVar('pass', md5($password), true);
+            $edituser->setVar('pass', md5($password), true);
         }
         $attachsig = !empty($_POST['attachsig']) ? 1 : 0;
         $edituser->setVar('attachsig', $attachsig);
@@ -186,17 +185,23 @@ if ('editprofile' === $op) {
     $form->addElement($url_text);
 
     $timezone_select = new XoopsFormSelectTimezone(
-        _US_TIMEZONE, 'timezone_offset', $xoopsUser->getVar(
-        'timezone_offset'
-    )
+        _US_TIMEZONE,
+        'timezone_offset',
+        $xoopsUser->getVar(
+            'timezone_offset'
+        )
     );
     $location_text   = new XoopsFormText(_US_LOCATION, 'user_from', 30, 100, $xoopsUser->getVar('user_from', 'E'));
     $occupation_text = new XoopsFormText(_US_OCCUPATION, 'user_occ', 30, 100, $xoopsUser->getVar('user_occ', 'E'));
     $interest_text   = new XoopsFormText(
-        _US_INTEREST, 'user_intrest', 30, 150, $xoopsUser->getVar(
+        _US_INTEREST,
         'user_intrest',
-        'E'
-    )
+        30,
+        150,
+        $xoopsUser->getVar(
+            'user_intrest',
+            'E'
+        )
     );
     $sig_tray        = new XoopsFormElementTray(_US_SIGNATURE, '<br>');
     require_once XOOPS_ROOT_PATH . '/include/xoopscodes.php';
@@ -226,9 +231,11 @@ if ('editprofile' === $op) {
     require_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/notification.php';
     require_once XOOPS_ROOT_PATH . '/include/notification_constants.php';
     $notify_method_select = new XoopsFormSelect(
-        _NOT_NOTIFYMETHOD, 'notify_method', $xoopsUser->getVar(
-        'notify_method'
-    )
+        _NOT_NOTIFYMETHOD,
+        'notify_method',
+        $xoopsUser->getVar(
+            'notify_method'
+        )
     );
     $notify_method_select->addOptionArray(
         [
@@ -249,7 +256,10 @@ if ('editprofile' === $op) {
     //    $cookie_radio_value = empty($_COOKIE[$xoopsConfig['usercookie']]) ? 0 : 1;
     //    $cookie_radio       = new \XoopsFormRadioYN(_US_USECOOKIE, 'usecookie', $cookie_radio_value, _YES, _NO);
     $pwd_text  = new XoopsFormPassword(
-        '', 'password', 10, 255
+        '',
+        'password',
+        10,
+        255
     );
     $pwd_text2 = new XoopsFormPassword('', 'vpass', 10, 255);
     $pwd_tray  = new XoopsFormElementTray(_US_PASSWORD . '<br>' . _US_TYPEPASSTWICE);
@@ -302,7 +312,8 @@ if ('avatarform' === $op) {
         $form->setExtra('enctype="multipart/form-data"');
         $form->addElement(
             new XoopsFormLabel(
-                _US_MAXPIXEL, $xoopsConfigUser['avatar_width'] . ' x ' . $xoopsConfigUser['avatar_height']
+                _US_MAXPIXEL,
+                $xoopsConfigUser['avatar_width'] . ' x ' . $xoopsConfigUser['avatar_height']
             )
         );
         $form->addElement(new XoopsFormLabel(_US_MAXIMGSZ, $xoopsConfigUser['avatar_maxsize']));
@@ -323,10 +334,11 @@ if ('avatarform' === $op) {
     $avatar_tray->addElement($avatar_select);
     $avatar_tray->addElement(
         new XoopsFormLabel(
-            '', "<img src='" . XOOPS_UPLOAD_URL . '/' . $xoopsUser->getVar(
-                  'user_avatar',
-                  'E'
-              ) . "' name='avatar' id='avatar' alt=''> <a href=\"javascript:openWithSelfMain('" . XOOPS_URL . "/misc.php?action=showpopups&amp;type=avatars','avatars',600,400);\">" . _LIST . '</a>'
+            '',
+            "<img src='" . XOOPS_UPLOAD_URL . '/' . $xoopsUser->getVar(
+                'user_avatar',
+                'E'
+            ) . "' name='avatar' id='avatar' alt=''> <a href=\"javascript:openWithSelfMain('" . XOOPS_URL . "/misc.php?action=showpopups&amp;type=avatars','avatars',600,400);\">" . _LIST . '</a>'
         )
     );
     $form2->addElement($avatar_tray);
@@ -364,7 +376,11 @@ if ('avatarupload' === $op) {
         ) >= $xoopsConfigUser['avatar_minposts']) {
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $uploader = new XoopsMediaUploader(
-            XOOPS_UPLOAD_PATH, $allowed_mimetypes, $xoopsConfigUser['avatar_maxsize'], $xoopsConfigUser['avatar_width'], $xoopsConfigUser['avatar_height']
+            XOOPS_UPLOAD_PATH,
+            $allowed_mimetypes,
+            $xoopsConfigUser['avatar_maxsize'],
+            $xoopsConfigUser['avatar_width'],
+            $xoopsConfigUser['avatar_height']
         );
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
             $uploader->setPrefix('cavt');

@@ -120,7 +120,7 @@ class AudioController extends YogurtController
         $audiosPerPage,
         $start,
         $interval
-    )  {
+    ) {
         $pageNav = new XoopsPageNav($nbAudios, $audiosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
         return $pageNav->renderImageNav($interval);
     }

@@ -87,7 +87,7 @@ class Migrate extends \Xmf\Database\Migrate
         $tableName,
         $columnName,
         $newName
-    )  {
+    ) {
         if ($this->tableHandler->useTable($tableName)) {
             $attributes = $this->tableHandler->getColumnAttributes($tableName, $columnName);
             //            if (false !== strpos($attributes, ' int(')) {

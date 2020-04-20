@@ -35,7 +35,7 @@ trait FilesManagement
      */
     public static function createFolder(
         $folder
-    )  {
+    ) {
         try {
             if (!\file_exists($folder)) {
                 if (!\is_dir($folder) && !\mkdir($folder) && !\is_dir($folder)) {
@@ -247,8 +247,8 @@ trait FilesManagement
 
         // If the destination directory does not exist and could not be created stop processing
         if (!\is_dir(
-                $dest
-            )
+            $dest
+        )
             && !\mkdir(
                 $dest
             )
@@ -300,8 +300,8 @@ trait FilesManagement
 
         // If the destination directory does not exist and could not be created stop processing
         if (!\is_dir(
-                $dest
-            )
+            $dest
+        )
             && !\mkdir(
                 $dest
             )

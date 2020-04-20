@@ -24,7 +24,7 @@
 // @see http://www.php-fig.org/psr/psr-4/examples/
 
 spl_autoload_register(
-    static function ($class)  {
+    static function ($class) {
         // project-specific namespace prefix
         $prefix = 'XoopsModules\\' . ucfirst(basename(dirname(__DIR__)));
 

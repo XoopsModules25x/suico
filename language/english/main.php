@@ -399,7 +399,7 @@ define('_MD_YOGURT_FRIENDSHIPSTATUS', 'Friendship Status');
 define('_MD_YOGURT_PROFILEVISITORS', 'Profile Visitors');
 define('_MD_YOGURT_FEATUREDVIDEO', 'Featured Video');
 define('_MD_YOGURT_ALLVIDEOS', 'View all videos');
-define('_MD_YOGURT_OWNEROFGROUP','Group Owner');
+define('_MD_YOGURT_OWNEROFGROUP', 'Group Owner');
 define('_MD_YOGURT_MEMBERSLIST', 'Members List');
 define('_MD_YOGURT_LATESTMEMBER', 'Latest Member');
 define('_MD_YOGURT_MEMBERSLISTSECTION', 'Welcome to Members List');
@@ -443,38 +443,38 @@ define('_MD_YOGURT_YOURPASSWORD', 'Your Password.');
 define('_MD_YOGURT_YOUREMAIL', 'Your Email');
 define('_MD_YOGURT_SIGNUP', 'Sign Up Now !');
 define('_MD_YOGURT_NOTAMEMBER', 'Not a member?');
-define('_MD_YOGURT_SOCIALNETWORK','Social Network');
-define('_MD_YOGURT_USERWELCOME','Enlarge friends network.');
-define('_MD_YOGURT_JOINUS','Join our community today and start to search for new friends!');
-define('_MD_YOGURT_FINDFRIENDS','Find Friends');
+define('_MD_YOGURT_SOCIALNETWORK', 'Social Network');
+define('_MD_YOGURT_USERWELCOME', 'Enlarge friends network.');
+define('_MD_YOGURT_JOINUS', 'Join our community today and start to search for new friends!');
+define('_MD_YOGURT_FINDFRIENDS', 'Find Friends');
 
 //Data Tables
-define('_MD_YOGURT_DTDECIMAL','');
-define('_MD_YOGURT_DTEMPTYTABLE','No data available in table');
-define('_MD_YOGURT_DTINFOSHOWING','Showing');
-define('_MD_YOGURT_DTINFOTO','to');
-define('_MD_YOGURT_DTINFOOF','of');
-define('_MD_YOGURT_DTINFOENTRIES','entries');
-define('_MD_YOGURT_DTINFOEMPTY','Showing 0 to 0 of 0 entries');
-define('_MD_YOGURT_DTINFOFILTEREDFROM','filtered from');
-define('_MD_YOGURT_DTINFOFILTEREDTOTALENTRIES','total entries');
-define('_MD_YOGURT_DTINFOPOSTFIX','');
-define('_MD_YOGURT_DTTHOUSANDS',',');
-define('_MD_YOGURT_DTLENGTHMENUSHOW','Show');
-define('_MD_YOGURT_DTLENGTHMENUENTRIES','entries');
-define('_MD_YOGURT_DTLOADINGRECORDS','Loading...');
-define('_MD_YOGURT_DTPROCESSING','Processing...');
-define('_MD_YOGURT_DTSEARCH','Search');
-define('_MD_YOGURT_DTZERORECORDS','No matching records found');
-define('_MD_YOGURT_DTFIRST','First');
-define('_MD_YOGURT_DTLAST','Last');
-define('_MD_YOGURT_DTNEXT','Next');
-define('_MD_YOGURT_DTPREVIOUS','Previous');
-define('_MD_YOGURT_DTSORTASCENDING',': activate to sort column ascending');
-define('_MD_YOGURT_DTSORTDESCENSING',': activate to sort column descending');
+define('_MD_YOGURT_DTDECIMAL', '');
+define('_MD_YOGURT_DTEMPTYTABLE', 'No data available in table');
+define('_MD_YOGURT_DTINFOSHOWING', 'Showing');
+define('_MD_YOGURT_DTINFOTO', 'to');
+define('_MD_YOGURT_DTINFOOF', 'of');
+define('_MD_YOGURT_DTINFOENTRIES', 'entries');
+define('_MD_YOGURT_DTINFOEMPTY', 'Showing 0 to 0 of 0 entries');
+define('_MD_YOGURT_DTINFOFILTEREDFROM', 'filtered from');
+define('_MD_YOGURT_DTINFOFILTEREDTOTALENTRIES', 'total entries');
+define('_MD_YOGURT_DTINFOPOSTFIX', '');
+define('_MD_YOGURT_DTTHOUSANDS', ',');
+define('_MD_YOGURT_DTLENGTHMENUSHOW', 'Show');
+define('_MD_YOGURT_DTLENGTHMENUENTRIES', 'entries');
+define('_MD_YOGURT_DTLOADINGRECORDS', 'Loading...');
+define('_MD_YOGURT_DTPROCESSING', 'Processing...');
+define('_MD_YOGURT_DTSEARCH', 'Search');
+define('_MD_YOGURT_DTZERORECORDS', 'No matching records found');
+define('_MD_YOGURT_DTFIRST', 'First');
+define('_MD_YOGURT_DTLAST', 'Last');
+define('_MD_YOGURT_DTNEXT', 'Next');
+define('_MD_YOGURT_DTPREVIOUS', 'Previous');
+define('_MD_YOGURT_DTSORTASCENDING', ': activate to sort column ascending');
+define('_MD_YOGURT_DTSORTDESCENSING', ': activate to sort column descending');
 
-define('_MD_YOGURT_CANTVOTEOWN','You can not vote for yourself');
-define('_MD_YOGURT_VOTED','Vote');
+define('_MD_YOGURT_CANTVOTEOWN', 'You can not vote for yourself');
+define('_MD_YOGURT_VOTED', 'Vote');
 define('_MD_YOGURT_ALREADYVOTED', 'Sorry, you have already voted once.');
 
 
@@ -488,6 +488,3 @@ define('_MD_YOGURT_PROFILE_LATERTHAN', ' %s  is later than');
 define('_MD_YOGURT_PROFILE_EARLIERTHAN', ' %s  is earlier than');
 define('_MD_YOGURT_PROFILE_LARGERTHAN', ' %s  is greater than');
 define('_MD_YOGURT_PROFILE_SMALLERTHAN', ' %s  is smaller than');
-
-
-

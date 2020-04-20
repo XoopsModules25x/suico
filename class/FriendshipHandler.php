@@ -319,8 +319,8 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT uname, user_avatar, friend2_uid FROM ' . $this->db->prefix(
-                'yogurt_friendship'
-            ) . ', ' . $this->db->prefix(
+            'yogurt_friendship'
+        ) . ', ' . $this->db->prefix(
                 'users'
             );
         if (isset($criteria) && $criteria instanceof CriteriaElement) {
@@ -367,8 +367,8 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT uname, user_avatar, friend1_uid FROM ' . $this->db->prefix(
-                'yogurt_friendship'
-            ) . ', ' . $this->db->prefix(
+            'yogurt_friendship'
+        ) . ', ' . $this->db->prefix(
                 'users'
             );
         if (isset($criteria) && $criteria instanceof CriteriaElement) {
@@ -411,9 +411,10 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
          * criteria fetch friendship to be edited
          */
         $criteria_friend1    = new Criteria(
-            'friend1_uid', $xoopsUser->getVar(
-            'uid'
-        )
+            'friend1_uid',
+            $xoopsUser->getVar(
+                'uid'
+            )
         );
 
         $field_friend_fan = $field_friend_friendly = $field_friend_funny = $field_friend_cool = '';
@@ -425,36 +426,45 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         $friendship  = $friendships[0];
 
         $form = new XoopsThemeForm(
-            _MD_YOGURT_EDITFRIENDSHIP, 'form_editfriendship', 'editfriendship.php', 'post', true
+            _MD_YOGURT_EDITFRIENDSHIP,
+            'form_editfriendship',
+            'editfriendship.php',
+            'post',
+            true
         );
         //$field_friend_avatar      = new XoopsFormLabel(_MD_YOGURT_PHOTO, "<img src=../../uploads/".$friend->getVar('user_avatar').">");
         if ('avatars/blank.gif' === $friend->getVar(
-                'user_avatar'
-            )) {
+            'user_avatar'
+        )) {
             $field_friend_avatar = new XoopsFormLabel(_MD_YOGURT_PHOTO, '<img src=assets/images/noavatar.gif>');
         } else {
             $field_friend_avatar = new XoopsFormLabel(
-                _MD_YOGURT_PHOTO, '<img src=../../uploads/' . $friend->getVar(
-                                    'user_avatar'
-                                ) . '>'
+                _MD_YOGURT_PHOTO,
+                '<img src=../../uploads/' . $friend->getVar(
+                    'user_avatar'
+                ) . '>'
             );
         }
         $field_friend_name = new XoopsFormLabel(_MD_YOGURT_FRIENDNAME, $friend->getVar('uname'));
 
         if (1 === $this->helper->getConfig('allow_friendshiplevel')) {
-        $field_friend_level = new XoopsFormRadio(_MD_YOGURT_LEVEL, 'level', $friendship->getVar('level'), '<br>');
+            $field_friend_level = new XoopsFormRadio(_MD_YOGURT_LEVEL, 'level', $friendship->getVar('level'), '<br>');
 
-        $field_friend_level->addOption('1', _MD_YOGURT_UNKNOWNACCEPTED);
-        $field_friend_level->addOption('3', _MD_YOGURT_AQUAITANCE);
-        $field_friend_level->addOption('5', _MD_YOGURT_FRIEND);
-        $field_friend_level->addOption('7', _MD_YOGURT_BESTFRIEND);
-		}
+            $field_friend_level->addOption('1', _MD_YOGURT_UNKNOWNACCEPTED);
+            $field_friend_level->addOption('3', _MD_YOGURT_AQUAITANCE);
+            $field_friend_level->addOption('5', _MD_YOGURT_FRIEND);
+            $field_friend_level->addOption('7', _MD_YOGURT_BESTFRIEND);
+        }
 
         if (1 === $this->helper->getConfig('allow_fanssevaluation')) {
             $field_friend_fan = new XoopsFormRadioYN(
-                _MD_YOGURT_FAN, 'fan', $friendship->getVar(
-                'fan'
-            ), '<img src="assets/images/fans.gif" alt="' . \_YES . '" title="' . \_YES . '">', '<img src="assets/images/fansbw.gif" alt="' . \_NO . '" title="' . \_NO . '">'
+                _MD_YOGURT_FAN,
+                'fan',
+                $friendship->getVar(
+                    'fan'
+                ),
+                '<img src="assets/images/fans.gif" alt="' . \_YES . '" title="' . \_YES . '">',
+                '<img src="assets/images/fansbw.gif" alt="' . \_NO . '" title="' . \_NO . '">'
             );
 
             $field_friend_friendly = new XoopsFormRadio(_MD_YOGURT_FRIENDLY, 'hot', $friendship->getVar('hot'));
@@ -539,8 +549,8 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
 
         //Calculating avg(hot)
         $sql    = 'SELECT friend2_uid, Avg(hot) AS mediahot FROM ' . $this->db->prefix(
-                'yogurt_friendship'
-            );
+            'yogurt_friendship'
+        );
         $sql    .= ' WHERE  (hot>0) GROUP BY friend2_uid HAVING (friend2_uid=' . $user_uid . ') ';
         $result = $this->db->query($sql);
         while (false !== ($myrow = $this->db->fetchArray($result))) {
@@ -549,8 +559,8 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
 
         //Calculating avg(trust)
         $sql    = 'SELECT friend2_uid, Avg(trust) AS mediatrust FROM ' . $this->db->prefix(
-                'yogurt_friendship'
-            );
+            'yogurt_friendship'
+        );
         $sql    .= ' WHERE  (trust>0) GROUP BY friend2_uid HAVING (friend2_uid=' . $user_uid . ') ';
         $result = $this->db->query($sql);
         while (false !== ($myrow = $this->db->fetchArray($result))) {
@@ -558,8 +568,8 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         }
         //Calculating avg(cool)
         $sql    = 'SELECT friend2_uid, Avg(cool) AS mediacool FROM ' . $this->db->prefix(
-                'yogurt_friendship'
-            );
+            'yogurt_friendship'
+        );
         $sql    .= ' WHERE  (cool>0) GROUP BY friend2_uid HAVING (friend2_uid=' . $user_uid . ') ';
         $result = $this->db->query($sql);
         while (false !== ($myrow = $this->db->fetchArray($result))) {
@@ -568,8 +578,8 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
 
         //Calculating sum(fans)
         $sql    = 'SELECT friend2_uid, Sum(fan) AS sumfan FROM ' . $this->db->prefix(
-                'yogurt_friendship'
-            );
+            'yogurt_friendship'
+        );
         $sql    .= ' GROUP BY friend2_uid HAVING (friend2_uid=' . $user_uid . ') ';
         $result = $this->db->query($sql);
         while (false !== ($myrow = $this->db->fetchArray($result))) {

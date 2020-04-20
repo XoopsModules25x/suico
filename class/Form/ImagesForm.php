@@ -69,9 +69,10 @@ class ImagesForm extends XoopsThemeForm
         //include ID field, it's needed so the module knows if it is a new form or an edited form
 
         $hidden = new XoopsFormHidden(
-            'cod_img', $this->targetObject->getVar(
-            'cod_img'
-        )
+            'cod_img',
+            $this->targetObject->getVar(
+                'cod_img'
+            )
         );
         $this->addElement($hidden);
         unset($hidden);
@@ -88,25 +89,36 @@ class ImagesForm extends XoopsThemeForm
         // Data_creation
         $this->addElement(
             new XoopsFormTextDateSelect(
-                AM_YOGURT_IMAGES_DATA_CREATION, 'data_creation', 0, \strtotime(
-                                                  $this->targetObject->getVar('data_creation')
-                                              )
+                AM_YOGURT_IMAGES_DATA_CREATION,
+                'data_creation',
+                0,
+                \strtotime(
+                    $this->targetObject->getVar('data_creation')
+                )
             )
         );
         // Data_update
         $this->addElement(
             new XoopsFormTextDateSelect(
-                AM_YOGURT_IMAGES_DATA_UPDATE, 'data_update', 0, \strtotime(
-                                                $this->targetObject->getVar('data_update')
-                                            )
+                AM_YOGURT_IMAGES_DATA_UPDATE,
+                'data_update',
+                0,
+                \strtotime(
+                    $this->targetObject->getVar('data_update')
+                )
             )
         );
         // Uid_owner
         $this->addElement(
             new XoopsFormSelectUser(
-                AM_YOGURT_IMAGES_UID_OWNER, 'uid_owner', false, $this->targetObject->getVar(
-                'uid_owner'
-            ), 1, false
+                AM_YOGURT_IMAGES_UID_OWNER,
+                'uid_owner',
+                false,
+                $this->targetObject->getVar(
+                    'uid_owner'
+                ),
+                1,
+                false
             ),
             false
         );

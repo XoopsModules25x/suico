@@ -108,8 +108,8 @@ class Friendship extends XoopsObject
         }
         if (!$asobject) {
             $sql    = 'SELECT friendship_id FROM ' . $db->prefix(
-                    'yogurt_friendship'
-                ) . "${where_query} ORDER BY ${sort} ${order}";
+                'yogurt_friendship'
+            ) . "${where_query} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['yogurt_friendship_id'];

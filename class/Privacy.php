@@ -36,7 +36,8 @@ use XoopsModules\Yogurt\Form;
  */
 class Privacy extends \XoopsObject
 {
-    public $helper, $permHelper;
+    public $helper;
+    public $permHelper;
 
     /**
      * Constructor
@@ -95,4 +96,3 @@ class Privacy extends \XoopsObject
         return $this->permHelper->getGroupsForItem('sbcolumns_moderation', $this->getVar('id'));
     }
 }
-

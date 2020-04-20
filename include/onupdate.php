@@ -182,8 +182,8 @@ function xoops_module_update_yogurt(
 
         //delete .html entries from the tpl table
         $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix(
-                'tplfile'
-            ) . " WHERE `tpl_module` = '" . $module->getVar(
+            'tplfile'
+        ) . " WHERE `tpl_module` = '" . $module->getVar(
                 'dirname',
                 'n'
             ) . "' AND `tpl_file` LIKE '%.html%'";
