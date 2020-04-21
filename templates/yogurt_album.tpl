@@ -6,7 +6,7 @@
         <{$lang_formtitle}>
     </h5>
 	
-    <form name="form_picture" id="form_picture" action="submit.php" method="post" enctype="multipart/form-data">
+    <form name="form_picture" id="form_picture" action="submitImage.php" method="post" enctype="multipart/form-data">
        <{$token}>
 		<div class="form-group">
 		<label for="album"><{$lang_youcanupload}><br><{$lang_nb_pict}> <{$lang_max_nb_pict}></label>

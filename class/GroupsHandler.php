@@ -341,7 +341,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $maxbytes,
         $xoopsTpl
     ) {
-        $form = new XoopsThemeForm(_MD_YOGURT_SUBMIT_GROUP, 'form_group', 'submit_group.php', 'post', true);
+        $form = new XoopsThemeForm(_MD_YOGURT_SUBMIT_GROUP, 'form_group', 'submitGroup.php', 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
 
         $field_url     = new XoopsFormFile(_MD_YOGURT_GROUP_IMAGE, 'group_img', $maxbytes);

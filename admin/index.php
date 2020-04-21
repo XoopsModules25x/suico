@@ -57,8 +57,8 @@ $totalFriendship = $friendshipHandler->getCount();
 $totalVisitors = $visitorsHandler->getCount();
 //count "total Video"
 $totalVideo = $videoHandler->getCount();
-//count "total Friendpetition"
-$totalFriendpetition = $friendpetitionHandler->getCount();
+//count "total Friendrequest"
+$totalFriendrequest = $friendrequestHandler->getCount();
 //count "total Groups"
 $totalGroups = $groupsHandler->getCount();
 //count "total Relgroupuser"
@@ -82,9 +82,9 @@ $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_IMAGES, $totalImages));
 // InfoBox friendship
 $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_FRIENDS, $totalFriendship));
 
-// InfoBox friendpetition
+// InfoBox friendrequest
 $adminObject->addInfoBoxLine(
-    sprintf(AM_YOGURT_THEREARE_FRIENDPETITION, $totalFriendpetition)
+    sprintf(AM_YOGURT_THEREARE_FRIENDREQUEST, $totalFriendrequest)
 );
 
 // InfoBox visitors
@@ -93,8 +93,8 @@ $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_VISITORS, $totalVisitors
 // InfoBox video
 $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_VIDEO, $totalVideo));
 
-// InfoBox friendpetition
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_FRIENDPETITION, $totalFriendpetition));
+// InfoBox friendrequest
+$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_FRIENDREQUEST, $totalFriendrequest));
 
 // InfoBox groups
 $adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_GROUPS, $totalGroups));

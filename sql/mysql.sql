@@ -41,10 +41,10 @@ CREATE TABLE `yogurt_video` (
     PRIMARY KEY (`video_id`)
 )
     ENGINE = MyISAM;
-CREATE TABLE `yogurt_friendpetition` (
+CREATE TABLE `yogurt_friendrequest` (
     `friendpet_id`   INT(11) NOT NULL AUTO_INCREMENT,
-    `petitioner_uid` INT(11) NOT NULL,
-    `petitionto_uid` INT(11) NOT NULL,
+    `friendrequester_uid` INT(11) NOT NULL,
+    `friendrequestto_uid` INT(11) NOT NULL,
     PRIMARY KEY (`friendpet_id`)
 )
     ENGINE = MyISAM;

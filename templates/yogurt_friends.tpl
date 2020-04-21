@@ -1,11 +1,11 @@
 <{include file="db:yogurt_navbar.tpl"}>
 
-<{if $allow_friends !=-1 && $petition==1 && $isOwner==1 && $isFriend==0}>
+<{if $allow_friends !=-1 && $friendrequest==1 && $isOwner==1 && $isFriend==0}>
 
     <!-- if not owner and not friend -->
-    <div id="yogurt-profile-petition" class="confirmMsg">
-        <h4><{$lang_youhavexpetitions}></h4>
-        <img width="30" src="<{$xoops_url}>/uploads/<{$petitioner_avatar}>">
+    <div id="yogurt-profile-friendrequest" class="confirmMsg">
+        <h4><{$lang_youhavexfriendrequests}></h4>
+        <img width="30" src="<{$xoops_url}>/uploads/<{$friendrequester_avatar}>">
         <form action="makefriends.php" method="post">
             <{$lang_askingfriend}>
             <ul>
@@ -22,7 +22,7 @@
                     <{$lang_rejectfriend}>
                 </li>
             </ul>
-            <input type="hidden" name="petition_id" id="petition_id" value="<{$petition_id}>">
+            <input type="hidden" name="friendrequest_id" id="friendrequest_id" value="<{$friendrequest_id}>">
             <input type="submit">
             <{$token}>
         </form>

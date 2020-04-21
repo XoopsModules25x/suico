@@ -34,21 +34,21 @@ $nbSections = $controller->getNumbersSections();
 $start = Request::getInt('start', 0, 'GET');
 
 /**
- * Filter for new friend petition
+ * Filter for new friend friendrequest
  */
-$petition = 0;
+$friendrequest = 0;
 if (1 === $controller->isOwner) {
-    $criteria_uidpetition = new Criteria('petitionto_uid', $controller->uidOwner);
-    $newpetition          = $controller->petitionsFactory->getObjects($criteria_uidpetition);
-    if ($newpetition) {
-        $nb_petitions      = count($newpetition);
-        $petitionerHandler = xoops_getHandler('member');
-        $petitioner        = $petitionerHandler->getUser($newpetition[0]->getVar('petitioner_uid'));
-        $petitioner_uid    = $petitioner->getVar('uid');
-        $petitioner_uname  = $petitioner->getVar('uname');
-        $petitioner_avatar = $petitioner->getVar('user_avatar');
-        $petition_id       = $newpetition[0]->getVar('friendpet_id');
-        $petition          = 1;
+    $criteria_uidfriendrequest = new Criteria('friendrequestto_uid', $controller->uidOwner);
+    $newFriendrequest          = $controller->friendrequestFactory->getObjects($criteria_uidfriendrequest);
+    if ($newFriendrequest) {
+        $nb_friendrequest      = count($newFriendrequest);
+        $friendrequesterHandler = xoops_getHandler('member');
+        $friendrequester        = $friendrequesterHandler->getUser($newFriendrequest[0]->getVar('friendrequester_uid'));
+        $friendrequester_uid    = $friendrequester->getVar('uid');
+        $friendrequester_uname  = $friendrequester->getVar('uname');
+        $friendrequester_avatar = $friendrequester->getVar('user_avatar');
+        $friendrequest_id       = $newFriendrequest[0]->getVar('friendpet_id');
+        $friendrequest          = 1;
     }
 }
 
@@ -82,20 +82,20 @@ $navigationBar = new XoopsPageNav(
 );
 $navegacao       = $navigationBar->renderImageNav(2);
 
-//petitions to become friend
-if (1 === $petition) {
-    $xoopsTpl->assign('lang_youhavexpetitions', sprintf(_MD_YOGURT_YOUHAVEXPETITIONS, $nb_petitions));
-    $xoopsTpl->assign('petitioner_uid', $petitioner_uid);
-    $xoopsTpl->assign('petitioner_uname', $petitioner_uname);
-    $xoopsTpl->assign('petitioner_avatar', $petitioner_avatar);
-    $xoopsTpl->assign('petition', $petition);
-    $xoopsTpl->assign('petition_id', $petition_id);
+//requests to become friend
+if (1 === $friendrequest) {
+    $xoopsTpl->assign('lang_youhavexfriendrequests', sprintf(_MD_YOGURT_YOUHAVEXREQUESTS, $nb_friendrequest));
+    $xoopsTpl->assign('friendrequester_uid', $friendrequester_uid);
+    $xoopsTpl->assign('friendrequester_uname', $friendrequester_uname);
+    $xoopsTpl->assign('friendrequester_avatar', $friendrequester_avatar);
+    $xoopsTpl->assign('friendrequest', $friendrequest);
+    $xoopsTpl->assign('friendrequest_id', $friendrequest_id);
     $xoopsTpl->assign('lang_rejected', _MD_YOGURT_UNKNOWNREJECTING);
     $xoopsTpl->assign('lang_accepted', _MD_YOGURT_UNKNOWNACCEPTING);
     $xoopsTpl->assign('lang_acquaintance', _MD_YOGURT_AQUAITANCE);
     $xoopsTpl->assign('lang_friend', _MD_YOGURT_FRIEND);
     $xoopsTpl->assign('lang_bestfriend', _MD_YOGURT_BESTFRIEND);
-    $linkedpetioner = '<a href="index.php?uid=' . $petitioner_uid . '">' . $petitioner_uname . '</a>';
+    $linkedpetioner = '<a href="index.php?uid=' . $friendrequester_uid . '">' . $friendrequester_uname . '</a>';
     $xoopsTpl->assign('lang_askingfriend', sprintf(_MD_YOGURT_ASKINGFRIEND, $linkedpetioner));
 }
 $xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);

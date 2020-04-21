@@ -76,7 +76,7 @@ $adminmenu[] = [
 
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU6,
-    'link'  => 'admin/friendpetition.php',
+    'link'  => 'admin/friendrequest.php',
     'icon'  => "{$pathIcon32}/face-smile.png",
 ];
 

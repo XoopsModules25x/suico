@@ -2,7 +2,7 @@
 
 namespace XoopsModules\Yogurt;
 
-// Friendpetition.php,v 1
+// Friendrequest.php,v 1
 //  ---------------------------------------------------------------- //
 // Author: Bruno Barthez                                               //
 // ----------------------------------------------------------------- //
@@ -14,11 +14,11 @@ use XoopsObject;
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
 /**
- * Friendpetition class.
+ * Friendrequest class.
  * $this class is responsible for providing data access mechanisms to the data source
  * of XOOPS user class objects.
  */
-class Friendpetition extends XoopsObject
+class Friendrequest extends XoopsObject
 {
     public $db;
     public $helper;
@@ -27,7 +27,7 @@ class Friendpetition extends XoopsObject
     // constructor
 
     /**
-     * Friendpetition constructor.
+     * Friendrequest constructor.
      * @param null $id
      */
     public function __construct($id = null)
@@ -37,8 +37,8 @@ class Friendpetition extends XoopsObject
         $this->permHelper = new Permission();
         $this->db         = XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('friendpet_id', \XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('petitioner_uid', \XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('petitionto_uid', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('friendrequester_uid', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('friendrequestto_uid', \XOBJ_DTYPE_INT, null, false, 10);
         if (!empty($id)) {
             if (\is_array($id)) {
                 $this->assignVars($id);
@@ -55,7 +55,7 @@ class Friendpetition extends XoopsObject
      */
     public function load($id)
     {
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendpetition') . ' WHERE friendpet_id=' . $id;
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendrequest') . ' WHERE friendpet_id=' . $id;
         $myrow = $this->db->fetchArray($this->db->query($sql));
         $this->assignVars($myrow);
         if (!$myrow) {
@@ -72,7 +72,7 @@ class Friendpetition extends XoopsObject
      * @param int    $start
      * @return array
      */
-    public function getAllyogurt_friendpetitions(
+    public function getAllyogurt_friendrequests(
         $criteria = [],
         $asobject = false,
         $sort = 'friendpet_id',
@@ -94,15 +94,15 @@ class Friendpetition extends XoopsObject
         }
         if (!$asobject) {
             $sql    = 'SELECT friendpet_id FROM ' . $db->prefix(
-                'yogurt_friendpetition'
+                'yogurt_friendrequest'
             ) . "${where_query} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
-                $ret[] = $myrow['yogurt_friendpetition_id'];
+                $ret[] = $myrow['yogurt_friendrequest_id'];
             }
         } else {
             $sql    = 'SELECT * FROM ' . $db->prefix(
-                'yogurt_friendpetition'
+                'yogurt_friendrequest'
             ) . "${where_query} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
@@ -116,11 +116,11 @@ class Friendpetition extends XoopsObject
     /**
      * Get form
      *
-     * @return \XoopsModules\Yogurt\Form\FriendpetitionForm
+     * @return \XoopsModules\Yogurt\Form\FriendrequestForm
      */
     public function getForm()
     {
-        return new Form\FriendpetitionForm($this);
+        return new Form\FriendrequestForm($this);
     }
 
     /**

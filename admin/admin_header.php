@@ -58,8 +58,8 @@ $friendshipHandler = $helper->getHandler('Friendship');
 $visitorsHandler = $helper->getHandler('Visitors');
 /** @var XoopsPersistableObjectHandler $videoHandler */
 $videoHandler = $helper->getHandler('Video');
-/** @var XoopsPersistableObjectHandler $friendpetitionHandler */
-$friendpetitionHandler = $helper->getHandler('Friendpetition');
+/** @var XoopsPersistableObjectHandler $friendrequestHandler */
+$friendrequestHandler = $helper->getHandler('Friendrequest');
 /** @var XoopsPersistableObjectHandler $groupsHandler */
 $groupsHandler = $helper->getHandler('Groups');
 /** @var XoopsPersistableObjectHandler $relgroupuserHandler */

@@ -23,25 +23,25 @@ use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
 
-$friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
+$friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
 /**
- * create the petition in database
+ * create the friendrequest in database
  */
-$newpetition = $friendpetitionFactory->create(true);
-$newpetition->setVar('petitioner_uid', $xoopsUser->getVar('uid'));
-$newpetition->setVar('petitionto_uid', Request::getInt('petitionto_uid', 0, 'POST'));
+$newFriendrequest = $friendrequestFactory->create(true);
+$newFriendrequest->setVar('friendrequester_uid', $xoopsUser->getVar('uid'));
+$newFriendrequest->setVar('friendrequestto_uid', Request::getInt('friendrequestto_uid', 0, 'POST'));
 
-if ($friendpetitionFactory->insert2($newpetition)) {
+if ($friendrequestFactory->insert2($newFriendrequest)) {
     $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
     $extra_tags['X_OWNER_UID']  = $xoopsUser->getVar('uid');
     /** @var \XoopsNotificationHandler $notificationHandler */
     $notificationHandler        = xoops_getHandler('notification');
-    $notificationHandler->triggerEvent('friendship', Request::getInt('petitionto_uid', 0, 'POST'), 'new_friendship', $extra_tags);
+    $notificationHandler->triggerEvent('friendship', Request::getInt('friendrequestto_uid', 0, 'POST'), 'new_friendship', $extra_tags);
 
     redirect_header(
-        XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('petitionto_uid', 0, 'POST'),
+        XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('friendrequestto_uid', 0, 'POST'),
         3,
-        _MD_YOGURT_PETITIONTO
+        _MD_YOGURT_FRIENDREQUESTTO
     );
 } else {
     redirect_header(

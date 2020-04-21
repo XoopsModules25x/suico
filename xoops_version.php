@@ -105,7 +105,7 @@ $modversion = [
     ],
     // ------------------- Tables ----------------------------
     'tables'              => [
-        $moduleDirName . '_' . 'friendpetition',
+        $moduleDirName . '_' . 'friendrequest',
         $moduleDirName . '_' . 'friendship',
         $moduleDirName . '_' . 'images',
         $moduleDirName . '_' . 'visitors',
@@ -1077,27 +1077,44 @@ $modversion['config'][] = [
 ];
 
 $modversion['templates'] = [
-    ['file' => 'yogurt_navbar.tpl', 'description' => _MI_YOGURT_TEMPLATENAVBARDESC,],
-    ['file' => 'yogurt_index.tpl', 'description' => _MI_YOGURT_TEMPLATEINDEXDESC,],
-    ['file' => 'yogurt_friends.tpl', 'description' => _MI_YOGURT_TEMPLATEFRIENDSDESC,],
-    ['file' => 'yogurt_notebook.tpl', 'description' => _MI_YOGURT_TEMPLATENOTEBOOKDESC,],
-    ['file' => 'yogurt_audio.tpl', 'description' => _MI_YOGURT_TEMPLATEAUDIOSDESC,],
-    ['file' => 'yogurt_video.tpl', 'description' => _MI_YOGURT_TEMPLATEVIDEOSDESC,],
+    ['file' => 'admin/yogurt_admin_about.tpl', 'description' => ''],
+    ['file' => 'admin/yogurt_admin_audio.tpl', 'description' => ''],
+    ['file' => 'admin/yogurt_admin_configs.tpl', 'description' => ''],
+    ['file' => 'admin/yogurt_admin_friendrequest.tpl', 'description' => ''],
+    ['file' => 'admin/yogurt_admin_friendship.tpl', 'description' => ''],
+    ['file' => 'admin/yogurt_admin_groups.tpl', 'description' => ''],
+    ['file' => 'admin/yogurt_admin_help.tpl', 'description' => ''],
+    ['file' => 'admin/yogurt_admin_images.tpl', 'description' => ''],
+    ['file' => 'admin/yogurt_admin_notes.tpl', 'description' => ''],
+    ['file' => 'admin/yogurt_admin_privacy.tpl', 'description' => ''],
+    ['file' => 'admin/yogurt_admin_relgroupuser.tpl', 'description' => ''],
+    ['file' => 'admin/yogurt_admin_suspensions.tpl', 'description' => ''],
+    ['file' => 'admin/yogurt_admin_video.tpl', 'description' => ''],
+    ['file' => 'admin/yogurt_admin_visitors.tpl', 'description' => ''],
+    ['file' => 'blocks/yogurt_block_friends.tpl', 'description' => ''],
+    ['file' => 'blocks/yogurt_block_hotfriends.tpl', 'description' => ''],
+    ['file' => 'blocks/yogurt_block_hottest.tpl', 'description' => ''],
+    ['file' => 'blocks/yogurt_block_lastpictures.tpl', 'description' => ''],
     ['file' => 'yogurt_album.tpl', 'description' => _MI_YOGURT_TEMPLATEALBUMDESC,],
-    ['file' => 'yogurt_groups.tpl', 'description' => _MI_YOGURT_TEMPLATEGROUPSDESC,],
+    ['file' => 'yogurt_audio.tpl', 'description' => _MI_YOGURT_TEMPLATEAUDIOSDESC,],
     ['file' => 'yogurt_configs.tpl', 'description' => _MI_YOGURT_TEMPLATECONFIGSDESC,],
-    ['file' => 'yogurt_footer.tpl', 'description' => _MI_YOGURT_TEMPLATEFOOTERDESC,],
     ['file' => 'yogurt_editgroup.tpl', 'description' => _MI_YOGURT_TEMPLATEEDITGROUP,],
-    ['file' => 'yogurt_groups_results.tpl', 'description' => _MI_YOGURT_TEMPLATESEARCHRESULTDESC,],
-    ['file' => 'yogurt_group.tpl', 'description' => _MI_YOGURT_TEMPLATEGROUPDESC,],
-    ['file' => 'yogurt_searchresults.tpl', 'description' => _MI_YOGURT_TEMPLATESEARCHRESULTSDESC,],
-    ['file' => 'yogurt_searchform.tpl', 'description' => _MI_YOGURT_TEMPLATESEARCHFORMDESC,],
-    ['file' => 'yogurt_notifications.tpl', 'description' => _MI_YOGURT_TEMPLATENOTIFICATIONS,],
     ['file' => 'yogurt_fans.tpl', 'description' => _MI_YOGURT_TEMPLATEFANS,],
+    ['file' => 'yogurt_footer.tpl', 'description' => _MI_YOGURT_TEMPLATEFOOTERDESC,],
+    ['file' => 'yogurt_friends.tpl', 'description' => _MI_YOGURT_TEMPLATEFRIENDSDESC,],
+    ['file' => 'yogurt_group.tpl', 'description' => _MI_YOGURT_TEMPLATEGROUPDESC,],
+    ['file' => 'yogurt_groups.tpl', 'description' => _MI_YOGURT_TEMPLATEGROUPSDESC,],
+    ['file' => 'yogurt_groups_results.tpl', 'description' => _MI_YOGURT_TEMPLATESEARCHRESULTDESC,],
+    ['file' => 'yogurt_index.tpl', 'description' => _MI_YOGURT_TEMPLATEINDEXDESC,],
     ['file' => 'yogurt_memberslist_datatables.tpl', 'description' => _MI_YOGURT_TEMPLATEMEMBERSDESC,],
     ['file' => 'yogurt_memberslist_normal.tpl', 'description' => _MI_YOGURT_TEMPLATEMEMBERSDESC,],
+    ['file' => 'yogurt_navbar.tpl', 'description' => _MI_YOGURT_TEMPLATENAVBARDESC,],
+    ['file' => 'yogurt_notebook.tpl', 'description' => _MI_YOGURT_TEMPLATENOTEBOOKDESC,],
+    ['file' => 'yogurt_notifications.tpl', 'description' => _MI_YOGURT_TEMPLATENOTIFICATIONS,],
+    ['file' => 'yogurt_searchform.tpl', 'description' => _MI_YOGURT_TEMPLATESEARCHFORMDESC,],
+    ['file' => 'yogurt_searchresults.tpl', 'description' => _MI_YOGURT_TEMPLATESEARCHRESULTSDESC,],
     ['file' => 'yogurt_user.tpl', 'description' => _MI_YOGURT_TEMPLATEUSERDESC,],
-    ['file' => 'admin/yogurt_admin_privacy.tpl', 'description' => ''],
+    ['file' => 'yogurt_video.tpl', 'description' => _MI_YOGURT_TEMPLATEVIDEOSDESC,],
 ];
 
 global $xoopsModule;
@@ -1197,11 +1214,11 @@ $modversion['notification']['category'][4]['item_name']      = 'uid';
 $modversion['notification']['category'][4]['allow_bookmark'] = 0;
 $modversion['notification']['event'][4]['name']              = 'new_friendship';
 $modversion['notification']['event'][4]['category']          = 'friendship';
-$modversion['notification']['event'][4]['title']             = _MI_YOGURT_FRIEND_NEWPETITION_NOTIFY;
-$modversion['notification']['event'][4]['caption']           = _MI_YOGURT_FRIEND_NEWPETITION_NOTIFYCAP;
-$modversion['notification']['event'][4]['description']       = _MI_YOGURT_FRIEND_NEWPETITION_NOTIFYDSC;
-$modversion['notification']['event'][4]['mail_template']     = 'friendship_newpetition_notify';
-$modversion['notification']['event'][4]['mail_subject']      = _MI_YOGURT_FRIEND_NEWPETITION_NOTIFYSBJ;
+$modversion['notification']['event'][4]['title']             = _MI_YOGURT_FRIEND_NEWFRIENDREQUEST_NOTIFY;
+$modversion['notification']['event'][4]['caption']           = _MI_YOGURT_FRIEND_NEWFRIENDREQUEST_NOTIFYCAP;
+$modversion['notification']['event'][4]['description']       = _MI_YOGURT_FRIEND_NEWFRIENDREQUEST_NOTIFYDSC;
+$modversion['notification']['event'][4]['mail_template']     = 'friendship_newFriendrequest_notify';
+$modversion['notification']['event'][4]['mail_subject']      = _MI_YOGURT_FRIEND_NEWFRIENDREQUEST_NOTIFYSBJ;
 
 $modversion['notification']['lookup_file'] = 'include/notification.inc.php';
 $modversion['notification']['lookup_func'] = 'yogurt_iteminfo';

@@ -1,11 +1,11 @@
 <{include file="db:yogurt_navbar.tpl"}>
 
-<{if $allow_friends !=-1 && $petition==1 && $isOwner==1 && $isFriend==0}>
+<{if $allow_friends !=-1 && $friendrequest==1 && $isOwner==1 && $isFriend==0}>
 
     <!-- if not owner and not friend -->
-    <div id="yogurt-profile-petition" class="confirmMsg">
-        <h4><{$lang_youhavexpetitions}></h4>
-        <img width="30" src="<{$xoops_url}>/uploads/<{$petitioner_avatar}>">
+    <div id="yogurt-profile-friendrequest" class="confirmMsg">
+        <h4><{$lang_youhavexfriendrequests}></h4>
+        <img width="30" src="<{$xoops_url}>/uploads/<{$friendrequester_avatar}>">
         <form action="makefriends.php" method="post">
             <{$lang_askingfriend}>
             <ul>
@@ -23,16 +23,16 @@
                 </li>
 
             </ul>
-            <input type="hidden" name="petition_id" id="petition_id" value="<{$petition_id}>">
+            <input type="hidden" name="friendrequest_id" id="friendrequest_id" value="<{$friendrequest_id}>">
             <input type="submit">
             <{$token}>
         </form>
     </div>
 <{else}>
-    <{if (($allow_friends !=-1) && ($isFriend!=1) && ($isOwner==0) && ($isAnonym!=1) && $petitionfrom_uid != $uid_owner) && $petitionto_uid != $xoops_userid}>
-        <div id="yogurt-profile-petition">
-            <form action=submit_friendpetition.php method="post">
-               <input type="hidden" name="petitionfrom_uid" id="petitionfrom_uid" value="<{$uid_owner}>">
+    <{if (($allow_friends !=-1) && ($isFriend!=1) && ($isOwner==0) && ($isAnonym!=1) && $friendrequestfrom_uid != $uid_owner) && $friendrequestto_uid != $xoops_userid}>
+        <div id="yogurt-profile-friendrequest">
+            <form action=submit_friendrequest.php method="post">
+               <input type="hidden" name="friendrequestfrom_uid" id="friendrequestfrom_uid" value="<{$uid_owner}>">
                <button name="" type="image" class="btn btn-info btn-sm"><{$lang_addfriend}></button>			 	   
 				<{$token}>
 
@@ -46,10 +46,10 @@
 	<{if $isFriend == 1 && $isAnonym!=1}>
 		<button type="button" class="btn btn-dark btn-sm"><{$lang_myfriend}></button>	
 	<{/if}>
-	<{if $petitionfrom_uid == $uid_owner && $isAnonym!=1}>
+	<{if $friendrequestfrom_uid == $uid_owner && $isAnonym!=1}>
 		<button type="button" class="btn btn-dark btn-sm"><{$lang_friendrequestsent}></button>	
 	<{/if}>
-	<{if $petitionto_uid == $xoops_userid && $isAnonym!=1}>
+	<{if $friendrequestto_uid == $xoops_userid && $isAnonym!=1}>
 		<button type="button" class="btn btn-dark btn-sm"><{$lang_friendrequestpending}></button>	
 	<{/if}>
 <{/if}>	

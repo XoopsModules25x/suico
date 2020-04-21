@@ -33,10 +33,8 @@ $friendshipHandler = $helper->getHandler('Friendship');
 $visitorsHandler = $helper->getHandler('Visitors');
 /** @var \XoopsPersistableObjectHandler $videoHandler */
 $videoHandler = $helper->getHandler('Video');
-/** @var \XoopsPersistableObjectHandler $friendpetitionHandler */
-$friendpetitionHandler = $helper->getHandler(
-    'Friendpetition'
-);
+/** @var \XoopsPersistableObjectHandler $friendrequestHandler */
+$friendrequestHandler = $helper->getHandler('Friendrequest');
 /** @var \XoopsPersistableObjectHandler $groupsHandler */
 $groupsHandler = $helper->getHandler('Groups');
 /** @var \XoopsPersistableObjectHandler $relgroupuserHandler */
@@ -67,7 +65,7 @@ if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl))
 $imageFactory          = new Yogurt\ImageHandler($xoopsDB);
 $visitorsFactory       = new Yogurt\VisitorsHandler($xoopsDB);
 $videosFactory         = new Yogurt\VideoHandler($xoopsDB);
-$friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
+$friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
 $friendshipFactory     = new Yogurt\FriendshipHandler($xoopsDB);
 
 $isOwner  = 0;

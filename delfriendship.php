@@ -23,9 +23,9 @@ use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
 /**
- * Factory of petitions created
+ * Factory of friendrequests created
  */
-$friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
+$friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
 $friendshipFactory     = new Yogurt\FriendshipHandler($xoopsDB);
 
 /**

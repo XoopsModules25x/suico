@@ -336,7 +336,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $maxbytes,
         $xoopsTpl
     ) {
-        $form       = new XoopsThemeForm(_MD_YOGURT_SUBMIT_PIC_TITLE, 'form_picture', 'submit.php', 'post', true);
+        $form       = new XoopsThemeForm(_MD_YOGURT_SUBMIT_PIC_TITLE, 'form_picture', 'submitImage.php', 'post', true);
         $field_url  = new XoopsFormFile(_MD_YOGURT_SELECT_PHOTO, 'sel_photo', 2000000);
         $field_desc = new XoopsFormText(_MD_YOGURT_CAPTION, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');

@@ -4,7 +4,7 @@
     <h5>
         <{$lang_addvideos}> 
     </h5>
-    <form name="form_videos" id="form_videos" action="video_submited.php" method="post" onsubmit="return xoopsFormValidate_form_videos();" enctype="multipart/form-data">
+    <form name="form_videos" id="form_videos" action="submitVideo.php" method="post" onsubmit="return xoopsFormValidate_form_videos();" enctype="multipart/form-data">
         <{$token}>
 		
 		<div class="form-group">

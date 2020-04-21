@@ -26,7 +26,7 @@ require __DIR__ . '/header.php';
 /**
  * Modules class includes
  */
-//require_once __DIR__ . '/class/Friendpetition.php';
+//require_once __DIR__ . '/class/Friendrequest.php';
 //require_once __DIR__ . '/class/Relgroupuser.php';
 //require_once __DIR__ . '/class/Groups.php';
 

@@ -1,7 +1,7 @@
 <{include file="db:yogurt_navbar.tpl"}>
 
 <{if $isAnonym!=1 && $isOwner==1}>
-    <form action="submit_configs.php" method="POST" id="form_configs" name="form_configs" class="outer">
+    <form action="submitConfigs.php" method="POST" id="form_configs" name="form_configs" class="outer">
         <h5><{$lang_whocan}></h5>
         <{if $allow_pictures!=-1}>
            <div class="alert alert-primary">   

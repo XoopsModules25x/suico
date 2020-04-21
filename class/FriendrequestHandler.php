@@ -2,7 +2,7 @@
 
 namespace XoopsModules\Yogurt;
 
-// Friendpetition.php,v 1
+// Friendrequest.php,v 1
 //  ---------------------------------------------------------------- //
 // Author: Bruno Barthez                                               //
 // ----------------------------------------------------------------- //
@@ -15,14 +15,14 @@ use XoopsPersistableObjectHandler;
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
 // -------------------------------------------------------------------------
-// ------------------Friendpetition user handler class -------------------
+// ------------------Friendrequest user handler class -------------------
 // -------------------------------------------------------------------------
 
 /**
- * yogurt_friendpetitionhandler class.
- * This class provides simple mecanisme for Friendpetition object
+ * yogurt_friendrequesthandler class.
+ * This class provides simple mecanisme for Friendrequest object
  */
-class FriendpetitionHandler extends XoopsPersistableObjectHandler
+class FriendrequestHandler extends XoopsPersistableObjectHandler
 {
     public $helper;
 
@@ -44,7 +44,7 @@ class FriendpetitionHandler extends XoopsPersistableObjectHandler
             $this->helper = $helper;
         }
         $isAdmin = $this->helper->isUserAdmin();
-        parent::__construct($xoopsDatabase, 'yogurt_friendpetition', Friendpetition::class, 'friendpet_id', 'friendpet_id');
+        parent::__construct($xoopsDatabase, 'yogurt_friendrequest', Friendrequest::class, 'friendpet_id', 'friendpet_id');
     }
 
     /**
@@ -66,35 +66,35 @@ class FriendpetitionHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * retrieve a Friendpetition
+     * retrieve a Friendrequest
      *
-     * @param int  $id of the Friendpetition
+     * @param int  $id of the Friendrequest
      * @param null $fields
-     * @return mixed reference to the {@link Friendpetition} object, FALSE if failed
+     * @return mixed reference to the {@link Friendrequest} object, FALSE if failed
      */
     public function get2(
         $id = null,
         $fields = null
     ) {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendpetition') . ' WHERE friendpet_id=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendrequest') . ' WHERE friendpet_id=' . $id;
         if (!$result = $this->db->query($sql)) {
             return false;
         }
         $numrows = $this->db->getRowsNum($result);
         if (1 === $numrows) {
-            $yogurt_friendpetition = new Friendpetition();
-            $yogurt_friendpetition->assignVars($this->db->fetchArray($result));
+            $yogurt_friendrequest = new Friendrequest();
+            $yogurt_friendrequest->assignVars($this->db->fetchArray($result));
 
-            return $yogurt_friendpetition;
+            return $yogurt_friendrequest;
         }
 
         return false;
     }
 
     /**
-     * insert a new Friendpetition in the database
+     * insert a new Friendrequest in the database
      *
-     * @param \XoopsObject $xoopsObject           reference to the {@link Friendpetition}
+     * @param \XoopsObject $xoopsObject           reference to the {@link Friendrequest}
      *                                            object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
@@ -104,7 +104,7 @@ class FriendpetitionHandler extends XoopsPersistableObjectHandler
         $force = false
     ) {
         global $xoopsConfig;
-        if (!$xoopsObject instanceof Friendpetition) {
+        if (!$xoopsObject instanceof Friendrequest) {
             return false;
         }
         if (!$xoopsObject->isDirty()) {
@@ -118,28 +118,28 @@ class FriendpetitionHandler extends XoopsPersistableObjectHandler
         }
         $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
         if ($xoopsObject->isNew()) {
-            // ajout/modification d'un Friendpetition
-            $xoopsObject = new Friendpetition();
-            $format      = 'INSERT INTO %s (friendpet_id, petitioner_uid, petitionto_uid)';
+            // ajout/modification d'un Friendrequest
+            $xoopsObject = new Friendrequest();
+            $format      = 'INSERT INTO %s (friendpet_id, friendrequester_uid, friendrequestto_uid)';
             $format      .= 'VALUES (%u, %u, %u)';
             $sql         = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_friendpetition'),
+                $this->db->prefix('yogurt_friendrequest'),
                 $friendpet_id,
-                $petitioner_uid,
-                $petitionto_uid
+                $friendrequester_uid,
+                $friendrequestto_uid
             );
             $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
-            $format .= 'friendpet_id=%u, petitioner_uid=%u, petitionto_uid=%u';
+            $format .= 'friendpet_id=%u, friendrequester_uid=%u, friendrequestto_uid=%u';
             $format .= ' WHERE friendpet_id = %u';
             $sql    = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_friendpetition'),
+                $this->db->prefix('yogurt_friendrequest'),
                 $friendpet_id,
-                $petitioner_uid,
-                $petitionto_uid,
+                $friendrequester_uid,
+                $friendrequestto_uid,
                 $friendpet_id
             );
         }
@@ -160,9 +160,9 @@ class FriendpetitionHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * delete a Friendpetition from the database
+     * delete a Friendrequest from the database
      *
-     * @param \XoopsObject $xoopsObject reference to the Friendpetition to delete
+     * @param \XoopsObject $xoopsObject reference to the Friendrequest to delete
      * @param bool         $force
      * @return bool FALSE if failed.
      */
@@ -170,12 +170,12 @@ class FriendpetitionHandler extends XoopsPersistableObjectHandler
         XoopsObject $xoopsObject,
         $force = false
     ) {
-        if (!$xoopsObject instanceof Friendpetition) {
+        if (!$xoopsObject instanceof Friendrequest) {
             return false;
         }
         $sql = \sprintf(
             'DELETE FROM %s WHERE friendpet_id = %u',
-            $this->db->prefix('yogurt_friendpetition'),
+            $this->db->prefix('yogurt_friendrequest'),
             $xoopsObject->getVar('friendpet_id')
         );
         if ($force) {
@@ -191,12 +191,12 @@ class FriendpetitionHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * retrieve yogurt_friendpetitions from the database
+     * retrieve yogurt_friendrequests from the database
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key       use the UID as key for the array?
      * @param bool                                 $as_object
-     * @return array array of {@link Friendpetition} objects
+     * @return array array of {@link Friendrequest} objects
      */
     public function &getObjects(
         ?CriteriaElement $criteriaElement = null,
@@ -205,7 +205,7 @@ class FriendpetitionHandler extends XoopsPersistableObjectHandler
     ) {
         $ret   = [];
         $limit = $start = 0;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendpetition');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendrequest');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
             if ('' !== $criteriaElement->getSort()) {
@@ -219,29 +219,29 @@ class FriendpetitionHandler extends XoopsPersistableObjectHandler
             return $ret;
         }
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $yogurt_friendpetition = new Friendpetition();
-            $yogurt_friendpetition->assignVars($myrow);
+            $yogurt_friendrequest = new Friendrequest();
+            $yogurt_friendrequest->assignVars($myrow);
             if (!$id_as_key) {
-                $ret[] = &$yogurt_friendpetition;
+                $ret[] = &$yogurt_friendrequest;
             } else {
-                $ret[$myrow['friendpet_id']] = &$yogurt_friendpetition;
+                $ret[$myrow['friendpet_id']] = &$yogurt_friendrequest;
             }
-            unset($yogurt_friendpetition);
+            unset($yogurt_friendrequest);
         }
 
         return $ret;
     }
 
     /**
-     * count yogurt_friendpetitions matching a condition
+     * count yogurt_friendrequests matching a condition
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} to match
-     * @return int count of yogurt_friendpetitions
+     * @return int count of yogurt_friendrequests
      */
     public function getCount(
         ?CriteriaElement $criteriaElement = null
     ) {
-        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_friendpetition');
+        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_friendrequest');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
         }
@@ -255,7 +255,7 @@ class FriendpetitionHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * delete yogurt_friendpetitions matching a set of conditions
+     * delete yogurt_friendrequests matching a set of conditions
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement}
      * @param bool                                 $force
@@ -267,7 +267,7 @@ class FriendpetitionHandler extends XoopsPersistableObjectHandler
         $force = true,
         $asObject = false
     ) {
-        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_friendpetition');
+        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_friendrequest');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
         }

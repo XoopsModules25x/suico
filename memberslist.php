@@ -115,12 +115,12 @@ $nbSections = $controller->getNumbersSections();
             $controller->isFriend = $controller->friendshipsFactory->getCount($criteria_isfriend);
             $userdata['isFriend'] = $controller->isFriend;
             
-            $friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
+            $friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
             
-            $criteria_selfrequest = new Criteria('petitioner_uid', $controller->uidOwner);
-            $criteria_isselfrequest = new CriteriaCompo(new Criteria('petitionto_uid', $userdata['uid']));
+            $criteria_selfrequest = new Criteria('friendrequester_uid', $controller->uidOwner);
+            $criteria_isselfrequest = new CriteriaCompo(new Criteria('friendrequestto_uid', $userdata['uid']));
             $criteria_isselfrequest->add($criteria_selfrequest);
-            $controller->isSelfRequest = $friendpetitionFactory->getCount($criteria_isselfrequest);
+            $controller->isSelfRequest = $friendrequestFactory->getCount($criteria_isselfrequest);
             $userdata['selffriendrequest'] = $controller->isSelfRequest;
             if ($controller->isSelfRequest > 0) {
                 $xoopsTpl->assign('self_uid', $controller->uidOwner);
@@ -129,10 +129,10 @@ $nbSections = $controller->getNumbersSections();
             $xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUESTSENT);
             $xoopsTpl->assign('lang_friendshipstatus', _MD_YOGURT_FRIENDSHIPSTATUS);
         
-            $criteria_otherrequest = new Criteria('petitioner_uid', $userdata['uid']);
-            $criteria_isotherrequest = new CriteriaCompo(new Criteria('petitionto_uid', $controller->uidOwner));
+            $criteria_otherrequest = new Criteria('friendrequester_uid', $userdata['uid']);
+            $criteria_isotherrequest = new CriteriaCompo(new Criteria('friendrequestto_uid', $controller->uidOwner));
             $criteria_isotherrequest->add($criteria_otherrequest);
-            $controller->isOtherRequest = $friendpetitionFactory->getCount($criteria_isotherrequest);
+            $controller->isOtherRequest = $friendrequestFactory->getCount($criteria_isotherrequest);
             $userdata['otherfriendrequest'] = $controller->isOtherRequest;
             if ($controller->isOtherRequest > 0) {
                 $xoopsTpl->assign('other_uid', $userdata['uid']);
@@ -259,14 +259,14 @@ $xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
 $xoopsTpl->assign('lang_friendshippending', _MD_YOGURT_FRIENDREQUESTPENDING);
 
 if (isset($_POST['addfriend'])) {
-    $newpetition = $friendpetitionFactory->create(true);
-    $newpetition->setVar('petitioner_uid', $controller->uidOwner);
-    $newpetition->setVar('petitionto_uid', 5, 0, 'POST');
-    $friendpetitionFactory->insert2($newpetition);
+    $newFriendrequest = $friendrequestFactory->create(true);
+    $newFriendrequest->setVar('friendrequester_uid', $controller->uidOwner);
+    $newFriendrequest->setVar('friendrequestto_uid', 5, 0, 'POST');
+    $friendrequestFactory->insert2($newFriendrequest);
     redirect_header(
-        XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('petitionfrom_uid', 0, 'POST'),
+        XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('friendrequestfrom_uid', 0, 'POST'),
         3,
-        _MD_YOGURT_PETITIONFROM
+        _MD_YOGURT_FRIENDREQUESTFROM
     );
 }
             

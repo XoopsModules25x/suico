@@ -45,7 +45,7 @@ define('_MD_YOGURT_HOME', 'Home');
 define('_MD_YOGURT_CONFIGSTITLE', 'Settings');
 
 ##################################################### PICTURES #######################################################
-//submit.php (for pictures submission
+//submitImage.php (for pictures submission
 define('_MD_YOGURT_UPLOADED', 'Upload Successful');
 
 //delpicture.php
@@ -105,22 +105,22 @@ define('_MD_YOGURT_UPDATEFRIEND', 'Update Friendship');
 //editfriendship.php
 define('_MD_YOGURT_FRIENDSHIPUPDATED', 'Friendship Updated');
 
-//submitfriendpetition.php
+//submitfriendrequest.php
 define(
-    '_MD_YOGURT_PETITIONFROM',
+    '_MD_YOGURT_FRIENDREQUESTFROM',
     'A friend request has been sent to this user, Wait until he accepts to have him in your friends list.'
 );
 define(
-    '_MD_YOGURT_ALREADY_PETITIONFROM',
+    '_MD_YOGURT_ALREADY_FRIENDREQUESTFROM',
     'You have already sent a friendship request to this user or vice-versa <br>, Wait untill he accepts or rejects it or check if he has asked you as a friend visiting your profile page.'
 );
 
 define(
-    '_MD_YOGURT_PETITIONTO',
+    '_MD_YOGURT_FRIENDREQUESTTO',
     'A friend request has been sent to this user, Wait until he accepts to have him in your friends list.'
 );
 define(
-    '_MD_YOGURT_ALREADY_PETITIONTO',
+    '_MD_YOGURT_ALREADY_FRIENDREQUESTTO',
     'You have already sent a friendship request to this user or vice-versa <br>, Wait untill he accepts or rejects it or check if he has asked you as a friend visiting your profile page.'
 );
 
@@ -152,7 +152,7 @@ define('_MD_YOGURT_ASKCONFIRMVIDEODELETION', 'Are you sure you want to delete th
 define('_MD_YOGURT_CONFIRMVIDEODELETION', 'Yes I am!');
 define('_MD_YOGURT_VIDEODELETED', 'Your video was deleted');
 
-//video_submited.php
+//submitVideo.php
 define('_MD_YOGURT_VIDEOSAVED', 'Your video was saved');
 
 ############################## GROUPS ########################################################
@@ -206,7 +206,7 @@ define(
     'Members of Group'
 ); //also present in other groups related
 
-//submit_group.php
+//submitGroup.php
 define('_MD_YOGURT_GROUP_CREATED', 'Your Group was created');
 
 //kickfromgroup.php
@@ -262,7 +262,7 @@ define('_MD_YOGURT_CONFIGSPROFILEGENERAL', 'See your Info');
 define('_MD_YOGURT_CONFIGSPROFILESTATS', 'See your Stats');
 define('_MD_YOGURT_WHOCAN', 'Who can:');
 
-//submit_configs.php
+//submitConfigs.php
 define('_MD_YOGURT_CONFIGSSAVE', 'Configuration saved!');
 define('_MD_YOGURT_CONFIGSSAVE_FAILED', 'ERROR: Configuration has not been saved');
 
@@ -289,7 +289,7 @@ define('_MD_YOGURT_SELECTMAINVIDEO', 'Then you can select a video to feature in 
 define('_MD_YOGURT_NOAVATARYET', 'No avatar yet');
 define('_MD_YOGURT_NOMAINVIDEOYET', 'No featured video yet');
 define('_MD_YOGURT_MYPROFILE', 'My Profile');
-define('_MD_YOGURT_YOUHAVEXPETITIONS', 'You have %u requests for friendship.');
+define('_MD_YOGURT_YOUHAVEXREQUESTS', 'You have %u requests for friendship.');
 define('_MD_YOGURT_CONTACTINFO', 'Contact Info');
 define('_MD_YOGURT_SUSPENDUSER', 'Suspend user');
 define('_MD_YOGURT_SUSPENDTIME', 'Time of suspension(in secs)');
