@@ -91,7 +91,7 @@ return (object)[
         'yogurt_Configs' => 'yogurt_configs',
     ],
     'renameColumns'   => [
-        '3.4' => [
+        '3.5' => [
             'yogurt_notes' => [
                 'Note_id'   => 'note_id',
                 'Note_text' => 'yogurt_configs',

@@ -60,8 +60,13 @@ switch ($op) {
         }
         // Form save fields
         $imagesObject->setVar('title', Request::getVar('title', ''));
-        $imagesObject->setVar('data_creation', $_REQUEST['data_creation']);
-        $imagesObject->setVar('data_update', $_REQUEST['data_update']);
+
+        $imageCreated = date_create_from_format(_SHORTDATESTRING, Request::getString('data_creation', '', 'POST'));
+        $imagesObject->setVar('data_creation', $imageCreated->getTimestamp());
+
+        $imageUpdated = date_create_from_format(_SHORTDATESTRING, Request::getString('data_update', '', 'POST'));
+        $imagesObject->setVar('data_update', $imageUpdated->getTimestamp());
+
         $imagesObject->setVar('uid_owner', Request::getVar('uid_owner', ''));
 
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
@@ -214,16 +219,10 @@ switch ($op) {
                 $imagesArray['title'] = $imagesTempArray[$i]->getVar('title');
 
                 $GLOBALS['xoopsTpl']->assign('selectordata_creation', AM_YOGURT_IMAGES_DATA_CREATION);
-                $imagesArray['data_creation'] = date(
-                    _SHORTDATESTRING,
-                    strtotime((string)$imagesTempArray[$i]->getVar('data_creation'))
-                );
+                $imagesArray['data_creation'] = formatTimeStamp($imagesTempArray[$i]->getVar('data_creation'), 's');
 
                 $GLOBALS['xoopsTpl']->assign('selectordata_update', AM_YOGURT_IMAGES_DATA_UPDATE);
-                $imagesArray['data_update'] = date(
-                    _SHORTDATESTRING,
-                    strtotime((string)$imagesTempArray[$i]->getVar('data_update'))
-                );
+                $imagesArray['data_update'] = formatTimeStamp($imagesTempArray[$i]->getVar('data_update'), 's');
 
                 $GLOBALS['xoopsTpl']->assign('selectoruid_owner', AM_YOGURT_IMAGES_UID_OWNER);
                 $imagesArray['uid_owner'] = strip_tags(

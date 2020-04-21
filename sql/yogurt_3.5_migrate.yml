@@ -2,8 +2,18 @@ yogurt_friendpetition:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
         -
-            name: petioned_uid
+            name: friendpet_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: petitioner_uid
             attributes: ' int(11)  NOT NULL '
+        -
+            name: petitionto_uid
+            attributes: ' int(11)  NOT NULL '
+    keys:
+        PRIMARY:
+            columns: friendpet_id
+            unique: true
 yogurt_friendship:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
@@ -46,10 +56,10 @@ yogurt_images:
             attributes: ' varchar(255)  NOT NULL '
         -
             name: data_creation
-            attributes: ' date  NOT NULL '
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
         -
             name: data_update
-            attributes: ' date  NOT NULL '
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
         -
             name: uid_owner
             attributes: ' varchar(50)  NOT NULL '
@@ -165,7 +175,7 @@ yogurt_notes:
             attributes: ' tinyint(1)  NOT NULL '
         -
             name: date
-            attributes: ' timestamp  NOT NULL  DEFAULT ''CURRENT_TIMESTAMP'' '
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
     keys:
         PRIMARY:
             columns: note_id
@@ -181,31 +191,31 @@ yogurt_configs:
             attributes: ' int(11)  NOT NULL '
         -
             name: pictures
-            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
+            attributes: ' tinyint(1)  NOT NULL '
         -
             name: audio
-            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
+            attributes: ' tinyint(1)  NOT NULL '
         -
             name: videos
-            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
+            attributes: ' tinyint(1)  NOT NULL '
         -
             name: groups
-            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
+            attributes: ' tinyint(1)  NOT NULL '
         -
             name: notes
-            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
+            attributes: ' tinyint(1)  NOT NULL '
         -
             name: friends
-            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
+            attributes: ' tinyint(1)  NOT NULL '
         -
             name: profile_contact
-            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
+            attributes: ' tinyint(1)  NOT NULL '
         -
             name: profile_general
-            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
+            attributes: ' tinyint(1)  NOT NULL '
         -
             name: profile_stats
-            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
+            attributes: ' tinyint(1)  NOT NULL '
         -
             name: suspension
             attributes: ' tinyint(1)  NOT NULL '
@@ -217,7 +227,7 @@ yogurt_configs:
             attributes: ' varchar(255)  NOT NULL '
         -
             name: end_suspension
-            attributes: ' timestamp  NOT NULL  DEFAULT ''CURRENT_TIMESTAMP'' '
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
     keys:
         config_uid:
             columns: config_uid
@@ -273,10 +283,10 @@ yogurt_audio:
             attributes: ' int(11)  NOT NULL '
         -
             name: data_creation
-            attributes: ' date  NOT NULL '
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
         -
             name: data_update
-            attributes: ' date  NOT NULL '
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
     keys:
         PRIMARY:
             columns: audio_id
