@@ -22,7 +22,6 @@
 <div class="form-check">
 	<label class="form-check-label"><input name="level" type="radio" value="0"> <{$lang_rejectfriend}></label>
  </div> 
-
 <div class='form-group'>
 <input type="hidden" name="petition_id" id="petition_id" value="<{$petition_id}>">
 <input type="submit" class='btn btn-primary btn-sm' value='Submit'>

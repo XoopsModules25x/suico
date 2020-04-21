@@ -7,10 +7,6 @@
       <div class="col-md-12">
          <div id="content" class="content content-full-width">
 <!-- start -->
-
-
-
-
 <{if $allow_friends !=-1 && $petition==1 && $isOwner==1 && $isFriend==0}>
 <!-- if not owner and not friend -->
 <div class="alert alert-info">
@@ -41,8 +37,6 @@
 							<a href="memberslist.php" class="btn btn-primary btn-sm float-right" role="button"><i class="fa fa-address-card-o"></i> <{$smarty.const._MD_YOGURT_FINDFRIENDS}></a>
 						<{/if}>
 				<{/if}>
-
-
 
 <h5 class="m-t-0 m-b-20"><{$lang_friends}></h5>
 

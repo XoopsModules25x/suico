@@ -218,7 +218,7 @@ function about()
                 - Developed for XOOPS 2.0.x and 2.2.x<br>
                              </div>
             <div style='line-height: 18px;'><b><u>=> Version 3.2 RC1 (2008)</u></b><br>
-               > 2 new features: Fans page and notifications upon new friend petition <br>
+               > 2 new features: Fans page and notifications upon new friend friendrequest <br>
                              </div>
             <div style='line-height: 18px;'><b><u>=> Version 3.1 BETA 3 (2008)</u></b><br>
                > Bug Corrections (many of them) <br>

@@ -77,7 +77,7 @@ define('AM_YOGURT_THEREARE_FRIENDS', "There are <span class='bold'>%s</span> Fri
 define('AM_YOGURT_THEREARE_VISITORS', "There are <span class='bold'>%s</span> Visitors in the database");
 define('AM_YOGURT_THEREARE_VIDEO', "There are <span class='bold'>%s</span> Video in the database");
 define(
-    'AM_YOGURT_THEREARE_FRIENDPETITION',
+    'AM_YOGURT_THEREARE_FRIENDREQUEST',
     "There are <span class='bold'>%s</span> Friendship Requests in the database"
 );
 define('AM_YOGURT_THEREARE_GROUPS', "There are <span class='bold'>%s</span> Groups in the database");
@@ -96,8 +96,8 @@ define('AM_YOGURT_ADD_VISITORS', 'Add new Visitors');
 define('AM_YOGURT_VISITORS_LIST', 'List of Visitors');
 define('AM_YOGURT_ADD_VIDEO', 'Add new Video');
 define('AM_YOGURT_VIDEO_LIST', 'List of Video');
-define('AM_YOGURT_ADD_FRIENDPETITION', 'Add new Friendship Request');
-define('AM_YOGURT_FRIENDPETITION_LIST', 'List of Friendship Request');
+define('AM_YOGURT_ADD_FRIENDREQUEST', 'Add new Friendship Request');
+define('AM_YOGURT_FRIENDREQUEST_LIST', 'List of Friendship Request');
 define('AM_YOGURT_ADD_GROUPS', 'Add new Groups');
 define('AM_YOGURT_GROUPS_LIST', 'List of Groups');
 define('AM_YOGURT_ADD_RELGROUPUSER', 'Add new Members');
@@ -167,13 +167,13 @@ define('AM_YOGURT_VIDEO_UID_OWNER', 'Owner');
 define('AM_YOGURT_VIDEO_VIDEO_DESC', 'Description');
 define('AM_YOGURT_VIDEO_YOUTUBE_CODE', 'YouTube_Code');
 define('AM_YOGURT_VIDEO_MAIN_VIDEO', 'MainVideo');
-// Friendpetition
-define('AM_YOGURT_FRIENDPETITION_ADD', 'Add a friendpetition');
-define('AM_YOGURT_FRIENDPETITION_EDIT', 'Edit friendpetition');
-define('AM_YOGURT_FRIENDPETITION_DELETE', 'Delete friendpetition');
-define('AM_YOGURT_FRIENDPETITION_FRIENDPET_ID', 'ID');
-define('AM_YOGURT_FRIENDPETITION_PETITIONER_UID', 'From');
-define('AM_YOGURT_FRIENDPETITION_PETITIONTO_UID', 'To');
+// Friendrequest
+define('AM_YOGURT_FRIENDREQUEST_ADD', 'Add a friendrequest');
+define('AM_YOGURT_FRIENDREQUEST_EDIT', 'Edit friendrequest');
+define('AM_YOGURT_FRIENDREQUEST_DELETE', 'Delete friendrequest');
+define('AM_YOGURT_FRIENDREQUEST_FRIENDPET_ID', 'ID');
+define('AM_YOGURT_FRIENDREQUEST_FRIENDREQUESTER_UID', 'From');
+define('AM_YOGURT_FRIENDREQUEST_FRIENDREQUESTTO_UID', 'To');
 // Groups
 define('AM_YOGURT_GROUPS_ADD', 'Add a groups');
 define('AM_YOGURT_GROUPS_EDIT', 'Edit groups');

@@ -13,7 +13,7 @@
         <h5>
             <{$lang_addaudios}>
         </h5>
-        <form name="form_audios" id="form_audios" action="submitaudio.php" method="post" onsubmit="return xoopsFormValidate_form_audios();" enctype="multipart/form-data">
+        <form name="form_audios" id="form_audios" action="submitAudio.php" method="post" onsubmit="return xoopsFormValidate_form_audios();" enctype="multipart/form-data">
             <{$token}>
 			<div class="form-group">
 			<label for="audio"><{$lang_audiohelp}><!--<{$smarty.const._MD_YOGURT_METAINFOHELP}>--></label>

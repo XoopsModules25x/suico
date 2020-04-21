@@ -1,14 +1,14 @@
-yogurt_friendpetition:
+yogurt_friendrequest:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
         -
             name: friendpet_id
             attributes: ' int(11)  NOT NULL auto_increment'
         -
-            name: petitioner_uid
+            name: friendrequester_uid
             attributes: ' int(11)  NOT NULL '
         -
-            name: petitionto_uid
+            name: friendrequestto_uid
             attributes: ' int(11)  NOT NULL '
     keys:
         PRIMARY:

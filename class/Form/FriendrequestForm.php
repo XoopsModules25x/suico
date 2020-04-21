@@ -41,9 +41,9 @@ $permHelper = new Permission();
 \xoops_load('XoopsFormLoader');
 
 /**
- * Class FriendpetitionForm
+ * Class FriendrequestForm
  */
-class FriendpetitionForm extends XoopsThemeForm
+class FriendrequestForm extends XoopsThemeForm
 {
     public $targetObject;
 
@@ -59,8 +59,8 @@ class FriendpetitionForm extends XoopsThemeForm
         $this->helper       = $target->helper;
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? \sprintf(AM_YOGURT_FRIENDPETITION_ADD) : \sprintf(
-            AM_YOGURT_FRIENDPETITION_EDIT
+        $title = $this->targetObject->isNew() ? \sprintf(AM_YOGURT_FRIENDREQUEST_ADD) : \sprintf(
+            AM_YOGURT_FRIENDREQUEST_EDIT
         );
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
@@ -79,7 +79,7 @@ class FriendpetitionForm extends XoopsThemeForm
         // Friendpet_id
         $this->addElement(
             new XoopsFormLabel(
-                AM_YOGURT_FRIENDPETITION_FRIENDPET_ID,
+                AM_YOGURT_FRIENDREQUEST_FRIENDPET_ID,
                 $this->targetObject->getVar(
                     'friendpet_id'
                 ),
@@ -89,11 +89,11 @@ class FriendpetitionForm extends XoopsThemeForm
         // Inviting by Friend_uid
         $this->addElement(
             new XoopsFormSelectUser(
-                AM_YOGURT_FRIENDPETITION_PETITIONER_UID,
-                'petitioner_uid',
+                AM_YOGURT_FRIENDREQUEST_FRIENDREQUESTER_UID,
+                'friendrequester_uid',
                 false,
                 $this->targetObject->getVar(
-                    'petitioner_uid'
+                    'friendrequester_uid'
                 ),
                 1,
                 false
@@ -103,11 +103,11 @@ class FriendpetitionForm extends XoopsThemeForm
         // Invited Friend_uid
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_YOGURT_FRIENDPETITION_PETITIONTO_UID,
-                'petitionto_uid',
+                \AM_YOGURT_FRIENDREQUEST_FRIENDREQUESTTO_UID,
+                'friendrequestto_uid',
                 false,
                 $this->targetObject->getVar(
-                    'petitionto_uid'
+                    'friendrequestto_uid'
                 ),
                 1,
                 false

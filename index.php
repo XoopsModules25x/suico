@@ -55,7 +55,6 @@ $start = Request::getInt(
     'GET'
 );
 
-
 /**
  * Criteria for mainvideo
  */

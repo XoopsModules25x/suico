@@ -39,7 +39,7 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 //require_once __DIR__ . '/Visitors.php';
 //require_once __DIR__ . '/Video.php';
 //require_once __DIR__ . '/Audio.php';
-//require_once __DIR__ . '/Friendpetition.php';
+//require_once __DIR__ . '/Friendrequest.php';
 //require_once __DIR__ . '/Friendship.php';
 //require_once __DIR__ . '/Relgroupuser.php';
 //require_once __DIR__ . '/Groups.php';
@@ -68,7 +68,7 @@ class YogurtController extends \XoopsObject
     public $visitorsFactory;
     public $audioFactory;
     public $videosFactory;
-    public $petitionsFactory;
+    public $friendrequestFactory;
     public $friendshipsFactory;
     public $relgroupusersFactory;
     public $suspensionsFactory;
@@ -266,7 +266,7 @@ class YogurtController extends \XoopsObject
         $this->visitorsFactory      = new VisitorsHandler($this->db);
         $this->audioFactory         = new AudioHandler($this->db);
         $this->videosFactory        = new VideoHandler($this->db);
-        $this->petitionsFactory     = new FriendpetitionHandler($this->db);
+        $this->friendrequestFactory     = new FriendrequestHandler($this->db);
         $this->friendshipsFactory   = new FriendshipHandler($this->db);
         $this->relgroupusersFactory = new RelgroupuserHandler($this->db);
         $this->notesFactory         = new NotesHandler($this->db);
