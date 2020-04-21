@@ -119,8 +119,8 @@ CREATE TABLE `yogurt_audio` (
     `author`        VARCHAR(256) NOT NULL,
     `url`           VARCHAR(256) NOT NULL,
     `uid_owner`     INT(11)      NOT NULL,
-    `data_creation` INT(11)      NOT NULL,
-    `data_update`   INT(11)      NOT NULL,
+    `data_creation` INT(11)      NOT NULL DEFAULT 0,
+    `data_update`   INT(11)      NOT NULL DEFAULT 0,
     PRIMARY KEY (`audio_id`)
 )
     ENGINE = MyISAM;

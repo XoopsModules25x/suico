@@ -121,17 +121,20 @@ class AudioForm extends XoopsThemeForm
                 )
             )
         );
-        // Data_update
+
         $this->addElement(
-            new XoopsFormDateTime(
+            new XoopsFormTextDateSelect(
                 AM_YOGURT_AUDIO_DATA_UPDATE,
                 'data_update',
-                '',
+                0,
                 \strtotime(
                     $this->targetObject->getVar('data_update')
                 )
             )
         );
+
+
+
 
         $this->addElement(new XoopsFormHidden('op', 'save'));
         $this->addElement(new XoopsFormButton('', 'submit', \_SUBMIT, 'submit'));

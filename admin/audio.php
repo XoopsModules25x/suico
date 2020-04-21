@@ -63,11 +63,11 @@ switch ($op) {
         $audioObject->setVar('author', Request::getVar('author', ''));
         $audioObject->setVar('url', Request::getVar('url', ''));
         $audioObject->setVar('uid_owner', Request::getVar('uid_owner', ''));
-        $audioObject->setVar('data_creation', $_REQUEST['data_creation']);
-        $audioObject->setVar(
-            'data_update',
-            date('Y-m-d H:i:s', strtotime($_REQUEST['data_update']['date']) + $_REQUEST['data_update']['time'])
-        );
+        $audioCreated = date_create_from_format(_SHORTDATESTRING, Request::getString('data_creation', '', 'POST'));
+        $audioObject->setVar('data_creation', $audioCreated->getTimestamp());
+        $audioUpdated = date_create_from_format(_SHORTDATESTRING, Request::getString('data_update', '', 'POST'));
+        $audioObject->setVar('data_update', $audioUpdated->getTimestamp());
+
         if ($audioHandler->insert($audioObject)) {
             redirect_header('audio.php?op=list', 2, AM_YOGURT_FORMOK);
         }
@@ -203,13 +203,11 @@ switch ($op) {
                 );
 
                 $GLOBALS['xoopsTpl']->assign('selectordata_creation', AM_YOGURT_AUDIO_DATA_CREATION);
-                $audioArray['data_creation'] = date(
-                    _SHORTDATESTRING,
-                    strtotime((string)$audioTempArray[$i]->getVar('data_creation'))
-                );
+                $audioArray['data_creation'] = formatTimeStamp($audioTempArray[$i]->getVar('data_creation'), 's');
 
                 $GLOBALS['xoopsTpl']->assign('selectordata_update', AM_YOGURT_AUDIO_DATA_UPDATE);
-                $audioArray['data_update'] = date(_DATESTRING, strtotime($audioTempArray[$i]->getVar('data_update')));
+                $audioArray['data_update'] = formatTimeStamp($audioTempArray[$i]->getVar('data_update'), 's');
+
                 $audioArray['edit_delete'] = "<a href='audio.php?op=edit&audio_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='audio.php?op=delete&audio_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='audio.php?op=clone&audio_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";

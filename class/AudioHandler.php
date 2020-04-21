@@ -103,7 +103,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
      * @param bool        $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(
+    public function insert2(
         XoopsObject $xoopsObject,
         $force = false
     ) {
