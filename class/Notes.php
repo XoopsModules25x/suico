@@ -38,10 +38,11 @@ class Notes extends XoopsObject
         $this->permHelper = new Permission();
         $this->db         = XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('note_id', \XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('note_text', \XOBJ_DTYPE_TXTAREA, null, false);
+        $this->initVar('note_text', \XOBJ_DTYPE_OTHER, null, false);
         $this->initVar('note_from', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('note_to', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('private', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('date', XOBJ_DTYPE_INT);
 
         if (!empty($id)) {
             if (\is_array($id)) {

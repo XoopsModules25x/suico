@@ -1040,6 +1040,16 @@ $modversion['config'][] = [
     'category'    => 'admin',
 ];
 
+// Truncate Max. length
+$modversion['config'][] = [
+    'name'        => 'truncatelength',
+    'title'       => 'CO_' . $moduleDirNameUpper . '_' . 'TRUNCATE_LENGTH',
+    'description' => 'CO_' . $moduleDirNameUpper . '_' . 'TRUNCATE_LENGTH_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 100
+];
+
 /**
  * Make Sample button visible?
  */

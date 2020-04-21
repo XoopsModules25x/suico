@@ -63,7 +63,11 @@ switch ($op) {
         $notesObject->setVar('note_from', Request::getVar('note_from', ''));
         $notesObject->setVar('note_to', Request::getVar('note_to', ''));
         $notesObject->setVar('private', (1 === Request::getInt('private', 0) ? '1' : '0'));
-        $notesObject->setVar('date', $_REQUEST['date']);
+        $noteCreated = date_create_from_format(_SHORTDATESTRING, Request::getString('date', '', 'POST'));
+        $notesObject->setVar('date', $noteCreated->getTimestamp());
+
+
+
         if ($notesHandler->insert($notesObject)) {
             redirect_header('notes.php?op=list', 2, AM_YOGURT_FORMOK);
         }
@@ -186,6 +190,7 @@ switch ($op) {
 
                 $GLOBALS['xoopsTpl']->assign('selectornote_text', AM_YOGURT_NOTES_NOTE_TEXT);
                 $notesArray['note_text'] = $notesTempArray[$i]->getVar('note_text');
+                $notesArray['note_text'] = $utility::truncateHtml($notesArray['note_text'], $helper->getConfig('truncatelength'));
 
                 $GLOBALS['xoopsTpl']->assign('selectornote_from', AM_YOGURT_NOTES_NOTE_FROM);
                 $notesArray['note_from'] = strip_tags(
@@ -201,10 +206,8 @@ switch ($op) {
                 $notesArray['private'] = $notesTempArray[$i]->getVar('private');
 
                 $GLOBALS['xoopsTpl']->assign('selectordate', AM_YOGURT_NOTES_DATE);
-                $notesArray['date']        = date(
-                    _SHORTDATESTRING,
-                    strtotime((string)$notesTempArray[$i]->getVar('date'))
-                );
+                $notesArray['date'] = formatTimeStamp($notesTempArray[$i]->getVar('date'), 's');
+
                 $notesArray['edit_delete'] = "<a href='notes.php?op=edit&note_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='notes.php?op=delete&note_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='notes.php?op=clone&note_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
