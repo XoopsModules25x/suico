@@ -173,7 +173,7 @@ define(
 ); //also present in many ther groups related
 define(
     '_MD_YOGURTCREATEYOURGROUP',
-    'Create your own Group!'
+    'Create your own Group'
 ); //also present in many ther groups related
 
 //abandongroup.php
@@ -210,8 +210,8 @@ define(
 define('_MD_YOGURT_GROUP_CREATED', 'Your Group was created');
 
 //kickfromgroup.php
-define('_MD_YOGURT_KICKOUT', 'Remove!');
-define('_MD_YOGURT_CONFIRMKICK', 'Yes remove this member!');
+define('_MD_YOGURT_KICKOUT', 'Remove');
+define('_MD_YOGURT_CONFIRMKICK', 'Yes remove this member');
 define('_MD_YOGURT_ASKCONFIRMKICKFROMGROUP', 'Are you sure you want to remove this person out of the Group?');
 define(
     '_MD_YOGURT_GROUPKICKED',
@@ -236,6 +236,7 @@ define('_MD_YOGURT_BOLD', 'bold');
 define('_MD_YOGURT_ITALIC', 'italic');
 define('_MD_YOGURT_UNDERLINE', 'underline');
 define('_MD_YOGURT_NONOTESYET', 'No Notes created in this Notebook yet');
+define('_MD_YOGURT_SENDNOTESTO', 'Send notes to');
 
 //submitNote.php
 define('_MD_YOGURT_NOTE_SENT', 'Thanks for participating, Note sent');
@@ -276,14 +277,14 @@ define(
 
 //index.php
 define('_MD_YOGURT_VISITORS', 'Visitors (who visited your profile recently)');
-define('_MD_YOGURT_USERDETAILS', 'User details');
-define('_MD_YOGURT_USERCONTRIBUTIONS', 'User contributions');
+define('_MD_YOGURT_USERDETAILS', 'Member Details');
+define('_MD_YOGURT_USERCONTRIBUTIONS', 'Member Contributions');
 define('_MD_YOGURT_FANS', 'Fans');
 define('_MD_YOGURT_UNKNOWNREJECTING', "I don't know this person, Do not add them to my friends list");
 define('_MD_YOGURT_UNKNOWNACCEPTING', "I don't know this person, Yet add them to my friends list");
 define('_MD_YOGURT_ASKINGFRIEND', 'Is %s your friend?');
 define('_MD_YOGURT_ASKBEFRIEND', 'Ask this user to be your friend?');
-define('_MD_YOGURT_EDITPROFILE', 'Edit your profile');
+define('_MD_YOGURT_EDITPROFILE', 'Edit Profile');
 define('_MD_YOGURT_SELECTAVATAR', 'Upload pictures to your album and select one as your avatar.');
 define('_MD_YOGURT_SELECTMAINVIDEO', 'Then you can select a video to feature in your profile page');
 define('_MD_YOGURT_NOAVATARYET', 'No avatar yet');
@@ -291,9 +292,10 @@ define('_MD_YOGURT_NOMAINVIDEOYET', 'No featured video yet');
 define('_MD_YOGURT_MYPROFILE', 'My Profile');
 define('_MD_YOGURT_YOUHAVEXPETITIONS', 'You have %u requests for friendship.');
 define('_MD_YOGURT_CONTACTINFO', 'Contact Info');
-define('_MD_YOGURT_SUSPENDUSER', 'Suspend user');
+define('_MD_YOGURT_SUSPENDUSER', 'Suspend User');
+define('_MD_YOGURT_SUSPEND', 'Suspend');
 define('_MD_YOGURT_SUSPENDTIME', 'Time of suspension(in secs)');
-define('_MD_YOGURT_UNSUSPEND', 'Unsuspend User');
+define('_MD_YOGURT_UNSUSPEND', 'Unsuspend ');
 define('_MD_YOGURT_SUSPENSIONADMIN', 'Suspension Admin Tools');
 define('_MD_YOGURT_USERPERSONAL', 'Personal');
 define('_MD_YOGURT_ACTIVITY', 'Activity');
@@ -373,7 +375,7 @@ define('_MD_YOGURT_ADDAUDIO', 'Add an mp3 file');
 define('_MD_YOGURT_SUBMITAUDIO', 'Upload file');
 define(
     '_MD_YOGURT_ADDAUDIOHELP',
-    'Choose an mp3 file on your computer, max size %s ,<br> Leave title and author fields blank if your file has metainfo already'
+    'Choose an mp3 file on your computer, max size %s .'
 );
 
 //19/04/2008
@@ -399,7 +401,7 @@ define('_MD_YOGURT_FRIENDSHIPSTATUS', 'Friendship Status');
 define('_MD_YOGURT_PROFILEVISITORS', 'Profile Visitors');
 define('_MD_YOGURT_FEATUREDVIDEO', 'Featured Video');
 define('_MD_YOGURT_ALLVIDEOS', 'View all videos');
-define('_MD_YOGURT_OWNEROFGROUP', 'Group Owner');
+define('_MD_YOGURT_OWNEROFGROUP','Group Owner');
 define('_MD_YOGURT_MEMBERSLIST', 'Members List');
 define('_MD_YOGURT_LATESTMEMBER', 'Latest Member');
 define('_MD_YOGURT_MEMBERSLISTSECTION', 'Welcome to Members List');
@@ -428,6 +430,12 @@ define('_MD_YOGURT_EXTRAINFOCONTAINS', 'Extra Info Contains');
 define('_MD_YOGURT_BIOGRAPHYINFOCONTAINS', 'Biography Contains');
 define('_MD_YOGURT_SIGNATURECONTAINS', 'Signature Contains');
 define('_MD_YOGURT_MEMBEROFGROUP', 'Member');
+define('_MD_YOGURT_RECENTNOTES', 'Recent Notes');
+define('_MD_YOGURT_LATESTNOTES', 'Latest Notes by Members');
+define('_MD_YOGURT_EDIT', 'Edit');
+define('_MD_YOGURT_DESCRIPTION', 'Description');
+define('_MD_YOGURT_AVAILABLEGROUPS', 'All Groups');
+define('_MD_YOGURT_GROUPSLIST', 'Groups List');
 //users
 define('_MD_YOGURT_USERNAME', 'Username');
 define('_MD_YOGURT_PASSWORD', 'Password');
@@ -443,38 +451,43 @@ define('_MD_YOGURT_YOURPASSWORD', 'Your Password.');
 define('_MD_YOGURT_YOUREMAIL', 'Your Email');
 define('_MD_YOGURT_SIGNUP', 'Sign Up Now !');
 define('_MD_YOGURT_NOTAMEMBER', 'Not a member?');
-define('_MD_YOGURT_SOCIALNETWORK', 'Social Network');
-define('_MD_YOGURT_USERWELCOME', 'Enlarge friends network.');
-define('_MD_YOGURT_JOINUS', 'Join our community today and start to search for new friends!');
-define('_MD_YOGURT_FINDFRIENDS', 'Find Friends');
+define('_MD_YOGURT_SOCIALNETWORK','Social Network');
+define('_MD_YOGURT_USERWELCOME','Enlarge friends network.');
+define('_MD_YOGURT_JOINUS','Join our community today and start to search for new friends!');
+define('_MD_YOGURT_FINDFRIENDS','Find Friends');
+define('_MD_YOGURT_FINDMOREFRIENDS','Find More Friends');
+define('_MD_YOGURT_METAINFOHELP','Leave title and author fields blank if your file has metainfo already');
+define('_MD_YOGURT_GROUPDESCRIPTION','Group Description');
+define('_MD_YOGURT_PRIVATEPHOTO', 'Private Photo');
+
 
 //Data Tables
-define('_MD_YOGURT_DTDECIMAL', '');
-define('_MD_YOGURT_DTEMPTYTABLE', 'No data available in table');
-define('_MD_YOGURT_DTINFOSHOWING', 'Showing');
-define('_MD_YOGURT_DTINFOTO', 'to');
-define('_MD_YOGURT_DTINFOOF', 'of');
-define('_MD_YOGURT_DTINFOENTRIES', 'entries');
-define('_MD_YOGURT_DTINFOEMPTY', 'Showing 0 to 0 of 0 entries');
-define('_MD_YOGURT_DTINFOFILTEREDFROM', 'filtered from');
-define('_MD_YOGURT_DTINFOFILTEREDTOTALENTRIES', 'total entries');
-define('_MD_YOGURT_DTINFOPOSTFIX', '');
-define('_MD_YOGURT_DTTHOUSANDS', ',');
-define('_MD_YOGURT_DTLENGTHMENUSHOW', 'Show');
-define('_MD_YOGURT_DTLENGTHMENUENTRIES', 'entries');
-define('_MD_YOGURT_DTLOADINGRECORDS', 'Loading...');
-define('_MD_YOGURT_DTPROCESSING', 'Processing...');
-define('_MD_YOGURT_DTSEARCH', 'Search');
-define('_MD_YOGURT_DTZERORECORDS', 'No matching records found');
-define('_MD_YOGURT_DTFIRST', 'First');
-define('_MD_YOGURT_DTLAST', 'Last');
-define('_MD_YOGURT_DTNEXT', 'Next');
-define('_MD_YOGURT_DTPREVIOUS', 'Previous');
-define('_MD_YOGURT_DTSORTASCENDING', ': activate to sort column ascending');
-define('_MD_YOGURT_DTSORTDESCENSING', ': activate to sort column descending');
+define('_MD_YOGURT_DTDECIMAL','');
+define('_MD_YOGURT_DTEMPTYTABLE','No data available in table');
+define('_MD_YOGURT_DTINFOSHOWING','Showing');
+define('_MD_YOGURT_DTINFOTO','to');
+define('_MD_YOGURT_DTINFOOF','of');
+define('_MD_YOGURT_DTINFOENTRIES','entries');
+define('_MD_YOGURT_DTINFOEMPTY','Showing 0 to 0 of 0 entries');
+define('_MD_YOGURT_DTINFOFILTEREDFROM','filtered from');
+define('_MD_YOGURT_DTINFOFILTEREDTOTALENTRIES','total entries');
+define('_MD_YOGURT_DTINFOPOSTFIX','');
+define('_MD_YOGURT_DTTHOUSANDS',',');
+define('_MD_YOGURT_DTLENGTHMENUSHOW','Show');
+define('_MD_YOGURT_DTLENGTHMENUENTRIES','entries');
+define('_MD_YOGURT_DTLOADINGRECORDS','Loading...');
+define('_MD_YOGURT_DTPROCESSING','Processing...');
+define('_MD_YOGURT_DTSEARCH','Search');
+define('_MD_YOGURT_DTZERORECORDS','No matching records found');
+define('_MD_YOGURT_DTFIRST','First');
+define('_MD_YOGURT_DTLAST','Last');
+define('_MD_YOGURT_DTNEXT','Next');
+define('_MD_YOGURT_DTPREVIOUS','Previous');
+define('_MD_YOGURT_DTSORTASCENDING',': activate to sort column ascending');
+define('_MD_YOGURT_DTSORTDESCENSING',': activate to sort column descending');
 
-define('_MD_YOGURT_CANTVOTEOWN', 'You can not vote for yourself');
-define('_MD_YOGURT_VOTED', 'Vote');
+define('_MD_YOGURT_CANTVOTEOWN','You can not vote for yourself');
+define('_MD_YOGURT_VOTED','Vote');
 define('_MD_YOGURT_ALREADYVOTED', 'Sorry, you have already voted once.');
 
 
@@ -488,3 +501,6 @@ define('_MD_YOGURT_PROFILE_LATERTHAN', ' %s  is later than');
 define('_MD_YOGURT_PROFILE_EARLIERTHAN', ' %s  is earlier than');
 define('_MD_YOGURT_PROFILE_LARGERTHAN', ' %s  is greater than');
 define('_MD_YOGURT_PROFILE_SMALLERTHAN', ' %s  is smaller than');
+
+
+

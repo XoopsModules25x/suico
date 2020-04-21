@@ -1,5 +1,13 @@
 <{include file="db:yogurt_navbar.tpl"}>
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+   <div class="row">
+      <div class="col-md-12">
+         <div id="content" class="content content-full-width">
+<!-- start -->
+
 <{$searchform.javascript}>
 <h4><{$smarty.const._MD_YOGURT_SEARCH}></h4>
 <{if $displaytotalmember == 1}>
@@ -26,3 +34,11 @@
 </form>
 
 <{include file="db:yogurt_footer.tpl"}>
+
+<!-- end -->
+</div>
+      </div>
+   </div>
+</div>
+    	</div>
+</div>

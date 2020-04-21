@@ -1,8 +1,15 @@
-<{include file="db:yogurt_navbar.tpl"}>
+<{include file='db:yogurt_navbar.tpl'}>
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+   <div class="row">
+      <div class="col-md-12">
+         <div id="content" class="content content-full-width">
+<!-- start -->
 <{if $isAnonym!=1 && $isOwner==1}>
-    <form action="submit_configs.php" method="POST" id="form_configs" name="form_configs" class="outer">
-        <h5><{$lang_whocan}></h5>
+    <form action="submit_configs.php" method="POST" id="form_configs" name="form_configs">
+       <h5><{$lang_whocan}></h5>
         <{if $allow_pictures!=-1}>
            <div class="alert alert-primary">   
                 <h5><{$lang_configpictures}></h5>
@@ -123,3 +130,10 @@
 <{/if}>
 
 <{include file="db:yogurt_footer.tpl"}>
+<!-- end -->
+</div>
+      </div>
+   </div>
+</div>
+    	</div>
+</div>

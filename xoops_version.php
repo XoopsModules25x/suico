@@ -4,7 +4,6 @@
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
-
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -190,60 +189,48 @@ $modversion['configcat']['friends']      = [
     'name'        => _MI_YOGURT_CONFCAT_NOTES,
     'description' => _MI_YOGURT_CONFCAT_NOTES_DSC,
 ];
-
 // Config categories
 $modversion['configcat']['photos'] = [
     'name'        => _MI_YOGURT_CONFCAT_PHOTOS,
     'description' => _MI_YOGURT_CONFCAT_PHOTOS_DSC,
 ];
-
 $modversion['configcat']['audios']      = [
     'name'        => _MI_YOGURT_CONFCAT_AUDIOS,
     'description' => _MI_YOGURT_CONFCAT_AUDIOS_DSC,
 ];
-
 $modversion['configcat']['videos']      = [
     'name'        => _MI_YOGURT_CONFCAT_VIDEOS,
     'description' => _MI_YOGURT_CONFCAT_VIDEOS_DSC,
 ];
-
 $modversion['configcat']['friends']      = [
     'name'        => _MI_YOGURT_CONFCAT_FRIENDS,
     'description' => _MI_YOGURT_CONFCAT_FRIENDS_DSC,
 ];
-
 $modversion['configcat']['groups']      = [
     'name'        => _MI_YOGURT_CONFCAT_GROUPS,
     'description' => _MI_YOGURT_CONFCAT_GROUPS_DSC,
 ];
-
 $modversion['configcat']['editor']      = [
     'name'        => _MI_YOGURT_CONFCAT_EDITOR,
     'description' => _MI_YOGURT_CONFCAT_EDITOR_DSC,
 ];
-
 $modversion['configcat']['upload']      = [
     'name'        => _MI_YOGURT_CONFCAT_UPLOAD,
     'description' => _MI_YOGURT_CONFCAT_UPLOAD_DSC,
 ];
-
 // Config categories
-
 $modversion['configcat']['memberslist'] = [
     'name'        => _MI_YOGURT_CONFCAT_MEMBERSLIST,
     'description' => _MI_YOGURT_CONFCAT_MEMBERSLIST_DSC,
 ];
-
 $modversion['configcat']['memberslistsearch']      = [
     'name'        => _MI_YOGURT_CONFCAT_MEMBERSLISTSEARCH,
     'description' => _MI_YOGURT_CONFCAT_MEMBERSLISTSEARCH_DSC,
 ];
-
 $modversion['configcat']['general']      = [
     'name'        => _MI_YOGURT_CONFCAT_GENERAL,
     'description' => _MI_YOGURT_CONFCAT_GENERAL_DSC,
 ];
-
 $modversion['configcat']['admin']      = [
     'name'        => _MI_YOGURT_CONFCAT_ADMIN,
     'description' => _MI_YOGURT_CONFCAT_ADMIN_DSC,
@@ -1213,7 +1200,7 @@ $modversion['blocks'][] = [
     'name'        => _MI_YOGURT_FRIENDS,
     'description' => _MI_YOGURT_FRIENDS_DESC,
     'show_func'   => 'b_yogurt_friends_show',
-    'options'     => '6|0',
+    'options'     => '8|0',
     'edit_func'   => 'b_yogurt_friends_edit',
     'template'    => 'yogurt_block_friends.tpl',
 ];
@@ -1223,7 +1210,7 @@ $modversion['blocks'][] = [
     'name'        => _MI_YOGURT_LAST,
     'description' => _MI_YOGURT_LAST_DESC,
     'show_func'   => 'b_yogurt_lastpictures_show',
-    'options'     => '5',
+    'options'     => '8',
     'edit_func'   => 'b_yogurt_lastpictures_edit',
     'template'    => 'yogurt_block_lastpictures.tpl',
 ];

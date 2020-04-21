@@ -55,51 +55,6 @@ $start = Request::getInt(
     'GET'
 );
 
-/**
- * Filter for new friend petition
- */
-$petition = 0;
-if (1 === $controller->isOwner) {
-    $criteria_uidpetition = new Criteria('petitionto_uid', $controller->uidOwner);
-    $newpetition          = $controller->petitionsFactory->getObjects($criteria_uidpetition);
-    if ($newpetition) {
-        $nb_petitions      = count($newpetition);
-        $petitionerHandler = xoops_getHandler('member');
-        $petitioner        = $petitionerHandler->getUser($newpetition[0]->getVar('petitioner_uid'));
-        $petitioner_uid    = $petitioner->getVar('uid');
-        $petitioner_uname  = $petitioner->getVar('uname');
-        $petitioner_avatar = $petitioner->getVar('user_avatar');
-        $petition_id       = $newpetition[0]->getVar('friendpet_id');
-        $petition          = 1;
-    }
-}
-
-$friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
-/**
- * Getting the uid of the user which user want to ask to be friend
- */
-$petitionfrom_uid = $controller->uidOwner;
-
-//Verify if the user has already asked for friendship or if the user he s asking to be a friend has already asked him
-$criteria = new CriteriaCompo(
-    new Criteria(
-        'petitionto_uid',
-        $petitionfrom_uid
-    )
-);
-
-if ($xoopsUser) {
-    $criteria->add(new Criteria('petitioner_uid', $xoopsUser->getVar('uid')));
-    if ($friendpetitionFactory->getCount($criteria) > 0) {
-        $xoopsTpl->assign('petitionfrom_uid', $petitionfrom_uid);
-    } else {
-        $criteria2 = new CriteriaCompo(new Criteria('petitioner_uid', $petitionfrom_uid));
-        $criteria2->add(new Criteria('petitionto_uid', $xoopsUser->getVar('uid')));
-        if ($friendpetitionFactory->getCount($criteria2) > 0) {
-            $xoopsTpl->assign('petitionto_uid', $xoopsUser->getVar('uid'));
-        }
-    }
-}
 
 /**
  * Criteria for mainvideo
@@ -114,20 +69,12 @@ if ((isset($nbSections['nbVideos']) && $nbSections['nbVideos'] > 0) && ($videos 
     $mainvideodesc = $videos[0]->getVar('video_desc');
 }
 
-/**
- * Friends
- */
-$criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
-$friends          = $controller->friendshipsFactory->getFriends(9, $criteria_friends);
-
-$controller->visitorsFactory->purgeVisits();
-$evaluation = $controller->friendshipsFactory->getMoyennes($controller->uidOwner);
 
 /**
  * Groups
  */
 $criteria_groups = new Criteria('rel_user_uid', $controller->uidOwner);
-$groups          = $controller->relgroupusersFactory->getGroups(9, $criteria_groups);
+$groups          = $controller->relgroupusersFactory->getGroups(8, $criteria_groups);
 
 /**
  * Visitors
@@ -177,18 +124,6 @@ $memberHandler = xoops_getHandler('member');
 $thisUser      = $memberHandler->getUser($controller->uidOwner);
 $myts          = MyTextSanitizer::getInstance();
 
-$xoopsTpl->assign('lang_suspensionadmin', _MD_YOGURT_SUSPENSIONADMIN);
-if (0 === $controller->isSuspended) {
-    $xoopsTpl->assign('isSuspended', 0);
-    $xoopsTpl->assign('lang_suspend', _MD_YOGURT_SUSPENDUSER);
-    $xoopsTpl->assign('lang_timeinseconds', _MD_YOGURT_SUSPENDTIME);
-} else {
-    $xoopsTpl->assign('lang_unsuspend', _MD_YOGURT_UNSUSPEND);
-    $xoopsTpl->assign('isSuspended', 1);
-    $xoopsTpl->assign('lang_suspended', _MD_YOGURT_USERSUSPENDED);
-}
-
-
 //navbar
 $xoopsTpl->assign('lang_mysection', _MD_YOGURT_MYPROFILE);
 $xoopsTpl->assign('section_name', _MD_YOGURT_PROFILE);
@@ -201,44 +136,6 @@ if (isset($nbSections['nbGroups']) && $nbSections['nbGroups'] <= 0) {
     $xoopsTpl->assign('lang_nogroupsyet', _MD_YOGURT_NOGROUPSYET);
 }
 $xoopsTpl->assign('lang_viewallgroups', _MD_YOGURT_ALLGROUPS);
-
-//evaluations
-$xoopsTpl->assign('lang_fans', _MD_YOGURT_FANS);
-$xoopsTpl->assign('nb_fans', $evaluation['sumfan']);
-$xoopsTpl->assign('lang_funny', _MD_YOGURT_FUNNY);
-$xoopsTpl->assign('funny', $evaluation['mediatrust']);
-$xoopsTpl->assign('funny_rest', 48 - $evaluation['mediatrust']);
-$xoopsTpl->assign('lang_friendly', _MD_YOGURT_FRIENDLY);
-$xoopsTpl->assign('friendly', $evaluation['mediahot']);
-$xoopsTpl->assign('friendly_rest', 48 - $evaluation['mediahot']);
-$xoopsTpl->assign('lang_cool', _MD_YOGURT_COOL);
-$xoopsTpl->assign('cool', $evaluation['mediacool']);
-$xoopsTpl->assign('cool_rest', 48 - $evaluation['mediacool']);
-$xoopsTpl->assign('allow_fanssevaluation', $helper->getConfig('allow_fanssevaluation'));
-
-//petitions to become friend
-if (1 === $petition) {
-    $xoopsTpl->assign('lang_youhavexpetitions', sprintf(_MD_YOGURT_YOUHAVEXPETITIONS, $nb_petitions));
-    $xoopsTpl->assign('petitioner_uid', $petitioner_uid);
-    $xoopsTpl->assign('petitioner_uname', $petitioner_uname);
-    $xoopsTpl->assign('petitioner_avatar', $petitioner_avatar);
-    $xoopsTpl->assign('petition', $petition);
-    $xoopsTpl->assign('petition_id', $petition_id);
-    $xoopsTpl->assign('lang_rejected', _MD_YOGURT_UNKNOWNREJECTING);
-    $xoopsTpl->assign('lang_accepted', _MD_YOGURT_UNKNOWNACCEPTING);
-    $xoopsTpl->assign('lang_acquaintance', _MD_YOGURT_AQUAITANCE);
-    $xoopsTpl->assign('lang_friend', _MD_YOGURT_FRIEND);
-    $xoopsTpl->assign('lang_bestfriend', _MD_YOGURT_BESTFRIEND);
-    $linkedpetioner = '<a href="index.php?uid=' . $petitioner_uid . '">' . $petitioner_uname . '</a>';
-    $xoopsTpl->assign('lang_askingfriend', sprintf(_MD_YOGURT_ASKINGFRIEND, $linkedpetioner));
-}
-$xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
-$xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
-$xoopsTpl->assign('lang_friendrequestpending', _MD_YOGURT_FRIENDREQUESTPENDING);
-$xoopsTpl->assign('lang_myfriend', _MD_YOGURT_MYFRIEND);
-$xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUESTSENT);
-$xoopsTpl->assign('lang_acceptfriend', _MD_YOGURT_ACCEPTFRIEND);
-$xoopsTpl->assign('lang_rejectfriend', _MD_YOGURT_REJECTFRIEND);
 
 //Avatar and Main
 $xoopsTpl->assign('avatar_url', $avatar);
@@ -262,7 +159,11 @@ if (isset($nbSections['nbVideos']) && $nbSections['nbVideos'] > 0) {
     );
 }
 
-//friends
+/**
+ * Friends
+ */
+$criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
+$friends          = $controller->friendshipsFactory->getFriends(8, $criteria_friends);
 $xoopsTpl->assign('friends', $friends);
 $xoopsTpl->assign('lang_friendstitle', sprintf(_MD_YOGURT_FRIENDSTITLE, $controller->nameOwner));
 $xoopsTpl->assign('lang_viewallfriends', _MD_YOGURT_ALLFRIENDS);
@@ -290,9 +191,9 @@ $xoopsTpl->assign('user_realname', $thisUser->getVar('name'));
 $xoopsTpl->assign('lang_uname', _US_NICKNAME);
 $xoopsTpl->assign('lang_website', _US_WEBSITE);
 $userwebsite = '' !== $thisUser->getVar('url', 'E') ? '<a href="' . $thisUser->getVar(
-    'url',
-    'E'
-) . '" target="_blank">' . $thisUser->getVar(
+        'url',
+        'E'
+    ) . '" target="_blank">' . $thisUser->getVar(
         'url'
     ) . '</a>' : '';
 $xoopsTpl->assign('user_websiteurl', $userwebsite);
@@ -388,8 +289,8 @@ foreach ($mids as $mid) {
             }
             if (5 === $count) {
                 $showall_link = '<a href="../../search.php?action=showallbyuser&amp;mid=' . $mid . '&amp;uid=' . $thisUser->getVar(
-                    'uid'
-                ) . '">' . _US_SHOWALL . '</a>';
+                        'uid'
+                    ) . '">' . _US_SHOWALL . '</a>';
             } else {
                 $showall_link = '';
             }
@@ -408,18 +309,21 @@ foreach ($mids as $mid) {
 
 // temporary solution for profile module integration
 if (xoops_isActiveModule('profile')) {
-    $profileHandler=xoops_getModuleHandler('profile', 'profile');
-    $uid = $controller->uidOwner;
-    if ($uid <= 0) {
-        if (is_object($xoopsUser)) {
-            $profile = $profileHandler->get($uid);
-        } else {
-            header('location: ' . XOOPS_URL);
-            exit();
-        }
-    } else {
+$profileHandler=xoops_getModuleHandler('profile','profile');
+$uid = $controller->uidOwner;
+if ($uid <= 0) { 
+ if (is_object($xoopsUser))  {
         $profile = $profileHandler->get($uid);
-    }
+		} 
+        else {
+             header('location: ' . XOOPS_URL); 
+             exit();
+             }
+ }
+else 
+{
+$profile = $profileHandler->get($uid);
+}
 }
 
 require __DIR__ . '/footer.php';

@@ -1,6 +1,14 @@
-<{include file="db:yogurt_navbar.tpl"}>
+<{include file='db:yogurt_navbar.tpl'}>
 
-<form class='outer' name='yogurt-group-edit-form' id='yogurt-group-edit-form' action='editgroup.php' method='post' enctype="multipart/form-data">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+   <div class="row">
+      <div class="col-md-12">
+         <div id="content" class="content content-full-width">
+<!-- start -->
+
+<form name='yogurt-group-edit-form' id='yogurt-group-edit-form' action='editgroup.php' method='post' enctype="multipart/form-data">
 <div class="alert alert-info">
     <h5><{$lang_editgroup}></h5>
 
@@ -34,33 +42,50 @@
 </div>
 </form>
 
-<div id="yogurt-group-edit-members" class="outer odd">
-    <h2 class="head"><{$lang_membersofgroup}></h2>
-    <{section name=i loop=$group_members}>
-        <div class="yogurt-group-edit-member <{cycle values="odd,even"}>">
-            <h2 class="head">
-                <{$group_members[i].uname}>
-            </h2>
-            <p>
-                <img src="<{$xoops_upload_url}>/<{$group_members[i].avatar}>">
-            <p>
-                <{$group_members[i].uname}>
-            </p>
 
-            <{if $group_members[i].isOwner }>
-                <img src="assets/images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>">
+<table id="membersofgroup" class="table table-hover table-border">
+    <thead>
+        <tr>
+            <th><h6><{$lang_membersofgroup}></h6></th>
+        </tr>
+    </thead>
+    <tbody>
+       
+		<{section name=i loop=$group_members}>    
+			<tr>        
+		   <td>
+		   <a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$group_members[i].uid}>" alt="<{$group_members[i].uname}>" title="<{$group_members[i].uname}>">
+      <{if $group_members[i].avatar=="avatars/blank.gif"}><img src="<{$xoops_upload_url}>/avatars/blank.gif" class="rounded-circle float-left p-2" height="60" width="60"  alt="<{$group_members[i].uname}>" title="<{$group_members[i].uname}>"><{else}> <img class="rounded-circle float-left p-2" src="<{$xoops_upload_url}>/<{$group_members[i].avatar}>" height="60" width="60"  alt="<{$group_members[i].uname}>" title="<{$group_members[i].uname}>"><{/if}></a>
+
+		  
+		   <a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$group_members[i].uid}>" alt="<{$group_members[i].uname}>" title="<{$group_members[i].uname}>"><{$group_members[i].uname}></a>
+               
+			  <{if $group_members[i].isOwner }>
+                 <i class="fa fa-user" title="<{$lang_owner}>" style="color:#8B0000;"></i>
             <{else}>
                 <form action="kickfromgroup.php" method="post">
                     <input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
                     <input type="hidden" value="<{$group_members[i].uid}>" name="rel_user_uid" id="rel_user_uid">
-                    <button name="" type="image" class="btn btn-danger btn-sm"><{$smarty.const._MD_YOGURT_KICKOUT}></button>
+                    <button name="" type="image" class="btn btn-danger btn-sm float-right"> <i class="fa fa-remove"></i><{$smarty.const._MD_YOGURT_KICKOUT}></button>
                 </form>
             <{/if}>
+		
+					
+					
+           </td>
+		   </tr>
+         <{/section}>
+		
+    </tbody>
+</table>
 
-            </p>
-        </div>
-    <{/section}>
-</div>
 
 
 <{include file="db:yogurt_footer.tpl"}>
+<!-- end -->
+</div>
+      </div>
+   </div>
+</div>
+    	</div>
+</div>
