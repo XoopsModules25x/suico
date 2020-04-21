@@ -56,7 +56,7 @@ $maxfilewidth  = $helper->getConfig('max_original_width');
 /**
  * If we are receiving a file
  */
-if ('sel_photo' === $_POST['xoops_upload_file'][0]) {
+if ('sel_photo' === Request::getArray('xoops_upload_file', '', 'POST')[0]) {
     /**
      * Verify Token
      */
