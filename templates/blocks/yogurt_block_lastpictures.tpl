@@ -1,8 +1,13 @@
-<{section name=i loop=$block}>
-    <div style="width:80%; text-align: center; page-break-after: always; margin: auto; page-break-before: always;">
-        <a href="<{$xoops_url}>/modules/yogurt/album.php?uid=<{$block[i].uid_voted}>" alt="<{$block[i].caption}>" title="<{$block[i].caption}>"><img src="<{$xoops_upload_url}>/yogurt/images/thumb_<{$block[i].img_filename}>"><br><{$block[i].uname}> </a>
-
-    </div>
-<{/section}>
-
+<div class="container-fluid">
+<div class="row row-cols-4">
+	<{section name=i loop=$block}>
+		<div class="col text-center p-2">
+			<a href="<{$xoops_url}>/modules/yogurt/album.php?uid=<{$block[i].uid_voted}>" alt="<{$block[i].caption}>" title="<{$block[i].caption}>">
+				<img src="<{$xoops_upload_url}>/yogurt/images/<{$block[i].img_filename}>" width="120" height="120">
+				<br> <small> <i class='fa fa-user-circle'></i> <{$block[i].uname}></small> 
+			</a>
+		</div>
+	<{/section}>
+</div>
+</div>
 

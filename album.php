@@ -151,6 +151,7 @@ $xoopsTpl->assign('avatar_url', $avatar);
 
 $xoopsTpl->assign('lang_setprivate', _MD_YOGURT_PRIVATIZE);
 $xoopsTpl->assign('lang_unsetprivate', _MD_YOGURT_UNPRIVATIZE);
+$xoopsTpl->assign('lang_privatephoto', _MD_YOGURT_PRIVATEPHOTO);
 
 $xoopsTpl->assign('lang_mysection', _MD_YOGURT_MYPHOTOS);
 $xoopsTpl->assign('section_name', _MD_YOGURT_PHOTOS);

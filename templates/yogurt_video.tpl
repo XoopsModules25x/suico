@@ -1,4 +1,14 @@
-<{include file="db:yogurt_navbar.tpl"}>
+<{include file='db:yogurt_navbar.tpl'}>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+   <div class="row">
+      <div class="col-md-12">
+         <div id="content" class="content content-full-width">
+<!-- start -->
+
+
 <{if $isOwner }>
 <div class="alert alert-info">
     <h5>
@@ -13,12 +23,12 @@
 		
 		<div class="form-group">
 			<label for="video"><strong> <{$lang_youtubecodeLabel}></strong></label>
-            <label for='codigo'></label><input type='text' name='codigo' id='codigo' class='form-control' value=''>
+			<input type='text' name='codigo' id='codigo' class='form-control' value=''>
 		</div>
           
         <div class="form-group">
 			<label for="video"><strong> <{$lang_captionLabel}></strong></label>
-            <label for='caption'></label><textarea class="form-control" name='caption' id='caption' rows='5' cols='50'></textarea>
+			 <textarea class="form-control" name='caption' id='caption' rows='5' cols='50'></textarea>
 		</div>
             
           <input type='submit' class='btn btn-primary' name='submit_button' id='submit_button' value='<{$lang_submitValue}>'>
@@ -39,56 +49,63 @@
     </div>
 <{/if}>
 
-<div id="yogurt-videos-container" class="outer">
-    <h4 id="yogurt-videos-title" class="head">
+    <h5>
         <a href="<{$xoops_url}>/userinfo.php?uid=<{$owner_uid}>">
             <{$lang_videos}>
         </a>
-    </h4>
+    </h5>
     <{if $nb_videos<=0}>
         <h4>
             <{$lang_novideoyet}>
         </h4>
     <{/if}>
 
+ <{if $nb_videos<=0}>
+		<div class="alert alert-info"><{$lang_novideoyet}></div>
+    <{/if}>
+
 
 
     <{section name=i loop=$videos}>
-        <div class="yogurt-video-container <{cycle values="odd,even"}>">
-            <div class="yogurt-video">
-                <object width="<{$width}>" height="<{$height}>">
-                    <param name="movie" value="http://www.youtube.com/v/<{$videos[i].url}>"></param>
-                    <param name="wmode" value="transparent"></param>
-                    <embed src="http://www.youtube.com/v/<{$videos[i].url}>" type="application/x-shockwave-flash" wmode="transparent" width="<{$width}>" height="<{$height}>"></embed>
-                </object>
-            </div>
-            <div class="yogurt-video-details">
-                <p class="yogurt-video-desc">
-                    <{$videos[i].desc}>
-                </p> <{if $isOwner==1 }>
+         
+	<div class="embed-responsive embed-responsive-16by9">
+   <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<{$videos[i].url}>?rel=0" allowfullscreen></iframe>
+   </div>
+                
+               <div class="alert alert-info">
+                       <{$videos[i].desc}>
+					   <{if $isOwner==1 }>
                     <form action="delvideo.php" method="post" id="deleteform" class="yogurt-video-forms">
                         <input type="hidden" value="<{$videos[i].id}>" name="cod_video">
                         <{$token}>
-                        <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 delete.png}>">
+                        <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 delete.png}>" class="float-left">
                     </form>
                     <form action="editdescvideo.php" method="post" id="editform" class="yogurt-video-forms">
                         <input type="hidden" alt="<{$lang_edit}>" title="<{$lang_edit}>" value="<{$videos[i].id}>" name="video_id">
                         <{$token}>
-                        <input name="submit" type="image" alt="<{$lang_editdesc}>" title="<{$lang_editdesc}>" src="<{xoModuleIcons16 edit.png}>">
+                        <input name="submit" type="image" alt="<{$lang_editdesc}>" title="<{$lang_editdesc}>" src="<{xoModuleIcons16 edit.png}>" class="float-left">
                     </form>
                     <form action="mainvideo.php" method="post" id="mainform" class="yogurt-video-forms">
                         <input type="hidden" value="<{$videos[i].id}>" name="video_id">
                         <{$token}>
-                        <input name="submit" type="image" alt="<{$lang_makemain}>" title="<{$lang_makemain}>" src="assets/images/mainvideo.gif">
+                        <input name="submit" type="image" alt="<{$lang_makemain}>" title="<{$lang_makemain}>" src="assets/images/mainvideo.gif" class="float-left">
                     </form>
                 <{/if}>
-            </div>
-        </div>
+				<br>
+               </div>
+	
+
     <{/section}>
-</div>
-<div style="clear:both;width:100%"></div>
-<div id="yogurt-navegacao">
+
     <{$pageNav}>
-</div>
-<div style="clear:both;width:100%"></div>
+
+
 <{include file="db:yogurt_footer.tpl"}>
+
+<!-- end -->
+</div>
+      </div>
+   </div>
+</div>
+    	</div>
+</div>

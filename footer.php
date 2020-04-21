@@ -17,12 +17,24 @@ declare(strict_types=1);
  * @author          XOOPS https://www.xoops.org
  */
 
+use Xmf\Request;
+use XoopsModules\Yogurt;
+use XoopsModules\Yogurt\IndexController;
+
+
 /**
  * Adding to the module js and css of the lightbox and new ones
  */
 $xoTheme->addStylesheet(
     XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/yogurt.css'
 );
+$xoTheme->addStylesheet(
+    XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/yogurtb4.css'
+);
+$xoTheme->addStylesheet(
+    XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/pagination.css'
+);
+
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
 if (false !== stripos($_SERVER['HTTP_USER_AGENT'], 'msie')) {
@@ -37,23 +49,23 @@ $xoTheme->addStylesheet(
 //}
 
 if (!stripos($_SERVER['REQUEST_URI'], 'memberslist.php')) {
-    $xoTheme->addScript(
-        XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.js'
-    );
+$xoTheme->addScript(
+    XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.js'
+);
 }
 
 //if (stripos($_SERVER['REQUEST_URI'], 'album.php')) {
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js');
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js'); 
 //}
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
 
 if (stripos($_SERVER['REQUEST_URI'], 'memberslist.php')) {
-    if ('datatables' == $xoopsModuleConfig['memberslisttemplate']) {
-        $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.dataTables.css');
-        $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/responsive.dataTables.min.css');
-        $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.dataTables.js');
-        $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/dataTables.responsive.min.js');
-    }
+if ('datatables' == $xoopsModuleConfig['memberslisttemplate']) {
+	$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.dataTables.css');
+	$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/responsive.dataTables.min.css');
+	$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.dataTables.js');
+	$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/dataTables.responsive.min.js');
+}
 }
 
 
@@ -114,6 +126,147 @@ $xoopsTpl->assign(
     'xoops_pagetitle',
     sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner)
 );
+
+
+
+//Navbar User Info
+$avatar = $controller->owner->getVar('user_avatar');
+$memberHandler = xoops_getHandler('member');
+$thisUser      = $memberHandler->getUser($controller->uidOwner);
+$myts          = MyTextSanitizer::getInstance();
+
+$xoopsTpl->assign('user_uname', $thisUser->getVar('uname'));
+$xoopsTpl->assign('user_realname', $thisUser->getVar('name'));
+$xoopsTpl->assign('lang_uname', _US_NICKNAME);
+$xoopsTpl->assign('lang_website', _US_WEBSITE);
+$userwebsite = ('' != $thisUser->getVar('url', 'E')) ? '<a href="' . $thisUser->getVar('url', 'E') . '" target="_blank">' . $thisUser->getVar('url') . '</a>' : '';
+$xoopsTpl->assign('user_websiteurl', $userwebsite);
+$xoopsTpl->assign('lang_email', _US_EMAIL);
+$xoopsTpl->assign('lang_privmsg', _US_PM);
+$xoopsTpl->assign('user_viewemail', $thisUser->getVar('user_viewemail', 'E'));
+if (1 == $thisUser->getVar('user_viewemail')) {
+    $xoopsTpl->assign('user_email', $thisUser->getVar('email', 'E'));
+} else {
+    $xoopsTpl->assign('user_email', '&nbsp;');
+}
+$xoopsTpl->assign('lang_location', _US_LOCATION);
+$xoopsTpl->assign('user_location', $thisUser->getVar('user_from'));
+$xoopsTpl->assign('lang_occupation', _US_OCCUPATION);
+$xoopsTpl->assign('user_occupation', $thisUser->getVar('user_occ'));
+$xoopsTpl->assign('avatar_url', $avatar);
+$xoopsTpl->assign('lang_selectavatar', _MD_YOGURT_SELECTAVATAR);
+$xoopsTpl->assign('lang_noavatar', _MD_YOGURT_NOAVATARYET);
+$xoopsTpl->assign('user_onlinestatus', $thisUser->isOnline());
+$xoopsTpl->assign('lang_onlinestatus', _MD_YOGURT_ONLINESTATUS);
+
+/**
+ * Filter for new friend petition
+ */
+$petition = 0;
+if (1 === $controller->isOwner) {
+    $criteria_uidpetition = new Criteria('petitionto_uid', $controller->uidOwner);
+    $newpetition          = $controller->petitionsFactory->getObjects($criteria_uidpetition);
+    if ($newpetition) {
+        $nb_petitions      = count($newpetition);
+        $petitionerHandler = xoops_getHandler('member');
+        $petitioner        = $petitionerHandler->getUser($newpetition[0]->getVar('petitioner_uid'));
+        $petitioner_uid    = $petitioner->getVar('uid');
+        $petitioner_uname  = $petitioner->getVar('uname');
+        $petitioner_avatar = $petitioner->getVar('user_avatar');
+        $petition_id       = $newpetition[0]->getVar('friendpet_id');
+        $petition          = 1;
+    }
+}
+
+$friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
+/**
+ * Getting the uid of the user which user want to ask to be friend
+ */
+$petitionfrom_uid = $controller->uidOwner;
+
+//Verify if the user has already asked for friendship or if the user he s asking to be a friend has already asked him
+$criteria = new CriteriaCompo(
+    new Criteria(
+        'petitionto_uid', $petitionfrom_uid
+    )
+);
+
+if ($xoopsUser){
+$criteria->add(new Criteria('petitioner_uid', $xoopsUser->getVar('uid')));
+if ($friendpetitionFactory->getCount($criteria) > 0) {
+	$xoopsTpl->assign('petitionfrom_uid', $petitionfrom_uid);
+	
+}
+else {
+    $criteria2 = new CriteriaCompo(new Criteria('petitioner_uid', $petitionfrom_uid));
+    $criteria2->add(new Criteria('petitionto_uid', $xoopsUser->getVar('uid')));
+    if ($friendpetitionFactory->getCount($criteria2) > 0) {
+       $xoopsTpl->assign('petitionto_uid', $xoopsUser->getVar('uid'));    
+    }
+}}
+
+/**
+ * Friends
+ */
+$criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
+$friends          = $controller->friendshipsFactory->getFriends(9, $criteria_friends);
+
+$controller->visitorsFactory->purgeVisits();
+$evaluation = $controller->friendshipsFactory->getMoyennes($controller->uidOwner);
+
+
+//evaluations
+$xoopsTpl->assign('lang_fans', _MD_YOGURT_FANS);
+$xoopsTpl->assign('nb_fans', $evaluation['sumfan']);
+$xoopsTpl->assign('lang_funny', _MD_YOGURT_FUNNY);
+$xoopsTpl->assign('funny', $evaluation['mediatrust']);
+$xoopsTpl->assign('funny_rest', 48 - $evaluation['mediatrust']);
+$xoopsTpl->assign('lang_friendly', _MD_YOGURT_FRIENDLY);
+$xoopsTpl->assign('friendly', $evaluation['mediahot']);
+$xoopsTpl->assign('friendly_rest', 48 - $evaluation['mediahot']);
+$xoopsTpl->assign('lang_cool', _MD_YOGURT_COOL);
+$xoopsTpl->assign('cool', $evaluation['mediacool']);
+$xoopsTpl->assign('cool_rest', 48 - $evaluation['mediacool']);
+$xoopsTpl->assign('allow_fanssevaluation', $helper->getConfig('allow_fanssevaluation'));
+
+//petitions to become friend
+if (1 === $petition) {
+    $xoopsTpl->assign('lang_youhavexpetitions', sprintf(_MD_YOGURT_YOUHAVEXPETITIONS, $nb_petitions));
+    $xoopsTpl->assign('petitioner_uid', $petitioner_uid);
+    $xoopsTpl->assign('petitioner_uname', $petitioner_uname);
+    $xoopsTpl->assign('petitioner_avatar', $petitioner_avatar);
+    $xoopsTpl->assign('petition', $petition);
+    $xoopsTpl->assign('petition_id', $petition_id);
+    $xoopsTpl->assign('lang_rejected', _MD_YOGURT_UNKNOWNREJECTING);
+    $xoopsTpl->assign('lang_accepted', _MD_YOGURT_UNKNOWNACCEPTING);
+    $xoopsTpl->assign('lang_acquaintance', _MD_YOGURT_AQUAITANCE);
+    $xoopsTpl->assign('lang_friend', _MD_YOGURT_FRIEND);
+    $xoopsTpl->assign('lang_bestfriend', _MD_YOGURT_BESTFRIEND);
+    $linkedpetioner = '<a href="index.php?uid=' . $petitioner_uid . '">' . $petitioner_uname . '</a>';
+    $xoopsTpl->assign('lang_askingfriend', sprintf(_MD_YOGURT_ASKINGFRIEND, $linkedpetioner));
+}
+$xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
+$xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
+$xoopsTpl->assign('lang_friendrequestpending', _MD_YOGURT_FRIENDREQUESTPENDING);
+$xoopsTpl->assign('lang_myfriend', _MD_YOGURT_MYFRIEND);
+$xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUESTSENT);
+$xoopsTpl->assign('lang_acceptfriend', _MD_YOGURT_ACCEPTFRIEND);
+$xoopsTpl->assign('lang_rejectfriend', _MD_YOGURT_REJECTFRIEND);
+
+
+// Member Suspension
+$xoopsTpl->assign('allow_usersuspension', $xoopsModuleConfig['allow_usersuspension']);
+$xoopsTpl->assign('lang_suspensionadmin', _MD_YOGURT_SUSPENSIONADMIN);
+if (0 === $controller->isSuspended) {
+    $xoopsTpl->assign('isSuspended', 0);
+    $xoopsTpl->assign('lang_suspend', _MD_YOGURT_SUSPENDUSER);
+    $xoopsTpl->assign('lang_timeinseconds', _MD_YOGURT_SUSPENDTIME);
+} else {
+    $xoopsTpl->assign('lang_unsuspend', _MD_YOGURT_UNSUSPEND);
+    $xoopsTpl->assign('isSuspended', 1);
+    $xoopsTpl->assign('lang_suspended', _MD_YOGURT_USERSUSPENDED);
+}
+
 
 //Memberslist and Search Members
 $xoopsTpl->assign('displayrealname', $xoopsModuleConfig['displayrealname']);

@@ -1,7 +1,15 @@
-<{include file="db:yogurt_navbar.tpl"}>
+<{include file='db:yogurt_navbar.tpl'}>
 
-<div id="yogurt-friends-container" class="outer">
-    <h4 class="head"><{$lang_fanstitle}></h4>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+   <div class="row">
+      <div class="col-md-12">
+         <div id="content" class="content content-full-width">
+<!-- start -->
+
+<div id="yogurt-friends-container">
+    <h5><{$lang_fanstitle}></h5>
     <{if $lang_nofansyet==""}>
 
         <{section name=i loop=$friends}>
@@ -26,11 +34,18 @@
             </div>
         <{/section}>
     <{else}>
-        <h4 id="yogurt-friends-nofriends"><{$lang_nofansyet}></h4>
+			<div class="alert alert-info"><{$lang_nofansyet}></div>
     <{/if}>
 </div>
 <{if $navegacao!='' }>
-    <div id="yogurt-navegacao"><{$navegacao}></div>
+    <div><{$navegacao}></div>
 <{/if}>
 
 <{include file="db:yogurt_footer.tpl"}>
+<!-- end -->
+</div>
+      </div>
+   </div>
+</div>
+    	</div>
+</div>
