@@ -20,7 +20,7 @@
     <form action="abandongroup.php" method="POST" id="form_abandongroup">
         <input type="hidden" value="<{$group_rel_id}>" name="relgroup_id" id="relgroup_id">
 		<input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
-		<button name="" type="image" class="btn btn-success btn-sm float-right"> <i class="fa fa-user-circle-o"></i> <{$smarty.const._MD_YOGURT_MEMBEROFGROUP}></button> 
+		<button name="" type="image" class="btn btn-primary btn-sm float-right"> <i class="fa fa-user-circle-o"></i> <{$smarty.const._MD_YOGURT_MEMBEROFGROUP}></button> 
         &nbsp;<button name="" type="image" class="btn btn-danger btn-sm float-right"> <i class="fa fa-close"></i> <{$lang_abandongroup}></button> 
     </form>
     <{ else}>
