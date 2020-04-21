@@ -1,4 +1,4 @@
-<h5>3.5 Alpha xxx </h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
+<h5>3.5 Alpha 5    [2020-04-21]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
 <hr>
 - Fix Guest can't access group page (liomj)
 - Fix edit,delete,avatar,private button visible to guest (liomj)
@@ -25,6 +25,38 @@
 - Fix featured video template in profile page (liomj)
 - Rename editdesc.php to editdescpciture.php (liomj)
 - Change join and leave groups image to button (liomj)
+* RGB color function instead of #HEX representation (mamba)
+* PhpDoc updates  (mamba)
+* Unnecessary double quotes (mamba)
+* Yoda (mamba)
+* fix delete video not possible (mamba)
+* convert to Xmf\Request (mamba)
+- convert to SCRIPT_NAME (mamba)
+* fix "image edit, delete, set to private is not working" (mamba)
+* fix "import sample data is not working" (mamba)
+* fix for "error when uploading group image" (mamba)
+* fix "uploading mp3 in audios not working" (mamba)
+* PSR-12 elseif (mamba)
+* fix for "image set as avatar is not working" (mamba)
+* fix for error when creating a group (mamba)
+- remove defined('XOOPS_ROOT_PATH') (mamba)
+* fix view images in Admin (mamba)
+* add Privacy table (mamba)
+* temporary solution for insert() and get() conflicts (mamba)
+* updated Migrate file to 3.5 version (mamba)
+* update menu and language (mamba)
+* Case mismatch in method call or class usage (mamba)
+* Traditional syntax array literal detected (mamba)
+* Redundant @var tag (mamba)
+* fix for Undefined constant, class, method (mamba)
+* Missing associated label (mamba)
+* fix move Private below the picture, so pictures are aligned on top (mamba)
+* change date fields to INT(11) (mamba)
+* fix Notes in Admin, add text truncate (mamba)
+* fix Config (mamba)
+* change petition to request (mamba)
+* fix delete group (mamba)
+* fix submit note (mamba)
 
 
 <h5>3.5 Alpha 4   [2020-04-05]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
@@ -32,15 +64,15 @@
 - add friend friendrequest in friend section & change add as a friend image (liomj)
 - correction for pettition in yogurt_friends.tpl (liomj)
 - language - profile & video template updates (liomj)
-- /photos renamed to /images
-- CSS from h2 to h4
-- fix group view from search
-- updated images
-- renaming tribes to groups
-- required Group name & description
-- fix for Group search - it shows now individual groups
-- changed group icon
-- language changes
+- /photos renamed to /images (mamba)
+- CSS from h2 to h4 (mamba)
+- fix group view from search (mamba)
+- updated images (mamba)
+- renaming tribes to groups (mamba)
+- required Group name & description (mamba)
+- fix for Group search - it shows now individual groups (mamba)
+- changed group icon (mamba)
+- language changes (mamba)
 
 
 <h5>3.5 Alpha 3   [2020-04-05]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
