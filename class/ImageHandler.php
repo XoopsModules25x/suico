@@ -23,6 +23,7 @@ use XoopsMediaUploader;
 use XoopsObject;
 use XoopsPersistableObjectHandler;
 use XoopsThemeForm;
+use Xmf\Request;
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
@@ -384,7 +385,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
      * Upload the file and Save into database
      *
      * @param string $title         A litle description of the file
-     * @param string $path_upload   The path to where the file should be uploaded
+     * @param string $pathUpload   The path to where the file should be uploaded
      * @param int    $thumbwidth    the width in pixels that the thumbnail will have
      * @param int    $thumbheight   the height in pixels that the thumbnail will have
      * @param int    $pictwidth     the width in pixels that the pic will have
@@ -396,7 +397,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
      */
     public function receivePicture(
         $title,
-        $path_upload,
+        $pathUpload,
         $thumbwidth,
         $thumbheight,
         $pictwidth,
@@ -405,7 +406,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $maxfilewidth,
         $maxfileheight
     ) {
-        global $xoopsUser, $xoopsDB, $_POST, $_FILES;
+        global $xoopsUser, $xoopsDB;
         //busca id do user logado
         $uid = $xoopsUser->getVar('uid');
         //create a hash so it does not erase another file
@@ -418,17 +419,17 @@ class ImageHandler extends XoopsPersistableObjectHandler
         );
         $maxfilesize       = $maxfilebytes;
 
-        $uploadDir = \XOOPS_UPLOAD_PATH . '/yogurt/images/';
+//        $uploadDir = \XOOPS_UPLOAD_PATH . '/yogurt/images/';
         // create the object to upload
         $uploader = new XoopsMediaUploader(
-            $path_upload,
+            $pathUpload,
             $allowed_mimetypes,
             $maxfilesize,
             $maxfilewidth,
             $maxfileheight
         );
         // fetch the media
-        if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
+        if ($uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0])) {
             //lets create a name for it
             $uploader->setPrefix('pic_' . $uid . '_');
             //now let s upload the file
@@ -450,15 +451,15 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $this->insert($picture);
             $saved_destination = $uploader->getSavedDestination();
             //print_r($_FILES);
-            //$this->resizeImage($saved_destination,false, $thumbwidth, $thumbheight, $pictwidth, $pictheight,$path_upload);
-            //$this->resizeImage($saved_destination,true, $thumbwidth, $thumbheight, $pictwidth, $pictheight,$path_upload);
+            //$this->resizeImage($saved_destination,false, $thumbwidth, $thumbheight, $pictwidth, $pictheight,$pathUpload);
+            //$this->resizeImage($saved_destination,true, $thumbwidth, $thumbheight, $pictwidth, $pictheight,$pathUpload);
             $this->resizeImage(
                 $saved_destination,
                 $thumbwidth,
                 $thumbheight,
                 $pictwidth,
                 $pictheight,
-                $path_upload
+                $pathUpload
             );
         } else {
             echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
@@ -470,14 +471,14 @@ class ImageHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * Resize a picture and save it to $path_upload
+     * Resize a picture and save it to $pathUpload
      *
      * @param string $img         the path to the file
      * @param int    $thumbwidth  the width in pixels that the thumbnail will have
      * @param int    $thumbheight the height in pixels that the thumbnail will have
      * @param int    $pictwidth   the width in pixels that the pic will have
      * @param int    $pictheight  the height in pixels that the pic will have
-     * @param string $path_upload The path to where the files should be saved after resizing
+     * @param string $pathUpload The path to where the files should be saved after resizing
      */
     public function resizeImage(
         $img,
@@ -485,7 +486,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $thumbheight,
         $pictwidth,
         $pictheight,
-        $path_upload
+        $pathUpload
     ) {
         $img2   = $img;
         $path   = \pathinfo($img);
@@ -511,10 +512,10 @@ class ImageHandler extends XoopsPersistableObjectHandler
                 \imagesx($img),
                 \imagesy($img)
             );
-            \imagejpeg($resized, $path_upload . '/thumb_' . $path['basename']);
+            \imagejpeg($resized, $pathUpload . '/thumb_' . $path['basename']);
             \imagedestroy($resized);
         } else {
-            \imagejpeg($img, $path_upload . '/thumb_' . $path['basename']);
+            \imagejpeg($img, $pathUpload . '/thumb_' . $path['basename']);
         }
 
         \imagedestroy($img);
@@ -541,10 +542,10 @@ class ImageHandler extends XoopsPersistableObjectHandler
                 \imagesx($img2),
                 \imagesy($img2)
             );
-            \imagejpeg($resized2, $path_upload . '/resized_' . $path2['basename']);
+            \imagejpeg($resized2, $pathUpload . '/resized_' . $path2['basename']);
             \imagedestroy($resized2);
         } else {
-            \imagejpeg($img2, $path_upload . '/resized_' . $path2['basename']);
+            \imagejpeg($img2, $pathUpload . '/resized_' . $path2['basename']);
         }
         \imagedestroy($img2);
     }
@@ -608,18 +609,18 @@ class ImageHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * Resize a picture and save it to $path_upload
+     * Resize a picture and save it to $pathUpload
      *
      * @param string $img         the path to the file
      * @param        $width
      * @param        $height
-     * @param string $path_upload The path to where the files should be saved after resizing
+     * @param string $pathUpload The path to where the files should be saved after resizing
      */
     public function makeAvatar(
         $img,
         $width,
         $height,
-        $path_upload
+        $pathUpload
     ) {
         $img2   = $img;
         $path   = \pathinfo($img);
@@ -645,10 +646,10 @@ class ImageHandler extends XoopsPersistableObjectHandler
                 \imagesx($img),
                 \imagesy($img)
             );
-            \imagejpeg($resized, $path_upload . '/thumb_' . $path['basename']);
+            \imagejpeg($resized, $pathUpload . '/thumb_' . $path['basename']);
             \imagedestroy($resized);
         } else {
-            \imagejpeg($img, $path_upload . '/thumb_' . $path['basename']);
+            \imagejpeg($img, $pathUpload . '/thumb_' . $path['basename']);
         }
 
         \imagedestroy($img);
@@ -675,10 +676,10 @@ class ImageHandler extends XoopsPersistableObjectHandler
                 \imagesx($img2),
                 \imagesy($img2)
             );
-            \imagejpeg($resized2, $path_upload . '/resized_' . $path2['basename']);
+            \imagejpeg($resized2, $pathUpload . '/resized_' . $path2['basename']);
             \imagedestroy($resized2);
         } else {
-            \imagejpeg($img2, $path_upload . '/resized_' . $path2['basename']);
+            \imagejpeg($img2, $pathUpload . '/resized_' . $path2['basename']);
         }
         \imagedestroy($img2);
     }
