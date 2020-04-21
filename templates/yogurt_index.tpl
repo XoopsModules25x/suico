@@ -134,7 +134,7 @@
 		  </div>
      <{/if}>
 	
-	
+	<{if $allow_profile_general==1}>
     <{if $allow_friends==1}>
 	<{if $nb_friends!=0}>
             <br><h5><{$lang_friends}> <i class="fa fa-address-card-o"></i></h5>
@@ -155,14 +155,15 @@
 			</div>
             <{if $nb_friends!=0}>
                 <div class="row p-2">
-                    <a href="friends.php?uid=<{$uid_owner}>" class="btn btn-primary btn-sm "> <i class='fa fa-arrow-circle-right'></i><{$lang_viewallfriends}> (<{$nb_friends}>) </a>
+                    <a href="friends.php?uid=<{$uid_owner}>" class="btn btn-primary btn-sm "> <i class='fa fa-arrow-circle-right'></i> <{$lang_viewallfriends}> (<{$nb_friends}>) </a>
                 </div>
             <{/if}>
 		</div>
     <{/if}>
 	<{/if}>
+	<{/if}>
 	
-	
+	<{if $allow_profile_general==1}>
     <{if $allow_groups==1}><br>
         <{if $nb_groups!=0}>
 		
@@ -186,6 +187,7 @@
         </div>
 		    
     <{/if}>
+	<{/if}>
 	<{/if}>
 </div><!-- end of group2 -->
 <{include file="db:yogurt_footer.tpl"}>

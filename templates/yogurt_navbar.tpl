@@ -63,21 +63,30 @@
                      <!-- END profile-header-img -->
                      <!-- BEGIN profile-header-info -->
                      <div class="profile-header-info" style="padding-left:15px;">
-                        <h4 class="m-t-10 m-b-5"><{$owner_uname}></h4> <{if $user_realname!=''}><h4 class="m-t-10 m-b-5 font-weight-light"><{$user_uname}></h4><{/if}>
-                        <{if $user_occupation || $user_location }>
+                        <h4 class="m-t-10 m-b-5"><{$owner_uname}></h4> <{if $allow_profile_general==1}><{if $user_realname!=''}><h4 class="m-t-10 m-b-5 font-weight-light"><{$user_uname}></h4><{/if}><{/if}>
+                        
+						<{if $allow_profile_general==1}>
+						<{if $user_occupation || $user_location }>
 						<p class="m-b-10"><{if $user_occupation}><{$user_occupation}><{/if}><{if $user_occupation}>, <{$user_location}><{/if}></p>
 						<{/if}>
+						<{/if}>
+						
+						<{if $allow_profile_contact==1}>
 						<{if $user_email || $user_websiteurl }>
 						<p class="m-b-10">
 						<{if $user_viewemail!='0'}><i class="fa fa-envelope"></i> <{mailto address=$user_email encode="javascript"}><{/if}>
 						<{if $user_websiteurl}><i class="fa fa-globe"></i> <{$user_websiteurl}><{else}><br><{/if}>
 						</p>
 						<{/if}>
+						<{/if}>
 						
-						<{if $allow_friends }>
+						
+						<{if $allow_profile_contact==1}>
+						<{if $allow_friends}>
 						<{if $isAnonym!=1 && $isOwner!=1 }> 
 						<button type="button" class="btn btn-success btn-sm">
 						<a href="javascript:openWithSelfMain('<{$xoops_url}>/pmlite.php?send2=1&amp;to_userid=<{$uid_owner}>', 'pmlite', 450, 380);"><i class="fa fa-envelope-o"></i> <{$smarty.const._MD_YOGURT_PRIVATEMESSAGE}></a></button>
+						<{/if}>
 						<{/if}>
 						<{/if}>
 						
