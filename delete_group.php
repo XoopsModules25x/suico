@@ -58,7 +58,7 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
     /**
      * Try to delete
      */
-    if (1 === $groupsFactory->getCount($criteria)) {
+    if (1 == $groupsFactory->getCount($criteria)) {
         if ($groupsFactory->deleteAll($criteria)) {
             $criteria_rel_group_id = new Criteria('rel_group_id', $group_id);
             $relgroupuserFactory->deleteAll($criteria_rel_group_id);
