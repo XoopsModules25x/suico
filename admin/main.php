@@ -19,7 +19,7 @@ declare(strict_types=1);
  * @author       XOOPS Development Team
  * @since
  */
-
+use Xmf\Request;
 /**
  * main.php, Main administration file *
  * This file was implemented as follows
@@ -38,7 +38,7 @@ require_once __DIR__ . '/admin_header.php';
  */
 xoops_cp_header();
 
-$op = $_GET['op'] ?? '';
+$op = Request::getCmd('op', '', 'GET');
 
 /*
 if (!@file_exists(XOOPS_ROOT_PATH."/Frameworks/art/functions.admin.php")) {
@@ -69,12 +69,13 @@ $isframeworksrequirement = false;
 global $xoopsModuleConfig, $xoopsModule;
 function about()
 {
+    /** @var \XoopsModuleHandler $moduleHandler */
     $moduleHandler = xoops_getHandler('module');
     $modulo        = $moduleHandler->getByDirname('yogurt');
     echo "<br style='clear: both;'>
 <img src='" . XOOPS_URL . '/modules/' . $modulo->getInfo('dirname') . '/' . $modulo->getInfo(
-            'image'
-        ) . "' alt='Yogurt' style='float: left; margin-right: 10px;'></a>
+        'image'
+    ) . "' alt='Yogurt' style='float: left; margin-right: 10px;'></a>
 <div style='margin-top: 1px; color: #33538e; margin-bottom: 4px; font-size: 18px; line-height: 18px; font-weight: bold;'>
     " . $modulo->getInfo('name') . ' ' . $modulo->getInfo('version') . "</div>
 
@@ -163,8 +164,8 @@ function about()
             <tr>
             <td class='head' width = '150px'>" . _MA_YOGURT_EMAIL . "</td>
             <td class='even'><a href='mailto:" . $modulo->getInfo(
-            'developer_email'
-        ) . "' target='_blank'>" . $modulo->getInfo(
+        'developer_email'
+    ) . "' target='_blank'>" . $modulo->getInfo(
             'developer_email'
         ) . "</a></td>
         </tr>
@@ -326,9 +327,9 @@ function homedefault()
     }
 
     echo "<tr><td class='odd'><img src='../assets/images/messagebox_info.gif'> " . sprintf(
-            _MA_YOGURT_MAXBYTESPHPINI,
-            ini_get('post_max_size')
-        ) . '</td></tr>';
+        _MA_YOGURT_MAXBYTESPHPINI,
+        ini_get('post_max_size')
+    ) . '</td></tr>';
     if (function_exists('memory_get_usage')) {
         echo "<tr><td class='even'><img src='../assets/images/messagebox_info.gif'> " . _MA_YOGURT_MEMORYLIMIT . ' ' . memory_get_usage() . '</td></tr>';
     }

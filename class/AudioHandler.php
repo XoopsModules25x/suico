@@ -6,7 +6,6 @@ namespace XoopsModules\Yogurt;
 
 use XoopsPersistableObjectHandler;
 use XoopsDatabase;
-use XoopsModules\Yogurt\Helper;
 use XoopsObject;
 use CriteriaElement;
 use XoopsMediaUploader;
@@ -31,7 +30,6 @@ require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 class AudioHandler extends XoopsPersistableObjectHandler
 {
     public $isAdmin;
-
     public $helper;
 
     /**
@@ -78,7 +76,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
      * @param null $fields
      * @return mixed reference to the {@link yogurt_audio} object, FALSE if failed
      */
-    public function get(
+    public function get2(
         $id = null,
         $fields = null
     ) {
@@ -325,7 +323,9 @@ class AudioHandler extends XoopsPersistableObjectHandler
         $uploadDir = \XOOPS_UPLOAD_PATH . '/yogurt/audio/';
         // create the object to upload
         $uploader = new XoopsMediaUploader(
-            $uploadDir, $allowed_mimetypes, $maxfilesize
+            $uploadDir,
+            $allowed_mimetypes,
+            $maxfilesize
         );
         // fetch the media
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
@@ -349,7 +349,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
             $audio->setVar('uid_owner', $uid);
             $this->insert($audio);
             $saved_destination = $uploader->getSavedDestination();
-            //print_r($_FILES);
+        //print_r($_FILES);
         } else {
             echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
 

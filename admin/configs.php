@@ -72,7 +72,13 @@ switch ($op) {
         $configsObject->setVar('suspension', ((1 == Request::getInt('suspension', 0)) ? '1' : '0'));
         $configsObject->setVar('backup_password', Request::getVar('backup_password', ''));
         $configsObject->setVar('backup_email', Request::getVar('backup_email', ''));
-        $configsObject->setVar('end_suspension', date('Y-m-d H:i:s',strtotime($_REQUEST['end_suspension']['date']) + $_REQUEST['end_suspension']['time']));
+//        $configsObject->setVar('end_suspension', date('Y-m-d H:i:s', strtotime($_REQUEST['end_suspension']['date']) + $_REQUEST['end_suspension']['time']));
+
+        $endSuspension = date_create_from_format(_SHORTDATESTRING, Request::getString('end_suspension', '', 'POST'));
+        $configsObject->setVar('end_suspension', $endSuspension->getTimestamp());
+
+
+
         if ($configsHandler->insert($configsObject)) {
             redirect_header('configs.php?op=list', 2, AM_YOGURT_FORMOK);
         }
@@ -145,7 +151,11 @@ switch ($op) {
             xoops_load('XoopsPageNav');
 
             $pagenav = new XoopsPageNav(
-                $configsTempRows, $configsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                $configsTempRows,
+                $configsPaginationLimit,
+                $start,
+                'start',
+                'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
@@ -170,8 +180,6 @@ switch ($op) {
         //    for ($i = 0; $i < $fieldsCount; ++$i) {
         if ($configsCount > 0) {
             foreach (array_keys($configsTempArray) as $i) {
-
-
                 $GLOBALS['xoopsTpl']->assign('selectorconfig_id', AM_YOGURT_CONFIGS_CONFIG_ID);
                 $configsArray['config_id'] = $configsTempArray[$i]->getVar('config_id');
 
@@ -215,7 +223,7 @@ switch ($op) {
                 $configsArray['backup_email'] = $configsTempArray[$i]->getVar('backup_email');
 
                 $GLOBALS['xoopsTpl']->assign('selectorend_suspension', AM_YOGURT_CONFIGS_END_SUSPENSION);
-                $configsArray['end_suspension'] = date(_DATESTRING, strtotime($configsTempArray[$i]->getVar('end_suspension')));
+                $configsArray['end_suspension'] = formatTimeStamp($configsTempArray[$i]->getVar('end_suspension'), 's');
 
 
 
@@ -231,7 +239,11 @@ switch ($op) {
             if ($configsCount > $configsPaginationLimit) {
                 xoops_load('XoopsPageNav');
                 $pagenav = new XoopsPageNav(
-                    $configsCount, $configsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                    $configsCount,
+                    $configsPaginationLimit,
+                    $start,
+                    'start',
+                    'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }

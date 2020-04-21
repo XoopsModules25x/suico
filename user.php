@@ -35,15 +35,15 @@ require __DIR__ . '/header.php';
  */
 
 if (($xoopsUser)) {
-   $isAnonym = 0;
-		if (isset($_GET['uid'])) {
-			$uid_owner = Request::getInt('uid', 0, 'GET');
-			$isOwner   = $xoopsUser->getVar('uid') === $uid_owner ? 1 : 0;
-		} else {
-			$uid_owner = (int)$xoopsUser->getVar('uid');
-			$isOwner   = 1;
-		}
-redirect_header('' . XOOPS_URL . "/modules/yogurt/index.php?uid=$uid_owner");
+    $isAnonym = 0;
+    if (isset($_GET['uid'])) {
+        $uid_owner = Request::getInt('uid', 0, 'GET');
+        $isOwner   = $xoopsUser->getVar('uid') === $uid_owner ? 1 : 0;
+    } else {
+        $uid_owner = (int)$xoopsUser->getVar('uid');
+        $isOwner   = 1;
+    }
+    redirect_header('' . XOOPS_URL . "/modules/yogurt/index.php?uid=$uid_owner");
 }
 
 

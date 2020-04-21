@@ -68,9 +68,10 @@ class FriendpetitionForm extends XoopsThemeForm
         //include ID field, it's needed so the module knows if it is a new form or an edited form
 
         $hidden = new XoopsFormHidden(
-            'friendpet_id', $this->targetObject->getVar(
-            'friendpet_id'
-        )
+            'friendpet_id',
+            $this->targetObject->getVar(
+                'friendpet_id'
+            )
         );
         $this->addElement($hidden);
         unset($hidden);
@@ -78,26 +79,38 @@ class FriendpetitionForm extends XoopsThemeForm
         // Friendpet_id
         $this->addElement(
             new XoopsFormLabel(
-                AM_YOGURT_FRIENDPETITION_FRIENDPET_ID, $this->targetObject->getVar(
+                AM_YOGURT_FRIENDPETITION_FRIENDPET_ID,
+                $this->targetObject->getVar(
+                    'friendpet_id'
+                ),
                 'friendpet_id'
-            ), 'friendpet_id'
             )
         );
         // Inviting by Friend_uid
         $this->addElement(
             new XoopsFormSelectUser(
-                AM_YOGURT_FRIENDPETITION_PETITIONER_UID, 'petitioner_uid', false, $this->targetObject->getVar(
-                'petitioner_uid'
-            ), 1, false
+                AM_YOGURT_FRIENDPETITION_PETITIONER_UID,
+                'petitioner_uid',
+                false,
+                $this->targetObject->getVar(
+                    'petitioner_uid'
+                ),
+                1,
+                false
             ),
             false
         );
         // Invited Friend_uid
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_YOGURT_FRIENDPETITION_PETITIONTO_UID, 'petitionto_uid', false, $this->targetObject->getVar(
-                'petitionto_uid'
-            ), 1, false
+                \AM_YOGURT_FRIENDPETITION_PETITIONTO_UID,
+                'petitionto_uid',
+                false,
+                $this->targetObject->getVar(
+                    'petitionto_uid'
+                ),
+                1,
+                false
             ),
             false
         );

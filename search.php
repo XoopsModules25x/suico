@@ -23,7 +23,7 @@ use Xmf\Request;
 require __DIR__ . '/header.php';
 
 $myts   = MyTextSanitizer::getInstance();
-$op     = isset($_REQUEST['op']) ? htmlspecialchars($_REQUEST['op'], ENT_QUOTES | ENT_HTML5) : 'search';
+$op     = Request::getString('op', 'search');
 $groups = $xoopsUser ? $xoopsUser->getGroups() : [XOOPS_GROUP_ANONYMOUS];
 switch ($op) {
     default:
@@ -81,9 +81,12 @@ switch ($op) {
                                     sprintf(
                                         _MD_YOGURT_PROFILE_LARGERTHAN,
                                         $fields[$i]->getVar('field_title')
-                                    ), $fields[$i]->getVar(
-                                         'field_name'
-                                     ) . '_larger', 35, 35
+                                    ),
+                                    $fields[$i]->getVar(
+                                        'field_name'
+                                    ) . '_larger',
+                                    35,
+                                    35
                                 )
                             );
                             $searchform->addElement(
@@ -91,9 +94,12 @@ switch ($op) {
                                     sprintf(
                                         _MD_YOGURT_PROFILE_SMALLERTHAN,
                                         $fields[$i]->getVar('field_title')
-                                    ), $fields[$i]->getVar(
-                                         'field_name'
-                                     ) . '_smaller', 35, 35
+                                    ),
+                                    $fields[$i]->getVar(
+                                        'field_name'
+                                    ) . '_smaller',
+                                    35,
+                                    35
                                 )
                             );
                         } else {
@@ -103,9 +109,12 @@ switch ($op) {
                             );
                             $tray->addElement(
                                 new XoopsFormText(
-                                    '', $fields[$i]->getVar('field_name'), 35, $fields[$i]->getVar(
-                                    'field_maxlength'
-                                )
+                                    '',
+                                    $fields[$i]->getVar('field_name'),
+                                    35,
+                                    $fields[$i]->getVar(
+                                        'field_maxlength'
+                                    )
                                 )
                             );
                             $searchform->addElement($tray);
@@ -118,9 +127,13 @@ switch ($op) {
                             $fields[$i]->getVar('field_options')
                         );
                         $element = new XoopsFormSelect(
-                            $fields[$i]->getVar('field_title'), $fields[$i]->getVar(
-                            'field_name'
-                        ), null, $size, true
+                            $fields[$i]->getVar('field_title'),
+                            $fields[$i]->getVar(
+                                'field_name'
+                            ),
+                            null,
+                            $size,
+                            true
                         );
                         $options = $fields[$i]->getVar('field_options');
                         asort($options);
@@ -130,9 +143,13 @@ switch ($op) {
                         break;
                     case 'yesno':
                         $element = new XoopsFormSelect(
-                            $fields[$i]->getVar('field_title'), $fields[$i]->getVar(
-                            'field_name'
-                        ), null, 2, true
+                            $fields[$i]->getVar('field_title'),
+                            $fields[$i]->getVar(
+                                'field_name'
+                            ),
+                            null,
+                            2,
+                            true
                         );
                         $element->addOption(1, _YES);
                         $element->addOption(0, _NO);
@@ -146,9 +163,12 @@ switch ($op) {
                                 sprintf(
                                     _MD_YOGURT_PROFILE_LATERTHAN,
                                     $fields[$i]->getVar('field_title')
-                                ), $fields[$i]->getVar(
-                                     'field_name'
-                                 ) . '_larger', 15, 0
+                                ),
+                                $fields[$i]->getVar(
+                                    'field_name'
+                                ) . '_larger',
+                                15,
+                                0
                             )
                         );
                         $searchform->addElement(
@@ -156,9 +176,12 @@ switch ($op) {
                                 sprintf(
                                     _MD_YOGURT_PROFILE_EARLIERTHAN,
                                     $fields[$i]->getVar('field_title')
-                                ), $fields[$i]->getVar(
-                                     'field_name'
-                                 ) . '_smaller', 15, time()
+                                ),
+                                $fields[$i]->getVar(
+                                    'field_name'
+                                ) . '_smaller',
+                                15,
+                                time()
                             )
                         );
                         break;
@@ -169,9 +192,13 @@ switch ($op) {
 
                     case 'timezone':
                         $element = new XoopsFormSelect(
-                            $fields[$i]->getVar('field_title'), $fields[$i]->getVar(
-                            'field_name'
-                        ), null, 6, true
+                            $fields[$i]->getVar('field_title'),
+                            $fields[$i]->getVar(
+                                'field_name'
+                            ),
+                            null,
+                            6,
+                            true
                         );
                         require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
                         $element->addOptionArray(XoopsLists::getTimeZoneList());
@@ -180,9 +207,12 @@ switch ($op) {
                         break;
                     case 'language':
                         $element = new XoopsFormSelectLang(
-                            $fields[$i]->getVar('field_title'), $fields[$i]->getVar(
-                            'field_name'
-                        ), null, 6
+                            $fields[$i]->getVar('field_title'),
+                            $fields[$i]->getVar(
+                                'field_name'
+                            ),
+                            null,
+                            6
                         );
                         $searchform->addElement($element);
                         unset($element);
@@ -241,7 +271,7 @@ switch ($op) {
         }
         if (isset($_REQUEST['email']) && '' !== Request::getString('email', '', 'REQUEST')) {
             $string = $myts->addSlashes(trim(Request::getString('email', '', 'REQUEST')));
-            switch ($_REQUEST['email_match']) {
+            switch (Request::getString('email_match', '', 'REQUEST')) {
                 case XOOPS_MATCH_START:
                     $string .= '%';
                     break;
@@ -436,16 +466,16 @@ switch ($op) {
         //Sort information
         foreach (array_keys($users) as $k) {
             $userarray['output'][] = "<a href='userinfo.php?uid=" . (int)$users[$k]->getVar(
-                    'uid'
-                ) . "'>" . $users[$k]->getVar(
+                'uid'
+            ) . "'>" . $users[$k]->getVar(
                     'uname'
                 ) . '</a>';
             $userarray['output'][] = 1 === $users[$k]->getVar(
                 'user_viewemail'
             )
                                      || $xoopsUser->isAdmin() ? $users[$k]->getVar(
-                'email'
-            ) : '';
+                                         'email'
+                                     ) : '';
 
             foreach (array_keys($fields) as $i) {
                 if (in_array($fields[$i]->getVar('fieldid'), $searchable_fields, true)

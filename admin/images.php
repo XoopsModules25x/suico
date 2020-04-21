@@ -60,14 +60,23 @@ switch ($op) {
         }
         // Form save fields
         $imagesObject->setVar('title', Request::getVar('title', ''));
-        $imagesObject->setVar('data_creation', $_REQUEST['data_creation']);
-        $imagesObject->setVar('data_update', $_REQUEST['data_update']);
+
+        $imageCreated = date_create_from_format(_SHORTDATESTRING, Request::getString('data_creation', '', 'POST'));
+        $imagesObject->setVar('data_creation', $imageCreated->getTimestamp());
+
+        $imageUpdated = date_create_from_format(_SHORTDATESTRING, Request::getString('data_update', '', 'POST'));
+        $imagesObject->setVar('data_update', $imageUpdated->getTimestamp());
+
         $imagesObject->setVar('uid_owner', Request::getVar('uid_owner', ''));
 
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/images/';
         $uploader  = new \XoopsMediaUploader(
-            $uploadDir, $helper->getConfig('mimetypes'), $helper->getConfig('maxsize'), null, null
+            $uploadDir,
+            $helper->getConfig('mimetypes'),
+            $helper->getConfig('maxsize'),
+            null,
+            null
         );
         if ($uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0])) {
             //$extension = preg_replace( '/^.+\.([^.]+)$/sU' , '' , $_FILES['attachedfile']['name']);
@@ -82,7 +91,7 @@ switch ($op) {
                 $imagesObject->setVar('url', $uploader->getSavedFileName());
             }
         } else {
-        $imagesObject->setVar('url', Request::getVar('url', ''));
+            $imagesObject->setVar('url', Request::getVar('url', ''));
         }
 
         $imagesObject->setVar('private', ((1 == \Xmf\Request::getInt('private', 0)) ? '1' : '0'));
@@ -169,7 +178,11 @@ switch ($op) {
             xoops_load('XoopsPageNav');
 
             $pagenav = new XoopsPageNav(
-                $imagesTempRows, $imagesPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                $imagesTempRows,
+                $imagesPaginationLimit,
+                $start,
+                'start',
+                'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
@@ -206,16 +219,10 @@ switch ($op) {
                 $imagesArray['title'] = $imagesTempArray[$i]->getVar('title');
 
                 $GLOBALS['xoopsTpl']->assign('selectordata_creation', AM_YOGURT_IMAGES_DATA_CREATION);
-                $imagesArray['data_creation'] = date(
-                    _SHORTDATESTRING,
-                    strtotime((string)$imagesTempArray[$i]->getVar('data_creation'))
-                );
+                $imagesArray['data_creation'] = formatTimeStamp($imagesTempArray[$i]->getVar('data_creation'), 's');
 
                 $GLOBALS['xoopsTpl']->assign('selectordata_update', AM_YOGURT_IMAGES_DATA_UPDATE);
-                $imagesArray['data_update'] = date(
-                    _SHORTDATESTRING,
-                    strtotime((string)$imagesTempArray[$i]->getVar('data_update'))
-                );
+                $imagesArray['data_update'] = formatTimeStamp($imagesTempArray[$i]->getVar('data_update'), 's');
 
                 $GLOBALS['xoopsTpl']->assign('selectoruid_owner', AM_YOGURT_IMAGES_UID_OWNER);
                 $imagesArray['uid_owner'] = strip_tags(
@@ -239,7 +246,11 @@ switch ($op) {
             if ($imagesCount > $imagesPaginationLimit) {
                 xoops_load('XoopsPageNav');
                 $pagenav = new XoopsPageNav(
-                    $imagesCount, $imagesPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                    $imagesCount,
+                    $imagesPaginationLimit,
+                    $start,
+                    'start',
+                    'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }

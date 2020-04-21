@@ -23,8 +23,8 @@ use XoopsModules\Yogurt\Helper;
 use XoopsModules\Yogurt\Utility;
 
 include dirname(
-            __DIR__
-        ) . '/preloads/autoloader.php';
+    __DIR__
+) . '/preloads/autoloader.php';
 
 /**
  * Prepares system prior to attempting to install module
@@ -127,8 +127,8 @@ function xoops_module_install_yogurt(
 
     //delete .html entries from the tpl table
     $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix(
-            'tplfile'
-        ) . " WHERE `tpl_module` = '" . $module->getVar(
+        'tplfile'
+    ) . " WHERE `tpl_module` = '" . $module->getVar(
             'dirname',
             'n'
         ) . "' AND `tpl_file` LIKE '%.html%'";

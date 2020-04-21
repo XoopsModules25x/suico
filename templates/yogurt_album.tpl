@@ -20,7 +20,7 @@
 		
 		<div class="form-group">
 		<label><strong><{$lang_caption}> :</strong></label>
-		<input type='text' class='form-control' name='caption' id='caption' size='35' maxlength='55' value='' required>
+            <label for='caption'></label><input type='text' class='form-control' name='caption' id='caption' size='35' maxlength='55' value='' required>
 		</div>
   
 		<div class="form-group">
@@ -72,15 +72,15 @@
         </form>
     <{/if}>
     <{if ($pics_array[i].private == 1) }>
-        <p><span class="yogurt-album-private"> Private </span></p>
-        <p class="yogurt-album-picture-img"><a href="<{$xoops_url}>/uploads/yogurt/images/resized_<{$pics_array[i].url}>" rel="lightbox[album]" title="<{$pics_array[i].desc}>">
-                <img class="thumb" src="<{$xoops_url}>/uploads/yogurt/images/thumb_<{$pics_array[i].url}>" rel="lightbox" title="<{$pics_array[i].desc}>">
+         <p class="yogurt-album-picture-img"><a href="<{$xoops_url}>/uploads/yogurt/images/resized_<{$pics_array[i].url}>" rel="lightbox[album]" title="<{$pics_array[i].desc}>">
+                <img class="thumb" src="<{$xoops_url}>/uploads/yogurt/images/thumb_<{$pics_array[i].url}>" rel="lightbox" alt="<{$pics_array[i].desc}> title="<{$pics_array[i].desc}>">
             </a></p>
         <p id="yogurt-album-picture-desc"><{$pics_array[i].desc}></p>
+        <p><span class="yogurt-album-private"> Private </span></p>
     <{/if}>
 
     <p class="yogurt-album-picture-img"><a href="<{$xoops_url}>/uploads/yogurt/images/resized_<{$pics_array[i].url}>" rel="lightbox[album]" title="<{$pics_array[i].desc}>">
-            <img class="thumb" src="<{$xoops_url}>/uploads/yogurt/images/thumb_<{$pics_array[i].url}>" rel="lightbox" title="<{$pics_array[i].desc}>">
+            <img class="thumb" src="<{$xoops_url}>/uploads/yogurt/images/thumb_<{$pics_array[i].url}>" rel="lightbox" alt="<{$pics_array[i].desc}>" title="<{$pics_array[i].desc}>">
         </a></p>
     <p id="yogurt-album-picture-desc"><{$pics_array[i].desc}></p>
 
@@ -117,11 +117,11 @@
         </form>
     <{/if}>
     <{if ($pics_array[i].private == 1) }>
-        <p><span class="yogurt-album-private"> Private </span></p>
         <p class="yogurt-album-picture-img"><a href="<{$xoops_url}>/uploads/yogurt/images/resized_<{$pics_array[i].url}>" rel="lightbox[album]" title="<{$pics_array[i].desc}>">
-                <img class="thumb" src="<{$xoops_url}>/uploads/yogurt/images/thumb_<{$pics_array[i].url}>" rel="lightbox" title="<{$pics_array[i].desc}>">
+                <img class="thumb" src="<{$xoops_url}>/uploads/yogurt/images/thumb_<{$pics_array[i].url}>" rel="lightbox" alt="<{$pics_array[i].desc}>" title="<{$pics_array[i].desc}>">
             </a></p>
         <p id="yogurt-album-picture-desc"><{$pics_array[i].desc}></p>
+        <p><span class="yogurt-album-private"> Private </span></p>
     <{/if}>
 
 

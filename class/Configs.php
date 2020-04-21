@@ -50,7 +50,7 @@ class Configs extends XoopsObject
         $this->initVar('suspension', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('backup_password', \XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('backup_email', \XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('end_suspension', \XOBJ_DTYPE_TIMESTAMP);
+        $this->initVar('end_suspension', \XOBJ_DTYPE_INT);
         if (!empty($id)) {
             if (\is_array($id)) {
                 $this->assignVars($id);
@@ -106,8 +106,8 @@ class Configs extends XoopsObject
         }
         if (!$asobject) {
             $sql    = 'SELECT config_id FROM ' . $db->prefix(
-                    'yogurt_configs'
-                ) . "${where_query} ORDER BY ${sort} ${order}";
+                'yogurt_configs'
+            ) . "${where_query} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['yogurt_configs_id'];

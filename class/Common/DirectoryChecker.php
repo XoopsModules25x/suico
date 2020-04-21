@@ -57,57 +57,57 @@ class DirectoryChecker
         $moduleDirName      = \basename(\dirname(__DIR__, 2));
         $moduleDirNameUpper = mb_strtoupper($moduleDirName);
         if (!@\is_dir($path)) {
-            $path_status = "<img src='${pathIcon16}/0.png'>";
-            $path_status .= "${path} (" . \constant('CO_' . $moduleDirNameUpper . '_' . 'DC_NOTAVAILABLE') . ') ';
-            $path_status .= "<form action='" . $_SERVER['SCRIPT_NAME'] . "' method='post'>";
-            $path_status .= "<input type='hidden' name='op' value='createdir'>";
-            $path_status .= "<input type='hidden' name='path' value='${path}'>";
-            $path_status .= "<input type='hidden' name='redirect' value='${redirectFile}'>";
-            $path_status .= "<button class='submit' onClick='this.form.submit();'>" . \constant(
-                    'CO_' . $moduleDirNameUpper . '_' . 'DC_CREATETHEDIR'
-                ) . '</button>';
-            $path_status .= '</form>';
+            $pathStatus = "<img src='${pathIcon16}/0.png' alt='DC_NOTAVAILABLE'>";
+            $pathStatus .= "${path} (" . \constant('CO_' . $moduleDirNameUpper . '_' . 'DC_NOTAVAILABLE') . ') ';
+            $pathStatus .= "<form action='" . $_SERVER['SCRIPT_NAME'] . "' method='post'>";
+            $pathStatus .= "<input type='hidden' name='op' value='createdir'>";
+            $pathStatus .= "<input type='hidden' name='path' value='${path}'>";
+            $pathStatus .= "<input type='hidden' name='redirect' value='${redirectFile}'>";
+            $pathStatus .= "<button class='submit' onClick='this.form.submit();'>" . \constant(
+                'CO_' . $moduleDirNameUpper . '_' . 'DC_CREATETHEDIR'
+            ) . '</button>';
+            $pathStatus .= '</form>';
         } elseif (@\is_writable($path)) {
-            $path_status = "<img src='${pathIcon16}/1.png'>";
-            $path_status .= "${path} (" . \constant('CO_' . $moduleDirNameUpper . '_' . 'DC_AVAILABLE') . ') ';
+            $pathStatus = "<img src='${pathIcon16}/1.png' alt='DC_AVAILABLE'>";
+            $pathStatus .= "${path} (" . \constant('CO_' . $moduleDirNameUpper . '_' . 'DC_AVAILABLE') . ') ';
             $currentMode = mb_substr(\decoct(\fileperms($path)), 2);
             if ($currentMode !== \decoct($mode)) {
-                $path_status = "<img src='${pathIcon16}/0.png'>";
-                $path_status .= $path . \sprintf(
-                        \constant('CO_' . $moduleDirNameUpper . '_' . 'DC_NOTWRITABLE'),
-                        \decoct($mode),
-                        $currentMode
-                    );
-                $path_status .= "<form action='" . $_SERVER['SCRIPT_NAME'] . "' method='post'>";
-                $path_status .= "<input type='hidden' name='op' value='setdirperm'>";
-                $path_status .= "<input type='hidden' name='mode' value='${mode}'>";
-                $path_status .= "<input type='hidden' name='path' value='${path}'>";
-                $path_status .= "<input type='hidden' name='redirect' value='${redirectFile}'>";
-                $path_status .= "<button class='submit' onClick='this.form.submit();'>" . \constant(
-                        'CO_' . $moduleDirNameUpper . '_' . 'DC_SETMPERM'
-                    ) . '</button>';
-                $path_status .= '</form>';
-            }
-        } else {
-            $currentMode = mb_substr(\decoct(\fileperms($path)), 2);
-            $path_status = "<img src='${pathIcon16}/0.png'>";
-            $path_status .= $path . \sprintf(
+                $pathStatus = "<img src='${pathIcon16}/0.png' alt='DC_NOTWRITABLE'>";
+                $pathStatus .= $path . \sprintf(
                     \constant('CO_' . $moduleDirNameUpper . '_' . 'DC_NOTWRITABLE'),
                     \decoct($mode),
                     $currentMode
                 );
-            $path_status .= "<form action='" . $_SERVER['SCRIPT_NAME'] . "' method='post'>";
-            $path_status .= "<input type='hidden' name='op' value='setdirperm'>";
-            $path_status .= "<input type='hidden' name='mode' value='${mode}'>";
-            $path_status .= "<input type='hidden' name='path' value='${path}'>";
-            $path_status .= "<input type='hidden' name='redirect' value='${redirectFile}'>";
-            $path_status .= "<button class='submit' onClick='this.form.submit();'>" . \constant(
+                $pathStatus .= "<form action='" . $_SERVER['SCRIPT_NAME'] . "' method='post'>";
+                $pathStatus .= "<input type='hidden' name='op' value='setdirperm'>";
+                $pathStatus .= "<input type='hidden' name='mode' value='${mode}'>";
+                $pathStatus .= "<input type='hidden' name='path' value='${path}'>";
+                $pathStatus .= "<input type='hidden' name='redirect' value='${redirectFile}'>";
+                $pathStatus .= "<button class='submit' onClick='this.form.submit();'>" . \constant(
                     'CO_' . $moduleDirNameUpper . '_' . 'DC_SETMPERM'
                 ) . '</button>';
-            $path_status .= '</form>';
+                $pathStatus .= '</form>';
+            }
+        } else {
+            $currentMode = mb_substr(\decoct(\fileperms($path)), 2);
+            $pathStatus = "<img src='${pathIcon16}/0.png' alt='DC_NOTWRITABLE'>";
+            $pathStatus .= $path . \sprintf(
+                \constant('CO_' . $moduleDirNameUpper . '_' . 'DC_NOTWRITABLE'),
+                \decoct($mode),
+                $currentMode
+            );
+            $pathStatus .= "<form action='" . $_SERVER['SCRIPT_NAME'] . "' method='post'>";
+            $pathStatus .= "<input type='hidden' name='op' value='setdirperm'>";
+            $pathStatus .= "<input type='hidden' name='mode' value='${mode}'>";
+            $pathStatus .= "<input type='hidden' name='path' value='${path}'>";
+            $pathStatus .= "<input type='hidden' name='redirect' value='${redirectFile}'>";
+            $pathStatus .= "<button class='submit' onClick='this.form.submit();'>" . \constant(
+                'CO_' . $moduleDirNameUpper . '_' . 'DC_SETMPERM'
+            ) . '</button>';
+            $pathStatus .= '</form>';
         }
 
-        return $path_status;
+        return $pathStatus;
     }
 
     /**
@@ -125,16 +125,16 @@ class DirectoryChecker
         // http://www.php.net/manual/en/function.mkdir.php
         return \is_dir($target)
                || (self::createDirectory(
-                    \dirname($target),
-                    $mode
-                )
+                   \dirname($target),
+                   $mode
+               )
                    && !\mkdir(
-                    $target,
-                    $mode
-                )
+                       $target,
+                       $mode
+                   )
                    && !\is_dir(
-                    $target
-                ));
+                       $target
+                   ));
     }
 
     /**
@@ -167,10 +167,10 @@ $op = Request::getString('op', '', 'POST');
 switch ($op) {
     case 'createdir':
         if (Request::hasVar('path', 'POST')) {
-            $path = $_POST['path'];
+            $path = Request::getString('path', '', 'POST');
         }
         if (Request::hasVar('redirect', 'POST')) {
-            $redirect = $_POST['redirect'];
+            $redirect = Request::getString('redirect', '', 'POST');
         }
         $msg = DirectoryChecker::createDirectory($path) ? \constant(
             'CO_' . $moduleDirNameUpper . '_' . 'DC_DIRCREATED'
@@ -181,13 +181,13 @@ switch ($op) {
         break;
     case 'setdirperm':
         if (Request::hasVar('path', 'POST')) {
-            $path = $_POST['path'];
+            $path = Request::getString('path', '', 'POST');
         }
         if (Request::hasVar('redirect', 'POST')) {
-            $redirect = $_POST['redirect'];
+            $redirect = Request::getString('redirect', '', 'POST');
         }
         if (Request::hasVar('mode', 'POST')) {
-            $mode = $_POST['mode'];
+            $mode = Request::getString('mode', '', 'POST');
         }
         $msg = DirectoryChecker::setDirectoryPermissions($path, $mode) ? \constant(
             'CO_' . $moduleDirNameUpper . '_' . 'DC_PERMSET'

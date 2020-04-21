@@ -13,12 +13,12 @@
 		
 		<div class="form-group">
 			<label for="video"><strong> <{$lang_youtubecodeLabel}></strong></label>
-			<input type='text' name='codigo' id='codigo' class='form-control' value=''>
+            <label for='codigo'></label><input type='text' name='codigo' id='codigo' class='form-control' value=''>
 		</div>
           
         <div class="form-group">
 			<label for="video"><strong> <{$lang_captionLabel}></strong></label>
-			 <textarea class="form-control" name='caption' id='caption' rows='5' cols='50'></textarea>
+            <label for='caption'></label><textarea class="form-control" name='caption' id='caption' rows='5' cols='50'></textarea>
 		</div>
             
           <input type='submit' class='btn btn-primary' name='submit_button' id='submit_button' value='<{$lang_submitValue}>'>

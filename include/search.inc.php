@@ -53,8 +53,8 @@ function yogurt_search(
 
     $ret = [];
     $sql = 'SELECT cod_img, title,  data_creation,  uid_owner, url FROM ' . $xoopsDB->prefix(
-            'yogurt_images'
-        ) . ' WHERE ';
+        'yogurt_images'
+    ) . ' WHERE ';
     if (0 !== $userid) {
         $sql .= '(uid_owner =' . (int)$userid . ')';
     }

@@ -44,9 +44,10 @@ function b_yogurt_friends_show($options)
          */
 
         $criteria_2 = new Criteria(
-            'friend1_uid', $xoopsUser->getVar(
-            'uid'
-        )
+            'friend1_uid',
+            $xoopsUser->getVar(
+                'uid'
+            )
         );
 
         /**

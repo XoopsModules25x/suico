@@ -53,7 +53,11 @@ $form->addElement(
 $mod_select = new XoopsFormSelect(
     constant(
         'CO_' . $moduleDirNameUpper . '_' . 'VISIBLEIN'
-    ), 'bmodule', $block['modules'], 5, true
+    ),
+    'bmodule',
+    $block['modules'],
+    5,
+    true
 );
 /** @var XoopsModuleHandler $moduleHandler */
 $moduleHandler = xoops_getHandler('module');
@@ -88,14 +92,16 @@ if ($block['is_custom']) {
     $form->addElement($ctype_select);
 } else {
     if ('' !== $block['template']) {
+        /** @var \XoopsTplfileHandler $tplfileHandler */
         $tplfileHandler = xoops_getHandler('tplfile');
         $btemplate      = $tplfileHandler->find($GLOBALS['xoopsConfig']['template_set'], 'block', $block['bid']);
         if (count($btemplate) > 0) {
             $form->addElement(
                 new XoopsFormLabel(
-                    _AM_SYSTEM_BLOCKS_CONTENT, '<a href="' . XOOPS_URL . '/modules/system/admin.php?fct=tplsets&amp;op=edittpl&amp;id=' . $btemplate[0]->getVar(
-                                                 'tpl_id'
-                                             ) . '">' . _AM_SYSTEM_BLOCKS_EDITTPL . '</a>'
+                    _AM_SYSTEM_BLOCKS_CONTENT,
+                    '<a href="' . XOOPS_URL . '/modules/system/admin.php?fct=tplsets&amp;op=edittpl&amp;id=' . $btemplate[0]->getVar(
+                        'tpl_id'
+                    ) . '">' . _AM_SYSTEM_BLOCKS_EDITTPL . '</a>'
                 )
             );
         } else {
@@ -103,9 +109,10 @@ if ($block['is_custom']) {
             if (count($btemplate2) > 0) {
                 $form->addElement(
                     new XoopsFormLabel(
-                        _AM_SYSTEM_BLOCKS_CONTENT, '<a href="' . XOOPS_URL . '/modules/system/admin.php?fct=tplsets&amp;op=edittpl&amp;id=' . $btemplate2[0]->getVar(
-                                                     'tpl_id'
-                                                 ) . '" target="_blank">' . _AM_SYSTEM_BLOCKS_EDITTPL . '</a>'
+                        _AM_SYSTEM_BLOCKS_CONTENT,
+                        '<a href="' . XOOPS_URL . '/modules/system/admin.php?fct=tplsets&amp;op=edittpl&amp;id=' . $btemplate2[0]->getVar(
+                            'tpl_id'
+                        ) . '" target="_blank">' . _AM_SYSTEM_BLOCKS_EDITTPL . '</a>'
                     )
                 );
             }
@@ -133,6 +140,7 @@ $cache_select->addOptionArray(
 );
 $form->addElement($cache_select);
 
+/** @var XoopsGroupPermHandler $grouppermHandler */
 $grouppermHandler = xoops_getHandler('groupperm');
 $groups           = $grouppermHandler->getGroupIds('block_read', $block['bid']);
 

@@ -143,9 +143,9 @@ if (1 === $marker) {//if (1 === $marker) {
     }
 
     $myts          = MyTextSanitizer::getInstance();
-    $group_title   = $myts->displayTarea($_POST['group_title'], 0, 1, 1, 1, 1);
-    $group_desc    = $myts->displayTarea($_POST['group_desc'], 0, 1, 1, 1, 1);
-    $group_img     = !empty($_POST['group_img']) ? $_POST['group_img'] : '';
+    $group_title   = $myts->displayTarea(Request::getString('group_title', '', 'POST'), 0, 1, 1, 1, 1);
+    $group_desc    = $myts->displayTarea(Request::getString('group_desc', '', 'POST'), 0, 1, 1, 1, 1);
+    $group_img     = !empty($_POST['group_img']) ? Request::getString('group_img', '', 'POST') : '';
     $path_upload   = XOOPS_UPLOAD_PATH . '/yogurt/groups';
     $pictwidth     = $helper->getConfig('resized_width');
     $pictheight    = $helper->getConfig('resized_height');
@@ -167,7 +167,7 @@ if (1 === $marker) {//if (1 === $marker) {
         $relgroupuser->setVar('rel_group_id', $xoopsDB->getInsertId());
         $relgroupuser->setVar('rel_user_uid', $xoopsUser->getVar('uid'));
         $relgroupuserFactory->insert2($relgroupuser);
-		$group_id=$relgroupuser->getVar('rel_group_id', $xoopsDB->getInsertId());
+        $group_id=$relgroupuser->getVar('rel_group_id', $xoopsDB->getInsertId());
         redirect_header('group.php?group_id='.$group_id.'', 500, _MD_YOGURT_GROUP_CREATED);
     } else {
         $groupsFactory->renderFormSubmit(120000, $xoopsTpl);

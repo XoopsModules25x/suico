@@ -39,7 +39,10 @@ if ($friendpetitionFactory->insert2($newpetition)) {
     $notificationHandler->triggerEvent('friendship', Request::getInt('petitionto_uid', 0, 'POST'), 'new_friendship', $extra_tags);
 
     redirect_header(
-        XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('petitionto_uid', 0, 'POST'), 3, _MD_YOGURT_PETITIONTO);
+        XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('petitionto_uid', 0, 'POST'),
+        3,
+        _MD_YOGURT_PETITIONTO
+    );
 } else {
     redirect_header(
         XOOPS_URL . '/modules/yogurt/index.php?uid=' . $xoopsUser->getVar('uid'),

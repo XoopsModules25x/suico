@@ -69,9 +69,10 @@ class SuspensionsForm extends XoopsThemeForm
         //include ID field, it's needed so the module knows if it is a new form or an edited form
 
         $hidden = new XoopsFormHidden(
-            'uid', $this->targetObject->getVar(
-            'uid'
-        )
+            'uid',
+            $this->targetObject->getVar(
+                'uid'
+            )
         );
         $this->addElement($hidden);
         unset($hidden);
@@ -83,54 +84,78 @@ class SuspensionsForm extends XoopsThemeForm
         // Old_pass
         $this->addElement(
             new XoopsFormText(
-                AM_YOGURT_SUSPENSIONS_OLD_PASS, 'old_pass', 50, 255, $this->targetObject->getVar(
-                'old_pass'
-            )
+                AM_YOGURT_SUSPENSIONS_OLD_PASS,
+                'old_pass',
+                50,
+                255,
+                $this->targetObject->getVar(
+                    'old_pass'
+                )
             ),
             false
         );
         // Old_email
         $this->addElement(
             new XoopsFormText(
-                AM_YOGURT_SUSPENSIONS_OLD_EMAIL, 'old_email', 50, 255, $this->targetObject->getVar(
-                'old_email'
-            )
+                AM_YOGURT_SUSPENSIONS_OLD_EMAIL,
+                'old_email',
+                50,
+                255,
+                $this->targetObject->getVar(
+                    'old_email'
+                )
             ),
             false
         );
         // Old_signature
         $this->addElement(
             new XoopsFormTextArea(
-                AM_YOGURT_SUSPENSIONS_OLD_SIGNATURE, 'old_signature', $this->targetObject->getVar(
-                'old_signature'
-            ), 4, 47
+                AM_YOGURT_SUSPENSIONS_OLD_SIGNATURE,
+                'old_signature',
+                $this->targetObject->getVar(
+                    'old_signature'
+                ),
+                4,
+                47
             ),
             false
         );
         // Suspension_time
         $this->addElement(
             new XoopsFormText(
-                AM_YOGURT_SUSPENSIONS_SUSPENSION_TIME, 'suspension_time', 50, 255, $this->targetObject->getVar(
-                'suspension_time'
-            )
+                AM_YOGURT_SUSPENSIONS_SUSPENSION_TIME,
+                'suspension_time',
+                50,
+                255,
+                $this->targetObject->getVar(
+                    'suspension_time'
+                )
             ),
             false
         );
         // Old_enc_type
         $this->addElement(
             new XoopsFormText(
-                AM_YOGURT_SUSPENSIONS_OLD_ENC_TYPE, 'old_enc_type', 50, 255, $this->targetObject->getVar(
-                'old_enc_type'
-            )
+                AM_YOGURT_SUSPENSIONS_OLD_ENC_TYPE,
+                'old_enc_type',
+                50,
+                255,
+                $this->targetObject->getVar(
+                    'old_enc_type'
+                )
             ),
             false
         );
         // Old_pass_expired
         $this->addElement(
             new XoopsFormText(
-                AM_YOGURT_SUSPENSIONS_OLD_PASS_EXPIRED, 'old_pass_expired', 50, 255, $this->targetObject->getVar(
-                'old_pass_expired'
-            )
+                AM_YOGURT_SUSPENSIONS_OLD_PASS_EXPIRED,
+                'old_pass_expired',
+                50,
+                255,
+                $this->targetObject->getVar(
+                    'old_pass_expired'
+                )
             ),
             false
         );

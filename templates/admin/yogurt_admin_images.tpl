@@ -4,10 +4,12 @@
               onsubmit="if(window.document.select.op.value =='') {return false;} else if (window.document.select.op.value =='delete') {return deleteSubmitValid('imagesId[]');} else if (isOneChecked('imagesId[]')) {return true;} else {alert('<{$smarty.const.AM_IMAGES_SELECTED_ERROR}>'); return false;}">
             <input type="hidden" name="confirm" value="1"/>
             <div class="floatleft">
-                <select name="op">
-                    <option value=""><{$smarty.const.AM_YOGURT_SELECT}></option>
-                    <option value="delete"><{$smarty.const.AM_YOGURT_SELECTED_DELETE}></option>
-                </select>
+                <label>
+                    <select name="op">
+                        <option value=""><{$smarty.const.AM_YOGURT_SELECT}></option>
+                        <option value="delete"><{$smarty.const.AM_YOGURT_SELECTED_DELETE}></option>
+                    </select>
+                </label>
                 <input id="submitUp" class="formButton" type="submit" name="submitselect" value="<{$smarty.const._SUBMIT}>" title="<{$smarty.const._SUBMIT}>"/>
             </div>
             <div class="floatcenter0">

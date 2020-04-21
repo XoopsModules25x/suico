@@ -48,7 +48,8 @@ if ($uid_voter === $uid_voted) {
  * Verify that this user hasn't voted or added this user yet
  */
 $criteria_uidvoter = new Criteria(
-    'uid_voter', $uid_voter
+    'uid_voter',
+    $uid_voter
 );
 $criteria_uidvoted = new Criteria('uid_voted', $uid_voted);
 $criteria          = new CriteriaCompo($criteria_uidvoter);

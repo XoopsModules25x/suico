@@ -68,9 +68,10 @@ class VisitorsForm extends XoopsThemeForm
         //include ID field, it's needed so the module knows if it is a new form or an edited form
 
         $hidden = new XoopsFormHidden(
-            'cod_visit', $this->targetObject->getVar(
-            'cod_visit'
-        )
+            'cod_visit',
+            $this->targetObject->getVar(
+                'cod_visit'
+            )
         );
         $this->addElement($hidden);
         unset($hidden);
@@ -82,36 +83,53 @@ class VisitorsForm extends XoopsThemeForm
         // Uid_owner
         $this->addElement(
             new XoopsFormSelectUser(
-                AM_YOGURT_VISITORS_UID_OWNER, 'uid_owner', false, $this->targetObject->getVar(
-                'uid_owner'
-            ), 1, false
+                AM_YOGURT_VISITORS_UID_OWNER,
+                'uid_owner',
+                false,
+                $this->targetObject->getVar(
+                    'uid_owner'
+                ),
+                1,
+                false
             ),
             false
         );
         // Uid_visitor
         $this->addElement(
             new XoopsFormSelectUser(
-                AM_YOGURT_VISITORS_UID_VISITOR, 'uid_visitor', false, $this->targetObject->getVar(
-                'uid_visitor'
-            ), 1, false
+                AM_YOGURT_VISITORS_UID_VISITOR,
+                'uid_visitor',
+                false,
+                $this->targetObject->getVar(
+                    'uid_visitor'
+                ),
+                1,
+                false
             ),
             false
         );
         // Uname_visitor
         $this->addElement(
             new XoopsFormText(
-                AM_YOGURT_VISITORS_UNAME_VISITOR, 'uname_visitor', 50, 255, $this->targetObject->getVar(
-                'uname_visitor'
-            )
+                AM_YOGURT_VISITORS_UNAME_VISITOR,
+                'uname_visitor',
+                50,
+                255,
+                $this->targetObject->getVar(
+                    'uname_visitor'
+                )
             ),
             false
         );
         // Datetime
         $this->addElement(
             new XoopsFormTextDateSelect(
-                AM_YOGURT_VISITORS_DATETIME, 'datetime', 0, \strtotime(
-                                               $this->targetObject->getVar('datetime')
-                                           )
+                AM_YOGURT_VISITORS_DATETIME,
+                'datetime',
+                0,
+                \strtotime(
+                    $this->targetObject->getVar('datetime')
+                )
             )
         );
 

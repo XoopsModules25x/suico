@@ -19,6 +19,34 @@
     rel_group_id: '10'
     rel_user_uid: '2'
 -
-    rel_id: '12'
-    rel_group_id: '9'
+    rel_id: '13'
+    rel_group_id: '13'
     rel_user_uid: '2'
+-
+    rel_id: '15'
+    rel_group_id: '14'
+    rel_user_uid: '1'
+-
+    rel_id: '16'
+    rel_group_id: '13'
+    rel_user_uid: '1'
+-
+    rel_id: '17'
+    rel_group_id: '15'
+    rel_user_uid: '1'
+-
+    rel_id: '18'
+    rel_group_id: '16'
+    rel_user_uid: '1'
+-
+    rel_id: '19'
+    rel_group_id: '17'
+    rel_user_uid: '1'
+-
+    rel_id: '20'
+    rel_group_id: '18'
+    rel_user_uid: '1'
+-
+    rel_id: '21'
+    rel_group_id: '19'
+    rel_user_uid: '1'

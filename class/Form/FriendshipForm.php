@@ -69,9 +69,10 @@ class FriendshipForm extends XoopsThemeForm
         //include ID field, it's needed so the module knows if it is a new form or an edited form
 
         $hidden = new XoopsFormHidden(
-            'friendship_id', $this->targetObject->getVar(
-            'friendship_id'
-        )
+            'friendship_id',
+            $this->targetObject->getVar(
+                'friendship_id'
+            )
         );
         $this->addElement($hidden);
         unset($hidden);
@@ -79,26 +80,38 @@ class FriendshipForm extends XoopsThemeForm
         // Friendship_id
         $this->addElement(
             new XoopsFormLabel(
-                AM_YOGURT_FRIENDSHIP_FRIENDSHIP_ID, $this->targetObject->getVar(
+                AM_YOGURT_FRIENDSHIP_FRIENDSHIP_ID,
+                $this->targetObject->getVar(
+                    'friendship_id'
+                ),
                 'friendship_id'
-            ), 'friendship_id'
             )
         );
         // Friend1_uid
         $this->addElement(
             new XoopsFormSelectUser(
-                AM_YOGURT_FRIENDSHIP_FRIEND1_UID, 'friend1_uid', false, $this->targetObject->getVar(
-                'friend1_uid'
-            ), 1, false
+                AM_YOGURT_FRIENDSHIP_FRIEND1_UID,
+                'friend1_uid',
+                false,
+                $this->targetObject->getVar(
+                    'friend1_uid'
+                ),
+                1,
+                false
             ),
             false
         );
         // Friend2_uid
         $this->addElement(
             new XoopsFormSelectUser(
-                AM_YOGURT_FRIENDSHIP_FRIEND2_UID, 'friend2_uid', false, $this->targetObject->getVar(
-                'friend2_uid'
-            ), 1, false
+                AM_YOGURT_FRIENDSHIP_FRIEND2_UID,
+                'friend2_uid',
+                false,
+                $this->targetObject->getVar(
+                    'friend2_uid'
+                ),
+                1,
+                false
             ),
             false
         );

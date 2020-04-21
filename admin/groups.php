@@ -66,7 +66,11 @@ switch ($op) {
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/groups/';
         $uploader  = new XoopsMediaUploader(
-            $uploadDir, $helper->getConfig('mimetypes'), $helper->getConfig('maxsize'), null, null
+            $uploadDir,
+            $helper->getConfig('mimetypes'),
+            $helper->getConfig('maxsize'),
+            null,
+            null
         );
         if ($uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0])) {
             //$extension = preg_replace( '/^.+\.([^.]+)$/sU' , '' , $_FILES['attachedfile']['name']);
@@ -167,7 +171,11 @@ switch ($op) {
             xoops_load('XoopsPageNav');
 
             $pagenav = new XoopsPageNav(
-                $groupsTempRows, $groupsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                $groupsTempRows,
+                $groupsPaginationLimit,
+                $start,
+                'start',
+                'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
@@ -213,8 +221,8 @@ switch ($op) {
 
                 $GLOBALS['xoopsTpl']->assign('selectorgroup_img', AM_YOGURT_GROUPS_GROUP_IMG);
                 $groupsArray['group_img']   = "<img src='" . $uploadUrl . $groupsTempArray[$i]->getVar(
-                        'group_img'
-                    ) . "' name='" . 'name' . "' id=" . 'id' . " alt='' style='max-width:100px'>";
+                    'group_img'
+                ) . "' name='" . 'name' . "' id=" . 'id' . " alt='' style='max-width:100px'>";
                 $groupsArray['edit_delete'] = "<a href='groups.php?op=edit&group_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='groups.php?op=delete&group_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='groups.php?op=clone&group_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
@@ -227,7 +235,11 @@ switch ($op) {
             if ($groupsCount > $groupsPaginationLimit) {
                 xoops_load('XoopsPageNav');
                 $pagenav = new XoopsPageNav(
-                    $groupsCount, $groupsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                    $groupsCount,
+                    $groupsPaginationLimit,
+                    $start,
+                    'start',
+                    'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }

@@ -68,11 +68,14 @@ if ('form' === $op) {
     $location_text   = new XoopsFormText(_MD_YOGURT_LOCATIONCONTAINS, 'user_from', 30, 100);
     $occupation_text = new XoopsFormText(_MD_YOGURT_OCCUPATIONCONTAINS, 'user_occ', 30, 100);
     $interest_text   = new XoopsFormText(_MD_YOGURT_INTERESTCONTAINS, 'user_intrest', 30, 100);
-	$extrainfo_text   = new XoopsFormText(_MD_YOGURT_EXTRAINFOCONTAINS, 'bio', 30, 100);
-	$signature_text   = new XoopsFormText(_MD_YOGURT_SIGNATURECONTAINS, 'user_sig', 30, 100);
-	
+    $extrainfo_text   = new XoopsFormText(_MD_YOGURT_EXTRAINFOCONTAINS, 'bio', 30, 100);
+    $signature_text   = new XoopsFormText(_MD_YOGURT_SIGNATURECONTAINS, 'user_sig', 30, 100);
+    
     $lastlog_more = new XoopsFormText(
-        _MD_YOGURT_LASTLOGMORE, 'user_lastlog_more', 10, 5
+        _MD_YOGURT_LASTLOGMORE,
+        'user_lastlog_more',
+        10,
+        5
     );
     $lastlog_less = new XoopsFormText(_MD_YOGURT_LASTLOGLESS, 'user_lastlog_less', 10, 5);
     $reg_more     = new XoopsFormText(_MD_YOGURT_REGMORE, 'user_reg_more', 10, 5);
@@ -105,45 +108,45 @@ if ('form' === $op) {
     $form->addElement($name_tray);
     $form->addElement($email_tray);
     
-	if (1 == $xoopsModuleConfig['displayurl']){
-    $form->addElement($url_text);
-	}
-	
-	if (1 == $xoopsModuleConfig['displayfrom']){
-    $form->addElement($location_text);
-	}
-	
-	if (1 == $xoopsModuleConfig['displayoccupation']){
-    $form->addElement($occupation_text);
-	}
-	 
-	if (1 == $xoopsModuleConfig['displayinterest']){
-    $form->addElement($interest_text); 
-	}
+    if (1 == $xoopsModuleConfig['displayurl']) {
+        $form->addElement($url_text);
+    }
     
-	if (1 == $xoopsModuleConfig['displayextrainfo']){
-    $form->addElement($extrainfo_text); 
-	}
+    if (1 == $xoopsModuleConfig['displayfrom']) {
+        $form->addElement($location_text);
+    }
     
-	if (1 == $xoopsModuleConfig['displaysignature']){
-    $form->addElement($signature_text); 
-	}
-	
-	if (1 == $xoopsModuleConfig['displaylastlogin']){
-	$form->addElement($lastlog_more);
-    $form->addElement($lastlog_less);
-	}
-	
-	if (1 == $xoopsModuleConfig['displayregdate']){
-    $form->addElement($reg_more);
-    $form->addElement($reg_less);
-	}
-	
-	if (1 == $xoopsModuleConfig['displayposts']){
-    $form->addElement($posts_more);
-    $form->addElement($posts_less);
-	}
-	
+    if (1 == $xoopsModuleConfig['displayoccupation']) {
+        $form->addElement($occupation_text);
+    }
+     
+    if (1 == $xoopsModuleConfig['displayinterest']) {
+        $form->addElement($interest_text);
+    }
+    
+    if (1 == $xoopsModuleConfig['displayextrainfo']) {
+        $form->addElement($extrainfo_text);
+    }
+    
+    if (1 == $xoopsModuleConfig['displaysignature']) {
+        $form->addElement($signature_text);
+    }
+    
+    if (1 == $xoopsModuleConfig['displaylastlogin']) {
+        $form->addElement($lastlog_more);
+        $form->addElement($lastlog_less);
+    }
+    
+    if (1 == $xoopsModuleConfig['displayregdate']) {
+        $form->addElement($reg_more);
+        $form->addElement($reg_less);
+    }
+    
+    if (1 == $xoopsModuleConfig['displayposts']) {
+        $form->addElement($posts_more);
+        $form->addElement($posts_less);
+    }
+    
     $form->addElement($sort_select);
     $form->addElement($order_select);
     $form->addElement($limit_text);
@@ -168,17 +171,17 @@ if ('submit' === $op) {
         $match = !empty($_POST['user_uname_match']) ? Request::getInt('user_uname_match', 0, 'POST') : XOOPS_MATCH_START;
         switch ($match) {
             case XOOPS_MATCH_START:
-                $criteria->add(new Criteria('uname', $myts->addSlashes(trim($_POST['user_uname'])) . '%', 'LIKE'));
+                $criteria->add(new Criteria('uname', Request::getString('user_uname', '', 'POST') . '%', 'LIKE'));
                 break;
             case XOOPS_MATCH_END:
-                $criteria->add(new Criteria('uname', '%' . $myts->addSlashes(trim($_POST['user_uname'])), 'LIKE'));
+                $criteria->add(new Criteria('uname', '%' . Request::getString('user_uname', '', 'POST'), 'LIKE'));
                 break;
             case XOOPS_MATCH_EQUAL:
-                $criteria->add(new Criteria('uname', $myts->addSlashes(trim($_POST['user_uname']))));
+                $criteria->add(new Criteria('uname', Request::getString('user_uname', '', 'POST')));
                 break;
             case XOOPS_MATCH_CONTAIN:
                 $criteria->add(
-                    new Criteria('uname', '%' . $myts->addSlashes(trim($_POST['user_uname'])) . '%', 'LIKE')
+                    new Criteria('uname', '%' . Request::getString('user_uname', '', 'POST') . '%', 'LIKE')
                 );
                 break;
         }
@@ -187,19 +190,19 @@ if ('submit' === $op) {
         $match = !empty($_POST['user_name_match']) ? Request::getInt('user_name_match', 0, 'POST') : XOOPS_MATCH_START;
         switch ($match) {
             case XOOPS_MATCH_START:
-                $criteria->add(new Criteria('name', $myts->addSlashes(trim($_POST['user_name'])) . '%', 'LIKE'));
+                $criteria->add(new Criteria('name', Request::getString('user_uname', '', 'POST') . '%', 'LIKE'));
                 break;
             case XOOPS_MATCH_END:
                 $criteria->add(
-                    new Criteria('name', '%' . $myts->addSlashes(trim($_POST['user_name'])) . '%', 'LIKE')
+                    new Criteria('name', '%' . Request::getString('user_uname', '', 'POST') . '%', 'LIKE')
                 );
                 break;
             case XOOPS_MATCH_EQUAL:
-                $criteria->add(new Criteria('name', $myts->addSlashes(trim($_POST['user_name']))));
+                $criteria->add(new Criteria('name', Request::getString('user_uname', '', 'POST')));
                 break;
             case XOOPS_MATCH_CONTAIN:
                 $criteria->add(
-                    new Criteria('name', '%' . $myts->addSlashes(trim($_POST['user_name'])) . '%', 'LIKE')
+                    new Criteria('name', '%' . Request::getString('user_uname', '', 'POST') . '%', 'LIKE')
                 );
                 break;
         }
@@ -208,17 +211,17 @@ if ('submit' === $op) {
         $match = !empty($_POST['user_email_match']) ? Request::getInt('user_email_match', 0, 'POST') : XOOPS_MATCH_START;
         switch ($match) {
             case XOOPS_MATCH_START:
-                $criteria->add(new Criteria('email', $myts->addSlashes(trim($_POST['user_email'])) . '%', 'LIKE'));
+                $criteria->add(new Criteria('email', Request::getString('user_email', '', 'POST') . '%', 'LIKE'));
                 break;
             case XOOPS_MATCH_END:
-                $criteria->add(new Criteria('email', '%' . $myts->addSlashes(trim($_POST['user_email'])), 'LIKE'));
+                $criteria->add(new Criteria('email', '%' . Request::getString('user_email', '', 'POST'), 'LIKE'));
                 break;
             case XOOPS_MATCH_EQUAL:
-                $criteria->add(new Criteria('email', $myts->addSlashes(trim($_POST['user_email']))));
+                $criteria->add(new Criteria('email', Request::getString('user_email', '', 'POST')));
                 break;
             case XOOPS_MATCH_CONTAIN:
                 $criteria->add(
-                    new Criteria('email', '%' . $myts->addSlashes(trim($_POST['user_email'])) . '%', 'LIKE')
+                    new Criteria('email', '%' . Request::getString('user_email', '', 'POST') . '%', 'LIKE')
                 );
                 break;
         }
@@ -227,46 +230,46 @@ if ('submit' === $op) {
         }
     }
     if (!empty($_POST['user_url'])) {
-        $url = formatURL(trim($_POST['user_url']));
-        $criteria->add(new Criteria('url', $myts->addSlashes($url) . '%', 'LIKE'));
+//        $url = Request::getUrl('user_url', '', 'POST');
+        $criteria->add(new Criteria('url', Request::getUrl('user_url', '', 'POST') . '%', 'LIKE'));
     }
 
     if (!empty($_POST['user_from'])) {
-        $criteria->add(new Criteria('user_from', '%' . $myts->addSlashes(trim($_POST['user_from'])) . '%', 'LIKE'));
+        $criteria->add(new Criteria('user_from', '%' . Request::getString('user_from', '', 'POST') . '%', 'LIKE'));
     }
     if (!empty($_POST['user_intrest'])) {
         $criteria->add(
-            new Criteria('user_intrest', '%' . $myts->addSlashes(trim($_POST['user_intrest'])) . '%', 'LIKE')
+            new Criteria('user_intrest', '%' . Request::getString('user_intrest', '', 'POST') . '%', 'LIKE')
         );
     }
     if (!empty($_POST['user_occ'])) {
-        $criteria->add(new Criteria('user_occ', '%' . $myts->addSlashes(trim($_POST['user_occ'])) . '%', 'LIKE'));
+        $criteria->add(new Criteria('user_occ', '%' . Request::getString('user_occ', '', 'POST') . '%', 'LIKE'));
     }
 
-	if (!empty($_POST['bio'])) {
-        $criteria->add(new Criteria('bio', '%' . $myts->addSlashes(trim($_POST['bio'])) . '%', 'LIKE'));
+    if (!empty($_POST['bio'])) {
+        $criteria->add(new Criteria('bio', '%' . Request::getString('bio', '', 'POST') . '%', 'LIKE'));
     }
 
-	if (!empty($_POST['user_sig'])) {
-        $criteria->add(new Criteria('user_sig', '%' . $myts->addSlashes(trim($_POST['user_sig'])) . '%', 'LIKE'));
+    if (!empty($_POST['user_sig'])) {
+        $criteria->add(new Criteria('user_sig', '%' . Request::getString('user_sig', '', 'POST') . '%', 'LIKE'));
     }
 
     if (!empty($_POST['user_lastlog_more']) && is_numeric($_POST['user_lastlog_more'])) {
-        $f_user_lastlog_more = (int)trim($_POST['user_lastlog_more']);
+        $f_user_lastlog_more = Request::getInt('user_lastlog_more', 0, 'POST');
         $time                = time() - (60 * 60 * 24 * $f_user_lastlog_more);
         if ($time > 0) {
             $criteria->add(new Criteria('last_login', $time, '<'));
         }
     }
     if (!empty($_POST['user_lastlog_less']) && is_numeric($_POST['user_lastlog_less'])) {
-        $f_user_lastlog_less = (int)trim($_POST['user_lastlog_less']);
+        $f_user_lastlog_less = Request::getInt('user_lastlog_less', 0, 'POST');
         $time                = time() - (60 * 60 * 24 * $f_user_lastlog_less);
         if ($time > 0) {
             $criteria->add(new Criteria('last_login', $time, '>'));
         }
     }
     if (!empty($_POST['user_reg_more']) && is_numeric($_POST['user_reg_more'])) {
-        $f_user_reg_more = (int)trim($_POST['user_reg_more']);
+        $f_user_reg_more = Request::getInt('user_reg_more', 0, 'POST');
         $time            = time() - (60 * 60 * 24 * $f_user_reg_more);
         if ($time > 0) {
             $criteria->add(new Criteria('user_regdate', $time, '<'));
@@ -287,12 +290,9 @@ if ('submit' === $op) {
     }
     $criteria->add(new Criteria('level', 0, '>'));
     $validsort = ['uname', 'email', 'last_login', 'user_regdate', 'posts'];
-    $sort      = !in_array($_POST['user_sort'], $validsort, true) ? 'uname' : htmlspecialchars(
-        $_POST['user_sort'],
-        ENT_QUOTES | ENT_HTML5
-    );
+    $sort      = !in_array(Request::getString('user_sort', 'uname', 'POST'), $validsort, true);
     $order     = 'ASC';
-    if (isset($_POST['user_order']) && 'DESC' === $_POST['user_order']) {
+    if (isset($_POST['user_order']) && 'DESC' === Request::getString('user_order', '', 'POST')) {
         $order = 'DESC';
     }
     $limit = Request::getInt('limit', 20, 'POST');
@@ -332,106 +332,108 @@ if ('submit' === $op) {
             $userdata['realname'] = $foundusers[$j]->getVar('name');
             $userdata['name']     = $foundusers[$j]->getVar('uname');
             $userdata['id']       = $foundusers[$j]->getVar('uid');
-			$userdata['uid']      = $foundusers[$j]->getVar('uid');  
-	       
-			$criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
-			$criteria_isfriend = new CriteriaCompo(new Criteria('friend2_uid', $userdata['uid']));
+            $userdata['uid']      = $foundusers[$j]->getVar('uid');
+           
+            $criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
+            $criteria_isfriend = new CriteriaCompo(new Criteria('friend2_uid', $userdata['uid']));
             $criteria_isfriend->add($criteria_friends);
-			$controller->isFriend = $controller->friendshipsFactory->getCount($criteria_isfriend);
-			$userdata['isFriend'] = $controller->isFriend;  
-			
-			$friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
-			
-			$criteria_selfrequest = new Criteria('petitioner_uid', $controller->uidOwner);
-			$criteria_isselfrequest = new CriteriaCompo(new Criteria('petitionto_uid', $userdata['uid']));
+            $controller->isFriend = $controller->friendshipsFactory->getCount($criteria_isfriend);
+            $userdata['isFriend'] = $controller->isFriend;
+            
+            $friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
+            
+            $criteria_selfrequest = new Criteria('petitioner_uid', $controller->uidOwner);
+            $criteria_isselfrequest = new CriteriaCompo(new Criteria('petitionto_uid', $userdata['uid']));
             $criteria_isselfrequest->add($criteria_selfrequest);
-			$controller->isSelfRequest = $friendpetitionFactory->getCount($criteria_isselfrequest);
-			$userdata['selffriendrequest'] = $controller->isSelfRequest; 
-			if ($controller->isSelfRequest > 0) { 
-			$xoopsTpl->assign('self_uid', $controller->uidOwner); }
-			$xoopsTpl->assign('lang_myfriend', _MD_YOGURT_MYFRIEND);
-			$xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUESTSENT);
-     		$xoopsTpl->assign('lang_friendshipstatus', _MD_YOGURT_FRIENDSHIPSTATUS);
-		
-     		$criteria_otherrequest = new Criteria('petitioner_uid', $userdata['uid']);
-			$criteria_isotherrequest = new CriteriaCompo(new Criteria('petitionto_uid', $controller->uidOwner));
+            $controller->isSelfRequest = $friendpetitionFactory->getCount($criteria_isselfrequest);
+            $userdata['selffriendrequest'] = $controller->isSelfRequest;
+            if ($controller->isSelfRequest > 0) {
+                $xoopsTpl->assign('self_uid', $controller->uidOwner);
+            }
+            $xoopsTpl->assign('lang_myfriend', _MD_YOGURT_MYFRIEND);
+            $xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUESTSENT);
+            $xoopsTpl->assign('lang_friendshipstatus', _MD_YOGURT_FRIENDSHIPSTATUS);
+        
+            $criteria_otherrequest = new Criteria('petitioner_uid', $userdata['uid']);
+            $criteria_isotherrequest = new CriteriaCompo(new Criteria('petitionto_uid', $controller->uidOwner));
             $criteria_isotherrequest->add($criteria_otherrequest);
-			$controller->isOtherRequest = $friendpetitionFactory->getCount($criteria_isotherrequest);
-			$userdata['otherfriendrequest'] = $controller->isOtherRequest; 
-			if ($controller->isOtherRequest > 0) { 
-			$xoopsTpl->assign('other_uid', $userdata['uid']); }
-			
+            $controller->isOtherRequest = $friendpetitionFactory->getCount($criteria_isotherrequest);
+            $userdata['otherfriendrequest'] = $controller->isOtherRequest;
+            if ($controller->isOtherRequest > 0) {
+                $xoopsTpl->assign('other_uid', $userdata['uid']);
+            }
+            
             if (1 === $foundusers[$j]->getVar('user_viewemail') || $iamadmin) {
                 $userdata['email'] = "<a href='mailto:" . $foundusers[$j]->getVar(
-                        'email'
-                    ) . "'><img src='" . XOOPS_URL . "/images/icons/email.gif' border='0' alt='" . sprintf(
-                                         _SENDEMAILTO,
-                                         $foundusers[$j]->getVar('uname', 'E')
-                                     ) . "'></a>";
-				$userdata['emailaddress'] = $foundusers[$j]->getVar('email');
+                    'email'
+                ) . "'><img src='" . XOOPS_URL . "/images/icons/email.gif' border='0' alt='" . sprintf(
+                        _SENDEMAILTO,
+                        $foundusers[$j]->getVar('uname', 'E')
+                    ) . "'></a>";
+                $userdata['emailaddress'] = $foundusers[$j]->getVar('email');
             } else {
                 $userdata['email'] = '&nbsp;';
             }
             if ($xoopsUser) {
                 $userdata['pmlink'] = "<a href='javascript:openWithSelfMain(\"" . XOOPS_URL . '/pmlite.php?send2=1&amp;to_userid=' . $foundusers[$j]->getVar(
-                        'uid'
-                    ) . "\",\"pmlite\",450,370);'><img src='" . XOOPS_URL . "/images/icons/pm.gif' border='0' alt='" . sprintf(
-                                          _SENDPMTO,
-                                          $foundusers[$j]->getVar(
+                    'uid'
+                ) . "\",\"pmlite\",450,370);'><img src='" . XOOPS_URL . "/images/icons/pm.gif' border='0' alt='" . sprintf(
+                        _SENDPMTO,
+                        $foundusers[$j]->getVar(
                                               'uname',
                                               'E'
                                           )
-                                      ) . "'></a>";
-            	$userdata['pm'] = $foundusers[$j]->getVar('uid');
-			} else {
+                    ) . "'></a>";
+                $userdata['pm'] = $foundusers[$j]->getVar('uid');
+            } else {
                 $userdata['pmlink'] = '&nbsp;';
             }
-			
+            
             if ('' !== $foundusers[$j]->getVar('url', 'E')) {
                 $userdata['website'] = "<a href='" . $foundusers[$j]->getVar(
-                        'url',
-                        'E'
-                    ) . "' target='_blank'><img src='" . XOOPS_URL . "/images/icons/www.gif' border='0' alt='" . _VISITWEBSITE . "'></a>";
+                    'url',
+                    'E'
+                ) . "' target='_blank'><img src='" . XOOPS_URL . "/images/icons/www.gif' border='0' alt='" . _VISITWEBSITE . "'></a>";
             } else {
                 $userdata['website'] = '&nbsp;';
             }
-			$userdata['url'] = $foundusers[$j]->getVar('url', 'e');
-			$userdata['registerdate'] = formatTimestamp($foundusers[$j]->getVar('user_regdate'), 's');
+            $userdata['url'] = $foundusers[$j]->getVar('url', 'e');
+            $userdata['registerdate'] = formatTimestamp($foundusers[$j]->getVar('user_regdate'), 's');
             if (0 !== $foundusers[$j]->getVar('last_login')) {
                 $userdata['lastlogin'] = formatTimestamp($foundusers[$j]->getVar('last_login'), 'm');
             } else {
-            $userdata['lastlogin'] = _MD_YOGURT_NEVERLOGIN;
-			}
+                $userdata['lastlogin'] = _MD_YOGURT_NEVERLOGIN;
+            }
             $userdata['posts'] = $foundusers[$j]->getVar('posts');
             if ($iamadmin) {
                 $userdata['adminlink'] = "<a href='" . XOOPS_URL . '/modules/system/admin.php?fct=users&amp;uid=' . (int)$foundusers[$j]->getVar(
-                        'uid'
-                    ) . "&amp;op=modifyUser'>" . _EDIT . "</a>  <a href='" . XOOPS_URL . '/modules/system/admin.php?fct=users&amp;op=delUser&amp;uid=' . (int)$foundusers[$j]->getVar(
+                    'uid'
+                ) . "&amp;op=modifyUser'>" . _EDIT . "</a>  <a href='" . XOOPS_URL . '/modules/system/admin.php?fct=users&amp;op=delUser&amp;uid=' . (int)$foundusers[$j]->getVar(
                         'uid'
                     ) . "'>" . _DELETE . '</a>';
             }
             
-			$userdata['location']       = $foundusers[$j]->getVar('user_from');
-			$userdata['occupation']     = $foundusers[$j]->getVar('user_occ');
-			$userdata['interest']       = $foundusers[$j]->getVar('user_intrest');
-			$userdata['extrainfo']      = $foundusers[$j]->getVar('bio');
-			$userdata['signature']      = $foundusers[$j]->getVar('user_sig');
-			$userdata['onlinestatus']   = $foundusers[$j]->isOnline();
-			$userrank = $foundusers[$j]->rank();
-			if ($userrank['image']) {
-				$userdata['rankimage']='<img src="' . XOOPS_UPLOAD_URL . '/' . $userrank['image'] . '" alt="">';
-			}
-				$userdata['ranktitle']=$userrank['title'];
-		
-			$uid=$userdata['id'];
-			$groups =$member_handler->getGroupsByUser($uid, true); 
-			$usergroups = [];
-			foreach ($groups as $group) { 
-			$usergroups[] = $group->getVar('name'); 
-			}  		
-			$userdata['groups']= implode(', ', $usergroups);
-			
-			$xoopsTpl->append('users', $userdata);
+            $userdata['location']       = $foundusers[$j]->getVar('user_from');
+            $userdata['occupation']     = $foundusers[$j]->getVar('user_occ');
+            $userdata['interest']       = $foundusers[$j]->getVar('user_intrest');
+            $userdata['extrainfo']      = $foundusers[$j]->getVar('bio');
+            $userdata['signature']      = $foundusers[$j]->getVar('user_sig');
+            $userdata['onlinestatus']   = $foundusers[$j]->isOnline();
+            $userrank = $foundusers[$j]->rank();
+            if ($userrank['image']) {
+                $userdata['rankimage']='<img src="' . XOOPS_UPLOAD_URL . '/' . $userrank['image'] . '" alt="">';
+            }
+            $userdata['ranktitle']=$userrank['title'];
+        
+            $uid=$userdata['id'];
+            $groups =$member_handler->getGroupsByUser($uid, true);
+            $usergroups = [];
+            foreach ($groups as $group) {
+                $usergroups[] = $group->getVar('name');
+            }
+            $userdata['groups']= implode(', ', $usergroups);
+            
+            $xoopsTpl->append('users', $userdata);
         }
         $totalpages = ceil($total / $limit);
         if ($totalpages > 1) {
@@ -482,14 +484,17 @@ $xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
 $xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
 $xoopsTpl->assign('lang_friendshippending', _MD_YOGURT_FRIENDREQUESTPENDING);
 
-if(isset($_POST['addfriend'])){
-			$newpetition = $friendpetitionFactory->create(true);
-			$newpetition->setVar('petitioner_uid', $controller->uidOwner);
-			$newpetition->setVar('petitionto_uid', 5, 0, 'POST');
-			$friendpetitionFactory->insert2($newpetition);
-			redirect_header(
-			XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('petitionfrom_uid', 0, 'POST'), 3, _MD_YOGURT_PETITIONFROM);
-			}
+if (isset($_POST['addfriend'])) {
+    $newpetition = $friendpetitionFactory->create(true);
+    $newpetition->setVar('petitioner_uid', $controller->uidOwner);
+    $newpetition->setVar('petitionto_uid', 5, 0, 'POST');
+    $friendpetitionFactory->insert2($newpetition);
+    redirect_header(
+        XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('petitionfrom_uid', 0, 'POST'),
+        3,
+        _MD_YOGURT_PETITIONFROM
+    );
+}
 
 $memberHandler = xoops_getHandler('member');
 $thisUser      = $memberHandler->getUser($controller->uidOwner);
@@ -502,21 +507,18 @@ $xoopsTpl->assign('section_name', _MD_YOGURT_SEARCH);
 
 // temporary solution for profile module integration
 if (xoops_isActiveModule('profile')) {
-$profileHandler=xoops_getModuleHandler('profile','profile');
-$uid = $controller->uidOwner;
-if ($uid <= 0) { 
- if (is_object($xoopsUser))  {
+    $profileHandler=xoops_getModuleHandler('profile', 'profile');
+    $uid = $controller->uidOwner;
+    if ($uid <= 0) {
+        if (is_object($xoopsUser)) {
+            $profile = $profileHandler->get($uid);
+        } else {
+            header('location: ' . XOOPS_URL);
+            exit();
+        }
+    } else {
         $profile = $profileHandler->get($uid);
-		} 
-        else {
-             header('location: ' . XOOPS_URL); 
-             exit();
-             }
- }
-else 
-{
-$profile = $profileHandler->get($uid);
-}
+    }
 }
 
 require __DIR__ . '/footer.php';

@@ -107,7 +107,7 @@ class YogurtController extends \XoopsObject
         $this->checkSuspension();
     }
 
-    public function checkSuspension() 
+    public function checkSuspension()
     {
         $criteria_suspended = new Criteria('uid', $this->uidOwner);
         if (1 === $this->isSuspended) {
@@ -150,7 +150,7 @@ class YogurtController extends \XoopsObject
     /**
      * Set permissions according to user is logged or not , is owner or not etc..
      */
-    public function getPermissions() 
+    public function getPermissions()
     {
         global $_GET, $xoopsUser;
         /**
@@ -234,7 +234,7 @@ class YogurtController extends \XoopsObject
      *
      * @return array(nbGroups=>"",nbPhotos=>"",nbFriends=>"",nbVideos=>"")
      */
-    public function getNumbersSections() 
+    public function getNumbersSections()
     {
         $criteriaGroups         = new Criteria('rel_user_uid', $this->uidOwner);
         $nbSections['nbGroups'] = $this->relgroupusersFactory->getCount($criteriaGroups);
@@ -260,7 +260,7 @@ class YogurtController extends \XoopsObject
     /**
      * This creates the module factories
      */
-    public function createFactories() 
+    public function createFactories()
     {
         $this->albumFactory         = new ImageHandler($this->db);
         $this->visitorsFactory      = new VisitorsHandler($this->db);

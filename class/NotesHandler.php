@@ -298,8 +298,8 @@ class NotesHandler extends XoopsPersistableObjectHandler
         $myts = new MyTextSanitizer();
         $ret  = [];
         $sql  = 'SELECT note_id, uid, uname, user_avatar, note_from, note_text, date FROM ' . $this->db->prefix(
-                'yogurt_notes'
-            ) . ', ' . $this->db->prefix(
+            'yogurt_notes'
+        ) . ', ' . $this->db->prefix(
                 'users'
             );
         if (isset($criteria) && $criteria instanceof CriteriaElement) {

@@ -472,7 +472,7 @@ class Id3v1
      *
      * @return string
      */
-    public function getComment() 
+    public function getComment()
     {
         if ($this->_version === self::ID3V1_1) {
             return mb_substr($this->_tags['comment'], 0, 28);
@@ -536,7 +536,7 @@ class Id3v1
      * @see self::ID3V1_1
      * @see self::ID3V1_0
      */
-    public function getId3v1Version() 
+    public function getId3v1Version()
     {
         return \constant('self::' . $this->_version);
     }
@@ -552,7 +552,7 @@ class Id3v1
      */
     public function setId3v1Version(
         $version
-    )  {
+    ) {
         if ($this->_readOnly) {
             return $this;
         }
@@ -583,7 +583,7 @@ class Id3v1
      */
     public function setTitle(
         $title
-    )  {
+    ) {
         if ($this->_readOnly) {
             return $this;
         }
@@ -610,7 +610,7 @@ class Id3v1
      */
     public function setArtist(
         $artist
-    )  {
+    ) {
         if ($this->_readOnly) {
             return $this;
         }
@@ -637,7 +637,7 @@ class Id3v1
      */
     public function setAlbum(
         $album
-    )  {
+    ) {
         if ($this->_readOnly) {
             return $this;
         }
@@ -666,7 +666,7 @@ class Id3v1
      */
     public function setComment(
         $comment
-    )  {
+    ) {
         if ($this->_readOnly) {
             return $this;
         }
@@ -692,7 +692,7 @@ class Id3v1
      */
     public function setGenre(
         $genre
-    )  {
+    ) {
         if ($this->_readOnly) {
             return $this;
         }
@@ -718,7 +718,7 @@ class Id3v1
      */
     public function setYear(
         $year
-    )  {
+    ) {
         if ($this->_readOnly) {
             return $this;
         }
@@ -748,7 +748,7 @@ class Id3v1
      */
     public function setTrack(
         $track
-    )  {
+    ) {
         if ($this->_readOnly) {
             return $this;
         }
@@ -827,7 +827,7 @@ class Id3v1
      * @return array
      * @see $_genres
      */
-    public static function getGenreList() 
+    public static function getGenreList()
     {
         return self::$_genres;
     }

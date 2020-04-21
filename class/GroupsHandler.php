@@ -384,13 +384,15 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $field_warning = new XoopsFormLabel(\sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxbytes / 1024));
 
         $field_oldpicture = new XoopsFormLabel(
-            _MD_YOGURT_GROUP_IMAGE, '<img src="' . \XOOPS_UPLOAD_URL . '/' . $group->getVar(
-                                      'group_img'
-                                  ) . '">'
+            _MD_YOGURT_GROUP_IMAGE,
+            '<img src="' . \XOOPS_UPLOAD_URL . '/' . $group->getVar(
+                'group_img'
+            ) . '">'
         );
 
         $field_maintainimage = new XoopsFormLabel(
-            _MD_YOGURT_MAINTAINOLDIMAGE, "<input type='checkbox' value='1' id='flag_oldimg' name='flag_oldimg' onclick=\"groupImgSwitch(img)\"  checked>"
+            _MD_YOGURT_MAINTAINOLDIMAGE,
+            "<input type='checkbox' value='1' id='flag_oldimg' name='flag_oldimg' onclick=\"groupImgSwitch(img)\"  checked>"
         );
 
         $form->addElement($field_oldpicture);
@@ -481,7 +483,11 @@ var elestyle = xoopsGetElementById(img).style;
             $uploadDir = \XOOPS_UPLOAD_PATH . '/yogurt/groups/';
             // create the object to upload
             $uploader = new XoopsMediaUploader(
-                $uploadDir, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight
+                $uploadDir,
+                $allowed_mimetypes,
+                $maxfilesize,
+                $maxfilewidth,
+                $maxfileheight
             );
             // fetch the media
             if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
@@ -534,14 +540,6 @@ var elestyle = xoopsGetElementById(img).style;
                 $resizer->maxWidth      = $maxWidth_grouplogo;
                 $resizer->maxHeight     = $maxHeight_grouplogo;
                 $result                 = $resizer->resizeImage();
-
-
-
-
-
-
-
-
             } else {
                 echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
 

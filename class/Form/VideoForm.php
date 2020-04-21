@@ -68,9 +68,10 @@ class VideoForm extends XoopsThemeForm
         //include ID field, it's needed so the module knows if it is a new form or an edited form
 
         $hidden = new XoopsFormHidden(
-            'video_id', $this->targetObject->getVar(
-            'video_id'
-        )
+            'video_id',
+            $this->targetObject->getVar(
+                'video_id'
+            )
         );
         $this->addElement($hidden);
         unset($hidden);
@@ -82,36 +83,53 @@ class VideoForm extends XoopsThemeForm
         // Uid_owner
         $this->addElement(
             new XoopsFormSelectUser(
-                AM_YOGURT_VIDEO_UID_OWNER, 'uid_owner', false, $this->targetObject->getVar(
-                'uid_owner'
-            ), 1, false
+                AM_YOGURT_VIDEO_UID_OWNER,
+                'uid_owner',
+                false,
+                $this->targetObject->getVar(
+                    'uid_owner'
+                ),
+                1,
+                false
             ),
             false
         );
         // Video_desc
         $this->addElement(
             new XoopsFormTextArea(
-                AM_YOGURT_VIDEO_VIDEO_DESC, 'video_desc', $this->targetObject->getVar(
-                'video_desc'
-            ), 4, 47
+                AM_YOGURT_VIDEO_VIDEO_DESC,
+                'video_desc',
+                $this->targetObject->getVar(
+                    'video_desc'
+                ),
+                4,
+                47
             ),
             false
         );
         // Youtube_code
         $this->addElement(
             new XoopsFormText(
-                AM_YOGURT_VIDEO_YOUTUBE_CODE, 'youtube_code', 50, 255, $this->targetObject->getVar(
-                'youtube_code'
-            )
+                AM_YOGURT_VIDEO_YOUTUBE_CODE,
+                'youtube_code',
+                50,
+                255,
+                $this->targetObject->getVar(
+                    'youtube_code'
+                )
             ),
             false
         );
         // Main_video
         $this->addElement(
             new XoopsFormText(
-                AM_YOGURT_VIDEO_MAIN_VIDEO, 'main_video', 50, 255, $this->targetObject->getVar(
-                'main_video'
-            )
+                AM_YOGURT_VIDEO_MAIN_VIDEO,
+                'main_video',
+                50,
+                255,
+                $this->targetObject->getVar(
+                    'main_video'
+                )
             ),
             false
         );

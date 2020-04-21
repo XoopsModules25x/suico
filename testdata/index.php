@@ -94,8 +94,8 @@ function loadSampleData()
     //  ---  COPY test folder files ---------------
     if (is_array($configurator->copyTestFolders)
         && count(
-               $configurator->copyTestFolders
-           ) > 0) {
+            $configurator->copyTestFolders
+        ) > 0) {
         //        $file =  dirname(__DIR__) . '/testdata/images/';
         foreach (
             array_keys(

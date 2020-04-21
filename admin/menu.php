@@ -23,8 +23,8 @@ use Xmf\Module\Admin;
  * @since
  */
 include dirname(
-            __DIR__
-        ) . '/preloads/autoloader.php';
+    __DIR__
+) . '/preloads/autoloader.php';
 
 $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);

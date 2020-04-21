@@ -12,12 +12,12 @@
 			
 			<div class="form-group">
 			<label for="audio"><strong><{$lang_titleLabel}></strong></label>
-			<input type='text' name='title' id='title' class="form-control" value=''>
+                <label for='title'></label><input type='text' name='title' id='title' class="form-control" value=''>
 			</div>
  
 			<div class="form-group">
 			<label for="audio"><strong><{$lang_authorLabel}></strong></label>
-			<input type='text' name='author' id='author' class="form-control" value=''>
+                <label for='author'></label><input type='text' name='author' id='author' class="form-control" value=''>
 			</div>
 
 			<div class="form-group">

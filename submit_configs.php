@@ -71,31 +71,31 @@ if ($configsFactory->getCount($criteria) > 0) {
 
 $config->setVar('config_uid', $xoopsUser->getVar('uid'));
 if (isset($_POST['pic'])) {
-    $config->setVar('pictures', $_POST['pic']);
+    $config->setVar('pictures', Request::getInt('pic', 0, 'POST'));
 }
 if (isset($_POST['aud'])) {
-    $config->setVar('audio', $_POST['aud']);
+    $config->setVar('audio', Request::getInt('aud', 0, 'POST'));
 }
 if (isset($_POST['vid'])) {
-    $config->setVar('videos', $_POST['vid']);
+    $config->setVar('videos', Request::getInt('vid', 0, 'POST'));
 }
 if (isset($_POST['groups'])) {
-    $config->setVar('groups', $_POST['groups']);
+    $config->setVar('groups', Request::getInt('groups', 0, 'POST'));
 }
 if (isset($_POST['notes'])) {
-    $config->setVar('notes', $_POST['notes']);
+    $config->setVar('notes', Request::getInt('notes', 0, 'POST'));
 }
 if (isset($_POST['friends'])) {
-    $config->setVar('friends', $_POST['friends']);
+    $config->setVar('friends', Request::getInt('friends', 0, 'POST'));
 }
 if (isset($_POST['profileContact'])) {
-    $config->setVar('profile_contact', $_POST['profileContact']);
+    $config->setVar('profile_contact', Request::getInt('profileContact', 0, 'POST'));
 }
 if (isset($_POST['gen'])) {
-    $config->setVar('profile_general', $_POST['gen']);
+    $config->setVar('profile_general', Request::getInt('gen', 0, 'POST'));
 }
 if (isset($_POST['stat'])) {
-    $config->setVar('profile_stats', $_POST['stat']);
+    $config->setVar('profile_stats', Request::getInt('stat', 0, 'POST'));
 }
 if ($configsFactory->insert2($config)) {
     redirect_header('configs.php?uid=' . $xoopsUser->getVar('uid'), 3, _MD_YOGURT_CONFIGSSAVE);

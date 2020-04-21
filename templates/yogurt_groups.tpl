@@ -7,12 +7,12 @@
 
 		<div class="form-group">
 			<label for="group"><strong><{$lang_title}></strong></label>
-			<input type='text' name='group_title' id='group_title' class='form-control' value='' required>
+            <label for='group_title'></label><input type='text' name='group_title' id='group_title' class='form-control' value='' required>
 		</div>
 
 		<div class="form-group">
 			<label for="group"><strong><{$lang_description}></strong></label>
-			<input type='text' name='group_desc' id='group_desc' class="form-control" value='' required>
+            <label for='group_desc'></label><input type='text' name='group_desc' id='group_desc' class="form-control" value='' required>
 		</div>
 
 		<div class="form-group">

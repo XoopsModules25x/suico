@@ -242,8 +242,8 @@ class SysUtility
                     // maximum lenght is reached, so get off the loop
                     break;
                 } else {
-                $truncate     .= $line_matchings[2];
-                $total_length += $content_length;
+                    $truncate     .= $line_matchings[2];
+                    $total_length += $content_length;
                 }
                 // if the maximum length is reached, get off the loop
                 if ($total_length >= $length) {
@@ -306,22 +306,34 @@ class SysUtility
         if (\class_exists('XoopsFormEditor')) {
             if ($isAdmin) {
                 $descEditor = new XoopsFormEditor(
-                    \ucfirst($options['name']), $helper->getConfig(
-                    'editorAdmin'
-                ), $options, $nohtml = false, $onfailure = 'textarea'
+                    \ucfirst($options['name']),
+                    $helper->getConfig(
+                        'editorAdmin'
+                    ),
+                    $options,
+                    $nohtml = false,
+                    $onfailure = 'textarea'
                 );
             } else {
                 $descEditor = new XoopsFormEditor(
-                    \ucfirst($options['name']), $helper->getConfig(
-                    'editorUser'
-                ), $options, $nohtml = false, $onfailure = 'textarea'
+                    \ucfirst($options['name']),
+                    $helper->getConfig(
+                        'editorUser'
+                    ),
+                    $options,
+                    $nohtml = false,
+                    $onfailure = 'textarea'
                 );
             }
         } else {
             $descEditor = new XoopsFormDhtmlTextArea(
                 \ucfirst(
                     $options['name']
-                ), $options['name'], $options['value'], '100%', '100%'
+                ),
+                $options['name'],
+                $options['value'],
+                '100%',
+                '100%'
             );
         }
 

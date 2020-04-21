@@ -57,7 +57,11 @@ $identifier = $owner::getUnameFromId($controller->uidOwner);
  * Creating the navigation bar if you have a lot of friends
  */
 $navigationBar = new XoopsPageNav(
-    $nb_friends, $helper->getConfig('friendsperpage'), $start, 'start', 'uid=' . (int)$controller->uidOwner
+    $nb_friends,
+    $helper->getConfig('friendsperpage'),
+    $start,
+    'start',
+    'uid=' . (int)$controller->uidOwner
 );
 $navegacao       = $navigationBar->renderImageNav(2);
 

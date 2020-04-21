@@ -106,7 +106,6 @@ class Utility extends Common\SysUtility
         $keep_original = false,
         $fit = 'inside'
     ) {
-
         $resize = true;
         if ($moduleDirNameUpper . '_DONT_RESIZE_IF_SMALLER') {
             $pictureDimensions = \getimagesize($src_path);
@@ -179,9 +178,8 @@ class Utility extends Common\SysUtility
                         echo $uploader->getErrors();
                     }
                 }
-                $story->setPictureinfo($_POST['pictureinfo']);
+                $story->setPictureinfo(Request::getString('pictureinfo', '', 'POST'));
             }
         }
     }
-
 }

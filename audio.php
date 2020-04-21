@@ -23,7 +23,7 @@ declare(strict_types=1);
 use XoopsModules\Yogurt;
 use Xmf\Request;
 
- const NBAUDIO = 'nbAudio';
+const NBAUDIO = 'nbAudio';
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_audio.tpl';
 require __DIR__ . '/header.php';
@@ -53,7 +53,7 @@ $criteriaUidAudio->setLimit($helper->getConfig('audiosperpage'));
  * Get all audios of this user and assign them to template
  */
 $audios       = $controller->getAudio($criteriaUidAudio);
-$nbAudio = $nbSections[NBAUDIO] ?? '';
+$nbAudio = $nbSections[NBAUDIO] ?? 0;
 try {
     $audios_array = $controller->assignAudioContent($nbAudio, $audios);
 } catch (\RuntimeException $e) {

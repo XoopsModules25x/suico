@@ -292,8 +292,8 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
     public function purgeVisits()
     {
         $sql = 'DELETE FROM ' . $this->db->prefix(
-                'yogurt_visitors'
-            ) . ' WHERE (datetime<(DATE_SUB(NOW(), INTERVAL 7 DAY))) ';
+            'yogurt_visitors'
+        ) . ' WHERE (datetime<(DATE_SUB(NOW(), INTERVAL 7 DAY))) ';
 
         if (!$result = $this->db->queryF($sql)) {
             return false;

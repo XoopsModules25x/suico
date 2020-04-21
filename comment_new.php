@@ -32,13 +32,13 @@ $controller = new Yogurt\GroupController($xoopsDB, $xoopsUser);
 /**
  * Receiving info from get parameters
  */
-$group_id = $_GET['com_itemid'];
-$criteria = new Criteria('group_id', $group_id);
+$groupId = Request::getInt('com_itemid', 0, 'GET');
+$criteria = new Criteria('group_id', $groupId);
 $groups   = $controller->groupsFactory->getObjects($criteria);
 $group    = $groups[0];
 
-$com_itemid = Request::getInt('com_itemid', 0, 'GET');
-if ($com_itemid > 0) {
+$comItemid = Request::getInt('com_itemid', 0, 'GET');
+if ($comItemid > 0) {
     $com_replytitle = _MD_YOGURT_GROUPS . ': ' . $group->getVar('group_title');
     require XOOPS_ROOT_PATH . '/include/comment_new.php';
 }

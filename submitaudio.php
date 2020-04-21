@@ -41,8 +41,8 @@ $myts = MyTextSanitizer::getInstance();
 /**
  * Getting the title
  */
-$title  = $myts->displayTarea($_POST['title'], 0, 1, 1, 1, 1);
-$author = $myts->displayTarea($_POST['author'], 0, 1, 1, 1, 1);
+$title  = $myts->displayTarea(Request::getString('title', '', 'POST'), 0, 1, 1, 1, 1);
+$author = $myts->displayTarea(Request::getString('author', '', 'POST'), 0, 1, 1, 1, 1);
 
 /**
  * Getting parameters defined in admin side

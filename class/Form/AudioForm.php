@@ -69,9 +69,10 @@ class AudioForm extends XoopsThemeForm
         //include ID field, it's needed so the module knows if it is a new form or an edited form
 
         $hidden = new XoopsFormHidden(
-            'audio_id', $this->targetObject->getVar(
-            'audio_id'
-        )
+            'audio_id',
+            $this->targetObject->getVar(
+                'audio_id'
+            )
         );
         $this->addElement($hidden);
         unset($hidden);
@@ -98,26 +99,37 @@ class AudioForm extends XoopsThemeForm
         // Uid_owner
         $this->addElement(
             new XoopsFormSelectUser(
-                AM_YOGURT_AUDIO_UID_OWNER, 'uid_owner', false, $this->targetObject->getVar(
-                'uid_owner'
-            ), 1, false
+                AM_YOGURT_AUDIO_UID_OWNER,
+                'uid_owner',
+                false,
+                $this->targetObject->getVar(
+                    'uid_owner'
+                ),
+                1,
+                false
             ),
             false
         );
         // Data_creation
         $this->addElement(
             new XoopsFormTextDateSelect(
-                AM_YOGURT_AUDIO_DATA_CREATION, 'data_creation', 0, \strtotime(
-                                                 $this->targetObject->getVar('data_creation')
-                                             )
+                AM_YOGURT_AUDIO_DATA_CREATION,
+                'data_creation',
+                0,
+                \strtotime(
+                    $this->targetObject->getVar('data_creation')
+                )
             )
         );
         // Data_update
         $this->addElement(
             new XoopsFormDateTime(
-                AM_YOGURT_AUDIO_DATA_UPDATE, 'data_update', '', \strtotime(
-                                               $this->targetObject->getVar('data_update')
-                                           )
+                AM_YOGURT_AUDIO_DATA_UPDATE,
+                'data_update',
+                '',
+                \strtotime(
+                    $this->targetObject->getVar('data_update')
+                )
             )
         );
 
