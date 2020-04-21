@@ -29,10 +29,10 @@
                   <div class="profile-header-content">
 
 	<div class="row float-right">
-    <{if (($allow_friends !=-1) && ($isFriend!=1) && ($isOwner==0) && ($isAnonym!=1) && $petitionfrom_uid != $uid_owner) && $petitionto_uid != $xoops_userid}>
+    <{if (($allow_friends !=-1) && ($isFriend!=1) && ($isOwner==0) && ($isAnonym!=1) && $friendrequestfrom_uid != $uid_owner) && $friendrequestto_uid != $xoops_userid}>
        
-            <form action=submit_friendpetition.php method="post">
-				<input type="hidden" name="petitionfrom_uid" id="petitionfrom_uid" value="<{$uid_owner}>">
+            <form action=submitFriendrequest.php method="post">
+				<input type="hidden" name="friendrequestfrom_uid" id="friendrequestfrom_uid" value="<{$uid_owner}>">
 				<button name="" type="image" class="btn btn-info btn-sm"> <i class="fa fa-user-plus"></i> <{$lang_addfriend}></button>			 	   
 				<{$token}>
             </form>
@@ -41,10 +41,10 @@
 							<{if $isFriend == 1 && $isAnonym!=1}>
 								<button type="button" class="btn btn-info btn-sm"> <i class="fa fa-user-circle"></i> <{$lang_myfriend}></button>	
 							<{/if}>
-							<{if $petitionfrom_uid == $uid_owner && $isAnonym!=1}>
+							<{if $friendrequestfrom_uid == $uid_owner && $isAnonym!=1}>
 								<button type="button" class="btn btn-info btn-sm"> <i class="fa fa-check-circle"></i> <{$lang_friendrequestsent}></button>	
 							<{/if}>
-							<{if $petitionto_uid == $xoops_userid && $isAnonym!=1}>
+							<{if $friendrequestto_uid == $xoops_userid && $isAnonym!=1}>
 								<button type="button" class="btn btn-info btn-sm"> <i class="fa fa-clock-o"></i> <{$lang_friendrequestpending}></button>	
 							<{/if}>
 						<{/if}>	

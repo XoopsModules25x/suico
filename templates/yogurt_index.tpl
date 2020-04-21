@@ -7,12 +7,12 @@
       <div class="col-md-12">
          <div id="content" class="content content-full-width">
 <!-- start -->
-<{if $allow_friends !=-1 && $petition==1 && $isOwner==1 && $isFriend==0}>
+<{if $allow_friends !=-1 && $friendrequest==1 && $isOwner==1 && $isFriend==0}>
 
     <!-- if not owner and not friend -->
 <div class="alert alert-info">
-<h5><{$lang_youhavexpetitions}></h5>
-<img class="rounded-circle float-left p-1" height="60" width="60" src="<{$xoops_url}>/uploads/<{$petitioner_avatar}>">
+<h5><{$lang_youhavexfriendrequests}></h5>
+<img class="rounded-circle float-left p-1" height="60" width="60" src="<{$xoops_url}>/uploads/<{$friendrequester_avatar}>">
 <form action="makefriends.php" method="post">
 <{$lang_askingfriend}>
 
@@ -23,7 +23,7 @@
 	<label class="form-check-label"><input name="level" type="radio" value="0"> <{$lang_rejectfriend}></label>
  </div> 
 <div class='form-group'>
-<input type="hidden" name="petition_id" id="petition_id" value="<{$petition_id}>">
+<input type="hidden" name="friendrequest_id" id="friendrequest_id" value="<{$friendrequest_id}>">
 <input type="submit" class='btn btn-primary btn-sm' value='Submit'>
 </div>
 <{$token}>
