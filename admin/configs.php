@@ -72,7 +72,13 @@ switch ($op) {
         $configsObject->setVar('suspension', ((1 == Request::getInt('suspension', 0)) ? '1' : '0'));
         $configsObject->setVar('backup_password', Request::getVar('backup_password', ''));
         $configsObject->setVar('backup_email', Request::getVar('backup_email', ''));
-        $configsObject->setVar('end_suspension', date('Y-m-d H:i:s', strtotime($_REQUEST['end_suspension']['date']) + $_REQUEST['end_suspension']['time']));
+//        $configsObject->setVar('end_suspension', date('Y-m-d H:i:s', strtotime($_REQUEST['end_suspension']['date']) + $_REQUEST['end_suspension']['time']));
+
+        $endSuspension = date_create_from_format(_SHORTDATESTRING, Request::getString('end_suspension', '', 'POST'));
+        $configsObject->setVar('end_suspension', $endSuspension->getTimestamp());
+
+
+
         if ($configsHandler->insert($configsObject)) {
             redirect_header('configs.php?op=list', 2, AM_YOGURT_FORMOK);
         }
@@ -217,7 +223,7 @@ switch ($op) {
                 $configsArray['backup_email'] = $configsTempArray[$i]->getVar('backup_email');
 
                 $GLOBALS['xoopsTpl']->assign('selectorend_suspension', AM_YOGURT_CONFIGS_END_SUSPENSION);
-                $configsArray['end_suspension'] = date(_DATESTRING, strtotime($configsTempArray[$i]->getVar('end_suspension')));
+                $configsArray['end_suspension'] = formatTimeStamp($configsTempArray[$i]->getVar('end_suspension'), 's');
 
 
 

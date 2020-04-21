@@ -50,7 +50,7 @@ class Configs extends XoopsObject
         $this->initVar('suspension', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('backup_password', \XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('backup_email', \XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('end_suspension', \XOBJ_DTYPE_TIMESTAMP);
+        $this->initVar('end_suspension', \XOBJ_DTYPE_INT);
         if (!empty($id)) {
             if (\is_array($id)) {
                 $this->assignVars($id);
