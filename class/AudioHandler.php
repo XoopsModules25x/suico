@@ -6,7 +6,6 @@ namespace XoopsModules\Yogurt;
 
 use XoopsPersistableObjectHandler;
 use XoopsDatabase;
-use XoopsModules\Yogurt\Helper;
 use XoopsObject;
 use CriteriaElement;
 use XoopsMediaUploader;
@@ -31,7 +30,6 @@ require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 class AudioHandler extends XoopsPersistableObjectHandler
 {
     public $isAdmin;
-
     public $helper;
 
     /**
@@ -78,7 +76,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
      * @param null $fields
      * @return mixed reference to the {@link yogurt_audio} object, FALSE if failed
      */
-    public function get(
+    public function get2(
         $id = null,
         $fields = null
     ) {

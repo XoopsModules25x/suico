@@ -19,7 +19,7 @@ declare(strict_types=1);
  * @author       XOOPS Development Team
  * @since
  */
-
+use Xmf\Request;
 /**
  * main.php, Main administration file *
  * This file was implemented as follows
@@ -69,6 +69,7 @@ $isframeworksrequirement = false;
 global $xoopsModuleConfig, $xoopsModule;
 function about()
 {
+    /** @var \XoopsModuleHandler $moduleHandler */
     $moduleHandler = xoops_getHandler('module');
     $modulo        = $moduleHandler->getByDirname('yogurt');
     echo "<br style='clear: both;'>

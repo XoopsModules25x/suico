@@ -68,6 +68,9 @@ trait FilesManagement
     public static function recurseCopy($src, $dst)
     {
         $dir = \opendir($src);
+        if (false === $dir) {
+            return false;
+        }
         //        @mkdir($dst);
         if (!@\mkdir($dst) && !\is_dir($dst)) {
             throw new RuntimeException('The directory ' . $dst . ' could not be created.');

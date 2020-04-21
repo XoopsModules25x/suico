@@ -21,6 +21,7 @@ declare(strict_types=1);
  */
 
 use XoopsModules\Yogurt;
+use Xmf\Request;
 
 require __DIR__ . '/header.php';
 
@@ -34,7 +35,8 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 $imageFactory = new Yogurt\ImageHandler(
     $xoopsDB
 );
-$picture      = $imageFactory->create(false);
+/** @var \XoopsModules\Yogurt\Image $picture */
+$picture = $imageFactory->create(false);
 $picture->load(Request::getString('cod_img', '', 'POST'));
 
 $uid = (int)$xoopsUser->getVar('uid');

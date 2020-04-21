@@ -383,7 +383,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
             Request::getString('btitle', '', 'POST')
         );
         $clone->setVar('bcachetime', $bcachetime);
-        if (isset($options) && (count($options) > 0)) {
+        if (is_array($options) && (count($options) > 0)) {
             $options = implode('|', $options);
             $clone->setVar('options', $options);
         }
@@ -459,7 +459,6 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
     function editBlock($bid)
     {
         require_once __DIR__ . '/admin_header.php';
-        //require_once __DIR__ . '/admin_header.php';
         xoops_cp_header();
         $moduleDirName      = basename(dirname(__DIR__));
         $moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
@@ -496,6 +495,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         ];
         echo '<a href="blocksadmin.php">' . _AM_BADMIN . '</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;' . _AM_SYSTEM_BLOCKS_EDITBLOCK . '<br><br>';
         require_once __DIR__ . '/blockform.php';
+        /** @var \XoopsThemeForm $form */
         $form->display();
         //        xoops_cp_footer();
         require_once __DIR__ . '/admin_footer.php';

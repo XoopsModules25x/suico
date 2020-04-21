@@ -92,6 +92,7 @@ if ($block['is_custom']) {
     $form->addElement($ctype_select);
 } else {
     if ('' !== $block['template']) {
+        /** @var \XoopsTplfileHandler $tplfileHandler */
         $tplfileHandler = xoops_getHandler('tplfile');
         $btemplate      = $tplfileHandler->find($GLOBALS['xoopsConfig']['template_set'], 'block', $block['bid']);
         if (count($btemplate) > 0) {
@@ -139,6 +140,7 @@ $cache_select->addOptionArray(
 );
 $form->addElement($cache_select);
 
+/** @var XoopsGroupPermHandler $grouppermHandler */
 $grouppermHandler = xoops_getHandler('groupperm');
 $groups           = $grouppermHandler->getGroupIds('block_read', $block['bid']);
 

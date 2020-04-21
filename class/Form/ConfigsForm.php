@@ -211,7 +211,7 @@ class ConfigsForm extends XoopsThemeForm
 //        $this->addElement(new \XoopsFormDateTime(AM_YOGURT_CONFIGS_END_SUSPENSION, 'end_suspension', '', \strtotime($this->targetObject->getVar('end_suspension'))));
 
         $endSuspension = $this->targetObject->isNew() ? 0 : $this->targetObject->getVar('end_suspension');
-        $this->addElement(new \XoopsFormTextDateSelect( AM_YOGURT_CONFIGS_END_SUSPENSION, 'end_suspension', '', $endSuspension ), true);
+        $this->addElement(new \XoopsFormTextDateSelect( AM_YOGURT_CONFIGS_END_SUSPENSION, 'end_suspension', 0, $endSuspension ), true);
 
         $this->addElement(new XoopsFormHidden('op', 'save'));
         $this->addElement(new XoopsFormButton('', 'submit', \_SUBMIT, 'submit'));

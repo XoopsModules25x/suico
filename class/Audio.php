@@ -32,7 +32,7 @@ class Audio extends XoopsObject
 
     /**
      * Audio constructor.
-     * @param null $id
+     * @param null|int|array $id
      */
     public function __construct($id = null)
     {
@@ -47,7 +47,7 @@ class Audio extends XoopsObject
         $this->initVar('uid_owner', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('data_creation', \XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('data_update', \XOBJ_DTYPE_TXTBOX, null, false);
-        if (!empty($id)) {
+        if (null !== ($id)) {
             if (\is_array($id)) {
                 $this->assignVars($id);
             } else {
@@ -59,7 +59,7 @@ class Audio extends XoopsObject
     }
 
     /**
-     * @param $id
+     * @param int $id
      */
     public function load($id)
     {

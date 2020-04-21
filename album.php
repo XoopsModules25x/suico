@@ -71,7 +71,7 @@ if (1 === $helper->getConfig('images_order')) {
  * Fetch pictures from factory
  */
 $pictures_object_array = $controller->albumFactory->getObjects($criteria_uid);
-$criteria_uid->setLimit('');
+$criteria_uid->setLimit(0);
 $criteria_uid->setStart(0);
 
 /**
@@ -118,7 +118,7 @@ $avatar     = $owner->getVar('user_avatar');
 /**
  * Creating the navigation bar if you have a lot of friends
  */
-$nbPhotos = $nbSections[NBPHOTOS] ?? '';
+$nbPhotos = $nbSections[NBPHOTOS] ?? 0;
 $navigationBar = new XoopsPageNav(
     $nbPhotos,
     $helper->getConfig('picturesperpage'),
