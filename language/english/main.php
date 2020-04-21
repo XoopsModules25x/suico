@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -26,8 +27,8 @@ define('_MD_YOGURT_YOUCANUPLOAD', "You can only upload jpg's files and up to %s 
 define('_MD_YOGURT_UPLOADPICTURE', 'Upload Picture');
 define(
     '_MD_YOGURT_NOCACHACA',
-    'Bad, Bad Module...No cache for you!<br>
-Unfortunately, this module has acted in an unexpected way. Hopefully it will return to its helpful self if you try again. '
+    'Error : No cache !<br>
+Unfortunately, this module has acted in an unexpected way. Please try again. '
 ); //Funny general error message
 define('_MD_YOGURT_PAGETITLE', "%s - %s's Social Network");
 define('_MD_YOGURT_SUBMIT', 'Submit');
@@ -44,7 +45,7 @@ define('_MD_YOGURT_HOME', 'Home');
 define('_MD_YOGURT_CONFIGSTITLE', 'Settings');
 
 ##################################################### PICTURES #######################################################
-//submit.php (for pictures submission
+//submitImage.php (for pictures submission
 define('_MD_YOGURT_UPLOADED', 'Upload Successful');
 
 //delpicture.php
@@ -81,7 +82,7 @@ define('_MD_YOGURT_FRIENDSHIPCONFIGS', 'Set the configs of this friendship.');
 define('_MD_YOGURT_EDITFRIENDSHIP', 'Your friendship with this member:');
 define('_MD_YOGURT_FRIENDNAME', 'Username');
 define('_MD_YOGURT_LEVEL', 'Friendship level:');
-define('_MD_YOGURT_UNKNOWNACCEPTED', "Unknown Friend");
+define('_MD_YOGURT_UNKNOWNACCEPTED', 'Unknown Friend');
 define('_MD_YOGURT_AQUAITANCE', 'Acquaintances'); //also present in index.php
 define('_MD_YOGURT_FRIEND', 'Friend'); //also present in index.php
 define('_MD_YOGURT_BESTFRIEND', 'Best Friend'); //also present in index.php
@@ -104,9 +105,24 @@ define('_MD_YOGURT_UPDATEFRIEND', 'Update Friendship');
 //editfriendship.php
 define('_MD_YOGURT_FRIENDSHIPUPDATED', 'Friendship Updated');
 
-//submitfriendpetition.php
-define('_MD_YOGURT_PETITIONED', 'A friend request has been sent to this user, Wait until he accepts to have him in your friends list.');
-define('_MD_YOGURT_ALREADY_PETITIONED', 'You have already sent a friendship request to this user or vice-versa <br>, Wait untill he accepts or rejects it or check if he has asked you as a friend visiting your profile page.');
+//submitfriendrequest.php
+define(
+    '_MD_YOGURT_FRIENDREQUESTFROM',
+    'A friend request has been sent to this user, Wait until he accepts to have him in your friends list.'
+);
+define(
+    '_MD_YOGURT_ALREADY_FRIENDREQUESTFROM',
+    'You have already sent a friendship request to this user or vice-versa <br>, Wait untill he accepts or rejects it or check if he has asked you as a friend visiting your profile page.'
+);
+
+define(
+    '_MD_YOGURT_FRIENDREQUESTTO',
+    'A friend request has been sent to this user, Wait until he accepts to have him in your friends list.'
+);
+define(
+    '_MD_YOGURT_ALREADY_FRIENDREQUESTTO',
+    'You have already sent a friendship request to this user or vice-versa <br>, Wait untill he accepts or rejects it or check if he has asked you as a friend visiting your profile page.'
+);
 
 //makefriends.php
 define('_MD_YOGURT_FRIENDMADE', 'Added as a friend!');
@@ -125,7 +141,8 @@ define('_MD_YOGURT_ADDFAVORITEVIDEOS', 'Add favourite videos');
 define(
     '_MD_YOGURT_ADDVIDEOSHELP',
     'If you want to upload your own video for sharing, upload your videos to
-<a href=https://www.youtube.com>YouTube</a> and then add the URL here in'); //The name of the site will show after this
+<a href=https://www.youtube.com>YouTube</a> and then add the URL here in'
+); //The name of the site will show after this
 define('_MD_YOGURT_MYVIDEOS', 'My Videos');
 define('_MD_YOGURT_MAKEMAIN', 'Feature this video in your main page');
 define('_MD_YOGURT_NOVIDEOSYET', 'No videos yet!');
@@ -135,17 +152,29 @@ define('_MD_YOGURT_ASKCONFIRMVIDEODELETION', 'Are you sure you want to delete th
 define('_MD_YOGURT_CONFIRMVIDEODELETION', 'Yes I am!');
 define('_MD_YOGURT_VIDEODELETED', 'Your video was deleted');
 
-//video_submited.php
+//submitVideo.php
 define('_MD_YOGURT_VIDEOSAVED', 'Your video was saved');
 
 ############################## GROUPS ########################################################
 //class/Groups.php
 define('_MD_YOGURT_SUBMIT_GROUP', 'Create a new group');
 define('_MD_YOGURT_UPLOADGROUP', 'Save Group'); //also present in many ther groups related
-define('_MD_YOGURT_GROUP_IMAGE', 'Group Image'); //also present in many ther groups related
-define('_MD_YOGURT_GROUP_TITLE', 'Title'); //also present in many ther groups related
-define('_MD_YOGURT_GROUP_DESC', 'Description'); //also present in many ther groups related
-define('_MD_YOGURTCREATEYOURGROUP', 'Create your own Group!'); //also present in many ther groups related
+define(
+    '_MD_YOGURT_GROUP_IMAGE',
+    'Group Image'
+); //also present in many ther groups related
+define(
+    '_MD_YOGURT_GROUP_TITLE',
+    'Title'
+); //also present in many ther groups related
+define(
+    '_MD_YOGURT_GROUP_DESC',
+    'Description'
+); //also present in many ther groups related
+define(
+    '_MD_YOGURTCREATEYOURGROUP',
+    'Create your own Group!'
+); //also present in many ther groups related
 
 //abandongroup.php
 define('_MD_YOGURT_ASKCONFIRMABANDONGROUP', 'Are you sure you want to leave this Group?');
@@ -157,7 +186,10 @@ define('_MD_YOGURT_YOUAREMEMBERNOW', 'You are now member of this community');
 define('_MD_YOGURT_YOUAREMEMBERALREADY', 'You are already a member of this Group');
 
 //delete_group.php
-define('_MD_YOGURT_ASKCONFIRMGROUPDELETION', 'Are you sure you want to delete this Group permanently?');
+define(
+    '_MD_YOGURT_ASKCONFIRMGROUPDELETION',
+    'Are you sure you want to delete this Group permanently?'
+);
 define('_MD_YOGURT_CONFIRMGROUPDELETION', 'Yes, please delete this Group!');
 define('_MD_YOGURT_GROUPDELETED', 'Group deleted!');
 
@@ -165,16 +197,26 @@ define('_MD_YOGURT_GROUPDELETED', 'Group deleted!');
 define('_MD_YOGURT_MAINTAINOLDIMAGE', 'Keep this image'); //also present in other groups related
 define('_MD_YOGURT_GROUPEDITED', 'Group edited');
 define('_MD_YOGURT_EDIT_GROUP', 'Edit your Group'); //also present in other groups related
-define('_MD_YOGURT_GROUPOWNER', 'You are the owner of this Group!'); //also present in other groups related
-define('_MD_YOGURT_MEMBERSDOFGROUP', 'Members of Group'); //also present in other groups related
+define(
+    '_MD_YOGURT_GROUPOWNER',
+    'You are the owner of this Group!'
+); //also present in other groups related
+define(
+    '_MD_YOGURT_MEMBERSDOFGROUP',
+    'Members of Group'
+); //also present in other groups related
 
-//submit_group.php
+//submitGroup.php
 define('_MD_YOGURT_GROUP_CREATED', 'Your Group was created');
 
 //kickfromgroup.php
-define('_MD_YOGURT_CONFIRMKICK', 'Yes kick him out!');
-define('_MD_YOGURT_ASKCONFIRMKICKFROMGROUP', 'Are you sure you want to kick this person out of the Group?');
-define('_MD_YOGURT_GROUPKICKED', "You've banished this user from the Group, but who knows when he'll try and comeback!");
+define('_MD_YOGURT_KICKOUT', 'Remove!');
+define('_MD_YOGURT_CONFIRMKICK', 'Yes remove this member!');
+define('_MD_YOGURT_ASKCONFIRMKICKFROMGROUP', 'Are you sure you want to remove this person out of the Group?');
+define(
+    '_MD_YOGURT_GROUPKICKED',
+    "You've banished this user from the Group, but who knows when he'll try and comeback!"
+);
 
 //Groups.php
 define('_MD_YOGURT_GROUP_ABANDON', 'Leave this Group');
@@ -220,12 +262,15 @@ define('_MD_YOGURT_CONFIGSPROFILEGENERAL', 'See your Info');
 define('_MD_YOGURT_CONFIGSPROFILESTATS', 'See your Stats');
 define('_MD_YOGURT_WHOCAN', 'Who can:');
 
-//submit_configs.php
+//submitConfigs.php
 define('_MD_YOGURT_CONFIGSSAVE', 'Configuration saved!');
 define('_MD_YOGURT_CONFIGSSAVE_FAILED', 'ERROR: Configuration has not been saved');
 
 //class/yogurt_controller.php
-define('_MD_YOGURT_NOPRIVILEGE', "The owner of this profile has set the privileges to see it, <br>higher than you have now. <br>Login to become their friend. <br>If they haven't set it, so only they can see, <br>then you will be able to view it.");
+define(
+    '_MD_YOGURT_NOPRIVILEGE',
+    "The owner of this profile has set the privileges to see it, <br>higher than you have now. <br>Login to become their friend. <br>If they haven't set it, so only they can see, <br>then you will be able to view it."
+);
 
 ###################################### OTHERS ##############################
 
@@ -244,12 +289,15 @@ define('_MD_YOGURT_SELECTMAINVIDEO', 'Then you can select a video to feature in 
 define('_MD_YOGURT_NOAVATARYET', 'No avatar yet');
 define('_MD_YOGURT_NOMAINVIDEOYET', 'No featured video yet');
 define('_MD_YOGURT_MYPROFILE', 'My Profile');
-define('_MD_YOGURT_YOUHAVEXPETITIONS', 'You have %u requests for friendship.');
+define('_MD_YOGURT_YOUHAVEXREQUESTS', 'You have %u requests for friendship.');
 define('_MD_YOGURT_CONTACTINFO', 'Contact Info');
 define('_MD_YOGURT_SUSPENDUSER', 'Suspend user');
 define('_MD_YOGURT_SUSPENDTIME', 'Time of suspension(in secs)');
 define('_MD_YOGURT_UNSUSPEND', 'Unsuspend User');
 define('_MD_YOGURT_SUSPENSIONADMIN', 'Suspension Admin Tools');
+define('_MD_YOGURT_USERPERSONAL', 'Personal');
+define('_MD_YOGURT_ACTIVITY', 'Activity');
+define('_MD_YOGURT_COMMUNITY', 'Community');
 
 //suspend.php
 define('_MD_YOGURT_SUSPENDED', 'User under suspension until %s');
@@ -266,21 +314,17 @@ define('_MD_YOGURT_REGDATE', 'Joined Date');
 define('_MD_YOGURT_EMAIL', 'Email');
 define('_MD_YOGURT_PM', 'PM');
 define('_MD_YOGURT_URL', 'URL');
-define('_MD_YOGURT_ADMIN', 'ADMIN');
+define('_MD_YOGURT_ADMIN', 'Admin');
 define('_MD_YOGURT_PREVIOUS', 'Previous');
 define('_MD_YOGURT_NEXT', 'Next');
 define('_MD_YOGURT_USERSFOUND', '%s member(s) found');
-define('_MD_YOGURT_TOTALUSERS', 'Total: %s members');
+define('_MD_YOGURT_TOTALUSERS', 'Total Members');
 define('_MD_YOGURT_NOFOUND', 'No Members Found');
 define('_MD_YOGURT_UNAME', 'User Name');
-define('_MD_YOGURT_ICQ', 'ICQ Number');
-define('_MD_YOGURT_AIM', 'AIM Handle');
-define('_MD_YOGURT_YIM', 'YIM Handle');
-define('_MD_YOGURT_MSNM', 'MSNM Handle');
-define('_MD_YOGURT_LOCATION', 'Location contains');
-define('_MD_YOGURT_OCCUPATION', 'Occupation contains');
-define('_MD_YOGURT_INTEREST', 'Interest contains');
-define('_MD_YOGURT_URLC', 'URL contains');
+define('_MD_YOGURT_LOCATIONCONTAINS', 'Location contains');
+define('_MD_YOGURT_OCCUPATIONCONTAINS', 'Occupation contains');
+define('_MD_YOGURT_INTERESTCONTAINS', 'Interest contains');
+define('_MD_YOGURT_URLCONTAINS', 'URL contains');
 define('_MD_YOGURT_LASTLOGMORE', "Last login is more than <span style='color:#ff0000;'>X</span> days ago");
 define('_MD_YOGURT_LASTLOGLESS', "Last login is less than <span style='color:#ff0000;'>X</span> days ago");
 define('_MD_YOGURT_REGMORE', "Joined date is more than <span style='color:#ff0000;'>X</span> days ago");
@@ -327,7 +371,10 @@ define('_MD_YOGURT_AUTHORAUDIO', 'Author/Singer');
 define('_MD_YOGURT_TITLEAUDIO', 'Title of file or song');
 define('_MD_YOGURT_ADDAUDIO', 'Add an mp3 file');
 define('_MD_YOGURT_SUBMITAUDIO', 'Upload file');
-define('_MD_YOGURT_ADDAUDIOHELP', 'Choose an mp3 file on your computer, max size %s ,<br> Leave title and author fields blank if your file has metainfo already');
+define(
+    '_MD_YOGURT_ADDAUDIOHELP',
+    'Choose an mp3 file on your computer, max size %s ,<br> Leave title and author fields blank if your file has metainfo already'
+);
 
 //19/04/2008
 define('_MD_YOGURT_AUDIODELETED', 'Your mp3 file was deleted!');
@@ -344,7 +391,100 @@ define('_MD_YOGURT_META_YEAR', 'Year');
 define('_MD_YOGURT_PLAYER', 'Your audio player');
 
 // 3.5
-define('_MD_YOGURT_ADDASAFRIEND', 'Add as a Friend');
+define('_MD_YOGURT_ADDFRIEND', 'Add Friend');
+define('_MD_YOGURT_FRIENDREQUESTPENDING', 'Friend Request Pending');
+define('_MD_YOGURT_MYFRIEND', 'Friend');
+define('_MD_YOGURT_FRIENDREQUESTSENT', 'Friend Request Sent');
+define('_MD_YOGURT_FRIENDSHIPSTATUS', 'Friendship Status');
 define('_MD_YOGURT_PROFILEVISITORS', 'Profile Visitors');
 define('_MD_YOGURT_FEATUREDVIDEO', 'Featured Video');
 define('_MD_YOGURT_ALLVIDEOS', 'View all videos');
+define('_MD_YOGURT_OWNEROFGROUP', 'Group Owner');
+define('_MD_YOGURT_MEMBERSLIST', 'Members List');
+define('_MD_YOGURT_LATESTMEMBER', 'Latest Member');
+define('_MD_YOGURT_MEMBERSLISTSECTION', 'Welcome to Members List');
+define('_MD_YOGURT_NEVERLOGIN', 'Never Login');
+define('_MD_YOGURT_MEMBERSINCE', 'Member Since');
+define('_MD_YOGURT_CONTACT', 'Contact');
+define('_MD_YOGURT_RANK', 'Rank');
+define('_MD_YOGURT_ACCEPTFRIEND', 'Accept');
+define('_MD_YOGURT_REJECTFRIEND', 'Reject');
+define('_MD_YOGURT_ONLINESTATUS', 'Online Status');
+define('_MD_YOGURT_ONLINE', 'Online');
+define('_MD_YOGURT_OFFLINE', 'Offline');
+define('_MD_YOGURT_SIGNATURE', 'Signature');
+define('_MD_YOGURT_BIOGRAPHY', 'Biography');
+define('_MD_YOGURT_EXTRAINFO', 'Extra Information');
+define('_MD_YOGURT_GROUP', 'Group');
+define('_MD_YOGURT_PRIVATEMESSAGE', 'Private Message');
+define('_MD_YOGURT_WEBSITE', 'Website');
+define('_MD_YOGURT_WWW', 'WWW');
+define('_MD_YOGURT_LOCATION', 'Location');
+define('_MD_YOGURT_OCCUPATION', 'Occupation');
+define('_MD_YOGURT_INTEREST', 'Interest');
+define('_MD_YOGURT_MYAUDIOS', 'My Audios');
+define('_MD_YOGURT_MYFANS', 'My Fans');
+define('_MD_YOGURT_EXTRAINFOCONTAINS', 'Extra Info Contains');
+define('_MD_YOGURT_BIOGRAPHYINFOCONTAINS', 'Biography Contains');
+define('_MD_YOGURT_SIGNATURECONTAINS', 'Signature Contains');
+define('_MD_YOGURT_MEMBEROFGROUP', 'Member');
+//users
+define('_MD_YOGURT_USERNAME', 'Username');
+define('_MD_YOGURT_PASSWORD', 'Password');
+define('_MD_YOGURT_REMEMBERME', 'Remember Me');
+define('_MD_YOGURT_LOGIN', 'Login');
+define('_MD_YOGURT_USERLOGIN', 'Members Login');
+define('_MD_YOGURT_LOSTPASSWORD', 'Lost Your Password ?');
+define('_MD_YOGURT_NOPROBLEM', 'No problem. Simply enter the e-mail address we have on file for your account.');
+define('_MD_YOGURT_NOTREGISTERED', 'Not registered? Click.');
+define('_MD_YOGURT_SENDPASSWORD', 'Send Password.');
+define('_MD_YOGURT_YOURUSERNAME', 'Your Username');
+define('_MD_YOGURT_YOURPASSWORD', 'Your Password.');
+define('_MD_YOGURT_YOUREMAIL', 'Your Email');
+define('_MD_YOGURT_SIGNUP', 'Sign Up Now !');
+define('_MD_YOGURT_NOTAMEMBER', 'Not a member?');
+define('_MD_YOGURT_SOCIALNETWORK', 'Social Network');
+define('_MD_YOGURT_USERWELCOME', 'Enlarge friends network.');
+define('_MD_YOGURT_JOINUS', 'Join our community today and start to search for new friends!');
+define('_MD_YOGURT_FINDFRIENDS', 'Find Friends');
+
+//Data Tables
+define('_MD_YOGURT_DTDECIMAL', '');
+define('_MD_YOGURT_DTEMPTYTABLE', 'No data available in table');
+define('_MD_YOGURT_DTINFOSHOWING', 'Showing');
+define('_MD_YOGURT_DTINFOTO', 'to');
+define('_MD_YOGURT_DTINFOOF', 'of');
+define('_MD_YOGURT_DTINFOENTRIES', 'entries');
+define('_MD_YOGURT_DTINFOEMPTY', 'Showing 0 to 0 of 0 entries');
+define('_MD_YOGURT_DTINFOFILTEREDFROM', 'filtered from');
+define('_MD_YOGURT_DTINFOFILTEREDTOTALENTRIES', 'total entries');
+define('_MD_YOGURT_DTINFOPOSTFIX', '');
+define('_MD_YOGURT_DTTHOUSANDS', ',');
+define('_MD_YOGURT_DTLENGTHMENUSHOW', 'Show');
+define('_MD_YOGURT_DTLENGTHMENUENTRIES', 'entries');
+define('_MD_YOGURT_DTLOADINGRECORDS', 'Loading...');
+define('_MD_YOGURT_DTPROCESSING', 'Processing...');
+define('_MD_YOGURT_DTSEARCH', 'Search');
+define('_MD_YOGURT_DTZERORECORDS', 'No matching records found');
+define('_MD_YOGURT_DTFIRST', 'First');
+define('_MD_YOGURT_DTLAST', 'Last');
+define('_MD_YOGURT_DTNEXT', 'Next');
+define('_MD_YOGURT_DTPREVIOUS', 'Previous');
+define('_MD_YOGURT_DTSORTASCENDING', ': activate to sort column ascending');
+define('_MD_YOGURT_DTSORTDESCENSING', ': activate to sort column descending');
+
+define('_MD_YOGURT_CANTVOTEOWN', 'You can not vote for yourself');
+define('_MD_YOGURT_VOTED', 'Vote');
+define('_MD_YOGURT_ALREADYVOTED', 'Sorry, you have already voted once.');
+
+
+define('_MD_YOGURT_PROFILE_DISPLAYNAME', 'Display Name');
+define('_MD_YOGURT_PROFILE_EMAIL', 'Email');
+
+define('_MD_YOGURT_PROFILE_SORTBY', 'Sort by');
+define('_MD_YOGURT_PROFILE_ORDER', 'Ordering');
+define('_MD_YOGURT_PROFILE_PERPAGE', 'Items per page');
+define('_MD_YOGURT_PROFILE_LATERTHAN', ' %s  is later than');
+define('_MD_YOGURT_PROFILE_EARLIERTHAN', ' %s  is earlier than');
+define('_MD_YOGURT_PROFILE_LARGERTHAN', ' %s  is greater than');
+define('_MD_YOGURT_PROFILE_SMALLERTHAN', ' %s  is smaller than');

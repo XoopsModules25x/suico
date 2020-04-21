@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,6 +18,7 @@
  * @since
  */
 
+use Xmf\Request;
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
@@ -26,25 +28,36 @@ require __DIR__ . '/header.php';
  */
 $notesFactory = new Yogurt\NotesHandler($xoopsDB);
 
-$note_id = \Xmf\Request::getInt('note_id', 0, 'POST');
+$note_id = Request::getInt('note_id', 0, 'POST');
 
-if (1 != $_POST['confirm']) {
-    xoops_confirm(['note_id' => $note_id, 'confirm' => 1], 'delete_Note.php', _MD_YOGURT_ASKCONFIRMNOTEDELETION, _MD_YOGURT_CONFIRMNOTEDELETION);
+if (1 !== Request::getInt('confirm', 0, 'POST')) {
+    xoops_confirm(
+        [
+            'note_id' => $note_id,
+            'confirm' => 1,
+        ],
+        'delete_Note.php',
+        _MD_YOGURT_ASKCONFIRMNOTEDELETION,
+        _MD_YOGURT_CONFIRMNOTEDELETION
+    );
 } else {
     /**
      * Creating the factory  and the criteria to delete the picture
      * The user must be the owner
      */
-    $criteria_note_id = new \Criteria('note_id', $note_id);
+    $criteria_note_id = new Criteria(
+        'note_id',
+        $note_id
+    );
     $uid              = (int)$xoopsUser->getVar('uid');
-    $criteria_uid     = new \Criteria('note_to', $uid);
-    $criteria         = new \CriteriaCompo($criteria_note_id);
+    $criteria_uid     = new Criteria('note_to', $uid);
+    $criteria         = new CriteriaCompo($criteria_note_id);
     $criteria->add($criteria_uid);
 
     /**
      * Try to delete
      */
-    if (1 == $notesFactory->getCount($criteria)) {
+    if (1 === $notesFactory->getCount($criteria)) {
         if ($notesFactory->deleteAll($criteria)) {
             redirect_header('notebook.php?uid=' . $uid, 2, _MD_YOGURT_NOTEDELETED);
         } else {
@@ -53,4 +66,4 @@ if (1 != $_POST['confirm']) {
     }
 }
 
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

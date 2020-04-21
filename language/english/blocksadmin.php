@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -37,3 +38,6 @@ define('_AM_ADGS', 'Groups');
 define('_AM_ALLMODULEPAGES', 'Groups');
 define('_AM_SYSTEMLEVEL', '_AM_SYSTEMLEVEL');
 define('_AM_ADMINBLOCK', '_AM_ADMINBLOCK');
+define('_AM_NOTSELNG', 'Not Sel');
+
+define('_AM_BLOCKTAG1', '%s will print %s');

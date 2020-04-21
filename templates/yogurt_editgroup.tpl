@@ -1,86 +1,37 @@
 <{include file="db:yogurt_navbar.tpl"}>
 
 <form class='outer' name='yogurt-group-edit-form' id='yogurt-group-edit-form' action='editgroup.php' method='post' enctype="multipart/form-data">
+<div class="alert alert-info">
+    <h5><{$lang_editgroup}></h5>
 
-    <h2 class=head><{$lang_editgroup}></h2>
+		<div class="form-group">
+			<label for="title"><strong><{$lang_titlegroup}></strong></label>
+			<input type='text' name='title' id='title' class='form-control' value='<{$group_title}>' required>
+		</div>
 
-    <p class=odd>
-        <label for='' class='xoops-form-element-caption'>
-            <span class='caption-text'>
-                <{$lang_groupimage}>
-            </span>
-            <span class='caption-marker'>
-            *
-            </span>
-        </label>
-        <img src="<{$xoops_upload_url}>/yogurt/groups/<{$group_img}>">
-    </p>
-    <p class=even>
-        <label for='' class='xoops-form-element-caption'>
-                <span class='caption-text'>
-                    <{$lang_keepimage}>
-                </span>
-            <span class='caption-marker'>
-                *
-                </span>
-        </label>
-        <input type='checkbox' value='1' id='flag_oldimg' name='flag_oldimg' onclick="disableElement(img)" checked>
-    </p>
+		<div class="form-group">
+			<label for="desc"><strong><{$lang_descgroup}></strong></label>
+			<input type='text' name='desc' id='desc' class="form-control" value='<{$group_desc}>' required>
+		</div>
+   
+		<div class="form-check">
+			<label for="group"><strong><{$lang_groupimage}></strong></label>
+			<br><img src="<{$xoops_upload_url}>/yogurt/groups/<{$group_img}>"><br><br>
+			<label class='form-check-label' for="group"><input type='checkbox' class="form-check-input" value='1' id='flag_oldimg' name='flag_oldimg' onclick="disableElement(img)" checked><{$lang_keepimage}></label>
+		</div>
+   
+		<div class="form-group">
+			<label for="group"><strong><{$lang_groupimage}></strong><br> <{$lang_youcanupload}></label>
+			<input type='hidden' name='MAX_FILE_SIZE' value='<{$maxfilesize}>'>
+            <input type='file' name='img' id='img' disabled="true" class='form-control-file'>
+            <input type='hidden' name='xoops_upload_file[]' id='xoops_upload_file[]' value='img'>			
+		</div>
 
-    <div>
-        <p class="odd">
-            <label for='' class='xoops-form-element-caption'>
-                <span class='caption-text'>
-                    <{$lang_youcanupload}>
-                </span>
-                <span class='caption-marker'>
-                    *
-                </span>
-            </label>
-        </p>
-        <p class="even">
-            <label for='img' class='xoops-form-element-caption'>
-                <span class='caption-text'>
-                    <{$lang_groupimage}>
-                </span>
-                <span class='caption-marker'>
-                    *
-                </span>
-            </label>
-            <input type='hidden' name='MAX_FILE_SIZE' value='<{$maxfilesize}>'>
-            <input type='file' name='img' id='img' disabled="true">
-            <input type='hidden' name='xoops_upload_file[]' id='xoops_upload_file[]' value='img'>
-        </p>
-    </div>
-    <p class="odd">
-        <label for='title' class='xoops-form-element-caption'>
-                <span class='caption-text'>
-                    <{$lang_titlegroup}>
-            </span>
-            <span class='caption-marker'>
-                    *
-                </span>
-        </label>
-        <input type='text' name='title' id='title' size='35' maxlength='55' value='<{$group_title}>'>
-    </p>
-    <p class="even">
-        <label for='desc' class='xoops-form-element-caption'>
-                <span class='caption-text'>
-                    <{$lang_descgroup}>
-                </span>
-            <span class='caption-marker'>
-                    *
-                </span>
-        </label>
-        <textarea name='desc' id='desc' rows='5' cols='50'><{$group_desc}></textarea>
-    </p>
-    <p class=odd>
-        <input type='submit' class='formButton' name='submit_button' id='submit_button' value='<{$lang_savegroup}>'>
-    </p>
-
-    <{$token}>
-    <input type='hidden' name='group_id' id='group_id' value='<{$group_id}>'>
-    <input type='hidden' name='marker' id='marker' value='1'>
+			<input type='submit' class='btn btn-primary' name='submit_button' id='submit_button' value='<{$lang_savegroup}>'>
+			<{$token}>
+			<input type='hidden' name='group_id' id='group_id' value='<{$group_id}>'>
+			<input type='hidden' name='marker' id='marker' value='1'>
+</div>
 </form>
 
 <div id="yogurt-group-edit-members" class="outer odd">
@@ -102,7 +53,7 @@
                 <form action="kickfromgroup.php" method="post">
                     <input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
                     <input type="hidden" value="<{$group_members[i].uid}>" name="rel_user_uid" id="rel_user_uid">
-                    <input type="image" src="assets/images/abandongroup.gif">
+                    <button name="" type="image" class="btn btn-danger btn-sm"><{$smarty.const._MD_YOGURT_KICKOUT}></button>
                 </form>
             <{/if}>
 

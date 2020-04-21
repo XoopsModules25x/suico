@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -23,17 +25,17 @@
  */
 
 use Xmf\Request;
+use Xmf\Module\Helper\Permission;
 
 require __DIR__ . '/admin_header.php';
 xoops_cp_header();
 //It recovered the value of argument op in URL$
-$op    = \Xmf\Request::getString('op', 'list');
-$order = \Xmf\Request::getString('order', 'desc');
-$sort  = \Xmf\Request::getString('sort', '');
+$op    = Request::getString('op', 'list');
+$order = Request::getString('order', 'desc');
+$sort  = Request::getString('sort', '');
 
 $adminObject->displayNavigation(basename(__FILE__));
-/** @var \Xmf\Module\Helper\Permission $permHelper */
-$permHelper = new \Xmf\Module\Helper\Permission();
+$permHelper = new Permission();
 $uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/groups/';
 $uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/groups/';
 
@@ -51,7 +53,7 @@ switch ($op) {
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('groups.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
-        if (0 !== \Xmf\Request::getInt('group_id', 0)) {
+        if (0 !== Request::getInt('group_id', 0)) {
             $groupsObject = $groupsHandler->get(Request::getInt('group_id', 0));
         } else {
             $groupsObject = $groupsHandler->create();
@@ -63,8 +65,12 @@ switch ($op) {
 
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/groups/';
-        $uploader  = new \XoopsMediaUploader(
-            $uploadDir, $helper->getConfig('mimetypes'), $helper->getConfig('maxsize'), null, null
+        $uploader  = new XoopsMediaUploader(
+            $uploadDir,
+            $helper->getConfig('mimetypes'),
+            $helper->getConfig('maxsize'),
+            null,
+            null
         );
         if ($uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0])) {
             //$extension = preg_replace( '/^.+\.([^.]+)$/sU' , '' , $_FILES['attachedfile']['name']);
@@ -102,7 +108,7 @@ switch ($op) {
 
     case 'delete':
         $groupsObject = $groupsHandler->get(Request::getString('group_id', ''));
-        if (1 == \Xmf\Request::getInt('ok', 0)) {
+        if (1 === Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('groups.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
@@ -112,13 +118,24 @@ switch ($op) {
                 echo $groupsObject->getHtmlErrors();
             }
         } else {
-            xoops_confirm(['ok' => 1, 'group_id' => Request::getString('group_id', ''), 'op' => 'delete',], Request::getUrl('REQUEST_URI', '', 'SERVER'), sprintf(AM_YOGURT_FORMSUREDEL, $groupsObject->getVar('group_title')));
+            xoops_confirm(
+                [
+                    'ok'       => 1,
+                    'group_id' => Request::getString('group_id', ''),
+                    'op'       => 'delete',
+                ],
+                Request::getUrl('REQUEST_URI', '', 'SERVER'),
+                sprintf(
+                    AM_YOGURT_FORMSUREDEL,
+                    $groupsObject->getVar('group_title')
+                )
+            );
         }
         break;
 
     case 'clone':
 
-        $id_field = \Xmf\Request::getString('group_id', '');
+        $id_field = Request::getString('group_id', '');
 
         if ($utility::cloneRecord('yogurt_groups', 'group_id', $id_field)) {
             redirect_header('groups.php', 3, AM_YOGURT_CLONED_OK);
@@ -131,10 +148,10 @@ switch ($op) {
     default:
         $adminObject->addItemButton(AM_YOGURT_ADD_GROUPS, 'groups.php?op=new', 'add');
         $adminObject->displayButton('left');
-        $start                 = \Xmf\Request::getInt('start', 0);
+        $start                 = Request::getInt('start', 0);
         $groupsPaginationLimit = $helper->getConfig('userpager');
 
-        $criteria = new \CriteriaCompo();
+        $criteria = new CriteriaCompo();
         $criteria->setSort('group_id ASC, group_title');
         $criteria->setOrder('ASC');
         $criteria->setLimit($groupsPaginationLimit);
@@ -153,8 +170,12 @@ switch ($op) {
         if ($groupsTempRows > $groupsPaginationLimit) {
             xoops_load('XoopsPageNav');
 
-            $pagenav = new \XoopsPageNav(
-                $groupsTempRows, $groupsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+            $pagenav = new XoopsPageNav(
+                $groupsTempRows,
+                $groupsPaginationLimit,
+                $start,
+                'start',
+                'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
@@ -165,7 +186,7 @@ switch ($op) {
         //    $fields = explode('|', group_id:int:11::NOT NULL::primary:group_id|owner_uid:int:11::NOT NULL:::owner_uid|group_title:varchar:255::NOT NULL:::group_title|group_desc:tinytext:0::NOT NULL:::group_desc|group_img:varchar:255::NOT NULL:::group_img);
         //    $fieldsCount    = count($fields);
 
-        $criteria = new \CriteriaCompo();
+        $criteria = new CriteriaCompo();
 
         //$criteria->setOrder('DESC');
         $criteria->setSort($sort);
@@ -181,11 +202,16 @@ switch ($op) {
             foreach (array_keys($groupsTempArray) as $i) {
                 //        $field = explode(':', $fields[$i]);
 
-                $GLOBALS['xoopsTpl']->assign('selectorgroup_id', AM_YOGURT_GROUPS_GROUP_ID);
+                $GLOBALS['xoopsTpl']->assign(
+                    'selectorgroup_id',
+                    AM_YOGURT_GROUPS_GROUP_ID
+                );
                 $groupsArray['group_id'] = $groupsTempArray[$i]->getVar('group_id');
 
                 $GLOBALS['xoopsTpl']->assign('selectorowner_uid', AM_YOGURT_GROUPS_OWNER_UID);
-                $groupsArray['owner_uid'] = strip_tags(\XoopsUser::getUnameFromId($groupsTempArray[$i]->getVar('owner_uid')));
+                $groupsArray['owner_uid'] = strip_tags(
+                    XoopsUser::getUnameFromId($groupsTempArray[$i]->getVar('owner_uid'))
+                );
 
                 $GLOBALS['xoopsTpl']->assign('selectorgroup_title', AM_YOGURT_GROUPS_GROUP_TITLE);
                 $groupsArray['group_title'] = $groupsTempArray[$i]->getVar('group_title');
@@ -194,7 +220,9 @@ switch ($op) {
                 $groupsArray['group_desc'] = $groupsTempArray[$i]->getVar('group_desc');
 
                 $GLOBALS['xoopsTpl']->assign('selectorgroup_img', AM_YOGURT_GROUPS_GROUP_IMG);
-                $groupsArray['group_img']   = "<img src='" . $uploadUrl . $groupsTempArray[$i]->getVar('group_img') . "' name='" . 'name' . "' id=" . 'id' . " alt='' style='max-width:100px'>";
+                $groupsArray['group_img']   = "<img src='" . $uploadUrl . $groupsTempArray[$i]->getVar(
+                    'group_img'
+                ) . "' name='" . 'name' . "' id=" . 'id' . " alt='' style='max-width:100px'>";
                 $groupsArray['edit_delete'] = "<a href='groups.php?op=edit&group_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='groups.php?op=delete&group_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='groups.php?op=clone&group_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
@@ -206,8 +234,12 @@ switch ($op) {
             // Display Navigation
             if ($groupsCount > $groupsPaginationLimit) {
                 xoops_load('XoopsPageNav');
-                $pagenav = new \XoopsPageNav(
-                    $groupsCount, $groupsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                $pagenav = new XoopsPageNav(
+                    $groupsCount,
+                    $groupsPaginationLimit,
+                    $start,
+                    'start',
+                    'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
@@ -237,7 +269,9 @@ switch ($op) {
             //-------------------------------------------
 
             echo $GLOBALS['xoopsTpl']->fetch(
-                XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname') . '/templates/admin/yogurt_admin_groups.tpl'
+                XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar(
+                    'dirname'
+                ) . '/templates/admin/yogurt_admin_groups.tpl'
             );
         }
 

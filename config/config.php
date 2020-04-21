@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -16,7 +17,9 @@
  * @since
  * @author       XOOPS Development Team
  */
-$moduleDirName      = basename(dirname(__DIR__));
+$moduleDirName      = basename(
+    dirname(__DIR__)
+);
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 require_once dirname(__DIR__) . '/include/common.php';
 
@@ -34,7 +37,7 @@ return (object)[
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/avatars',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images',
-        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/mp3',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/audio',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/thumbs',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/groups',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/videos',
@@ -44,7 +47,7 @@ return (object)[
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/avatars',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images',
-        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/mp3',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/audio',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/thumbs',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/groups',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/videos',
@@ -83,17 +86,22 @@ return (object)[
         '/tcpdf',
     ],
     'renameTables'    => [
-        'yogurt_seutubo' => 'yogurt_video',
-        'yogurt_Groups'  => 'yogurt_groups',
-        'yogurt_Configs' => 'yogurt_configs',
+        'yogurt_seutubo'        => 'yogurt_video',
+        'yogurt_Groups'         => 'yogurt_groups',
+        'yogurt_Configs'        => 'yogurt_configs',
+        'yogurt_friendpetition' => 'yogurt_friendrequest',
     ],
     'renameColumns'   => [
-        '3.4' => [
-            'yogurt_notes' => [
+        '3.5' => [
+            'yogurt_notes'         => [
                 'Note_id'   => 'note_id',
                 'Note_text' => 'yogurt_configs',
                 'Note_from' => 'note_text',
                 'Note_to'   => 'note_from',
+            ],
+            'yogurt_friendrequest' => [
+                'petitioner_uid' => 'friendrequester_uid',
+                'petitionto_uid' => 'friendrequestto_uid',
             ],
         ],
     ],

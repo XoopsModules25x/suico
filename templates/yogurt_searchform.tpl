@@ -1,7 +1,13 @@
 <{include file="db:yogurt_navbar.tpl"}>
 
 <{$searchform.javascript}>
-<h4><{$searchform.title}></h4>
+<h4><{$smarty.const._MD_YOGURT_SEARCH}></h4>
+<{if $displaytotalmember == 1}>
+    <b><{$smarty.const._MD_YOGURT_TOTALUSERS}>:</b>
+    <{$totalmember}>
+<{/if}>
+
+<br><br>
 <form name="<{$searchform.name}>" action="<{$searchform.action}>" method="<{$searchform.method}>" <{$searchform.extra}>>
     <div>
         <!-- start of form elements loop -->

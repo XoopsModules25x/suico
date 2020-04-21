@@ -40,7 +40,7 @@
             activeImage:            0
         },settings);
         // Caching the jQuery object with all elements matched
-        var jQueryMatchedObj = this; // This, in this context, refer to jQuery object
+        const jQueryMatchedObj = this; // This, in this context, refer to jQuery object
         /**
          * Initializing the plugin calling the start function
          *
@@ -71,7 +71,7 @@
                 settings.imageArray.push(new Array(jQueryMatchedObj.attr('href'),jQueryMatchedObj.attr('title')));
             } else {
                 // Add an Array (as many as we have), with href and title atributes, inside the Array that storage the images references
-                for ( var i = 0; i < jQueryMatchedObj.length; i++ ) {
+                for (let i = 0; i < jQueryMatchedObj.length; i++ ) {
                     settings.imageArray.push(new Array(jQueryMatchedObj[i].getAttribute('href'),jQueryMatchedObj[i].getAttribute('title')));
                 }
             }
@@ -122,7 +122,7 @@
             // Apply the HTML markup into body tag
             $('body').append('<div id="jquery-overlay"></div><div id="jquery-lightbox"><div id="lightbox-container-image-box"><div id="lightbox-container-image"><img id="lightbox-image"><div style="" id="lightbox-nav"><a href="#" id="lightbox-nav-btnPrev"></a><a href="#" id="lightbox-nav-btnNext"></a></div><div id="lightbox-loading"><a href="#" id="lightbox-loading-link"><img src="' + settings.imageLoading + '"></a></div></div></div><div id="lightbox-container-image-data-box"><div id="lightbox-container-image-data"><div id="lightbox-image-details"><span id="lightbox-image-details-caption"></span><span id="lightbox-image-details-currentNumber"></span></div><div id="lightbox-secNav"><a href="#" id="lightbox-secNav-btnClose"><img src="' + settings.imageBtnClose + '"></a></div></div></div></div>');
             // Get page sizes
-            var arrPageSizes = ___getPageSize();
+            const arrPageSizes = ___getPageSize();
             // Style overlay and show it
             $('#jquery-overlay').css({
                 backgroundColor:    settings.overlayBgColor,
@@ -131,7 +131,7 @@
                 height:             arrPageSizes[1]
             }).fadeIn();
             // Get page scroll
-            var arrPageScroll = ___getPageScroll();
+            const arrPageScroll = ___getPageScroll();
             // Calculate top and left offset for the jquery-lightbox div object and show it
             $('#jquery-lightbox').css({
                 top:    arrPageScroll[1] + (arrPageSizes[3] / 10),
@@ -149,14 +149,14 @@
             // If window was resized, calculate the new overlay dimensions
             $(window).resize(function() {
                 // Get page sizes
-                var arrPageSizes = ___getPageSize();
+                const arrPageSizes = ___getPageSize();
                 // Style overlay and show it
                 $('#jquery-overlay').css({
                     width:      arrPageSizes[0],
                     height:     arrPageSizes[1]
                 });
                 // Get page scroll
-                var arrPageScroll = ___getPageScroll();
+                const arrPageScroll = ___getPageScroll();
                 // Calculate top and left offset for the jquery-lightbox div object and show it
                 $('#jquery-lightbox').css({
                     top:    arrPageScroll[1] + (arrPageSizes[3] / 10),
@@ -174,7 +174,7 @@
             // Hide some elements
             $('#lightbox-image,#lightbox-nav,#lightbox-nav-btnPrev,#lightbox-nav-btnNext,#lightbox-container-image-data-box,#lightbox-image-details-currentNumber').hide();
             // Image preload process
-            var objImagePreloader = new Image();
+            const objImagePreloader = new Image();
             objImagePreloader.onload = function() {
                 $('#lightbox-image').attr('src',settings.imageArray[settings.activeImage][0]);
                 // Perfomance an effect in the image container resizing it
@@ -192,14 +192,14 @@
          */
         function _resize_container_image_box(intImageWidth,intImageHeight) {
             // Get current width and height
-            var intCurrentWidth = $('#lightbox-container-image-box').width();
-            var intCurrentHeight = $('#lightbox-container-image-box').height();
+            const intCurrentWidth = $('#lightbox-container-image-box').width();
+            const intCurrentHeight = $('#lightbox-container-image-box').height();
             // Get the width and height of the selected image plus the padding
-            var intWidth = (intImageWidth + (settings.containerBorderSize * 2)); // Plus the image´s width and the left and right padding value
-            var intHeight = (intImageHeight + (settings.containerBorderSize * 2)); // Plus the image´s height and the left and right padding value
+            const intWidth = (intImageWidth + (settings.containerBorderSize * 2)); // Plus the image´s width and the left and right padding value
+            const intHeight = (intImageHeight + (settings.containerBorderSize * 2)); // Plus the image´s height and the left and right padding value
             // Diferences
-            var intDiffW = intCurrentWidth - intWidth;
-            var intDiffH = intCurrentHeight - intHeight;
+            const intDiffW = intCurrentWidth - intWidth;
+            const intDiffH = intCurrentHeight - intHeight;
             // Perfomance the effect
             $('#lightbox-container-image-box').animate({ width: intWidth, height: intHeight },settings.containerResizeSpeed,function() { _show_image(); });
             if ( ( intDiffW == 0 ) && ( intDiffH == 0 ) ) {
@@ -305,7 +305,7 @@
          * @return Array Return an array with page width, height and window width, height
          */
         function ___getPageSize() {
-            var xScroll, yScroll;
+            let xScroll, yScroll;
             if (window.innerHeight && window.scrollMaxY) {
                 xScroll = window.innerWidth + window.scrollMaxX;
                 yScroll = window.innerHeight + window.scrollMaxY;
@@ -316,7 +316,7 @@
                 xScroll = document.body.offsetWidth;
                 yScroll = document.body.offsetHeight;
             }
-            var windowWidth, windowHeight;
+            let windowWidth, windowHeight;
             if (self.innerHeight) { // all except Explorer
                 if(document.documentElement.clientWidth){
                     windowWidth = document.documentElement.clientWidth;
@@ -353,7 +353,7 @@
          * @return Array Return an array with x,y page scroll values.
          */
         function ___getPageScroll() {
-            var xScroll, yScroll;
+            let xScroll, yScroll;
             if (self.pageYOffset) {
                 yScroll = self.pageYOffset;
                 xScroll = self.pageXOffset;
@@ -372,8 +372,8 @@
           *
           */
          function ___pause(ms) {
-            var date = new Date();
-            curDate = null;
+             const date = new Date();
+             curDate = null;
             do { var curDate = new Date(); }
             while ( curDate - date < ms);
          };

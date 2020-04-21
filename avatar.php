@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -18,6 +21,7 @@
  */
 
 use XoopsModules\Yogurt;
+use Xmf\Request;
 
 require __DIR__ . '/header.php';
 
@@ -28,9 +32,12 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 /**
  * Creating the factory  loading the picture changing its caption
  */
-$imageFactory = new Yogurt\ImageHandler($xoopsDB);
-$picture      = $imageFactory->create(false);
-$picture->load($_POST['cod_img']);
+$imageFactory = new Yogurt\ImageHandler(
+    $xoopsDB
+);
+/** @var \XoopsModules\Yogurt\Image $picture */
+$picture = $imageFactory->create(false);
+$picture->load(Request::getString('cod_img', '', 'POST'));
 
 $uid = (int)$xoopsUser->getVar('uid');
 
@@ -43,12 +50,12 @@ if (!copy($image, $imageavatar)) {
 }
 $xoopsUser->setVar('user_avatar', 'avatars/' . $avatar);
 
-$userHandler = new \XoopsUserHandler($xoopsDB);
+$userHandler = new XoopsUserHandler($xoopsDB);
 
 /**
  * Verifying who's the owner to allow changes
  */
-if ($uid == $picture->getVar('uid_owner')) {
+if ($uid === (int)$picture->getVar('uid_owner')) {
     if ($userHandler->insert($xoopsUser)) {
         redirect_header('album.php', 2, _MD_YOGURT_AVATAR_EDITED);
     } else {
@@ -56,4 +63,4 @@ if ($uid == $picture->getVar('uid_owner')) {
     }
 }
 
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

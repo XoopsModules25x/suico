@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,34 +18,35 @@
  * @since
  */
 
+use Xmf\Request;
 use XoopsModules\Yogurt;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
 require __DIR__ . '/header.php';
 
-//require_once __DIR__ . '/class/Friendpetition.php';
+//require_once __DIR__ . '/class/Friendrequest.php';
 //require_once __DIR__ . '/class/Friendship.php';
 
 /**
- * Factory of petitions created
+ * Factory of friendrequests created
  */
-$friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
+$friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
 $friendshipFactory     = new Yogurt\FriendshipHandler($xoopsDB);
 
-$petition_id      = \Xmf\Request::getInt('petition_id', 0, 'POST');
-$friendship_level = \Xmf\Request::getInt('level', 0, 'POST');
+$friendrequest_id      = Request::getInt('friendrequest_id', 0, 'POST');
+$friendship_level = Request::getInt('level', 0, 'POST');
 $uid              = (int)$xoopsUser->getVar('uid');
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
-$criteria = new \CriteriaCompo(new \Criteria('friendpet_id', $petition_id));
-$criteria->add(new \Criteria('petioned_uid', $uid));
-if ($friendpetitionFactory->getCount($criteria) > 0) {
-    if (($friendship_level > 0) && ($petition = $friendpetitionFactory->getObjects($criteria))) {
-        $friend1_uid = $petition[0]->getVar('petitioner_uid');
-        $friend2_uid = $petition[0]->getVar('petioned_uid');
+$criteria = new CriteriaCompo(new Criteria('friendpet_id', $friendrequest_id));
+$criteria->add(new Criteria('friendrequestto_uid', $uid));
+if ($friendrequestFactory->getCount($criteria) > 0) {
+    if (($friendship_level > 0) && ($friendrequest = $friendrequestFactory->getObjects($criteria))) {
+        $friend1_uid = $friendrequest[0]->getVar('friendrequester_uid');
+        $friend2_uid = $friendrequest[0]->getVar('friendrequestto_uid');
 
         $newfriendship1 = $friendshipFactory->create(true);
         $newfriendship1->setVar('level', 3);
@@ -54,14 +56,14 @@ if ($friendpetitionFactory->getCount($criteria) > 0) {
         $newfriendship2->setVar('level', $friendship_level);
         $newfriendship2->setVar('friend1_uid', $friend2_uid);
         $newfriendship2->setVar('friend2_uid', $friend1_uid);
-        $friendpetitionFactory->deleteAll($criteria);
-        $friendshipFactory->insert($newfriendship1);
-        $friendshipFactory->insert($newfriendship2);
+        $friendrequestFactory->deleteAll($criteria);
+        $friendshipFactory->insert2($newfriendship1);
+        $friendshipFactory->insert2($newfriendship2);
 
         redirect_header(XOOPS_URL . '/modules/yogurt/friends.php?uid=' . $friend2_uid, 3, _MD_YOGURT_FRIENDMADE);
     } else {
-        if (0 == $friendship_level) {
-            $friendpetitionFactory->deleteAll($criteria);
+        if (0 === $friendship_level) {
+            $friendrequestFactory->deleteAll($criteria);
             redirect_header(XOOPS_URL . '/modules/yogurt/index.php?uid=' . $uid, 3, _MD_YOGURT_FRIENDSHIPNOTACCEPTED);
         }
         redirect_header(XOOPS_URL . '/modules/yogurt/index.php?uid=' . $uid, 3, _MD_YOGURT_NOCACHACA);
@@ -70,4 +72,4 @@ if ($friendpetitionFactory->getCount($criteria) > 0) {
     redirect_header(XOOPS_URL . '/modules/yogurt/index.php?uid=' . $uid, 3, _MD_YOGURT_NOCACHACA);
 }
 
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,20 +18,23 @@
  * @since
  */
 
+use Xmf\Request;
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
-$cod_img = \Xmf\Request::getInt('video_id', 0, 'POST');
+$cod_img = Request::getInt('video_id', 0, 'POST');
 
 /**
  * Creating the factory  loading the video changing its caption
  */
-$videoFactory = new Yogurt\VideoHandler($xoopsDB);
+$videoFactory = new Yogurt\VideoHandler(
+    $xoopsDB
+);
 $video        = $videoFactory->create(false);
 $video->load($cod_img);
 $video->setVar('main_video', 1);
@@ -39,9 +43,9 @@ $video->setVar('main_video', 1);
  * Verifying who's the owner to allow changes
  */
 $uid = (int)$xoopsUser->getVar('uid');
-if ($uid == $video->getVar('uid_owner')) {
+if ($uid === $video->getVar('uid_owner')) {
     if ($videoFactory->unsetAllMainsbyID($uid)) {
-        if ($videoFactory->insert($video)) {
+        if ($videoFactory->insert2($video)) {
             redirect_header('video.php', 2, _MD_YOGURT_SETMAINVIDEO);
         } else {
             redirect_header('video.php', 2, _MD_YOGURT_NOCACHACA);
@@ -51,4 +55,4 @@ if ($uid == $video->getVar('uid_owner')) {
     }
 }
 
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

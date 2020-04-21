@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -17,7 +18,10 @@
  * @author       XOOPS Development Team
  */
 
+use Xmf\Module\Admin;
 use XoopsModules\Yogurt;
+use XoopsModules\Yogurt\Helper;
+use XoopsModules\Yogurt\Utility;
 
 include dirname(__DIR__) . '/preloads/autoloader.php';
 
@@ -27,10 +31,10 @@ $moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
 /** @var \XoopsDatabase $db */
 /** @var \XoopsModules\Yogurt\Helper $helper */
 /** @var \XoopsModules\Yogurt\Utility $utility */
-$db      = \XoopsDatabaseFactory::getDatabaseConnection();
+$db      = XoopsDatabaseFactory::getDatabaseConnection();
 $debug   = false;
-$helper  = \XoopsModules\Yogurt\Helper::getInstance($debug);
-$utility = new \XoopsModules\Yogurt\Utility();
+$helper  = Helper::getInstance($debug);
+$utility = Utility::getInstance();
 
 $helper->loadLanguage('common');
 
@@ -38,11 +42,11 @@ $helper->loadLanguage('common');
 //$categoryHandler     = new Yogurt\CategoryHandler($db);
 //$downloadHandler     = new Yogurt\DownloadHandler($db);
 
-$pathIcon16 = \Xmf\Module\Admin::iconUrl('', 16);
-$pathIcon32 = \Xmf\Module\Admin::iconUrl('', 32);
+$pathIcon16 = Admin::iconUrl('', 16);
+$pathIcon32 = Admin::iconUrl('', 32);
 if (is_object($helper->getModule())) {
-    $pathModIcon16 = $helper->getModule()->getInfo('modicons16');
-    $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
+    $pathModIcon16 = $helper->getConfig('modicons16');
+    $pathModIcon32 = $helper->getConfig('modicons32');
 }
 
 if (!defined($moduleDirNameUpper . '_CONSTANTS_DEFINED')) {
@@ -60,6 +64,8 @@ if (!defined($moduleDirNameUpper . '_CONSTANTS_DEFINED')) {
     define($moduleDirNameUpper . '_UPLOAD_PATH', XOOPS_UPLOAD_PATH . '/' . $moduleDirName); // WITHOUT Trailing slash
     define($moduleDirNameUpper . '_AUTHOR_LOGOIMG', $pathIcon32 . '/xoopsmicrobutton.gif');
     define($moduleDirNameUpper . '_CONSTANTS_DEFINED', 1);
+    // Do we resize pictures when they are smaller than defined dimensions  ?
+    define($moduleDirNameUpper . '_DONT_RESIZE_IF_SMALLER', true);
 }
 
 $icons = [
@@ -77,18 +83,18 @@ $icons = [
 $debug = false;
 
 // MyTextSanitizer object
-$myts = \MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 
-if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof \XoopsTpl)) {
+if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
     require_once $GLOBALS['xoops']->path('class/template.php');
-    $GLOBALS['xoopsTpl'] = new \XoopsTpl();
+    $GLOBALS['xoopsTpl'] = new XoopsTpl();
 }
 
 $GLOBALS['xoopsTpl']->assign('mod_url', XOOPS_URL . '/modules/' . $moduleDirName);
 // Local icons path
 if (is_object($helper->getModule())) {
-    $pathModIcon16 = $helper->getModule()->getInfo('modicons16');
-    $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
+    $pathModIcon16 = $helper->getConfig('modicons16');
+    $pathModIcon32 = $helper->getConfig('modicons32');
 
     $GLOBALS['xoopsTpl']->assign('pathModIcon16', XOOPS_URL . '/modules/' . $moduleDirName . '/' . $pathModIcon16);
     $GLOBALS['xoopsTpl']->assign('pathModIcon32', $pathModIcon32);

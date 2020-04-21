@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Yogurt\Form;
+<?php declare(strict_types=1);
+
+namespace XoopsModules\Yogurt\Form;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -22,23 +24,32 @@
  * @since           1.0.0
  */
 
-use Xmf\Request;
+use Xmf\Module\Helper\Permission;
+use XoopsFormButton;
+use XoopsFormHidden;
+use XoopsFormLabel;
+use XoopsFormSelect;
+use XoopsFormSelectUser;
+use XoopsFormText;
+use XoopsFormTextDateSelect;
 use XoopsModules\Yogurt;
+use XoopsThemeForm;
 
-require_once dirname(dirname(__DIR__)) . '/include/common.php';
+require_once \dirname(__DIR__, 2) . '/include/common.php';
 
-$moduleDirName = basename(dirname(dirname(__DIR__)));
+$moduleDirName = \basename(\dirname(__DIR__, 2));
 //$helper = Yogurt\Helper::getInstance();
-$permHelper = new \Xmf\Module\Helper\Permission();
+$permHelper = new Permission();
 
-xoops_load('XoopsFormLoader');
+\xoops_load('XoopsFormLoader');
 
 /**
  * Class ConfigsForm
  */
-class ConfigsForm extends \XoopsThemeForm
+class ConfigsForm extends XoopsThemeForm
 {
     public $targetObject;
+
     public $helper;
 
     /**
@@ -51,97 +62,158 @@ class ConfigsForm extends \XoopsThemeForm
         $this->helper       = $target->helper;
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? sprintf(AM_YOGURT_CONFIGS_ADD) : sprintf(AM_YOGURT_CONFIGS_EDIT);
-        parent::__construct($title, 'form', xoops_getenv('PHP_SELF'), 'post', true);
+        $title = $this->targetObject->isNew() ? \sprintf(AM_YOGURT_CONFIGS_ADD) : \sprintf(AM_YOGURT_CONFIGS_EDIT);
+        parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
 
         //include ID field, it's needed so the module knows if it is a new form or an edited form
 
-        $hidden = new \XoopsFormHidden('config_id', $this->targetObject->getVar('config_id'));
+        $hidden = new XoopsFormHidden(
+            'config_id',
+            $this->targetObject->getVar(
+                'config_id'
+            )
+        );
         $this->addElement($hidden);
         unset($hidden);
 
         // Config_id
-        $this->addElement(new \XoopsFormLabel(AM_YOGURT_CONFIGS_CONFIG_ID, $this->targetObject->getVar('config_id'), 'config_id'));
+        $this->addElement(
+            new XoopsFormLabel(AM_YOGURT_CONFIGS_CONFIG_ID, $this->targetObject->getVar('config_id'), 'config_id')
+        );
         // Config_uid
-        $this->addElement(new \XoopsFormSelectUser(AM_YOGURT_CONFIGS_CONFIG_UID, 'config_uid', false, $this->targetObject->getVar('config_uid'), 1, false), false);
+        $this->addElement(
+            new XoopsFormSelectUser(
+                AM_YOGURT_CONFIGS_CONFIG_UID,
+                'config_uid',
+                false,
+                $this->targetObject->getVar(
+                    'config_uid'
+                ),
+                1,
+                false
+            ),
+            false
+        );
         // Pictures
-        //$imagesHandler = $this->helper->getHandler('Images');
+        //$privacyHandler = $this->helper->getHandler('Privacy');
         //$db     = \XoopsDatabaseFactory::getDatabaseConnection();
-        /** @var \XoopsPersistableObjectHandler $imagesHandler */
-        $imagesHandler = $this->helper->getHandler('Images');
+        /** @var \XoopsPersistableObjectHandler $privacyHandler */
+        $privacyHandler = $this->helper->getHandler('Privacy');
 
-        $images_id_select = new \XoopsFormSelect(AM_YOGURT_CONFIGS_PICTURES, 'pictures', $this->targetObject->getVar('pictures'));
-        $images_id_select->addOptionArray($imagesHandler->getList());
-        $this->addElement($images_id_select, false);
+        $privacy_id_select = new \XoopsFormSelect(AM_YOGURT_CONFIGS_PICTURES, 'pictures', $this->targetObject->getVar('pictures'));
+        $privacy_id_select->addOptionArray($privacyHandler->getList());
+        $this->addElement($privacy_id_select, false);
         // Audio
-        //$audioHandler = $this->helper->getHandler('Audio');
+        //$privacyHandler = $this->helper->getHandler('Privacy');
         //$db     = \XoopsDatabaseFactory::getDatabaseConnection();
-        /** @var \XoopsPersistableObjectHandler $audioHandler */
-        $audioHandler = $this->helper->getHandler('Audio');
+        /** @var \XoopsPersistableObjectHandler $privacyHandler */
+        $privacyHandler = $this->helper->getHandler('Privacy');
 
-        $audio_id_select = new \XoopsFormSelect(AM_YOGURT_CONFIGS_AUDIO, 'audio', $this->targetObject->getVar('audio'));
-        $audio_id_select->addOptionArray($audioHandler->getList());
-        $this->addElement($audio_id_select, false);
+        $privacy_id_select = new \XoopsFormSelect(AM_YOGURT_CONFIGS_AUDIO, 'audio', $this->targetObject->getVar('audio'));
+        $privacy_id_select->addOptionArray($privacyHandler->getList());
+        $this->addElement($privacy_id_select, false);
         // Videos
-        //$videoHandler = $this->helper->getHandler('Seutubo');
+        //$privacyHandler = $this->helper->getHandler('Privacy');
         //$db     = \XoopsDatabaseFactory::getDatabaseConnection();
-        /** @var \XoopsPersistableObjectHandler $videoHandler */
-        $videoHandler = $this->helper->getHandler('Video');
+        /** @var \XoopsPersistableObjectHandler $privacyHandler */
+        $privacyHandler = $this->helper->getHandler('Privacy');
 
-        $video_id_select = new \XoopsFormSelect(AM_YOGURT_CONFIGS_VIDEOS, 'videos', $this->targetObject->getVar('videos'));
-        $video_id_select->addOptionArray($videoHandler->getList());
-        $this->addElement($video_id_select, false);
+        $privacy_id_select = new \XoopsFormSelect(AM_YOGURT_CONFIGS_VIDEOS, 'videos', $this->targetObject->getVar('videos'));
+        $privacy_id_select->addOptionArray($privacyHandler->getList());
+        $this->addElement($privacy_id_select, false);
         // Groups
-        //$groupsHandler = $this->helper->getHandler('Groups');
+        //$privacyHandler = $this->helper->getHandler('Privacy');
         //$db     = \XoopsDatabaseFactory::getDatabaseConnection();
-        /** @var \XoopsPersistableObjectHandler $groupsHandler */
-        $groupsHandler = $this->helper->getHandler('Groups');
+        /** @var \XoopsPersistableObjectHandler $privacyHandler */
+        $privacyHandler = $this->helper->getHandler('Privacy');
 
-        $groups_id_select = new \XoopsFormSelect(AM_YOGURT_CONFIGS_GROUPS, 'groups', $this->targetObject->getVar('groups'));
-        $groups_id_select->addOptionArray($groupsHandler->getList());
-        $this->addElement($groups_id_select, false);
+        $privacy_id_select = new \XoopsFormSelect(AM_YOGURT_CONFIGS_GROUPS, 'groups', $this->targetObject->getVar('groups'));
+        $privacy_id_select->addOptionArray($privacyHandler->getList());
+        $this->addElement($privacy_id_select, false);
         // Notes
-        //$notesHandler = $this->helper->getHandler('Notes');
+        //$privacyHandler = $this->helper->getHandler('Privacy');
         //$db     = \XoopsDatabaseFactory::getDatabaseConnection();
-        /** @var \XoopsPersistableObjectHandler $notesHandler */
-        $notesHandler = $this->helper->getHandler('Notes');
+        /** @var \XoopsPersistableObjectHandler $privacyHandler */
+        $privacyHandler = $this->helper->getHandler('Privacy');
 
-        $notes_id_select = new \XoopsFormSelect(AM_YOGURT_CONFIGS_NOTES, 'notes', $this->targetObject->getVar('notes'));
-        $notes_id_select->addOptionArray($notesHandler->getList());
-        $this->addElement($notes_id_select, false);
+        $privacy_id_select = new \XoopsFormSelect(AM_YOGURT_CONFIGS_NOTES, 'notes', $this->targetObject->getVar('notes'));
+        $privacy_id_select->addOptionArray($privacyHandler->getList());
+        $this->addElement($privacy_id_select, false);
         // Friends
-        //$friendshipHandler = $this->helper->getHandler('Friendship');
+        //$privacyHandler = $this->helper->getHandler('Privacy');
         //$db     = \XoopsDatabaseFactory::getDatabaseConnection();
-        /** @var \XoopsPersistableObjectHandler $friendshipHandler */
-        $friendshipHandler = $this->helper->getHandler('Friendship');
+        /** @var \XoopsPersistableObjectHandler $privacyHandler */
+        $privacyHandler = $this->helper->getHandler('Privacy');
 
-        $friendship_id_select = new \XoopsFormSelect(AM_YOGURT_CONFIGS_FRIENDS, 'friends', $this->targetObject->getVar('friends'));
-        $friendship_id_select->addOptionArray($friendshipHandler->getList());
-        $this->addElement($friendship_id_select, false);
+        $privacy_id_select = new \XoopsFormSelect(AM_YOGURT_CONFIGS_FRIENDS, 'friends', $this->targetObject->getVar('friends'));
+        $privacy_id_select->addOptionArray($privacyHandler->getList());
+        $this->addElement($privacy_id_select, false);
         // Profile_contact
-        $this->addElement(new \XoopsFormSelectUser(AM_YOGURT_CONFIGS_PROFILE_CONTACT, 'profile_contact', false, $this->targetObject->getVar('profile_contact'), 1, false), false);
-        // Profile_general
-        $this->addElement(new \XoopsFormSelectUser(AM_YOGURT_CONFIGS_PROFILE_GENERAL, 'profile_general', false, $this->targetObject->getVar('profile_general'), 1, false), false);
-        // Profile_stats
-        $this->addElement(new \XoopsFormSelectUser(AM_YOGURT_CONFIGS_PROFILE_STATS, 'profile_stats', false, $this->targetObject->getVar('profile_stats'), 1, false), false);
-        // Suspension
-        //$suspensionsHandler = $this->helper->getHandler('Suspensions');
+        //$privacyHandler = $this->helper->getHandler('Privacy');
         //$db     = \XoopsDatabaseFactory::getDatabaseConnection();
-        /** @var \XoopsPersistableObjectHandler $suspensionsHandler */
-        $suspensionsHandler = $this->helper->getHandler('Suspensions');
+        /** @var \XoopsPersistableObjectHandler $privacyHandler */
+        $privacyHandler = $this->helper->getHandler('Privacy');
 
-        $suspensions_id_select = new \XoopsFormSelect(AM_YOGURT_CONFIGS_SUSPENSION, 'suspension', $this->targetObject->getVar('suspension'));
-        $suspensions_id_select->addOptionArray($suspensionsHandler->getList());
-        $this->addElement($suspensions_id_select, false);
+        $privacy_id_select = new \XoopsFormSelect(AM_YOGURT_CONFIGS_PROFILE_CONTACT, 'profile_contact', $this->targetObject->getVar('profile_contact'));
+        $privacy_id_select->addOptionArray($privacyHandler->getList());
+        $this->addElement($privacy_id_select, false);
+        // Profile_general
+        //$privacyHandler = $this->helper->getHandler('Privacy');
+        //$db     = \XoopsDatabaseFactory::getDatabaseConnection();
+        /** @var \XoopsPersistableObjectHandler $privacyHandler */
+        $privacyHandler = $this->helper->getHandler('Privacy');
+
+        $privacy_id_select = new \XoopsFormSelect(AM_YOGURT_CONFIGS_PROFILE_GENERAL, 'profile_general', $this->targetObject->getVar('profile_general'));
+        $privacy_id_select->addOptionArray($privacyHandler->getList());
+        $this->addElement($privacy_id_select, false);
+        // Profile_stats
+        //$privacyHandler = $this->helper->getHandler('Privacy');
+        //$db     = \XoopsDatabaseFactory::getDatabaseConnection();
+        /** @var \XoopsPersistableObjectHandler $privacyHandler */
+        $privacyHandler = $this->helper->getHandler('Privacy');
+
+        $privacy_id_select = new \XoopsFormSelect(AM_YOGURT_CONFIGS_PROFILE_STATS, 'profile_stats', $this->targetObject->getVar('profile_stats'));
+        $privacy_id_select->addOptionArray($privacyHandler->getList());
+        $this->addElement($privacy_id_select, false);
+        // Suspension
+        $suspension = $this->targetObject->isNew() ? 0 : $this->targetObject->getVar('suspension');
+        $check_suspension = new \XoopsFormCheckBox(AM_YOGURT_CONFIGS_SUSPENSION, 'suspension', $suspension);
+        $check_suspension->addOption(1, ' ');
+        $this->addElement($check_suspension);
         // Backup_password
-        $this->addElement(new \XoopsFormText(AM_YOGURT_CONFIGS_BACKUP_PASSWORD, 'backup_password', 50, 255, $this->targetObject->getVar('backup_password')), false);
+        $this->addElement(
+            new XoopsFormText(
+                AM_YOGURT_CONFIGS_BACKUP_PASSWORD,
+                'backup_password',
+                50,
+                255,
+                $this->targetObject->getVar(
+                    'backup_password'
+                )
+            ),
+            false
+        );
         // Backup_email
-        $this->addElement(new \XoopsFormText(AM_YOGURT_CONFIGS_BACKUP_EMAIL, 'backup_email', 50, 255, $this->targetObject->getVar('backup_email')), false);
+        $this->addElement(
+            new XoopsFormText(
+                AM_YOGURT_CONFIGS_BACKUP_EMAIL,
+                'backup_email',
+                50,
+                255,
+                $this->targetObject->getVar(
+                    'backup_email'
+                )
+            ),
+            false
+        );
         // End_suspension
-        $this->addElement(new \XoopsFormTextDateSelect(AM_YOGURT_CONFIGS_END_SUSPENSION, 'end_suspension', 0, strtotime($this->targetObject->getVar('end_suspension'))));
+//        $this->addElement(new \XoopsFormDateTime(AM_YOGURT_CONFIGS_END_SUSPENSION, 'end_suspension', '', \strtotime($this->targetObject->getVar('end_suspension'))));
 
-        $this->addElement(new \XoopsFormHidden('op', 'save'));
-        $this->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $endSuspension = $this->targetObject->isNew() ? 0 : $this->targetObject->getVar('end_suspension');
+        $this->addElement(new \XoopsFormTextDateSelect( AM_YOGURT_CONFIGS_END_SUSPENSION, 'end_suspension', 0, $endSuspension ), true);
+
+        $this->addElement(new XoopsFormHidden('op', 'save'));
+        $this->addElement(new XoopsFormButton('', 'submit', \_SUBMIT, 'submit'));
     }
 }

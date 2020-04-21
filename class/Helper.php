@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
@@ -12,6 +12,9 @@ namespace XoopsModules\Yogurt;
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
+use RuntimeException;
+use XoopsDatabaseFactory;
+
 /**
  * @copyright    XOOPS Project https://xoops.org/
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
@@ -19,7 +22,6 @@ namespace XoopsModules\Yogurt;
  * @since
  * @author       XOOPS Development Team
  */
-//defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Class Helper
@@ -34,7 +36,7 @@ class Helper extends \Xmf\Module\Helper
     public function __construct($debug = false)
     {
         $this->debug   = $debug;
-        $moduleDirName = basename(dirname(__DIR__));
+        $moduleDirName = \basename(\dirname(__DIR__));
         parent::__construct($moduleDirName);
     }
 
@@ -43,8 +45,9 @@ class Helper extends \Xmf\Module\Helper
      *
      * @return \XoopsModules\Yogurt\Helper
      */
-    public static function getInstance($debug = false)
-    {
+    public static function getInstance(
+        $debug = false
+    ) {
         static $instance;
         if (null === $instance) {
             $instance = new static($debug);
@@ -68,15 +71,16 @@ class Helper extends \Xmf\Module\Helper
      *
      * @return bool|\XoopsObjectHandler|\XoopsPersistableObjectHandler
      */
-    public function getHandler($name)
-    {
+    public function getHandler(
+        $name
+    ) {
         //$ret   = false;
-        $class = __NAMESPACE__ . '\\' . ucfirst($name) . 'Handler';
-        if (!class_exists($class)) {
-            throw new \RuntimeException("Class '$class' not found");
+        $class = __NAMESPACE__ . '\\' . \ucfirst($name) . 'Handler';
+        if (!\class_exists($class)) {
+            throw new RuntimeException("Class '${class}' not found");
         }
         /** @var \XoopsMySQLDatabase $db */
-        $db     = \XoopsDatabaseFactory::getDatabaseConnection();
+        $db     = XoopsDatabaseFactory::getDatabaseConnection();
         $helper = self::getInstance();
         $ret    = new $class($db, $helper);
         $this->addLog("Getting handler '{$name}'");

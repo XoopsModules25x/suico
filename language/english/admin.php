@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -41,9 +42,15 @@ define('_MA_YOGURT_ALLTESTSOK', 'All tests must be OK for this module to work 10
 define('_MA_YOGURT_GDEXTENSIONOK', 'GD extension loaded: OK!');
 define('_MA_YOGURT_MOREINFO', 'Here is more info on:');
 define('_MA_YOGURT_GDEXTENSIONFALSE', 'GD extension loaded: FAILED ');
-define('_MA_YOGURT_CONFIGPHPINI', 'Configure your php.ini or ask your server manager to install it and enable it for you.');
+define(
+    '_MA_YOGURT_CONFIGPHPINI',
+    'Configure your php.ini or ask your server manager to install it and enable it for you.'
+);
 define('_MA_YOGURT_PHP5PRESENT', 'You have a compatible version of PHP:');
-define('_MA_YOGURT_PHP5NOTPRESENT', 'Your PHP version is compatible, but many details would work better on a php5 server and above.');
+define(
+    '_MA_YOGURT_PHP5NOTPRESENT',
+    'Your PHP version is compatible, but many details would work better on a php5 server and above.'
+);
 define('_MA_YOGURT_MAXBYTESPHPINI', 'Your server limits the size of uploads to %s');
 define('_MA_YOGURT_MEMORYLIMIT', 'The Memory Limit of your server is:');
 //3.4
@@ -69,13 +76,17 @@ define('AM_YOGURT_THEREARE_IMAGES', "There are <span class='bold'>%s</span> Imag
 define('AM_YOGURT_THEREARE_FRIENDS', "There are <span class='bold'>%s</span> Friends in the database");
 define('AM_YOGURT_THEREARE_VISITORS', "There are <span class='bold'>%s</span> Visitors in the database");
 define('AM_YOGURT_THEREARE_VIDEO', "There are <span class='bold'>%s</span> Video in the database");
-define('AM_YOGURT_THEREARE_FRIENDPETITION', "There are <span class='bold'>%s</span> Friendship Requests in the database");
+define(
+    'AM_YOGURT_THEREARE_FRIENDREQUEST',
+    "There are <span class='bold'>%s</span> Friendship Requests in the database"
+);
 define('AM_YOGURT_THEREARE_GROUPS', "There are <span class='bold'>%s</span> Groups in the database");
 define('AM_YOGURT_THEREARE_MEMBERS', "There are <span class='bold'>%s</span> Members in the database");
 define('AM_YOGURT_THEREARE_NOTES', "There are <span class='bold'>%s</span> Notes in the database");
 define('AM_YOGURT_THEREARE_CONFIGS', "There are <span class='bold'>%s</span> Configs in the database");
 define('AM_YOGURT_THEREARE_SUSPENSIONS', "There are <span class='bold'>%s</span> Suspensions in the database");
 define('AM_YOGURT_THEREARE_AUDIO', "There are <span class='bold'>%s</span> Audio in the database");
+define('AM_YOGURT_THEREARE_PRIVACY', "There are <span class='bold'>%s</span> Privacy in the database");
 //Buttons
 define('AM_YOGURT_ADD_IMAGES', 'Add new Images');
 define('AM_YOGURT_IMAGES_LIST', 'List of Images');
@@ -85,8 +96,8 @@ define('AM_YOGURT_ADD_VISITORS', 'Add new Visitors');
 define('AM_YOGURT_VISITORS_LIST', 'List of Visitors');
 define('AM_YOGURT_ADD_VIDEO', 'Add new Video');
 define('AM_YOGURT_VIDEO_LIST', 'List of Video');
-define('AM_YOGURT_ADD_FRIENDPETITION', 'Add new Friendship Request');
-define('AM_YOGURT_FRIENDPETITION_LIST', 'List of Friendship Request');
+define('AM_YOGURT_ADD_FRIENDREQUEST', 'Add new Friendship Request');
+define('AM_YOGURT_FRIENDREQUEST_LIST', 'List of Friendship Request');
 define('AM_YOGURT_ADD_GROUPS', 'Add new Groups');
 define('AM_YOGURT_GROUPS_LIST', 'List of Groups');
 define('AM_YOGURT_ADD_RELGROUPUSER', 'Add new Members');
@@ -156,13 +167,13 @@ define('AM_YOGURT_VIDEO_UID_OWNER', 'Owner');
 define('AM_YOGURT_VIDEO_VIDEO_DESC', 'Description');
 define('AM_YOGURT_VIDEO_YOUTUBE_CODE', 'YouTube_Code');
 define('AM_YOGURT_VIDEO_MAIN_VIDEO', 'MainVideo');
-// Friendpetition
-define('AM_YOGURT_FRIENDPETITION_ADD', 'Add a friendpetition');
-define('AM_YOGURT_FRIENDPETITION_EDIT', 'Edit friendpetition');
-define('AM_YOGURT_FRIENDPETITION_DELETE', 'Delete friendpetition');
-define('AM_YOGURT_FRIENDPETITION_FRIENDPET_ID', 'ID');
-define('AM_YOGURT_FRIENDPETITION_PETITIONER_UID', 'From');
-define('AM_YOGURT_FRIENDPETITION_PETIONED_UID', 'To');
+// Friendrequest
+define('AM_YOGURT_FRIENDREQUEST_ADD', 'Add a friendrequest');
+define('AM_YOGURT_FRIENDREQUEST_EDIT', 'Edit friendrequest');
+define('AM_YOGURT_FRIENDREQUEST_DELETE', 'Delete friendrequest');
+define('AM_YOGURT_FRIENDREQUEST_FRIENDPET_ID', 'ID');
+define('AM_YOGURT_FRIENDREQUEST_FRIENDREQUESTER_UID', 'From');
+define('AM_YOGURT_FRIENDREQUEST_FRIENDREQUESTTO_UID', 'To');
 // Groups
 define('AM_YOGURT_GROUPS_ADD', 'Add a groups');
 define('AM_YOGURT_GROUPS_EDIT', 'Edit groups');
@@ -202,8 +213,8 @@ define('AM_YOGURT_CONFIGS_GROUPS', 'Groups');
 define('AM_YOGURT_CONFIGS_NOTES', 'Notes');
 define('AM_YOGURT_CONFIGS_FRIENDS', 'Friends');
 define('AM_YOGURT_CONFIGS_PROFILE_CONTACT', 'Contact');
-define('AM_YOGURT_CONFIGS_PROFILE_GENERAL', 'Profile_general');
-define('AM_YOGURT_CONFIGS_PROFILE_STATS', 'Profile_stats');
+define('AM_YOGURT_CONFIGS_PROFILE_GENERAL', 'Profile Info');
+define('AM_YOGURT_CONFIGS_PROFILE_STATS', 'Profile Stats');
 define('AM_YOGURT_CONFIGS_SUSPENSION', 'Suspension');
 define('AM_YOGURT_CONFIGS_BACKUP_PASSWORD', 'BackupPassword');
 define('AM_YOGURT_CONFIGS_BACKUP_EMAIL', 'BackupEmail');
@@ -226,10 +237,18 @@ define('AM_YOGURT_AUDIO_DELETE', 'Delete audio');
 define('AM_YOGURT_AUDIO_AUDIO_ID', 'ID');
 define('AM_YOGURT_AUDIO_TITLE', 'Name');
 define('AM_YOGURT_AUDIO_AUTHOR', 'Author');
-define('AM_YOGURT_AUDIO_URL', 'URL');
+define('AM_YOGURT_AUDIO_URL', 'File');
 define('AM_YOGURT_AUDIO_UID_OWNER', 'Owner');
 define('AM_YOGURT_AUDIO_DATA_CREATION', 'Created');
 define('AM_YOGURT_AUDIO_DATA_UPDATE', 'Updated');
+// Privacy
+define('AM_YOGURT_PRIVACY_ADD', 'Add a privacy');
+define('AM_YOGURT_PRIVACY_EDIT', 'Edit privacy');
+define('AM_YOGURT_PRIVACY_DELETE', 'Delete privacy');
+define('AM_YOGURT_PRIVACY_ID', 'ID');
+define('AM_YOGURT_PRIVACY_LEVEL', 'Level');
+define('AM_YOGURT_PRIVACY_NAME', 'Name');
+define('AM_YOGURT_PRIVACY_DESCRIPTION', 'Description');
 //Blocks.php
 //Permissions
 define('AM_YOGURT_PERMISSIONS_GLOBAL', 'Global permissions');
@@ -244,7 +263,7 @@ define('AM_YOGURT_PERMISSIONS_VIEW_DESC', 'Only users in the group that you sele
 define('AM_YOGURT_PERMISSIONS_SUBMIT', 'Permissions to submit');
 define('AM_YOGURT_PERMISSIONS_SUBMIT_DESC', 'Only users in the group that you select may submit this');
 define('AM_YOGURT_PERMISSIONS_GPERMUPDATED', 'Permissions have been changed successfully');
-define('AM_YOGURT_PERMISSIONS_NOPERMSSET', 'Permission cannot be set: No audio created yet! Please create a audio first.');
+define('AM_YOGURT_PERMISSIONS_NOPERMSSET', 'Permission cannot be set: No privacy created yet! Please create a privacy first.');
 
 //Errors
 define('AM_YOGURT_UPGRADEFAILED0', "Update failed - couldn't rename field '%s'");
@@ -257,7 +276,10 @@ define('AM_YOGURT_ERROR_TAG_REMOVAL', 'Could not remove tags from Tag Module');
 //directories
 define('AM_YOGURT_AVAILABLE', "<span style='color : #008000;'>Available. </span>");
 define('AM_YOGURT_NOTAVAILABLE', "<span style='color : #ff0000;'>is not available. </span>");
-define('AM_YOGURT_NOTWRITABLE', "<span style='color : #ff0000;'>" . ' should have permission ( %1$d ), but it has ( %2$d )' . '</span>');
+define(
+    'AM_YOGURT_NOTWRITABLE',
+    "<span style='color : #ff0000;'>" . ' should have permission ( %1$d ), but it has ( %2$d )' . '</span>'
+);
 define('AM_YOGURT_CREATETHEDIR', 'Create it');
 define('AM_YOGURT_SETMPERM', 'Set the permission');
 define('AM_YOGURT_DIRCREATED', 'The directory has been created');
@@ -270,5 +292,12 @@ define('AM_YOGURT_ADD_SAMPLEDATA', 'Import Sample Data (will delete ALL current 
 define('AM_YOGURT_SAMPLEDATA_SUCCESS', 'Sample Date uploaded successfully');
 
 //Error NoFrameworks
-define('_AM_ERROR_NOFRAMEWORKS', 'Error: You don&#39;t use the Frameworks \'admin module\'. Please install this Frameworks');
+define(
+    '_AM_ERROR_NOFRAMEWORKS',
+    'Error: You don&#39;t use the Frameworks \'admin module\'. Please install this Frameworks'
+);
 define('AM_YOGURT_MAINTAINEDBY', 'is maintained by the');
+
+define('AM_YOGURT_ADD_PRIVACY', 'Add new Privacy');
+define('AM_YOGURT_PRIVACY_LIST', 'List of Privacy');
+define('_AM_YOGURT_UPLOAD_ERROR', 'Upload Error');

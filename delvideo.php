@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,28 +18,39 @@
  * @since
  */
 
+use Xmf\Request;
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
-$cod_video = $_POST['cod_video'];
+$cod_video = Request::getInt('cod_video', 0, 'POST');
 
-if (1 != $_POST['confirm']) {
-    xoops_confirm(['cod_video' => $cod_video, 'confirm' => 1], 'delvideo.php', _MD_YOGURT_ASKCONFIRMVIDEODELETION, _MD_YOGURT_CONFIRMVIDEODELETION);
+if (!Request::hasVar('confirm', 'POST') || 1 !== Request::getInt('confirm', 0, 'POST')) {
+    xoops_confirm(
+        [
+            'cod_video' => $cod_video,
+            'confirm'   => 1,
+        ],
+        'delvideo.php',
+        _MD_YOGURT_ASKCONFIRMVIDEODELETION,
+        _MD_YOGURT_CONFIRMVIDEODELETION
+    );
 } else {
     /**
      * Creating the factory  and the criteria to delete the picture
      * The user must be the owner
      */
-    $videoFactory = new Yogurt\VideoHandler($xoopsDB);
-    $criteria_img = new \Criteria('video_id', $cod_video);
+    $videoFactory = new Yogurt\VideoHandler(
+        $xoopsDB
+    );
+    $criteria_img = new Criteria('video_id', $cod_video);
     $uid          = (int)$xoopsUser->getVar('uid');
-    $criteria_uid = new \Criteria('uid_owner', $uid);
-    $criteria     = new \CriteriaCompo($criteria_img);
+    $criteria_uid = new Criteria('uid_owner', $uid);
+    $criteria     = new CriteriaCompo($criteria_img);
     $criteria->add($criteria_uid);
 
     /**
@@ -51,4 +63,4 @@ if (1 != $_POST['confirm']) {
     }
 }
 
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

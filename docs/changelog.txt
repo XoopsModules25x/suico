@@ -1,17 +1,78 @@
+<h5>3.5 Alpha 5    [2020-04-21]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
+<hr>
+- Fix Guest can't access group page (liomj)
+- Fix edit,delete,avatar,private button visible to guest (liomj)
+- Fix Group Redirection (liomj)
+- Option to disable user suspension (liomj)
+- redirect guest to guest page (liomj/young)
+- move variables to footer.php (liomj)
+- add members online status (liomj)
+- add new members list page (liomj)
+- add friendship status (liomj)
+- separate photos and friends block (liomj)
+- add pending status after friend request (liomj)
+- remove icq,aim,yim,msnm (liomj)
+- add preferences group order (liomj)
+- fix missing closing div in group page template (liomj)
+- add group owner name in group page (liomj)
+- changed photo description to be a required field (liomj)
+- Fix required caption marker for groups (liomj)
+- More Templates update and fix (liomj)
+- Languages changes (liomj)
+- Added option to disable pm button in my friend block (liomj)
+- Fix my friend block errors (liomj)
+- Added the ability to disable the friendship evaluation ranking (liomj)
+- Fix featured video template in profile page (liomj)
+- Rename editdesc.php to editdescpciture.php (liomj)
+- Change join and leave groups image to button (liomj)
+* RGB color function instead of #HEX representation (mamba)
+* PhpDoc updates  (mamba)
+* Unnecessary double quotes (mamba)
+* Yoda (mamba)
+* fix delete video not possible (mamba)
+* convert to Xmf\Request (mamba)
+- convert to SCRIPT_NAME (mamba)
+* fix "image edit, delete, set to private is not working" (mamba)
+* fix "import sample data is not working" (mamba)
+* fix for "error when uploading group image" (mamba)
+* fix "uploading mp3 in audios not working" (mamba)
+* PSR-12 elseif (mamba)
+* fix for "image set as avatar is not working" (mamba)
+* fix for error when creating a group (mamba)
+- remove defined('XOOPS_ROOT_PATH') (mamba)
+* fix view images in Admin (mamba)
+* add Privacy table (mamba)
+* temporary solution for insert() and get() conflicts (mamba)
+* updated Migrate file to 3.5 version (mamba)
+* update menu and language (mamba)
+* Case mismatch in method call or class usage (mamba)
+* Traditional syntax array literal detected (mamba)
+* Redundant @var tag (mamba)
+* fix for Undefined constant, class, method (mamba)
+* Missing associated label (mamba)
+* fix move Private below the picture, so pictures are aligned on top (mamba)
+* change date fields to INT(11) (mamba)
+* fix Notes in Admin, add text truncate (mamba)
+* fix Config (mamba)
+* change petition to request (mamba)
+* fix delete group (mamba)
+* fix submit note (mamba)
+
+
 <h5>3.5 Alpha 4   [2020-04-05]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
 <hr>
-- add friend petition in friend section & change add as a friend image (liomj)
+- add friend friendrequest in friend section & change add as a friend image (liomj)
 - correction for pettition in yogurt_friends.tpl (liomj)
 - language - profile & video template updates (liomj)
-- /photos renamed to /images
-- CSS from h2 to h4
-- fix group view from search
-- updated images
-- renaming tribes to groups
-- required Group name & description
-- fix for Group search - it shows now individual groups
-- changed group icon
-- language changes
+- /photos renamed to /images (mamba)
+- CSS from h2 to h4 (mamba)
+- fix group view from search (mamba)
+- updated images (mamba)
+- renaming tribes to groups (mamba)
+- required Group name & description (mamba)
+- fix for Group search - it shows now individual groups (mamba)
+- changed group icon (mamba)
+- language changes (mamba)
 
 
 <h5>3.5 Alpha 3   [2020-04-05]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
@@ -137,7 +198,7 @@
 Bugs fixed
 
 fixed #2074440 file upload size on the search page (m0nty_)
-fixed #2074263 check for /uploads/yogurt/mp3 in the backend (dhcst)
+fixed #2074263 check for /uploads/yogurt/audio in the backend (dhcst)
 fixed #2074362 MP3 player read now ID3v1 and v2 (dhcst)
 fixed #1993627 deleting Photos with errors (dhcst)
 fixed #1939798 Smarty error: mailto: missing (dhcst)
@@ -149,7 +210,7 @@ fixed sanitize $_GET['uid'] (dhcst)
 fixed some sanitizing (m0nty_)
 fixed configuration> cosmetic (sato-san)
 added tables for impresscms (m0nty_)
-added folder uploads/yogurt/mp3 (sato-san)
+added folder uploads/yogurt/audio (sato-san)
 added yogurt works now without Frameworks (dhcst)
 added code for simple-xoops updater
 deleted URL is not available (sato-san)
@@ -160,7 +221,7 @@ deleted URL is not available (sato-san)
 New features:
 
 Fans page
-Notifications upon new friend petition
+Notifications upon new friend friendrequest
 
 
 ## 07/04/2008

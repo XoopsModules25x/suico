@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,6 +18,7 @@
  * @since
  */
 
+use Xmf\Request;
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
@@ -24,26 +26,28 @@ require __DIR__ . '/header.php';
 //require_once __DIR__ . '/class/Image.php';
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
-$cod_img = $_POST['cod_img'];
+$cod_img = Request::getInt('cod_img', 0, 'POST');
 
 /**
  * Creating the factory  loading the picture changing its caption
  */
-$imageFactory = new Yogurt\ImageHandler($xoopsDB);
+$imageFactory = new Yogurt\ImageHandler(
+    $xoopsDB
+);
 $picture      = $imageFactory->create(false);
 $picture->load($cod_img);
-$picture->setVar('private', \Xmf\Request::getInt('private', 0, 'POST'));
+$picture->setVar('private', Request::getInt('private', 0, 'POST'));
 
 /**
  * Verifying who's the owner to allow changes
  */
 $uid = (int)$xoopsUser->getVar('uid');
-if ($uid == $picture->getVar('uid_owner')) {
-    if ($imageFactory->insert($picture)) {
-        if (1 == $_POST['private']) {
+if ($uid === (int)$picture->getVar('uid_owner')) {
+    if ($imageFactory->insert2($picture)) {
+        if (1 === Request::getInt('private', 0, 'POST')) {
             redirect_header('album.php', 2, _MD_YOGURT_PRIVATIZED);
         } else {
             redirect_header('album.php', 2, _MD_YOGURT_UNPRIVATIZED);
@@ -53,4 +57,4 @@ if ($uid == $picture->getVar('uid_owner')) {
     }
 }
 
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

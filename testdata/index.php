@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /**
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -14,14 +15,18 @@
  * @author          Michael Beck (aka Mamba)
  */
 
+use Xmf\Database\TableLoad;
+use Xmf\Module\Helper;
+use Xmf\Request;
+use Xmf\Yaml;
 use XoopsModules\Yogurt;
 use XoopsModules\Yogurt\Common;
 use XoopsModules\Yogurt\Utility;
 
-require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+require_once dirname(__DIR__, 3) . '/include/cp_header.php';
 require dirname(__DIR__) . '/preloads/autoloader.php';
 
-$op = \Xmf\Request::getCmd('op', '');
+$op = Request::getCmd('op', '');
 
 $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
@@ -32,14 +37,25 @@ $helper->loadLanguage('common');
 
 switch ($op) {
     case 'load':
-        if (\Xmf\Request::hasVar('ok', 'REQUEST') && 1 == $_REQUEST['ok']) {
+        if (Request::hasVar('ok', 'REQUEST') && 1 ===  Request::getInt('ok', 0, 'REQUEST')) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('../admin/index.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }
             loadSampleData();
         } else {
             xoops_cp_header();
-            xoops_confirm(['ok' => 1, 'op' => 'load'], 'index.php', sprintf(constant('CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA_OK')), constant('CO_' . $moduleDirNameUpper . '_' . 'CONFIRM'), true);
+            xoops_confirm(
+                [
+                    'ok' => 1,
+                    'op' => 'load',
+                ],
+                'index.php',
+                sprintf(constant('CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA_OK')),
+                constant(
+                    'CO_' . $moduleDirNameUpper . '_' . 'CONFIRM'
+                ),
+                true
+            );
             xoops_cp_footer();
         }
         break;
@@ -60,7 +76,7 @@ function loadSampleData()
     $utility      = new Yogurt\Utility();
     $configurator = new Common\Configurator();
 
-    $tables = \Xmf\Module\Helper::getHelper($moduleDirName)->getModule()->getInfo('tables');
+    $tables = Helper::getHelper($moduleDirName)->getModule()->getInfo('tables');
 
     $language = 'english/';
     if (is_dir(__DIR__ . '/' . $xoopsConfig['language'])) {
@@ -68,17 +84,24 @@ function loadSampleData()
     }
 
     foreach ($tables as $table) {
-        $tabledata = \Xmf\Yaml::readWrapped($language . $table . '.yml');
+        $tabledata = Yaml::readWrapped($language . $table . '.yml');
         if (is_array($tabledata)) {
-            \Xmf\Database\TableLoad::truncateTable($table);
-            \Xmf\Database\TableLoad::loadTableFromArray($table, $tabledata);
+            TableLoad::truncateTable($table);
+            TableLoad::loadTableFromArray($table, $tabledata);
         }
     }
 
     //  ---  COPY test folder files ---------------
-    if (is_array($configurator->copyTestFolders) && count($configurator->copyTestFolders) > 0) {
+    if (is_array($configurator->copyTestFolders)
+        && count(
+            $configurator->copyTestFolders
+        ) > 0) {
         //        $file =  dirname(__DIR__) . '/testdata/images/';
-        foreach (array_keys($configurator->copyTestFolders) as $i) {
+        foreach (
+            array_keys(
+                $configurator->copyTestFolders
+            ) as $i
+        ) {
             $src  = $configurator->copyTestFolders[$i][0];
             $dest = $configurator->copyTestFolders[$i][1];
             $utility::rcopy($src, $dest);
@@ -94,7 +117,7 @@ function saveSampleData()
     $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-    $tables = \Xmf\Module\Helper::getHelper($moduleDirName)->getModule()->getInfo('tables');
+    $tables = Helper::getHelper($moduleDirName)->getModule()->getInfo('tables');
 
     $language = 'english/';
     if (is_dir(__DIR__ . '/' . $xoopsConfig['language'])) {
@@ -109,7 +132,7 @@ function saveSampleData()
     Utility::createFolder($exportFolder);
 
     foreach ($tables as $table) {
-        \Xmf\Database\TableLoad::saveTableToYamlFile($table, $exportFolder . $table . '.yml');
+        TableLoad::saveTableToYamlFile($table, $exportFolder . $table . '.yml');
     }
 
     redirect_header('../admin/index.php', 1, constant('CO_' . $moduleDirNameUpper . '_' . 'SAMPLEDATA_SUCCESS'));
@@ -126,7 +149,7 @@ function exportSchema()
         //        $migrate->saveCurrentSchema();
         //
         //        redirect_header('../admin/index.php', 1, constant('CO_' . $moduleDirNameUpper . '_' . 'EXPORT_SCHEMA_SUCCESS'));
-    } catch (\Exception $e) {
+    } catch (Throwable $e) {
         exit(constant('CO_' . $moduleDirNameUpper . '_' . 'EXPORT_SCHEMA_ERROR'));
     }
 }

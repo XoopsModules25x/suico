@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,37 +18,42 @@
  * @since
  */
 
+use Xmf\Request;
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
 /**
- * Factory of petitions created
+ * Factory of friendrequests created
  */
-$friendpetitionFactory = new Yogurt\FriendpetitionHandler($xoopsDB);
+$friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
 $friendshipFactory     = new Yogurt\FriendshipHandler($xoopsDB);
 
 /**
  * Getting the uid of the user which user want to ask to be friend
  */
-$friend1_uid = \Xmf\Request::getInt('friend_uid', 0, 'POST');
+$friend1_uid = Request::getInt(
+    'friend_uid',
+    0,
+    'POST'
+);
 $friend2_uid = (int)$xoopsUser->getVar('uid');
 
-$criteria_friend1 = new \Criteria('friend1_uid', $friend1_uid);
-$criteria_friend2 = new \Criteria('friend2_uid', $friend2_uid);
+$criteria_friend1 = new Criteria('friend1_uid', $friend1_uid);
+$criteria_friend2 = new Criteria('friend2_uid', $friend2_uid);
 
-$criteria_delete1 = new \CriteriaCompo($criteria_friend1);
+$criteria_delete1 = new CriteriaCompo($criteria_friend1);
 $criteria_delete1->add($criteria_friend2);
 
 $friendshipFactory->deleteAll($criteria_delete1);
 
-$criteria_friend1 = new \Criteria('friend1_uid', $friend2_uid);
-$criteria_friend2 = new \Criteria('friend2_uid', $friend1_uid);
+$criteria_friend1 = new Criteria('friend1_uid', $friend2_uid);
+$criteria_friend2 = new Criteria('friend2_uid', $friend1_uid);
 
-$criteria_delete1 = new \CriteriaCompo($criteria_friend1);
+$criteria_delete1 = new CriteriaCompo($criteria_friend1);
 $criteria_delete1->add($criteria_friend2);
 
 $friendshipFactory->deleteAll($criteria_delete1);
 
 redirect_header('friends.php', 3, _MD_YOGURT_FRIENDSHIPTERMINATED);
 
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

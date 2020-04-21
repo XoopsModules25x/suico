@@ -1,13 +1,5 @@
 TODO: Planned features in the future
 =====================================
 
-Bugs that are still open:
-- search a group is not working properly only number of search groups is displaying
-- outdated ym,icq, aim,msn in yogurt
-- friends appears twice in friend list & my friends blocks
-
-Features that are being considered/planned for the future releases:
-
-- ????
-
-
+Please refer here
+https://github.com/XoopsModules25x/yogurt/issues

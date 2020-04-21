@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,44 +18,42 @@
  * @since
  */
 
+use Xmf\Request;
 use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
-//
 //require_once __DIR__ . '/class/Suspensions.php';
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 5, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 5, _MD_YOGURT_TOKENEXPIRED);
 }
 
-$uid = \Xmf\Request::getInt('uid', 0, 'POST');
+$uid = Request::getInt('uid', 0, 'POST');
 /**
  * Creating the factory  loading the picture changing its caption
  */
-$suspensionsFactory = new Yogurt\SuspensionsHandler($xoopsDB);
+$suspensionsFactory = new Yogurt\SuspensionsHandler(
+    $xoopsDB
+);
 $suspension         = $suspensionsFactory->create(false);
 $suspension->load($uid);
 
 if ($xoopsUser->isAdmin(1)) {
+    /** @var \XoopsMemberHandler $memberHandler */
     $memberHandler = xoops_getHandler('member');
     $thisUser      = $memberHandler->getUser($uid);
     $suspension->setVar('uid', $uid);
     $suspension->setVar('old_email', $thisUser->getVar('email'));
     $suspension->setVar('old_pass', $thisUser->getVar('pass'));
-    if (defined(ICMS_VERSION_NAME)) {
-        $thisUser->setVar('old_salt', $thisUser->getVar('salt'));
-        $thisUser->setVar('old_pass_expired', $thisUser->getVar('pass_expired'));
-        $thisUser->setVar('old_enc_type', $thisUser->getVar('enc_type'));
-    }
     $suspension->setVar('old_signature', $thisUser->getVar('user_sig'));
-    $suspension->setVar('suspension_time', time() + (int)$_POST['time']);
-    $suspensionsFactory->insert($suspension);
+    $suspension->setVar('suspension_time', time() + Request::getInt('time', 0, 'POST'));
+    $suspensionsFactory->insert2($suspension);
     $thisUser->setVar('email', md5(time()));
     $thisUser->setVar('pass', md5(time()));
 
-    $thisUser->setVar('user_sig', sprintf(_MD_YOGURT_SUSPENDED, formatTimestamp(time() + (int)$_POST['time'], 'm')));
+    $thisUser->setVar('user_sig', sprintf(_MD_YOGURT_SUSPENDED, formatTimestamp(time() + Request::getInt('time', 0, 'POST'), 'm')));
     $memberHandler->insertUser($thisUser);
     redirect_header('index.php?uid=' . $uid, 300, _MD_YOGURT_USERSUSPENDED);
 }
 
-require dirname(dirname(__DIR__)) . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';
