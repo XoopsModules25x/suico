@@ -14,19 +14,16 @@
     </div>
 
   <div class="alert alert-info">
-        
+    <{if $xoops_userid == $group_owneruid }>
+		<button title="<{$lang_owner}>" class="btn btn-secondary btn-sm float-right"> <i class="fa fa-user"></i> <{$smarty.const._MD_YOGURT_OWNEROFGROUP}></button>
+	<{/if}> 
 		<{if $isAnonym!=1}>
-		<{if $memberOfGroup ==1}>
-		
+		<{if $memberOfGroup ==1}>          	
     <form action="abandongroup.php" method="POST" id="form_abandongroup">
         <input type="hidden" value="<{$group_rel_id}>" name="relgroup_id" id="relgroup_id">
 		<input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
 		<button name="" type="image" class="btn btn-primary btn-sm float-right"> <i class="fa fa-user-circle-o"></i> <{$smarty.const._MD_YOGURT_MEMBEROFGROUP}></button> 
         <button name="" type="image" class="btn btn-danger btn-sm float-right"> <i class="fa fa-close"></i> <{$lang_abandongroup}></button> 
-    	<{if $xoops_userid == $group_owneruid }>
-		<button title="<{$lang_owner}>" class="btn btn-secondary btn-sm float-right"> <i class="fa fa-user"></i> <{$smarty.const._MD_YOGURT_OWNEROFGROUP}></button>
-		<{/if}>
-	
 	</form>
     <{ else}>
     <form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">

@@ -29,17 +29,27 @@
     <{section name=j loop=$groups}>
 	<tr>
             <td>
-			<{if $isOwner }>
-                <{if $xoops_userid == $groups[j].uid }>
-                    <form>
-                         <button name="" type="image" class="btn btn-primary btn-sm float-right"> <i class="fa fa-user-circle-o"></i> <{$smarty.const._MD_YOGURT_MEMBEROFGROUP}></button> 
-					</form>
-				<{else}>	
-					<form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">
+			
+			<{if $isAnonym!=1}>
+                <{if !in_array($groups[j].id, $mygroupsid) && $uid_owner == $groups[j].uid}>
+                <{if $uid_owner == $groups[j].uid }>
+				    <button name="" type="image" class="btn btn-primary btn-sm float-right"> <i class="fa fa-user-circle-o"></i> <{$lang_memberofgroup}></button>
+                <{/if}>
+				<{else}>
+				    <form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">
                         <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
                         <button name="" type="image" class="btn btn-dark btn-sm float-right"> <i class="fa fa-handshake-o"></i> <{$lang_joingroup}></button>
                     </form>
 				<{/if}>
+            <{/if}>
+			 
+			 
+			<{if $isOwner }>
+                <{if $uid_owner == $groups[j].uid }>
+                    <form>
+                         <button title="<{$lang_owner}>" class="btn btn-secondary btn-sm float-right"> <i class="fa fa-user"></i> <{$smarty.const._MD_YOGURT_OWNEROFGROUP}></button>
+					</form>
+				 <{/if}>	
             <{/if}>
                  <a href="group.php?group_id=<{$groups[j].id}>"><img src="<{$xoops_upload_url}>/yogurt/groups/<{$groups[j].img}>" alt="<{$groups[j].title}>" title="<{$groups[j].title}>"></a>
            
@@ -47,7 +57,7 @@
                 <{$groups[j].desc}>
             <br>
 			 <{if $isOwner }>
-                 <{if $xoops_userid == $groups[j].uid }>
+                 <{if $uid_owner == $groups[j].uid }>
 					<form action="delete_group.php" method="POST" id="form_deletegroup" class="yogurt-groups-form-delete">
                         <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
                         <input type="image" src="<{xoModuleIcons16 delete.png}>">
