@@ -100,8 +100,8 @@ return (object)[
                 'Note_to'   => 'note_from',
             ],
             'yogurt_friendrequest' => [
-                'petitioner_uid' => 'friendrequester_uid',
-                'petitionto_uid' => 'friendrequestto_uid',
+                'requester_uid' => 'friendrequester_uid',
+                'requestto_uid' => 'friendrequestto_uid',
             ],
         ],
     ],

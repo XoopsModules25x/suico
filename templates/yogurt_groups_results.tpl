@@ -1,42 +1,44 @@
-<{include file="db:yogurt_navbar.tpl"}>
-<form class='outer' name='form_group_search' id='form_group_search' action='search_group.php' method='get'>
-<div class="alert alert-primary">    
-<h5><{$lang_searchgroup}></h5>
+<{include file='db:yogurt_navbar.tpl'}>
 
-		<div class="form-group">
-			<label for="group_keyword"><strong> <{$lang_groupkeyword}></strong></label> 
-			<input type='text' name='group_keyword' id='group_keyword' class="form-control" value=''>
-			</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+   <div class="row">
+      <div class="col-md-12">
+         <div id="content" class="content content-full-width">
+<!-- start -->
+111
 
-        <input type='submit' class='btn btn-primary' name='submit_button' id='submit_button' value='<{$lang_searchgroup}>'>
-
-    <{$token}>
-</div>
-</form>
-
-
-<div id="yogurt-groups-container" class="outer">
-    <h4 class="head">
-        <{$lang_groupstitle}>
-    </h4>
+    <h5>
+        <{$lang_availablegroups}>
+    </h5>
 
     <{if $nb_groups_all<=0}>
-        <h4 id="yogurt-groups-nogroups">
+       <div class="alert alert-info">
             <{$lang_nogroupsyet}>
-        </h4>
+        </div>
     <{/if}>
 
+	<table class="table table-striped">
+    <thead>
+        <tr>
+            <th><{$lang_groupslist}></th>
+         
+        </tr>
+    </thead>
+    <tbody>
     <{section name=j loop=$groups}>
-        <div class="yogurt-group-all <{cycle values="odd,even"}>">
-            <{*            <img src="<{$xoops_upload_url}>/yogurt/groups/<{$groups[j].img}>" alt="<{$groups[j].title}>" title="<{$groups[j].title}>">*}>
-            <a href="group.php?group_id=<{$groups[j].id}>"><img src="<{$xoops_upload_url}>/yogurt/groups/<{$groups[j].img}>" alt="<{$groups[j].title}>" title="<{$groups[j].title}>"></a>
-            <h4><a href="group.php?group_id=<{$groups[j].id}>"><{$groups[j].title}></a></h4>
-            <p>
-            <p>
-                <{$groups[j].desc}>
-            </p>
-            </p>
-                <{if $xoops_userid == $groups[j].uid }>
+	<tr>
+            <td>
+         
+
+                 <a href="group.php?group_id=<{$groups[j].id}>"><img src="<{$xoops_upload_url}>/yogurt/groups/<{$groups[j].img}>" alt="<{$groups[j].title}>" title="<{$groups[j].title}>"></a>
+           
+                <h6><a href="group.php?group_id=<{$groups[j].id}>"><{$groups[j].title}></a></h6>
+                <br><{$groups[j].desc}>
+            <br>
+			 <{if $isOwner }>
+                 <{if $xoops_userid == $groups[j].uid }>
                     <form action="delete_group.php" method="POST" id="form_deletegroup" class="yogurt-groups-form-delete">
                         <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
                         <input type="image" src="<{xoModuleIcons16 delete.png}>">
@@ -49,14 +51,42 @@
                         <img src="assets/images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>">
                     </form>
                 <{/if}>
-                 </div>
+           <{/if}>
+
+		 </td></tr>
     <{/section}>
+ </tbody>
+</table>
+	
 
-</div>
-
-<div id="yogurt-navegacao">
+<div>
     <{$navigationBar}>
 </div>
 
 
+<div class="alert alert-primary"> 
+<form name='form_group_search1' id='form_group_search1' action='search_group.php' method='get'>   
+<h5><{$lang_searchgroup}></h5>
+
+		<div class="form-group">
+			<label for="group_keyword"><strong> <{$lang_groupkeyword}></strong></label> 
+			<input type='text' name='group_keyword' id='group_keyword' class="form-control" value=''>
+			<input type='hidden' name='uid' id='uid' value='<{$uid_owner}>'>
+			</div>
+
+        <input type='submit' class='btn btn-primary' name='submit_button' id='submit_button' value='<{$lang_searchgroup}>'>
+
+    <{$token}>
+</form>
+</div>
+
+
 <{include file="db:yogurt_footer.tpl"}>
+
+<!-- end -->
+</div>
+      </div>
+   </div>
+</div>
+    	</div>
+</div>

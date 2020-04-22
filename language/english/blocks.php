@@ -24,3 +24,5 @@ define(
 define('_MB_YOGURT_NOFRIENDSYET', 'You have no friends yet. Make some Friends');
 define('_MB_YOGURT_TOTALFRIENDSTOSHOW', 'Total Friends To Show');
 define('_MB_YOGURT_ENABLEPM', 'Show Private Message Button');
+define('_MB_YOGURT_PRIVATEMESSAGE', 'Private Message');
+define('_MB_YOGURT_PM', 'PM');

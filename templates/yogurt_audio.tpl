@@ -1,4 +1,13 @@
-<{include file="db:yogurt_navbar.tpl"}>
+<{include file='db:yogurt_navbar.tpl'}>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+   <div class="row">
+      <div class="col-md-12">
+         <div id="content" class="content content-full-width">
+<!-- start -->
+
 <{if $isOwner}>
     <div class="alert alert-info">
         <h5>
@@ -7,17 +16,17 @@
         <form name="form_audios" id="form_audios" action="submitAudio.php" method="post" onsubmit="return xoopsFormValidate_form_audios();" enctype="multipart/form-data">
             <{$token}>
 			<div class="form-group">
-			<label for="audio"><{$lang_audiohelp}></label>
+			<label for="audio"><{$lang_audiohelp}><!--<{$smarty.const._MD_YOGURT_METAINFOHELP}>--></label>
 			</div>
 			
 			<div class="form-group">
 			<label for="audio"><strong><{$lang_titleLabel}></strong></label>
-                <label for='title'></label><input type='text' name='title' id='title' class="form-control" value=''>
+			<input type='text' name='title' id='title' class="form-control" value='' required>
 			</div>
  
 			<div class="form-group">
 			<label for="audio"><strong><{$lang_authorLabel}></strong></label>
-                <label for='author'></label><input type='text' name='author' id='author' class="form-control" value=''>
+			<input type='text' name='author' id='author' class="form-control" value='' required>
 			</div>
 
 			<div class="form-group">
@@ -33,11 +42,13 @@
     </div>
 <{/if}>
 
+	<h5>
+        <{$section_name}>
+    </h5>
 
-<div id="yogurt-audio-allaudiocontainer" class="outer">
-    <h4 id="yogurt-audio-allaudiotitle" class="head">
-        <{$player_from_list}>
-    </h4>
+  <{if $nb_audio > 0}>
+  
+<div id="yogurt-audio-allaudiocontainer">
 
     <{*    <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="240" height="20" id="dewplayer" align="middle">*}>
     <{*        <param name="wmode" value="transparent">*}>
@@ -51,23 +62,18 @@
 
 </div>
 
-<div id="yogurt-audio-container" class="outer">
-    <h4 id="yogurt-audio-title" class="head">
-        <a href="<{$xoops_url}>/userinfo.php?uid=<{$owner_uid}>">
-            <{$lang_audios}>
-        </a>
-    </h4>
+
     <div id="waveform"></div>
-    <{if $nb_audio<=0}>
-        <h4>
+    <{else}>
+        <div class="alert alert-info">
             <{$lang_noaudioyet}>
-        </h4>
+        </div>
     <{/if}>
 
 
 
     <{section name=i loop=$audios}>
-    <div class="yogurt-audio-container <{cycle values="odd,even"}>">
+
         <div class="yogurt-audio">
             <{*            <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="200" height="20" id="dewplayer" align="middle">*}>
             <{*                <param name="wmode" value="transparent">*}>
@@ -81,9 +87,9 @@
 
         </div>
         <div class="audio-play-wrapper">
-            <a href="#" id="player<{$audios[i].id}>" class="audio-play-button">
+            <!-- <a href="#" id="player<{$audios[i].id}>" class="audio-play-button float-left"> 
                 <i class="fa fa-play"></i>
-            </a> <span><strong><{$audios[i].title}></strong></span>
+            </a>--> <span><strong><{$audios[i].author}> - <{$audios[i].title}></strong></span>
         </div>
 
         <div id="waveform"></div>
@@ -138,39 +144,36 @@
                 Toggle Mute
             </button>
         </div>
+<br>
+        <div class="alert alert-info">
+          <h5><{$smarty.const._MD_YOGURT_DESCRIPTION}></h5>
+               <{$audios[i].author}> - <{$audios[i].title}> <br>
 
-        <div class="yogurt-audio-details">
-            <p class="yogurt-audio-desc">
-                <{$audios[i].title}> <{$audios[i].author}>
-
-                <{if '' !== $audios[i].meta.Title}>
-
-                <div class="yogurt-audio-metainfocontainer">
-                    <h4 class="yogurt-audio-metainfo"> <{$lang_meta}></h4>
-            <p class="yogurt-audio-meta-title"><span class="yogurt-audio-meta-label"> <{$lang_title}>:</span> <{$audios[i].meta.Title}></p>
-            <p class="yogurt-audio-meta-title"><span class="yogurt-audio-meta-label"> <{$lang_album}>:</span> <{$audios[i].meta.Album}></p>
-            <p class="yogurt-audio-meta-title"><span class="yogurt-audio-meta-label"> <{$lang_artist}>:</span> <{$audios[i].meta.Artist}></p>
-            <p class="yogurt-audio-meta-title"><span class="yogurt-audio-meta-label"> <{$lang_year}>:</span> <{$audios[i].meta.Year}></p>
-        </div>
-        <{/if}>
-    </div>
-
-
-    </p> <{if $isOwner==1 }>
+                  <{if '' != $audios[i].meta.Title || '' != $audios[i].meta.Album  || '' != $audios[i].meta.Artist || '' != $audios[i].meta.Year   }>  <h6> <{$lang_meta}></h6> <{/if}>
+			<{if '' != $audios[i].meta.Title}> <p class="yogurt-audio-meta-title"><span class="yogurt-audio-meta-label"> <{$lang_title}>:</span> <{$audios[i].meta.Title}></p> <{/if}>
+            <{if '' != $audios[i].meta.Album}><p class="yogurt-audio-meta-title"><span class="yogurt-audio-meta-label"> <{$lang_album}>:</span> <{$audios[i].meta.Album}></p> <{/if}>
+            <{if '' != $audios[i].meta.Artist}><p class="yogurt-audio-meta-title"><span class="yogurt-audio-meta-label"> <{$lang_artist}>:</span> <{$audios[i].meta.Artist}></p> <{/if}>
+            <{if '' != $audios[i].meta.Year}><p class="yogurt-audio-meta-title"><span class="yogurt-audio-meta-label"> <{$lang_year}>:</span> <{$audios[i].meta.Year}></p> <{/if}>
+         <{if $isOwner==1 }>
         <form action="delaudio.php" method="post" id="deleteform" class="yogurt-audio-forms">
             <input type="hidden" value="<{$audios[i].id}>" name="cod_audio">
             <{$token}>
             <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 delete.png}>">
         </form>
-    <{/if}>
-</div>
-<hr>
-    </div>
-<{/section}>
-</div>
-<div style="clear:both;width:100%"></div>
-<div id="yogurt-navegacao">
+        <{/if}>
+       </div>
+ <{/section}>
+
+<div>
     <{$pageNav}>
 </div>
-<div style="clear:both;width:100%"></div>
+
 <{include file="db:yogurt_footer.tpl"}>
+
+<!-- end -->
+</div>
+      </div>
+   </div>
+</div>
+    	</div>
+</div>

@@ -1,5 +1,13 @@
 <{include file="db:yogurt_navbar.tpl"}>
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+   <div class="row">
+      <div class="col-md-12">
+         <div id="content" class="content content-full-width">
+<!-- start -->
+
 <h4><{$smarty.const._MD_YOGURT_MEMBERSLISTSECTION}></h4>
 <{if $displaywelcomemessage == 1}><{$welcomemessage}><br><{/if}>
 
@@ -33,19 +41,19 @@
                             <{if $users[i].isFriend!=1 && $users[i].uid != $uid_owner && $users[i].selffriendrequest!=1 && $users[i].otherfriendrequest!=1}>
                                 <form action=send_friendrequest.php method="post">
                                     <input type="hidden" name="friendrequestto_uid" id="friendrequestto_uid" value="<{$users[i].id}>">
-                                    <input name="addfriend" type="submit" value="<{$lang_addfriend}>" class="btn btn-info btn-sm float-right">
-                                    <{$token}>
+									<button name="addfriend" type="submit" class="btn btn-info btn-sm float-right"> <i class="fa fa-user-plus"></i> <{$lang_addfriend}></button>			 	   
+									<{$token}>
                                 </form>
                             <{/if}>
                             <{if $users[i].isFriend ==1 && $users[i].uid != $uid_owner}>
-                                <button type="button" class="btn btn-dark btn-sm"><{$lang_myfriend}></button>
+									<button type="button" class="btn btn-info btn-sm"> <i class="fa fa-user-circle"></i> <{$lang_myfriend}></button>
                             <{/if}>
                             <{if $users[i].uid != $uid_owner}>
                                 <{if $users[i].selffriendrequest==1 && $self_uid!=0}>
-                                    <button type="button" class="btn btn-dark btn-sm"><{$lang_friendrequestsent}></button>
+                                    <button type="button" class="btn btn-info btn-sm"> <i class="fa fa-check-circle"></i> <{$lang_friendrequestsent}></button>
                                 <{/if}>
                                 <{if $users[i].otherfriendrequest==1 && $other_uid!=0}>
-                                    <button type="button" class="btn btn-dark btn-sm"><{$lang_friendshippending}></button>
+                                    <button type="button" class="btn btn-info btn-sm"> <i class="fa fa-clock-o"></i> <{$lang_friendshippending}></button>
                                 <{/if}>
                             <{/if}>
                             </p>
@@ -98,9 +106,9 @@
                         <br><br>
                         <{if $displayonlinestatus == 1}>
                             <{if $users[i].onlinestatus == 1}>
-                                <button type="button" class="btn btn-danger btn-sm"> <{$smarty.const._MD_YOGURT_ONLINE}></button>
+                                <button type="button" class="btn btn-danger btn-sm"> <i class="fa fa-user-circle-o"></i> <{$smarty.const._MD_YOGURT_ONLINE}></button>
                             <{else}>
-                                <button type="button" class="btn btn-dark btn-sm"> <{$smarty.const._MD_YOGURT_OFFLINE}></button>
+                                <button type="button" class="btn btn-dark btn-sm"> <i class="fa fa-user-circle-o"></i> <{$smarty.const._MD_YOGURT_OFFLINE}></button>
                             <{/if}>
                         <{/if}>
 
@@ -164,3 +172,11 @@
 <{/if}>
 
 <{include file="db:yogurt_footer.tpl"}>
+
+<!-- end -->
+</div>
+      </div>
+   </div>
+</div>
+    	</div>
+</div>

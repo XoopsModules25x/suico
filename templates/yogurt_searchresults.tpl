@@ -1,5 +1,13 @@
 <{include file="db:yogurt_navbar.tpl"}>
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+   <div class="row">
+      <div class="col-md-12">
+         <div id="content" class="content content-full-width">
+<!-- start -->
+
 <h4><{$smarty.const._MD_YOGURT_RESULTS}></h4>
 
 <{if $total_found != 0}>
@@ -85,9 +93,9 @@
                     <br><br>
                     <{if $displayonlinestatus == 1}>
                         <{if $users[i].onlinestatus == 1}>
-                            <button type="button" class="btn btn-danger btn-sm"> <{$smarty.const._MD_YOGURT_ONLINE}></button>
+                            <button type="button" class="btn btn-danger btn-sm"> <i class="fa fa-user-circle-o"></i> <{$smarty.const._MD_YOGURT_ONLINE}></button>
                         <{else}>
-                            <button type="button" class="btn btn-dark btn-sm"> <{$smarty.const._MD_YOGURT_OFFLINE}></button>
+                            <button type="button" class="btn btn-dark btn-sm"> <i class="fa fa-user-circle-o"></i> <{$smarty.const._MD_YOGURT_OFFLINE}></button>
                         <{/if}>
                     <{/if}>
 
@@ -116,3 +124,13 @@
 <{/if}>
 
 <{include file="db:yogurt_footer.tpl"}>
+
+
+<!-- end -->
+</div>
+      </div>
+   </div>
+</div>
+    	</div>
+</div>
+
