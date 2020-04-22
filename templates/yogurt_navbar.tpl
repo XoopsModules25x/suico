@@ -67,7 +67,7 @@
                         
 						<{if $allow_profile_general==1}>
 						<{if $user_occupation || $user_location }>
-						<p class="m-b-10"><{if $user_occupation}><{$user_occupation}><{/if}><{if $user_occupation}>, <{$user_location}><{/if}></p>
+						<p class="m-b-10"><{if $user_occupation}><i class="fa fa-briefcase"></i> <{$user_occupation}><{/if}> <{if $user_occupation}> <i class="fa fa-map-marker"></i>  <{$user_location}><{/if}></p>
 						<{/if}>
 						<{/if}>
 						
