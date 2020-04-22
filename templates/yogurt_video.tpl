@@ -54,11 +54,6 @@
             <{$lang_videos}>
         </a>
     </h5>
-    <{if $nb_videos<=0}>
-        <h4>
-            <{$lang_novideoyet}>
-        </h4>
-    <{/if}>
 
  <{if $nb_videos<=0}>
 		<div class="alert alert-info"><{$lang_novideoyet}></div>
