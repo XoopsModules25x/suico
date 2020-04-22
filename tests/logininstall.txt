@@ -1,0 +1,3 @@
+tests/acceptance/LoginAsAdminCept.php
+tests/acceptance/InstallCept.php
+tests/acceptance/UninstallCept.php

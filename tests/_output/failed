@@ -1,0 +1,2 @@
+tests\acceptance\InstallCept.php
+tests\acceptance\UninstallCept.php
