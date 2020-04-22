@@ -119,20 +119,22 @@
 </div>
 
     <{if $allow_videos==1 }>
+		<{if $mainvideocode!="" }>
 		<div class="container-fluid"> 
 		<div class="row"> 
            <h5><{$lang_featuredvideo}> <i class="fa fa-youtube-play"></i></h5>
-                <{if $mainvideocode!="" }>
+                
                    <div class="embed-responsive embed-responsive-16by9">
 							<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<{$mainvideocode}>?rel=0" allowfullscreen></iframe>
 					</div>
 						<div class="alert alert-info">
 							<{$mainvideodesc}>
 						</div>
-				<{/if}>
+				
           </div>
 		  </div>
-     <{/if}>
+		<{/if}>
+    <{/if}>
 	
 	<{if $allow_profile_general==1}>
     <{if $allow_friends==1}>
