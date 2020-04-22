@@ -7,10 +7,9 @@
       <div class="col-md-12">
          <div id="content" class="content content-full-width">
 <!-- start -->
-111
 
     <h5>
-        <{$lang_availablegroups}>
+        <{$smarty.const._MD_YOGURT_GROUPSEARCHRESULT}>
     </h5>
 
     <{if $nb_groups_all<=0}>
@@ -30,25 +29,32 @@
     <{section name=j loop=$groups}>
 	<tr>
             <td>
-         
-
+			<{if $isOwner }>
+                <{if $xoops_userid == $groups[j].uid }>
+                    <form>
+                         <button name="" type="image" class="btn btn-primary btn-sm float-right"> <i class="fa fa-user-circle-o"></i> <{$smarty.const._MD_YOGURT_MEMBEROFGROUP}></button> 
+					</form>
+				<{else}>	
+					<form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">
+                        <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
+                        <button name="" type="image" class="btn btn-dark btn-sm float-right"> <i class="fa fa-handshake-o"></i> <{$lang_joingroup}></button>
+                    </form>
+				<{/if}>
+            <{/if}>
                  <a href="group.php?group_id=<{$groups[j].id}>"><img src="<{$xoops_upload_url}>/yogurt/groups/<{$groups[j].img}>" alt="<{$groups[j].title}>" title="<{$groups[j].title}>"></a>
            
                 <h6><a href="group.php?group_id=<{$groups[j].id}>"><{$groups[j].title}></a></h6>
-                <br><{$groups[j].desc}>
+                <{$groups[j].desc}>
             <br>
 			 <{if $isOwner }>
                  <{if $xoops_userid == $groups[j].uid }>
-                    <form action="delete_group.php" method="POST" id="form_deletegroup" class="yogurt-groups-form-delete">
+					<form action="delete_group.php" method="POST" id="form_deletegroup" class="yogurt-groups-form-delete">
                         <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
                         <input type="image" src="<{xoModuleIcons16 delete.png}>">
                     </form>
                     <form action="editgroup.php" method="POST" id="form_editgroup" class="yogurt-groups-form-edit">
                         <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
                         <input type="image" src="<{xoModuleIcons16 edit.png}>">
-                    </form>
-                    <form>
-                        <img src="assets/images/owner.gif" alt="<{$lang_owner}>" title="<{$lang_owner}>">
                     </form>
                 <{/if}>
            <{/if}>

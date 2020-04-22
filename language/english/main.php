@@ -223,6 +223,7 @@ define('_MD_YOGURT_GROUP_ABANDON', 'Leave this Group');
 define('_MD_YOGURT_GROUP_JOIN', 'Join this Group');
 define('_MD_YOGURT_GROUP_SEARCH', 'Search a Group');
 define('_MD_YOGURT_GROUP_SEARCHKEYWORD', 'Keyword');
+define('_MD_YOGURT_GROUPSEARCHRESULT', 'Group Search Result');
 
 ######################################### NOTES #####################################################
 //notebook.php
