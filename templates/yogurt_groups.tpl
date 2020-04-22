@@ -83,7 +83,8 @@
                         <input type="hidden" value="<{$mygroups[i].group_id}>" name="group_id" id="group_id">
                         <input type="image" src="<{xoModuleIcons16 edit.png}>">
                     </form>
-                         <i class="fa fa-user float-right" title="<{$lang_owner}>" style="color:#8B0000;"></i>
+					
+					    <button title="<{$lang_owner}>" class="btn btn-secondary btn-sm float-right"> <i class="fa fa-user"></i> <{$smarty.const._MD_YOGURT_OWNEROFGROUP}></button>
                 <{/if}>
             <{/if}>
 
@@ -161,9 +162,8 @@
                         <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
                         <input type="image" src="<{xoModuleIcons16 edit.png}>">
                     </form>
-                    <form>
-                        <i class="fa fa-user float-right" title="<{$lang_owner}>" style="color:#8B0000;"></i>
-                    </form>
+                        <button title="<{$lang_owner}>" class="btn btn-secondary btn-sm float-right"> <i class="fa fa-user"></i> <{$smarty.const._MD_YOGURT_OWNEROFGROUP}></button>
+                    
                 <{/if}>
             
          

@@ -52,7 +52,7 @@
 								 <{ if $friends[i].user_avatar=="blank.gif" }><img src="<{$xoops_url}>/uploads/avatars/blank.gif"  class="media-object"> <{else}> <img src="<{$xoops_upload_url}>/<{$friends[i].user_avatar}>" class="media-object"><{/if}>                              
 								</a>
                      		   <div class="media-body valign-middle">
-                                    <b class="text-inverse"><{$friends[i].uname}></b>
+                                    <b class="text-inverse"><a class="media-left" href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$friends[i].uid}>" alt=" <{$friends[i].uname}>" title="<{$friends[i].uname}>">  <{$friends[i].uname}></a></b>
                                  </div>
                                  <div class="media-body valign-middle text-right overflow-visible">
                                    <div class="btn-group dropdown">
