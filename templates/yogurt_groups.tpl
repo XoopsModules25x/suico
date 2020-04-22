@@ -134,7 +134,7 @@
 	
    
 
-<table id="table_id" class="table table-striped">
+<table class="table table-striped">
     <thead>
         <tr>
             <th><{$lang_groupslist}></th>
@@ -146,13 +146,13 @@
         <tr>
             <td>
              <{if $isAnonym!=1}>
-                <{if !in_array($groups[j].id, $mygroupsid) && $uid_owner == $groups[j].uid}>
+                <{if !in_array($groups[j].id, $mygroupsid)}>
                     <form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">
                         <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
                         <button name="" type="image" class="btn btn-dark btn-sm float-right"> <i class="fa fa-handshake-o"></i> <{$lang_joingroup}></button>
                     </form>
 				<{else}>
-				<{if $uid_owner == $groups[j].uid }>
+				<{if $uid_owner == $groups[j].uid OR in_array($groups[j].id, $mygroupsid)}>
 				    <button name="" type="image" class="btn btn-primary btn-sm float-right"> <i class="fa fa-user-circle-o"></i> <{$lang_memberofgroup}></button>
 				<{else}>
 				<form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">
@@ -203,3 +203,4 @@
 </div>
     	</div>
 </div>
+
