@@ -10,19 +10,24 @@
     <h5><{$smarty.const._MD_YOGURT_GROUP}> : <{$group_title}></h5>
 
     <div>
-        <img src="<{$xoops_upload_url}>/yogurt/groups/<{$group_img}>"><br><br>
+        <img src="<{$xoops_upload_url}>/yogurt/groups/<{$group_img}>" alt="<{$group_title}>" title="<{$group_title}>"><br><br>
     </div>
 
   <div class="alert alert-info">
         
 		<{if $isAnonym!=1}>
 		<{if $memberOfGroup ==1}>
+		
     <form action="abandongroup.php" method="POST" id="form_abandongroup">
         <input type="hidden" value="<{$group_rel_id}>" name="relgroup_id" id="relgroup_id">
 		<input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
 		<button name="" type="image" class="btn btn-primary btn-sm float-right"> <i class="fa fa-user-circle-o"></i> <{$smarty.const._MD_YOGURT_MEMBEROFGROUP}></button> 
-        &nbsp;<button name="" type="image" class="btn btn-danger btn-sm float-right"> <i class="fa fa-close"></i> <{$lang_abandongroup}></button> 
-    </form>
+        <button name="" type="image" class="btn btn-danger btn-sm float-right"> <i class="fa fa-close"></i> <{$lang_abandongroup}></button> 
+    	<{if $xoops_userid == $group_owneruid }>
+		<button title="<{$lang_owner}>" class="btn btn-secondary btn-sm float-right"> <i class="fa fa-user"></i> <{$smarty.const._MD_YOGURT_OWNEROFGROUP}></button>
+		<{/if}>
+	
+	</form>
     <{ else}>
     <form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">
         <input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
@@ -48,7 +53,7 @@
                         <input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
                         <input type="image" src="<{xoModuleIcons16 edit.png}>">
                     </form>
-                          <{/if}>
+					      <{/if}>
               
                 <{/if}>
 		
@@ -72,7 +77,8 @@
 		   
 		   <a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$group_members[i].uid}>" alt="<{$group_members[i].uname}>" title="<{$group_members[i].uname}>"><{$group_members[i].uname}></a>
                <{if $group_owneruid==$group_members[i].uid}>
-			   <i class="fa fa-user" title="<{$lang_owner}>" style="color:#8B0000;"></i><{/if}>
+			   <button title="<{$lang_owner}>" class="btn btn-secondary btn-sm float-right"> <i class="fa fa-user"></i> <{$smarty.const._MD_YOGURT_OWNEROFGROUP}></button>
+				<{/if}>
 			   
 			    <{if $group_owneruid==$useruid && $group_owneruid!=$group_members[i].uid}>
                     <form action="kickfromgroup.php" method="post">
