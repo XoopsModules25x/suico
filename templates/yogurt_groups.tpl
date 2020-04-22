@@ -52,7 +52,7 @@
     <{/if}>
 
 
-
+<{if $nb_groups!=0}>
 <table id="table_id" class="table table-striped">
     <thead>
         <tr>
@@ -92,7 +92,7 @@
     <{/section}>
  </tbody>
 </table>
-
+<{/if}>
 <{$navigationBar_my}>
 
 
@@ -123,8 +123,7 @@
         </div>
     <{/if}>
 
-
-
+<{if $nb_groups_all!=0}>
 <table id="table_id" class="table table-striped">
     <thead>
         <tr>
@@ -171,6 +170,7 @@
     <{/section}>
  </tbody>
 </table>
+<{/if}>
 
 <div>
     <{$navigationBar}>
