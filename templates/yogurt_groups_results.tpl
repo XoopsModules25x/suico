@@ -14,7 +14,7 @@
 
     <{if $nb_groups_all<=0}>
        <div class="alert alert-info">
-            <{$lang_nogroupsyet}>
+        <{$smarty.const._MD_YOGURT_NOMATCHGROUP}>
         </div>
     <{/if}>
 
@@ -29,25 +29,14 @@
     <{section name=j loop=$groups}>
 	<tr>
             <td>
-			<{if $isOwner }>
-                <{if $xoops_userid == $groups[j].uid }>
-                    <form>
-                         <button name="" type="image" class="btn btn-primary btn-sm float-right"> <i class="fa fa-user-circle-o"></i> <{$smarty.const._MD_YOGURT_MEMBEROFGROUP}></button> 
-					</form>
-				<{else}>	
-					<form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">
-                        <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
-                        <button name="" type="image" class="btn btn-dark btn-sm float-right"> <i class="fa fa-handshake-o"></i> <{$lang_joingroup}></button>
-                    </form>
-				<{/if}>
-            <{/if}>
+
                  <a href="group.php?group_id=<{$groups[j].id}>"><img src="<{$xoops_upload_url}>/yogurt/groups/<{$groups[j].img}>" alt="<{$groups[j].title}>" title="<{$groups[j].title}>"></a>
            
                 <h6><a href="group.php?group_id=<{$groups[j].id}>"><{$groups[j].title}></a></h6>
                 <{$groups[j].desc}>
             <br>
 			 <{if $isOwner }>
-                 <{if $xoops_userid == $groups[j].uid }>
+                 <{if $uid_owner == $groups[j].uid }>
 					<form action="delete_group.php" method="POST" id="form_deletegroup" class="yogurt-groups-form-delete">
                         <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
                         <input type="image" src="<{xoModuleIcons16 delete.png}>">
@@ -96,3 +85,4 @@
 </div>
     	</div>
 </div>
+

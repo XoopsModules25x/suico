@@ -437,6 +437,7 @@ define('_MD_YOGURT_EDIT', 'Edit');
 define('_MD_YOGURT_DESCRIPTION', 'Description');
 define('_MD_YOGURT_AVAILABLEGROUPS', 'All Groups');
 define('_MD_YOGURT_GROUPSLIST', 'Groups List');
+define('_MD_YOGURT_NOMATCHGROUP', 'No Match Found for your Query. ');
 //users
 define('_MD_YOGURT_USERNAME', 'Username');
 define('_MD_YOGURT_PASSWORD', 'Password');

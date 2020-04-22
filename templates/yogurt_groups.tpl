@@ -41,7 +41,7 @@
 
 	<h5>
       
-            <{$lang_mysection}>
+            <{$lang_groups}>
         
     </h5>
 
@@ -73,7 +73,7 @@
 				<{$mygroups[i].desc}>
             <br>
 			 <{if $isOwner }>
-                <{if $xoops_userid == $mygroups[i].uid }>
+                <{if $uid_owner == $mygroups[i].uid }>
                     
 					 <form action="delete_group.php" method="POST" id="form_deletegroup" class="yogurt-groups-form-delete">
                         <input type="hidden" value="<{$mygroups[i].group_id}>" name="group_id" id="group_id">
@@ -96,6 +96,11 @@
 <{$navigationBar_my}>
 
 
+
+
+
+<{if $isOwner==1}>	
+
 <div class="alert alert-primary"> 
 <form name='form_group_search1' id='form_group_search1' action='search_group.php' method='get'>   
 <h5><{$lang_searchgroup}></h5>
@@ -113,18 +118,23 @@
 </div>
 
 
-    <h5>
+	<h5>
         <{$lang_availablegroups}>
     </h5>
 
-    <{if $nb_groups_all<=0}>
+ <{if $nb_groups_all<=0}>
         <div class="alert alert-info">
             <{$lang_nogroupsyet}>
         </div>
     <{/if}>
 
 <{if $nb_groups_all!=0}>
-<table id="table_id" class="table table-striped">
+
+    
+	
+   
+
+<table class="table table-striped">
     <thead>
         <tr>
             <th><{$lang_groupslist}></th>
@@ -142,8 +152,15 @@
                         <button name="" type="image" class="btn btn-dark btn-sm float-right"> <i class="fa fa-handshake-o"></i> <{$lang_joingroup}></button>
                     </form>
 				<{else}>
+				<{if $uid_owner == $groups[j].uid OR in_array($groups[j].id, $mygroupsid)}>
 				    <button name="" type="image" class="btn btn-primary btn-sm float-right"> <i class="fa fa-user-circle-o"></i> <{$lang_memberofgroup}></button>
-                <{/if}>
+				<{else}>
+				<form action="becomemembergroup.php" method="POST" id="form_becomemember" class="yogurt-groups-form-becomemember">
+                        <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
+                        <button name="" type="image" class="btn btn-dark btn-sm float-right"> <i class="fa fa-handshake-o"></i> <{$lang_joingroup}></button>
+                </form>
+				<{/if}>
+				<{/if}>
             <{/if}>
 			
 			<a href="group.php?group_id=<{$groups[j].id}>"><img src="<{$xoops_upload_url}>/yogurt/groups/<{$groups[j].img}>" alt="<{$groups[j].title}>" title="<{$groups[j].title}>" class="float-left pr-2" width="120" height="120"></a>
@@ -152,7 +169,7 @@
             </h6>
                 <{$groups[j].desc}>
             <br>
-			<{if ($xoops_userid == $groups[j].uid)}>
+			<{if ($uid_owner == $groups[j].uid)}>
                   <form action="delete_group.php" method="POST" id="form_deletegroup" class="yogurt-groups-form-delete">
                         <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
                         <input type="image" src="<{xoModuleIcons16 delete.png}>">
@@ -161,15 +178,15 @@
                         <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
                         <input type="image" src="<{xoModuleIcons16 edit.png}>">
                     </form>
-                        <button title="<{$lang_owner}>" class="btn btn-secondary btn-sm float-right"> <i class="fa fa-user"></i> <{$smarty.const._MD_YOGURT_OWNEROFGROUP}></button>
-                    
+                  <button title="<{$lang_owner}>" class="btn btn-secondary btn-sm float-right"> <i class="fa fa-user"></i> <{$smarty.const._MD_YOGURT_OWNEROFGROUP}></button>
                 <{/if}>
-            
+                    
          
 		 </td></tr>
     <{/section}>
  </tbody>
 </table>
+<{/if}>
 <{/if}>
 
 <div>
@@ -186,3 +203,4 @@
 </div>
     	</div>
 </div>
+
