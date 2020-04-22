@@ -10,7 +10,7 @@ We accept contributions via Pull Requests on [Github](https://github.com/XoopsMo
 ## Pull Requests
 
 - **[PSR-2 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)** - The easiest way to apply the conventions is to install [PHP Code Sniffer](http://pear.php.net/package/PHP_CodeSniffer).
-- **Add tests!** - We encourage to provide tests for your contributions.
+- **Add tests!** - We encourage providing tests with your contributions. We're using [Codeception](www.codeception.com) and PhpUnit
 - **Document any change in behavior** - Make sure the `/docs/changelog.txt` and any other relevant documentation are kept up-to-date.
 - **Consider our release cycle** - We try to follow [Semantic Versioning v2.0.0](http://semver.org/). Randomly breaking public APIs is not an option.
 - **Create feature branches** - Don't ask us to pull from your master branch.
