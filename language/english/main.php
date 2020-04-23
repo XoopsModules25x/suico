@@ -461,7 +461,8 @@ define('_MD_YOGURT_FINDMOREFRIENDS','Find More Friends');
 define('_MD_YOGURT_METAINFOHELP','Leave title and author fields blank if your file has metainfo already');
 define('_MD_YOGURT_GROUPDESCRIPTION','Group Description');
 define('_MD_YOGURT_PRIVATEPHOTO', 'Private Photo');
-
+define('_MD_YOGURT_FRIENDSHIPSETTINGS', 'Friend Settings');
+define('_MD_YOGURT_DELETEFRIENDSHIP', 'Delete Friend ');
 
 //Data Tables
 define('_MD_YOGURT_DTDECIMAL','');
