@@ -41,19 +41,13 @@
 							<{if $isFriend == 1 && $isAnonym!=1}>
 								<button type="button" class="btn btn-info btn-sm"> <i class="fa fa-user-circle"></i> <{$lang_myfriend}></button>	
 							<{/if}>
-							<{if $friendrequestfrom_uid == $uid_owner && $isAnonym!=1}>
-								<button type="button" class="btn btn-info btn-sm"> <i class="fa fa-check-circle"></i> <{$lang_friendrequestsent}></button>	
-							<{/if}>
-							<{if $friendrequestto_uid == $xoops_userid && $isAnonym!=1}>
-								<button type="button" class="btn btn-info btn-sm"> <i class="fa fa-clock-o"></i> 1<{$lang_friendrequestpending}></button>	
-							<{/if}>
-							
+
 							<{if $selffriendrequest==1 && $self_uid!=0 && $isAnonym!=1}>
                                     <button type="button" class="btn btn-info btn-sm"> <i class="fa fa-check-circle"></i> <{$lang_friendrequestsent}></button>
                                 <{/if}>
                                 <{if $otherfriendrequest==1 && $other_uid!=0 && $isAnonym!=1}>
                                     <button type="button" class="btn btn-info btn-sm"> <i class="fa fa-clock-o"></i> <{$lang_friendrequestpending}></button>
-                                <{/if}>
+                            <{/if}>
 							
 							
 						<{/if}>	
