@@ -398,6 +398,7 @@ define('_MD_YOGURT_ADDFRIEND', 'Add Friend');
 define('_MD_YOGURT_FRIENDREQUESTPENDING', 'Friend Request Pending');
 define('_MD_YOGURT_MYFRIEND', 'Friend');
 define('_MD_YOGURT_FRIENDREQUESTSENT', 'Friend Request Sent');
+define('_MD_YOGURT_CANCELFRIENDREQUEST', 'Cancel Friend Request');
 define('_MD_YOGURT_FRIENDSHIPSTATUS', 'Friendship Status');
 define('_MD_YOGURT_PROFILEVISITORS', 'Profile Visitors');
 define('_MD_YOGURT_FEATUREDVIDEO', 'Featured Video');
@@ -463,6 +464,8 @@ define('_MD_YOGURT_GROUPDESCRIPTION','Group Description');
 define('_MD_YOGURT_PRIVATEPHOTO', 'Private Photo');
 define('_MD_YOGURT_FRIENDSHIPSETTINGS', 'Friend Settings');
 define('_MD_YOGURT_DELETEFRIENDSHIP', 'Delete Friend ');
+define('_MD_YOGURT_FRIENDREQUESTCANCELLED', 'You have cancel your friendship request with this user!');
+
 
 //Data Tables
 define('_MD_YOGURT_DTDECIMAL','');
