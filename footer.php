@@ -243,6 +243,7 @@ if (1 === $friendrequest) {
 $xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
 $xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
 $xoopsTpl->assign('lang_friendrequestpending', _MD_YOGURT_FRIENDREQUESTPENDING);
+$xoopsTpl->assign('lang_cancelfriendrequest', _MD_YOGURT_CANCELFRIENDREQUEST);
 $xoopsTpl->assign('lang_myfriend', _MD_YOGURT_MYFRIEND);
 $xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUESTSENT);
 $xoopsTpl->assign('lang_acceptfriend', _MD_YOGURT_ACCEPTFRIEND);

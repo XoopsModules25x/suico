@@ -43,11 +43,21 @@
 							<{/if}>
 
 							<{if $selffriendrequest==1 && $self_uid!=0 && $isAnonym!=1}>
-                                    <button type="button" class="btn btn-info btn-sm"> <i class="fa fa-check-circle"></i> <{$lang_friendrequestsent}></button>
-                                <{/if}>
-                                <{if $otherfriendrequest==1 && $other_uid!=0 && $isAnonym!=1}>
+								<button type="button" class="btn btn-info btn-sm"> <i class="fa fa-check-circle"></i> <{$lang_friendrequestsent}></button>
+								<form action=cancelFriendrequest.php method="post">
+								<input type="hidden" name="friendrequestto_uid" id="friendrequestto_uid" value="<{$uid_owner}>">
+								<button name="" type="image" class="btn btn-danger btn-sm"> <i class="fa fa-remove"></i> <{$lang_cancelfriendrequest}></button>			 	   
+								<{$token}>
+								</form>
+							<{/if}>
+                            <{if $otherfriendrequest==1 && $other_uid!=0 && $isAnonym!=1}>
                                     <button type="button" class="btn btn-info btn-sm"> <i class="fa fa-clock-o"></i> <{$lang_friendrequestpending}></button>
-                            <{/if}>
+									<form action=cancelFriendrequest.php method="post">
+									<input type="hidden" name="friendrequestto_uid" id="friendrequestto_uid" value="<{$uid_owner}>">
+									<button name="" type="image" class="btn btn-danger btn-sm"> <i class="fa fa-remove"></i> <{$lang_cancelfriendrequest}></button>			 	   
+									<{$token}>
+									</form>
+							<{/if}>
 							
 							
 						<{/if}>	

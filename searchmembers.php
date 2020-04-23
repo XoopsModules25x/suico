@@ -483,6 +483,7 @@ if ('submit' === $op) {
 $xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
 $xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
 $xoopsTpl->assign('lang_friendshippending', _MD_YOGURT_FRIENDREQUESTPENDING);
+$xoopsTpl->assign('lang_cancelfriendrequest', _MD_YOGURT_CANCELFRIENDREQUEST);
 
 if (isset($_POST['addfriend'])) {
     $newFriendrequest = $friendrequestFactory->create(true);
