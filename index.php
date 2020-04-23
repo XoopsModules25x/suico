@@ -78,6 +78,8 @@ $groups          = $controller->relgroupusersFactory->getGroups(8, $criteria_gro
 /**
  * Visitors
  */
+ $controller->visitorsFactory->purgeVisits();
+ 
 if (0 === $controller->isAnonym) {
     /**
      * Fectching last visitors
@@ -161,12 +163,54 @@ if (isset($nbSections['nbVideos']) && $nbSections['nbVideos'] > 0) {
 /**
  * Friends
  */
+$controller = new Yogurt\FriendsController($xoopsDB, $xoopsUser);
+
+$friendrequest = 0;
+if (1 === $controller->isOwner) {
+    $criteria_uidfriendrequest = new Criteria('friendrequestto_uid', $controller->uidOwner);
+    $newFriendrequest          = $controller->friendrequestFactory->getObjects($criteria_uidfriendrequest);
+    if ($newFriendrequest) {
+        $nb_friendrequest      = count($newFriendrequest);
+        $friendrequesterHandler = xoops_getHandler('member');
+        $friendrequester        = $friendrequesterHandler->getUser($newFriendrequest[0]->getVar('friendrequester_uid'));
+        $friendrequester_uid    = $friendrequester->getVar('uid');
+        $friendrequester_uname  = $friendrequester->getVar('uname');
+        $friendrequester_avatar = $friendrequester->getVar('user_avatar');
+        $friendrequest_id       = $newFriendrequest[0]->getVar('friendpet_id');
+        $friendrequest          = 1;
+    }
+}
+ 
 $criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
 $friends          = $controller->friendshipsFactory->getFriends(8, $criteria_friends);
 $xoopsTpl->assign('friends', $friends);
 $xoopsTpl->assign('lang_friendstitle', sprintf(_MD_YOGURT_FRIENDSTITLE, $controller->nameOwner));
 $xoopsTpl->assign('lang_viewallfriends', _MD_YOGURT_ALLFRIENDS);
 $xoopsTpl->assign('lang_nofriendsyet', _MD_YOGURT_NOFRIENDSYET);
+
+//requests to become friend
+if (1 === $friendrequest) {
+    $xoopsTpl->assign('lang_youhavexfriendrequests', sprintf(_MD_YOGURT_YOUHAVEXREQUESTS, $nb_friendrequest));
+    $xoopsTpl->assign('friendrequester_uid', $friendrequester_uid);
+    $xoopsTpl->assign('friendrequester_uname', $friendrequester_uname);
+    $xoopsTpl->assign('friendrequester_avatar', $friendrequester_avatar);
+    $xoopsTpl->assign('friendrequest', $friendrequest);
+    $xoopsTpl->assign('friendrequest_id', $friendrequest_id);
+    $xoopsTpl->assign('lang_rejected', _MD_YOGURT_UNKNOWNREJECTING);
+    $xoopsTpl->assign('lang_accepted', _MD_YOGURT_UNKNOWNACCEPTING);
+    $xoopsTpl->assign('lang_acquaintance', _MD_YOGURT_AQUAITANCE);
+    $xoopsTpl->assign('lang_friend', _MD_YOGURT_FRIEND);
+    $xoopsTpl->assign('lang_bestfriend', _MD_YOGURT_BESTFRIEND);
+    $linkedpetioner = '<a href="index.php?uid=' . $friendrequester_uid . '">' . $friendrequester_uname . '</a>';
+    $xoopsTpl->assign('lang_askingfriend', sprintf(_MD_YOGURT_ASKINGFRIEND, $linkedpetioner));
+}
+$xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
+$xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
+$xoopsTpl->assign('lang_friendrequestpending', _MD_YOGURT_FRIENDREQUESTPENDING);
+$xoopsTpl->assign('lang_myfriend', _MD_YOGURT_MYFRIEND);
+$xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUESTSENT);
+$xoopsTpl->assign('lang_acceptfriend', _MD_YOGURT_ACCEPTFRIEND);
+$xoopsTpl->assign('lang_rejectfriend', _MD_YOGURT_REJECTFRIEND);
 
 //search
 $xoopsTpl->assign('lang_usercontributions', _MD_YOGURT_USERCONTRIBUTIONS);

@@ -7,10 +7,10 @@
       <div class="col-md-12">
          <div id="content" class="content content-full-width">
 <!-- start -->
+ <!-- if not owner and not friend -->
 <{if $allow_friends !=-1 && $friendrequest==1 && $isOwner==1 && $isFriend==0}>
-
-    <!-- if not owner and not friend -->
-<div class="alert alert-info">
+<!-- if not owner and not friend -->
+<div class="alert alert-warning">
 <h5><{$lang_youhavexfriendrequests}></h5>
 <img class="rounded-circle float-left p-1" height="60" width="60" src="<{$xoops_url}>/uploads/<{$friendrequester_avatar}>">
 <form action="makefriends.php" method="post">
@@ -22,6 +22,7 @@
 <div class="form-check">
 	<label class="form-check-label"><input name="level" type="radio" value="0"> <{$lang_rejectfriend}></label>
  </div> 
+
 <div class='form-group'>
 <input type="hidden" name="friendrequest_id" id="friendrequest_id" value="<{$friendrequest_id}>">
 <input type="submit" class='btn btn-primary btn-sm' value='Submit'>

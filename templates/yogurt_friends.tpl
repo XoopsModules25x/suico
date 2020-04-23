@@ -9,7 +9,7 @@
 <!-- start -->
 <{if $allow_friends !=-1 && $friendrequest==1 && $isOwner==1 && $isFriend==0}>
 <!-- if not owner and not friend -->
-<div class="alert alert-info">
+<div class="alert alert-warning">
 <h5><{$lang_youhavexfriendrequests}></h5>
 <img class="rounded-circle float-left p-1" height="60" width="60" src="<{$xoops_url}>/uploads/<{$friendrequester_avatar}>">
 <form action="makefriends.php" method="post">
@@ -61,7 +61,7 @@
                                         <ul class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(101px, 34px, 0px);">
                                     <{if $allow_fanssevaluation == 1 OR $allow_friendshiplevel == 1}>
 										  <li class="p-1">						
-									<form action="editfriendship.php" method="post" class="yogurt-friends-deleteform">
+			<form action="editfriendship.php" method="post" class="yogurt-friends-deleteform">
             <input type="hidden" name="friend_uid" id="friend_uid" value="<{$friends[i].uid}>">
             <input name="submit" id="submit" src="assets/images/evaluate.gif" type="image" title="<{$lang_evaluate}>" alt="<{$lang_evaluate}>"/> <{$lang_evaluate}>
             </form>

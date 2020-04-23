@@ -105,6 +105,7 @@ $xoopsTpl->assign('lang_myfriend', _MD_YOGURT_MYFRIEND);
 $xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUESTSENT);
 $xoopsTpl->assign('lang_acceptfriend', _MD_YOGURT_ACCEPTFRIEND);
 $xoopsTpl->assign('lang_rejectfriend', _MD_YOGURT_REJECTFRIEND);
+
 //navbar
 $xoopsTpl->assign('module_name', $xoopsModule->getVar('name'));
 $xoopsTpl->assign('lang_mysection', _MD_YOGURT_MYFRIENDS);
