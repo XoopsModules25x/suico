@@ -63,8 +63,8 @@ switch ($op) {
         $notesObject->setVar('note_from', Request::getVar('note_from', ''));
         $notesObject->setVar('note_to', Request::getVar('note_to', ''));
         $notesObject->setVar('private', (1 === Request::getInt('private', 0) ? '1' : '0'));
-        $noteCreated = date_create_from_format(_SHORTDATESTRING, Request::getString('date', '', 'POST'));
-        $notesObject->setVar('date', $noteCreated->getTimestamp());
+        $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date', '', 'POST'));
+        $notesObject->setVar('date', $dateTimeObj->getTimestamp());
 
 
 

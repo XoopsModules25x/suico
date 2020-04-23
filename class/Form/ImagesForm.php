@@ -71,8 +71,8 @@ class ImagesForm extends XoopsThemeForm
         $hidden = new XoopsFormHidden(
             'cod_img',
             $this->targetObject->getVar(
-                'cod_img'
-            )
+            'cod_img'
+        )
         );
         $this->addElement($hidden);
         unset($hidden);
@@ -89,47 +89,32 @@ class ImagesForm extends XoopsThemeForm
         // Data_creation
         $this->addElement(
             new XoopsFormTextDateSelect(
-                AM_YOGURT_IMAGES_DATA_CREATION,
-                'data_creation',
-                0,
-                \strtotime(
-                    $this->targetObject->getVar('data_creation')
-                )
+                AM_YOGURT_IMAGES_DATA_CREATION, 'data_creation', 0, formatTimeStamp($this->targetObject->getVar('data_creation'), 's')
             )
         );
         // Data_update
         $this->addElement(
             new XoopsFormTextDateSelect(
-                AM_YOGURT_IMAGES_DATA_UPDATE,
-                'data_update',
-                0,
-                \strtotime(
-                    $this->targetObject->getVar('data_update')
-                )
+                AM_YOGURT_IMAGES_DATA_UPDATE, 'data_update', 0, formatTimeStamp($this->targetObject->getVar('data_update'), 's')
             )
         );
         // Uid_owner
         $this->addElement(
             new XoopsFormSelectUser(
-                AM_YOGURT_IMAGES_UID_OWNER,
-                'uid_owner',
-                false,
-                $this->targetObject->getVar(
-                    'uid_owner'
-                ),
-                1,
-                false
+                AM_YOGURT_IMAGES_UID_OWNER, 'uid_owner', false, $this->targetObject->getVar(
+                'uid_owner'
+            ), 1, false
             ),
             false
         );
         // Url
-//        $this->addElement(
-//            new XoopsFormTextArea(AM_YOGURT_IMAGES_URL, 'url', $this->targetObject->getVar('url'), 4, 47),
-//            false
-//        );
+        //        $this->addElement(
+        //            new XoopsFormTextArea(AM_YOGURT_IMAGES_URL, 'url', $this->targetObject->getVar('url'), 4, 47),
+        //            false
+        //        );
 
         $url = $this->targetObject->getVar('url') ?: 'blank.png';
-        
+
         $uploadDir   = '/uploads/yogurt/images/';
         $imgtray     = new \XoopsFormElementTray(AM_YOGURT_IMAGES_URL, '<br>');
         $imgpath     = \sprintf(AM_YOGURT_FORMIMAGE_PATH, $uploadDir);
@@ -147,10 +132,10 @@ class ImagesForm extends XoopsThemeForm
         $imgtray->addElement($fileseltray);
         $this->addElement($imgtray);
         // Private
-//        $this->addElement(
-//            new XoopsFormText(AM_YOGURT_IMAGES_PRIVATE, 'private', 50, 255, $this->targetObject->getVar('private')),
-//            false
-//        );
+        //        $this->addElement(
+        //            new XoopsFormText(AM_YOGURT_IMAGES_PRIVATE, 'private', 50, 255, $this->targetObject->getVar('private')),
+        //            false
+        //        );
 
         $private       = $this->targetObject->isNew() ? 0 : $this->targetObject->getVar('private');
         $check_private = new \XoopsFormCheckBox(AM_YOGURT_IMAGES_PRIVATE, 'private', $private);

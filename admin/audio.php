@@ -36,8 +36,8 @@ $sort  = Request::getString('sort', '');
 
 $adminObject->displayNavigation(basename(__FILE__));
 $permHelper = new Permission();
-$uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/images/';
-$uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/images/';
+$uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/audio/';
+$uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/audio/';
 
 switch ($op) {
     case 'new':
@@ -61,12 +61,39 @@ switch ($op) {
         // Form save fields
         $audioObject->setVar('title', Request::getVar('title', ''));
         $audioObject->setVar('author', Request::getVar('author', ''));
-        $audioObject->setVar('url', Request::getVar('url', ''));
+
+
+
+//        $audioObject->setVar('url', Request::getVar('url', ''));
+        require_once XOOPS_ROOT_PATH . '/class/uploader.php';
+        $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/audio/';
+        $uploader  = new \XoopsMediaUploader(
+            $uploadDir, $helper->getConfig('mimetypes'), $helper->getConfig('maxsize'), null, null
+        );
+        if ($uploader->fetchMedia(Request::getString('xoops_upload_file')[0], '', 'POST')) {
+//            $uploader->setPrefix('url_');
+            $uploader->setPrefix('aud_' . $uid . '_');
+            $uploader->fetchMedia(Request::getString('xoops_upload_file')[0], '', 'POST');
+            if (!$uploader->upload()) {
+                $errors = $uploader->getErrors();
+                redirect_header('javascript:history.go(-1)', 3, $errors);
+            } else {
+                $audioObject->setVar("url", $uploader->getSavedFileName());
+            }
+        }
+
+
+
+
+
+
+
+
         $audioObject->setVar('uid_owner', Request::getVar('uid_owner', ''));
-        $audioCreated = date_create_from_format(_SHORTDATESTRING, Request::getString('data_creation', '', 'POST'));
-        $audioObject->setVar('data_creation', $audioCreated->getTimestamp());
-        $audioUpdated = date_create_from_format(_SHORTDATESTRING, Request::getString('data_update', '', 'POST'));
-        $audioObject->setVar('data_update', $audioUpdated->getTimestamp());
+        $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('data_creation', '', 'POST'));
+        $audioObject->setVar('data_creation', $dateTimeObj->getTimestamp());
+        $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('data_update', '', 'POST'));
+        $audioObject->setVar('data_update', $dateTimeObj->getTimestamp());
 
         if ($audioHandler->insert($audioObject)) {
             redirect_header('audio.php?op=list', 2, AM_YOGURT_FORMOK);

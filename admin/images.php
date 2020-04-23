@@ -61,11 +61,11 @@ switch ($op) {
         // Form save fields
         $imagesObject->setVar('title', Request::getVar('title', ''));
 
-        $imageCreated = date_create_from_format(_SHORTDATESTRING, Request::getString('data_creation', '', 'POST'));
-        $imagesObject->setVar('data_creation', $imageCreated->getTimestamp());
+        $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('data_creation', '', 'POST'));
+        $imagesObject->setVar('data_creation', $dateTimeObj->getTimestamp());
 
-        $imageUpdated = date_create_from_format(_SHORTDATESTRING, Request::getString('data_update', '', 'POST'));
-        $imagesObject->setVar('data_update', $imageUpdated->getTimestamp());
+        $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('data_update', '', 'POST'));
+        $imagesObject->setVar('data_update', $dateTimeObj->getTimestamp());
 
         $imagesObject->setVar('uid_owner', Request::getVar('uid_owner', ''));
 
