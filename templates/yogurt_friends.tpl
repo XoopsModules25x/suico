@@ -63,15 +63,15 @@
 										  <li class="p-1">						
 			<form action="editfriendship.php" method="post" class="yogurt-friends-deleteform">
             <input type="hidden" name="friend_uid" id="friend_uid" value="<{$friends[i].uid}>">
-            <input name="submit" id="submit" src="assets/images/evaluate.gif" type="image" title="<{$lang_evaluate}>" alt="<{$lang_evaluate}>"/> <{$lang_evaluate}>
-            </form>
+            <button name="submit" id="submit" type="image" class="btn btn-primary btn-sm" title="<{$lang_evaluate}>"> <i class="fa fa-gear"></i> <{$lang_friendshipsettings}></button>			 	   
+			</form>
 			</li>
 			<{/if}>
 			<li class="p-1">
             <form action="delfriendship.php" method="post" class="yogurt-friends-evaluateform">
             <input type="hidden" name="friend_uid" id="friend_uid" value="<{$friends[i].uid}>">
-            <input name="submit" id="submit" src="assets/images/dele.gif" type="image" title="<{$lang_delete}>" alt="<{$lang_delete}>"/> <{$lang_delete}>
-            </form>
+            <button name="submit" id="submit" type="image" class="btn btn-danger btn-sm" title="<{$lang_delete}>"> <i class="fa fa-remove"></i> <{$lang_deletefriend}></button>			 	   
+			</form>
 
 										  </li>
                                        </ul>
