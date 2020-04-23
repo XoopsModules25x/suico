@@ -68,7 +68,7 @@
 			</li>
 			<{/if}>
 			<li class="p-1">
-            <form action="delfriendship.php" method="post" class="yogurt-friends-evaluateform">
+            <form action="delfriendship.php" method="post">
             <input type="hidden" name="friend_uid" id="friend_uid" value="<{$friends[i].uid}>">
             <button name="submit" id="submit" type="image" class="btn btn-danger btn-sm" title="<{$lang_delete}>"> <i class="fa fa-remove"></i> <{$lang_deletefriend}></button>			 	   
 			</form>
