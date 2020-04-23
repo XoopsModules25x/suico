@@ -99,6 +99,7 @@
 
 
 
+
 <{if $isOwner==1}>	
 
 <div class="alert alert-primary"> 
@@ -186,12 +187,13 @@
     <{/section}>
  </tbody>
 </table>
-<{/if}>
-<{/if}>
-
 <div>
     <{$navigationBar}>
 </div>
+<{/if}>
+<{/if}>
+
+
 
 
 <{include file="db:yogurt_footer.tpl"}>
