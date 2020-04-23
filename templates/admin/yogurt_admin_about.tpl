@@ -5,7 +5,7 @@
                 <fieldset>
                     <legend class="Slideshow_MediumTitle bold shadowlight"><{$moduleName}></legend>
                     <div>
-                        <img class="logo" src="<{$smarty.const.XOOPS_URL}>/modules/<{$module_dirname}>/<{$module_image}>" alt=""/><br>
+                        <img class="logo" src="<{$smarty.const.XOOPS_URL}>/modules/<{$module_dirname}>/<{$module_image}>" alt=""><br>
                         <label> Version : </label>
                         <text><{$module_version}></text>
                         <br>

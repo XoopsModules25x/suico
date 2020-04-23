@@ -35,7 +35,7 @@ include dirname(
 function xoops_module_pre_install_yogurt(
     XoopsModule $module
 ) {
-    include __DIR__ . '/common.php';
+    require __DIR__ . '/common.php';
     $utility = new Utility();
     //check for minimum XOOPS version
     $xoopsSuccess = $utility::checkVerXoops($module);

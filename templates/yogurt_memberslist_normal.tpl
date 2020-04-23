@@ -105,7 +105,7 @@
                     <{if $displayurl == 1 AND $users[i].website!=''}>
                         <a href="<{$users[i].url}>" target="_blank" class="btn btn-primary btn-sm" role="button"><i class="fa fa-link" aria-hidden="true"></i> <{$smarty.const._MD_YOGURT_URL}></a>
                     <{/if}>
-                    <{if $is_admin == true}>
+                    <{if $is_admin === true}>
                         <p class="float-right"><br><{$users[i].adminlink}></p>
                     <{/if}>
                 </td>

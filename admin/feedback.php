@@ -29,7 +29,7 @@ use XoopsModules\Yogurt;
 use XoopsModules\Yogurt\Common\ModuleFeedback;
 use Xmf\Request;
 
-include __DIR__ . '/admin_header.php';
+require __DIR__ . '/admin_header.php';
 
 $adminObject = Admin::getInstance();
 
@@ -118,4 +118,4 @@ switch ($op) {
 
         break;
 }
-include __DIR__ . '/admin_footer.php';
+require __DIR__ . '/admin_footer.php';

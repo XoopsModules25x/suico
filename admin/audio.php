@@ -62,8 +62,6 @@ switch ($op) {
         $audioObject->setVar('title', Request::getVar('title', ''));
         $audioObject->setVar('author', Request::getVar('author', ''));
 
-
-
 //        $audioObject->setVar('url', Request::getVar('url', ''));
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/audio/';
@@ -81,13 +79,6 @@ switch ($op) {
                 $audioObject->setVar("url", $uploader->getSavedFileName());
             }
         }
-
-
-
-
-
-
-
 
         $audioObject->setVar('uid_owner', Request::getVar('uid_owner', ''));
         $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('data_creation', '', 'POST'));

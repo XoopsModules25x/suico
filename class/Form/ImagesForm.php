@@ -125,7 +125,7 @@ class ImagesForm extends XoopsThemeForm
         }
         $imageselect->setExtra("onchange='showImgSelected(\"image_url\", \"url\", \"" . $uploadDir . '", "", "' . XOOPS_URL . "\")'");
         $imgtray->addElement($imageselect);
-        $imgtray->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $uploadDir . '/' . $url . "' name='image_url' id='image_url' alt='' style='max-width:300px' />"));
+        $imgtray->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $uploadDir . '/' . $url . "' name='image_url' id='image_url' alt='' style='max-width:300px'>"));
         $fileseltray = new \XoopsFormElementTray('', '<br>');
         $fileseltray->addElement(new \XoopsFormFile(AM_YOGURT_FORMUPLOAD, 'url', $this->helper->getConfig('maxsize')));
         $fileseltray->addElement(new \XoopsFormLabel(''));
