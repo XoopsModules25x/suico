@@ -177,43 +177,38 @@ if (1 === $controller->isOwner) {
         $friendrequest          = 1;
     }
 }
-
-$friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
-/**
- * Getting the uid of the user which user want to ask to be friend
- */
-$friendrequestfrom_uid = $controller->uidOwner;
-
-//Verify if the user has already asked for friendship or if the user he s asking to be a friend has already asked him
-$criteria = new CriteriaCompo(
-    new Criteria(
-        'requestto_uid', $friendrequestfrom_uid
-    )
-);
-
 if ($xoopsUser){
-$criteria->add(new Criteria('requester_uid', $xoopsUser->getVar('uid')));
-if ($friendrequestFactory->getCount($criteria) > 0) {
-	$xoopsTpl->assign('requestfrom_uid', $friendrequestfrom_uid);
-	
+			$criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
+            $criteria_isfriend = new CriteriaCompo(new Criteria('friend2_uid', $xoopsUser->getVar('uid')));
+            $criteria_isfriend->add($criteria_friends);
+            $controller->isFriend = $controller->friendshipsFactory->getCount($criteria_isfriend);
+			$xoopsTpl->assign('isFriend', $controller->isFriend);
+			
+			$friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
+            
+			$criteria_selfrequest = new Criteria('friendrequester_uid', $xoopsUser->getVar('uid'));
+            $criteria_isselfrequest = new CriteriaCompo(new Criteria('friendrequestto_uid', $controller->uidOwner));
+            $criteria_isselfrequest->add($criteria_selfrequest);
+            $controller->isSelfRequest = $friendrequestFactory->getCount($criteria_isselfrequest);
+			$xoopsTpl->assign('selffriendrequest', $controller->isSelfRequest);
+            if ($controller->isSelfRequest > 0) {
+                $xoopsTpl->assign('self_uid', $xoopsUser->getVar('uid'));
+            }
+            $xoopsTpl->assign('lang_myfriend', _MD_YOGURT_MYFRIEND);
+            $xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUESTSENT);
+            $xoopsTpl->assign('lang_friendshipstatus', _MD_YOGURT_FRIENDSHIPSTATUS);
+        
+            $criteria_otherrequest = new Criteria('friendrequester_uid', $controller->uidOwner);
+            $criteria_isotherrequest = new CriteriaCompo(new Criteria('friendrequestto_uid', $xoopsUser->getVar('uid')));
+            $criteria_isotherrequest->add($criteria_otherrequest);
+            $controller->isOtherRequest = $friendrequestFactory->getCount($criteria_isotherrequest);
+            $xoopsTpl->assign('otherfriendrequest', $controller->isOtherRequest);
+			if ($controller->isOtherRequest > 0) {
+                $xoopsTpl->assign('other_uid', $controller->uidOwner);
+            }
 }
-else {
-    $criteria2 = new CriteriaCompo(new Criteria('requester_uid', $friendrequestfrom_uid));
-    $criteria2->add(new Criteria('requestto_uid', $xoopsUser->getVar('uid')));
-    if ($friendrequestFactory->getCount($criteria2) > 0) {
-       $xoopsTpl->assign('requestto_uid', $xoopsUser->getVar('uid'));
-    }
-}}
-
-/**
- * Friends
- */
-$criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
-$friends          = $controller->friendshipsFactory->getFriends(9, $criteria_friends);
-
-$controller->visitorsFactory->purgeVisits();
+			
 $evaluation = $controller->friendshipsFactory->getMoyennes($controller->uidOwner);
-
 
 //evaluations
 $xoopsTpl->assign('lang_fans', _MD_YOGURT_FANS);
