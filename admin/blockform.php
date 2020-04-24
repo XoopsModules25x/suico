@@ -12,7 +12,7 @@ declare(strict_types=1);
  * @category        Module
  * @author          XOOPS Development Team
  * @copyright       XOOPS Project
- * @link            https://www.xoops.org
+ * @link            https://xoops.org
  * @license         GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  */
 

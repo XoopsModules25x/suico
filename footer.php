@@ -12,9 +12,9 @@ declare(strict_types=1);
  */
 
 /**
- * @copyright       XOOPS https://www.xoops.org
+ * @copyright       XOOPS https://xoops.org
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
- * @author          XOOPS https://www.xoops.org
+ * @author          XOOPS https://xoops.org
  */
 
 use Xmf\Request;
