@@ -56,7 +56,7 @@
                       <{/if}>
 					  </div>
                         <div class="comment-text w-100">
-                            <h5><a href="index.php?uid=<{$notes[i].uid}>"><{$notes[i].uname}></a></h5>
+                            <h5><a name="<{$notes[i].id}>" href="index.php?uid=<{$notes[i].uid}>"><{$notes[i].uname}></a></h5>
                             <div class="comment-footer"> <span class="date text-muted"> <i class="fa fa-calendar"></i> <{$notes[i].date}></span> 
 							
 							
