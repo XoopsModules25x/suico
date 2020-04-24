@@ -162,9 +162,10 @@ $xoopsTpl->assign('lang_onlinestatus', _MD_YOGURT_ONLINESTATUS);
 /**
  * Filter for new friend request
  */
+if ($xoopsUser){
 $friendrequest = 0;
 if (1 === $controller->isOwner) {
-    $criteria_uidrequest = new Criteria('requestto_uid', $controller->uidOwner);
+    $criteria_uidrequest = new Criteria('friendrequestto_uid', $controller->uidOwner);
     $newFriendrequest          = $controller->friendrequestFactory->getObjects($criteria_uidrequest);
     if ($newFriendrequest) {
         $nb_friendrequests      = count($newFriendrequest);
@@ -177,7 +178,6 @@ if (1 === $controller->isOwner) {
         $friendrequest          = 1;
     }
 }
-if ($xoopsUser){
 			$criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
             $criteria_isfriend = new CriteriaCompo(new Criteria('friend2_uid', $xoopsUser->getVar('uid')));
             $criteria_isfriend->add($criteria_friends);
