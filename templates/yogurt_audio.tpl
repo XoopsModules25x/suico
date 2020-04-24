@@ -9,7 +9,7 @@
 <!-- start -->
 
 <{if $isOwner}>
-    <div class="alert alert-info">
+    <div class="alert alert-primary">
         <h5>
             <{$lang_addaudios}>
         </h5>
@@ -65,7 +65,7 @@
 
     <div id="waveform"></div>
     <{else}>
-        <div class="alert alert-info">
+        <div class="alert alert-primary">
             <{$lang_noaudioyet}>
         </div>
     <{/if}>
@@ -145,7 +145,7 @@
             </button>
         </div>
 <br>
-        <div class="alert alert-info">
+        <div class="alert alert-primary">
           <h5><{$smarty.const._MD_YOGURT_DESCRIPTION}></h5>
                <{$audios[i].author}> - <{$audios[i].title}> <br>
 

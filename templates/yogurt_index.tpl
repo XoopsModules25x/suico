@@ -128,7 +128,7 @@
                    <div class="embed-responsive embed-responsive-16by9">
 							<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<{$mainvideocode}>?rel=0" allowfullscreen></iframe>
 					</div>
-						<div class="alert alert-info">
+						<div class="alert alert-primary">
 							<{$mainvideodesc}>
 						</div>
 				

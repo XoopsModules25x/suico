@@ -9,7 +9,7 @@
 <!-- start -->
 
 <{if $isAnonym!=1 }>
-<div class="alert alert-info">
+<div class="alert alert-primary">
     <form name="formNoteNew" id="formNoteNew" action="submitNote.php" method="post">
 	 <h5>
         <{$lang_submit}>
@@ -55,14 +55,18 @@
                          <img src="<{$xoops_url}>/uploads/avatars/blank.gif" class="rounded-circle" height="60" width="60" alt="" title="<{$notes[i].uname}>">
                       <{/if}>
 					  </div>
-                        <div class="comment-text w-100">
+					   <{if $uid_owner==$notes[i].uid}>
+                        <div class="comment-text w-100 alert alert-primary">
+						<{else}>
+						<div class="comment-text w-100 ">
+						<{/if}>
                             <h5><a name="<{$notes[i].id}>" href="index.php?uid=<{$notes[i].uid}>"><{$notes[i].uname}></a></h5>
                             <div class="comment-footer"> <span class="date text-muted"> <i class="fa fa-calendar"></i> <{$notes[i].date}></span> 
 							
 							
 							<p class="m-b-5 m-t-10"> &nbsp;<{$notes[i].text}></p>
                             <{ if $isOwner==1}>
-            
+       
                     <form name="delete_Note" method="post" action="delete_Note.php" class="yogurt-Note-form-delete">
                      <!--<input value="<{$notes[i].id}>" type="image" id="Note_idimage" name="Note_idimage" src="images/dele.gif" >-->
 						<button type="image" id="Note_idimage" name="Note_idimage" class="btn btn-primary btn-xs">Delete</button>
@@ -112,7 +116,7 @@
     </div>
    </div>
  <{else}>
-    <div class="alert alert-info"><{$lang_noNotesyet}>  </div>
+    <div class="alert alert-primary"><{$lang_noNotesyet}>  </div>
  <{/if}>
 
 <div>

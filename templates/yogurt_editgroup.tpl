@@ -9,7 +9,7 @@
 <!-- start -->
 
 <form name='yogurt-group-edit-form' id='yogurt-group-edit-form' action='editgroup.php' method='post' enctype="multipart/form-data">
-<div class="alert alert-info">
+<div class="alert alert-primary">
     <h5><{$lang_editgroup}></h5>
 
 		<div class="form-group">
