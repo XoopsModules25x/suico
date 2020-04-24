@@ -70,7 +70,7 @@ $navigationBar = new XoopsPageNav(
     $helper->getConfig('groupsperpage'),
     $start_all,
     'start_all',
-    'uid=' . (int)$controller->uidOwner . '&amp;start_my=' . $start_my
+    'uid=' . (int)$controller->uidOwner . '&amp;start_my=' . $start_my .'#allgroups'
 );
 $barrinha        = $navigationBar->renderImageNav(2); //allgroups
 
@@ -79,7 +79,7 @@ $navigationBar_my = new XoopsPageNav(
     $helper->getConfig('groupsperpage'),
     $start_my,
     'start_my',
-    'uid=' . (int)$controller->uidOwner . '&amp;start_all=' . $start_all
+    'uid=' . (int)$controller->uidOwner . '&amp;start_all=' . $start_all .'#mygroups'
 );
 $barrinha_my        = $navigationBar_my->renderImageNav(2);
 

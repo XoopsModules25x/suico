@@ -41,7 +41,7 @@
 
 	<h5>
       
-            <{$lang_groups}>
+            <a name="mygroups"><{$lang_groups}></a>
         
     </h5>
 
@@ -120,7 +120,7 @@
 
 
 	<h5>
-        <{$lang_availablegroups}>
+			<a name="allgroups"><{$lang_availablegroups}></a>
     </h5>
 
  <{if $nb_groups_all<=0}>
@@ -130,10 +130,6 @@
     <{/if}>
 
 <{if $nb_groups_all!=0}>
-
-    
-	
-   
 
 <table class="table table-striped">
     <thead>
