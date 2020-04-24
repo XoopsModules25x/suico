@@ -45,8 +45,8 @@ class Audio extends XoopsObject
         $this->initVar('author', \XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('url', \XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('uid_owner', \XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('data_creation', \XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('data_update', \XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('data_creation', \XOBJ_DTYPE_INT, 0, false);
+        $this->initVar('data_update', \XOBJ_DTYPE_INT, 0, false);
         if (null !== ($id)) {
             if (\is_array($id)) {
                 $this->assignVars($id);

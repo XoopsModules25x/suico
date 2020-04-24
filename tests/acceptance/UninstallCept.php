@@ -21,8 +21,8 @@ $I->see('http://259alfred/modules/system/admin.php?fct=modulesadmin&amp;op=unins
 //$I->see('Uninstall-contact');
 //$I->see('uninstall_contact');
 //$I->see('Uninstall2-contact');
-//$I->seeLink('<img src="http://localhost/259zyspec/modules/system/images/icons/default/uninstall.png" alt="Uninstall" id="uninstall2_contact" title="Uninstall2-contact" />');
-//$I->click('<img src="http://localhost/259zyspec/modules/system/images/icons/default/uninstall.png" alt="Uninstall" id="uninstall2_contact" title="Uninstall2-contact" />');
+//$I->seeLink('<img src="http://localhost/259zyspec/modules/system/images/icons/default/uninstall.png" alt="Uninstall" id="uninstall2_contact" title="Uninstall2-contact">');
+//$I->click('<img src="http://localhost/259zyspec/modules/system/images/icons/default/uninstall.png" alt="Uninstall" id="uninstall2_contact" title="Uninstall2-contact">');
 //$I->seeLink('Uninstall-contact');
 //$I->seeLink('uninstall_contact');
 //$I->seeLink('Uninstall2-contact');

@@ -90,7 +90,7 @@ yogurt_visitors:
             attributes: ' varchar(30)  NOT NULL '
         -
             name: datetime
-            attributes: ' timestamp  NOT NULL  DEFAULT ''CURRENT_TIMESTAMP'' '
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
     keys:
         PRIMARY:
             columns: cod_visit

@@ -175,7 +175,7 @@ class GroupsForm extends XoopsThemeForm
         $imgtray->addElement(
             new XoopsFormLabel(
                 '',
-                "<br><img src='" . XOOPS_URL . '/' . $uploadDir . '/' . $group_img . "' name='image_group_img' id='image_group_img' alt='' style='max-width:300px' />"
+                "<br><img src='" . XOOPS_URL . '/' . $uploadDir . '/' . $group_img . "' name='image_group_img' id='image_group_img' alt='' style='max-width:300px'>"
             )
         );
         $fileseltray = new XoopsFormElementTray('', '<br>');

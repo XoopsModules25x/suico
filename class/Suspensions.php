@@ -40,7 +40,7 @@ class Suspensions extends XoopsObject
         $this->initVar('old_pass', \XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('old_email', \XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('old_signature', \XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('suspension_time', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('suspension_time', \XOBJ_DTYPE_INT, 0, false);
         if (!empty($id)) {
             if (\is_array($id)) {
                 $this->assignVars($id);
