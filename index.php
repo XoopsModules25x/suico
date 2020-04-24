@@ -163,6 +163,8 @@ if (isset($nbSections['nbVideos']) && $nbSections['nbVideos'] > 0) {
 /**
  * Friends
  */
+if ($xoopsUser){
+
 $controller = new Yogurt\FriendsController($xoopsDB, $xoopsUser);
 
 $friendrequest = 0;
@@ -181,13 +183,6 @@ if (1 === $controller->isOwner) {
     }
 }
  
-$criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
-$friends          = $controller->friendshipsFactory->getFriends(8, $criteria_friends);
-$xoopsTpl->assign('friends', $friends);
-$xoopsTpl->assign('lang_friendstitle', sprintf(_MD_YOGURT_FRIENDSTITLE, $controller->nameOwner));
-$xoopsTpl->assign('lang_viewallfriends', _MD_YOGURT_ALLFRIENDS);
-$xoopsTpl->assign('lang_nofriendsyet', _MD_YOGURT_NOFRIENDSYET);
-
 //requests to become friend
 if (1 === $friendrequest) {
     $xoopsTpl->assign('lang_youhavexfriendrequests', sprintf(_MD_YOGURT_YOUHAVEXREQUESTS, $nb_friendrequest));
@@ -204,6 +199,8 @@ if (1 === $friendrequest) {
     $linkedpetioner = '<a href="index.php?uid=' . $friendrequester_uid . '">' . $friendrequester_uname . '</a>';
     $xoopsTpl->assign('lang_askingfriend', sprintf(_MD_YOGURT_ASKINGFRIEND, $linkedpetioner));
 }
+}
+
 $xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
 $xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
 $xoopsTpl->assign('lang_friendrequestpending', _MD_YOGURT_FRIENDREQUESTPENDING);
@@ -211,6 +208,14 @@ $xoopsTpl->assign('lang_myfriend', _MD_YOGURT_MYFRIEND);
 $xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUESTSENT);
 $xoopsTpl->assign('lang_acceptfriend', _MD_YOGURT_ACCEPTFRIEND);
 $xoopsTpl->assign('lang_rejectfriend', _MD_YOGURT_REJECTFRIEND);
+
+$criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
+$friends          = $controller->friendshipsFactory->getFriends(8, $criteria_friends);
+$xoopsTpl->assign('friends', $friends);
+$xoopsTpl->assign('lang_friendstitle', sprintf(_MD_YOGURT_FRIENDSTITLE, $controller->nameOwner));
+$xoopsTpl->assign('lang_viewallfriends', _MD_YOGURT_ALLFRIENDS);
+$xoopsTpl->assign('lang_nofriendsyet', _MD_YOGURT_NOFRIENDSYET);
+
 
 //search
 $xoopsTpl->assign('lang_usercontributions', _MD_YOGURT_USERCONTRIBUTIONS);
