@@ -103,7 +103,7 @@
 						<{/if}>
 						<{/if}>
 						
-						<{if $isOwner==1}> 
+						<{if $isAnonym!=1 && $isOwner==1}> 
 						<{xoInboxCount assign=pmcount}>
 						<{if $pmcount}><a href="<{$xoops_url}>/viewpmsg.php" class="btn btn-success btn-sm" > <i class="fa fa-envelope-o"></i> <{$smarty.const._MD_YOGURT_PRIVATEMESSAGE}> <span class="badge badge-light"><{$pmcount}></span></a> <{/if}>
 						<a href="<{$xoops_url}>/modules/yogurt/edituser.php" class="btn btn-success btn-sm" /> <i class="fa fa-edit"></i> <{$smarty.const._MD_YOGURT_EDITPROFILE}></a>

@@ -97,14 +97,12 @@ $xoopsTpl->assign('lang_savegroup', _MD_YOGURT_UPLOADGROUP);
 //$xoopsTpl->assign('path_yogurt_uploads',$helper->getConfig('link_path_upload'));
 $xoopsTpl->assign('groups', $groups);
 $xoopsTpl->assign('mygroups', $mygroups);
+$xoopsTpl->assign('mygroupsid', $mygroupsid);
 $xoopsTpl->assign('lang_mygroupstitle', _MD_YOGURT_MYGROUPS);
 $xoopsTpl->assign('lang_groupstitle', _MD_YOGURT_ALLGROUPS . ' (' . $nb_groups . ')');
 $xoopsTpl->assign('lang_nogroupsyet', _MD_YOGURT_NOGROUPSYET);
 $xoopsTpl->assign('lang_availablegroups', _MD_YOGURT_AVAILABLEGROUPS . ' (' . $nb_groups . ')');
 $xoopsTpl->assign('lang_groupslist', _MD_YOGURT_GROUPSLIST);
-
-
-$xoopsTpl->assign('mygroupsid', $mygroupsid);
 
 //page nav
 $xoopsTpl->assign('navigationBar', $barrinha); //allgroups
@@ -126,6 +124,7 @@ $xoopsTpl->assign('lang_joingroup', _MD_YOGURT_GROUP_JOIN);
 $xoopsTpl->assign('lang_searchgroup', _MD_YOGURT_GROUP_SEARCH);
 $xoopsTpl->assign('lang_groupkeyword', _MD_YOGURT_GROUP_SEARCHKEYWORD);
 $xoopsTpl->assign('lang_memberofgroup', _MD_YOGURT_MEMBEROFGROUP);
+$xoopsTpl->assign('lang_grouptotalmembers', _MD_YOGURT_GROUPTOTALMEMBERS);
 
 $xoopsTpl->assign('lang_mysection', _MD_YOGURT_MYGROUPS);
 $xoopsTpl->assign('section_name', _MD_YOGURT_GROUPS);

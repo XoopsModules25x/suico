@@ -280,7 +280,13 @@ class GroupsHandler extends XoopsPersistableObjectHandler
             $ret[$i]['img']   = $myrow['group_img'];
             $ret[$i]['desc']  = $myrow['group_desc'];
             $ret[$i]['uid']   = $myrow['owner_uid'];
-            $i++;
+			$groupid          = $myrow['group_id'];
+			$query            = 'SELECT COUNT(rel_id) AS grouptotalmembers FROM ' . $GLOBALS['xoopsDB']->prefix('yogurt_relgroupuser') . ' WHERE rel_group_id='.$groupid.'';
+			$queryresult      = $GLOBALS['xoopsDB']->query($query);
+			$row              = $GLOBALS['xoopsDB']->fetchArray($queryresult);
+	        $grouptotalmembers =  $row['grouptotalmembers'];
+			$ret[$i]['grouptotalmembers'] = $grouptotalmembers . ' ' . _MD_YOGURT_GROUPMEMBERS;
+		$i++;
         }
 
         return $ret;

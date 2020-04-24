@@ -37,8 +37,12 @@
 		<h6><{$group_title}></h6>
 		<{$group_desc}>
 		<br><b><{$lang_ownerofgroup}></b><br>
-		<a href><a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$group_owneruid}>" target="_blank"><{$group_ownername}></a><br><br>
+		<a href><a href="<{$xoops_url}>/modules/yogurt/index.php?uid=<{$group_owneruid}>" target="_blank"><{$group_ownername}></a><br>
 		
+		<{if $grouptotalmembers!=''}>
+		<b><{$lang_grouptotalmembers}></b><br>
+		<{$grouptotalmembers}><br>
+		<{/if}>
 		<{if $isOwner }>
         <{if $xoops_userid == $group_owneruid }>
                          
