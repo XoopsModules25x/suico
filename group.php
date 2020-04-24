@@ -57,9 +57,12 @@ $group_members = $controller->relgroupusersFactory->getUsersFromGroup(
     50
 );
 
+$grouptotalmembers=0;
 foreach ($group_members as $group_member) {
     $uids[] = (int)$group_member['uid'];
+	$grouptotalmembers++;
 }
+$xoopsTpl->assign('grouptotalmembers', $grouptotalmembers . ' ' . _MD_YOGURT_GROUPMEMBERS);
 
 if (!empty($uids)) {
     if ($xoopsUser) {
@@ -84,7 +87,10 @@ $xoopsTpl->assign('group_id', $group->getVar('group_id'));
 $xoopsTpl->assign('group_owneruid', $group->getVar('owner_uid'));
 $xoopsTpl->assign('group_ownername', $group_ownername);
 
-$xoopsTpl->assign('lang_membersofgroup', _MD_YOGURT_MEMBERSDOFGROUP);
+$xoopsTpl->assign('lang_groupdatecreated', _MD_YOGURT_GROUPDATECREATED);
+$xoopsTpl->assign('lang_grouptotalmembers', _MD_YOGURT_GROUPTOTALMEMBERS);
+$xoopsTpl->assign('lang_groupmembers', _MD_YOGURT_GROUPMEMBERS);
+$xoopsTpl->assign('lang_membersofgroup', _MD_YOGURT_MEMBERSOFGROUP);
 $xoopsTpl->assign('lang_editgroup', _MD_YOGURT_EDIT_GROUP);
 $xoopsTpl->assign('lang_groupimage', _MD_YOGURT_GROUP_IMAGE);
 $xoopsTpl->assign('lang_keepimage', _MD_YOGURT_MAINTAINOLDIMAGE);

@@ -1,5 +1,7 @@
 <h5>3.5 Beta 1    [NOT RELEASED]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.5
 <hr>
+- Add group total members (liomj)
+- Fix Group Pagination (liomj)
 - New Private Message alert in Navbar (liomj)
 - Add Cancel Friend Request Option (liomj)
 - Fix Friendship Status and Approval (liomj)

@@ -41,7 +41,7 @@
 
 	<h5>
       
-            <{$lang_groups}>
+            <a name="mygroups"><{$lang_groups}></a>
         
     </h5>
 
@@ -120,7 +120,7 @@
 
 
 	<h5>
-        <{$lang_availablegroups}>
+			<a name="allgroups"><{$lang_availablegroups}></a>
     </h5>
 
  <{if $nb_groups_all<=0}>
@@ -131,10 +131,6 @@
 
 <{if $nb_groups_all!=0}>
 
-    
-	
-   
-
 <table class="table table-striped">
     <thead>
         <tr>
@@ -143,7 +139,8 @@
         </tr>
     </thead>
     <tbody>
-    <{section name=j loop=$groups}>
+    
+	<{section name=j loop=$groups}>
         <tr>
             <td>
              <{if $isAnonym!=1}>
@@ -166,9 +163,9 @@
 			
 			<a href="group.php?group_id=<{$groups[j].id}>"><img src="<{$xoops_upload_url}>/yogurt/groups/<{$groups[j].img}>" alt="<{$groups[j].title}>" title="<{$groups[j].title}>" class="float-left pr-2" width="120" height="120"></a>
             <h6>
-                <a href="group.php?group_id=<{$groups[j].id}>"><{$groups[j].title}></a>
+                <a href="group.php?group_id=<{$groups[j].id}>"><{$groups[j].title}></a> 
             </h6>
-                <{$groups[j].desc}>
+                <{if $groups[j].desc!=''}><{$groups[j].desc}><br><{/if}> <small><{$groups[j].grouptotalmembers}> </small>
             <br>
 			<{if ($uid_owner == $groups[j].uid)}>
                   <form action="delete_group.php" method="POST" id="form_deletegroup" class="yogurt-groups-form-delete">
