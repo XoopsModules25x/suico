@@ -1,9 +1,10 @@
-<h5>3.5 Beta 1    [NOT RELEASED]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
+<h5>3.5 Beta 1    [NOT RELEASED]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.5
 <hr>
 - New Private Message alert in Navbar (liomj)
 - Add Cancel Friend Request Option (liomj)
 - Fix Friendship Status and Approval (liomj)
 - Update templates (liomj)
+- Datetime updates (mamba)
 
 <h5>3.5 Alpha 5    [2020-04-21]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
 <hr>
