@@ -242,7 +242,7 @@ define('_MD_YOGURT_SENDNOTESTO', 'Send notes to');
 //submitNote.php
 define('_MD_YOGURT_NOTE_SENT', 'Thanks for participating, Note sent');
 
-//delete_Note.php
+//delete_note.php
 define('_MD_YOGURT_ASKCONFIRMNOTEDELETION', 'Are you sure you want to delete this Note?');
 define('_MD_YOGURT_CONFIRMNOTEDELETION', 'Yes please delete this Note.');
 define('_MD_YOGURT_NOTEDELETED', 'The Note was deleted');
