@@ -202,7 +202,7 @@ define(
     'You are the owner of this Group!'
 ); //also present in other groups related
 define(
-    '_MD_YOGURT_MEMBERSDOFGROUP',
+    '_MD_YOGURT_MEMBERSOFGROUP',
     'Members of Group'
 ); //also present in other groups related
 
@@ -219,8 +219,8 @@ define(
 );
 
 //Groups.php
-define('_MD_YOGURT_GROUP_ABANDON', 'Leave this Group');
-define('_MD_YOGURT_GROUP_JOIN', 'Join this Group');
+define('_MD_YOGURT_GROUP_ABANDON', 'Leave');
+define('_MD_YOGURT_GROUP_JOIN', 'Join');
 define('_MD_YOGURT_GROUP_SEARCH', 'Search a Group');
 define('_MD_YOGURT_GROUP_SEARCHKEYWORD', 'Keyword');
 define('_MD_YOGURT_GROUPSEARCHRESULT', 'Group Search Result');
@@ -291,7 +291,7 @@ define('_MD_YOGURT_SELECTMAINVIDEO', 'Then you can select a video to feature in 
 define('_MD_YOGURT_NOAVATARYET', 'No avatar yet');
 define('_MD_YOGURT_NOMAINVIDEOYET', 'No featured video yet');
 define('_MD_YOGURT_MYPROFILE', 'My Profile');
-define('_MD_YOGURT_YOUHAVEXREQUESTS', 'You have %u requests for friendship.');
+define('_MD_YOGURT_YOUHAVEXFRIENDREQUESTS', 'You have %u requests for friendship.');
 define('_MD_YOGURT_CONTACTINFO', 'Contact Info');
 define('_MD_YOGURT_SUSPENDUSER', 'Suspend User');
 define('_MD_YOGURT_SUSPEND', 'Suspend');
@@ -465,7 +465,9 @@ define('_MD_YOGURT_PRIVATEPHOTO', 'Private Photo');
 define('_MD_YOGURT_FRIENDSHIPSETTINGS', 'Friend Settings');
 define('_MD_YOGURT_DELETEFRIENDSHIP', 'Delete Friend ');
 define('_MD_YOGURT_FRIENDREQUESTCANCELLED', 'You have cancel your friendship request with this user!');
-
+define('_MD_YOGURT_GROUPTOTALMEMBERS', 'Group Total Members');
+define('_MD_YOGURT_GROUPDATECREATED', 'Founded Date');
+define('_MD_YOGURT_GROUPMEMBERS', 'member(s)');
 
 //Data Tables
 define('_MD_YOGURT_DTDECIMAL','');
