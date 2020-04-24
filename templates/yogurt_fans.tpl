@@ -34,7 +34,7 @@
             </div>
         <{/section}>
     <{else}>
-			<div class="alert alert-info"><{$lang_nofansyet}></div>
+			<div class="alert alert-primary"><{$lang_nofansyet}></div>
     <{/if}>
 </div>
 <{if $navegacao!='' }>

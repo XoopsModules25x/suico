@@ -10,7 +10,7 @@
 
 
 <{if $isOwner }>
-<div class="alert alert-info">
+<div class="alert alert-primary">
     <h5>
         <{$lang_addvideos}> 
     </h5>
@@ -56,7 +56,7 @@
     </h5>
 
  <{if $nb_videos<=0}>
-		<div class="alert alert-info"><{$lang_novideoyet}></div>
+		<div class="alert alert-primary"><{$lang_novideoyet}></div>
     <{/if}>
 
 
@@ -67,7 +67,7 @@
    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<{$videos[i].url}>?rel=0" allowfullscreen></iframe>
    </div>
                 
-               <div class="alert alert-info">
+               <div class="alert alert-primary">
                        <{$videos[i].desc}>
 					   <{if $isOwner==1 }>
                     <form action="delvideo.php" method="post" id="deleteform" class="yogurt-video-forms">

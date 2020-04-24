@@ -13,7 +13,7 @@
         <img src="<{$xoops_upload_url}>/yogurt/groups/<{$group_img}>" alt="<{$group_title}>" title="<{$group_title}>"><br><br>
     </div>
 
-  <div class="alert alert-info">
+  <div class="alert alert-primary">
     <{if $xoops_userid == $group_owneruid }>
 		<button title="<{$lang_owner}>" class="btn btn-secondary btn-sm float-right"> <i class="fa fa-user"></i> <{$smarty.const._MD_YOGURT_OWNEROFGROUP}></button>
 	<{/if}> 

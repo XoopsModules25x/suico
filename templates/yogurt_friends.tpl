@@ -88,7 +88,7 @@
                      <!-- end row -->
 <{else}>
 <br>
-<div class="alert alert-info">
+<div class="alert alert-primary">
                     <{$lang_nofriendsyet}></div>
 
 					

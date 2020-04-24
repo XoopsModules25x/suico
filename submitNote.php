@@ -49,13 +49,14 @@ $noteObj->setVar('note_text', $noteText);
 $noteObj->setVar('note_from', $xoopsUser->getVar('uid'));
 $noteObj->setVar('note_to', $notebook_uid);
 $notesFactory->insert2($noteObj);
+$note_id=$xoopsDB->getInsertId();
 $extra_tags['X_OWNER_NAME'] = $xoopsUser::getUnameFromId($notebook_uid);
 $extra_tags['X_OWNER_UID']  = $notebook_uid;
 /** @var \XoopsNotificationHandler $notificationHandler */
 $notificationHandler        = xoops_getHandler('notification');
 $notificationHandler->triggerEvent('Note', $xoopsUser->getVar('uid'), 'new_Note', $extra_tags);
 if (1 == $mainform) {
-    redirect_header('notebook.php?uid=' . $notebook_uid, 1, _MD_YOGURT_NOTE_SENT);
+    redirect_header('notebook.php?uid=' . $notebook_uid .'#' . $note_id, 1, _MD_YOGURT_NOTE_SENT);
 } else {
     redirect_header('notebook.php?uid=' . $xoopsUser->getVar('uid'), 1, _MD_YOGURT_NOTE_SENT);
 }

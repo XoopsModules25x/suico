@@ -9,7 +9,7 @@
 <!-- start -->
 
 <{if ($showForm==1) }>
-<div class="alert alert-info">
+<div class="alert alert-primary">
     <h5>
         <{$lang_formtitle}>
     </h5>
@@ -142,7 +142,7 @@
     <{/section}>
 </div>
 <{else}>
-        <div class="alert alert-info"><{$lang_nopicyet}></div>
+        <div class="alert alert-primary"><{$lang_nopicyet}></div>
 <{/if}>
 
 <{if $navegacao!='' }>

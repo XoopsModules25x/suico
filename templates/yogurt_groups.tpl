@@ -9,7 +9,7 @@
 <!-- start -->
 
 <{if $isAnonym!=1 && $isOwner}>
-<div class="alert alert-info">
+<div class="alert alert-primary">
   <h5><{$lang_creategroup}></h5>
     <form name="form_group1" id="form_group1" action="submitGroup.php" method="post" onsubmit="return xoopsFormValidate_form_group();" enctype="multipart/form-data">
    	
@@ -46,7 +46,7 @@
     </h5>
 
     <{if $nb_groups<=0}>
-        <div class="alert alert-info">
+        <div class="alert alert-primary">
             <{$lang_nogroupsyet}>
         </div>
     <{/if}>
@@ -124,7 +124,7 @@
     </h5>
 
  <{if $nb_groups_all<=0}>
-        <div class="alert alert-info">
+        <div class="alert alert-primary">
             <{$lang_nogroupsyet}>
         </div>
     <{/if}>
