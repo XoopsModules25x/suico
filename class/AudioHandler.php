@@ -347,6 +347,9 @@ class AudioHandler extends XoopsPersistableObjectHandler
             $audio->setVar('author', $author);
             $uid = $xoopsUser->getVar('uid');
             $audio->setVar('uid_owner', $uid);
+            $audio->setVar('data_creation', \time());
+            $audio->setVar('data_update', \time());
+
             $this->insert($audio);
             $saved_destination = $uploader->getSavedDestination();
         //print_r($_FILES);

@@ -124,12 +124,7 @@ class VisitorsForm extends XoopsThemeForm
         // Datetime
         $this->addElement(
             new XoopsFormTextDateSelect(
-                AM_YOGURT_VISITORS_DATETIME,
-                'datetime',
-                0,
-                \strtotime(
-                    $this->targetObject->getVar('datetime')
-                )
+                AM_YOGURT_VISITORS_DATETIME, 'datetime', 0, formatTimeStamp($this->targetObject->getVar('datetime'), 's')
             )
         );
 

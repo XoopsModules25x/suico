@@ -74,8 +74,8 @@ switch ($op) {
         $configsObject->setVar('backup_email', Request::getVar('backup_email', ''));
 //        $configsObject->setVar('end_suspension', date('Y-m-d H:i:s', strtotime($_REQUEST['end_suspension']['date']) + $_REQUEST['end_suspension']['time']));
 
-        $endSuspension = date_create_from_format(_SHORTDATESTRING, Request::getString('end_suspension', '', 'POST'));
-        $configsObject->setVar('end_suspension', $endSuspension->getTimestamp());
+        $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('end_suspension', '', 'POST'));
+        $configsObject->setVar('end_suspension', $dateTimeObj->getTimestamp());
 
 
 

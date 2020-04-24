@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -17,6 +17,8 @@
  * @since
  * @author       XOOPS Development Team
  */
+
+declare(strict_types=1);
 
 use Xmf\Module\Admin;
 use XoopsModules\Yogurt;

@@ -426,7 +426,7 @@ if ('submit' === $op) {
             $userdata['ranktitle']=$userrank['title'];
         
             $uid=$userdata['id'];
-            $groups =$member_handler->getGroupsByUser($uid, true);
+            $groups =$memberHandler->getGroupsByUser($uid, true);
             $usergroups = [];
             foreach ($groups as $group) {
                 $usergroups[] = $group->getVar('name');

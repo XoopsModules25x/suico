@@ -73,18 +73,18 @@ function b_yogurt_friends_show($options)
 function b_yogurt_friends_edit($options)
 {
     $form .= _MB_YOGURT_TOTALFRIENDSTOSHOW . '&nbsp;';
-    $form .= "<input type='text' name='options[0]' value='" . $options[0] . "'/><br />";
+    $form .= "<input type='text' name='options[0]' value='" . $options[0] . "'><br>";
 
     $form .= _MB_YOGURT_ENABLEPM . '&nbsp;';
     if (1 === $options[1]) {
-        $chk = " checked='checked'";
+        $chk = " checked";
     }
-    $form .= "<input type='radio' name='options[1]' value='1'" . $chk . ' />&nbsp;' . _YES . '';
+    $form .= "<input type='radio' name='options[1]' value='1'" . $chk . '>&nbsp;' . _YES . '';
     $chk  = '';
     if (0 === $options[1]) {
-        $chk = " checked='checked'";
+        $chk = " checked";
     }
-    $form .= "&nbsp;<input type='radio' name='options[1]' value='0'" . $chk . ' />' . _NO . '<br />';
+    $form .= "&nbsp;<input type='radio' name='options[1]' value='0'" . $chk . '>' . _NO . '<br>';
 
     return $form;
 }

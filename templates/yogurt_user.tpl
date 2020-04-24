@@ -12,8 +12,8 @@
                 <div class="container-fluid">
                     <form style="margin: 0px;" action="<{$xoops_url}>/user.php" method="post">
                         <p><b><{$smarty.const._MD_YOGURT_USERLOGIN}></b>
-                            <input type="hidden" name="xoops_redirect" value="/modules/yogurt/memberslist.php"/>
-                            <input type="hidden" name="op" value="login"/>
+                            <input type="hidden" name="xoops_redirect" value="/modules/yogurt/memberslist.php">
+                            <input type="hidden" name="op" value="login">
                         </p>
                         <label for="profile-uname"><{$smarty.const._MD_YOGURT_USERNAME}></label>
                         <div class="input-group">
@@ -31,7 +31,7 @@
                             <input class="form-control" type="password" name="pass" id="profile-pass" placeholder="<{$smarty.const._MD_YOGURT_YOURPASSWORD}>">
                         </div>
 
-                        <br><input name="submit" type="submit" class="btn btn-primary" accesskey="l" tabindex="7" value="<{$smarty.const._MD_YOGURT_LOGIN}>"/>
+                        <br><input name="submit" type="submit" class="btn btn-primary" accesskey="l" tabindex="7" value="<{$smarty.const._MD_YOGURT_LOGIN}>">
                     </form>
 
                     <{$smarty.const._MD_YOGURT_NOTAMEMBER}> <a href="<{$xoops_url}>/register.php" target="_self"><{$smarty.const._MD_YOGURT_SIGNUP}></a><br>
