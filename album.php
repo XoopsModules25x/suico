@@ -87,11 +87,12 @@ if (isset($nbSections[NBPHOTOS]) && 0 === $nbSections[NBPHOTOS]) {
     $i = 0;
     foreach ($pictures_object_array as $picture) {
         $pictures_array[$i]['url']     = $picture->getVar('url', 's');
-        $pictures_array[$i]['desc']    = $picture->getVar('title', 's');
-        $pictures_array[$i]['cod_img'] = $picture->getVar('cod_img', 's');
+        $pictures_array[$i]['title']   = $picture->getVar('title', 's');
+        $pictures_array[$i]['caption'] = $picture->getVar('caption', 's');
+		$pictures_array[$i]['cod_img'] = $picture->getVar('cod_img', 's');
         $pictures_array[$i]['private'] = $picture->getVar('private', 's');
-        $pictures_array[$i]['date_creation'] = formatTimeStamp($picture->getVar('date_created', 's'));
-		$pictures_array[$i]['date_update'] = formatTimeStamp($picture->getVar('date_updated', 's'));
+        $pictures_array[$i]['date_created'] = formatTimeStamp($picture->getVar('date_created', 's'));
+		$pictures_array[$i]['date_updated'] = formatTimeStamp($picture->getVar('date_updated', 's'));
 		$xoopsTpl->assign('pics_array', $pictures_array);
         $i++;
     }
@@ -133,6 +134,7 @@ $navegacao       = $navigationBar->renderImageNav(2);
 //form
 $xoopsTpl->assign('lang_formtitle', _MD_YOGURT_SUBMIT_PIC_TITLE);
 $xoopsTpl->assign('lang_selectphoto', _MD_YOGURT_SELECT_PHOTO);
+$xoopsTpl->assign('lang_phototitle', _MD_YOGURT_PHOTOTITLE);
 $xoopsTpl->assign('lang_caption', _MD_YOGURT_CAPTION);
 $xoopsTpl->assign('lang_uploadpicture', _MD_YOGURT_UPLOADPICTURE);
 $xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOU_CAN_UPLOAD, $maxfilebytes / 1024));

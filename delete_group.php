@@ -64,7 +64,7 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
             $relgroupuserFactory->deleteAll($criteria_rel_group_id);
             redirect_header('groups.php?uid=' . $uid, 3, _MD_YOGURT_GROUP_DELETED);
         } else {
-            redirect_header('groups.php?uid=' . $uid, 3, _MD_YOGURT_NOCACHACA);
+            redirect_header('groups.php?uid=' . $uid, 3, _MD_YOGURT_ERROR);
         }
     }
 }

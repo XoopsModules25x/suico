@@ -28,9 +28,14 @@
         </div> 
 		
 		<div class="form-group">
-		<label><strong><{$lang_caption}> :</strong></label>
-		<input type='text' class='form-control' name='caption' id='caption' size='35' maxlength='55' value='' required>
+		<label><strong><{$lang_phototitle}> :</strong></label>
+		<input type='text' class='form-control' name='title' id='title' size='35' maxlength='55' value='' required>
 		</div>
+		
+	   <div class="form-group">
+       <label><strong><{$lang_caption}> :</strong></label>
+       <textarea class="form-control" name="caption" id="caption" rows="5" cols="50" maxlength="55" required></textarea>
+       </div>
   
 		<div class="form-group">
 		<input type='submit' class='formButton btn btn-primary' name='submit_button'  id='submit_button' value='<{$lang_uploadpicture}>'>
@@ -50,17 +55,17 @@
         <!-- Start Normal Photo -->
 		<div class="col-6 h-100 mb-3">
 <div class="card" style="width:400px">
-		<a href="<{$xoops_url}>/uploads/yogurt/images/resized_<{$pics_array[i].url}>" rel="lightbox[album]" title="<{$pics_array[i].desc}>">
-                <img class="card-img-top thumb" src="<{$xoops_url}>/uploads/yogurt/images/<{$pics_array[i].url}>" rel="lightbox" title="<{$pics_array[i].desc}>">
+		<a name="<{$pics_array[i].cod_img}>" href="<{$xoops_url}>/uploads/yogurt/images/resized_<{$pics_array[i].url}>" rel="lightbox[album]" title="<{$pics_array[i].title}> - <{$pics_array[i].caption}>">
+                <img class="card-img-top thumb" src="<{$xoops_url}>/uploads/yogurt/images/<{$pics_array[i].url}>" rel="lightbox" title="<{$pics_array[i].title}> - <{$pics_array[i].caption}>">
         </a>
 			<div class="card-body">
-				<h4 class="card-title">&nbsp;</h4>
-				<p class="card-text"><{$pics_array[i].desc}></p>
+				<h4 class="card-title"><{$pics_array[i].title}></h4>
+				<p class="card-text"><{$pics_array[i].caption}></p>
 				<p class="text-muted"> <i class="fa fa-calendar"></i> 
-				<{if $pics_array[i].date_creation == $pics_array[i].date_update}>
-				<small><{$pics_array[i].date_creation|date_format}></small>
+				<{if $pics_array[i].date_created == $pics_array[i].date_updated}>
+				<small><{$pics_array[i].date_created|date_format}></small>
 				<{else}>
-				<small><{$pics_array[i].date_update|date_format}></small>
+				<small><{$pics_array[i].date_updated|date_format}></small>
 				<{/if}>
 				</p>
 				
@@ -70,7 +75,7 @@
             <{$token}>
             <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 delete.png}>">
         </form>
-        <form action="editdescpicture.php" method="post" id="editform" class="yogurt-album-formquick">
+        <form action="editpicture.php" method="post" id="editform" class="yogurt-album-formquick">
             <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">
             <{$token}>
             <input name="submit" type="image" alt="<{$lang_editdesc}>" title="<{$lang_editdesc}>" src="<{xoModuleIcons16 edit.png}>">
@@ -102,12 +107,20 @@
 	<{if ($pics_array[i].private == 1) }>
 	<div class="col-6 h-100 mb-3">
 	<div class="card" style="width:400px">
-		<a href="<{$xoops_url}>/uploads/yogurt/images/resized_<{$pics_array[i].url}>" rel="lightbox[album]" title="<{$pics_array[i].desc}>">
-                <img class="card-img-top thumb" src="<{$xoops_url}>/uploads/yogurt/images/<{$pics_array[i].url}>" rel="lightbox" title="<{$pics_array[i].desc}>">
+		<a href="<{$xoops_url}>/uploads/yogurt/images/resized_<{$pics_array[i].url}>" rel="lightbox[album]" title="<{$pics_array[i].title}> - <{$pics_array[i].caption}>">
+                <img class="card-img-top thumb" src="<{$xoops_url}>/uploads/yogurt/images/<{$pics_array[i].url}>" rel="lightbox" title="<{$pics_array[i].title}> - <{$pics_array[i].caption}>">
         </a>
 			<div class="card-body">
-				<h4 class="card-title">&nbsp;</h4>
-				<p class="card-text"><{$pics_array[i].desc}></p>
+				<h4 class="card-title"><{$pics_array[i].title}></h4>
+				<p class="card-text"><{$pics_array[i].caption}></p>
+				<p class="text-muted"> <i class="fa fa-calendar"></i> 
+				<{if $pics_array[i].date_created == $pics_array[i].date_updated}>
+				<small><{$pics_array[i].date_created|date_format}></small>
+				<{else}>
+				<small><{$pics_array[i].date_updated|date_format}></small>
+				<{/if}>
+				</p>
+				
 				<p class="text-center"><button class="btn btn-info btn-sm"><i class='fa fa-lock'></i> <{$lang_privatephoto}></button></p>
 				<{if (($isOwner==1))}>
         <form action="delpicture.php" method="post" id="deleteform" class="yogurt-album-formquick">
@@ -115,7 +128,7 @@
             <{$token}>
             <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 delete.png}>">
         </form>
-        <form action="editdescpicture.php" method="post" id="editform" class="yogurt-album-formquick">
+        <form action="editpicture.php" method="post" id="editform" class="yogurt-album-formquick">
             <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">
             <{$token}>
             <input name="submit" type="image" alt="<{$lang_editdesc}>" title="<{$lang_editdesc}>" src="<{xoModuleIcons16 edit.png}>">

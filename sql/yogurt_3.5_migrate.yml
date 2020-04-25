@@ -55,6 +55,9 @@ yogurt_images:
             name: title
             attributes: ' varchar(255)  NOT NULL '
         -
+            name: caption
+            attributes: ' varchar(255)  NOT NULL '
+        -
             name: date_created
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
         -

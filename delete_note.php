@@ -61,7 +61,7 @@ if (1 != Request::getInt('confirm', 0, 'POST')) {
         if ($notesFactory->deleteAll($criteria)) {
             redirect_header('notebook.php?uid=' . $uid, 2, _MD_YOGURT_NOTE_DELETED);
         } else {
-            redirect_header('notebook.php?uid=' . $uid, 2, _MD_YOGURT_NOCACHACA);
+            redirect_header('notebook.php?uid=' . $uid, 2, _MD_YOGURT_ERROR);
         }
     }
 }

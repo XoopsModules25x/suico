@@ -133,7 +133,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
                 $this->db->quoteString($note_text),
                 $note_from,
                 $note_to,
-                $date,
+                $date_created,
                 $private
             );
             $force       = true;
@@ -148,7 +148,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
                 $this->db->quoteString($note_text),
                 $note_from,
                 $note_to,
-                $date,
+                $date_created,
                 $private,
                 $note_id
             );

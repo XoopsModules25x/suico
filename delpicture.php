@@ -76,7 +76,7 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
         }
         redirect_header('album.php', 2, _MD_YOGURT_DELETED);
     } else {
-        redirect_header('album.php', 2, _MD_YOGURT_NOCACHACA);
+        redirect_header('album.php', 2, _MD_YOGURT_ERROR);
     }
 }
 

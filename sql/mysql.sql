@@ -1,6 +1,7 @@
 CREATE TABLE `yogurt_images` (
     `cod_img`       INT(11)      NOT NULL AUTO_INCREMENT,
     `title`         VARCHAR(255) NOT NULL,
+    `caption`       VARCHAR(255) NOT NULL,
     `date_created` INT(11)      NOT NULL DEFAULT 0,
     `date_updated`   INT(11)      NOT NULL DEFAULT 0,
     `uid_owner`     VARCHAR(50)  NOT NULL,

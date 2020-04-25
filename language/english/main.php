@@ -23,12 +23,12 @@ define('_MD_YOGURT_EDIT_DESC', 'Edit description');
 define('_MD_YOGURT_TOKENEXPIRED', 'Your Security Token has Expired<br>Please Try Again');
 define('_MD_YOGURT_DESC_EDITED', 'The description was edited successfully');
 define('_MD_YOGURT_CAPTION', 'Caption');
+define('_MD_YOGURT_PHOTOTITLE', 'Photo Title');
 define('_MD_YOGURT_YOU_CAN_UPLOAD', "You can only upload jpg's files and up to %s KBytes in size");
 define('_MD_YOGURT_UPLOADPICTURE', 'Upload Picture');
 define(
-    '_MD_YOGURT_SETMAINVIDEO_ERROR',
-    'Error : No cache !<br>
-Unfortunately, this module has acted in an unexpected way. Please try again. '
+    '_MD_YOGURT_ERROR',
+    'Error : Unfortunately, this module has acted in an unexpected way. Please try again. '
 ); //Funny general error message
 define('_MD_YOGURT_PAGETITLE', "%s - %s's Social Network");
 define('_MD_YOGURT_SUBMIT', 'Submit');

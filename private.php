@@ -53,7 +53,7 @@ if ($uid === (int)$picture->getVar('uid_owner')) {
             redirect_header('album.php', 2, _MD_YOGURT_UNPRIVATIZED);
         }
     } else {
-        redirect_header('album.php', 2, _MD_YOGURT_NOCACHACA);
+        redirect_header('album.php', 2, _MD_YOGURT_ERROR);
     }
 }
 

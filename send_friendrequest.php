@@ -47,7 +47,7 @@ if ($friendrequestFactory->insert2($newFriendrequest)) {
     redirect_header(
         XOOPS_URL . '/modules/yogurt/index.php?uid=' . $xoopsUser->getVar('uid'),
         3,
-        _MD_YOGURT_NOCACHACA
+        _MD_YOGURT_ERROR
     );
 }
 

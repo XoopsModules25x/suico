@@ -88,7 +88,8 @@ class AudioController extends YogurtController
             $audios_array[$i]['title']  = $audio->getVar('title', 's');
             $audios_array[$i]['id']     = $audio->getVar('audio_id', 's');
             $audios_array[$i]['author'] = $audio->getVar('author', 's');
-
+			$audios_array[$i]['date_created'] = formatTimeStamp($audio->getVar('date_created', 's'));
+			$audios_array[$i]['date_updated'] = formatTimeStamp($audio->getVar('date_updated', 's'));
             $audio_path = XOOPS_ROOT_PATH . '/uploads/yogurt/audio/' . $audio->getVar('url', 's');
             // echo $audio_path;
             $mp3filemetainfo                = new Id3v1($audio_path, true);
