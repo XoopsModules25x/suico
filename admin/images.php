@@ -218,6 +218,9 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('selectortitle', AM_YOGURT_IMAGES_TITLE);
                 $imagesArray['title'] = $imagesTempArray[$i]->getVar('title');
 
+				$GLOBALS['xoopsTpl']->assign('selectorcaption', AM_YOGURT_IMAGES_CAPTION);
+                $imagesArray['caption'] = $imagesTempArray[$i]->getVar('caption');
+
                 $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_IMAGES_DATA_CREATION);
                 $imagesArray['date_created'] = formatTimeStamp($imagesTempArray[$i]->getVar('date_created'), 's');
 

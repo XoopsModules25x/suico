@@ -82,7 +82,7 @@ $navigationBar = new XoopsPageNav(
     'start_all',
     'group_keyword=' . $group_keyword . '&amp;start_my=' . $start_my
 );
-$barrinha        = $navigationBar->renderImageNav(2);
+$imageNav        = $navigationBar->renderImageNav(2);
 
 
 //form
@@ -108,8 +108,8 @@ $xoopsTpl->assign('lang_groupstitle', _MD_YOGURT_ALLGROUPS . ' (' . $nb_groups .
 $xoopsTpl->assign('lang_nogroupsyet', _MD_YOGURT_NOGROUPSYET);
 
 //page nav
-$xoopsTpl->assign('navigationBar', $barrinha);
-//$xoopsTpl->assign('navigationBar_my',$barrinha_my);
+$xoopsTpl->assign('navigationBar', $imageNav);
+//$xoopsTpl->assign('navigationBar_my',$imageNav_my);
 //$xoopsTpl->assign('nb_groups',$nb_mygroups);// this is the one wich shows in the upper bar actually is about the mygroups
 $xoopsTpl->assign(
     'nb_groups_all',

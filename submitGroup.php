@@ -120,7 +120,7 @@ $groupsFactory       = new Yogurt\GroupsHandler($xoopsDB);
 //        redirect_header(
 //            XOOPS_URL . '/modules/yogurt/groups.php?uid=' . $xoopsUser->getVar('uid'),
 //            3,
-//            _MD_YOGURT_NOCACHACA
+//            _MD_YOGURT_ERROR
 //        );
 //    }
 

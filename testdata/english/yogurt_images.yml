@@ -1,6 +1,7 @@
 -
     cod_img: '1'
-    title: sunset1
+    title: Sunset
+    caption: This is Sunset
     date_created: '1587424126'
     date_updated: '1587424126'
     uid_owner: '1'
@@ -8,7 +9,8 @@
     private: '0'
 -
     cod_img: '2'
-    title: castle
+    title: Castle
+    caption: This is Castle
     date_created: '1587424126'
     date_updated: '1587424126'
     uid_owner: '1'
@@ -16,7 +18,8 @@
     private: '0'
 -
     cod_img: '3'
-    title: 'sunset in Africa'
+    title: 'Sunset in Africa'
+    caption: 'Sunset in Africa'
     date_created: '1587424126'
     date_updated: '1587424126'
     uid_owner: '1'
@@ -24,7 +27,8 @@
     private: '1'
 -
     cod_img: '5'
-    title: ''
+    title: 'Bird'
+    caption: 'Sunset Bird'
     date_created: '1587424126'
     date_updated: '1587424126'
     uid_owner: '1'
