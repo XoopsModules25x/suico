@@ -77,7 +77,7 @@ class Notes extends XoopsObject
      * @param int    $start
      * @return array
      */
-    public function getAllyogurt_Notes(
+    public function getAllNotes(
         $criteria = [],
         $asobject = false,
         $sort = 'note_id',

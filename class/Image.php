@@ -102,7 +102,7 @@ class Image extends XoopsObject
      * @param int    $start
      * @return array
      */
-    public function getAllyogurt_imagess(
+    public function getAllImages(
         $criteria = [],
         $asobject = false,
         $sort = 'cod_img',

@@ -74,7 +74,7 @@ class Suspensions extends XoopsObject
      * @param int    $start
      * @return array
      */
-    public function getAllyogurt_suspensionss(
+    public function getAllSuspensions(
         $criteria = [],
         $asobject = false,
         $sort = 'uid',

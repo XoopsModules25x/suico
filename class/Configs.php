@@ -84,7 +84,7 @@ class Configs extends XoopsObject
      * @param int    $start
      * @return array
      */
-    public function getAllyogurt_configs(
+    public function getAllConfigs(
         $criteria = [],
         $asobject = false,
         $sort = 'config_id',

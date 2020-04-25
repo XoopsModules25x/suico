@@ -86,7 +86,7 @@ class Friendship extends XoopsObject
      * @param int    $start
      * @return array
      */
-    public function getAllyogurt_friendships(
+    public function getAllFriendships(
         $criteria = [],
         $asobject = false,
         $sort = 'friendship_id',

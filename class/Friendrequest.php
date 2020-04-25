@@ -73,7 +73,7 @@ class Friendrequest extends XoopsObject
      * @param int    $start
      * @return array
      */
-    public function getAllyogurt_friendrequests(
+    public function getAllFriendrequests(
         $criteria = [],
         $asobject = false,
         $sort = 'friendpet_id',

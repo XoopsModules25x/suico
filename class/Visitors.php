@@ -74,7 +74,7 @@ class Visitors extends XoopsObject
      * @param int    $start
      * @return array
      */
-    public function getAllyogurt_visitorss(
+    public function getAllVisitors(
         $criteria = [],
         $asobject = false,
         $sort = 'cod_visit',

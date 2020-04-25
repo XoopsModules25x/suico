@@ -80,7 +80,7 @@ class Audio extends XoopsObject
      * @param int    $start
      * @return array
      */
-    public function getAllyogurt_audios(
+    public function getAllAudios(
         $criteria = [],
         $asobject = false,
         $sort = 'audio_id',

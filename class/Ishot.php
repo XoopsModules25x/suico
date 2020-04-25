@@ -91,7 +91,7 @@ class Ishot extends XoopsObject
      * @param int    $start
      * @return array
      */
-    public function getAllyogurt_ishots(
+    public function getAllHots(
         $criteria = [],
         $asobject = false,
         $sort = 'cod_ishot',

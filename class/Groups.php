@@ -82,7 +82,7 @@ class Groups extends XoopsObject
      * @param int    $start
      * @return array
      */
-    public function getAllyogurt_groupss(
+    public function getAllGroups(
         $criteria = [],
         $asobject = false,
         $sort = 'group_id',

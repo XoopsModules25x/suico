@@ -72,7 +72,7 @@ class Relgroupuser extends XoopsObject
      * @param int    $start
      * @return array
      */
-    public function getAllyogurt_relgroupusers(
+    public function getAllRelgroupusers(
         $criteria = [],
         $asobject = false,
         $sort = 'rel_id',
