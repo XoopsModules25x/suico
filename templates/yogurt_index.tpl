@@ -158,7 +158,7 @@
 			</div>
             <{if $nb_friends!=0}>
                 <div class="row p-2">
-                    <a href="friends.php?uid=<{$uid_owner}>" class="btn btn-primary btn-sm "> <i class='fa fa-arrow-circle-right'></i> <{$lang_viewallfriends}> (<{$nb_friends}>) </a>
+                    <a href="friends.php?uid=<{$uid_owner}>" class="btn btn-primary btn-sm "> <i class='fa fa-arrow-circle-right'></i> <{$lang_viewallfriends}>  <span class="badge badge-pill badge-light"><{$nb_friends}></span></a>
                 </div>
             <{/if}>
 		</div>
@@ -184,7 +184,7 @@
 				</div>
 			<{if $nb_groups!=0}>
                 <div class="row p-2">
-                    <br><a href="groups.php?uid=<{$uid_owner}>" class="btn btn-primary btn-sm "><i class='fa fa-arrow-circle-right'></i> <{$lang_viewallgroups}> (<{$nb_groups}>) </a>
+                    <br><a href="groups.php?uid=<{$uid_owner}>" class="btn btn-primary btn-sm "><i class='fa fa-arrow-circle-right'></i> <{$lang_viewallgroups}>  <span class="badge badge-pill badge-light"><{$nb_groups}></span> </a>
                 </div>
             <{/if}>
         </div>

@@ -120,7 +120,7 @@
 
 
 	<h5>
-			<a name="allgroups"><{$lang_availablegroups}></a>
+			<a name="allgroups"><{$lang_availablegroups}> <span class="badge badge-pill badge-primary"><{$groupstotal}></span></a>
     </h5>
 
  <{if $nb_groups_all<=0}>

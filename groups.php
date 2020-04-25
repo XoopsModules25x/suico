@@ -101,7 +101,8 @@ $xoopsTpl->assign('mygroupsid', $mygroupsid);
 $xoopsTpl->assign('lang_mygroupstitle', _MD_YOGURT_MYGROUPS);
 $xoopsTpl->assign('lang_groupstitle', _MD_YOGURT_ALLGROUPS . ' (' . $nb_groups . ')');
 $xoopsTpl->assign('lang_nogroupsyet', _MD_YOGURT_NOGROUPSYET);
-$xoopsTpl->assign('lang_availablegroups', _MD_YOGURT_AVAILABLEGROUPS . ' (' . $nb_groups . ')');
+$xoopsTpl->assign('lang_availablegroups', _MD_YOGURT_AVAILABLEGROUPS);
+$xoopsTpl->assign('groupstotal', $nb_groups);
 $xoopsTpl->assign('lang_groupslist', _MD_YOGURT_GROUPSLIST);
 
 //page nav
