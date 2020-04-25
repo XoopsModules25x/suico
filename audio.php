@@ -55,14 +55,14 @@ $criteriaUidAudio->setLimit($helper->getConfig('audiosperpage'));
 $audios       = $controller->getAudio($criteriaUidAudio);
 $nbAudio = $nbSections[NBAUDIO] ?? 0;
 try {
-    $audios_array = $controller->assignAudioContent($nbAudio, $audios);
+    $audiosArray = $controller->assignAudioContent($nbAudio, $audios);
 } catch (\RuntimeException $e) {
 }
 
-if (is_array($audios_array)) {
-    $xoopsTpl->assign('audios', $audios_array);
+if (is_array($audiosArray)) {
+    $xoopsTpl->assign('audios', $audiosArray);
     $audio_list = [];
-    foreach ($audios_array as $audio_item) {
+    foreach ($audiosArray as $audio_item) {
         $audio_list[] = XOOPS_UPLOAD_URL . '/yogurt/audio/' . $audio_item['url']; // . ' | ';
     }
     //$audio_list = substr($audio_list,-2);

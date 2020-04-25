@@ -83,13 +83,14 @@ class AudioController extends YogurtController
          * Lets populate an array with the data from the audio
          */
         $i = 0;
+        $audiosArray = [];
         foreach ($audios as $audio) {
-            $audios_array[$i]['url']    = $audio->getVar('url', 's');
-            $audios_array[$i]['title']  = $audio->getVar('title', 's');
-            $audios_array[$i]['id']     = $audio->getVar('audio_id', 's');
-            $audios_array[$i]['author'] = $audio->getVar('author', 's');
-			$audios_array[$i]['date_created'] = formatTimestamp($audio->getVar('date_created', 's'));
-			$audios_array[$i]['date_updated'] = formatTimestamp($audio->getVar('date_updated', 's'));
+            $audiosArray[$i]['url']    = $audio->getVar('url', 's');
+            $audiosArray[$i]['title']  = $audio->getVar('title', 's');
+            $audiosArray[$i]['id']     = $audio->getVar('audio_id', 's');
+            $audiosArray[$i]['author'] = $audio->getVar('author', 's');
+			$audiosArray[$i]['date_created'] = formatTimestamp($audio->getVar('date_created', 's'));
+			$audiosArray[$i]['date_updated'] = formatTimestamp($audio->getVar('date_updated', 's'));
             $audio_path = XOOPS_ROOT_PATH . '/uploads/yogurt/audio/' . $audio->getVar('url', 's');
             // echo $audio_path;
             $mp3filemetainfo                = new Id3v1($audio_path, true);
@@ -99,12 +100,12 @@ class AudioController extends YogurtController
             $mp3filemetainfoarray['Album']  = $mp3filemetainfo->getAlbum();
             $mp3filemetainfoarray['Year']   = $mp3filemetainfo->getYear();
 
-            $audios_array[$i]['meta'] = $mp3filemetainfoarray;
+            $audiosArray[$i]['meta'] = $mp3filemetainfoarray;
 
             $i++;
         }
 
-        return $audios_array;
+        return $audiosArray;
     }
 
     /**
