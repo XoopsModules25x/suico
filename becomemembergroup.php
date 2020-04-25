@@ -51,7 +51,7 @@ if ($relgroupuserFactory->getCount($criteria) < 1) {
     if ($relgroupuserFactory->insert2($relgroupuser)) {
         redirect_header('group.php?group_id='.$group_id.'', 1, _MD_YOGURT_YOUAREMEMBERNOW);
     } else {
-        redirect_header('groups.php', 1, _MD_YOGURT_NOCACHACA);
+        redirect_header('groups.php', 1, _MD_YOGURT_ERROR);
     }
 } else {
     redirect_header('group.php?group_id='.$group_id.'', 1, _MD_YOGURT_YOUAREMEMBERALREADY);

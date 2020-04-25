@@ -59,7 +59,7 @@ if (!Request::hasVar('confirm', 'POST') || 1 !== Request::getInt('confirm', 0, '
     if ($videoFactory->deleteAll($criteria)) {
         redirect_header('video.php?uid=' . $uid, 2, _MD_YOGURT_VIDEO_DELETED);
     } else {
-        redirect_header('video.php?uid=' . $uid, 2, _MD_YOGURT_NOCACHACA);
+        redirect_header('video.php?uid=' . $uid, 2, _MD_YOGURT_ERROR);
     }
 }
 

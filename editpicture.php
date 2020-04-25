@@ -27,30 +27,29 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
-$cod_img = Request::getInt('video_id', 0, 'POST');
+$cod_img = Request::getInt('cod_img', 0, 'POST');
 $marker  = Request::getInt('marker', 0, 'POST');
-
-$uid = (int)$xoopsUser->getVar('uid');
+$uid     = (int)$xoopsUser->getVar('uid');
 
 if (1 === $marker) {
     /**
-     * Creating the factory  loading the picture changing its caption
+     * Creating the factory loading the picture changing its caption
      */
-    $videoFactory = new Yogurt\VideoHandler(
+    $imageFactory = new Yogurt\ImageHandler(
         $xoopsDB
     );
-    $video        = $videoFactory->create(false);
-    $video->load($cod_img);
-    $video->setVar('video_desc', trim(htmlspecialchars($_POST['caption'], ENT_QUOTES | ENT_HTML5)));
-
+    $picture      = $imageFactory->create(false);
+    $picture->load($cod_img);
+    $picture->setVar('title', Request::getString('title', '', 'POST'));
+	$picture->setVar('caption', Request::getString('caption', '', 'POST'));
     /**
      * Verifying who's the owner to allow changes
      */
-    if ($uid === $video->getVar('uid_owner')) {
-        if ($videoFactory->insert2($video)) {
-            redirect_header('video.php?uid=' . $uid, 2, _MD_YOGURT_DESC_EDITED);
+    if ($uid === (int)$picture->getVar('uid_owner')) {
+        if ($imageFactory->insert2($picture)) {
+            redirect_header('album.php', 2, _MD_YOGURT_DESC_EDITED);
         } else {
-            redirect_header('index.php?uid=' . $uid, 2, _MD_YOGURT_ERROR);
+             redirect_header('album.php', 2, _MD_YOGURT_ERROR);
         }
     }
 }
@@ -58,26 +57,28 @@ if (1 === $marker) {
  * Creating the factory  and the criteria to edit the desc of the picture
  * The user must be the owner
  */
-$videoFactory   = new Yogurt\VideoHandler(
+$imageFactory = new Yogurt\ImageHandler(
     $xoopsDB
 );
-$criteria_video = new Criteria('video_id', $cod_img);
-$criteria_uid   = new Criteria('uid_owner', $uid);
-$criteria       = new CriteriaCompo($criteria_video);
+$criteria_img = new Criteria('cod_img', $cod_img);
+$criteria_uid = new Criteria('uid_owner', $uid);
+$criteria     = new CriteriaCompo($criteria_img);
 $criteria->add($criteria_uid);
 
 /**
  * Lets fetch the info of the pictures to be able to render the form
  * The user must be the owner
  */
-$array_pict = $videoFactory->getObjects(
+$array_pict = $imageFactory->getObjects(
     $criteria
 );
 if ($array_pict) {
-    $caption = $array_pict[0]->getVar('video_desc');
-    $url     = $array_pict[0]->getVar('youtube_code');
+    $title = $array_pict[0]->getVar('title');
+    $caption = $array_pict[0]->getVar('caption');
+	$url     = $array_pict[0]->getVar('url');
 }
-
-$videoFactory->renderFormEdit($caption, $cod_img, $url);
+//$url = $xoopsModuleConfig['link_path_upload']."/thumb_".$url;
+$url = XOOPS_URL . '/uploads/yogurt/images/thumb_' . $url;
+$imageFactory->renderFormEdit($title, $caption, $cod_img, $url);
 
 require dirname(__DIR__, 2) . '/footer.php';
