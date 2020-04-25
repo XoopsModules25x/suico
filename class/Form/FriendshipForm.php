@@ -60,8 +60,8 @@ class FriendshipForm extends XoopsThemeForm
         $this->helper       = $target->helper;
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? \sprintf(AM_YOGURT_FRIENDSHIP_ADD) : \sprintf(
-            AM_YOGURT_FRIENDSHIP_EDIT
+        $title = $this->targetObject->isNew() ? \sprintf(\AM_YOGURT_FRIENDSHIP_ADD) : \sprintf(
+            \AM_YOGURT_FRIENDSHIP_EDIT
         );
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
@@ -80,7 +80,7 @@ class FriendshipForm extends XoopsThemeForm
         // Friendship_id
         $this->addElement(
             new XoopsFormLabel(
-                AM_YOGURT_FRIENDSHIP_FRIENDSHIP_ID,
+                \AM_YOGURT_FRIENDSHIP_FRIENDSHIP_ID,
                 $this->targetObject->getVar(
                     'friendship_id'
                 ),
@@ -90,7 +90,7 @@ class FriendshipForm extends XoopsThemeForm
         // Friend1_uid
         $this->addElement(
             new XoopsFormSelectUser(
-                AM_YOGURT_FRIENDSHIP_FRIEND1_UID,
+                \AM_YOGURT_FRIENDSHIP_FRIEND1_UID,
                 'friend1_uid',
                 false,
                 $this->targetObject->getVar(
@@ -104,7 +104,7 @@ class FriendshipForm extends XoopsThemeForm
         // Friend2_uid
         $this->addElement(
             new XoopsFormSelectUser(
-                AM_YOGURT_FRIENDSHIP_FRIEND2_UID,
+                \AM_YOGURT_FRIENDSHIP_FRIEND2_UID,
                 'friend2_uid',
                 false,
                 $this->targetObject->getVar(
@@ -117,27 +117,27 @@ class FriendshipForm extends XoopsThemeForm
         );
         // Level
         $this->addElement(
-            new XoopsFormText(AM_YOGURT_FRIENDSHIP_LEVEL, 'level', 50, 255, $this->targetObject->getVar('level')),
+            new XoopsFormText(\AM_YOGURT_FRIENDSHIP_LEVEL, 'level', 50, 255, $this->targetObject->getVar('level')),
             false
         );
         // Hot
         $this->addElement(
-            new XoopsFormText(AM_YOGURT_FRIENDSHIP_HOT, 'hot', 50, 255, $this->targetObject->getVar('hot')),
+            new XoopsFormText(\AM_YOGURT_FRIENDSHIP_HOT, 'hot', 50, 255, $this->targetObject->getVar('hot')),
             false
         );
         // Trust
         $this->addElement(
-            new XoopsFormText(AM_YOGURT_FRIENDSHIP_TRUST, 'trust', 50, 255, $this->targetObject->getVar('trust')),
+            new XoopsFormText(\AM_YOGURT_FRIENDSHIP_TRUST, 'trust', 50, 255, $this->targetObject->getVar('trust')),
             false
         );
         // Cool
         $this->addElement(
-            new XoopsFormText(AM_YOGURT_FRIENDSHIP_COOL, 'cool', 50, 255, $this->targetObject->getVar('cool')),
+            new XoopsFormText(\AM_YOGURT_FRIENDSHIP_COOL, 'cool', 50, 255, $this->targetObject->getVar('cool')),
             false
         );
         // Fan
         $this->addElement(
-            new XoopsFormText(AM_YOGURT_FRIENDSHIP_FAN, 'fan', 50, 255, $this->targetObject->getVar('fan')),
+            new XoopsFormText(\AM_YOGURT_FRIENDSHIP_FAN, 'fan', 50, 255, $this->targetObject->getVar('fan')),
             false
         );
 

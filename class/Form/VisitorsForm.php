@@ -61,7 +61,7 @@ class VisitorsForm extends XoopsThemeForm
         $this->helper       = $target->helper;
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? \sprintf(AM_YOGURT_VISITORS_ADD) : \sprintf(AM_YOGURT_VISITORS_EDIT);
+        $title = $this->targetObject->isNew() ? \sprintf(\AM_YOGURT_VISITORS_ADD) : \sprintf(\AM_YOGURT_VISITORS_EDIT);
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
 
@@ -78,12 +78,12 @@ class VisitorsForm extends XoopsThemeForm
 
         // Cod_visit
         $this->addElement(
-            new XoopsFormLabel(AM_YOGURT_VISITORS_COD_VISIT, $this->targetObject->getVar('cod_visit'), 'cod_visit')
+            new XoopsFormLabel(\AM_YOGURT_VISITORS_COD_VISIT, $this->targetObject->getVar('cod_visit'), 'cod_visit')
         );
         // Uid_owner
         $this->addElement(
             new XoopsFormSelectUser(
-                AM_YOGURT_VISITORS_UID_OWNER,
+                \AM_YOGURT_VISITORS_UID_OWNER,
                 'uid_owner',
                 false,
                 $this->targetObject->getVar(
@@ -97,7 +97,7 @@ class VisitorsForm extends XoopsThemeForm
         // Uid_visitor
         $this->addElement(
             new XoopsFormSelectUser(
-                AM_YOGURT_VISITORS_UID_VISITOR,
+                \AM_YOGURT_VISITORS_UID_VISITOR,
                 'uid_visitor',
                 false,
                 $this->targetObject->getVar(
@@ -111,7 +111,7 @@ class VisitorsForm extends XoopsThemeForm
         // Uname_visitor
         $this->addElement(
             new XoopsFormText(
-                AM_YOGURT_VISITORS_UNAME_VISITOR,
+                \AM_YOGURT_VISITORS_UNAME_VISITOR,
                 'uname_visitor',
                 50,
                 255,
@@ -124,7 +124,7 @@ class VisitorsForm extends XoopsThemeForm
         // Datetime
         $this->addElement(
             new XoopsFormTextDateSelect(
-                AM_YOGURT_VISITORS_DATETIME, 'date_visited', 0, formatTimestamp($this->targetObject->getVar('date_visited'), 's')
+                \AM_YOGURT_VISITORS_DATETIME, 'date_visited', 0, formatTimestamp($this->targetObject->getVar('date_visited'), 's')
             )
         );
 

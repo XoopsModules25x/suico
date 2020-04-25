@@ -60,8 +60,8 @@ class FriendrequestForm extends XoopsThemeForm
         $this->helper       = $target->helper;
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? \sprintf(AM_YOGURT_FRIENDREQUEST_ADD) : \sprintf(
-            AM_YOGURT_FRIENDREQUEST_EDIT
+        $title = $this->targetObject->isNew() ? \sprintf(\AM_YOGURT_FRIENDREQUEST_ADD) : \sprintf(
+            \AM_YOGURT_FRIENDREQUEST_EDIT
         );
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
@@ -80,7 +80,7 @@ class FriendrequestForm extends XoopsThemeForm
         // Friendpet_id
         $this->addElement(
             new XoopsFormLabel(
-                AM_YOGURT_FRIENDREQUEST_FRIENDPET_ID,
+                \AM_YOGURT_FRIENDREQUEST_FRIENDPET_ID,
                 $this->targetObject->getVar(
                     'friendpet_id'
                 ),
@@ -90,7 +90,7 @@ class FriendrequestForm extends XoopsThemeForm
         // Inviting by Friend_uid
         $this->addElement(
             new XoopsFormSelectUser(
-                AM_YOGURT_FRIENDREQUEST_FRIENDREQUESTER_UID,
+                \AM_YOGURT_FRIENDREQUEST_FRIENDREQUESTER_UID,
                 'friendrequester_uid',
                 false,
                 $this->targetObject->getVar(
@@ -119,7 +119,7 @@ class FriendrequestForm extends XoopsThemeForm
         // Date_created
         $this->addElement(
             new \XoopsFormTextDateSelect(
-                AM_YOGURT_FRIENDREQUEST_DATE_CREATED, 'date_created', 0, formatTimestamp($this->targetObject->getVar('date_created'), 's')
+                \AM_YOGURT_FRIENDREQUEST_DATE_CREATED, 'date_created', 0, formatTimestamp($this->targetObject->getVar('date_created'), 's')
             )
         );
 

@@ -61,7 +61,7 @@ class VideoForm extends XoopsThemeForm
         $this->helper       = $target->helper;
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? \sprintf(AM_YOGURT_VIDEO_ADD) : \sprintf(AM_YOGURT_VIDEO_EDIT);
+        $title = $this->targetObject->isNew() ? \sprintf(\AM_YOGURT_VIDEO_ADD) : \sprintf(\AM_YOGURT_VIDEO_EDIT);
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
 
@@ -78,12 +78,12 @@ class VideoForm extends XoopsThemeForm
 
         // Video_id
         $this->addElement(
-            new XoopsFormLabel(AM_YOGURT_VIDEO_VIDEO_ID, $this->targetObject->getVar('video_id'), 'video_id')
+            new XoopsFormLabel(\AM_YOGURT_VIDEO_VIDEO_ID, $this->targetObject->getVar('video_id'), 'video_id')
         );
         // Uid_owner
         $this->addElement(
             new XoopsFormSelectUser(
-                AM_YOGURT_VIDEO_UID_OWNER,
+                \AM_YOGURT_VIDEO_UID_OWNER,
                 'uid_owner',
                 false,
                 $this->targetObject->getVar(
@@ -97,7 +97,7 @@ class VideoForm extends XoopsThemeForm
         // Video_desc
         $this->addElement(
             new XoopsFormTextArea(
-                AM_YOGURT_VIDEO_VIDEO_DESC,
+                \AM_YOGURT_VIDEO_VIDEO_DESC,
                 'video_desc',
                 $this->targetObject->getVar(
                     'video_desc'
@@ -110,7 +110,7 @@ class VideoForm extends XoopsThemeForm
         // Youtube_code
         $this->addElement(
             new XoopsFormText(
-                AM_YOGURT_VIDEO_YOUTUBE_CODE,
+                \AM_YOGURT_VIDEO_YOUTUBE_CODE,
                 'youtube_code',
                 50,
                 255,
@@ -123,7 +123,7 @@ class VideoForm extends XoopsThemeForm
         // Main_video
         $this->addElement(
             new XoopsFormText(
-                AM_YOGURT_VIDEO_MAIN_VIDEO,
+                \AM_YOGURT_VIDEO_MAIN_VIDEO,
                 'main_video',
                 50,
                 255,
@@ -137,13 +137,13 @@ class VideoForm extends XoopsThemeForm
         // Data_creation
         $this->addElement(
             new \XoopsFormTextDateSelect(
-                AM_YOGURT_VIDEO_DATE_CREATED, 'date_created', 0, formatTimestamp($this->targetObject->getVar('date_created'), 's')
+                \AM_YOGURT_VIDEO_DATE_CREATED, 'date_created', 0, formatTimestamp($this->targetObject->getVar('date_created'), 's')
             )
         );
 
         $this->addElement(
             new \XoopsFormTextDateSelect(
-                AM_YOGURT_VIDEO_DATE_UPDATED, 'date_updated', 0, formatTimestamp($this->targetObject->getVar('date_updated'), 's')
+                \AM_YOGURT_VIDEO_DATE_UPDATED, 'date_updated', 0, formatTimestamp($this->targetObject->getVar('date_updated'), 's')
             )
         );
         

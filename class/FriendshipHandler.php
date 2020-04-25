@@ -426,7 +426,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         $friendship  = $friendships[0];
 
         $form = new XoopsThemeForm(
-            _MD_YOGURT_EDIT_FRIENDSHIP,
+            \_MD_YOGURT_EDIT_FRIENDSHIP,
             'form_editfriendship',
             'editfriendship.php',
             'post',
@@ -436,29 +436,29 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         if ('avatars/blank.gif' === $friend->getVar(
             'user_avatar'
         )) {
-            $field_friend_avatar = new XoopsFormLabel(_MD_YOGURT_PHOTO, '<img src=assets/images/noavatar.gif>');
+            $field_friend_avatar = new XoopsFormLabel(\_MD_YOGURT_PHOTO, '<img src=assets/images/noavatar.gif>');
         } else {
             $field_friend_avatar = new XoopsFormLabel(
-                _MD_YOGURT_PHOTO,
+                \_MD_YOGURT_PHOTO,
                 '<img src=../../uploads/' . $friend->getVar(
                     'user_avatar'
                 ) . '>'
             );
         }
-        $field_friend_name = new XoopsFormLabel(_MD_YOGURT_FRIENDNAME, $friend->getVar('uname'));
+        $field_friend_name = new XoopsFormLabel(\_MD_YOGURT_FRIENDNAME, $friend->getVar('uname'));
 
         if (1 === $this->helper->getConfig('allow_friendshiplevel')) {
-            $field_friend_level = new XoopsFormRadio(_MD_YOGURT_LEVEL, 'level', $friendship->getVar('level'), '<br>');
+            $field_friend_level = new XoopsFormRadio(\_MD_YOGURT_LEVEL, 'level', $friendship->getVar('level'), '<br>');
 
-            $field_friend_level->addOption('1', _MD_YOGURT_UNKNOWN_ACCEPTED);
-            $field_friend_level->addOption('3', _MD_YOGURT_AQUAITANCE);
-            $field_friend_level->addOption('5', _MD_YOGURT_FRIEND);
-            $field_friend_level->addOption('7', _MD_YOGURT_BESTFRIEND);
+            $field_friend_level->addOption('1', \_MD_YOGURT_UNKNOWN_ACCEPTED);
+            $field_friend_level->addOption('3', \_MD_YOGURT_AQUAITANCE);
+            $field_friend_level->addOption('5', \_MD_YOGURT_FRIEND);
+            $field_friend_level->addOption('7', \_MD_YOGURT_BESTFRIEND);
         }
 
         if (1 === $this->helper->getConfig('allow_fanssevaluation')) {
             $field_friend_fan = new XoopsFormRadioYN(
-                _MD_YOGURT_FAN,
+                \_MD_YOGURT_FAN,
                 'fan',
                 $friendship->getVar(
                     'fan'
@@ -467,50 +467,50 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
                 '<img src="assets/images/fansbw.gif" alt="' . \_NO . '" title="' . \_NO . '">'
             );
 
-            $field_friend_friendly = new XoopsFormRadio(_MD_YOGURT_FRIENDLY, 'hot', $friendship->getVar('hot'));
+            $field_friend_friendly = new XoopsFormRadio(\_MD_YOGURT_FRIENDLY, 'hot', $friendship->getVar('hot'));
             $field_friend_friendly->addOption(
                 '1',
-                '<img src="assets/images/friendlya.gif" alt="' . _MD_YOGURT_FRIENDLYNO . '" title="' . _MD_YOGURT_FRIENDLYNO . '">'
+                '<img src="assets/images/friendlya.gif" alt="' . \_MD_YOGURT_FRIENDLYNO . '" title="' . \_MD_YOGURT_FRIENDLYNO . '">'
             );
             $field_friend_friendly->addOption(
                 '2',
-                '<img src="assets/images/friendlyb.gif" alt="' . _MD_YOGURT_FRIENDLYYES . '" title="' . _MD_YOGURT_FRIENDLYYES . '">'
+                '<img src="assets/images/friendlyb.gif" alt="' . \_MD_YOGURT_FRIENDLYYES . '" title="' . \_MD_YOGURT_FRIENDLYYES . '">'
             );
             $field_friend_friendly->addOption(
                 '3',
-                '<img src="assets/images/friendlyc.gif" alt="' . _MD_YOGURT_FRIENDLYALOT . '" title="' . _MD_YOGURT_FRIENDLYALOT . '">'
+                '<img src="assets/images/friendlyc.gif" alt="' . \_MD_YOGURT_FRIENDLYALOT . '" title="' . \_MD_YOGURT_FRIENDLYALOT . '">'
             );
 
-            $field_friend_funny = new XoopsFormRadio(_MD_YOGURT_FUNNY, 'trust', $friendship->getVar('trust'));
+            $field_friend_funny = new XoopsFormRadio(\_MD_YOGURT_FUNNY, 'trust', $friendship->getVar('trust'));
             $field_friend_funny->addOption(
                 '1',
-                '<img src="assets/images/funnya.gif" alt="' . _MD_YOGURT_FUNNYNO . '" title="' . _MD_YOGURT_FUNNYNO . '">'
+                '<img src="assets/images/funnya.gif" alt="' . \_MD_YOGURT_FUNNYNO . '" title="' . \_MD_YOGURT_FUNNYNO . '">'
             );
             $field_friend_funny->addOption(
                 '2',
-                '<img src="assets/images/funnyb.gif" alt="' . _MD_YOGURT_FUNNYYES . '" title="' . _MD_YOGURT_FUNNYYES . '">'
+                '<img src="assets/images/funnyb.gif" alt="' . \_MD_YOGURT_FUNNYYES . '" title="' . \_MD_YOGURT_FUNNYYES . '">'
             );
             $field_friend_funny->addOption(
                 '3',
-                '<img src="assets/images/funnyc.gif" alt="' . _MD_YOGURT_FUNNYALOT . '" title="' . _MD_YOGURT_FUNNYALOT . '">'
+                '<img src="assets/images/funnyc.gif" alt="' . \_MD_YOGURT_FUNNYALOT . '" title="' . \_MD_YOGURT_FUNNYALOT . '">'
             );
 
-            $field_friend_cool = new XoopsFormRadio(_MD_YOGURT_COOL, 'cool', $friendship->getVar('cool'));
+            $field_friend_cool = new XoopsFormRadio(\_MD_YOGURT_COOL, 'cool', $friendship->getVar('cool'));
             $field_friend_cool->addOption(
                 '1',
-                '<img src="assets/images/coola.gif" alt="' . _MD_YOGURT_COOLNO . '" title="' . _MD_YOGURT_COOLNO . '">'
+                '<img src="assets/images/coola.gif" alt="' . \_MD_YOGURT_COOLNO . '" title="' . \_MD_YOGURT_COOLNO . '">'
             );
             $field_friend_cool->addOption(
                 '2',
-                '<img src="assets/images/coolb.gif" alt="' . _MD_YOGURT_COOLYES . '" title="' . _MD_YOGURT_COOLYES . '">'
+                '<img src="assets/images/coolb.gif" alt="' . \_MD_YOGURT_COOLYES . '" title="' . \_MD_YOGURT_COOLYES . '">'
             );
             $field_friend_cool->addOption(
                 '3',
-                '<img src="assets/images/coolc.gif" alt="' . _MD_YOGURT_COOLALOT . '" title="' . _MD_YOGURT_COOLALOT . '">'
+                '<img src="assets/images/coolc.gif" alt="' . \_MD_YOGURT_COOLALOT . '" title="' . \_MD_YOGURT_COOLALOT . '">'
             );
         }
         $form->setExtra('enctype="multipart/form-data"');
-        $buttonSend                = new XoopsFormButton('', 'submit_button', _MD_YOGURT_UPDATEFRIEND, 'submit');
+        $buttonSend                = new XoopsFormButton('', 'submit_button', \_MD_YOGURT_UPDATEFRIEND, 'submit');
         $field_friend_friendid      = new XoopsFormHidden('friend_uid', $friend->getVar('uid'));
         $field_friend_marker        = new XoopsFormHidden('marker', '1');
         $field_friend_friendshio_id = new XoopsFormHidden('friendship_id', $friendship->getVar('friendship_id'));

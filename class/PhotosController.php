@@ -54,7 +54,7 @@ class PhotosController extends YogurtController
     public function checkPrivilege()
     {
         if (0 === $this->helper->getConfig('enable_pictures')) {
-            \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_PICTURES_ENABLED_NOT);
+            \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, \_MD_YOGURT_PICTURES_ENABLED_NOT);
         }
         $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
         if (1 === $this->configsFactory->getCount($criteria)) {
@@ -63,7 +63,7 @@ class PhotosController extends YogurtController
             $config = $configs[0]->getVar('pictures');
 
             if (!$this->checkPrivilegeLevel($config)) {
-                \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, _MD_YOGURT_NOPRIVILEGE);
+                \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, \_MD_YOGURT_NOPRIVILEGE);
             }
         }
 

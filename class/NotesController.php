@@ -94,7 +94,7 @@ class NotesController extends YogurtController
         $privilegeType = ''
     ) {
         if (0 === $this->helper->getConfig('enable_notes')) {
-            \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_NOTES_ENABLED_NOT);
+            \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, \_MD_YOGURT_NOTES_ENABLED_NOT);
         }
         if ('sendNotes' === $privilegeType) {
             $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
@@ -111,7 +111,7 @@ class NotesController extends YogurtController
             $config = $configs[0]->getVar('notes');
 
             if (!$this->checkPrivilegeLevel($config)) {
-                \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, _MD_YOGURT_NOPRIVILEGE);
+                \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, \_MD_YOGURT_NOPRIVILEGE);
             }
         }
 

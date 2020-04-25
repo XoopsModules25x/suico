@@ -62,7 +62,7 @@ class AudioForm extends XoopsThemeForm
         $this->helper       = $target->helper;
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? \sprintf(AM_YOGURT_AUDIO_ADD) : \sprintf(AM_YOGURT_AUDIO_EDIT);
+        $title = $this->targetObject->isNew() ? \sprintf(\AM_YOGURT_AUDIO_ADD) : \sprintf(\AM_YOGURT_AUDIO_EDIT);
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
 
@@ -79,25 +79,25 @@ class AudioForm extends XoopsThemeForm
 
         // Audio_id
         $this->addElement(
-            new XoopsFormLabel(AM_YOGURT_AUDIO_AUDIO_ID, $this->targetObject->getVar('audio_id'), 'audio_id')
+            new XoopsFormLabel(\AM_YOGURT_AUDIO_AUDIO_ID, $this->targetObject->getVar('audio_id'), 'audio_id')
         );
         // Title
         $this->addElement(
-            new XoopsFormText(AM_YOGURT_AUDIO_TITLE, 'title', 50, 255, $this->targetObject->getVar('title')),
+            new XoopsFormText(\AM_YOGURT_AUDIO_TITLE, 'title', 50, 255, $this->targetObject->getVar('title')),
             false
         );
         // Author
         $this->addElement(
-            new XoopsFormText(AM_YOGURT_AUDIO_AUTHOR, 'author', 50, 255, $this->targetObject->getVar('author')),
+            new XoopsFormText(\AM_YOGURT_AUDIO_AUTHOR, 'author', 50, 255, $this->targetObject->getVar('author')),
             false
         );
         // Url
-        $this->addElement(new \XoopsFormFile(AM_YOGURT_AUDIO_URL, 'url', $this->helper->getConfig('maxsize')), false);
+        $this->addElement(new \XoopsFormFile(\AM_YOGURT_AUDIO_URL, 'url', $this->helper->getConfig('maxsize')), false);
 
         // Uid_owner
         $this->addElement(
             new XoopsFormSelectUser(
-                AM_YOGURT_AUDIO_UID_OWNER, 'uid_owner', false, $this->targetObject->getVar(
+                \AM_YOGURT_AUDIO_UID_OWNER, 'uid_owner', false, $this->targetObject->getVar(
                 'uid_owner'
             ), 1, false
             ),
@@ -106,13 +106,13 @@ class AudioForm extends XoopsThemeForm
         // Data_creation
         $this->addElement(
             new XoopsFormTextDateSelect(
-                AM_YOGURT_AUDIO_DATE_CREATED, 'date_created', 0, formatTimestamp($this->targetObject->getVar('date_created'), 's')
+                \AM_YOGURT_AUDIO_DATE_CREATED, 'date_created', 0, formatTimestamp($this->targetObject->getVar('date_created'), 's')
             )
         );
 
         $this->addElement(
             new XoopsFormTextDateSelect(
-                AM_YOGURT_AUDIO_DATE_UPDATED, 'date_updated', 0, formatTimestamp($this->targetObject->getVar('date_updated'), 's')
+                \AM_YOGURT_AUDIO_DATE_UPDATED, 'date_updated', 0, formatTimestamp($this->targetObject->getVar('date_updated'), 's')
             )
         );
 

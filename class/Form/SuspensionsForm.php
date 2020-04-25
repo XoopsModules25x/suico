@@ -60,8 +60,8 @@ class SuspensionsForm extends XoopsThemeForm
         $this->helper       = $target->helper;
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? \sprintf(AM_YOGURT_SUSPENSIONS_ADD) : \sprintf(
-            AM_YOGURT_SUSPENSIONS_EDIT
+        $title = $this->targetObject->isNew() ? \sprintf(\AM_YOGURT_SUSPENSIONS_ADD) : \sprintf(
+            \AM_YOGURT_SUSPENSIONS_EDIT
         );
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
@@ -79,12 +79,12 @@ class SuspensionsForm extends XoopsThemeForm
 
         // Uid
         $this->addElement(
-            new XoopsFormLabel(AM_YOGURT_SUSPENSIONS_UID, $this->targetObject->getVar('uid'), 'uid')
+            new XoopsFormLabel(\AM_YOGURT_SUSPENSIONS_UID, $this->targetObject->getVar('uid'), 'uid')
         );
         // Old_pass
         $this->addElement(
             new XoopsFormText(
-                AM_YOGURT_SUSPENSIONS_OLD_PASS,
+                \AM_YOGURT_SUSPENSIONS_OLD_PASS,
                 'old_pass',
                 50,
                 255,
@@ -97,7 +97,7 @@ class SuspensionsForm extends XoopsThemeForm
         // Old_email
         $this->addElement(
             new XoopsFormText(
-                AM_YOGURT_SUSPENSIONS_OLD_EMAIL,
+                \AM_YOGURT_SUSPENSIONS_OLD_EMAIL,
                 'old_email',
                 50,
                 255,
@@ -110,7 +110,7 @@ class SuspensionsForm extends XoopsThemeForm
         // Old_signature
         $this->addElement(
             new XoopsFormTextArea(
-                AM_YOGURT_SUSPENSIONS_OLD_SIGNATURE,
+                \AM_YOGURT_SUSPENSIONS_OLD_SIGNATURE,
                 'old_signature',
                 $this->targetObject->getVar(
                     'old_signature'
@@ -123,7 +123,7 @@ class SuspensionsForm extends XoopsThemeForm
         // Suspension_time
         $this->addElement(
             new XoopsFormText(
-                AM_YOGURT_SUSPENSIONS_SUSPENSION_TIME,
+                \AM_YOGURT_SUSPENSIONS_SUSPENSION_TIME,
                 'suspension_time',
                 50,
                 255,
@@ -136,7 +136,7 @@ class SuspensionsForm extends XoopsThemeForm
         // Old_enc_type
         $this->addElement(
             new XoopsFormText(
-                AM_YOGURT_SUSPENSIONS_OLD_ENC_TYPE,
+                \AM_YOGURT_SUSPENSIONS_OLD_ENC_TYPE,
                 'old_enc_type',
                 50,
                 255,
@@ -149,7 +149,7 @@ class SuspensionsForm extends XoopsThemeForm
         // Old_pass_expired
         $this->addElement(
             new XoopsFormText(
-                AM_YOGURT_SUSPENSIONS_OLD_PASS_EXPIRED,
+                \AM_YOGURT_SUSPENSIONS_OLD_PASS_EXPIRED,
                 'old_pass_expired',
                 50,
                 255,

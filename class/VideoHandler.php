@@ -303,11 +303,11 @@ class VideoHandler extends XoopsPersistableObjectHandler
     public function renderFormSubmit(
         $xoopsTpl
     ) {
-        $form       = new XoopsThemeForm(_MD_YOGURT_ADDFAVORITEVIDEOS, 'form_videos', 'submitVideo.php', 'post', true);
-        $field_code = new XoopsFormText(_MD_YOGURT_YOUTUBECODE, 'codigo', 50, 250);
-        $field_desc = new XoopsFormTextArea(_MD_YOGURT_CAPTION, 'caption');
+        $form       = new XoopsThemeForm(\_MD_YOGURT_ADDFAVORITEVIDEOS, 'form_videos', 'submitVideo.php', 'post', true);
+        $field_code = new XoopsFormText(\_MD_YOGURT_YOUTUBECODE, 'codigo', 50, 250);
+        $field_desc = new XoopsFormTextArea(\_MD_YOGURT_CAPTION, 'caption');
         $form->setExtra('enctype="multipart/form-data"');
-        $buttonSend = new XoopsFormButton('', 'submit_button', _MD_YOGURT_ADDVIDEO, 'submit');
+        $buttonSend = new XoopsFormButton('', 'submit_button', \_MD_YOGURT_ADDVIDEO, 'submit');
 
         $form->addElement($field_warning);
         $form->addElement($field_code, true);
@@ -333,10 +333,10 @@ class VideoHandler extends XoopsPersistableObjectHandler
         $cod_img,
         $filename
     ) {
-        $form       = new XoopsThemeForm(_MD_YOGURT_EDIT_DESC, 'form_picture', 'editdescvideo.php', 'post', true);
+        $form       = new XoopsThemeForm(\_MD_YOGURT_EDIT_DESC, 'form_picture', 'editdescvideo.php', 'post', true);
         $field_desc = new XoopsFormText($caption, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
-        $buttonSend    = new XoopsFormButton('', 'submit_button', _MD_YOGURT_SUBMIT, 'submit');
+        $buttonSend    = new XoopsFormButton('', 'submit_button', \_MD_YOGURT_SUBMIT, 'submit');
         $field_warning  = new XoopsFormLabel(
             '<object width="425" height="353">
 <param name="movie" value="http://www.youtube.com/v/' . $filename . '"></param>

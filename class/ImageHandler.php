@@ -338,13 +338,13 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $maxbytes,
         $xoopsTpl
     ) {
-        $form       = new XoopsThemeForm(_MD_YOGURT_SUBMIT_PIC_TITLE, 'form_picture', 'submitImage.php', 'post', true);
-        $field_url  = new XoopsFormFile(_MD_YOGURT_SELECT_PHOTO, 'sel_photo', 2000000);
-		$field_title = new XoopsFormText(_MD_YOGURT_PHOTOTITLE, 'title', 35, 55);
-        $field_caption = new XoopsFormText(_MD_YOGURT_CAPTION, 'caption', 35, 55);
+        $form       = new XoopsThemeForm(\_MD_YOGURT_SUBMIT_PIC_TITLE, 'form_picture', 'submitImage.php', 'post', true);
+        $field_url  = new XoopsFormFile(\_MD_YOGURT_SELECT_PHOTO, 'sel_photo', 2000000);
+		$field_title = new XoopsFormText(\_MD_YOGURT_PHOTOTITLE, 'title', 35, 55);
+        $field_caption = new XoopsFormText(\_MD_YOGURT_CAPTION, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
-        $buttonSend   = new XoopsFormButton('', 'submit_button', _MD_YOGURT_UPLOADPICTURE, 'submit');
-        $field_warning = new XoopsFormLabel(\sprintf(_MD_YOGURT_YOU_CAN_UPLOAD, $maxbytes / 1024));
+        $buttonSend   = new XoopsFormButton('', 'submit_button', \_MD_YOGURT_UPLOADPICTURE, 'submit');
+        $field_warning = new XoopsFormLabel(\sprintf(\_MD_YOGURT_YOU_CAN_UPLOAD, $maxbytes / 1024));
         $form->addElement($field_warning);
         $form->addElement($field_url, true);
         $form->addElement($field_title);
@@ -370,11 +370,11 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $cod_img,
         $filename
     ) {
-        $form       = new XoopsThemeForm(_MD_YOGURT_EDIT_DESC, 'form_picture', 'editpicture.php', 'post', true);
+        $form       = new XoopsThemeForm(\_MD_YOGURT_EDIT_DESC, 'form_picture', 'editpicture.php', 'post', true);
         $field_title = new XoopsFormText($title, 'title', 35, 55);
 		$field_caption = new XoopsFormText($caption, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
-        $buttonSend   = new XoopsFormButton('', 'submit_button', _MD_YOGURT_SUBMIT, 'submit');
+        $buttonSend   = new XoopsFormButton('', 'submit_button', \_MD_YOGURT_SUBMIT, 'submit');
         $field_warning = new XoopsFormLabel("<img src='" . $filename . "' alt='sssss'>");
         $field_cod_img = new XoopsFormHidden('cod_img', $cod_img);
         $field_marker  = new XoopsFormHidden('marker', 1);
@@ -456,8 +456,8 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $picture->setVar('url', $url);
             $picture->setVar('title', $title);
             $picture->setVar('caption', $caption);
-			$picture->setVar('date_created', time());
-            $picture->setVar('date_updated', time());
+			$picture->setVar('date_created', \time());
+            $picture->setVar('date_updated', \time());
             $picture->setVar('private', 0);
             $uid = $xoopsUser->getVar('uid');
             $picture->setVar('uid_owner', $uid);

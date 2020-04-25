@@ -60,8 +60,8 @@ class RelgroupuserForm extends XoopsThemeForm
         $this->helper       = $target->helper;
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? \sprintf(AM_YOGURT_RELGROUPUSER_ADD) : \sprintf(
-            AM_YOGURT_RELGROUPUSER_EDIT
+        $title = $this->targetObject->isNew() ? \sprintf(\AM_YOGURT_RELGROUPUSER_ADD) : \sprintf(
+            \AM_YOGURT_RELGROUPUSER_EDIT
         );
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
@@ -79,7 +79,7 @@ class RelgroupuserForm extends XoopsThemeForm
 
         // Rel_id
         $this->addElement(
-            new XoopsFormLabel(AM_YOGURT_RELGROUPUSER_REL_ID, $this->targetObject->getVar('rel_id'), 'rel_id')
+            new XoopsFormLabel(\AM_YOGURT_RELGROUPUSER_REL_ID, $this->targetObject->getVar('rel_id'), 'rel_id')
         );
         // Rel_group_id
         //$groupsHandler = $this->helper->getHandler('Groups');
@@ -88,7 +88,7 @@ class RelgroupuserForm extends XoopsThemeForm
         $groupsHandler = $this->helper->getHandler('Groups');
 
         $groups_id_select = new XoopsFormSelect(
-            AM_YOGURT_RELGROUPUSER_REL_GROUP_ID,
+            \AM_YOGURT_RELGROUPUSER_REL_GROUP_ID,
             'rel_group_id',
             $this->targetObject->getVar(
                 'rel_group_id'
@@ -99,7 +99,7 @@ class RelgroupuserForm extends XoopsThemeForm
         // Rel_user_uid
         $this->addElement(
             new XoopsFormSelectUser(
-                AM_YOGURT_RELGROUPUSER_REL_USER_UID,
+                \AM_YOGURT_RELGROUPUSER_REL_USER_UID,
                 'rel_user_uid',
                 false,
                 $this->targetObject->getVar(
