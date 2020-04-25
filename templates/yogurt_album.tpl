@@ -108,6 +108,14 @@
 			<div class="card-body">
 				<h4 class="card-title">&nbsp;</h4>
 				<p class="card-text"><{$pics_array[i].desc}></p>
+				<p class="text-muted"> <i class="fa fa-calendar"></i> 
+				<{if $pics_array[i].date_creation == $pics_array[i].date_update}>
+				<small><{$pics_array[i].date_creation|date_format}></small>
+				<{else}>
+				<small><{$pics_array[i].date_update|date_format}></small>
+				<{/if}>
+				</p>
+				
 				<p class="text-center"><button class="btn btn-info btn-sm"><i class='fa fa-lock'></i> <{$lang_privatephoto}></button></p>
 				<{if (($isOwner==1))}>
         <form action="delpicture.php" method="post" id="deleteform" class="yogurt-album-formquick">
