@@ -39,6 +39,7 @@ class Friendrequest extends XoopsObject
         $this->initVar('friendpet_id', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('friendrequester_uid', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('friendrequestto_uid', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('date_created', \XOBJ_DTYPE_INT, 0, false);
         if (!empty($id)) {
             if (\is_array($id)) {
                 $this->assignVars($id);

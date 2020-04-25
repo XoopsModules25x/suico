@@ -120,19 +120,20 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Friendrequest
             $xoopsObject = new Friendrequest();
-            $format      = 'INSERT INTO %s (friendpet_id, friendrequester_uid, friendrequestto_uid)';
-            $format      .= 'VALUES (%u, %u, %u)';
+            $format      = 'INSERT INTO %s (friendpet_id, friendrequester_uid, friendrequestto_uid, date_created)';
+            $format      .= 'VALUES (%u, %u, %u, %u)';
             $sql         = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_friendrequest'),
                 $friendpet_id,
                 $friendrequester_uid,
-                $friendrequestto_uid
+                $friendrequestto_uid,
+                $date_created
             );
             $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
-            $format .= 'friendpet_id=%u, friendrequester_uid=%u, friendrequestto_uid=%u';
+            $format .= 'friendpet_id=%u, friendrequester_uid=%u, friendrequestto_uid=%u, date_created=%u';
             $format .= ' WHERE friendpet_id = %u';
             $sql    = \sprintf(
                 $format,
@@ -140,6 +141,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
                 $friendpet_id,
                 $friendrequester_uid,
                 $friendrequestto_uid,
+                $date_created,
                 $friendpet_id
             );
         }

@@ -23,6 +23,7 @@
                     <th class="left"><{$selectorfriendpet_id}></th>
                     <th class="left"><{$selectorfriendrequester_uid}></th>
                     <th class="left"><{$selectorfriendrequestto_uid}></th>
+                    <th class="left"><{$selectordate_created}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
@@ -33,6 +34,7 @@
                         <td class='left'><{$friendrequestArray.friendpet_id}></td>
                         <td class='left'><{$friendrequestArray.friendrequester_uid}></td>
                         <td class='left'><{$friendrequestArray.friendrequestto_uid}></td>
+                        <td class='left'><{$friendrequestArray.date_created}></td>
 
 
                         <td class="center width5"><{$friendrequestArray.edit_delete}></td>
@@ -49,6 +51,7 @@
                     <th class="left"><{$selectorfriendpet_id}></th>
                     <th class="left"><{$selectorfriendrequester_uid}></th>
                     <th class="left"><{$selectorfriendrequestto_uid}></th>
+                    <th class="left"><{$selectordate_created}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
