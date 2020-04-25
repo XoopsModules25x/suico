@@ -124,7 +124,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un yogurt_audio
             $xoopsObject = new Audio();
-            $format      = 'INSERT INTO %s (audio_id, title, author, url, uid_owner, data_creation, data_update)';
+            $format      = 'INSERT INTO %s (audio_id, title, author, url, uid_owner, date_created, date_updated)';
             $format      .= ' VALUES (%u, %s, %s, %s, %u, %s, %s)';
             $sql         = \sprintf(
                 $format,
@@ -140,7 +140,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
             $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
-            $format .= 'audio_id=%u, title=%s, author=%s, url=%s, uid_owner=%u, data_creation=%s, data_update=%s';
+            $format .= 'audio_id=%u, title=%s, author=%s, url=%s, uid_owner=%u, date_created=%s, date_updated=%s';
             $format .= ' WHERE audio_id = %u';
             $sql    = \sprintf(
                 $format,
@@ -347,8 +347,8 @@ class AudioHandler extends XoopsPersistableObjectHandler
             $audio->setVar('author', $author);
             $uid = $xoopsUser->getVar('uid');
             $audio->setVar('uid_owner', $uid);
-            $audio->setVar('data_creation', \time());
-            $audio->setVar('data_update', \time());
+            $audio->setVar('date_created', \time());
+            $audio->setVar('date_updated', \time());
 
             $this->insert($audio);
             $saved_destination = $uploader->getSavedDestination();

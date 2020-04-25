@@ -3,16 +3,16 @@
     uid_owner: '2'
     uid_visitor: '1'
     uname_visitor: admin
-    datetime: '1587424126'
+    date_visited: '1587424126'
 -
     cod_visit: '11'
     uid_owner: '2'
     uid_visitor: '1'
     uname_visitor: admin
-    datetime: '1587424126'
+    date_visited: '1587424126'
 -
     cod_visit: '10'
     uid_owner: '1'
     uid_visitor: '2'
     uname_visitor: tester
-    datetime: '1587424126'
+    date_visited: '1587424126'

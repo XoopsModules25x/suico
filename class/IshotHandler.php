@@ -153,7 +153,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
             $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
-            $format .= 'cod_ishot=%u, uid_voter=%u, uid_voted=%u, ishot=%u, date=%s';
+            $format .= 'cod_ishot=%u, uid_voter=%u, uid_voted=%u, ishot=%u, date_created=%s';
             $format .= ' WHERE cod_ishot = %u';
             $sql    = \sprintf(
                 $format,

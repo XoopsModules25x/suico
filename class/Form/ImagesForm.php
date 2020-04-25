@@ -89,13 +89,13 @@ class ImagesForm extends XoopsThemeForm
         // Data_creation
         $this->addElement(
             new XoopsFormTextDateSelect(
-                AM_YOGURT_IMAGES_DATA_CREATION, 'data_creation', 0, formatTimeStamp($this->targetObject->getVar('data_creation'), 's')
+                AM_YOGURT_IMAGES_DATA_CREATION, 'date_created', 0, formatTimeStamp($this->targetObject->getVar('date_created'), 's')
             )
         );
         // Data_update
         $this->addElement(
             new XoopsFormTextDateSelect(
-                AM_YOGURT_IMAGES_DATA_UPDATE, 'data_update', 0, formatTimeStamp($this->targetObject->getVar('data_update'), 's')
+                AM_YOGURT_IMAGES_DATA_UPDATE, 'date_updated', 0, formatTimeStamp($this->targetObject->getVar('date_updated'), 's')
             )
         );
         // Uid_owner

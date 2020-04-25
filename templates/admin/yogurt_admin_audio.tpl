@@ -25,8 +25,8 @@
                     <th class="left"><{$selectorauthor}></th>
                     <th class="left"><{$selectorurl}></th>
                     <th class="left"><{$selectoruid_owner}></th>
-                    <th class="left"><{$selectordata_creation}></th>
-                    <th class="left"><{$selectordata_update}></th>
+                    <th class="left"><{$selectordate_created}></th>
+                    <th class="left"><{$selectordate_updated}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
@@ -39,8 +39,8 @@
                         <td class='left'><{$audioArray.author}></td>
                         <td class='left'><{$audioArray.url}></td>
                         <td class='left'><{$audioArray.uid_owner}></td>
-                        <td class='left'><{$audioArray.data_creation}></td>
-                        <td class='left'><{$audioArray.data_update}></td>
+                        <td class='left'><{$audioArray.date_created}></td>
+                        <td class='left'><{$audioArray.date_updated}></td>
 
 
                         <td class="center width5"><{$audioArray.edit_delete}></td>
@@ -59,8 +59,8 @@
                     <th class="left"><{$selectorauthor}></th>
                     <th class="left"><{$selectorurl}></th>
                     <th class="left"><{$selectoruid_owner}></th>
-                    <th class="left"><{$selectordata_creation}></th>
-                    <th class="left"><{$selectordata_update}></th>
+                    <th class="left"><{$selectordate_created}></th>
+                    <th class="left"><{$selectordate_updated}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>

@@ -63,8 +63,8 @@ switch ($op) {
         $notesObject->setVar('note_from', Request::getVar('note_from', ''));
         $notesObject->setVar('note_to', Request::getVar('note_to', ''));
         $notesObject->setVar('private', (1 === Request::getInt('private', 0) ? '1' : '0'));
-        $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date', '', 'POST'));
-        $notesObject->setVar('date', $dateTimeObj->getTimestamp());
+        $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_created', '', 'POST'));
+        $notesObject->setVar('date_created', $dateTimeObj->getTimestamp());
 
 
 
@@ -163,7 +163,7 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('notesRows', $notesTempRows);
         $notesArray = [];
 
-        //    $fields = explode('|', note_id:int:11::NOT NULL::primary:ID:0|note_text:text:0::NOT NULL:::Text:1|note_from:int:11::NOT NULL:::From:2|note_to:int:11::NOT NULL:::To:3|private:tinyint:1::NOT NULL:::Private:4|date:int:11::NOT NULL:CURRENT_TIMESTAMP::Date:5);
+        //    $fields = explode('|', note_id:int:11::NOT NULL::primary:ID:0|note_text:text:0::NOT NULL:::Text:1|note_from:int:11::NOT NULL:::From:2|note_to:int:11::NOT NULL:::To:3|private:tinyint:1::NOT NULL:::Private:4|date_created:int:11::NOT NULL:CURRENT_TIMESTAMP::Date:5);
         //    $fieldsCount    = count($fields);
 
         $criteria = new CriteriaCompo();
@@ -206,7 +206,7 @@ switch ($op) {
                 $notesArray['private'] = $notesTempArray[$i]->getVar('private');
 
                 $GLOBALS['xoopsTpl']->assign('selectordate', AM_YOGURT_NOTES_DATE);
-                $notesArray['date'] = formatTimeStamp($notesTempArray[$i]->getVar('date'), 's');
+                $notesArray['date_created'] = formatTimeStamp($notesTempArray[$i]->getVar('date_created'), 's');
 
                 $notesArray['edit_delete'] = "<a href='notes.php?op=edit&note_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='notes.php?op=delete&note_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>

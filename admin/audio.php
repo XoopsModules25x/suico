@@ -81,10 +81,10 @@ switch ($op) {
         }
 
         $audioObject->setVar('uid_owner', Request::getVar('uid_owner', ''));
-        $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('data_creation', '', 'POST'));
-        $audioObject->setVar('data_creation', $dateTimeObj->getTimestamp());
-        $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('data_update', '', 'POST'));
-        $audioObject->setVar('data_update', $dateTimeObj->getTimestamp());
+        $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_created', '', 'POST'));
+        $audioObject->setVar('date_created', $dateTimeObj->getTimestamp());
+        $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_updated', '', 'POST'));
+        $audioObject->setVar('date_updated', $dateTimeObj->getTimestamp());
 
         if ($audioHandler->insert($audioObject)) {
             redirect_header('audio.php?op=list', 2, AM_YOGURT_FORMOK);
@@ -181,7 +181,7 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('audioRows', $audioTempRows);
         $audioArray = [];
 
-        //    $fields = explode('|', audio_id:int:11::NOT NULL::primary:audio_id|title:varchar:256::NOT NULL:::title|author:varchar:256::NOT NULL:::author|url:varchar:256::NOT NULL:::url|uid_owner:int:11::NOT NULL:::uid_owner|data_creation:date:0::NOT NULL:::data_creation|data_update:timestamp:CURRENT_TIMESTAMP::NOT NULL:::data_update);
+        //    $fields = explode('|', audio_id:int:11::NOT NULL::primary:audio_id|title:varchar:256::NOT NULL:::title|author:varchar:256::NOT NULL:::author|url:varchar:256::NOT NULL:::url|uid_owner:int:11::NOT NULL:::uid_owner|date_created:date:0::NOT NULL:::date_created|date_updated:timestamp:CURRENT_TIMESTAMP::NOT NULL:::date_updated);
         //    $fieldsCount    = count($fields);
 
         $criteria = new CriteriaCompo();
@@ -220,11 +220,11 @@ switch ($op) {
                     XoopsUser::getUnameFromId($audioTempArray[$i]->getVar('uid_owner'))
                 );
 
-                $GLOBALS['xoopsTpl']->assign('selectordata_creation', AM_YOGURT_AUDIO_DATA_CREATION);
-                $audioArray['data_creation'] = formatTimeStamp($audioTempArray[$i]->getVar('data_creation'), 's');
+                $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_AUDIO_DATA_CREATION);
+                $audioArray['date_created'] = formatTimeStamp($audioTempArray[$i]->getVar('date_created'), 's');
 
-                $GLOBALS['xoopsTpl']->assign('selectordata_update', AM_YOGURT_AUDIO_DATA_UPDATE);
-                $audioArray['data_update'] = formatTimeStamp($audioTempArray[$i]->getVar('data_update'), 's');
+                $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_YOGURT_AUDIO_DATA_UPDATE);
+                $audioArray['date_updated'] = formatTimeStamp($audioTempArray[$i]->getVar('date_updated'), 's');
 
                 $audioArray['edit_delete'] = "<a href='audio.php?op=edit&audio_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='audio.php?op=delete&audio_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>

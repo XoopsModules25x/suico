@@ -124,7 +124,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
         if ($xoopsObject->isNew()) {
             // add / modify a Notes
             $xoopsObject = new Notes();
-            $format      = 'INSERT INTO %s (note_id, note_text, note_from, note_to, date, private)';
+            $format      = 'INSERT INTO %s (note_id, note_text, note_from, note_to, date_created, private)';
             $format      .= 'VALUES (%u, %s, %u, %u, %u,%u)';
             $sql         = \sprintf(
                 $format,
@@ -139,7 +139,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
             $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
-            $format .= 'note_id=%u, note_text=%s, note_from=%u, note_to=%u, date=%u, private=%u';
+            $format .= 'note_id=%u, note_text=%s, note_from=%u, note_to=%u, date_created=%u, private=%u';
             $format .= ' WHERE note_id = %u';
             $sql    = \sprintf(
                 $format,
@@ -299,7 +299,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
     ) {
         $myts = new MyTextSanitizer();
         $ret  = [];
-        $sql  = 'SELECT note_id, uid, uname, user_avatar, note_from, note_text, date FROM ' . $this->db->prefix(
+        $sql  = 'SELECT note_id, uid, uname, user_avatar, note_from, note_text, date_created FROM ' . $this->db->prefix(
             'yogurt_notes'
         ) . ', ' . $this->db->prefix(
                 'users'
@@ -325,7 +325,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
                 $temptext                 = $myts->xoopsCodeDecode($myrow['note_text'], 1);
                 $vetor[$i]['text']        = $myts->nl2Br($temptext);
                 $vetor[$i]['id']          = $myrow['note_id'];
-                $vetor[$i]['date']        = formatTimeStamp($myrow['date'], 's');
+                $vetor[$i]['date_created']        = formatTimeStamp($myrow['date_created'], 's');
 
                 $i++;
             }
