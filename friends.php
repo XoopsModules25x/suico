@@ -41,7 +41,7 @@ if (1 === $controller->isOwner) {
     $criteria_uidfriendrequest = new Criteria('friendrequestto_uid', $controller->uidOwner);
     $newFriendrequest          = $controller->friendrequestFactory->getObjects($criteria_uidfriendrequest);
     if ($newFriendrequest) {
-        $nb_friendrequest      = count($newFriendrequest);
+        $countFriendrequest      = count($newFriendrequest);
         $friendrequesterHandler = xoops_getHandler('member');
         $friendrequester        = $friendrequesterHandler->getUser($newFriendrequest[0]->getVar('friendrequester_uid'));
         $friendrequester_uid    = $friendrequester->getVar('uid');
@@ -56,11 +56,11 @@ if (1 === $controller->isOwner) {
  * Friends
  */
 $criteria_friends = new Criteria('friend1_uid', (int)$controller->uidOwner);
-$nb_friends       = $controller->friendshipsFactory->getCount($criteria_friends);
+$countFriends       = $controller->friendshipsFactory->getCount($criteria_friends);
 $criteria_friends->setLimit($helper->getConfig('friendsperpage'));
 $criteria_friends->setStart($start);
 $vetor = $controller->friendshipsFactory->getFriends('', $criteria_friends, 0);
-if (0 === $nb_friends) {
+if (0 === $countFriends) {
     $xoopsTpl->assign('lang_nofriendsyet', _MD_YOGURT_NOFRIENDSYET);
 }
 
@@ -84,7 +84,7 @@ $navegacao       = $navigationBar->renderImageNav(2);
 
 //requests to become friend
 if (1 === $friendrequest) {
-	$xoopsTpl->assign('lang_youhavexfriendrequests', sprintf(_MD_YOGURT_YOUHAVEXFRIENDREQUESTS, $nb_friendrequest));
+	$xoopsTpl->assign('lang_youhavexfriendrequests', sprintf(_MD_YOGURT_YOUHAVEXFRIENDREQUESTS, $countFriendrequest));
     $xoopsTpl->assign('friendrequester_uid', $friendrequester_uid);
     $xoopsTpl->assign('friendrequester_uname', $friendrequester_uname);
     $xoopsTpl->assign('friendrequester_avatar', $friendrequester_avatar);

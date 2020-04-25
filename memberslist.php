@@ -110,8 +110,8 @@ $nbSections = $controller->getNumbersSections();
             $userdata['uid']      = $foundusers[$j]->getVar('uid');
                     
             $criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
-            $criteria_isfriend = new CriteriaCompo(new Criteria('friend2_uid', $userdata['uid']));
-            $criteria_isfriend->add($criteria_friends);
+            $criteriaIsfriend = new CriteriaCompo(new Criteria('friend2_uid', $userdata['uid']));
+            $criteriaIsfriend->add($criteria_friends);
             $controller->isFriend = $controller->friendshipsFactory->getCount($criteria_isfriend);
             $userdata['isFriend'] = $controller->isFriend;
             

@@ -12,7 +12,7 @@
         <{$smarty.const._MD_YOGURT_GROUPSEARCHRESULT}>
     </h5>
 
-    <{if $nb_groups_all<=0}>
+    <{if $countGroups_all<=0}>
        <div class="alert alert-primary">
         <{$smarty.const._MD_YOGURT_NOMATCHGROUP}>
         </div>

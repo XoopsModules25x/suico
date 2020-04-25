@@ -39,11 +39,11 @@ $criteria_friends    = new Criteria('friend2_uid', $controller->uidOwner);
 $criteria_fans       = new Criteria('fan', 1);
 $criteria_compo_fans = new CriteriaCompo($criteria_friends);
 $criteria_compo_fans->add($criteria_fans);
-$nb_friends = $controller->friendshipsFactory->getCount($criteria_compo_fans);
+$countFriends = $controller->friendshipsFactory->getCount($criteria_compo_fans);
 $criteria_compo_fans->setLimit($helper->getConfig('friendsperpage'));
 $criteria_compo_fans->setStart($start);
 $vetor = $controller->friendshipsFactory->getFans('', $criteria_compo_fans, 0);
-if (0 === $nb_friends) {
+if (0 === $countFriends) {
     $xoopsTpl->assign('lang_nofansyet', _MD_YOGURT_NOFANSYET);
 }
 
@@ -57,7 +57,7 @@ $identifier = $owner::getUnameFromId($controller->uidOwner);
  * Creating the navigation bar if you have a lot of friends
  */
 $navigationBar = new XoopsPageNav(
-    $nb_friends,
+    $countFriends,
     $helper->getConfig('friendsperpage'),
     $start,
     'start',

@@ -90,15 +90,15 @@ class Audio extends XoopsObject
     ) {
         $db          = XoopsDatabaseFactory::getDatabaseConnection();
         $ret         = [];
-        $where_query = '';
+        $whereQuery = '';
         if (\is_array($criteria) && \count($criteria) > 0) {
-            $where_query = ' WHERE';
+            $whereQuery = ' WHERE';
             foreach ($criteria as $c) {
-                $where_query .= " ${c} AND";
+                $whereQuery .= " ${c} AND";
             }
-            $where_query = mb_substr($where_query, 0, -4);
+            $whereQuery = mb_substr($whereQuery, 0, -4);
         } elseif (!\is_array($criteria) && $criteria) {
-            $where_query = ' WHERE ' . $criteria;
+            $whereQuery = ' WHERE ' . $criteria;
         }
         if (!$asobject) {
             $sql    = 'SELECT audio_id FROM ' . $db->prefix('yogurt_audio') . "${where_query} ORDER BY ${sort} ${order}";

@@ -71,7 +71,8 @@ function about()
 {
     /** @var \XoopsModuleHandler $moduleHandler */
     $moduleHandler = xoops_getHandler('module');
-    $modulo        = $moduleHandler->getByDirname('yogurt');
+    /** @var \XoopsModule $modulo */
+    $modulo = $moduleHandler->getByDirname('yogurt');
     echo "<br style='clear: both;'>
 <img src='" . XOOPS_URL . '/modules/' . $modulo->getInfo('dirname') . '/' . $modulo->getInfo(
         'image'

@@ -510,7 +510,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
             );
         }
         $form->setExtra('enctype="multipart/form-data"');
-        $button_send                = new XoopsFormButton('', 'submit_button', _MD_YOGURT_UPDATEFRIEND, 'submit');
+        $buttonSend                = new XoopsFormButton('', 'submit_button', _MD_YOGURT_UPDATEFRIEND, 'submit');
         $field_friend_friendid      = new XoopsFormHidden('friend_uid', $friend->getVar('uid'));
         $field_friend_marker        = new XoopsFormHidden('marker', '1');
         $field_friend_friendshio_id = new XoopsFormHidden('friendship_id', $friendship->getVar('friendship_id'));
@@ -525,7 +525,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         $form->addElement($field_friend_funny);
         $form->addElement($field_friend_cool);
 
-        $form->addElement($button_send);
+        $form->addElement($buttonSend);
 
         $form->display();
     }

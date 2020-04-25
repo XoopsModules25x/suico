@@ -317,7 +317,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         while (false !== ($row = $db->fetchArray($result))) {
             $modules[] = (int)$row['module_id'];
         }
-        $is_custom = ('C' === $myblock->getVar('block_type') || 'E' === $myblock->getVar('block_type'));
+        $isCustom = ('C' === $myblock->getVar('block_type') || 'E' === $myblock->getVar('block_type'));
         $block     = [
             'title'      => $myblock->getVar('title') . ' Clone',
             'form_title' => constant('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS_CLONEBLOCK'),
@@ -327,7 +327,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
             'visible'    => $myblock->getVar('visible'),
             'content'    => $myblock->getVar('content', 'N'),
             'modules'    => $modules,
-            'is_custom'  => $is_custom,
+            'is_custom'  => $isCustom,
             'ctype'      => $myblock->getVar('c_type'),
             'bcachetime' => $myblock->getVar('bcachetime'),
             'op'         => 'clone_ok',
@@ -474,7 +474,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         while (false !== ($row = $db->fetchArray($result))) {
             $modules[] = (int)$row['module_id'];
         }
-        $is_custom = ('C' === $myblock->getVar('block_type') || 'E' === $myblock->getVar('block_type'));
+        $isCustom = ('C' === $myblock->getVar('block_type') || 'E' === $myblock->getVar('block_type'));
         $block     = [
             'title'      => $myblock->getVar('title'),
             'form_title' => constant('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS_EDITBLOCK'),
@@ -484,7 +484,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
             'visible'    => $myblock->getVar('visible'),
             'content'    => $myblock->getVar('content', 'N'),
             'modules'    => $modules,
-            'is_custom'  => $is_custom,
+            'is_custom'  => $isCustom,
             'ctype'      => $myblock->getVar('c_type'),
             'bcachetime' => $myblock->getVar('bcachetime'),
             'op'         => 'edit_ok',

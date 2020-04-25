@@ -17,7 +17,7 @@
     <form name="form_picture" id="form_picture" action="submitImage.php" method="post" enctype="multipart/form-data">
        <{$token}>
 		<div class="form-group">
-		<label for="album"><{$lang_youcanupload}><br><{$lang_nb_pict}> <{$lang_max_nb_pict}></label>
+		<label for="album"><{$lang_youcanupload}><br><{$lang_countPicture}> <{$lang_max_countPicture}></label>
         </div>
 		
 		<div class="form-group">

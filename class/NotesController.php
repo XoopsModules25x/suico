@@ -70,15 +70,15 @@ class NotesController extends YogurtController
     //  }
 
     /**
-     * @param                                      $nb_notes
+     * @param                                      $countNotes
      * @param \CriteriaElement|\CriteriaCompo|null $criteria
      * @return bool|array
      */
     public function fetchNotes(
-        $nb_notes,
+        $countNotes,
         $criteria
     ) {
-        $notes = $this->notesFactory->getNotes($nb_notes, $criteria);
+        $notes = $this->notesFactory->getNotes($countNotes, $criteria);
         if ($notes) {
             return $notes;
         }

@@ -42,7 +42,7 @@ $criteria_title  = new Criteria('group_title', '%' . $group_keyword . '%', 'LIKE
 $criteria_desc   = new Criteria('group_desc', '%' . $group_keyword . '%', 'LIKE');
 $criteria_groups = new CriteriaCompo($criteria_title);
 $criteria_groups->add($criteria_desc, 'OR');
-$nb_groups = $controller->groupsFactory->getCount($criteria_groups);
+$countGroups = $controller->groupsFactory->getCount($criteria_groups);
 $criteria_groups->setLimit($helper->getConfig('groupsperpage'));
 $criteria_groups->setStart($start_all);
 $groups_objects = $controller->groupsFactory->getObjects($criteria_groups);
@@ -61,7 +61,7 @@ foreach ($groups_objects as $group_object) {
  */
 $mygroups          = '';
 $criteria_mygroups = new Criteria('rel_user_uid', $controller->uidOwner);
-$nb_mygroups       = $controller->relgroupusersFactory->getCount($criteria_mygroups);
+$countMyGroups       = $controller->relgroupusersFactory->getCount($criteria_mygroups);
 $criteria_mygroups->setLimit($helper->getConfig('groupsperpage'));
 $criteria_mygroups->setStart($start_my);
 $mygroups = $controller->relgroupusersFactory->getGroups('', $criteria_mygroups, 0);
@@ -76,7 +76,7 @@ foreach ($mygroups as $value) {
  * Creating the navigation bar if you have a lot of friends
  */
 $navigationBar = new XoopsPageNav(
-    $nb_groups,
+    $countGroups,
     $helper->getConfig('groupsperpage'),
     $start_all,
     'start_all',
@@ -104,16 +104,16 @@ $xoopsTpl->assign('section_name', _MD_YOGURT_GROUPS);
 $xoopsTpl->assign('groups', $groups);
 //$xoopsTpl->assign('mygroups',$mygroups);
 $xoopsTpl->assign('lang_mygroupstitle', _MD_YOGURT_MYGROUPS);
-$xoopsTpl->assign('lang_groupstitle', _MD_YOGURT_ALLGROUPS . ' (' . $nb_groups . ')');
+$xoopsTpl->assign('lang_groupstitle', _MD_YOGURT_ALLGROUPS . ' (' . $countGroups . ')');
 $xoopsTpl->assign('lang_nogroupsyet', _MD_YOGURT_NOGROUPSYET);
 
 //page nav
 $xoopsTpl->assign('navigationBar', $imageNav);
 //$xoopsTpl->assign('navigationBar_my',$imageNav_my);
-//$xoopsTpl->assign('nb_groups',$nb_mygroups);// this is the one wich shows in the upper bar actually is about the mygroups
+//$xoopsTpl->assign('countGroups',$countMyGroups);// this is the one wich shows in the upper bar actually is about the mygroups
 $xoopsTpl->assign(
-    'nb_groups_all',
-    $nb_groups
+    'countGroups_all',
+    $countGroups
 ); //this is total number of groups
 
 $xoopsTpl->assign('lang_creategroup', _MD_YOGURTCREATEYOURGROUP);

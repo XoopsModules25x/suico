@@ -84,10 +84,10 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         }
         $numrows = $this->db->getRowsNum($result);
         if (1 === $numrows) {
-            $yogurt_visitors = new Visitors();
-            $yogurt_visitors->assignVars($this->db->fetchArray($result));
+            $visitors = new Visitors();
+            $visitors->assignVars($this->db->fetchArray($result));
 
-            return $yogurt_visitors;
+            return $visitors;
         }
 
         return false;
@@ -223,8 +223,8 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
             return $ret;
         }
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $yogurt_visitors = new Visitors();
-            $yogurt_visitors->assignVars($myrow);
+            $visitors = new Visitors();
+            $visitors->assignVars($myrow);
             if (!$id_as_key) {
                 $ret[] = &$yogurt_visitors;
             } else {

@@ -129,7 +129,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
             $sql         = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_notes'),
-                $note_id,
+                $noteId,
                 $this->db->quoteString($note_text),
                 $note_from,
                 $note_to,
@@ -144,13 +144,13 @@ class NotesHandler extends XoopsPersistableObjectHandler
             $sql    = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_notes'),
-                $note_id,
+                $noteId,
                 $this->db->quoteString($note_text),
                 $note_from,
                 $note_to,
                 $date_created,
                 $private,
-                $note_id
+                $noteId
             );
         }
         if ($force) {
@@ -161,10 +161,10 @@ class NotesHandler extends XoopsPersistableObjectHandler
         if (!$result) {
             return false;
         }
-        if (empty($note_id)) {
-            $note_id = $this->db->getInsertId();
+        if (empty($noteId)) {
+            $noteId = $this->db->getInsertId();
         }
-        $xoopsObject->assignVar('note_id', $note_id);
+        $xoopsObject->assignVar('note_id', $noteId);
 
         return true;
     }

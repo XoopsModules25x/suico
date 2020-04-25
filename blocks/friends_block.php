@@ -43,7 +43,7 @@ function b_yogurt_friends_show($options)
          * Filter for fetch votes ishot and isnothot
          */
 
-        $criteria_2 = new Criteria(
+        $criteria2 = new Criteria(
             'friend1_uid',
             $xoopsUser->getVar(
                 'uid'
@@ -56,11 +56,11 @@ function b_yogurt_friends_show($options)
         //$albumFactory      = new ImagesHandler($xoopsDB);
         $friendsFactory = new Yogurt\FriendshipHandler($xoopsDB);
 
-        $block['friends'] = $friendsFactory->getFriends($options[0], $criteria_2);
+        $block['friends'] = $friendsFactory->getFriends($options[0], $criteria2);
 
         $block['lang_allfriends'] = _MB_YOGURT_ALLFRIENDS;
         $block['lang_nofriends']  = _MB_YOGURT_NOFRIENDSYET;
-        $block['enablepm']        = $options[1];
+        $block['enablepm']        = isset($options[1])?$options[1]:'';
 
         return $block;
     }

@@ -124,7 +124,7 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
             $xoopsObject = new Relgroupuser();
             $format      = 'INSERT INTO %s (rel_id, rel_group_id, rel_user_uid)';
             $format      .= 'VALUES (%u, %u, %u)';
-            $sql         = \sprintf($format, $this->db->prefix('yogurt_relgroupuser'), $rel_id, $rel_group_id, $rel_user_uid);
+            $sql         = \sprintf($format, $this->db->prefix('yogurt_relgroupuser'), $relId, $rel_group_id, $rel_user_uid);
             $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
@@ -133,10 +133,10 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
             $sql    = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_relgroupuser'),
-                $rel_id,
+                $relId,
                 $rel_group_id,
                 $rel_user_uid,
-                $rel_id
+                $relId
             );
         }
         if ($force) {
@@ -147,10 +147,10 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
         if (!$result) {
             return false;
         }
-        if (empty($rel_id)) {
-            $rel_id = $this->db->getInsertId();
+        if (empty($relId)) {
+            $relId = $this->db->getInsertId();
         }
-        $xoopsObject->assignVar('rel_id', $rel_id);
+        $xoopsObject->assignVar('rel_id', $relId);
 
         return true;
     }

@@ -172,7 +172,7 @@ if (1 === $controller->isOwner) {
     $criteria_uidfriendrequest = new Criteria('friendrequestto_uid', $controller->uidOwner);
     $newFriendrequest          = $controller->friendrequestFactory->getObjects($criteria_uidfriendrequest);
     if ($newFriendrequest) {
-        $nb_friendrequest      = count($newFriendrequest);
+        $countFriendrequest      = count($newFriendrequest);
         $friendrequesterHandler = xoops_getHandler('member');
         $friendrequester        = $friendrequesterHandler->getUser($newFriendrequest[0]->getVar('friendrequester_uid'));
         $friendrequester_uid    = $friendrequester->getVar('uid');
@@ -185,7 +185,7 @@ if (1 === $controller->isOwner) {
  
 //requests to become friend
 if (1 === $friendrequest) {
-	$xoopsTpl->assign('lang_youhavexfriendrequests', sprintf(_MD_YOGURT_YOUHAVEXFRIENDREQUESTS, $nb_friendrequest));
+	$xoopsTpl->assign('lang_youhavexfriendrequests', sprintf(_MD_YOGURT_YOUHAVEXFRIENDREQUESTS, $countFriendrequest));
     $xoopsTpl->assign('friendrequester_uid', $friendrequester_uid);
     $xoopsTpl->assign('friendrequester_uname', $friendrequester_uname);
     $xoopsTpl->assign('friendrequester_avatar', $friendrequester_avatar);
@@ -225,8 +225,8 @@ $xoopsTpl->assign('lang_detailsinfo', _MD_YOGURT_USER_DETAILS);
 $xoopsTpl->assign('lang_contactinfo', _MD_YOGURT_CONTACTINFO);
 //$xoopsTpl->assign('path_yogurt_uploads',$helper->getConfig('link_path_upload'));
 $xoopsTpl->assign(
-    'lang_max_nb_pict',
-    sprintf(_MD_YOGURT_YOUCANHAVE, $helper->getConfig('nb_pict'))
+    'lang_max_countPicture',
+    sprintf(_MD_YOGURT_YOUCANHAVE, $helper->getConfig('countPicture'))
 );
 $xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
 $xoopsTpl->assign('lang_editdesc', _MD_YOGURT_EDIT_DESC);

@@ -103,7 +103,7 @@ if (isset($nbSections[NBPHOTOS]) && 0 === $nbSections[NBPHOTOS]) {
  */
 $maxfilebytes = $helper->getConfig('maxfilesize');
 if (!empty($xoopsUser)) {
-    if ((isset($nbSections[NBPHOTOS]) && 1 === $controller->isOwner) && $helper->getConfig('nb_pict') > $nbSections[NBPHOTOS]) {
+    if ((isset($nbSections[NBPHOTOS]) && 1 === $controller->isOwner) && $helper->getConfig('countPicture') > $nbSections[NBPHOTOS]) {
 //        $maxfilebytes = $helper->getConfig('maxfilesize');
         $xoopsTpl->assign('maxfilebytes', $maxfilebytes);
         $xoopsTpl->assign('showForm', '1');
@@ -141,12 +141,12 @@ $xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOU_CAN_UPLOAD, $maxfi
 
 //$xoopsTpl->assign('path_yogurt_uploads',$helper->getConfig('link_path_upload'));
 $xoopsTpl->assign(
-    'lang_max_nb_pict',
-    sprintf(_MD_YOGURT_YOUCANHAVE, $helper->getConfig('nb_pict'))
+    'lang_max_countPicture',
+    sprintf(_MD_YOGURT_YOUCANHAVE, $helper->getConfig('countPicture'))
 );
 $xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
 $xoopsTpl->assign('lang_editdesc', _MD_YOGURT_EDIT_DESC);
-$xoopsTpl->assign('lang_nb_pict', sprintf(_MD_YOGURT_YOUHAVE, ($nbSections[NBPHOTOS] ?? '')));
+$xoopsTpl->assign('lang_countPicture', sprintf(_MD_YOGURT_YOUHAVE, ($nbSections[NBPHOTOS] ?? '')));
 
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 $xoopsTpl->assign('navegacao', $navegacao);

@@ -45,14 +45,14 @@
         
     </h5>
 
-    <{if $nb_groups<=0}>
+    <{if $countGroups<=0}>
         <div class="alert alert-primary">
             <{$lang_nogroupsyet}>
         </div>
     <{/if}>
 
 
-<{if $nb_groups!=0}>
+<{if $countGroups!=0}>
 <table id="table_id" class="table table-striped">
     <thead>
         <tr>
@@ -123,13 +123,13 @@
 			<a name="allgroups"><{$lang_availablegroups}> <span class="badge badge-pill badge-primary"><{$groupstotal}></span></a>
     </h5>
 
- <{if $nb_groups_all<=0}>
+ <{if $countGroups_all<=0}>
         <div class="alert alert-primary">
             <{$lang_nogroupsyet}>
         </div>
     <{/if}>
 
-<{if $nb_groups_all!=0}>
+<{if $countGroups_all!=0}>
 
 <table class="table table-striped">
     <thead>

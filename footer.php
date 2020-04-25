@@ -99,12 +99,12 @@ if ($xoopsUser && $xoopsUser->isAdmin(1)) {
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
-$xoopsTpl->assign('nb_groups', $nbSections['nbGroups']);
-$xoopsTpl->assign('nb_photos', $nbSections['nbPhotos']);
-$xoopsTpl->assign('nb_videos', $nbSections['nbVideos']);
-$xoopsTpl->assign('nb_notes', $nbSections['nbNotes']);
-$xoopsTpl->assign('nb_friends', $nbSections['nbFriends']);
-$xoopsTpl->assign('nb_audio', $nbSections['nbAudio']);
+$xoopsTpl->assign('countGroups', $nbSections['nbGroups']);
+$xoopsTpl->assign('countPhotos', $nbSections['nbPhotos']);
+$xoopsTpl->assign('countVideos', $nbSections['nbVideos']);
+$xoopsTpl->assign('countNotes', $nbSections['nbNotes']);
+$xoopsTpl->assign('countFriends', $nbSections['nbFriends']);
+$xoopsTpl->assign('countAudio', $nbSections['nbAudio']);
 
 //navbar
 $xoopsTpl->assign('module_name', $xoopsModule->getVar('name'));
@@ -168,7 +168,7 @@ if (1 === $controller->isOwner) {
     $criteria_uidrequest = new Criteria('friendrequestto_uid', $controller->uidOwner);
     $newFriendrequest          = $controller->friendrequestFactory->getObjects($criteria_uidrequest);
     if ($newFriendrequest) {
-        $nb_friendrequests      = count($newFriendrequest);
+        $countFriendrequests      = count($newFriendrequest);
         $friendrequesterHandler = xoops_getHandler('member');
         $friendrequester        = $friendrequesterHandler->getUser($newFriendrequest[0]->getVar('requester_uid'));
         $friendrequester_uid    = $friendrequester->getVar('uid');
@@ -179,9 +179,9 @@ if (1 === $controller->isOwner) {
     }
 }
 			$criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
-            $criteria_isfriend = new CriteriaCompo(new Criteria('friend2_uid', $xoopsUser->getVar('uid')));
-            $criteria_isfriend->add($criteria_friends);
-            $controller->isFriend = $controller->friendshipsFactory->getCount($criteria_isfriend);
+            $criteriaIsfriend = new CriteriaCompo(new Criteria('friend2_uid', $xoopsUser->getVar('uid')));
+            $criteriaIsfriend->add($criteria_friends);
+            $controller->isFriend = $controller->friendshipsFactory->getCount($criteriaIsfriend);
 			$xoopsTpl->assign('isFriend', $controller->isFriend);
 			
 			$friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
@@ -212,7 +212,7 @@ $evaluation = $controller->friendshipsFactory->getMoyennes($controller->uidOwner
 
 //evaluations
 $xoopsTpl->assign('lang_fans', _MD_YOGURT_FANS);
-$xoopsTpl->assign('nb_fans', $evaluation['sumfan']);
+$xoopsTpl->assign('countFans', $evaluation['sumfan']);
 $xoopsTpl->assign('lang_funny', _MD_YOGURT_FUNNY);
 $xoopsTpl->assign('funny', $evaluation['mediatrust']);
 $xoopsTpl->assign('funny_rest', 48 - $evaluation['mediatrust']);
@@ -226,7 +226,7 @@ $xoopsTpl->assign('allow_fanssevaluation', $helper->getConfig('allow_fanssevalua
 
 //request to become friend
 if (1 === $friendrequest) {
-    $xoopsTpl->assign('lang_youhavexfriendrequests', sprintf(_MD_YOGURT_YOUHAVEXFRIENDREQUESTS, $nb_friendrequests));
+    $xoopsTpl->assign('lang_youhavexfriendrequests', sprintf(_MD_YOGURT_YOUHAVEXFRIENDREQUESTS, $countFriendrequests));
     $xoopsTpl->assign('requester_uid', $friendrequester_uid);
     $xoopsTpl->assign('requester_uname', $friendrequester_uname);
     $xoopsTpl->assign('requester_avatar', $friendrequester_avatar);

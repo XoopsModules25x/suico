@@ -55,7 +55,7 @@
         </a>
     </h5>
 
- <{if $nb_videos<=0}>
+ <{if $countVideos<=0}>
 		<div class="alert alert-primary"><{$lang_novideoyet}></div>
     <{/if}>
 

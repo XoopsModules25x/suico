@@ -92,10 +92,10 @@ class VideoHandler extends XoopsPersistableObjectHandler
         }
         $numrows = $this->db->getRowsNum($result);
         if (1 === $numrows) {
-            $yogurt_video = new Video();
-            $yogurt_video->assignVars($this->db->fetchArray($result));
+            $video = new Video();
+            $video->assignVars($this->db->fetchArray($result));
 
-            return $yogurt_video;
+            return $video;
         }
 
         return false;
@@ -233,14 +233,14 @@ class VideoHandler extends XoopsPersistableObjectHandler
             return $ret;
         }
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $yogurt_video = new Video();
-            $yogurt_video->assignVars($myrow);
+            $video = new Video();
+            $video->assignVars($myrow);
             if (!$id_as_key) {
-                $ret[] = &$yogurt_video;
+                $ret[] = &$video;
             } else {
-                $ret[$myrow['video_id']] = &$yogurt_video;
+                $ret[$myrow['video_id']] = &$video;
             }
-            unset($yogurt_video);
+            unset($video);
         }
 
         return $ret;
@@ -307,13 +307,13 @@ class VideoHandler extends XoopsPersistableObjectHandler
         $field_code = new XoopsFormText(_MD_YOGURT_YOUTUBECODE, 'codigo', 50, 250);
         $field_desc = new XoopsFormTextArea(_MD_YOGURT_CAPTION, 'caption');
         $form->setExtra('enctype="multipart/form-data"');
-        $button_send = new XoopsFormButton('', 'submit_button', _MD_YOGURT_ADDVIDEO, 'submit');
+        $buttonSend = new XoopsFormButton('', 'submit_button', _MD_YOGURT_ADDVIDEO, 'submit');
 
         $form->addElement($field_warning);
         $form->addElement($field_code, true);
         $form->addElement($field_desc);
 
-        $form->addElement($button_send);
+        $form->addElement($buttonSend);
         $form->assign($xoopsTpl); //If your server is php 5
         //$form->display();
 
@@ -336,7 +336,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
         $form       = new XoopsThemeForm(_MD_YOGURT_EDIT_DESC, 'form_picture', 'editdescvideo.php', 'post', true);
         $field_desc = new XoopsFormText($caption, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
-        $button_send    = new XoopsFormButton('', 'submit_button', _MD_YOGURT_SUBMIT, 'submit');
+        $buttonSend    = new XoopsFormButton('', 'submit_button', _MD_YOGURT_SUBMIT, 'submit');
         $field_warning  = new XoopsFormLabel(
             '<object width="425" height="353">
 <param name="movie" value="http://www.youtube.com/v/' . $filename . '"></param>
@@ -350,7 +350,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
         $form->addElement($field_desc);
         $form->addElement($field_video_id, true);
         $form->addElement($field_marker);
-        $form->addElement($button_send);
+        $form->addElement($buttonSend);
         $form->display();
 
         return true;

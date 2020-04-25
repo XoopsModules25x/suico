@@ -46,7 +46,7 @@
         <{$section_name}>
     </h5>
 
-  <{if $nb_audio > 0}>
+  <{if $countAudio > 0}>
   
 <div id="yogurt-audio-allaudiocontainer">
 

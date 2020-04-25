@@ -77,8 +77,8 @@ class AudioHandler extends XoopsPersistableObjectHandler
      * @return mixed reference to the {@link yogurt_audio} object, FALSE if failed
      */
     public function get2(
-        $id = null,
-        $fields = null
+        $id = null
+//        $fields = null
     ) {
         $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_audio') . ' WHERE audio_id=' . $id;
         if (!$result = $this->db->query($sql)) {
@@ -120,7 +120,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
-        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+//        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
         if ($xoopsObject->isNew()) {
             // adding / modifying a yogurt_audio
             $xoopsObject = new Audio();

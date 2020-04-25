@@ -139,7 +139,7 @@
 	
 	<{if $allow_profile_general==1}>
     <{if $allow_friends==1}>
-	<{if $nb_friends!=0}>
+	<{if $countFriends!=0}>
             <br><h5><{$lang_friends}> <i class="fa fa-address-card-o"></i></h5>
 			<div class="container-fluid">
 			<div class="row row-cols-4 border">
@@ -156,9 +156,9 @@
                 </div>
             <{/section}>
 			</div>
-            <{if $nb_friends!=0}>
+            <{if $countFriends!=0}>
                 <div class="row p-2">
-                    <a href="friends.php?uid=<{$uid_owner}>" class="btn btn-primary btn-sm "> <i class='fa fa-arrow-circle-right'></i> <{$lang_viewallfriends}>  <span class="badge badge-pill badge-light"><{$nb_friends}></span></a>
+                    <a href="friends.php?uid=<{$uid_owner}>" class="btn btn-primary btn-sm "> <i class='fa fa-arrow-circle-right'></i> <{$lang_viewallfriends}>  <span class="badge badge-pill badge-light"><{$countFriends}></span></a>
                 </div>
             <{/if}>
 		</div>
@@ -168,7 +168,7 @@
 	
 	<{if $allow_profile_general==1}>
     <{if $allow_groups==1}><br>
-        <{if $nb_groups!=0}>
+        <{if $countGroups!=0}>
 		
             <br><h5><{$lang_groups}> <i class="fa fa-group"></i></h5>
 			<div class="container-fluid">
@@ -182,9 +182,9 @@
                 </div>
             <{/section}>
 				</div>
-			<{if $nb_groups!=0}>
+			<{if $countGroups!=0}>
                 <div class="row p-2">
-                    <br><a href="groups.php?uid=<{$uid_owner}>" class="btn btn-primary btn-sm "><i class='fa fa-arrow-circle-right'></i> <{$lang_viewallgroups}>  <span class="badge badge-pill badge-light"><{$nb_groups}></span> </a>
+                    <br><a href="groups.php?uid=<{$uid_owner}>" class="btn btn-primary btn-sm "><i class='fa fa-arrow-circle-right'></i> <{$lang_viewallgroups}>  <span class="badge badge-pill badge-light"><{$countGroups}></span> </a>
                 </div>
             <{/if}>
         </div>

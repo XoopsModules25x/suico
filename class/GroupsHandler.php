@@ -126,7 +126,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
-        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+//        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Groups
             $xoopsObject = new Groups();
@@ -354,7 +354,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $field_title   = new XoopsFormText(_MD_YOGURT_GROUP_TITLE, 'group_title', 35, 55);
         $field_desc    = new XoopsFormText(_MD_YOGURT_GROUP_DESC, 'group_desc', 35, 55);
         $field_marker  = new XoopsFormHidden('marker', '1');
-        $button_send   = new XoopsFormButton('', 'submit_button', _MD_YOGURT_UPLOADGROUP, 'submit');
+        $buttonSend   = new XoopsFormButton('', 'submit_button', _MD_YOGURT_UPLOADGROUP, 'submit');
         $field_warning = new XoopsFormLabel(\sprintf(_MD_YOGURT_YOU_CAN_UPLOAD, $maxbytes / 1024));
 
         $form->addElement($field_warning);
@@ -363,7 +363,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $form->addElement($field_title);
         $form->addElement($field_desc);
         $form->addElement($field_marker);
-        $form->addElement($button_send);
+        $form->addElement($buttonSend);
         $form->display();
 
         return true;
@@ -386,7 +386,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $field_title   = new XoopsFormText(_MD_YOGURT_GROUP_TITLE, 'title', 35, 55, $group->getVar('group_title'));
         $field_desc    = new XoopsFormTextArea(_MD_YOGURT_GROUP_DESC, 'desc', $group->getVar('group_desc'));
         $field_marker  = new XoopsFormHidden('marker', '1');
-        $button_send   = new XoopsFormButton('', 'submit_button', _MD_YOGURT_UPLOADGROUP, 'submit');
+        $buttonSend   = new XoopsFormButton('', 'submit_button', _MD_YOGURT_UPLOADGROUP, 'submit');
         $field_warning = new XoopsFormLabel(\sprintf(_MD_YOGURT_YOU_CAN_UPLOAD, $maxbytes / 1024));
 
         $field_oldpicture = new XoopsFormLabel(
@@ -409,7 +409,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $form->addElement($field_title);
         $form->addElement($field_desc);
         $form->addElement($field_marker);
-        $form->addElement($button_send);
+        $form->addElement($buttonSend);
         $form->display();
         echo "
         <!-- Start Form Validation JavaScript //-->

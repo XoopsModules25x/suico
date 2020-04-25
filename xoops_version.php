@@ -332,7 +332,7 @@ $modversion['config'][] = [
 ];
 
 $modversion['config'][] = [
-    'name'        => 'nb_pict',
+    'name'        => 'countPicture',
     'title'       => '_MI_YOGURT_NUMBPICT_TITLE',
     'description' => '_MI_YOGURT_NUMBPICT_DESC',
     'default'     => 12,
@@ -453,7 +453,7 @@ $modversion['config'][] = [
 ];
 
 $modversion['config'][] = [
-    'name'        => 'nb_audio',
+    'name'        => 'countAudio',
     'title'       => '_MI_YOGURT_NUMBAUDIO_TITLE',
     'description' => '_MI_YOGURT_NUMBAUDIO_DESC',
     'default'     => 12,

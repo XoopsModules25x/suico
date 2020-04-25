@@ -68,7 +68,7 @@
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
                 <tr>
-                    <td class="errorMsg" colspan="11">There are no $images</td>
+                    <td class="errorMsg" colspan="11">There are no images</td>
                 </tr>
             </table>
     </div>

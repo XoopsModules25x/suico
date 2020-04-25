@@ -107,12 +107,12 @@ if (1 === $marker && $group->getVar('owner_uid') === $uid) {
     $xoopsTpl->assign('isAnonym', $controller->isAnonym);
 
     //numbers
-    $xoopsTpl->assign('nb_groups', $nbSections['nbGroups']);
-    $xoopsTpl->assign('nb_photos', $nbSections['nbPhotos']);
-    $xoopsTpl->assign('nb_videos', $nbSections['nbVideos']);
-    $xoopsTpl->assign('nb_notes', $nbSections['nbNotes']);
-    $xoopsTpl->assign('nb_friends', $nbSections['nbFriends']);
-    $xoopsTpl->assign('nb_audio', $nbSections['nbAudio']);
+    $xoopsTpl->assign('countGroups', $nbSections['nbGroups']);
+    $xoopsTpl->assign('countPhotos', $nbSections['nbPhotos']);
+    $xoopsTpl->assign('countVideos', $nbSections['nbVideos']);
+    $xoopsTpl->assign('countNotes', $nbSections['nbNotes']);
+    $xoopsTpl->assign('countFriends', $nbSections['nbFriends']);
+    $xoopsTpl->assign('countAudio', $nbSections['nbAudio']);
 
     //navbar
     $xoopsTpl->assign('module_name', $xoopsModule->getVar('name'));

@@ -70,18 +70,18 @@ class Resizer
                 } else {
                     $new_width  = $this->maxWidth;
                     $divisor    = $width / $new_width;
-                    $new_height = (int)\floor($height / $divisor);
+                    $newHeight = (int)\floor($height / $divisor);
                 }
             } elseif ($height < $this->maxHeight) {
-                $new_height = (int)$height;
+                $newHeight = (int)$height;
             } else {
-                $new_height = $this->maxHeight;
-                $divisor    = $height / $new_height;
+                $newHeight = $this->maxHeight;
+                $divisor    = $height / $newHeight;
                 $new_width  = (int)\floor($width / $divisor);
             }
 
             // Create a new temporary image.
-            $tmpimg = \imagecreatetruecolor($new_width, $new_height);
+            $tmpimg = \imagecreatetruecolor($new_width, $newHeight);
             imagealphablending($tmpimg, false);
             imagesavealpha($tmpimg, true);
 
@@ -94,7 +94,7 @@ class Resizer
                 0,
                 0,
                 $new_width,
-                $new_height,
+                $newHeight,
                 $width,
                 $height
             );
