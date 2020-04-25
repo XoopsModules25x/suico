@@ -90,8 +90,8 @@ if (1 === $friendrequest) {
     $xoopsTpl->assign('friendrequester_avatar', $friendrequester_avatar);
     $xoopsTpl->assign('friendrequest', $friendrequest);
     $xoopsTpl->assign('friendrequest_id', $friendrequest_id);
-    $xoopsTpl->assign('lang_rejected', _MD_YOGURT_UNKNOWNREJECTING);
-    $xoopsTpl->assign('lang_accepted', _MD_YOGURT_UNKNOWNACCEPTING);
+    $xoopsTpl->assign('lang_rejected', _MD_YOGURT_UNKNOWN_REJECTING);
+    $xoopsTpl->assign('lang_accepted', _MD_YOGURT_UNKNOWN_ACCEPTING);
     $xoopsTpl->assign('lang_acquaintance', _MD_YOGURT_AQUAITANCE);
     $xoopsTpl->assign('lang_friend', _MD_YOGURT_FRIEND);
     $xoopsTpl->assign('lang_bestfriend', _MD_YOGURT_BESTFRIEND);
@@ -100,13 +100,13 @@ if (1 === $friendrequest) {
 }
 $xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
 $xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
-$xoopsTpl->assign('lang_friendrequestpending', _MD_YOGURT_FRIENDREQUESTPENDING);
+$xoopsTpl->assign('lang_friendrequestpending', _MD_YOGURT_FRIENDREQUEST_PENDING);
 $xoopsTpl->assign('lang_myfriend', _MD_YOGURT_MYFRIEND);
-$xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUESTSENT);
-$xoopsTpl->assign('lang_acceptfriend', _MD_YOGURT_ACCEPTFRIEND);
-$xoopsTpl->assign('lang_rejectfriend', _MD_YOGURT_REJECTFRIEND);
-$xoopsTpl->assign('lang_deletefriend', _MD_YOGURT_DELETEFRIENDSHIP);
-$xoopsTpl->assign('lang_friendshipsettings', _MD_YOGURT_FRIENDSHIPSETTINGS);
+$xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUEST_SENT);
+$xoopsTpl->assign('lang_acceptfriend', _MD_YOGURT_FRIEND_ACCEPT);
+$xoopsTpl->assign('lang_rejectfriend', _MD_YOGURT_FRIEND_REJECT);
+$xoopsTpl->assign('lang_deletefriend', _MD_YOGURT_FRIENDSHIP_DELETE);
+$xoopsTpl->assign('lang_friendshipsettings', _MD_YOGURT_FRIENDSHIP_SETTINGS);
 
 //navbar
 $xoopsTpl->assign('module_name', $xoopsModule->getVar('name'));
@@ -117,7 +117,7 @@ $xoopsTpl->assign('lang_friendstitle', sprintf(_MD_YOGURT_FRIENDSTITLE, $identif
 $xoopsTpl->assign('friends', $vetor);
 
 $xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
-$xoopsTpl->assign('lang_evaluate', _MD_YOGURT_FRIENDSHIPCONFIGS);
+$xoopsTpl->assign('lang_evaluate', _MD_YOGURT_FRIENDSHIP_CONFIGS);
 $xoopsTpl->assign('allow_friendshiplevel', $helper->getConfig('allow_friendshiplevel'));
 $xoopsTpl->assign('allow_fanssevaluation', $helper->getConfig('allow_fanssevaluation'));
 

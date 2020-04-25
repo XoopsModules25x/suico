@@ -122,10 +122,10 @@ class NotesHandler extends XoopsPersistableObjectHandler
         }
         $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
         if ($xoopsObject->isNew()) {
-            // ajout/modification d'unNotes
+            // add / modify a Notes
             $xoopsObject = new Notes();
-            $format      = 'INSERT INTO %s (note_id, note_text, note_from, note_to, private)';
-            $format      .= 'VALUES (%u, %s, %u, %u, %u)';
+            $format      = 'INSERT INTO %s (note_id, note_text, note_from, note_to, date, private)';
+            $format      .= 'VALUES (%u, %s, %u, %u, %u,%u)';
             $sql         = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_notes'),
@@ -133,12 +133,13 @@ class NotesHandler extends XoopsPersistableObjectHandler
                 $this->db->quoteString($note_text),
                 $note_from,
                 $note_to,
+                $date,
                 $private
             );
             $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
-            $format .= 'note_id=%u, note_text=%s, note_from=%u, note_to=%u, private=%u';
+            $format .= 'note_id=%u, note_text=%s, note_from=%u, note_to=%u, date=%u, private=%u';
             $format .= ' WHERE note_id = %u';
             $sql    = \sprintf(
                 $format,
@@ -147,6 +148,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
                 $this->db->quoteString($note_text),
                 $note_from,
                 $note_to,
+                $date,
                 $private,
                 $note_id
             );

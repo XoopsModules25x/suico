@@ -87,7 +87,7 @@ $maxfilebytes = $helper->getConfig('maxfilesize');
 
 
 //form
-$xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxfilebytes / 1024));
+$xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOU_CAN_UPLOAD, $maxfilebytes / 1024));
 $xoopsTpl->assign('lang_groupimage', _MD_YOGURT_GROUP_IMAGE);
 $xoopsTpl->assign('maxfilesize', $maxfilebytes);
 $xoopsTpl->assign('lang_title', _MD_YOGURT_GROUP_TITLE);

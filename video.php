@@ -62,7 +62,7 @@ if (isset($nbSections['nbVideos']) && $nbSections['nbVideos'] > 0) {
 }
 //form actions
 $xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
-$xoopsTpl->assign('lang_editdesc', _MD_YOGURT_EDITDESC);
+$xoopsTpl->assign('lang_editdesc', _MD_YOGURT_EDIT_DESC);
 $xoopsTpl->assign('lang_makemain', _MD_YOGURT_MAKEMAIN);
 
 //FORM SUBMIT

@@ -133,7 +133,7 @@ $xoopsTpl->assign('lang_formtitle', _MD_YOGURT_SUBMIT_PIC_TITLE);
 $xoopsTpl->assign('lang_selectphoto', _MD_YOGURT_SELECT_PHOTO);
 $xoopsTpl->assign('lang_caption', _MD_YOGURT_CAPTION);
 $xoopsTpl->assign('lang_uploadpicture', _MD_YOGURT_UPLOADPICTURE);
-$xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxfilebytes / 1024));
+$xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOU_CAN_UPLOAD, $maxfilebytes / 1024));
 
 //$xoopsTpl->assign('path_yogurt_uploads',$helper->getConfig('link_path_upload'));
 $xoopsTpl->assign(
@@ -141,7 +141,7 @@ $xoopsTpl->assign(
     sprintf(_MD_YOGURT_YOUCANHAVE, $helper->getConfig('nb_pict'))
 );
 $xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
-$xoopsTpl->assign('lang_editdesc', _MD_YOGURT_EDITDESC);
+$xoopsTpl->assign('lang_editdesc', _MD_YOGURT_EDIT_DESC);
 $xoopsTpl->assign('lang_nb_pict', sprintf(_MD_YOGURT_YOUHAVE, ($nbSections[NBPHOTOS] ?? '')));
 
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());

@@ -426,7 +426,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         $friendship  = $friendships[0];
 
         $form = new XoopsThemeForm(
-            _MD_YOGURT_EDITFRIENDSHIP,
+            _MD_YOGURT_EDIT_FRIENDSHIP,
             'form_editfriendship',
             'editfriendship.php',
             'post',
@@ -450,7 +450,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         if (1 === $this->helper->getConfig('allow_friendshiplevel')) {
             $field_friend_level = new XoopsFormRadio(_MD_YOGURT_LEVEL, 'level', $friendship->getVar('level'), '<br>');
 
-            $field_friend_level->addOption('1', _MD_YOGURT_UNKNOWNACCEPTED);
+            $field_friend_level->addOption('1', _MD_YOGURT_UNKNOWN_ACCEPTED);
             $field_friend_level->addOption('3', _MD_YOGURT_AQUAITANCE);
             $field_friend_level->addOption('5', _MD_YOGURT_FRIEND);
             $field_friend_level->addOption('7', _MD_YOGURT_BESTFRIEND);

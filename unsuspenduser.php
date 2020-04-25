@@ -49,7 +49,7 @@ if ($xoopsUser->isAdmin(1)) {
 
     $criteria = new Criteria('uid', $uid);
     $suspensionsFactory->deleteAll($criteria);
-    redirect_header('index.php?uid=' . $uid, 3, _MD_YOGURT_USERUNSUSPENDED);
+    redirect_header('index.php?uid=' . $uid, 3, _MD_YOGURT_USER_UNSUSPENDED);
 }
 
 require dirname(__DIR__, 2) . '/footer.php';

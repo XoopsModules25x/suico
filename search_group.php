@@ -86,7 +86,7 @@ $barrinha        = $navigationBar->renderImageNav(2);
 
 
 //form
-//$xoopsTpl->assign('lang_youcanupload',sprintf(_MD_YOGURT_YOUCANUPLOAD,$maxfilebytes/1024));
+//$xoopsTpl->assign('lang_youcanupload',sprintf(_MD_YOGURT_YOU_CAN_UPLOAD,$maxfilebytes/1024));
 $xoopsTpl->assign(
     'lang_groupimage',
     _MD_YOGURT_GROUP_IMAGE

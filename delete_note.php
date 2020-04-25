@@ -30,7 +30,7 @@ $notesFactory = new Yogurt\NotesHandler($xoopsDB);
 
 $note_id = Request::getInt('note_id', 0, 'POST');
 
-if (1 !== Request::getInt('confirm', 0, 'POST')) {
+if (1 != Request::getInt('confirm', 0, 'POST')) {
     xoops_confirm(
         [
             'note_id' => $note_id,
@@ -57,9 +57,9 @@ if (1 !== Request::getInt('confirm', 0, 'POST')) {
     /**
      * Try to delete
      */
-    if (1 === $notesFactory->getCount($criteria)) {
+    if (1 == $notesFactory->getCount($criteria)) {
         if ($notesFactory->deleteAll($criteria)) {
-            redirect_header('notebook.php?uid=' . $uid, 2, _MD_YOGURT_NOTEDELETED);
+            redirect_header('notebook.php?uid=' . $uid, 2, _MD_YOGURT_NOTE_DELETED);
         } else {
             redirect_header('notebook.php?uid=' . $uid, 2, _MD_YOGURT_NOCACHACA);
         }

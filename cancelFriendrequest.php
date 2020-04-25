@@ -54,6 +54,6 @@ $criteria_delete1->add($criteria_friend2);
 
 $friendrequestFactory->deleteAll($criteria_delete1);
 
-redirect_header('index.php?uid='.$friendrequestto_uid.'', 3, _MD_YOGURT_FRIENDREQUESTCANCELLED);
+redirect_header('index.php?uid='.$friendrequestto_uid.'', 3, _MD_YOGURT_FRIENDREQUEST_CANCELLED);
 
 require dirname(__DIR__, 2) . '/footer.php';

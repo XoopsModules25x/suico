@@ -64,7 +64,7 @@ if ($friendrequestFactory->getCount($criteria) > 0) {
     } else {
         if (0 === $friendship_level) {
             $friendrequestFactory->deleteAll($criteria);
-            redirect_header(XOOPS_URL . '/modules/yogurt/index.php?uid=' . $uid, 3, _MD_YOGURT_FRIENDSHIPNOTACCEPTED);
+            redirect_header(XOOPS_URL . '/modules/yogurt/index.php?uid=' . $uid, 3, _MD_YOGURT_FRIENDSHIP_NOTACCEPTED);
         }
         redirect_header(XOOPS_URL . '/modules/yogurt/index.php?uid=' . $uid, 3, _MD_YOGURT_NOCACHACA);
     }

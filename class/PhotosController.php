@@ -54,7 +54,7 @@ class PhotosController extends YogurtController
     public function checkPrivilege()
     {
         if (0 === $this->helper->getConfig('enable_pictures')) {
-            \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_PICTURESNOTENABLED);
+            \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_PICTURES_ENABLED_NOT);
         }
         $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
         if (1 === $this->configsFactory->getCount($criteria)) {
