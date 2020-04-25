@@ -51,6 +51,9 @@ yogurt_images:
         -
             name: cod_img
             attributes: ' int(11)  NOT NULL auto_increment'
+        -	
+            name: caption
+            attributes: ' varchar(255)  NOT NULL '
         -
             name: title
             attributes: ' varchar(255)  NOT NULL '

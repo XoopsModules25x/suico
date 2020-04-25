@@ -85,7 +85,7 @@ if ('sel_audio' === $_POST['xoops_upload_file'][0]) {
         redirect_header(
             XOOPS_URL . '/modules/yogurt/audio.php?uid=' . $xoopsUser->getVar('uid'),
             50,
-            _MD_YOGURT_NOCACHACA
+            _MD_YOGURT_ERROR
         );
     }
 }

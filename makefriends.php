@@ -66,10 +66,10 @@ if ($friendrequestFactory->getCount($criteria) > 0) {
             $friendrequestFactory->deleteAll($criteria);
             redirect_header(XOOPS_URL . '/modules/yogurt/index.php?uid=' . $uid, 3, _MD_YOGURT_FRIENDSHIP_NOTACCEPTED);
         }
-        redirect_header(XOOPS_URL . '/modules/yogurt/index.php?uid=' . $uid, 3, _MD_YOGURT_NOCACHACA);
+        redirect_header(XOOPS_URL . '/modules/yogurt/index.php?uid=' . $uid, 3, _MD_YOGURT_ERROR);
     }
 } else {
-    redirect_header(XOOPS_URL . '/modules/yogurt/index.php?uid=' . $uid, 3, _MD_YOGURT_NOCACHACA);
+    redirect_header(XOOPS_URL . '/modules/yogurt/index.php?uid=' . $uid, 3, _MD_YOGURT_ERROR);
 }
 
 require dirname(__DIR__, 2) . '/footer.php';

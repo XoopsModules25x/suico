@@ -60,10 +60,10 @@ if (1 !== Request::getInt('confirm', 0, 'POST')) {
         if ($relgroupuserFactory->deleteAll($criteria)) {
             redirect_header('group.php?group_id='.$group_id.'', 2, _MD_YOGURT_GROUPKICKED);
         } else {
-            redirect_header('group.php?group_id='.$group_id.'', 2, _MD_YOGURT_NOCACHACA);
+            redirect_header('group.php?group_id='.$group_id.'', 2, _MD_YOGURT_ERROR);
         }
     } else {
-        redirect_header('group.php?group_id='.$group_id.'', 2, _MD_YOGURT_NOCACHACA);
+        redirect_header('group.php?group_id='.$group_id.'', 2, _MD_YOGURT_ERROR);
     }
 }
 

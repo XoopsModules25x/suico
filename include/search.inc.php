@@ -52,7 +52,7 @@ function yogurt_search(
     $path_uploadimages = XOOPS_UPLOAD_URL;
 
     $ret = [];
-    $sql = 'SELECT cod_img, title,  date_created,  uid_owner, url FROM ' . $xoopsDB->prefix(
+    $sql = 'SELECT cod_img, title, caption,  date_created,  uid_owner, url FROM ' . $xoopsDB->prefix(
         'yogurt_images'
     ) . ' WHERE ';
     if (0 !== $userid) {

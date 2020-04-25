@@ -63,7 +63,8 @@ class Image extends XoopsObject
         $this->db         = XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('cod_img', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('title', \XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('date_created', \XOBJ_DTYPE_INT, 0, false);
+        $this->initVar('caption', \XOBJ_DTYPE_TXTBOX, null, false);
+		$this->initVar('date_created', \XOBJ_DTYPE_INT, 0, false);
         $this->initVar('date_updated', \XOBJ_DTYPE_INT, 0, false);
         $this->initVar('uid_owner', \XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('url', \XOBJ_DTYPE_OTHER, null, false);

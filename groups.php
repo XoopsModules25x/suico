@@ -72,7 +72,7 @@ $navigationBar = new XoopsPageNav(
     'start_all',
     'uid=' . (int)$controller->uidOwner . '&amp;start_my=' . $start_my .'#allgroups'
 );
-$barrinha        = $navigationBar->renderImageNav(2); //allgroups
+$imageNav        = $navigationBar->renderImageNav(2); //allgroups
 
 $navigationBar_my = new XoopsPageNav(
     $nb_mygroups,
@@ -81,7 +81,7 @@ $navigationBar_my = new XoopsPageNav(
     'start_my',
     'uid=' . (int)$controller->uidOwner . '&amp;start_all=' . $start_all .'#mygroups'
 );
-$barrinha_my        = $navigationBar_my->renderImageNav(2);
+$imageNav_my        = $navigationBar_my->renderImageNav(2);
 
 $maxfilebytes = $helper->getConfig('maxfilesize');
 
@@ -106,8 +106,8 @@ $xoopsTpl->assign('groupstotal', $nb_groups);
 $xoopsTpl->assign('lang_groupslist', _MD_YOGURT_GROUPSLIST);
 
 //page nav
-$xoopsTpl->assign('navigationBar', $barrinha); //allgroups
-$xoopsTpl->assign('navigationBar_my', $barrinha_my);
+$xoopsTpl->assign('navigationBar', $imageNav); //allgroups
+$xoopsTpl->assign('navigationBar_my', $imageNav_my);
 
 $xoopsTpl->assign(
     'nb_groups',

@@ -39,8 +39,8 @@ $imageFactory = new Yogurt\ImageHandler($xoopsDB);
 /**
  * Getting the title
  */
-$title = Request::getString('caption', '', 'POST');
-
+$title = Request::getString('title', '', 'POST');
+$caption = Request::getString('caption', '', 'POST');
 /**
  * Getting parameters defined in admin side
  */
@@ -69,6 +69,7 @@ if ('sel_photo' === Request::getArray('xoops_upload_file', '', 'POST')[0]) {
      */
     if ($imageFactory->receivePicture(
         $title,
+		$caption,
         $path_upload,
         $thumbwidth,
         $thumbheight,
@@ -93,7 +94,7 @@ if ('sel_photo' === Request::getArray('xoops_upload_file', '', 'POST')[0]) {
         redirect_header(
             XOOPS_URL . '/modules/yogurt/album.php?uid=' . $xoopsUser->getVar('uid'),
             3,
-            _MD_YOGURT_NOCACHACA
+            _MD_YOGURT_ERROR
         );
     }
 }

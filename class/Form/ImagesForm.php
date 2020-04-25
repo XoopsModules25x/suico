@@ -86,6 +86,13 @@ class ImagesForm extends XoopsThemeForm
             new XoopsFormText(AM_YOGURT_IMAGES_TITLE, 'title', 50, 255, $this->targetObject->getVar('title')),
             false
         );
+		
+		// Caption
+        $this->addElement(
+            new XoopsFormText(AM_YOGURT_IMAGES_CAPTION, 'caption', 50, 255, $this->targetObject->getVar('caption')),
+            false
+        );
+		
         // Data_creation
         $this->addElement(
             new XoopsFormTextDateSelect(
