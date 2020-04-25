@@ -1,5 +1,6 @@
 <h5>3.5 Beta 1    [NOT RELEASED]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.5
 <hr>
+
 - Add Caption in Album (liomj)
 - Add Dates in Album and Audio Templates (liomj/mamba)
 - Add group total members (liomj)
