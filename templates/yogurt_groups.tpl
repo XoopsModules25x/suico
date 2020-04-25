@@ -102,7 +102,7 @@
 
 <{if $isOwner==1}>	
 
-<div class="alert alert-primary"> 
+<div class="alert alert-info"> 
 <form name='form_group_search1' id='form_group_search1' action='search_group.php' method='get'>   
 <h5><{$lang_searchgroup}></h5>
 
@@ -120,7 +120,7 @@
 
 
 	<h5>
-			<a name="allgroups"><{$lang_availablegroups}></a>
+			<a name="allgroups"><{$lang_availablegroups}> <span class="badge badge-pill badge-primary"><{$groupstotal}></span></a>
     </h5>
 
  <{if $nb_groups_all<=0}>
