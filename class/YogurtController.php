@@ -140,11 +140,7 @@ class YogurtController extends \XoopsObject
     public function checkPrivilegeLevel(
         $privilegeNeeded = 0
     ) {
-        if ($privilegeNeeded <= $this->privilegeLevel) {
-            return true;
-        }
-
-        return false;
+        return $privilegeNeeded <= $this->privilegeLevel;
     }
 
     /**
