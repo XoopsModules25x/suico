@@ -36,7 +36,7 @@ if (1 !== Request::getInt('confirm', 0, 'POST')) {
             'note_id' => $note_id,
             'confirm' => 1,
         ],
-        'delete_Note.php',
+        'delete_note.php',
         _MD_YOGURT_ASKCONFIRMNOTEDELETION,
         _MD_YOGURT_CONFIRMNOTEDELETION
     );

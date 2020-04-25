@@ -67,7 +67,7 @@
 							<p class="m-b-5 m-t-10"> &nbsp;<{$notes[i].text}></p>
                             <{ if $isOwner==1}>
        
-                    <form name="delete_Note" method="post" action="delete_Note.php" class="yogurt-Note-form-delete">
+                    <form name="delete_note" method="post" action="delete_note.php" class="yogurt-Note-form-delete">
                      <!--<input value="<{$notes[i].id}>" type="image" id="Note_idimage" name="Note_idimage" src="images/dele.gif" >-->
 						<button type="image" id="Note_idimage" name="Note_idimage" class="btn btn-primary btn-xs">Delete</button>
                         <input value="<{$notes[i].id}>" type="hidden" id="Note_id" name="Note_id"  >
