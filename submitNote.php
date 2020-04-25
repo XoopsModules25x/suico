@@ -48,6 +48,7 @@ $noteObj         = $notesFactory->create();
 $noteObj->setVar('note_text', $noteText);
 $noteObj->setVar('note_from', $xoopsUser->getVar('uid'));
 $noteObj->setVar('note_to', $notebook_uid);
+$noteObj->setVar('date', time());
 $notesFactory->insert2($noteObj);
 $note_id=$xoopsDB->getInsertId();
 $extra_tags['X_OWNER_NAME'] = $xoopsUser::getUnameFromId($notebook_uid);
