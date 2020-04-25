@@ -7,13 +7,6 @@ use XoopsDatabaseFactory;
 use XoopsObject;
 
 /**
- * Protection against inclusion outside the site
- */
-if (!\defined('XOOPS_ROOT_PATH')) {
-    die('XOOPS root path not defined');
-}
-
-/**
  * Includes of form objects and uploader
  */
 require_once XOOPS_ROOT_PATH . '/class/uploader.php';
@@ -28,11 +21,15 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  */
 class Groups extends XoopsObject
 {
-    public $db;
+    public $xoopsDb;
     public $helper;
     public $permHelper;
 
-    // constructor
+    const GROUPID = 'group_id';
+    const YOGURTGROUPS = 'yogurt_groups'; //table
+    
+    
+
 
     /**
      * Groups constructor.
@@ -43,8 +40,8 @@ class Groups extends XoopsObject
         /** @var Helper $helper */
         $this->helper     = Helper::getInstance();
         $this->permHelper = new Permission();
-        $this->db         = XoopsDatabaseFactory::getDatabaseConnection();
-        $this->initVar('group_id', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->xoopsDb         = XoopsDatabaseFactory::getDatabaseConnection();
+        $this->initVar(GROUPID, \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('owner_uid', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('group_title', \XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('group_desc', \XOBJ_DTYPE_TXTBOX, null, false);
@@ -65,8 +62,8 @@ class Groups extends XoopsObject
      */
     public function load($id)
     {
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_groups') . ' WHERE group_id=' . $id;
-        $myrow = $this->db->fetchArray($this->db->query($sql));
+        $sql   = 'SELECT * FROM ' . $this->xoopsDb->prefix(YOGURTGROUPS) . ' WHERE group_id=' . $id;
+        $myrow = $this->xoopsDb->fetchArray($this->xoopsDb->query($sql));
         $this->assignVars($myrow);
         if (!$myrow) {
             $this->setNew();
@@ -85,12 +82,12 @@ class Groups extends XoopsObject
     public function getAllGroups(
         $criteria = [],
         $asobject = false,
-        $sort = 'group_id',
+        $sort = GROUPID,
         $order = 'ASC',
         $limit = 0,
         $start = 0
     ) {
-        $db          = XoopsDatabaseFactory::getDatabaseConnection();
+
         $ret         = [];
         $whereQuery = '';
         if (\is_array($criteria) && \count($criteria) > 0) {
@@ -103,17 +100,17 @@ class Groups extends XoopsObject
             $whereQuery = ' WHERE ' . $criteria;
         }
         if (!$asobject) {
-            $sql    = 'SELECT group_id FROM ' . $db->prefix(
-                'yogurt_groups'
+            $sql    = 'SELECT group_id FROM ' . $this->xoopsDb->prefix(
+                YOGURTGROUPS
             ) . "${whereQuery} ORDER BY ${sort} ${order}";
-            $result = $db->query($sql, $limit, $start);
-            while (false !== ($myrow = $db->fetchArray($result))) {
+            $result = $this->xoopsDb->query($sql, $limit, $start);
+            while (false !== ($myrow = $this->xoopsDb->fetchArray($result))) {
                 $ret[] = $myrow['yogurt_groups_id'];
             }
         } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_groups') . "${whereQuery} ORDER BY ${sort} ${order}";
-            $result = $db->query($sql, $limit, $start);
-            while (false !== ($myrow = $db->fetchArray($result))) {
+            $sql    = 'SELECT * FROM ' . $this->xoopsDb->prefix(YOGURTGROUPS) . "${whereQuery} ORDER BY ${sort} ${order}";
+            $result = $this->xoopsDb->query($sql, $limit, $start);
+            while (false !== ($myrow = $this->xoopsDb->fetchArray($result))) {
                 $ret[] = new self($myrow);
             }
         }
@@ -136,10 +133,9 @@ class Groups extends XoopsObject
      */
     public function getGroupsRead()
     {
-        //$permHelper = new \Xmf\Module\Helper\Permission();
         return $this->permHelper->getGroupsForItem(
             'sbcolumns_read',
-            $this->getVar('group_id')
+            $this->getVar(GROUPID)
         );
     }
 
@@ -148,10 +144,9 @@ class Groups extends XoopsObject
      */
     public function getGroupsSubmit()
     {
-        //$permHelper = new \Xmf\Module\Helper\Permission();
         return $this->permHelper->getGroupsForItem(
             'sbcolumns_submit',
-            $this->getVar('group_id')
+            $this->getVar(GROUPID)
         );
     }
 
@@ -160,10 +155,9 @@ class Groups extends XoopsObject
      */
     public function getGroupsModeration()
     {
-        //$permHelper = new \Xmf\Module\Helper\Permission();
         return $this->permHelper->getGroupsForItem(
             'sbcolumns_moderation',
-            $this->getVar('group_id')
+            $this->getVar(GROUPID)
         );
     }
 }
