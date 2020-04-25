@@ -38,7 +38,7 @@
                         <td class='left'><{$notesArray.note_from}></td>
                         <td class='left'><{$notesArray.note_to}></td>
                         <td class='center'><{$notesArray.private}></td>
-                        <td class='left'><{$notesArray.date}></td>
+                        <td class='left'><{$notesArray.date_created}></td>
 
 
                         <td class="center width5"><{$notesArray.edit_delete}></td>

@@ -61,11 +61,11 @@ switch ($op) {
         // Form save fields
         $imagesObject->setVar('title', Request::getVar('title', ''));
 
-        $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('data_creation', '', 'POST'));
-        $imagesObject->setVar('data_creation', $dateTimeObj->getTimestamp());
+        $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_created', '', 'POST'));
+        $imagesObject->setVar('date_created', $dateTimeObj->getTimestamp());
 
-        $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('data_update', '', 'POST'));
-        $imagesObject->setVar('data_update', $dateTimeObj->getTimestamp());
+        $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_updated', '', 'POST'));
+        $imagesObject->setVar('date_updated', $dateTimeObj->getTimestamp());
 
         $imagesObject->setVar('uid_owner', Request::getVar('uid_owner', ''));
 
@@ -190,7 +190,7 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('imagesRows', $imagesTempRows);
         $imagesArray = [];
 
-        //    $fields = explode('|', cod_img:int:11::NOT NULL::primary:cod_img|title:varchar:255::NOT NULL:::title|data_creation:date:0::NOT NULL:::data_creation|data_update:date:0::NOT NULL:::data_update|uid_owner:varchar:50::NOT NULL:::uid_owner|url:text:0::NOT NULL:::url|private:varchar:1::NOT NULL:::private);
+        //    $fields = explode('|', cod_img:int:11::NOT NULL::primary:cod_img|title:varchar:255::NOT NULL:::title|date_created:date:0::NOT NULL:::date_created|date_updated:date:0::NOT NULL:::date_updated|uid_owner:varchar:50::NOT NULL:::uid_owner|url:text:0::NOT NULL:::url|private:varchar:1::NOT NULL:::private);
         //    $fieldsCount    = count($fields);
 
         $criteria = new CriteriaCompo();
@@ -218,11 +218,11 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('selectortitle', AM_YOGURT_IMAGES_TITLE);
                 $imagesArray['title'] = $imagesTempArray[$i]->getVar('title');
 
-                $GLOBALS['xoopsTpl']->assign('selectordata_creation', AM_YOGURT_IMAGES_DATA_CREATION);
-                $imagesArray['data_creation'] = formatTimeStamp($imagesTempArray[$i]->getVar('data_creation'), 's');
+                $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_IMAGES_DATA_CREATION);
+                $imagesArray['date_created'] = formatTimeStamp($imagesTempArray[$i]->getVar('date_created'), 's');
 
-                $GLOBALS['xoopsTpl']->assign('selectordata_update', AM_YOGURT_IMAGES_DATA_UPDATE);
-                $imagesArray['data_update'] = formatTimeStamp($imagesTempArray[$i]->getVar('data_update'), 's');
+                $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_YOGURT_IMAGES_DATA_UPDATE);
+                $imagesArray['date_updated'] = formatTimeStamp($imagesTempArray[$i]->getVar('date_updated'), 's');
 
                 $GLOBALS['xoopsTpl']->assign('selectoruid_owner', AM_YOGURT_IMAGES_UID_OWNER);
                 $imagesArray['uid_owner'] = strip_tags(

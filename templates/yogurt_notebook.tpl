@@ -61,7 +61,7 @@
                                                 <div class="comment-text w-100 ">
                                                     <{/if}>
                                                     <h5><a name="<{$notes[i].id}>" href="index.php?uid=<{$notes[i].uid}>"><{$notes[i].uname}></a></h5>
-                                                    <div class="comment-footer"><span class="date text-muted"> <i class="fa fa-calendar"></i> <{$notes[i].date}></span>
+                                                    <div class="comment-footer"><span class="date_created text-muted"> <i class="fa fa-calendar"></i> <{$notes[i].date_created}></span>
 
 
                                                         <p class="m-b-5 m-t-10"> &nbsp;<{$notes[i].text}></p>
@@ -80,7 +80,7 @@
                                             <!--
            <div class="yogurt-Note-details-texts">
                     <p class="yogurt-Note-text"><img src="assets/images/notes.gif" alt="<{$section_name}>" title="<{$section_name}>">
-                        &nbsp;<{$notes[i].text}><br>&nbsp;<small><{$notes[i].date}></small>
+                        &nbsp;<{$notes[i].text}><br>&nbsp;<small><{$notes[i].date_created}></small>
                         <a name="replyform<{$notes[i].id}>" id="replyform<{$notes[i].id}>"></a>
                     </p>
                     <{if $isOwner==1}>

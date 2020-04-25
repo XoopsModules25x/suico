@@ -42,7 +42,7 @@ class Notes extends XoopsObject
         $this->initVar('note_from', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('note_to', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('private', \XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('date', \XOBJ_DTYPE_INT, 0, false);
+        $this->initVar('date_created', \XOBJ_DTYPE_INT, 0, false);
 
         if (!empty($id)) {
             if (\is_array($id)) {

@@ -55,10 +55,10 @@ yogurt_images:
             name: title
             attributes: ' varchar(255)  NOT NULL '
         -
-            name: data_creation
+            name: date_created
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
         -
-            name: data_update
+            name: date_updated
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
         -
             name: uid_owner
@@ -89,7 +89,7 @@ yogurt_visitors:
             name: uname_visitor
             attributes: ' varchar(30)  NOT NULL '
         -
-            name: datetime
+            name: date_visited
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
     keys:
         PRIMARY:
@@ -174,7 +174,7 @@ yogurt_notes:
             name: private
             attributes: ' tinyint(1)  NOT NULL '
         -
-            name: date
+            name: date_created
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
     keys:
         PRIMARY:
@@ -282,10 +282,10 @@ yogurt_audio:
             name: uid_owner
             attributes: ' int(11)  NOT NULL '
         -
-            name: data_creation
+            name: date_created
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
         -
-            name: data_update
+            name: date_updated
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
     keys:
         PRIMARY:

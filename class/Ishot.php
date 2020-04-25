@@ -57,7 +57,7 @@ class Ishot extends XoopsObject
         $this->initVar('uid_voter', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('uid_voted', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('ishot', \XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('date', \XOBJ_DTYPE_INT, 0, false);
+        $this->initVar('date_created', \XOBJ_DTYPE_INT, 0, false);
         if (!empty($id)) {
             if (\is_array($id)) {
                 $this->assignVars($id);

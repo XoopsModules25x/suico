@@ -24,7 +24,7 @@
                     <th class="left"><{$selectoruid_owner}></th>
                     <th class="left"><{$selectoruid_visitor}></th>
                     <th class="left"><{$selectoruname_visitor}></th>
-                    <th class="left"><{$selectordatetime}></th>
+                    <th class="left"><{$selectordate_visited}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
@@ -36,7 +36,7 @@
                         <td class='left'><{$visitorsArray.uid_owner}></td>
                         <td class='left'><{$visitorsArray.uid_visitor}></td>
                         <td class='left'><{$visitorsArray.uname_visitor}></td>
-                        <td class='left'><{$visitorsArray.datetime}></td>
+                        <td class='left'><{$visitorsArray.date_visited}></td>
 
 
                         <td class="center width5"><{$visitorsArray.edit_delete}></td>
@@ -54,7 +54,7 @@
                     <th class="left"><{$selectoruid_owner}></th>
                     <th class="left"><{$selectoruid_visitor}></th>
                     <th class="left"><{$selectoruname_visitor}></th>
-                    <th class="left"><{$selectordatetime}></th>
+                    <th class="left"><{$selectordate_visited}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
