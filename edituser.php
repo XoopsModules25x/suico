@@ -301,7 +301,7 @@ if ('avatarform' === $op) {
     echo '<a href="index.php?uid=' . $uid . '">' . _US_PROFILE . '</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;' . _US_UPLOADMYAVATAR . '<br><br>';
     $oldavatar = $xoopsUser->getVar('user_avatar');
     if (!empty($oldavatar) && 'avatars/blank.gif' !== $oldavatar) {
-        echo '<div style="text-align:center;"><h4 style="color:#ff0000; font-weight:bold;">' . _US_OLDDELETED . '</h4>';
+        echo '<div style="text-align:center;"><h4 style="color:#ff0000; font-weight:bold;">' . _US_OLD_DELETED . '</h4>';
         echo '<img src="' . XOOPS_UPLOAD_URL . '/' . $oldavatar . '" alt=""></div>';
     }
     if (1 === $xoopsConfigUser['avatar_allow_upload']

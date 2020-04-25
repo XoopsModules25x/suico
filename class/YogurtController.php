@@ -161,7 +161,7 @@ class YogurtController extends \XoopsObject
             $memberHandler = \xoops_getHandler('member');
             $user          = $memberHandler->getUser(Request::getInt('uid', 0, 'GET'));
             if (!\is_object($user)) {
-                \redirect_header('index.php', 3, _MD_YOGURT_USERDOESNTEXIST);
+                \redirect_header('index.php', 3, _MD_YOGURT_USER_DOESNTEXIST);
             }
         }
 

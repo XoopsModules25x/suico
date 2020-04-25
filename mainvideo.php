@@ -48,10 +48,10 @@ if ($uid === $video->getVar('uid_owner')) {
         if ($videoFactory->insert2($video)) {
             redirect_header('video.php', 2, _MD_YOGURT_SETMAINVIDEO);
         } else {
-            redirect_header('video.php', 2, _MD_YOGURT_NOCACHACA);
+            redirect_header('video.php', 2, _MD_YOGURT_SETMAINVIDEO_ERROR);
         }
     } else {
-        echo 'nao deu certo';
+        echo 'did not work';
     }
 }
 

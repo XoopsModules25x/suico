@@ -41,7 +41,7 @@ if ($friendrequestFactory->insert2($newFriendrequest)) {
     redirect_header(
         XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('friendrequestto_uid', 0, 'POST'),
         3,
-        _MD_YOGURT_FRIENDREQUESTTO
+        _MD_YOGURT_FRIENDREQUEST_TO
     );
 } else {
     redirect_header(

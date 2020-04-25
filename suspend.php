@@ -53,7 +53,7 @@ if ($xoopsUser->isAdmin(1)) {
 
     $thisUser->setVar('user_sig', sprintf(_MD_YOGURT_SUSPENDED, formatTimestamp(time() + Request::getInt('time', 0, 'POST'), 'm')));
     $memberHandler->insertUser($thisUser);
-    redirect_header('index.php?uid=' . $uid, 300, _MD_YOGURT_USERSUSPENDED);
+    redirect_header('index.php?uid=' . $uid, 300, _MD_YOGURT_USER_SUSPENDED);
 }
 
 require dirname(__DIR__, 2) . '/footer.php';

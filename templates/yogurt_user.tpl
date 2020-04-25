@@ -4,18 +4,18 @@
             <td>
                 <p>
                 <h4><{$smarty.const._MD_YOGURT_SOCIALNETWORK}></h4>
-                <p><{$smarty.const._MD_YOGURT_USERWELCOME}><br>
+                <p><{$smarty.const._MD_YOGURT_USER_WELCOME}><br>
                     <{$smarty.const._MD_YOGURT_JOINUS}></p>
             </td>
             <td>
 
                 <div class="container-fluid">
                     <form style="margin: 0px;" action="<{$xoops_url}>/user.php" method="post">
-                        <p><b><{$smarty.const._MD_YOGURT_USERLOGIN}></b>
+                        <p><b><{$smarty.const._MD_YOGURT_USER_LOGIN}></b>
                             <input type="hidden" name="xoops_redirect" value="/modules/yogurt/memberslist.php">
                             <input type="hidden" name="op" value="login">
                         </p>
-                        <label for="profile-uname"><{$smarty.const._MD_YOGURT_USERNAME}></label>
+                        <label for="profile-uname"><{$smarty.const._MD_YOGURT_USER_NAME}></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></span>

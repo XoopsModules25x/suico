@@ -95,8 +95,8 @@ if (1 === $marker && $group->getVar('owner_uid') === $uid) {
     $xoopsTpl->assign('lang_membersofgroup', _MD_YOGURT_MEMBERSDOFGROUP);
     $xoopsTpl->assign('lang_editgroup', _MD_YOGURT_EDIT_GROUP);
     $xoopsTpl->assign('lang_groupimage', _MD_YOGURT_GROUP_IMAGE);
-    $xoopsTpl->assign('lang_keepimage', _MD_YOGURT_MAINTAINOLDIMAGE);
-    $xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxfilebytes / 1024));
+    $xoopsTpl->assign('lang_keepimage', _MD_YOGURT_MAINTAIN_OLD_IMAGE);
+    $xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOU_CAN_UPLOAD, $maxfilebytes / 1024));
     $xoopsTpl->assign('lang_titlegroup', _MD_YOGURT_GROUP_TITLE);
     $xoopsTpl->assign('lang_descgroup', _MD_YOGURT_GROUP_DESC);
 
@@ -125,7 +125,7 @@ if (1 === $marker && $group->getVar('owner_uid') === $uid) {
     $xoopsTpl->assign('lang_notebook', _MD_YOGURT_NOTEBOOK);
     $xoopsTpl->assign('lang_profile', _MD_YOGURT_PROFILE);
     $xoopsTpl->assign('lang_groups', _MD_YOGURT_GROUPS);
-    $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
+    $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGS_TITLE);
     $xoopsTpl->assign('lang_audio', _MD_YOGURT_AUDIOS);
 
     //xoopsToken

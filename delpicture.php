@@ -36,8 +36,8 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
             'confirm' => 1,
         ],
         'delpicture.php',
-        _MD_YOGURT_ASKCONFIRMDELETION,
-        _MD_YOGURT_CONFIRMDELETION
+        _MD_YOGURT_ASK_CONFIRM_DELETION,
+        _MD_YOGURT_CONFIRM_DELETION
     );
 } else {
     /**

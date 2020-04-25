@@ -98,9 +98,9 @@ if (isset($_POST['stat'])) {
     $config->setVar('profile_stats', Request::getInt('stat', 0, 'POST'));
 }
 if ($configsFactory->insert2($config)) {
-    redirect_header('configs.php?uid=' . $xoopsUser->getVar('uid'), 3, _MD_YOGURT_CONFIGSSAVE);
+    redirect_header('configs.php?uid=' . $xoopsUser->getVar('uid'), 3, _MD_YOGURT_CONFIGS_SAVE);
 } else {
-    redirect_header('configs.php?uid=' . $xoopsUser->getVar('uid'), 3, _MD_YOGURT_CONFIGSSAVE_FAILED);
+    redirect_header('configs.php?uid=' . $xoopsUser->getVar('uid'), 3, _MD_YOGURT_CONFIGS_SAVE_FAILED);
 }
 /**
  * Close page

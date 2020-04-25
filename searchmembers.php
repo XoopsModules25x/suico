@@ -64,12 +64,12 @@ if ('form' === $op) {
     $email_tray  = new XoopsFormElementTray(_MD_YOGURT_EMAIL, '&nbsp;');
     $email_tray->addElement($email_match);
     $email_tray->addElement($email_text);
-    $url_text = new XoopsFormText(_MD_YOGURT_URLCONTAINS, 'user_url', 30, 100);
-    $location_text   = new XoopsFormText(_MD_YOGURT_LOCATIONCONTAINS, 'user_from', 30, 100);
-    $occupation_text = new XoopsFormText(_MD_YOGURT_OCCUPATIONCONTAINS, 'user_occ', 30, 100);
-    $interest_text   = new XoopsFormText(_MD_YOGURT_INTERESTCONTAINS, 'user_intrest', 30, 100);
-    $extrainfo_text   = new XoopsFormText(_MD_YOGURT_EXTRAINFOCONTAINS, 'bio', 30, 100);
-    $signature_text   = new XoopsFormText(_MD_YOGURT_SIGNATURECONTAINS, 'user_sig', 30, 100);
+    $url_text = new XoopsFormText(_MD_YOGURT_URL_CONTAINS, 'user_url', 30, 100);
+    $location_text   = new XoopsFormText(_MD_YOGURT_LOCATION_CONTAINS, 'user_from', 30, 100);
+    $occupation_text = new XoopsFormText(_MD_YOGURT_OCCUPATION_CONTAINS, 'user_occ', 30, 100);
+    $interest_text   = new XoopsFormText(_MD_YOGURT_INTEREST_CONTAINS, 'user_intrest', 30, 100);
+    $extrainfo_text   = new XoopsFormText(_MD_YOGURT_EXTRAINFO_CONTAINS, 'bio', 30, 100);
+    $signature_text   = new XoopsFormText(_MD_YOGURT_SIGNATURE_CONTAINS, 'user_sig', 30, 100);
     
     $lastlog_more = new XoopsFormText(
         _MD_YOGURT_LASTLOGMORE,
@@ -351,8 +351,8 @@ if ('submit' === $op) {
                 $xoopsTpl->assign('self_uid', $controller->uidOwner);
             }
             $xoopsTpl->assign('lang_myfriend', _MD_YOGURT_MYFRIEND);
-            $xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUESTSENT);
-            $xoopsTpl->assign('lang_friendshipstatus', _MD_YOGURT_FRIENDSHIPSTATUS);
+            $xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUEST_SENT);
+            $xoopsTpl->assign('lang_friendshipstatus', _MD_YOGURT_FRIENDSHIP_STATUS);
         
             $criteria_otherrequest = new Criteria('friendrequester_uid', $userdata['uid']);
             $criteria_isotherrequest = new CriteriaCompo(new Criteria('friendrequestto_uid', $controller->uidOwner));
@@ -473,7 +473,7 @@ if ('submit' === $op) {
             }
             $hiddenform .= '</form>';
             $xoopsTpl->assign('pagenav', $hiddenform);
-            $xoopsTpl->assign('lang_numfound', sprintf(_MD_YOGURT_USERSFOUND, $total));
+            $xoopsTpl->assign('lang_numfound', sprintf(_MD_YOGURT_USER_SFOUND, $total));
         }
     }
 }
@@ -482,8 +482,8 @@ if ('submit' === $op) {
 
 $xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
 $xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
-$xoopsTpl->assign('lang_friendshippending', _MD_YOGURT_FRIENDREQUESTPENDING);
-$xoopsTpl->assign('lang_cancelfriendrequest', _MD_YOGURT_CANCELFRIENDREQUEST);
+$xoopsTpl->assign('lang_friendshippending', _MD_YOGURT_FRIENDREQUEST_PENDING);
+$xoopsTpl->assign('lang_cancelfriendrequest', _MD_YOGURT_FRIENDREQUEST_CANCEL);
 
 if (isset($_POST['addfriend'])) {
     $newFriendrequest = $friendrequestFactory->create(true);
@@ -493,7 +493,7 @@ if (isset($_POST['addfriend'])) {
     redirect_header(
         XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('friendrequestfrom_uid', 0, 'POST'),
         3,
-        _MD_YOGURT_FRIENDREQUESTFROM
+        _MD_YOGURT_FRIENDREQUEST_FROM
     );
 }
 

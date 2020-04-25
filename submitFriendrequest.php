@@ -55,7 +55,7 @@ if ($friendrequestFactory->getCount($criteria) > 0) {
     redirect_header(
         XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('friendrequestfrom_uid', 0, 'POST'),
         3,
-        _MD_YOGURT_ALREADY_FRIENDREQUESTFROM
+        _MD_YOGURT_ALREADY_FRIEND_REQUESTFROM
     );
 } else {
     $criteria2 = new CriteriaCompo(new Criteria('friendrequester_uid', $friendrequestfrom_uid));
@@ -64,7 +64,7 @@ if ($friendrequestFactory->getCount($criteria) > 0) {
         redirect_header(
             XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('friendrequestfrom_uid', 0, 'POST'),
             3,
-            _MD_YOGURT_ALREADY_FRIENDREQUESTFROM
+            _MD_YOGURT_ALREADY_FRIEND_REQUESTFROM
         );
     }
 }
@@ -85,7 +85,7 @@ if ($friendrequestFactory->insert2($newFriendrequest)) {
     redirect_header(
         XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('friendrequestfrom_uid', 0, 'POST'),
         3,
-        _MD_YOGURT_FRIENDREQUESTFROM
+        _MD_YOGURT_FRIENDREQUEST_FROM
     );
 } else {
     redirect_header(

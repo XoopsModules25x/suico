@@ -85,20 +85,20 @@ $xoopsTpl->assign('lang_year', _MD_YOGURT_META_YEAR);
 
 //form actions
 $xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
-$xoopsTpl->assign('lang_editdesc', _MD_YOGURT_EDITDESC);
+$xoopsTpl->assign('lang_editdesc', _MD_YOGURT_EDIT_DESC);
 $xoopsTpl->assign('lang_makemain', _MD_YOGURT_MAKEMAIN);
 
 //Form Submit
-$xoopsTpl->assign('lang_selectaudio', _MD_YOGURT_SELECTAUDIO);
-$xoopsTpl->assign('lang_authorLabel', _MD_YOGURT_AUTHORAUDIO);
-$xoopsTpl->assign('lang_titleLabel', _MD_YOGURT_TITLEAUDIO);
-$xoopsTpl->assign('lang_submitValue', _MD_YOGURT_SUBMITAUDIO);
-$xoopsTpl->assign('lang_addaudios', _MD_YOGURT_ADDAUDIO);
+$xoopsTpl->assign('lang_selectaudio', _MD_YOGURT_AUDIO_SELECT);
+$xoopsTpl->assign('lang_authorLabel', _MD_YOGURT_AUDIO_AUTHOR);
+$xoopsTpl->assign('lang_titleLabel', _MD_YOGURT_AUDIO_TITLE);
+$xoopsTpl->assign('lang_submitValue', _MD_YOGURT_AUDIO_SUBMIT);
+$xoopsTpl->assign('lang_addaudios', _MD_YOGURT_AUDIO_ADD);
 
 $xoopsTpl->assign('width', $helper->getConfig('width_tube'));
 $xoopsTpl->assign('height', $helper->getConfig('height_tube'));
 $xoopsTpl->assign('player_from_list', _MD_YOGURT_PLAYER);
-$xoopsTpl->assign('lang_audiohelp', sprintf(_MD_YOGURT_ADDAUDIOHELP, $helper->getConfig('maxfilesize')));
+$xoopsTpl->assign('lang_audiohelp', sprintf(_MD_YOGURT_AUDIO_ADD_HELP, $helper->getConfig('maxfilesize')));
 $xoopsTpl->assign('max_youcanupload', $helper->getConfig('maxfilesize'));
 
 $xoopsTpl->assign('lang_mysection', _MD_YOGURT_MYAUDIOS);

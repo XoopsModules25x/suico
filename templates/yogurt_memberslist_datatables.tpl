@@ -151,27 +151,27 @@
                 "lengthChange": false,
                 "displayLength": <{$membersperpage}>,
                 "language": {
-                    "decimal": "<{$smarty.const._MD_YOGURT_DTDECIMAL}>",
-                    "emptyTable": "<{$smarty.const._MD_YOGURT_DTEMPTYTABLE}>",
-                    "info": "<{$smarty.const._MD_YOGURT_DTINFOSHOWING}> _START_ <{$smarty.const._MD_YOGURT_DTINFOTO}> _END_ <{$smarty.const._MD_YOGURT_DTINFOOF}> _TOTAL_ <{$smarty.const._MD_YOGURT_DTINFOENTRIES}>",
-                    "infoEmpty": "<{$smarty.const._MD_YOGURT_DTINFOEMPTY}>",
-                    "infoFiltered": "(<{$smarty.const._MD_YOGURT_DTINFOFILTEREDFROM}> _MAX_ <{$smarty.const._MD_YOGURT_DTINFOFILTEREDTOTALENTRIES}>)",
-                    "infoPostFix": "<{$smarty.const._MD_YOGURT_DTINFOPOSTFIX}>",
-                    "thousands": "<{$smarty.const._MD_YOGURT_DTTHOUSANDS}>",
-                    "lengthMenu": "<{$smarty.const._MD_YOGURT_DTLENGTHMENUSHOW}> _MENU_ <{$smarty.const._MD_YOGURT_DTLENGTHMENUENTRIES}>",
-                    "loadingRecords": "<{$smarty.const._MD_YOGURT_DTLOADINGRECORDS}>",
-                    "processing": "<{$smarty.const._MD_YOGURT_DTPROCESSING}>",
-                    "search": "<{$smarty.const._MD_YOGURT_DTSEARCH}>",
-                    "zeroRecords": "<{$smarty.const._MD_YOGURT_DTZERORECORDS}>",
+                    "decimal": "<{$smarty.const._MD_YOGURT_DTABLE_DECIMAL}>",
+                    "emptyTable": "<{$smarty.const._MD_YOGURT_DTABLE_EMPTYTABLE}>",
+                    "info": "<{$smarty.const._MD_YOGURT_DTABLE_INFOSHOWING}> _START_ <{$smarty.const._MD_YOGURT_DTABLE_INFOTO}> _END_ <{$smarty.const._MD_YOGURT_DTABLE_INFOOF}> _TOTAL_ <{$smarty.const._MD_YOGURT_DTABLE_INFOENTRIES}>",
+                    "infoEmpty": "<{$smarty.const._MD_YOGURT_DTABLE_INFOEMPTY}>",
+                    "infoFiltered": "(<{$smarty.const._MD_YOGURT_DTABLE_INFOFILTEREDFROM}> _MAX_ <{$smarty.const._MD_YOGURT_DTABLE_INFOFILTEREDTOTALENTRIES}>)",
+                    "infoPostFix": "<{$smarty.const._MD_YOGURT_DTABLE_INFOPOSTFIX}>",
+                    "thousands": "<{$smarty.const._MD_YOGURT_DTABLE_THOUSANDS}>",
+                    "lengthMenu": "<{$smarty.const._MD_YOGURT_DTABLE_LENGTHMENUSHOW}> _MENU_ <{$smarty.const._MD_YOGURT_DTABLE_LENGTHMENUENTRIES}>",
+                    "loadingRecords": "<{$smarty.const._MD_YOGURT_DTABLE_LOADINGRECORDS}>",
+                    "processing": "<{$smarty.const._MD_YOGURT_DTABLE_PROCESSING}>",
+                    "search": "<{$smarty.const._MD_YOGURT_DTABLE_SEARCH}>",
+                    "zeroRecords": "<{$smarty.const._MD_YOGURT_DTABLE_ZERORECORDS}>",
                     "paginate": {
-                        "first": "<{$smarty.const._MD_YOGURT_DTFIRST}>",
-                        "last": "<{$smarty.const._MD_YOGURT_DTLAST}>",
-                        "next": "<{$smarty.const._MD_YOGURT_DTNEXT}>",
-                        "previous": "<{$smarty.const._MD_YOGURT_DTPREVIOUS}>"
+                        "first": "<{$smarty.const._MD_YOGURT_DTABLE_FIRST}>",
+                        "last": "<{$smarty.const._MD_YOGURT_DTABLE_LAST}>",
+                        "next": "<{$smarty.const._MD_YOGURT_DTABLE_NEXT}>",
+                        "previous": "<{$smarty.const._MD_YOGURT_DTABLE_PREVIOUS}>"
                     },
                     "aria": {
-                        "sortAscending": "<{$smarty.const._MD_YOGURT_DTSORTASCENDING}>",
-                        "sortDescending": "<{$smarty.const._MD_YOGURT_DTSORTDESCENSING}>"
+                        "sortAscending": "<{$smarty.const._MD_YOGURT_DTABLE_SORT_ASCENDING}>",
+                        "sortDescending": "<{$smarty.const._MD_YOGURT_DTABLE_SORT_DESCENSING}>"
                     }
                 }
             });
