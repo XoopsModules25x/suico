@@ -58,9 +58,9 @@
 				<p class="card-text"><{$pics_array[i].desc}></p>
 				<p class="text-muted"> <i class="fa fa-calendar"></i> 
 				<{if $pics_array[i].date_creation == $pics_array[i].date_update}>
-				<{$pics_array[i].date_creation|date_format}>
+				<small><{$pics_array[i].date_creation|date_format}></small>
 				<{else}>
-				<{$pics_array[i].date_update|date_format}>
+				<small><{$pics_array[i].date_update|date_format}></small>
 				<{/if}>
 				</p>
 				
