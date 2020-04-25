@@ -90,7 +90,9 @@ if (isset($nbSections[NBPHOTOS]) && 0 === $nbSections[NBPHOTOS]) {
         $pictures_array[$i]['desc']    = $picture->getVar('title', 's');
         $pictures_array[$i]['cod_img'] = $picture->getVar('cod_img', 's');
         $pictures_array[$i]['private'] = $picture->getVar('private', 's');
-        $xoopsTpl->assign('pics_array', $pictures_array);
+        $pictures_array[$i]['date_creation'] = formatTimeStamp($picture->getVar('date_creation', 's'));
+		$pictures_array[$i]['date_update'] = formatTimeStamp($picture->getVar('date_update', 's'));
+		$xoopsTpl->assign('pics_array', $pictures_array);
         $i++;
     }
 }

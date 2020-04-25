@@ -56,6 +56,14 @@
 			<div class="card-body">
 				<h4 class="card-title">&nbsp;</h4>
 				<p class="card-text"><{$pics_array[i].desc}></p>
+				<p class="text-muted"> <i class="fa fa-calendar"></i> 
+				<{if $pics_array[i].date_creation == $pics_array[i].date_update}>
+				<{$pics_array[i].date_creation|date_format}>
+				<{else}>
+				<{$pics_array[i].date_update|date_format}>
+				<{/if}>
+				</p>
+				
 				<{if (($isOwner==1))}>
         <form action="delpicture.php" method="post" id="deleteform" class="yogurt-album-formquick">
             <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">
