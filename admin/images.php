@@ -60,6 +60,7 @@ switch ($op) {
         }
         // Form save fields
         $imagesObject->setVar('title', Request::getVar('title', ''));
+        $imagesObject->setVar('caption', Request::getVar('caption', ''));
 
         $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_created', '', 'POST'));
         $imagesObject->setVar('date_created', $dateTimeObj->getTimestamp());

@@ -86,6 +86,7 @@ switch ($op) {
         $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_updated', '', 'POST'));
         $audioObject->setVar('date_updated', $dateTimeObj->getTimestamp());
 
+        //insert object
         if ($audioHandler->insert($audioObject)) {
             redirect_header('audio.php?op=list', 2, AM_YOGURT_FORMOK);
         }
