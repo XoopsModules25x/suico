@@ -144,7 +144,7 @@ $xoopsTpl->assign('lang_selectavatar', _MD_YOGURT_SELECTAVATAR);
 $xoopsTpl->assign('lang_selectmainvideo', _MD_YOGURT_SELECTMAINVIDEO);
 $xoopsTpl->assign('lang_noavatar', _MD_YOGURT_NOAVATARYET);
 $xoopsTpl->assign('lang_nomainvideo', _MD_YOGURT_NOMAINVIDEOYET);
-$xoopsTpl->assign('lang_featuredvideo', _MD_YOGURT_FEATUREDVIDEO);
+$xoopsTpl->assign('lang_featuredvideo', _MD_YOGURT_VIDEO_FEATURED);
 $xoopsTpl->assign('lang_viewallvideos', _MD_YOGURT_ALLVIDEOS);
 
 if (isset($nbSections['nbVideos']) && $nbSections['nbVideos'] > 0) {
@@ -191,8 +191,8 @@ if (1 === $friendrequest) {
     $xoopsTpl->assign('friendrequester_avatar', $friendrequester_avatar);
     $xoopsTpl->assign('friendrequest', $friendrequest);
     $xoopsTpl->assign('friendrequest_id', $friendrequest_id);
-    $xoopsTpl->assign('lang_rejected', _MD_YOGURT_UNKNOWNREJECTING);
-    $xoopsTpl->assign('lang_accepted', _MD_YOGURT_UNKNOWNACCEPTING);
+    $xoopsTpl->assign('lang_rejected', _MD_YOGURT_UNKNOWN_REJECTING);
+    $xoopsTpl->assign('lang_accepted', _MD_YOGURT_UNKNOWN_ACCEPTING);
     $xoopsTpl->assign('lang_acquaintance', _MD_YOGURT_AQUAITANCE);
     $xoopsTpl->assign('lang_friend', _MD_YOGURT_FRIEND);
     $xoopsTpl->assign('lang_bestfriend', _MD_YOGURT_BESTFRIEND);
@@ -203,11 +203,11 @@ if (1 === $friendrequest) {
 
 $xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
 $xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
-$xoopsTpl->assign('lang_friendrequestpending', _MD_YOGURT_FRIENDREQUESTPENDING);
+$xoopsTpl->assign('lang_friendrequestpending', _MD_YOGURT_FRIENDREQUEST_PENDING);
 $xoopsTpl->assign('lang_myfriend', _MD_YOGURT_MYFRIEND);
-$xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUESTSENT);
-$xoopsTpl->assign('lang_acceptfriend', _MD_YOGURT_ACCEPTFRIEND);
-$xoopsTpl->assign('lang_rejectfriend', _MD_YOGURT_REJECTFRIEND);
+$xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUEST_SENT);
+$xoopsTpl->assign('lang_acceptfriend', _MD_YOGURT_FRIEND_ACCEPT);
+$xoopsTpl->assign('lang_rejectfriend', _MD_YOGURT_FRIEND_REJECT);
 
 $criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
 $friends          = $controller->friendshipsFactory->getFriends(8, $criteria_friends);
@@ -218,10 +218,10 @@ $xoopsTpl->assign('lang_nofriendsyet', _MD_YOGURT_NOFRIENDSYET);
 
 
 //search
-$xoopsTpl->assign('lang_usercontributions', _MD_YOGURT_USERCONTRIBUTIONS);
+$xoopsTpl->assign('lang_usercontributions', _MD_YOGURT_USER_CONTRIBUTIONS);
 
 //Profile
-$xoopsTpl->assign('lang_detailsinfo', _MD_YOGURT_USERDETAILS);
+$xoopsTpl->assign('lang_detailsinfo', _MD_YOGURT_USER_DETAILS);
 $xoopsTpl->assign('lang_contactinfo', _MD_YOGURT_CONTACTINFO);
 //$xoopsTpl->assign('path_yogurt_uploads',$helper->getConfig('link_path_upload'));
 $xoopsTpl->assign(
@@ -229,7 +229,7 @@ $xoopsTpl->assign(
     sprintf(_MD_YOGURT_YOUCANHAVE, $helper->getConfig('nb_pict'))
 );
 $xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
-$xoopsTpl->assign('lang_editdesc', _MD_YOGURT_EDITDESC);
+$xoopsTpl->assign('lang_editdesc', _MD_YOGURT_EDIT_DESC);
 $xoopsTpl->assign('lang_visitors', _MD_YOGURT_VISITORS);
 $xoopsTpl->assign('lang_profilevisitors', _MD_YOGURT_PROFILEVISITORS);
 $xoopsTpl->assign('lang_editprofile', _MD_YOGURT_EDITPROFILE);

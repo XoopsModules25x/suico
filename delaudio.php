@@ -38,8 +38,8 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
             'confirm'   => 1,
         ],
         'delaudio.php',
-        _MD_YOGURT_ASKCONFIRMAUDIODELETION,
-        _MD_YOGURT_CONFIRMAUDIODELETION
+        _MD_YOGURT_AUDIO_DELETE_CONFIRM_ASK,
+        _MD_YOGURT_AUDIO_DELETE_CONFIRM
     );
 } else {
     /**
@@ -63,7 +63,7 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
      */
     if ($audioFactory->deleteAll($criteria)) {
         unlink(XOOPS_ROOT_PATH . '/uploads/yogurt/audio/' . $audio_name);
-        redirect_header('audio.php', 2, _MD_YOGURT_AUDIODELETED);
+        redirect_header('audio.php', 2, _MD_YOGURT_AUDIO_DELETED);
     } else {
         redirect_header('audio.php', 2, _MD_YOGURT_NOCACHACA);
     }

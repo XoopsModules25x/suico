@@ -355,7 +355,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $field_desc    = new XoopsFormText(_MD_YOGURT_GROUP_DESC, 'group_desc', 35, 55);
         $field_marker  = new XoopsFormHidden('marker', '1');
         $button_send   = new XoopsFormButton('', 'submit_button', _MD_YOGURT_UPLOADGROUP, 'submit');
-        $field_warning = new XoopsFormLabel(\sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxbytes / 1024));
+        $field_warning = new XoopsFormLabel(\sprintf(_MD_YOGURT_YOU_CAN_UPLOAD, $maxbytes / 1024));
 
         $form->addElement($field_warning);
         $form->addElement($field_url, true);
@@ -387,7 +387,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $field_desc    = new XoopsFormTextArea(_MD_YOGURT_GROUP_DESC, 'desc', $group->getVar('group_desc'));
         $field_marker  = new XoopsFormHidden('marker', '1');
         $button_send   = new XoopsFormButton('', 'submit_button', _MD_YOGURT_UPLOADGROUP, 'submit');
-        $field_warning = new XoopsFormLabel(\sprintf(_MD_YOGURT_YOUCANUPLOAD, $maxbytes / 1024));
+        $field_warning = new XoopsFormLabel(\sprintf(_MD_YOGURT_YOU_CAN_UPLOAD, $maxbytes / 1024));
 
         $field_oldpicture = new XoopsFormLabel(
             _MD_YOGURT_GROUP_IMAGE,
@@ -397,7 +397,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         );
 
         $field_maintainimage = new XoopsFormLabel(
-            _MD_YOGURT_MAINTAINOLDIMAGE,
+            _MD_YOGURT_MAINTAIN_OLD_IMAGE,
             "<input type='checkbox' value='1' id='flag_oldimg' name='flag_oldimg' onclick=\"groupImgSwitch(img)\"  checked>"
         );
 

@@ -70,21 +70,21 @@ if ($configsFactory->getCount($criteria) > 0) {
 
 //form
 $xoopsTpl->assign('lang_whocan', _MD_YOGURT_WHOCAN);
-$xoopsTpl->assign('lang_configtitle', _MD_YOGURT_CONFIGSTITLE);
-$xoopsTpl->assign('lang_configprofilestats', _MD_YOGURT_CONFIGSPROFILESTATS);
-$xoopsTpl->assign('lang_configprofilegeneral', _MD_YOGURT_CONFIGSPROFILEGENERAL);
-$xoopsTpl->assign('lang_configprofilecontact', _MD_YOGURT_CONFIGSPROFILECONTACT);
-$xoopsTpl->assign('lang_configfriends', _MD_YOGURT_CONFIGSFRIENDS);
-$xoopsTpl->assign('lang_confignotes', _MD_YOGURT_CONFIGSNOTES);
-$xoopsTpl->assign('lang_configsendnotes', _MD_YOGURT_CONFIGSNOTESSEND);
-$xoopsTpl->assign('lang_configgroups', _MD_YOGURT_CONFIGSGROUPS);
-$xoopsTpl->assign('lang_configaudio', _MD_YOGURT_CONFIGSAUDIOS);
-$xoopsTpl->assign('lang_configvideos', _MD_YOGURT_CONFIGSVIDEOS);
-$xoopsTpl->assign('lang_configpictures', _MD_YOGURT_CONFIGSPICTURES);
-$xoopsTpl->assign('lang_only_me', _MD_YOGURT_CONFIGSONLYME);
-$xoopsTpl->assign('lang_only_friends', _MD_YOGURT_CONFIGSONLYEFRIENDS);
-$xoopsTpl->assign('lang_only_users', _MD_YOGURT_CONFIGSONLYEUSERS);
-$xoopsTpl->assign('lang_everyone', _MD_YOGURT_CONFIGSEVERYONE);
+$xoopsTpl->assign('lang_configtitle', _MD_YOGURT_CONFIGS_TITLE);
+$xoopsTpl->assign('lang_configprofilestats', _MD_YOGURT_CONFIGS_PROFILESTATS);
+$xoopsTpl->assign('lang_configprofilegeneral', _MD_YOGURT_CONFIGS_PROFILEGENERAL);
+$xoopsTpl->assign('lang_configprofilecontact', _MD_YOGURT_CONFIGS_PROFILECONTACT);
+$xoopsTpl->assign('lang_configfriends', _MD_YOGURT_CONFIGS_FRIENDS);
+$xoopsTpl->assign('lang_confignotes', _MD_YOGURT_CONFIGS_NOTES);
+$xoopsTpl->assign('lang_configsendnotes', _MD_YOGURT_CONFIGS_NOTESSEND);
+$xoopsTpl->assign('lang_configgroups', _MD_YOGURT_CONFIGS_GROUPS);
+$xoopsTpl->assign('lang_configaudio', _MD_YOGURT_CONFIGS_AUDIOS);
+$xoopsTpl->assign('lang_configvideos', _MD_YOGURT_CONFIGS_VIDEOS);
+$xoopsTpl->assign('lang_configpictures', _MD_YOGURT_CONFIGS_PICTURES);
+$xoopsTpl->assign('lang_only_me', _MD_YOGURT_CONFIGS_ONLYME);
+$xoopsTpl->assign('lang_only_friends', _MD_YOGURT_CONFIGS_ONLYEFRIENDS);
+$xoopsTpl->assign('lang_only_users', _MD_YOGURT_CONFIGS_ONLYEUSERS);
+$xoopsTpl->assign('lang_everyone', _MD_YOGURT_CONFIGS_EVERYONE);
 
 $xoopsTpl->assign('lang_cancel', _MD_YOGURT_CANCEL);
 
@@ -93,8 +93,8 @@ $xoopsTpl->assign('lang_cancel', _MD_YOGURT_CANCEL);
 $xoopsTpl->assign('lang_answerNote', _MD_YOGURT_ANSWERNOTE);
 
 //navbar
-$xoopsTpl->assign('lang_mysection', _MD_YOGURT_CONFIGSTITLE);
-$xoopsTpl->assign('section_name', _MD_YOGURT_CONFIGSTITLE);
+$xoopsTpl->assign('lang_mysection', _MD_YOGURT_CONFIGS_TITLE);
+$xoopsTpl->assign('section_name', _MD_YOGURT_CONFIGS_TITLE);
 
 require __DIR__ . '/footer.php';
 require dirname(__DIR__, 2) . '/footer.php';

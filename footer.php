@@ -116,7 +116,7 @@ $xoopsTpl->assign('lang_videos', _MD_YOGURT_VIDEOS);
 $xoopsTpl->assign('lang_notebook', _MD_YOGURT_NOTEBOOK);
 $xoopsTpl->assign('lang_profile', _MD_YOGURT_PROFILE);
 $xoopsTpl->assign('lang_groups', _MD_YOGURT_GROUPS);
-$xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGSTITLE);
+$xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGS_TITLE);
 
 //xoopsToken
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
@@ -195,8 +195,8 @@ if (1 === $controller->isOwner) {
                 $xoopsTpl->assign('self_uid', $xoopsUser->getVar('uid'));
             }
             $xoopsTpl->assign('lang_myfriend', _MD_YOGURT_MYFRIEND);
-            $xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUESTSENT);
-            $xoopsTpl->assign('lang_friendshipstatus', _MD_YOGURT_FRIENDSHIPSTATUS);
+            $xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUEST_SENT);
+            $xoopsTpl->assign('lang_friendshipstatus', _MD_YOGURT_FRIENDSHIP_STATUS);
         
             $criteria_otherrequest = new Criteria('friendrequester_uid', $controller->uidOwner);
             $criteria_isotherrequest = new CriteriaCompo(new Criteria('friendrequestto_uid', $xoopsUser->getVar('uid')));
@@ -232,8 +232,8 @@ if (1 === $friendrequest) {
     $xoopsTpl->assign('requester_avatar', $friendrequester_avatar);
     $xoopsTpl->assign('request', $friendrequest);
     $xoopsTpl->assign('request_id', $friendrequest_id);
-    $xoopsTpl->assign('lang_rejected', _MD_YOGURT_UNKNOWNREJECTING);
-    $xoopsTpl->assign('lang_accepted', _MD_YOGURT_UNKNOWNACCEPTING);
+    $xoopsTpl->assign('lang_rejected', _MD_YOGURT_UNKNOWN_REJECTING);
+    $xoopsTpl->assign('lang_accepted', _MD_YOGURT_UNKNOWN_ACCEPTING);
     $xoopsTpl->assign('lang_acquaintance', _MD_YOGURT_AQUAITANCE);
     $xoopsTpl->assign('lang_friend', _MD_YOGURT_FRIEND);
     $xoopsTpl->assign('lang_bestfriend', _MD_YOGURT_BESTFRIEND);
@@ -242,12 +242,12 @@ if (1 === $friendrequest) {
 }
 $xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
 $xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
-$xoopsTpl->assign('lang_friendrequestpending', _MD_YOGURT_FRIENDREQUESTPENDING);
-$xoopsTpl->assign('lang_cancelfriendrequest', _MD_YOGURT_CANCELFRIENDREQUEST);
+$xoopsTpl->assign('lang_friendrequestpending', _MD_YOGURT_FRIENDREQUEST_PENDING);
+$xoopsTpl->assign('lang_cancelfriendrequest', _MD_YOGURT_FRIENDREQUEST_CANCEL);
 $xoopsTpl->assign('lang_myfriend', _MD_YOGURT_MYFRIEND);
-$xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUESTSENT);
-$xoopsTpl->assign('lang_acceptfriend', _MD_YOGURT_ACCEPTFRIEND);
-$xoopsTpl->assign('lang_rejectfriend', _MD_YOGURT_REJECTFRIEND);
+$xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUEST_SENT);
+$xoopsTpl->assign('lang_acceptfriend', _MD_YOGURT_FRIEND_ACCEPT);
+$xoopsTpl->assign('lang_rejectfriend', _MD_YOGURT_FRIEND_REJECT);
 
 
 // Member Suspension
@@ -260,7 +260,7 @@ if (0 === $controller->isSuspended) {
 } else {
     $xoopsTpl->assign('lang_unsuspend', _MD_YOGURT_UNSUSPEND);
     $xoopsTpl->assign('isSuspended', 1);
-    $xoopsTpl->assign('lang_suspended', _MD_YOGURT_USERSUSPENDED);
+    $xoopsTpl->assign('lang_suspended', _MD_YOGURT_USER_SUSPENDED);
 }
 
 

@@ -52,7 +52,7 @@ if (1 === $marker) {
     $friend2_uid = (int)$friendship->getVar('friend2_uid');
     $friendship->unsetNew();
     $friendshipFactory->insert2($friendship);
-    redirect_header('friends.php', 2, _MD_YOGURT_FRIENDSHIPUPDATED);
+    redirect_header('friends.php', 2, _MD_YOGURT_FRIENDSHIP_UPDATED);
 } else {
     $friendshipFactory->renderFormSubmit($friend);
 }
