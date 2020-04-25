@@ -49,6 +49,8 @@ class Video extends XoopsObject
         $this->initVar('video_desc', \XOBJ_DTYPE_OTHER, null, false);
         $this->initVar('youtube_code', \XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('main_video', \XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('date_created', \XOBJ_DTYPE_INT);
+        $this->initVar('date_updated', \XOBJ_DTYPE_INT);
         if (!empty($id)) {
             if (\is_array($id)) {
                 $this->assignVars($id);

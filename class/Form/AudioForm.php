@@ -106,13 +106,13 @@ class AudioForm extends XoopsThemeForm
         // Data_creation
         $this->addElement(
             new XoopsFormTextDateSelect(
-                AM_YOGURT_AUDIO_DATA_CREATION, 'date_created', 0, formatTimeStamp($this->targetObject->getVar('date_created'), 's')
+                AM_YOGURT_AUDIO_DATE_CREATED, 'date_created', 0, formatTimeStamp($this->targetObject->getVar('date_created'), 's')
             )
         );
 
         $this->addElement(
             new XoopsFormTextDateSelect(
-                AM_YOGURT_AUDIO_DATA_UPDATE, 'date_updated', 0, formatTimeStamp($this->targetObject->getVar('date_updated'), 's')
+                AM_YOGURT_AUDIO_DATE_UPDATED, 'date_updated', 0, formatTimeStamp($this->targetObject->getVar('date_updated'), 's')
             )
         );
 

@@ -221,10 +221,10 @@ switch ($op) {
 				$GLOBALS['xoopsTpl']->assign('selectorcaption', AM_YOGURT_IMAGES_CAPTION);
                 $imagesArray['caption'] = $imagesTempArray[$i]->getVar('caption');
 
-                $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_IMAGES_DATA_CREATION);
+                $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_IMAGES_DATE_CREATED);
                 $imagesArray['date_created'] = formatTimeStamp($imagesTempArray[$i]->getVar('date_created'), 's');
 
-                $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_YOGURT_IMAGES_DATA_UPDATE);
+                $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_YOGURT_IMAGES_DATE_UPDATED);
                 $imagesArray['date_updated'] = formatTimeStamp($imagesTempArray[$i]->getVar('date_updated'), 's');
 
                 $GLOBALS['xoopsTpl']->assign('selectoruid_owner', AM_YOGURT_IMAGES_UID_OWNER);

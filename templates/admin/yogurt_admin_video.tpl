@@ -25,6 +25,8 @@
                     <th class="left"><{$selectorvideo_desc}></th>
                     <th class="left"><{$selectoryoutube_code}></th>
                     <th class="center"><{$selectormain_video}></th>
+                    <th class="left"><{$selectordate_created}></th>
+                    <th class="left"><{$selectordate_updated}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
@@ -37,6 +39,8 @@
                         <td class='left'><{$videoArray.video_desc}></td>
                         <td class='left'><{$videoArray.youtube_code}></td>
                         <td class='center'><{$videoArray.main_video}></td>
+                        <td class='left'><{$videoArray.date_created}></td>
+                        <td class='left'><{$videoArray.date_updated}></td>
 
 
                         <td class="center width5"><{$videoArray.edit_delete}></td>
@@ -55,6 +59,8 @@
                     <th class="left"><{$selectorvideo_desc}></th>
                     <th class="left"><{$selectoryoutube_code}></th>
                     <th class="center"><{$selectormain_video}></th>
+                    <th class="left"><{$selectordate_created}></th>
+                    <th class="left"><{$selectordate_updated}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
