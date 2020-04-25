@@ -62,8 +62,8 @@ switch ($op) {
         $visitorsObject->setVar('uid_owner', Request::getVar('uid_owner', ''));
         $visitorsObject->setVar('uid_visitor', Request::getVar('uid_visitor', ''));
         $visitorsObject->setVar('uname_visitor', Request::getVar('uname_visitor', ''));
-        $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('datetime', '', 'POST'));
-        $visitorsObject->setVar('datetime', $dateTimeObj->getTimestamp());
+        $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_visited', '', 'POST'));
+        $visitorsObject->setVar('date_visited', $dateTimeObj->getTimestamp());
 
         if ($visitorsHandler->insert($visitorsObject)) {
             redirect_header('visitors.php?op=list', 2, AM_YOGURT_FORMOK);
@@ -160,7 +160,7 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('visitorsRows', $visitorsTempRows);
         $visitorsArray = [];
 
-        //    $fields = explode('|', cod_visit:int:11::NOT NULL::primary:cod_visit|uid_owner:int:11::NOT NULL:::uid_owner|uid_visitor:int:11::NOT NULL:::uid_visitor|uname_visitor:varchar:30::NOT NULL:::uname_visitor|datetime:timestamp:0::NOT NULL:CURRENT_TIMESTAMP::datetime);
+        //    $fields = explode('|', cod_visit:int:11::NOT NULL::primary:cod_visit|uid_owner:int:11::NOT NULL:::uid_owner|uid_visitor:int:11::NOT NULL:::uid_visitor|uname_visitor:varchar:30::NOT NULL:::uname_visitor|date_visited:timestamp:0::NOT NULL:CURRENT_TIMESTAMP::date_visited);
         //    $fieldsCount    = count($fields);
 
         $criteria = new CriteriaCompo();
@@ -198,8 +198,8 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('selectoruname_visitor', AM_YOGURT_VISITORS_UNAME_VISITOR);
                 $visitorsArray['uname_visitor'] = $visitorsTempArray[$i]->getVar('uname_visitor');
 
-                $GLOBALS['xoopsTpl']->assign('selectordatetime', AM_YOGURT_VISITORS_DATETIME);
-                $visitorsArray['datetime'] = formatTimeStamp($visitorsTempArray[$i]->getVar('datetime'), 's');
+                $GLOBALS['xoopsTpl']->assign('selectordate_visited', AM_YOGURT_VISITORS_DATETIME);
+                $visitorsArray['date_visited'] = formatTimeStamp($visitorsTempArray[$i]->getVar('date_visited'), 's');
 
 
                 $visitorsArray['edit_delete'] = "<a href='visitors.php?op=edit&cod_visit=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>

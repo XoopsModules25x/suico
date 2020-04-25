@@ -158,7 +158,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Image
             $xoopsObject = new Image();
-            $format      = 'INSERT INTO %s (cod_img, title, data_creation, data_update, uid_owner, url, private)';
+            $format      = 'INSERT INTO %s (cod_img, title, date_created, date_updated, uid_owner, url, private)';
             $format      .= 'VALUES (%u, %s, %s, %s, %s, %s, 0)';
             $sql         = \sprintf(
                 $format,
@@ -173,7 +173,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
-            $format .= 'cod_img=%u, title=%s, data_creation=%s, data_update=%s, uid_owner=%s, url=%s, private=%s';
+            $format .= 'cod_img=%u, title=%s, date_created=%s, date_updated=%s, uid_owner=%s, url=%s, private=%s';
             $format .= ' WHERE cod_img = %u';
             $sql    = \sprintf(
                 $format,
@@ -445,8 +445,8 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $url     = $uploader->getSavedFileName();
             $picture->setVar('url', $url);
             $picture->setVar('title', $title);
-            $picture->setVar('data_creation', time());
-            $picture->setVar('data_update', time());
+            $picture->setVar('date_created', time());
+            $picture->setVar('date_updated', time());
             $picture->setVar('private', 0);
             $uid = $xoopsUser->getVar('uid');
             $picture->setVar('uid_owner', $uid);

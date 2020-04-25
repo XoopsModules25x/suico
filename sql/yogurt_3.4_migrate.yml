@@ -55,10 +55,10 @@ yogurt_images:
             name: title
             attributes: ' varchar(255)  NOT NULL '
         -
-            name: data_creation
+            name: date_created
             attributes: ' date  NOT NULL '
         -
-            name: data_update
+            name: date_updated
             attributes: ' date  NOT NULL '
         -
             name: uid_owner
@@ -282,10 +282,10 @@ yogurt_audio:
             name: uid_owner
             attributes: ' int(11)  NOT NULL '
         -
-            name: data_creation
+            name: date_created
             attributes: ' date  NOT NULL '
         -
-            name: data_update
+            name: date_updated
             attributes: ' date  NOT NULL '
     keys:
         PRIMARY:

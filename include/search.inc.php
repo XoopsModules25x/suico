@@ -52,7 +52,7 @@ function yogurt_search(
     $path_uploadimages = XOOPS_UPLOAD_URL;
 
     $ret = [];
-    $sql = 'SELECT cod_img, title,  data_creation,  uid_owner, url FROM ' . $xoopsDB->prefix(
+    $sql = 'SELECT cod_img, title,  date_created,  uid_owner, url FROM ' . $xoopsDB->prefix(
         'yogurt_images'
     ) . ' WHERE ';
     if (0 !== $userid) {
@@ -93,7 +93,7 @@ function yogurt_search(
                                     . '/modules/yogurt/images/search.png';
                 $ret[$i]['link']  = 'album.php?uid=' . $myrow['uid_owner'];
                 $ret[$i]['title'] = $myrow['title'];
-                //$ret[$i]['time'] = $myrow['data_creation'];
+                //$ret[$i]['time'] = $myrow['date_created'];
                 $ret[$i]['uid'] = $myrow['uid_owner'];
             } else {
                 $stringofimage .= '<a href="' . XOOPS_URL . '/modules/yogurt/album.php?uid=' . $myrow['uid_owner'] . '" title="' . $myrow['title'] . '"><img src="' . $path_uploadimages . '/yogurt/images/thumb_' . $myrow['url'] . '"></a>&nbsp;';
@@ -102,7 +102,7 @@ function yogurt_search(
             $ret[$i]['image'] = "assets/images/search.png'><a href='" . XOOPS_URL . '/modules/yogurt/album.php?uid=' . $myrow['uid_owner'] . "'><img src='" . $path_uploadimages . '/yogurt/images/thumb_' . $myrow['url'] . "'></a><br>" . "<img src='" . XOOPS_URL . '/modules/yogurt/images/search.png';
             $ret[$i]['link']  = 'album.php?uid=' . $myrow['uid_owner'];
             $ret[$i]['title'] = $myrow['title'];
-            //$ret[$i]['time'] = $myrow['data_creation'];
+            //$ret[$i]['time'] = $myrow['date_created'];
             $ret[$i]['uid'] = $myrow['uid_owner'];
         }
 

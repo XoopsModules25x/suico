@@ -163,8 +163,8 @@ class NotesForm extends XoopsThemeForm
         // Date
 //        $this->addElement(new XoopsFormTextDateSelect(AM_YOGURT_NOTES_DATE, 'date',0, \strtotime($this->targetObject->getVar('date'))));
 
-        $noteCreated = $this->targetObject->isNew() ? 0 : $this->targetObject->getVar('date');
-        $this->addElement(new \XoopsFormTextDateSelect( AM_YOGURT_NOTES_DATE, 'date', '', $noteCreated ), true);
+        $noteCreated = $this->targetObject->isNew() ? 0 : $this->targetObject->getVar('date_created');
+        $this->addElement(new \XoopsFormTextDateSelect( AM_YOGURT_NOTES_DATE, 'date_created', '', $noteCreated ), true);
 
         $this->addElement(new XoopsFormHidden('op', 'save'));
         $this->addElement(new XoopsFormButton('', 'submit', \_SUBMIT, 'submit'));

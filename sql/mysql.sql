@@ -1,8 +1,8 @@
 CREATE TABLE `yogurt_images` (
     `cod_img`       INT(11)      NOT NULL AUTO_INCREMENT,
     `title`         VARCHAR(255) NOT NULL,
-    `data_creation` INT(11)      NOT NULL DEFAULT 0,
-    `data_update`   INT(11)      NOT NULL DEFAULT 0,
+    `date_created` INT(11)      NOT NULL DEFAULT 0,
+    `date_updated`   INT(11)      NOT NULL DEFAULT 0,
     `uid_owner`     VARCHAR(50)  NOT NULL,
     `url`           TEXT         NOT NULL,
     `private`       VARCHAR(1)   NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE `yogurt_visitors` (
     `uid_owner`     INT(11)     NOT NULL,
     `uid_visitor`   INT(11)     NOT NULL,
     `uname_visitor` VARCHAR(30) NOT NULL,
-    `datetime`      INT(11)     NOT NULL DEFAULT 0,
+    `date_visited`      INT(11)     NOT NULL DEFAULT 0,
     PRIMARY KEY (`cod_visit`)
 )
     ENGINE = MyISAM;
@@ -75,7 +75,7 @@ CREATE TABLE `yogurt_notes` (
     `note_from` INT(11)    NOT NULL,
     `note_to`   INT(11)    NOT NULL,
     `private`   TINYINT(1) NOT NULL,
-    `date`      INT(11)    NOT NULL DEFAULT 0,
+    `date_created`      INT(11)    NOT NULL DEFAULT 0,
     PRIMARY KEY (`note_id`)
 )
     ENGINE = MyISAM;
@@ -119,8 +119,8 @@ CREATE TABLE `yogurt_audio` (
     `author`        VARCHAR(256) NOT NULL,
     `url`           VARCHAR(256) NOT NULL,
     `uid_owner`     INT(11)      NOT NULL,
-    `data_creation` INT(11)      NOT NULL DEFAULT 0,
-    `data_update`   INT(11)      NOT NULL DEFAULT 0,
+    `date_created` INT(11)      NOT NULL DEFAULT 0,
+    `date_updated`   INT(11)      NOT NULL DEFAULT 0,
     PRIMARY KEY (`audio_id`)
 )
     ENGINE = MyISAM;
