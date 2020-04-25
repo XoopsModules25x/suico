@@ -222,10 +222,10 @@ switch ($op) {
                 );
 
                 $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_AUDIO_DATE_CREATED);
-                $audioArray['date_created'] = formatTimeStamp($audioTempArray[$i]->getVar('date_created'), 's');
+                $audioArray['date_created'] = formatTimestamp($audioTempArray[$i]->getVar('date_created'), 's');
 
                 $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_YOGURT_AUDIO_DATE_UPDATED);
-                $audioArray['date_updated'] = formatTimeStamp($audioTempArray[$i]->getVar('date_updated'), 's');
+                $audioArray['date_updated'] = formatTimestamp($audioTempArray[$i]->getVar('date_updated'), 's');
 
                 $audioArray['edit_delete'] = "<a href='audio.php?op=edit&audio_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='audio.php?op=delete&audio_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>

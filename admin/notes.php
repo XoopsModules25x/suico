@@ -206,7 +206,7 @@ switch ($op) {
                 $notesArray['private'] = $notesTempArray[$i]->getVar('private');
 
                 $GLOBALS['xoopsTpl']->assign('selectordate', AM_YOGURT_NOTES_DATE);
-                $notesArray['date_created'] = formatTimeStamp($notesTempArray[$i]->getVar('date_created'), 's');
+                $notesArray['date_created'] = formatTimestamp($notesTempArray[$i]->getVar('date_created'), 's');
 
                 $notesArray['edit_delete'] = "<a href='notes.php?op=edit&note_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='notes.php?op=delete&note_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>

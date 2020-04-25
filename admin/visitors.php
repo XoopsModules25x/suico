@@ -199,7 +199,7 @@ switch ($op) {
                 $visitorsArray['uname_visitor'] = $visitorsTempArray[$i]->getVar('uname_visitor');
 
                 $GLOBALS['xoopsTpl']->assign('selectordate_visited', AM_YOGURT_VISITORS_DATETIME);
-                $visitorsArray['date_visited'] = formatTimeStamp($visitorsTempArray[$i]->getVar('date_visited'), 's');
+                $visitorsArray['date_visited'] = formatTimestamp($visitorsTempArray[$i]->getVar('date_visited'), 's');
 
 
                 $visitorsArray['edit_delete'] = "<a href='visitors.php?op=edit&cod_visit=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>

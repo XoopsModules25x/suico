@@ -223,7 +223,7 @@ switch ($op) {
                 $configsArray['backup_email'] = $configsTempArray[$i]->getVar('backup_email');
 
                 $GLOBALS['xoopsTpl']->assign('selectorend_suspension', AM_YOGURT_CONFIGS_END_SUSPENSION);
-                $configsArray['end_suspension'] = formatTimeStamp($configsTempArray[$i]->getVar('end_suspension'), 's');
+                $configsArray['end_suspension'] = formatTimestamp($configsTempArray[$i]->getVar('end_suspension'), 's');
 
 
 

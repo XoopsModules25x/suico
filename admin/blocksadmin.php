@@ -111,9 +111,9 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         ];
         foreach ($block_arr as $i) {
             $groups_perms = $grouppermHandler->getGroupIds('block_read', $i->getVar('bid'));
-            $sql          = 'SELECT module_id FROM ' . $db->prefix(
+            $sql          = 'SELECT `module_id` FROM ' . $db->prefix(
                 'block_module_link'
-            ) . ' WHERE block_id=' . $i->getVar(
+            ) . ' WHERE `block_id` =' . $i->getVar(
                     'bid'
                 );
             $result       = $db->query($sql);

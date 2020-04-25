@@ -119,7 +119,7 @@ class FriendrequestForm extends XoopsThemeForm
         // Date_created
         $this->addElement(
             new \XoopsFormTextDateSelect(
-                AM_YOGURT_FRIENDREQUEST_DATE_CREATED, 'date_created', 0, formatTimeStamp($this->targetObject->getVar('date_created'), 's')
+                AM_YOGURT_FRIENDREQUEST_DATE_CREATED, 'date_created', 0, formatTimestamp($this->targetObject->getVar('date_created'), 's')
             )
         );
 

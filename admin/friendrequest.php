@@ -193,7 +193,7 @@ switch ($op) {
                     XoopsUser::getUnameFromId($friendrequestTempArray[$i]->getVar('friendrequestto_uid'))
                 );
                 $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_FRIENDREQUEST_DATE_CREATED);
-                $friendrequestArray['date_created'] = formatTimeStamp($friendrequestTempArray[$i]->getVar('date_created'), 's');
+                $friendrequestArray['date_created'] = formatTimestamp($friendrequestTempArray[$i]->getVar('date_created'), 's');
                 $friendrequestArray['edit_delete']  = "<a href='friendrequest.php?op=edit&friendpet_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='friendrequest.php?op=delete&friendpet_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='friendrequest.php?op=clone&friendpet_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";

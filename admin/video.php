@@ -203,10 +203,10 @@ switch ($op) {
                 $videoArray['main_video']  = $videoTempArray[$i]->getVar('main_video');
                 
                 $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_VIDEO_DATE_CREATED);
-                $videoArray['date_created'] = formatTimeStamp($videoTempArray[$i]->getVar('date_created'), 's');
+                $videoArray['date_created'] = formatTimestamp($videoTempArray[$i]->getVar('date_created'), 's');
 
                 $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_YOGURT_VIDEO_DATE_UPDATED);
-                $videoArray['date_updated'] = formatTimeStamp($videoTempArray[$i]->getVar('date_updated'), 's');
+                $videoArray['date_updated'] = formatTimestamp($videoTempArray[$i]->getVar('date_updated'), 's');
                 
                 $videoArray['edit_delete'] = "<a href='video.php?op=edit&video_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='video.php?op=delete&video_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
