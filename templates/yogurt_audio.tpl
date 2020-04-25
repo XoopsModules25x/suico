@@ -148,7 +148,15 @@
         <div class="alert alert-primary">
           <h5><{$smarty.const._MD_YOGURT_DESCRIPTION}></h5>
                <{$audios[i].author}> - <{$audios[i].title}> <br>
-
+			   
+			   <p class="text-muted"> <i class="fa fa-calendar"></i> 
+				<{if $audios[i].date_created == $audios[i].date_updated}>
+				<small><{$audios[i].date_created|date_format}></small>
+				<{else}>
+				<small><{$audios[i].date_updated|date_format}></small>
+				<{/if}>
+				</p>
+				
                   <{if '' != $audios[i].meta.Title || '' != $audios[i].meta.Album  || '' != $audios[i].meta.Artist || '' != $audios[i].meta.Year   }>  <h6> <{$lang_meta}></h6> <{/if}>
 			<{if '' != $audios[i].meta.Title}> <p class="yogurt-audio-meta-title"><span class="yogurt-audio-meta-label"> <{$lang_title}>:</span> <{$audios[i].meta.Title}></p> <{/if}>
             <{if '' != $audios[i].meta.Album}><p class="yogurt-audio-meta-title"><span class="yogurt-audio-meta-label"> <{$lang_album}>:</span> <{$audios[i].meta.Album}></p> <{/if}>
