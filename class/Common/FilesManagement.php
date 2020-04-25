@@ -64,6 +64,8 @@ trait FilesManagement
     /**
      * @param $src
      * @param $dst
+     * @return bool
+     * @return bool
      */
     public static function recurseCopy($src, $dst)
     {

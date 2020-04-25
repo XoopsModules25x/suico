@@ -358,6 +358,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
     /**
      * Render a form to edit the description of the pictures
      *
+     * @param        $title
      * @param string $caption  The description of the picture
      * @param int    $cod_img  the id of the image in database
      * @param string $filename the url to the thumb of the image so it can be displayed

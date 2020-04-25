@@ -72,8 +72,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
     /**
      * retrieve a yogurt_audio
      *
-     * @param int  $id of the yogurt_audio
-     * @param null $fields
+     * @param int $id of the yogurt_audio
      * @return mixed reference to the {@link yogurt_audio} object, FALSE if failed
      */
     public function get2(
