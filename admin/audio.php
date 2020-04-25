@@ -220,10 +220,10 @@ switch ($op) {
                     XoopsUser::getUnameFromId($audioTempArray[$i]->getVar('uid_owner'))
                 );
 
-                $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_AUDIO_DATA_CREATION);
+                $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_AUDIO_DATE_CREATED);
                 $audioArray['date_created'] = formatTimeStamp($audioTempArray[$i]->getVar('date_created'), 's');
 
-                $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_YOGURT_AUDIO_DATA_UPDATE);
+                $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_YOGURT_AUDIO_DATE_UPDATED);
                 $audioArray['date_updated'] = formatTimeStamp($audioTempArray[$i]->getVar('date_updated'), 's');
 
                 $audioArray['edit_delete'] = "<a href='audio.php?op=edit&audio_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>

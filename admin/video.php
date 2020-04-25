@@ -63,6 +63,11 @@ switch ($op) {
         $videoObject->setVar('video_desc', Request::getVar('video_desc', ''));
         $videoObject->setVar('youtube_code', Request::getVar('youtube_code', ''));
         $videoObject->setVar('main_video', Request::getVar('main_video', ''));
+
+        $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_created', '', 'POST'));
+        $videoObject->setVar('date_created', $dateTimeObj->getTimestamp());
+        $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_updated', '', 'POST'));
+        $videoObject->setVar('date_updated', $dateTimeObj->getTimestamp());
         if ($videoHandler->insert($videoObject)) {
             redirect_header('video.php?op=list', 2, AM_YOGURT_FORMOK);
         }
@@ -196,6 +201,13 @@ switch ($op) {
 
                 $GLOBALS['xoopsTpl']->assign('selectormain_video', AM_YOGURT_VIDEO_MAIN_VIDEO);
                 $videoArray['main_video']  = $videoTempArray[$i]->getVar('main_video');
+                
+                $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_VIDEO_DATE_CREATED);
+                $videoArray['date_created'] = formatTimeStamp($videoTempArray[$i]->getVar('date_created'), 's');
+
+                $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_YOGURT_VIDEO_DATE_UPDATED);
+                $videoArray['date_updated'] = formatTimeStamp($videoTempArray[$i]->getVar('date_updated'), 's');
+                
                 $videoArray['edit_delete'] = "<a href='video.php?op=edit&video_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='video.php?op=delete&video_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='video.php?op=clone&video_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
