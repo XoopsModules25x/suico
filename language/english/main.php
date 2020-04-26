@@ -131,10 +131,10 @@ define('_MD_YOGURT_FRIENDMADE', 'Added as a friend!');
 define('_MD_YOGURT_FRIENDSHIP_TERMINATED', 'You have broken your friendship with this user!');
 
 ############################################ VIDEOS ############################################################
-//mainvideo.php
+//mainvideos.php
 define('_MD_YOGURT_SETMAINVIDEO', 'This video is featured on your profile page from now on');
 
-//video.php
+//videos.php
 define('_MD_YOGURT_YOUTUBECODE', 'YouTube code or URL');
 define('_MD_YOGURT_ADDVIDEO', 'Add video');
 define('_MD_YOGURT_ADDFAVORITEVIDEOS', 'Add favourite videos');
@@ -147,7 +147,7 @@ define('_MD_YOGURT_MYVIDEOS', 'My Videos');
 define('_MD_YOGURT_MAKEMAIN', 'Feature this video in your main page');
 define('_MD_YOGURT_NOVIDEOSYET', 'No videos yet!');
 
-//delvideo.php
+//delvideos.php
 define('_MD_YOGURT_ASKCONFIRMVIDEODELETION', 'Are you sure you want to delete this video?');
 define('_MD_YOGURT_CONFIRMVIDEODELETION', 'Yes I am!');
 define('_MD_YOGURT_VIDEO_DELETED', 'Your video was deleted');

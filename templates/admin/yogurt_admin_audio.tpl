@@ -1,6 +1,6 @@
 <{if $audioRows > 0}>
     <div class="outer">
-        <form name="select" action="audio.php?op=" method="POST"
+        <form name="select" action="audios.php?op=" method="POST"
               onsubmit="if(window.document.select.op.value =='') {return false;} else if (window.document.select.op.value =='delete') {return deleteSubmitValid('audioId[]');} else if (isOneChecked('audioId[]')) {return true;} else {alert('<{$smarty.const.AM_AUDIO_SELECTED_ERROR}>'); return false;}">
             <input type="hidden" name="confirm" value="1">
             <div class="floatleft">

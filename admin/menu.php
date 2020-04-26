@@ -70,7 +70,7 @@ $adminmenu[] = [
 
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU5,
-    'link'  => 'admin/video.php',
+    'link'  => 'admin/videos.php',
     'icon'  => "{$pathIcon32}/marquee.png",
 ];
 
@@ -112,7 +112,7 @@ $adminmenu[] = [
 
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU12,
-    'link'  => 'admin/audio.php',
+    'link'  => 'admin/audios.php',
     'icon'  => "{$pathIcon32}/playlist.png",
 ];
 

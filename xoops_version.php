@@ -1122,11 +1122,11 @@ if (is_object($xoopsModule) && $xoopsModule->dirname() === $modversion['dirname'
     }
     if (1 === $moduleConfig['enable_audio']) {
         $modversion['sub'][5]['name'] = _MI_YOGURT_MYAUDIOS;
-        $modversion['sub'][5]['url']  = 'audio.php';
+        $modversion['sub'][5]['url']  = 'audios.php';
     }
     if (1 === $moduleConfig['enable_videos']) {
         $modversion['sub'][6]['name'] = _MI_YOGURT_MYVIDEOS;
-        $modversion['sub'][6]['url']  = 'video.php';
+        $modversion['sub'][6]['url']  = 'videos.php';
     }
     if (1 === $moduleConfig['enable_friends']) {
         $modversion['sub'][7]['name'] = _MI_YOGURT_MYFRIENDS;
@@ -1168,7 +1168,7 @@ $modversion['notification']['event'][1]['mail_subject']      = _MI_YOGURT_PICTUR
 $modversion['notification']['category'][2]['name']           = 'video';
 $modversion['notification']['category'][2]['title']          = _MI_YOGURT_VIDEO_NOTIFYTIT;
 $modversion['notification']['category'][2]['description']    = _MI_YOGURT_VIDEO_NOTIFYDSC;
-$modversion['notification']['category'][2]['subscribe_from'] = 'video.php';
+$modversion['notification']['category'][2]['subscribe_from'] = 'videos.php';
 $modversion['notification']['category'][2]['item_name']      = 'uid';
 $modversion['notification']['category'][2]['allow_bookmark'] = 1;
 $modversion['notification']['event'][2]['name']              = 'new_video';

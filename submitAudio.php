@@ -77,13 +77,13 @@ if ('sel_audio' === $_POST['xoops_upload_file'][0]) {
         //                     $notificationHandler->triggerEvent ("picture", $xoopsUser->getVar('uid'), "new_picture",$extra_tags);
         //header("Location: ".XOOPS_URL."/modules/yogurt/index.php?uid=".$xoopsUser->getVar('uid'));
         redirect_header(
-            XOOPS_URL . '/modules/yogurt/audio.php?uid=' . $xoopsUser->getVar('uid'),
+            XOOPS_URL . '/modules/yogurt/audios.php?uid=' . $xoopsUser->getVar('uid'),
             50,
             _MD_YOGURT_UPLOADEDAUDIO
         );
     } else {
         redirect_header(
-            XOOPS_URL . '/modules/yogurt/audio.php?uid=' . $xoopsUser->getVar('uid'),
+            XOOPS_URL . '/modules/yogurt/audios.php?uid=' . $xoopsUser->getVar('uid'),
             50,
             _MD_YOGURT_ERROR
         );

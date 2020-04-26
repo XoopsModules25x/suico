@@ -46,9 +46,9 @@ $uid = (int)$xoopsUser->getVar('uid');
 if ($uid === $video->getVar('uid_owner')) {
     if ($videoFactory->unsetAllMainsbyID($uid)) {
         if ($videoFactory->insert2($video)) {
-            redirect_header('video.php', 2, _MD_YOGURT_SETMAINVIDEO);
+            redirect_header('videos.php', 2, _MD_YOGURT_SETMAINVIDEO);
         } else {
-            redirect_header('video.php', 2, _MD_YOGURT_SETMAINVIDEO_ERROR);
+            redirect_header('videos.php', 2, _MD_YOGURT_SETMAINVIDEO_ERROR);
         }
     } else {
         echo 'did not work';

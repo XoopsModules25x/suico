@@ -41,7 +41,7 @@ $uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/audio/';
 
 switch ($op) {
     case 'new':
-        $adminObject->addItemButton(AM_YOGURT_AUDIO_LIST, 'audio.php', 'list');
+        $adminObject->addItemButton(AM_YOGURT_AUDIO_LIST, 'audios.php', 'list');
         $adminObject->displayButton('left');
 
         $audioObject = $audioHandler->create();
@@ -51,7 +51,7 @@ switch ($op) {
 
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            redirect_header('audio.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+            redirect_header('audios.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         if (0 !== Request::getInt('audio_id', 0)) {
             $audioObject = $audioHandler->get(Request::getInt('audio_id', 0));
@@ -88,7 +88,7 @@ switch ($op) {
 
         //insert object
         if ($audioHandler->insert($audioObject)) {
-            redirect_header('audio.php?op=list', 2, AM_YOGURT_FORMOK);
+            redirect_header('audios.php?op=list', 2, AM_YOGURT_FORMOK);
         }
 
         echo $audioObject->getHtmlErrors();
@@ -97,8 +97,8 @@ switch ($op) {
         break;
 
     case 'edit':
-        $adminObject->addItemButton(AM_YOGURT_ADD_AUDIO, 'audio.php?op=new', 'add');
-        $adminObject->addItemButton(AM_YOGURT_AUDIO_LIST, 'audio.php', 'list');
+        $adminObject->addItemButton(AM_YOGURT_ADD_AUDIO, 'audios.php?op=new', 'add');
+        $adminObject->addItemButton(AM_YOGURT_AUDIO_LIST, 'audios.php', 'list');
         $adminObject->displayButton('left');
         $audioObject = $audioHandler->get(Request::getString('audio_id', ''));
         $form        = $audioObject->getForm();
@@ -109,10 +109,10 @@ switch ($op) {
         $audioObject = $audioHandler->get(Request::getString('audio_id', ''));
         if (1 === Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
-                redirect_header('audio.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
+                redirect_header('audios.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
             if ($audioHandler->delete($audioObject)) {
-                redirect_header('audio.php', 3, AM_YOGURT_FORMDELOK);
+                redirect_header('audios.php', 3, AM_YOGURT_FORMDELOK);
             } else {
                 echo $audioObject->getHtmlErrors();
             }
@@ -137,15 +137,15 @@ switch ($op) {
         $id_field = Request::getString('audio_id', '');
 
         if ($utility::cloneRecord('yogurt_audio', 'audio_id', $id_field)) {
-            redirect_header('audio.php', 3, AM_YOGURT_CLONED_OK);
+            redirect_header('audios.php', 3, AM_YOGURT_CLONED_OK);
         } else {
-            redirect_header('audio.php', 3, AM_YOGURT_CLONED_FAILED);
+            redirect_header('audios.php', 3, AM_YOGURT_CLONED_FAILED);
         }
 
         break;
     case 'list':
     default:
-        $adminObject->addItemButton(AM_YOGURT_ADD_AUDIO, 'audio.php?op=new', 'add');
+        $adminObject->addItemButton(AM_YOGURT_ADD_AUDIO, 'audios.php?op=new', 'add');
         $adminObject->displayButton('left');
         $start                = Request::getInt('start', 0);
         $audioPaginationLimit = $helper->getConfig('userpager');
@@ -227,9 +227,9 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_YOGURT_AUDIO_DATE_UPDATED);
                 $audioArray['date_updated'] = formatTimestamp($audioTempArray[$i]->getVar('date_updated'), 's');
 
-                $audioArray['edit_delete'] = "<a href='audio.php?op=edit&audio_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
-               <a href='audio.php?op=delete&audio_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
-               <a href='audio.php?op=clone&audio_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
+                $audioArray['edit_delete'] = "<a href='audios.php?op=edit&audio_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
+               <a href='audios.php?op=delete&audio_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
+               <a href='audios.php?op=clone&audio_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
                 $GLOBALS['xoopsTpl']->append_by_ref('audioArrays', $audioArray);
                 unset($audioArray);
@@ -250,8 +250,8 @@ switch ($op) {
 
             //                     echo "<td class='center width5'>
 
-            //                    <a href='audio.php?op=edit&audio_id=".$i."'><img src=".$pathIcon16."/edit.png alt='"._EDIT."' title='"._EDIT."'></a>
-            //                    <a href='audio.php?op=delete&audio_id=".$i."'><img src=".$pathIcon16."/delete.png alt='"._DELETE."' title='"._DELETE."'></a>
+            //                    <a href='audios.php?op=edit&audio_id=".$i."'><img src=".$pathIcon16."/edit.png alt='"._EDIT."' title='"._EDIT."'></a>
+            //                    <a href='audios.php?op=delete&audio_id=".$i."'><img src=".$pathIcon16."/delete.png alt='"._DELETE."' title='"._DELETE."'></a>
             //                    </td>";
 
             //                echo "</tr>";

@@ -48,7 +48,7 @@ if (1 === $marker) {
      */
     if ($uid === $video->getVar('uid_owner')) {
         if ($videoFactory->insert2($video)) {
-            redirect_header('video.php?uid=' . $uid, 2, _MD_YOGURT_DESC_EDITED);
+            redirect_header('videos.php?uid=' . $uid, 2, _MD_YOGURT_DESC_EDITED);
         } else {
             redirect_header('index.php?uid=' . $uid, 2, _MD_YOGURT_ERROR);
         }

@@ -190,10 +190,10 @@
             <li class="nav-item"><a href="album.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_photos}>active show<{/if}>"><small><i class="fa fa-picture-o"></i> <{$lang_photos}> <span class="badge badge-pill badge-primary"><{$countPhotos}></span></small></a>
                 </li><{/if}>
             <{if $allow_audios !=0}>
-            <li class="nav-item"> <a href="audio.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_audio}>active show<{/if}>"><span><small><i class="fa fa-file-audio-o"></i> <{$lang_audio}> <span class="badge badge-pill badge-primary"><{$countAudio}></span></small></a>
+            <li class="nav-item"> <a href="audios.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_audio}>active show<{/if}>"><span><small><i class="fa fa-file-audio-o"></i> <{$lang_audio}> <span class="badge badge-pill badge-primary"><{$countAudio}></span></small></a>
                 </li><{/if}>
             <{if $allow_videos !=0}>
-            <li class="nav-item"><a href="video.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_videos}>active show<{/if}>"><small><i class="fa fa-youtube-play"></i> <{$lang_videos}> <span class="badge badge-pill badge-primary"><{$countVideos}></span></small></a>
+            <li class="nav-item"><a href="videos.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_videos}>active show<{/if}>"><small><i class="fa fa-youtube-play"></i> <{$lang_videos}> <span class="badge badge-pill badge-primary"><{$countVideos}></span></small></a>
                 </li><{/if}>
             <{if $allow_friends !=0}>
             <li class="nav-item"> <a href="friends.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_friends}>active show<{/if}>"><small><i class="fa fa-user-circle-o"></i> <{$lang_friends}> <span class="badge badge-pill badge-primary"><{$countFriends}></span></small></a>

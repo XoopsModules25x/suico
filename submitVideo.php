@@ -61,13 +61,13 @@ if ($videoFactory->insert2($newvideo)) {
     $notificationHandler        = xoops_getHandler('notification');
     $notificationHandler->triggerEvent('video', (int)$xoopsUser->getVar('uid'), 'new_video', $extra_tags);
     redirect_header(
-        XOOPS_URL . '/modules/yogurt/video.php?uid=' . (int)$xoopsUser->getVar('uid'),
+        XOOPS_URL . '/modules/yogurt/videos.php?uid=' . (int)$xoopsUser->getVar('uid'),
         2,
         _MD_YOGURT_VIDEOSAVED
     );
 } else {
     redirect_header(
-        XOOPS_URL . '/modules/yogurt/video.php?uid=' . (int)$xoopsUser->getVar('uid'),
+        XOOPS_URL . '/modules/yogurt/videos.php?uid=' . (int)$xoopsUser->getVar('uid'),
         2,
         _MD_YOGURT_ERROR
     );

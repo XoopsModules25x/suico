@@ -41,7 +41,7 @@ $uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/images/';
 
 switch ($op) {
     case 'new':
-        $adminObject->addItemButton(AM_YOGURT_VIDEO_LIST, 'video.php', 'list');
+        $adminObject->addItemButton(AM_YOGURT_VIDEO_LIST, 'videos.php', 'list');
         $adminObject->displayButton('left');
 
         $videoObject = $videoHandler->create();
@@ -51,7 +51,7 @@ switch ($op) {
 
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            redirect_header('video.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+            redirect_header('videos.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         if (0 !== Request::getInt('video_id', 0)) {
             $videoObject = $videoHandler->get(Request::getInt('video_id', 0));
@@ -69,7 +69,7 @@ switch ($op) {
         $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_updated', '', 'POST'));
         $videoObject->setVar('date_updated', $dateTimeObj->getTimestamp());
         if ($videoHandler->insert($videoObject)) {
-            redirect_header('video.php?op=list', 2, AM_YOGURT_FORMOK);
+            redirect_header('videos.php?op=list', 2, AM_YOGURT_FORMOK);
         }
 
         echo $videoObject->getHtmlErrors();
@@ -78,8 +78,8 @@ switch ($op) {
         break;
 
     case 'edit':
-        $adminObject->addItemButton(AM_YOGURT_ADD_VIDEO, 'video.php?op=new', 'add');
-        $adminObject->addItemButton(AM_YOGURT_VIDEO_LIST, 'video.php', 'list');
+        $adminObject->addItemButton(AM_YOGURT_ADD_VIDEO, 'videos.php?op=new', 'add');
+        $adminObject->addItemButton(AM_YOGURT_VIDEO_LIST, 'videos.php', 'list');
         $adminObject->displayButton('left');
         $videoObject = $videoHandler->get(Request::getString('video_id', ''));
         $form        = $videoObject->getForm();
@@ -90,10 +90,10 @@ switch ($op) {
         $videoObject = $videoHandler->get(Request::getString('video_id', ''));
         if (1 === Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
-                redirect_header('video.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
+                redirect_header('videos.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
             if ($videoHandler->delete($videoObject)) {
-                redirect_header('video.php', 3, AM_YOGURT_FORMDELOK);
+                redirect_header('videos.php', 3, AM_YOGURT_FORMDELOK);
             } else {
                 echo $videoObject->getHtmlErrors();
             }
@@ -118,15 +118,15 @@ switch ($op) {
         $id_field = Request::getString('video_id', '');
 
         if ($utility::cloneRecord('yogurt_video', 'video_id', $id_field)) {
-            redirect_header('video.php', 3, AM_YOGURT_CLONED_OK);
+            redirect_header('videos.php', 3, AM_YOGURT_CLONED_OK);
         } else {
-            redirect_header('video.php', 3, AM_YOGURT_CLONED_FAILED);
+            redirect_header('videos.php', 3, AM_YOGURT_CLONED_FAILED);
         }
 
         break;
     case 'list':
     default:
-        $adminObject->addItemButton(AM_YOGURT_ADD_VIDEO, 'video.php?op=new', 'add');
+        $adminObject->addItemButton(AM_YOGURT_ADD_VIDEO, 'videos.php?op=new', 'add');
         $adminObject->displayButton('left');
         $start                = Request::getInt('start', 0);
         $videoPaginationLimit = $helper->getConfig('userpager');
@@ -208,9 +208,9 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_YOGURT_VIDEO_DATE_UPDATED);
                 $videoArray['date_updated'] = formatTimestamp($videoTempArray[$i]->getVar('date_updated'), 's');
                 
-                $videoArray['edit_delete'] = "<a href='video.php?op=edit&video_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
-               <a href='video.php?op=delete&video_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
-               <a href='video.php?op=clone&video_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
+                $videoArray['edit_delete'] = "<a href='videos.php?op=edit&video_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
+               <a href='videos.php?op=delete&video_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
+               <a href='videos.php?op=clone&video_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
                 $GLOBALS['xoopsTpl']->append_by_ref('videoArrays', $videoArray);
                 unset($videoArray);
@@ -231,8 +231,8 @@ switch ($op) {
 
             //                     echo "<td class='center width5'>
 
-            //                    <a href='video.php?op=edit&video_id=".$i."'><img src=".$pathIcon16."/edit.png alt='"._EDIT."' title='"._EDIT."'></a>
-            //                    <a href='video.php?op=delete&video_id=".$i."'><img src=".$pathIcon16."/delete.png alt='"._DELETE."' title='"._DELETE."'></a>
+            //                    <a href='videos.php?op=edit&video_id=".$i."'><img src=".$pathIcon16."/edit.png alt='"._EDIT."' title='"._EDIT."'></a>
+            //                    <a href='videos.php?op=delete&video_id=".$i."'><img src=".$pathIcon16."/delete.png alt='"._DELETE."' title='"._DELETE."'></a>
             //                    </td>";
 
             //                echo "</tr>";

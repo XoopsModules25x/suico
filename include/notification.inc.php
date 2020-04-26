@@ -77,7 +77,7 @@ function yogurt_iteminfo($category, $item_id)
         $item['name'] = $identifier . "'s Videos";
         $item['url']  = XOOPS_URL . '/modules/' . $module->getVar(
             'dirname'
-        ) . '/video.php?uid=' . $result_array['uid_owner'];
+        ) . '/videos.php?uid=' . $result_array['uid_owner'];
 
         return $item;
     }

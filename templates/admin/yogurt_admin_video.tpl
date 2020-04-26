@@ -1,6 +1,6 @@
 <{if $videoRows > 0}>
     <div class="outer">
-        <form name="select" action="video.php?op=" method="POST"
+        <form name="select" action="videos.php?op=" method="POST"
               onsubmit="if(window.document.select.op.value =='') {return false;} else if (window.document.select.op.value =='delete') {return deleteSubmitValid('videoId[]');} else if (isOneChecked('videoId[]')) {return true;} else {alert('<{$smarty.const.AM_VIDEO_SELECTED_ERROR}>'); return false;}">
             <input type="hidden" name="confirm" value="1">
             <div class="floatleft">

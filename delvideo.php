@@ -35,7 +35,7 @@ if (!Request::hasVar('confirm', 'POST') || 1 !== Request::getInt('confirm', 0, '
             'cod_video' => $cod_video,
             'confirm'   => 1,
         ],
-        'delvideo.php',
+        'delvideos.php',
         _MD_YOGURT_ASKCONFIRMVIDEODELETION,
         _MD_YOGURT_CONFIRMVIDEODELETION
     );
@@ -57,9 +57,9 @@ if (!Request::hasVar('confirm', 'POST') || 1 !== Request::getInt('confirm', 0, '
      * Try to delete
      */
     if ($videoFactory->deleteAll($criteria)) {
-        redirect_header('video.php?uid=' . $uid, 2, _MD_YOGURT_VIDEO_DELETED);
+        redirect_header('videos.php?uid=' . $uid, 2, _MD_YOGURT_VIDEO_DELETED);
     } else {
-        redirect_header('video.php?uid=' . $uid, 2, _MD_YOGURT_ERROR);
+        redirect_header('videos.php?uid=' . $uid, 2, _MD_YOGURT_ERROR);
     }
 }
 
