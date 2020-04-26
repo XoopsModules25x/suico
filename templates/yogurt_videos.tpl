@@ -75,7 +75,7 @@
                         <{$token}>
                         <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 delete.png}>" class="float-left">
                     </form>
-                    <form action="editdescvideos.php" method="post" id="editform" class="yogurt-video-forms">
+                    <form action="editdescvideo.php" method="post" id="editform" class="yogurt-video-forms">
                         <input type="hidden" alt="<{$lang_edit}>" title="<{$lang_edit}>" value="<{$videos[i].id}>" name="video_id">
                         <{$token}>
                         <input name="submit" type="image" alt="<{$lang_editdesc}>" title="<{$lang_editdesc}>" src="<{xoModuleIcons16 edit.png}>" class="float-left">

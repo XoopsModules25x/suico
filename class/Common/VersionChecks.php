@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace XoopsModules\Yogurt\Common;
 
@@ -11,13 +13,14 @@ namespace XoopsModules\Yogurt\Common;
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
-
-use XoopsModule;
-
 /**
- * @copyright   XOOPS Project (https://xoops.org)
- * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
- * @author      mamba <mambax7@gmail.com>
+ * Module: Yogurt
+ *
+ * @category        Module
+ * @package         yogurt
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 trait VersionChecks
 {
@@ -30,7 +33,7 @@ trait VersionChecks
      * @return bool true if meets requirements, false if not
      */
     public static function checkVerXoops(
-        ?XoopsModule $xoopsModule = null,
+        ?\XoopsModule $xoopsModule = null,
         $requiredVer = null
     ) {
         $moduleDirName      = \basename(\dirname(__DIR__, 2));
@@ -66,7 +69,7 @@ trait VersionChecks
      * @return bool true if meets requirements, false if not
      */
     public static function checkVerPhp(
-        ?XoopsModule $xoopsModule = null
+        ?\XoopsModule $xoopsModule = null
     ) {
         $moduleDirName      = \basename(\dirname(__DIR__, 2));
         $moduleDirNameUpper = mb_strtoupper($moduleDirName);

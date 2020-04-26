@@ -139,7 +139,7 @@ $xoopsTpl->assign('user_uname', $thisUser->getVar('uname'));
 $xoopsTpl->assign('user_realname', $thisUser->getVar('name'));
 $xoopsTpl->assign('lang_uname', _US_NICKNAME);
 $xoopsTpl->assign('lang_website', _US_WEBSITE);
-$userwebsite = ('' != $thisUser->getVar('url', 'E')) ? '<a href="' . $thisUser->getVar('url', 'E') . '" target="_blank">' . $thisUser->getVar('url') . '</a>' : '';
+$userwebsite = ('' != $thisUser->getVar('filename', 'E')) ? '<a href="' . $thisUser->getVar('filename', 'E') . '" target="_blank">' . $thisUser->getVar('filename') . '</a>' : '';
 $xoopsTpl->assign('user_websiteurl', $userwebsite);
 $xoopsTpl->assign('lang_email', _US_EMAIL);
 $xoopsTpl->assign('lang_privmsg', _US_PM);

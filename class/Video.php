@@ -1,6 +1,28 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
+
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+/**
+ * Module: Yogurt
+ *
+ * @category        Module
+ * @package         yogurt
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ */
+
 
 use Xmf\Module\Helper\Permission;
 use XoopsDatabaseFactory;
@@ -67,7 +89,7 @@ class Video extends XoopsObject
      */
     public function load($id)
     {
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_video') . ' WHERE video_id=' . $id;
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_videos') . ' WHERE video_id=' . $id;
         $myrow = $this->db->fetchArray($this->db->query($sql));
         $this->assignVars($myrow);
         if (!$myrow) {
@@ -105,13 +127,13 @@ class Video extends XoopsObject
             $whereQuery = ' WHERE ' . $criteria;
         }
         if (!$asobject) {
-            $sql    = 'SELECT video_id FROM ' . $db->prefix('yogurt_video') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql    = 'SELECT video_id FROM ' . $db->prefix('yogurt_videos') . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['yogurt_video_id'];
             }
         } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_video') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_videos') . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new self($myrow);

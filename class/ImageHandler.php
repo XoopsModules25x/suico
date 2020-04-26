@@ -154,11 +154,11 @@ class ImageHandler extends XoopsPersistableObjectHandler
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
-        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+//        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Image
             $xoopsObject = new Image();
-            $format      = 'INSERT INTO %s (cod_img, title, caption, date_created, date_updated, uid_owner, url, private)';
+            $format      = 'INSERT INTO %s (cod_img, title, caption, date_created, date_updated, uid_owner, filename, private)';
             $format      .= 'VALUES (%u, %s, %s, %s, %s, %s, %s, 0)';
             $sql         = \sprintf(
                 $format,
@@ -166,15 +166,15 @@ class ImageHandler extends XoopsPersistableObjectHandler
                 $cod_img,
                 $this->db->quoteString($title),
                 $this->db->quoteString($caption),
-				$now,
-                $now,
+                time(),//$now,
+                time(),//$now,
                 $this->db->quoteString($uid_owner),
                 $this->db->quoteString($url)
             );
             $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
-            $format .= 'cod_img=%u, title=%s, caption=%s, date_created=%s, date_updated=%s, uid_owner=%s, url=%s, private=%s';
+            $format .= 'cod_img=%u, title=%s, caption=%s, date_created=%s, date_updated=%s, uid_owner=%s, filename=%s, private=%s';
             $format .= ' WHERE cod_img = %u';
             $sql    = \sprintf(
                 $format,
@@ -453,7 +453,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             // now let s create a new object picture and set its variables
             $picture = $this->create();
             $url     = $uploader->getSavedFileName();
-            $picture->setVar('url', $url);
+            $picture->setVar('filename', $url);
             $picture->setVar('title', $title);
             $picture->setVar('caption', $caption);
 			$picture->setVar('date_created', \time());
@@ -571,7 +571,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
     {
         $ret = [];
 
-        $sql = 'SELECT uname, t.uid_owner, t.url FROM ' . $this->db->prefix(
+        $sql = 'SELECT uname, t.uid_owner, t.filename FROM ' . $this->db->prefix(
             'yogurt_images'
         ) . ' AS t, ' . $this->db->prefix(
                 'users'
@@ -584,7 +584,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $vetor[$i]['uid_voted']   = $myrow['uid_owner'];
             $vetor[$i]['uname']       = $myrow['uname'];
-            $vetor[$i]['user_avatar'] = $myrow['url'];
+            $vetor[$i]['user_avatar'] = $myrow['filename'];
             $i++;
         }
 
@@ -599,7 +599,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
     {
         $ret = [];
 
-        $sql = 'SELECT uname, t.uid_owner, t.url, t.title, t.caption  FROM ' . $this->db->prefix(
+        $sql = 'SELECT uname, t.uid_owner, t.filename, t.title, t.caption  FROM ' . $this->db->prefix(
             'yogurt_images'
         ) . ' AS t, ' . $this->db->prefix(
                 'users'
@@ -612,7 +612,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $vetor[$i]['uid_voted']    = $myrow['uid_owner'];
             $vetor[$i]['uname']        = $myrow['uname'];
-            $vetor[$i]['img_filename'] = $myrow['url'];
+            $vetor[$i]['img_filename'] = $myrow['filename'];
             $vetor[$i]['title']        = $myrow['title'];
 			$vetor[$i]['caption']      = $myrow['caption'];
 			

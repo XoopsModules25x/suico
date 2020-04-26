@@ -6,7 +6,7 @@ declare(strict_types=1);
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
-
+ 
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -17,11 +17,9 @@ declare(strict_types=1);
  *
  * @category        Module
  * @package         yogurt
- * @author          XOOPS Development Team <https://xoops.org>
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
- * @link            https://xoops.org/
- * @since           1.0.0
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use Xmf\Module\Helper\Permission;
@@ -62,7 +60,7 @@ switch ($op) {
         $audioObject->setVar('title', Request::getVar('title', ''));
         $audioObject->setVar('author', Request::getVar('author', ''));
 
-//        $audioObject->setVar('url', Request::getVar('url', ''));
+//        $audioObject->setVar('filename', Request::getVar('filename', ''));
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/audio/';
         $uploader  = new \XoopsMediaUploader(
@@ -76,7 +74,7 @@ switch ($op) {
                 $errors = $uploader->getErrors();
                 redirect_header('javascript:history.go(-1)', 3, $errors);
             } else {
-                $audioObject->setVar("url", $uploader->getSavedFileName());
+                $audioObject->setVar("filename", $uploader->getSavedFileName());
             }
         }
 
@@ -136,7 +134,7 @@ switch ($op) {
 
         $id_field = Request::getString('audio_id', '');
 
-        if ($utility::cloneRecord('yogurt_audio', 'audio_id', $id_field)) {
+        if ($utility::cloneRecord('yogurt_audios', 'audio_id', $id_field)) {
             redirect_header('audios.php', 3, AM_YOGURT_CLONED_OK);
         } else {
             redirect_header('audios.php', 3, AM_YOGURT_CLONED_FAILED);
@@ -182,7 +180,7 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('audioRows', $audioTempRows);
         $audioArray = [];
 
-        //    $fields = explode('|', audio_id:int:11::NOT NULL::primary:audio_id|title:varchar:256::NOT NULL:::title|author:varchar:256::NOT NULL:::author|url:varchar:256::NOT NULL:::url|uid_owner:int:11::NOT NULL:::uid_owner|date_created:date:0::NOT NULL:::date_created|date_updated:timestamp:CURRENT_TIMESTAMP::NOT NULL:::date_updated);
+        //    $fields = explode('|', audio_id:int:11::NOT NULL::primary:audio_id|title:varchar:256::NOT NULL:::title|author:varchar:256::NOT NULL:::author|filename:varchar:256::NOT NULL:::filename|uid_owner:int:11::NOT NULL:::uid_owner|date_created:date:0::NOT NULL:::date_created|date_updated:timestamp:CURRENT_TIMESTAMP::NOT NULL:::date_updated);
         //    $fieldsCount    = count($fields);
 
         $criteria = new CriteriaCompo();
@@ -214,7 +212,7 @@ switch ($op) {
                 $audioArray['author'] = $audioTempArray[$i]->getVar('author');
 
                 $GLOBALS['xoopsTpl']->assign('selectorurl', AM_YOGURT_AUDIO_URL);
-                $audioArray['url'] = $audioTempArray[$i]->getVar('url');
+                $audioArray['filename'] = $audioTempArray[$i]->getVar('filename');
 
                 $GLOBALS['xoopsTpl']->assign('selectoruid_owner', AM_YOGURT_AUDIO_UID_OWNER);
                 $audioArray['uid_owner'] = strip_tags(
@@ -275,7 +273,7 @@ switch ($op) {
             echo $GLOBALS['xoopsTpl']->fetch(
                 XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar(
                     'dirname'
-                ) . '/templates/admin/yogurt_admin_audio.tpl'
+                ) . '/templates/admin/yogurt_admin_audios.tpl'
             );
         }
 

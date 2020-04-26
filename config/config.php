@@ -86,10 +86,12 @@ return (object)[
         '/tcpdf',
     ],
     'renameTables'    => [
-        'yogurt_seutubo'        => 'yogurt_video',
+        'yogurt_seutubo'        => 'yogurt_videos',
         'yogurt_Groups'         => 'yogurt_groups',
         'yogurt_Configs'        => 'yogurt_configs',
-        'yogurt_friendpetition' => 'yogurt_friendrequest',
+        'yogurt_friendpetition' => 'yogurt_friendrequests',
+        'yogurt_audio'          => 'yogurt_audios',
+        'yogurt_friendships'     => 'yogurt_friendships',
     ],
     'renameColumns'   => [
         '3.5' => [
@@ -99,9 +101,16 @@ return (object)[
                 'Note_from' => 'note_text',
                 'Note_to'   => 'note_from',
             ],
-            'yogurt_friendrequest' => [
+            'yogurt_friendrequests' => [
+                'requespet_uid' => 'friendreq_id',
                 'requester_uid' => 'friendrequester_uid',
                 'requestto_uid' => 'friendrequestto_uid',
+            ],
+            'yogurt_audios'        => [
+                'url' => 'filename',
+            ],
+            'yogurt_images'        => [
+                'url' => 'filename',
             ],
         ],
     ],

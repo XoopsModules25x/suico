@@ -1,6 +1,28 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
+
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+/**
+ * Module: Yogurt
+ *
+ * @category        Module
+ * @package         yogurt
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ */
+
 
 use CriteriaElement;
 use XoopsDatabase;
@@ -50,7 +72,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
             $this->helper = $helper;
         }
         $isAdmin = $this->helper->isUserAdmin();
-        parent::__construct($xoopsDatabase, 'yogurt_video', Video::class, 'video_id', 'video_desc');
+        parent::__construct($xoopsDatabase, 'yogurt_videos', Video::class, 'video_id', 'video_desc');
     }
 
     /**
@@ -86,7 +108,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
         $id = null,
         $fields = null
     ) {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_video') . ' WHERE video_id=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_videos') . ' WHERE video_id=' . $id;
         if (!$result = $this->db->query($sql)) {
             return false;
         }
@@ -134,7 +156,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
             $format      .= 'VALUES (%u, %u, %s, %s, %s)';
             $sql         = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_video'),
+                $this->db->prefix('yogurt_videos'),
                 $video_id,
                 $uid_owner,
                 $this->db->quoteString($video_desc),
@@ -148,7 +170,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
             $format .= ' WHERE video_id = %u';
             $sql    = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_video'),
+                $this->db->prefix('yogurt_videos'),
                 $video_id,
                 $uid_owner,
                 $this->db->quoteString($video_desc),
@@ -189,7 +211,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
         }
         $sql = \sprintf(
             'DELETE FROM %s WHERE video_id = %u',
-            $this->db->prefix('yogurt_video'),
+            $this->db->prefix('yogurt_videos'),
             $xoopsObject->getVar('video_id')
         );
         if ($force) {
@@ -219,7 +241,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
     ) {
         $ret   = [];
         $limit = $start = 0;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_video');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_videos');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
             if ('' !== $criteriaElement->getSort()) {
@@ -255,7 +277,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
     public function getCount(
         ?CriteriaElement $criteriaElement = null
     ) {
-        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_video');
+        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_videos');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
         }
@@ -281,7 +303,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
         $force = true,
         $asObject = false
     ) {
-        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_video');
+        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_videos');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
         }
@@ -333,7 +355,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
         $cod_img,
         $filename
     ) {
-        $form       = new XoopsThemeForm(\_MD_YOGURT_EDIT_DESC, 'form_picture', 'editdescvideos.php', 'post', true);
+        $form       = new XoopsThemeForm(\_MD_YOGURT_EDIT_DESC, 'form_picture', 'editdescvideo.php', 'post', true);
         $field_desc = new XoopsFormText($caption, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
         $buttonSend    = new XoopsFormButton('', 'submit_button', \_MD_YOGURT_SUBMIT, 'submit');
@@ -362,7 +384,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
      */
     public function unsetAllMainsbyID($uid_owner = null)
     {
-        $sql = 'UPDATE ' . $this->db->prefix('yogurt_video') . ' SET main_video=0 WHERE uid_owner=' . $uid_owner;
+        $sql = 'UPDATE ' . $this->db->prefix('yogurt_videos') . ' SET main_video=0 WHERE uid_owner=' . $uid_owner;
 
         if (!$result = $this->db->query($sql)) {
             return false;

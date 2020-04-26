@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace XoopsModules\Yogurt\Common;
 
@@ -13,12 +15,14 @@ namespace XoopsModules\Yogurt\Common;
  */
 
 /**
- * Yogurt module
+ * Module: Yogurt
  *
- * @copyright       XOOPS Project (https://xoops.org)
- * @license         GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author          Xoops Development Team
- */
+ * @category        Module
+ * @package         yogurt
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+*/ 
 
 use Xmf\Request;
 use XoopsModules\Yogurt;

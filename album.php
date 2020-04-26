@@ -54,25 +54,25 @@ $nbSections = $controller->getNumbersSections();
  * Filter for search pictures in database
  */
 if (1 === $controller->isOwner) {
-    $criteria_uid = new Criteria('uid_owner', $controller->uidOwner);
+    $criteriaUid = new Criteria('uid_owner', $controller->uidOwner);
 } else {
     $criteria_private = new Criteria('private', 0);
-    $criteria_uid2    = new Criteria('uid_owner', (int)$controller->uidOwner);
-    $criteria_uid     = new CriteriaCompo($criteria_uid2);
-    $criteria_uid->add($criteria_private);
+    $criteriaUid2    = new Criteria('uid_owner', (int)$controller->uidOwner);
+    $criteriaUid     = new CriteriaCompo($criteriaUid2);
+    $criteriaUid->add($criteria_private);
 }
-$criteria_uid->setLimit($helper->getConfig('picturesperpage'));
-$criteria_uid->setStart($start);
+$criteriaUid->setLimit($helper->getConfig('picturesperpage'));
+$criteriaUid->setStart($start);
 if (1 === $helper->getConfig('images_order')) {
-    $criteria_uid->setOrder('DESC');
-    $criteria_uid->setSort('cod_img');
+    $criteriaUid->setOrder('DESC');
+    $criteriaUid->setSort('cod_img');
 }
 /**
  * Fetch pictures from factory
  */
-$pictures_object_array = $controller->albumFactory->getObjects($criteria_uid);
-$criteria_uid->setLimit(0);
-$criteria_uid->setStart(0);
+$pictures_object_array = $controller->albumFactory->getObjects($criteriaUid);
+$criteriaUid->setLimit(0);
+$criteriaUid->setStart(0);
 
 /**
  * If there is no pictures in the album show in template lang_nopicyet
@@ -86,14 +86,14 @@ if (isset($nbSections[NBPHOTOS]) && 0 === $nbSections[NBPHOTOS]) {
      */
     $i = 0;
     foreach ($pictures_object_array as $picture) {
-        $pictures_array[$i]['url']     = $picture->getVar('url', 's');
-        $pictures_array[$i]['title']   = $picture->getVar('title', 's');
-        $pictures_array[$i]['caption'] = $picture->getVar('caption', 's');
-		$pictures_array[$i]['cod_img'] = $picture->getVar('cod_img', 's');
-        $pictures_array[$i]['private'] = $picture->getVar('private', 's');
+        $pictures_array[$i]['filename']     = $picture->getVar('filename', 's');
+        $pictures_array[$i]['title']        = $picture->getVar('title', 's');
+        $pictures_array[$i]['caption']      = $picture->getVar('caption', 's');
+        $pictures_array[$i]['cod_img']      = $picture->getVar('cod_img', 's');
+        $pictures_array[$i]['private']      = $picture->getVar('private', 's');
         $pictures_array[$i]['date_created'] = formatTimeStamp($picture->getVar('date_created', 's'));
-		$pictures_array[$i]['date_updated'] = formatTimeStamp($picture->getVar('date_updated', 's'));
-		$xoopsTpl->assign('pics_array', $pictures_array);
+        $pictures_array[$i]['date_updated'] = formatTimeStamp($picture->getVar('date_updated', 's'));
+        $xoopsTpl->assign('pics_array', $pictures_array);
         $i++;
     }
 }
@@ -104,7 +104,7 @@ if (isset($nbSections[NBPHOTOS]) && 0 === $nbSections[NBPHOTOS]) {
 $maxfilebytes = $helper->getConfig('maxfilesize');
 if (!empty($xoopsUser)) {
     if ((isset($nbSections[NBPHOTOS]) && 1 === $controller->isOwner) && $helper->getConfig('countPicture') > $nbSections[NBPHOTOS]) {
-//        $maxfilebytes = $helper->getConfig('maxfilesize');
+        //        $maxfilebytes = $helper->getConfig('maxfilesize');
         $xoopsTpl->assign('maxfilebytes', $maxfilebytes);
         $xoopsTpl->assign('showForm', '1');
     }
@@ -117,19 +117,14 @@ $owner      = new XoopsUser($controller->uidOwner);
 $identifier = $owner->getVar('uname');
 $avatar     = $owner->getVar('user_avatar');
 
-
 /**
  * Creating the navigation bar if you have a lot of friends
  */
-$nbPhotos = $nbSections[NBPHOTOS] ?? 0;
+$nbPhotos      = $nbSections[NBPHOTOS] ?? 0;
 $navigationBar = new XoopsPageNav(
-    $nbPhotos,
-    $helper->getConfig('picturesperpage'),
-    $start,
-    'start',
-    'uid=' . (int)$controller->uidOwner
+    $nbPhotos, $helper->getConfig('picturesperpage'), $start, 'start', 'uid=' . (int)$controller->uidOwner
 );
-$navegacao       = $navigationBar->renderImageNav(2);
+$navegacao     = $navigationBar->renderImageNav(2);
 
 //form
 $xoopsTpl->assign('lang_formtitle', _MD_YOGURT_SUBMIT_PIC_TITLE);

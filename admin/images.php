@@ -6,7 +6,7 @@ declare(strict_types=1);
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
-
+ 
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -17,11 +17,9 @@ declare(strict_types=1);
  *
  * @category        Module
  * @package         yogurt
- * @author          XOOPS Development Team <https://xoops.org>
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
- * @link            https://xoops.org/
- * @since           1.0.0
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use Xmf\Request;
@@ -81,18 +79,18 @@ switch ($op) {
         );
         if ($uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0])) {
             //$extension = preg_replace( '/^.+\.([^.]+)$/sU' , '' , $_FILES['attachedfile']['name']);
-            //$imgName = str_replace(' ', '', $_POST['url']).'.'.$extension;
+            //$imgName = str_replace(' ', '', $_POST['filename']).'.'.$extension;
 
-            $uploader->setPrefix('url_');
+            $uploader->setPrefix('pic_');
             $uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0]);
             if (!$uploader->upload()) {
                 $errors = $uploader->getErrors();
                 redirect_header('javascript:history.go(-1)', 3, $errors);
             } else {
-                $imagesObject->setVar('url', $uploader->getSavedFileName());
+                $imagesObject->setVar('filename', $uploader->getSavedFileName());
             }
         } else {
-            $imagesObject->setVar('url', Request::getVar('url', ''));
+            $imagesObject->setVar('filename', Request::getVar('filename', ''));
         }
 
         $imagesObject->setVar('private', ((1 == \Xmf\Request::getInt('private', 0)) ? '1' : '0'));
@@ -191,7 +189,7 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('imagesRows', $imagesTempRows);
         $imagesArray = [];
 
-        //    $fields = explode('|', cod_img:int:11::NOT NULL::primary:cod_img|title:varchar:255::NOT NULL:::title|date_created:date:0::NOT NULL:::date_created|date_updated:date:0::NOT NULL:::date_updated|uid_owner:varchar:50::NOT NULL:::uid_owner|url:text:0::NOT NULL:::url|private:varchar:1::NOT NULL:::private);
+        //    $fields = explode('|', cod_img:int:11::NOT NULL::primary:cod_img|title:varchar:255::NOT NULL:::title|date_created:date:0::NOT NULL:::date_created|date_updated:date:0::NOT NULL:::date_updated|uid_owner:varchar:50::NOT NULL:::uid_owner|filename:text:0::NOT NULL:::filename|private:varchar:1::NOT NULL:::private);
         //    $fieldsCount    = count($fields);
 
         $criteria = new CriteriaCompo();
@@ -234,7 +232,7 @@ switch ($op) {
                 );
 
                 $GLOBALS['xoopsTpl']->assign('selectorurl', AM_YOGURT_IMAGES_URL);
-                $imagesArray['url'] = "<img src='" . $uploadUrl . $imagesTempArray[$i]->getVar('url') . "' name='" . 'name' . "' id=" . 'id' . " alt='' style='max-width:100px'>";
+                $imagesArray['filename'] = "<img src='" . $uploadUrl . $imagesTempArray[$i]->getVar('filename') . "' name='" . 'name' . "' id=" . 'id' . " alt='' style='max-width:100px'>";
 
                 $GLOBALS['xoopsTpl']->assign('selectorprivate', AM_YOGURT_IMAGES_PRIVATE);
                 $imagesArray['private']     = $imagesTempArray[$i]->getVar('private');

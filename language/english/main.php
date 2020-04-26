@@ -1,22 +1,26 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
-
+ 
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
-
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * Module: Yogurt
+ *
+ * @category        Module
+ * @package         yogurt
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
+ 
 //Present in many files (videos pictures etc...)
 define('_MD_YOGURT_DELETE', 'Delete');
 define('_MD_YOGURT_EDIT_DESC', 'Edit description');

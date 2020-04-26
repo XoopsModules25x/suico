@@ -4,6 +4,28 @@ declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * Module: Yogurt
+ *
+ * @category        Module
+ * @package         yogurt
+ * @author          XOOPS Development Team <https://xoops.org>
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GPL 2.0 or later
+ * @link            https://xoops.org/
+ * @since           1.0.0
+ */
+
 use XoopsObject;
 use Xmf\Module\Helper\Permission;
 use XoopsDatabaseFactory;
@@ -18,7 +40,7 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 
 /**
- * Audio class.
+ * Class Audio
  * $this class is responsible for providing data access mechanisms to the data source
  * of XOOPS user class objects.
  */
@@ -43,7 +65,7 @@ class Audio extends XoopsObject
         $this->initVar('audio_id', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('title', \XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('author', \XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('url', \XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('filename', \XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('uid_owner', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('date_created', \XOBJ_DTYPE_INT, 0, false);
         $this->initVar('date_updated', \XOBJ_DTYPE_INT, 0, false);
@@ -63,7 +85,7 @@ class Audio extends XoopsObject
      */
     public function load($id)
     {
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_audio') . ' WHERE audio_id=' . $id;
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_audios') . ' WHERE audio_id=' . $id;
         $myrow = $this->db->fetchArray($this->db->query($sql));
         $this->assignVars($myrow);
         if (!$myrow) {
@@ -101,13 +123,13 @@ class Audio extends XoopsObject
             $whereQuery = ' WHERE ' . $criteria;
         }
         if (!$asobject) {
-            $sql    = 'SELECT audio_id FROM ' . $db->prefix('yogurt_audio') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql    = 'SELECT audio_id FROM ' . $db->prefix('yogurt_audios') . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['yogurt_audio_id'];
             }
         } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_audio') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_audios') . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new self($myrow);

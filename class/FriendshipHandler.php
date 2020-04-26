@@ -1,6 +1,28 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
+
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+/**
+ * Module: Yogurt
+ *
+ * @category        Module
+ * @package         yogurt
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ */
+
 
 // Friendship.php,v 1
 //  ---------------------------------------------------------------- //
@@ -59,7 +81,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
             $this->helper = $helper;
         }
         $isAdmin = $this->helper->isUserAdmin();
-        parent::__construct($xoopsDatabase, 'yogurt_friendship', Friendship::class, 'friendship_id', 'friendship_id');
+        parent::__construct($xoopsDatabase, 'yogurt_friendships', Friendship::class, 'friendship_id', 'friendship_id');
     }
 
     /**
@@ -93,7 +115,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         $id = null,
         $fields = null
     ) {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendship') . ' WHERE friendship_id=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendships') . ' WHERE friendship_id=' . $id;
         if (!$result = $this->db->query($sql)) {
             return false;
         }
@@ -141,7 +163,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
             $format      .= 'VALUES (%u, %u, %u, %u, %u, %u, %u, %u)';
             $sql         = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_friendship'),
+                $this->db->prefix('yogurt_friendships'),
                 $friendship_id,
                 $friend1_uid,
                 $friend2_uid,
@@ -158,7 +180,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
             $format .= ' WHERE friendship_id = %u';
             $sql    = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_friendship'),
+                $this->db->prefix('yogurt_friendships'),
                 $friendship_id,
                 $friend1_uid,
                 $friend2_uid,
@@ -202,7 +224,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         }
         $sql = \sprintf(
             'DELETE FROM %s WHERE friendship_id = %u',
-            $this->db->prefix('yogurt_friendship'),
+            $this->db->prefix('yogurt_friendships'),
             $xoopsObject->getVar('friendship_id')
         );
         if ($force) {
@@ -232,7 +254,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
     ) {
         $ret   = [];
         $limit = $start = 0;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendship');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendships');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
             if ('' !== $criteriaElement->getSort()) {
@@ -268,7 +290,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
     public function getCount(
         ?CriteriaElement $criteriaElement = null
     ) {
-        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_friendship');
+        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_friendships');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
         }
@@ -294,7 +316,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         $force = true,
         $asObject = false
     ) {
-        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_friendship');
+        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_friendships');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
         }
@@ -319,7 +341,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT uname, user_avatar, friend2_uid FROM ' . $this->db->prefix(
-            'yogurt_friendship'
+            'yogurt_friendships'
         ) . ', ' . $this->db->prefix(
                 'users'
             );
@@ -367,7 +389,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT uname, user_avatar, friend1_uid FROM ' . $this->db->prefix(
-            'yogurt_friendship'
+            'yogurt_friendships'
         ) . ', ' . $this->db->prefix(
                 'users'
             );
@@ -549,7 +571,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
 
         //Calculating avg(hot)
         $sql    = 'SELECT friend2_uid, Avg(hot) AS mediahot FROM ' . $this->db->prefix(
-            'yogurt_friendship'
+            'yogurt_friendships'
         );
         $sql    .= ' WHERE  (hot>0) GROUP BY friend2_uid HAVING (friend2_uid=' . $user_uid . ') ';
         $result = $this->db->query($sql);
@@ -559,7 +581,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
 
         //Calculating avg(trust)
         $sql    = 'SELECT friend2_uid, Avg(trust) AS mediatrust FROM ' . $this->db->prefix(
-            'yogurt_friendship'
+            'yogurt_friendships'
         );
         $sql    .= ' WHERE  (trust>0) GROUP BY friend2_uid HAVING (friend2_uid=' . $user_uid . ') ';
         $result = $this->db->query($sql);
@@ -568,7 +590,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         }
         //Calculating avg(cool)
         $sql    = 'SELECT friend2_uid, Avg(cool) AS mediacool FROM ' . $this->db->prefix(
-            'yogurt_friendship'
+            'yogurt_friendships'
         );
         $sql    .= ' WHERE  (cool>0) GROUP BY friend2_uid HAVING (friend2_uid=' . $user_uid . ') ';
         $result = $this->db->query($sql);
@@ -578,7 +600,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
 
         //Calculating sum(fans)
         $sql    = 'SELECT friend2_uid, Sum(fan) AS sumfan FROM ' . $this->db->prefix(
-            'yogurt_friendship'
+            'yogurt_friendships'
         );
         $sql    .= ' GROUP BY friend2_uid HAVING (friend2_uid=' . $user_uid . ') ';
         $result = $this->db->query($sql);

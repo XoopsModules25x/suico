@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace XoopsModules\Yogurt\Form;
 
@@ -27,6 +29,7 @@ namespace XoopsModules\Yogurt\Form;
 use Xmf\Module\Helper\Permission;
 use XoopsFormButton;
 use XoopsFormDateTime;
+use XoopsFormEditor;
 use XoopsFormHidden;
 use XoopsFormLabel;
 use XoopsFormSelectUser;
@@ -81,18 +84,6 @@ class AudioForm extends XoopsThemeForm
         $this->addElement(
             new XoopsFormLabel(\AM_YOGURT_AUDIO_AUDIO_ID, $this->targetObject->getVar('audio_id'), 'audio_id')
         );
-        // Title
-        $this->addElement(
-            new XoopsFormText(\AM_YOGURT_AUDIO_TITLE, 'title', 50, 255, $this->targetObject->getVar('title')),
-            false
-        );
-        // Author
-        $this->addElement(
-            new XoopsFormText(\AM_YOGURT_AUDIO_AUTHOR, 'author', 50, 255, $this->targetObject->getVar('author')),
-            false
-        );
-        // Url
-        $this->addElement(new \XoopsFormFile(\AM_YOGURT_AUDIO_URL, 'url', $this->helper->getConfig('maxsize')), false);
 
         // Uid_owner
         $this->addElement(
@@ -103,6 +94,65 @@ class AudioForm extends XoopsThemeForm
             ),
             false
         );
+        // Title
+        $this->addElement(
+            new XoopsFormText(\AM_YOGURT_AUDIO_TITLE, 'title', 50, 255, $this->targetObject->getVar('title')),
+            false
+        );
+        // Author
+        $this->addElement(
+            new XoopsFormText(\AM_YOGURT_AUDIO_AUTHOR, 'author', 50, 255, $this->targetObject->getVar('author')),
+            false
+        );
+
+        // Description
+        if (\class_exists('XoopsFormEditor')) {
+            $editorOptions           = [];
+            $editorOptions['name']   = 'description';
+            $editorOptions['value']  = $this->targetObject->getVar('description', 'e');
+            $editorOptions['rows']   = 5;
+            $editorOptions['cols']   = 40;
+            $editorOptions['width']  = '100%';
+            $editorOptions['height'] = '400px';
+            //$editorOptions['editor'] = xoops_getModuleOption('yogurt_editor', 'yogurt');
+            //$this->addElement( new \XoopsFormEditor(AM_YOGURT_AUDIO_DESCRIPTION, 'description', $editorOptions), false  );
+            if ($this->helper->isUserAdmin()) {
+                $descEditor = new XoopsFormEditor(
+                    \AM_YOGURT_AUDIO_DESCRIPTION,
+                    $this->helper->getConfig(
+                        'yogurtEditorAdmin'
+                    ),
+                    $editorOptions,
+                    $nohtml = false,
+                    $onfailure = 'textarea'
+                );
+            } else {
+                $descEditor = new XoopsFormEditor(
+                    \AM_YOGURT_AUDIO_DESCRIPTION,
+                    $this->helper->getConfig(
+                        'yogurtEditorUser'
+                    ),
+                    $editorOptions,
+                    $nohtml = false,
+                    $onfailure = 'textarea'
+                );
+            }
+        } else {
+            $descEditor = new XoopsFormDhtmlTextArea(
+                \AM_YOGURT_AUDIO_DESCRIPTION,
+                'description',
+                $this->targetObject->getVar(
+                    'description',
+                    'e'
+                ),
+                5,
+                50
+            );
+        }
+        $this->addElement($descEditor);
+        // Url
+        $this->addElement(new \XoopsFormFile(\AM_YOGURT_AUDIO_URL, 'filename', $this->helper->getConfig('maxsize')), false);
+
         // Data_creation
         $this->addElement(
             new XoopsFormTextDateSelect(

@@ -1,50 +1,3 @@
-yogurt_friendrequest:
-    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
-    columns:
-        -
-            name: friendreq_id
-            attributes: ' int(11)  NOT NULL auto_increment'
-        -
-            name: friendrequester_uid
-            attributes: ' int(11)  NOT NULL '
-        -
-            name: friendrequestto_uid
-            attributes: ' int(11)  NOT NULL '
-    keys:
-        PRIMARY:
-            columns: friendreq_id
-            unique: true
-yogurt_friendship:
-    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
-    columns:
-        -
-            name: friendship_id
-            attributes: ' int(11)  NOT NULL auto_increment'
-        -
-            name: friend1_uid
-            attributes: ' int(11)  NOT NULL '
-        -
-            name: friend2_uid
-            attributes: ' int(11)  NOT NULL '
-        -
-            name: level
-            attributes: ' int(11)  NOT NULL '
-        -
-            name: hot
-            attributes: ' tinyint(4)  NOT NULL '
-        -
-            name: trust
-            attributes: ' tinyint(4)  NOT NULL '
-        -
-            name: cool
-            attributes: ' tinyint(4)  NOT NULL '
-        -
-            name: fan
-            attributes: ' tinyint(4)  NOT NULL '
-    keys:
-        PRIMARY:
-            columns: friendship_id
-            unique: true
 yogurt_images:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
@@ -64,7 +17,7 @@ yogurt_images:
             name: uid_owner
             attributes: ' varchar(50)  NOT NULL '
         -
-            name: url
+            name: filename
             attributes: ' varchar(50)  NOT NULL '
         -
             name: private
@@ -97,34 +50,6 @@ yogurt_visitors:
     keys:
         PRIMARY:
             columns: cod_visit
-            unique: true
-yogurt_video:
-    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
-    columns:
-        -
-            name: video_id
-            attributes: ' int(11)  NOT NULL auto_increment'
-        -
-            name: uid_owner
-            attributes: ' int(11)  NOT NULL '
-        -
-            name: video_desc
-            attributes: ' text  NOT NULL '
-        -
-            name: youtube_code
-            attributes: ' varchar(11)  NOT NULL '
-        -
-            name: main_video
-            attributes: ' varchar(1)  NOT NULL '
-        -
-            name: date_created
-            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
-        -
-            name: date_updated
-            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
-    keys:
-        PRIMARY:
-            columns: video_id
             unique: true
 yogurt_relgroupuser:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
@@ -280,37 +205,6 @@ yogurt_suspensions:
     keys:
         PRIMARY:
             columns: uid
-            unique: true
-yogurt_audio:
-    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
-    columns:
-        -
-            name: audio_id
-            attributes: ' int(11)  NOT NULL auto_increment'
-        -
-            name: title
-            attributes: ' varchar(100)  NOT NULL '
-        -
-            name: author
-            attributes: ' varchar(100)  NOT NULL '
-        -
-            name: description
-            attributes: ' text  NOT NULL '
-        -
-            name: url
-            attributes: ' varchar(50)  NOT NULL '
-        -
-            name: uid_owner
-            attributes: ' int(11)  NOT NULL '
-        -
-            name: date_created
-            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
-        -
-            name: date_updated
-            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
-    keys:
-        PRIMARY:
-            columns: audio_id
             unique: true
 yogurt_privacy:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'

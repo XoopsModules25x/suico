@@ -40,9 +40,9 @@ $groupsFactory       = new Yogurt\GroupsHandler($xoopsDB);
 $group_id = Request::getInt('group_id', 0, 'POST');
 $uid      = (int)$xoopsUser->getVar('uid');
 
-$criteria_uid      = new Criteria('rel_user_uid', $uid);
+$criteriaUid      = new Criteria('rel_user_uid', $uid);
 $criteria_group_id = new Criteria('rel_group_id', $group_id);
-$criteria          = new CriteriaCompo($criteria_uid);
+$criteria          = new CriteriaCompo($criteriaUid);
 $criteria->add($criteria_group_id);
 if ($relgroupuserFactory->getCount($criteria) < 1) {
     $relgroupuser = $relgroupuserFactory->create();

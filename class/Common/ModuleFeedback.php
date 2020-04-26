@@ -1,7 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace XoopsModules\Yogurt\Common;
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -12,16 +13,9 @@ namespace XoopsModules\Yogurt\Common;
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 
-use XoopsFormButtonTray;
-use XoopsFormEditor;
-use XoopsFormHidden;
-use XoopsFormSelect;
-use XoopsFormText;
-use XoopsObject;
-use XoopsThemeForm;
 
 /**
- * Feedback plugin for xoops modules
+ * Feedback plugin for XOOPS modules
  *
  * @copyright      XOOPS Project  (https://xoops.org)
  * @license        GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
@@ -29,10 +23,6 @@ use XoopsThemeForm;
  * @author         Wedega - Email:<webmaster@wedega.com>
  * @author         Fernando Santos (topet05) <fernando@mastop.com.br>
  */
-\defined(
-    'XOOPS_ROOT_PATH'
-)
-|| die('Restricted access');
 
 /**
  * Class Object ModuleFeedback

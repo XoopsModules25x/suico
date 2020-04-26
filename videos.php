@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -11,17 +13,19 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * Module: Yogurt
+ *
+ * @category        Module
+ * @package         yogurt
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use Xmf\Request;
 use XoopsModules\Yogurt;
 
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_video.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'yogurt_videos.tpl';
 require __DIR__ . '/header.php';
 
 $controller = new Yogurt\VideoController($xoopsDB, $xoopsUser);
@@ -44,14 +48,14 @@ $criteriaUidVideo->setLimit($helper->getConfig('videosperpage'));
  * Get all videos of this user and assign them to template
  */
 $videos       = $controller->getVideos($criteriaUidVideo);
-$videos_array = '';
+$videosArray = [];
 $pageNav = '';
 if (isset($nbSections['nbVideos'])) {
-    $videos_array = $controller->assignVideoContent($nbSections['nbVideos'], $videos);
+    $videosArray = $controller->assignVideoContent($nbSections['nbVideos'], $videos);
 }
 
-if (is_array($videos_array)) {
-    $xoopsTpl->assign('videos', $videos_array);
+if (is_array($videosArray)) {
+    $xoopsTpl->assign('videos', $videosArray);
 } else {
     $xoopsTpl->assign('lang_novideoyet', _MD_YOGURT_NOVIDEOSYET);
 }

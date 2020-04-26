@@ -49,9 +49,9 @@ if (!Request::hasVar('confirm', 'POST') || 1 !== Request::getInt('confirm', 0, '
     );
     $criteria_img = new Criteria('video_id', $cod_video);
     $uid          = (int)$xoopsUser->getVar('uid');
-    $criteria_uid = new Criteria('uid_owner', $uid);
+    $criteriaUid = new Criteria('uid_owner', $uid);
     $criteria     = new CriteriaCompo($criteria_img);
-    $criteria->add($criteria_uid);
+    $criteria->add($criteriaUid);
 
     /**
      * Try to delete

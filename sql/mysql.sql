@@ -5,12 +5,12 @@ CREATE TABLE `yogurt_images` (
     `date_created` INT(11) UNSIGNED NOT NULL DEFAULT 0,
     `date_updated` INT(11) UNSIGNED NOT NULL DEFAULT 0,
     `uid_owner`     VARCHAR(50)  NOT NULL,
-    `url`          VARCHAR(50)      NOT NULL,
+    `filename`          VARCHAR(50)      NOT NULL,
     `private`       TINYINT(1)   NOT NULL,
     PRIMARY KEY (`cod_img`)
 )
     ENGINE = MyISAM;
-CREATE TABLE `yogurt_friendship` (
+CREATE TABLE `yogurt_friendships` (
     `friendship_id` INT(11)    NOT NULL AUTO_INCREMENT,
     `friend1_uid`   INT(11)    NOT NULL,
     `friend2_uid`   INT(11)    NOT NULL,
@@ -19,6 +19,8 @@ CREATE TABLE `yogurt_friendship` (
     `trust`         TINYINT(4) NOT NULL,
     `cool`          TINYINT(4) NOT NULL,
     `fan`           TINYINT(4) NOT NULL,
+    `date_created`  INT(11) UNSIGNED NOT NULL DEFAULT 0,
+    `date_updated`  INT(11) UNSIGNED NOT NULL DEFAULT 0,
     PRIMARY KEY (`friendship_id`)
 )
     ENGINE = MyISAM;
@@ -33,7 +35,7 @@ CREATE TABLE `yogurt_visitors` (
 )
     ENGINE = MyISAM;
 
-CREATE TABLE `yogurt_video` (
+CREATE TABLE `yogurt_videos` (
     `video_id`     INT(11)     NOT NULL AUTO_INCREMENT,
     `uid_owner`    INT(11)     NOT NULL,
     `video_desc`   TEXT        NOT NULL,
@@ -44,7 +46,7 @@ CREATE TABLE `yogurt_video` (
     PRIMARY KEY (`video_id`)
 )
     ENGINE = MyISAM;
-CREATE TABLE `yogurt_friendrequest` (
+CREATE TABLE `yogurt_friendrequests` (
     `friendreq_id`   INT(11) NOT NULL AUTO_INCREMENT,
     `friendrequester_uid` INT(11) NOT NULL,
     `friendrequestto_uid` INT(11) NOT NULL,
@@ -120,15 +122,15 @@ CREATE TABLE `yogurt_suspensions` (
 )
     ENGINE = MyISAM;
 
-CREATE TABLE `yogurt_audio` (
+CREATE TABLE `yogurt_audios` (
     `audio_id`      INT(11)      NOT NULL AUTO_INCREMENT,
     `title`         VARCHAR(100) NOT NULL,
     `author`        VARCHAR(100) NOT NULL,
     `description`  TEXT             NOT NULL,
-    `url`           VARCHAR(50) NOT NULL,
+    `filename`           VARCHAR(50) NOT NULL,
     `uid_owner`     INT(11)      NOT NULL,
-    `date_created` INT(11)      NOT NULL DEFAULT 0,
-    `date_updated`   INT(11)      NOT NULL DEFAULT 0,
+    `date_created` INT(11) UNSIGNED NOT NULL DEFAULT 0,
+    `date_updated` INT(11) UNSIGNED NOT NULL DEFAULT 0,
     PRIMARY KEY (`audio_id`)
 )
     ENGINE = MyISAM;

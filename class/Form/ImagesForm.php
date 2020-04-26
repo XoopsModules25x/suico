@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace XoopsModules\Yogurt\Form;
 
@@ -17,11 +19,9 @@ namespace XoopsModules\Yogurt\Form;
  *
  * @category        Module
  * @package         yogurt
- * @author          XOOPS Development Team <https://xoops.org>
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
- * @link            https://xoops.org/
- * @since           1.0.0
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use Xmf\Module\Helper\Permission;
@@ -116,25 +116,25 @@ class ImagesForm extends XoopsThemeForm
         );
         // Url
         //        $this->addElement(
-        //            new XoopsFormTextArea(AM_YOGURT_IMAGES_URL, 'url', $this->targetObject->getVar('url'), 4, 47),
+        //            new XoopsFormTextArea(AM_YOGURT_IMAGES_URL, 'filename', $this->targetObject->getVar('filename'), 4, 47),
         //            false
         //        );
 
-        $url = $this->targetObject->getVar('url') ?: 'blank.png';
+        $url = $this->targetObject->getVar('filename') ?: 'blank.png';
 
         $uploadDir   = '/uploads/yogurt/images/';
         $imgtray     = new \XoopsFormElementTray(\AM_YOGURT_IMAGES_URL, '<br>');
         $imgpath     = \sprintf(\AM_YOGURT_FORMIMAGE_PATH, $uploadDir);
-        $imageselect = new \XoopsFormSelect($imgpath, 'url', $url);
+        $imageselect = new \XoopsFormSelect($imgpath, 'filename', $url);
         $imageArray  = \XoopsLists::getImgListAsArray(XOOPS_ROOT_PATH . $uploadDir);
         foreach ($imageArray as $image) {
             $imageselect->addOption($image, $image);
         }
-        $imageselect->setExtra("onchange='showImgSelected(\"image_url\", \"url\", \"" . $uploadDir . '", "", "' . XOOPS_URL . "\")'");
+        $imageselect->setExtra("onchange='showImgSelected(\"image_url\", \"filename\", \"" . $uploadDir . '", "", "' . XOOPS_URL . "\")'");
         $imgtray->addElement($imageselect);
         $imgtray->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $uploadDir . '/' . $url . "' name='image_url' id='image_url' alt='' style='max-width:300px'>"));
         $fileseltray = new \XoopsFormElementTray('', '<br>');
-        $fileseltray->addElement(new \XoopsFormFile(\AM_YOGURT_FORMUPLOAD, 'url', $this->helper->getConfig('maxsize')));
+        $fileseltray->addElement(new \XoopsFormFile(\AM_YOGURT_FORMUPLOAD, 'filename', $this->helper->getConfig('maxsize')));
         $fileseltray->addElement(new \XoopsFormLabel(''));
         $imgtray->addElement($fileseltray);
         $this->addElement($imgtray);

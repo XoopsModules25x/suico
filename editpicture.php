@@ -61,9 +61,9 @@ $imageFactory = new Yogurt\ImageHandler(
     $xoopsDB
 );
 $criteria_img = new Criteria('cod_img', $cod_img);
-$criteria_uid = new Criteria('uid_owner', $uid);
+$criteriaUid = new Criteria('uid_owner', $uid);
 $criteria     = new CriteriaCompo($criteria_img);
-$criteria->add($criteria_uid);
+$criteria->add($criteriaUid);
 
 /**
  * Lets fetch the info of the pictures to be able to render the form
@@ -75,7 +75,7 @@ $array_pict = $imageFactory->getObjects(
 if ($array_pict) {
     $title = $array_pict[0]->getVar('title');
     $caption = $array_pict[0]->getVar('caption');
-	$url     = $array_pict[0]->getVar('url');
+	$url     = $array_pict[0]->getVar('filename');
 }
 //$url = $xoopsModuleConfig['link_path_upload']."/thumb_".$url;
 $url = XOOPS_URL . '/uploads/yogurt/images/thumb_' . $url;

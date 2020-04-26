@@ -50,9 +50,9 @@ if (1 != Request::getInt('confirm', 0, 'POST')) {
         $noteId
     );
     $uid              = (int)$xoopsUser->getVar('uid');
-    $criteria_uid     = new Criteria('note_to', $uid);
+    $criteriaUid     = new Criteria('note_to', $uid);
     $criteria         = new CriteriaCompo($criteria_note_id);
-    $criteria->add($criteria_uid);
+    $criteria->add($criteriaUid);
 
     /**
      * Try to delete

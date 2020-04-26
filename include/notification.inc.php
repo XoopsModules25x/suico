@@ -45,7 +45,7 @@ function yogurt_iteminfo($category, $item_id)
     global $xoopsDB;
 
     if ('picture' === $category) {
-        $sql          = 'SELECT title,uid_owner,url FROM ' . $xoopsDB->prefix(
+        $sql          = 'SELECT title,uid_owner,filename FROM ' . $xoopsDB->prefix(
             'yogurt_images'
         ) . ' WHERE uid_owner = ' . $item_id . ' LIMIT 1';
         $result       = $xoopsDB->query($sql);

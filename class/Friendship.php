@@ -1,6 +1,28 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
+
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+/**
+ * Module: Yogurt
+ *
+ * @category        Module
+ * @package         yogurt
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ */
+
 
 // Friendship.php,v 1
 //  ---------------------------------------------------------------- //
@@ -69,7 +91,7 @@ class Friendship extends XoopsObject
      */
     public function load($id)
     {
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendship') . ' WHERE friendship_id=' . $id;
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendships') . ' WHERE friendship_id=' . $id;
         $myrow = $this->db->fetchArray($this->db->query($sql));
         $this->assignVars($myrow);
         if (!$myrow) {
@@ -108,14 +130,14 @@ class Friendship extends XoopsObject
         }
         if (!$asobject) {
             $sql    = 'SELECT friendship_id FROM ' . $db->prefix(
-                'yogurt_friendship'
+                'yogurt_friendships'
             ) . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['yogurt_friendship_id'];
             }
         } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_friendship') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_friendships') . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new self($myrow);

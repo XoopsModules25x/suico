@@ -4,6 +4,28 @@ declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * Module: Yogurt
+ *
+ * @category        Module
+ * @package         yogurt
+ * @author          XOOPS Development Team <https://xoops.org>
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GPL 2.0 or later
+ * @link            https://xoops.org/
+ * @since           1.0.0
+ */
+
 use XoopsPersistableObjectHandler;
 use XoopsDatabase;
 use XoopsObject;
@@ -48,7 +70,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
             $this->helper = $helper;
         }
         $isAdmin = $this->helper->isUserAdmin();
-        parent::__construct($xoopsDatabase, 'yogurt_audio', Audio::class, 'audio_id', 'title');
+        parent::__construct($xoopsDatabase, 'yogurt_audios', Audio::class, 'audio_id', 'title');
     }
 
     /**
@@ -79,7 +101,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         $id = null
 //        $fields = null
     ) {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_audio') . ' WHERE audio_id=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_audios') . ' WHERE audio_id=' . $id;
         if (!$result = $this->db->query($sql)) {
             return false;
         }
@@ -123,11 +145,11 @@ class AudioHandler extends XoopsPersistableObjectHandler
         if ($xoopsObject->isNew()) {
             // adding / modifying a yogurt_audio
             $xoopsObject = new Audio();
-            $format      = 'INSERT INTO %s (audio_id, title, author, url, uid_owner, date_created, date_updated)';
+            $format      = 'INSERT INTO %s (audio_id, title, author, filename, uid_owner, date_created, date_updated)';
             $format      .= ' VALUES (%u, %s, %s, %s, %u, %s, %s)';
             $sql         = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_audio'),
+                $this->db->prefix('yogurt_audios'),
                 $audio_id,
                 $this->db->quoteString($title),
                 $this->db->quoteString($author),
@@ -139,11 +161,11 @@ class AudioHandler extends XoopsPersistableObjectHandler
             $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
-            $format .= 'audio_id=%u, title=%s, author=%s, url=%s, uid_owner=%u, date_created=%s, date_updated=%s';
+            $format .= 'audio_id=%u, title=%s, author=%s, filename=%s, uid_owner=%u, date_created=%s, date_updated=%s';
             $format .= ' WHERE audio_id = %u';
             $sql    = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_audio'),
+                $this->db->prefix('yogurt_audios'),
                 $audio_id,
                 $this->db->quoteString($title),
                 $this->db->quoteString($author),
@@ -186,7 +208,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         }
         $sql = \sprintf(
             'DELETE FROM %s WHERE audio_id = %u',
-            $this->db->prefix('yogurt_audio'),
+            $this->db->prefix('yogurt_audios'),
             $xoopsObject->getVar('audio_id')
         );
         if ($force) {
@@ -216,7 +238,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
     ) {
         $ret   = [];
         $limit = $start = 0;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_audio');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_audios');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
             if ('' !== $criteriaElement->getSort()) {
@@ -252,7 +274,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
     public function getCount(
         ?CriteriaElement $criteriaElement = null
     ) {
-        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_audio');
+        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_audios');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
         }
@@ -278,7 +300,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         $force = true,
         $asObject = false
     ) {
-        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_audio');
+        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_audios');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
         }
@@ -341,7 +363,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
             //echo "passei aqui";
             $audio = $this->create();
             $url   = $uploader->getSavedFileName();
-            $audio->setVar('url', $url);
+            $audio->setVar('filename', $url);
             $audio->setVar('title', $title);
             $audio->setVar('author', $author);
             $uid = $xoopsUser->getVar('uid');

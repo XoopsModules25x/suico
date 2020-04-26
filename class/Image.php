@@ -67,7 +67,7 @@ class Image extends XoopsObject
 		$this->initVar('date_created', \XOBJ_DTYPE_INT, 0, false);
         $this->initVar('date_updated', \XOBJ_DTYPE_INT, 0, false);
         $this->initVar('uid_owner', \XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('url', \XOBJ_DTYPE_OTHER, null, false);
+        $this->initVar('filename', \XOBJ_DTYPE_OTHER, null, false);
         $this->initVar('private', \XOBJ_DTYPE_TXTBOX, null, false);
         if (!empty($id)) {
             if (\is_array($id)) {

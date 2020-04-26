@@ -51,12 +51,12 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
     );
     $criteria_aud = new Criteria('audio_id', $cod_audio);
     $uid          = (int)$xoopsUser->getVar('uid');
-    $criteria_uid = new Criteria('uid_owner', $uid);
+    $criteriaUid = new Criteria('uid_owner', $uid);
     $criteria     = new CriteriaCompo($criteria_aud);
-    $criteria->add($criteria_uid);
+    $criteria->add($criteriaUid);
 
     $objects_array = $audioFactory->getObjects($criteria);
-    $audio_name    = $objects_array[0]->getVar('url');
+    $audio_name    = $objects_array[0]->getVar('filename');
 
     /**
      * Try to delete

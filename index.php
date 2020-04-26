@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -11,11 +13,13 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * Module: Yogurt
+ *
+ * @category        Module
+ * @package         yogurt
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use Xmf\Request;
@@ -58,10 +62,10 @@ $start = Request::getInt(
 /**
  * Criteria for mainvideo
  */
-$criteria_uidvideo  = new Criteria('uid_owner', $controller->uidOwner);
+$criteriaUidVideo  = new Criteria('uid_owner', $controller->uidOwner);
 $criteria_mainvideo = new Criteria('main_video', '1');
 $criteria_video     = new CriteriaCompo($criteria_mainvideo);
-$criteria_video->add($criteria_uidvideo);
+$criteria_video->add($criteriaUidVideo);
 
 if ((isset($nbSections['nbVideos']) && $nbSections['nbVideos'] > 0) && ($videos = $controller->videosFactory->getObjects($criteria_video))) {
     $mainvideocode = $videos[0]->getVar('youtube_code');
@@ -93,7 +97,7 @@ if (0 === $controller->isAnonym) {
     }
     $criteria_visitors = new Criteria('uid_owner', $controller->uidOwner);
     //$criteria_visitors->setLimit(5);
-    $visitors_object_array = $controller->visitorsFactory->getObjects(
+    $visitorsObjectArray = $controller->visitorsFactory->getObjects(
         $criteria_visitors
     );
 
@@ -101,15 +105,19 @@ if (0 === $controller->isAnonym) {
      * Lets populate an array with the dati from visitors
      */
     $i              = 0;
-    $visitors_array = [];
-    foreach ($visitors_object_array as $visitor) {
-        $indice                  = $visitor->getVar('uid_visitor', 's');
-        $visitors_array[$indice] = $visitor->getVar('uname_visitor', 's');
+    $visitorsArray = [];
+    if (is_array($visitorsObjectArray) && count($visitorsObjectArray)>0) {
+        foreach ($visitorsObjectArray as $visitor) {
+            if (null !== $visitor) {
+                $indice                 = $visitor->getVar('uid_visitor', 's');
+                $visitorsArray[$indice] = $visitor->getVar('uname_visitor', 's');
 
-        $i++;
+                $i++;
+            }
+        }
     }
 
-    $xoopsTpl->assign('visitors', $visitors_array);
+    $xoopsTpl->assign('visitors', $visitorsArray);
     $xoopsTpl->assign('lang_visitors', _MD_YOGURT_VISITORS);
     /*    $criteria_deletevisitors = new criteria('uid_owner',$uid);
         $criteria_deletevisitors->setStart(5);

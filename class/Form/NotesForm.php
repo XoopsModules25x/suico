@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace XoopsModules\Yogurt\Form;
 
@@ -17,11 +19,9 @@ namespace XoopsModules\Yogurt\Form;
  *
  * @category        Module
  * @package         yogurt
- * @author          XOOPS Development Team <https://xoops.org>
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
- * @link            https://xoops.org/
- * @since           1.0.0
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use Xmf\Module\Helper\Permission;

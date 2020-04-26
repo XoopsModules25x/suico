@@ -17,11 +17,9 @@ declare(strict_types=1);
  *
  * @category        Module
  * @package         yogurt
- * @author          XOOPS Development Team <https://xoops.org>
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
- * @link            https://xoops.org/
- * @since           1.0.0
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use Xmf\Request;
@@ -112,7 +110,7 @@ switch ($op) {
 
         $id_field = Request::getString('friendreq_id', '');
 
-        if ($utility::cloneRecord('yogurt_friendrequest', 'friendreq_id', $id_field)) {
+        if ($utility::cloneRecord('yogurt_friendrequests', 'friendreq_id', $id_field)) {
             redirect_header('friendrequest.php', 3, AM_YOGURT_CLONED_OK);
         } else {
             redirect_header('friendrequest.php', 3, AM_YOGURT_CLONED_FAILED);

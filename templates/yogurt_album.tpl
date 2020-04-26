@@ -55,8 +55,8 @@
         <!-- Start Normal Photo -->
 		<div class="col-6 h-100 mb-3">
 <div class="card" style="width:400px">
-		<a name="<{$pics_array[i].cod_img}>" href="<{$xoops_url}>/uploads/yogurt/images/resized_<{$pics_array[i].url}>" rel="lightbox[album]" title="<{$pics_array[i].title}> - <{$pics_array[i].caption}>">
-                <img class="card-img-top thumb" src="<{$xoops_url}>/uploads/yogurt/images/<{$pics_array[i].url}>" rel="lightbox" title="<{$pics_array[i].title}> - <{$pics_array[i].caption}>">
+		<a name="<{$pics_array[i].cod_img}>" href="<{$xoops_url}>/uploads/yogurt/images/resized_<{$pics_array[i].filename}>" rel="lightbox[album]" title="<{$pics_array[i].title}> - <{$pics_array[i].caption}>">
+                <img class="card-img-top thumb" src="<{$xoops_url}>/uploads/yogurt/images/<{$pics_array[i].filename}>" rel="lightbox" title="<{$pics_array[i].title}> - <{$pics_array[i].caption}>">
         </a>
 			<div class="card-body">
 				<h4 class="card-title"><{$pics_array[i].title}></h4>
@@ -107,8 +107,8 @@
 	<{if ($pics_array[i].private == 1) }>
 	<div class="col-6 h-100 mb-3">
 	<div class="card" style="width:400px">
-		<a href="<{$xoops_url}>/uploads/yogurt/images/resized_<{$pics_array[i].url}>" rel="lightbox[album]" title="<{$pics_array[i].title}> - <{$pics_array[i].caption}>">
-                <img class="card-img-top thumb" src="<{$xoops_url}>/uploads/yogurt/images/<{$pics_array[i].url}>" rel="lightbox" title="<{$pics_array[i].title}> - <{$pics_array[i].caption}>">
+		<a href="<{$xoops_url}>/uploads/yogurt/images/resized_<{$pics_array[i].filename}>" rel="lightbox[album]" title="<{$pics_array[i].title}> - <{$pics_array[i].caption}>">
+                <img class="card-img-top thumb" src="<{$xoops_url}>/uploads/yogurt/images/<{$pics_array[i].filename}>" rel="lightbox" title="<{$pics_array[i].title}> - <{$pics_array[i].caption}>">
         </a>
 			<div class="card-body">
 				<h4 class="card-title"><{$pics_array[i].title}></h4>

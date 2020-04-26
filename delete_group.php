@@ -51,9 +51,9 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
         $group_id
     );
     $uid               = (int)$xoopsUser->getVar('uid');
-    $criteria_uid      = new Criteria('owner_uid', $uid);
+    $criteriaUid      = new Criteria('owner_uid', $uid);
     $criteria          = new CriteriaCompo($criteria_group_id);
-    $criteria->add($criteria_uid);
+    $criteria->add($criteriaUid);
 
     /**
      * Try to delete

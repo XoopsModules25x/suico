@@ -31,11 +31,11 @@ $controller = new Yogurt\NotesController($xoopsDB, $xoopsUser);
 $nbSections = $controller->getNumbersSections();
 
 //$controller->renderFormNewPost($xoopsTpl);
-$criteria_uid = new Criteria('note_to', $controller->uidOwner);
-$criteria_uid->setOrder('DESC');
-$criteria_uid->setSort('note_id');
+$criteriaUid = new Criteria('note_to', $controller->uidOwner);
+$criteriaUid->setOrder('DESC');
+$criteriaUid->setSort('note_id');
 
-if (!($notes = $controller->fetchNotes($nbSections['nbNotes'], $criteria_uid))) {
+if (!($notes = $controller->fetchNotes($nbSections['nbNotes'], $criteriaUid))) {
     $xoopsTpl->assign('lang_noNotesyet', _MD_YOGURT_NONOTESYET);
 }
 

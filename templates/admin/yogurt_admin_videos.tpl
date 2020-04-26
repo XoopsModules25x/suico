@@ -1,7 +1,7 @@
-<{if $videoRows > 0}>
+<{if $videosRows > 0}>
     <div class="outer">
         <form name="select" action="videos.php?op=" method="POST"
-              onsubmit="if(window.document.select.op.value =='') {return false;} else if (window.document.select.op.value =='delete') {return deleteSubmitValid('videoId[]');} else if (isOneChecked('videoId[]')) {return true;} else {alert('<{$smarty.const.AM_VIDEO_SELECTED_ERROR}>'); return false;}">
+              onsubmit="if(window.document.select.op.value =='') {return false;} else if (window.document.select.op.value =='delete') {return deleteSubmitValid('videosId[]');} else if (isOneChecked('videosId[]')) {return true;} else {alert('<{$smarty.const.AM_VIDEOS_SELECTED_ERROR}>'); return false;}">
             <input type="hidden" name="confirm" value="1">
             <div class="floatleft">
                 <label>
@@ -17,7 +17,7 @@
             </div>
 
 
-            <table class="$video" cellpadding="0" cellspacing="0" width="100%">
+            <table class="$videos" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                     <th align="center" width="5%"><input name="allbox" title="allbox" id="allbox" onclick="xoopsCheckAll('select', 'allbox');" type="checkbox" title="Check All" value="Check All"></th>
                     <th class="left"><{$selectorvideo_id}></th>
@@ -30,20 +30,20 @@
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
-                <{foreach item=videoArray from=$videoArrays}>
+                <{foreach item=videosArray from=$videosArrays}>
                     <tr class="<{cycle values="odd,even"}>">
 
-                        <td align="center" style="vertical-align:middle;"><input type="checkbox" name="video_id[]" title="video_id[]" id="video_id[]" value="<{$videoArray.video_id}>"></td>
-                        <td class='left'><{$videoArray.video_id}></td>
-                        <td class='left'><{$videoArray.uid_owner}></td>
-                        <td class='left'><{$videoArray.video_desc}></td>
-                        <td class='left'><{$videoArray.youtube_code}></td>
-                        <td class='center'><{$videoArray.main_video}></td>
-                        <td class='left'><{$videoArray.date_created}></td>
-                        <td class='left'><{$videoArray.date_updated}></td>
+                        <td align="center" style="vertical-align:middle;"><input type="checkbox" name="videos_id[]" title="videos_id[]" id="videos_id[]" value="<{$videosArray.videos_id}>"></td>
+                        <td class='left'><{$videosArray.video_id}></td>
+                        <td class='left'><{$videosArray.uid_owner}></td>
+                        <td class='left'><{$videosArray.video_desc}></td>
+                        <td class='left'><{$videosArray.youtube_code}></td>
+                        <td class='center'><{$videosArray.main_video}></td>
+                        <td class='left'><{$videosArray.date_created}></td>
+                        <td class='left'><{$videosArray.date_updated}></td>
 
 
-                        <td class="center width5"><{$videoArray.edit_delete}></td>
+                        <td class="center width5"><{$videosArray.edit_delete}></td>
                     </tr>
                 <{/foreach}>
             </table>
@@ -65,7 +65,7 @@
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
                 <tr>
-                    <td class="errorMsg" colspan="11">There are no $video</td>
+                    <td class="errorMsg" colspan="11">There are no $videos</td>
                 </tr>
             </table>
     </div>

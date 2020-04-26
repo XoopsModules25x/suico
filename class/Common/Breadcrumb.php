@@ -15,13 +15,15 @@ namespace XoopsModules\Yogurt\Common;
  */
 
 /**
- * Breadcrumb Class
+ * Module: Yogurt
  *
- * @copyright   XOOPS Project (https://xoops.org)
- * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
- * @author      lucio <lucio.rota@gmail.com>
- * @package     Yogurt
- *
+ * @category        Module
+ * @package         yogurt
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ */
+/*
  * Example:
  * $breadcrumb = new Common\Breadcrumb();
  * $breadcrumb->addLink( 'bread 1', 'index1.php' );

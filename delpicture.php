@@ -49,12 +49,12 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
     );
     $criteria_img = new Criteria('cod_img', $cod_img);
     $uid          = (int)$xoopsUser->getVar('uid');
-    $criteria_uid = new Criteria('uid_owner', $uid);
+    $criteriaUid = new Criteria('uid_owner', $uid);
     $criteria     = new CriteriaCompo($criteria_img);
-    $criteria->add($criteria_uid);
+    $criteria->add($criteriaUid);
 
     $objects_array = $imageFactory->getObjects($criteria);
-    $image_name    = $objects_array[0]->getVar('url');
+    $image_name    = $objects_array[0]->getVar('filename');
     $avatar_image  = $xoopsUser->getVar('user_avatar');
 
     /**

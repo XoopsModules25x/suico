@@ -25,6 +25,8 @@
                     <th class="left"><{$selectorgroup_title}></th>
                     <th class="left"><{$selectorgroup_desc}></th>
                     <th class="center"><{$selectorgroup_img}></th>
+                    <th class="left"><{$selectordate_created}></th>
+                    <th class="left"><{$selectordate_updated}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
@@ -37,6 +39,8 @@
                         <td class='left'><{$groupsArray.group_title}></td>
                         <td class='left'><{$groupsArray.group_desc}></td>
                         <td class='center'><{$groupsArray.group_img}></td>
+                        <td class='left'><{$groupsArray.date_created}></td>
+                        <td class='left'><{$groupsArray.date_updated}></td>
 
 
                         <td class="center width5"><{$groupsArray.edit_delete}></td>
@@ -55,6 +59,8 @@
                     <th class="left"><{$selectorgroup_title}></th>
                     <th class="left"><{$selectorgroup_desc}></th>
                     <th class="center"><{$selectorgroup_img}></th>
+                    <th class="left"><{$selectordate_created}></th>
+                    <th class="left"><{$selectordate_updated}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>

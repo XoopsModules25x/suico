@@ -1,12 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace XoopsModules\Yogurt\Common;
-
-use RuntimeException;
-use Throwable;
-use XoopsUser;
-use SplFileInfo;
-use DirectoryIterator;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -19,10 +15,21 @@ use DirectoryIterator;
  */
 
 /**
- * @copyright   XOOPS Project (https://xoops.org)
- * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
- * @author      mamba <mambax7@gmail.com>
+ * Module: Yogurt
+ *
+ * @category        Module
+ * @package         yogurt
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
+ 
+use RuntimeException;
+use Throwable;
+use XoopsUser;
+use SplFileInfo;
+use DirectoryIterator;
+
 trait FilesManagement
 {
     /**

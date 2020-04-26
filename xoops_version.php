@@ -1,20 +1,25 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
+ 
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * Module: Yogurt
+ *
+ * @category        Module
+ * @package         yogurt
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 $moduleDirName      = basename(
     __DIR__
@@ -1065,7 +1070,7 @@ $modversion['config'][] = [
 
 $modversion['templates'] = [
     ['file' => 'admin/yogurt_admin_about.tpl', 'description' => ''],
-    ['file' => 'admin/yogurt_admin_audio.tpl', 'description' => ''],
+    ['file' => 'admin/yogurt_admin_audios.tpl', 'description' => ''],
     ['file' => 'admin/yogurt_admin_configs.tpl', 'description' => ''],
     ['file' => 'admin/yogurt_admin_friendrequest.tpl', 'description' => ''],
     ['file' => 'admin/yogurt_admin_friendship.tpl', 'description' => ''],
@@ -1076,14 +1081,14 @@ $modversion['templates'] = [
     ['file' => 'admin/yogurt_admin_privacy.tpl', 'description' => ''],
     ['file' => 'admin/yogurt_admin_relgroupuser.tpl', 'description' => ''],
     ['file' => 'admin/yogurt_admin_suspensions.tpl', 'description' => ''],
-    ['file' => 'admin/yogurt_admin_video.tpl', 'description' => ''],
+    ['file' => 'admin/yogurt_admin_videos.tpl', 'description' => ''],
     ['file' => 'admin/yogurt_admin_visitors.tpl', 'description' => ''],
     ['file' => 'blocks/yogurt_block_friends.tpl', 'description' => ''],
     ['file' => 'blocks/yogurt_block_hotfriends.tpl', 'description' => ''],
     ['file' => 'blocks/yogurt_block_hottest.tpl', 'description' => ''],
     ['file' => 'blocks/yogurt_block_lastpictures.tpl', 'description' => ''],
     ['file' => 'yogurt_album.tpl', 'description' => _MI_YOGURT_TEMPLATE_ALBUMDESC,],
-    ['file' => 'yogurt_audio.tpl', 'description' => _MI_YOGURT_TEMPLATE_AUDIOSDESC,],
+    ['file' => 'yogurt_audios.tpl', 'description' => _MI_YOGURT_TEMPLATE_AUDIOSDESC,],
     ['file' => 'yogurt_configs.tpl', 'description' => _MI_YOGURT_TEMPLATE_CONFIGSDESC,],
     ['file' => 'yogurt_editgroup.tpl', 'description' => _MI_YOGURT_TEMPLATE_EDITGROUP,],
     ['file' => 'yogurt_fans.tpl', 'description' => _MI_YOGURT_TEMPLATE_FANS,],
@@ -1101,7 +1106,7 @@ $modversion['templates'] = [
     ['file' => 'yogurt_searchform.tpl', 'description' => _MI_YOGURT_TEMPLATE_SEARCHFORMDESC,],
     ['file' => 'yogurt_searchresults.tpl', 'description' => _MI_YOGURT_TEMPLATE_SEARCHRESULTSDESC,],
     ['file' => 'yogurt_user.tpl', 'description' => _MI_YOGURT_TEMPLATE_USERDESC,],
-    ['file' => 'yogurt_video.tpl', 'description' => _MI_YOGURT_TEMPLATE_VIDEOSDESC,],
+    ['file' => 'yogurt_videos.tpl', 'description' => _MI_YOGURT_TEMPLATE_VIDEOSDESC,],
 ];
 
 global $xoopsModule;

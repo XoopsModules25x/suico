@@ -97,14 +97,14 @@ class VideoController extends YogurtController
          */
         $i = 0;
         foreach ($videos as $video) {
-            $videos_array[$i]['url']  = $video->getVar('youtube_code', 's');
-            $videos_array[$i]['desc'] = $video->getVar('video_desc', 's');
-            $videos_array[$i]['id']   = $video->getVar('video_id', 's');
+            $videosArray[$i]['url']  = $video->getVar('youtube_code', 's');
+            $videosArray[$i]['desc'] = $video->getVar('video_desc', 's');
+            $videosArray[$i]['id']   = $video->getVar('video_id', 's');
 
             $i++;
         }
 
-        return $videos_array;
+        return $videosArray;
     }
 
     /**

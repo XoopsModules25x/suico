@@ -26,7 +26,7 @@
                     <th class="left"><{$selectordate_created}></th>
                     <th class="left"><{$selectordate_updated}></th>
                     <th class="left"><{$selectoruid_owner}></th>
-                    <th class="left"><{$selectorurl}></th>
+                    <th class="left"><{$selectorfilename}></th>
                     <th class="center"><{$selectorprivate}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
@@ -41,7 +41,7 @@
                         <td class='left'><{$imagesArray.date_created}></td>
                         <td class='left'><{$imagesArray.date_updated}></td>
                         <td class='left'><{$imagesArray.uid_owner}></td>
-                        <td class='left'><{$imagesArray.url}></td>
+                        <td class='left'><{$imagesArray.filename}></td>
                         <td class='center'><{$imagesArray.private}></td>
 
 
@@ -62,7 +62,7 @@
                     <th class="left"><{$selectordate_created}></th>
                     <th class="left"><{$selectordate_updated}></th>
                     <th class="left"><{$selectoruid_owner}></th>
-                    <th class="left"><{$selectorurl}></th>
+                    <th class="left"><{$selectorfilename}></th>
                     <th class="center"><{$selectorprivate}></th>
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>

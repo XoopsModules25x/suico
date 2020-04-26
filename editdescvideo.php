@@ -62,9 +62,9 @@ $videoFactory   = new Yogurt\VideoHandler(
     $xoopsDB
 );
 $criteria_video = new Criteria('video_id', $cod_img);
-$criteria_uid   = new Criteria('uid_owner', $uid);
+$criteriaUid   = new Criteria('uid_owner', $uid);
 $criteria       = new CriteriaCompo($criteria_video);
-$criteria->add($criteria_uid);
+$criteria->add($criteriaUid);
 
 /**
  * Lets fetch the info of the pictures to be able to render the form

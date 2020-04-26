@@ -13,11 +13,13 @@ declare(strict_types=1);
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * Module: Yogurt
+ *
+ * @category        Module
+ * @package         yogurt
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use XoopsModules\Yogurt;
@@ -25,7 +27,7 @@ use Xmf\Request;
 
 const NBAUDIO = 'nbAudio';
 
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_audio.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'yogurt_audios.tpl';
 require __DIR__ . '/header.php';
 
 $controller = new Yogurt\AudioController($xoopsDB, $xoopsUser);
@@ -63,7 +65,7 @@ if (is_array($audiosArray)) {
     $xoopsTpl->assign('audios', $audiosArray);
     $audio_list = [];
     foreach ($audiosArray as $audio_item) {
-        $audio_list[] = XOOPS_UPLOAD_URL . '/yogurt/audio/' . $audio_item['url']; // . ' | ';
+        $audio_list[] = XOOPS_UPLOAD_URL . '/yogurt/audio/' . $audio_item['filename']; // . ' | ';
     }
     //$audio_list = substr($audio_list,-2);
     $xoopsTpl->assign('audio_list', $audio_list);

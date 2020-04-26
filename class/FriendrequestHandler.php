@@ -1,6 +1,27 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
+
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+/**
+ * Module: Yogurt
+ *
+ * @category        Module
+ * @package         yogurt
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ */
 
 // Friendrequest.php,v 1
 //  ---------------------------------------------------------------- //
@@ -44,7 +65,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
             $this->helper = $helper;
         }
         $isAdmin = $this->helper->isUserAdmin();
-        parent::__construct($xoopsDatabase, 'yogurt_friendrequest', Friendrequest::class, 'friendreq_id', 'friendreq_id');
+        parent::__construct($xoopsDatabase, 'yogurt_friendrequests', Friendrequest::class, 'friendreq_id', 'friendreq_id');
     }
 
     /**
@@ -76,7 +97,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
         $id = null,
         $fields = null
     ) {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendrequest') . ' WHERE friendreq_id=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendrequests') . ' WHERE friendreq_id=' . $id;
         if (!$result = $this->db->query($sql)) {
             return false;
         }
@@ -124,7 +145,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
             $format      .= 'VALUES (%u, %u, %u, %u)';
             $sql         = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_friendrequest'),
+                $this->db->prefix('yogurt_friendrequests'),
                 $friendreq_id,
                 $friendrequester_uid,
                 $friendrequestto_uid,
@@ -137,7 +158,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
             $format .= ' WHERE friendreq_id = %u';
             $sql    = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_friendrequest'),
+                $this->db->prefix('yogurt_friendrequests'),
                 $friendreq_id,
                 $friendrequester_uid,
                 $friendrequestto_uid,
@@ -177,7 +198,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
         }
         $sql = \sprintf(
             'DELETE FROM %s WHERE friendreq_id = %u',
-            $this->db->prefix('yogurt_friendrequest'),
+            $this->db->prefix('yogurt_friendrequests'),
             $xoopsObject->getVar('friendreq_id')
         );
         if ($force) {
@@ -207,7 +228,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
     ) {
         $ret   = [];
         $limit = $start = 0;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendrequest');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendrequests');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
             if ('' !== $criteriaElement->getSort()) {
@@ -243,7 +264,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
     public function getCount(
         ?CriteriaElement $criteriaElement = null
     ) {
-        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_friendrequest');
+        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_friendrequests');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
         }
@@ -269,7 +290,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
         $force = true,
         $asObject = false
     ) {
-        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_friendrequest');
+        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_friendrequests');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
         }
