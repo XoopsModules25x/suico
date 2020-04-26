@@ -45,11 +45,11 @@ CREATE TABLE `yogurt_video` (
 )
     ENGINE = MyISAM;
 CREATE TABLE `yogurt_friendrequest` (
-    `friendpet_id`   INT(11) NOT NULL AUTO_INCREMENT,
+    `friendreq_id`   INT(11) NOT NULL AUTO_INCREMENT,
     `friendrequester_uid` INT(11) NOT NULL,
     `friendrequestto_uid` INT(11) NOT NULL,
     `date_created`        INT(11) UNSIGNED NOT NULL DEFAULT 0,
-    PRIMARY KEY (`friendpet_id`)
+    PRIMARY KEY (`friendreq_id`)
 )
     ENGINE = MyISAM;
 

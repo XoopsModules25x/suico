@@ -53,8 +53,8 @@ switch ($op) {
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('friendrequest.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
-        if (0 !== Request::getInt('friendpet_id', 0)) {
-            $friendrequestObject = $friendrequestHandler->get(Request::getInt('friendpet_id', 0));
+        if (0 !== Request::getInt('friendreq_id', 0)) {
+            $friendrequestObject = $friendrequestHandler->get(Request::getInt('friendreq_id', 0));
         } else {
             $friendrequestObject = $friendrequestHandler->create();
         }
@@ -76,13 +76,13 @@ switch ($op) {
         $adminObject->addItemButton(AM_YOGURT_ADD_FRIENDREQUEST, 'friendrequest.php?op=new', 'add');
         $adminObject->addItemButton(AM_YOGURT_FRIENDREQUEST_LIST, 'friendrequest.php', 'list');
         $adminObject->displayButton('left');
-        $friendrequestObject = $friendrequestHandler->get(Request::getString('friendpet_id', ''));
+        $friendrequestObject = $friendrequestHandler->get(Request::getString('friendreq_id', ''));
         $form                 = $friendrequestObject->getForm();
         $form->display();
         break;
 
     case 'delete':
-        $friendrequestObject = $friendrequestHandler->get(Request::getString('friendpet_id', ''));
+        $friendrequestObject = $friendrequestHandler->get(Request::getString('friendreq_id', ''));
         if (1 === Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('friendrequest.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -96,13 +96,13 @@ switch ($op) {
             xoops_confirm(
                 [
                     'ok'           => 1,
-                    'friendpet_id' => Request::getString('friendpet_id', ''),
+                    'friendreq_id' => Request::getString('friendreq_id', ''),
                     'op'           => 'delete',
                 ],
                 Request::getUrl('REQUEST_URI', '', 'SERVER'),
                 sprintf(
                     AM_YOGURT_FORMSUREDEL,
-                    $friendrequestObject->getVar('friendpet_id')
+                    $friendrequestObject->getVar('friendreq_id')
                 )
             );
         }
@@ -110,9 +110,9 @@ switch ($op) {
 
     case 'clone':
 
-        $id_field = Request::getString('friendpet_id', '');
+        $id_field = Request::getString('friendreq_id', '');
 
-        if ($utility::cloneRecord('yogurt_friendrequest', 'friendpet_id', $id_field)) {
+        if ($utility::cloneRecord('yogurt_friendrequest', 'friendreq_id', $id_field)) {
             redirect_header('friendrequest.php', 3, AM_YOGURT_CLONED_OK);
         } else {
             redirect_header('friendrequest.php', 3, AM_YOGURT_CLONED_FAILED);
@@ -127,7 +127,7 @@ switch ($op) {
         $friendrequestPaginationLimit = $helper->getConfig('userpager');
 
         $criteria = new CriteriaCompo();
-        $criteria->setSort('friendpet_id ASC, friendpet_id');
+        $criteria->setSort('friendreq_id ASC, friendreq_id');
         $criteria->setOrder('ASC');
         $criteria->setLimit($friendrequestPaginationLimit);
         $criteria->setStart($start);
@@ -158,7 +158,7 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('friendrequestRows', $friendrequestTempRows);
         $friendrequestArray = [];
 
-        //    $fields = explode('|', friendpet_id:int:11::NOT NULL::primary:friendpet_id|friendrequester_uid:int:11::NOT NULL:::friendrequester_uid|friendrequestto_uid:int:11::NOT NULL:::friendrequestto_uid);
+        //    $fields = explode('|', friendreq_id:int:11::NOT NULL::primary:friendreq_id|friendrequester_uid:int:11::NOT NULL:::friendrequester_uid|friendrequestto_uid:int:11::NOT NULL:::friendrequestto_uid);
         //    $fieldsCount    = count($fields);
 
         $criteria = new CriteriaCompo();
@@ -178,10 +178,10 @@ switch ($op) {
                 //        $field = explode(':', $fields[$i]);
 
                 $GLOBALS['xoopsTpl']->assign(
-                    'selectorfriendpet_id',
+                    'selectorfriendreq_id',
                     AM_YOGURT_FRIENDREQUEST_FRIENDPET_ID
                 );
-                $friendrequestArray['friendpet_id'] = $friendrequestTempArray[$i]->getVar('friendpet_id');
+                $friendrequestArray['friendreq_id'] = $friendrequestTempArray[$i]->getVar('friendreq_id');
 
                 $GLOBALS['xoopsTpl']->assign('selectorfriendrequester_uid', AM_YOGURT_FRIENDREQUEST_FRIENDREQUESTER_UID);
                 $friendrequestArray['friendrequester_uid'] = strip_tags(
@@ -194,9 +194,9 @@ switch ($op) {
                 );
                 $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_FRIENDREQUEST_DATE_CREATED);
                 $friendrequestArray['date_created'] = formatTimestamp($friendrequestTempArray[$i]->getVar('date_created'), 's');
-                $friendrequestArray['edit_delete']  = "<a href='friendrequest.php?op=edit&friendpet_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
-               <a href='friendrequest.php?op=delete&friendpet_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
-               <a href='friendrequest.php?op=clone&friendpet_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
+                $friendrequestArray['edit_delete']  = "<a href='friendrequest.php?op=edit&friendreq_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
+               <a href='friendrequest.php?op=delete&friendreq_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
+               <a href='friendrequest.php?op=clone&friendreq_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
                 $GLOBALS['xoopsTpl']->append_by_ref('friendrequestArrays', $friendrequestArray);
                 unset($friendrequestArray);
@@ -217,8 +217,8 @@ switch ($op) {
 
             //                     echo "<td class='center width5'>
 
-            //                    <a href='friendrequest.php?op=edit&friendpet_id=".$i."'><img src=".$pathIcon16."/edit.png alt='"._EDIT."' title='"._EDIT."'></a>
-            //                    <a href='friendrequest.php?op=delete&friendpet_id=".$i."'><img src=".$pathIcon16."/delete.png alt='"._DELETE."' title='"._DELETE."'></a>
+            //                    <a href='friendrequest.php?op=edit&friendreq_id=".$i."'><img src=".$pathIcon16."/edit.png alt='"._EDIT."' title='"._EDIT."'></a>
+            //                    <a href='friendrequest.php?op=delete&friendreq_id=".$i."'><img src=".$pathIcon16."/delete.png alt='"._DELETE."' title='"._DELETE."'></a>
             //                    </td>";
 
             //                echo "</tr>";

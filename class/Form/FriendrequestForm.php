@@ -69,9 +69,9 @@ class FriendrequestForm extends XoopsThemeForm
         //include ID field, it's needed so the module knows if it is a new form or an edited form
 
         $hidden = new XoopsFormHidden(
-            'friendpet_id',
+            'friendreq_id',
             $this->targetObject->getVar(
-                'friendpet_id'
+                'friendreq_id'
             )
         );
         $this->addElement($hidden);
@@ -82,9 +82,9 @@ class FriendrequestForm extends XoopsThemeForm
             new XoopsFormLabel(
                 \AM_YOGURT_FRIENDREQUEST_FRIENDPET_ID,
                 $this->targetObject->getVar(
-                    'friendpet_id'
+                    'friendreq_id'
                 ),
-                'friendpet_id'
+                'friendreq_id'
             )
         );
         // Inviting by Friend_uid

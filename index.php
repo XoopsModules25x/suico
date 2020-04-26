@@ -178,7 +178,7 @@ if (1 === $controller->isOwner) {
         $friendrequester_uid    = $friendrequester->getVar('uid');
         $friendrequester_uname  = $friendrequester->getVar('uname');
         $friendrequester_avatar = $friendrequester->getVar('user_avatar');
-        $friendrequest_id       = $newFriendrequest[0]->getVar('friendpet_id');
+        $friendrequest_id       = $newFriendrequest[0]->getVar('friendreq_id');
         $friendrequest          = 1;
     }
 }

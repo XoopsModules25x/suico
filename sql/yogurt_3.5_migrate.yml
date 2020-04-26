@@ -2,7 +2,7 @@ yogurt_friendrequest:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
         -
-            name: friendpet_id
+            name: friendreq_id
             attributes: ' int(11)  NOT NULL auto_increment'
         -
             name: friendrequester_uid
@@ -12,7 +12,7 @@ yogurt_friendrequest:
             attributes: ' int(11)  NOT NULL '
     keys:
         PRIMARY:
-            columns: friendpet_id
+            columns: friendreq_id
             unique: true
 yogurt_friendship:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
@@ -55,9 +55,6 @@ yogurt_images:
             name: title
             attributes: ' varchar(255)  NOT NULL '
         -
-            name: caption
-            attributes: ' varchar(255)  NOT NULL '
-        -
             name: date_created
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
         -
@@ -72,6 +69,9 @@ yogurt_images:
         -
             name: private
             attributes: ' tinyint(1)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: caption
+            attributes: ' varchar(255)  NOT NULL '
     keys:
         PRIMARY:
             columns: cod_img

@@ -41,7 +41,7 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
-$criteria = new CriteriaCompo(new Criteria('friendpet_id', $friendrequest_id));
+$criteria = new CriteriaCompo(new Criteria('friendreq_id', $friendrequest_id));
 $criteria->add(new Criteria('friendrequestto_uid', $uid));
 if ($friendrequestFactory->getCount($criteria) > 0) {
     if (($friendship_level > 0) && ($friendrequest = $friendrequestFactory->getObjects($criteria))) {

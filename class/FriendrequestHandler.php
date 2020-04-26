@@ -44,7 +44,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
             $this->helper = $helper;
         }
         $isAdmin = $this->helper->isUserAdmin();
-        parent::__construct($xoopsDatabase, 'yogurt_friendrequest', Friendrequest::class, 'friendpet_id', 'friendpet_id');
+        parent::__construct($xoopsDatabase, 'yogurt_friendrequest', Friendrequest::class, 'friendreq_id', 'friendreq_id');
     }
 
     /**
@@ -76,7 +76,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
         $id = null,
         $fields = null
     ) {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendrequest') . ' WHERE friendpet_id=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendrequest') . ' WHERE friendreq_id=' . $id;
         if (!$result = $this->db->query($sql)) {
             return false;
         }
@@ -120,12 +120,12 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Friendrequest
             $xoopsObject = new Friendrequest();
-            $format      = 'INSERT INTO %s (friendpet_id, friendrequester_uid, friendrequestto_uid, date_created)';
+            $format      = 'INSERT INTO %s (friendreq_id, friendrequester_uid, friendrequestto_uid, date_created)';
             $format      .= 'VALUES (%u, %u, %u, %u)';
             $sql         = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_friendrequest'),
-                $friendpet_id,
+                $friendreq_id,
                 $friendrequester_uid,
                 $friendrequestto_uid,
                 $date_created
@@ -133,16 +133,16 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
             $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
-            $format .= 'friendpet_id=%u, friendrequester_uid=%u, friendrequestto_uid=%u, date_created=%u';
-            $format .= ' WHERE friendpet_id = %u';
+            $format .= 'friendreq_id=%u, friendrequester_uid=%u, friendrequestto_uid=%u, date_created=%u';
+            $format .= ' WHERE friendreq_id = %u';
             $sql    = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_friendrequest'),
-                $friendpet_id,
+                $friendreq_id,
                 $friendrequester_uid,
                 $friendrequestto_uid,
                 $date_created,
-                $friendpet_id
+                $friendreq_id
             );
         }
         if ($force) {
@@ -153,10 +153,10 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
         if (!$result) {
             return false;
         }
-        if (empty($friendpet_id)) {
-            $friendpet_id = $this->db->getInsertId();
+        if (empty($friendreq_id)) {
+            $friendreq_id = $this->db->getInsertId();
         }
-        $xoopsObject->assignVar('friendpet_id', $friendpet_id);
+        $xoopsObject->assignVar('friendreq_id', $friendreq_id);
 
         return true;
     }
@@ -176,9 +176,9 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
             return false;
         }
         $sql = \sprintf(
-            'DELETE FROM %s WHERE friendpet_id = %u',
+            'DELETE FROM %s WHERE friendreq_id = %u',
             $this->db->prefix('yogurt_friendrequest'),
-            $xoopsObject->getVar('friendpet_id')
+            $xoopsObject->getVar('friendreq_id')
         );
         if ($force) {
             $result = $this->db->queryF($sql);
@@ -226,7 +226,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
             if (!$id_as_key) {
                 $ret[] = &$yogurt_friendrequest;
             } else {
-                $ret[$myrow['friendpet_id']] = &$yogurt_friendrequest;
+                $ret[$myrow['friendreq_id']] = &$yogurt_friendrequest;
             }
             unset($yogurt_friendrequest);
         }

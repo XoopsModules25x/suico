@@ -20,7 +20,7 @@
             <table class="$friendrequest" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                     <th align="center" width="5%"><input name="allbox" title="allbox" id="allbox" onclick="xoopsCheckAll('select', 'allbox');" type="checkbox" title="Check All" value="Check All"></th>
-                    <th class="left"><{$selectorfriendpet_id}></th>
+                    <th class="left"><{$selectorfriendreq_id}></th>
                     <th class="left"><{$selectorfriendrequester_uid}></th>
                     <th class="left"><{$selectorfriendrequestto_uid}></th>
                     <th class="left"><{$selectordate_created}></th>
@@ -31,7 +31,7 @@
                     <tr class="<{cycle values="odd,even"}>">
 
                         <td align="center" style="vertical-align:middle;"><input type="checkbox" name="friendrequest_id[]" title="friendrequest_id[]" id="friendrequest_id[]" value="<{$friendrequestArray.friendrequest_id}>"></td>
-                        <td class='left'><{$friendrequestArray.friendpet_id}></td>
+                        <td class='left'><{$friendrequestArray.friendreq_id}></td>
                         <td class='left'><{$friendrequestArray.friendrequester_uid}></td>
                         <td class='left'><{$friendrequestArray.friendrequestto_uid}></td>
                         <td class='left'><{$friendrequestArray.date_created}></td>
@@ -48,7 +48,7 @@
                 <tr>
 
                     <th align="center" width="5%"><input name="allbox" title="allbox" id="allbox" onclick="xoopsCheckAll('select', 'allbox');" type="checkbox" title="Check All" value="Check All"></th>
-                    <th class="left"><{$selectorfriendpet_id}></th>
+                    <th class="left"><{$selectorfriendreq_id}></th>
                     <th class="left"><{$selectorfriendrequester_uid}></th>
                     <th class="left"><{$selectorfriendrequestto_uid}></th>
                     <th class="left"><{$selectordate_created}></th>

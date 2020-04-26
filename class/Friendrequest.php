@@ -36,7 +36,7 @@ class Friendrequest extends XoopsObject
         $this->helper     = Helper::getInstance();
         $this->permHelper = new Permission();
         $this->db         = XoopsDatabaseFactory::getDatabaseConnection();
-        $this->initVar('friendpet_id', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('friendreq_id', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('friendrequester_uid', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('friendrequestto_uid', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('date_created', \XOBJ_DTYPE_INT, 0, false);
@@ -56,7 +56,7 @@ class Friendrequest extends XoopsObject
      */
     public function load($id)
     {
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendrequest') . ' WHERE friendpet_id=' . $id;
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_friendrequest') . ' WHERE friendreq_id=' . $id;
         $myrow = $this->db->fetchArray($this->db->query($sql));
         $this->assignVars($myrow);
         if (!$myrow) {
@@ -76,7 +76,7 @@ class Friendrequest extends XoopsObject
     public function getAllFriendrequests(
         $criteria = [],
         $asobject = false,
-        $sort = 'friendpet_id',
+        $sort = 'friendreq_id',
         $order = 'ASC',
         $limit = 0,
         $start = 0
@@ -94,7 +94,7 @@ class Friendrequest extends XoopsObject
             $whereQuery = ' WHERE ' . $criteria;
         }
         if (!$asobject) {
-            $sql    = 'SELECT friendpet_id FROM ' . $db->prefix(
+            $sql    = 'SELECT friendreq_id FROM ' . $db->prefix(
                 'yogurt_friendrequest'
             ) . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
@@ -132,7 +132,7 @@ class Friendrequest extends XoopsObject
         //$permHelper = new \Xmf\Module\Helper\Permission();
         return $this->permHelper->getGroupsForItem(
             'sbcolumns_read',
-            $this->getVar('friendpet_id')
+            $this->getVar('friendreq_id')
         );
     }
 
@@ -144,7 +144,7 @@ class Friendrequest extends XoopsObject
         //$permHelper = new \Xmf\Module\Helper\Permission();
         return $this->permHelper->getGroupsForItem(
             'sbcolumns_submit',
-            $this->getVar('friendpet_id')
+            $this->getVar('friendreq_id')
         );
     }
 
@@ -156,7 +156,7 @@ class Friendrequest extends XoopsObject
         //$permHelper = new \Xmf\Module\Helper\Permission();
         return $this->permHelper->getGroupsForItem(
             'sbcolumns_moderation',
-            $this->getVar('friendpet_id')
+            $this->getVar('friendreq_id')
         );
     }
 }
