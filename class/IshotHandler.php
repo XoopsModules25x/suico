@@ -132,10 +132,14 @@ class IshotHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject->cleanVars()) {
             return false;
         }
+
+        $cod_ishot = $uid_voter = $uid_voted = $ishot = '';
+
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
-        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+//        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Ishot
             $xoopsObject = new Ishot();

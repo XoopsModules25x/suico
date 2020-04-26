@@ -152,10 +152,14 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject->cleanVars()) {
             return false;
         }
+
+        $friendship_id = $friend1_uid = $friend2_uid = $level = $hot = $trust = $cool = $fan = '';
+
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
-        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+//        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Friendship
             $xoopsObject = new Friendship();

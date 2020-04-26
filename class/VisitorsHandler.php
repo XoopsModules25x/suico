@@ -137,10 +137,13 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject->cleanVars()) {
             return false;
         }
+        $cod_visit = $uid_owner = $uid_visitor = '';
+
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
-        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+//        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Yogurt\Visitors
             $xoopsObject = new Visitors();

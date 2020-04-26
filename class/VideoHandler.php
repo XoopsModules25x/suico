@@ -145,10 +145,14 @@ class VideoHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject->cleanVars()) {
             return false;
         }
+
+        $video_id = $uid_owner = '';
+
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
-        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+//        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Video
             $xoopsObject = new Video();

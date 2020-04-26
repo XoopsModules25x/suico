@@ -137,10 +137,14 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject->cleanVars()) {
             return false;
         }
+
+        $suspension_time = '';
+
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
-        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+//        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+        $uid = 0;
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Suspensions
             $xoopsObject = new Suspensions();

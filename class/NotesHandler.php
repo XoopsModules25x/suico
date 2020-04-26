@@ -139,10 +139,14 @@ class NotesHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject->cleanVars()) {
             return false;
         }
+
+        $noteId = $note_from = $note_to = $date_created = $private = '';
+
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
-        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+//        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+
         if ($xoopsObject->isNew()) {
             // add / modify a Notes
             $xoopsObject = new Notes();

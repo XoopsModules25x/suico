@@ -151,6 +151,8 @@ class ImageHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject->cleanVars()) {
             return false;
         }
+
+        $cod_img ='';
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
