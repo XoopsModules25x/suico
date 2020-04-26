@@ -191,6 +191,9 @@ yogurt_notes:
         -
             name: date_created
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: date_updated
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
     keys:
         PRIMARY:
             columns: note_id

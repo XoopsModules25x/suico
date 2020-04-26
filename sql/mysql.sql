@@ -82,6 +82,7 @@ CREATE TABLE `yogurt_notes` (
     `note_to`   INT(11)    NOT NULL,
     `private`   TINYINT(1) NOT NULL,
     `date_created` INT(11) UNSIGNED NOT NULL DEFAULT 0,
+    `date_updated` INT(11) UNSIGNED NOT NULL DEFAULT 0,
     PRIMARY KEY (`note_id`)
 )
     ENGINE = MyISAM;
