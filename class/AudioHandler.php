@@ -122,7 +122,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         }
         $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
         if ($xoopsObject->isNew()) {
-            // ajout/modification d'un yogurt_audio
+            // adding / modifying a yogurt_audio
             $xoopsObject = new Audio();
             $format      = 'INSERT INTO %s (audio_id, title, author, url, uid_owner, date_created, date_updated)';
             $format      .= ' VALUES (%u, %s, %s, %s, %u, %s, %s)';

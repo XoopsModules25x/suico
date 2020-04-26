@@ -61,6 +61,8 @@ switch ($op) {
         // Form save fields
         $friendrequestObject->setVar('friendrequester_uid', Request::getVar('friendrequester_uid', ''));
         $friendrequestObject->setVar('friendrequestto_uid', Request::getVar('friendrequestto_uid', ''));
+        $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_created', '', 'POST'));
+        $friendrequestObject->setVar('date_created', $dateTimeObj->getTimestamp());
         if ($friendrequestHandler->insert($friendrequestObject)) {
             redirect_header('friendrequest.php?op=list', 2, AM_YOGURT_FORMOK);
         }
@@ -190,6 +192,8 @@ switch ($op) {
                 $friendrequestArray['friendrequestto_uid'] = strip_tags(
                     XoopsUser::getUnameFromId($friendrequestTempArray[$i]->getVar('friendrequestto_uid'))
                 );
+                $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_FRIENDREQUEST_DATE_CREATED);
+                $friendrequestArray['date_created'] = formatTimeStamp($friendrequestTempArray[$i]->getVar('date_created'), 's');
                 $friendrequestArray['edit_delete']  = "<a href='friendrequest.php?op=edit&friendpet_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='friendrequest.php?op=delete&friendpet_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='friendrequest.php?op=clone&friendpet_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
