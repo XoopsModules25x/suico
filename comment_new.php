@@ -32,7 +32,7 @@ $controller = new Yogurt\GroupController($xoopsDB, $xoopsUser);
 /**
  * Receiving info from get parameters
  */
-$groupId = Request::getInt('com_itemid', 0, 'GET');
+$groupId  = Request::getInt('com_itemid', 0, 'GET');
 $criteria = new Criteria('group_id', $groupId);
 $groups   = $controller->groupsFactory->getObjects($criteria);
 $group    = $groups[0];

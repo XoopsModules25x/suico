@@ -30,20 +30,20 @@
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
-                <{foreach item=videosArray from=$videosArrays}>
+                <{foreach item=videoArray from=$videosArray}>
                     <tr class="<{cycle values="odd,even"}>">
 
                         <td align="center" style="vertical-align:middle;"><input type="checkbox" name="videos_id[]" title="videos_id[]" id="videos_id[]" value="<{$videosArray.videos_id}>"></td>
-                        <td class='left'><{$videosArray.video_id}></td>
-                        <td class='left'><{$videosArray.uid_owner}></td>
-                        <td class='left'><{$videosArray.video_desc}></td>
-                        <td class='left'><{$videosArray.youtube_code}></td>
-                        <td class='center'><{$videosArray.main_video}></td>
-                        <td class='left'><{$videosArray.date_created}></td>
-                        <td class='left'><{$videosArray.date_updated}></td>
+                        <td class='left'><{$videoArray.video_id}></td>
+                        <td class='left'><{$videoArray.uid_owner}></td>
+                        <td class='left'><{$videoArray.video_desc}></td>
+                        <td class='left'><{$videoArray.youtube_code}></td>
+                        <td class='center'><{$videoArray.main_video}></td>
+                        <td class='left'><{$videoArray.date_created}></td>
+                        <td class='left'><{$videsArray.date_updated}></td>
 
 
-                        <td class="center width5"><{$videosArray.edit_delete}></td>
+                        <td class="center width5"><{$videoArray.edit_delete}></td>
                     </tr>
                 <{/foreach}>
             </table>
@@ -65,7 +65,7 @@
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
                 <tr>
-                    <td class="errorMsg" colspan="11">There are no $videos</td>
+                    <td class="errorMsg" colspan="11">There are no videos</td>
                 </tr>
             </table>
     </div>

@@ -23,7 +23,6 @@ namespace XoopsModules\Yogurt;
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
-
 //Notes.php,v 1
 //  ---------------------------------------------------------------- //
 // Author: Bruno Barthez                                               //
@@ -145,7 +144,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
-//        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+        //        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
 
         if ($xoopsObject->isNew()) {
             // add / modify a Notes
@@ -326,8 +325,8 @@ class NotesHandler extends XoopsPersistableObjectHandler
         $myts = new MyTextSanitizer();
         $ret  = [];
         $sql  = 'SELECT note_id, uid, uname, user_avatar, note_from, note_text, date_created FROM ' . $this->db->prefix(
-            'yogurt_notes'
-        ) . ', ' . $this->db->prefix(
+                'yogurt_notes'
+            ) . ', ' . $this->db->prefix(
                 'users'
             );
         if (isset($criteria) && $criteria instanceof CriteriaElement) {
@@ -345,13 +344,13 @@ class NotesHandler extends XoopsPersistableObjectHandler
             $i      = 0;
 
             while (false !== ($myrow = $this->db->fetchArray($result))) {
-                $vetor[$i]['uid']         = $myrow['uid'];
-                $vetor[$i]['uname']       = $myrow['uname'];
-                $vetor[$i]['user_avatar'] = $myrow['user_avatar'];
-                $temptext                 = $myts->xoopsCodeDecode($myrow['note_text'], 1);
-                $vetor[$i]['text']        = $myts->nl2Br($temptext);
-                $vetor[$i]['id']          = $myrow['note_id'];
-                $vetor[$i]['date_created']        = formatTimestamp($myrow['date_created'], 's');
+                $vetor[$i]['uid']          = $myrow['uid'];
+                $vetor[$i]['uname']        = $myrow['uname'];
+                $vetor[$i]['user_avatar']  = $myrow['user_avatar'];
+                $temptext                  = $myts->xoopsCodeDecode($myrow['note_text'], 1);
+                $vetor[$i]['text']         = $myts->nl2Br($temptext);
+                $vetor[$i]['id']           = $myrow['note_id'];
+                $vetor[$i]['date_created'] = formatTimestamp($myrow['date_created'], 's');
 
                 $i++;
             }

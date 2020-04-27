@@ -35,7 +35,7 @@ require dirname(__DIR__) . '/include/common.php';
 
 $moduleDirName = basename(dirname(__DIR__));
 
-$helper = Helper::getInstance();
+$helper  = Helper::getInstance();
 $utility = Utility::getInstance();
 
 /** @var Admin $adminObject */

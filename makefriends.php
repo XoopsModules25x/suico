@@ -31,9 +31,9 @@ require __DIR__ . '/header.php';
  * Factory of friendrequests created
  */
 $friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
-$friendshipFactory     = new Yogurt\FriendshipHandler($xoopsDB);
+$friendshipFactory    = new Yogurt\FriendshipHandler($xoopsDB);
 
-$friendrequest_id      = Request::getInt('friendrequest_id', 0, 'POST');
+$friendrequest_id = Request::getInt('friendrequest_id', 0, 'POST');
 $friendship_level = Request::getInt('level', 0, 'POST');
 $uid              = (int)$xoopsUser->getVar('uid');
 

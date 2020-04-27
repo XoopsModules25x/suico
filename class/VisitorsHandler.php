@@ -23,7 +23,6 @@ namespace XoopsModules\Yogurt;
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
-
 // Visitors.php,v 1
 //  ---------------------------------------------------------------- //
 // Author: Bruno Barthez                                               //
@@ -142,7 +141,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
-//        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+        //        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
 
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Yogurt\Visitors
@@ -317,8 +316,8 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
     public function purgeVisits()
     {
         $sql = 'DELETE FROM ' . $this->db->prefix(
-            'yogurt_visitors'
-        ) . ' WHERE (date_visited<(DATE_SUB(NOW(), INTERVAL 7 DAY))) ';
+                'yogurt_visitors'
+            ) . ' WHERE (date_visited<(DATE_SUB(NOW(), INTERVAL 7 DAY))) ';
 
         if (!$result = $this->db->queryF($sql)) {
             return false;

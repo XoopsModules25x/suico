@@ -62,7 +62,7 @@ $videoFactory   = new Yogurt\VideoHandler(
     $xoopsDB
 );
 $criteria_video = new Criteria('video_id', $cod_img);
-$criteriaUid   = new Criteria('uid_owner', $uid);
+$criteriaUid    = new Criteria('uid_owner', $uid);
 $criteria       = new CriteriaCompo($criteria_video);
 $criteria->add($criteriaUid);
 

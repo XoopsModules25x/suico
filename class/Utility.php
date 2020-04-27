@@ -13,6 +13,7 @@ namespace XoopsModules\Yogurt;
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
 /**
  * Module: Yogurt
  *
@@ -22,7 +23,6 @@ namespace XoopsModules\Yogurt;
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
-
 
 use WideImage\WideImage;
 use Xmf\Request;
@@ -153,15 +153,15 @@ class Utility extends Common\SysUtility
     ) {
         if ($allowupload) { // L'image
             if (Request::hasVar('xoops_upload_file', 'POST')) {
-                $helper = Helper::getInstance();
+                $helper  = Helper::getInstance();
                 $fldname = $_FILES[$_POST['xoops_upload_file'][1]];
                 $fldname = $fldname['name'];
                 if (\xoops_trim('' !== $fldname)) {
-                    $destname       = self::createUploadName($destPath, $fldname);
+                    $destname = self::createUploadName($destPath, $fldname);
 
                     $permittedTypes = $helper->getConfig('mimetypes');//['image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png'];
 
-                    $uploader       = new \XoopsMediaUploader(XOOPS_ROOT_PATH . '/uploads/news/image', $permittedTypes, $helper->getConfig('maxuploadsize'));
+                    $uploader = new \XoopsMediaUploader(XOOPS_ROOT_PATH . '/uploads/news/image', $permittedTypes, $helper->getConfig('maxuploadsize'));
                     $uploader->setTargetFileName($destname);
                     if ($uploader->fetchMedia($_POST['xoops_upload_file'][1])) {
                         if ($uploader->upload()) {

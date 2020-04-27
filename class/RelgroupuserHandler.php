@@ -23,7 +23,6 @@ namespace XoopsModules\Yogurt;
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
-
 // Relgroupuser.php,v 1
 //  ---------------------------------------------------------------- //
 // Author: Bruno Barthez                                               //
@@ -310,8 +309,8 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
         $ret = [];
 
         $sql = 'SELECT rel_id, rel_group_id, rel_user_uid, group_title, group_desc, group_img, owner_uid FROM ' . $this->db->prefix(
-            'yogurt_groups'
-        ) . ', ' . $this->db->prefix(
+                'yogurt_groups'
+            ) . ', ' . $this->db->prefix(
                 'yogurt_relgroupuser'
             );
         if (isset($criteria) && $criteria instanceof CriteriaElement) {
@@ -364,8 +363,8 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
         $ret = [];
 
         $sql = 'SELECT rel_group_id, rel_user_uid, owner_uid, uname, user_avatar, uid FROM ' . $this->db->prefix(
-            'users'
-        ) . ', ' . $this->db->prefix(
+                'users'
+            ) . ', ' . $this->db->prefix(
                 'yogurt_groups'
             ) . ', ' . $this->db->prefix(
                 'yogurt_relgroupuser'

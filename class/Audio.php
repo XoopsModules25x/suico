@@ -110,8 +110,8 @@ class Audio extends XoopsObject
         $limit = 0,
         $start = 0
     ) {
-        $db          = XoopsDatabaseFactory::getDatabaseConnection();
-        $ret         = [];
+        $db         = XoopsDatabaseFactory::getDatabaseConnection();
+        $ret        = [];
         $whereQuery = '';
         if (\is_array($criteria) && \count($criteria) > 0) {
             $whereQuery = ' WHERE';

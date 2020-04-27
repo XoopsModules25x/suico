@@ -41,7 +41,7 @@ if (1 === $controller->isOwner) {
     $criteria_uidfriendrequest = new Criteria('friendrequestto_uid', $controller->uidOwner);
     $newFriendrequest          = $controller->friendrequestFactory->getObjects($criteria_uidfriendrequest);
     if ($newFriendrequest) {
-        $countFriendrequest      = count($newFriendrequest);
+        $countFriendrequest     = count($newFriendrequest);
         $friendrequesterHandler = xoops_getHandler('member');
         $friendrequester        = $friendrequesterHandler->getUser($newFriendrequest[0]->getVar('friendrequester_uid'));
         $friendrequester_uid    = $friendrequester->getVar('uid');
@@ -56,7 +56,7 @@ if (1 === $controller->isOwner) {
  * Friends
  */
 $criteria_friends = new Criteria('friend1_uid', (int)$controller->uidOwner);
-$countFriends       = $controller->friendshipsFactory->getCount($criteria_friends);
+$countFriends     = $controller->friendshipsFactory->getCount($criteria_friends);
 $criteria_friends->setLimit($helper->getConfig('friendsperpage'));
 $criteria_friends->setStart($start);
 $vetor = $controller->friendshipsFactory->getFriends('', $criteria_friends, 0);
@@ -74,17 +74,13 @@ $identifier = $owner::getUnameFromId($controller->uidOwner);
  * Creating the navigation bar if you have a lot of friends
  */
 $navigationBar = new XoopsPageNav(
-    $nbSections['nbFriends'],
-    $helper->getConfig('friendsperpage'),
-    $start,
-    'start',
-    'uid=' . (int)$controller->uidOwner
+    $nbSections['nbFriends'], $helper->getConfig('friendsperpage'), $start, 'start', 'uid=' . (int)$controller->uidOwner
 );
-$navegacao       = $navigationBar->renderImageNav(2);
+$navegacao     = $navigationBar->renderImageNav(2);
 
 //requests to become friend
 if (1 === $friendrequest) {
-	$xoopsTpl->assign('lang_youhavexfriendrequests', sprintf(_MD_YOGURT_YOUHAVEXFRIENDREQUESTS, $countFriendrequest));
+    $xoopsTpl->assign('lang_youhavexfriendrequests', sprintf(_MD_YOGURT_YOUHAVEXFRIENDREQUESTS, $countFriendrequest));
     $xoopsTpl->assign('friendrequester_uid', $friendrequester_uid);
     $xoopsTpl->assign('friendrequester_uname', $friendrequester_uname);
     $xoopsTpl->assign('friendrequester_avatar', $friendrequester_avatar);

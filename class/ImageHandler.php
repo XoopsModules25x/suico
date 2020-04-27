@@ -152,11 +152,11 @@ class ImageHandler extends XoopsPersistableObjectHandler
             return false;
         }
 
-        $cod_img ='';
+        $cod_img = '';
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
-//        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+        //        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Image
             $xoopsObject = new Image();
@@ -183,7 +183,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
                 $this->db->prefix('yogurt_images'),
                 $cod_img,
                 $this->db->quoteString($title),
-				$this->db->quoteString($caption),
+                $this->db->quoteString($caption),
                 $xoopsObject->getVar('date_created'), // $now,
                 $xoopsObject->getVar('date_updated'), // $now,
                 $this->db->quoteString($uid_owner),
@@ -340,17 +340,17 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $maxbytes,
         $xoopsTpl
     ) {
-        $form       = new XoopsThemeForm(\_MD_YOGURT_SUBMIT_PIC_TITLE, 'form_picture', 'submitImage.php', 'post', true);
-        $field_url  = new XoopsFormFile(\_MD_YOGURT_SELECT_PHOTO, 'sel_photo', 2000000);
-		$field_title = new XoopsFormText(\_MD_YOGURT_PHOTOTITLE, 'title', 35, 55);
+        $form          = new XoopsThemeForm(\_MD_YOGURT_SUBMIT_PIC_TITLE, 'form_picture', 'submitImage.php', 'post', true);
+        $field_url     = new XoopsFormFile(\_MD_YOGURT_SELECT_PHOTO, 'sel_photo', 2000000);
+        $field_title   = new XoopsFormText(\_MD_YOGURT_PHOTOTITLE, 'title', 35, 55);
         $field_caption = new XoopsFormText(\_MD_YOGURT_CAPTION, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
-        $buttonSend   = new XoopsFormButton('', 'submit_button', \_MD_YOGURT_UPLOADPICTURE, 'submit');
+        $buttonSend    = new XoopsFormButton('', 'submit_button', \_MD_YOGURT_UPLOADPICTURE, 'submit');
         $field_warning = new XoopsFormLabel(\sprintf(\_MD_YOGURT_YOU_CAN_UPLOAD, $maxbytes / 1024));
         $form->addElement($field_warning);
         $form->addElement($field_url, true);
         $form->addElement($field_title);
-		$form->addElement($field_caption);
+        $form->addElement($field_caption);
 
         $form->addElement($buttonSend);
         $form->assign($xoopsTpl); //If your server is php 5
@@ -368,21 +368,21 @@ class ImageHandler extends XoopsPersistableObjectHandler
      */
     public function renderFormEdit(
         $title,
-		$caption,
+        $caption,
         $cod_img,
         $filename
     ) {
-        $form       = new XoopsThemeForm(\_MD_YOGURT_EDIT_DESC, 'form_picture', 'editpicture.php', 'post', true);
-        $field_title = new XoopsFormText($title, 'title', 35, 55);
-		$field_caption = new XoopsFormText($caption, 'caption', 35, 55);
+        $form          = new XoopsThemeForm(\_MD_YOGURT_EDIT_DESC, 'form_picture', 'editpicture.php', 'post', true);
+        $field_title   = new XoopsFormText($title, 'title', 35, 55);
+        $field_caption = new XoopsFormText($caption, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
-        $buttonSend   = new XoopsFormButton('', 'submit_button', \_MD_YOGURT_SUBMIT, 'submit');
+        $buttonSend    = new XoopsFormButton('', 'submit_button', \_MD_YOGURT_SUBMIT, 'submit');
         $field_warning = new XoopsFormLabel("<img src='" . $filename . "' alt='sssss'>");
         $field_cod_img = new XoopsFormHidden('cod_img', $cod_img);
         $field_marker  = new XoopsFormHidden('marker', 1);
         $form->addElement($field_warning);
         $form->addElement($field_title);
-		$form->addElement($field_caption);
+        $form->addElement($field_caption);
         $form->addElement($field_cod_img);
         $form->addElement($field_marker);
         $form->addElement($buttonSend);
@@ -395,8 +395,8 @@ class ImageHandler extends XoopsPersistableObjectHandler
      * Upload the file and Save into database
      *
      * @param string $title         A litle title of the file
-     * @param string $caption         A litle description of the file
-	 * @param string $pathUpload   The path to where the file should be uploaded
+     * @param string $caption       A litle description of the file
+     * @param string $pathUpload    The path to where the file should be uploaded
      * @param int    $thumbwidth    the width in pixels that the thumbnail will have
      * @param int    $thumbheight   the height in pixels that the thumbnail will have
      * @param int    $pictwidth     the width in pixels that the pic will have
@@ -408,7 +408,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
      */
     public function receivePicture(
         $title,
-		$caption,
+        $caption,
         $pathUpload,
         $thumbwidth,
         $thumbheight,
@@ -431,14 +431,10 @@ class ImageHandler extends XoopsPersistableObjectHandler
         );
         $maxfilesize       = $maxfilebytes;
 
-//        $uploadDir = \XOOPS_UPLOAD_PATH . '/yogurt/images/';
+        //        $uploadDir = \XOOPS_UPLOAD_PATH . '/yogurt/images/';
         // create the object to upload
         $uploader = new XoopsMediaUploader(
-            $pathUpload,
-            $allowed_mimetypes,
-            $maxfilesize,
-            $maxfilewidth,
-            $maxfileheight
+            $pathUpload, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight
         );
         // fetch the media
         if ($uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0])) {
@@ -458,7 +454,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $picture->setVar('filename', $url);
             $picture->setVar('title', $title);
             $picture->setVar('caption', $caption);
-			$picture->setVar('date_created', \time());
+            $picture->setVar('date_created', \time());
             $picture->setVar('date_updated', \time());
             $picture->setVar('private', 0);
             $uid = $xoopsUser->getVar('uid');
@@ -493,7 +489,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
      * @param int    $thumbheight the height in pixels that the thumbnail will have
      * @param int    $pictwidth   the width in pixels that the pic will have
      * @param int    $pictheight  the height in pixels that the pic will have
-     * @param string $pathUpload The path to where the files should be saved after resizing
+     * @param string $pathUpload  The path to where the files should be saved after resizing
      */
     public function resizeImage(
         $img,
@@ -574,8 +570,8 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $ret = [];
 
         $sql = 'SELECT uname, t.uid_owner, t.filename FROM ' . $this->db->prefix(
-            'yogurt_images'
-        ) . ' AS t, ' . $this->db->prefix(
+                'yogurt_images'
+            ) . ' AS t, ' . $this->db->prefix(
                 'users'
             );
 
@@ -602,8 +598,8 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $ret = [];
 
         $sql = 'SELECT uname, t.uid_owner, t.filename, t.title, t.caption  FROM ' . $this->db->prefix(
-            'yogurt_images'
-        ) . ' AS t, ' . $this->db->prefix(
+                'yogurt_images'
+            ) . ' AS t, ' . $this->db->prefix(
                 'users'
             );
 
@@ -616,8 +612,8 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $vetor[$i]['uname']        = $myrow['uname'];
             $vetor[$i]['img_filename'] = $myrow['filename'];
             $vetor[$i]['title']        = $myrow['title'];
-			$vetor[$i]['caption']      = $myrow['caption'];
-			
+            $vetor[$i]['caption']      = $myrow['caption'];
+
             $i++;
         }
 
@@ -627,7 +623,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
     /**
      * Resize a picture and save it to $pathUpload
      *
-     * @param string $img         the path to the file
+     * @param string $img        the path to the file
      * @param        $width
      * @param        $height
      * @param string $pathUpload The path to where the files should be saved after resizing

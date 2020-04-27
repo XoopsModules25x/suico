@@ -13,6 +13,7 @@ namespace XoopsModules\Yogurt;
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
 /**
  * Module: Yogurt
  *
@@ -22,7 +23,6 @@ namespace XoopsModules\Yogurt;
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
-
 
 use CriteriaElement;
 use XoopsDatabase;
@@ -151,7 +151,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
-//        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+        //        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
 
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Video
@@ -362,7 +362,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
         $form       = new XoopsThemeForm(\_MD_YOGURT_EDIT_DESC, 'form_picture', 'editdescvideo.php', 'post', true);
         $field_desc = new XoopsFormText($caption, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
-        $buttonSend    = new XoopsFormButton('', 'submit_button', \_MD_YOGURT_SUBMIT, 'submit');
+        $buttonSend     = new XoopsFormButton('', 'submit_button', \_MD_YOGURT_SUBMIT, 'submit');
         $field_warning  = new XoopsFormLabel(
             '<object width="425" height="353">
 <param name="movie" value="http://www.youtube.com/v/' . $filename . '"></param>

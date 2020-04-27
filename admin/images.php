@@ -71,11 +71,7 @@ switch ($op) {
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/images/';
         $uploader  = new \XoopsMediaUploader(
-            $uploadDir,
-            $helper->getConfig('mimetypes'),
-            $helper->getConfig('maxsize'),
-            null,
-            null
+            $uploadDir, $helper->getConfig('mimetypes'), $helper->getConfig('maxsize'), null, null
         );
         if ($uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0])) {
             //$extension = preg_replace( '/^.+\.([^.]+)$/sU' , '' , $_FILES['attachedfile']['name']);
@@ -177,11 +173,7 @@ switch ($op) {
             xoops_load('XoopsPageNav');
 
             $pagenav = new XoopsPageNav(
-                $imagesTempRows,
-                $imagesPaginationLimit,
-                $start,
-                'start',
-                'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                $imagesTempRows, $imagesPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
@@ -217,7 +209,7 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('selectortitle', AM_YOGURT_IMAGES_TITLE);
                 $imagesArray['title'] = $imagesTempArray[$i]->getVar('title');
 
-				$GLOBALS['xoopsTpl']->assign('selectorcaption', AM_YOGURT_IMAGES_CAPTION);
+                $GLOBALS['xoopsTpl']->assign('selectorcaption', AM_YOGURT_IMAGES_CAPTION);
                 $imagesArray['caption'] = $imagesTempArray[$i]->getVar('caption');
 
                 $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_IMAGES_DATE_CREATED);
@@ -248,11 +240,7 @@ switch ($op) {
             if ($imagesCount > $imagesPaginationLimit) {
                 xoops_load('XoopsPageNav');
                 $pagenav = new XoopsPageNav(
-                    $imagesCount,
-                    $imagesPaginationLimit,
-                    $start,
-                    'start',
-                    'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                    $imagesCount, $imagesPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }

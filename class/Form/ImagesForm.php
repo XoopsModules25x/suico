@@ -69,8 +69,7 @@ class ImagesForm extends XoopsThemeForm
         //include ID field, it's needed so the module knows if it is a new form or an edited form
 
         $hidden = new XoopsFormHidden(
-            'cod_img',
-            $this->targetObject->getVar(
+            'cod_img', $this->targetObject->getVar(
             'cod_img'
         )
         );
@@ -86,13 +85,13 @@ class ImagesForm extends XoopsThemeForm
             new XoopsFormText(\AM_YOGURT_IMAGES_TITLE, 'title', 50, 255, $this->targetObject->getVar('title')),
             false
         );
-		
-		// Caption
+
+        // Caption
         $this->addElement(
             new XoopsFormText(\AM_YOGURT_IMAGES_CAPTION, 'caption', 50, 255, $this->targetObject->getVar('caption')),
             false
         );
-		
+
         // Data_creation
         $this->addElement(
             new XoopsFormTextDateSelect(

@@ -23,6 +23,7 @@ namespace XoopsModules\Yogurt\Common;
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
+
 /*
  * Example:
  * $breadcrumb = new Common\Breadcrumb();

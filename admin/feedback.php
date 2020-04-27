@@ -79,10 +79,10 @@ switch ($op) {
         ); //clean line break from dhtmltextarea
 
         $title       = constant(
-            'CO_' . $moduleDirNameUpper . '_' . 'FB_SEND_FOR'
-        ) . $GLOBALS['xoopsModule']->getVar(
-                           'dirname'
-                       );
+                           'CO_' . $moduleDirNameUpper . '_' . 'FB_SEND_FOR'
+                       ) . $GLOBALS['xoopsModule']->getVar(
+                'dirname'
+            );
         $body        = constant('CO_' . $moduleDirNameUpper . '_' . 'FB_NAME') . ': ' . $your_name . '<br>';
         $body        .= constant('CO_' . $moduleDirNameUpper . '_' . 'FB_MAIL') . ': ' . $your_mail . '<br>';
         $body        .= constant('CO_' . $moduleDirNameUpper . '_' . 'FB_SITE') . ': ' . $your_site . '<br>';

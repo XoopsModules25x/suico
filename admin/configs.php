@@ -70,12 +70,10 @@ switch ($op) {
         $configsObject->setVar('suspension', ((1 == Request::getInt('suspension', 0)) ? '1' : '0'));
         $configsObject->setVar('backup_password', Request::getVar('backup_password', ''));
         $configsObject->setVar('backup_email', Request::getVar('backup_email', ''));
-//        $configsObject->setVar('end_suspension', date('Y-m-d H:i:s', strtotime($_REQUEST['end_suspension']['date']) + $_REQUEST['end_suspension']['time']));
+        //        $configsObject->setVar('end_suspension', date('Y-m-d H:i:s', strtotime($_REQUEST['end_suspension']['date']) + $_REQUEST['end_suspension']['time']));
 
         $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('end_suspension', '', 'POST'));
         $configsObject->setVar('end_suspension', $dateTimeObj->getTimestamp());
-
-
 
         if ($configsHandler->insert($configsObject)) {
             redirect_header('configs.php?op=list', 2, AM_YOGURT_FORMOK);
@@ -149,11 +147,7 @@ switch ($op) {
             xoops_load('XoopsPageNav');
 
             $pagenav = new XoopsPageNav(
-                $configsTempRows,
-                $configsPaginationLimit,
-                $start,
-                'start',
-                'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                $configsTempRows, $configsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
@@ -223,9 +217,7 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('selectorend_suspension', AM_YOGURT_CONFIGS_END_SUSPENSION);
                 $configsArray['end_suspension'] = formatTimestamp($configsTempArray[$i]->getVar('end_suspension'), 's');
 
-
-
-                $configsArray['edit_delete']    = "<a href='configs.php?op=edit&config_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
+                $configsArray['edit_delete'] = "<a href='configs.php?op=edit&config_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='configs.php?op=delete&config_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='configs.php?op=clone&config_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
@@ -237,11 +229,7 @@ switch ($op) {
             if ($configsCount > $configsPaginationLimit) {
                 xoops_load('XoopsPageNav');
                 $pagenav = new XoopsPageNav(
-                    $configsCount,
-                    $configsPaginationLimit,
-                    $start,
-                    'start',
-                    'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                    $configsCount, $configsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }

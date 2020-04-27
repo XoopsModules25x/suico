@@ -36,7 +36,6 @@ require __DIR__ . '/header.php';
 $relgroupuserFactory = new Yogurt\RelgroupuserHandler($xoopsDB);
 $groupsFactory       = new Yogurt\GroupsHandler($xoopsDB);
 
-
 ///**
 // * Factory of pictures created
 // */
@@ -46,12 +45,6 @@ $groupsFactory       = new Yogurt\GroupsHandler($xoopsDB);
 // * Getting the title
 // */
 //$title = $_POST['caption'];
-
-
-
-
-
-
 
 //
 ///**
@@ -108,9 +101,6 @@ $groupsFactory       = new Yogurt\GroupsHandler($xoopsDB);
 //        $groupsFactory->renderFormSubmit(120000, $xoopsTpl);
 //    }
 
-
-
-
 //        redirect_header(
 //            XOOPS_URL . '/modules/yogurt/groups.php?uid=' . $xoopsUser->getVar('uid'),
 //            3,
@@ -125,12 +115,6 @@ $groupsFactory       = new Yogurt\GroupsHandler($xoopsDB);
 //    }
 
 //}
-
-
-
-
-
-
 
 $marker = Request::getInt('marker', 0, 'POST');
 
@@ -167,8 +151,8 @@ if (1 === $marker) {//if (1 === $marker) {
         $relgroupuser->setVar('rel_group_id', $xoopsDB->getInsertId());
         $relgroupuser->setVar('rel_user_uid', $xoopsUser->getVar('uid'));
         $relgroupuserFactory->insert2($relgroupuser);
-        $group_id=$relgroupuser->getVar('rel_group_id', $xoopsDB->getInsertId());
-        redirect_header('group.php?group_id='.$group_id.'', 500, _MD_YOGURT_GROUP_CREATED);
+        $group_id = $relgroupuser->getVar('rel_group_id', $xoopsDB->getInsertId());
+        redirect_header('group.php?group_id=' . $group_id . '', 500, _MD_YOGURT_GROUP_CREATED);
     } else {
         $groupsFactory->renderFormSubmit(120000, $xoopsTpl);
     }

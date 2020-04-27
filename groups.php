@@ -42,7 +42,7 @@ $nbSections = $controller->getNumbersSections();
  * All Groups
  */
 $criteria_groups = new Criteria('group_id', 0, '>');
-$countGroups       = $controller->groupsFactory->getCount($criteria_groups);
+$countGroups     = $controller->groupsFactory->getCount($criteria_groups);
 $criteria_groups->setLimit($helper->getConfig('groupsperpage'));
 $criteria_groups->setStart($start_all);
 $groups = $controller->groupsFactory->getGroups($criteria_groups);
@@ -52,43 +52,30 @@ $groups = $controller->groupsFactory->getGroups($criteria_groups);
  */
 $mygroups          = '';
 $criteria_mygroups = new Criteria('rel_user_uid', $controller->uidOwner);
-$countMyGroups       = $controller->relgroupusersFactory->getCount($criteria_mygroups);
+$countMyGroups     = $controller->relgroupusersFactory->getCount($criteria_mygroups);
 $criteria_mygroups->setLimit($helper->getConfig('groupsperpage'));
 $criteria_mygroups->setStart($start_my);
 $mygroups = $controller->relgroupusersFactory->getGroups('', $criteria_mygroups, 0);
 
-
-$mygroupsid =[];
+$mygroupsid = [];
 foreach ($mygroups as $value) {
     $mygroupsid[] = $value['group_id'];
 }
-
-
-
 
 /**
  * Creating the navigation bar if you have a lot of friends
  */
 $navigationBar = new XoopsPageNav(
-    $countGroups,
-    $helper->getConfig('groupsperpage'),
-    $start_all,
-    'start_all',
-    'uid=' . (int)$controller->uidOwner . '&amp;start_my=' . $start_my .'#allgroups'
+    $countGroups, $helper->getConfig('groupsperpage'), $start_all, 'start_all', 'uid=' . (int)$controller->uidOwner . '&amp;start_my=' . $start_my . '#allgroups'
 );
-$imageNav        = $navigationBar->renderImageNav(2); //allgroups
+$imageNav      = $navigationBar->renderImageNav(2); //allgroups
 
 $navigationBar_my = new XoopsPageNav(
-    $countMyGroups,
-    $helper->getConfig('groupsperpage'),
-    $start_my,
-    'start_my',
-    'uid=' . (int)$controller->uidOwner . '&amp;start_all=' . $start_all .'#mygroups'
+    $countMyGroups, $helper->getConfig('groupsperpage'), $start_my, 'start_my', 'uid=' . (int)$controller->uidOwner . '&amp;start_all=' . $start_all . '#mygroups'
 );
-$imageNav_my        = $navigationBar_my->renderImageNav(2);
+$imageNav_my      = $navigationBar_my->renderImageNav(2);
 
 $maxfilebytes = $helper->getConfig('maxfilesize');
-
 
 //form
 $xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOU_CAN_UPLOAD, $maxfilebytes / 1024));

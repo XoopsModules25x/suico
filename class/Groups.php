@@ -13,6 +13,7 @@ namespace XoopsModules\Yogurt;
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
 /**
  * Module: Yogurt
  *
@@ -22,7 +23,6 @@ namespace XoopsModules\Yogurt;
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
-
 
 use Xmf\Module\Helper\Permission;
 use XoopsDatabaseFactory;
@@ -49,9 +49,6 @@ class Groups extends XoopsObject
 
     const GROUPID = 'group_id';
     const YOGURTGROUPS = 'yogurt_groups'; //table
-    
-    
-
 
     /**
      * Groups constructor.
@@ -62,7 +59,7 @@ class Groups extends XoopsObject
         /** @var Helper $helper */
         $this->helper     = Helper::getInstance();
         $this->permHelper = new Permission();
-        $this->xoopsDb         = XoopsDatabaseFactory::getDatabaseConnection();
+        $this->xoopsDb    = XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar(GROUPID, \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('owner_uid', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('group_title', \XOBJ_DTYPE_TXTBOX, null, false);
@@ -111,8 +108,7 @@ class Groups extends XoopsObject
         $limit = 0,
         $start = 0
     ) {
-
-        $ret         = [];
+        $ret        = [];
         $whereQuery = '';
         if (\is_array($criteria) && \count($criteria) > 0) {
             $whereQuery = ' WHERE';
@@ -125,8 +121,8 @@ class Groups extends XoopsObject
         }
         if (!$asobject) {
             $sql    = 'SELECT group_id FROM ' . $this->xoopsDb->prefix(
-                YOGURTGROUPS
-            ) . "${whereQuery} ORDER BY ${sort} ${order}";
+                    YOGURTGROUPS
+                ) . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $this->xoopsDb->query($sql, $limit, $start);
             while (false !== ($myrow = $this->xoopsDb->fetchArray($result))) {
                 $ret[] = $myrow['yogurt_groups_id'];

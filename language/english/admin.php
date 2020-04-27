@@ -20,7 +20,7 @@ declare(strict_types=1);
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
- 
+
 //index.php
 define(
     '_MA_YOGURT_FRAMEWORKSFALSE',
@@ -154,6 +154,9 @@ define('AM_YOGURT_FRIENDSHIP_HOT', 'Hot');
 define('AM_YOGURT_FRIENDSHIP_TRUST', 'Trust');
 define('AM_YOGURT_FRIENDSHIP_COOL', 'Cool');
 define('AM_YOGURT_FRIENDSHIP_FAN', 'Fan');
+define('AM_YOGURT_FRIENDSHIP_DATE_CREATED', 'Created');
+define('AM_YOGURT_FRIENDSHIP_DATE_UPDATED', 'Updated');
+
 // Visitors
 define('AM_YOGURT_VISITORS_ADD', 'Add a visitors');
 define('AM_YOGURT_VISITORS_EDIT', 'Edit visitors');

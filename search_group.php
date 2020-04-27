@@ -61,13 +61,12 @@ foreach ($groups_objects as $group_object) {
  */
 $mygroups          = '';
 $criteria_mygroups = new Criteria('rel_user_uid', $controller->uidOwner);
-$countMyGroups       = $controller->relgroupusersFactory->getCount($criteria_mygroups);
+$countMyGroups     = $controller->relgroupusersFactory->getCount($criteria_mygroups);
 $criteria_mygroups->setLimit($helper->getConfig('groupsperpage'));
 $criteria_mygroups->setStart($start_my);
 $mygroups = $controller->relgroupusersFactory->getGroups('', $criteria_mygroups, 0);
 
-
-$mygroupsid =[];
+$mygroupsid = [];
 foreach ($mygroups as $value) {
     $mygroupsid[] = $value['group_id'];
 }
@@ -76,14 +75,9 @@ foreach ($mygroups as $value) {
  * Creating the navigation bar if you have a lot of friends
  */
 $navigationBar = new XoopsPageNav(
-    $countGroups,
-    $helper->getConfig('groupsperpage'),
-    $start_all,
-    'start_all',
-    'group_keyword=' . $group_keyword . '&amp;start_my=' . $start_my
+    $countGroups, $helper->getConfig('groupsperpage'), $start_all, 'start_all', 'group_keyword=' . $group_keyword . '&amp;start_my=' . $start_my
 );
-$imageNav        = $navigationBar->renderImageNav(2);
-
+$imageNav      = $navigationBar->renderImageNav(2);
 
 //form
 //$xoopsTpl->assign('lang_youcanupload',sprintf(_MD_YOGURT_YOU_CAN_UPLOAD,$maxfilebytes/1024));

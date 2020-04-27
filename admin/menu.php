@@ -125,7 +125,6 @@ $adminmenu[] = [
     'icon'  => "{$pathIcon32}/album.png",
 ];
 
-
 // Blocks Admin
 $adminmenu[] = [
     'title' => constant('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS'),
@@ -146,7 +145,6 @@ $adminmenu[] = [
     'link'  => 'admin/main.php',
     'icon'  => $pathIcon32 . '/manage.png',
 ];
-
 
 //$adminmenu[] = [
 //    'title' => _MI_YOGURT_ADMENU2,

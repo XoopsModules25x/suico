@@ -23,7 +23,6 @@ namespace XoopsModules\Yogurt;
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
-
 // Friendship.php,v 1
 //  ---------------------------------------------------------------- //
 // Author: Bruno Barthez                                               //
@@ -75,6 +74,8 @@ class Friendship extends XoopsObject
         $this->initVar('trust', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('cool', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('fan', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('date_created', \XOBJ_DTYPE_INT, 0, false);
+        $this->initVar('date_updated', \XOBJ_DTYPE_INT, 0, false);
         if (!empty($id)) {
             if (\is_array($id)) {
                 $this->assignVars($id);
@@ -116,8 +117,8 @@ class Friendship extends XoopsObject
         $limit = 0,
         $start = 0
     ) {
-        $db          = XoopsDatabaseFactory::getDatabaseConnection();
-        $ret         = [];
+        $db         = XoopsDatabaseFactory::getDatabaseConnection();
+        $ret        = [];
         $whereQuery = '';
         if (\is_array($criteria) && \count($criteria) > 0) {
             $whereQuery = ' WHERE';
@@ -130,8 +131,8 @@ class Friendship extends XoopsObject
         }
         if (!$asobject) {
             $sql    = 'SELECT friendship_id FROM ' . $db->prefix(
-                'yogurt_friendships'
-            ) . "${whereQuery} ORDER BY ${sort} ${order}";
+                    'yogurt_friendships'
+                ) . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['yogurt_friendship_id'];

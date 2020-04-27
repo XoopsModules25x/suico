@@ -40,7 +40,7 @@ $groupsFactory       = new Yogurt\GroupsHandler($xoopsDB);
 $group_id = Request::getInt('group_id', 0, 'POST');
 $uid      = (int)$xoopsUser->getVar('uid');
 
-$criteriaUid      = new Criteria('rel_user_uid', $uid);
+$criteriaUid       = new Criteria('rel_user_uid', $uid);
 $criteria_group_id = new Criteria('rel_group_id', $group_id);
 $criteria          = new CriteriaCompo($criteriaUid);
 $criteria->add($criteria_group_id);
@@ -49,12 +49,12 @@ if ($relgroupuserFactory->getCount($criteria) < 1) {
     $relgroupuser->setVar('rel_group_id', $group_id);
     $relgroupuser->setVar('rel_user_uid', $uid);
     if ($relgroupuserFactory->insert2($relgroupuser)) {
-        redirect_header('group.php?group_id='.$group_id.'', 1, _MD_YOGURT_YOUAREMEMBERNOW);
+        redirect_header('group.php?group_id=' . $group_id . '', 1, _MD_YOGURT_YOUAREMEMBERNOW);
     } else {
         redirect_header('groups.php', 1, _MD_YOGURT_ERROR);
     }
 } else {
-    redirect_header('group.php?group_id='.$group_id.'', 1, _MD_YOGURT_YOUAREMEMBERALREADY);
+    redirect_header('group.php?group_id=' . $group_id . '', 1, _MD_YOGURT_YOUAREMEMBERALREADY);
 }
 
 require dirname(__DIR__, 2) . '/footer.php';

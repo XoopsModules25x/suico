@@ -99,8 +99,9 @@ class AudioHandler extends XoopsPersistableObjectHandler
      */
     public function get2(
         $id = null
-//        $fields = null
-    ) {
+        //        $fields = null
+    )
+    {
         $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_audios') . ' WHERE audio_id=' . $id;
         if (!$result = $this->db->query($sql)) {
             return false;
@@ -141,7 +142,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
-//        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+        //        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
         if ($xoopsObject->isNew()) {
             // adding / modifying a yogurt_audio
             $xoopsObject = new Audio();
@@ -344,9 +345,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         $uploadDir = \XOOPS_UPLOAD_PATH . '/yogurt/audio/';
         // create the object to upload
         $uploader = new XoopsMediaUploader(
-            $uploadDir,
-            $allowed_mimetypes,
-            $maxfilesize
+            $uploadDir, $allowed_mimetypes, $maxfilesize
         );
         // fetch the media
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
@@ -373,7 +372,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
 
             $this->insert($audio);
             $saved_destination = $uploader->getSavedDestination();
-        //print_r($_FILES);
+            //print_r($_FILES);
         } else {
             echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
 

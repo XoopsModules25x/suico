@@ -1,5 +1,6 @@
 <{if $xoops_notification.show}>
-<br><br>
+    <br>
+    <br>
     <form name="notification_select" action="<{$xoops_notification.target_page}>" method="post">
         <h5 style="text-align:center;"><{$lang_activenotifications}></h5>
         <input type="hidden" name="not_redirect" value="<{$xoops_notification.redirect_script}>">

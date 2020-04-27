@@ -20,7 +20,7 @@ declare(strict_types=1);
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
- 
+
 // @see http://www.php-fig.org/psr/psr-4/examples/
 
 spl_autoload_register(

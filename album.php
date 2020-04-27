@@ -57,8 +57,8 @@ if (1 === $controller->isOwner) {
     $criteriaUid = new Criteria('uid_owner', $controller->uidOwner);
 } else {
     $criteria_private = new Criteria('private', 0);
-    $criteriaUid2    = new Criteria('uid_owner', (int)$controller->uidOwner);
-    $criteriaUid     = new CriteriaCompo($criteriaUid2);
+    $criteriaUid2     = new Criteria('uid_owner', (int)$controller->uidOwner);
+    $criteriaUid      = new CriteriaCompo($criteriaUid2);
     $criteriaUid->add($criteria_private);
 }
 $criteriaUid->setLimit($helper->getConfig('picturesperpage'));

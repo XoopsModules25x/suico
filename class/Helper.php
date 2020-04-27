@@ -14,7 +14,6 @@ namespace XoopsModules\Yogurt;
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-
 /**
  * Module: Yogurt
  *
@@ -24,7 +23,6 @@ namespace XoopsModules\Yogurt;
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
-
 
 use RuntimeException;
 use XoopsDatabaseFactory;

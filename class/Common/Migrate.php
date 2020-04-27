@@ -13,6 +13,7 @@ namespace XoopsModules\Yogurt\Common;
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
+
 /**
  * Module: Yogurt
  *
@@ -22,6 +23,7 @@ namespace XoopsModules\Yogurt\Common;
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
+
 use \XoopsModules\Yogurt\Common;
 
 /**

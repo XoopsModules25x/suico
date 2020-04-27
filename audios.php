@@ -54,14 +54,44 @@ $criteriaUidAudio->setLimit($helper->getConfig('audiosperpage'));
 /**
  * Get all audios of this user and assign them to template
  */
-$audios       = $controller->getAudio($criteriaUidAudio);
+$audiosArray = [];
+$audios      = $controller->getAudio($criteriaUidAudio);
+
+/**
+ * If there is no audio files show in template lang_noaudioyet
+ */
+if (isset($nbSections[NBAUDIO]) && 0 === $nbSections[NBAUDIO]) {
+//    $lang_noaudioyet = _MD_YOGURT_NOTHINGYET;
+//    $xoopsTpl->assign('lang_nopicyet', $lang_noaudioyet);
+    echo '<script>alert("Please add some audio files here")</script>';
+} else {
+
+    /**
+     * Lets populate an array with the data from the pictures
+     */
+    $i = 0;
+    foreach ($audios as $audio) {
+        $audiosArray[$i]['audio_id']     = $audio->getVar('audio_id', 's');
+        $audiosArray[$i]['title']        = $audio->getVar('title', 's');
+        $audiosArray[$i]['author']       = $audio->getVar('author', 's');
+        $audiosArray[$i]['description']  = $audio->getVar('description', 's');
+        $audiosArray[$i]['filename']     = $audio->getVar('filename', 's');
+        $audiosArray[$i]['uid_owner']    = $audio->getVar('uid_owner', 's');
+        $audiosArray[$i]['date_created'] = formatTimeStamp($audio->getVar('date_created', 's'));
+        $audiosArray[$i]['date_updated'] = formatTimeStamp($audio->getVar('date_updated', 's'));
+        $xoopsTpl->assign('audios', $audiosArray);
+        $i++;
+    }
+}
+
+$xoopsTpl->assign('audios', $audios);
 $nbAudio = $nbSections[NBAUDIO] ?? 0;
 try {
     $audiosArray = $controller->assignAudioContent($nbAudio, $audios);
 } catch (\RuntimeException $e) {
 }
 
-if (is_array($audiosArray)) {
+if (is_array($audiosArray) && count($audiosArray) > 0) {
     $xoopsTpl->assign('audios', $audiosArray);
     $audio_list = [];
     foreach ($audiosArray as $audio_item) {
@@ -108,7 +138,6 @@ $xoopsTpl->assign('section_name', _MD_YOGURT_AUDIOS);
 
 //Page Navigation
 $xoopsTpl->assign('pageNav', $pageNav);
-
 
 require __DIR__ . '/footer.php';
 require dirname(__DIR__, 2) . '/footer.php';

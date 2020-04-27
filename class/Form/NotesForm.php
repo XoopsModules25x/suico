@@ -70,10 +70,9 @@ class NotesForm extends XoopsThemeForm
         //include ID field, it's needed so the module knows if it is a new form or an edited form
 
         $hidden = new XoopsFormHidden(
-            'note_id',
-            $this->targetObject->getVar(
-                'note_id'
-            )
+            'note_id', $this->targetObject->getVar(
+            'note_id'
+        )
         );
         $this->addElement($hidden);
         unset($hidden);
@@ -95,63 +94,41 @@ class NotesForm extends XoopsThemeForm
             //$this->addElement( new \XoopsFormEditor(AM_YOGURT_NOTES_NOTE_TEXT, 'note_text', $editorOptions), false  );
             if ($this->helper->isUserAdmin()) {
                 $descEditor = new XoopsFormEditor(
-                    \AM_YOGURT_NOTES_NOTE_TEXT,
-                    $this->helper->getConfig(
-                        'yogurtEditorAdmin'
-                    ),
-                    $editorOptions,
-                    $nohtml = false,
-                    $onfailure = 'textarea'
+                    \AM_YOGURT_NOTES_NOTE_TEXT, $this->helper->getConfig(
+                    'yogurtEditorAdmin'
+                ), $editorOptions, $nohtml = false, $onfailure = 'textarea'
                 );
             } else {
                 $descEditor = new XoopsFormEditor(
-                    \AM_YOGURT_NOTES_NOTE_TEXT,
-                    $this->helper->getConfig(
-                        'yogurtEditorUser'
-                    ),
-                    $editorOptions,
-                    $nohtml = false,
-                    $onfailure = 'textarea'
+                    \AM_YOGURT_NOTES_NOTE_TEXT, $this->helper->getConfig(
+                    'yogurtEditorUser'
+                ), $editorOptions, $nohtml = false, $onfailure = 'textarea'
                 );
             }
         } else {
             $descEditor = new XoopsFormDhtmlTextArea(
-                \AM_YOGURT_NOTES_NOTE_TEXT,
+                \AM_YOGURT_NOTES_NOTE_TEXT, 'description', $this->targetObject->getVar(
                 'description',
-                $this->targetObject->getVar(
-                    'description',
-                    'e'
-                ),
-                5,
-                50
+                'e'
+            ), 5, 50
             );
         }
         $this->addElement($descEditor);
         // Note_from
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_YOGURT_NOTES_NOTE_FROM,
-                'note_from',
-                false,
-                $this->targetObject->getVar(
-                    'note_from'
-                ),
-                1,
-                false
+                \AM_YOGURT_NOTES_NOTE_FROM, 'note_from', false, $this->targetObject->getVar(
+                'note_from'
+            ), 1, false
             ),
             false
         );
         // Note_to
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_YOGURT_NOTES_NOTE_TO,
-                'note_to',
-                false,
-                $this->targetObject->getVar(
-                    'note_to'
-                ),
-                1,
-                false
+                \AM_YOGURT_NOTES_NOTE_TO, 'note_to', false, $this->targetObject->getVar(
+                'note_to'
+            ), 1, false
             ),
             false
         );
@@ -161,10 +138,10 @@ class NotesForm extends XoopsThemeForm
         $check_private->addOption(1, ' ');
         $this->addElement($check_private);
         // Date
-//        $this->addElement(new XoopsFormTextDateSelect(AM_YOGURT_NOTES_DATE, 'date',0, \strtotime($this->targetObject->getVar('date'))));
+        //        $this->addElement(new XoopsFormTextDateSelect(AM_YOGURT_NOTES_DATE, 'date',0, \strtotime($this->targetObject->getVar('date'))));
 
         $noteCreated = $this->targetObject->isNew() ? 0 : $this->targetObject->getVar('date_created');
-        $this->addElement(new \XoopsFormTextDateSelect(\AM_YOGURT_NOTES_DATE, 'date_created', '', $noteCreated ), true);
+        $this->addElement(new \XoopsFormTextDateSelect(\AM_YOGURT_NOTES_DATE, 'date_created', '', $noteCreated), true);
 
         $this->addElement(new XoopsFormHidden('op', 'save'));
         $this->addElement(new XoopsFormButton('', 'submit', \_SUBMIT, 'submit'));

@@ -13,6 +13,7 @@ namespace XoopsModules\Yogurt;
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
 /**
  * Module: Yogurt
  *
@@ -22,7 +23,6 @@ namespace XoopsModules\Yogurt;
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
-
 
 use Xmf\Module\Helper\Permission;
 use XoopsDatabaseFactory;
@@ -114,8 +114,8 @@ class Video extends XoopsObject
         $limit = 0,
         $start = 0
     ) {
-        $db          = XoopsDatabaseFactory::getDatabaseConnection();
-        $ret         = [];
+        $db         = XoopsDatabaseFactory::getDatabaseConnection();
+        $ret        = [];
         $whereQuery = '';
         if (\is_array($criteria) && \count($criteria) > 0) {
             $whereQuery = ' WHERE';

@@ -69,10 +69,9 @@ class RelgroupuserForm extends XoopsThemeForm
         //include ID field, it's needed so the module knows if it is a new form or an edited form
 
         $hidden = new XoopsFormHidden(
-            'rel_id',
-            $this->targetObject->getVar(
-                'rel_id'
-            )
+            'rel_id', $this->targetObject->getVar(
+            'rel_id'
+        )
         );
         $this->addElement($hidden);
         unset($hidden);
@@ -88,25 +87,18 @@ class RelgroupuserForm extends XoopsThemeForm
         $groupsHandler = $this->helper->getHandler('Groups');
 
         $groups_id_select = new XoopsFormSelect(
-            \AM_YOGURT_RELGROUPUSER_REL_GROUP_ID,
-            'rel_group_id',
-            $this->targetObject->getVar(
-                'rel_group_id'
-            )
+            \AM_YOGURT_RELGROUPUSER_REL_GROUP_ID, 'rel_group_id', $this->targetObject->getVar(
+            'rel_group_id'
+        )
         );
         $groups_id_select->addOptionArray($groupsHandler->getList());
         $this->addElement($groups_id_select, false);
         // Rel_user_uid
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_YOGURT_RELGROUPUSER_REL_USER_UID,
-                'rel_user_uid',
-                false,
-                $this->targetObject->getVar(
-                    'rel_user_uid'
-                ),
-                1,
-                false
+                \AM_YOGURT_RELGROUPUSER_REL_USER_UID, 'rel_user_uid', false, $this->targetObject->getVar(
+                'rel_user_uid'
+            ), 1, false
             ),
             false
         );

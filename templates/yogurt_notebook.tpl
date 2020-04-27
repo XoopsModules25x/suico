@@ -68,7 +68,7 @@
                                                         <{ if $isOwner==1}>
 
                                                         <form name="delete_note" method="post" action="delete_note.php" class="yogurt-Note-form-delete">
-                                                           <button type="image" id="note_idimage" name="note_idimage" class="btn btn-primary btn-xs">Delete</button>
+                                                            <button type="image" id="note_idimage" name="note_idimage" class="btn btn-primary btn-xs">Delete</button>
                                                             <input value="<{$notes[i].id}>" type="hidden" id="note_id" name="note_id">
                                                         </form>
                                                         <{/if}>

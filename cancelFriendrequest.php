@@ -26,7 +26,7 @@ require __DIR__ . '/header.php';
  * Factory of friendrequests created
  */
 $friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
-$friendshipFactory     = new Yogurt\FriendshipHandler($xoopsDB);
+$friendshipFactory    = new Yogurt\FriendshipHandler($xoopsDB);
 
 /**
  * Getting the uid of the user which user want to canel friend request
@@ -54,6 +54,6 @@ $criteria_delete1->add($criteria_friend2);
 
 $friendrequestFactory->deleteAll($criteria_delete1);
 
-redirect_header('index.php?uid='.$friendrequestto_uid.'', 3, _MD_YOGURT_FRIENDREQUEST_CANCELLED);
+redirect_header('index.php?uid=' . $friendrequestto_uid . '', 3, _MD_YOGURT_FRIENDREQUEST_CANCELLED);
 
 require dirname(__DIR__, 2) . '/footer.php';

@@ -66,6 +66,7 @@ switch ($op) {
         $videoObject->setVar('date_created', $dateTimeObj->getTimestamp());
         $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_updated', '', 'POST'));
         $videoObject->setVar('date_updated', $dateTimeObj->getTimestamp());
+
         if ($videoHandler->insert($videoObject)) {
             redirect_header('videos.php?op=list', 2, AM_YOGURT_FORMOK);
         }
@@ -149,11 +150,7 @@ switch ($op) {
             xoops_load('XoopsPageNav');
 
             $pagenav = new XoopsPageNav(
-                $videoTempRows,
-                $videoPaginationLimit,
-                $start,
-                'start',
-                'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                $videoTempRows, $videoPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
@@ -180,10 +177,7 @@ switch ($op) {
             foreach (array_keys($videoTempArray) as $i) {
                 //        $field = explode(':', $fields[$i]);
 
-                $GLOBALS['xoopsTpl']->assign(
-                    'selectorvideo_id',
-                    AM_YOGURT_VIDEO_VIDEO_ID
-                );
+                $GLOBALS['xoopsTpl']->assign('selectorvideo_id', AM_YOGURT_VIDEO_VIDEO_ID);
                 $videoArray['video_id'] = $videoTempArray[$i]->getVar('video_id');
 
                 $GLOBALS['xoopsTpl']->assign('selectoruid_owner', AM_YOGURT_VIDEO_UID_OWNER);
@@ -198,19 +192,19 @@ switch ($op) {
                 $videoArray['youtube_code'] = $videoTempArray[$i]->getVar('youtube_code');
 
                 $GLOBALS['xoopsTpl']->assign('selectormain_video', AM_YOGURT_VIDEO_MAIN_VIDEO);
-                $videoArray['main_video']  = $videoTempArray[$i]->getVar('main_video');
-                
+                $videoArray['main_video'] = $videoTempArray[$i]->getVar('main_video');
+
                 $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_VIDEO_DATE_CREATED);
                 $videoArray['date_created'] = formatTimestamp($videoTempArray[$i]->getVar('date_created'), 's');
 
                 $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_YOGURT_VIDEO_DATE_UPDATED);
                 $videoArray['date_updated'] = formatTimestamp($videoTempArray[$i]->getVar('date_updated'), 's');
-                
+
                 $videoArray['edit_delete'] = "<a href='videos.php?op=edit&video_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='videos.php?op=delete&video_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='videos.php?op=clone&video_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
-                $GLOBALS['xoopsTpl']->append_by_ref('videoArrays', $videoArray);
+                $GLOBALS['xoopsTpl']->append_by_ref('videosArray', $videoArray);
                 unset($videoArray);
             }
             unset($videoTempArray);
@@ -218,11 +212,7 @@ switch ($op) {
             if ($videoCount > $videoPaginationLimit) {
                 xoops_load('XoopsPageNav');
                 $pagenav = new XoopsPageNav(
-                    $videoCount,
-                    $videoPaginationLimit,
-                    $start,
-                    'start',
-                    'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                    $videoCount, $videoPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
@@ -252,9 +242,7 @@ switch ($op) {
             //-------------------------------------------
 
             echo $GLOBALS['xoopsTpl']->fetch(
-                XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar(
-                    'dirname'
-                ) . '/templates/admin/yogurt_admin_videos.tpl'
+                XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname') . '/templates/admin/yogurt_admin_videos.tpl'
             );
         }
 

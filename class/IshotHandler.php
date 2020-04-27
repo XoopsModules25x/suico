@@ -138,7 +138,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
-//        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+        //        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
 
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Ishot
@@ -312,8 +312,8 @@ class IshotHandler extends XoopsPersistableObjectHandler
     public function getHottest($criteria = null)
     {
         $sql = 'SELECT DISTINCTROW uname, user_avatar, uid_voted, COUNT(cod_ishot) AS qtd FROM ' . $this->db->prefix(
-            'yogurt_ishot'
-        ) . ', ' . $this->db->prefix(
+                'yogurt_ishot'
+            ) . ', ' . $this->db->prefix(
                 'users'
             );
         if (isset($criteria) && $criteria instanceof CriteriaElement) {
@@ -356,8 +356,8 @@ class IshotHandler extends XoopsPersistableObjectHandler
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT uname, user_avatar, uid_voted FROM ' . $this->db->prefix(
-            'yogurt_ishot'
-        ) . ', ' . $this->db->prefix(
+                'yogurt_ishot'
+            ) . ', ' . $this->db->prefix(
                 'users'
             );
         if (isset($criteria) && $criteria instanceof CriteriaElement) {

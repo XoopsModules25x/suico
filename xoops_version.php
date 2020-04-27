@@ -109,17 +109,17 @@ $modversion = [
     ],
     // ------------------- Tables ----------------------------
     'tables'              => [
-        $moduleDirName . '_' . 'friendrequest',
-        $moduleDirName . '_' . 'friendship',
+        $moduleDirName . '_' . 'friendrequests',
+        $moduleDirName . '_' . 'friendships',
         $moduleDirName . '_' . 'images',
         $moduleDirName . '_' . 'visitors',
-        $moduleDirName . '_' . 'video',
+        $moduleDirName . '_' . 'videos',
         $moduleDirName . '_' . 'relgroupuser',
         $moduleDirName . '_' . 'groups',
         $moduleDirName . '_' . 'notes',
         $moduleDirName . '_' . 'configs',
         $moduleDirName . '_' . 'suspensions',
-        $moduleDirName . '_' . 'audio',
+        $moduleDirName . '_' . 'audios',
         $moduleDirName . '_' . 'privacy',
     ],
 ];
@@ -252,6 +252,24 @@ $modversion['config'][] = [
     'valuetype'   => 'textbox',
     'default'     => 'odd',
     'category'    => 'group_header',
+];
+
+$modversion['config'][] = [
+    'name'        => 'adminpager',
+    'title'       => 'MI_YOGURT_ADMINPAGER',
+    'description' => 'MI_YOGURT_ADMINPAGER_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 10,
+];
+
+$modversion['config'][] = [
+    'name'        => 'userpager',
+    'title'       => 'MI_YOGURT_USERPAGER',
+    'description' => 'MI_YOGURT_USERPAGER_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 10,
 ];
 
 $modversion['config'][] = [
@@ -815,7 +833,7 @@ $modversion['config'][] = [
     'default'     => 'datatables',
     'options'     => [
         _MI_YOGURT_DATATABLESBASICTEMPLATE => 'datatables',
-        _MI_YOGURT_TEMPLATE_NORMAL          => 'normal',
+        _MI_YOGURT_TEMPLATE_NORMAL         => 'normal',
     ],
     'category'    => 'memberslist',
 ];
@@ -1039,7 +1057,7 @@ $modversion['config'][] = [
     'description' => 'CO_' . $moduleDirNameUpper . '_' . 'TRUNCATE_LENGTH_DESC',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
-    'default'     => 100
+    'default'     => 100,
 ];
 
 /**
@@ -1073,7 +1091,7 @@ $modversion['templates'] = [
     ['file' => 'admin/yogurt_admin_audios.tpl', 'description' => ''],
     ['file' => 'admin/yogurt_admin_configs.tpl', 'description' => ''],
     ['file' => 'admin/yogurt_admin_friendrequest.tpl', 'description' => ''],
-    ['file' => 'admin/yogurt_admin_friendship.tpl', 'description' => ''],
+    ['file' => 'admin/yogurt_admin_friendships.tpl', 'description' => ''],
     ['file' => 'admin/yogurt_admin_groups.tpl', 'description' => ''],
     ['file' => 'admin/yogurt_admin_help.tpl', 'description' => ''],
     ['file' => 'admin/yogurt_admin_images.tpl', 'description' => ''],

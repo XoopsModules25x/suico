@@ -21,7 +21,6 @@ declare(strict_types=1);
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
-
 declare(strict_types=1);
 
 use Xmf\Module\Admin;

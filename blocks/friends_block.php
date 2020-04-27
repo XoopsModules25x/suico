@@ -44,10 +44,9 @@ function b_yogurt_friends_show($options)
          */
 
         $criteria2 = new Criteria(
-            'friend1_uid',
-            $xoopsUser->getVar(
-                'uid'
-            )
+            'friend1_uid', $xoopsUser->getVar(
+            'uid'
+        )
         );
 
         /**
@@ -60,7 +59,7 @@ function b_yogurt_friends_show($options)
 
         $block['lang_allfriends'] = _MB_YOGURT_ALLFRIENDS;
         $block['lang_nofriends']  = _MB_YOGURT_NOFRIENDSYET;
-        $block['enablepm']        = isset($options[1])?$options[1]:'';
+        $block['enablepm']        = isset($options[1]) ? $options[1] : '';
 
         return $block;
     }

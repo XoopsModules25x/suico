@@ -47,11 +47,10 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
      * The user must be the owner
      */
     $criteria_group_id = new Criteria(
-        'group_id',
-        $group_id
+        'group_id', $group_id
     );
     $uid               = (int)$xoopsUser->getVar('uid');
-    $criteriaUid      = new Criteria('owner_uid', $uid);
+    $criteriaUid       = new Criteria('owner_uid', $uid);
     $criteria          = new CriteriaCompo($criteria_group_id);
     $criteria->add($criteriaUid);
 

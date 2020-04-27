@@ -11,6 +11,7 @@ declare(strict_types=1);
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
 /**
  * Module: Yogurt
  *
@@ -83,24 +84,22 @@ if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl))
     $xoopsTpl = new XoopsTpl();
 }
 
-$imageFactory          = new Yogurt\ImageHandler($xoopsDB);
-$visitorsFactory       = new Yogurt\VisitorsHandler($xoopsDB);
-$videosFactory         = new Yogurt\VideoHandler($xoopsDB);
+$imageFactory         = new Yogurt\ImageHandler($xoopsDB);
+$visitorsFactory      = new Yogurt\VisitorsHandler($xoopsDB);
+$videosFactory        = new Yogurt\VideoHandler($xoopsDB);
 $friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
-$friendshipFactory     = new Yogurt\FriendshipHandler($xoopsDB);
+$friendshipFactory    = new Yogurt\FriendshipHandler($xoopsDB);
 
 $isOwner  = 0;
 $isAnonym = 1;
 $isFriend = 0;
 
-
 if (1 === $helper->getConfig('enable_guestaccess')) {
-
-/**
- * Enable Guest Access
- * If anonym and uid not set then redirect to admins profile
- * Else redirects to own profile
- */
+    /**
+     * Enable Guest Access
+     * If anonym and uid not set then redirect to admins profile
+     * Else redirects to own profile
+     */
     if (empty($xoopsUser)) {
         $isAnonym = 1;
         if (isset($_GET['uid'])) {
@@ -120,12 +119,11 @@ if (1 === $helper->getConfig('enable_guestaccess')) {
         }
     }
 } else {
-    
-/**
- * Disable Guest Access
- * If anonym redirect to landing guest page
- * Else redirects to own profile
- */
+    /**
+     * Disable Guest Access
+     * If anonym redirect to landing guest page
+     * Else redirects to own profile
+     */
 
     if (empty($xoopsUser)) {
         $isAnonym = 1;

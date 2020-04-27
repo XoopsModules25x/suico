@@ -13,6 +13,7 @@ namespace XoopsModules\Yogurt;
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
 /**
  * Module: Yogurt
  *
@@ -22,7 +23,6 @@ namespace XoopsModules\Yogurt;
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
-
 
 use CriteriaElement;
 use XoopsDatabase;
@@ -148,7 +148,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
-//        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+        //        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Groups
             $xoopsObject = new Groups();
@@ -297,18 +297,18 @@ class GroupsHandler extends XoopsPersistableObjectHandler
 
         $i = 0;
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $ret[$i]['id']    = $myrow['group_id'];
-            $ret[$i]['title'] = $myrow['group_title'];
-            $ret[$i]['img']   = $myrow['group_img'];
-            $ret[$i]['desc']  = $myrow['group_desc'];
-            $ret[$i]['uid']   = $myrow['owner_uid'];
-			$groupid          = $myrow['group_id'];
-			$query            = 'SELECT COUNT(rel_id) AS grouptotalmembers FROM ' . $GLOBALS['xoopsDB']->prefix('yogurt_relgroupuser') . ' WHERE rel_group_id='.$groupid.'';
-			$queryresult      = $GLOBALS['xoopsDB']->query($query);
-			$row              = $GLOBALS['xoopsDB']->fetchArray($queryresult);
-	        $grouptotalmembers =  $row['grouptotalmembers'];
-			$ret[$i]['grouptotalmembers'] = $grouptotalmembers . ' ' . \_MD_YOGURT_GROUPMEMBERS;
-		$i++;
+            $ret[$i]['id']                = $myrow['group_id'];
+            $ret[$i]['title']             = $myrow['group_title'];
+            $ret[$i]['img']               = $myrow['group_img'];
+            $ret[$i]['desc']              = $myrow['group_desc'];
+            $ret[$i]['uid']               = $myrow['owner_uid'];
+            $groupid                      = $myrow['group_id'];
+            $query                        = 'SELECT COUNT(rel_id) AS grouptotalmembers FROM ' . $GLOBALS['xoopsDB']->prefix('yogurt_relgroupuser') . ' WHERE rel_group_id=' . $groupid . '';
+            $queryresult                  = $GLOBALS['xoopsDB']->query($query);
+            $row                          = $GLOBALS['xoopsDB']->fetchArray($queryresult);
+            $grouptotalmembers            = $row['grouptotalmembers'];
+            $ret[$i]['grouptotalmembers'] = $grouptotalmembers . ' ' . \_MD_YOGURT_GROUPMEMBERS;
+            $i++;
         }
 
         return $ret;
@@ -376,7 +376,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $field_title   = new XoopsFormText(\_MD_YOGURT_GROUP_TITLE, 'group_title', 35, 55);
         $field_desc    = new XoopsFormText(\_MD_YOGURT_GROUP_DESC, 'group_desc', 35, 55);
         $field_marker  = new XoopsFormHidden('marker', '1');
-        $buttonSend   = new XoopsFormButton('', 'submit_button', \_MD_YOGURT_UPLOADGROUP, 'submit');
+        $buttonSend    = new XoopsFormButton('', 'submit_button', \_MD_YOGURT_UPLOADGROUP, 'submit');
         $field_warning = new XoopsFormLabel(\sprintf(\_MD_YOGURT_YOU_CAN_UPLOAD, $maxbytes / 1024));
 
         $form->addElement($field_warning);
@@ -408,19 +408,17 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $field_title   = new XoopsFormText(\_MD_YOGURT_GROUP_TITLE, 'title', 35, 55, $group->getVar('group_title'));
         $field_desc    = new XoopsFormTextArea(\_MD_YOGURT_GROUP_DESC, 'desc', $group->getVar('group_desc'));
         $field_marker  = new XoopsFormHidden('marker', '1');
-        $buttonSend   = new XoopsFormButton('', 'submit_button', \_MD_YOGURT_UPLOADGROUP, 'submit');
+        $buttonSend    = new XoopsFormButton('', 'submit_button', \_MD_YOGURT_UPLOADGROUP, 'submit');
         $field_warning = new XoopsFormLabel(\sprintf(\_MD_YOGURT_YOU_CAN_UPLOAD, $maxbytes / 1024));
 
         $field_oldpicture = new XoopsFormLabel(
-            \_MD_YOGURT_GROUP_IMAGE,
-            '<img src="' . \XOOPS_UPLOAD_URL . '/' . $group->getVar(
-                'group_img'
-            ) . '">'
+            \_MD_YOGURT_GROUP_IMAGE, '<img src="' . \XOOPS_UPLOAD_URL . '/' . $group->getVar(
+                                       'group_img'
+                                   ) . '">'
         );
 
         $field_maintainimage = new XoopsFormLabel(
-            \_MD_YOGURT_MAINTAIN_OLD_IMAGE,
-            "<input type='checkbox' value='1' id='flag_oldimg' name='flag_oldimg' onclick=\"groupImgSwitch(img)\"  checked>"
+            \_MD_YOGURT_MAINTAIN_OLD_IMAGE, "<input type='checkbox' value='1' id='flag_oldimg' name='flag_oldimg' onclick=\"groupImgSwitch(img)\"  checked>"
         );
 
         $form->addElement($field_oldpicture);
@@ -478,11 +476,12 @@ var elestyle = xoopsGetElementById(img).style;
         $maxfileheight,
         $change_img = 1,
         $group = ''
-//        $pictwidth,
-//        $pictheight,
-//        $thumbwidth,
-//        $thumbheight
-    ) {
+        //        $pictwidth,
+        //        $pictheight,
+        //        $thumbwidth,
+        //        $thumbheight
+    )
+    {
         global $xoopsUser, $xoopsDB, $_POST, $_FILES;
         //search logged user id
         $uid = $xoopsUser->getVar('uid');
@@ -492,14 +491,11 @@ var elestyle = xoopsGetElementById(img).style;
             $group->unsetNew();
         }
 
-
-        $helper = Helper::getInstance();
-        $pictwidth     = $helper->getConfig('resized_width');
-        $pictheight    = $helper->getConfig('resized_height');
-        $thumbwidth    = $helper->getConfig('thumb_width');
-        $thumbheight   = $helper->getConfig('thumb_height');
-
-
+        $helper      = Helper::getInstance();
+        $pictwidth   = $helper->getConfig('resized_width');
+        $pictheight  = $helper->getConfig('resized_height');
+        $thumbwidth  = $helper->getConfig('thumb_width');
+        $thumbheight = $helper->getConfig('thumb_height');
 
         if (1 === $change_img) {
             // mimetypes and settings put this in admin part later
@@ -511,11 +507,7 @@ var elestyle = xoopsGetElementById(img).style;
             $uploadDir = \XOOPS_UPLOAD_PATH . '/yogurt/groups/';
             // create the object to upload
             $uploader = new XoopsMediaUploader(
-                $uploadDir,
-                $allowed_mimetypes,
-                $maxfilesize,
-                $maxfilewidth,
-                $maxfileheight
+                $uploadDir, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight
             );
             // fetch the media
             if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
@@ -545,11 +537,8 @@ var elestyle = xoopsGetElementById(img).style;
                 $resizer->maxHeight     = $maxHeight_grouplogo;
                 $result                 = $resizer->resizeImage();
 
-
-                $maxWidth_grouplogo     = Helper::getInstance()->getConfig('thumb_width');
-                $maxHeight_grouplogo    = Helper::getInstance()->getConfig('thumb_height');
-
-
+                $maxWidth_grouplogo  = Helper::getInstance()->getConfig('thumb_width');
+                $maxHeight_grouplogo = Helper::getInstance()->getConfig('thumb_height');
 
                 $resizer->endFile       = $uploadDir . '/thumb_' . $savedFilename;
                 $resizer->imageMimetype = $imageMimetype;
@@ -557,13 +546,10 @@ var elestyle = xoopsGetElementById(img).style;
                 $resizer->maxHeight     = $maxHeight_grouplogo;
                 $result                 = $resizer->resizeImage();
 
+                $maxWidth_grouplogo  = Helper::getInstance()->getConfig('resized_width');
+                $maxHeight_grouplogo = Helper::getInstance()->getConfig('resized_height');
 
-                $maxWidth_grouplogo     = Helper::getInstance()->getConfig('resized_width');
-                $maxHeight_grouplogo    = Helper::getInstance()->getConfig('resized_height');
-
-
-
-                $resizer->endFile       = $uploadDir . '/resized_' .$savedFilename;
+                $resizer->endFile       = $uploadDir . '/resized_' . $savedFilename;
                 $resizer->imageMimetype = $imageMimetype;
                 $resizer->maxWidth      = $maxWidth_grouplogo;
                 $resizer->maxHeight     = $maxHeight_grouplogo;
@@ -579,7 +565,7 @@ var elestyle = xoopsGetElementById(img).style;
         $group->setVar('group_desc', $group_desc);
         $group->setVar('owner_uid', $uid);
 
-        $this->insert($group);
+        $this->insert2($group);
 
         return true;
     }

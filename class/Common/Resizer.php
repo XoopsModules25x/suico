@@ -24,16 +24,16 @@ namespace XoopsModules\Yogurt\Common;
  */
 class Resizer
 {
-    public $sourceFile = '';
-    public $endFile = '';
-    public $maxWidth = 0;
-    public $maxHeight = 0;
+    public $sourceFile    = '';
+    public $endFile       = '';
+    public $maxWidth      = 0;
+    public $maxHeight     = 0;
     public $imageMimetype = '';
-    public $jpgQuality = 90;
-    public $mergeType = 0;
-    public $mergePos = 0;
-    public $degrees = 0;
-    public $error = '';
+    public $jpgQuality    = 90;
+    public $mergeType     = 0;
+    public $mergePos      = 0;
+    public $degrees       = 0;
+    public $error         = '';
 
     /**
      * resize image if size exceed given width/height
@@ -68,16 +68,16 @@ class Resizer
                 if ($width < $this->maxWidth) {
                     $new_width = $width;
                 } else {
-                    $new_width  = $this->maxWidth;
-                    $divisor    = $width / $new_width;
+                    $new_width = $this->maxWidth;
+                    $divisor   = $width / $new_width;
                     $newHeight = (int)\floor($height / $divisor);
                 }
             } elseif ($height < $this->maxHeight) {
                 $newHeight = (int)$height;
             } else {
                 $newHeight = $this->maxHeight;
-                $divisor    = $height / $newHeight;
-                $new_width  = (int)\floor($width / $divisor);
+                $divisor   = $height / $newHeight;
+                $new_width = (int)\floor($width / $divisor);
             }
 
             // Create a new temporary image.

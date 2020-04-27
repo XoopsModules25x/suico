@@ -11,6 +11,7 @@ declare(strict_types=1);
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
 /**
  * Module: Yogurt
  *
@@ -176,7 +177,7 @@ function xoops_module_update_yogurt(
 
         //  ---  COPY blank.png FILES ---------------
         if (count($configurator->copyBlankFiles) > 0) {
-            $file =  dirname(__DIR__) . '/assets/images/blank.png';
+            $file = dirname(__DIR__) . '/assets/images/blank.png';
             foreach (array_keys($configurator->copyBlankFiles) as $i) {
                 $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
                 $utility::copyFile($file, $dest);
@@ -185,8 +186,8 @@ function xoops_module_update_yogurt(
 
         //delete .html entries from the tpl table
         $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix(
-            'tplfile'
-        ) . " WHERE `tpl_module` = '" . $module->getVar(
+                'tplfile'
+            ) . " WHERE `tpl_module` = '" . $module->getVar(
                 'dirname',
                 'n'
             ) . "' AND `tpl_file` LIKE '%.html%'";

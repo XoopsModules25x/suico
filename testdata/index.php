@@ -44,7 +44,7 @@ $helper->loadLanguage('common');
 
 switch ($op) {
     case 'load':
-        if (Request::hasVar('ok', 'REQUEST') && 1 ===  Request::getInt('ok', 0, 'REQUEST')) {
+        if (Request::hasVar('ok', 'REQUEST') && 1 === Request::getInt('ok', 0, 'REQUEST')) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('../admin/index.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }
@@ -101,8 +101,8 @@ function loadSampleData()
     //  ---  COPY test folder files ---------------
     if (is_array($configurator->copyTestFolders)
         && count(
-            $configurator->copyTestFolders
-        ) > 0) {
+               $configurator->copyTestFolders
+           ) > 0) {
         //        $file =  dirname(__DIR__) . '/testdata/images/';
         foreach (
             array_keys(

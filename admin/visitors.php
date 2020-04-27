@@ -146,11 +146,7 @@ switch ($op) {
             xoops_load('XoopsPageNav');
 
             $pagenav = new XoopsPageNav(
-                $visitorsTempRows,
-                $visitorsPaginationLimit,
-                $start,
-                'start',
-                'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                $visitorsTempRows, $visitorsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
@@ -199,7 +195,6 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('selectordate_visited', AM_YOGURT_VISITORS_DATETIME);
                 $visitorsArray['date_visited'] = formatTimestamp($visitorsTempArray[$i]->getVar('date_visited'), 's');
 
-
                 $visitorsArray['edit_delete'] = "<a href='visitors.php?op=edit&cod_visit=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='visitors.php?op=delete&cod_visit=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='visitors.php?op=clone&cod_visit=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
@@ -212,11 +207,7 @@ switch ($op) {
             if ($visitorsCount > $visitorsPaginationLimit) {
                 xoops_load('XoopsPageNav');
                 $pagenav = new XoopsPageNav(
-                    $visitorsCount,
-                    $visitorsPaginationLimit,
-                    $start,
-                    'start',
-                    'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                    $visitorsCount, $visitorsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }

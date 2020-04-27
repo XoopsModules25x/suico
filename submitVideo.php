@@ -58,7 +58,7 @@ if ($videoFactory->insert2($newvideo)) {
     $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
     $extra_tags['X_OWNER_UID']  = (int)$xoopsUser->getVar('uid');
     /** @var \XoopsNotificationHandler $notificationHandler */
-    $notificationHandler        = xoops_getHandler('notification');
+    $notificationHandler = xoops_getHandler('notification');
     $notificationHandler->triggerEvent('video', (int)$xoopsUser->getVar('uid'), 'new_video', $extra_tags);
     redirect_header(
         XOOPS_URL . '/modules/yogurt/videos.php?uid=' . (int)$xoopsUser->getVar('uid'),

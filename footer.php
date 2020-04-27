@@ -21,7 +21,6 @@ use Xmf\Request;
 use XoopsModules\Yogurt;
 use XoopsModules\Yogurt\IndexController;
 
-
 /**
  * Adding to the module js and css of the lightbox and new ones
  */
@@ -49,25 +48,24 @@ $xoTheme->addStylesheet(
 //}
 
 if (!stripos($_SERVER['REQUEST_URI'], 'memberslist.php')) {
-$xoTheme->addScript(
-    XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.js'
-);
+    $xoTheme->addScript(
+        XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.js'
+    );
 }
 
 //if (stripos($_SERVER['REQUEST_URI'], 'album.php')) {
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js'); 
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js');
 //}
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
 
 if (stripos($_SERVER['REQUEST_URI'], 'memberslist.php')) {
-if ('datatables' == $xoopsModuleConfig['memberslisttemplate']) {
-	$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.dataTables.css');
-	$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/responsive.dataTables.min.css');
-	$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.dataTables.js');
-	$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/dataTables.responsive.min.js');
+    if ('datatables' == $xoopsModuleConfig['memberslisttemplate']) {
+        $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.dataTables.css');
+        $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/responsive.dataTables.min.css');
+        $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.dataTables.js');
+        $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/dataTables.responsive.min.js');
+    }
 }
-}
-
 
 //permissions
 $xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('notes'));
@@ -127,10 +125,8 @@ $xoopsTpl->assign(
     sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner)
 );
 
-
-
 //Navbar User Info
-$avatar = $controller->owner->getVar('user_avatar');
+$avatar        = $controller->owner->getVar('user_avatar');
 $memberHandler = xoops_getHandler('member');
 $thisUser      = $memberHandler->getUser($controller->uidOwner);
 $myts          = MyTextSanitizer::getInstance();
@@ -162,52 +158,52 @@ $xoopsTpl->assign('lang_onlinestatus', _MD_YOGURT_ONLINESTATUS);
 /**
  * Filter for new friend request
  */
-if ($xoopsUser){
-$friendrequest = 0;
-if (1 === $controller->isOwner) {
-    $criteria_uidrequest = new Criteria('friendrequestto_uid', $controller->uidOwner);
-    $newFriendrequest          = $controller->friendrequestFactory->getObjects($criteria_uidrequest);
-    if ($newFriendrequest) {
-        $countFriendrequests      = count($newFriendrequest);
-        $friendrequesterHandler = xoops_getHandler('member');
-        $friendrequester        = $friendrequesterHandler->getUser($newFriendrequest[0]->getVar('requester_uid'));
-        $friendrequester_uid    = $friendrequester->getVar('uid');
-        $friendrequester_uname  = $friendrequester->getVar('uname');
-        $friendrequester_avatar = $friendrequester->getVar('user_avatar');
-        $friendrequest_id       = $newFriendrequest[0]->getVar('friendreq_id');
-        $friendrequest          = 1;
+if ($xoopsUser) {
+    $friendrequest = 0;
+    if (1 === $controller->isOwner) {
+        $criteria_uidrequest = new Criteria('friendrequestto_uid', $controller->uidOwner);
+        $newFriendrequest    = $controller->friendrequestFactory->getObjects($criteria_uidrequest);
+        if ($newFriendrequest) {
+            $countFriendrequests    = count($newFriendrequest);
+            $friendrequesterHandler = xoops_getHandler('member');
+            $friendrequester        = $friendrequesterHandler->getUser($newFriendrequest[0]->getVar('requester_uid'));
+            $friendrequester_uid    = $friendrequester->getVar('uid');
+            $friendrequester_uname  = $friendrequester->getVar('uname');
+            $friendrequester_avatar = $friendrequester->getVar('user_avatar');
+            $friendrequest_id       = $newFriendrequest[0]->getVar('friendreq_id');
+            $friendrequest          = 1;
+        }
+    }
+    $criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
+    $criteriaIsfriend = new CriteriaCompo(new Criteria('friend2_uid', $xoopsUser->getVar('uid')));
+    $criteriaIsfriend->add($criteria_friends);
+    $controller->isFriend = $controller->friendshipsFactory->getCount($criteriaIsfriend);
+    $xoopsTpl->assign('isFriend', $controller->isFriend);
+
+    $friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
+
+    $criteria_selfrequest   = new Criteria('friendrequester_uid', $xoopsUser->getVar('uid'));
+    $criteria_isselfrequest = new CriteriaCompo(new Criteria('friendrequestto_uid', $controller->uidOwner));
+    $criteria_isselfrequest->add($criteria_selfrequest);
+    $controller->isSelfRequest = $friendrequestFactory->getCount($criteria_isselfrequest);
+    $xoopsTpl->assign('selffriendrequest', $controller->isSelfRequest);
+    if ($controller->isSelfRequest > 0) {
+        $xoopsTpl->assign('self_uid', $xoopsUser->getVar('uid'));
+    }
+    $xoopsTpl->assign('lang_myfriend', _MD_YOGURT_MYFRIEND);
+    $xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUEST_SENT);
+    $xoopsTpl->assign('lang_friendshipstatus', _MD_YOGURT_FRIENDSHIP_STATUS);
+
+    $criteria_otherrequest   = new Criteria('friendrequester_uid', $controller->uidOwner);
+    $criteria_isotherrequest = new CriteriaCompo(new Criteria('friendrequestto_uid', $xoopsUser->getVar('uid')));
+    $criteria_isotherrequest->add($criteria_otherrequest);
+    $controller->isOtherRequest = $friendrequestFactory->getCount($criteria_isotherrequest);
+    $xoopsTpl->assign('otherfriendrequest', $controller->isOtherRequest);
+    if ($controller->isOtherRequest > 0) {
+        $xoopsTpl->assign('other_uid', $controller->uidOwner);
     }
 }
-			$criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
-            $criteriaIsfriend = new CriteriaCompo(new Criteria('friend2_uid', $xoopsUser->getVar('uid')));
-            $criteriaIsfriend->add($criteria_friends);
-            $controller->isFriend = $controller->friendshipsFactory->getCount($criteriaIsfriend);
-			$xoopsTpl->assign('isFriend', $controller->isFriend);
-			
-			$friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
-            
-			$criteria_selfrequest = new Criteria('friendrequester_uid', $xoopsUser->getVar('uid'));
-            $criteria_isselfrequest = new CriteriaCompo(new Criteria('friendrequestto_uid', $controller->uidOwner));
-            $criteria_isselfrequest->add($criteria_selfrequest);
-            $controller->isSelfRequest = $friendrequestFactory->getCount($criteria_isselfrequest);
-			$xoopsTpl->assign('selffriendrequest', $controller->isSelfRequest);
-            if ($controller->isSelfRequest > 0) {
-                $xoopsTpl->assign('self_uid', $xoopsUser->getVar('uid'));
-            }
-            $xoopsTpl->assign('lang_myfriend', _MD_YOGURT_MYFRIEND);
-            $xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUEST_SENT);
-            $xoopsTpl->assign('lang_friendshipstatus', _MD_YOGURT_FRIENDSHIP_STATUS);
-        
-            $criteria_otherrequest = new Criteria('friendrequester_uid', $controller->uidOwner);
-            $criteria_isotherrequest = new CriteriaCompo(new Criteria('friendrequestto_uid', $xoopsUser->getVar('uid')));
-            $criteria_isotherrequest->add($criteria_otherrequest);
-            $controller->isOtherRequest = $friendrequestFactory->getCount($criteria_isotherrequest);
-            $xoopsTpl->assign('otherfriendrequest', $controller->isOtherRequest);
-			if ($controller->isOtherRequest > 0) {
-                $xoopsTpl->assign('other_uid', $controller->uidOwner);
-            }
-}
-			
+
 $evaluation = $controller->friendshipsFactory->getMoyennes($controller->uidOwner);
 
 //evaluations
@@ -249,7 +245,6 @@ $xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUEST_SENT);
 $xoopsTpl->assign('lang_acceptfriend', _MD_YOGURT_FRIEND_ACCEPT);
 $xoopsTpl->assign('lang_rejectfriend', _MD_YOGURT_FRIEND_REJECT);
 
-
 // Member Suspension
 $xoopsTpl->assign('allow_usersuspension', $xoopsModuleConfig['allow_usersuspension']);
 $xoopsTpl->assign('lang_suspensionadmin', _MD_YOGURT_SUSPENSIONADMIN);
@@ -262,7 +257,6 @@ if (0 === $controller->isSuspended) {
     $xoopsTpl->assign('isSuspended', 1);
     $xoopsTpl->assign('lang_suspended', _MD_YOGURT_USER_SUSPENDED);
 }
-
 
 //Memberslist and Search Members
 $xoopsTpl->assign('displayrealname', $xoopsModuleConfig['displayrealname']);

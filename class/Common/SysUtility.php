@@ -54,9 +54,9 @@ class SysUtility
 
         $select_view   = '';
         $moduleDirName = \basename(\dirname(__DIR__, 2));
-        $helper = Helper::getInstance();
+        $helper        = Helper::getInstance();
 
-//        $pathModIcon16 = XOOPS_URL . '/modules/' . $moduleDirName . '/' . $helper->getModule()->getInfo('modicons16');
+        //        $pathModIcon16 = XOOPS_URL . '/modules/' . $moduleDirName . '/' . $helper->getModule()->getInfo('modicons16');
         $pathModIcon16 = $helper->url($helper->getModule()->getInfo('modicons16'));
 
         $select_view = '<form name="form_switch" id="form_switch" action="' . Request::getString('REQUEST_URI', '', 'SERVER') . '" method="post"><span style="font-weight: bold;">' . $text . '</span>';
@@ -200,7 +200,7 @@ class SysUtility
             \preg_match_all('/(<.+?' . '>)?([^<>]*)/s', $text, $lines, \PREG_SET_ORDER);
             $total_length = mb_strlen($ending);
             //$openTags    = [];
-            $truncate     = '';
+            $truncate = '';
             foreach ($lines as $line_matchings) {
                 // if there is any html-tag in this line, handle it and add it (uncounted) to the output
                 if (!empty($line_matchings[1])) {
@@ -309,34 +309,22 @@ class SysUtility
         if (\class_exists('XoopsFormEditor')) {
             if ($isAdmin) {
                 $descEditor = new XoopsFormEditor(
-                    \ucfirst($options['name']),
-                    $helper->getConfig(
-                        'editorAdmin'
-                    ),
-                    $options,
-                    $nohtml = false,
-                    $onfailure = 'textarea'
+                    \ucfirst($options['name']), $helper->getConfig(
+                    'editorAdmin'
+                ), $options, $nohtml = false, $onfailure = 'textarea'
                 );
             } else {
                 $descEditor = new XoopsFormEditor(
-                    \ucfirst($options['name']),
-                    $helper->getConfig(
-                        'editorUser'
-                    ),
-                    $options,
-                    $nohtml = false,
-                    $onfailure = 'textarea'
+                    \ucfirst($options['name']), $helper->getConfig(
+                    'editorUser'
+                ), $options, $nohtml = false, $onfailure = 'textarea'
                 );
             }
         } else {
             $descEditor = new XoopsFormDhtmlTextArea(
                 \ucfirst(
                     $options['name']
-                ),
-                $options['name'],
-                $options['value'],
-                '100%',
-                '100%'
+                ), $options['name'], $options['value'], '100%', '100%'
             );
         }
 

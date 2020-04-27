@@ -92,14 +92,14 @@ class YogurtController extends \XoopsObject
         XoopsDatabase $xoopsDatabase,
         $user
     ) {
-        $this->helper = Helper::getInstance();
-        $this->db       = $xoopsDatabase;
-        $this->user     = $user;
-        $this->isOwner  = 0;
-        $this->isAnonym = 1;
-        $this->isFriend = 0;
-        $this->isUser   = 0;
-        $this->isSelfRequest = 0;
+        $this->helper         = Helper::getInstance();
+        $this->db             = $xoopsDatabase;
+        $this->user           = $user;
+        $this->isOwner        = 0;
+        $this->isAnonym       = 1;
+        $this->isFriend       = 0;
+        $this->isUser         = 0;
+        $this->isSelfRequest  = 0;
         $this->isOtherRequest = 0;
         $this->createFactories();
         $this->getPermissions();
@@ -262,7 +262,7 @@ class YogurtController extends \XoopsObject
         $this->visitorsFactory      = new VisitorsHandler($this->db);
         $this->audioFactory         = new AudioHandler($this->db);
         $this->videosFactory        = new VideoHandler($this->db);
-        $this->friendrequestFactory     = new FriendrequestHandler($this->db);
+        $this->friendrequestFactory = new FriendrequestHandler($this->db);
         $this->friendshipsFactory   = new FriendshipHandler($this->db);
         $this->relgroupusersFactory = new RelgroupuserHandler($this->db);
         $this->notesFactory         = new NotesHandler($this->db);

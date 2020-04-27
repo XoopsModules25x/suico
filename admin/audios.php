@@ -60,14 +60,14 @@ switch ($op) {
         $audioObject->setVar('title', Request::getVar('title', ''));
         $audioObject->setVar('author', Request::getVar('author', ''));
 
-//        $audioObject->setVar('filename', Request::getVar('filename', ''));
+        //        $audioObject->setVar('filename', Request::getVar('filename', ''));
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/audio/';
         $uploader  = new \XoopsMediaUploader(
             $uploadDir, $helper->getConfig('mimetypes'), $helper->getConfig('maxsize'), null, null
         );
         if ($uploader->fetchMedia(Request::getString('xoops_upload_file')[0], '', 'POST')) {
-//            $uploader->setPrefix('url_');
+            //            $uploader->setPrefix('url_');
             $uploader->setPrefix('aud_' . $uid . '_');
             $uploader->fetchMedia(Request::getString('xoops_upload_file')[0], '', 'POST');
             if (!$uploader->upload()) {
@@ -79,6 +79,7 @@ switch ($op) {
         }
 
         $audioObject->setVar('uid_owner', Request::getVar('uid_owner', ''));
+
         $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_created', '', 'POST'));
         $audioObject->setVar('date_created', $dateTimeObj->getTimestamp());
         $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_updated', '', 'POST'));
@@ -168,11 +169,7 @@ switch ($op) {
             xoops_load('XoopsPageNav');
 
             $pagenav = new XoopsPageNav(
-                $audioTempRows,
-                $audioPaginationLimit,
-                $start,
-                'start',
-                'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                $audioTempRows, $audioPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
@@ -237,11 +234,7 @@ switch ($op) {
             if ($audioCount > $audioPaginationLimit) {
                 xoops_load('XoopsPageNav');
                 $pagenav = new XoopsPageNav(
-                    $audioCount,
-                    $audioPaginationLimit,
-                    $start,
-                    'start',
-                    'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                    $audioCount, $audioPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }

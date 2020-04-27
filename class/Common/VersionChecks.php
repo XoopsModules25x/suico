@@ -13,6 +13,7 @@ namespace XoopsModules\Yogurt\Common;
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
+
 /**
  * Module: Yogurt
  *
@@ -147,8 +148,8 @@ trait VersionChecks
                         $latestVersion = \str_replace('final', '', mb_strtolower($latestVersion));
                     }
                     $moduleVersion = $helper->getConfig('version') . '_' . $helper->getConfig(
-                        'module_status'
-                    );
+                            'module_status'
+                        );
                     //"PHP-standardized" version
                     $moduleVersion = \str_replace(' ', '', mb_strtolower($moduleVersion));
                     //                    $moduleVersion = '1.0'; //for testing only

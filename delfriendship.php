@@ -26,7 +26,7 @@ require __DIR__ . '/header.php';
  * Factory of friendrequests created
  */
 $friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
-$friendshipFactory     = new Yogurt\FriendshipHandler($xoopsDB);
+$friendshipFactory    = new Yogurt\FriendshipHandler($xoopsDB);
 
 /**
  * Getting the uid of the user which user want to ask to be friend

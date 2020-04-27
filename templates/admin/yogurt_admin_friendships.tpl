@@ -33,20 +33,20 @@
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
-                <{foreach item=friendshipsArray from=$friendshipsArrays}>
+                <{foreach item=friendshipArray from=$friendshipsArray}>
                     <tr class="<{cycle values="odd,even"}>">
 
-                        <td align="center" style="vertical-align:middle;"><input type="checkbox" name="friendships_id[]" title="friendships_id[]" id="friendships_id[]" value="<{$friendshipsArray.friendships_id}>"></td>
-                        <td class='left'><{$friendshipsArray.friendship_id}></td>
-                        <td class='left'><{$friendshipsArray.friend1_uid}></td>
-                        <td class='left'><{$friendshipsArray.friend2_uid}></td>
-                        <td class='center'><{$friendshipsArray.level}></td>
-                        <td class='center'><{$friendshipsArray.hot}></td>
-                        <td class='center'><{$friendshipsArray.trust}></td>
-                        <td class='center'><{$friendshipsArray.cool}></td>
-                        <td class='center'><{$friendshipsArray.fan}></td>
-                        <td class='left'><{$friendshipsArray.date_created}></td>
-                        <td class='left'><{$friendshipsArray.date_updated}></td>
+                        <td align="center" style="vertical-align:middle;"><input type="checkbox" name="friendships_id[]" title="friendships_id[]" id="friendships_id[]" value="<{$friendshipArray.friendships_id}>"></td>
+                        <td class='left'><{$friendshipArray.friendship_id}></td>
+                        <td class='left'><{$friendshipArray.friend1_uid}></td>
+                        <td class='left'><{$friendshipArray.friend2_uid}></td>
+                        <td class='center'><{$friendshipArray.level}></td>
+                        <td class='center'><{$friendshipArray.hot}></td>
+                        <td class='center'><{$friendshipArray.trust}></td>
+                        <td class='center'><{$friendshipArray.cool}></td>
+                        <td class='center'><{$friendshipArray.fan}></td>
+                        <td class='left'><{$friendshipArray.date_created}></td>
+                        <td class='left'><{$friendshipArray.date_updated}></td>
 
 
                         <td class="center width5"><{$friendshipsArray.edit_delete}></td>
@@ -74,7 +74,7 @@
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
                 <tr>
-                    <td class="errorMsg" colspan="11">There are no $friendships</td>
+                    <td class="errorMsg" colspan="11">There are no friendships</td>
                 </tr>
             </table>
     </div>

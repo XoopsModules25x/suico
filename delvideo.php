@@ -35,7 +35,7 @@ if (!Request::hasVar('confirm', 'POST') || 1 !== Request::getInt('confirm', 0, '
             'cod_video' => $cod_video,
             'confirm'   => 1,
         ],
-        'delvideos.php',
+        'delvideo.php',
         _MD_YOGURT_ASKCONFIRMVIDEODELETION,
         _MD_YOGURT_CONFIRMVIDEODELETION
     );
@@ -49,7 +49,7 @@ if (!Request::hasVar('confirm', 'POST') || 1 !== Request::getInt('confirm', 0, '
     );
     $criteria_img = new Criteria('video_id', $cod_video);
     $uid          = (int)$xoopsUser->getVar('uid');
-    $criteriaUid = new Criteria('uid_owner', $uid);
+    $criteriaUid  = new Criteria('uid_owner', $uid);
     $criteria     = new CriteriaCompo($criteria_img);
     $criteria->add($criteriaUid);
 

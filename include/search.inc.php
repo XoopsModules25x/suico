@@ -47,8 +47,8 @@ function yogurt_search(
 ) {
     global $xoopsDB, $module;
     //getting the url to the uploads directory
-    $moduleHandler     = xoops_getHandler('module');
-    $modulo            = $moduleHandler->getByDirname('yogurt');
+    $moduleHandler = xoops_getHandler('module');
+    $modulo        = $moduleHandler->getByDirname('yogurt');
     /** @var \XoopsConfigHandler $configHandler */
     $configHandler     = xoops_getHandler('config');
     $moduleConfig      = $configHandler->getConfigsByCat(0, $modulo->getVar('mid'));
@@ -56,8 +56,8 @@ function yogurt_search(
 
     $ret = [];
     $sql = 'SELECT cod_img, title, caption,  date_created,  uid_owner, filename FROM ' . $xoopsDB->prefix(
-        'yogurt_images'
-    ) . ' WHERE ';
+            'yogurt_images'
+        ) . ' WHERE ';
     if (0 !== $userid) {
         $sql .= '(uid_owner =' . (int)$userid . ')';
     }
@@ -102,7 +102,18 @@ function yogurt_search(
                 $stringofimage .= '<a href="' . XOOPS_URL . '/modules/yogurt/album.php?uid=' . $myrow['uid_owner'] . '" title="' . $myrow['title'] . '"><img src="' . $path_uploadimages . '/yogurt/images/thumb_' . $myrow['filename'] . '"></a>&nbsp;';
             }
         } else {
-            $ret[$i]['image'] = "assets/images/search.png'><a href='" . XOOPS_URL . '/modules/yogurt/album.php?uid=' . $myrow['uid_owner'] . "'><img src='" . $path_uploadimages . '/yogurt/images/thumb_' . $myrow['filename'] . "'></a><br>" . "<img src='" . XOOPS_URL . '/modules/yogurt/images/search.png';
+            $ret[$i]['image'] = "assets/images/search.png'><a href='"
+                                . XOOPS_URL
+                                . '/modules/yogurt/album.php?uid='
+                                . $myrow['uid_owner']
+                                . "'><img src='"
+                                . $path_uploadimages
+                                . '/yogurt/images/thumb_'
+                                . $myrow['filename']
+                                . "'></a><br>"
+                                . "<img src='"
+                                . XOOPS_URL
+                                . '/modules/yogurt/images/search.png';
             $ret[$i]['link']  = 'album.php?uid=' . $myrow['uid_owner'];
             $ret[$i]['title'] = $myrow['title'];
             //$ret[$i]['time'] = $myrow['date_created'];

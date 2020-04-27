@@ -35,7 +35,7 @@ if ($friendrequestFactory->insert2($newFriendrequest)) {
     $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
     $extra_tags['X_OWNER_UID']  = $xoopsUser->getVar('uid');
     /** @var \XoopsNotificationHandler $notificationHandler */
-    $notificationHandler        = xoops_getHandler('notification');
+    $notificationHandler = xoops_getHandler('notification');
     $notificationHandler->triggerEvent('friendship', Request::getInt('friendrequestto_uid', 0, 'POST'), 'new_friendship', $extra_tags);
 
     redirect_header(

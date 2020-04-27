@@ -71,10 +71,9 @@ class FriendrequestForm extends XoopsThemeForm
         //include ID field, it's needed so the module knows if it is a new form or an edited form
 
         $hidden = new XoopsFormHidden(
-            'friendreq_id',
-            $this->targetObject->getVar(
-                'friendreq_id'
-            )
+            'friendreq_id', $this->targetObject->getVar(
+            'friendreq_id'
+        )
         );
         $this->addElement($hidden);
         unset($hidden);
@@ -82,38 +81,26 @@ class FriendrequestForm extends XoopsThemeForm
         // Friendpet_id
         $this->addElement(
             new XoopsFormLabel(
-                \AM_YOGURT_FRIENDREQUEST_FRIENDPET_ID,
-                $this->targetObject->getVar(
-                    'friendreq_id'
-                ),
+                \AM_YOGURT_FRIENDREQUEST_FRIENDPET_ID, $this->targetObject->getVar(
                 'friendreq_id'
+            ), 'friendreq_id'
             )
         );
         // Inviting by Friend_uid
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_YOGURT_FRIENDREQUEST_FRIENDREQUESTER_UID,
-                'friendrequester_uid',
-                false,
-                $this->targetObject->getVar(
-                    'friendrequester_uid'
-                ),
-                1,
-                false
+                \AM_YOGURT_FRIENDREQUEST_FRIENDREQUESTER_UID, 'friendrequester_uid', false, $this->targetObject->getVar(
+                'friendrequester_uid'
+            ), 1, false
             ),
             false
         );
         // Invited Friend_uid
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_YOGURT_FRIENDREQUEST_FRIENDREQUESTTO_UID,
-                'friendrequestto_uid',
-                false,
-                $this->targetObject->getVar(
-                    'friendrequestto_uid'
-                ),
-                1,
-                false
+                \AM_YOGURT_FRIENDREQUEST_FRIENDREQUESTTO_UID, 'friendrequestto_uid', false, $this->targetObject->getVar(
+                'friendrequestto_uid'
+            ), 1, false
             ),
             false
         );

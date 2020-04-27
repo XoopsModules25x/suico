@@ -43,7 +43,7 @@ switch ($op) {
         $adminObject->displayButton('left');
 
         $friendrequestObject = $friendrequestHandler->create();
-        $form                 = $friendrequestObject->getForm();
+        $form                = $friendrequestObject->getForm();
         $form->display();
         break;
 
@@ -75,7 +75,7 @@ switch ($op) {
         $adminObject->addItemButton(AM_YOGURT_FRIENDREQUEST_LIST, 'friendrequest.php', 'list');
         $adminObject->displayButton('left');
         $friendrequestObject = $friendrequestHandler->get(Request::getString('friendreq_id', ''));
-        $form                 = $friendrequestObject->getForm();
+        $form                = $friendrequestObject->getForm();
         $form->display();
         break;
 
@@ -121,7 +121,7 @@ switch ($op) {
     default:
         $adminObject->addItemButton(AM_YOGURT_ADD_FRIENDREQUEST, 'friendrequest.php?op=new', 'add');
         $adminObject->displayButton('left');
-        $start                         = Request::getInt('start', 0);
+        $start                        = Request::getInt('start', 0);
         $friendrequestPaginationLimit = $helper->getConfig('userpager');
 
         $criteria = new CriteriaCompo();
@@ -144,11 +144,7 @@ switch ($op) {
             xoops_load('XoopsPageNav');
 
             $pagenav = new XoopsPageNav(
-                $friendrequestTempRows,
-                $friendrequestPaginationLimit,
-                $start,
-                'start',
-                'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                $friendrequestTempRows, $friendrequestPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
@@ -204,11 +200,7 @@ switch ($op) {
             if ($friendrequestCount > $friendrequestPaginationLimit) {
                 xoops_load('XoopsPageNav');
                 $pagenav = new XoopsPageNav(
-                    $friendrequestCount,
-                    $friendrequestPaginationLimit,
-                    $start,
-                    'start',
-                    'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                    $friendrequestCount, $friendrequestPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }

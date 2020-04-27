@@ -23,7 +23,6 @@ namespace XoopsModules\Yogurt;
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 
-
 // Visitors.php,v 1
 //  ---------------------------------------------------------------- //
 // Author: Bruno Barthez                                               //
@@ -104,8 +103,8 @@ class Visitors extends XoopsObject
         $limit = 0,
         $start = 0
     ) {
-        $db          = XoopsDatabaseFactory::getDatabaseConnection();
-        $ret         = [];
+        $db         = XoopsDatabaseFactory::getDatabaseConnection();
+        $ret        = [];
         $whereQuery = '';
         if (\is_array($criteria) && \count($criteria) > 0) {
             $whereQuery = ' WHERE';
@@ -118,8 +117,8 @@ class Visitors extends XoopsObject
         }
         if (!$asobject) {
             $sql    = 'SELECT cod_visit FROM ' . $db->prefix(
-                'yogurt_visitors'
-            ) . "${whereQuery} ORDER BY ${sort} ${order}";
+                    'yogurt_visitors'
+                ) . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['yogurt_visitors_id'];

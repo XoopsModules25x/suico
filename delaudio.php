@@ -51,7 +51,7 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
     );
     $criteria_aud = new Criteria('audio_id', $cod_audio);
     $uid          = (int)$xoopsUser->getVar('uid');
-    $criteriaUid = new Criteria('uid_owner', $uid);
+    $criteriaUid  = new Criteria('uid_owner', $uid);
     $criteria     = new CriteriaCompo($criteria_aud);
     $criteria->add($criteriaUid);
 

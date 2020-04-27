@@ -34,7 +34,6 @@ $controller = new Yogurt\ConfigController($xoopsDB, $xoopsUser);
  */
 $nbSections = $controller->getNumbersSections();
 
-
 if (!$xoopsUser) {
     redirect_header('index.php');
 }

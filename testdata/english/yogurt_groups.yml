@@ -1,66 +1,56 @@
--
-    group_id: '12'
-    owner_uid: '1'
-    group_title: Facebook
-    group_desc: ''
-    group_img: group_1_5e8961ec22fe7.png
--
-    group_id: '9'
-    owner_uid: '1'
-    group_title: Google
-    group_desc: ''
-    group_img: group_1_5e8960c615341.png
--
-    group_id: '10'
-    owner_uid: '1'
-    group_title: XOOPS
-    group_desc: ''
-    group_img: group_1_5e8961cb23a58.jpg
--
-    group_id: '11'
-    owner_uid: '1'
-    group_title: Microsoft
-    group_desc: ''
-    group_img: group_1_5e8961dcb4d56.png
--
-    group_id: '13'
-    owner_uid: '2'
-    group_title: 'Horse Breeders'
-    group_desc: 'Horse Breeders Association'
-    group_img: group_2_5e96b93f6459a.jpg
--
-    group_id: '14'
-    owner_uid: '1'
-    group_title: Sharks
-    group_desc: Windsurfers
-    group_img: group_1_5e97c77470e2d.jpg
--
-    group_id: '15'
-    owner_uid: '1'
-    group_title: Horses2
-    group_desc: Horses3
-    group_img: group_1_5e981ff36847c.jpg
--
-    group_id: '16'
-    owner_uid: '1'
-    group_title: nthnt
-    group_desc: nthnthn
-    group_img: group_1_5e9823a05849f.jpg
--
-    group_id: '17'
-    owner_uid: '1'
-    group_title: ssss
-    group_desc: zzzzz
-    group_img: group_1_5e9823db58701.jpg
--
-    group_id: '18'
-    owner_uid: '1'
-    group_title: cccc
-    group_desc: ccccccc
-    group_img: group_1_5e9826f884256.jpg
--
-    group_id: '19'
-    owner_uid: '1'
-    group_title: nnnn
-    group_desc: nnnn
-    group_img: group_1_5e98272686c1d.jpg
+- group_id: '12'
+  owner_uid: '1'
+  group_title: Facebook
+  group_desc: ''
+  group_img: group_1_5e8961ec22fe7.png
+  date_created: '0'
+  date_updated: '0'
+- group_id: '9'
+  owner_uid: '1'
+  group_title: Google
+  group_desc: ''
+  group_img: group_1_5e8960c615341.png
+  date_created: '0'
+  date_updated: '0'
+- group_id: '10'
+  owner_uid: '1'
+  group_title: XOOPS
+  group_desc: ''
+  group_img: group_1_5e8961cb23a58.jpg
+  date_created: '0'
+  date_updated: '0'
+- group_id: '11'
+  owner_uid: '1'
+  group_title: Microsoft
+  group_desc: ''
+  group_img: group_1_5e8961dcb4d56.png
+  date_created: '0'
+  date_updated: '0'
+- group_id: '13'
+  owner_uid: '999'
+  group_title: 'Horse Breeders'
+  group_desc: 'Horse Breeders Association'
+  group_img: group_2_5e96b93f6459a.jpg
+  date_created: '0'
+  date_updated: '0'
+- group_id: '14'
+  owner_uid: '1'
+  group_title: Sharks
+  group_desc: Windsurfers
+  group_img: group_1_5e97c77470e2d.jpg
+  date_created: '0'
+  date_updated: '0'
+- group_id: '15'
+  owner_uid: '1'
+  group_title: Horses2
+  group_desc: Horses3
+  group_img: group_1_5e981ff36847c.jpg
+  date_created: '0'
+  date_updated: '0'
+- group_id: '20'
+  owner_uid: '1'
+  group_title: zzz
+  group_desc: zzzzz
+  group_img: group_1_5ea51221a8438.jpg
+  date_created: '0'
+  date_updated: '0'

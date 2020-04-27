@@ -99,8 +99,8 @@ class Ishot extends XoopsObject
         $limit = 0,
         $start = 0
     ) {
-        $db          = XoopsDatabaseFactory::getDatabaseConnection();
-        $ret         = [];
+        $db         = XoopsDatabaseFactory::getDatabaseConnection();
+        $ret        = [];
         $whereQuery = '';
         if (\is_array($criteria) && \count($criteria) > 0) {
             $whereQuery = ' WHERE';
@@ -113,8 +113,8 @@ class Ishot extends XoopsObject
         }
         if (!$asobject) {
             $sql    = 'SELECT cod_ishot FROM ' . $db->prefix(
-                'yogurt_ishot'
-            ) . "${whereQuery} ORDER BY ${sort} ${order}";
+                    'yogurt_ishot'
+                ) . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['yogurt_ishot_id'];

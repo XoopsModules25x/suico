@@ -72,8 +72,7 @@ class AudioForm extends XoopsThemeForm
         //include ID field, it's needed so the module knows if it is a new form or an edited form
 
         $hidden = new XoopsFormHidden(
-            'audio_id',
-            $this->targetObject->getVar(
+            'audio_id', $this->targetObject->getVar(
             'audio_id'
         )
         );
@@ -118,35 +117,23 @@ class AudioForm extends XoopsThemeForm
             //$this->addElement( new \XoopsFormEditor(AM_YOGURT_AUDIO_DESCRIPTION, 'description', $editorOptions), false  );
             if ($this->helper->isUserAdmin()) {
                 $descEditor = new XoopsFormEditor(
-                    \AM_YOGURT_AUDIO_DESCRIPTION,
-                    $this->helper->getConfig(
-                        'yogurtEditorAdmin'
-                    ),
-                    $editorOptions,
-                    $nohtml = false,
-                    $onfailure = 'textarea'
+                    \AM_YOGURT_AUDIO_DESCRIPTION, $this->helper->getConfig(
+                    'yogurtEditorAdmin'
+                ), $editorOptions, $nohtml = false, $onfailure = 'textarea'
                 );
             } else {
                 $descEditor = new XoopsFormEditor(
-                    \AM_YOGURT_AUDIO_DESCRIPTION,
-                    $this->helper->getConfig(
-                        'yogurtEditorUser'
-                    ),
-                    $editorOptions,
-                    $nohtml = false,
-                    $onfailure = 'textarea'
+                    \AM_YOGURT_AUDIO_DESCRIPTION, $this->helper->getConfig(
+                    'yogurtEditorUser'
+                ), $editorOptions, $nohtml = false, $onfailure = 'textarea'
                 );
             }
         } else {
             $descEditor = new XoopsFormDhtmlTextArea(
-                \AM_YOGURT_AUDIO_DESCRIPTION,
+                \AM_YOGURT_AUDIO_DESCRIPTION, 'description', $this->targetObject->getVar(
                 'description',
-                $this->targetObject->getVar(
-                    'description',
-                    'e'
-                ),
-                5,
-                50
+                'e'
+            ), 5, 50
             );
         }
         $this->addElement($descEditor);

@@ -1,24 +1,24 @@
 CREATE TABLE `yogurt_images` (
-    `cod_img`       INT(11)      NOT NULL AUTO_INCREMENT,
-    `title`         VARCHAR(255) NOT NULL,
-    `caption`       VARCHAR(255) NOT NULL,
+    `cod_img`      INT(11)          NOT NULL AUTO_INCREMENT,
+    `title`        VARCHAR(255)     NOT NULL,
+    `caption`      VARCHAR(255)     NOT NULL,
     `date_created` INT(11) UNSIGNED NOT NULL DEFAULT 0,
     `date_updated` INT(11) UNSIGNED NOT NULL DEFAULT 0,
-    `uid_owner`     VARCHAR(50)  NOT NULL,
-    `filename`          VARCHAR(50)      NOT NULL,
-    `private`       TINYINT(1)   NOT NULL,
+    `uid_owner`    VARCHAR(50)      NOT NULL,
+    `filename`     VARCHAR(50)      NOT NULL,
+    `private`      TINYINT(1)       NOT NULL,
     PRIMARY KEY (`cod_img`)
 )
     ENGINE = MyISAM;
 CREATE TABLE `yogurt_friendships` (
-    `friendship_id` INT(11)    NOT NULL AUTO_INCREMENT,
-    `friend1_uid`   INT(11)    NOT NULL,
-    `friend2_uid`   INT(11)    NOT NULL,
-    `level`         INT(11)    NOT NULL,
-    `hot`           TINYINT(4) NOT NULL,
-    `trust`         TINYINT(4) NOT NULL,
-    `cool`          TINYINT(4) NOT NULL,
-    `fan`           TINYINT(4) NOT NULL,
+    `friendship_id` INT(11)          NOT NULL AUTO_INCREMENT,
+    `friend1_uid`   INT(11)          NOT NULL,
+    `friend2_uid`   INT(11)          NOT NULL,
+    `level`         INT(11)          NOT NULL,
+    `hot`           TINYINT(4)       NOT NULL,
+    `trust`         TINYINT(4)       NOT NULL,
+    `cool`          TINYINT(4)       NOT NULL,
+    `fan`           TINYINT(4)       NOT NULL,
     `date_created`  INT(11) UNSIGNED NOT NULL DEFAULT 0,
     `date_updated`  INT(11) UNSIGNED NOT NULL DEFAULT 0,
     PRIMARY KEY (`friendship_id`)
@@ -26,43 +26,42 @@ CREATE TABLE `yogurt_friendships` (
     ENGINE = MyISAM;
 
 CREATE TABLE `yogurt_visitors` (
-    `cod_visit`     INT(11)     NOT NULL AUTO_INCREMENT,
-    `uid_owner`     INT(11)     NOT NULL,
-    `uid_visitor`   INT(11)     NOT NULL,
-    `uname_visitor` VARCHAR(30) NOT NULL,
+    `cod_visit`     INT(11)          NOT NULL AUTO_INCREMENT,
+    `uid_owner`     INT(11)          NOT NULL,
+    `uid_visitor`   INT(11)          NOT NULL,
+    `uname_visitor` VARCHAR(30)      NOT NULL,
     `date_visited`  INT(11) UNSIGNED NOT NULL DEFAULT 0,
     PRIMARY KEY (`cod_visit`)
 )
     ENGINE = MyISAM;
 
 CREATE TABLE `yogurt_videos` (
-    `video_id`     INT(11)     NOT NULL AUTO_INCREMENT,
-    `uid_owner`    INT(11)     NOT NULL,
-    `video_desc`   TEXT        NOT NULL,
-    `youtube_code` VARCHAR(11) NOT NULL,
+    `video_id`     INT(11)          NOT NULL AUTO_INCREMENT,
+    `uid_owner`    INT(11)          NOT NULL,
+    `video_desc`   TEXT             NOT NULL,
+    `youtube_code` VARCHAR(11)      NOT NULL,
     `main_video`   TINYINT(1)       NOT NULL DEFAULT 0,
     `date_created` INT(11) UNSIGNED NOT NULL DEFAULT 0,
     `date_updated` INT(11) UNSIGNED NOT NULL DEFAULT 0,
     PRIMARY KEY (`video_id`)
 )
     ENGINE = MyISAM;
+
 CREATE TABLE `yogurt_friendrequests` (
-    `friendreq_id`   INT(11) NOT NULL AUTO_INCREMENT,
-    `friendrequester_uid` INT(11) NOT NULL,
-    `friendrequestto_uid` INT(11) NOT NULL,
+    `friendreq_id`        INT(11)          NOT NULL AUTO_INCREMENT,
+    `friendrequester_uid` INT(11)          NOT NULL,
+    `friendrequestto_uid` INT(11)          NOT NULL,
     `date_created`        INT(11) UNSIGNED NOT NULL DEFAULT 0,
     PRIMARY KEY (`friendreq_id`)
 )
     ENGINE = MyISAM;
 
-
-
 CREATE TABLE `yogurt_groups` (
-    `group_id`    INT(11)      NOT NULL AUTO_INCREMENT,
-    `owner_uid`   INT(11)      NOT NULL,
-    `group_title` VARCHAR(255) NOT NULL,
-    `group_desc`  TINYTEXT     NOT NULL,
-    `group_img`   VARCHAR(255) NOT NULL,
+    `group_id`     INT(11)      NOT NULL AUTO_INCREMENT,
+    `owner_uid`    INT(11)      NOT NULL,
+    `group_title`  VARCHAR(255) NOT NULL,
+    `group_desc`   TINYTEXT     NOT NULL,
+    `group_img`    VARCHAR(255) NOT NULL,
     `date_created` INT(11)      NOT NULL,
     `date_updated` INT(11)      NOT NULL,
     PRIMARY KEY (`group_id`)
@@ -78,11 +77,11 @@ CREATE TABLE `yogurt_relgroupuser` (
     ENGINE = MyISAM;
 
 CREATE TABLE `yogurt_notes` (
-    `note_id`   INT(11)    NOT NULL AUTO_INCREMENT,
-    `note_text` TEXT       NOT NULL,
-    `note_from` INT(11)    NOT NULL,
-    `note_to`   INT(11)    NOT NULL,
-    `private`   TINYINT(1) NOT NULL,
+    `note_id`      INT(11)          NOT NULL AUTO_INCREMENT,
+    `note_text`    TEXT             NOT NULL,
+    `note_from`    INT(11)          NOT NULL,
+    `note_to`      INT(11)          NOT NULL,
+    `private`      TINYINT(1)       NOT NULL,
     `date_created` INT(11) UNSIGNED NOT NULL DEFAULT 0,
     `date_updated` INT(11) UNSIGNED NOT NULL DEFAULT 0,
     PRIMARY KEY (`note_id`)
@@ -123,12 +122,12 @@ CREATE TABLE `yogurt_suspensions` (
     ENGINE = MyISAM;
 
 CREATE TABLE `yogurt_audios` (
-    `audio_id`      INT(11)      NOT NULL AUTO_INCREMENT,
-    `title`         VARCHAR(100) NOT NULL,
-    `author`        VARCHAR(100) NOT NULL,
+    `audio_id`     INT(11)          NOT NULL AUTO_INCREMENT,
+    `title`        VARCHAR(100)     NOT NULL,
+    `author`       VARCHAR(100)     NOT NULL,
     `description`  TEXT             NOT NULL,
-    `filename`           VARCHAR(50) NOT NULL,
-    `uid_owner`     INT(11)      NOT NULL,
+    `filename`     VARCHAR(50)      NOT NULL,
+    `uid_owner`    INT(11)          NOT NULL,
     `date_created` INT(11) UNSIGNED NOT NULL DEFAULT 0,
     `date_updated` INT(11) UNSIGNED NOT NULL DEFAULT 0,
     PRIMARY KEY (`audio_id`)

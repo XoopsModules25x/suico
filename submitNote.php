@@ -42,22 +42,22 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 
 $myts         = MyTextSanitizer::getInstance();
 $notebook_uid = Request::getInt('uid', 0, 'POST');
-$noteText    = $myts->displayTarea(Request::getText('text', '', 'POST'), 0, 1, 1, 1, 1);
+$noteText     = $myts->displayTarea(Request::getText('text', '', 'POST'), 0, 1, 1, 1, 1);
 $mainform     = !empty($_POST['mainform']) ? 1 : 0;
-$noteObj         = $notesFactory->create();
+$noteObj      = $notesFactory->create();
 $noteObj->setVar('note_text', $noteText);
 $noteObj->setVar('note_from', $xoopsUser->getVar('uid'));
 $noteObj->setVar('note_to', $notebook_uid);
 $noteObj->setVar('date_created', time());
 $notesFactory->insert2($noteObj);
-$noteId=$xoopsDB->getInsertId();
+$noteId                     = $xoopsDB->getInsertId();
 $extra_tags['X_OWNER_NAME'] = $xoopsUser::getUnameFromId($notebook_uid);
 $extra_tags['X_OWNER_UID']  = $notebook_uid;
 /** @var \XoopsNotificationHandler $notificationHandler */
-$notificationHandler        = xoops_getHandler('notification');
+$notificationHandler = xoops_getHandler('notification');
 $notificationHandler->triggerEvent('Note', $xoopsUser->getVar('uid'), 'new_Note', $extra_tags);
 if (1 == $mainform) {
-    redirect_header('notebook.php?uid=' . $notebook_uid .'#' . $noteId, 1, _MD_YOGURT_NOTE_SENT);
+    redirect_header('notebook.php?uid=' . $notebook_uid . '#' . $noteId, 1, _MD_YOGURT_NOTE_SENT);
 } else {
     redirect_header('notebook.php?uid=' . $xoopsUser->getVar('uid'), 1, _MD_YOGURT_NOTE_SENT);
 }

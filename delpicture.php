@@ -49,7 +49,7 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
     );
     $criteria_img = new Criteria('cod_img', $cod_img);
     $uid          = (int)$xoopsUser->getVar('uid');
-    $criteriaUid = new Criteria('uid_owner', $uid);
+    $criteriaUid  = new Criteria('uid_owner', $uid);
     $criteria     = new CriteriaCompo($criteria_img);
     $criteria->add($criteriaUid);
 

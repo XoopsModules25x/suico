@@ -46,8 +46,7 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 //Verify if the user has already asked for friendship or if the user he s asking to be a friend has already asked him
 $criteria = new CriteriaCompo(
     new Criteria(
-        'friendrequestto_uid',
-        $friendrequestfrom_uid
+        'friendrequestto_uid', $friendrequestfrom_uid
     )
 );
 $criteria->add(new Criteria('friendrequester_uid', $xoopsUser->getVar('uid')));
@@ -79,7 +78,7 @@ if ($friendrequestFactory->insert2($newFriendrequest)) {
     $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
     $extra_tags['X_OWNER_UID']  = $xoopsUser->getVar('uid');
     /** @var \XoopsNotificationHandler $notificationHandler */
-    $notificationHandler        = xoops_getHandler('notification');
+    $notificationHandler = xoops_getHandler('notification');
     $notificationHandler->triggerEvent('friendship', Request::getInt('friendrequestfrom_uid', 0, 'POST'), 'new_friendship', $extra_tags);
 
     redirect_header(

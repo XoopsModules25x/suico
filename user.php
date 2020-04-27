@@ -46,5 +46,4 @@ if (($xoopsUser)) {
     redirect_header('' . XOOPS_URL . "/modules/yogurt/index.php?uid=$uid_owner");
 }
 
-
 require_once XOOPS_ROOT_PATH . '/footer.php';

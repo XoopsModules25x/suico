@@ -42,10 +42,10 @@ $group    = $groups[0];
  * Fetching rel_id
  */
 
-$sql                 = 'SELECT * FROM ' . $GLOBALS['xoopsDB']->prefix('yogurt_relgroupuser') . ' WHERE rel_group_id='.$group_id.' AND rel_user_uid='.$controller->uidOwner.'';
-$result              = $GLOBALS['xoopsDB']->query($sql);
-$myrow               = $GLOBALS['xoopsDB']->fetchArray($result);
-$mygroup['rel_id']   = $myrow['rel_id'];
+$sql               = 'SELECT * FROM ' . $GLOBALS['xoopsDB']->prefix('yogurt_relgroupuser') . ' WHERE rel_group_id=' . $group_id . ' AND rel_user_uid=' . $controller->uidOwner . '';
+$result            = $GLOBALS['xoopsDB']->query($sql);
+$myrow             = $GLOBALS['xoopsDB']->fetchArray($result);
+$mygroup['rel_id'] = $myrow['rel_id'];
 $xoopsTpl->assign('group_rel_id', $mygroup['rel_id']);
 
 /**
@@ -57,10 +57,10 @@ $group_members = $controller->relgroupusersFactory->getUsersFromGroup(
     50
 );
 
-$grouptotalmembers=0;
+$grouptotalmembers = 0;
 foreach ($group_members as $group_member) {
     $uids[] = (int)$group_member['uid'];
-	$grouptotalmembers++;
+    $grouptotalmembers++;
 }
 $xoopsTpl->assign('grouptotalmembers', $grouptotalmembers . ' ' . _MD_YOGURT_GROUPMEMBERS);
 

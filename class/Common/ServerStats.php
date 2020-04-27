@@ -43,8 +43,8 @@ trait ServerStats
         //        list($meta) = $GLOBALS['xoopsDB']->fetchRow($query);
         $html .= '<fieldset>';
         $html .= "<legend style='font-weight: bold; color: #900;'>" . \constant(
-            'CO_' . $moduleDirNameUpper . '_IMAGEINFO'
-        ) . '</legend>';
+                'CO_' . $moduleDirNameUpper . '_IMAGEINFO'
+            ) . '</legend>';
         $html .= "<div style='padding: 8px;'>";
         //        $html .= '<div>' . constant('CO_' . $moduleDirNameUpper . '_METAVERSION') . $meta . "</div>";
         //        $html .= "<br>";
@@ -53,16 +53,16 @@ trait ServerStats
         $html .= '<ul>';
 
         $gdlib = \function_exists('gd_info') ? '<span style="color: #008000;">' . \constant(
-            'CO_' . $moduleDirNameUpper . '_GDON'
-        ) . '</span>' : '<span style="color: #ff0000;">' . \constant(
+                'CO_' . $moduleDirNameUpper . '_GDON'
+            ) . '</span>' : '<span style="color: #ff0000;">' . \constant(
                 'CO_' . $moduleDirNameUpper . '_GDOFF'
             ) . '</span>';
         $html  .= '<li>' . \constant('CO_' . $moduleDirNameUpper . '_GDLIBSTATUS') . $gdlib;
         if (\function_exists('gd_info')) {
             if (true === ($gdlib = gd_info())) {
                 $html .= '<li>' . \constant(
-                    'CO_' . $moduleDirNameUpper . '_GDLIBVERSION'
-                ) . '<b>' . $gdlib['GD Version'] . '</b>';
+                        'CO_' . $moduleDirNameUpper . '_GDLIBVERSION'
+                    ) . '<b>' . $gdlib['GD Version'] . '</b>';
             }
         }
 
@@ -75,27 +75,27 @@ trait ServerStats
         $downloads = \ini_get(
             'file_uploads'
         ) ? '<span style="color: #008000;">' . \constant(
-            'CO_' . $moduleDirNameUpper . '_ON'
-        ) . '</span>' : '<span style="color: #ff0000;">' . \constant(
+                'CO_' . $moduleDirNameUpper . '_ON'
+            ) . '</span>' : '<span style="color: #ff0000;">' . \constant(
                 'CO_' . $moduleDirNameUpper . '_OFF'
             ) . '</span>';
         $html      .= '<li>' . \constant('CO_' . $moduleDirNameUpper . '_SERVERUPLOADSTATUS') . $downloads;
 
         $html .= '<li>' . \constant(
-            'CO_' . $moduleDirNameUpper . '_MAXUPLOADSIZE'
-        ) . ' <b><span style="color: #0000ff;">' . \ini_get(
-                'upload_max_filesize'
-            ) . '</span></b>';
+                'CO_' . $moduleDirNameUpper . '_MAXUPLOADSIZE'
+            ) . ' <b><span style="color: #0000ff;">' . \ini_get(
+                     'upload_max_filesize'
+                 ) . '</span></b>';
         $html .= '<li>' . \constant(
-            'CO_' . $moduleDirNameUpper . '_MAXPOSTSIZE'
-        ) . ' <b><span style="color: #0000ff;">' . \ini_get(
-                'post_max_size'
-            ) . '</span></b>';
+                'CO_' . $moduleDirNameUpper . '_MAXPOSTSIZE'
+            ) . ' <b><span style="color: #0000ff;">' . \ini_get(
+                     'post_max_size'
+                 ) . '</span></b>';
         $html .= '<li>' . \constant(
-            'CO_' . $moduleDirNameUpper . '_MEMORYLIMIT'
-        ) . ' <b><span style="color: #0000ff;">' . \ini_get(
-                'memory_limit'
-            ) . '</span></b>';
+                'CO_' . $moduleDirNameUpper . '_MEMORYLIMIT'
+            ) . ' <b><span style="color: #0000ff;">' . \ini_get(
+                     'memory_limit'
+                 ) . '</span></b>';
         $html .= '</ul>';
         $html .= '<ul>';
         $html .= '<li>' . \constant('CO_' . $moduleDirNameUpper . '_SERVERPATH') . ' <b>' . XOOPS_ROOT_PATH . '</b>';

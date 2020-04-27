@@ -22,7 +22,7 @@ namespace XoopsModules\Yogurt\Common;
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
-*/ 
+ */
 
 use Xmf\Request;
 use XoopsModules\Yogurt;
@@ -63,35 +63,34 @@ class FileChecker
             if (self::fileExists($file_path)) {
                 $pathStatus = "<img src='${pathIcon16}/1.png'>";
                 $pathStatus .= "${file_path} (" . \constant(
-                    'CO_' . $moduleDirNameUpper . '_' . 'FC_AVAILABLE'
-                ) . ') ';
+                        'CO_' . $moduleDirNameUpper . '_' . 'FC_AVAILABLE'
+                    ) . ') ';
             } else {
                 $pathStatus = "<img src='${pathIcon16}/0.png'>";
                 $pathStatus .= "${file_path} (" . \constant(
-                    'CO_' . $moduleDirNameUpper . '_' . 'FC_NOTAVAILABLE'
-                ) . ') ';
+                        'CO_' . $moduleDirNameUpper . '_' . 'FC_NOTAVAILABLE'
+                    ) . ') ';
             }
         } elseif (self::compareFiles($file_path, $original_file_path)) {
             $pathStatus = "<img src='${pathIcon16}/1.png'>";
             $pathStatus .= "${file_path} (" . \constant(
-                'CO_' . $moduleDirNameUpper . '_' . 'FC_AVAILABLE'
-            ) . ') ';
+                    'CO_' . $moduleDirNameUpper . '_' . 'FC_AVAILABLE'
+                ) . ') ';
         } else {
             $pathStatus = "<img src='${pathIcon16}/0.png'>";
             $pathStatus .= "${file_path} (" . \constant(
-                'CO_' . $moduleDirNameUpper . '_' . 'FC_NOTAVAILABLE'
-            ) . ') ';
+                    'CO_' . $moduleDirNameUpper . '_' . 'FC_NOTAVAILABLE'
+                ) . ') ';
             $pathStatus .= "<form action='" . $_SERVER['SCRIPT_NAME'] . "' method='post'>";
             $pathStatus .= "<input type='hidden' name='op' value='copyfile'>";
             $pathStatus .= "<input type='hidden' name='file_path' value='${file_path}'>";
             $pathStatus .= "<input type='hidden' name='original_file_path' value='${original_file_path}'>";
             $pathStatus .= "<input type='hidden' name='redirect' value='${redirectFile}'>";
             $pathStatus .= "<button class='submit' onClick='this.form.submit();'>" . \constant(
-                'CO_' . $moduleDirNameUpper . '_' . 'FC_CREATETHEFILE'
-            ) . '</button>';
+                    'CO_' . $moduleDirNameUpper . '_' . 'FC_CREATETHEFILE'
+                ) . '</button>';
             $pathStatus .= '</form>';
         }
-
 
         return $pathStatus;
     }

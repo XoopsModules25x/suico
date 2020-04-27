@@ -65,7 +65,7 @@ class AudioController extends YogurtController
 
     /**
      * Assign Audio Content to Template
-     * @param int $nbAudios
+     * @param int   $nbAudios
      * @param array $audios
      * @return bool|array
      * @throws Exception
@@ -82,16 +82,16 @@ class AudioController extends YogurtController
         /**
          * Lets populate an array with the data from the audio
          */
-        $i = 0;
+        $i           = 0;
         $audiosArray = [];
         foreach ($audios as $audio) {
-            $audiosArray[$i]['filename']    = $audio->getVar('filename', 's');
-            $audiosArray[$i]['title']  = $audio->getVar('title', 's');
-            $audiosArray[$i]['id']     = $audio->getVar('audio_id', 's');
-            $audiosArray[$i]['author'] = $audio->getVar('author', 's');
-			$audiosArray[$i]['date_created'] = formatTimestamp($audio->getVar('date_created', 's'));
-			$audiosArray[$i]['date_updated'] = formatTimestamp($audio->getVar('date_updated', 's'));
-            $audio_path = XOOPS_ROOT_PATH . '/uploads/yogurt/audio/' . $audio->getVar('filename', 's');
+            $audiosArray[$i]['filename']     = $audio->getVar('filename', 's');
+            $audiosArray[$i]['title']        = $audio->getVar('title', 's');
+            $audiosArray[$i]['id']           = $audio->getVar('audio_id', 's');
+            $audiosArray[$i]['author']       = $audio->getVar('author', 's');
+            $audiosArray[$i]['date_created'] = formatTimestamp($audio->getVar('date_created', 's'));
+            $audiosArray[$i]['date_updated'] = formatTimestamp($audio->getVar('date_updated', 's'));
+            $audio_path                      = XOOPS_ROOT_PATH . '/uploads/yogurt/audio/' . $audio->getVar('filename', 's');
             // echo $audio_path;
             $mp3filemetainfo                = new Id3v1($audio_path, true);
             $mp3filemetainfoarray           = [];

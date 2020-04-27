@@ -64,7 +64,7 @@ class Image extends XoopsObject
         $this->initVar('cod_img', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('title', \XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('caption', \XOBJ_DTYPE_TXTBOX, null, false);
-		$this->initVar('date_created', \XOBJ_DTYPE_INT, 0, false);
+        $this->initVar('date_created', \XOBJ_DTYPE_INT, 0, false);
         $this->initVar('date_updated', \XOBJ_DTYPE_INT, 0, false);
         $this->initVar('uid_owner', \XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('filename', \XOBJ_DTYPE_OTHER, null, false);
@@ -110,8 +110,8 @@ class Image extends XoopsObject
         $limit = 0,
         $start = 0
     ) {
-        $db          = XoopsDatabaseFactory::getDatabaseConnection();
-        $ret         = [];
+        $db         = XoopsDatabaseFactory::getDatabaseConnection();
+        $ret        = [];
         $whereQuery = '';
         if (\is_array($criteria) && \count($criteria) > 0) {
             $whereQuery = ' WHERE';

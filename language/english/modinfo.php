@@ -20,7 +20,7 @@ declare(strict_types=1);
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
- 
+
 define(
     '_MI_YOGURT_NUMBPICT_TITLE',
     'Number of Pictures'
@@ -401,7 +401,6 @@ define('_MI_YOGURT_DISPLAYONLINESTATUS_DSC', 'Hide or Display Members Online Sta
 //define('_MI_YOGURT_CONFIG_COMMENTANDNOTIFICATION', '<h4>:: Comment & Notification Preferences ::</h4>');
 //define('_MI_YOGURT_CONFIG_COMMENTANDNOTIFICATION_DSC', '');
 
-
 //Config Categories Styling:
 
 define('_MI_YOGURT_CONFIG_STYLING_START', '<span style="color: #FF0000; font-size: Small;  font-weight: bold;">:: ');
@@ -448,3 +447,8 @@ define('_MI_YOGURT_CONFIG_ADMIN_DSC', _MI_YOGURT_CONFIG_STYLING_DESC_START . _MI
 
 define('_MI_YOGURT_CONFIG_COMMENTANDNOTIFICATION', _MI_YOGURT_CONFIG_STYLING_START . _MI_YOGURT_CONFCAT_COMMENTANDNOTIFICATION . _MI_YOGURT_CONFIG_STYLING_END);
 define('_MI_YOGURT_CONFIG_COMMENTANDNOTIFICATION_DSC', _MI_YOGURT_CONFIG_STYLING_DESC_START . _MI_YOGURT_CONFCAT_COMMENTANDNOTIFICATION_DSC . _MI_YOGURT_CONFIG_STYLING_DESC_END);
+
+define('MI_YOGURT_ADMINPAGER', 'Admin: records / page');
+define('MI_YOGURT_ADMINPAGER_DESC', 'Admin: # of records shown per page');
+define('MI_YOGURT_USERPAGER', 'User: records / page');
+define('MI_YOGURT_USERPAGER_DESC', 'User: # of records shown per page');

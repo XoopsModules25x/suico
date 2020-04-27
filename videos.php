@@ -47,9 +47,9 @@ $criteriaUidVideo->setLimit($helper->getConfig('videosperpage'));
 /**
  * Get all videos of this user and assign them to template
  */
-$videos       = $controller->getVideos($criteriaUidVideo);
+$videos      = $controller->getVideos($criteriaUidVideo);
 $videosArray = [];
-$pageNav = '';
+$pageNav     = '';
 if (isset($nbSections['nbVideos'])) {
     $videosArray = $controller->assignVideoContent($nbSections['nbVideos'], $videos);
 }

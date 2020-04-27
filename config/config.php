@@ -91,25 +91,25 @@ return (object)[
         'yogurt_Configs'        => 'yogurt_configs',
         'yogurt_friendpetition' => 'yogurt_friendrequests',
         'yogurt_audio'          => 'yogurt_audios',
-        'yogurt_friendships'     => 'yogurt_friendships',
+        'yogurt_friendship'     => 'yogurt_friendships',
     ],
     'renameColumns'   => [
         '3.5' => [
-            'yogurt_notes'         => [
+            'yogurt_notes'          => [
                 'Note_id'   => 'note_id',
-                'Note_text' => 'yogurt_configs',
-                'Note_from' => 'note_text',
-                'Note_to'   => 'note_from',
+                'Note_text' => 'note_text',
+                'Note_from' => 'note_from',
+                'Note_to'   => 'note_to',
             ],
             'yogurt_friendrequests' => [
                 'requespet_uid' => 'friendreq_id',
                 'requester_uid' => 'friendrequester_uid',
                 'requestto_uid' => 'friendrequestto_uid',
             ],
-            'yogurt_audios'        => [
+            'yogurt_audios'         => [
                 'url' => 'filename',
             ],
-            'yogurt_images'        => [
+            'yogurt_images'         => [
                 'url' => 'filename',
             ],
         ],
