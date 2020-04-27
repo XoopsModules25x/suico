@@ -34,4 +34,40 @@ class YogurtCorePreload extends XoopsPreloadItem
     {
         require __DIR__ . '/autoloader.php';
     }
+	
+	/**
+     * @param $args
+     */
+    public static function eventCoreUserStart($args)
+    {
+        $op = 'main';
+        if (isset($_POST['op'])) {
+            $op = trim($_POST['op']);
+        } elseif (isset($_GET['op'])) {
+            $op = trim($_GET['op']);
+        }
+        if ($op !== 'login' && (empty($_GET['from']) || 'yogurt' !== $_GET['from'])) {
+            header('location: ./modules/yogurt/user.php' . (empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING']));
+            exit();
+        }
+    }
+
+    /**
+     * @param $args
+     */
+    public static function eventCoreEdituserStart($args)
+    {
+        header('location: ./modules/yogurt/edituser.php' . (empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING']));
+        exit();
+    }
+
+	/**
+     * @param $args
+     */
+    public static function eventCoreUserinfoStart($args)
+    {
+        header('location: ./modules/yogurt/index.php' . (empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING']));
+        exit();
+    }
+	
 }
