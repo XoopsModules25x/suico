@@ -56,10 +56,12 @@ switch ($op) {
         } else {
             $audioObject = $audioHandler->create();
         }
+
         // Form save fields
+        $audioObject->setVar('uid_owner', Request::getVar('uid_owner', ''));
         $audioObject->setVar('title', Request::getVar('title', ''));
         $audioObject->setVar('author', Request::getVar('author', ''));
-
+        $audioObject->setVar('description', Request::getText('description', ''));
         //        $audioObject->setVar('filename', Request::getVar('filename', ''));
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/audio/';
@@ -77,8 +79,6 @@ switch ($op) {
                 $audioObject->setVar("filename", $uploader->getSavedFileName());
             }
         }
-
-        $audioObject->setVar('uid_owner', Request::getVar('uid_owner', ''));
 
         $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_created', '', 'POST'));
         $audioObject->setVar('date_created', $dateTimeObj->getTimestamp());
@@ -202,19 +202,22 @@ switch ($op) {
                 );
                 $audioArray['audio_id'] = $audioTempArray[$i]->getVar('audio_id');
 
-                $GLOBALS['xoopsTpl']->assign('selectortitle', AM_YOGURT_AUDIO_TITLE);
-                $audioArray['title'] = $audioTempArray[$i]->getVar('title');
-
-                $GLOBALS['xoopsTpl']->assign('selectorauthor', AM_YOGURT_AUDIO_AUTHOR);
-                $audioArray['author'] = $audioTempArray[$i]->getVar('author');
-
-                $GLOBALS['xoopsTpl']->assign('selectorurl', AM_YOGURT_AUDIO_URL);
-                $audioArray['filename'] = $audioTempArray[$i]->getVar('filename');
-
                 $GLOBALS['xoopsTpl']->assign('selectoruid_owner', AM_YOGURT_AUDIO_UID_OWNER);
                 $audioArray['uid_owner'] = strip_tags(
                     XoopsUser::getUnameFromId($audioTempArray[$i]->getVar('uid_owner'))
                 );
+
+                $GLOBALS['xoopsTpl']->assign('selectorauthor', AM_YOGURT_AUDIO_AUTHOR);
+                $audioArray['author'] = $audioTempArray[$i]->getVar('author');
+
+                $GLOBALS['xoopsTpl']->assign('selectortitle', AM_YOGURT_AUDIO_TITLE);
+                $audioArray['title'] = $audioTempArray[$i]->getVar('title');
+
+                $GLOBALS['xoopsTpl']->assign('selectordescription', AM_YOGURT_AUDIO_DESCRIPTION);
+                $audioArray['description'] = $audioTempArray[$i]->getVar('description');
+
+                $GLOBALS['xoopsTpl']->assign('selectorfilename', AM_YOGURT_AUDIO_URL);
+                $audioArray['filename'] = $audioTempArray[$i]->getVar('filename');
 
                 $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_AUDIO_DATE_CREATED);
                 $audioArray['date_created'] = formatTimestamp($audioTempArray[$i]->getVar('date_created'), 's');
@@ -226,7 +229,7 @@ switch ($op) {
                <a href='audios.php?op=delete&audio_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='audios.php?op=clone&audio_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
-                $GLOBALS['xoopsTpl']->append_by_ref('audioArrays', $audioArray);
+                $GLOBALS['xoopsTpl']->append_by_ref('audiosArrays', $audioArray);
                 unset($audioArray);
             }
             unset($audioTempArray);

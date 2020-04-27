@@ -63,10 +63,11 @@ class Audio extends XoopsObject
         $this->permHelper = new Permission();
         $this->db         = XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('audio_id', \XOBJ_DTYPE_INT, null, false, 10);
-        $this->initVar('title', \XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('author', \XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('filename', \XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('uid_owner', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('author', \XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('title', \XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('description', \XOBJ_DTYPE_OTHER, null, false);
+        $this->initVar('filename', \XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('date_created', \XOBJ_DTYPE_INT, 0, false);
         $this->initVar('date_updated', \XOBJ_DTYPE_INT, 0, false);
         if (null !== ($id)) {

@@ -146,23 +146,24 @@ class AudioHandler extends XoopsPersistableObjectHandler
         if ($xoopsObject->isNew()) {
             // adding / modifying a yogurt_audio
             $xoopsObject = new Audio();
-            $format      = 'INSERT INTO %s (audio_id, title, author, filename, uid_owner, date_created, date_updated)';
-            $format      .= ' VALUES (%u, %s, %s, %s, %u, %s, %s)';
+            $format      = 'INSERT INTO %s (audio_id, title, author, description, filename, uid_owner, date_created, date_updated)';
+            $format      .= ' VALUES (%u, %s, %s, %s, %s, %u, %s, %s)';
             $sql         = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_audios'),
                 $audio_id,
-                $this->db->quoteString($title),
                 $this->db->quoteString($author),
-                $this->db->quoteString($url),
+                $this->db->quoteString($title),
+                $this->db->quoteString($description),
+                $this->db->quoteString($filename),
                 $uid_owner,
-                $now,
-                $now
+                time(),
+                time()
             );
             $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
-            $format .= 'audio_id=%u, title=%s, author=%s, filename=%s, uid_owner=%u, date_created=%s, date_updated=%s';
+            $format .= 'audio_id=%u, title=%s, author=%s, filename=%s, description=%s,uid_owner=%u, date_created=%s, date_updated=%s';
             $format .= ' WHERE audio_id = %u';
             $sql    = \sprintf(
                 $format,

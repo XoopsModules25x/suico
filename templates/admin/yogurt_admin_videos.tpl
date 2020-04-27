@@ -1,4 +1,4 @@
-<{if $videosRows > 0}>
+<{if $videoRows > 0}>
     <div class="outer">
         <form name="select" action="videos.php?op=" method="POST"
               onsubmit="if(window.document.select.op.value =='') {return false;} else if (window.document.select.op.value =='delete') {return deleteSubmitValid('videosId[]');} else if (isOneChecked('videosId[]')) {return true;} else {alert('<{$smarty.const.AM_VIDEOS_SELECTED_ERROR}>'); return false;}">
