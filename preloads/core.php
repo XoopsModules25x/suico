@@ -35,7 +35,6 @@ class YogurtCorePreload extends XoopsPreloadItem
         require __DIR__ . '/autoloader.php';
     }
 	
-
     /**
      * @param $args
      */
