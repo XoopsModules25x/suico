@@ -27,10 +27,10 @@
                                     <div class="alert alert-primary">
                                         <h5><{$lang_configvideos}></h5>
 
-                                        <div class="form-check"><label class="form-check-label"><input type="radio" class="form-check-input" name="vid" id="vid0" value="0" <{if $vid==3}>checked<{/if}>> <label for="vid0"><{$lang_only_me}></label></label></div>
-                                        <div class="form-check"><label class="form-check-label"><input type="radio" class="form-check-input" name="vid" id="vid1" value="1" <{if $vid==2}>checked<{/if}>><label for="vid1"><{$lang_only_friends}></label></label></div>
-                                        <div class="form-check"><label class="form-check-label"><input type="radio" class="form-check-input" name="vid" id="vid2" value="2" <{if $vid==1}>checked<{/if}>><label for="vid2"><{$lang_only_users}></label></label></div>
-                                        <div class="form-check"><label class="form-check-label"><input type="radio" class="form-check-input" name="vid" id="vid3" value="3" <{if $vid==0}>checked<{/if}>><label for="vid3"><{$lang_everyone}></label></label></div>
+                                        <div class="form-check"><label class="form-check-label"><input type="radio" class="form-check-input" name="vid" id="vid0" value="0" <{if $vid==0}>checked<{/if}>> <label for="vid0"><{$lang_only_me}></label></label></div>
+                                        <div class="form-check"><label class="form-check-label"><input type="radio" class="form-check-input" name="vid" id="vid1" value="1" <{if $vid==1}>checked<{/if}>><label for="vid1"><{$lang_only_friends}></label></label></div>
+                                        <div class="form-check"><label class="form-check-label"><input type="radio" class="form-check-input" name="vid" id="vid2" value="2" <{if $vid==2}>checked<{/if}>><label for="vid2"><{$lang_only_users}></label></label></div>
+                                        <div class="form-check"><label class="form-check-label"><input type="radio" class="form-check-input" name="vid" id="vid3" value="3" <{if $vid==3}>checked<{/if}>><label for="vid3"><{$lang_everyone}></label></label></div>
 
                                     </div>
                                     <br>

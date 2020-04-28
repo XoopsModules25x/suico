@@ -85,7 +85,7 @@ $controller->visitorsFactory->purgeVisits();
 
 if (0 === $controller->isAnonym) {
     /**
-     * Fectching last visitors
+     * Fetching last visitors
      */
     if ($controller->uidOwner !== $xoopsUser->getVar('uid')) {
         $visitor_now = $controller->visitorsFactory->create();
@@ -101,7 +101,7 @@ if (0 === $controller->isAnonym) {
     );
 
     /**
-     * Lets populate an array with the dati from visitors
+     * Lets populate an array with the data from visitors
      */
     $i             = 0;
     $visitorsArray = [];

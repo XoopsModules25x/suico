@@ -57,7 +57,7 @@ class PhotosController extends YogurtController
             \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, \_MD_YOGURT_PICTURES_ENABLED_NOT);
         }
         $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
-        if (1 === $this->configsFactory->getCount($criteria)) {
+        if (1 == $this->configsFactory->getCount($criteria)) {
             $configs = $this->configsFactory->getObjects($criteria);
 
             $config = $configs[0]->getVar('pictures');
