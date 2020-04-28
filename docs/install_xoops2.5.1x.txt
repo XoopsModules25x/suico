@@ -15,22 +15,7 @@ Anyone please do report or help me on this
 
 Optional Procedure
 -------------------
-Hack to make the yogurt userpage as the main userpage of your site:
-
-Open ROOT_URL/userinfo.php in the root of your site, search at the very beggining of the file  for
-
-$uid = intval($_GET['uid']);
-if ($uid <= 0) {
-    redirect_header('index.php', 3, _US_SELECTNG);
-    exit();
-}
-
-Add after this the following lines:
-
-header("Location:".XOOPS_URL."/modules/yogurt/index.php?uid=".$uid);
-exit();
-
-If you are using the profile module
+Hack to make the yogurt userpage as the main userpage of your site If you are using the profile module
 
 Open ROOT_URL/modules/profile/userinfo.php, search at the very beggining of the file  for
 

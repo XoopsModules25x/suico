@@ -499,9 +499,9 @@ define('_MD_YOGURT_VOTED','Vote');
 define('_MD_YOGURT_ALREADYVOTED', 'Sorry, you have already voted once.');
 
 
+//Profile Module
 define('_MD_YOGURT_PROFILE_DISPLAYNAME', 'Display Name');
 define('_MD_YOGURT_PROFILE_EMAIL', 'Email');
-
 define('_MD_YOGURT_PROFILE_SORTBY', 'Sort by');
 define('_MD_YOGURT_PROFILE_ORDER', 'Ordering');
 define('_MD_YOGURT_PROFILE_PERPAGE', 'Items per page');
@@ -509,6 +509,42 @@ define('_MD_YOGURT_PROFILE_LATERTHAN', ' %s  is later than');
 define('_MD_YOGURT_PROFILE_EARLIERTHAN', ' %s  is earlier than');
 define('_MD_YOGURT_PROFILE_LARGERTHAN', ' %s  is greater than');
 define('_MD_YOGURT_PROFILE_SMALLERTHAN', ' %s  is smaller than');
-
-
+define('_MD_YOGURT_REGISTER_NOTGROUP', 'New user is not registered to corresponding groups.');
+define('_MD_YOGURT_FINISH_LOGIN', 'Your account has been created successfully, please click to log on.');
+define('_MD_YOGURT_REGISTER_FINISH', 'Thanks for registering');
+define('_MD_YOGURT_REGISTER_STEPS', 'Register steps:');
+define('_MD_YOGURT_DEFAULT', 'Basic Information');
+define('_MD_YOGURT_ERRORDURINGSAVE', 'Error during save');
+define('_MD_YOGURT_NOSTEPSAVAILABLE', 'Registration is not allowed at this moment, please come back later.');
+define('_MD_YOGURT_EXPIRED', 'The process has been expired, please go back to try again.');
+define('_MD_YOGURT_RECENTACTIVITY', 'Recent Activities');
+define('_MD_YOGURT_THEME', 'Theme');
+define('_MD_YOGURT_ACTIVATE', 'Activate');
+define('_MD_YOGURT_DEACTIVATE', 'Deactivate');
+define('_MD_YOGURT_SENDPM', 'Send Message');
+define('_MD_YOGURT_CHANGEPASSWORD', 'Change Password');
+define('_MD_YOGURT_PASSWORDCHANGED', 'Password Changed Successfully');
+define('_MD_YOGURT_OLDPASSWORD', 'Current Password');
+define('_MD_YOGURT_NEWPASSWORD', 'New Password');
+define('_MD_YOGURT_WRONGPASSWORD', 'Old password is wrong');
+define('_MD_YOGURT_CHANGEMAIL', 'Change Email Address');
+define('_MD_YOGURT_NEWMAIL', 'New Email Address');
+define('_MD_YOGURT_NEWEMAIL', 'New email address at %s');
+define('_MD_YOGURT_EMAILCHANGED', 'Your Email Address Has Been Changed');
+define('_MD_YOGURT_SITEDEFAULT', 'Site default');
+define('_MD_YOGURT_USERINFO', 'User profile');
+define('_MD_YOGURT_REGISTER', 'Registration form');
+define('_MD_YOGURT_ACTUS', 'Active Users: %s');
+define('_MD_YOGURT_FOUNDUSER', '%s users found');
+define('_MD_YOGURT_USERLEVEL', 'Status');
+define('_MD_YOGURT_ACTIVE', 'Active');
+define('_MD_YOGURT_INACTIVE', 'Inactive');
+define('_MD_YOGURT_NICKNAME', 'Username');
+define('_MD_YOGURT_EMAILADDRESS', 'Email Address');
+define('_MD_YOGURT_SAVECHANGES', 'Submit');
+define('_MD_YOGURT_USERGROUPS', 'Users Groups');
+define('_MD_YOGURT_CONFIRMPASSWORD', 'Type again to confirm your password');
+define('_MD_YOGURT_LOGOUT', 'Logout');
+define('_MD_YOGURT_CHANGEAVATAR', 'Change Avatar');
+define('_MD_YOGURT_CHANGEAVATARHELP', 'You can also change your avatar by selecting any of the photos upload in your photo album section.');
 

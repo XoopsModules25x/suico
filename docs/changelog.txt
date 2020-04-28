@@ -1,6 +1,9 @@
 <h5>3.5 Beta 1    [NOT RELEASED]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.5
 <hr>
 
+- Fix Sub-Menu visible to Guest (liomj)
+- Add Profile Module 1.90 features (liomj)
+- Make yogurt the main userpage on install (liomj)
 - Add Caption in Album (liomj)
 - Add Dates in Album and Audio Templates (liomj/mamba)
 - Add group total members (liomj)
