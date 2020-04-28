@@ -53,7 +53,7 @@ $maxfilebytes = $helper->getConfig('maxfilesize');
 /**
  * If we are receiving a file
  */
-if ('sel_audio' === $_POST['xoops_upload_file'][0]) {
+if ('sel_audio' === (Request::getArray('xoops_upload_file', '', 'POST')[0])) {
     /**
      * Verify Token
      */

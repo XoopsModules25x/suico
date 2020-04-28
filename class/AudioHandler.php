@@ -32,6 +32,8 @@ use XoopsObject;
 use CriteriaElement;
 use XoopsMediaUploader;
 use CriteriaCompo;
+use Xmf\Request;
+
 
 // Audio.php,v 1
 //  ---------------------------------------------------------------- //
@@ -343,13 +345,13 @@ class AudioHandler extends XoopsPersistableObjectHandler
         ];
         $maxfilesize       = $maxfilebytes;
 
-        $uploadDir = \XOOPS_UPLOAD_PATH . '/yogurt/audio/';
+        $uploadDir = $path_upload;
         // create the object to upload
         $uploader = new XoopsMediaUploader(
             $uploadDir, $allowed_mimetypes, $maxfilesize
         );
         // fetch the media
-        if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
+        if ($uploader->fetchMedia((Request::getArray('xoops_upload_file', '', 'POST')[0]))) {
             //lets create a name for it
             $uploader->setPrefix('aud_' . $uid . '_');
             //now let s upload the file
@@ -371,7 +373,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
             $audio->setVar('date_created', \time());
             $audio->setVar('date_updated', \time());
 
-            $this->insert($audio);
+            $this->insert2($audio);
             $saved_destination = $uploader->getSavedDestination();
             //print_r($_FILES);
         } else {
