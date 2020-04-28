@@ -84,8 +84,7 @@ function xoops_module_install_yogurt(XoopsModule $module)
     $moduleDirName = basename(dirname(__DIR__));
 
     // Create registration steps
-    yogurt_install_addStep(_MI_YOGURT_STEP_BASIC, '', 1, 0);
-    yogurt_install_addStep(_MI_YOGURT_STEP_COMPLEMENTARY, '', 2, 1);
+    yogurt_install_addStep(_MI_YOGURT_STEP_BASIC, '', 1, 1);
 
     // Create categories
     yogurt_install_addCategory(_MI_YOGURT_CATEGORY_PERSONAL, 1);
@@ -113,28 +112,28 @@ function xoops_module_install_yogurt(XoopsModule $module)
         XOOPS_NOTIFICATION_METHOD_PM      => _NOT_METHOD_PM,
         XOOPS_NOTIFICATION_METHOD_EMAIL   => _NOT_METHOD_EMAIL);
 
-    yogurt_install_addField('name', _US_REALNAME, '', 1, 'textbox', 1, 1, 1, array(), 2, 255);
-    yogurt_install_addField('user_from', _US_LOCATION, '', 1, 'textbox', 1, 2, 1, array(), 2, 255);
-    yogurt_install_addField('timezone_offset', _US_TIMEZONE, '', 1, 'timezone', 1, 3, 1, array(), 2, 0);
-    yogurt_install_addField('user_occ', _US_OCCUPATION, '', 1, 'textbox', 1, 4, 1, array(), 2, 255);
-    yogurt_install_addField('user_intrest', _US_INTEREST, '', 1, 'textbox', 1, 5, 1, array(), 2, 255);
-    yogurt_install_addField('bio', _US_EXTRAINFO, '', 1, 'textarea', 2, 6, 1, array(), 2, 0);
-    yogurt_install_addField('user_regdate', _US_MEMBERSINCE, '', 1, 'datetime', 3, 7, 0, array(), 0, 10);
-
-    yogurt_install_addField('user_viewemail', _US_ALLOWVIEWEMAIL, '', 3, 'yesno', 3, 1, 1, array(), 2, 1, false);
+    yogurt_install_addField('name', _US_REALNAME, '', 1, 'textbox', 1, 1, 1, array(), 0, 255);
+    yogurt_install_addField('user_from', _US_LOCATION, '', 1, 'textbox', 1, 2, 1, array(), 0, 255);
+    yogurt_install_addField('user_occ', _US_OCCUPATION, '', 1, 'textbox', 1, 3, 1, array(), 0, 255);
+    yogurt_install_addField('user_intrest', _US_INTEREST, '', 1, 'textbox', 1, 4, 1, array(), 0, 255);
+    yogurt_install_addField('bio', _US_EXTRAINFO, '', 1, 'textarea', 2, 5, 1, array(), 0, 0);
+    yogurt_install_addField('user_sig', _US_SIGNATURE, '', 1, 'dhtml', 1, 6, 1, array(), 0, 0);
+	yogurt_install_addField('url', _MI_YOGURT_URL_TITLE, '', 1, 'textbox', 1, 7, 1, array(), 0, 255, false);
+    
+	yogurt_install_addField('timezone_offset', _US_TIMEZONE, '', 3, 'timezone', 1, 0, 1, array(), 0, 0, false);
+	yogurt_install_addField('user_viewemail', _US_ALLOWVIEWEMAIL, '', 3, 'yesno', 3, 1, 1, array(), 0, 1, false);
     yogurt_install_addField('attachsig', _US_SHOWSIG, '', 3, 'yesno', 3, 2, 1, array(), 0, 1, false);
-    yogurt_install_addField('user_mailok', _US_MAILOK, '', 3, 'yesno', 3, 3, 1, array(), 2, 1, false);
+    yogurt_install_addField('user_mailok', _US_MAILOK, '', 3, 'yesno', 3, 3, 1, array(), 0, 1, false);
     yogurt_install_addField('theme', _MD_YOGURT_THEME, '', 3, 'theme', 1, 4, 1, array(), 0, 0, false);
     yogurt_install_addField('umode', _US_CDISPLAYMODE, '', 3, 'select', 1, 5, 1, $umode_options, 0, 0, false);
     yogurt_install_addField('uorder', _US_CSORTORDER, '', 3, 'select', 3, 6, 1, $uorder_options, 0, 0, false);
     yogurt_install_addField('notify_mode', _NOT_NOTIFYMODE, '', 3, 'select', 3, 7, 1, $notify_mode_options, 0, 0, false);
     yogurt_install_addField('notify_method', _NOT_NOTIFYMETHOD, '', 3, 'select', 3, 8, 1, $notify_method_options, 0, 0, false);
 
-    yogurt_install_addField('url', _MI_YOGURT_URL_TITLE, '', 4, 'textbox', 1, 1, 1, array(), 2, 255);
+	yogurt_install_addField('user_regdate', _US_MEMBERSINCE, '', 4, 'datetime', 3, 1, 0, array(), 0, 10);
     yogurt_install_addField('posts', _US_POSTS, '', 4, 'textbox', 3, 2, 0, array(), 0, 255);
     yogurt_install_addField('rank', _US_RANK, '', 4, 'rank', 3, 3, 2, array(), 0, 0);
     yogurt_install_addField('last_login', _US_LASTLOGIN, '', 4, 'datetime', 3, 4, 0, array(), 0, 10);
-    yogurt_install_addField('user_sig', _US_SIGNATURE, '', 4, 'dhtml', 1, 5, 1, array(), 0, 0);
 
     yogurt_install_initializeProfiles();
 

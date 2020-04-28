@@ -34,15 +34,13 @@ require __DIR__ . '/header.php';
 
 $helper->loadLanguage('user');
 
-$uid = isset($_GET['uid']) ? (int)$_GET['uid'] : 0;
-if ($uid <= 0) {
-    if (is_object($GLOBALS['xoopsUser'])) {
-        $uid = $GLOBALS['xoopsUser']->getVar('uid');
-    } else {
-        header('location: ' . XOOPS_URL);
-        exit();
-    }
-}
+$controller = new IndexController($xoopsDB, $xoopsUser);
+/**
+ * Fetching numbers of groups friends videos pictures etc...
+ */
+$nbSections = $controller->getNumbersSections();
+
+$uid=$controller->uidOwner;
 
 /* @var  XoopsGroupPermHandler $gperm_handler */
 $gperm_handler = xoops_getHandler('groupperm');
@@ -72,8 +70,8 @@ if (is_object($GLOBALS['xoopsUser']) && $uid == $GLOBALS['xoopsUser']->getVar('u
     $thisUser       = $member_handler->getUser($uid);
 
     // Redirect if not a user or not active and the current user is not admin
-    if (!is_object($thisUser) || (!$thisUser->isActive() && (!$GLOBALS['xoopsUser'] || !$GLOBALS['xoopsUser']->isAdmin()))) {
-        redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n'), 3, _US_SELECTNG);
+   if (!is_object($thisUser) || (!$thisUser->isActive() && (!$GLOBALS['xoopsUser'] || !$GLOBALS['xoopsUser']->isAdmin()))) {
+		redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n'), 3, _US_SELECTNG);
     }
 
     /**
@@ -108,7 +106,7 @@ if (is_object($GLOBALS['xoopsUser']) && $uid == $GLOBALS['xoopsUser']->getVar('u
     }
 
     if ($rejected) {
-        redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n'), 3, _NOPERM);
+       // redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n'), 3, _NOPERM);
     }
 
     if (is_object($GLOBALS['xoopsUser']) && $GLOBALS['xoopsUser']->isAdmin()) {
@@ -181,12 +179,7 @@ $mainvideodesc = '';
 //    require_once XOOPS_ROOT_PATH . '/language/english/user.php';
 //}
 
-$controller = new IndexController($xoopsDB, $xoopsUser);
 
-/**
- * Fetching numbers of groups friends videos pictures etc...
- */
-$nbSections = $controller->getNumbersSections();
 
 /**
  * This variable define the beginning of the navigation must be

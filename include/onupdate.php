@@ -198,6 +198,13 @@ function xoops_module_update_yogurt(
 
         return $gpermHandler->deleteByModule($module->getVar('mid'), 'item_read');
     }
+	
+	$profile_handler = xoops_getModuleHandler('profile', $module->getVar('dirname', 'n'));
+    $profile_handler->cleanOrphan($GLOBALS['xoopsDB']->prefix('users'), 'uid', 'profile_id');
+    $field_handler = xoops_getModuleHandler('field', $module->getVar('dirname', 'n'));
+    $user_fields   = $field_handler->getUserVars();
+    $criteria      = new Criteria('field_name', "('" . implode("', '", $user_fields) . "')", 'IN');
+    $field_handler->updateAll('field_config', 0, $criteria);
 
     return true;
 }

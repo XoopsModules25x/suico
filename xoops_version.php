@@ -13,13 +13,11 @@ declare(strict_types=1);
 */
 
 /**
- * Module: Yogurt
- *
- * @category        Module
- * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
- * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author       Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
+ * @author       XOOPS Development Team
+ * @since
  */
 $moduleDirName      = basename(
     __DIR__
@@ -77,7 +75,7 @@ $modversion = [
     'adminmenu'           => 'admin/menu.php',
     // ------------------- Main Menu -------------------
     'hasMain'             => 1,
-
+	
     // ------------------- Install/Update -------------------
     'onInstall'           => 'include/oninstall.php',
     'onUpdate'            => 'include/onupdate.php',
@@ -366,7 +364,7 @@ $modversion['config'][] = [
 ];
 
 $modversion['config'][] = [
-    'name'        => 'pictureCount',
+    'name'        => 'countPicture',
     'title'       => '_MI_YOGURT_NUMBPICT_TITLE',
     'description' => '_MI_YOGURT_NUMBPICT_DESC',
     'default'     => 12,
@@ -487,7 +485,7 @@ $modversion['config'][] = [
 ];
 
 $modversion['config'][] = [
-    'name'        => 'audioCount',
+    'name'        => 'countAudio',
     'title'       => '_MI_YOGURT_NUMBAUDIO_TITLE',
     'description' => '_MI_YOGURT_NUMBAUDIO_DESC',
     'default'     => 12,
@@ -1127,6 +1125,8 @@ $modversion['templates'] = [
     ['file' => 'blocks/yogurt_block_hotfriends.tpl', 'description' => ''],
     ['file' => 'blocks/yogurt_block_hottest.tpl', 'description' => ''],
     ['file' => 'blocks/yogurt_block_lastpictures.tpl', 'description' => ''],
+    ['file' => 'yogurt_search.tpl', 'description' => '',],
+	['file' => 'yogurt_results.tpl', 'description' => '',],
     ['file' => 'yogurt_album.tpl', 'description' => _MI_YOGURT_TEMPLATE_ALBUMDESC,],
     ['file' => 'yogurt_audios.tpl', 'description' => _MI_YOGURT_TEMPLATE_AUDIOSDESC,],
     ['file' => 'yogurt_configs.tpl', 'description' => _MI_YOGURT_TEMPLATE_CONFIGSDESC,],
@@ -1146,7 +1146,7 @@ $modversion['templates'] = [
     ['file' => 'yogurt_searchform.tpl', 'description' => _MI_YOGURT_TEMPLATE_SEARCHFORMDESC,],
     ['file' => 'yogurt_searchresults.tpl', 'description' => _MI_YOGURT_TEMPLATE_SEARCHRESULTSDESC,],
     ['file' => 'yogurt_user.tpl', 'description' => _MI_YOGURT_TEMPLATE_USERDESC,],
-    ['file' => 'yogurt_videos.tpl', 'description' => _MI_YOGURT_TEMPLATE_VIDEOSDESC,],
+    ['file' => 'yogurt_video.tpl', 'description' => _MI_YOGURT_TEMPLATE_VIDEOSDESC,],
 ];
 
 global $xoopsModule;
@@ -1187,7 +1187,7 @@ if (is_object($xoopsModule) && $xoopsModule->dirname() === $modversion['dirname'
         $modversion['sub'][6]['url']  = 'groups.php';
     }
 	}
-    }
+}
 
 if ($GLOBALS['xoopsUser']) {
 $modversion['sub'][7]['name'] = _MI_YOGURT_MYCONFIGS;
