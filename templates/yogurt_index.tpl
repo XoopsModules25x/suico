@@ -33,52 +33,33 @@
 <{/if}>
 
     <{if $allow_profile_general==1}>
-        <div>
-            <h5><{$lang_detailsinfo}> <i class="fa fa-user-circle"></i></h5>
-            <span class="yogurt-profileinfo-label"><{$lang_uname}>:</span><span class="yogurt-profileinfo-value"><{$user_uname}></span><br>
-            <{if $user_realname}>
-                <p><span class="yogurt-profileinfo-label"><{$lang_realname}>:</span><span class="yogurt-profileinfo-value"><{$user_realname}></span><br>
-            <{/if}>
-            <{if $user_location}>
-                <span class="yogurt-profileinfo-label"><{$lang_location}>:</span><span class="yogurt-profileinfo-value"><{$user_location}></span><br>
-            <{/if}>
-            <{if $user_occupation}>
-                <span class="yogurt-profileinfo-label"><{$lang_occupation}>:</span><span class="yogurt-profileinfo-value"><{$user_occupation}></span><br>
-            <{/if}>
-            <{if $user_interest}>
-                <span class="yogurt-profileinfo-label"><{$lang_interest}>:</span><span class="yogurt-profileinfo-value"><{$user_interest}></span><br>
-            <{/if}>
-            <{if $user_extrainfo}>
-                <span class="yogurt-profileinfo-label"><{$lang_extrainfo}>:</span><br>
-                <{$user_extrainfo}><br>
-            <{/if}>
-			<{if $user_signature}>
-                <span class="yogurt-profileinfo-label"><{$lang_signature}>:</span><br>
-                <{$user_signature}><br>
-            <{/if}>
-    
-        </div>
     <{/if}>
     
     <{if $allow_profile_stats}>
-            <h5><{$lang_statistics}> <i class="fa fa-bar-chart"></i></h5>
-           <span class="yogurt-profileinfo-label"><{$lang_membersince}>:</span><span class="yogurt-profileinfo-value"><{$user_joindate}></span><br>
-           <span class="yogurt-profileinfo-label"><{$lang_rank}>:</span><span class="yogurt-profileinfo-value"><{$user_rankimage}>  <{$user_ranktitle}></span><br>
-           <span class="yogurt-profileinfo-label"><{$lang_posts}>:</span><span class="yogurt-profileinfo-value"><{$user_posts}></span><br>
-           <span class="yogurt-profileinfo-label"><{$lang_lastlogin}>:</span><span class="yogurt-profileinfo-value"><{$user_lastlogin}></span><br>
-           	<{if ($isOwner==1)}><{if $visitors}>
+         
+    <{/if}>
+  <h5><{$smarty.const._MD_YOGURT_USER_DETAILS}> <i class="fa fa-user-circle"></i></h5>
+	<{foreach item=category from=$categories}>
+		<{if isset($category.fields)}>
+		<br><h6><{$category.cat_title}></h6>        
+                <{foreach item=field from=$category.fields}>
+                    <span class="yogurt-profileinfo-label"><{$field.title}> : </span><span class="yogurt-profileinfo-value"><{$field.value}></span><br>
+                <{/foreach}>
+		<{/if}>
+<{/foreach}>
+
+  	<{if ($isOwner==1)}><{if $visitors}>
 				 <span class="yogurt-profileinfo-label"> <{$lang_profilevisitors}>: </span>
 		    <{foreach from=$visitors key=k item=v}>
                 <a href=index.php?uid=<{$k}>> <{$v}> </a> &nbsp;
             <{/foreach}>
                 <br>
 			<{/if}><{/if}>	
-    <{/if}>
 
 <br>
    <{if $allow_profile_stats}>
     <{if $modules!=''}>
-        <h5><{$lang_usercontributions}> <i class="fa fa-check-circle"></i></h5>
+        <h5><{$smarty.const._MD_YOGURT_USER_CONTRIBUTIONS}>  <i class="fa fa-check-circle"></i></h5>
         <!-- start module search results loop -->
         <p>
             <{foreach item=module from=$modules name="search_results"}>
@@ -192,6 +173,8 @@
     <{/if}>
 	<{/if}>
 	<{/if}>
+		
+	
 </div><!-- end of group2 -->
 <{include file="db:yogurt_footer.tpl"}>
 

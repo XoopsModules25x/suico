@@ -122,6 +122,31 @@ $adminmenu[] = [
     'icon'  => "{$pathIcon32}/album.png",
 ];
 
+$adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU17,
+	'link'  => 'admin/profile_user.php',
+	'icon'  => $pathIcon32 . '/users.png',
+];
+$adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU18,
+	'link'  => 'admin/profile_fieldscategory.php',
+	'icon'  => $pathIcon32 . '/category.png',
+];
+$adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU19,
+	'link'  => 'admin/profile_fieldslist.php',
+	'icon'  => $pathIcon32 . '/index.png',
+];
+$adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU20,
+	'link'  => 'admin/profile_registrationstep.php',
+	'icon'  => $pathIcon32 . '/stats.png',
+];
+$adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU21,
+	'link'  => 'admin/profile_fieldspermissions.php',
+	'icon'  => $pathIcon32 . '/permissions.png',
+];
 
 // Blocks Admin
 $adminmenu[] = [
