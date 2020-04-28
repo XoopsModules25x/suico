@@ -500,15 +500,13 @@ define('_MD_YOGURT_ALREADYVOTED', 'Sorry, you have already voted once.');
 
 
 //Profile Module
-define('_MD_YOGURT_PROFILE_DISPLAYNAME', 'Display Name');
-define('_MD_YOGURT_PROFILE_EMAIL', 'Email');
-define('_MD_YOGURT_PROFILE_SORTBY', 'Sort by');
-define('_MD_YOGURT_PROFILE_ORDER', 'Ordering');
-define('_MD_YOGURT_PROFILE_PERPAGE', 'Items per page');
-define('_MD_YOGURT_PROFILE_LATERTHAN', ' %s  is later than');
-define('_MD_YOGURT_PROFILE_EARLIERTHAN', ' %s  is earlier than');
-define('_MD_YOGURT_PROFILE_LARGERTHAN', ' %s  is greater than');
-define('_MD_YOGURT_PROFILE_SMALLERTHAN', ' %s  is smaller than');
+define('_MD_YOGURT_DISPLAYNAME', 'Display Name');
+define('_MD_YOGURT_SORTBY', 'Sort by');
+define('_MD_YOGURT_PERPAGE', 'Items per page');
+define('_MD_YOGURT_LATERTHAN', ' %s  is later than');
+define('_MD_YOGURT_EARLIERTHAN', ' %s  is earlier than');
+define('_MD_YOGURT_LARGERTHAN', ' %s  is greater than');
+define('_MD_YOGURT_SMALLERTHAN', ' %s  is smaller than');
 define('_MD_YOGURT_REGISTER_NOTGROUP', 'New user is not registered to corresponding groups.');
 define('_MD_YOGURT_FINISH_LOGIN', 'Your account has been created successfully, please click to log on.');
 define('_MD_YOGURT_REGISTER_FINISH', 'Thanks for registering');

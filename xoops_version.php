@@ -1104,6 +1104,8 @@ $modversion['templates'] = [
     ['file' => 'blocks/yogurt_block_hotfriends.tpl', 'description' => ''],
     ['file' => 'blocks/yogurt_block_hottest.tpl', 'description' => ''],
     ['file' => 'blocks/yogurt_block_lastpictures.tpl', 'description' => ''],
+    ['file' => 'yogurt_search.tpl', 'description' => '',],
+	['file' => 'yogurt_results.tpl', 'description' => '',],
     ['file' => 'yogurt_album.tpl', 'description' => _MI_YOGURT_TEMPLATE_ALBUMDESC,],
     ['file' => 'yogurt_audio.tpl', 'description' => _MI_YOGURT_TEMPLATE_AUDIOSDESC,],
     ['file' => 'yogurt_configs.tpl', 'description' => _MI_YOGURT_TEMPLATE_CONFIGSDESC,],
@@ -1124,6 +1126,7 @@ $modversion['templates'] = [
     ['file' => 'yogurt_searchresults.tpl', 'description' => _MI_YOGURT_TEMPLATE_SEARCHRESULTSDESC,],
     ['file' => 'yogurt_user.tpl', 'description' => _MI_YOGURT_TEMPLATE_USERDESC,],
     ['file' => 'yogurt_video.tpl', 'description' => _MI_YOGURT_TEMPLATE_VIDEOSDESC,],
+
 ];
 
 global $xoopsModule;
