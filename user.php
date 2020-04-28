@@ -54,11 +54,6 @@ if ($op === 'register') {
     $GLOBALS['xoopsOption']['template_main'] = 'yogurt_register.tpl';
     include $GLOBALS['xoops']->path('header.php');
 
-if ($GLOBALS['xoopsUser']) {
-    header('location: index.php?uid= ' . $GLOBALS['xoopsUser']->getVar('uid'));
-    exit();
-}
-
 if (!empty($_GET['op']) && in_array($_GET['op'], array('actv', 'activate'))) {
     header('location: ./activate.php' . (empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING']));
     exit();
