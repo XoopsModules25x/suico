@@ -93,9 +93,9 @@ function xoops_module_install_yogurt(XoopsModule $module)
     yogurt_install_addField('user_intrest', _US_INTEREST, '', 1, 'textbox', 1, 4, 1, array(), 0, 255);
     yogurt_install_addField('bio', _US_EXTRAINFO, '', 1, 'textarea', 2, 5, 1, array(), 0, 0);
     yogurt_install_addField('user_sig', _US_SIGNATURE, '', 1, 'dhtml', 1, 6, 1, array(), 0, 0);
-	yogurt_install_addField('url', _MI_YOGURT_URL_TITLE, '', 4, 'textbox', 1, 7, 1, array(), 0, 255);
+	yogurt_install_addField('url', _MI_YOGURT_URL_TITLE, '', 1, 'textbox', 1, 7, 1, array(), 0, 255, false);
     
-	yogurt_install_addField('timezone_offset', _US_TIMEZONE, '', 1, 'timezone', 1, 0, 1, array(), 0, 0);
+	yogurt_install_addField('timezone_offset', _US_TIMEZONE, '', 3, 'timezone', 1, 0, 1, array(), 0, 0, false);
 	yogurt_install_addField('user_viewemail', _US_ALLOWVIEWEMAIL, '', 3, 'yesno', 3, 1, 1, array(), 0, 1, false);
     yogurt_install_addField('attachsig', _US_SHOWSIG, '', 3, 'yesno', 3, 2, 1, array(), 0, 1, false);
     yogurt_install_addField('user_mailok', _US_MAILOK, '', 3, 'yesno', 3, 3, 1, array(), 0, 1, false);
