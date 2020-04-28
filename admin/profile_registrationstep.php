@@ -43,7 +43,7 @@ switch ($op) {
     case 'edit':
         $obj = $handler->get($_REQUEST['id']);
         include_once dirname(__DIR__) . '/include/forms.php';
-        $form = profile_getStepForm($obj);
+        $form = yogurt_getStepForm($obj);
         $form->display();
         break;
 

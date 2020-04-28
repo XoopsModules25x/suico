@@ -252,8 +252,8 @@ if ($current_step > 0 && empty($stop) && (!empty($steps[$current_step - 1]['step
             $newuser->setVar('uname', $uname);
             $newuser->setVar('email', $email);
             $newuser->setVar('pass', $pass ? password_hash($pass, PASSWORD_DEFAULT) : '');
-            $actkey = substr(md5(uniqid(mt_rand(), 1)), 0, 8);
-            $newuser->setVar('actkey', $actkey, true);
+            //$actkey = substr(md5(uniqid(mt_rand(), 1)), 0, 8);
+            //$newuser->setVar('actkey', $actkey, true);
             $newuser->setVar('user_regdate', time(), true);
             $newuser->setVar('uorder', $GLOBALS['xoopsConfig']['com_order'], true);
             $newuser->setVar('umode', $GLOBALS['xoopsConfig']['com_mode'], true);
