@@ -6,7 +6,7 @@ declare(strict_types=1);
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -123,6 +123,32 @@ $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU13,
     'link'  => 'admin/privacy.php',
     'icon'  => "{$pathIcon32}/album.png",
+];
+
+$adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU17,
+	'link'  => 'admin/profile_user.php',
+	'icon'  => $pathIcon32 . '/users.png',
+];
+$adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU18,
+	'link'  => 'admin/profile_fieldscategory.php',
+	'icon'  => $pathIcon32 . '/category.png',
+];
+$adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU19,
+	'link'  => 'admin/profile_fieldslist.php',
+	'icon'  => $pathIcon32 . '/index.png',
+];
+$adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU20,
+	'link'  => 'admin/profile_registrationstep.php',
+	'icon'  => $pathIcon32 . '/stats.png',
+];
+$adminmenu[] = [
+    'title' => MI_YOGURT_ADMENU21,
+	'link'  => 'admin/profile_fieldspermissions.php',
+	'icon'  => $pathIcon32 . '/permissions.png',
 ];
 
 // Blocks Admin

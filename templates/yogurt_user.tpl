@@ -34,7 +34,7 @@
                         <br><input name="submit" type="submit" class="btn btn-primary" accesskey="l" tabindex="7" value="<{$smarty.const._MD_YOGURT_LOGIN}>">
                     </form>
 
-                    <{$smarty.const._MD_YOGURT_NOTAMEMBER}> <a href="<{$xoops_url}>/register.php" target="_self"><{$smarty.const._MD_YOGURT_SIGNUP}></a><br>
+                    <{$smarty.const._MD_YOGURT_NOTAMEMBER}> <a href="<{$xoops_url}>/modules/yogurt/user.php?op=register" target="_self"><{$smarty.const._MD_YOGURT_SIGNUP}></a><br>
                     <a href="<{$xoops_url}>/user.php#lost" target="_self"><{$smarty.const._MD_YOGURT_LOSTPASSWORD}></a>
                 </div>
             </td>

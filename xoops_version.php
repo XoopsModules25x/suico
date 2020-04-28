@@ -77,20 +77,6 @@ $modversion = [
     'adminmenu'           => 'admin/menu.php',
     // ------------------- Main Menu -------------------
     'hasMain'             => 1,
-    'sub'                 => [
-        [
-            'name' => _MI_YOGURT_MEMBERSLIST,
-            'url'  => 'memberslist.php',
-        ],
-        [
-            'name' => _MI_YOGURT_SEARCH,
-            'url'  => 'searchmembers.php',
-        ],
-        [
-            'name' => _MI_YOGURT_MYPROFILE,
-            'url'  => 'index.php',
-        ],
-    ],
 
     // ------------------- Install/Update -------------------
     'onInstall'           => 'include/oninstall.php',
@@ -121,6 +107,11 @@ $modversion = [
         $moduleDirName . '_' . 'suspensions',
         $moduleDirName . '_' . 'audios',
         $moduleDirName . '_' . 'privacy',
+        $moduleDirName . '_' . 'profile',
+		$moduleDirName . '_' . 'profile_category',
+		$moduleDirName . '_' . 'profile_field',
+		$moduleDirName . '_' . 'profile_regstep',
+		$moduleDirName . '_' . 'profile_visibility',
     ],
 ];
 
@@ -302,6 +293,26 @@ $modversion['config'][] = [
     'category'    => 'general',
 ];
 
+$modversion['config'][] = [
+    'name'        => 'profile_search',
+    'title'       => '_MI_YOGURT_PROFILE_SEARCH',
+    'description' => '',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+    'category'    => 'general',
+];
+
+$modversion['config'][] = [
+    'name'        => 'profileCaptchaAfterStep1',
+    'title'       => '_MI_YOGURT_PROFILE_CAPTCHA_STEP1',
+    'description' => '_MI_YOGURT_PROFILE_CAPTCHA_STEP1_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+	'category'    => 'general',
+];
+
 // group header
 $modversion['config'][] = [
     'name'        => 'notes_config',
@@ -355,7 +366,7 @@ $modversion['config'][] = [
 ];
 
 $modversion['config'][] = [
-    'name'        => 'countPicture',
+    'name'        => 'pictureCount',
     'title'       => '_MI_YOGURT_NUMBPICT_TITLE',
     'description' => '_MI_YOGURT_NUMBPICT_DESC',
     'default'     => 12,
@@ -476,7 +487,7 @@ $modversion['config'][] = [
 ];
 
 $modversion['config'][] = [
-    'name'        => 'countAudio',
+    'name'        => 'audioCount',
     'title'       => '_MI_YOGURT_NUMBAUDIO_TITLE',
     'description' => '_MI_YOGURT_NUMBAUDIO_DESC',
     'default'     => 12,
@@ -833,7 +844,7 @@ $modversion['config'][] = [
     'default'     => 'datatables',
     'options'     => [
         _MI_YOGURT_DATATABLESBASICTEMPLATE => 'datatables',
-        _MI_YOGURT_TEMPLATE_NORMAL         => 'normal',
+        _MI_YOGURT_TEMPLATE_NORMAL          => 'normal',
     ],
     'category'    => 'memberslist',
 ];
@@ -1101,6 +1112,17 @@ $modversion['templates'] = [
     ['file' => 'admin/yogurt_admin_suspensions.tpl', 'description' => ''],
     ['file' => 'admin/yogurt_admin_videos.tpl', 'description' => ''],
     ['file' => 'admin/yogurt_admin_visitors.tpl', 'description' => ''],
+	['file' => 'admin/yogurt_admin_profilefieldslist.tpl', 'description' => ''],
+	['file' => 'admin/yogurt_admin_profilefieldscategory.tpl', 'description' => ''],
+	['file' => 'admin/yogurt_admin_profilefieldspermission.tpl', 'description' => ''],
+	['file' => 'admin/yogurt_admin_profilefieldsvisibility.tpl', 'description' => ''],
+	['file' => 'admin/yogurt_admin_profileregistrationstep.tpl', 'description' => ''],
+	['file' => 'yogurt_form.tpl', 'description' => ''],
+	['file' => 'yogurt_register.tpl', 'description' => ''],
+	['file' => 'yogurt_changepass.tpl', 'description' => ''],
+	['file' => 'yogurt_editprofile.tpl', 'description' => ''],
+	['file' => 'yogurt_avatar.tpl', 'description' => ''],
+	['file' => 'yogurt_email.tpl', 'description' => ''],
     ['file' => 'blocks/yogurt_block_friends.tpl', 'description' => ''],
     ['file' => 'blocks/yogurt_block_hotfriends.tpl', 'description' => ''],
     ['file' => 'blocks/yogurt_block_hottest.tpl', 'description' => ''],
@@ -1135,33 +1157,60 @@ if (is_object($xoopsModule) && $xoopsModule->dirname() === $modversion['dirname'
     $confHandler  = xoops_getHandler('config');
     $moduleConfig = $confHandler->getConfigsByCat(0, $mod_yogurt->getVar('mid'));
 
+	if ($GLOBALS['xoopsUser']) {
+		
+	$modversion['sub'][0]['name'] = _MI_YOGURT_MYPROFILE;
+    $modversion['sub'][0]['url']  = 'index.php';
+		
     if (1 === $moduleConfig['enable_notes']) {
-        $modversion['sub'][3]['name'] = _MI_YOGURT_MYNOTES;
-        $modversion['sub'][3]['url']  = 'notebook.php';
+        $modversion['sub'][1]['name'] = _MI_YOGURT_MYNOTES;
+        $modversion['sub'][1]['url']  = 'notebook.php';
     }
     if (1 === $moduleConfig['enable_pictures']) {
-        $modversion['sub'][4]['name'] = _MI_YOGURT_MYPICTURES;
-        $modversion['sub'][4]['url']  = 'album.php';
+        $modversion['sub'][2]['name'] = _MI_YOGURT_MYPICTURES;
+        $modversion['sub'][2]['url']  = 'album.php';
     }
     if (1 === $moduleConfig['enable_audio']) {
-        $modversion['sub'][5]['name'] = _MI_YOGURT_MYAUDIOS;
-        $modversion['sub'][5]['url']  = 'audios.php';
+        $modversion['sub'][3]['name'] = _MI_YOGURT_MYAUDIOS;
+        $modversion['sub'][3]['url']  = 'audio.php';
     }
     if (1 === $moduleConfig['enable_videos']) {
-        $modversion['sub'][6]['name'] = _MI_YOGURT_MYVIDEOS;
-        $modversion['sub'][6]['url']  = 'videos.php';
+        $modversion['sub'][4]['name'] = _MI_YOGURT_MYVIDEOS;
+        $modversion['sub'][4]['url']  = 'video.php';
     }
     if (1 === $moduleConfig['enable_friends']) {
-        $modversion['sub'][7]['name'] = _MI_YOGURT_MYFRIENDS;
-        $modversion['sub'][7]['url']  = 'friends.php';
+        $modversion['sub'][5]['name'] = _MI_YOGURT_MYFRIENDS;
+        $modversion['sub'][5]['url']  = 'friends.php';
     }
     if (1 === $moduleConfig['enable_groups']) {
-        $modversion['sub'][8]['name'] = _MI_YOGURT_MYGROUPS;
-        $modversion['sub'][8]['url']  = 'groups.php';
+        $modversion['sub'][6]['name'] = _MI_YOGURT_MYGROUPS;
+        $modversion['sub'][6]['url']  = 'groups.php';
     }
+	}
+    }
+
+if ($GLOBALS['xoopsUser']) {
+$modversion['sub'][7]['name'] = _MI_YOGURT_MYCONFIGS;
+$modversion['sub'][7]['url']  = 'configs.php';
+
+$modversion['sub'][8]['name'] = _MI_YOGURT_EDITPROFILE;
+$modversion['sub'][8]['url']  = 'edituser.php';
+
+
+$modversion['sub'][9]['name'] = _MI_YOGURT_CHANGEPASS;
+$modversion['sub'][9]['url']  = 'changepass.php';
+	
+$modversion['sub'][10]['name'] = _MI_YOGURT_CHANGEAVATAR;
+$modversion['sub'][10]['url']  = 'edituser.php?op=avatarform';
 }
-$modversion['sub'][9]['name'] = _MI_YOGURT_MYCONFIGS;
-$modversion['sub'][9]['url']  = 'configs.php';
+
+$modversion['sub'][11]['name'] = _MI_YOGURT_MEMBERSLIST;
+$modversion['sub'][11]['url']  = 'memberslist.php';
+
+if ($GLOBALS['xoopsUser']) {
+$modversion['sub'][12]['name'] = _MI_YOGURT_SEARCH;
+$modversion['sub'][12]['url']  = 'searchmembers.php';
+}
 
 $modversion['hasComments']          = 1;
 $modversion['comments']['itemName'] = 'group_id';

@@ -45,6 +45,15 @@ class YogurtCorePreload extends XoopsPreloadItem
         exit();
     }
 
+    /**
+     * @param $args
+     */
+    public static function eventCoreRegisterStart($args)
+    {
+        header('location: ./modules/yogurt/user.php?op=register' . (empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING']));
+        exit();
+    }
+
 	/**
      * @param $args
      */

@@ -1,58 +1,27 @@
-<?php declare(strict_types=1);
-
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <https://xoops.org>                             //
-// ------------------------------------------------------------------------- //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
+<?php
+/**
+ * Extended User Profile
+ *
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
+ * @license             GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @package             profile
+ * @since               2.3.0
+ * @author              Taiwen Jiang <phppp@users.sourceforge.net>
+ * @author              Jan Pedersen
+ * @author              trabis <lusopoemas@gmail.com>
+ */
 
 use Xmf\Request;
 
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_user.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'yogurt_register.tpl';
 require __DIR__ . '/header.php';
-
-/**
- * If is user redirects to own profile
- */
-
-if (($xoopsUser)) {
-    $isAnonym = 0;
-    if (isset($_GET['uid'])) {
-        $uid_owner = Request::getInt('uid', 0, 'GET');
-        $isOwner   = $xoopsUser->getVar('uid') === $uid_owner ? 1 : 0;
-    } else {
-        $uid_owner = (int)$xoopsUser->getVar('uid');
-        $isOwner   = 1;
-    }
-    redirect_header('' . XOOPS_URL . "/modules/yogurt/index.php?uid=$uid_owner");
-}
-
-
-$op = isset($_REQUEST['op']) ? $_REQUEST['op'] : '';
-
-
-if ($op === 'register') {
-    $GLOBALS['xoopsOption']['template_main'] = 'yogurt_register.tpl';
-    include $GLOBALS['xoops']->path('header.php');
 
 if ($GLOBALS['xoopsUser']) {
     header('location: index.php?uid= ' . $GLOBALS['xoopsUser']->getVar('uid'));
@@ -97,7 +66,7 @@ $uid = !empty($_SESSION['profile_register_uid']) ? (int)$_SESSION['profile_regis
 
 // First step is already secured by with the captcha Token so lets check the others
 if ($current_step > 0 && !$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header('user.php', 5, _MD_YOGURT_EXPIRED);
+    redirect_header('user.php', 5, _PROFILE_MA_EXPIRED);
 }
 
 $criteria = new CriteriaCompo();
@@ -105,7 +74,7 @@ $criteria->setSort('step_order');
 $regstep_handler = xoops_getModuleHandler('regstep');
 
 if (!$steps = $regstep_handler->getAll($criteria, null, false, false)) {
-    redirect_header(XOOPS_URL . '/', 6, _MD_YOGURT_NOSTEPSAVAILABLE);
+    redirect_header(XOOPS_URL . '/', 6, _PROFILE_MA_NOSTEPSAVAILABLE);
 }
 
 foreach (array_keys($steps) as $key) {
@@ -113,11 +82,11 @@ foreach (array_keys($steps) as $key) {
 }
 
 $GLOBALS['xoopsTpl']->assign('steps', $steps);
-$GLOBALS['xoopsTpl']->assign('lang_register_steps', _MD_YOGURT_REGISTER_STEPS);
+$GLOBALS['xoopsTpl']->assign('lang_register_steps', _PROFILE_MA_REGISTER_STEPS);
 
 $xoBreadcrumbs[] = array(
     'link'  => XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/register.php',
-    'title' => _MD_YOGURT_REGISTER);
+    'title' => _PROFILE_MA_REGISTER);
 if (isset($steps[$current_step])) {
     $xoBreadcrumbs[] = array('title' => $steps[$current_step]['step_name']);
 }
@@ -291,7 +260,7 @@ if ($current_step > 0 && empty($stop) && (!empty($steps[$current_step - 1]['step
 
                 $message = '';
                 if (!$member_handler->addUserToGroup(XOOPS_GROUP_USERS, $newuser->getVar('uid'))) {
-                    $message = _MD_YOGURT_REGISTER_NOTGROUP . '<br>';
+                    $message = _PROFILE_MA_REGISTER_NOTGROUP . '<br>';
                 } else {
                     if ($GLOBALS['xoopsConfigUser']['activation_type'] == 1) {
                         XoopsUserUtility::sendWelcome($newuser);
@@ -351,16 +320,16 @@ if ($current_step > 0 && empty($stop) && (!empty($steps[$current_step - 1]['step
 if (!empty($stop) || isset($steps[$current_step])) {
     include_once __DIR__ . '/include/forms.php';
     $current_step = empty($stop) ? $current_step : $current_step - 1;
-    $reg_form     = yogurt_getRegisterForm($newuser, $profile, $steps[$current_step]);
+    $reg_form     = profile_getRegisterForm($newuser, $profile, $steps[$current_step]);
     $reg_form->assign($GLOBALS['xoopsTpl']);
     $GLOBALS['xoopsTpl']->assign('current_step', $current_step);
     $GLOBALS['xoopsTpl']->assign('stop', $stop);
 } else {
     // No errors and no more steps, finish
-    $GLOBALS['xoopsTpl']->assign('finish', _MD_YOGURT_REGISTER_FINISH);
+    $GLOBALS['xoopsTpl']->assign('finish', _PROFILE_MA_REGISTER_FINISH);
     $GLOBALS['xoopsTpl']->assign('current_step', -1);
     if ($GLOBALS['xoopsConfigUser']['activation_type'] == 1 && !empty($_SESSION['profile_post']['pass'])) {
-        $GLOBALS['xoopsTpl']->assign('finish_login', _MD_YOGURT_FINISH_LOGIN);
+        $GLOBALS['xoopsTpl']->assign('finish_login', _PROFILE_MA_FINISH_LOGIN);
         $GLOBALS['xoopsTpl']->assign('finish_uname', $newuser->getVar('uname'));
         $GLOBALS['xoopsTpl']->assign('finish_pass', htmlspecialchars($_SESSION['profile_post']['pass']));
     }
@@ -370,8 +339,6 @@ if (!empty($stop) || isset($steps[$current_step])) {
         $GLOBALS['xoopsTpl']->assign('finish_message', $messages[$_SESSION['profile_post']['_message_']]);
     }
     $_SESSION['profile_post'] = null;
-}
-
 }
 
 require_once XOOPS_ROOT_PATH . '/footer.php';

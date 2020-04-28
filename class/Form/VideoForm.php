@@ -119,11 +119,7 @@ class VideoForm extends XoopsThemeForm
         );
 
         // Data_creation
-        $this->addElement(
-            new \XoopsFormTextDateSelect(
-                \AM_YOGURT_VIDEO_DATE_CREATED, 'date_created', 0, formatTimestamp($this->targetObject->getVar('date_created'), 's')
-            )
-        );
+        $this->addElement(new \XoopsFormTextDateSelect(\AM_YOGURT_VIDEO_DATE_CREATED, 'date_created', 0, formatTimestamp($this->targetObject->getVar('date_created'), 's')));
 
         $this->addElement(
             new \XoopsFormTextDateSelect(

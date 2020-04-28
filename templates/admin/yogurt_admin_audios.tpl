@@ -43,7 +43,6 @@
                         <td class='left'><{$audiosArray.date_updated}></td>
 
 
-
                         <td class="center width5"><{$audiosArray.edit_delete}></td>
                     </tr>
                 <{/foreach}>

@@ -153,7 +153,7 @@
                                 </p>
 
                                 <{if '' != $audios[i].meta.Title || '' != $audios[i].meta.Album  || '' != $audios[i].meta.Artist || '' != $audios[i].meta.Year   }><h6> <{$lang_meta}></h6><{/if}>
-                                <{if '' != $audios[i].meta.Title}><p class="yogurt-audio-meta-title"><span class="yogurt-audio-meta-label"> <{$lang_title}>:</span> <{$audios[i].meta.Title}></p><{/if}>
+                                <{if '' != $audios[i].meta.Title}><p class="yogurt-audio-meta-title"><span class="yogurt-audio-meta-label"> <{$lang_title}>:</span><{$audios[i].meta.Title}></p><{/if}>
                                 <{if '' != $audios[i].meta.Album}><p class="yogurt-audio-meta-title"><span class="yogurt-audio-meta-label"> <{$lang_album}>:</span><{$audios[i].meta.Album}></p> <{/if}>
                                 <{if '' != $audios[i].meta.Artist}><p class="yogurt-audio-meta-title"><span class="yogurt-audio-meta-label"> <{$lang_artist}>:</span><{$audios[i].meta.Artist}></p> <{/if}>
                                 <{if '' != $audios[i].meta.Year}><p class="yogurt-audio-meta-title"><span class="yogurt-audio-meta-label"> <{$lang_year}>:</span><{$audios[i].meta.Year}></p> <{/if}>

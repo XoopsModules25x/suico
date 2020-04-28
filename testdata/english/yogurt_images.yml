@@ -1,72 +1,64 @@
--
-    cod_img: '1'
-    title: Sunset1
-    caption: 'Airplane at Sunset'
-    date_created: '1587835341'
-    date_updated: '1587835341'
-    uid_owner: '1'
-    filename: pic_1_5e88f37c29ba1.jpg
-    private: '0'
--
-    cod_img: '2'
-    title: Castle
-    caption: 'A beautiful castle in Germany'
-    date_created: '1587424126'
-    date_updated: '1587424126'
-    uid_owner: '1'
-    filename: pic_1_5e893647beea8.jpg
-    private: '0'
--
-    cod_img: '3'
-    title: 'Sunset in Africa'
-    caption: 'A dream Safari'
-    date_created: '1585748818'
-    date_updated: '1587649618'
-    uid_owner: '1'
-    filename: pic_1_5e893e44d61a0.jpg
-    private: '1'
--
-    cod_img: '5'
-    title: 'Sunset and a bird'
-    caption: 'So quiet here'
-    date_created: '1585835277'
-    date_updated: '1587563277'
-    uid_owner: '999'
-    filename: pic_1_5e97d09fb1e0e.jpg
-    private: '0'
--
-    cod_img: '6'
-    title: Wave
-    caption: ''
-    date_created: '1585719811'
-    date_updated: '1587534211'
-    uid_owner: '1'
-    filename: pic_1_5ea5d0236a7e2.jpg
-    private: '0'
--
-    cod_img: '16'
-    title: Horses
-    caption: 'A wonderful picture of horses'
-    date_created: '1587912200'
-    date_updated: '1587912200'
-    uid_owner: '1'
-    filename: pic_1_5ea5cfa184db0.jpg
-    private: '0'
--
-    cod_img: '20'
-    title: 'Mountain Road'
-    caption: 'The long and winding road'
-    date_created: '1587945268'
-    date_updated: '1587945268'
-    uid_owner: '999'
-    filename: pic_999_5ea61f3462d51.jpg
-    private: '0'
--
-    cod_img: '15'
-    title: 'Pink Sunset'
-    caption: 'Beautiful pink Sunset'
-    date_created: '1587830215'
-    date_updated: '1587830215'
-    uid_owner: '1'
-    filename: pic_1_5ea5cf1821500.jpg
-    private: '0'
+- cod_img: '1'
+  title: Sunset1
+  caption: 'Airplane at Sunset'
+  date_created: '1587835341'
+  date_updated: '1587835341'
+  uid_owner: '1'
+  filename: pic_1_5e88f37c29ba1.jpg
+  private: '0'
+- cod_img: '2'
+  title: Castle
+  caption: 'A beautiful castle in Germany'
+  date_created: '1587424126'
+  date_updated: '1587424126'
+  uid_owner: '1'
+  filename: pic_1_5e893647beea8.jpg
+  private: '0'
+- cod_img: '3'
+  title: 'Sunset in Africa'
+  caption: 'A dream Safari'
+  date_created: '1585748818'
+  date_updated: '1587649618'
+  uid_owner: '1'
+  filename: pic_1_5e893e44d61a0.jpg
+  private: '1'
+- cod_img: '5'
+  title: 'Sunset and a bird'
+  caption: 'So quiet here'
+  date_created: '1585835277'
+  date_updated: '1587563277'
+  uid_owner: '999'
+  filename: pic_1_5e97d09fb1e0e.jpg
+  private: '0'
+- cod_img: '6'
+  title: Wave
+  caption: ''
+  date_created: '1585719811'
+  date_updated: '1587534211'
+  uid_owner: '1'
+  filename: pic_1_5ea5d0236a7e2.jpg
+  private: '0'
+- cod_img: '16'
+  title: Horses
+  caption: 'A wonderful picture of horses'
+  date_created: '1587912200'
+  date_updated: '1587912200'
+  uid_owner: '1'
+  filename: pic_1_5ea5cfa184db0.jpg
+  private: '0'
+- cod_img: '20'
+  title: 'Mountain Road'
+  caption: 'The long and winding road'
+  date_created: '1587945268'
+  date_updated: '1587945268'
+  uid_owner: '999'
+  filename: pic_999_5ea61f3462d51.jpg
+  private: '0'
+- cod_img: '15'
+  title: 'Pink Sunset'
+  caption: 'Beautiful pink Sunset'
+  date_created: '1587830215'
+  date_updated: '1587830215'
+  uid_owner: '1'
+  filename: pic_1_5ea5cf1821500.jpg
+  private: '0'

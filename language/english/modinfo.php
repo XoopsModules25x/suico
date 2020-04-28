@@ -6,7 +6,7 @@ declare(strict_types=1);
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -244,6 +244,12 @@ define('MI_YOGURT_ADMENU13', 'Privacy');
 define('MI_YOGURT_ADMENU14', 'Feedback');
 define('MI_YOGURT_ADMENU15', 'Migrate');
 define('MI_YOGURT_ADMENU16', 'About');
+define('MI_YOGURT_ADMENU17', 'User');
+define('MI_YOGURT_ADMENU18', 'Profile Category');
+define('MI_YOGURT_ADMENU19', 'Profile Fields');
+define('MI_YOGURT_ADMENU20', 'Registration Steps');
+define('MI_YOGURT_ADMENU21', 'Fields Permission');
+
 
 //Config
 define('MI_YOGURT_EDITOR_ADMIN', 'Editor: Admin');
@@ -448,7 +454,41 @@ define('_MI_YOGURT_CONFIG_ADMIN_DSC', _MI_YOGURT_CONFIG_STYLING_DESC_START . _MI
 define('_MI_YOGURT_CONFIG_COMMENTANDNOTIFICATION', _MI_YOGURT_CONFIG_STYLING_START . _MI_YOGURT_CONFCAT_COMMENTANDNOTIFICATION . _MI_YOGURT_CONFIG_STYLING_END);
 define('_MI_YOGURT_CONFIG_COMMENTANDNOTIFICATION_DSC', _MI_YOGURT_CONFIG_STYLING_DESC_START . _MI_YOGURT_CONFCAT_COMMENTANDNOTIFICATION_DSC . _MI_YOGURT_CONFIG_STYLING_DESC_END);
 
+//Profile Module
+define('_MI_YOGURT_EDITACCOUNT', 'Edit Profile');
+define('_MI_YOGURT_CHANGEPASS', 'Change Password');
+define('_MI_YOGURT_CHANGEMAIL', 'Change Email');
+define('_MI_YOGURT_INDEX', 'Index');
+define('_MI_YOGURT_CATEGORIES', 'Categories');
+define('_MI_YOGURT_FIELDS', 'Fields');
+define('_MI_YOGURT_USERS', 'Users');
+define('_MI_YOGURT_STEPS', 'Registration Steps');
+define('_MI_YOGURT_PERMISSIONS', 'Permissions');
+define('_MI_YOGURT_CATEGORY_TITLE', 'User Profile');
+define('_MI_YOGURT_CATEGORY_DESC', 'For those user fields');
+define('_MI_YOGURT_URL_TITLE', 'Website');
+define('_MI_YOGURT_CAT_SETTINGS', 'General Settings');
+define('_MI_YOGURT_CAT_SETTINGS_DSC', '');
+define('_MI_YOGURT_CAT_USER', 'User Settings');
+define('_MI_YOGURT_CAT_USER_DSC', '');
+define('_MI_YOGURT_PROFILE_SEARCH', 'Show latest activities on user profile');
+define('_MI_YOGURT_PAGE_INFO', 'User Info');
+define('_MI_YOGURT_PAGE_EDIT', 'Edit User');
+define('_MI_YOGURT_PAGE_SEARCH', 'Search');
+define('_MI_YOGURT_STEP_BASIC', 'Basic');
+define('_MI_YOGURT_STEP_COMPLEMENTARY', 'Advanced');
+define('_MI_YOGURT_CATEGORY_PERSONAL', 'Personal');
+define('_MI_YOGURT_CATEGORY_MESSAGING', 'Messaging');
+define('_MI_YOGURT_CATEGORY_SETTINGS', 'Settings');
+define('_MI_YOGURT_CATEGORY_COMMUNITY', 'Community');
+define('_MI_YOGURT_NEVER_LOGGED_IN', 'Never logged in');
+define('_MI_YOGURT_PROFILE_CAPTCHA_STEP1', 'Use Captcha after the second Registration step?');
+define('_MI_YOGURT_PROFILE_CAPTCHA_STEP1_DESC', "Select 'Yes' to add extra measure against Spam registration by bots");
+define('_MI_YOGURT_EDITPROFILE', 'Edit Profile');
+define('_MI_YOGURT_CHANGEAVATAR', 'Change Avatar');
+
 define('MI_YOGURT_ADMINPAGER', 'Admin: records / page');
 define('MI_YOGURT_ADMINPAGER_DESC', 'Admin: # of records shown per page');
 define('MI_YOGURT_USERPAGER', 'User: records / page');
 define('MI_YOGURT_USERPAGER_DESC', 'User: # of records shown per page');
+
