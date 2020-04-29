@@ -13,15 +13,15 @@ declare(strict_types=1);
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsModules\Yogurt;
 use Xmf\Request;
+use XoopsModules\Yogurt;
 
 require __DIR__ . '/header.php';
 
@@ -40,21 +40,21 @@ $groupsFactory       = new Yogurt\GroupsHandler($xoopsDB);
 $group_id = Request::getInt('group_id', 0, 'POST');
 $uid      = (int)$xoopsUser->getVar('uid');
 
-$criteria_uid      = new Criteria('rel_user_uid', $uid);
+$criteriaUid       = new Criteria('rel_user_uid', $uid);
 $criteria_group_id = new Criteria('rel_group_id', $group_id);
-$criteria          = new CriteriaCompo($criteria_uid);
+$criteria          = new CriteriaCompo($criteriaUid);
 $criteria->add($criteria_group_id);
 if ($relgroupuserFactory->getCount($criteria) < 1) {
     $relgroupuser = $relgroupuserFactory->create();
     $relgroupuser->setVar('rel_group_id', $group_id);
     $relgroupuser->setVar('rel_user_uid', $uid);
     if ($relgroupuserFactory->insert2($relgroupuser)) {
-        redirect_header('group.php?group_id='.$group_id.'', 1, _MD_YOGURT_YOUAREMEMBERNOW);
+        redirect_header('group.php?group_id=' . $group_id . '', 1, _MD_YOGURT_YOUAREMEMBERNOW);
     } else {
         redirect_header('groups.php', 1, _MD_YOGURT_ERROR);
     }
 } else {
-    redirect_header('group.php?group_id='.$group_id.'', 1, _MD_YOGURT_YOUAREMEMBERALREADY);
+    redirect_header('group.php?group_id=' . $group_id . '', 1, _MD_YOGURT_YOUAREMEMBERALREADY);
 }
 
 require dirname(__DIR__, 2) . '/footer.php';

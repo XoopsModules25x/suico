@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -11,11 +13,11 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -36,105 +38,9 @@ require __DIR__ . '/header.php';
 $relgroupuserFactory = new Yogurt\RelgroupuserHandler($xoopsDB);
 $groupsFactory       = new Yogurt\GroupsHandler($xoopsDB);
 
-
-///**
-// * Factory of pictures created
-// */
-//$imageFactory = new Yogurt\ImageHandler($xoopsDB);
-//
-///**
-// * Getting the title
-// */
-//$title = $_POST['caption'];
-
-
-
-
-
-
-
-//
-///**
-// * Getting parameters defined in admin side
-// */
-//$path_upload   = XOOPS_ROOT_PATH . '/uploads/yogurt/groups';
-//$pictwidth     = $helper->getConfig('resized_width');
-//$pictheight    = $helper->getConfig('resized_height');
-//$thumbwidth    = $helper->getConfig('thumb_width');
-//$thumbheight   = $helper->getConfig('thumb_height');
-//$maxfilebytes  = $helper->getConfig('maxfilesize');
-//$maxfileheight = $helper->getConfig('max_original_height');
-//$maxfilewidth  = $helper->getConfig('max_original_width');
-//
-///**
-// * If we are receiving a file
-// */
-//if ('sel_photo' === $_POST['xoops_upload_file'][0]) {
-//    /**
-//     * Verify Token
-//     */
-//    if (!$GLOBALS['xoopsSecurity']->check()) {
-//        redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
-//    }
-//    ini_set('memory_limit', '50M');
-//    /**
-//     * Try to upload picture resize it insert in database and then redirect to index
-//     */
-//    if ($imageFactory->receivePicture(
-//        $title,
-//        $path_upload,
-//        $thumbwidth,
-//        $thumbheight,
-//        $pictwidth,
-//        $pictheight,
-//        $maxfilebytes,
-//        $maxfilewidth,
-//        $maxfileheight
-//    )) {
-//        $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
-//        $extra_tags['X_OWNER_UID']  = $xoopsUser->getVar('uid');
-//        ** @var \XoopsNotificationHandler $notificationHandler */
-//        $notificationHandler        = xoops_getHandler('notification');
-//        $notificationHandler->triggerEvent('picture', $xoopsUser->getVar('uid'), 'new_picture', $extra_tags);
-//        //header("Location: ".XOOPS_URL."/modules/yogurt/index.php?uid=".$xoopsUser->getVar('uid'));
-//
-//
-//        $relgroupuser = $relgroupuserFactory->create();
-//        $relgroupuser->setVar('rel_group_id', $xoopsDB->getInsertId());
-//        $relgroupuser->setVar('rel_user_uid', $xoopsUser->getVar('uid'));
-//        $relgroupuserFactory->insert2($relgroupuser);
-//        redirect_header('groups.php', 500, _MD_YOGURT_GROUP_CREATED);
-//    } else {
-//        $groupsFactory->renderFormSubmit(120000, $xoopsTpl);
-//    }
-
-
-
-
-//        redirect_header(
-//            XOOPS_URL . '/modules/yogurt/groups.php?uid=' . $xoopsUser->getVar('uid'),
-//            3,
-//            _MD_YOGURT_UPLOADED
-//        );
-//    } else {
-//        redirect_header(
-//            XOOPS_URL . '/modules/yogurt/groups.php?uid=' . $xoopsUser->getVar('uid'),
-//            3,
-//            _MD_YOGURT_ERROR
-//        );
-//    }
-
-//}
-
-
-
-
-
-
-
 $marker = Request::getInt('marker', 0, 'POST');
 
-if (1 === $marker) {//if (1 === $marker) {
+if (1 == $marker) { //if (1 === $marker) {
     /**
      * Verify Token
      */
@@ -142,35 +48,97 @@ if (1 === $marker) {//if (1 === $marker) {
         redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
     }
 
-    $myts          = MyTextSanitizer::getInstance();
-    $group_title   = $myts->displayTarea(Request::getString('group_title', '', 'POST'), 0, 1, 1, 1, 1);
-    $group_desc    = $myts->displayTarea(Request::getString('group_desc', '', 'POST'), 0, 1, 1, 1, 1);
-    $group_img     = !empty($_POST['group_img']) ? Request::getString('group_img', '', 'POST') : '';
-    $path_upload   = XOOPS_UPLOAD_PATH . '/yogurt/groups';
-    $pictwidth     = $helper->getConfig('resized_width');
-    $pictheight    = $helper->getConfig('resized_height');
-    $thumbwidth    = $helper->getConfig('thumb_width');
-    $thumbheight   = $helper->getConfig('thumb_height');
-    $maxfilebytes  = $helper->getConfig('maxfilesize');
-    $maxfileheight = $helper->getConfig('max_original_height');
-    $maxfilewidth  = $helper->getConfig('max_original_width');
-    if ($groupsFactory->receiveGroup(
-        $group_title,
-        $group_desc,
-        '',
-        $path_upload,
-        $maxfilebytes,
-        $maxfilewidth,
-        $maxfileheight
-    )) {
+    if (0 !== \Xmf\Request::getInt('group_id', 0)) {
+        $groupsObject = $groupsHandler->get(Request::getInt('group_id', 0));
+    } else {
+        $groupsObject = $groupsHandler->create();
+    }
+    // Form save fields
+    $groupsObject->setVar('owner_uid', (int)$xoopsUser->getVar('uid'));
+    $groupsObject->setVar('group_title', Request::getString('group_title', '', 'POST'));
+    $groupsObject->setVar('group_desc', Request::getString('group_desc', '', 'POST'));
+
+    //    $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_created', '', 'POST'));
+    //    $groupsObject->setVar('date_created', $dateTimeObj->getTimestamp());
+    //    $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_updated', '', 'POST'));
+    //    $groupsObject->setVar('date_updated', $dateTimeObj->getTimestamp());
+
+    $groupsObject->setVar('date_created', \time());
+    $groupsObject->setVar('date_updated', \time());
+
+    require_once XOOPS_ROOT_PATH . '/class/uploader.php';
+    $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/groups/';
+    $uploader  = new \XoopsMediaUploader(
+        $uploadDir, $helper->getConfig('mimetypes'), $helper->getConfig('maxsize'), null, null
+    );
+    if ($uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0])) {
+        //$extension = preg_replace( '/^.+\.([^.]+)$/sU' , '' , $_FILES['attachedfile']['name']);
+
+        //$imgName = str_replace(' ', '', $_POST['group_img']).'.'.$extension;
+
+        $uploader->setPrefix('group_img_');
+
+        $uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0]);
+
+        if (!$uploader->upload()) {
+            $errors = $uploader->getErrors();
+
+            redirect_header('javascript:history.go(-1)', 3, $errors);
+        } else {
+            $groupsObject->setVar('group_img', $uploader->getSavedFileName());
+        }
+    } else {
+        $groupsObject->setVar('group_img', Request::getVar('group_img', ''));
+    }
+
+    if ($groupsHandler->insert($groupsObject)) {
+        //add membership info for the group
         $relgroupuser = $relgroupuserFactory->create();
         $relgroupuser->setVar('rel_group_id', $xoopsDB->getInsertId());
         $relgroupuser->setVar('rel_user_uid', $xoopsUser->getVar('uid'));
-        $relgroupuserFactory->insert2($relgroupuser);
-        $group_id=$relgroupuser->getVar('rel_group_id', $xoopsDB->getInsertId());
-        redirect_header('group.php?group_id='.$group_id.'', 500, _MD_YOGURT_GROUP_CREATED);
+
+        $relgroupuserFactory->insert($relgroupuser);
+        $group_id = $relgroupuser->getVar('rel_group_id', $xoopsDB->getInsertId());
+        redirect_header('group.php?group_id=' . $group_id . '', 500, _MD_YOGURT_GROUP_CREATED);
+        redirect_header('groups.php?op=list', 2, _MD_YOGURT_GROUP_SAVED);
     } else {
-        $groupsFactory->renderFormSubmit(120000, $xoopsTpl);
+        redirect_header(
+            XOOPS_URL . '/modules/yogurt/audios.php?uid=' . (int)$xoopsUser->getVar('uid'),
+            2,
+            _MD_YOGURT_ERROR
+        );
+
+        $group_img   = !empty($_POST['group_img']) ? Request::getString('group_img', '', 'POST') : '';
+        $path_upload = XOOPS_UPLOAD_PATH . '/yogurt/groups';
+
+        $pictwidth   = $helper->getConfig('resized_width');
+        $pictheight  = $helper->getConfig('resized_height');
+        $thumbwidth  = $helper->getConfig('thumb_width');
+        $thumbheight = $helper->getConfig('thumb_height');
+
+        $maxfilebytes  = $helper->getConfig('maxfilesize');
+        $maxfileheight = $helper->getConfig('max_original_height');
+        $maxfilewidth  = $helper->getConfig('max_original_width');
+
+        if ($groupsFactory->receiveGroup(
+            $group_title,
+            $group_desc,
+            '',
+            $path_upload,
+            $maxfilebytes,
+            $maxfilewidth,
+            $maxfileheight
+        )) {
+            //add membership info for the group
+            $relgroupuser = $relgroupuserFactory->create();
+            $relgroupuser->setVar('rel_group_id', $xoopsDB->getInsertId());
+            $relgroupuser->setVar('rel_user_uid', $xoopsUser->getVar('uid'));
+            $relgroupuserFactory->insert2($relgroupuser);
+            $group_id = $relgroupuser->getVar('rel_group_id', $xoopsDB->getInsertId());
+            redirect_header('group.php?group_id=' . $group_id . '', 500, _MD_YOGURT_GROUP_CREATED);
+        } else {
+            $groupsFactory->renderFormSubmit(120000, $xoopsTpl);
+        }
     }
 } else {
     $groupsFactory->renderFormSubmit(120000, $xoopsTpl);

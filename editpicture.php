@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -11,11 +13,11 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -41,7 +43,7 @@ if (1 === $marker) {
     $picture      = $imageFactory->create(false);
     $picture->load($cod_img);
     $picture->setVar('title', Request::getString('title', '', 'POST'));
-	$picture->setVar('caption', Request::getString('caption', '', 'POST'));
+    $picture->setVar('caption', Request::getString('caption', '', 'POST'));
     /**
      * Verifying who's the owner to allow changes
      */
@@ -49,7 +51,7 @@ if (1 === $marker) {
         if ($imageFactory->insert2($picture)) {
             redirect_header('album.php', 2, _MD_YOGURT_DESC_EDITED);
         } else {
-             redirect_header('album.php', 2, _MD_YOGURT_ERROR);
+            redirect_header('album.php', 2, _MD_YOGURT_ERROR);
         }
     }
 }
@@ -61,9 +63,9 @@ $imageFactory = new Yogurt\ImageHandler(
     $xoopsDB
 );
 $criteria_img = new Criteria('cod_img', $cod_img);
-$criteria_uid = new Criteria('uid_owner', $uid);
+$criteriaUid  = new Criteria('uid_owner', $uid);
 $criteria     = new CriteriaCompo($criteria_img);
-$criteria->add($criteria_uid);
+$criteria->add($criteriaUid);
 
 /**
  * Lets fetch the info of the pictures to be able to render the form
@@ -73,12 +75,12 @@ $array_pict = $imageFactory->getObjects(
     $criteria
 );
 if ($array_pict) {
-    $title = $array_pict[0]->getVar('title');
+    $title   = $array_pict[0]->getVar('title');
     $caption = $array_pict[0]->getVar('caption');
-	$url     = $array_pict[0]->getVar('url');
+    $filename     = $array_pict[0]->getVar('filename');
 }
 //$url = $xoopsModuleConfig['link_path_upload']."/thumb_".$url;
-$url = XOOPS_URL . '/uploads/yogurt/images/thumb_' . $url;
+$url = XOOPS_URL . '/uploads/yogurt/images/thumb_' . $filename;
 $imageFactory->renderFormEdit($title, $caption, $cod_img, $url);
 
 require dirname(__DIR__, 2) . '/footer.php';

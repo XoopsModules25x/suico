@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -11,11 +13,11 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -42,7 +44,7 @@ $criteria_title  = new Criteria('group_title', '%' . $group_keyword . '%', 'LIKE
 $criteria_desc   = new Criteria('group_desc', '%' . $group_keyword . '%', 'LIKE');
 $criteria_groups = new CriteriaCompo($criteria_title);
 $criteria_groups->add($criteria_desc, 'OR');
-$nb_groups = $controller->groupsFactory->getCount($criteria_groups);
+$countGroups = $controller->groupsFactory->getCount($criteria_groups);
 $criteria_groups->setLimit($helper->getConfig('groupsperpage'));
 $criteria_groups->setStart($start_all);
 $groups_objects = $controller->groupsFactory->getObjects($criteria_groups);
@@ -61,13 +63,12 @@ foreach ($groups_objects as $group_object) {
  */
 $mygroups          = '';
 $criteria_mygroups = new Criteria('rel_user_uid', $controller->uidOwner);
-$nb_mygroups       = $controller->relgroupusersFactory->getCount($criteria_mygroups);
+$countMyGroups     = $controller->relgroupusersFactory->getCount($criteria_mygroups);
 $criteria_mygroups->setLimit($helper->getConfig('groupsperpage'));
 $criteria_mygroups->setStart($start_my);
 $mygroups = $controller->relgroupusersFactory->getGroups('', $criteria_mygroups, 0);
 
-
-$mygroupsid =[];
+$mygroupsid = [];
 foreach ($mygroups as $value) {
     $mygroupsid[] = $value['group_id'];
 }
@@ -76,14 +77,9 @@ foreach ($mygroups as $value) {
  * Creating the navigation bar if you have a lot of friends
  */
 $navigationBar = new XoopsPageNav(
-    $nb_groups,
-    $helper->getConfig('groupsperpage'),
-    $start_all,
-    'start_all',
-    'group_keyword=' . $group_keyword . '&amp;start_my=' . $start_my
+    $countGroups, $helper->getConfig('groupsperpage'), $start_all, 'start_all', 'group_keyword=' . $group_keyword . '&amp;start_my=' . $start_my
 );
-$imageNav        = $navigationBar->renderImageNav(2);
-
+$imageNav      = $navigationBar->renderImageNav(2);
 
 //form
 //$xoopsTpl->assign('lang_youcanupload',sprintf(_MD_YOGURT_YOU_CAN_UPLOAD,$maxfilebytes/1024));
@@ -104,16 +100,16 @@ $xoopsTpl->assign('section_name', _MD_YOGURT_GROUPS);
 $xoopsTpl->assign('groups', $groups);
 //$xoopsTpl->assign('mygroups',$mygroups);
 $xoopsTpl->assign('lang_mygroupstitle', _MD_YOGURT_MYGROUPS);
-$xoopsTpl->assign('lang_groupstitle', _MD_YOGURT_ALLGROUPS . ' (' . $nb_groups . ')');
+$xoopsTpl->assign('lang_groupstitle', _MD_YOGURT_ALLGROUPS . ' (' . $countGroups . ')');
 $xoopsTpl->assign('lang_nogroupsyet', _MD_YOGURT_NOGROUPSYET);
 
 //page nav
 $xoopsTpl->assign('navigationBar', $imageNav);
 //$xoopsTpl->assign('navigationBar_my',$imageNav_my);
-//$xoopsTpl->assign('nb_groups',$nb_mygroups);// this is the one wich shows in the upper bar actually is about the mygroups
+//$xoopsTpl->assign('countGroups',$countMyGroups);// this is the one wich shows in the upper bar actually is about the mygroups
 $xoopsTpl->assign(
-    'nb_groups_all',
-    $nb_groups
+    'countGroups_all',
+    $countGroups
 ); //this is total number of groups
 
 $xoopsTpl->assign('lang_creategroup', _MD_YOGURTCREATEYOURGROUP);

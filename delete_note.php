@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -11,11 +13,11 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -28,12 +30,12 @@ require __DIR__ . '/header.php';
  */
 $notesFactory = new Yogurt\NotesHandler($xoopsDB);
 
-$note_id = Request::getInt('note_id', 0, 'POST');
+$noteId = Request::getInt('note_id', 0, 'POST');
 
 if (1 != Request::getInt('confirm', 0, 'POST')) {
     xoops_confirm(
         [
-            'note_id' => $note_id,
+            'note_id' => $noteId,
             'confirm' => 1,
         ],
         'delete_note.php',
@@ -46,13 +48,12 @@ if (1 != Request::getInt('confirm', 0, 'POST')) {
      * The user must be the owner
      */
     $criteria_note_id = new Criteria(
-        'note_id',
-        $note_id
+        'note_id', $noteId
     );
     $uid              = (int)$xoopsUser->getVar('uid');
-    $criteria_uid     = new Criteria('note_to', $uid);
+    $criteriaUid      = new Criteria('note_to', $uid);
     $criteria         = new CriteriaCompo($criteria_note_id);
-    $criteria->add($criteria_uid);
+    $criteria->add($criteriaUid);
 
     /**
      * Try to delete

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -11,11 +13,11 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -31,9 +33,9 @@ require __DIR__ . '/header.php';
  * Factory of friendrequests created
  */
 $friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
-$friendshipFactory     = new Yogurt\FriendshipHandler($xoopsDB);
+$friendshipFactory    = new Yogurt\FriendshipHandler($xoopsDB);
 
-$friendrequest_id      = Request::getInt('friendrequest_id', 0, 'POST');
+$friendrequest_id = Request::getInt('friendrequest_id', 0, 'POST');
 $friendship_level = Request::getInt('level', 0, 'POST');
 $uid              = (int)$xoopsUser->getVar('uid');
 
@@ -41,7 +43,7 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
 }
 
-$criteria = new CriteriaCompo(new Criteria('friendpet_id', $friendrequest_id));
+$criteria = new CriteriaCompo(new Criteria('friendreq_id', $friendrequest_id));
 $criteria->add(new Criteria('friendrequestto_uid', $uid));
 if ($friendrequestFactory->getCount($criteria) > 0) {
     if (($friendship_level > 0) && ($friendrequest = $friendrequestFactory->getObjects($criteria))) {

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -11,11 +13,11 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -51,21 +53,21 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
     );
     $criteria_aud = new Criteria('audio_id', $cod_audio);
     $uid          = (int)$xoopsUser->getVar('uid');
-    $criteria_uid = new Criteria('uid_owner', $uid);
+    $criteriaUid  = new Criteria('uid_owner', $uid);
     $criteria     = new CriteriaCompo($criteria_aud);
-    $criteria->add($criteria_uid);
+    $criteria->add($criteriaUid);
 
     $objects_array = $audioFactory->getObjects($criteria);
-    $audio_name    = $objects_array[0]->getVar('url');
+    $audio_name    = $objects_array[0]->getVar('filename');
 
     /**
      * Try to delete
      */
     if ($audioFactory->deleteAll($criteria)) {
         unlink(XOOPS_ROOT_PATH . '/uploads/yogurt/audio/' . $audio_name);
-        redirect_header('audio.php', 2, _MD_YOGURT_AUDIO_DELETED);
+        redirect_header('audios.php', 2, _MD_YOGURT_AUDIO_DELETED);
     } else {
-        redirect_header('audio.php', 2, _MD_YOGURT_ERROR);
+        redirect_header('audios.php', 2, _MD_YOGURT_ERROR);
     }
 }
 

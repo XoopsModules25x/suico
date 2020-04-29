@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 $I = new AcceptanceTester($scenario);
 $I->wantTo('UnInstall Module');
 $I->amOnPage('/');

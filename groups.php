@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -11,11 +13,11 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -38,7 +40,7 @@ $nbSections = $controller->getNumbersSections();
  * All Groups
  */
 $criteria_groups = new Criteria('group_id', 0, '>');
-$nb_groups       = $controller->groupsFactory->getCount($criteria_groups);
+$countGroups     = $controller->groupsFactory->getCount($criteria_groups);
 $criteria_groups->setLimit($helper->getConfig('groupsperpage'));
 $criteria_groups->setStart($start_all);
 $groups = $controller->groupsFactory->getGroups($criteria_groups);
@@ -48,43 +50,30 @@ $groups = $controller->groupsFactory->getGroups($criteria_groups);
  */
 $mygroups          = '';
 $criteria_mygroups = new Criteria('rel_user_uid', $controller->uidOwner);
-$nb_mygroups       = $controller->relgroupusersFactory->getCount($criteria_mygroups);
+$countMyGroups     = $controller->relgroupusersFactory->getCount($criteria_mygroups);
 $criteria_mygroups->setLimit($helper->getConfig('groupsperpage'));
 $criteria_mygroups->setStart($start_my);
 $mygroups = $controller->relgroupusersFactory->getGroups('', $criteria_mygroups, 0);
 
-
-$mygroupsid =[];
+$mygroupsid = [];
 foreach ($mygroups as $value) {
     $mygroupsid[] = $value['group_id'];
 }
-
-
-
 
 /**
  * Creating the navigation bar if you have a lot of friends
  */
 $navigationBar = new XoopsPageNav(
-    $nb_groups,
-    $helper->getConfig('groupsperpage'),
-    $start_all,
-    'start_all',
-    'uid=' . (int)$controller->uidOwner . '&amp;start_my=' . $start_my .'#allgroups'
+    $countGroups, $helper->getConfig('groupsperpage'), $start_all, 'start_all', 'uid=' . (int)$controller->uidOwner . '&amp;start_my=' . $start_my . '#allgroups'
 );
-$imageNav        = $navigationBar->renderImageNav(2); //allgroups
+$imageNav      = $navigationBar->renderImageNav(2); //allgroups
 
 $navigationBar_my = new XoopsPageNav(
-    $nb_mygroups,
-    $helper->getConfig('groupsperpage'),
-    $start_my,
-    'start_my',
-    'uid=' . (int)$controller->uidOwner . '&amp;start_all=' . $start_all .'#mygroups'
+    $countMyGroups, $helper->getConfig('groupsperpage'), $start_my, 'start_my', 'uid=' . (int)$controller->uidOwner . '&amp;start_all=' . $start_all . '#mygroups'
 );
-$imageNav_my        = $navigationBar_my->renderImageNav(2);
+$imageNav_my      = $navigationBar_my->renderImageNav(2);
 
 $maxfilebytes = $helper->getConfig('maxfilesize');
-
 
 //form
 $xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOU_CAN_UPLOAD, $maxfilebytes / 1024));
@@ -99,10 +88,10 @@ $xoopsTpl->assign('groups', $groups);
 $xoopsTpl->assign('mygroups', $mygroups);
 $xoopsTpl->assign('mygroupsid', $mygroupsid);
 $xoopsTpl->assign('lang_mygroupstitle', _MD_YOGURT_MYGROUPS);
-$xoopsTpl->assign('lang_groupstitle', _MD_YOGURT_ALLGROUPS . ' (' . $nb_groups . ')');
+$xoopsTpl->assign('lang_groupstitle', _MD_YOGURT_ALLGROUPS . ' (' . $countGroups . ')');
 $xoopsTpl->assign('lang_nogroupsyet', _MD_YOGURT_NOGROUPSYET);
 $xoopsTpl->assign('lang_availablegroups', _MD_YOGURT_AVAILABLEGROUPS);
-$xoopsTpl->assign('groupstotal', $nb_groups);
+$xoopsTpl->assign('groupstotal', $countGroups);
 $xoopsTpl->assign('lang_groupslist', _MD_YOGURT_GROUPSLIST);
 
 //page nav
@@ -110,12 +99,12 @@ $xoopsTpl->assign('navigationBar', $imageNav); //allgroups
 $xoopsTpl->assign('navigationBar_my', $imageNav_my);
 
 $xoopsTpl->assign(
-    'nb_groups',
-    $nb_mygroups
+    'countGroups',
+    $countMyGroups
 ); // this is the one which shows in the upper bar actually is about the mygroups
 $xoopsTpl->assign(
-    'nb_groups_all',
-    $nb_groups
+    'countGroups_all',
+    $countGroups
 ); //this is total number of groups
 
 $xoopsTpl->assign('lang_creategroup', _MD_YOGURTCREATEYOURGROUP);

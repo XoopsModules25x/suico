@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -9,13 +11,12 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
-
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 define(
     '_MI_YOGURT_NUMBPICT_TITLE',
@@ -241,11 +242,10 @@ define('MI_YOGURT_ADMENU14', 'Feedback');
 define('MI_YOGURT_ADMENU15', 'Migrate');
 define('MI_YOGURT_ADMENU16', 'About');
 define('MI_YOGURT_ADMENU17', 'User');
-define('MI_YOGURT_ADMENU18', 'Profile Category');
-define('MI_YOGURT_ADMENU19', 'Profile Fields');
-define('MI_YOGURT_ADMENU20', 'Registration Steps');
+define('MI_YOGURT_ADMENU18', 'Category');
+define('MI_YOGURT_ADMENU19', 'Fields');
+define('MI_YOGURT_ADMENU20', 'Reg-Steps');
 define('MI_YOGURT_ADMENU21', 'Fields Permission');
-
 
 //Config
 define('MI_YOGURT_EDITOR_ADMIN', 'Editor: Admin');
@@ -403,7 +403,6 @@ define('_MI_YOGURT_DISPLAYONLINESTATUS_DSC', 'Hide or Display Members Online Sta
 //define('_MI_YOGURT_CONFIG_COMMENTANDNOTIFICATION', '<h4>:: Comment & Notification Preferences ::</h4>');
 //define('_MI_YOGURT_CONFIG_COMMENTANDNOTIFICATION_DSC', '');
 
-
 //Config Categories Styling:
 
 define('_MI_YOGURT_CONFIG_STYLING_START', '<span style="color: #FF0000; font-size: Small;  font-weight: bold;">:: ');
@@ -484,4 +483,8 @@ define('_MI_YOGURT_PROFILE_CAPTCHA_STEP1_DESC', "Select 'Yes' to add extra measu
 define('_MI_YOGURT_EDITPROFILE', 'Edit Profile');
 define('_MI_YOGURT_CHANGEAVATAR', 'Change Avatar');
 
+define('MI_YOGURT_ADMINPAGER', 'Admin: records / page');
+define('MI_YOGURT_ADMINPAGER_DESC', 'Admin: # of records shown per page');
+define('MI_YOGURT_USERPAGER', 'User: records / page');
+define('MI_YOGURT_USERPAGER_DESC', 'User: # of records shown per page');
 

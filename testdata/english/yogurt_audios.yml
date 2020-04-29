@@ -1,0 +1,45 @@
+-
+    audio_id: '4'
+    title: Sonata_eminor
+    author: Vivaldi
+    description: ''
+    filename: aud_1_5e9687513a2b1.mp3
+    uid_owner: '1'
+    date_created: '1587461956'
+    date_updated: '1587461956'
+-
+    audio_id: '3'
+    title: NOCTURNE
+    author: TCHAIKOVSKY
+    description: ''
+    filename: aud_1_5e92c04d57cf0.mp3
+    uid_owner: '999'
+    date_created: '1585820373'
+    date_updated: '1587375573'
+-
+    audio_id: '5'
+    title: Prayer
+    author: Bloch
+    description: ''
+    filename: aud_1_5e92bc545bc64.mp3
+    uid_owner: '1'
+    date_created: '1585820373'
+    date_updated: '1587375573'
+-
+    audio_id: '8'
+    title: Adagio
+    author: Haydn
+    description: ''
+    filename: aud_1_5ea5d2205adbf.mp3
+    uid_owner: '1'
+    date_created: '1585820373'
+    date_updated: '1587375573'
+-
+    audio_id: '7'
+    title: 'Test File'
+    author: 'Modern Music'
+    description: ''
+    filename: aud_1_5e96879ghtest.mp3
+    uid_owner: '1'
+    date_created: '1585712055'
+    date_updated: '1585971255'

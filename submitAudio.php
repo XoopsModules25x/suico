@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -11,11 +13,11 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -33,7 +35,7 @@ require __DIR__ . '/header.php';
 //require_once __DIR__ . '/class/Audio.php';
 
 /**
- * Factory of pictures created
+ * Audio Factory created
  */
 $audioFactory = new Yogurt\AudioHandler($xoopsDB);
 
@@ -41,8 +43,9 @@ $myts = MyTextSanitizer::getInstance();
 /**
  * Getting the title
  */
-$title  = $myts->displayTarea(Request::getString('title', '', 'POST'), 0, 1, 1, 1, 1);
-$author = $myts->displayTarea(Request::getString('author', '', 'POST'), 0, 1, 1, 1, 1);
+$title  = Request::getString('title', '', 'POST');
+$author = Request::getString('author', '', 'POST');
+$description = Request::getText('description', '', 'POST');
 
 /**
  * Getting parameters defined in admin side
@@ -53,7 +56,7 @@ $maxfilebytes = $helper->getConfig('maxfilesize');
 /**
  * If we are receiving a file
  */
-if ('sel_audio' === $_POST['xoops_upload_file'][0]) {
+if ('sel_audio' === (Request::getArray('xoops_upload_file', '', 'POST')[0])) {
     /**
      * Verify Token
      */
@@ -62,13 +65,14 @@ if ('sel_audio' === $_POST['xoops_upload_file'][0]) {
     }
 
     /**
-     * Try to upload picture resize it insert in database and then redirect to index
+     * Try to upload the audio file, insert in database, and then redirect to index
      */
     if ($audioFactory->receiveAudio(
         $title,
         $path_upload,
         $author,
-        $maxfilebytes
+        $maxfilebytes,
+        $description
     )) {
         //$extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
         //                     $extra_tags['X_OWNER_UID'] = $xoopsUser->getVar('uid');
@@ -77,13 +81,13 @@ if ('sel_audio' === $_POST['xoops_upload_file'][0]) {
         //                     $notificationHandler->triggerEvent ("picture", $xoopsUser->getVar('uid'), "new_picture",$extra_tags);
         //header("Location: ".XOOPS_URL."/modules/yogurt/index.php?uid=".$xoopsUser->getVar('uid'));
         redirect_header(
-            XOOPS_URL . '/modules/yogurt/audio.php?uid=' . $xoopsUser->getVar('uid'),
+            XOOPS_URL . '/modules/yogurt/audios.php?uid=' . $xoopsUser->getVar('uid'),
             50,
             _MD_YOGURT_UPLOADEDAUDIO
         );
     } else {
         redirect_header(
-            XOOPS_URL . '/modules/yogurt/audio.php?uid=' . $xoopsUser->getVar('uid'),
+            XOOPS_URL . '/modules/yogurt/audios.php?uid=' . $xoopsUser->getVar('uid'),
             50,
             _MD_YOGURT_ERROR
         );

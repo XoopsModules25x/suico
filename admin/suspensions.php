@@ -13,19 +13,15 @@ declare(strict_types=1);
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          XOOPS Development Team <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
- * @link            https://xoops.org/
- * @since           1.0.0
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use Xmf\Request;
 use Xmf\Module\Helper\Permission;
+use Xmf\Request;
 
 require __DIR__ . '/admin_header.php';
 xoops_cp_header();
@@ -48,7 +44,6 @@ switch ($op) {
         $form              = $suspensionsObject->getForm();
         $form->display();
         break;
-
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('suspensions.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -73,7 +68,6 @@ switch ($op) {
         $form = $suspensionsObject->getForm();
         $form->display();
         break;
-
     case 'edit':
         $adminObject->addItemButton(AM_YOGURT_ADD_SUSPENSIONS, 'suspensions.php?op=new', 'add');
         $adminObject->addItemButton(AM_YOGURT_SUSPENSIONS_LIST, 'suspensions.php', 'list');
@@ -82,13 +76,13 @@ switch ($op) {
         $form              = $suspensionsObject->getForm();
         $form->display();
         break;
-
     case 'delete':
         $suspensionsObject = $suspensionsHandler->get(Request::getString('uid', ''));
         if (1 === Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('suspensions.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
+
             if ($suspensionsHandler->delete($suspensionsObject)) {
                 redirect_header('suspensions.php', 3, AM_YOGURT_FORMDELOK);
             } else {
@@ -109,7 +103,6 @@ switch ($op) {
             );
         }
         break;
-
     case 'clone':
 
         $id_field = Request::getString('uid', '');
@@ -148,12 +141,9 @@ switch ($op) {
             xoops_load('XoopsPageNav');
 
             $pagenav = new XoopsPageNav(
-                $suspensionsTempRows,
-                $suspensionsPaginationLimit,
-                $start,
-                'start',
-                'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                $suspensionsTempRows, $suspensionsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
+
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
 
@@ -183,50 +173,62 @@ switch ($op) {
                     'selectoruid',
                     AM_YOGURT_SUSPENSIONS_UID
                 );
+
                 $suspensionsArray['uid'] = $suspensionsTempArray[$i]->getVar('uid');
 
                 $GLOBALS['xoopsTpl']->assign('selectorold_pass', AM_YOGURT_SUSPENSIONS_OLD_PASS);
+
                 $suspensionsArray['old_pass'] = $suspensionsTempArray[$i]->getVar('old_pass');
 
                 $GLOBALS['xoopsTpl']->assign('selectorold_email', AM_YOGURT_SUSPENSIONS_OLD_EMAIL);
+
                 $suspensionsArray['old_email'] = $suspensionsTempArray[$i]->getVar('old_email');
 
                 $GLOBALS['xoopsTpl']->assign('selectorold_signature', AM_YOGURT_SUSPENSIONS_OLD_SIGNATURE);
+
                 $suspensionsArray['old_signature'] = strip_tags($suspensionsTempArray[$i]->getVar('old_signature'));
 
                 $GLOBALS['xoopsTpl']->assign('selectorsuspension_time', AM_YOGURT_SUSPENSIONS_SUSPENSION_TIME);
+
                 $suspensionsArray['suspension_time'] = $suspensionsTempArray[$i]->getVar('suspension_time');
 
                 $GLOBALS['xoopsTpl']->assign('selectorold_enc_type', AM_YOGURT_SUSPENSIONS_OLD_ENC_TYPE);
+
                 $suspensionsArray['old_enc_type'] = $suspensionsTempArray[$i]->getVar('old_enc_type');
 
                 $GLOBALS['xoopsTpl']->assign('selectorold_pass_expired', AM_YOGURT_SUSPENSIONS_OLD_PASS_EXPIRED);
+
                 $suspensionsArray['old_pass_expired'] = $suspensionsTempArray[$i]->getVar('old_pass_expired');
-                $suspensionsArray['edit_delete']      = "<a href='suspensions.php?op=edit&uid=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
+
+                $suspensionsArray['edit_delete'] = "<a href='suspensions.php?op=edit&uid=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='suspensions.php?op=delete&uid=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='suspensions.php?op=clone&uid=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
                 $GLOBALS['xoopsTpl']->append_by_ref('suspensionsArrays', $suspensionsArray);
+
                 unset($suspensionsArray);
             }
+
             unset($suspensionsTempArray);
+
             // Display Navigation
+
             if ($suspensionsCount > $suspensionsPaginationLimit) {
                 xoops_load('XoopsPageNav');
+
                 $pagenav = new XoopsPageNav(
-                    $suspensionsCount,
-                    $suspensionsPaginationLimit,
-                    $start,
-                    'start',
-                    'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                    $suspensionsCount, $suspensionsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
+
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
 
             //                     echo "<td class='center width5'>
 
             //                    <a href='suspensions.php?op=edit&uid=".$i."'><img src=".$pathIcon16."/edit.png alt='"._EDIT."' title='"._EDIT."'></a>
+
             //                    <a href='suspensions.php?op=delete&uid=".$i."'><img src=".$pathIcon16."/delete.png alt='"._DELETE."' title='"._DELETE."'></a>
+
             //                    </td>";
 
             //                echo "</tr>";
@@ -242,7 +244,9 @@ switch ($op) {
             //                    <tr>
 
             //                     <th class='center width5'>".AM_YOGURT_FORM_ACTION."XXX</th>
+
             //                    </tr><tr><td class='errorMsg' colspan='8'>There are noXXX suspensions</td></tr>";
+
             //            echo "</table><br><br>";
 
             //-------------------------------------------

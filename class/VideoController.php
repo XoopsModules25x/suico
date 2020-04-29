@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
@@ -16,11 +18,11 @@ use Criteria;
 use XoopsPageNav;
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
@@ -54,6 +56,7 @@ class VideoController extends YogurtController
      * @param object $criteria
      * @return array of video objects
      */
+
     public function getVideos(
         $criteria
     ) {
@@ -65,6 +68,7 @@ class VideoController extends YogurtController
      * @param int $maxNbVideos the maximum number of videos a user can have
      * @param     $presentNb
      */
+
     public function showFormSubmitVideos(
         $maxNbVideos,
         $presentNb
@@ -74,6 +78,7 @@ class VideoController extends YogurtController
         if ($this->isUser) {
             if ((1 === $this->isOwner) && ($maxNbVideos > $presentNb)) {
                 echo '&nbsp;';
+
                 $this->videosFactory->renderFormSubmit($xoopsTpl);
             }
         }
@@ -81,67 +86,78 @@ class VideoController extends YogurtController
 
     /**
      * Assign Video Content to Template
-     * @param $nbVideos
+     * @param $countVideos
      * @param $videos
      * @return bool
      */
+
     public function assignVideoContent(
-        $nbVideos,
+        $countVideos,
         $videos
     ) {
-        if (0 === $nbVideos) {
+        if (0 === $countVideos) {
             return false;
         }
+
         /**
          * Lets populate an array with the dati from the videos
          */
+
         $i = 0;
+
         foreach ($videos as $video) {
-            $videos_array[$i]['url']  = $video->getVar('youtube_code', 's');
-            $videos_array[$i]['desc'] = $video->getVar('video_desc', 's');
-            $videos_array[$i]['id']   = $video->getVar('video_id', 's');
+            $videosArray[$i]['url'] = $video->getVar('youtube_code', 's');
+
+            $videosArray[$i]['desc'] = $video->getVar('video_desc', 's');
+
+            $videosArray[$i]['id'] = $video->getVar('video_id', 's');
 
             $i++;
         }
 
-        return $videos_array;
+        return $videosArray;
     }
 
     /**
      * Create a page navbar for videos
-     * @param     $nbVideos
+     * @param     $countVideos
      * @param int $videosPerPage the number of videos in a page
      * @param int $start         at which position of the array we start
      * @param int $interval      how many pages between the first link and the next one
      * @return string|null
      * @return string|null
      */
-    public function VideosNavBar(
-        $nbVideos,
+
+    public function videosNavBar(
+        $countVideos,
         $videosPerPage,
         $start,
         $interval
     ) {
-        $pageNav = new XoopsPageNav($nbVideos, $videosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
+        $pageNav = new XoopsPageNav($countVideos, $videosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
+
         return $pageNav->renderImageNav($interval);
     }
 
     /**
      * @return bool|void
      */
+
     public function checkPrivilege()
     {
         if (0 === $this->helper->getConfig('enable_videos')) {
-            \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, _MD_YOGURT_VIDEOS_ENABLED_NOT);
+            \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, \_MD_YOGURT_VIDEOS_ENABLED_NOT);
         }
+
         $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
+
         if (1 === $this->configsFactory->getCount($criteria)) {
             $configs = $this->configsFactory->getObjects($criteria);
 
             $config = $configs[0]->getVar('videos');
 
             if (!$this->checkPrivilegeLevel($config)) {
-                \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, _MD_YOGURT_NOPRIVILEGE);
+                \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, \_MD_YOGURT_NOPRIVILEGE);
             }
         }
 

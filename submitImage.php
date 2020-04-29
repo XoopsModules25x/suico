@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -11,11 +13,11 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -39,7 +41,7 @@ $imageFactory = new Yogurt\ImageHandler($xoopsDB);
 /**
  * Getting the title
  */
-$title = Request::getString('title', '', 'POST');
+$title   = Request::getString('title', '', 'POST');
 $caption = Request::getString('caption', '', 'POST');
 /**
  * Getting parameters defined in admin side
@@ -69,7 +71,7 @@ if ('sel_photo' === Request::getArray('xoops_upload_file', '', 'POST')[0]) {
      */
     if ($imageFactory->receivePicture(
         $title,
-		$caption,
+        $caption,
         $path_upload,
         $thumbwidth,
         $thumbheight,
@@ -82,7 +84,7 @@ if ('sel_photo' === Request::getArray('xoops_upload_file', '', 'POST')[0]) {
         $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
         $extra_tags['X_OWNER_UID']  = $xoopsUser->getVar('uid');
         /** @var \XoopsNotificationHandler $notificationHandler */
-        $notificationHandler        = xoops_getHandler('notification');
+        $notificationHandler = xoops_getHandler('notification');
         $notificationHandler->triggerEvent('picture', $xoopsUser->getVar('uid'), 'new_picture', $extra_tags);
         //header("Location: ".XOOPS_URL."/modules/yogurt/index.php?uid=".$xoopsUser->getVar('uid'));
         redirect_header(

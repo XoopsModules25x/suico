@@ -1,20 +1,23 @@
-#xo-pagenav{ display: inline-block;text-align:left } 
+#xo-pagenav {
+    display: inline-block;
+    text-align: left
+}
 
 #xo-pagenav a:first-child {
- margin-right: -4px;
+    margin-right: -4px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
 
 #xo-pagenav a:last-child {
-       margin-left: -2px;
+    margin-left: -2px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
 
-#xo-pagenav a{ 
+#xo-pagenav a {
     color: #999999;
-   
+
     padding: 8px 16px;
     text-decoration: none;
     transition: background-color .3s;
@@ -22,21 +25,46 @@
 }
 
 
-
 /* active */
-#xo-pagenav .xo-pagact { margin-right: -4px;background-color: #ff0000;color: #FFFFFF;padding: 8px 16px; border: 1px solid #ddd;}
+#xo-pagenav .xo-pagact {
+    margin-right: -4px;
+    background-color: #ff0000;
+    color: #FFFFFF;
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+}
 
 /* in-active */
-#xo-pagenav a.xo-counterpage {margin-right: -4px;background-color: #FFFFFF;color: #999999;border: 1px solid #F5F5F5;} 
+#xo-pagenav a.xo-counterpage {
+    margin-right: -4px;
+    background-color: #FFFFFF;
+    color: #999999;
+    border: 1px solid #F5F5F5;
+}
 
 /* in-active-hover */
-#xo-pagenav a.xo-counterpage:hover { background-color: #F8F8F8;}
+#xo-pagenav a.xo-counterpage:hover {
+    background-color: #F8F8F8;
+}
 
 /* arrow left */
-#xo-pagenav a.xo-pagarrow-left {border: 1px solid  #F5F5F5; text-decoration: none;color: #999999;} 
-#xo-pagenav a.xo-pagarrow-left:hover{text-decoration: none;} 
+#xo-pagenav a.xo-pagarrow-left {
+    border: 1px solid #F5F5F5;
+    text-decoration: none;
+    color: #999999;
+}
+
+#xo-pagenav a.xo-pagarrow-left:hover {
+    text-decoration: none;
+}
 
 /* arrow-right */
-#xo-pagenav a.xo-pagarrow-right {border: 1px solid  #F5F5F5; text-decoration: none;color: #999999;} 
+#xo-pagenav a.xo-pagarrow-right {
+    border: 1px solid #F5F5F5;
+    text-decoration: none;
+    color: #999999;
+}
 
-#xo-pagenav a.xo-pagarrow-right:hover {text-decoration: none;} 
+#xo-pagenav a.xo-pagarrow-right:hover {
+    text-decoration: none;
+}

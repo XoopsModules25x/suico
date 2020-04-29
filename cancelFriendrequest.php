@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -11,11 +13,11 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -26,7 +28,7 @@ require __DIR__ . '/header.php';
  * Factory of friendrequests created
  */
 $friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
-$friendshipFactory     = new Yogurt\FriendshipHandler($xoopsDB);
+$friendshipFactory    = new Yogurt\FriendshipHandler($xoopsDB);
 
 /**
  * Getting the uid of the user which user want to canel friend request
@@ -54,6 +56,6 @@ $criteria_delete1->add($criteria_friend2);
 
 $friendrequestFactory->deleteAll($criteria_delete1);
 
-redirect_header('index.php?uid='.$friendrequestto_uid.'', 3, _MD_YOGURT_FRIENDREQUEST_CANCELLED);
+redirect_header('index.php?uid=' . $friendrequestto_uid . '', 3, _MD_YOGURT_FRIENDREQUEST_CANCELLED);
 
 require dirname(__DIR__, 2) . '/footer.php';

@@ -1,22 +1,24 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
- * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code
- * which is considered copyrighted (c) material of the original comment or credit authors.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+/**
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-/**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @package
- * @since
- * @author       XOOPS Development Team
- */
 $moduleDirName      = basename(
     dirname(__DIR__)
 );
@@ -86,22 +88,31 @@ return (object)[
         '/tcpdf',
     ],
     'renameTables'    => [
-        'yogurt_seutubo'        => 'yogurt_video',
+        'yogurt_seutubo'        => 'yogurt_videos',
         'yogurt_Groups'         => 'yogurt_groups',
         'yogurt_Configs'        => 'yogurt_configs',
-        'yogurt_friendpetition' => 'yogurt_friendrequest',
+        'yogurt_friendpetition' => 'yogurt_friendrequests',
+        'yogurt_audio'          => 'yogurt_audios',
+        'yogurt_friendship'     => 'yogurt_friendships',
     ],
     'renameColumns'   => [
         '3.5' => [
-            'yogurt_notes'         => [
+            'yogurt_notes'          => [
                 'Note_id'   => 'note_id',
-                'Note_text' => 'yogurt_configs',
-                'Note_from' => 'note_text',
-                'Note_to'   => 'note_from',
+                'Note_text' => 'note_text',
+                'Note_from' => 'note_from',
+                'Note_to'   => 'note_to',
             ],
-            'yogurt_friendrequest' => [
+            'yogurt_friendrequests' => [
+                'requespet_uid' => 'friendreq_id',
                 'requester_uid' => 'friendrequester_uid',
                 'requestto_uid' => 'friendrequestto_uid',
+            ],
+            'yogurt_audios'         => [
+                'url' => 'filename',
+            ],
+            'yogurt_images'         => [
+                'url' => 'filename',
             ],
         ],
     ],

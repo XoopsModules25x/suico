@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -11,15 +13,11 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
- */
-
-/**
- * Xoops header
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -32,7 +30,7 @@ $controller = new Yogurt\GroupController($xoopsDB, $xoopsUser);
 /**
  * Receiving info from get parameters
  */
-$groupId = Request::getInt('com_itemid', 0, 'GET');
+$groupId  = Request::getInt('com_itemid', 0, 'GET');
 $criteria = new Criteria('group_id', $groupId);
 $groups   = $controller->groupsFactory->getObjects($criteria);
 $group    = $groups[0];
@@ -40,5 +38,6 @@ $group    = $groups[0];
 $comItemid = Request::getInt('com_itemid', 0, 'GET');
 if ($comItemid > 0) {
     $com_replytitle = _MD_YOGURT_GROUPS . ': ' . $group->getVar('group_title');
+
     require XOOPS_ROOT_PATH . '/include/comment_new.php';
 }

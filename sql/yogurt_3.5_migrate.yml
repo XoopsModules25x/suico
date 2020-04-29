@@ -1,8 +1,8 @@
-yogurt_friendrequest:
+yogurt_friendrequests:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
         -
-            name: friendpet_id
+            name: friendreq_id
             attributes: ' int(11)  NOT NULL auto_increment'
         -
             name: friendrequester_uid
@@ -10,11 +10,14 @@ yogurt_friendrequest:
         -
             name: friendrequestto_uid
             attributes: ' int(11)  NOT NULL '
+        -
+            name: date_created
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
     keys:
         PRIMARY:
-            columns: friendpet_id
+            columns: friendreq_id
             unique: true
-yogurt_friendship:
+yogurt_friendships:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
         -
@@ -41,6 +44,12 @@ yogurt_friendship:
         -
             name: fan
             attributes: ' tinyint(4)  NOT NULL '
+        -
+            name: date_created
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: date_updated
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
     keys:
         PRIMARY:
             columns: friendship_id
@@ -67,11 +76,11 @@ yogurt_images:
             name: uid_owner
             attributes: ' varchar(50)  NOT NULL '
         -
-            name: url
+            name: filename
             attributes: ' varchar(50)  NOT NULL '
         -
             name: private
-            attributes: ' tinyint(1)  NOT NULL  DEFAULT ''0'' '
+            attributes: ' tinyint(1)  NOT NULL '
     keys:
         PRIMARY:
             columns: cod_img
@@ -98,7 +107,7 @@ yogurt_visitors:
         PRIMARY:
             columns: cod_visit
             unique: true
-yogurt_video:
+yogurt_videos:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
         -
@@ -115,7 +124,7 @@ yogurt_video:
             attributes: ' varchar(11)  NOT NULL '
         -
             name: main_video
-            attributes: ' varchar(1)  NOT NULL '
+            attributes: ' tinyint(1)  NOT NULL  DEFAULT ''0'' '
         -
             name: date_created
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
@@ -162,10 +171,10 @@ yogurt_groups:
             attributes: ' varchar(255)  NOT NULL '
         -
             name: date_created
-            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
+            attributes: ' int(11)  NOT NULL '
         -
             name: date_updated
-            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
+            attributes: ' int(11)  NOT NULL '
     keys:
         PRIMARY:
             columns: group_id
@@ -191,6 +200,9 @@ yogurt_notes:
         -
             name: date_created
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: date_updated
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
     keys:
         PRIMARY:
             columns: note_id
@@ -206,31 +218,31 @@ yogurt_configs:
             attributes: ' int(11)  NOT NULL '
         -
             name: pictures
-            attributes: ' tinyint(1)  NOT NULL '
+            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
         -
             name: audio
-            attributes: ' tinyint(1)  NOT NULL '
+            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
         -
             name: videos
-            attributes: ' tinyint(1)  NOT NULL '
+            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
         -
             name: groups
-            attributes: ' tinyint(1)  NOT NULL '
+            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
         -
             name: notes
-            attributes: ' tinyint(1)  NOT NULL '
+            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
         -
             name: friends
-            attributes: ' tinyint(1)  NOT NULL '
+            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
         -
             name: profile_contact
-            attributes: ' tinyint(1)  NOT NULL '
+            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
         -
             name: profile_general
-            attributes: ' tinyint(1)  NOT NULL '
+            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
         -
             name: profile_stats
-            attributes: ' tinyint(1)  NOT NULL '
+            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
         -
             name: suspension
             attributes: ' tinyint(1)  NOT NULL '
@@ -278,7 +290,7 @@ yogurt_suspensions:
         PRIMARY:
             columns: uid
             unique: true
-yogurt_audio:
+yogurt_audios:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
         -
@@ -294,7 +306,7 @@ yogurt_audio:
             name: description
             attributes: ' text  NOT NULL '
         -
-            name: url
+            name: filename
             attributes: ' varchar(50)  NOT NULL '
         -
             name: uid_owner
@@ -328,3 +340,140 @@ yogurt_privacy:
         PRIMARY:
             columns: id
             unique: true
+yogurt_profile:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: profile_id
+            attributes: ' int(12) unsigned  NOT NULL  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: profile_id
+            unique: true
+yogurt_profile_category:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: cat_id
+            attributes: ' smallint(5) unsigned  NOT NULL auto_increment'
+        -
+            name: cat_title
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: cat_description
+            attributes: ' text '
+        -
+            name: cat_weight
+            attributes: ' smallint(5) unsigned  NOT NULL  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: cat_id
+            unique: true
+yogurt_profile_field:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: field_id
+            attributes: ' int(12) unsigned  NOT NULL auto_increment'
+        -
+            name: cat_id
+            attributes: ' smallint(5) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: field_type
+            attributes: ' varchar(30)  NOT NULL  DEFAULT '''' '
+        -
+            name: field_valuetype
+            attributes: ' tinyint(2) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: field_name
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: field_title
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: field_description
+            attributes: ' text '
+        -
+            name: field_required
+            attributes: ' tinyint(1) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: field_maxlength
+            attributes: ' smallint(6) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: field_weight
+            attributes: ' smallint(6) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: field_default
+            attributes: ' text '
+        -
+            name: field_notnull
+            attributes: ' tinyint(1) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: field_edit
+            attributes: ' tinyint(1) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: field_show
+            attributes: ' tinyint(1) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: field_config
+            attributes: ' tinyint(1) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: field_options
+            attributes: ' text '
+        -
+            name: step_id
+            attributes: ' smallint(3) unsigned  NOT NULL  DEFAULT ''0'' '
+    keys:
+        field_name:
+            columns: field_name
+            unique: true
+        PRIMARY:
+            columns: field_id
+            unique: true
+        step:
+            columns: 'step_id, field_weight'
+            unique: false
+yogurt_profile_regstep:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: step_id
+            attributes: ' smallint(3) unsigned  NOT NULL auto_increment'
+        -
+            name: step_name
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: step_desc
+            attributes: ' text '
+        -
+            name: step_order
+            attributes: ' smallint(3) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: step_save
+            attributes: ' tinyint(1) unsigned  NOT NULL  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: step_id
+            unique: true
+        sort:
+            columns: 'step_order, step_name'
+            unique: false
+yogurt_profile_visibility:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: field_id
+            attributes: ' int(12) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: user_group
+            attributes: ' smallint(5) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: profile_group
+            attributes: ' smallint(5) unsigned  NOT NULL  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: 'field_id, user_group, profile_group'
+            unique: true
+        visible:
+            columns: 'user_group, profile_group'
+            unique: false

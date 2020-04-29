@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
@@ -17,11 +19,11 @@ use XoopsDatabaseFactory;
 use XoopsObject;
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 /**
@@ -64,10 +66,10 @@ class Image extends XoopsObject
         $this->initVar('cod_img', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('title', \XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('caption', \XOBJ_DTYPE_TXTBOX, null, false);
-		$this->initVar('date_created', \XOBJ_DTYPE_INT, 0, false);
+        $this->initVar('date_created', \XOBJ_DTYPE_INT, 0, false);
         $this->initVar('date_updated', \XOBJ_DTYPE_INT, 0, false);
         $this->initVar('uid_owner', \XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('url', \XOBJ_DTYPE_OTHER, null, false);
+        $this->initVar('filename', \XOBJ_DTYPE_OTHER, null, false);
         $this->initVar('private', \XOBJ_DTYPE_TXTBOX, null, false);
         if (!empty($id)) {
             if (\is_array($id)) {
@@ -102,7 +104,7 @@ class Image extends XoopsObject
      * @param int    $start
      * @return array
      */
-    public function getAllyogurt_imagess(
+    public function getAllImages(
         $criteria = [],
         $asobject = false,
         $sort = 'cod_img',
@@ -110,26 +112,26 @@ class Image extends XoopsObject
         $limit = 0,
         $start = 0
     ) {
-        $db          = XoopsDatabaseFactory::getDatabaseConnection();
-        $ret         = [];
-        $where_query = '';
+        $db         = XoopsDatabaseFactory::getDatabaseConnection();
+        $ret        = [];
+        $whereQuery = '';
         if (\is_array($criteria) && \count($criteria) > 0) {
-            $where_query = ' WHERE';
+            $whereQuery = ' WHERE';
             foreach ($criteria as $c) {
-                $where_query .= " ${c} AND";
+                $whereQuery .= " ${c} AND";
             }
-            $where_query = mb_substr($where_query, 0, -4);
+            $whereQuery = mb_substr($whereQuery, 0, -4);
         } elseif (!\is_array($criteria) && $criteria) {
-            $where_query = ' WHERE ' . $criteria;
+            $whereQuery = ' WHERE ' . $criteria;
         }
         if (!$asobject) {
-            $sql    = 'SELECT cod_img FROM ' . $db->prefix('yogurt_images') . "${where_query} ORDER BY ${sort} ${order}";
+            $sql    = 'SELECT cod_img FROM ' . $db->prefix('yogurt_images') . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['yogurt_images_id'];
             }
         } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_images') . "${where_query} ORDER BY ${sort} ${order}";
+            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_images') . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new self($myrow);
