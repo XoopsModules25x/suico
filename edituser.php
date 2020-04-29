@@ -279,5 +279,5 @@ if ('avatarchoose' === $op) {
     redirect_header('index . php ? uid = ' . $uid, 0, _US_PROFUPDATED);
 }
 
-require __DIR__ . ' / footer . php';
-require dirname(__DIR__, 2) . ' / footer . php';
+require __DIR__ . '/footer.php';
+require dirname(__DIR__, 2) . '/footer.php';

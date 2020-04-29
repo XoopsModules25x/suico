@@ -322,7 +322,7 @@ function yogurt_getRegisterForm(XoopsUser $user, $profile, $step = null)
     }
 
     // Dynamic fields
-    $profileHandler              = $helper->getHandler('Profile');
+    $profileHandler              = \XoopsModules\Yogurt\Helper::getInstance()->getHandler('Profile');
     $fields                       = $profileHandler->loadFields();
     $_SESSION['profile_required'] = [];
     foreach (array_keys($fields) as $i) {
@@ -341,7 +341,7 @@ function yogurt_getRegisterForm(XoopsUser $user, $profile, $step = null)
     ksort($elements);
 
     // Get categories
-    $categoryHandler = $helper->getHandler('Category');
+    $categoryHandler = \XoopsModules\Yogurt\Helper::getInstance()->getHandler('Category');
     $categories  = $categoryHandler->getObjects(null, true, false);
 
     foreach (array_keys($elements) as $k) {

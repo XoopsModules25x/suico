@@ -60,7 +60,7 @@ class YogurtCorePreload extends XoopsPreloadItem
      */
     public static function eventCoreUserinfoStart($args)
     {
-        header('location: ./modules/yogurt/index.php' . (Request::getString('QUERY_STRING', '', 'SERVER')));
+        header('location: ./modules/yogurt/index.php?' . (Request::getString('QUERY_STRING', '', 'SERVER')));
         exit();
     }
 }
