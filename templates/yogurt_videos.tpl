@@ -1,4 +1,4 @@
-<{include file='db:yogurt_navbar.tpl'}>
+<{include file='db:suico_navbar.tpl'}>
 
 <div class="container-fluid">
     <div class="row">
@@ -43,45 +43,38 @@
                                             myform.codigo.focus();
                                             return false;
                                         }
-
                                     //-->
                                 </script>
                                 <!-- End Form Vaidation JavaScript //-->
                             </div>
                         <{/if}>
-
                         <h5>
                             <a href="<{$xoops_url}>/userinfo.php?uid=<{$owner_uid}>">
                                 <{$lang_videos}>
                             </a>
                         </h5>
-
                         <{if $countVideos<=0}>
                             <div class="alert alert-primary"><{$lang_novideoyet}></div>
                         <{/if}>
-
-
-
                         <{section name=i loop=$videos}>
                             <div class="embed-responsive embed-responsive-16by9">
-                                <a name="<{$videos[i].id}>"></a>
-								<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<{$videos[i].url}>?rel=0" allowfullscreen></iframe>
-								
-							</div>
+                               <a name="<{$videos[i].id}>"></a>
+                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<{$videos[i].url}>?rel=0" allowfullscreen></iframe>
+                            </div>
                             <div class="alert alert-primary">
                                 <{$videos[i].desc}>
                                 <{if $isOwner==1 }>
-                                    <form action="delvideo.php" method="post" id="deleteform" class="yogurt-video-forms">
+                                    <form action="delvideo.php" method="post" id="deleteform" class="suico-video-forms">
                                         <input type="hidden" value="<{$videos[i].id}>" name="cod_video">
                                         <{$token}>
                                         <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 delete.png}>" class="float-left">
                                     </form>
-                                    <form action="editdescvideo.php" method="post" id="editform" class="yogurt-video-forms">
+                                    <form action="editdescvideo.php" method="post" id="editform" class="suico-video-forms">
                                         <input type="hidden" alt="<{$lang_edit}>" title="<{$lang_edit}>" value="<{$videos[i].id}>" name="video_id">
                                         <{$token}>
                                         <input name="submit" type="image" alt="<{$lang_editdesc}>" title="<{$lang_editdesc}>" src="<{xoModuleIcons16 edit.png}>" class="float-left">
                                     </form>
-                                    <form action="mainvideo.php" method="post" id="mainform" class="yogurt-video-forms">
+                                    <form action="mainvideo.php" method="post" id="mainform" class="suico-video-forms">
                                         <input type="hidden" value="<{$videos[i].id}>" name="video_id">
                                         <{$token}>
                                         <input name="submit" type="image" alt="<{$lang_makemain}>" title="<{$lang_makemain}>" src="assets/images/mainvideo.gif" class="float-left">
@@ -90,12 +83,8 @@
                                 <br>
                             </div>
                         <{/section}>
-
                         <{$pageNav}>
-
-
-                        <{include file="db:yogurt_footer.tpl"}>
-
+                        <{include file="db:suico_footer.tpl"}>
                         <!-- end -->
                     </div>
                 </div>
