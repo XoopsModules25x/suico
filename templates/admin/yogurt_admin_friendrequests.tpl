@@ -1,4 +1,4 @@
-<{if $friendrequestsRows > 0}>
+<{if $friendrequestRows > 0}>
     <div class="outer">
         <form name="select" action="friendrequests.php?op=" method="POST"
               onsubmit="if(window.document.select.op.value =='') {return false;} else if (window.document.select.op.value =='delete') {return deleteSubmitValid('friendrequestsId[]');} else if (isOneChecked('friendrequestsId[]')) {return true;} else {alert('<{$smarty.const.AM_FRIENDREQUESTS_SELECTED_ERROR}>'); return false;}">
@@ -16,7 +16,6 @@
                 <div id="pagenav"><{$pagenav}></div>
             </div>
 
-
             <table class="$friendrequests" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                     <th align="center" width="5%"><input name="allbox" title="allbox" id="allbox" onclick="xoopsCheckAll('select', 'allbox');" type="checkbox" title="Check All" value="Check All"></th>
@@ -27,17 +26,15 @@
 
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
-                <{foreach item=friendrequestsArray from=$friendrequestsArrays}>
+                <{foreach item=friendrequestArray from=$friendrequestsArray}>
                     <tr class="<{cycle values="odd,even"}>">
 
-                        <td align="center" style="vertical-align:middle;"><input type="checkbox" name="friendrequests_id[]" title="friendrequests_id[]" id="friendrequests_id[]" value="<{$friendrequestsArray.friendrequests_id}>"></td>
-                        <td class='left'><{$friendrequestsArray.friendreq_id}></td>
-                        <td class='left'><{$friendrequestsArray.friendrequester_uid}></td>
-                        <td class='left'><{$friendrequestsArray.friendrequestto_uid}></td>
-                        <td class='left'><{$friendrequestsArray.date_created}></td>
-
-
-                        <td class="center width5"><{$friendrequestsArray.edit_delete}></td>
+                        <td align="center" style="vertical-align:middle;"><input type="checkbox" name="friendrequests_id[]" title="friendrequests_id[]" id="friendrequests_id[]" value="<{$friendrequestArray.friendrequests_id}>"></td>
+                        <td class='left'><{$friendrequestArray.friendreq_id}></td>
+                        <td class='left'><{$friendrequestArray.friendrequester_uid}></td>
+                        <td class='left'><{$friendrequestArray.friendrequestto_uid}></td>
+                        <td class='left'><{$friendrequestArray.date_created}></td>
+                        <td class="center width5"><{$friendrequestArray.edit_delete}></td>
                     </tr>
                 <{/foreach}>
             </table>
@@ -46,7 +43,6 @@
             <{else}>
             <table width="100%" cellspacing="1" class="outer">
                 <tr>
-
                     <th align="center" width="5%"><input name="allbox" title="allbox" id="allbox" onclick="xoopsCheckAll('select', 'allbox');" type="checkbox" title="Check All" value="Check All"></th>
                     <th class="left"><{$selectorfriendreq_id}></th>
                     <th class="left"><{$selectorfriendrequester_uid}></th>
@@ -56,7 +52,7 @@
                     <th class="center width5"><{$smarty.const.AM_YOGURT_FORM_ACTION}></th>
                 </tr>
                 <tr>
-                    <td class="errorMsg" colspan="11">There are no $friendrequests</td>
+                    <td class="errorMsg" colspan="11">There are no friendrequests</td>
                 </tr>
             </table>
     </div>

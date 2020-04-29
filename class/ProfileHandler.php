@@ -308,9 +308,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
     public function search(\CriteriaElement $criteria, $searchvars = [], $groups = null)
     {
         $uservars = $this->getUserVars();
-
         $searchvars_user = \array_intersect($searchvars, $uservars);
-
         $searchvars_profile = \array_diff($searchvars, $uservars);
 
         $sv = ['u.uid, u.uname, u.email, u.user_viewemail'];

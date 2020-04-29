@@ -72,7 +72,7 @@ class Groups extends XoopsObject
 
         $this->initVar('group_title', \XOBJ_DTYPE_TXTBOX, null, false);
 
-        $this->initVar('group_desc', \XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('group_desc', \XOBJ_DTYPE_OTHER, null, false);
 
         $this->initVar('group_img', \XOBJ_DTYPE_TXTBOX, null, false);
 

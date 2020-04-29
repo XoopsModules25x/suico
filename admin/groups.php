@@ -83,6 +83,14 @@ switch ($op) {
             $groupsObject->setVar('group_img', Request::getVar('group_img', ''));
         }
 
+
+        $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_created', '', 'POST'));
+        $groupsObject->setVar('date_created', $dateTimeObj->getTimestamp());
+
+        $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_updated', '', 'POST'));
+        $groupsObject->setVar('date_updated', $dateTimeObj->getTimestamp());
+
+
         if ($groupsHandler->insert($groupsObject)) {
             redirect_header('groups.php?op=list', 2, AM_YOGURT_FORMOK);
         }
@@ -210,14 +218,18 @@ switch ($op) {
                 $groupsArray['group_title'] = $groupsTempArray[$i]->getVar('group_title');
 
                 $GLOBALS['xoopsTpl']->assign('selectorgroup_desc', AM_YOGURT_GROUPS_GROUP_DESC);
-
                 $groupsArray['group_desc'] = $groupsTempArray[$i]->getVar('group_desc');
 
                 $GLOBALS['xoopsTpl']->assign('selectorgroup_img', AM_YOGURT_GROUPS_GROUP_IMG);
-
                 $groupsArray['group_img'] = "<img src='" . $uploadUrl . $groupsTempArray[$i]->getVar(
                         'group_img'
                     ) . "' name='" . 'name' . "' id=" . 'id' . " alt='' style='max-width:100px'>";
+
+                $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_GROUPS_DATE_CREATED);
+                $groupsArray['date_created'] = formatTimestamp($groupsTempArray[$i]->getVar('date_created'), 's');
+
+                $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_YOGURT_GROUPS_DATE_UPDATED);
+                $groupsArray['date_updated'] = formatTimestamp($groupsTempArray[$i]->getVar('date_updated'), 's');
 
                 $groupsArray['edit_delete'] = "<a href='groups.php?op=edit&group_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='groups.php?op=delete&group_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>

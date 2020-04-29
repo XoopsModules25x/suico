@@ -191,6 +191,8 @@ define('AM_YOGURT_GROUPS_OWNER_UID', 'Owner');
 define('AM_YOGURT_GROUPS_GROUP_TITLE', 'Group');
 define('AM_YOGURT_GROUPS_GROUP_DESC', 'Description');
 define('AM_YOGURT_GROUPS_GROUP_IMG', 'Image');
+define('AM_YOGURT_GROUPS_DATE_CREATED', 'Created');
+define('AM_YOGURT_GROUPS_DATE_UPDATED', 'Updated');
 // Relgroupuser
 define('AM_YOGURT_RELGROUPUSER_ADD', 'Add a relgroupuser');
 define('AM_YOGURT_RELGROUPUSER_EDIT', 'Edit relgroupuser');

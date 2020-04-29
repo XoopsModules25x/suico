@@ -18,6 +18,9 @@
  * @author              Jan Pedersen
  * @author              trabis <lusopoemas@gmail.com>
  */
+
+use Xmf\Request;
+
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_register.tpl';
 require __DIR__ . '/header.php';
 

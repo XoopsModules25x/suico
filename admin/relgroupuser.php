@@ -169,8 +169,8 @@ switch ($op) {
                 $relgroupuserArray['rel_id'] = $relgroupuserTempArray[$i]->getVar('rel_id');
 
                 $GLOBALS['xoopsTpl']->assign('selectorrel_group_id', AM_YOGURT_RELGROUPUSER_REL_GROUP_ID);
-                $relgroupuserArray['rel_group_id'] = $groupsHandler->get($relgroupuserTempArray[$i]->getVar('rel_group_id'))->getVar('group_title');
-
+//                $relgroupuserArray['rel_group_id'] = ($groupsHandler->get($relgroupuserTempArray[$i]->getVar('rel_group_id')))->getVar('group_title');
+                $relgroupuserArray['rel_group_id'] = $relgroupuserTempArray[$i]->getVar('rel_group_id');
                 $GLOBALS['xoopsTpl']->assign('selectorrel_user_uid', AM_YOGURT_RELGROUPUSER_REL_USER_UID);
                 $relgroupuserArray['rel_user_uid'] = strip_tags(XoopsUser::getUnameFromId($relgroupuserTempArray[$i]->getVar('rel_user_uid')));
 

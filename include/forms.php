@@ -53,7 +53,7 @@ function yogurt_getFieldForm(Yogurt\Field $field, $action = false)
     if (!$field->isNew()) {
         $fieldcat_id = $field->getVar('cat_id');
     }
-    $categoryHandler = $helper->getHandler('Category');
+    $categoryHandler = \XoopsModules\Yogurt\Helper::getInstance()->getHandler('Category');
     $cat_select       = new XoopsFormSelect(_AM_YOGURT_CATEGORY, 'field_category', $fieldcat_id);
     $cat_select->addOption(0, _AM_YOGURT_DEFAULT);
     $cat_select->addOptionArray($categoryHandler->getList());
@@ -258,7 +258,7 @@ function yogurt_getFieldForm(Yogurt\Field $field, $action = false)
         $form->addElement(new XoopsFormRadioYN(_AM_YOGURT_REQUIRED, 'field_required', $field->getVar('field_required', 'e')));
         $regstep_select = new XoopsFormSelect(_AM_YOGURT_PROF_REGISTER, 'step_id', $field->getVar('step_id', 'e'));
         $regstep_select->addOption(0, _NO);
-        $regstepHandler = $helper->getHandler('Regstep');
+        $regstepHandler = \XoopsModules\Yogurt\Helper::getInstance()->getHandler('Regstep');
         $regstep_select->addOptionArray($regstepHandler->getList());
         $form->addElement($regstep_select);
     }
@@ -409,12 +409,12 @@ function yogurt_getUserForm(XoopsUser $user, Yogurt\Profile $profile = null, $ac
 
     /* @var ProfileHandler $profileHandler */
 
-    $profileHandler = $helper->getHandler('Profile');
+    $profileHandler = \XoopsModules\Yogurt\Helper::getInstance()->getHandler('Profile');
     // Dynamic fields
     if (!$profile) {
         /* @var ProfileHandler $profileHandler */
 
-        $profileHandler = $helper->getHandler('Profile');
+        $profileHandler = \XoopsModules\Yogurt\Helper::getInstance()->getHandler('Profile');
         $profile         = $profileHandler->get($user->getVar('uid'));
     }
     // Get fields
@@ -463,7 +463,7 @@ function yogurt_getUserForm(XoopsUser $user, Yogurt\Profile $profile = null, $ac
     $elements[0][] = ['element' => new XoopsFormHidden('op', 'save'), 'required' => 0];
     $weights[0][]  = 0;
 
-    $categoryHandler    = $helper->getHandler('Category');
+    $categoryHandler    = \XoopsModules\Yogurt\Helper::getInstance()->getHandler('Category');
     $categories     = [];
     $all_categories = $categoryHandler->getObjects(null, true, false);
     $count_fields   = count($fields);
