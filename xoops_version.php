@@ -1145,7 +1145,7 @@ $modversion['templates'] = [
     ['file' => 'yogurt_searchform.tpl', 'description' => _MI_YOGURT_TEMPLATE_SEARCHFORMDESC],
     ['file' => 'yogurt_searchresults.tpl', 'description' => _MI_YOGURT_TEMPLATE_SEARCHRESULTSDESC],
     ['file' => 'yogurt_user.tpl', 'description' => _MI_YOGURT_TEMPLATE_USERDESC],
-    ['file' => 'yogurt_video.tpl', 'description' => _MI_YOGURT_TEMPLATE_VIDEOSDESC],
+    ['file' => 'yogurt_videos.tpl', 'description' => _MI_YOGURT_TEMPLATE_VIDEOSDESC],
 ];
 
 global $xoopsModule;

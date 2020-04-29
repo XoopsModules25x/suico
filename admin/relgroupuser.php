@@ -166,20 +166,13 @@ switch ($op) {
                 //        $field = explode(':', $fields[$i]);
 
                 $GLOBALS['xoopsTpl']->assign('selectorrel_id', AM_YOGURT_RELGROUPUSER_REL_ID);
-
                 $relgroupuserArray['rel_id'] = $relgroupuserTempArray[$i]->getVar('rel_id');
 
                 $GLOBALS['xoopsTpl']->assign('selectorrel_group_id', AM_YOGURT_RELGROUPUSER_REL_GROUP_ID);
-
                 $relgroupuserArray['rel_group_id'] = $groupsHandler->get($relgroupuserTempArray[$i]->getVar('rel_group_id'))->getVar('group_title');
 
-                //                $GLOBALS['xoopsTpl']->assign('selectorrel_user_uid', AM_YOGURT_RELGROUPUSER_REL_USER_UID);
-
-                //                $relgroupuserArray['rel_user_uid'] = strip_tags(
-
-                //                    XoopsUser::getUnameFromId($relgroupuserTempArray[$i]->getVar('rel_user_uid'))
-
-                //                );
+                $GLOBALS['xoopsTpl']->assign('selectorrel_user_uid', AM_YOGURT_RELGROUPUSER_REL_USER_UID);
+                $relgroupuserArray['rel_user_uid'] = strip_tags(XoopsUser::getUnameFromId($relgroupuserTempArray[$i]->getVar('rel_user_uid')));
 
                 $selectorrel_user_uid = $utility::selectSorting(AM_YOGURT_RELGROUPUSER_REL_USER_UID, 'rel_user_uid');
 

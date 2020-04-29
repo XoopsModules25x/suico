@@ -26,6 +26,9 @@ use Xmf\Module\Helper\Permission;
 use XoopsDatabaseFactory;
 use XoopsObject;
 
+const GROUPID = 'group_id';
+const YOGURTGROUPS = 'yogurt_groups'; //table
+
 /**
  * Includes of form objects and uploader
  */
@@ -47,9 +50,6 @@ class Groups extends XoopsObject
 
     public $permHelper;
 
-    public const GROUPID = 'group_id';
-
-    public const YOGURTGROUPS = 'yogurt_groups'; //table
 
     /**
      * Groups constructor.
