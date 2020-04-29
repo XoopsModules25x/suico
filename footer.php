@@ -19,7 +19,6 @@ declare(strict_types=1);
 
 use Xmf\Request;
 use XoopsModules\Yogurt;
-use XoopsModules\Yogurt\IndexController;
 
 /**
  * Adding to the module js and css of the lightbox and new ones
@@ -36,7 +35,7 @@ $xoTheme->addStylesheet(
 
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
-if (false !== stripos($_SERVER['HTTP_USER_AGENT'], 'msie')) {
+if (false !== mb_stripos($_SERVER['HTTP_USER_AGENT'], 'msie')) {
     $xoTheme->addStylesheet(
         XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css'
     );
@@ -47,7 +46,7 @@ $xoTheme->addStylesheet(
 );
 //}
 
-if (!stripos($_SERVER['REQUEST_URI'], 'memberslist.php')) {
+if (!mb_stripos($_SERVER['REQUEST_URI'], 'memberslist.php')) {
     $xoTheme->addScript(
         XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.js'
     );
@@ -58,7 +57,7 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 //}
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
 
-if (stripos($_SERVER['REQUEST_URI'], 'memberslist.php')) {
+if (mb_stripos($_SERVER['REQUEST_URI'], 'memberslist.php')) {
     if ('datatables' == $xoopsModuleConfig['memberslisttemplate']) {
         $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.dataTables.css');
         $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/responsive.dataTables.min.css');

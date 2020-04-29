@@ -13,13 +13,11 @@ declare(strict_types=1);
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -40,11 +38,11 @@ $controller = new IndexController($xoopsDB, $xoopsUser);
  */
 $nbSections = $controller->getNumbersSections();
 
-$uid=$controller->uidOwner;
+$uid = $controller->uidOwner;
 
-/* @var  XoopsGroupPermHandler $gperm_handler */
-$gperm_handler = xoops_getHandler('groupperm');
-$groups        = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : array(XOOPS_GROUP_ANONYMOUS);
+/* @var  XoopsGroupPermHandler $grouppermHandler */
+$grouppermHandler = xoops_getHandler('groupperm');
+$groups        = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : [XOOPS_GROUP_ANONYMOUS];
 
 if (is_object($GLOBALS['xoopsUser']) && $uid == $GLOBALS['xoopsUser']->getVar('uid')) {
     //disable cache
@@ -56,22 +54,22 @@ if (is_object($GLOBALS['xoopsUser']) && $uid == $GLOBALS['xoopsUser']->getVar('u
     $GLOBALS['xoopsConfigUser'] = $config_handler->getConfigsByCat(XOOPS_CONF_USER);
 
     $GLOBALS['xoopsTpl']->assign('user_ownpage', true);
-    if ($GLOBALS['xoopsConfigUser']['self_delete'] == 1) {
+    if (1 == $GLOBALS['xoopsConfigUser']['self_delete']) {
         $GLOBALS['xoopsTpl']->assign('user_candelete', true);
         $GLOBALS['xoopsTpl']->assign('lang_deleteaccount', _US_DELACCOUNT);
     } else {
         $GLOBALS['xoopsTpl']->assign('user_candelete', false);
     }
-	$GLOBALS['xoopsTpl']->assign('user_changeemail', $GLOBALS['xoopsConfigUser']['allow_chgmail']);
-    $thisUser =& $GLOBALS['xoopsUser'];
+    $GLOBALS['xoopsTpl']->assign('user_changeemail', $GLOBALS['xoopsConfigUser']['allow_chgmail']);
+    $thisUser = &$GLOBALS['xoopsUser'];
 } else {
-    /* @var XoopsMemberHandler $member_handler */
-    $member_handler = xoops_getHandler('member');
-    $thisUser       = $member_handler->getUser($uid);
+    /* @var XoopsMemberHandler $memberHandler */
+    $memberHandler = xoops_getHandler('member');
+    $thisUser       = $memberHandler->getUser($uid);
 
     // Redirect if not a user or not active and the current user is not admin
-   if (!is_object($thisUser) || (!$thisUser->isActive() && (!$GLOBALS['xoopsUser'] || !$GLOBALS['xoopsUser']->isAdmin()))) {
-		redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n'), 3, _US_SELECTNG);
+    if (!is_object($thisUser) || (!$thisUser->isActive() && (!$GLOBALS['xoopsUser'] || !$GLOBALS['xoopsUser']->isAdmin()))) {
+        redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n'), 3, _US_SELECTNG);
     }
 
     /**
@@ -85,16 +83,15 @@ if (is_object($GLOBALS['xoopsUser']) && $uid == $GLOBALS['xoopsUser']->getVar('u
      * Admin groups: If thisUser belongs to admin groups, the xoopsUser has access if and only if one of xoopsUser's groups is allowed to access admin group; else
      * Non basic groups: If thisUser belongs to one or more non basic groups, the xoopsUser has access if and only if one of xoopsUser's groups is allowed to allowed to any of the non basic groups; else
      * User group: If thisUser belongs to User group only, the xoopsUser has access if and only if one of his groups is allowed to access User group
-     *
      */
     // Redirect if current user is not allowed to access the user's profile based on group permission
-    $groups_basic             = array(XOOPS_GROUP_ADMIN, XOOPS_GROUP_USERS, XOOPS_GROUP_ANONYMOUS);
+    $groups_basic             = [XOOPS_GROUP_ADMIN, XOOPS_GROUP_USERS, XOOPS_GROUP_ANONYMOUS];
     $groups_thisUser          = $thisUser->getGroups();
     $groups_thisUser_nonbasic = array_diff($groups_thisUser, $groups_basic);
     $groups_xoopsUser         = $groups;
-    /* @var  XoopsGroupPermHandler $gperm_handler */
-    $gperm_handler            = xoops_getHandler('groupperm');
-    $groups_accessible        = $gperm_handler->getItemIds('profile_access', $groups_xoopsUser, $GLOBALS['xoopsModule']->getVar('mid'));
+    /* @var  XoopsGroupPermHandler $grouppermHandler */
+    $grouppermHandler     = xoops_getHandler('groupperm');
+    $groups_accessible = $grouppermHandler->getItemIds('profile_access', $groups_xoopsUser, $GLOBALS['xoopsModule']->getVar('mid'));
 
     $rejected = false;
     if ($thisUser->isAdmin()) {
@@ -106,7 +103,7 @@ if (is_object($GLOBALS['xoopsUser']) && $uid == $GLOBALS['xoopsUser']->getVar('u
     }
 
     if ($rejected) {
-       // redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n'), 3, _NOPERM);
+        // redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n'), 3, _NOPERM);
     }
 
     if (is_object($GLOBALS['xoopsUser']) && $GLOBALS['xoopsUser']->isAdmin()) {
@@ -122,8 +119,6 @@ if (is_object($GLOBALS['xoopsUser']) && $GLOBALS['xoopsUser']->isAdmin()) {
     $GLOBALS['xoopsTpl']->assign('lang_deleteaccount', _US_DELACCOUNT);
     $GLOBALS['xoopsTpl']->assign('userlevel', $thisUser->isActive());
 }
-
-
 
 // Dynamic User Profiles
 $thisUsergroups     = $thisUser->getGroups();
@@ -163,7 +158,7 @@ foreach (array_keys($fields) as $i) {
         $value = implode('<br>', array_values($value));
     }
     if ($value) {
-        $categories[$cat_id]['fields'][] = array('title' => $fields[$i]->getVar('field_title'), 'value' => $value);
+        $categories[$cat_id]['fields'][] = ['title' => $fields[$i]->getVar('field_title'), 'value' => $value];
         $weights[$cat_id][]              = $fields[$i]->getVar('cat_id');
     }
 }
@@ -178,8 +173,6 @@ $mainvideodesc = '';
 //if (!@ require_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/user.php') {
 //    require_once XOOPS_ROOT_PATH . '/language/english/user.php';
 //}
-
-
 
 /**
  * This variable define the beginning of the navigation must be
@@ -213,8 +206,8 @@ $groups          = $controller->relgroupusersFactory->getGroups(8, $criteria_gro
 /**
  * Visitors
  */
- $controller->visitorsFactory->purgeVisits();
- 
+$controller->visitorsFactory->purgeVisits();
+
 if (0 === $controller->isAnonym) {
     /**
      * Fetching last visitors
@@ -235,16 +228,16 @@ if (0 === $controller->isAnonym) {
     /**
      * Lets populate an array with the data from visitors
      */
-    $i              = 0;
+    $i             = 0;
     $visitorsArray = [];
     if (is_array($visitorsObjectArray) && count($visitorsObjectArray) > 0) {
         foreach ($visitorsObjectArray as $visitor) {
             if (null !== $visitor) {
-        $indice                  = $visitor->getVar('uid_visitor', 's');
+                $indice                 = $visitor->getVar('uid_visitor', 's');
                 $visitorsArray[$indice] = $visitor->getVar('uname_visitor', 's');
 
-        $i++;
-    }
+                $i++;
+            }
         }
     }
 
@@ -302,41 +295,41 @@ if (isset($nbSections['nbVideos']) && $nbSections['nbVideos'] > 0) {
 /**
  * Friends
  */
-if ($xoopsUser){
-$controller = new Yogurt\FriendsController($xoopsDB, $xoopsUser);
+if ($xoopsUser) {
+    $controller = new Yogurt\FriendsController($xoopsDB, $xoopsUser);
 
-$friendrequest = 0;
-if (1 === $controller->isOwner) {
-    $criteria_uidfriendrequest = new Criteria('friendrequestto_uid', $controller->uidOwner);
-    $newFriendrequest          = $controller->friendrequestFactory->getObjects($criteria_uidfriendrequest);
-    if ($newFriendrequest) {
-        $countFriendrequest     = count($newFriendrequest);
-        $friendrequesterHandler = xoops_getHandler('member');
-        $friendrequester        = $friendrequesterHandler->getUser($newFriendrequest[0]->getVar('friendrequester_uid'));
-        $friendrequester_uid    = $friendrequester->getVar('uid');
-        $friendrequester_uname  = $friendrequester->getVar('uname');
-        $friendrequester_avatar = $friendrequester->getVar('user_avatar');
+    $friendrequest = 0;
+    if (1 === $controller->isOwner) {
+        $criteria_uidfriendrequest = new Criteria('friendrequestto_uid', $controller->uidOwner);
+        $newFriendrequest          = $controller->friendrequestFactory->getObjects($criteria_uidfriendrequest);
+        if ($newFriendrequest) {
+            $countFriendrequest     = count($newFriendrequest);
+            $friendrequesterHandler = xoops_getHandler('member');
+            $friendrequester        = $friendrequesterHandler->getUser($newFriendrequest[0]->getVar('friendrequester_uid'));
+            $friendrequester_uid    = $friendrequester->getVar('uid');
+            $friendrequester_uname  = $friendrequester->getVar('uname');
+            $friendrequester_avatar = $friendrequester->getVar('user_avatar');
             $friendrequest_id       = $newFriendrequest[0]->getVar('friendreq_id');
-        $friendrequest          = 1;
+            $friendrequest          = 1;
+        }
     }
-}
- 
-//requests to become friend
-if (1 === $friendrequest) {
-    $xoopsTpl->assign('lang_youhavexfriendrequests', sprintf(_MD_YOGURT_YOUHAVEXFRIENDREQUESTS, $countFriendrequest));
-    $xoopsTpl->assign('friendrequester_uid', $friendrequester_uid);
-    $xoopsTpl->assign('friendrequester_uname', $friendrequester_uname);
-    $xoopsTpl->assign('friendrequester_avatar', $friendrequester_avatar);
-    $xoopsTpl->assign('friendrequest', $friendrequest);
-    $xoopsTpl->assign('friendrequest_id', $friendrequest_id);
-    $xoopsTpl->assign('lang_rejected', _MD_YOGURT_UNKNOWN_REJECTING);
-    $xoopsTpl->assign('lang_accepted', _MD_YOGURT_UNKNOWN_ACCEPTING);
-    $xoopsTpl->assign('lang_acquaintance', _MD_YOGURT_AQUAITANCE);
-    $xoopsTpl->assign('lang_friend', _MD_YOGURT_FRIEND);
-    $xoopsTpl->assign('lang_bestfriend', _MD_YOGURT_BESTFRIEND);
-    $linkedpetioner = '<a href="index.php?uid=' . $friendrequester_uid . '">' . $friendrequester_uname . '</a>';
-    $xoopsTpl->assign('lang_askingfriend', sprintf(_MD_YOGURT_ASKINGFRIEND, $linkedpetioner));
-}
+
+    //requests to become friend
+    if (1 === $friendrequest) {
+        $xoopsTpl->assign('lang_youhavexfriendrequests', sprintf(_MD_YOGURT_YOUHAVEXFRIENDREQUESTS, $countFriendrequest));
+        $xoopsTpl->assign('friendrequester_uid', $friendrequester_uid);
+        $xoopsTpl->assign('friendrequester_uname', $friendrequester_uname);
+        $xoopsTpl->assign('friendrequester_avatar', $friendrequester_avatar);
+        $xoopsTpl->assign('friendrequest', $friendrequest);
+        $xoopsTpl->assign('friendrequest_id', $friendrequest_id);
+        $xoopsTpl->assign('lang_rejected', _MD_YOGURT_UNKNOWN_REJECTING);
+        $xoopsTpl->assign('lang_accepted', _MD_YOGURT_UNKNOWN_ACCEPTING);
+        $xoopsTpl->assign('lang_acquaintance', _MD_YOGURT_AQUAITANCE);
+        $xoopsTpl->assign('lang_friend', _MD_YOGURT_FRIEND);
+        $xoopsTpl->assign('lang_bestfriend', _MD_YOGURT_BESTFRIEND);
+        $linkedpetioner = '<a href="index.php?uid=' . $friendrequester_uid . '">' . $friendrequester_uname . '</a>';
+        $xoopsTpl->assign('lang_askingfriend', sprintf(_MD_YOGURT_ASKINGFRIEND, $linkedpetioner));
+    }
 }
 
 $xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
@@ -482,22 +475,6 @@ foreach ($mids as $mid) {
         }
         unset($module);
     }
-}
-
-
-
- if (is_object($xoopsUser))  {
-        $profile = $profileHandler->get($uid);
-		} 
-        else {
-             header('location: ' . XOOPS_URL); 
-             exit();
-             }
- }
-else 
-{
-$profile = $profileHandler->get($uid);
-}
 }
 
 require __DIR__ . '/footer.php';

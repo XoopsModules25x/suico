@@ -13,17 +13,15 @@ declare(strict_types=1);
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use Xmf\Request;
 use Xmf\Module\Helper\Permission;
+use Xmf\Request;
 
 require __DIR__ . '/admin_header.php';
 xoops_cp_header();
@@ -46,7 +44,6 @@ switch ($op) {
         $form        = $notesObject->getForm();
         $form->display();
         break;
-
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('notes.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -72,7 +69,6 @@ switch ($op) {
         $form = $notesObject->getForm();
         $form->display();
         break;
-
     case 'edit':
         $adminObject->addItemButton(AM_YOGURT_ADD_NOTES, 'notes.php?op=new', 'add');
         $adminObject->addItemButton(AM_YOGURT_NOTES_LIST, 'notes.php', 'list');
@@ -81,13 +77,13 @@ switch ($op) {
         $form        = $notesObject->getForm();
         $form->display();
         break;
-
     case 'delete':
         $notesObject = $notesHandler->get(Request::getString('note_id', ''));
         if (1 === Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('notes.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
+
             if ($notesHandler->delete($notesObject)) {
                 redirect_header('notes.php', 3, AM_YOGURT_FORMDELOK);
             } else {
@@ -108,7 +104,6 @@ switch ($op) {
             );
         }
         break;
-
     case 'clone':
 
         $id_field = Request::getString('note_id', '');
@@ -149,6 +144,7 @@ switch ($op) {
             $pagenav = new XoopsPageNav(
                 $notesTempRows, $notesPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
+
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
 
@@ -178,26 +174,33 @@ switch ($op) {
                     'selectornote_id',
                     AM_YOGURT_NOTES_NOTE_ID
                 );
+
                 $notesArray['note_id'] = $notesTempArray[$i]->getVar('note_id');
 
                 $GLOBALS['xoopsTpl']->assign('selectornote_text', AM_YOGURT_NOTES_NOTE_TEXT);
+
                 $notesArray['note_text'] = $notesTempArray[$i]->getVar('note_text');
+
                 $notesArray['note_text'] = $utility::truncateHtml($notesArray['note_text'], $helper->getConfig('truncatelength'));
 
                 $GLOBALS['xoopsTpl']->assign('selectornote_from', AM_YOGURT_NOTES_NOTE_FROM);
+
                 $notesArray['note_from'] = strip_tags(
                     XoopsUser::getUnameFromId($notesTempArray[$i]->getVar('note_from'))
                 );
 
                 $GLOBALS['xoopsTpl']->assign('selectornote_to', AM_YOGURT_NOTES_NOTE_TO);
+
                 $notesArray['note_to'] = strip_tags(
                     XoopsUser::getUnameFromId($notesTempArray[$i]->getVar('note_to'))
                 );
 
                 $GLOBALS['xoopsTpl']->assign('selectorprivate', AM_YOGURT_NOTES_PRIVATE);
+
                 $notesArray['private'] = $notesTempArray[$i]->getVar('private');
 
                 $GLOBALS['xoopsTpl']->assign('selectordate', AM_YOGURT_NOTES_DATE);
+
                 $notesArray['date_created'] = formatTimestamp($notesTempArray[$i]->getVar('date_created'), 's');
 
                 $notesArray['edit_delete'] = "<a href='notes.php?op=edit&note_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
@@ -205,22 +208,30 @@ switch ($op) {
                <a href='notes.php?op=clone&note_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
                 $GLOBALS['xoopsTpl']->append_by_ref('notesArrays', $notesArray);
+
                 unset($notesArray);
             }
+
             unset($notesTempArray);
+
             // Display Navigation
+
             if ($notesCount > $notesPaginationLimit) {
                 xoops_load('XoopsPageNav');
+
                 $pagenav = new XoopsPageNav(
                     $notesCount, $notesPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
+
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
 
             //                     echo "<td class='center width5'>
 
             //                    <a href='notes.php?op=edit&note_id=".$i."'><img src=".$pathIcon16."/edit.png alt='"._EDIT."' title='"._EDIT."'></a>
+
             //                    <a href='notes.php?op=delete&note_id=".$i."'><img src=".$pathIcon16."/delete.png alt='"._DELETE."' title='"._DELETE."'></a>
+
             //                    </td>";
 
             //                echo "</tr>";
@@ -236,7 +247,9 @@ switch ($op) {
             //                    <tr>
 
             //                     <th class='center width5'>".AM_YOGURT_FORM_ACTION."XXX</th>
+
             //                    </tr><tr><td class='errorMsg' colspan='7'>There are noXXX notes</td></tr>";
+
             //            echo "</table><br><br>";
 
             //-------------------------------------------

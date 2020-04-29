@@ -1,4 +1,9 @@
 <?php
+
+declare(strict_types=1);
+
+namespace XoopsModules\Yogurt;
+
 /**
  * Extended User Profile
  *
@@ -17,54 +22,36 @@
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
-// defined('XOOPS_ROOT_PATH') || exit("XOOPS root path not defined");
 
 /**
- * Class YogurtRegstep
+ * Class RegstepHandler
  */
-class YogurtRegstep extends XoopsObject
-{
-    /**
-     *
-     */
-    public function __construct()
-    {
-        $this->initVar('step_id', XOBJ_DTYPE_INT);
-        $this->initVar('step_name', XOBJ_DTYPE_TXTBOX);
-        $this->initVar('step_desc', XOBJ_DTYPE_TXTAREA);
-        $this->initVar('step_order', XOBJ_DTYPE_INT, 1);
-        $this->initVar('step_save', XOBJ_DTYPE_INT, 0);
-    }
-}
-
-/**
- * Class YogurtRegstepHandler
- */
-class YogurtRegstepHandler extends XoopsPersistableObjectHandler
+class RegstepHandler extends \XoopsPersistableObjectHandler
 {
     /**
      * @param null|object $db
      */
+
     public function __construct($db)
     {
-        parent::__construct($db, 'yogurt_profile_regstep', 'yogurtregstep', 'step_id', 'step_name');
+        parent::__construct($db, 'yogurt_profile_regstep', Regstep::class, 'step_id', 'step_name');
     }
 
     /**
      * Delete an object from the database
-     * @see XoopsPersistableObjectHandler
-     *
-     * @param XoopsObject $obj
-     * @param bool           $force
+     * @param \XoopsObject $obj
+     * @param bool         $force
      *
      * @return bool
+     * @see XoopsPersistableObjectHandler
      */
-    public function delete(XoopsObject $obj, $force = false)
+
+    public function delete(\XoopsObject $obj, $force = false)
     {
         if (parent::delete($obj, $force)) {
-            $field_handler = xoops_getModuleHandler('field');
+            $field_handler = \xoops_getModuleHandler('field');
 
-            return $field_handler->updateAll('step_id', 0, new Criteria('step_id', $obj->getVar('step_id')), $force);
+            return $field_handler->updateAll('step_id', 0, new \Criteria('step_id', $obj->getVar('step_id')), $force);
         }
 
         return false;

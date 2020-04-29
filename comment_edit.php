@@ -13,13 +13,11 @@ declare(strict_types=1);
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 require dirname(__DIR__, 2) . '/mainfile.php';
 require XOOPS_ROOT_PATH . '/include/comment_edit.php';

@@ -30,35 +30,3 @@
   uid_owner: '999'
   filename: pic_1_5e97d09fb1e0e.jpg
   private: '0'
-- cod_img: '6'
-  title: Wave
-  caption: ''
-  date_created: '1585719811'
-  date_updated: '1587534211'
-  uid_owner: '1'
-  filename: pic_1_5ea5d0236a7e2.jpg
-  private: '0'
-- cod_img: '16'
-  title: Horses
-  caption: 'A wonderful picture of horses'
-  date_created: '1587912200'
-  date_updated: '1587912200'
-  uid_owner: '1'
-  filename: pic_1_5ea5cfa184db0.jpg
-  private: '0'
-- cod_img: '20'
-  title: 'Mountain Road'
-  caption: 'The long and winding road'
-  date_created: '1587945268'
-  date_updated: '1587945268'
-  uid_owner: '999'
-  filename: pic_999_5ea61f3462d51.jpg
-  private: '0'
-- cod_img: '15'
-  title: 'Pink Sunset'
-  caption: 'Beautiful pink Sunset'
-  date_created: '1587830215'
-  date_updated: '1587830215'
-  uid_owner: '1'
-  filename: pic_1_5ea5cf1821500.jpg
-  private: '0'

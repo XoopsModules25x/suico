@@ -158,7 +158,7 @@
                                 <{if '' != $audios[i].meta.Artist}><p class="yogurt-audio-meta-title"><span class="yogurt-audio-meta-label"> <{$lang_artist}>:</span><{$audios[i].meta.Artist}></p> <{/if}>
                                 <{if '' != $audios[i].meta.Year}><p class="yogurt-audio-meta-title"><span class="yogurt-audio-meta-label"> <{$lang_year}>:</span><{$audios[i].meta.Year}></p> <{/if}>
                                 <{if $isOwner==1 }>
-                                    <form action="delaudios.php" method="post" id="deleteform" class="yogurt-audio-forms">
+                                    <form action="delaudio.php" method="post" id="deleteform" class="yogurt-audio-forms">
                                         <input type="hidden" value="<{$audios[i].id}>" name="cod_audio">
                                         <{$token}>
                                         <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 delete.png}>">

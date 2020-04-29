@@ -79,7 +79,7 @@
                                         <{$token}>
                                         <input name="submit" type="image" alt="<{$lang_editdesc}>" title="<{$lang_editdesc}>" src="<{xoModuleIcons16 edit.png}>" class="float-left">
                                     </form>
-                                    <form action="mainvideos.php" method="post" id="mainform" class="yogurt-video-forms">
+                                    <form action="mainvideo.php" method="post" id="mainform" class="yogurt-video-forms">
                                         <input type="hidden" value="<{$videos[i].id}>" name="video_id">
                                         <{$token}>
                                         <input name="submit" type="image" alt="<{$lang_makemain}>" title="<{$lang_makemain}>" src="assets/images/mainvideo.gif" class="float-left">

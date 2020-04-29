@@ -11,16 +11,14 @@ declare(strict_types=1);
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
-
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
+ 
 
 use XoopsModules\Yogurt;
 
@@ -34,6 +32,7 @@ function xoops_module_pre_uninstall_yogurt(
     XoopsModule $module
 ) {
     // Do some synchronization if needed
+
     return true;
 }
 
@@ -47,35 +46,51 @@ function xoops_module_uninstall_yogurt(
     XoopsModule $module
 ) {
     require __DIR__ . '/common.php';
-    $moduleDirName      = basename(dirname(__DIR__));
+
+    $moduleDirName = basename(dirname(__DIR__));
+
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-    $helper  = Yogurt\Helper::getInstance();
+    $helper = Yogurt\Helper::getInstance();
+
     $utility = new Yogurt\Utility();
+
     //    $configurator = new Yogurt\Common\Configurator();
+
     // Load language files
+
     $helper->loadLanguage('admin');
+
     $helper->loadLanguage('common');
+
     $success = true;
 
     //------------------------------------------------------------------
+
     // Remove uploads folder (and all subfolders) if they exist
+
     //------------------------------------------------------------------
 
     $old_directories = [
         $GLOBALS['xoops']->path("uploads/{$moduleDirName}"),
     ];
+
     foreach ($old_directories as $old_dir) {
         $dirInfo = new SplFileInfo($old_dir);
+
         if ($dirInfo->isDir()) {
             // The directory exists so delete it
-            if (false === $utility::rrmdir($old_dir)) {
+
+            if (!$utility::rrmdir($old_dir)) {
                 $module->setErrors(sprintf(constant('CO_' . $moduleDirNameUpper . '_ERROR_BAD_DEL_PATH'), $old_dir));
+
                 $success = false;
             }
         }
+
         unset($dirInfo);
     }
+
     /*
     //------------ START ----------------
     //------------------------------------------------------------------

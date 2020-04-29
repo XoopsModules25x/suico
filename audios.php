@@ -13,17 +13,15 @@ declare(strict_types=1);
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsModules\Yogurt;
 use Xmf\Request;
+use XoopsModules\Yogurt;
 
 const NBAUDIO = 'nbAudio';
 
@@ -62,29 +60,43 @@ $audios      = $controller->getAudio($criteriaUidAudio);
  */
 if (isset($nbSections[NBAUDIO]) && 0 === $nbSections[NBAUDIO]) {
     //    $lang_noaudioyet = _MD_YOGURT_NOTHINGYET;
+
     //    $xoopsTpl->assign('lang_nopicyet', $lang_noaudioyet);
+
     echo '<script>alert("Please add some audio files here")</script>';
 } else {
     /**
      * Lets populate an array with the data from the pictures
      */
+
     $i = 0;
+
     foreach ($audios as $audio) {
-        $audiosArray[$i]['audio_id']     = $audio->getVar('audio_id', 's');
-        $audiosArray[$i]['title']        = $audio->getVar('title', 's');
-        $audiosArray[$i]['author']       = $audio->getVar('author', 's');
-        $audiosArray[$i]['description']  = $audio->getVar('description', 's');
-        $audiosArray[$i]['filename']     = $audio->getVar('filename', 's');
-        $audiosArray[$i]['uid_owner']    = $audio->getVar('uid_owner', 's');
-        $audiosArray[$i]['date_created'] = formatTimeStamp($audio->getVar('date_created', 's'));
-        $audiosArray[$i]['date_updated'] = formatTimeStamp($audio->getVar('date_updated', 's'));
+        $audiosArray[$i]['audio_id'] = $audio->getVar('audio_id', 's');
+
+        $audiosArray[$i]['title'] = $audio->getVar('title', 's');
+
+        $audiosArray[$i]['author'] = $audio->getVar('author', 's');
+
+        $audiosArray[$i]['description'] = $audio->getVar('description', 's');
+
+        $audiosArray[$i]['filename'] = $audio->getVar('filename', 's');
+
+        $audiosArray[$i]['uid_owner'] = $audio->getVar('uid_owner', 's');
+
+        $audiosArray[$i]['date_created'] = formatTimestamp($audio->getVar('date_created', 's'));
+
+        $audiosArray[$i]['date_updated'] = formatTimestamp($audio->getVar('date_updated', 's'));
+
         $xoopsTpl->assign('audios', $audiosArray);
+
         $i++;
     }
 }
 
 $xoopsTpl->assign('audios', $audios);
 $nbAudio = $nbSections[NBAUDIO] ?? 0;
+
 try {
     $audiosArray = $controller->assignAudioContent($nbAudio, $audios);
 } catch (\RuntimeException $e) {
@@ -92,11 +104,15 @@ try {
 
 if (is_array($audiosArray) && count($audiosArray) > 0) {
     $xoopsTpl->assign('audios', $audiosArray);
+
     $audio_list = [];
+
     foreach ($audiosArray as $audio_item) {
         $audio_list[] = XOOPS_UPLOAD_URL . '/yogurt/audio/' . $audio_item['filename']; // . ' | ';
     }
+
     //$audio_list = substr($audio_list,-2);
+
     $xoopsTpl->assign('audio_list', $audio_list);
 } else {
     $xoopsTpl->assign('lang_noaudioyet', _MD_YOGURT_NOAUDIOYET);

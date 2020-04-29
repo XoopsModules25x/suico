@@ -12,13 +12,11 @@ declare(strict_types=1);
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 //index.php
@@ -313,7 +311,6 @@ define('AM_YOGURT_ADD_PRIVACY', 'Add new Privacy');
 define('AM_YOGURT_PRIVACY_LIST', 'List of Privacy');
 define('_AM_YOGURT_UPLOAD_ERROR', 'Upload Error');
 
-
 //Profile Module
 define('_AM_YOGURT_FIELD', 'Field');
 define('_AM_YOGURT_FIELDS', 'Fields');
@@ -356,7 +353,13 @@ define('_AM_YOGURT_PROF_EDITABLE', 'Field editable from profile');
 define('_AM_YOGURT_PROF_REGISTER', 'Show in registration form');
 define('_AM_YOGURT_PROF_SEARCH', 'Searchable by these groups');
 define('_AM_YOGURT_PROF_ACCESS', 'Profile accessible by these groups');
-define('_AM_YOGURT_PROF_ACCESS_DESC', '<ul>' . "<li>Admin groups: If a user belongs to admin groups, the current user has access if and only if one of the current user's groups is allowed to access admin group; else</li>" . "<li>Non basic groups: If a user belongs to one or more non basic groups (NOT admin, user, anonymous), the current user has access if and only if one of the current user's groups is allowed to allowed to any of the non basic groups; else</li>" . '<li>User group: If a user belongs to User group only, the current user has access if and only if one of his groups is allowed to access User group</li>' . '</ul>');
+define('_AM_YOGURT_PROF_ACCESS_DESC',
+       '<ul>'
+       . "<li>Admin groups: If a user belongs to admin groups, the current user has access if and only if one of the current user's groups is allowed to access admin group; else</li>"
+       . "<li>Non basic groups: If a user belongs to one or more non basic groups (NOT admin, user, anonymous), the current user has access if and only if one of the current user's groups is allowed to allowed to any of the non basic groups; else</li>"
+       . '<li>User group: If a user belongs to User group only, the current user has access if and only if one of his groups is allowed to access User group</li>'
+       . '</ul>'
+);
 define('_AM_YOGURT_FIELDVISIBLE', 'The field ');
 define('_AM_YOGURT_FIELDVISIBLEFOR', ' is visible for ');
 define('_AM_YOGURT_FIELDVISIBLEON', ' viewing a profile of ');
@@ -411,5 +414,4 @@ define('_AM_YOGURT_SAVESTEP_TOGGLE', 'Toggle Save');
 define('_AM_YOGURT_SAVESTEP_TOGGLE_SUCCESS', 'Successfully Changed Save After Step');
 define('_AM_YOGURT_SAVESTEP_TOGGLE_FAILED', "Changing 'Save After Step' Failed");
 define('_AM_YOGURT_CANNOTDEACTIVATEWEBMASTERS', 'You cannot deactivate Webmaster account');
-
 

@@ -20,7 +20,7 @@
                             <li>
                                 <{$smarty.const._AM_YOGURT_FIELDVISIBLEFOR}> <{$groups.$user_gid}>
                                 <{$smarty.const._AM_YOGURT_FIELDVISIBLEON}> <{$groups.$profile_gid}>
-                                <a href="profile_fieldsvisibility.php?op=del&amp;field_id=<{$field_id}>&amp;ug=<{$user_gid}>&amp;pg=<{$profile_gid}>"
+                                <a href="fieldsvisibility.php?op=del&amp;field_id=<{$field_id}>&amp;ug=<{$user_gid}>&amp;pg=<{$profile_gid}>"
                                    title="<{$smarty.const._DELETE}>">
                                     <img src="<{$xoops_url}>/modules/yogurt/assets/images/no.png" alt="<{$smarty.const._DELETE}>"/>
                                 </a>

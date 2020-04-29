@@ -13,19 +13,17 @@ declare(strict_types=1);
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Module\Admin;
+use Xmf\Request;
 use XoopsModules\Yogurt;
 use XoopsModules\Yogurt\Common\ModuleFeedback;
-use Xmf\Request;
 
 require __DIR__ . '/admin_header.php';
 
@@ -51,7 +49,6 @@ switch ($op) {
         $form            = $feedback->getFormFeedback();
         echo $form->render();
         break;
-
     case 'send':
         // Security Check
         if (!$GLOBALS['xoopsSecurity']->check()) {

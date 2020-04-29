@@ -13,17 +13,15 @@ declare(strict_types=1);
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use Xmf\Request;
 use Xmf\Module\Helper\Permission;
+use Xmf\Request;
 
 require __DIR__ . '/admin_header.php';
 xoops_cp_header();
@@ -46,7 +44,6 @@ switch ($op) {
         $form         = $groupsObject->getForm();
         $form->display();
         break;
-
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('groups.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -68,12 +65,16 @@ switch ($op) {
         );
         if ($uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0])) {
             //$extension = preg_replace( '/^.+\.([^.]+)$/sU' , '' , $_FILES['attachedfile']['name']);
+
             //$imgName = str_replace(' ', '', $_POST['group_img']).'.'.$extension;
 
             $uploader->setPrefix('group_img_');
+
             $uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0]);
+
             if (!$uploader->upload()) {
                 $errors = $uploader->getErrors();
+
                 redirect_header('javascript:history.go(-1)', 3, $errors);
             } else {
                 $groupsObject->setVar('group_img', $uploader->getSavedFileName());
@@ -90,7 +91,6 @@ switch ($op) {
         $form = $groupsObject->getForm();
         $form->display();
         break;
-
     case 'edit':
         $adminObject->addItemButton(AM_YOGURT_ADD_GROUPS, 'groups.php?op=new', 'add');
         $adminObject->addItemButton(AM_YOGURT_GROUPS_LIST, 'groups.php', 'list');
@@ -99,13 +99,13 @@ switch ($op) {
         $form         = $groupsObject->getForm();
         $form->display();
         break;
-
     case 'delete':
         $groupsObject = $groupsHandler->get(Request::getString('group_id', ''));
         if (1 === Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('groups.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
+
             if ($groupsHandler->delete($groupsObject)) {
                 redirect_header('groups.php', 3, AM_YOGURT_FORMDELOK);
             } else {
@@ -126,7 +126,6 @@ switch ($op) {
             );
         }
         break;
-
     case 'clone':
 
         $id_field = Request::getString('group_id', '');
@@ -167,6 +166,7 @@ switch ($op) {
             $pagenav = new XoopsPageNav(
                 $groupsTempRows, $groupsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
+
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
 
@@ -196,44 +196,58 @@ switch ($op) {
                     'selectorgroup_id',
                     AM_YOGURT_GROUPS_GROUP_ID
                 );
+
                 $groupsArray['group_id'] = $groupsTempArray[$i]->getVar('group_id');
 
                 $GLOBALS['xoopsTpl']->assign('selectorowner_uid', AM_YOGURT_GROUPS_OWNER_UID);
+
                 $groupsArray['owner_uid'] = strip_tags(
                     XoopsUser::getUnameFromId($groupsTempArray[$i]->getVar('owner_uid'))
                 );
 
                 $GLOBALS['xoopsTpl']->assign('selectorgroup_title', AM_YOGURT_GROUPS_GROUP_TITLE);
+
                 $groupsArray['group_title'] = $groupsTempArray[$i]->getVar('group_title');
 
                 $GLOBALS['xoopsTpl']->assign('selectorgroup_desc', AM_YOGURT_GROUPS_GROUP_DESC);
+
                 $groupsArray['group_desc'] = $groupsTempArray[$i]->getVar('group_desc');
 
                 $GLOBALS['xoopsTpl']->assign('selectorgroup_img', AM_YOGURT_GROUPS_GROUP_IMG);
-                $groupsArray['group_img']   = "<img src='" . $uploadUrl . $groupsTempArray[$i]->getVar(
+
+                $groupsArray['group_img'] = "<img src='" . $uploadUrl . $groupsTempArray[$i]->getVar(
                         'group_img'
                     ) . "' name='" . 'name' . "' id=" . 'id' . " alt='' style='max-width:100px'>";
+
                 $groupsArray['edit_delete'] = "<a href='groups.php?op=edit&group_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='groups.php?op=delete&group_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='groups.php?op=clone&group_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
                 $GLOBALS['xoopsTpl']->append_by_ref('groupsArrays', $groupsArray);
+
                 unset($groupsArray);
             }
+
             unset($groupsTempArray);
+
             // Display Navigation
+
             if ($groupsCount > $groupsPaginationLimit) {
                 xoops_load('XoopsPageNav');
+
                 $pagenav = new XoopsPageNav(
                     $groupsCount, $groupsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
+
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
 
             //                     echo "<td class='center width5'>
 
             //                    <a href='groups.php?op=edit&group_id=".$i."'><img src=".$pathIcon16."/edit.png alt='"._EDIT."' title='"._EDIT."'></a>
+
             //                    <a href='groups.php?op=delete&group_id=".$i."'><img src=".$pathIcon16."/delete.png alt='"._DELETE."' title='"._DELETE."'></a>
+
             //                    </td>";
 
             //                echo "</tr>";
@@ -249,7 +263,9 @@ switch ($op) {
             //                    <tr>
 
             //                     <th class='center width5'>".AM_YOGURT_FORM_ACTION."XXX</th>
+
             //                    </tr><tr><td class='errorMsg' colspan='6'>There are noXXX groups</td></tr>";
+
             //            echo "</table><br><br>";
 
             //-------------------------------------------

@@ -1,4 +1,4 @@
-<form action="profile_fieldslist.php" method="post" id="fieldform">
+<form action="fieldslist.php" method="post" id="fieldform">
     <table>
         <th><{$smarty.const._AM_YOGURT_NAME}></th>
         <th><{$smarty.const._AM_YOGURT_TITLE}></th>
@@ -27,7 +27,7 @@
                     </td>
                     <td align="center">
                         <{if $field.canEdit}>
-                            <a href="profile_fieldslist.php?op=toggle&amp;field_required=<{$field.field_required}>&amp;field_id=<{$field.field_id}>"><img
+                            <a href="fieldslist.php?op=toggle&amp;field_required=<{$field.field_required}>&amp;field_id=<{$field.field_id}>"><img
                                         src="<{xoModuleIcons16}><{$field.field_required}>.png" title="<{$smarty.const._AM_YOGURT_REQUIRED_TOGGLE}>"
                                         alt="<{$smarty.const._AM_YOGURT_REQUIRED_TOGGLE}>"/></a>
                         <{/if}>
@@ -37,13 +37,13 @@
                             <input type="hidden" name="oldweight[<{$field.field_id}>]" value="<{$field.field_weight}>"/>
                             <input type="hidden" name="oldcat[<{$field.field_id}>]" value="<{$field.cat_id}>"/>
                             <input type="hidden" name="field_ids[]" value="<{$field.field_id}>"/>
-                            <a href="profile_fieldslist.php?id=<{$field.field_id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>"
-                                                                                                            alt="<{$smarty.const._EDIT}>"
-                                                                                                            title="<{$smarty.const._EDIT}>"/></a>
+                            <a href="fieldslist.php?id=<{$field.field_id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>"
+                                                                                                                         alt="<{$smarty.const._EDIT}>"
+                                                                                                                         title="<{$smarty.const._EDIT}>"/></a>
                         <{/if}>
                         <{if $field.canDelete}>
                             &nbsp;
-                            <a href="profile_fieldslist.php?op=delete&amp;id=<{$field.field_id}>" title="<{$smarty.const._DELETE}>"><img
+                            <a href="fieldslist.php?op=delete&amp;id=<{$field.field_id}>" title="<{$smarty.const._DELETE}>"><img
                                         src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}>" title="<{$smarty.const._DELETE}>"</a>
                         <{/if}>
                     </td>

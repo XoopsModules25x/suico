@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
@@ -13,6 +15,7 @@ namespace XoopsModules\Yogurt;
 */
 
 use CriteriaElement;
+use Xmf\Request;
 use XoopsDatabase;
 use XoopsFormButton;
 use XoopsFormFile;
@@ -23,14 +26,13 @@ use XoopsMediaUploader;
 use XoopsObject;
 use XoopsPersistableObjectHandler;
 use XoopsThemeForm;
-use Xmf\Request;
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 /**
@@ -168,8 +170,8 @@ class ImageHandler extends XoopsPersistableObjectHandler
                 $cod_img,
                 $this->db->quoteString($title),
                 $this->db->quoteString($caption),
-                time(),//$now,
-                time(),//$now,
+                \time(),//$now,
+                \time(),//$now,
                 $this->db->quoteString($uid_owner),
                 $this->db->quoteString($url)
             );

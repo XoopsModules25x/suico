@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
@@ -15,11 +17,11 @@ namespace XoopsModules\Yogurt;
 use Criteria;
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
@@ -52,14 +54,18 @@ class IndexController extends YogurtController
      * @param string|null $section
      * @return int|void
      */
+
     public function checkPrivilege(
         $section = null
     ) {
         global $xoopsModuleConfig;
+
         if ('' === \trim($section)) {
             return -1;
         }
+
         $configsectionname = 'enable_' . $section;
+
         if (\array_key_exists($configsectionname, $xoopsModuleConfig)) {
             if (0 === $this->helper->getConfig($configsectionname)) {
                 return -1;
@@ -67,16 +73,27 @@ class IndexController extends YogurtController
         }
 
         //  if ($section=="Notes" && $xoopsModuleConfig['enable_notes']==0){
+
         //          return false;
+
         //      }
+
         //      if ($section=="pictures" && $xoopsModuleConfig['enable_pictures']==0){
+
         //          return false;
+
         //      }
+
         //
+
         //      if ($section=="pictures" && $xoopsModuleConfig['enable_pictures']==0){
+
         //          return false;
+
         //      }
+
         $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
+
         if (1 === $this->configsFactory->getCount($criteria)) {
             $configs = $this->configsFactory->getObjects($criteria);
 

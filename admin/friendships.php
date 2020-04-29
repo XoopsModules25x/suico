@@ -13,17 +13,15 @@ declare(strict_types=1);
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use Xmf\Request;
 use Xmf\Module\Helper\Permission;
+use Xmf\Request;
 
 require __DIR__ . '/admin_header.php';
 xoops_cp_header();
@@ -46,7 +44,6 @@ switch ($op) {
         $form             = $friendshipObject->getForm();
         $form->display();
         break;
-
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('friendships.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -78,7 +75,6 @@ switch ($op) {
         $form = $friendshipObject->getForm();
         $form->display();
         break;
-
     case 'edit':
         $adminObject->addItemButton(AM_YOGURT_ADD_FRIENDSHIP, 'friendships.php?op=new', 'add');
         $adminObject->addItemButton(AM_YOGURT_FRIENDSHIP_LIST, 'friendships.php', 'list');
@@ -87,13 +83,13 @@ switch ($op) {
         $form             = $friendshipObject->getForm();
         $form->display();
         break;
-
     case 'delete':
         $friendshipObject = $friendshipHandler->get(Request::getString('friendship_id', ''));
         if (1 === Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('friendships.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
+
             if ($friendshipHandler->delete($friendshipObject)) {
                 redirect_header('friendships.php', 3, AM_YOGURT_FORMDELOK);
             } else {
@@ -114,7 +110,6 @@ switch ($op) {
             );
         }
         break;
-
     case 'clone':
 
         $id_field = Request::getString('friendship_id', '');
@@ -155,6 +150,7 @@ switch ($op) {
             $pagenav = new XoopsPageNav(
                 $friendshipTempRows, $friendshipPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
+
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
 
@@ -184,37 +180,47 @@ switch ($op) {
                     'selectorfriendship_id',
                     AM_YOGURT_FRIENDSHIP_FRIENDSHIP_ID
                 );
+
                 $friendshipArray['friendship_id'] = $friendshipTempArray[$i]->getVar('friendship_id');
 
                 $GLOBALS['xoopsTpl']->assign('selectorfriend1_uid', AM_YOGURT_FRIENDSHIP_FRIEND1_UID);
+
                 $friendshipArray['friend1_uid'] = strip_tags(
                     XoopsUser::getUnameFromId($friendshipTempArray[$i]->getVar('friend1_uid'))
                 );
 
                 $GLOBALS['xoopsTpl']->assign('selectorfriend2_uid', AM_YOGURT_FRIENDSHIP_FRIEND2_UID);
+
                 $friendshipArray['friend2_uid'] = strip_tags(
                     XoopsUser::getUnameFromId($friendshipTempArray[$i]->getVar('friend2_uid'))
                 );
 
                 $GLOBALS['xoopsTpl']->assign('selectorlevel', AM_YOGURT_FRIENDSHIP_LEVEL);
+
                 $friendshipArray['level'] = $friendshipTempArray[$i]->getVar('level');
 
                 $GLOBALS['xoopsTpl']->assign('selectorhot', AM_YOGURT_FRIENDSHIP_HOT);
+
                 $friendshipArray['hot'] = $friendshipTempArray[$i]->getVar('hot');
 
                 $GLOBALS['xoopsTpl']->assign('selectortrust', AM_YOGURT_FRIENDSHIP_TRUST);
+
                 $friendshipArray['trust'] = $friendshipTempArray[$i]->getVar('trust');
 
                 $GLOBALS['xoopsTpl']->assign('selectorcool', AM_YOGURT_FRIENDSHIP_COOL);
+
                 $friendshipArray['cool'] = $friendshipTempArray[$i]->getVar('cool');
 
                 $GLOBALS['xoopsTpl']->assign('selectorfan', AM_YOGURT_FRIENDSHIP_FAN);
+
                 $friendshipArray['fan'] = $friendshipTempArray[$i]->getVar('fan');
 
                 $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_FRIENDSHIP_DATE_CREATED);
+
                 $friendshipArray['date_created'] = formatTimestamp($friendshipTempArray[$i]->getVar('date_created'), 's');
 
                 $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_YOGURT_FRIENDSHIP_DATE_UPDATED);
+
                 $friendshipArray['date_updated'] = formatTimestamp($friendshipTempArray[$i]->getVar('date_updated'), 's');
 
                 $friendshipArray['edit_delete'] = "<a href='friendships.php?op=edit&friendship_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
@@ -222,22 +228,30 @@ switch ($op) {
                <a href='friendships.php?op=clone&friendship_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
                 $GLOBALS['xoopsTpl']->append_by_ref('friendshipsArray', $friendshipArray);
+
                 unset($friendshipArray);
             }
+
             unset($friendshipTempArray);
+
             // Display Navigation
+
             if ($friendshipCount > $friendshipPaginationLimit) {
                 xoops_load('XoopsPageNav');
+
                 $pagenav = new XoopsPageNav(
                     $friendshipCount, $friendshipPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
+
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
 
             //                     echo "<td class='center width5'>
 
             //                    <a href='friendships.php?op=edit&friendship_id=".$i."'><img src=".$pathIcon16."/edit.png alt='"._EDIT."' title='"._EDIT."'></a>
+
             //                    <a href='friendships.php?op=delete&friendship_id=".$i."'><img src=".$pathIcon16."/delete.png alt='"._DELETE."' title='"._DELETE."'></a>
+
             //                    </td>";
 
             //                echo "</tr>";
@@ -253,7 +267,9 @@ switch ($op) {
             //                    <tr>
 
             //                     <th class='center width5'>".AM_YOGURT_FORM_ACTION."XXX</th>
+
             //                    </tr><tr><td class='errorMsg' colspan='9'>There are noXXX friendship</td></tr>";
+
             //            echo "</table><br><br>";
 
             //-------------------------------------------

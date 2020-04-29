@@ -13,11 +13,11 @@ declare(strict_types=1);
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -72,9 +72,13 @@ global $xoopsModuleConfig, $xoopsModule;
 function about()
 {
     /** @var \XoopsModuleHandler $moduleHandler */
+
     $moduleHandler = xoops_getHandler('module');
+
     /** @var \XoopsModule $modulo */
+
     $modulo = $moduleHandler->getByDirname('yogurt');
+
     echo "<br style='clear: both;'>
 <img src='" . XOOPS_URL . '/modules/' . $modulo->getInfo('dirname') . '/' . $modulo->getInfo(
             'image'
@@ -124,11 +128,14 @@ function about()
             <td class='even'>
                                     <div>";
 
-    $vetorpessoas    = $modulo->getInfo('people');
+    $vetorpessoas = $modulo->getInfo('people');
+
     $vetordevelopers = $vetorpessoas['developers'];
+
     foreach ($vetordevelopers as $developer) {
         echo $developer . '&nbsp;';
     }
+
     echo "</div>
                  </td>
         </tr>
@@ -140,6 +147,7 @@ function about()
                                     <div>";
 
     $vetortesters = $vetorpessoas['testers'];
+
     foreach ($vetortesters as $tester) {
         echo $tester . '&nbsp;';
     }
@@ -157,6 +165,7 @@ function about()
             <td class='even'>";
 
     $vetortranslators = $vetorpessoas['translators'];
+
     foreach ($vetortranslators as $translator) {
         echo $translator . '&nbsp;';
     }
@@ -257,26 +266,38 @@ function about()
 function homedefault()
 {
     global $isframeworksrequirement;
+
     echo _MA_YOGURT_CONFIGEVERYTHING;
+
     //echo "<a href='../../system/admin.php?fct=modulesadmin&op=update&module=yogurt'>Update</a>";
 
     echo "<table width='100%' cellspacing='1' cellpadding='3' border='0' class='outer' style='margin-top: 15px;'>
         <tr>
             <td class='bg3'><b>" . _MA_YOGURT_ALLTESTSOK . '</b></td>
         </tr>';
+
     $a = $GLOBALS['xoopsDB']->getServerVersion();
+
     //$b = substr($a, 0, strpos($a, "-"));
+
     $b = explode('-', $a, 2);
+
     $b = $b[0];
+
     $c = explode('.', $b);
+
     echo "<tr><td class='odd'>";
+
     if ($c[0] > 4 || (4 === $c[0] && $c[1] > 0)) {
         echo "<img src='../assets/images/green.gif' align='baseline'> ";
+
         echo 'Mysql Version:<b>' . $b;
     } else {
         echo "<img src='../assets/images/red.gif'> ";
+
         echo 'Mysql Version:<b>' . $b . '</b>. You must use a version higher than 4.1 </td></tr>';
     }
+
     if (extension_loaded('gd')) {
         echo "        <tr>
             <td class='even'><img src='../assets/images/green.gif' align='baseline'> " . _MA_YOGURT_GDEXTENSIONOK . '
@@ -292,6 +313,7 @@ function homedefault()
 
         </tr>";
     }
+
     echo "              <tr>
             <td class='odd'><img src='../assets/images/green.gif' align='baseline'> " . _MA_YOGURT_PHP5PRESENT . ' ' . PHP_VERSION . '</td>
 
@@ -313,6 +335,7 @@ function homedefault()
          ";
     }
     */
+
     if (!is_dir(
         XOOPS_ROOT_PATH . '/uploads/yogurt/audio/'
     )) {
@@ -333,9 +356,11 @@ function homedefault()
             _MA_YOGURT_MAXBYTESPHPINI,
             ini_get('post_max_size')
         ) . '</td></tr>';
+
     if (function_exists('memory_get_usage')) {
         echo "<tr><td class='even'><img src='../assets/images/messagebox_info.gif'> " . _MA_YOGURT_MEMORYLIMIT . ' ' . memory_get_usage() . '</td></tr>';
     }
+
     echo '</table>';
 }
 

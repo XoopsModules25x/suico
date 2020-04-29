@@ -15,21 +15,17 @@ namespace XoopsModules\Yogurt;
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          XOOPS Development Team <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
- * @link            https://xoops.org/
- * @since           1.0.0
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsObject;
 use Xmf\Module\Helper\Permission;
 use XoopsDatabaseFactory;
 use XoopsModules\Yogurt\Form\AudioForm;
+use XoopsObject;
 
 // Audio.php,v 1
 //  ---------------------------------------------------------------- //
@@ -47,7 +43,9 @@ require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 class Audio extends XoopsObject
 {
     public $db;
+
     public $helper;
+
     public $permHelper;
 
     // constructor
@@ -56,20 +54,33 @@ class Audio extends XoopsObject
      * Audio constructor.
      * @param null|int|array $id
      */
+
     public function __construct($id = null)
     {
         /** @var Helper $helper */
-        $this->helper     = Helper::getInstance();
+
+        $this->helper = Helper::getInstance();
+
         $this->permHelper = new Permission();
-        $this->db         = XoopsDatabaseFactory::getDatabaseConnection();
+
+        $this->db = XoopsDatabaseFactory::getDatabaseConnection();
+
         $this->initVar('audio_id', \XOBJ_DTYPE_INT, null, false, 10);
+
         $this->initVar('uid_owner', \XOBJ_DTYPE_INT, null, false, 10);
+
         $this->initVar('author', \XOBJ_DTYPE_TXTBOX, null, false);
+
         $this->initVar('title', \XOBJ_DTYPE_TXTBOX, null, false);
+
         $this->initVar('description', \XOBJ_DTYPE_OTHER, null, false);
+
         $this->initVar('filename', \XOBJ_DTYPE_TXTBOX, null, false);
+
         $this->initVar('date_created', \XOBJ_DTYPE_INT, 0, false);
+
         $this->initVar('date_updated', \XOBJ_DTYPE_INT, 0, false);
+
         if (null !== ($id)) {
             if (\is_array($id)) {
                 $this->assignVars($id);
@@ -84,11 +95,15 @@ class Audio extends XoopsObject
     /**
      * @param int $id
      */
+
     public function load($id)
     {
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_audios') . ' WHERE audio_id=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_audios') . ' WHERE audio_id=' . $id;
+
         $myrow = $this->db->fetchArray($this->db->query($sql));
+
         $this->assignVars($myrow);
+
         if (!$myrow) {
             $this->setNew();
         }
@@ -103,6 +118,7 @@ class Audio extends XoopsObject
      * @param int    $start
      * @return array
      */
+
     public function getAllAudios(
         $criteria = [],
         $asobject = false,
@@ -111,27 +127,37 @@ class Audio extends XoopsObject
         $limit = 0,
         $start = 0
     ) {
-        $db         = XoopsDatabaseFactory::getDatabaseConnection();
-        $ret        = [];
+        $db = XoopsDatabaseFactory::getDatabaseConnection();
+
+        $ret = [];
+
         $whereQuery = '';
+
         if (\is_array($criteria) && \count($criteria) > 0) {
             $whereQuery = ' WHERE';
+
             foreach ($criteria as $c) {
                 $whereQuery .= " ${c} AND";
             }
+
             $whereQuery = mb_substr($whereQuery, 0, -4);
         } elseif (!\is_array($criteria) && $criteria) {
             $whereQuery = ' WHERE ' . $criteria;
         }
+
         if (!$asobject) {
-            $sql    = 'SELECT audio_id FROM ' . $db->prefix('yogurt_audios') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql = 'SELECT audio_id FROM ' . $db->prefix('yogurt_audios') . "${whereQuery} ORDER BY ${sort} ${order}";
+
             $result = $db->query($sql, $limit, $start);
+
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['yogurt_audio_id'];
             }
         } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_audios') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql = 'SELECT * FROM ' . $db->prefix('yogurt_audios') . "${whereQuery} ORDER BY ${sort} ${order}";
+
             $result = $db->query($sql, $limit, $start);
+
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new self($myrow);
             }
@@ -145,6 +171,7 @@ class Audio extends XoopsObject
      *
      * @return AudioForm
      */
+
     public function getForm()
     {
         return new Form\AudioForm($this);
@@ -153,9 +180,11 @@ class Audio extends XoopsObject
     /**
      * @return array|null
      */
+
     public function getGroupsRead()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
+
         return $this->permHelper->getGroupsForItem(
             'sbcolumns_read',
             $this->getVar('audio_id')
@@ -165,9 +194,11 @@ class Audio extends XoopsObject
     /**
      * @return array|null
      */
+
     public function getGroupsSubmit()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
+
         return $this->permHelper->getGroupsForItem(
             'sbcolumns_submit',
             $this->getVar('audio_id')
@@ -177,9 +208,11 @@ class Audio extends XoopsObject
     /**
      * @return array|null
      */
+
     public function getGroupsModeration()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
+
         return $this->permHelper->getGroupsForItem(
             'sbcolumns_moderation',
             $this->getVar('audio_id')

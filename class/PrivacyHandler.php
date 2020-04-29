@@ -15,13 +15,11 @@ namespace XoopsModules\Yogurt;
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use XoopsModules\Yogurt;
@@ -35,26 +33,28 @@ $permHelper = new \Xmf\Module\Helper\Permission();
  */
 class PrivacyHandler extends \XoopsPersistableObjectHandler
 {
-
     /**
      * @var Helper
      */
+
     public $helper;
 
     /**
      * Constructor
-     * @param null|\XoopsDatabase              $db
+     * @param \XoopsDatabase|null              $db
      * @param null|\XoopsModules\Yogurt\Helper $helper
      */
 
     public function __construct(\XoopsDatabase $db = null, $helper = null)
     {
         /** @var \XoopsModules\Yogurt\Helper $this ->helper */
+
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
             $this->helper = $helper;
         }
+
         parent::__construct($db, 'yogurt_privacy', Privacy::class, 'id', 'name');
     }
 
@@ -63,9 +63,11 @@ class PrivacyHandler extends \XoopsPersistableObjectHandler
      *
      * @return \XoopsObject
      */
+
     public function create($isNew = true)
     {
-        $obj         = parent::create($isNew);
+        $obj = parent::create($isNew);
+
         $obj->helper = $this->helper;
 
         return $obj;

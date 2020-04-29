@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
@@ -27,7 +29,6 @@
 
 use Xmf\Request;
 use XoopsModules\Yogurt;
-use XoopsModules\Yogurt\IndexController;
 
 require __DIR__ . '/header.php';
 

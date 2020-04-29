@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Extended User Profile
  *
@@ -20,11 +21,11 @@ include_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 $indexAdmin = new ModuleAdmin();
 
-$indexAdmin->addItemButton(_ADD . ' ' . _AM_YOGURT_STEP, 'profile_registrationstep.php?op=new', 'add', '');
+$indexAdmin->addItemButton(_ADD . ' ' . _AM_YOGURT_STEP, 'registrationstep.php?op=new', 'add', '');
 echo $indexAdmin->addNavigation(basename(__FILE__));
 echo $indexAdmin->renderButton('right', '');
 
-$op = isset($_REQUEST['op']) ? $_REQUEST['op'] : (isset($_REQUEST['id']) ? 'edit' : 'list');
+$op = $_REQUEST['op'] ?? (isset($_REQUEST['id']) ? 'edit' : 'list');
 
 $handler = xoops_getModuleHandler('regstep');
 switch ($op) {
@@ -32,21 +33,18 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('steps', $handler->getObjects(null, true, false));
         $template_main = 'admin/yogurt_admin_profileregistrationstep.tpl';
         break;
-
     case 'new':
         $obj = $handler->create();
         include_once dirname(__DIR__) . '/include/forms.php';
         $form = profile_getStepForm($obj);
         $form->display();
         break;
-
     case 'edit':
         $obj = $handler->get($_REQUEST['id']);
         include_once dirname(__DIR__) . '/include/forms.php';
         $form = yogurt_getStepForm($obj);
         $form->display();
         break;
-
     case 'save':
         if (isset($_REQUEST['id'])) {
             $obj = $handler->get($_REQUEST['id']);
@@ -58,29 +56,32 @@ switch ($op) {
         $obj->setVar('step_desc', $_REQUEST['step_desc']);
         $obj->setVar('step_save', $_REQUEST['step_save']);
         if ($handler->insert($obj)) {
-            redirect_header('profile_registrationstep.php', 3, sprintf(_AM_YOGURT_SAVEDSUCCESS, _AM_YOGURT_STEP));
+            redirect_header('registrationstep.php', 3, sprintf(_AM_YOGURT_SAVEDSUCCESS, _AM_YOGURT_STEP));
         }
         echo $obj->getHtmlErrors();
         $form = $obj->getForm();
         $form->display();
         break;
-
     case 'delete':
         $obj = $handler->get($_REQUEST['id']);
-        if (isset($_REQUEST['ok']) && $_REQUEST['ok'] == 1) {
+        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if ($handler->delete($obj)) {
-                redirect_header('profile_registrationstep.php', 3, sprintf(_AM_YOGURT_DELETEDSUCCESS, _AM_YOGURT_STEP));
+                redirect_header('registrationstep.php', 3, sprintf(_AM_YOGURT_DELETEDSUCCESS, _AM_YOGURT_STEP));
             } else {
                 echo $obj->getHtmlErrors();
             }
         } else {
-            xoops_confirm(array(
-                              'ok' => 1,
-                              'id' => $_REQUEST['id'],
-                              'op' => 'delete'), $_SERVER['REQUEST_URI'], sprintf(_AM_YOGURT_RUSUREDEL, $obj->getVar('step_name')));
+            xoops_confirm(
+                [
+                    'ok' => 1,
+                    'id' => $_REQUEST['id'],
+                    'op' => 'delete',
+                ],
+                $_SERVER['REQUEST_URI'],
+                sprintf(_AM_YOGURT_RUSUREDEL, $obj->getVar('step_name'))
+            );
         }
         break;
-
     case 'toggle':
         if (isset($_GET['step_id'])) {
             $field_id = (int)$_GET['step_id'];
@@ -102,14 +103,14 @@ if (!empty($template_main)) {
  */
 function profile_stepsave_toggle($step_d, $step_save)
 {
-    $step_save = ($step_save == 1) ? 0 : 1;
+    $step_save = (1 == $step_save) ? 0 : 1;
     $handler   = xoops_getModuleHandler('regstep');
     $obj       = $handler->get($_REQUEST['step_id']);
     $obj->setVar('step_save', $step_save);
     if ($handler->insert($obj, true)) {
-        redirect_header('profile_registrationstep.php', 1, _AM_YOGURT_SAVESTEP_TOGGLE_SUCCESS);
+        redirect_header('registrationstep.php', 1, _AM_YOGURT_SAVESTEP_TOGGLE_SUCCESS);
     } else {
-        redirect_header('profile_registrationstep.php', 1, _AM_YOGURT_SAVESTEP_TOGGLE_FAILED);
+        redirect_header('registrationstep.php', 1, _AM_YOGURT_SAVESTEP_TOGGLE_FAILED);
     }
 }
 

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -11,11 +13,11 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -56,7 +58,9 @@ $criteria->add($criteria_uidvoted);
 
 if (0 === $ishotFactory->getCount($criteria)) {
     $vote = $ishotFactory->create(true);
+
     $vote->setVar('uid_voted', $uid_voted);
+
     $vote->setVar('uid_voter', $uid_voter);
 
     if (1 === $ishot) {
@@ -66,6 +70,7 @@ if (0 === $ishotFactory->getCount($criteria)) {
     }
 
     $ishotFactory->insert2($vote);
+
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_VOTED);
 } else {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_ALREADYVOTED);

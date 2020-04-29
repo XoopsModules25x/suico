@@ -13,17 +13,15 @@ declare(strict_types=1);
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use Xmf\Request;
 use Xmf\Module\Helper\Permission;
+use Xmf\Request;
 
 require __DIR__ . '/admin_header.php';
 xoops_cp_header();
@@ -46,7 +44,6 @@ switch ($op) {
         $form         = $imagesObject->getForm();
         $form->display();
         break;
-
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('images.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -98,7 +95,6 @@ switch ($op) {
         $form = $imagesObject->getForm();
         $form->display();
         break;
-
     case 'edit':
         $adminObject->addItemButton(AM_YOGURT_ADD_IMAGES, 'images.php?op=new', 'add');
         $adminObject->addItemButton(AM_YOGURT_IMAGES_LIST, 'images.php', 'list');
@@ -107,7 +103,6 @@ switch ($op) {
         $form         = $imagesObject->getForm();
         $form->display();
         break;
-
     case 'delete':
         $imagesObject = $imageHandler->get(Request::getString('cod_img', ''));
         if (1 === Request::getInt('ok', 0)) {
@@ -134,7 +129,6 @@ switch ($op) {
             );
         }
         break;
-
     case 'clone':
 
         $id_field = Request::getString('cod_img', '');

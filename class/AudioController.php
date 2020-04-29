@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
-use XoopsPageNav;
 use Criteria;
 use Exception;
+use XoopsPageNav;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -19,11 +19,11 @@ use Exception;
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
@@ -89,8 +89,8 @@ class AudioController extends YogurtController
             $audiosArray[$i]['title']        = $audio->getVar('title', 's');
             $audiosArray[$i]['id']           = $audio->getVar('audio_id', 's');
             $audiosArray[$i]['author']       = $audio->getVar('author', 's');
-            $audiosArray[$i]['date_created'] = formatTimestamp($audio->getVar('date_created', 's'));
-            $audiosArray[$i]['date_updated'] = formatTimestamp($audio->getVar('date_updated', 's'));
+            $audiosArray[$i]['date_created'] = \formatTimestamp($audio->getVar('date_created', 's'));
+            $audiosArray[$i]['date_updated'] = \formatTimestamp($audio->getVar('date_updated', 's'));
             $audio_path                      = XOOPS_ROOT_PATH . '/uploads/yogurt/audio/' . $audio->getVar('filename', 's');
             // echo $audio_path;
             $mp3filemetainfo                = new Id3v1($audio_path, true);
@@ -124,6 +124,7 @@ class AudioController extends YogurtController
         $interval
     ) {
         $pageNav = new XoopsPageNav($nbAudios, $audiosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
+
         return $pageNav->renderImageNav($interval);
     }
 

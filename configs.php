@@ -13,13 +13,11 @@ declare(strict_types=1);
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use XoopsModules\Yogurt;
@@ -48,26 +46,43 @@ $uid = (int)$xoopsUser->getVar('uid');
 $criteria = new Criteria('config_uid', $uid);
 if ($configsFactory->getCount($criteria) > 0) {
     $configs = $configsFactory->getObjects($criteria);
-    $config  = $configs[0];
 
-    $pic  = $config->getVar('pictures');
-    $aud  = $config->getVar('audio');
-    $vid  = $config->getVar('videos');
-    $tri  = $config->getVar('groups');
-    $scr  = $config->getVar('notes');
-    $fri  = $config->getVar('friends');
+    $config = $configs[0];
+
+    $pic = $config->getVar('pictures');
+
+    $aud = $config->getVar('audio');
+
+    $vid = $config->getVar('videos');
+
+    $tri = $config->getVar('groups');
+
+    $scr = $config->getVar('notes');
+
+    $fri = $config->getVar('friends');
+
     $pcon = $config->getVar('profile_contact');
+
     $pgen = $config->getVar('profile_general');
+
     $psta = $config->getVar('profile_stats');
 
     $xoopsTpl->assign('pic', $pic);
+
     $xoopsTpl->assign('aud', $aud);
+
     $xoopsTpl->assign('vid', $vid);
+
     $xoopsTpl->assign('tri', $tri);
+
     $xoopsTpl->assign('scr', $scr);
+
     $xoopsTpl->assign('fri', $fri);
+
     $xoopsTpl->assign('pcon', $pcon);
+
     $xoopsTpl->assign('pgen', $pgen);
+
     $xoopsTpl->assign('psta', $psta);
 }
 

@@ -5,23 +5,21 @@ declare(strict_types=1);
 namespace XoopsModules\Yogurt;
 
 /*
- You may not change or alter any portion of this comment or credits
- of supporting developers from this source code or any supporting source code
- which is considered copyrighted (c) material of the original comment or credit authors.
- 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- */
-
-/**
- * Module: Yogurt
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
  *
- * @category        Module
- * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
- * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
+ 
+/**
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @package
+ * @since
+ * @author       XOOPS Development Team
  */
 
 use RuntimeException;
@@ -37,10 +35,13 @@ class Helper extends \Xmf\Module\Helper
     /**
      * @param bool $debug
      */
+
     public function __construct($debug = false)
     {
-        $this->debug   = $debug;
+        $this->debug = $debug;
+
         $moduleDirName = \basename(\dirname(__DIR__));
+
         parent::__construct($moduleDirName);
     }
 
@@ -49,10 +50,12 @@ class Helper extends \Xmf\Module\Helper
      *
      * @return \XoopsModules\Yogurt\Helper
      */
+
     public static function getInstance(
         $debug = false
     ) {
         static $instance;
+
         if (null === $instance) {
             $instance = new static($debug);
         }
@@ -63,6 +66,7 @@ class Helper extends \Xmf\Module\Helper
     /**
      * @return string
      */
+
     public function getDirname()
     {
         return $this->dirname;
@@ -75,18 +79,26 @@ class Helper extends \Xmf\Module\Helper
      *
      * @return bool|\XoopsObjectHandler|\XoopsPersistableObjectHandler
      */
+
     public function getHandler(
         $name
     ) {
         //$ret   = false;
+
         $class = __NAMESPACE__ . '\\' . \ucfirst($name) . 'Handler';
+
         if (!\class_exists($class)) {
             throw new RuntimeException("Class '${class}' not found");
         }
+
         /** @var \XoopsMySQLDatabase $db */
-        $db     = XoopsDatabaseFactory::getDatabaseConnection();
+
+        $db = XoopsDatabaseFactory::getDatabaseConnection();
+
         $helper = self::getInstance();
-        $ret    = new $class($db, $helper);
+
+        $ret = new $class($db, $helper);
+
         $this->addLog("Getting handler '{$name}'");
 
         return $ret;

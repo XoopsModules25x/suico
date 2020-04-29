@@ -13,19 +13,17 @@ declare(strict_types=1);
  */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsModules\Yogurt\Common;
 use Xmf\Module\Admin;
-use Xmf\Yaml;
 use Xmf\Request;
+use Xmf\Yaml;
+use XoopsModules\Yogurt\Common;
 
 require __DIR__ . '/admin_header.php';
 // Display Admin header
@@ -36,6 +34,7 @@ $adminObject = Admin::getInstance();
 $configurator = new Common\Configurator();
 foreach (array_keys($configurator->uploadFolders) as $i) {
     $utility::createFolder($configurator->uploadFolders[$i]);
+
     $adminObject->addConfigBoxLine($configurator->uploadFolders[$i], 'folder');
 }
 
@@ -130,12 +129,15 @@ $adminObject->displayNavigation(basename(__FILE__));
 //------------- Test Data ----------------------------
 
 if ($helper->getConfig('displaySampleButton')) {
-    $yamlFile            = dirname(__DIR__) . '/config/admin.yml';
-    $config              = loadAdminConfig($yamlFile);
+    $yamlFile = dirname(__DIR__) . '/config/admin.yml';
+
+    $config = loadAdminConfig($yamlFile);
+
     $displaySampleButton = $config['displaySampleButton'];
 
     if (1 === $displaySampleButton) {
         xoops_loadLanguage('admin/modulesadmin', 'system');
+
         require_once dirname(__DIR__) . '/testdata/index.php';
 
         $adminObject->addItemButton(
@@ -143,12 +145,15 @@ if ($helper->getConfig('displaySampleButton')) {
             '__DIR__ . /../../testdata/index.php?op=load',
             'add'
         );
+
         $adminObject->addItemButton(
             constant('CO_' . $moduleDirNameUpper . '_' . 'SAVE_SAMPLEDATA'),
             '__DIR__ . /../../testdata/index.php?op=save',
             'add'
         );
+
         //    $adminObject->addItemButton(constant('CO_' . $moduleDirNameUpper . '_' . 'EXPORT_SCHEMA'), '__DIR__ . /../../testdata/index.php?op=exportschema', 'add');
+
         $adminObject->addItemButton(
             constant('CO_' . $moduleDirNameUpper . '_' . 'HIDE_SAMPLEDATA_BUTTONS'),
             '?op=hide_buttons',
@@ -160,8 +165,10 @@ if ($helper->getConfig('displaySampleButton')) {
             '?op=show_buttons',
             'add'
         );
+
         $displaySampleButton = $config['displaySampleButton'];
     }
+
     $adminObject->displayButton('left', '');
 }
 
@@ -184,7 +191,9 @@ function loadAdminConfig($yamlFile)
 function hideButtons($yamlFile)
 {
     $app['displaySampleButton'] = 0;
+
     Yaml::save($app, $yamlFile);
+
     redirect_header('index.php', 0, '');
 }
 
@@ -193,9 +202,12 @@ function hideButtons($yamlFile)
  */
 function showButtons($yamlFile)
 {
-    $app                        = [];
+    $app = [];
+
     $app['displaySampleButton'] = 1;
+
     Yaml::save($app, $yamlFile);
+
     redirect_header('index.php', 0, '');
 }
 

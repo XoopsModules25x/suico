@@ -15,13 +15,11 @@ namespace XoopsModules\Yogurt\Form;
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Module\Helper\Permission;
@@ -95,13 +93,13 @@ class ImagesForm extends XoopsThemeForm
         // Data_creation
         $this->addElement(
             new XoopsFormTextDateSelect(
-                \AM_YOGURT_IMAGES_DATE_CREATED, 'date_created', 0, formatTimestamp($this->targetObject->getVar('date_created'), 's')
+                \AM_YOGURT_IMAGES_DATE_CREATED, 'date_created', 0, \formatTimestamp($this->targetObject->getVar('date_created'), 's')
             )
         );
         // Data_update
         $this->addElement(
             new XoopsFormTextDateSelect(
-                \AM_YOGURT_IMAGES_DATE_UPDATED, 'date_updated', 0, formatTimestamp($this->targetObject->getVar('date_updated'), 's')
+                \AM_YOGURT_IMAGES_DATE_UPDATED, 'date_updated', 0, \formatTimestamp($this->targetObject->getVar('date_updated'), 's')
             )
         );
         // Uid_owner
@@ -119,12 +117,12 @@ class ImagesForm extends XoopsThemeForm
         //            false
         //        );
 
-        $url = $this->targetObject->getVar('filename') ?: 'blank.png';
+        $filename = $this->targetObject->getVar('filename') ?: 'blank.png';
 
         $uploadDir   = '/uploads/yogurt/images/';
         $imgtray     = new \XoopsFormElementTray(\AM_YOGURT_IMAGES_URL, '<br>');
         $imgpath     = \sprintf(\AM_YOGURT_FORMIMAGE_PATH, $uploadDir);
-        $imageselect = new \XoopsFormSelect($imgpath, 'filename', $url);
+        $imageselect = new \XoopsFormSelect($imgpath, 'filename', $filename);
         $imageArray  = \XoopsLists::getImgListAsArray(XOOPS_ROOT_PATH . $uploadDir);
         foreach ($imageArray as $image) {
             $imageselect->addOption($image, $image);

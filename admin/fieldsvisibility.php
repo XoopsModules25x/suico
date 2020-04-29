@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Extended User Profile
  *
@@ -20,11 +21,11 @@ include_once __DIR__ . '/admin_header.php';
 
 //there is no way to override current tabs when using system menu
 //this dirty hack will have to do it
-$_SERVER['REQUEST_URI'] = 'admin/profile_fieldspermissions.php';
+$_SERVER['REQUEST_URI'] = 'admin/fieldspermissions.php';
 
 xoops_cp_header();
 
-$op = isset($_REQUEST['op']) ? $_REQUEST['op'] : 'visibility';
+$op = $_REQUEST['op'] ?? 'visibility';
 
 $visibility_handler = xoops_getModuleHandler('visibility');
 $field_handler      = xoops_getModuleHandler('field');
@@ -36,18 +37,18 @@ if (isset($_REQUEST['submit'])) {
     $visibility->setVar('user_group', $_REQUEST['ug']);
     $visibility->setVar('profile_group', $_REQUEST['pg']);
     $visibility_handler->insert($visibility, true);
-    redirect_header('profile_fieldsvisibility.php', 2, sprintf(_AM_YOGURT_SAVEDSUCCESS, _AM_YOGURT_PROF_VISIBLE));
+    redirect_header('fieldsvisibility.php', 2, sprintf(_AM_YOGURT_SAVEDSUCCESS, _AM_YOGURT_PROF_VISIBLE));
 }
-if ($op === 'del') {
+if ('del' === $op) {
     $criteria = new CriteriaCompo(new Criteria('field_id', (int)$_REQUEST['field_id']));
     $criteria->add(new Criteria('user_group', (int)$_REQUEST['ug']));
     $criteria->add(new Criteria('profile_group', (int)$_REQUEST['pg']));
     $visibility_handler->deleteAll($criteria, true);
-    redirect_header('profile_fieldsvisibility.php', 2, sprintf(_AM_YOGURT_DELETEDSUCCESS, _AM_YOGURT_PROF_VISIBLE));
+    redirect_header('fieldsvisibility.php', 2, sprintf(_AM_YOGURT_DELETEDSUCCESS, _AM_YOGURT_PROF_VISIBLE));
 }
 
 include_once $GLOBALS['xoops']->path('/class/xoopsformloader.php');
-$opform    = new XoopsSimpleForm('', 'opform', 'profile_fieldspermissions.php', 'get');
+$opform    = new XoopsSimpleForm('', 'opform', 'fieldspermissions.php', 'get');
 $op_select = new XoopsFormSelect('', 'op', $op);
 $op_select->setExtra('onchange="document.forms.opform.submit()"');
 $op_select->addOption('visibility', _AM_YOGURT_PROF_VISIBLE);
@@ -64,9 +65,9 @@ $criteria->setOrder('DESC');
 
 $visibilities = $visibility_handler->getAllByFieldId($criteria);
 
-/* @var XoopsMemberHandler $member_handler */
-$member_handler = xoops_getHandler('member');
-$groups         = $member_handler->getGroupList();
+/* @var XoopsMemberHandler $memberHandler */
+$memberHandler = xoops_getHandler('member');
+$groups         = $memberHandler->getGroupList();
 $groups[0]      = _AM_YOGURT_FIELDVISIBLETOALL;
 asort($groups);
 
@@ -74,7 +75,7 @@ $GLOBALS['xoopsTpl']->assign('fields', $fields);
 $GLOBALS['xoopsTpl']->assign('visibilities', $visibilities);
 $GLOBALS['xoopsTpl']->assign('groups', $groups);
 
-$add_form = new XoopsSimpleForm('', 'addform', 'profile_fieldsvisibility.php');
+$add_form = new XoopsSimpleForm('', 'addform', 'fieldsvisibility.php');
 
 $sel_field = new XoopsFormSelect(_AM_YOGURT_FIELDVISIBLE, 'field_id');
 $sel_field->setExtra("style='width: 200px;'");

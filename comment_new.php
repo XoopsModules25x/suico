@@ -13,13 +13,11 @@ declare(strict_types=1);
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -40,5 +38,6 @@ $group    = $groups[0];
 $comItemid = Request::getInt('com_itemid', 0, 'GET');
 if ($comItemid > 0) {
     $com_replytitle = _MD_YOGURT_GROUPS . ': ' . $group->getVar('group_title');
+
     require XOOPS_ROOT_PATH . '/include/comment_new.php';
 }

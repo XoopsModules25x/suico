@@ -13,17 +13,15 @@ declare(strict_types=1);
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use Xmf\Request;
 use Xmf\Module\Helper\Permission;
+use Xmf\Request;
 
 require __DIR__ . '/admin_header.php';
 xoops_cp_header();
@@ -46,7 +44,6 @@ switch ($op) {
         $form               = $relgroupuserObject->getForm();
         $form->display();
         break;
-
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('relgroupuser.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -67,7 +64,6 @@ switch ($op) {
         $form = $relgroupuserObject->getForm();
         $form->display();
         break;
-
     case 'edit':
         $adminObject->addItemButton(AM_YOGURT_ADD_RELGROUPUSER, 'relgroupuser.php?op=new', 'add');
         $adminObject->addItemButton(AM_YOGURT_RELGROUPUSER_LIST, 'relgroupuser.php', 'list');
@@ -76,13 +72,13 @@ switch ($op) {
         $form               = $relgroupuserObject->getForm();
         $form->display();
         break;
-
     case 'delete':
         $relgroupuserObject = $relgroupuserHandler->get(Request::getString('rel_id', ''));
         if (1 === Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('relgroupuser.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
+
             if ($relgroupuserHandler->delete($relgroupuserObject)) {
                 redirect_header('relgroupuser.php', 3, AM_YOGURT_FORMDELOK);
             } else {
@@ -103,7 +99,6 @@ switch ($op) {
             );
         }
         break;
-
     case 'clone':
 
         $id_field = Request::getString('rel_id', '');
@@ -144,6 +139,7 @@ switch ($op) {
             $pagenav = new XoopsPageNav(
                 $relgroupuserTempRows, $relgroupuserPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
+
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
 
@@ -170,18 +166,25 @@ switch ($op) {
                 //        $field = explode(':', $fields[$i]);
 
                 $GLOBALS['xoopsTpl']->assign('selectorrel_id', AM_YOGURT_RELGROUPUSER_REL_ID);
+
                 $relgroupuserArray['rel_id'] = $relgroupuserTempArray[$i]->getVar('rel_id');
 
                 $GLOBALS['xoopsTpl']->assign('selectorrel_group_id', AM_YOGURT_RELGROUPUSER_REL_GROUP_ID);
+
                 $relgroupuserArray['rel_group_id'] = $groupsHandler->get($relgroupuserTempArray[$i]->getVar('rel_group_id'))->getVar('group_title');
 
                 //                $GLOBALS['xoopsTpl']->assign('selectorrel_user_uid', AM_YOGURT_RELGROUPUSER_REL_USER_UID);
+
                 //                $relgroupuserArray['rel_user_uid'] = strip_tags(
+
                 //                    XoopsUser::getUnameFromId($relgroupuserTempArray[$i]->getVar('rel_user_uid'))
+
                 //                );
 
                 $selectorrel_user_uid = $utility::selectSorting(AM_YOGURT_RELGROUPUSER_REL_USER_UID, 'rel_user_uid');
+
                 $GLOBALS['xoopsTpl']->assign('selectorrel_user_uid', $selectorrel_user_uid);
+
                 $relgroupuserArray['rel_user_uid'] = strip_tags(\XoopsUser::getUnameFromId($relgroupuserTempArray[$i]->getVar('rel_user_uid')));
 
                 $relgroupuserArray['edit_delete'] = "<a href='relgroupuser.php?op=edit&rel_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
@@ -189,22 +192,30 @@ switch ($op) {
                <a href='relgroupuser.php?op=clone&rel_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
                 $GLOBALS['xoopsTpl']->append_by_ref('relgroupuserArrays', $relgroupuserArray);
+
                 unset($relgroupuserArray);
             }
+
             unset($relgroupuserTempArray);
+
             // Display Navigation
+
             if ($relgroupuserCount > $relgroupuserPaginationLimit) {
                 xoops_load('XoopsPageNav');
+
                 $pagenav = new XoopsPageNav(
                     $relgroupuserCount, $relgroupuserPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
+
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
 
             //                     echo "<td class='center width5'>
 
             //                    <a href='relgroupuser.php?op=edit&rel_id=".$i."'><img src=".$pathIcon16."/edit.png alt='"._EDIT."' title='"._EDIT."'></a>
+
             //                    <a href='relgroupuser.php?op=delete&rel_id=".$i."'><img src=".$pathIcon16."/delete.png alt='"._DELETE."' title='"._DELETE."'></a>
+
             //                    </td>";
 
             //                echo "</tr>";
@@ -220,7 +231,9 @@ switch ($op) {
             //                    <tr>
 
             //                     <th class='center width5'>".AM_YOGURT_FORM_ACTION."XXX</th>
+
             //                    </tr><tr><td class='errorMsg' colspan='4'>There are noXXX relgroupuser</td></tr>";
+
             //            echo "</table><br><br>";
 
             //-------------------------------------------

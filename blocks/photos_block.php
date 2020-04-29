@@ -13,11 +13,11 @@ declare(strict_types=1);
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use XoopsModules\Yogurt;
@@ -35,7 +35,9 @@ if (!defined('XOOPS_ROOT_PATH')) {
 function b_yogurt_lastpictures_show($options)
 {
     global $xoopsDB, $xoopsModule, $xoopsModuleConfig;
-    $myts  = MyTextSanitizer::getInstance();
+
+    $myts = MyTextSanitizer::getInstance();
+
     $block = [];
 
     /**
@@ -43,14 +45,19 @@ function b_yogurt_lastpictures_show($options)
      */
 
     $criteria = new Criteria('cod_img', 0, '>');
+
     $criteria->setSort('cod_img');
+
     $criteria->setOrder('DESC');
+
     $criteria->setLimit($options[0]);
 
     /**
      * Creating factories of pictures and votes
      */
+
     //$albumFactory      = new ImagesHandler($xoopsDB);
+
     $imageFactory = new Yogurt\ImageHandler($xoopsDB);
 
     return $imageFactory->getLastPicturesForBlock($options[0]);

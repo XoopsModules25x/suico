@@ -14,19 +14,13 @@ namespace XoopsModules\Yogurt;
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
-
-//Notes.php,v 1
-//  ---------------------------------------------------------------- //
-// Author: Bruno Barthez                                               //
-// ----------------------------------------------------------------- //
+ 
 
 use CriteriaElement;
 use MyTextSanitizer;
@@ -350,7 +344,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
                 $temptext                  = $myts->xoopsCodeDecode($myrow['note_text'], 1);
                 $vetor[$i]['text']         = $myts->nl2Br($temptext);
                 $vetor[$i]['id']           = $myrow['note_id'];
-                $vetor[$i]['date_created'] = formatTimestamp($myrow['date_created'], 's');
+                $vetor[$i]['date_created'] = \formatTimestamp($myrow['date_created'], 's');
 
                 $i++;
             }

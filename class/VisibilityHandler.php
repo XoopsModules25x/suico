@@ -1,4 +1,9 @@
 <?php
+
+declare(strict_types=1);
+
+namespace XoopsModules\Yogurt;
+
 /**
  * Extended User Profile
  *
@@ -17,35 +22,18 @@
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
-// defined('XOOPS_ROOT_PATH') || exit("XOOPS root path not defined");
-
-/**
- * Class YogurtVisibility
- */
-class YogurtVisibility extends XoopsObject
-{
-    /**
-     *
-     */
-    public function __construct()
-    {
-        $this->initVar('field_id', XOBJ_DTYPE_INT);
-        $this->initVar('user_group', XOBJ_DTYPE_INT);
-        $this->initVar('profile_group', XOBJ_DTYPE_INT);
-    }
-}
-
 /**
  * Class ProfileVisibilityHandler
  */
-class YogurtVisibilityHandler extends XoopsPersistableObjectHandler
+class VisibilityHandler extends \XoopsPersistableObjectHandler
 {
     /**
-     * @param null|XoopsDatabase $db
+     * @param \XoopsDatabase $db
      */
-    public function __construct(XoopsDatabase $db)
+
+    public function __construct(\XoopsDatabase $db)
     {
-        parent::__construct($db, 'yogurt_profile_visibility', 'yogurtvisibility', 'field_id');
+        parent::__construct($db, 'yogurt_profile_visibility', Visibility::class, 'field_id');
     }
 
     /**
@@ -56,13 +44,18 @@ class YogurtVisibilityHandler extends XoopsPersistableObjectHandler
      *
      * @return array
      */
+
     public function getVisibleFields($profile_groups, $user_groups = null)
     {
         $profile_groups[] = $user_groups[] = 0;
-        $sql  = "SELECT field_id FROM {$this->table} WHERE profile_group IN (" . implode(',', $profile_groups) . ')';
-        $sql .= ' AND user_group IN (' . implode(',', $user_groups) . ')';
-        $field_ids = array();
-        if ($result = $this->db->query($sql)) {
+
+        $sql = "SELECT field_id FROM {$this->table} WHERE profile_group IN (" . \implode(',', $profile_groups) . ')';
+
+        $sql .= ' AND user_group IN (' . \implode(',', $user_groups) . ')';
+
+        $field_ids = [];
+
+        if (false !== ($result = $this->db->query($sql))) {
             while (false !== (list($field_id) = $this->db->fetchRow($result))) {
                 $field_ids[] = $field_id;
             }
@@ -74,17 +67,19 @@ class YogurtVisibilityHandler extends XoopsPersistableObjectHandler
     /**
      * get all rows matching a condition
      *
-     * @param  CriteriaElement $criteria  {@link CriteriaElement} to match
+     * @param \CriteriaElement $criteria {@link \CriteriaElement} to match
      *
      * @return array of row arrays, indexed by field_id
      */
-    public function getAllByFieldId(CriteriaElement $criteria = null)
+
+    public function getAllByFieldId(\CriteriaElement $criteria = null)
     {
         $rawRows = parent::getAll($criteria, null, false, false);
 
-        usort($rawRows, array($this, 'visibilitySort'));
+        \usort($rawRows, [$this, 'visibilitySort']);
 
-        $rows = array();
+        $rows = [];
+
         foreach ($rawRows as $rawRow) {
             $rows[$rawRow['field_id']][] = $rawRow;
         }
@@ -104,17 +99,23 @@ class YogurtVisibilityHandler extends XoopsPersistableObjectHandler
      *              integer zero if $a and $b are equal
      *              integer greater than zero if $a is greater than $b
      */
+
     protected function visibilitySort($a, $b)
     {
         $fieldDiff = $a['field_id'] - $b['field_id'];
-        $userDiff  = $a['user_group'] - $b['user_group'];
-        $profDiff  = $a['profile_group'] - $b['profile_group'];
+
+        $userDiff = $a['user_group'] - $b['user_group'];
+
+        $profDiff = $a['profile_group'] - $b['profile_group'];
+
         if (0 != $fieldDiff) {
             return $fieldDiff;
-        } elseif (0 !== $userDiff) {
-            return $userDiff;
-        } else {
-            return $profDiff;
         }
+
+        if (0 !== $userDiff) {
+            return $userDiff;
+        }
+
+        return $profDiff;
     }
 }

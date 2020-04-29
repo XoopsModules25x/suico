@@ -13,17 +13,15 @@ declare(strict_types=1);
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use Xmf\Request;
 use Xmf\Module\Helper\Permission;
+use Xmf\Request;
 
 require __DIR__ . '/admin_header.php';
 xoops_cp_header();
@@ -46,7 +44,6 @@ switch ($op) {
         $form                = $friendrequestObject->getForm();
         $form->display();
         break;
-
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('friendrequest.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -69,7 +66,6 @@ switch ($op) {
         $form = $friendrequestObject->getForm();
         $form->display();
         break;
-
     case 'edit':
         $adminObject->addItemButton(AM_YOGURT_ADD_FRIENDREQUEST, 'friendrequest.php?op=new', 'add');
         $adminObject->addItemButton(AM_YOGURT_FRIENDREQUEST_LIST, 'friendrequest.php', 'list');
@@ -78,13 +74,13 @@ switch ($op) {
         $form                = $friendrequestObject->getForm();
         $form->display();
         break;
-
     case 'delete':
         $friendrequestObject = $friendrequestHandler->get(Request::getString('friendreq_id', ''));
         if (1 === Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('friendrequest.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
+
             if ($friendrequestHandler->delete($friendrequestObject)) {
                 redirect_header('friendrequest.php', 3, AM_YOGURT_FORMDELOK);
             } else {
@@ -105,7 +101,6 @@ switch ($op) {
             );
         }
         break;
-
     case 'clone':
 
         $id_field = Request::getString('friendreq_id', '');
@@ -146,6 +141,7 @@ switch ($op) {
             $pagenav = new XoopsPageNav(
                 $friendrequestTempRows, $friendrequestPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
+
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
 
@@ -175,40 +171,54 @@ switch ($op) {
                     'selectorfriendreq_id',
                     AM_YOGURT_FRIENDREQUEST_FRIENDPET_ID
                 );
+
                 $friendrequestArray['friendreq_id'] = $friendrequestTempArray[$i]->getVar('friendreq_id');
 
                 $GLOBALS['xoopsTpl']->assign('selectorfriendrequester_uid', AM_YOGURT_FRIENDREQUEST_FRIENDREQUESTER_UID);
+
                 $friendrequestArray['friendrequester_uid'] = strip_tags(
                     XoopsUser::getUnameFromId($friendrequestTempArray[$i]->getVar('friendrequester_uid'))
                 );
 
                 $GLOBALS['xoopsTpl']->assign('selectorfriendrequestto_uid', AM_YOGURT_FRIENDREQUEST_FRIENDREQUESTTO_UID);
+
                 $friendrequestArray['friendrequestto_uid'] = strip_tags(
                     XoopsUser::getUnameFromId($friendrequestTempArray[$i]->getVar('friendrequestto_uid'))
                 );
+
                 $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_FRIENDREQUEST_DATE_CREATED);
+
                 $friendrequestArray['date_created'] = formatTimestamp($friendrequestTempArray[$i]->getVar('date_created'), 's');
-                $friendrequestArray['edit_delete']  = "<a href='friendrequest.php?op=edit&friendreq_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
+
+                $friendrequestArray['edit_delete'] = "<a href='friendrequest.php?op=edit&friendreq_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='friendrequest.php?op=delete&friendreq_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='friendrequest.php?op=clone&friendreq_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
                 $GLOBALS['xoopsTpl']->append_by_ref('friendrequestArrays', $friendrequestArray);
+
                 unset($friendrequestArray);
             }
+
             unset($friendrequestTempArray);
+
             // Display Navigation
+
             if ($friendrequestCount > $friendrequestPaginationLimit) {
                 xoops_load('XoopsPageNav');
+
                 $pagenav = new XoopsPageNav(
                     $friendrequestCount, $friendrequestPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
+
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
 
             //                     echo "<td class='center width5'>
 
             //                    <a href='friendrequest.php?op=edit&friendreq_id=".$i."'><img src=".$pathIcon16."/edit.png alt='"._EDIT."' title='"._EDIT."'></a>
+
             //                    <a href='friendrequest.php?op=delete&friendreq_id=".$i."'><img src=".$pathIcon16."/delete.png alt='"._DELETE."' title='"._DELETE."'></a>
+
             //                    </td>";
 
             //                echo "</tr>";
@@ -224,7 +234,9 @@ switch ($op) {
             //                    <tr>
 
             //                     <th class='center width5'>".AM_YOGURT_FORM_ACTION."XXX</th>
+
             //                    </tr><tr><td class='errorMsg' colspan='4'>There are noXXX friendrequest</td></tr>";
+
             //            echo "</table><br><br>";
 
             //-------------------------------------------

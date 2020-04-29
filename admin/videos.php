@@ -13,17 +13,15 @@ declare(strict_types=1);
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use Xmf\Request;
 use Xmf\Module\Helper\Permission;
+use Xmf\Request;
 
 require __DIR__ . '/admin_header.php';
 xoops_cp_header();
@@ -46,7 +44,6 @@ switch ($op) {
         $form        = $videoObject->getForm();
         $form->display();
         break;
-
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('videos.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -75,7 +72,6 @@ switch ($op) {
         $form = $videoObject->getForm();
         $form->display();
         break;
-
     case 'edit':
         $adminObject->addItemButton(AM_YOGURT_ADD_VIDEO, 'videos.php?op=new', 'add');
         $adminObject->addItemButton(AM_YOGURT_VIDEO_LIST, 'videos.php', 'list');
@@ -84,13 +80,13 @@ switch ($op) {
         $form        = $videoObject->getForm();
         $form->display();
         break;
-
     case 'delete':
         $videoObject = $videoHandler->get(Request::getString('video_id', ''));
         if (1 === Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('videos.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
+
             if ($videoHandler->delete($videoObject)) {
                 redirect_header('videos.php', 3, AM_YOGURT_FORMDELOK);
             } else {
@@ -111,7 +107,6 @@ switch ($op) {
             );
         }
         break;
-
     case 'clone':
 
         $id_field = Request::getString('video_id', '');
@@ -152,6 +147,7 @@ switch ($op) {
             $pagenav = new XoopsPageNav(
                 $videoTempRows, $videoPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
+
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
 
@@ -178,26 +174,33 @@ switch ($op) {
                 //        $field = explode(':', $fields[$i]);
 
                 $GLOBALS['xoopsTpl']->assign('selectorvideo_id', AM_YOGURT_VIDEO_VIDEO_ID);
+
                 $videoArray['video_id'] = $videoTempArray[$i]->getVar('video_id');
 
                 $GLOBALS['xoopsTpl']->assign('selectoruid_owner', AM_YOGURT_VIDEO_UID_OWNER);
+
                 $videoArray['uid_owner'] = strip_tags(
                     XoopsUser::getUnameFromId($videoTempArray[$i]->getVar('uid_owner'))
                 );
 
                 $GLOBALS['xoopsTpl']->assign('selectorvideo_desc', AM_YOGURT_VIDEO_VIDEO_DESC);
+
                 $videoArray['video_desc'] = strip_tags($videoTempArray[$i]->getVar('video_desc'));
 
                 $GLOBALS['xoopsTpl']->assign('selectoryoutube_code', AM_YOGURT_VIDEO_YOUTUBE_CODE);
+
                 $videoArray['youtube_code'] = $videoTempArray[$i]->getVar('youtube_code');
 
                 $GLOBALS['xoopsTpl']->assign('selectormain_video', AM_YOGURT_VIDEO_MAIN_VIDEO);
+
                 $videoArray['main_video'] = $videoTempArray[$i]->getVar('main_video');
 
                 $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_VIDEO_DATE_CREATED);
+
                 $videoArray['date_created'] = formatTimestamp($videoTempArray[$i]->getVar('date_created'), 's');
 
                 $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_YOGURT_VIDEO_DATE_UPDATED);
+
                 $videoArray['date_updated'] = formatTimestamp($videoTempArray[$i]->getVar('date_updated'), 's');
 
                 $videoArray['edit_delete'] = "<a href='videos.php?op=edit&video_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
@@ -205,22 +208,30 @@ switch ($op) {
                <a href='videos.php?op=clone&video_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
                 $GLOBALS['xoopsTpl']->append_by_ref('videosArray', $videoArray);
+
                 unset($videoArray);
             }
+
             unset($videoTempArray);
+
             // Display Navigation
+
             if ($videoCount > $videoPaginationLimit) {
                 xoops_load('XoopsPageNav');
+
                 $pagenav = new XoopsPageNav(
                     $videoCount, $videoPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
+
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
 
             //                     echo "<td class='center width5'>
 
             //                    <a href='videos.php?op=edit&video_id=".$i."'><img src=".$pathIcon16."/edit.png alt='"._EDIT."' title='"._EDIT."'></a>
+
             //                    <a href='videos.php?op=delete&video_id=".$i."'><img src=".$pathIcon16."/delete.png alt='"._DELETE."' title='"._DELETE."'></a>
+
             //                    </td>";
 
             //                echo "</tr>";
@@ -236,7 +247,9 @@ switch ($op) {
             //                    <tr>
 
             //                     <th class='center width5'>".AM_YOGURT_FORM_ACTION."XXX</th>
+
             //                    </tr><tr><td class='errorMsg' colspan='6'>There are noXXX video</td></tr>";
+
             //            echo "</table><br><br>";
 
             //-------------------------------------------

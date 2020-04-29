@@ -12,13 +12,11 @@ declare(strict_types=1);
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 /**
@@ -35,7 +33,7 @@ class YogurtCorePreload extends XoopsPreloadItem
     {
         require __DIR__ . '/autoloader.php';
     }
-	
+
     /**
      * @param $args
      */
@@ -54,7 +52,7 @@ class YogurtCorePreload extends XoopsPreloadItem
         exit();
     }
 
-	/**
+    /**
      * @param $args
      */
     public static function eventCoreUserinfoStart($args)
@@ -62,5 +60,4 @@ class YogurtCorePreload extends XoopsPreloadItem
         header('location: ./modules/yogurt/index.php' . (empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING']));
         exit();
     }
-	
 }

@@ -14,19 +14,13 @@ namespace XoopsModules\Yogurt;
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
-
-//Notes.php,v 1
-//  ---------------------------------------------------------------- //
-// Author: Bruno Barthez                                               //
-// ----------------------------------------------------------------- //
+ 
 
 use Xmf\Module\Helper\Permission;
 use XoopsDatabaseFactory;
@@ -43,7 +37,9 @@ require_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';
 class Notes extends XoopsObject
 {
     public $db;
+
     public $helper;
+
     public $permHelper;
 
     // constructor
@@ -52,17 +48,27 @@ class Notes extends XoopsObject
      * Notes constructor.
      * @param null $id
      */
+
     public function __construct($id = null)
     {
         /** @var Helper $helper */
-        $this->helper     = Helper::getInstance();
+
+        $this->helper = Helper::getInstance();
+
         $this->permHelper = new Permission();
-        $this->db         = XoopsDatabaseFactory::getDatabaseConnection();
+
+        $this->db = XoopsDatabaseFactory::getDatabaseConnection();
+
         $this->initVar('note_id', \XOBJ_DTYPE_INT, null, false, 10);
+
         $this->initVar('note_text', \XOBJ_DTYPE_OTHER, null, false);
+
         $this->initVar('note_from', \XOBJ_DTYPE_INT, null, false, 10);
+
         $this->initVar('note_to', \XOBJ_DTYPE_INT, null, false, 10);
+
         $this->initVar('private', \XOBJ_DTYPE_INT, null, false, 10);
+
         $this->initVar('date_created', \XOBJ_DTYPE_INT, 0, false);
 
         if (!empty($id)) {
@@ -79,11 +85,15 @@ class Notes extends XoopsObject
     /**
      * @param $id
      */
+
     public function load($id)
     {
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_notes') . ' WHERE note_id=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_notes') . ' WHERE note_id=' . $id;
+
         $myrow = $this->db->fetchArray($this->db->query($sql));
+
         $this->assignVars($myrow);
+
         if (!$myrow) {
             $this->setNew();
         }
@@ -98,6 +108,7 @@ class Notes extends XoopsObject
      * @param int    $start
      * @return array
      */
+
     public function getAllNotes(
         $criteria = [],
         $asobject = false,
@@ -106,27 +117,37 @@ class Notes extends XoopsObject
         $limit = 0,
         $start = 0
     ) {
-        $db         = XoopsDatabaseFactory::getDatabaseConnection();
-        $ret        = [];
+        $db = XoopsDatabaseFactory::getDatabaseConnection();
+
+        $ret = [];
+
         $whereQuery = '';
+
         if (\is_array($criteria) && \count($criteria) > 0) {
             $whereQuery = ' WHERE';
+
             foreach ($criteria as $c) {
                 $whereQuery .= " ${c} AND";
             }
+
             $whereQuery = mb_substr($whereQuery, 0, -4);
         } elseif (!\is_array($criteria) && $criteria) {
             $whereQuery = ' WHERE ' . $criteria;
         }
+
         if (!$asobject) {
-            $sql    = 'SELECT note_id FROM ' . $db->prefix('yogurt_notes') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql = 'SELECT note_id FROM ' . $db->prefix('yogurt_notes') . "${whereQuery} ORDER BY ${sort} ${order}";
+
             $result = $db->query($sql, $limit, $start);
+
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['yogurt_notes_id'];
             }
         } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('yogurt_notes') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql = 'SELECT * FROM ' . $db->prefix('yogurt_notes') . "${whereQuery} ORDER BY ${sort} ${order}";
+
             $result = $db->query($sql, $limit, $start);
+
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new self($myrow);
             }
@@ -140,6 +161,7 @@ class Notes extends XoopsObject
      *
      * @return \XoopsModules\Yogurt\Form\NotesForm
      */
+
     public function getForm()
     {
         return new Form\NotesForm($this);
@@ -148,9 +170,11 @@ class Notes extends XoopsObject
     /**
      * @return array|null
      */
+
     public function getGroupsRead()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
+
         return $this->permHelper->getGroupsForItem(
             'sbcolumns_read',
             $this->getVar('note_id')
@@ -160,9 +184,11 @@ class Notes extends XoopsObject
     /**
      * @return array|null
      */
+
     public function getGroupsSubmit()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
+
         return $this->permHelper->getGroupsForItem(
             'sbcolumns_submit',
             $this->getVar('note_id')
@@ -172,9 +198,11 @@ class Notes extends XoopsObject
     /**
      * @return array|null
      */
+
     public function getGroupsModeration()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
+
         return $this->permHelper->getGroupsForItem(
             'sbcolumns_moderation',
             $this->getVar('note_id')

@@ -13,13 +13,11 @@ declare(strict_types=1);
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use XoopsModules\Yogurt;
@@ -198,8 +196,8 @@ function xoops_module_update_yogurt(
 
         return $gpermHandler->deleteByModule($module->getVar('mid'), 'item_read');
     }
-	
-	$profile_handler = xoops_getModuleHandler('profile', $module->getVar('dirname', 'n'));
+
+    $profile_handler = xoops_getModuleHandler('profile', $module->getVar('dirname', 'n'));
     $profile_handler->cleanOrphan($GLOBALS['xoopsDB']->prefix('users'), 'uid', 'profile_id');
     $field_handler = xoops_getModuleHandler('field', $module->getVar('dirname', 'n'));
     $user_fields   = $field_handler->getUserVars();

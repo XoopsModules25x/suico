@@ -13,13 +13,11 @@ declare(strict_types=1);
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Module\Helper\Permission;
@@ -46,7 +44,6 @@ switch ($op) {
         $form        = $audioObject->getForm();
         $form->display();
         break;
-
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('audios.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -70,13 +67,17 @@ switch ($op) {
         );
         if ($uploader->fetchMedia(Request::getString('xoops_upload_file')[0], '', 'POST')) {
             //            $uploader->setPrefix('url_');
+
             $uploader->setPrefix('aud_' . $uid . '_');
+
             $uploader->fetchMedia(Request::getString('xoops_upload_file')[0], '', 'POST');
+
             if (!$uploader->upload()) {
                 $errors = $uploader->getErrors();
+
                 redirect_header('javascript:history.go(-1)', 3, $errors);
             } else {
-                $audioObject->setVar("filename", $uploader->getSavedFileName());
+                $audioObject->setVar('filename', $uploader->getSavedFileName());
             }
         }
 
@@ -94,7 +95,6 @@ switch ($op) {
         $form = $audioObject->getForm();
         $form->display();
         break;
-
     case 'edit':
         $adminObject->addItemButton(AM_YOGURT_ADD_AUDIO, 'audios.php?op=new', 'add');
         $adminObject->addItemButton(AM_YOGURT_AUDIO_LIST, 'audios.php', 'list');
@@ -103,13 +103,13 @@ switch ($op) {
         $form        = $audioObject->getForm();
         $form->display();
         break;
-
     case 'delete':
         $audioObject = $audioHandler->get(Request::getString('audio_id', ''));
         if (1 === Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('audios.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
+
             if ($audioHandler->delete($audioObject)) {
                 redirect_header('audios.php', 3, AM_YOGURT_FORMDELOK);
             } else {
@@ -130,7 +130,6 @@ switch ($op) {
             );
         }
         break;
-
     case 'clone':
 
         $id_field = Request::getString('audio_id', '');
@@ -171,6 +170,7 @@ switch ($op) {
             $pagenav = new XoopsPageNav(
                 $audioTempRows, $audioPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
+
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
 
@@ -200,29 +200,37 @@ switch ($op) {
                     'selectoraudio_id',
                     AM_YOGURT_AUDIO_AUDIO_ID
                 );
+
                 $audioArray['audio_id'] = $audioTempArray[$i]->getVar('audio_id');
 
                 $GLOBALS['xoopsTpl']->assign('selectoruid_owner', AM_YOGURT_AUDIO_UID_OWNER);
+
                 $audioArray['uid_owner'] = strip_tags(
                     XoopsUser::getUnameFromId($audioTempArray[$i]->getVar('uid_owner'))
                 );
 
                 $GLOBALS['xoopsTpl']->assign('selectorauthor', AM_YOGURT_AUDIO_AUTHOR);
+
                 $audioArray['author'] = $audioTempArray[$i]->getVar('author');
 
                 $GLOBALS['xoopsTpl']->assign('selectortitle', AM_YOGURT_AUDIO_TITLE);
+
                 $audioArray['title'] = $audioTempArray[$i]->getVar('title');
 
                 $GLOBALS['xoopsTpl']->assign('selectordescription', AM_YOGURT_AUDIO_DESCRIPTION);
+
                 $audioArray['description'] = $audioTempArray[$i]->getVar('description');
 
                 $GLOBALS['xoopsTpl']->assign('selectorfilename', AM_YOGURT_AUDIO_URL);
+
                 $audioArray['filename'] = $audioTempArray[$i]->getVar('filename');
 
                 $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_AUDIO_DATE_CREATED);
+
                 $audioArray['date_created'] = formatTimestamp($audioTempArray[$i]->getVar('date_created'), 's');
 
                 $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_YOGURT_AUDIO_DATE_UPDATED);
+
                 $audioArray['date_updated'] = formatTimestamp($audioTempArray[$i]->getVar('date_updated'), 's');
 
                 $audioArray['edit_delete'] = "<a href='audios.php?op=edit&audio_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
@@ -230,22 +238,30 @@ switch ($op) {
                <a href='audios.php?op=clone&audio_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
                 $GLOBALS['xoopsTpl']->append_by_ref('audiosArrays', $audioArray);
+
                 unset($audioArray);
             }
+
             unset($audioTempArray);
+
             // Display Navigation
+
             if ($audioCount > $audioPaginationLimit) {
                 xoops_load('XoopsPageNav');
+
                 $pagenav = new XoopsPageNav(
                     $audioCount, $audioPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
+
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
 
             //                     echo "<td class='center width5'>
 
             //                    <a href='audios.php?op=edit&audio_id=".$i."'><img src=".$pathIcon16."/edit.png alt='"._EDIT."' title='"._EDIT."'></a>
+
             //                    <a href='audios.php?op=delete&audio_id=".$i."'><img src=".$pathIcon16."/delete.png alt='"._DELETE."' title='"._DELETE."'></a>
+
             //                    </td>";
 
             //                echo "</tr>";
@@ -261,7 +277,9 @@ switch ($op) {
             //                    <tr>
 
             //                     <th class='center width5'>".AM_YOGURT_FORM_ACTION."XXX</th>
+
             //                    </tr><tr><td class='errorMsg' colspan='8'>There are noXXX audio</td></tr>";
+
             //            echo "</table><br><br>";
 
             //-------------------------------------------

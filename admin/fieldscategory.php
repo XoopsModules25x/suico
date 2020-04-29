@@ -16,17 +16,16 @@
  * @since
  * @author         XOOPS Development Team
  */
-
 include_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 $indexAdmin = new ModuleAdmin();
 
-$indexAdmin->addItemButton(_ADD . ' ' . _AM_YOGURT_CATEGORY, 'profile_fieldscategory.php?op=new', 'add', '');
+$indexAdmin->addItemButton(_ADD . ' ' . _AM_YOGURT_CATEGORY, 'fieldscategory.php?op=new', 'add', '');
 
 echo $indexAdmin->addNavigation(basename(__FILE__));
 echo $indexAdmin->renderButton('right', '');
 
-$op = isset($_REQUEST['op']) ? $_REQUEST['op'] : (isset($_REQUEST['id']) ? 'edit' : 'list');
+$op = $_REQUEST['op'] ?? (isset($_REQUEST['id']) ? 'edit' : 'list');
 
 /* @var YogurtCategoryHandler $handler */
 $handler = xoops_getModuleHandler('category');
@@ -39,24 +38,21 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('categories', $handler->getObjects($criteria, true, false));
         $template_main = 'admin/yogurt_admin_profilefieldscategory.tpl';
         break;
-
     case 'new':
         include_once dirname(__DIR__) . '/include/forms.php';
         $obj  = $handler->create();
         $form = $obj->getForm();
         $form->display();
         break;
-
     case 'edit':
         include_once dirname(__DIR__) . '/include/forms.php';
         $obj  = $handler->get($_REQUEST['id']);
         $form = $obj->getForm();
         $form->display();
         break;
-
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            redirect_header('profile_fieldscategory.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+            redirect_header('fieldscategory.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         if (isset($_REQUEST['id'])) {
             $obj = $handler->get($_REQUEST['id']);
@@ -67,7 +63,7 @@ switch ($op) {
         $obj->setVar('cat_description', $_REQUEST['cat_description']);
         $obj->setVar('cat_weight', $_REQUEST['cat_weight']);
         if ($handler->insert($obj)) {
-            redirect_header('profile_fieldscategory.php', 3, sprintf(_AM_YOGURT_SAVEDSUCCESS, _AM_YOGURT_CATEGORY));
+            redirect_header('fieldscategory.php', 3, sprintf(_AM_YOGURT_SAVEDSUCCESS, _AM_YOGURT_CATEGORY));
         }
         include_once dirname(__DIR__) . '/include/forms.php';
         echo $obj->getHtmlErrors();
@@ -75,23 +71,27 @@ switch ($op) {
         $form = $obj->getForm();
         $form->display();
         break;
-
     case 'delete':
         $obj = $handler->get($_REQUEST['id']);
-        if (isset($_REQUEST['ok']) && $_REQUEST['ok'] == 1) {
+        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
-                redirect_header('profile_fieldscategory.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+                redirect_header('fieldscategory.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }
             if ($handler->delete($obj)) {
-                redirect_header('profile_fieldscategory.php', 3, sprintf(_AM_YOGURT_DELETEDSUCCESS, _AM_YOGURT_CATEGORY));
+                redirect_header('fieldscategory.php', 3, sprintf(_AM_YOGURT_DELETEDSUCCESS, _AM_YOGURT_CATEGORY));
             } else {
                 echo $obj->getHtmlErrors();
             }
         } else {
-            xoops_confirm(array(
-                              'ok' => 1,
-                              'id' => $_REQUEST['id'],
-                              'op' => 'delete'), $_SERVER['REQUEST_URI'], sprintf(_AM_YOGURT_RUSUREDEL, $obj->getVar('cat_title')));
+            xoops_confirm(
+                [
+                    'ok' => 1,
+                    'id' => $_REQUEST['id'],
+                    'op' => 'delete',
+                ],
+                $_SERVER['REQUEST_URI'],
+                sprintf(_AM_YOGURT_RUSUREDEL, $obj->getVar('cat_title'))
+            );
         }
         break;
 }

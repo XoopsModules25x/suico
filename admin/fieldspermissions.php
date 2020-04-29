@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Extended User Profile
  *
@@ -26,24 +27,21 @@ $op = \Xmf\Request::getCmd('op', 'edit');
 $perm_desc = '';
 switch ($op) {
     case 'visibility':
-        //redirect_header("profile_fieldsvisibility.php", 0, _AM_YOGURT_PROF_VISIBLE);
-        header('Location: profile_fieldsvisibility.php');
+        //redirect_header("fieldsvisibility.php", 0, _AM_YOGURT_PROF_VISIBLE);
+        header('Location: fieldsvisibility.php');
         break;
-
     case 'edit':
         $title_of_form = _AM_YOGURT_PROF_EDITABLE;
         $perm_name     = 'profile_edit';
         $restriction   = 'field_edit';
         $anonymous     = false;
         break;
-
     case 'search':
         $title_of_form = _AM_YOGURT_PROF_SEARCH;
         $perm_name     = 'profile_search';
         $restriction   = '';
         $anonymous     = true;
         break;
-
     case 'access':
         $title_of_form = _AM_YOGURT_PROF_ACCESS;
         $perm_name     = 'profile_access';
@@ -54,7 +52,7 @@ switch ($op) {
 }
 
 include_once $GLOBALS['xoops']->path('/class/xoopsformloader.php');
-$opform    = new XoopsSimpleForm('', 'opform', 'profile_fieldspermissions.php', 'get');
+$opform    = new XoopsSimpleForm('', 'opform', 'fieldspermissions.php', 'get');
 $op_select = new XoopsFormSelect('', 'op', $op);
 $op_select->setExtra('onchange="document.forms.opform.submit()"');
 $op_select->addOption('visibility', _AM_YOGURT_PROF_VISIBLE);
@@ -66,13 +64,13 @@ $opform->display();
 
 $module_id = $GLOBALS['xoopsModule']->getVar('mid');
 include_once $GLOBALS['xoops']->path('/class/xoopsform/grouppermform.php');
-$form = new XoopsGroupPermForm($title_of_form, $module_id, $perm_name, $perm_desc, 'admin/profile_fieldspermissions.php?op=' . $op, $anonymous);
-if ($op === 'access') {
-    /* @var XoopsMemberHandler $member_handler */
-    $member_handler = xoops_getHandler('member');
-    $glist          = $member_handler->getGroupList();
+$form = new XoopsGroupPermForm($title_of_form, $module_id, $perm_name, $perm_desc, 'admin/fieldspermissions.php?op=' . $op, $anonymous);
+if ('access' === $op) {
+    /* @var XoopsMemberHandler $memberHandler */
+    $memberHandler = xoops_getHandler('member');
+    $glist          = $memberHandler->getGroupList();
     foreach (array_keys($glist) as $i) {
-        if ($i != XOOPS_GROUP_ANONYMOUS) {
+        if (XOOPS_GROUP_ANONYMOUS != $i) {
             $form->addItem($i, $glist[$i]);
         }
     }
@@ -80,14 +78,14 @@ if ($op === 'access') {
     $profile_handler = xoops_getModuleHandler('profile');
     $fields          = $profile_handler->loadFields();
 
-    if ($op !== 'search') {
+    if ('search' !== $op) {
         foreach (array_keys($fields) as $i) {
-            if ($restriction == '' || $fields[$i]->getVar($restriction)) {
+            if ('' == $restriction || $fields[$i]->getVar($restriction)) {
                 $form->addItem($fields[$i]->getVar('field_id'), xoops_substr($fields[$i]->getVar('field_title'), 0, 25));
             }
         }
     } else {
-        $searchable_types = array(
+        $searchable_types = [
             'textbox',
             'select',
             'radio',
@@ -95,7 +93,8 @@ if ($op === 'access') {
             'date',
             'datetime',
             'timezone',
-            'language');
+            'language',
+        ];
         foreach (array_keys($fields) as $i) {
             if (in_array($fields[$i]->getVar('field_type'), $searchable_types)) {
                 $form->addItem($fields[$i]->getVar('field_id'), xoops_substr($fields[$i]->getVar('field_title'), 0, 25));

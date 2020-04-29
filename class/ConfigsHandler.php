@@ -14,20 +14,13 @@ namespace XoopsModules\Yogurt;
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
-
-// Configs.php,v 1
-//  ---------------------------------------------------------------- //
-// Author: Bruno Barthez                                               //
-// ----------------------------------------------------------------- //
-
+ 
 use CriteriaElement;
 use XoopsDatabase;
 use XoopsObject;
@@ -54,17 +47,21 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
      * @param \XoopsDatabase|null              $xoopsDatabase
      * @param \XoopsModules\Yogurt\Helper|null $helper
      */
+
     public function __construct(
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
         /** @var \XoopsModules\Yogurt\Helper $this ->helper */
+
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
             $this->helper = $helper;
         }
+
         $isAdmin = $this->helper->isUserAdmin();
+
         parent::__construct($xoopsDatabase, 'yogurt_configs', Configs::class, 'config_id', 'config_id');
     }
 
@@ -73,14 +70,17 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
      *
      * @return \XoopsObject
      */
+
     public function create($isNew = true)
     {
         $obj = parent::create($isNew);
+
         if ($isNew) {
             $obj->setNew();
         } else {
             $obj->unsetNew();
         }
+
         $obj->helper = $this->helper;
 
         return $obj;
@@ -93,17 +93,22 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
      * @param null $fields
      * @return mixed reference to the {@link Configs} object, FALSE if failed
      */
+
     public function get2(
         $id = null,
         $fields = null
     ) {
         $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_configs') . ' WHERE config_id=' . $id;
+
         if (!$result = $this->db->query($sql)) {
             return false;
         }
+
         $numrows = $this->db->getRowsNum($result);
+
         if (1 === $numrows) {
             $yogurt_configs = new Configs();
+
             $yogurt_configs->assignVars($this->db->fetchArray($result));
 
             return $yogurt_configs;
@@ -120,31 +125,43 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
+
     public function insert2(
         XoopsObject $xoopsObject,
         $force = false
     ) {
         global $xoopsConfig;
+
         if (!$xoopsObject instanceof Configs) {
             return false;
         }
+
         if (!$xoopsObject->isDirty()) {
             return true;
         }
+
         if (!$xoopsObject->cleanVars()) {
             return false;
         }
+
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
+
         $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+
         if ($xoopsObject->isNew()) {
             // addition / modification of a Configs
+
             //            $config_id = null;
+
             $xoopsObject = new Configs();
-            $format      = 'INSERT INTO %s (config_id, config_uid, pictures, audio, videos, groups, notes, friends, profile_contact, profile_general, profile_stats, suspension, backup_password, backup_email, end_suspension)';
-            $format      .= 'VALUES (%u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %s, %s, %s)';
-            $sql         = \sprintf(
+
+            $format = 'INSERT INTO %s (config_id, config_uid, pictures, audio, videos, groups, notes, friends, profile_contact, profile_general, profile_stats, suspension, backup_password, backup_email, end_suspension)';
+
+            $format .= 'VALUES (%u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %s, %s, %s)';
+
+            $sql = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_configs'),
                 $config_id,
@@ -163,12 +180,16 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
                 $this->db->quoteString($backup_email),
                 $this->db->quoteString($end_suspension)
             );
-            $force       = true;
+
+            $force = true;
         } else {
             $format = 'UPDATE %s SET ';
+
             $format .= 'config_id=%u, config_uid=%u, pictures=%u, audio=%u, videos=%u, groups=%u, notes=%u, friends=%u, profile_contact=%u, profile_general=%u, profile_stats=%u, suspension=%u, backup_password=%s, backup_email=%s, end_suspension=%s';
+
             $format .= ' WHERE config_id = %u';
-            $sql    = \sprintf(
+
+            $sql = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_configs'),
                 $config_id,
@@ -189,17 +210,21 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
                 $config_id
             );
         }
+
         if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
         }
+
         if (!$result) {
             return false;
         }
+
         if (empty($config_id)) {
             $config_id = $this->db->getInsertId();
         }
+
         $xoopsObject->assignVar('config_id', $config_id);
 
         return true;
@@ -212,6 +237,7 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
      * @param bool         $force
      * @return bool FALSE if failed.
      */
+
     public function delete(
         XoopsObject $xoopsObject,
         $force = false
@@ -219,16 +245,19 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject instanceof Configs) {
             return false;
         }
+
         $sql = \sprintf(
             'DELETE FROM %s WHERE config_id = %u',
             $this->db->prefix('yogurt_configs'),
             $xoopsObject->getVar('config_id')
         );
+
         if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
         }
+
         if (!$result) {
             return false;
         }
@@ -244,34 +273,47 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
      * @param bool                                 $as_object
      * @return array array of {@link Configs} objects
      */
+
     public function &getObjects(
         ?CriteriaElement $criteriaElement = null,
         $id_as_key = false,
         $as_object = true
     ) {
-        $ret   = [];
+        $ret = [];
+
         $limit = $start = 0;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_configs');
+
+        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_configs');
+
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
+
             if ('' !== $criteriaElement->getSort()) {
                 $sql .= ' ORDER BY ' . $criteriaElement->getSort() . ' ' . $criteriaElement->getOrder();
             }
+
             $limit = $criteriaElement->getLimit();
+
             $start = $criteriaElement->getStart();
         }
+
         $result = $this->db->query($sql, $limit, $start);
+
         if (!$result) {
             return $ret;
         }
+
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $yogurt_configs = new Configs();
+
             $yogurt_configs->assignVars($myrow);
+
             if (!$id_as_key) {
                 $ret[] = &$yogurt_configs;
             } else {
                 $ret[$myrow['config_id']] = &$yogurt_configs;
             }
+
             unset($yogurt_configs);
         }
 
@@ -284,17 +326,22 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} to match
      * @return int count of yogurt_configs
      */
+
     public function getCount(
         ?CriteriaElement $criteriaElement = null
     ) {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_configs');
+
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
         }
+
         $result = $this->db->query($sql);
+
         if (!$result) {
             return 0;
         }
+
         [$count] = $this->db->fetchRow($result);
 
         return (int)$count;
@@ -308,15 +355,18 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
      * @param bool                                 $asObject
      * @return bool FALSE if deletion failed
      */
+
     public function deleteAll(
         ?CriteriaElement $criteriaElement = null,
         $force = true,
         $asObject = false
     ) {
         $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_configs');
+
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
         }
+
         if (!$result = $this->db->query($sql)) {
             return false;
         }

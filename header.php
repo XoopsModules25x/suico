@@ -13,13 +13,11 @@ declare(strict_types=1);
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -41,6 +39,7 @@ $myts = MyTextSanitizer::getInstance();
 
 if (!isset($GLOBALS['xoTheme']) || !is_object($GLOBALS['xoTheme'])) {
     require $GLOBALS['xoops']->path('class/theme.php');
+
     $GLOBALS['xoTheme'] = new xos_opal_Theme();
 }
 
@@ -81,6 +80,7 @@ xoops_loadLanguage('user');
 
 if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
     require $GLOBALS['xoops']->path('class/template.php');
+
     $xoopsTpl = new XoopsTpl();
 }
 
@@ -100,22 +100,28 @@ if (1 === $helper->getConfig('enable_guestaccess')) {
      * If anonym and uid not set then redirect to admins profile
      * Else redirects to own profile
      */
+
     if (empty($xoopsUser)) {
         $isAnonym = 1;
+
         if (isset($_GET['uid'])) {
             $uid_owner = Request::getInt('uid', 0, 'GET');
         } else {
             $uid_owner = 1;
-            $isOwner   = 0;
+
+            $isOwner = 0;
         }
     } else {
         $isAnonym = 0;
+
         if (isset($_GET['uid'])) {
             $uid_owner = Request::getInt('uid', 0, 'GET');
-            $isOwner   = $xoopsUser->getVar('uid') === $uid_owner ? 1 : 0;
+
+            $isOwner = $xoopsUser->getVar('uid') === $uid_owner ? 1 : 0;
         } else {
             $uid_owner = (int)$xoopsUser->getVar('uid');
-            $isOwner   = 1;
+
+            $isOwner = 1;
         }
     }
 } else {
@@ -127,17 +133,21 @@ if (1 === $helper->getConfig('enable_guestaccess')) {
 
     if (empty($xoopsUser)) {
         $isAnonym = 1;
-        if (!stripos($_SERVER['REQUEST_URI'], 'user.php')) {
+
+        if (!mb_stripos($_SERVER['REQUEST_URI'], 'user.php')) {
             $xoopsUser || redirect_header('user.php', 3, _NOPERM);
         }
     } else {
         $isAnonym = 0;
+
         if (isset($_GET['uid'])) {
             $uid_owner = Request::getInt('uid', 0, 'GET');
-            $isOwner   = $xoopsUser->getVar('uid') === $uid_owner ? 1 : 0;
+
+            $isOwner = $xoopsUser->getVar('uid') === $uid_owner ? 1 : 0;
         } else {
             $uid_owner = (int)$xoopsUser->getVar('uid');
-            $isOwner   = 1;
+
+            $isOwner = 1;
         }
     }
 }

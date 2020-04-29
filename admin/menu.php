@@ -13,26 +13,23 @@ declare(strict_types=1);
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsModules\Yogurt;
-use Xmf\Request;
 use Xmf\Module\Admin;
+use XoopsModules\Yogurt;
+use XoopsModules\Yogurt\Helper;
 
 require dirname(__DIR__) . '/preloads/autoloader.php';
 
 $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-/** @var \XoopsModules\Yogurt\Helper $helper */
-$helper = Yogurt\Helper::getInstance();
+$helper = Helper::getInstance();
 $helper->loadLanguage('common');
 $helper->loadLanguage('feedback');
 $helper->loadLanguage('admin');
@@ -127,28 +124,28 @@ $adminmenu[] = [
 
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU17,
-	'link'  => 'admin/profile_user.php',
-	'icon'  => $pathIcon32 . '/users.png',
+    'link'  => 'admin/profile_user.php',
+    'icon'  => $pathIcon32 . '/users.png',
 ];
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU18,
-	'link'  => 'admin/profile_fieldscategory.php',
-	'icon'  => $pathIcon32 . '/category.png',
+    'link'  => 'admin/fieldscategory.php',
+    'icon'  => $pathIcon32 . '/category.png',
 ];
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU19,
-	'link'  => 'admin/profile_fieldslist.php',
-	'icon'  => $pathIcon32 . '/index.png',
+    'link'  => 'admin/fieldslist.php',
+    'icon'  => $pathIcon32 . '/index.png',
 ];
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU20,
-	'link'  => 'admin/profile_registrationstep.php',
-	'icon'  => $pathIcon32 . '/stats.png',
+    'link'  => 'admin/registrationstep.php',
+    'icon'  => $pathIcon32 . '/stats.png',
 ];
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU21,
-	'link'  => 'admin/profile_fieldspermissions.php',
-	'icon'  => $pathIcon32 . '/permissions.png',
+    'link'  => 'admin/fieldspermissions.php',
+    'icon'  => $pathIcon32 . '/permissions.png',
 ];
 
 // Blocks Admin

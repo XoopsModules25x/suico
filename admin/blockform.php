@@ -15,7 +15,6 @@ declare(strict_types=1);
  * @link            https://xoops.org
  * @license         GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  */
-
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
 $moduleDirName      = basename(dirname(__DIR__));
@@ -68,6 +67,7 @@ $form->addElement($mod_select);
 $form->addElement(new XoopsFormText(_AM_TITLE, 'btitle', 50, 255, $block['title']), false);
 if ($block['is_custom']) {
     $textarea = new XoopsFormDhtmlTextArea(_AM_SYSTEM_BLOCKS_CONTENT, 'bcontent', $block['content'], 15, 70);
+
     $textarea->setDescription(
         '<span style="font-size:x-small;font-weight:bold;">' . _AM_SYSTEM_BLOCKS_USEFULTAGS . '</span><br><span style="font-size:x-small;font-weight:normal;">' . sprintf(
             _AM_BLOCKTAG1,
@@ -75,8 +75,11 @@ if ($block['is_custom']) {
             XOOPS_URL . '/'
         ) . '</span>'
     );
+
     $form->addElement($textarea, true);
+
     $ctype_select = new XoopsFormSelect(_AM_SYSTEM_BLOCKS_CTYPE, 'bctype', $block['ctype']);
+
     $ctype_select->addOptionArray(
         [
             'H' => _AM_SYSTEM_BLOCKS_HTML,
@@ -85,12 +88,16 @@ if ($block['is_custom']) {
             'T' => _AM_SYSTEM_BLOCKS_AFNOSMILE,
         ]
     );
+
     $form->addElement($ctype_select);
 } else {
     if ('' !== $block['template']) {
         /** @var \XoopsTplfileHandler $tplfileHandler */
+
         $tplfileHandler = xoops_getHandler('tplfile');
-        $btemplate      = $tplfileHandler->find($GLOBALS['xoopsConfig']['template_set'], 'block', $block['bid']);
+
+        $btemplate = $tplfileHandler->find($GLOBALS['xoopsConfig']['template_set'], 'block', $block['bid']);
+
         if (count($btemplate) > 0) {
             $form->addElement(
                 new XoopsFormLabel(
@@ -101,6 +108,7 @@ if ($block['is_custom']) {
             );
         } else {
             $btemplate2 = $tplfileHandler->find('default', 'block', $block['bid']);
+
             if (count($btemplate2) > 0) {
                 $form->addElement(
                     new XoopsFormLabel(
@@ -112,6 +120,7 @@ if ($block['is_custom']) {
             }
         }
     }
+
     if (false !== $block['edit_form']) {
         $form->addElement(new XoopsFormLabel(_AM_SYSTEM_BLOCKS_OPTIONS, $block['edit_form']));
     }

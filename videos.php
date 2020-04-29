@@ -13,13 +13,11 @@ declare(strict_types=1);
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -62,7 +60,7 @@ if (is_array($videosArray)) {
 $xoopsTpl->assign('lang_selectmainvideo', _MD_YOGURT_SELECTMAINVIDEO);
 
 if (isset($nbSections['nbVideos']) && $nbSections['nbVideos'] > 0) {
-    $pageNav = $controller->VideosNavBar($nbSections['nbVideos'], $helper->getConfig('videosperpage'), $start, 2);
+    $pageNav = $controller->videosNavBar($nbSections['nbVideos'], $helper->getConfig('videosperpage'), $start, 2);
 }
 //form actions
 $xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);

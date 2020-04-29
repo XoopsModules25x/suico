@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Extended User Profile
  *
@@ -16,7 +17,6 @@
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
-
 $xoopsOption['pagetype'] = 'user';
 include __DIR__ . '/header.php';
 
@@ -27,9 +27,9 @@ if (!empty($_GET['id']) && !empty($_GET['actkey'])) {
     if (empty($id)) {
         redirect_header(XOOPS_URL, 1, '');
     }
-    /* @var XoopsMemberHandler $member_handler */
-    $member_handler = xoops_getHandler('member');
-    $thisuser       = $member_handler->getUser($id);
+    /* @var XoopsMemberHandler $memberHandler */
+    $memberHandler = xoops_getHandler('member');
+    $thisuser       = $memberHandler->getUser($id);
     if (!is_object($thisuser)) {
         redirect_header(XOOPS_URL, 1, '');
     }
@@ -39,13 +39,13 @@ if (!empty($_GET['id']) && !empty($_GET['actkey'])) {
         if ($thisuser->getVar('level') > 0) {
             redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/index.php', 5, _US_ACONTACT, false);
         } else {
-            if (false !== $member_handler->activateUser($thisuser)) {
+            if (false !== $memberHandler->activateUser($thisuser)) {
                 $xoopsPreload = XoopsPreload::getInstance();
                 $xoopsPreload->triggerEvent('core.behavior.user.activate', $thisuser);
                 /* @var XoopsConfigHandler $config_handler */
                 $config_handler             = xoops_getHandler('config');
                 $GLOBALS['xoopsConfigUser'] = $config_handler->getConfigsByCat(XOOPS_CONF_USER);
-                if ($GLOBALS['xoopsConfigUser']['activation_type'] == 2) {
+                if (2 == $GLOBALS['xoopsConfigUser']['activation_type']) {
                     $myts        = MyTextSanitizer::getInstance();
                     $xoopsMailer = xoops_getMailer();
                     $xoopsMailer->useMail();
@@ -73,12 +73,12 @@ if (!empty($_GET['id']) && !empty($_GET['actkey'])) {
         }
     }
     // Not implemented yet: re-send activiation code
-} elseif (!empty($_REQUEST['email']) && $xoopsConfigUser['activation_type'] != 0) {
-    $myts           = MyTextSanitizer::getInstance();
-    /* @var XoopsMemberHandler $member_handler */
-    $member_handler = xoops_getHandler('member');
-    $getuser        = $member_handler->getUsers(new Criteria('email', $myts->addSlashes(trim($_REQUEST['email']))));
-    if (count($getuser) == 0) {
+} elseif (!empty($_REQUEST['email']) && 0 != $xoopsConfigUser['activation_type']) {
+    $myts = MyTextSanitizer::getInstance();
+    /* @var XoopsMemberHandler $memberHandler */
+    $memberHandler = xoops_getHandler('member');
+    $getuser        = $memberHandler->getUsers(new Criteria('email', $myts->addSlashes(trim($_REQUEST['email']))));
+    if (0 == count($getuser)) {
         redirect_header(XOOPS_URL, 2, _US_SORRYNOTFOUND);
     }
     if ($getuser[0]->isActive()) {
@@ -107,5 +107,5 @@ if (!empty($_GET['id']) && !empty($_GET['actkey'])) {
     $form->display();
 }
 
-$xoBreadcrumbs[] = array('title' => _MD_YOGURT_REGISTER);
+$xoBreadcrumbs[] = ['title' => _MD_YOGURT_REGISTER];
 include __DIR__ . '/footer.php';

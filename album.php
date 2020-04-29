@@ -13,15 +13,15 @@ declare(strict_types=1);
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsModules\Yogurt;
 use Xmf\Request;
+use XoopsModules\Yogurt;
 
 const NBPHOTOS = 'nbPhotos';
 
@@ -91,8 +91,11 @@ if (isset($nbSections[NBPHOTOS]) && 0 === $nbSections[NBPHOTOS]) {
         $pictures_array[$i]['caption']      = $picture->getVar('caption', 's');
         $pictures_array[$i]['cod_img']      = $picture->getVar('cod_img', 's');
         $pictures_array[$i]['private']      = $picture->getVar('private', 's');
-        $pictures_array[$i]['date_created'] = formatTimeStamp($picture->getVar('date_created', 's'));
-        $pictures_array[$i]['date_updated'] = formatTimeStamp($picture->getVar('date_updated', 's'));
+
+        $pictures_array[$i]['date_created'] = formatTimestamp($picture->getVar('date_created', 's'));
+
+        $pictures_array[$i]['date_updated'] = formatTimestamp($picture->getVar('date_updated', 's'));
+
         $xoopsTpl->assign('pics_array', $pictures_array);
         $i++;
     }
