@@ -54,7 +54,7 @@ if ('register' === $op) {
     include $GLOBALS['xoops']->path('header.php');
 
     if (!empty($_GET['op']) && in_array($_GET['op'], ['actv', 'activate'])) {
-        header('location: ./activate.php' . (empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING']));
+        header('location: ./activate.php' . (Request::getString('QUERY_STRING', '', 'SERVER')));
         exit();
     }
 

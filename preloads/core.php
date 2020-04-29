@@ -11,6 +11,7 @@ declare(strict_types=1);
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
 /**
  * @category        Module
  * @package         yogurt
@@ -18,6 +19,8 @@ declare(strict_types=1);
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
+
+use Xmf\Request;
 
 /**
  * Class YogurtCorePreload
@@ -39,7 +42,7 @@ class YogurtCorePreload extends XoopsPreloadItem
      */
     public static function eventCoreEdituserStart($args)
     {
-        header('location: ./modules/yogurt/edituser.php' . (empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING']));
+        header('location: ./modules/yogurt/edituser.php' . (Request::getString('QUERY_STRING', '', 'SERVER')));
         exit();
     }
 
@@ -48,7 +51,7 @@ class YogurtCorePreload extends XoopsPreloadItem
      */
     public static function eventCoreRegisterStart($args)
     {
-        header('location: ./modules/yogurt/user.php?op=register' . (empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING']));
+        header('location: ./modules/yogurt/user.php?op=register' . (Request::getString('QUERY_STRING', '', 'SERVER')));
         exit();
     }
 
@@ -57,7 +60,7 @@ class YogurtCorePreload extends XoopsPreloadItem
      */
     public static function eventCoreUserinfoStart($args)
     {
-        header('location: ./modules/yogurt/index.php' . (empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING']));
+        header('location: ./modules/yogurt/index.php' . (Request::getString('QUERY_STRING', '', 'SERVER')));
         exit();
     }
 }
