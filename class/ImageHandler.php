@@ -134,8 +134,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
     /**
      * insert a new Image in the database
      *
-     * @param \XoopsObject $xoopsObject   reference to the {@link Image}
-     *                                    object
+     * @param \XoopsObject $xoopsObject   reference to the {@link Image} object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
@@ -173,7 +172,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
                 \time(),//$now,
                 \time(),//$now,
                 $this->db->quoteString($uid_owner),
-                $this->db->quoteString($url)
+                $this->db->quoteString($filename)
             );
             $force       = true;
         } else {
@@ -189,7 +188,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
                 $xoopsObject->getVar('date_created'), // $now,
                 $xoopsObject->getVar('date_updated'), // $now,
                 $this->db->quoteString($uid_owner),
-                $this->db->quoteString($url),
+                $this->db->quoteString($filename),
                 $this->db->quoteString($private),
                 $cod_img
             );
@@ -379,7 +378,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $field_caption = new XoopsFormText($caption, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
         $buttonSend    = new XoopsFormButton('', 'submit_button', \_MD_YOGURT_SUBMIT, 'submit');
-        $field_warning = new XoopsFormLabel("<img src='" . $filename . "' alt='sssss'>");
+        $field_warning = new XoopsFormLabel("<img src='" . $filename . "' alt='thumb'>");
         $field_cod_img = new XoopsFormHidden('cod_img', $cod_img);
         $field_marker  = new XoopsFormHidden('marker', 1);
         $form->addElement($field_warning);

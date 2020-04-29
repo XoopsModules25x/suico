@@ -160,19 +160,20 @@ define('_MD_YOGURT_VIDEOSAVED', 'Your video was saved');
 ############################## GROUPS ########################################################
 //class/Groups.php
 define('_MD_YOGURT_SUBMIT_GROUP', 'Create a new group');
-define('_MD_YOGURT_UPLOADGROUP', 'Save Group'); //also present in many ther groups related
-define(
-    '_MD_YOGURT_GROUP_IMAGE',
-    'Group Image'
-); //also present in many ther groups related
+define('_MD_YOGURT_UPLOADGROUP', 'Save Group'); //also present in many groups related areas
+define(    '_MD_YOGURT_GROUP_IMAGE',    'Group Image'); //also present in many groups related areas
+
+define('_MD_YOGURT_GROUP_SAVED', 'Your Group was saved');
+define('_MD_YOGURT_GROUP_SAVED_ERROR',    'Error : Unfortunately, We could not save your group. Please try again. ');
+
 define(
     '_MD_YOGURT_GROUP_TITLE',
     'Title'
-); //also present in many ther groups related
+); //also present in many groups related areas
 define(
     '_MD_YOGURT_GROUP_DESC',
     'Description'
-); //also present in many ther groups related
+); //also present in many groups related areas
 define(
     '_MD_YOGURTCREATEYOURGROUP',
     'Create your own Group'
@@ -293,7 +294,7 @@ define('_MD_YOGURT_SELECTMAINVIDEO', 'Then you can select a video to feature in 
 define('_MD_YOGURT_NOAVATARYET', 'No avatar yet');
 define('_MD_YOGURT_NOMAINVIDEOYET', 'No featured video yet');
 define('_MD_YOGURT_MYPROFILE', 'My Profile');
-define('_MD_YOGURT_YOUHAVEXFRIENDREQUESTS', 'You have %u requests for friendship.');
+define('_MD_YOGURT_YOU_HAVE_X_FRIENDREQUESTS', 'You have %u requests for friendship.');
 define('_MD_YOGURT_CONTACTINFO', 'Contact Info');
 define('_MD_YOGURT_SUSPENDUSER', 'Suspend User');
 define('_MD_YOGURT_SUSPEND', 'Suspend');

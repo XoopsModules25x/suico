@@ -54,9 +54,14 @@ if (11 === mb_strlen($url)) {
     $position_of_code = mb_strpos($url, 'v=');
     $code             = mb_substr($url, $position_of_code + 2, 11);
 }
-
 $newvideo->setVar('youtube_code', $code);
-if ($videoFactory->insert2($newvideo)) {
+$newvideo->setVar('main_video', Request::getInt('main_video', 0, 'POST'));
+$newvideo->setVar('date_created', \time());
+$newvideo->setVar('date_updated', \time());
+
+$videoFactory->insert($newvideo);
+
+if ($videoFactory->insert($newvideo)) {
     $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
     $extra_tags['X_OWNER_UID']  = (int)$xoopsUser->getVar('uid');
     /** @var \XoopsNotificationHandler $notificationHandler */

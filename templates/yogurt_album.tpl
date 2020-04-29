@@ -40,7 +40,6 @@
                                     <div class="form-group">
                                         <input type='submit' class='formButton btn btn-primary' name='submit_button' id='submit_button' value='<{$lang_uploadpicture}>'>
                                     </div>
-
                                 </form>
                             </div>
                         <{/if}>

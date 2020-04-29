@@ -583,11 +583,8 @@ var elestyle = xoopsGetElementById(img).style;
         $helper = Helper::getInstance();
 
         $pictwidth = $helper->getConfig('resized_width');
-
         $pictheight = $helper->getConfig('resized_height');
-
         $thumbwidth = $helper->getConfig('thumb_width');
-
         $thumbheight = $helper->getConfig('thumb_height');
 
         if (1 === $change_img) {
@@ -627,58 +624,36 @@ var elestyle = xoopsGetElementById(img).style;
                 // now let s create a new object picture and set its variables
 
                 $savedFilename = $uploader->getSavedFileName();
-
                 $group->setVar('group_img', $savedFilename);
-
                 $imageMimetype = $uploader->getMediaType();
-
                 $group->setVar('group_img', $savedFilename);
-
                 $maxWidth_grouplogo = Helper::getInstance()->getConfig('groupslogo_width');
-
                 $maxHeight_grouplogo = Helper::getInstance()->getConfig('groupslogo_height');
 
                 $resizer = new Common\Resizer();
-
                 $resizer->sourceFile = $uploadDir . $savedFilename;
-
                 $resizer->endFile = $uploadDir . $savedFilename;
-
                 $resizer->imageMimetype = $imageMimetype;
-
                 $resizer->maxWidth = $maxWidth_grouplogo;
-
                 $resizer->maxHeight = $maxHeight_grouplogo;
-
                 $result = $resizer->resizeImage();
 
                 $maxWidth_grouplogo = Helper::getInstance()->getConfig('thumb_width');
-
                 $maxHeight_grouplogo = Helper::getInstance()->getConfig('thumb_height');
-
                 $resizer->endFile = $uploadDir . '/thumb_' . $savedFilename;
-
                 $resizer->imageMimetype = $imageMimetype;
-
                 $resizer->maxWidth = $maxWidth_grouplogo;
-
                 $resizer->maxHeight = $maxHeight_grouplogo;
-
                 $result = $resizer->resizeImage();
 
                 $maxWidth_grouplogo = Helper::getInstance()->getConfig('resized_width');
-
                 $maxHeight_grouplogo = Helper::getInstance()->getConfig('resized_height');
-
                 $resizer->endFile = $uploadDir . '/resized_' . $savedFilename;
-
                 $resizer->imageMimetype = $imageMimetype;
-
                 $resizer->maxWidth = $maxWidth_grouplogo;
-
                 $resizer->maxHeight = $maxHeight_grouplogo;
-
                 $result = $resizer->resizeImage();
+
             } else {
                 echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
 
@@ -687,11 +662,8 @@ var elestyle = xoopsGetElementById(img).style;
         }
 
         $group->setVar('group_title', $group_title);
-
         $group->setVar('group_desc', $group_desc);
-
         $group->setVar('owner_uid', $uid);
-
         $this->insert($group);
 
         return true;

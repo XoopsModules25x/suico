@@ -35,7 +35,7 @@ require __DIR__ . '/header.php';
 //require_once __DIR__ . '/class/Audio.php';
 
 /**
- * Factory of pictures created
+ * Audio Factory created
  */
 $audioFactory = new Yogurt\AudioHandler($xoopsDB);
 
@@ -43,8 +43,9 @@ $myts = MyTextSanitizer::getInstance();
 /**
  * Getting the title
  */
-$title  = $myts->displayTarea(Request::getString('title', '', 'POST'), 0, 1, 1, 1, 1);
-$author = $myts->displayTarea(Request::getString('author', '', 'POST'), 0, 1, 1, 1, 1);
+$title  = Request::getString('title', '', 'POST');
+$author = Request::getString('author', '', 'POST');
+$description = Request::getText('description', '', 'POST');
 
 /**
  * Getting parameters defined in admin side
@@ -64,13 +65,14 @@ if ('sel_audio' === (Request::getArray('xoops_upload_file', '', 'POST')[0])) {
     }
 
     /**
-     * Try to upload picture resize it insert in database and then redirect to index
+     * Try to upload the audio file, insert in database, and then redirect to index
      */
     if ($audioFactory->receiveAudio(
         $title,
         $path_upload,
         $author,
-        $maxfilebytes
+        $maxfilebytes,
+        $description
     )) {
         //$extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
         //                     $extra_tags['X_OWNER_UID'] = $xoopsUser->getVar('uid');

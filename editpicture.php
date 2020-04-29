@@ -77,10 +77,10 @@ $array_pict = $imageFactory->getObjects(
 if ($array_pict) {
     $title   = $array_pict[0]->getVar('title');
     $caption = $array_pict[0]->getVar('caption');
-    $url     = $array_pict[0]->getVar('filename');
+    $filename     = $array_pict[0]->getVar('filename');
 }
 //$url = $xoopsModuleConfig['link_path_upload']."/thumb_".$url;
-$url = XOOPS_URL . '/uploads/yogurt/images/thumb_' . $url;
+$url = XOOPS_URL . '/uploads/yogurt/images/thumb_' . $filename;
 $imageFactory->renderFormEdit($title, $caption, $cod_img, $url);
 
 require dirname(__DIR__, 2) . '/footer.php';

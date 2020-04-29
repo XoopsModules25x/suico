@@ -149,6 +149,15 @@ class AudioHandler extends XoopsPersistableObjectHandler
             ${$k} = $v;
         }
 
+        $audio_id = Request::getString('audio_id','', 'POST');
+        $uid_owner = Request::getInt('audio_id',0, 'POST');
+        $title = Request::getString('title','', 'POST');
+        $author = Request::getString('author','', 'POST');
+        $description = Request::getText('description','', 'POST');
+        $filename = Request::getString('filename','', 'POST');
+        $date_created = Request::getString('date_created',\time(), 'POST');
+        $date_updated = Request::getString('date_updated',\time(), 'POST');
+
         //        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
 
         if ($xoopsObject->isNew()) {
@@ -169,8 +178,8 @@ class AudioHandler extends XoopsPersistableObjectHandler
                 $this->db->quoteString($description),
                 $this->db->quoteString($filename),
                 $uid_owner,
-                \time(),
-                \time()
+                $date_created,
+                $date_updated
             );
 
             $force = true;
@@ -187,10 +196,10 @@ class AudioHandler extends XoopsPersistableObjectHandler
                 $audio_id,
                 $this->db->quoteString($title),
                 $this->db->quoteString($author),
-                $this->db->quoteString($url),
+                $this->db->quoteString($filename),
                 $uid_owner,
-                $now,
-                $now,
+                $date_created,
+                $date_updated,
                 $audio_id
             );
         }
@@ -372,7 +381,8 @@ class AudioHandler extends XoopsPersistableObjectHandler
         $title,
         $path_upload,
         $author,
-        $maxfilebytes
+        $maxfilebytes,
+        $description
     ) {
         global $xoopsUser, $xoopsDB, $_POST, $_FILES;
 
@@ -426,24 +436,15 @@ class AudioHandler extends XoopsPersistableObjectHandler
             //echo "passei aqui";
 
             $audio = $this->create();
-
-            $url = $uploader->getSavedFileName();
-
-            $audio->setVar('filename', $url);
-
+            $audio->setVar('uid_owner', $xoopsUser->getVar('uid'));
             $audio->setVar('title', $title);
-
             $audio->setVar('author', $author);
-
-            $uid = $xoopsUser->getVar('uid');
-
-            $audio->setVar('uid_owner', $uid);
-
+            $audio->setVar('description', $description);
+            $audio->setVar('filename', $uploader->getSavedFileName()
+            );
             $audio->setVar('date_created', \time());
-
             $audio->setVar('date_updated', \time());
-
-            $this->insert2($audio);
+            $this->insert($audio);
 
             $saved_destination = $uploader->getSavedDestination();
             //print_r($_FILES);

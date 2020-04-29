@@ -82,7 +82,7 @@ $navegacao     = $navigationBar->renderImageNav(2);
 
 //requests to become friend
 if (1 === $friendrequest) {
-    $xoopsTpl->assign('lang_youhavexfriendrequests', sprintf(_MD_YOGURT_YOUHAVEXFRIENDREQUESTS, $countFriendrequest));
+    $xoopsTpl->assign('lang_you_have_x_friendrequests', sprintf(_MD_YOGURT_YOU_HAVE_X_FRIENDREQUESTS, $countFriendrequest));
     $xoopsTpl->assign('friendrequester_uid', $friendrequester_uid);
     $xoopsTpl->assign('friendrequester_uname', $friendrequester_uname);
     $xoopsTpl->assign('friendrequester_avatar', $friendrequester_avatar);

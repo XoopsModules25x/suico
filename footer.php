@@ -56,6 +56,7 @@ if (!mb_stripos($_SERVER['REQUEST_URI'], 'memberslist.php')) {
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js');
 //}
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
+//$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/crud.js');
 
 if (mb_stripos($_SERVER['REQUEST_URI'], 'memberslist.php')) {
     if ('datatables' == $xoopsModuleConfig['memberslisttemplate']) {
@@ -221,7 +222,7 @@ $xoopsTpl->assign('allow_fanssevaluation', $helper->getConfig('allow_fanssevalua
 
 //request to become friend
 if (1 === $friendrequest) {
-    $xoopsTpl->assign('lang_youhavexfriendrequests', sprintf(_MD_YOGURT_YOUHAVEXFRIENDREQUESTS, $countFriendrequests));
+    $xoopsTpl->assign('lang_you_have_x_friendrequests', sprintf(_MD_YOGURT_YOU_HAVE_X_FRIENDREQUESTS, $countFriendrequests));
     $xoopsTpl->assign('requester_uid', $friendrequester_uid);
     $xoopsTpl->assign('requester_uname', $friendrequester_uname);
     $xoopsTpl->assign('requester_avatar', $friendrequester_avatar);

@@ -43,7 +43,7 @@ if (!is_object($GLOBALS['xoopsUser'])) {
 }
 
 $myts = MyTextSanitizer::getInstance();
-$op   = Request::getCmd('op', editprofile);
+$op   = Request::getCmd('op', 'editprofile');
 /* @var XoopsConfigHandler $configHandler */
 $configHandler             = xoops_getHandler('config');
 $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);

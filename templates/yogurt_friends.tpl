@@ -10,7 +10,7 @@
                         <{if $allow_friends !=-1 && $friendrequest==1 && $isOwner==1 && $isFriend==0}>
                         <!-- if not owner and not friend -->
                         <div class="alert alert-warning">
-                            <h5><{$lang_youhavexfriendrequests}></h5>
+                            <h5><{$lang_you_have_x_friendrequests}></h5>
                             <img class="rounded-circle float-left p-1" height="60" width="60" src="<{$xoops_url}>/uploads/<{$friendrequester_avatar}>">
                             <form action="makefriends.php" method="post">
                                 <{$lang_askingfriend}>

@@ -305,8 +305,8 @@ if ($xoopsUser) {
         $newFriendrequest          = $controller->friendrequestFactory->getObjects($criteria_uidfriendrequest);
         if ($newFriendrequest) {
             $countFriendrequest     = count($newFriendrequest);
-            $friendrequesterHandler = xoops_getHandler('member');
-            $friendrequester        = $friendrequesterHandler->getUser($newFriendrequest[0]->getVar('friendrequester_uid'));
+            $memberHandler = xoops_getHandler('member');
+            $friendrequester        = $memberHandler->getUser($newFriendrequest[0]->getVar('friendrequester_uid'));
             $friendrequester_uid    = $friendrequester->getVar('uid');
             $friendrequester_uname  = $friendrequester->getVar('uname');
             $friendrequester_avatar = $friendrequester->getVar('user_avatar');
@@ -317,7 +317,7 @@ if ($xoopsUser) {
 
     //requests to become friend
     if (1 === $friendrequest) {
-        $xoopsTpl->assign('lang_youhavexfriendrequests', sprintf(_MD_YOGURT_YOUHAVEXFRIENDREQUESTS, $countFriendrequest));
+        $xoopsTpl->assign('lang_you_have_x_friendrequests', sprintf(_MD_YOGURT_YOU_HAVE_X_FRIENDREQUESTS, $countFriendrequest));
         $xoopsTpl->assign('friendrequester_uid', $friendrequester_uid);
         $xoopsTpl->assign('friendrequester_uname', $friendrequester_uname);
         $xoopsTpl->assign('friendrequester_avatar', $friendrequester_avatar);
