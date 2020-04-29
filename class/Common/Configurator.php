@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace XoopsModules\Yogurt\Common;
 
@@ -13,13 +15,11 @@ namespace XoopsModules\Yogurt\Common;
  */
 
 /**
- * Configurator Class
- *
- * @copyright   XOOPS Project (https://xoops.org)
- * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
- * @author      XOOPS Development Team
- * @package     Publisher
- * @since       1.05
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 /**
@@ -54,29 +54,45 @@ class Configurator
     /**
      * Configurator constructor.
      */
+
     public function __construct()
     {
         //        $moduleDirName      = basename(dirname(dirname(__DIR__)));
+
         //        $moduleDirNameUpper = mb_strtoupper($moduleDirName);
+
         //        require dirname(dirname(__DIR__)) . '/config/config.php';
+
         //        $config = getConfig();
 
         $config = include \dirname(__DIR__, 2) . '/config/config.php';
 
-        $this->name            = $config->name;
-        $this->paths           = $config->paths;
-        $this->uploadFolders   = $config->uploadFolders;
-        $this->copyBlankFiles  = $config->copyBlankFiles;
+        $this->name = $config->name;
+
+        $this->paths = $config->paths;
+
+        $this->uploadFolders = $config->uploadFolders;
+
+        $this->copyBlankFiles = $config->copyBlankFiles;
+
         $this->copyTestFolders = $config->copyTestFolders;
+
         $this->templateFolders = $config->templateFolders;
-        $this->oldFiles        = $config->oldFiles;
-        $this->oldFolders      = $config->oldFolders;
-        $this->renameTables    = $config->renameTables;
-        $this->renameColumns   = $config->renameColumns;
-        $this->moduleStats     = $config->moduleStats;
+
+        $this->oldFiles = $config->oldFiles;
+
+        $this->oldFolders = $config->oldFolders;
+
+        $this->renameTables = $config->renameTables;
+
+        $this->renameColumns = $config->renameColumns;
+
+        $this->moduleStats = $config->moduleStats;
+
         //        $this->modCopyright    = $config->modCopyright;
 
         $this->icons = include \dirname(__DIR__, 2) . '/config/icons.php';
+
         $this->paths = include \dirname(__DIR__, 2) . '/config/paths.php';
     }
 }

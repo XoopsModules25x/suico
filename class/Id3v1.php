@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
@@ -54,11 +56,13 @@ class Id3v1
     /**
      * Represents Id3v1.0
      */
+
     public const ID3V1_0 = 'ID3V1_0';
 
     /**
      * Represents Id3v1.1
      */
+
     public const ID3V1_1 = 'ID3V1_1';
 
     /**
@@ -82,6 +86,7 @@ class Id3v1
      * @see setGenre()
      * @see setGenreId()
      */
+
     protected $_tags = [];
 
     /**
@@ -89,6 +94,7 @@ class Id3v1
      *
      * @see __construct()
      */
+
     protected $_stream = null;
 
     /**
@@ -99,6 +105,7 @@ class Id3v1
      * @see setId3v1Version()
      * @see getId3v1Version()
      */
+
     protected $_version = null;
 
     /**
@@ -106,6 +113,7 @@ class Id3v1
      *
      * @see __construct()
      */
+
     protected $_readOnly = false;
 
     /**
@@ -116,6 +124,7 @@ class Id3v1
      * @see  getGenreNameByid()
      * @see  getGenreIdByName()
      */
+
     protected static $_genres = [
         'Blues',
         'Classic Rock',
@@ -255,6 +264,7 @@ class Id3v1
      * @param bool $readOnly
      * @see $_tags
      */
+
     public function __construct(
         $filename,
         $readOnly = false
@@ -282,6 +292,7 @@ class Id3v1
         }
 
         \fseek($this->_stream, -128, \SEEK_END);
+
         $rawTag = \fread($this->_stream, 128);
 
         if ($rawTag[125] === \chr(0) && $rawTag[126] !== \chr(0)) {
@@ -323,6 +334,7 @@ class Id3v1
      * @return mixed Depends on tag, which will be returned
      * @throws \Exception
      */
+
     public function __get(
         $name
     ) {
@@ -364,6 +376,7 @@ class Id3v1
      * @return mixed Depends on tag
      * @throws \Exception
      */
+
     public function __set(
         $name,
         $value
@@ -402,6 +415,7 @@ class Id3v1
      *
      * @return string
      */
+
     public function __toString()
     {
         $returnedTags = [];
@@ -417,6 +431,7 @@ class Id3v1
 
             if ('genre' === $tagKey) {
                 $returnedTags[] = self::getGenreNameById($tagVal);
+
                 continue;
             }
 
@@ -433,11 +448,13 @@ class Id3v1
      *
      * @return string
      */
+
     public function getTitle()
     {
         if (!empty($this->_tags['title'])) {
             return $this->_tags['title'];
         }
+
         return null;
     }
 
@@ -446,11 +463,13 @@ class Id3v1
      *
      * @return string
      */
+
     public function getArtist()
     {
         if (!empty($this->_tags['artists'])) {
             return $this->_tags['artist'];
         }
+
         return null;
     }
 
@@ -459,11 +478,13 @@ class Id3v1
      *
      * @return string
      */
+
     public function getAlbum()
     {
         if (!empty($this->_tags['album'])) {
             return $this->_tags['album'];
         }
+
         return null;
     }
 
@@ -472,9 +493,10 @@ class Id3v1
      *
      * @return string
      */
+
     public function getComment()
     {
-        if ($this->_version === self::ID3V1_1) {
+        if (self::ID3V1_1 === $this->_version) {
             return mb_substr($this->_tags['comment'], 0, 28);
         }
 
@@ -487,6 +509,7 @@ class Id3v1
      * @return string
      * @uses getGenreNameById()
      */
+
     public function getGenre()
     {
         return self::getGenreNameById($this->_tags['genre']);
@@ -497,6 +520,7 @@ class Id3v1
      *
      * @return int
      */
+
     public function getGenreId()
     {
         return $this->_tags['genre'];
@@ -507,11 +531,13 @@ class Id3v1
      *
      * @return int
      */
+
     public function getYear()
     {
         if (!empty($this->_tags['year'])) {
             return (int)$this->_tags['year'];
         }
+
         return null;
     }
 
@@ -520,9 +546,10 @@ class Id3v1
      *
      * @return mixed If there is no track false will be returned, else the track
      */
+
     public function getTrack()
     {
-        if ($this->_version === self::ID3V1_0 || !isset($this->_tags['track'])) {
+        if (self::ID3V1_0 === $this->_version || !isset($this->_tags['track'])) {
             return false;
         }
 
@@ -536,6 +563,7 @@ class Id3v1
      * @see self::ID3V1_1
      * @see self::ID3V1_0
      */
+
     public function getId3v1Version()
     {
         return \constant('self::' . $this->_version);
@@ -550,6 +578,7 @@ class Id3v1
      * @see self::ID3V1_1
      * @see self::ID3V1_0
      */
+
     public function setId3v1Version(
         $version
     ) {
@@ -581,6 +610,7 @@ class Id3v1
      * @throws \Exception
      * @see $_tags
      */
+
     public function setTitle(
         $title
     ) {
@@ -608,6 +638,7 @@ class Id3v1
      * @throws \Exception
      * @see $_tags
      */
+
     public function setArtist(
         $artist
     ) {
@@ -635,6 +666,7 @@ class Id3v1
      * @throws \Exception
      * @see $_tags
      */
+
     public function setAlbum(
         $album
     ) {
@@ -664,6 +696,7 @@ class Id3v1
      * @throws \Exception
      * @see $_tags
      */
+
     public function setComment(
         $comment
     ) {
@@ -690,6 +723,7 @@ class Id3v1
      * @throws \Exception
      * @see $_tags
      */
+
     public function setGenre(
         $genre
     ) {
@@ -716,6 +750,7 @@ class Id3v1
      * @throws \Exception
      * @see $_tags
      */
+
     public function setYear(
         $year
     ) {
@@ -746,6 +781,7 @@ class Id3v1
      * @see setId3v1Version()
      * @see getId3v1Version()
      */
+
     public function setTrack(
         $track
     ) {
@@ -755,7 +791,8 @@ class Id3v1
 
         if (\is_int($track) && 0 !== $track) {
             $this->_tags['track'] = $track;
-            $this->_version       = self::ID3V1_1;
+
+            $this->_version = self::ID3V1_1;
         } else {
             throw new RuntimeException('Track type invalid or zero');
         }
@@ -771,6 +808,7 @@ class Id3v1
      * @return Id3v1 Implements fluent interface
      * @see $_tags
      */
+
     public function clearAllTags()
     {
         if ($this->_readOnly) {
@@ -778,13 +816,20 @@ class Id3v1
         }
 
         $this->_tags['marking'] = 'TAG';
-        $this->_tags['title']   = '';
-        $this->_tags['artist']  = '';
-        $this->_tags['album']   = '';
-        $this->_tags['year']    = null;
+
+        $this->_tags['title'] = '';
+
+        $this->_tags['artist'] = '';
+
+        $this->_tags['album'] = '';
+
+        $this->_tags['year'] = null;
+
         $this->_tags['comment'] = '';
-        $this->_tags['track']   = null;
-        $this->_tags['genre']   = 255;
+
+        $this->_tags['track'] = null;
+
+        $this->_tags['genre'] = 255;
 
         return $this;
     }
@@ -796,6 +841,7 @@ class Id3v1
      * @return int
      * @see $_genres
      */
+
     public static function getGenreIdByName(
         $genreName
     ) {
@@ -815,6 +861,7 @@ class Id3v1
      * @return string|bool
      * @see $_genres
      */
+
     public static function getGenreNameById(
         $genreId
     ) {
@@ -827,6 +874,7 @@ class Id3v1
      * @return array
      * @see $_genres
      */
+
     public static function getGenreList()
     {
         return self::$_genres;
@@ -849,6 +897,7 @@ class Id3v1
      * @see setYear()
      * @see setTrack()
      */
+
     public function save()
     {
         if ($this->_readOnly) {
@@ -863,7 +912,7 @@ class Id3v1
 
         $newTag = '';
 
-        if ($this->_version === self::ID3V1_0) {
+        if (self::ID3V1_0 === $this->_version) {
             $newTag = \pack(
                 'a3a30a30a30a4a30C1',
                 'TAG',

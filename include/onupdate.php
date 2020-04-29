@@ -1,28 +1,30 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
- * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code
- * which is considered copyrighted (c) material of the original comment or credit authors.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- */
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
 
 /**
- * @copyright    {@link https://xoops.org/ XOOPS Project}
- * @license      {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
- * @package
- * @since
- * @author       XOOPS Development Team
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use XoopsModules\Yogurt;
 use XoopsModules\Yogurt\Common\Configurator;
 use XoopsModules\Yogurt\Common\Migrate;
 
-if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof XoopsUser)
+if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
     || !$GLOBALS['xoopsUser']->isAdmin()) {
     exit('Restricted access' . PHP_EOL);
 }
@@ -43,11 +45,11 @@ function tableExists($tablename)
 
 /**
  * Prepares system prior to attempting to install module
- * @param \XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link \XoopsModule}
  * @return bool true if ready to install, false if not
  */
 function xoops_module_pre_update_yogurt(
-    XoopsModule $module
+    \XoopsModule $module
 ) {
     $moduleDirName = basename(dirname(__DIR__));
     /** @var Yogurt\Helper $helper */
@@ -173,7 +175,7 @@ function xoops_module_update_yogurt(
 
         //  ---  COPY blank.png FILES ---------------
         if (count($configurator->copyBlankFiles) > 0) {
-            $file =  dirname(__DIR__) . '/assets/images/blank.png';
+            $file = dirname(__DIR__) . '/assets/images/blank.png';
             foreach (array_keys($configurator->copyBlankFiles) as $i) {
                 $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
                 $utility::copyFile($file, $dest);
@@ -182,8 +184,8 @@ function xoops_module_update_yogurt(
 
         //delete .html entries from the tpl table
         $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix(
-            'tplfile'
-        ) . " WHERE `tpl_module` = '" . $module->getVar(
+                'tplfile'
+            ) . " WHERE `tpl_module` = '" . $module->getVar(
                 'dirname',
                 'n'
             ) . "' AND `tpl_file` LIKE '%.html%'";
@@ -194,13 +196,13 @@ function xoops_module_update_yogurt(
 
         return $gpermHandler->deleteByModule($module->getVar('mid'), 'item_read');
     }
-	
-	$profile_handler = xoops_getModuleHandler('profile', $module->getVar('dirname', 'n'));
-    $profile_handler->cleanOrphan($GLOBALS['xoopsDB']->prefix('users'), 'uid', 'profile_id');
-    $field_handler = xoops_getModuleHandler('field', $module->getVar('dirname', 'n'));
-    $user_fields   = $field_handler->getUserVars();
+
+    $profileHandler = $helper->getHandler('Profile');
+    $profileHandler->cleanOrphan($GLOBALS['xoopsDB']->prefix('users'), 'uid', 'profile_id');
+    $fieldHandler = $helper->getHandler('Field');
+    $user_fields   = $fieldHandler->getUserVars();
     $criteria      = new Criteria('field_name', "('" . implode("', '", $user_fields) . "')", 'IN');
-    $field_handler->updateAll('field_config', 0, $criteria);
+    $fieldHandler->updateAll('field_config', 0, $criteria);
 
     return true;
 }

@@ -1,22 +1,24 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
-
+ 
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
-
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
+
 //index.php
 define(
     '_MD_YOGURT_FRAMEWORKSFALSE',
@@ -148,6 +150,9 @@ define('AM_YOGURT_FRIENDSHIP_HOT', 'Hot');
 define('AM_YOGURT_FRIENDSHIP_TRUST', 'Trust');
 define('AM_YOGURT_FRIENDSHIP_COOL', 'Cool');
 define('AM_YOGURT_FRIENDSHIP_FAN', 'Fan');
+define('AM_YOGURT_FRIENDSHIP_DATE_CREATED', 'Created');
+define('AM_YOGURT_FRIENDSHIP_DATE_UPDATED', 'Updated');
+
 // Visitors
 define('AM_YOGURT_VISITORS_ADD', 'Add a visitors');
 define('AM_YOGURT_VISITORS_EDIT', 'Edit visitors');
@@ -244,6 +249,7 @@ define('AM_YOGURT_AUDIO_URL', 'File');
 define('AM_YOGURT_AUDIO_UID_OWNER', 'Owner');
 define('AM_YOGURT_AUDIO_DATE_CREATED', 'Created');
 define('AM_YOGURT_AUDIO_DATE_UPDATED', 'Updated');
+define('AM_YOGURT_AUDIO_DESCRIPTION', 'Description');
 // Privacy
 define('AM_YOGURT_PRIVACY_ADD', 'Add a privacy');
 define('AM_YOGURT_PRIVACY_EDIT', 'Edit privacy');
@@ -305,12 +311,11 @@ define('AM_YOGURT_ADD_PRIVACY', 'Add new Privacy');
 define('AM_YOGURT_PRIVACY_LIST', 'List of Privacy');
 define('_AM_YOGURT_UPLOAD_ERROR', 'Upload Error');
 
-
 //Profile Module
-define('_AM_YOGURT_FIELD', 'Field');
+define('_AM_YOGURT_FIELD', 'Add Field');
 define('_AM_YOGURT_FIELDS', 'Fields');
-define('_AM_YOGURT_CATEGORY', 'Category');
-define('_AM_YOGURT_STEP', 'Step');
+define('_AM_YOGURT_CATEGORY', 'Add Category');
+define('_AM_YOGURT_STEP', 'Add Step');
 define('_AM_YOGURT_SAVEDSUCCESS', '%s saved successfully');
 define('_AM_YOGURT_DELETEDSUCCESS', '%s deleted successfully');
 define('_AM_YOGURT_RUSUREDEL', 'Are you sure you want to delete %s');
@@ -348,7 +353,14 @@ define('_AM_YOGURT_PROF_EDITABLE', 'Field editable from profile');
 define('_AM_YOGURT_PROF_REGISTER', 'Show in registration form');
 define('_AM_YOGURT_PROF_SEARCH', 'Searchable by these groups');
 define('_AM_YOGURT_PROF_ACCESS', 'Profile accessible by these groups');
-define('_AM_YOGURT_PROF_ACCESS_DESC', '<ul>' . "<li>Admin groups: If a user belongs to admin groups, the current user has access if and only if one of the current user's groups is allowed to access admin group; else</li>" . "<li>Non basic groups: If a user belongs to one or more non basic groups (NOT admin, user, anonymous), the current user has access if and only if one of the current user's groups is allowed to allowed to any of the non basic groups; else</li>" . '<li>User group: If a user belongs to User group only, the current user has access if and only if one of his groups is allowed to access User group</li>' . '</ul>');
+define(
+    '_AM_YOGURT_PROF_ACCESS_DESC',
+    '<ul>'
+    . "<li>Admin groups: If a user belongs to admin groups, the current user has access if and only if one of the current user's groups is allowed to access admin group; else</li>"
+    . "<li>Non basic groups: If a user belongs to one or more non basic groups (NOT admin, user, anonymous), the current user has access if and only if one of the current user's groups is allowed to allowed to any of the non basic groups; else</li>"
+    . '<li>User group: If a user belongs to User group only, the current user has access if and only if one of his groups is allowed to access User group</li>'
+    . '</ul>'
+);
 define('_AM_YOGURT_FIELDVISIBLE', 'The field ');
 define('_AM_YOGURT_FIELDVISIBLEFOR', ' is visible for ');
 define('_AM_YOGURT_FIELDVISIBLEON', ' viewing a profile of ');
@@ -403,5 +415,4 @@ define('_AM_YOGURT_SAVESTEP_TOGGLE', 'Toggle Save');
 define('_AM_YOGURT_SAVESTEP_TOGGLE_SUCCESS', 'Successfully Changed Save After Step');
 define('_AM_YOGURT_SAVESTEP_TOGGLE_FAILED', "Changing 'Save After Step' Failed");
 define('_AM_YOGURT_CANNOTDEACTIVATEWEBMASTERS', 'You cannot deactivate Webmaster account');
-
 

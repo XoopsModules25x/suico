@@ -17,8 +17,6 @@
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
-use Xmf\Request;
-use XoopsModules\Yogurt;
 use XoopsModules\Yogurt\IndexController;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_changepass.tpl';
@@ -34,7 +32,7 @@ if (!$GLOBALS['xoopsUser']) {
     redirect_header(XOOPS_URL, 2, _NOPERM);
 }
 
-$xoopsOption['xoops_pagetitle'] = sprintf(_MD_YOGURT_CHANGEPASSWORD,$xoopsModule->getVar('name'), $controller->nameOwner);
+$xoopsOption['xoops_pagetitle'] = sprintf(_MD_YOGURT_CHANGEPASSWORD, $xoopsModule->getVar('name'), $controller->nameOwner);
 
 if (!isset($_POST['submit'])) {
     //show change password form
@@ -46,20 +44,20 @@ if (!isset($_POST['submit'])) {
     $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
     $form->assign($GLOBALS['xoopsTpl']);
 
-    $xoBreadcrumbs[] = array('title' => _MD_YOGURT_CHANGEPASSWORD);
+    $xoBreadcrumbs[] = ['title' => _MD_YOGURT_CHANGEPASSWORD];
 } else {
-    /* @var XoopsConfigHandler $config_handler */
-    $config_handler             = xoops_getHandler('config');
-    $GLOBALS['xoopsConfigUser'] = $config_handler->getConfigsByCat(XOOPS_CONF_USER);
+    /* @var XoopsConfigHandler $configHandler */
+    $configHandler             = xoops_getHandler('config');
+    $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
     $myts                       = MyTextSanitizer::getInstance();
     $oldpass                    = @$myts->stripSlashesGPC(trim($_POST['oldpass']));
     $password                   = @$myts->stripSlashesGPC(trim($_POST['newpass']));
     $vpass                      = @$myts->stripSlashesGPC(trim($_POST['vpass']));
-    $errors                     = array();
+    $errors                     = [];
     if (!password_verify($oldpass, $GLOBALS['xoopsUser']->getVar('pass', 'n'))) {
         $errors[] = _MD_YOGURT_WRONGPASSWORD;
     }
-    if (strlen($password) < $GLOBALS['xoopsConfigUser']['minpass']) {
+    if (mb_strlen($password) < $GLOBALS['xoopsConfigUser']['minpass']) {
         $errors[] = sprintf(_US_PWDTOOSHORT, $GLOBALS['xoopsConfigUser']['minpass']);
     }
     if ($password != $vpass) {
@@ -71,10 +69,10 @@ if (!isset($_POST['submit'])) {
     } else {
         //update password
         $GLOBALS['xoopsUser']->setVar('pass', password_hash($password, PASSWORD_DEFAULT));
-        /* @var XoopsMemberHandler $member_handler */
-        $member_handler = xoops_getHandler('member');
-        $msg = _MD_YOGURT_ERRORDURINGSAVE;
-        if ($member_handler->insertUser($GLOBALS['xoopsUser'])) {
+        /* @var XoopsMemberHandler $memberHandler */
+        $memberHandler = xoops_getHandler('member');
+        $msg           = _MD_YOGURT_ERRORDURINGSAVE;
+        if ($memberHandler->insertUser($GLOBALS['xoopsUser'])) {
             $msg = _MD_YOGURT_PASSWORDCHANGED;
         }
     }

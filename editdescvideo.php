@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -11,11 +13,11 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -48,7 +50,7 @@ if (1 === $marker) {
      */
     if ($uid === $video->getVar('uid_owner')) {
         if ($videoFactory->insert2($video)) {
-            redirect_header('video.php?uid=' . $uid, 2, _MD_YOGURT_DESC_EDITED);
+            redirect_header('videos.php?uid=' . $uid, 2, _MD_YOGURT_DESC_EDITED);
         } else {
             redirect_header('index.php?uid=' . $uid, 2, _MD_YOGURT_ERROR);
         }
@@ -62,9 +64,9 @@ $videoFactory   = new Yogurt\VideoHandler(
     $xoopsDB
 );
 $criteria_video = new Criteria('video_id', $cod_img);
-$criteria_uid   = new Criteria('uid_owner', $uid);
+$criteriaUid    = new Criteria('uid_owner', $uid);
 $criteria       = new CriteriaCompo($criteria_video);
-$criteria->add($criteria_uid);
+$criteria->add($criteriaUid);
 
 /**
  * Lets fetch the info of the pictures to be able to render the form

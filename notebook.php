@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -11,11 +13,11 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use XoopsModules\Yogurt;
@@ -31,11 +33,11 @@ $controller = new Yogurt\NotesController($xoopsDB, $xoopsUser);
 $nbSections = $controller->getNumbersSections();
 
 //$controller->renderFormNewPost($xoopsTpl);
-$criteria_uid = new Criteria('note_to', $controller->uidOwner);
-$criteria_uid->setOrder('DESC');
-$criteria_uid->setSort('note_id');
+$criteriaUid = new Criteria('note_to', $controller->uidOwner);
+$criteriaUid->setOrder('DESC');
+$criteriaUid->setSort('note_id');
 
-if (!($notes = $controller->fetchNotes($nbSections['nbNotes'], $criteria_uid))) {
+if (!($notes = $controller->fetchNotes($nbSections['countNotes'], $criteriaUid))) {
     $xoopsTpl->assign('lang_noNotesyet', _MD_YOGURT_NONOTESYET);
 }
 

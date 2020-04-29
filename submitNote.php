@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -11,11 +13,11 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -42,22 +44,22 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 
 $myts         = MyTextSanitizer::getInstance();
 $notebook_uid = Request::getInt('uid', 0, 'POST');
-$noteText    = $myts->displayTarea(Request::getText('text', '', 'POST'), 0, 1, 1, 1, 1);
+$noteText     = $myts->displayTarea(Request::getText('text', '', 'POST'), 0, 1, 1, 1, 1);
 $mainform     = !empty($_POST['mainform']) ? 1 : 0;
-$noteObj         = $notesFactory->create();
+$noteObj      = $notesFactory->create();
 $noteObj->setVar('note_text', $noteText);
 $noteObj->setVar('note_from', $xoopsUser->getVar('uid'));
 $noteObj->setVar('note_to', $notebook_uid);
 $noteObj->setVar('date_created', time());
 $notesFactory->insert2($noteObj);
-$note_id=$xoopsDB->getInsertId();
+$noteId                     = $xoopsDB->getInsertId();
 $extra_tags['X_OWNER_NAME'] = $xoopsUser::getUnameFromId($notebook_uid);
 $extra_tags['X_OWNER_UID']  = $notebook_uid;
 /** @var \XoopsNotificationHandler $notificationHandler */
-$notificationHandler        = xoops_getHandler('notification');
+$notificationHandler = xoops_getHandler('notification');
 $notificationHandler->triggerEvent('Note', $xoopsUser->getVar('uid'), 'new_Note', $extra_tags);
 if (1 == $mainform) {
-    redirect_header('notebook.php?uid=' . $notebook_uid .'#' . $note_id, 1, _MD_YOGURT_NOTE_SENT);
+    redirect_header('notebook.php?uid=' . $notebook_uid . '#' . $noteId, 1, _MD_YOGURT_NOTE_SENT);
 } else {
     redirect_header('notebook.php?uid=' . $xoopsUser->getVar('uid'), 1, _MD_YOGURT_NOTE_SENT);
 }

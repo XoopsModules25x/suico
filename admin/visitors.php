@@ -13,19 +13,15 @@ declare(strict_types=1);
 */
 
 /**
- * Module: Yogurt
- *
  * @category        Module
  * @package         yogurt
- * @author          XOOPS Development Team <https://xoops.org>
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GPL 2.0 or later
- * @link            https://xoops.org/
- * @since           1.0.0
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use Xmf\Request;
 use Xmf\Module\Helper\Permission;
+use Xmf\Request;
 
 require __DIR__ . '/admin_header.php';
 xoops_cp_header();
@@ -48,7 +44,6 @@ switch ($op) {
         $form           = $visitorsObject->getForm();
         $form->display();
         break;
-
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('visitors.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -73,7 +68,6 @@ switch ($op) {
         $form = $visitorsObject->getForm();
         $form->display();
         break;
-
     case 'edit':
         $adminObject->addItemButton(AM_YOGURT_ADD_VISITORS, 'visitors.php?op=new', 'add');
         $adminObject->addItemButton(AM_YOGURT_VISITORS_LIST, 'visitors.php', 'list');
@@ -82,13 +76,13 @@ switch ($op) {
         $form           = $visitorsObject->getForm();
         $form->display();
         break;
-
     case 'delete':
         $visitorsObject = $visitorsHandler->get(Request::getString('cod_visit', ''));
         if (1 === Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('visitors.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
+
             if ($visitorsHandler->delete($visitorsObject)) {
                 redirect_header('visitors.php', 3, AM_YOGURT_FORMDELOK);
             } else {
@@ -109,7 +103,6 @@ switch ($op) {
             );
         }
         break;
-
     case 'clone':
 
         $id_field = Request::getString('cod_visit', '');
@@ -148,12 +141,9 @@ switch ($op) {
             xoops_load('XoopsPageNav');
 
             $pagenav = new XoopsPageNav(
-                $visitorsTempRows,
-                $visitorsPaginationLimit,
-                $start,
-                'start',
-                'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                $visitorsTempRows, $visitorsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
+
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
 
@@ -183,50 +173,58 @@ switch ($op) {
                     'selectorcod_visit',
                     AM_YOGURT_VISITORS_COD_VISIT
                 );
+
                 $visitorsArray['cod_visit'] = $visitorsTempArray[$i]->getVar('cod_visit');
 
                 $GLOBALS['xoopsTpl']->assign('selectoruid_owner', AM_YOGURT_VISITORS_UID_OWNER);
+
                 $visitorsArray['uid_owner'] = strip_tags(
                     XoopsUser::getUnameFromId($visitorsTempArray[$i]->getVar('uid_owner'))
                 );
 
                 $GLOBALS['xoopsTpl']->assign('selectoruid_visitor', AM_YOGURT_VISITORS_UID_VISITOR);
+
                 $visitorsArray['uid_visitor'] = strip_tags(
                     XoopsUser::getUnameFromId($visitorsTempArray[$i]->getVar('uid_visitor'))
                 );
 
                 $GLOBALS['xoopsTpl']->assign('selectoruname_visitor', AM_YOGURT_VISITORS_UNAME_VISITOR);
+
                 $visitorsArray['uname_visitor'] = $visitorsTempArray[$i]->getVar('uname_visitor');
 
                 $GLOBALS['xoopsTpl']->assign('selectordate_visited', AM_YOGURT_VISITORS_DATETIME);
-                $visitorsArray['date_visited'] = formatTimeStamp($visitorsTempArray[$i]->getVar('date_visited'), 's');
 
+                $visitorsArray['date_visited'] = formatTimestamp($visitorsTempArray[$i]->getVar('date_visited'), 's');
 
                 $visitorsArray['edit_delete'] = "<a href='visitors.php?op=edit&cod_visit=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='visitors.php?op=delete&cod_visit=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='visitors.php?op=clone&cod_visit=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
 
                 $GLOBALS['xoopsTpl']->append_by_ref('visitorsArrays', $visitorsArray);
+
                 unset($visitorsArray);
             }
+
             unset($visitorsTempArray);
+
             // Display Navigation
+
             if ($visitorsCount > $visitorsPaginationLimit) {
                 xoops_load('XoopsPageNav');
+
                 $pagenav = new XoopsPageNav(
-                    $visitorsCount,
-                    $visitorsPaginationLimit,
-                    $start,
-                    'start',
-                    'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                    $visitorsCount, $visitorsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
+
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
 
             //                     echo "<td class='center width5'>
 
             //                    <a href='visitors.php?op=edit&cod_visit=".$i."'><img src=".$pathIcon16."/edit.png alt='"._EDIT."' title='"._EDIT."'></a>
+
             //                    <a href='visitors.php?op=delete&cod_visit=".$i."'><img src=".$pathIcon16."/delete.png alt='"._DELETE."' title='"._DELETE."'></a>
+
             //                    </td>";
 
             //                echo "</tr>";
@@ -242,7 +240,9 @@ switch ($op) {
             //                    <tr>
 
             //                     <th class='center width5'>".AM_YOGURT_FORM_ACTION."XXX</th>
+
             //                    </tr><tr><td class='errorMsg' colspan='6'>There are noXXX visitors</td></tr>";
+
             //            echo "</table><br><br>";
 
             //-------------------------------------------

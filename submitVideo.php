@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -11,11 +13,11 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -52,22 +54,27 @@ if (11 === mb_strlen($url)) {
     $position_of_code = mb_strpos($url, 'v=');
     $code             = mb_substr($url, $position_of_code + 2, 11);
 }
-
 $newvideo->setVar('youtube_code', $code);
-if ($videoFactory->insert2($newvideo)) {
+$newvideo->setVar('main_video', Request::getInt('main_video', 0, 'POST'));
+$newvideo->setVar('date_created', \time());
+$newvideo->setVar('date_updated', \time());
+
+$videoFactory->insert($newvideo);
+
+if ($videoFactory->insert($newvideo)) {
     $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
     $extra_tags['X_OWNER_UID']  = (int)$xoopsUser->getVar('uid');
     /** @var \XoopsNotificationHandler $notificationHandler */
-    $notificationHandler        = xoops_getHandler('notification');
+    $notificationHandler = xoops_getHandler('notification');
     $notificationHandler->triggerEvent('video', (int)$xoopsUser->getVar('uid'), 'new_video', $extra_tags);
     redirect_header(
-        XOOPS_URL . '/modules/yogurt/video.php?uid=' . (int)$xoopsUser->getVar('uid'),
+        XOOPS_URL . '/modules/yogurt/videos.php?uid=' . (int)$xoopsUser->getVar('uid'),
         2,
         _MD_YOGURT_VIDEOSAVED
     );
 } else {
     redirect_header(
-        XOOPS_URL . '/modules/yogurt/video.php?uid=' . (int)$xoopsUser->getVar('uid'),
+        XOOPS_URL . '/modules/yogurt/videos.php?uid=' . (int)$xoopsUser->getVar('uid'),
         2,
         _MD_YOGURT_ERROR
     );

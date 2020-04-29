@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace XoopsModules\Yogurt\Common;
 
@@ -13,11 +15,11 @@ namespace XoopsModules\Yogurt\Common;
  */
 
 /**
- * Yogurt module
- *
- * @copyright       XOOPS Project (https://xoops.org)
- * @license         GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author          Xoops Development Team
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -41,6 +43,7 @@ class DirectoryChecker
      *
      * @return bool|string
      */
+
     public static function getDirectoryStatus(
         $path,
         $mode = 0777,
@@ -51,59 +54,90 @@ class DirectoryChecker
         if (empty($path)) {
             return false;
         }
+
         if (null === $redirectFile) {
             $redirectFile = $_SERVER['SCRIPT_NAME'];
         }
-        $moduleDirName      = \basename(\dirname(__DIR__, 2));
+
+        $moduleDirName = \basename(\dirname(__DIR__, 2));
+
         $moduleDirNameUpper = mb_strtoupper($moduleDirName);
+
         if (!@\is_dir($path)) {
             $pathStatus = "<img src='${pathIcon16}/0.png' alt='DC_NOTAVAILABLE'>";
+
             $pathStatus .= "${path} (" . \constant('CO_' . $moduleDirNameUpper . '_' . 'DC_NOTAVAILABLE') . ') ';
+
             $pathStatus .= "<form action='" . $_SERVER['SCRIPT_NAME'] . "' method='post'>";
+
             $pathStatus .= "<input type='hidden' name='op' value='createdir'>";
+
             $pathStatus .= "<input type='hidden' name='path' value='${path}'>";
+
             $pathStatus .= "<input type='hidden' name='redirect' value='${redirectFile}'>";
+
             $pathStatus .= "<button class='submit' onClick='this.form.submit();'>" . \constant(
-                'CO_' . $moduleDirNameUpper . '_' . 'DC_CREATETHEDIR'
-            ) . '</button>';
+                    'CO_' . $moduleDirNameUpper . '_' . 'DC_CREATETHEDIR'
+                ) . '</button>';
+
             $pathStatus .= '</form>';
         } elseif (@\is_writable($path)) {
             $pathStatus = "<img src='${pathIcon16}/1.png' alt='DC_AVAILABLE'>";
+
             $pathStatus .= "${path} (" . \constant('CO_' . $moduleDirNameUpper . '_' . 'DC_AVAILABLE') . ') ';
+
             $currentMode = mb_substr(\decoct(\fileperms($path)), 2);
+
             if ($currentMode !== \decoct($mode)) {
                 $pathStatus = "<img src='${pathIcon16}/0.png' alt='DC_NOTWRITABLE'>";
+
                 $pathStatus .= $path . \sprintf(
-                    \constant('CO_' . $moduleDirNameUpper . '_' . 'DC_NOTWRITABLE'),
-                    \decoct($mode),
-                    $currentMode
-                );
+                        \constant('CO_' . $moduleDirNameUpper . '_' . 'DC_NOTWRITABLE'),
+                        \decoct($mode),
+                        $currentMode
+                    );
+
                 $pathStatus .= "<form action='" . $_SERVER['SCRIPT_NAME'] . "' method='post'>";
+
                 $pathStatus .= "<input type='hidden' name='op' value='setdirperm'>";
+
                 $pathStatus .= "<input type='hidden' name='mode' value='${mode}'>";
+
                 $pathStatus .= "<input type='hidden' name='path' value='${path}'>";
+
                 $pathStatus .= "<input type='hidden' name='redirect' value='${redirectFile}'>";
+
                 $pathStatus .= "<button class='submit' onClick='this.form.submit();'>" . \constant(
-                    'CO_' . $moduleDirNameUpper . '_' . 'DC_SETMPERM'
-                ) . '</button>';
+                        'CO_' . $moduleDirNameUpper . '_' . 'DC_SETMPERM'
+                    ) . '</button>';
+
                 $pathStatus .= '</form>';
             }
         } else {
             $currentMode = mb_substr(\decoct(\fileperms($path)), 2);
+
             $pathStatus = "<img src='${pathIcon16}/0.png' alt='DC_NOTWRITABLE'>";
+
             $pathStatus .= $path . \sprintf(
-                \constant('CO_' . $moduleDirNameUpper . '_' . 'DC_NOTWRITABLE'),
-                \decoct($mode),
-                $currentMode
-            );
+                    \constant('CO_' . $moduleDirNameUpper . '_' . 'DC_NOTWRITABLE'),
+                    \decoct($mode),
+                    $currentMode
+                );
+
             $pathStatus .= "<form action='" . $_SERVER['SCRIPT_NAME'] . "' method='post'>";
+
             $pathStatus .= "<input type='hidden' name='op' value='setdirperm'>";
+
             $pathStatus .= "<input type='hidden' name='mode' value='${mode}'>";
+
             $pathStatus .= "<input type='hidden' name='path' value='${path}'>";
+
             $pathStatus .= "<input type='hidden' name='redirect' value='${redirectFile}'>";
+
             $pathStatus .= "<button class='submit' onClick='this.form.submit();'>" . \constant(
-                'CO_' . $moduleDirNameUpper . '_' . 'DC_SETMPERM'
-            ) . '</button>';
+                    'CO_' . $moduleDirNameUpper . '_' . 'DC_SETMPERM'
+                ) . '</button>';
+
             $pathStatus .= '</form>';
         }
 
@@ -116,6 +150,7 @@ class DirectoryChecker
      *
      * @return bool
      */
+
     public static function createDirectory(
         $target,
         $mode = 0777
@@ -123,18 +158,19 @@ class DirectoryChecker
         $target = \str_replace('..', '', $target);
 
         // http://www.php.net/manual/en/function.mkdir.php
+
         return \is_dir($target)
                || (self::createDirectory(
-                   \dirname($target),
-                   $mode
-               )
+                    \dirname($target),
+                    $mode
+                )
                    && !\mkdir(
-                       $target,
-                       $mode
-                   )
+                    $target,
+                    $mode
+                )
                    && !\is_dir(
-                       $target
-                   ));
+                    $target
+                ));
     }
 
     /**
@@ -143,6 +179,7 @@ class DirectoryChecker
      *
      * @return bool
      */
+
     public static function setDirectoryPermissions(
         $target,
         $mode = 0777
@@ -157,6 +194,7 @@ class DirectoryChecker
      *
      * @return bool
      */
+
     public static function dirExists($dir_path)
     {
         return \is_dir($dir_path);

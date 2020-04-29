@@ -1,11 +1,26 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace XoopsModules\Yogurt;
 
-//Notes.php,v 1
-//  ---------------------------------------------------------------- //
-// Author: Bruno Barthez                                               //
-// ----------------------------------------------------------------- //
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
+ */
 
 use CriteriaElement;
 use MyTextSanitizer;
@@ -117,10 +132,14 @@ class NotesHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject->cleanVars()) {
             return false;
         }
+
+        $noteId = $note_from = $note_to = $date_created = $private = '';
+
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
-        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+        //        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
+
         if ($xoopsObject->isNew()) {
             // add / modify a Notes
             $xoopsObject = new Notes();
@@ -129,7 +148,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
             $sql         = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_notes'),
-                $note_id,
+                $noteId,
                 $this->db->quoteString($note_text),
                 $note_from,
                 $note_to,
@@ -144,13 +163,13 @@ class NotesHandler extends XoopsPersistableObjectHandler
             $sql    = \sprintf(
                 $format,
                 $this->db->prefix('yogurt_notes'),
-                $note_id,
+                $noteId,
                 $this->db->quoteString($note_text),
                 $note_from,
                 $note_to,
                 $date_created,
                 $private,
-                $note_id
+                $noteId
             );
         }
         if ($force) {
@@ -161,10 +180,10 @@ class NotesHandler extends XoopsPersistableObjectHandler
         if (!$result) {
             return false;
         }
-        if (empty($note_id)) {
-            $note_id = $this->db->getInsertId();
+        if (empty($noteId)) {
+            $noteId = $this->db->getInsertId();
         }
-        $xoopsObject->assignVar('note_id', $note_id);
+        $xoopsObject->assignVar('note_id', $noteId);
 
         return true;
     }
@@ -289,19 +308,19 @@ class NotesHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * @param                                      $nbNotes
+     * @param                                      $countNotes
      * @param \CriteriaElement|\CriteriaCompo|null $criteria
      * @return array
      */
     public function getNotes(
-        $nbNotes,
+        $countNotes,
         $criteria
     ) {
         $myts = new MyTextSanitizer();
         $ret  = [];
         $sql  = 'SELECT note_id, uid, uname, user_avatar, note_from, note_text, date_created FROM ' . $this->db->prefix(
-            'yogurt_notes'
-        ) . ', ' . $this->db->prefix(
+                'yogurt_notes'
+            ) . ', ' . $this->db->prefix(
                 'users'
             );
         if (isset($criteria) && $criteria instanceof CriteriaElement) {
@@ -319,13 +338,13 @@ class NotesHandler extends XoopsPersistableObjectHandler
             $i      = 0;
 
             while (false !== ($myrow = $this->db->fetchArray($result))) {
-                $vetor[$i]['uid']         = $myrow['uid'];
-                $vetor[$i]['uname']       = $myrow['uname'];
-                $vetor[$i]['user_avatar'] = $myrow['user_avatar'];
-                $temptext                 = $myts->xoopsCodeDecode($myrow['note_text'], 1);
-                $vetor[$i]['text']        = $myts->nl2Br($temptext);
-                $vetor[$i]['id']          = $myrow['note_id'];
-                $vetor[$i]['date_created']        = formatTimeStamp($myrow['date_created'], 's');
+                $vetor[$i]['uid']          = $myrow['uid'];
+                $vetor[$i]['uname']        = $myrow['uname'];
+                $vetor[$i]['user_avatar']  = $myrow['user_avatar'];
+                $temptext                  = $myts->xoopsCodeDecode($myrow['note_text'], 1);
+                $vetor[$i]['text']         = $myts->nl2Br($temptext);
+                $vetor[$i]['id']           = $myrow['note_id'];
+                $vetor[$i]['date_created'] = \formatTimestamp($myrow['date_created'], 's');
 
                 $i++;
             }

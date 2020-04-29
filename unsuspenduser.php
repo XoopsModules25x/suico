@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -11,11 +13,11 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -39,16 +41,23 @@ $suspension->load($uid);
 
 if ($xoopsUser->isAdmin(1)) {
     /** @var \XoopsMemberHandler $memberHandler */
+
     $memberHandler = xoops_getHandler('member');
-    $thisUser      = $memberHandler->getUser($uid);
+
+    $thisUser = $memberHandler->getUser($uid);
 
     $thisUser->setVar('email', $suspension->getVar('old_email', 'n'));
+
     $thisUser->setVar('pass', $suspension->getVar('old_pass', 'n'));
+
     $thisUser->setVar('user_sig', $suspension->getVar('old_signature', 'n'));
+
     $memberHandler->insertUser($thisUser);
 
     $criteria = new Criteria('uid', $uid);
+
     $suspensionsFactory->deleteAll($criteria);
+
     redirect_header('index.php?uid=' . $uid, 3, _MD_YOGURT_USER_UNSUSPENDED);
 }
 

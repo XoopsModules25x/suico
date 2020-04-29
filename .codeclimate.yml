@@ -7,14 +7,14 @@ engines:
     enabled: true
     config:
       languages:
-      - javascript
-      - php
+        - javascript
+        - php
   fixme:
     enabled: true
   phpmd:
     enabled: true
     config:
-      file_extensions: 
+      file_extensions:
         - php
         - inc
   phpcodesniffer:
@@ -24,8 +24,8 @@ engines:
       standard: "PSR1,PSR2"
 ratings:
   paths:
-  - "**.inc"
-  - "**.js"
-  - "**.lib"
-  - "**.php"
+    - "**.inc"
+    - "**.js"
+    - "**.lib"
+    - "**.php"
 exclude_paths: []

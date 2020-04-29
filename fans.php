@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -11,11 +13,11 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -39,11 +41,11 @@ $criteria_friends    = new Criteria('friend2_uid', $controller->uidOwner);
 $criteria_fans       = new Criteria('fan', 1);
 $criteria_compo_fans = new CriteriaCompo($criteria_friends);
 $criteria_compo_fans->add($criteria_fans);
-$nb_friends = $controller->friendshipsFactory->getCount($criteria_compo_fans);
+$countFriends = $controller->friendshipsFactory->getCount($criteria_compo_fans);
 $criteria_compo_fans->setLimit($helper->getConfig('friendsperpage'));
 $criteria_compo_fans->setStart($start);
 $vetor = $controller->friendshipsFactory->getFans('', $criteria_compo_fans, 0);
-if (0 === $nb_friends) {
+if (0 === $countFriends) {
     $xoopsTpl->assign('lang_nofansyet', _MD_YOGURT_NOFANSYET);
 }
 
@@ -57,13 +59,9 @@ $identifier = $owner::getUnameFromId($controller->uidOwner);
  * Creating the navigation bar if you have a lot of friends
  */
 $navigationBar = new XoopsPageNav(
-    $nb_friends,
-    $helper->getConfig('friendsperpage'),
-    $start,
-    'start',
-    'uid=' . (int)$controller->uidOwner
+    $countFriends, $helper->getConfig('friendsperpage'), $start, 'start', 'uid=' . (int)$controller->uidOwner
 );
-$navegacao       = $navigationBar->renderImageNav(2);
+$navegacao     = $navigationBar->renderImageNav(2);
 
 //navbar
 $xoopsTpl->assign('lang_mysection', _MD_YOGURT_MYFANS);

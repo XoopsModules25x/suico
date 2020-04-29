@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -11,11 +13,11 @@
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
@@ -49,17 +51,17 @@ if (!Request::hasVar('confirm', 'POST') || 1 !== Request::getInt('confirm', 0, '
     );
     $criteria_img = new Criteria('video_id', $cod_video);
     $uid          = (int)$xoopsUser->getVar('uid');
-    $criteria_uid = new Criteria('uid_owner', $uid);
+    $criteriaUid  = new Criteria('uid_owner', $uid);
     $criteria     = new CriteriaCompo($criteria_img);
-    $criteria->add($criteria_uid);
+    $criteria->add($criteriaUid);
 
     /**
      * Try to delete
      */
     if ($videoFactory->deleteAll($criteria)) {
-        redirect_header('video.php?uid=' . $uid, 2, _MD_YOGURT_VIDEO_DELETED);
+        redirect_header('videos.php?uid=' . $uid, 2, _MD_YOGURT_VIDEO_DELETED);
     } else {
-        redirect_header('video.php?uid=' . $uid, 2, _MD_YOGURT_ERROR);
+        redirect_header('videos.php?uid=' . $uid, 2, _MD_YOGURT_ERROR);
     }
 }
 

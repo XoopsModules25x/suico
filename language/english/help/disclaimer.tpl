@@ -6,7 +6,7 @@
     <p><b>Software downloaded from the XOOPS web site is provided 'as is' without warranty
             of any kind, either express or implied, including, but not limited to, the implied
             warranties of fitness for a purpose, or the warranty of non-infringement. Without
-            limiting the foregoing, XOOPS Projects team makes no warranty that:</b></p>
+            limiting the foregoing, XOOPS Project team makes no warranty that:</b></p>
     <br>
     <ol>
         <li>the software will meet your requirements</li>

@@ -2,9 +2,6 @@
 
 declare(strict_types=1);
 
-use XoopsModules\Yogurt\Helper;
-use Xmf\Module\Admin;
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -16,15 +13,18 @@ use Xmf\Module\Admin;
 */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico
- * @author       XOOPS Development Team
- * @since
+ * @category        Module
+ * @package         yogurt
+ * @copyright       {@link https://xoops.org/ XOOPS Project}
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
-include dirname(
-    __DIR__
-) . '/preloads/autoloader.php';
+
+use Xmf\Module\Admin;
+use XoopsModules\Yogurt;
+use XoopsModules\Yogurt\Helper;
+
+require dirname(__DIR__) . '/preloads/autoloader.php';
 
 $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
@@ -58,7 +58,7 @@ $adminmenu[] = [
 
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU3,
-    'link'  => 'admin/friendship.php',
+    'link'  => 'admin/friendships.php',
     'icon'  => "{$pathIcon32}/users.png",
 ];
 
@@ -70,13 +70,13 @@ $adminmenu[] = [
 
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU5,
-    'link'  => 'admin/video.php',
+    'link'  => 'admin/videos.php',
     'icon'  => "{$pathIcon32}/marquee.png",
 ];
 
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU6,
-    'link'  => 'admin/friendrequest.php',
+    'link'  => 'admin/friendrequests.php',
     'icon'  => "{$pathIcon32}/face-smile.png",
 ];
 
@@ -112,7 +112,7 @@ $adminmenu[] = [
 
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU12,
-    'link'  => 'admin/audio.php',
+    'link'  => 'admin/audios.php',
     'icon'  => "{$pathIcon32}/playlist.png",
 ];
 
@@ -124,28 +124,28 @@ $adminmenu[] = [
 
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU17,
-	'link'  => 'admin/profile_user.php',
-	'icon'  => $pathIcon32 . '/users.png',
+    'link'  => 'admin/user.php',
+    'icon'  => $pathIcon32 . '/users.png',
 ];
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU18,
-	'link'  => 'admin/profile_fieldscategory.php',
-	'icon'  => $pathIcon32 . '/category.png',
+    'link'  => 'admin/fieldscategory.php',
+    'icon'  => $pathIcon32 . '/category.png',
 ];
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU19,
-	'link'  => 'admin/profile_fieldslist.php',
-	'icon'  => $pathIcon32 . '/index.png',
+    'link'  => 'admin/fieldslist.php',
+    'icon'  => $pathIcon32 . '/index.png',
 ];
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU20,
-	'link'  => 'admin/profile_registrationstep.php',
-	'icon'  => $pathIcon32 . '/stats.png',
+    'link'  => 'admin/registrationstep.php',
+    'icon'  => $pathIcon32 . '/stats.png',
 ];
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU21,
-	'link'  => 'admin/profile_fieldspermissions.php',
-	'icon'  => $pathIcon32 . '/permissions.png',
+    'link'  => 'admin/fieldspermissions.php',
+    'icon'  => $pathIcon32 . '/permissions.png',
 ];
 
 // Blocks Admin
@@ -162,19 +162,6 @@ if (is_object($helper->getModule()) && $helper->getConfig('displayDeveloperTools
         'icon'  => $pathIcon32 . '/database_go.png',
     ];
 }
-
-$adminmenu[] = [
-    'title' => _MI_YOGURT_MENU_02,
-    'link'  => 'admin/main.php',
-    'icon'  => $pathIcon32 . '/manage.png',
-];
-
-
-//$adminmenu[] = [
-//    'title' => _MI_YOGURT_ADMENU2,
-//    'link'  => 'admin/main.php?op=about',
-//    'icon'  => $pathIcon32 . '/about.png',
-//];
 
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU16,

@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 $I = new AcceptanceTester($scenario);
 $I->wantTo('Install Module');
 $I->amOnPage('/');
