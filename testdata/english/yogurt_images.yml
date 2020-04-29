@@ -1,32 +1,36 @@
-- cod_img: '1'
-  title: Sunset1
-  caption: 'Airplane at Sunset'
-  date_created: '1587835341'
-  date_updated: '1587835341'
-  uid_owner: '1'
-  filename: pic_1_5e88f37c29ba1.jpg
-  private: '0'
-- cod_img: '2'
-  title: Castle
-  caption: 'A beautiful castle in Germany'
-  date_created: '1587424126'
-  date_updated: '1587424126'
-  uid_owner: '1'
-  filename: pic_1_5e893647beea8.jpg
-  private: '0'
-- cod_img: '3'
-  title: 'Sunset in Africa'
-  caption: 'A dream Safari'
-  date_created: '1585748818'
-  date_updated: '1587649618'
-  uid_owner: '1'
-  filename: pic_1_5e893e44d61a0.jpg
-  private: '1'
-- cod_img: '5'
-  title: 'Sunset and a bird'
-  caption: 'So quiet here'
-  date_created: '1585835277'
-  date_updated: '1587563277'
-  uid_owner: '999'
-  filename: pic_1_5e97d09fb1e0e.jpg
-  private: '0'
+-
+    cod_img: '1'
+    title: Sunset1
+    caption: 'Airplane at Sunset'
+    date_created: '1587835341'
+    date_updated: '1587835341'
+    uid_owner: '1'
+    filename: pic_1_5e88f37c29ba1.jpg
+    private: '0'
+-
+    cod_img: '2'
+    title: Castle
+    caption: 'A beautiful castle in Germany'
+    date_created: '1587424126'
+    date_updated: '1587424126'
+    uid_owner: '1'
+    filename: pic_1_5e893647beea8.jpg
+    private: '0'
+-
+    cod_img: '3'
+    title: 'Sunset in Africa'
+    caption: 'A dream Safari'
+    date_created: '1585748818'
+    date_updated: '1587649618'
+    uid_owner: '1'
+    filename: pic_1_5e893e44d61a0.jpg
+    private: '1'
+-
+    cod_img: '5'
+    title: 'Sunset and a bird'
+    caption: 'So quiet here'
+    date_created: '1585835277'
+    date_updated: '1587563277'
+    uid_owner: '999'
+    filename: pic_999_5e97d09fb1e0e.jpg
+    private: '0'

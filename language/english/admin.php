@@ -81,7 +81,7 @@ define(
     "There are <span class='bold'>%s</span> Friendship Requests in the database"
 );
 define('AM_YOGURT_THEREARE_GROUPS', "There are <span class='bold'>%s</span> Groups in the database");
-define('AM_YOGURT_THEREARE_MEMBERS', "There are <span class='bold'>%s</span> Members in the database");
+define('AM_YOGURT_THEREARE_MEMBERS', "There are <span class='bold'>%s</span> Memberships in the database");
 define('AM_YOGURT_THEREARE_NOTES', "There are <span class='bold'>%s</span> Notes in the database");
 define('AM_YOGURT_THEREARE_CONFIGS', "There are <span class='bold'>%s</span> Configs in the database");
 define('AM_YOGURT_THEREARE_SUSPENSIONS', "There are <span class='bold'>%s</span> Suspensions in the database");
