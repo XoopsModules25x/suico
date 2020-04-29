@@ -140,7 +140,7 @@ define('CO_' . $moduleDirNameUpper . '_' . 'VISIBLEIN', 'Visible In');
 define('CO_' . $moduleDirNameUpper . '_' . 'WEIGHT', 'Weight');
 
 define('CO_' . $moduleDirNameUpper . '_' . 'PERMISSIONS', 'Permissions');
-define('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS', 'Blocks Admin');
+define('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS', 'Blocks');
 define('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS_DESC', 'Blocks/Group Admin');
 
 define('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS_MANAGMENT', 'Manage');

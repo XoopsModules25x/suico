@@ -19,7 +19,7 @@ namespace XoopsModules\Yogurt;
  * @package         yogurt
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
- * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
+ * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Module\Helper\Permission;
@@ -27,10 +27,6 @@ use XoopsDatabaseFactory;
 use XoopsModules\Yogurt\Form\AudioForm;
 use XoopsObject;
 
-// Audio.php,v 1
-//  ---------------------------------------------------------------- //
-// Author: Bruno Barthez                                               //
-// ----------------------------------------------------------------- //
 
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 require_once XOOPS_ROOT_PATH . '/class/uploader.php';
