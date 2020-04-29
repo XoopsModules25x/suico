@@ -46,9 +46,9 @@ if (!isset($_POST['submit'])) {
 
     $xoBreadcrumbs[] = ['title' => _MD_YOGURT_CHANGEPASSWORD];
 } else {
-    /* @var XoopsConfigHandler $config_handler */
-    $config_handler             = xoops_getHandler('config');
-    $GLOBALS['xoopsConfigUser'] = $config_handler->getConfigsByCat(XOOPS_CONF_USER);
+    /* @var XoopsConfigHandler $configHandler */
+    $configHandler             = xoops_getHandler('config');
+    $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
     $myts                       = MyTextSanitizer::getInstance();
     $oldpass                    = @$myts->stripSlashesGPC(trim($_POST['oldpass']));
     $password                   = @$myts->stripSlashesGPC(trim($_POST['newpass']));
@@ -71,7 +71,7 @@ if (!isset($_POST['submit'])) {
         $GLOBALS['xoopsUser']->setVar('pass', password_hash($password, PASSWORD_DEFAULT));
         /* @var XoopsMemberHandler $memberHandler */
         $memberHandler = xoops_getHandler('member');
-        $msg            = _MD_YOGURT_ERRORDURINGSAVE;
+        $msg           = _MD_YOGURT_ERRORDURINGSAVE;
         if ($memberHandler->insertUser($GLOBALS['xoopsUser'])) {
             $msg = _MD_YOGURT_PASSWORDCHANGED;
         }

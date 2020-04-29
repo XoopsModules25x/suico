@@ -295,15 +295,15 @@ class Field extends \XoopsObject
                 break;
             case 'group':
                 /* @var XoopsMemberHandler $memberHandler */ $memberHandler = \xoops_getHandler('member');
-                $options                                                      = $memberHandler->getGroupList();
-                $ret                                                          = $options[$value] ?? '';
+                $options                                                    = $memberHandler->getGroupList();
+                $ret                                                        = $options[$value] ?? '';
 
                 return $ret;
                 break;
             case 'group_multi':
                 /* @var XoopsMemberHandler $memberHandler */ $memberHandler = \xoops_getHandler('member');
-                $options                                                      = $memberHandler->getGroupList();
-                $ret                                                          = [];
+                $options                                                    = $memberHandler->getGroupList();
+                $ret                                                        = [];
                 foreach (\array_keys($options) as $key) {
                     if (\in_array($key, $value)) {
                         $ret[$key] = \htmlspecialchars($options[$key]);
@@ -409,10 +409,11 @@ class Field extends \XoopsObject
 
     public function getUserVars()
     {
-        /* @var ProfileProfileHandler $profile_handler */
+        /* @var Yogurt\ProfileHandler $profileHandler */
 
-        $profile_handler = \$helper->getHandler('Profile');
+        $helper = \XoopsModules\Yogurt\Helper::getInstance();
+        $profileHandler = $helper->getHandler('Profile');
 
-        return $profile_handler->getUserVars();
+        return $profileHandler->getUserVars();
     }
 }

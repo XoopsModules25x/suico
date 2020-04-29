@@ -13,6 +13,7 @@ namespace XoopsModules\Yogurt;
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
 /**
  * @category        Module
  * @package         yogurt
@@ -20,7 +21,6 @@ namespace XoopsModules\Yogurt;
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
- 
 
 use CriteriaElement;
 use XoopsDatabase;
@@ -28,7 +28,6 @@ use XoopsObject;
 use XoopsPersistableObjectHandler;
 
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
-
 
 /**
  * yogurt_visitorshandler class.

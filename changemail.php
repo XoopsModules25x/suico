@@ -17,6 +17,7 @@
  */
 
 use XoopsModules\Yogurt\IndexController;
+use Xmf\Request;
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_email.tpl';
 require __DIR__ . '/header.php';
@@ -27,9 +28,9 @@ require __DIR__ . '/header.php';
 $controller = new IndexController($xoopsDB, $xoopsUser, $xoopsModule);
 $nbSections = $controller->getNumbersSections();
 
-/* @var XoopsConfigHandler $config_handler */
-$config_handler             = xoops_getHandler('config');
-$GLOBALS['xoopsConfigUser'] = $config_handler->getConfigsByCat(XOOPS_CONF_USER);
+/* @var XoopsConfigHandler $configHandler */
+$configHandler             = xoops_getHandler('config');
+$GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
 
 if (!$GLOBALS['xoopsUser'] || 1 != $GLOBALS['xoopsConfigUser']['allow_chgmail']) {
     redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/', 2, _NOPERM);
@@ -45,8 +46,8 @@ if (!isset($_POST['submit']) || !isset($_POST['passwd'])) {
     $form->assign($GLOBALS['xoopsTpl']);
 } else {
     $myts   = MyTextSanitizer::getInstance();
-    $pass   = @$myts->stripSlashesGPC(trim($_POST['passwd']));
-    $email  = @$myts->stripSlashesGPC(trim($_POST['newmail']));
+    $pass   = Request::getString('passwd', '', 'POST');
+    $email  = Request::getString('newmail', '', 'POST');
     $errors = [];
     if (!password_verify($oldpass, $GLOBALS['xoopsUser']->getVar('pass', 'n'))) {
         $errors[] = _MA_YOGURT_WRONGPASSWORD;
@@ -59,7 +60,7 @@ if (!isset($_POST['submit']) || !isset($_POST['passwd'])) {
         $msg = implode('<br>', $errors);
     } else {
         //update password
-        $GLOBALS['xoopsUser']->setVar('email', trim($_POST['newmail']));
+        $GLOBALS['xoopsUser']->setVar('email', Request::getString('newmail', '', 'POST'));
         /* @var XoopsMemberHandler $memberHandler */
         $memberHandler = xoops_getHandler('member');
         if ($memberHandler->insertUser($GLOBALS['xoopsUser'])) {

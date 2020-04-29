@@ -27,23 +27,23 @@ xoops_cp_header();
 
 $op = $_REQUEST['op'] ?? 'visibility';
 
-$visibility_handler = $helper->getHandler('Visibility');
-$field_handler      = $helper->getHandler('Field');
-$fields             = $field_handler->getList();
+$visibilityHandler = $helper->getHandler('Visibility');
+$fieldHandler      = $helper->getHandler('Field');
+$fields             = $fieldHandler->getList();
 
 if (isset($_REQUEST['submit'])) {
-    $visibility = $visibility_handler->create();
+    $visibility = $visibilityHandler->create();
     $visibility->setVar('field_id', $_REQUEST['field_id']);
     $visibility->setVar('user_group', $_REQUEST['ug']);
     $visibility->setVar('profile_group', $_REQUEST['pg']);
-    $visibility_handler->insert($visibility, true);
+    $visibilityHandler->insert($visibility, true);
     redirect_header('fieldsvisibility.php', 2, sprintf(_AM_YOGURT_SAVEDSUCCESS, _AM_YOGURT_PROF_VISIBLE));
 }
 if ('del' === $op) {
     $criteria = new CriteriaCompo(new Criteria('field_id', (int)$_REQUEST['field_id']));
     $criteria->add(new Criteria('user_group', (int)$_REQUEST['ug']));
     $criteria->add(new Criteria('profile_group', (int)$_REQUEST['pg']));
-    $visibility_handler->deleteAll($criteria, true);
+    $visibilityHandler->deleteAll($criteria, true);
     redirect_header('fieldsvisibility.php', 2, sprintf(_AM_YOGURT_DELETEDSUCCESS, _AM_YOGURT_PROF_VISIBLE));
 }
 
@@ -63,12 +63,12 @@ $criteria = new CriteriaCompo();
 $criteria->setSort('field_id, user_group, profile_group');
 $criteria->setOrder('DESC');
 
-$visibilities = $visibility_handler->getAllByFieldId($criteria);
+$visibilities = $visibilityHandler->getAllByFieldId($criteria);
 
 /* @var XoopsMemberHandler $memberHandler */
 $memberHandler = xoops_getHandler('member');
-$groups         = $memberHandler->getGroupList();
-$groups[0]      = _AM_YOGURT_FIELDVISIBLETOALL;
+$groups        = $memberHandler->getGroupList();
+$groups[0]     = _AM_YOGURT_FIELDVISIBLETOALL;
 asort($groups);
 
 $GLOBALS['xoopsTpl']->assign('fields', $fields);
@@ -94,7 +94,7 @@ $add_form->addElement($sel_pg);
 $add_form->addElement(new XoopsFormButton('', 'submit', _ADD, 'submit'));
 $add_form->assign($GLOBALS['xoopsTpl']);
 
-$GLOBALS['xoopsTpl']->display('db:admin/yogurt_admin_profilefieldsvisibility.tpl');
+$GLOBALS['xoopsTpl']->display('db:admin/yogurt_admin_fieldsvisibility.tpl');
 
 include_once __DIR__ . '/admin_footer.php';
 //xoops_cp_footer();

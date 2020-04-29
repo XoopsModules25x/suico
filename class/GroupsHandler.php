@@ -369,7 +369,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
 
             $row = $GLOBALS['xoopsDB']->fetchArray($queryresult);
 
-            $grouptotalmembers = $row['grouptotalmembers'];
+            $grouptotalmembers            = $row['grouptotalmembers'];
             $ret[$i]['grouptotalmembers'] = $grouptotalmembers . ' ' . \_MD_YOGURT_GROUPMEMBERS;
             $i++;
         }
@@ -447,7 +447,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $field_url     = new XoopsFormFile(\_MD_YOGURT_GROUP_IMAGE, 'group_img', $maxbytes);
         $field_title   = new XoopsFormText(\_MD_YOGURT_GROUP_TITLE, 'group_title', 35, 55);
         $field_desc    = new XoopsFormText(\_MD_YOGURT_GROUP_DESC, 'group_desc', 35, 55);
-        $field_marker = new XoopsFormHidden('marker', '1');
+        $field_marker  = new XoopsFormHidden('marker', '1');
         $buttonSend    = new XoopsFormButton('', 'submit_button', \_MD_YOGURT_UPLOADGROUP, 'submit');
         $field_warning = new XoopsFormLabel(\sprintf(\_MD_YOGURT_YOU_CAN_UPLOAD, $maxbytes / 1024));
 
@@ -484,14 +484,14 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $field_url->setExtra('style="visibility:hidden;"');
         $field_title   = new XoopsFormText(\_MD_YOGURT_GROUP_TITLE, 'title', 35, 55, $group->getVar('group_title'));
         $field_desc    = new XoopsFormTextArea(\_MD_YOGURT_GROUP_DESC, 'desc', $group->getVar('group_desc'));
-        $field_marker = new XoopsFormHidden('marker', '1');
+        $field_marker  = new XoopsFormHidden('marker', '1');
         $buttonSend    = new XoopsFormButton('', 'submit_button', \_MD_YOGURT_UPLOADGROUP, 'submit');
         $field_warning = new XoopsFormLabel(\sprintf(\_MD_YOGURT_YOU_CAN_UPLOAD, $maxbytes / 1024));
 
         $field_oldpicture = new XoopsFormLabel(
             \_MD_YOGURT_GROUP_IMAGE, '<img src="' . \XOOPS_UPLOAD_URL . '/' . $group->getVar(
-                                      'group_img'
-                                  ) . '">'
+                                       'group_img'
+                                   ) . '">'
         );
 
         $field_maintainimage = new XoopsFormLabel(

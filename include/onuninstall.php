@@ -11,6 +11,7 @@ declare(strict_types=1);
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
 /**
  * @category        Module
  * @package         yogurt
@@ -18,7 +19,6 @@ declare(strict_types=1);
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
- 
 
 use XoopsModules\Yogurt;
 

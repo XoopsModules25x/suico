@@ -24,7 +24,7 @@
  * Get {@link XoopsThemeForm} for adding/editing fields
  *
  * @param Yogurt\Field $field  {@link Yogurt\Field} object to get edit form for
- * @param mixed  $action URL to submit to - or false for $_SERVER['REQUEST_URI']
+ * @param mixed        $action URL to submit to - or false for $_SERVER['REQUEST_URI']
  *
  * @return object
  */
@@ -33,7 +33,7 @@ use XoopsModules\Yogurt;
 
 /**
  * @param Yogurt\Field $field
- * @param bool           $action
+ * @param bool         $action
  * @return \XoopsThemeForm
  */
 function yogurt_getFieldForm(Yogurt\Field $field, $action = false)
@@ -53,10 +53,10 @@ function yogurt_getFieldForm(Yogurt\Field $field, $action = false)
     if (!$field->isNew()) {
         $fieldcat_id = $field->getVar('cat_id');
     }
-    $category_handler = $helper->getHandler('Category');
+    $categoryHandler = $helper->getHandler('Category');
     $cat_select       = new XoopsFormSelect(_AM_YOGURT_CATEGORY, 'field_category', $fieldcat_id);
     $cat_select->addOption(0, _AM_YOGURT_DEFAULT);
-    $cat_select->addOptionArray($category_handler->getList());
+    $cat_select->addOptionArray($categoryHandler->getList());
     $form->addElement($cat_select);
     $form->addElement(new XoopsFormText(_AM_YOGURT_WEIGHT, 'field_weight', 10, 10, $field->getVar('field_weight', 'e')));
     if ($field->getVar('field_config') || $field->isNew()) {
@@ -232,8 +232,8 @@ function yogurt_getFieldForm(Yogurt\Field $field, $action = false)
                 break;
         }
     }
-    /* @var XoopsGroupPermHandler $groupperm_handler */
-    $groupperm_handler = xoops_getHandler('groupperm');
+    /* @var XoopsGroupPermHandler $grouppermHandler */
+    $grouppermHandler = xoops_getHandler('groupperm');
     $searchable_types  = [
         'textbox',
         'select',
@@ -245,21 +245,21 @@ function yogurt_getFieldForm(Yogurt\Field $field, $action = false)
         'language',
     ];
     if (in_array($field->getVar('field_type'), $searchable_types)) {
-        $search_groups = $groupperm_handler->getGroupIds('profile_search', $field->getVar('field_id'), $GLOBALS['xoopsModule']->getVar('mid'));
+        $search_groups = $grouppermHandler->getGroupIds('profile_search', $field->getVar('field_id'), $GLOBALS['xoopsModule']->getVar('mid'));
         $form->addElement(new XoopsFormSelectGroup(_AM_YOGURT_PROF_SEARCH, 'profile_search', true, $search_groups, 5, true));
     }
     if ($field->getVar('field_edit') || $field->isNew()) {
         $editable_groups = [];
         if (!$field->isNew()) {
             //Load groups
-            $editable_groups = $groupperm_handler->getGroupIds('profile_edit', $field->getVar('field_id'), $GLOBALS['xoopsModule']->getVar('mid'));
+            $editable_groups = $grouppermHandler->getGroupIds('profile_edit', $field->getVar('field_id'), $GLOBALS['xoopsModule']->getVar('mid'));
         }
         $form->addElement(new XoopsFormSelectGroup(_AM_YOGURT_PROF_EDITABLE, 'profile_edit', false, $editable_groups, 5, true));
         $form->addElement(new XoopsFormRadioYN(_AM_YOGURT_REQUIRED, 'field_required', $field->getVar('field_required', 'e')));
         $regstep_select = new XoopsFormSelect(_AM_YOGURT_PROF_REGISTER, 'step_id', $field->getVar('step_id', 'e'));
         $regstep_select->addOption(0, _NO);
-        $regstep_handler = $helper->getHandler('Regstep');
-        $regstep_select->addOptionArray($regstep_handler->getList());
+        $regstepHandler = $helper->getHandler('Regstep');
+        $regstep_select->addOptionArray($regstepHandler->getList());
         $form->addElement($regstep_select);
     }
     $form->addElement(new XoopsFormHidden('op', 'save'));
@@ -289,9 +289,9 @@ function yogurt_getRegisterForm(XoopsUser $user, $profile, $step = null)
 
     include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
     if (empty($GLOBALS['xoopsConfigUser'])) {
-        /* @var XoopsConfigHandler $config_handler */
-        $config_handler             = xoops_getHandler('config');
-        $GLOBALS['xoopsConfigUser'] = $config_handler->getConfigsByCat(XOOPS_CONF_USER);
+        /* @var XoopsConfigHandler $configHandler */
+        $configHandler             = xoops_getHandler('config');
+        $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
     }
     $action    = $_SERVER['REQUEST_URI'];
     $step_no   = $step['step_no'];
@@ -322,8 +322,8 @@ function yogurt_getRegisterForm(XoopsUser $user, $profile, $step = null)
     }
 
     // Dynamic fields
-    $profile_handler              = $helper->getHandler('Profile');
-    $fields                       = $profile_handler->loadFields();
+    $profileHandler              = $helper->getHandler('Profile');
+    $fields                       = $profileHandler->loadFields();
     $_SESSION['profile_required'] = [];
     foreach (array_keys($fields) as $i) {
         if ($fields[$i]->getVar('step_id') == $step['step_id']) {
@@ -341,8 +341,8 @@ function yogurt_getRegisterForm(XoopsUser $user, $profile, $step = null)
     ksort($elements);
 
     // Get categories
-    $cat_handler = $helper->getHandler('Category');
-    $categories  = $cat_handler->getObjects(null, true, false);
+    $categoryHandler = $helper->getHandler('Category');
+    $categories  = $categoryHandler->getObjects(null, true, false);
 
     foreach (array_keys($elements) as $k) {
         array_multisort($weights[$k], SORT_ASC, array_keys($elements[$k]), SORT_ASC, $elements[$k]);
@@ -391,37 +391,38 @@ function yogurt_getRegisterForm(XoopsUser $user, $profile, $step = null)
  */
 function yogurt_getUserForm(XoopsUser $user, Yogurt\Profile $profile = null, $action = false)
 {
+    $helper = \XoopsModules\Yogurt\Helper::getInstance();
     if (!$action) {
         $action = $_SERVER['REQUEST_URI'];
     }
     if (empty($GLOBALS['xoopsConfigUser'])) {
-        /* @var XoopsConfigHandler $config_handler */
-        $config_handler             = xoops_getHandler('config');
-        $GLOBALS['xoopsConfigUser'] = $config_handler->getConfigsByCat(XOOPS_CONF_USER);
+        /* @var XoopsConfigHandler $configHandler */
+        $configHandler             = xoops_getHandler('config');
+        $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
     }
 
-    include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
+    require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
 
     $title = $user->isNew() ? _AM_YOGURT_ADDUSER : _US_EDITPROFILE;
 
     $form = new XoopsThemeForm($title, 'userinfo', $action, 'post', true);
 
-    /* @var ProfileHandler $profile_handler */
+    /* @var ProfileHandler $profileHandler */
 
-    $profile_handler = $helper->getHandler('Profile');
+    $profileHandler = $helper->getHandler('Profile');
     // Dynamic fields
     if (!$profile) {
-        /* @var ProfileHandler $profile_handler */
+        /* @var ProfileHandler $profileHandler */
 
-        $profile_handler = $helper->getHandler('Profile');
-        $profile         = $profile_handler->get($user->getVar('uid'));
+        $profileHandler = $helper->getHandler('Profile');
+        $profile         = $profileHandler->get($user->getVar('uid'));
     }
     // Get fields
-    $fields = $profile_handler->loadFields();
+    $fields = $profileHandler->loadFields();
     // Get ids of fields that can be edited
     /* @var  XoopsGroupPermHandler $grouppermHandler */
-    $grouppermHandler   = xoops_getHandler('groupperm');
-    $editable_fields = $grouppermHandler->getItemIds('profile_edit', $GLOBALS['xoopsUser']->getGroups(), $GLOBALS['xoopsModule']->getVar('mid'));
+    $grouppermHandler = xoops_getHandler('groupperm');
+    $editable_fields  = $grouppermHandler->getItemIds('profile_edit', $GLOBALS['xoopsUser']->getGroups(), $GLOBALS['xoopsModule']->getVar('mid'));
 
     if ($user->isNew() || $GLOBALS['xoopsUser']->isAdmin()) {
         $elements[0][] = [
@@ -462,9 +463,9 @@ function yogurt_getUserForm(XoopsUser $user, Yogurt\Profile $profile = null, $ac
     $elements[0][] = ['element' => new XoopsFormHidden('op', 'save'), 'required' => 0];
     $weights[0][]  = 0;
 
-    $cat_handler    = $helper->getHandler('Category');
+    $categoryHandler    = $helper->getHandler('Category');
     $categories     = [];
-    $all_categories = $cat_handler->getObjects(null, true, false);
+    $all_categories = $categoryHandler->getObjects(null, true, false);
     $count_fields   = count($fields);
 
     foreach (array_keys($fields) as $i) {
@@ -538,9 +539,9 @@ function yogurt_getStepForm(Yogurt\Regstep $step = null, $action = false)
         $action = $_SERVER['REQUEST_URI'];
     }
     if (empty($GLOBALS['xoopsConfigUser'])) {
-        /* @var XoopsConfigHandler $config_handler */
-        $config_handler             = xoops_getHandler('config');
-        $GLOBALS['xoopsConfigUser'] = $config_handler->getConfigsByCat(XOOPS_CONF_USER);
+        /* @var XoopsConfigHandler $configHandler */
+        $configHandler             = xoops_getHandler('config');
+        $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
     }
     include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
 

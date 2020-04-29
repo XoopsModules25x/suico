@@ -36,7 +36,7 @@ switch ($op) {
         $criteria->setSort('cat_weight');
         $criteria->setOrder('ASC');
         $GLOBALS['xoopsTpl']->assign('categories', $handler->getObjects($criteria, true, false));
-        $template_main = 'admin/yogurt_admin_profilefieldscategory.tpl';
+        $template_main = 'admin/yogurt_admin_fieldscategory.tpl';
         break;
     case 'new':
         include_once dirname(__DIR__) . '/include/forms.php';

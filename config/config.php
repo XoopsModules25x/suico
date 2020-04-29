@@ -18,8 +18,7 @@ declare(strict_types=1);
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
- 
- 
+
 $moduleDirName      = basename(
     dirname(__DIR__)
 );

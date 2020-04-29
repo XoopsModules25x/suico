@@ -242,9 +242,9 @@ define('MI_YOGURT_ADMENU14', 'Feedback');
 define('MI_YOGURT_ADMENU15', 'Migrate');
 define('MI_YOGURT_ADMENU16', 'About');
 define('MI_YOGURT_ADMENU17', 'User');
-define('MI_YOGURT_ADMENU18', 'Profile Category');
-define('MI_YOGURT_ADMENU19', 'Profile Fields');
-define('MI_YOGURT_ADMENU20', 'Registration Steps');
+define('MI_YOGURT_ADMENU18', 'Category');
+define('MI_YOGURT_ADMENU19', 'Fields');
+define('MI_YOGURT_ADMENU20', 'Reg-Steps');
 define('MI_YOGURT_ADMENU21', 'Fields Permission');
 
 //Config

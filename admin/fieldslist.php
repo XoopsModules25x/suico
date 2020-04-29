@@ -17,6 +17,9 @@
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
+
+use XoopsModules\Yogurt;
+
 include_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 $indexAdmin = new ModuleAdmin();
@@ -27,23 +30,23 @@ echo $indexAdmin->addNavigation(basename(__FILE__));
 echo $indexAdmin->renderButton('right', '');
 
 $op = $_REQUEST['op'] ?? (isset($_REQUEST['id']) ? 'edit' : 'list');
-/* @var XoopsModuleHandler $profilefield_handler */
-$yogurtfield_handler = $helper->getHandler('Field');
+/* @var Yogurt\FieldHandler $fieldHandler */
+$fieldHandler = $helper->getHandler('Field');
 
 switch ($op) {
     default:
     case 'list':
-        $fields = $yogurtfield_handler->getObjects(null, true, false);
+        $fields = $fieldHandler->getObjects(null, true, false);
 
-        /* @var XoopsModuleHandler $module_handler */
-        $module_handler = xoops_getHandler('module');
-        $modules        = $module_handler->getObjects(null, true);
+        /* @var XoopsModuleHandler $moduleHandler */
+        $moduleHandler = xoops_getHandler('module');
+        $modules        = $moduleHandler->getObjects(null, true);
 
-        /* @var XoopsModuleHandler $cat_handler */
-        $cat_handler = $helper->getHandler('Category');
+        /* @var Yogurt\CategoryHandler $categoryHandler */
+        $categoryHandler = $helper->getHandler('Category');
         $criteria    = new CriteriaCompo();
         $criteria->setSort('cat_weight');
-        $cats = $cat_handler->getObjects($criteria, true);
+        $cats = $categoryHandler->getObjects($criteria, true);
         unset($criteria);
 
         $categories[0] = _AM_YOGURT_DEFAULT;
@@ -101,16 +104,16 @@ switch ($op) {
         ksort($categories);
         $GLOBALS['xoopsTpl']->assign('fieldcategories', $categories);
         $GLOBALS['xoopsTpl']->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
-        $template_main = 'admin/yogurt_admin_profilefieldslist.tpl';
+        $template_main = 'admin/yogurt_admin_fieldslist.tpl';
         break;
     case 'new':
         include_once dirname(__DIR__) . '/include/forms.php';
-        $obj  = $yogurtfield_handler->create();
+        $obj  = $fieldHandler->create();
         $form = yogurt_getFieldForm($obj);
         $form->display();
         break;
     case 'edit':
-        $obj = $yogurtfield_handler->get($_REQUEST['id']);
+        $obj = $fieldHandler->get($_REQUEST['id']);
         if (!$obj->getVar('field_config') && !$obj->getVar('field_show') && !$obj->getVar('field_edit')) { //If no configs exist
             redirect_header('fieldslist.php', 2, _AM_YOGURT_FIELDNOTCONFIGURABLE);
         }
@@ -137,13 +140,13 @@ switch ($op) {
             if (count($ids) > 0) {
                 $errors = [];
                 //if there are changed fields, fetch the fieldcategory objects
-                /* @var XoopsModuleHandler $field_handler */
-                $field_handler = $helper->getHandler('Field');
-                $fields        = $field_handler->getObjects(new Criteria('field_id', '(' . implode(',', $ids) . ')', 'IN'), true);
+                /* @var XoopsModuleHandler $fieldHandler */
+                $fieldHandler = $helper->getHandler('Field');
+                $fields        = $fieldHandler->getObjects(new Criteria('field_id', '(' . implode(',', $ids) . ')', 'IN'), true);
                 foreach ($ids as $i) {
                     $fields[$i]->setVar('field_weight', (int)$weight[$i]);
                     $fields[$i]->setVar('cat_id', (int)$category[$i]);
-                    if (!$field_handler->insert($fields[$i])) {
+                    if (!$fieldHandler->insert($fields[$i])) {
                         $errors = array_merge($errors, $fields[$i]->getErrors());
                     }
                 }
@@ -162,12 +165,12 @@ switch ($op) {
         }
         $redirect_to_edit = false;
         if (isset($_REQUEST['id'])) {
-            $obj = $yogurtfield_handler->get($_REQUEST['id']);
+            $obj = $fieldHandler->get($_REQUEST['id']);
             if (!$obj->getVar('field_config') && !$obj->getVar('field_show') && !$obj->getVar('field_edit')) { //If no configs exist
                 redirect_header('admin.php', 2, _AM_YOGURT_FIELDNOTCONFIGURABLE);
             }
         } else {
-            $obj = $yogurtfield_handler->create();
+            $obj = $fieldHandler->create();
             $obj->setVar('field_name', $_REQUEST['field_name']);
             $obj->setVar('field_moduleid', $GLOBALS['xoopsModule']->getVar('mid'));
             $obj->setVar('field_show', 1);
@@ -227,9 +230,9 @@ switch ($op) {
         isset($_REQUEST['step_id'])) {
             $obj->setVar('step_id', $_REQUEST['step_id']);
         }
-        if ($yogurtfield_handler->insert($obj)) {
-            /* @var XoopsGroupPermHandler $groupperm_handler */
-            $groupperm_handler = xoops_getHandler('groupperm');
+        if ($fieldHandler->insert($obj)) {
+            /* @var XoopsGroupPermHandler $grouppermHandler */
+            $grouppermHandler = xoops_getHandler('groupperm');
 
             $perm_arr = [];
             if ($obj->getVar('field_show')) {
@@ -248,7 +251,7 @@ switch ($op) {
                     $criteria->add(new Criteria('gperm_itemid', (int)$obj->getVar('field_id')));
                     $criteria->add(new Criteria('gperm_modid', (int)$GLOBALS['xoopsModule']->getVar('mid')));
                     if (isset($_REQUEST[$perm]) && is_array($_REQUEST[$perm])) {
-                        $perms = $groupperm_handler->getObjects($criteria);
+                        $perms = $grouppermHandler->getObjects($criteria);
                         if (count($perms) > 0) {
                             foreach (array_keys($perms) as $i) {
                                 $groups[$perms[$i]->getVar('gperm_groupid')] = &$perms[$i];
@@ -259,23 +262,23 @@ switch ($op) {
                         foreach ($_REQUEST[$perm] as $groupid) {
                             $groupid = (int)$groupid;
                             if (!isset($groups[$groupid])) {
-                                $perm_obj = $groupperm_handler->create();
+                                $perm_obj = $grouppermHandler->create();
                                 $perm_obj->setVar('gperm_name', $perm);
                                 $perm_obj->setVar('gperm_itemid', (int)$obj->getVar('field_id'));
                                 $perm_obj->setVar('gperm_modid', $GLOBALS['xoopsModule']->getVar('mid'));
                                 $perm_obj->setVar('gperm_groupid', $groupid);
-                                $groupperm_handler->insert($perm_obj);
+                                $grouppermHandler->insert($perm_obj);
                                 unset($perm_obj);
                             }
                         }
                         $removed_groups = array_diff(array_keys($groups), $_REQUEST[$perm]);
                         if (count($removed_groups) > 0) {
                             $criteria->add(new Criteria('gperm_groupid', '(' . implode(',', $removed_groups) . ')', 'IN'));
-                            $groupperm_handler->deleteAll($criteria);
+                            $grouppermHandler->deleteAll($criteria);
                         }
                         unset($groups);
                     } else {
-                        $groupperm_handler->deleteAll($criteria);
+                        $grouppermHandler->deleteAll($criteria);
                     }
                     unset($criteria);
                 }
@@ -289,7 +292,7 @@ switch ($op) {
         $form->display();
         break;
     case 'delete':
-        $obj = $yogurtfield_handler->get($_REQUEST['id']);
+        $obj = $fieldHandler->get($_REQUEST['id']);
         if (!$obj->getVar('field_config')) {
             redirect_header('index.php', 2, _AM_YOGURT_FIELDNOTCONFIGURABLE);
         }
@@ -297,7 +300,7 @@ switch ($op) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('fieldslist.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }
-            if ($yogurtfield_handler->delete($obj)) {
+            if ($fieldHandler->delete($obj)) {
                 redirect_header('fieldslist.php', 3, sprintf(_AM_YOGURT_DELETEDSUCCESS, _AM_YOGURT_FIELD));
             } else {
                 echo $obj->getHtmlErrors();
@@ -319,7 +322,7 @@ switch ($op) {
             $field_id = (int)$_REQUEST['field_id'];
             if (isset($_REQUEST['field_required'])) {
                 $field_required = (int)$_REQUEST['field_required'];
-                yogurt_visible_toggle($field_id, $field_required);
+                yogurt_visible_toggle($field_id, $field_required, $helper);
             }
         }
         break;
@@ -333,13 +336,13 @@ if (isset($template_main)) {
  * @param $field_id
  * @param $field_required
  */
-function yogurt_visible_toggle($field_id, $field_required)
+function yogurt_visible_toggle($field_id, $field_required, $helper)
 {
     $field_required = (1 == $field_required) ? 0 : 1;
-    $this_handler   = $helper->getHandler('Field');
-    $obj            = $this_handler->get($field_id);
+    $fieldHandler   = $helper->getHandler('Field');
+    $obj            = $fieldHandler->get($field_id);
     $obj->setVar('field_required', $field_required);
-    if ($this_handler->insert($obj, true)) {
+    if ($fieldHandler->insert($obj, true)) {
         redirect_header('fieldslist.php', 1, _AM_YOGURT_REQUIRED_TOGGLE_SUCCESS);
     } else {
         redirect_header('fieldslist.php', 1, _AM_YOGURT_REQUIRED_TOGGLE_FAILED);

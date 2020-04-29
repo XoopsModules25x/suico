@@ -22,7 +22,6 @@ namespace XoopsModules\Yogurt;
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
-
 /**
  * Class RegstepHandler
  */
@@ -49,9 +48,9 @@ class RegstepHandler extends \XoopsPersistableObjectHandler
     public function delete(\XoopsObject $obj, $force = false)
     {
         if (parent::delete($obj, $force)) {
-            $field_handler = \$helper->getHandler('Field');
+            $fieldHandler = \XoopsModules\Yogurt\Helper::getInstance()->getHandler('Field');
 
-            return $field_handler->updateAll('step_id', 0, new \Criteria('step_id', $obj->getVar('step_id')), $force);
+            return $fieldHandler->updateAll('step_id', 0, new \Criteria('step_id', $obj->getVar('step_id')), $force);
         }
 
         return false;

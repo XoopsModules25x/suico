@@ -38,21 +38,21 @@ $controller = new IndexController($xoopsDB, $xoopsUser);
  */
 $nbSections = $controller->getNumbersSections();
 
-$uid = $controller->uidOwner;
+$uid        = $controller->uidOwner;
 $categories = [];
 
 /* @var  XoopsGroupPermHandler $grouppermHandler */
 $grouppermHandler = xoops_getHandler('groupperm');
-$groups        = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : [XOOPS_GROUP_ANONYMOUS];
+$groups           = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : [XOOPS_GROUP_ANONYMOUS];
 
 if (is_object($GLOBALS['xoopsUser']) && $uid == $GLOBALS['xoopsUser']->getVar('uid')) {
     //disable cache
     $GLOBALS['xoopsConfig']['module_cache'][$GLOBALS['xoopsModule']->getVar('mid')] = 0;
     include $GLOBALS['xoops']->path('header.php');
 
-    /* @var XoopsConfigHandler $config_handler */
-    $config_handler             = xoops_getHandler('config');
-    $GLOBALS['xoopsConfigUser'] = $config_handler->getConfigsByCat(XOOPS_CONF_USER);
+    /* @var XoopsConfigHandler $configHandler */
+    $configHandler             = xoops_getHandler('config');
+    $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
 
     $GLOBALS['xoopsTpl']->assign('user_ownpage', true);
     if (1 == $GLOBALS['xoopsConfigUser']['self_delete']) {
@@ -66,7 +66,7 @@ if (is_object($GLOBALS['xoopsUser']) && $uid == $GLOBALS['xoopsUser']->getVar('u
 } else {
     /* @var XoopsMemberHandler $memberHandler */
     $memberHandler = xoops_getHandler('member');
-    $thisUser       = $memberHandler->getUser($uid);
+    $thisUser      = $memberHandler->getUser($uid);
 
     // Redirect if not a user or not active and the current user is not admin
     if (!is_object($thisUser) || (!$thisUser->isActive() && (!$GLOBALS['xoopsUser'] || !$GLOBALS['xoopsUser']->isAdmin()))) {
@@ -91,7 +91,7 @@ if (is_object($GLOBALS['xoopsUser']) && $uid == $GLOBALS['xoopsUser']->getVar('u
     $groups_thisUser_nonbasic = array_diff($groups_thisUser, $groups_basic);
     $groups_xoopsUser         = $groups;
     /* @var  XoopsGroupPermHandler $grouppermHandler */
-    $grouppermHandler     = xoops_getHandler('groupperm');
+    $grouppermHandler  = xoops_getHandler('groupperm');
     $groups_accessible = $grouppermHandler->getItemIds('profile_access', $groups_xoopsUser, $GLOBALS['xoopsModule']->getVar('mid'));
 
     $rejected = false;
@@ -123,16 +123,16 @@ if (is_object($GLOBALS['xoopsUser']) && $GLOBALS['xoopsUser']->isAdmin()) {
 
 // Dynamic User Profiles
 $thisUsergroups     = $thisUser->getGroups();
-$visibility_handler = $helper->getHandler('Visibility');
+$visibilityHandler = $helper->getHandler('Visibility');
 //search for visible Fields or null for none
-$field_ids_visible = $visibility_handler->getVisibleFields($thisUsergroups, $groups);
+$field_ids_visible = $visibilityHandler->getVisibleFields($thisUsergroups, $groups);
 
-$profile_handler = $helper->getHandler('Profile');
-$fields          = $profile_handler->loadFields();
-$cat_handler     = $helper->getHandler('Category');
+$profileHandler = $helper->getHandler('Profile');
+$fields          = $profileHandler->loadFields();
+$categoryHandler     = $helper->getHandler('Category');
 $cat_crit        = new CriteriaCompo();
 $cat_crit->setSort('cat_weight');
-$cats = $cat_handler->getObjects($cat_crit, true, false);
+$cats = $categoryHandler->getObjects($cat_crit, true, false);
 unset($cat_crit);
 
 $avatar = '';
@@ -144,8 +144,8 @@ foreach (array_keys($cats) as $i) {
     $categories[$i] = $cats[$i];
 }
 
-$profile_handler = $helper->getHandler('Profile');
-$profile         = $profile_handler->get($thisUser->getVar('uid'));
+$profileHandler = $helper->getHandler('Profile');
+$profile         = $profileHandler->get($thisUser->getVar('uid'));
 // Add dynamic fields
 foreach (array_keys($fields) as $i) {
     //If field is not visible, skip

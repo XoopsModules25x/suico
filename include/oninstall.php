@@ -11,6 +11,7 @@ declare(strict_types=1);
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
 /**
  * @category        Module
  * @package         yogurt
@@ -255,8 +256,8 @@ function yogurt_install_addField($name, $title, $description, $category, $type, 
 {
     global $module_id;
 
-    $yogurtfield_handler = $helper->getHandler('Field');
-    $obj                 = $yogurtfield_handler->create();
+    $fieldHandler = Helper::getInstance()->getHandler('Field');
+    $obj                 = $fieldHandler->create();
     $obj->setVar('field_name', $name, true);
     $obj->setVar('field_moduleid', $module_id, true);
     $obj->setVar('field_show', 1);
@@ -274,7 +275,7 @@ function yogurt_install_addField($name, $title, $description, $category, $type, 
     $obj->setVar('field_weight', $weight, true);
     $obj->setVar('cat_id', $category, true);
     $obj->setVar('step_id', $step_id, true);
-    $yogurtfield_handler->insert($obj);
+    $fieldHandler->insert($obj);
 
     yogurt_install_setPermissions($obj->getVar('field_id'), $module_id, $canedit, $visible);
 

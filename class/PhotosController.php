@@ -14,8 +14,6 @@ namespace XoopsModules\Yogurt;
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 
-
-
 /**
  * @category        Module
  * @package         yogurt
@@ -23,9 +21,9 @@ namespace XoopsModules\Yogurt;
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
- 
+
 use Criteria;
- 
+
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once XOOPS_ROOT_PATH . '/class/criteria.php';

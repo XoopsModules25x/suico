@@ -51,12 +51,12 @@ switch ($op) {
         $sortby_arr = [];
 
         // Dynamic fields
-        $profile_handler = $helper->getHandler('Profile');
+        $profileHandler = $helper->getHandler('Profile');
         // Get fields
-        $fields = $profile_handler->loadFields();
+        $fields = $profileHandler->loadFields();
         // Get ids of fields that can be searched
         /* @var  XoopsGroupPermHandler $grouppermHandler */
-        $grouppermHandler     = xoops_getHandler('groupperm');
+        $grouppermHandler  = xoops_getHandler('groupperm');
         $searchable_fields = $grouppermHandler->getItemIds('profile_search', $groups, $GLOBALS['xoopsModule']->getVar('mid'));
 
         include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
@@ -155,8 +155,8 @@ switch ($op) {
         //added count user
         /* @var XoopsMemberHandler $memberHandler */
         $memberHandler = xoops_getHandler('member');
-        $acttotal       = $memberHandler->getUserCount(new Criteria('level', 0, '>'));
-        $total          = sprintf(_MD_YOGURT_ACTUS, "<span style='color:#ff0000;'>{$acttotal}</span>");
+        $acttotal      = $memberHandler->getUserCount(new Criteria('level', 0, '>'));
+        $total         = sprintf(_MD_YOGURT_ACTUS, "<span style='color:#ff0000;'>{$acttotal}</span>");
         $GLOBALS['xoopsTpl']->assign('total_users', $total);
         break;
     case 'results':
@@ -176,12 +176,12 @@ switch ($op) {
         /* @var XoopsMemberHandler $memberHandler */
         $memberHandler = xoops_getHandler('member');
         // Dynamic fields
-        $profile_handler = $helper->getHandler('Profile');
+        $profileHandler = $helper->getHandler('Profile');
         // Get fields
-        $fields = $profile_handler->loadFields();
+        $fields = $profileHandler->loadFields();
         // Get ids of fields that can be searched
         /* @var  XoopsGroupPermHandler $grouppermHandler */
-        $grouppermHandler     = xoops_getHandler('groupperm');
+        $grouppermHandler  = xoops_getHandler('groupperm');
         $searchable_fields = $grouppermHandler->getItemIds('profile_search', $groups, $GLOBALS['xoopsModule']->getVar('mid'));
         $searchvars        = [];
         $search_url        = [];
@@ -391,7 +391,7 @@ switch ($op) {
         $start = isset($_REQUEST['start']) ? (int)$_REQUEST['start'] : 0;
         $criteria->setStart($start);
 
-        [$users, $profiles, $total_users] = $profile_handler->search($criteria, $searchvars, $searchgroups);
+        [$users, $profiles, $total_users] = $profileHandler->search($criteria, $searchvars, $searchgroups);
 
         $total = sprintf(_MD_YOGURT_FOUNDUSER, "<span class='red'>{$total_users}</span>") . ' ';
         $GLOBALS['xoopsTpl']->assign('total_users', $total);

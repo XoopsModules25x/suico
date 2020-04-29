@@ -82,9 +82,9 @@ class FieldHandler extends \XoopsPersistableObjectHandler
             return false;
         }
 
-        /* @var ProfileProfileHandler $profile_handler */
+        /* @var ProfileProfileHandler $profileHandler */
 
-        $profile_handler = \XoopsModules\Yogurt\Helper::getInstance()->getHandler('Profile');
+        $profileHandler = \XoopsModules\Yogurt\Helper::getInstance()->getHandler('Profile');
 
         $obj->setVar('field_name', \str_replace(' ', '_', $obj->getVar('field_name')));
 
@@ -194,7 +194,7 @@ class FieldHandler extends \XoopsPersistableObjectHandler
                     break;
             }
 
-            $sql = 'ALTER TABLE `' . $profile_handler->table . '` ' . $changetype . ' `' . $obj->cleanVars['field_name'] . '` ' . $type . $maxlengthstring . ' NULL';
+            $sql = 'ALTER TABLE `' . $profileHandler->table . '` ' . $changetype . ' `' . $obj->cleanVars['field_name'] . '` ' . $type . $maxlengthstring . ' NULL';
 
             $result = $force ? $this->db->queryF($sql) : $this->db->query($sql);
 
@@ -230,13 +230,13 @@ class FieldHandler extends \XoopsPersistableObjectHandler
             return false;
         }
 
-        /* @var ProfileProfileHandler $profile_handler */
+        /* @var ProfileProfileHandler $profileHandler */
 
-        $profile_handler = \XoopsModules\Yogurt\Helper::getInstance()->getHandler('Profile');
+        $profileHandler = \XoopsModules\Yogurt\Helper::getInstance()->getHandler('Profile');
 
         // remove column from table
 
-        $sql = 'ALTER TABLE ' . $profile_handler->table . ' DROP `' . $obj->getVar('field_name', 'n') . '`';
+        $sql = 'ALTER TABLE ' . $profileHandler->table . ' DROP `' . $obj->getVar('field_name', 'n') . '`';
 
         if ($this->db->query($sql)) {
             //change this to update the cached field information storage
@@ -246,24 +246,24 @@ class FieldHandler extends \XoopsPersistableObjectHandler
             }
 
             if ($obj->getVar('field_show') || $obj->getVar('field_edit')) {
-                /* @var XoopsModuleHandler $module_handler */
+                /* @var XoopsModuleHandler $moduleHandler */
 
-                $module_handler = \xoops_getHandler('module');
+                $moduleHandler = \xoops_getHandler('module');
 
-                $yogurt_module = $module_handler->getByDirname('yogurt');
+                $yogurt_module = $moduleHandler->getByDirname('yogurt');
 
                 if (\is_object($yogurt_module)) {
                     // Remove group permissions
 
-                    /* @var XoopsGroupPermHandler $groupperm_handler */
+                    /* @var XoopsGroupPermHandler $grouppermHandler */
 
-                    $groupperm_handler = \xoops_getHandler('groupperm');
+                    $grouppermHandler = \xoops_getHandler('groupperm');
 
                     $criteria = new \CriteriaCompo(new \Criteria('gperm_modid', $yogurt_module->getVar('mid')));
 
                     $criteria->add(new \Criteria('gperm_itemid', $obj->getVar('field_id')));
 
-                    return $groupperm_handler->deleteAll($criteria);
+                    return $grouppermHandler->deleteAll($criteria);
                 }
             }
         }

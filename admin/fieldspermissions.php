@@ -68,15 +68,15 @@ $form = new XoopsGroupPermForm($title_of_form, $module_id, $perm_name, $perm_des
 if ('access' === $op) {
     /* @var XoopsMemberHandler $memberHandler */
     $memberHandler = xoops_getHandler('member');
-    $glist          = $memberHandler->getGroupList();
+    $glist         = $memberHandler->getGroupList();
     foreach (array_keys($glist) as $i) {
         if (XOOPS_GROUP_ANONYMOUS != $i) {
             $form->addItem($i, $glist[$i]);
         }
     }
 } else {
-    $profile_handler = $helper->getHandler('Profile');
-    $fields          = $profile_handler->loadFields();
+    $profileHandler = $helper->getHandler('Profile');
+    $fields          = $profileHandler->loadFields();
 
     if ('search' !== $op) {
         foreach (array_keys($fields) as $i) {

@@ -31,7 +31,7 @@ $handler = $helper->getHandler('Regstep');
 switch ($op) {
     case 'list':
         $GLOBALS['xoopsTpl']->assign('steps', $handler->getObjects(null, true, false));
-        $template_main = 'admin/yogurt_admin_profileregistrationstep.tpl';
+        $template_main = 'admin/yogurt_admin_registrationstep.tpl';
         break;
     case 'new':
         $obj = $handler->create();

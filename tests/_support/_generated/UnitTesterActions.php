@@ -40,7 +40,7 @@ trait UnitTesterActions
      * ```
      *
      * @param string $exception or \Exception
-     * @param $callback
+     * @param        $callback
      * @deprecated Use expectThrowable() instead
      * @see        \Codeception\Module\Asserts::expectException()
      */
@@ -76,7 +76,7 @@ trait UnitTesterActions
      * ```
      *
      * @param string $throwable or \Throwable
-     * @param $callback
+     * @param        $callback
      * @see \Codeception\Module\Asserts::expectThrowable()
      */
 

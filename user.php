@@ -61,9 +61,9 @@ if ('register' === $op) {
     xoops_load('XoopsUserUtility');
     $myts = MyTextSanitizer::getInstance();
 
-    /* @var XoopsConfigHandler $config_handler */
-    $config_handler             = xoops_getHandler('config');
-    $GLOBALS['xoopsConfigUser'] = $config_handler->getConfigsByCat(XOOPS_CONF_USER);
+    /* @var XoopsConfigHandler $configHandler */
+    $configHandler             = xoops_getHandler('config');
+    $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
     if (empty($GLOBALS['xoopsConfigUser']['allow_register'])) {
         redirect_header('index.php', 6, _US_NOREGISTER);
     }
@@ -96,9 +96,9 @@ if ('register' === $op) {
 
     $criteria = new CriteriaCompo();
     $criteria->setSort('step_order');
-    $regstep_handler = $helper->getHandler('Regstep');
+    $regstepHandler = $helper->getHandler('Regstep');
 
-    if (!$steps = $regstep_handler->getAll($criteria, null, false, false)) {
+    if (!$steps = $regstepHandler->getAll($criteria, null, false, false)) {
         redirect_header(XOOPS_URL . '/', 6, _MD_YOGURT_NOSTEPSAVAILABLE);
     }
 
@@ -118,16 +118,16 @@ if ('register' === $op) {
     }
 
     /* @var XoopsMemberHandler $memberHandler */
-    $memberHandler  = xoops_getHandler('member');
-    $profile_handler = $helper->getHandler('Profile');
+    $memberHandler   = xoops_getHandler('member');
+    $profileHandler = $helper->getHandler('Profile');
 
-    $fields     = $profile_handler->loadFields();
-    $userfields = $profile_handler->getUserVars();
+    $fields     = $profileHandler->loadFields();
+    $userfields = $profileHandler->getUserVars();
 
     if (0 == $uid) {
         // No user yet? Create one and set default values.
         $newuser = $memberHandler->createUser();
-        $profile = $profile_handler->create();
+        $profile = $profileHandler->create();
         if (count($fields) > 0) {
             foreach (array_keys($fields) as $i) {
                 $fieldname = $fields[$i]->getVar('field_name');
@@ -143,7 +143,7 @@ if ('register' === $op) {
     } else {
         // We already have a user? Just load it! Security is handled by token so there is no fake uid here.
         $newuser = $memberHandler->getUser($uid);
-        $profile = $profile_handler->get($uid);
+        $profile = $profileHandler->get($uid);
     }
 
     // Lets merge current $_POST  with $_SESSION['profile_post'] so we can have access to info submited in previous steps
@@ -268,7 +268,7 @@ if ('register' === $op) {
             } else {
                 // User inserted! Now insert custom profile fields
                 $profile->setVar('profile_id', $newuser->getVar('uid'));
-                $profile_handler->insert($profile);
+                $profileHandler->insert($profile);
 
                 // We are good! If this is 'was' a new user then we handle notification
                 if ($isNew) {

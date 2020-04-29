@@ -22,7 +22,6 @@ namespace XoopsModules\Yogurt;
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
-
 /**
  * @package             kernel
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
@@ -358,7 +357,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
             return [[], [], 0];
         }
 
-        $user_handler = \xoops_getHandler('user');
+        $userHandler = \xoops_getHandler('user');
 
         $uservars = $this->getUserVars();
 
@@ -369,7 +368,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $profile = $this->create(false);
 
-            $user = $user_handler->create(false);
+            $user = $userHandler->create(false);
 
             foreach ($myrow as $name => $value) {
                 if (\in_array($name, $uservars)) {

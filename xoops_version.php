@@ -16,7 +16,7 @@ declare(strict_types=1);
  * @package         yogurt
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
- * @author       Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
+ * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 $moduleDirName      = basename(
     __DIR__
@@ -1109,11 +1109,11 @@ $modversion['templates'] = [
     ['file' => 'admin/yogurt_admin_suspensions.tpl', 'description' => ''],
     ['file' => 'admin/yogurt_admin_videos.tpl', 'description' => ''],
     ['file' => 'admin/yogurt_admin_visitors.tpl', 'description' => ''],
-    ['file' => 'admin/yogurt_admin_profilefieldslist.tpl', 'description' => ''],
-    ['file' => 'admin/yogurt_admin_profilefieldscategory.tpl', 'description' => ''],
-    ['file' => 'admin/yogurt_admin_profilefieldspermission.tpl', 'description' => ''],
-    ['file' => 'admin/yogurt_admin_profilefieldsvisibility.tpl', 'description' => ''],
-    ['file' => 'admin/yogurt_admin_profileregistrationstep.tpl', 'description' => ''],
+    ['file' => 'admin/yogurt_admin_fieldslist.tpl', 'description' => ''],
+    ['file' => 'admin/yogurt_admin_fieldscategory.tpl', 'description' => ''],
+    ['file' => 'admin/yogurt_admin_fieldspermission.tpl', 'description' => ''],
+    ['file' => 'admin/yogurt_admin_fieldsvisibility.tpl', 'description' => ''],
+    ['file' => 'admin/yogurt_admin_registrationstep.tpl', 'description' => ''],
     ['file' => 'yogurt_form.tpl', 'description' => ''],
     ['file' => 'yogurt_register.tpl', 'description' => ''],
     ['file' => 'yogurt_changepass.tpl', 'description' => ''],

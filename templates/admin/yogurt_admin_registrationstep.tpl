@@ -14,8 +14,8 @@
             </td>
             <td align="center">
                 <a href="registrationstep.php?id=<{$step.step_id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>"
-                                                                                                                 alt="<{$smarty.const._EDIT}>"
-                                                                                                                 title="<{$smarty.const._EDIT}>"/></a>
+                                                                                                         alt="<{$smarty.const._EDIT}>"
+                                                                                                         title="<{$smarty.const._EDIT}>"/></a>
                 &nbsp;<a href="registrationstep.php?op=delete&amp;id=<{$step.step_id}>" title="<{$smarty.const._DELETE}>"><img
                             src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}>" title="<{$smarty.const._DELETE}>"</a>
             </td>

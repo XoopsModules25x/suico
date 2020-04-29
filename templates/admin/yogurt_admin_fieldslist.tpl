@@ -38,8 +38,8 @@
                             <input type="hidden" name="oldcat[<{$field.field_id}>]" value="<{$field.cat_id}>"/>
                             <input type="hidden" name="field_ids[]" value="<{$field.field_id}>"/>
                             <a href="fieldslist.php?id=<{$field.field_id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>"
-                                                                                                                         alt="<{$smarty.const._EDIT}>"
-                                                                                                                         title="<{$smarty.const._EDIT}>"/></a>
+                                                                                                                 alt="<{$smarty.const._EDIT}>"
+                                                                                                                 title="<{$smarty.const._EDIT}>"/></a>
                         <{/if}>
                         <{if $field.canDelete}>
                             &nbsp;
