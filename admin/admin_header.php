@@ -14,15 +14,15 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Module\Admin;
-use XoopsModules\Yogurt\Helper;
-use XoopsModules\Yogurt\Utility;
+use XoopsModules\Suico\Helper;
+use XoopsModules\Suico\Utility;
 
 include dirname(__DIR__) . '/preloads/autoloader.php';
 

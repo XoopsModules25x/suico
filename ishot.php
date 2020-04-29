@@ -14,36 +14,36 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'suico_index.tpl';
 require __DIR__ . '/header.php';
 
 /**
  * Factory of pictures created
  */
-$ishotFactory = new Yogurt\IshotHandler($xoopsDB);
+$ishotFactory = new Suico\IshotHandler($xoopsDB);
 
 $uid_voted = Request::getInt('uid_voted', 0, 'POST');
 $ishot     = Request::getInt('ishot', 0, 'POST');
 $uid_voter = (int)$xoopsUser->getVar('uid');
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
 
 /**
  * Verify if user is trying to vote for himself
  */
 if ($uid_voter === $uid_voted) {
-    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_CANTVOTEOWN);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_CANTVOTEOWN);
 }
 
 /**
@@ -71,9 +71,9 @@ if (0 === $ishotFactory->getCount($criteria)) {
 
     $ishotFactory->insert2($vote);
 
-    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_VOTED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_VOTED);
 } else {
-    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_ALREADYVOTED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_ALREADYVOTED);
 }
 
 require dirname(__DIR__, 2) . '/footer.php';

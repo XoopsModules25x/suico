@@ -2,4 +2,4 @@ TODO: Planned features in the future
 =====================================
 
 Please refer here
-https://github.com/XoopsModules25x/yogurt/issues
+https://github.com/XoopsModules25x/suico/issues

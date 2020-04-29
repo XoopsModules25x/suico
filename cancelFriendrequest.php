@@ -14,21 +14,21 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
 /**
  * Factory of friendrequests created
  */
-$friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
-$friendshipFactory    = new Yogurt\FriendshipHandler($xoopsDB);
+$friendrequestFactory = new Suico\FriendrequestHandler($xoopsDB);
+$friendshipFactory    = new Suico\FriendshipHandler($xoopsDB);
 
 /**
  * Getting the uid of the user which user want to canel friend request
@@ -56,6 +56,6 @@ $criteria_delete1->add($criteria_friend2);
 
 $friendrequestFactory->deleteAll($criteria_delete1);
 
-redirect_header('index.php?uid=' . $friendrequestto_uid . '', 3, _MD_YOGURT_FRIENDREQUEST_CANCELLED);
+redirect_header('index.php?uid=' . $friendrequestto_uid . '', 3, _MD_SUICO_FRIENDREQUEST_CANCELLED);
 
 require dirname(__DIR__, 2) . '/footer.php';

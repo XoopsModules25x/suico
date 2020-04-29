@@ -14,13 +14,13 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 /**
  * Prepares system prior to attempting to uninstall module
@@ -28,7 +28,7 @@ use XoopsModules\Yogurt;
  *
  * @return bool true if ready to uninstall, false if not
  */
-function xoops_module_pre_uninstall_yogurt(
+function xoops_module_pre_uninstall_suico(
     XoopsModule $module
 ) {
     // Do some synchronization if needed
@@ -42,7 +42,7 @@ function xoops_module_pre_uninstall_yogurt(
  *
  * @return bool true if uninstallation successful, false if not
  */
-function xoops_module_uninstall_yogurt(
+function xoops_module_uninstall_suico(
     XoopsModule $module
 ) {
     require __DIR__ . '/common.php';
@@ -51,11 +51,11 @@ function xoops_module_uninstall_yogurt(
 
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-    $helper = Yogurt\Helper::getInstance();
+    $helper = Suico\Helper::getInstance();
 
-    $utility = new Yogurt\Utility();
+    $utility = new Suico\Utility();
 
-    //    $configurator = new Yogurt\Common\Configurator();
+    //    $configurator = new Suico\Common\Configurator();
 
     // Load language files
 

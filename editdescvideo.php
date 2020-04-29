@@ -14,19 +14,19 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
 
 $cod_img = Request::getInt('video_id', 0, 'POST');
@@ -38,7 +38,7 @@ if (1 === $marker) {
     /**
      * Creating the factory  loading the picture changing its caption
      */
-    $videoFactory = new Yogurt\VideoHandler(
+    $videoFactory = new Suico\VideoHandler(
         $xoopsDB
     );
     $video        = $videoFactory->create(false);
@@ -50,9 +50,9 @@ if (1 === $marker) {
      */
     if ($uid === $video->getVar('uid_owner')) {
         if ($videoFactory->insert2($video)) {
-            redirect_header('videos.php?uid=' . $uid, 2, _MD_YOGURT_DESC_EDITED);
+            redirect_header('videos.php?uid=' . $uid, 2, _MD_SUICO_DESC_EDITED);
         } else {
-            redirect_header('index.php?uid=' . $uid, 2, _MD_YOGURT_ERROR);
+            redirect_header('index.php?uid=' . $uid, 2, _MD_SUICO_ERROR);
         }
     }
 }
@@ -60,7 +60,7 @@ if (1 === $marker) {
  * Creating the factory  and the criteria to edit the desc of the picture
  * The user must be the owner
  */
-$videoFactory   = new Yogurt\VideoHandler(
+$videoFactory   = new Suico\VideoHandler(
     $xoopsDB
 );
 $criteria_video = new Criteria('video_id', $cod_img);

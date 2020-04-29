@@ -13,7 +13,7 @@ declare(strict_types=1);
 */
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -22,9 +22,9 @@ declare(strict_types=1);
 declare(strict_types=1);
 
 use Xmf\Module\Admin;
-use XoopsModules\Yogurt;
-use XoopsModules\Yogurt\Helper;
-use XoopsModules\Yogurt\Utility;
+use XoopsModules\Suico;
+use XoopsModules\Suico\Helper;
+use XoopsModules\Suico\Utility;
 
 include dirname(__DIR__) . '/preloads/autoloader.php';
 
@@ -32,8 +32,8 @@ $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
 
 /** @var \XoopsDatabase $db */
-/** @var \XoopsModules\Yogurt\Helper $helper */
-/** @var \XoopsModules\Yogurt\Utility $utility */
+/** @var \XoopsModules\Suico\Helper $helper */
+/** @var \XoopsModules\Suico\Utility $utility */
 $db      = XoopsDatabaseFactory::getDatabaseConnection();
 $debug   = false;
 $helper  = Helper::getInstance($debug);
@@ -42,8 +42,8 @@ $utility = Utility::getInstance();
 $helper->loadLanguage('common');
 
 //handlers
-//$categoryHandler     = new Yogurt\CategoryHandler($db);
-//$downloadHandler     = new Yogurt\DownloadHandler($db);
+//$categoryHandler     = new Suico\CategoryHandler($db);
+//$downloadHandler     = new Suico\DownloadHandler($db);
 
 $pathIcon16 = Admin::iconUrl('', 16);
 $pathIcon32 = Admin::iconUrl('', 32);

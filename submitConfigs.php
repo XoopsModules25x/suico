@@ -14,27 +14,27 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
 
 /**
  * Factories of groups
  */
-$configsFactory = new Yogurt\ConfigsHandler($xoopsDB);
+$configsFactory = new Suico\ConfigsHandler($xoopsDB);
 
 /**
  * Verify Token
  */
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
 
 //      $this->initVar("config_id",XOBJ_DTYPE_INT,null,false,10);
@@ -102,9 +102,9 @@ if (isset($_POST['stat'])) {
     $config->setVar('profile_stats', Request::getInt('stat', 0, 'POST'));
 }
 if ($configsFactory->insert2($config)) {
-    redirect_header('configs.php?uid=' . $xoopsUser->getVar('uid'), 3, _MD_YOGURT_CONFIGS_SAVE);
+    redirect_header('configs.php?uid=' . $xoopsUser->getVar('uid'), 3, _MD_SUICO_CONFIGS_SAVE);
 } else {
-    redirect_header('configs.php?uid=' . $xoopsUser->getVar('uid'), 3, _MD_YOGURT_CONFIGS_SAVE_FAILED);
+    redirect_header('configs.php?uid=' . $xoopsUser->getVar('uid'), 3, _MD_SUICO_CONFIGS_SAVE_FAILED);
 }
 /**
  * Close page

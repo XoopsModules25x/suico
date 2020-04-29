@@ -14,22 +14,22 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
 
 /**
  * Factories of groups
  */
-$relgroupuserFactory = new Yogurt\RelgroupuserHandler($xoopsDB);
-$groupsFactory       = new Yogurt\GroupsHandler($xoopsDB);
+$relgroupuserFactory = new Suico\RelgroupuserHandler($xoopsDB);
+$groupsFactory       = new Suico\GroupsHandler($xoopsDB);
 
 $group_id = Request::getInt('group_id', 0, 'POST');
 
@@ -40,8 +40,8 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
             'confirm'  => 1,
         ],
         'delete_group.php',
-        _MD_YOGURT_ASKCONFIRMGROUPDELETION,
-        _MD_YOGURT_CONFIRMGROUPDELETION
+        _MD_SUICO_ASKCONFIRMGROUPDELETION,
+        _MD_SUICO_CONFIRMGROUPDELETION
     );
 } else {
     /**
@@ -63,9 +63,9 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
         if ($groupsFactory->deleteAll($criteria)) {
             $criteria_rel_group_id = new Criteria('rel_group_id', $group_id);
             $relgroupuserFactory->deleteAll($criteria_rel_group_id);
-            redirect_header('groups.php?uid=' . $uid, 3, _MD_YOGURT_GROUP_DELETED);
+            redirect_header('groups.php?uid=' . $uid, 3, _MD_SUICO_GROUP_DELETED);
         } else {
-            redirect_header('groups.php?uid=' . $uid, 3, _MD_YOGURT_ERROR);
+            redirect_header('groups.php?uid=' . $uid, 3, _MD_SUICO_ERROR);
         }
     }
 }

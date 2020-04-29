@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -32,12 +32,12 @@ $sort  = Request::getString('sort', '');
 
 $adminObject->displayNavigation(basename(__FILE__));
 $permHelper = new Permission();
-$uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/groups/';
-$uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/groups/';
+$uploadDir  = XOOPS_UPLOAD_PATH . '/suico/groups/';
+$uploadUrl  = XOOPS_UPLOAD_URL . '/suico/groups/';
 
 switch ($op) {
     case 'new':
-        $adminObject->addItemButton(AM_YOGURT_GROUPS_LIST, 'groups.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_GROUPS_LIST, 'groups.php', 'list');
         $adminObject->displayButton('left');
 
         $groupsObject = $groupsHandler->create();
@@ -59,7 +59,7 @@ switch ($op) {
         $groupsObject->setVar('group_desc', Request::getText('group_desc', ''));
 
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
-        $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/groups/';
+        $uploadDir = XOOPS_UPLOAD_PATH . '/suico/groups/';
         $uploader  = new XoopsMediaUploader(
             $uploadDir, $helper->getConfig('mimetypes'), $helper->getConfig('maxsize'), null, null
         );
@@ -92,7 +92,7 @@ switch ($op) {
 
 
         if ($groupsHandler->insert($groupsObject)) {
-            redirect_header('groups.php?op=list', 2, AM_YOGURT_FORMOK);
+            redirect_header('groups.php?op=list', 2, AM_SUICO_FORMOK);
         }
 
         echo $groupsObject->getHtmlErrors();
@@ -100,8 +100,8 @@ switch ($op) {
         $form->display();
         break;
     case 'edit':
-        $adminObject->addItemButton(AM_YOGURT_ADD_GROUPS, 'groups.php?op=new', 'add');
-        $adminObject->addItemButton(AM_YOGURT_GROUPS_LIST, 'groups.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_ADD_GROUPS, 'groups.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_GROUPS_LIST, 'groups.php', 'list');
         $adminObject->displayButton('left');
         $groupsObject = $groupsHandler->get(Request::getString('group_id', ''));
         $form         = $groupsObject->getForm();
@@ -115,7 +115,7 @@ switch ($op) {
             }
 
             if ($groupsHandler->delete($groupsObject)) {
-                redirect_header('groups.php', 3, AM_YOGURT_FORMDELOK);
+                redirect_header('groups.php', 3, AM_SUICO_FORMDELOK);
             } else {
                 echo $groupsObject->getHtmlErrors();
             }
@@ -128,7 +128,7 @@ switch ($op) {
                 ],
                 Request::getUrl('REQUEST_URI', '', 'SERVER'),
                 sprintf(
-                    AM_YOGURT_FORMSUREDEL,
+                    AM_SUICO_FORMSUREDEL,
                     $groupsObject->getVar('group_title')
                 )
             );
@@ -138,16 +138,16 @@ switch ($op) {
 
         $id_field = Request::getString('group_id', '');
 
-        if ($utility::cloneRecord('yogurt_groups', 'group_id', $id_field)) {
-            redirect_header('groups.php', 3, AM_YOGURT_CLONED_OK);
+        if ($utility::cloneRecord('suico_groups', 'group_id', $id_field)) {
+            redirect_header('groups.php', 3, AM_SUICO_CLONED_OK);
         } else {
-            redirect_header('groups.php', 3, AM_YOGURT_CLONED_FAILED);
+            redirect_header('groups.php', 3, AM_SUICO_CLONED_FAILED);
         }
 
         break;
     case 'list':
     default:
-        $adminObject->addItemButton(AM_YOGURT_ADD_GROUPS, 'groups.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_ADD_GROUPS, 'groups.php?op=new', 'add');
         $adminObject->displayButton('left');
         $start                 = Request::getInt('start', 0);
         $groupsPaginationLimit = $helper->getConfig('userpager');
@@ -162,7 +162,7 @@ switch ($op) {
         /*
         //
         //
-                            <th class='center width5'>".AM_YOGURT_FORM_ACTION."</th>
+                            <th class='center width5'>".AM_SUICO_FORM_ACTION."</th>
         //                    </tr>";
         //            $class = "odd";
         */
@@ -202,33 +202,33 @@ switch ($op) {
 
                 $GLOBALS['xoopsTpl']->assign(
                     'selectorgroup_id',
-                    AM_YOGURT_GROUPS_GROUP_ID
+                    AM_SUICO_GROUPS_GROUP_ID
                 );
 
                 $groupsArray['group_id'] = $groupsTempArray[$i]->getVar('group_id');
 
-                $GLOBALS['xoopsTpl']->assign('selectorowner_uid', AM_YOGURT_GROUPS_OWNER_UID);
+                $GLOBALS['xoopsTpl']->assign('selectorowner_uid', AM_SUICO_GROUPS_OWNER_UID);
 
                 $groupsArray['owner_uid'] = strip_tags(
                     XoopsUser::getUnameFromId($groupsTempArray[$i]->getVar('owner_uid'))
                 );
 
-                $GLOBALS['xoopsTpl']->assign('selectorgroup_title', AM_YOGURT_GROUPS_GROUP_TITLE);
+                $GLOBALS['xoopsTpl']->assign('selectorgroup_title', AM_SUICO_GROUPS_GROUP_TITLE);
 
                 $groupsArray['group_title'] = $groupsTempArray[$i]->getVar('group_title');
 
-                $GLOBALS['xoopsTpl']->assign('selectorgroup_desc', AM_YOGURT_GROUPS_GROUP_DESC);
+                $GLOBALS['xoopsTpl']->assign('selectorgroup_desc', AM_SUICO_GROUPS_GROUP_DESC);
                 $groupsArray['group_desc'] = $groupsTempArray[$i]->getVar('group_desc');
 
-                $GLOBALS['xoopsTpl']->assign('selectorgroup_img', AM_YOGURT_GROUPS_GROUP_IMG);
+                $GLOBALS['xoopsTpl']->assign('selectorgroup_img', AM_SUICO_GROUPS_GROUP_IMG);
                 $groupsArray['group_img'] = "<img src='" . $uploadUrl . $groupsTempArray[$i]->getVar(
                         'group_img'
                     ) . "' name='" . 'name' . "' id=" . 'id' . " alt='' style='max-width:100px'>";
 
-                $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_GROUPS_DATE_CREATED);
+                $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_SUICO_GROUPS_DATE_CREATED);
                 $groupsArray['date_created'] = formatTimestamp($groupsTempArray[$i]->getVar('date_created'), 's');
 
-                $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_YOGURT_GROUPS_DATE_UPDATED);
+                $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_SUICO_GROUPS_DATE_UPDATED);
                 $groupsArray['date_updated'] = formatTimestamp($groupsTempArray[$i]->getVar('date_updated'), 's');
 
                 $groupsArray['edit_delete'] = "<a href='groups.php?op=edit&group_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
@@ -274,7 +274,7 @@ switch ($op) {
 
             //                    <tr>
 
-            //                     <th class='center width5'>".AM_YOGURT_FORM_ACTION."XXX</th>
+            //                     <th class='center width5'>".AM_SUICO_FORM_ACTION."XXX</th>
 
             //                    </tr><tr><td class='errorMsg' colspan='6'>There are noXXX groups</td></tr>";
 
@@ -285,7 +285,7 @@ switch ($op) {
             echo $GLOBALS['xoopsTpl']->fetch(
                 XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar(
                     'dirname'
-                ) . '/templates/admin/yogurt_admin_groups.tpl'
+                ) . '/templates/admin/suico_admin_groups.tpl'
             );
         }
 

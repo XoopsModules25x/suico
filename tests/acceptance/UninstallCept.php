@@ -14,7 +14,7 @@ $I->click('Administration Menu');
 
 $I->amOnPage('/modules/system/admin.php?fct=modulesadmin');
 
-$I->see('http://259alfred/modules/system/admin.php?fct=modulesadmin&amp;op=uninstall&amp;module=yogurt');
+$I->see('http://259alfred/modules/system/admin.php?fct=modulesadmin&amp;op=uninstall&amp;module=suico');
 //$I->see('#mod_9 > td:nth-child(6) > a:nth-child(2)');
 //$I->see('//*[@id="mod_9"]/td[6]/a[2]');
 //$I->see('/modules/system/admin.php?fct=modulesadmin&op=uninstall&module=contact');
@@ -37,7 +37,7 @@ $I->see('http://259alfred/modules/system/admin.php?fct=modulesadmin&amp;op=unins
 
 //$I->amOnPage('/modules/system/admin.php?fct=modulesadmin&op=uninstall&module=contact');
 
-$I->amOnPage('modules/yogurt/admin/index.php');
+$I->amOnPage('modules/suico/admin/index.php');
 //$I->see('Uninstall');
 //$I->seeLink('Uninstall');
 //$I->click('Uninstall');

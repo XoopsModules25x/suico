@@ -14,34 +14,34 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header('index.php', 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header('index.php', 3, _MD_SUICO_TOKENEXPIRED);
 }
 
 /**
  * Creating the factory  loading the picture changing its caption
  */
-$imageFactory = new Yogurt\ImageHandler(
+$imageFactory = new Suico\ImageHandler(
     $xoopsDB
 );
-/** @var \XoopsModules\Yogurt\Image $picture */
+/** @var \XoopsModules\Suico\Image $picture */
 $picture = $imageFactory->create(false);
 $picture->load(Request::getString('cod_img', '', 'POST'));
 
 $uid = (int)$xoopsUser->getVar('uid');
 
-$image       = XOOPS_ROOT_PATH . '/uploads/yogurt/images/' . 'thumb_' . $picture->getVar('filename');
+$image       = XOOPS_ROOT_PATH . '/uploads/suico/images/' . 'thumb_' . $picture->getVar('filename');
 $avatar      = 'av' . $uid . '_' . time() . '.jpg';
 $imageavatar = XOOPS_ROOT_PATH . '/uploads/avatars/' . $avatar;
 
@@ -57,9 +57,9 @@ $userHandler = new XoopsUserHandler($xoopsDB);
  */
 if ($uid === (int)$picture->getVar('uid_owner')) {
     if ($userHandler->insert($xoopsUser)) {
-        redirect_header('album.php', 2, _MD_YOGURT_AVATAR_EDITED);
+        redirect_header('album.php', 2, _MD_SUICO_AVATAR_EDITED);
     } else {
-        redirect_header('album.php', 2, _MD_YOGURT_ERROR);
+        redirect_header('album.php', 2, _MD_SUICO_ERROR);
     }
 }
 

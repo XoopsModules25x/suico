@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -16,7 +16,7 @@ namespace XoopsModules\Yogurt;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -81,7 +81,7 @@ class Relgroupuser extends \XoopsObject
 
     public function load($id)
     {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_relgroupuser') . ' WHERE rel_id=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_relgroupuser') . ' WHERE rel_id=' . $id;
 
         $myrow = $this->db->fetchArray($this->db->query($sql));
 
@@ -130,16 +130,16 @@ class Relgroupuser extends \XoopsObject
 
         if (!$asobject) {
             $sql = 'SELECT rel_id FROM ' . $db->prefix(
-                    'yogurt_relgroupuser'
+                    'suico_relgroupuser'
                 ) . "${whereQuery} ORDER BY ${sort} ${order}";
 
             $result = $db->query($sql, $limit, $start);
 
             while (false !== ($myrow = $db->fetchArray($result))) {
-                $ret[] = $myrow['yogurt_relgroupuser_id'];
+                $ret[] = $myrow['suico_relgroupuser_id'];
             }
         } else {
-            $sql = 'SELECT * FROM ' . $db->prefix('yogurt_relgroupuser') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql = 'SELECT * FROM ' . $db->prefix('suico_relgroupuser') . "${whereQuery} ORDER BY ${sort} ${order}";
 
             $result = $db->query($sql, $limit, $start);
 
@@ -154,7 +154,7 @@ class Relgroupuser extends \XoopsObject
     /**
      * Get form
      *
-     * @return \XoopsModules\Yogurt\Form\RelgroupuserForm
+     * @return \XoopsModules\Suico\Form\RelgroupuserForm
      */
 
     public function getForm()

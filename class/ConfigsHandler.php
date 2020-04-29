@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -16,7 +16,7 @@ namespace XoopsModules\Yogurt;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -46,14 +46,14 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
     /**
      * Constructor
      * @param \XoopsDatabase|null              $xoopsDatabase
-     * @param \XoopsModules\Yogurt\Helper|null $helper
+     * @param \XoopsModules\Suico\Helper|null $helper
      */
 
     public function __construct(
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Yogurt\Helper $this ->helper */
+        /** @var \XoopsModules\Suico\Helper $this ->helper */
 
         if (null === $helper) {
             $this->helper = Helper::getInstance();
@@ -63,7 +63,7 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
 
         $isAdmin = $this->helper->isUserAdmin();
 
-        parent::__construct($xoopsDatabase, 'yogurt_configs', Configs::class, 'config_id', 'config_id');
+        parent::__construct($xoopsDatabase, 'suico_configs', Configs::class, 'config_id', 'config_id');
     }
 
     /**
@@ -99,7 +99,7 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
         $id = null,
         $fields = null
     ) {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_configs') . ' WHERE config_id=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_configs') . ' WHERE config_id=' . $id;
 
         if (!$result = $this->db->query($sql)) {
             return false;
@@ -108,11 +108,11 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
         $numrows = $this->db->getRowsNum($result);
 
         if (1 === $numrows) {
-            $yogurt_configs = new Configs();
+            $suico_configs = new Configs();
 
-            $yogurt_configs->assignVars($this->db->fetchArray($result));
+            $suico_configs->assignVars($this->db->fetchArray($result));
 
-            return $yogurt_configs;
+            return $suico_configs;
         }
 
         return false;
@@ -164,7 +164,7 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
 
             $sql = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_configs'),
+                $this->db->prefix('suico_configs'),
                 $config_id,
                 $config_uid,
                 $pictures,
@@ -192,7 +192,7 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
 
             $sql = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_configs'),
+                $this->db->prefix('suico_configs'),
                 $config_id,
                 $config_uid,
                 $pictures,
@@ -249,7 +249,7 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
 
         $sql = \sprintf(
             'DELETE FROM %s WHERE config_id = %u',
-            $this->db->prefix('yogurt_configs'),
+            $this->db->prefix('suico_configs'),
             $xoopsObject->getVar('config_id')
         );
 
@@ -267,7 +267,7 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * retrieve yogurt_configs from the database
+     * retrieve suico_configs from the database
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key       use the UID as key for the array?
@@ -284,7 +284,7 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
 
         $limit = $start = 0;
 
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_configs');
+        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_configs');
 
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
@@ -305,33 +305,33 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
         }
 
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $yogurt_configs = new Configs();
+            $suico_configs = new Configs();
 
-            $yogurt_configs->assignVars($myrow);
+            $suico_configs->assignVars($myrow);
 
             if (!$id_as_key) {
-                $ret[] = &$yogurt_configs;
+                $ret[] = &$suico_configs;
             } else {
-                $ret[$myrow['config_id']] = &$yogurt_configs;
+                $ret[$myrow['config_id']] = &$suico_configs;
             }
 
-            unset($yogurt_configs);
+            unset($suico_configs);
         }
 
         return $ret;
     }
 
     /**
-     * count yogurt_configs matching a condition
+     * count suico_configs matching a condition
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} to match
-     * @return int count of yogurt_configs
+     * @return int count of suico_configs
      */
 
     public function getCount(
         ?CriteriaElement $criteriaElement = null
     ) {
-        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_configs');
+        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_configs');
 
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
@@ -349,7 +349,7 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * delete yogurt_configs matching a set of conditions
+     * delete suico_configs matching a set of conditions
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement}
      * @param bool                                 $force
@@ -362,7 +362,7 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
         $force = true,
         $asObject = false
     ) {
-        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_configs');
+        $sql = 'DELETE FROM ' . $this->db->prefix('suico_configs');
 
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();

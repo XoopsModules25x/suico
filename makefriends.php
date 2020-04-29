@@ -14,16 +14,16 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'suico_index.tpl';
 require __DIR__ . '/header.php';
 
 //require_once __DIR__ . '/class/Friendrequest.php';
@@ -32,15 +32,15 @@ require __DIR__ . '/header.php';
 /**
  * Factory of friendrequests created
  */
-$friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
-$friendshipFactory    = new Yogurt\FriendshipHandler($xoopsDB);
+$friendrequestFactory = new Suico\FriendrequestHandler($xoopsDB);
+$friendshipFactory    = new Suico\FriendshipHandler($xoopsDB);
 
 $friendrequest_id = Request::getInt('friendrequest_id', 0, 'POST');
 $friendship_level = Request::getInt('level', 0, 'POST');
 $uid              = (int)$xoopsUser->getVar('uid');
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
 
 $criteria = new CriteriaCompo(new Criteria('friendreq_id', $friendrequest_id));
@@ -62,16 +62,16 @@ if ($friendrequestFactory->getCount($criteria) > 0) {
         $friendshipFactory->insert2($newfriendship1);
         $friendshipFactory->insert2($newfriendship2);
 
-        redirect_header(XOOPS_URL . '/modules/yogurt/friends.php?uid=' . $friend2_uid, 3, _MD_YOGURT_FRIENDMADE);
+        redirect_header(XOOPS_URL . '/modules/suico/friends.php?uid=' . $friend2_uid, 3, _MD_SUICO_FRIENDMADE);
     } else {
         if (0 === $friendship_level) {
             $friendrequestFactory->deleteAll($criteria);
-            redirect_header(XOOPS_URL . '/modules/yogurt/index.php?uid=' . $uid, 3, _MD_YOGURT_FRIENDSHIP_NOTACCEPTED);
+            redirect_header(XOOPS_URL . '/modules/suico/index.php?uid=' . $uid, 3, _MD_SUICO_FRIENDSHIP_NOTACCEPTED);
         }
-        redirect_header(XOOPS_URL . '/modules/yogurt/index.php?uid=' . $uid, 3, _MD_YOGURT_ERROR);
+        redirect_header(XOOPS_URL . '/modules/suico/index.php?uid=' . $uid, 3, _MD_SUICO_ERROR);
     }
 } else {
-    redirect_header(XOOPS_URL . '/modules/yogurt/index.php?uid=' . $uid, 3, _MD_YOGURT_ERROR);
+    redirect_header(XOOPS_URL . '/modules/suico/index.php?uid=' . $uid, 3, _MD_SUICO_ERROR);
 }
 
 require dirname(__DIR__, 2) . '/footer.php';

@@ -20,7 +20,7 @@
 include_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 
-$adminObject->addItemButton(_AM_YOGURT_ADDUSER, 'user.php?op=new', 'add');
+$adminObject->addItemButton(_AM_SUICO_ADDUSER, 'user.php?op=new', 'add');
 $adminObject->displayNavigation(basename(__FILE__));
 $adminObject->displayButton('left');
 
@@ -35,9 +35,9 @@ switch ($op) {
     default:
     case 'list':
         include_once $GLOBALS['xoops']->path('/class/xoopsformloader.php');
-        $form    = new XoopsThemeForm(_AM_YOGURT_EDITUSER, 'form', 'user.php');
+        $form    = new XoopsThemeForm(_AM_SUICO_EDITUSER, 'form', 'user.php');
         $lastUid = \Xmf\Request::getInt('lastuid', null, 'GET');
-        $form->addElement(new XoopsFormSelectUser(_AM_YOGURT_SELECTUSER, 'id', false, $lastUid));
+        $form->addElement(new XoopsFormSelectUser(_AM_SUICO_SELECTUSER, 'id', false, $lastUid));
         $form->addElement(new XoopsFormHidden('op', 'editordelete'));
         $button_tray = new XoopsFormElementTray('');
         $button_tray->addElement(new XoopsFormButton('', 'edit', _EDIT, 'submit'));
@@ -50,7 +50,7 @@ switch ($op) {
         include_once dirname(__DIR__) . '/include/forms.php';
         $obj = $handler->createUser();
         $obj->setGroups([XOOPS_GROUP_USERS]);
-        $form = yogurt_getUserForm($obj);
+        $form = suico_getUserForm($obj);
         $form->display();
         break;
     case 'edit':
@@ -61,7 +61,7 @@ switch ($op) {
             redirect_header('user.php', 3, _US_NOEDITRIGHT);
         }
         include_once dirname(__DIR__) . '/include/forms.php';
-        $form = yogurt_getUserForm($obj);
+        $form = suico_getUserForm($obj);
         $form->display();
         break;
     case 'save':
@@ -172,7 +172,7 @@ switch ($op) {
                 XoopsLoad::load('XoopsCache');
                 $queryCache = XoopsCache::delete('formselectuser');
                 if ($user->isNew()) {
-                    redirect_header('user.php?lastuid=' . $user->getVar('uid'), 2, _AM_YOGURT_USERCREATED, false);
+                    redirect_header('user.php?lastuid=' . $user->getVar('uid'), 2, _AM_SUICO_USERCREATED, false);
                 } else {
                     redirect_header('user.php?lastuid=' . $user->getVar('uid'), 2, _US_PROFUPDATED, false);
                 }
@@ -185,17 +185,17 @@ switch ($op) {
         $user->setGroups($new_groups);
         include_once dirname(__DIR__) . '/include/forms.php';
         echo $user->getHtmlErrors();
-        $form = yogurt_getUserForm($user, $profile);
+        $form = suico_getUserForm($user, $profile);
         $form->display();
         break;
     case 'delete':
         if ($_REQUEST['id'] == $GLOBALS['xoopsUser']->getVar('uid')) {
-            redirect_header('user.php', 2, _AM_YOGURT_CANNOTDELETESELF);
+            redirect_header('user.php', 2, _AM_SUICO_CANNOTDELETESELF);
         }
         $obj    = $handler->getUser($_REQUEST['id']);
         $groups = $obj->getGroups();
         if (in_array(XOOPS_GROUP_ADMIN, $groups)) {
-            redirect_header('user.php', 3, _AM_YOGURT_CANNOTDELETEADMIN, false);
+            redirect_header('user.php', 3, _AM_SUICO_CANNOTDELETEADMIN, false);
         }
 
         if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
@@ -206,7 +206,7 @@ switch ($op) {
             $profile         = $profileHandler->get($obj->getVar('uid'));
             if (!$profile || $profile->isNew() || $profileHandler->delete($profile)) {
                 if ($handler->deleteUser($obj)) {
-                    redirect_header('user.php', 3, sprintf(_AM_YOGURT_DELETEDSUCCESS, $obj->getVar('uname') . ' (' . $obj->getVar('email') . ')'), false);
+                    redirect_header('user.php', 3, sprintf(_AM_SUICO_DELETEDSUCCESS, $obj->getVar('uname') . ' (' . $obj->getVar('email') . ')'), false);
                 } else {
                     echo $obj->getHtmlErrors();
                 }
@@ -221,7 +221,7 @@ switch ($op) {
                     'op' => 'delete',
                 ],
                 $_SERVER['REQUEST_URI'],
-                sprintf(_AM_YOGURT_RUSUREDEL, $obj->getVar('uname') . ' (' . $obj->getVar('email') . ')')
+                sprintf(_AM_SUICO_RUSUREDEL, $obj->getVar('uname') . ' (' . $obj->getVar('email') . ')')
             );
         }
         break;

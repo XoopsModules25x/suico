@@ -1,4 +1,4 @@
-CREATE TABLE `yogurt_images` (
+CREATE TABLE `suico_images` (
     `cod_img`      INT(11)          NOT NULL AUTO_INCREMENT,
     `title`        VARCHAR(255)     NOT NULL,
     `caption`      VARCHAR(255)     NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE `yogurt_images` (
     PRIMARY KEY (`cod_img`)
 )
     ENGINE = MyISAM;
-CREATE TABLE `yogurt_friendships` (
+CREATE TABLE `suico_friendships` (
     `friendship_id` INT(11)          NOT NULL AUTO_INCREMENT,
     `friend1_uid`   INT(11)          NOT NULL,
     `friend2_uid`   INT(11)          NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE `yogurt_friendships` (
 )
     ENGINE = MyISAM;
 
-CREATE TABLE `yogurt_visitors` (
+CREATE TABLE `suico_visitors` (
     `cod_visit`     INT(11)          NOT NULL AUTO_INCREMENT,
     `uid_owner`     INT(11)          NOT NULL,
     `uid_visitor`   INT(11)          NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE `yogurt_visitors` (
 )
     ENGINE = MyISAM;
 
-CREATE TABLE `yogurt_videos` (
+CREATE TABLE `suico_videos` (
     `video_id`     INT(11)          NOT NULL AUTO_INCREMENT,
     `uid_owner`    INT(11)          NOT NULL,
     `video_desc`   TEXT             NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE `yogurt_videos` (
 )
     ENGINE = MyISAM;
 
-CREATE TABLE `yogurt_friendrequests` (
+CREATE TABLE `suico_friendrequests` (
     `friendreq_id`        INT(11)          NOT NULL AUTO_INCREMENT,
     `friendrequester_uid` INT(11)          NOT NULL,
     `friendrequestto_uid` INT(11)          NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE `yogurt_friendrequests` (
 )
     ENGINE = MyISAM;
 
-CREATE TABLE `yogurt_groups` (
+CREATE TABLE `suico_groups` (
     `group_id`     INT(11)      NOT NULL AUTO_INCREMENT,
     `owner_uid`    INT(11)      NOT NULL,
     `group_title`  VARCHAR(255) NOT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE `yogurt_groups` (
 )
     ENGINE = MyISAM;
 
-CREATE TABLE `yogurt_relgroupuser` (
+CREATE TABLE `suico_relgroupuser` (
     `rel_id`       INT(11) NOT NULL AUTO_INCREMENT,
     `rel_group_id` INT(11) NOT NULL,
     `rel_user_uid` INT(11) NOT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE `yogurt_relgroupuser` (
 )
     ENGINE = MyISAM;
 
-CREATE TABLE `yogurt_notes` (
+CREATE TABLE `suico_notes` (
     `note_id`      INT(11)          NOT NULL AUTO_INCREMENT,
     `note_text`    TEXT             NOT NULL,
     `note_from`    INT(11)          NOT NULL,
@@ -88,7 +88,7 @@ CREATE TABLE `yogurt_notes` (
 )
     ENGINE = MyISAM;
 
-CREATE TABLE `yogurt_configs` (
+CREATE TABLE `suico_configs` (
     `config_id`       INT(11)      NOT NULL AUTO_INCREMENT,
     `config_uid`      INT(11)      NOT NULL,
     `pictures`        INT(8)       NOT NULL DEFAULT 0,
@@ -109,7 +109,7 @@ CREATE TABLE `yogurt_configs` (
 )
     ENGINE = MyISAM;
 
-CREATE TABLE `yogurt_suspensions` (
+CREATE TABLE `suico_suspensions` (
     `uid`              INT(11)      NOT NULL AUTO_INCREMENT,
     `old_pass`         VARCHAR(255) NOT NULL,
     `old_email`        VARCHAR(100) NOT NULL,
@@ -121,7 +121,7 @@ CREATE TABLE `yogurt_suspensions` (
 )
     ENGINE = MyISAM;
 
-CREATE TABLE `yogurt_audios` (
+CREATE TABLE `suico_audios` (
     `audio_id`     INT(11)          NOT NULL AUTO_INCREMENT,
     `title`        VARCHAR(100)     NOT NULL,
     `author`       VARCHAR(100)     NOT NULL,
@@ -135,7 +135,7 @@ CREATE TABLE `yogurt_audios` (
     ENGINE = MyISAM;
 
 
-CREATE TABLE `yogurt_privacy` (
+CREATE TABLE `suico_privacy` (
     `id`          INT(8)      NOT NULL AUTO_INCREMENT,
     `level`       INT(8)      NOT NULL,
     `name`        VARCHAR(20) NOT NULL,
@@ -144,7 +144,7 @@ CREATE TABLE `yogurt_privacy` (
 )
     ENGINE = MyISAM;
 
-CREATE TABLE `yogurt_profile_category` (
+CREATE TABLE `suico_profile_category` (
     `cat_id`          SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
     `cat_title`       VARCHAR(255)         NOT NULL DEFAULT '',
     `cat_description` TEXT,
@@ -154,7 +154,7 @@ CREATE TABLE `yogurt_profile_category` (
 )
     ENGINE = MyISAM;
 
-CREATE TABLE `yogurt_profile_field` (
+CREATE TABLE `suico_profile_field` (
     `field_id`          INT(12) UNSIGNED     NOT NULL AUTO_INCREMENT,
     `cat_id`            SMALLINT(5) UNSIGNED NOT NULL DEFAULT '0',
     `field_type`        VARCHAR(30)          NOT NULL DEFAULT '',
@@ -179,7 +179,7 @@ CREATE TABLE `yogurt_profile_field` (
 )
     ENGINE = MyISAM;
 
-CREATE TABLE `yogurt_profile_visibility` (
+CREATE TABLE `suico_profile_visibility` (
     `field_id`      INT(12) UNSIGNED     NOT NULL DEFAULT '0',
     `user_group`    SMALLINT(5) UNSIGNED NOT NULL DEFAULT '0',
     `profile_group` SMALLINT(5) UNSIGNED NOT NULL DEFAULT '0',
@@ -189,7 +189,7 @@ CREATE TABLE `yogurt_profile_visibility` (
 )
     ENGINE = MyISAM;
 
-CREATE TABLE `yogurt_profile_regstep` (
+CREATE TABLE `suico_profile_regstep` (
     `step_id`    SMALLINT(3) UNSIGNED NOT NULL AUTO_INCREMENT,
     `step_name`  VARCHAR(255)         NOT NULL DEFAULT '',
     `step_desc`  TEXT,
@@ -201,7 +201,7 @@ CREATE TABLE `yogurt_profile_regstep` (
 )
     ENGINE = MyISAM;
 
-CREATE TABLE `yogurt_profile` (
+CREATE TABLE `suico_profile` (
     `profile_id` INT(12) UNSIGNED NOT NULL DEFAULT '0',
 
     PRIMARY KEY (`profile_id`)

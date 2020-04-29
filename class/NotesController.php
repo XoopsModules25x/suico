@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -18,7 +18,7 @@ use Criteria;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -48,7 +48,7 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 /**
  * Class NotesController
  */
-class NotesController extends YogurtController
+class NotesController extends SuicoController
 {
     //  function renderFormNewPost($tpl){
 
@@ -60,9 +60,9 @@ class NotesController extends YogurtController
 
     //      $form = new XoopsThemeForm("",'formNoteNew','submitNote.php','post',true);
 
-    //      $fieldNote = new XoopsFormTextArea('','text',_MD_YOGURT_ENTERTEXTNOTE);
+    //      $fieldNote = new XoopsFormTextArea('','text',_MD_SUICO_ENTERTEXTNOTE);
 
-    //      $fieldNote->setExtra(' onclick="cleanNoteForm(text,\''._MD_YOGURT_ENTERTEXTNOTE.'\')"');
+    //      $fieldNote->setExtra(' onclick="cleanNoteForm(text,\''._MD_SUICO_ENTERTEXTNOTE.'\')"');
 
     //
 
@@ -72,7 +72,7 @@ class NotesController extends YogurtController
 
     //
 
-    //      $submitButton = new XoopsFormButton("","post_Note",_MD_YOGURT_SENDNOTE,"submit");
+    //      $submitButton = new XoopsFormButton("","post_Note",_MD_SUICO_SENDNOTE,"submit");
 
     //
 
@@ -118,7 +118,7 @@ class NotesController extends YogurtController
         $privilegeType = ''
     ) {
         if (0 === $this->helper->getConfig('enable_notes')) {
-            \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, \_MD_YOGURT_NOTES_ENABLED_NOT);
+            \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, \_MD_SUICO_NOTES_ENABLED_NOT);
         }
 
         if ('sendNotes' === $privilegeType) {
@@ -139,7 +139,7 @@ class NotesController extends YogurtController
             $config = $configs[0]->getVar('notes');
 
             if (!$this->checkPrivilegeLevel($config)) {
-                \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, \_MD_YOGURT_NOPRIVILEGE);
+                \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, \_MD_SUICO_NOPRIVILEGE);
             }
         }
 

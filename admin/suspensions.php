@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -32,12 +32,12 @@ $sort  = Request::getString('sort', '');
 
 $adminObject->displayNavigation(basename(__FILE__));
 $permHelper = new Permission();
-$uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/images/';
-$uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/images/';
+$uploadDir  = XOOPS_UPLOAD_PATH . '/suico/images/';
+$uploadUrl  = XOOPS_UPLOAD_URL . '/suico/images/';
 
 switch ($op) {
     case 'new':
-        $adminObject->addItemButton(AM_YOGURT_SUSPENSIONS_LIST, 'suspensions.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_SUSPENSIONS_LIST, 'suspensions.php', 'list');
         $adminObject->displayButton('left');
 
         $suspensionsObject = $suspensionsHandler->create();
@@ -61,7 +61,7 @@ switch ($op) {
         $suspensionsObject->setVar('old_enc_type', Request::getVar('old_enc_type', ''));
         $suspensionsObject->setVar('old_pass_expired', Request::getVar('old_pass_expired', ''));
         if ($suspensionsHandler->insert($suspensionsObject)) {
-            redirect_header('suspensions.php?op=list', 2, AM_YOGURT_FORMOK);
+            redirect_header('suspensions.php?op=list', 2, AM_SUICO_FORMOK);
         }
 
         echo $suspensionsObject->getHtmlErrors();
@@ -69,8 +69,8 @@ switch ($op) {
         $form->display();
         break;
     case 'edit':
-        $adminObject->addItemButton(AM_YOGURT_ADD_SUSPENSIONS, 'suspensions.php?op=new', 'add');
-        $adminObject->addItemButton(AM_YOGURT_SUSPENSIONS_LIST, 'suspensions.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_ADD_SUSPENSIONS, 'suspensions.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_SUSPENSIONS_LIST, 'suspensions.php', 'list');
         $adminObject->displayButton('left');
         $suspensionsObject = $suspensionsHandler->get(Request::getString('uid', ''));
         $form              = $suspensionsObject->getForm();
@@ -84,7 +84,7 @@ switch ($op) {
             }
 
             if ($suspensionsHandler->delete($suspensionsObject)) {
-                redirect_header('suspensions.php', 3, AM_YOGURT_FORMDELOK);
+                redirect_header('suspensions.php', 3, AM_SUICO_FORMDELOK);
             } else {
                 echo $suspensionsObject->getHtmlErrors();
             }
@@ -97,7 +97,7 @@ switch ($op) {
                 ],
                 Request::getUrl('REQUEST_URI', '', 'SERVER'),
                 sprintf(
-                    AM_YOGURT_FORMSUREDEL,
+                    AM_SUICO_FORMSUREDEL,
                     $suspensionsObject->getVar('uid')
                 )
             );
@@ -107,16 +107,16 @@ switch ($op) {
 
         $id_field = Request::getString('uid', '');
 
-        if ($utility::cloneRecord('yogurt_suspensions', 'uid', $id_field)) {
-            redirect_header('suspensions.php', 3, AM_YOGURT_CLONED_OK);
+        if ($utility::cloneRecord('suico_suspensions', 'uid', $id_field)) {
+            redirect_header('suspensions.php', 3, AM_SUICO_CLONED_OK);
         } else {
-            redirect_header('suspensions.php', 3, AM_YOGURT_CLONED_FAILED);
+            redirect_header('suspensions.php', 3, AM_SUICO_CLONED_FAILED);
         }
 
         break;
     case 'list':
     default:
-        $adminObject->addItemButton(AM_YOGURT_ADD_SUSPENSIONS, 'suspensions.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_ADD_SUSPENSIONS, 'suspensions.php?op=new', 'add');
         $adminObject->displayButton('left');
         $start                      = Request::getInt('start', 0);
         $suspensionsPaginationLimit = $helper->getConfig('userpager');
@@ -131,7 +131,7 @@ switch ($op) {
         /*
         //
         //
-                            <th class='center width5'>".AM_YOGURT_FORM_ACTION."</th>
+                            <th class='center width5'>".AM_SUICO_FORM_ACTION."</th>
         //                    </tr>";
         //            $class = "odd";
         */
@@ -171,32 +171,32 @@ switch ($op) {
 
                 $GLOBALS['xoopsTpl']->assign(
                     'selectoruid',
-                    AM_YOGURT_SUSPENSIONS_UID
+                    AM_SUICO_SUSPENSIONS_UID
                 );
 
                 $suspensionsArray['uid'] = $suspensionsTempArray[$i]->getVar('uid');
 
-                $GLOBALS['xoopsTpl']->assign('selectorold_pass', AM_YOGURT_SUSPENSIONS_OLD_PASS);
+                $GLOBALS['xoopsTpl']->assign('selectorold_pass', AM_SUICO_SUSPENSIONS_OLD_PASS);
 
                 $suspensionsArray['old_pass'] = $suspensionsTempArray[$i]->getVar('old_pass');
 
-                $GLOBALS['xoopsTpl']->assign('selectorold_email', AM_YOGURT_SUSPENSIONS_OLD_EMAIL);
+                $GLOBALS['xoopsTpl']->assign('selectorold_email', AM_SUICO_SUSPENSIONS_OLD_EMAIL);
 
                 $suspensionsArray['old_email'] = $suspensionsTempArray[$i]->getVar('old_email');
 
-                $GLOBALS['xoopsTpl']->assign('selectorold_signature', AM_YOGURT_SUSPENSIONS_OLD_SIGNATURE);
+                $GLOBALS['xoopsTpl']->assign('selectorold_signature', AM_SUICO_SUSPENSIONS_OLD_SIGNATURE);
 
                 $suspensionsArray['old_signature'] = strip_tags($suspensionsTempArray[$i]->getVar('old_signature'));
 
-                $GLOBALS['xoopsTpl']->assign('selectorsuspension_time', AM_YOGURT_SUSPENSIONS_SUSPENSION_TIME);
+                $GLOBALS['xoopsTpl']->assign('selectorsuspension_time', AM_SUICO_SUSPENSIONS_SUSPENSION_TIME);
 
                 $suspensionsArray['suspension_time'] = $suspensionsTempArray[$i]->getVar('suspension_time');
 
-                $GLOBALS['xoopsTpl']->assign('selectorold_enc_type', AM_YOGURT_SUSPENSIONS_OLD_ENC_TYPE);
+                $GLOBALS['xoopsTpl']->assign('selectorold_enc_type', AM_SUICO_SUSPENSIONS_OLD_ENC_TYPE);
 
                 $suspensionsArray['old_enc_type'] = $suspensionsTempArray[$i]->getVar('old_enc_type');
 
-                $GLOBALS['xoopsTpl']->assign('selectorold_pass_expired', AM_YOGURT_SUSPENSIONS_OLD_PASS_EXPIRED);
+                $GLOBALS['xoopsTpl']->assign('selectorold_pass_expired', AM_SUICO_SUSPENSIONS_OLD_PASS_EXPIRED);
 
                 $suspensionsArray['old_pass_expired'] = $suspensionsTempArray[$i]->getVar('old_pass_expired');
 
@@ -243,7 +243,7 @@ switch ($op) {
 
             //                    <tr>
 
-            //                     <th class='center width5'>".AM_YOGURT_FORM_ACTION."XXX</th>
+            //                     <th class='center width5'>".AM_SUICO_FORM_ACTION."XXX</th>
 
             //                    </tr><tr><td class='errorMsg' colspan='8'>There are noXXX suspensions</td></tr>";
 
@@ -254,7 +254,7 @@ switch ($op) {
             echo $GLOBALS['xoopsTpl']->fetch(
                 XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar(
                     'dirname'
-                ) . '/templates/admin/yogurt_admin_suspensions.tpl'
+                ) . '/templates/admin/suico_admin_suspensions.tpl'
             );
         }
 

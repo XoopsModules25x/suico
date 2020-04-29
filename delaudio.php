@@ -14,19 +14,19 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
 
 /**
@@ -40,15 +40,15 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
             'confirm'   => 1,
         ],
         'delaudio.php',
-        _MD_YOGURT_AUDIO_DELETE_CONFIRM_ASK,
-        _MD_YOGURT_AUDIO_DELETE_CONFIRM
+        _MD_SUICO_AUDIO_DELETE_CONFIRM_ASK,
+        _MD_SUICO_AUDIO_DELETE_CONFIRM
     );
 } else {
     /**
      * Creating the factory  and the criteria to delete the picture
      * The user must be the owner
      */
-    $audioFactory = new Yogurt\AudioHandler(
+    $audioFactory = new Suico\AudioHandler(
         $xoopsDB
     );
     $criteria_aud = new Criteria('audio_id', $cod_audio);
@@ -64,10 +64,10 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
      * Try to delete
      */
     if ($audioFactory->deleteAll($criteria)) {
-        unlink(XOOPS_ROOT_PATH . '/uploads/yogurt/audio/' . $audio_name);
-        redirect_header('audios.php', 2, _MD_YOGURT_AUDIO_DELETED);
+        unlink(XOOPS_ROOT_PATH . '/uploads/suico/audio/' . $audio_name);
+        redirect_header('audios.php', 2, _MD_SUICO_AUDIO_DELETED);
     } else {
-        redirect_header('audios.php', 2, _MD_YOGURT_ERROR);
+        redirect_header('audios.php', 2, _MD_SUICO_ERROR);
     }
 }
 

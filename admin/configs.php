@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -32,12 +32,12 @@ $sort  = Request::getString('sort', '');
 
 $adminObject->displayNavigation(basename(__FILE__));
 $permHelper = new Permission();
-//$uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/images/';
-//$uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/images/';
+//$uploadDir  = XOOPS_UPLOAD_PATH . '/suico/images/';
+//$uploadUrl  = XOOPS_UPLOAD_URL . '/suico/images/';
 
 switch ($op) {
     case 'new':
-        $adminObject->addItemButton(AM_YOGURT_CONFIGS_LIST, 'configs.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_CONFIGS_LIST, 'configs.php', 'list');
         $adminObject->displayButton('left');
 
         $configsObject = $configsHandler->create();
@@ -73,7 +73,7 @@ switch ($op) {
         $configsObject->setVar('end_suspension', $dateTimeObj->getTimestamp());
 
         if ($configsHandler->insert($configsObject)) {
-            redirect_header('configs.php?op=list', 2, AM_YOGURT_FORMOK);
+            redirect_header('configs.php?op=list', 2, AM_SUICO_FORMOK);
         }
 
         echo $configsObject->getHtmlErrors();
@@ -81,8 +81,8 @@ switch ($op) {
         $form->display();
         break;
     case 'edit':
-        $adminObject->addItemButton(AM_YOGURT_ADD_CONFIGS, 'configs.php?op=new', 'add');
-        $adminObject->addItemButton(AM_YOGURT_CONFIGS_LIST, 'configs.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_ADD_CONFIGS, 'configs.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_CONFIGS_LIST, 'configs.php', 'list');
         $adminObject->displayButton('left');
         $configsObject = $configsHandler->get(Request::getString('config_id', ''));
         $form          = $configsObject->getForm();
@@ -96,28 +96,28 @@ switch ($op) {
             }
 
             if ($configsHandler->delete($configsObject)) {
-                redirect_header('configs.php', 3, AM_YOGURT_FORMDELOK);
+                redirect_header('configs.php', 3, AM_SUICO_FORMDELOK);
             } else {
                 echo $configsObject->getHtmlErrors();
             }
         } else {
-            xoops_confirm(['ok' => 1, 'config_id' => Request::getString('config_id', ''), 'op' => 'delete'], Request::getUrl('REQUEST_URI', '', 'SERVER'), sprintf(AM_YOGURT_FORMSUREDEL, $configsObject->getVar('config_uid')));
+            xoops_confirm(['ok' => 1, 'config_id' => Request::getString('config_id', ''), 'op' => 'delete'], Request::getUrl('REQUEST_URI', '', 'SERVER'), sprintf(AM_SUICO_FORMSUREDEL, $configsObject->getVar('config_uid')));
         }
         break;
     case 'clone':
 
         $id_field = Request::getString('config_id', '');
 
-        if ($utility::cloneRecord('yogurt_configs', 'config_id', $id_field)) {
-            redirect_header('configs.php', 3, AM_YOGURT_CLONED_OK);
+        if ($utility::cloneRecord('suico_configs', 'config_id', $id_field)) {
+            redirect_header('configs.php', 3, AM_SUICO_CLONED_OK);
         } else {
-            redirect_header('configs.php', 3, AM_YOGURT_CLONED_FAILED);
+            redirect_header('configs.php', 3, AM_SUICO_CLONED_FAILED);
         }
 
         break;
     case 'list':
     default:
-        $adminObject->addItemButton(AM_YOGURT_ADD_CONFIGS, 'configs.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_ADD_CONFIGS, 'configs.php?op=new', 'add');
         $adminObject->displayButton('left');
         $start                  = Request::getInt('start', 0);
         $configsPaginationLimit = $helper->getConfig('userpager');
@@ -132,7 +132,7 @@ switch ($op) {
         /*
         //
         //
-                            <th class='center width5'>".AM_YOGURT_FORM_ACTION."</th>
+                            <th class='center width5'>".AM_SUICO_FORM_ACTION."</th>
         //                    </tr>";
         //            $class = "odd";
         */
@@ -168,63 +168,63 @@ switch ($op) {
         //    for ($i = 0; $i < $fieldsCount; ++$i) {
         if ($configsCount > 0) {
             foreach (array_keys($configsTempArray) as $i) {
-                $GLOBALS['xoopsTpl']->assign('selectorconfig_id', AM_YOGURT_CONFIGS_CONFIG_ID);
+                $GLOBALS['xoopsTpl']->assign('selectorconfig_id', AM_SUICO_CONFIGS_CONFIG_ID);
 
                 $configsArray['config_id'] = $configsTempArray[$i]->getVar('config_id');
 
-                $GLOBALS['xoopsTpl']->assign('selectorconfig_uid', AM_YOGURT_CONFIGS_CONFIG_UID);
+                $GLOBALS['xoopsTpl']->assign('selectorconfig_uid', AM_SUICO_CONFIGS_CONFIG_UID);
 
                 $configsArray['config_uid'] = strip_tags(\XoopsUser::getUnameFromId($configsTempArray[$i]->getVar('config_uid')));
 
-                $GLOBALS['xoopsTpl']->assign('selectorpictures', AM_YOGURT_CONFIGS_PICTURES);
+                $GLOBALS['xoopsTpl']->assign('selectorpictures', AM_SUICO_CONFIGS_PICTURES);
 
                 $configsArray['pictures'] = $privacyHandler->get($configsTempArray[$i]->getVar('pictures'))->getVar('name');
 
-                $GLOBALS['xoopsTpl']->assign('selectoraudio', AM_YOGURT_CONFIGS_AUDIO);
+                $GLOBALS['xoopsTpl']->assign('selectoraudio', AM_SUICO_CONFIGS_AUDIO);
 
                 $configsArray['audio'] = $privacyHandler->get($configsTempArray[$i]->getVar('audio'))->getVar('name');
 
-                $GLOBALS['xoopsTpl']->assign('selectorvideos', AM_YOGURT_CONFIGS_VIDEOS);
+                $GLOBALS['xoopsTpl']->assign('selectorvideos', AM_SUICO_CONFIGS_VIDEOS);
 
                 $configsArray['videos'] = $privacyHandler->get($configsTempArray[$i]->getVar('videos'))->getVar('name');
 
-                $GLOBALS['xoopsTpl']->assign('selectorgroups', AM_YOGURT_CONFIGS_GROUPS);
+                $GLOBALS['xoopsTpl']->assign('selectorgroups', AM_SUICO_CONFIGS_GROUPS);
 
                 $configsArray['groups'] = $privacyHandler->get($configsTempArray[$i]->getVar('groups'))->getVar('name');
 
-                $GLOBALS['xoopsTpl']->assign('selectornotes', AM_YOGURT_CONFIGS_NOTES);
+                $GLOBALS['xoopsTpl']->assign('selectornotes', AM_SUICO_CONFIGS_NOTES);
 
                 $configsArray['notes'] = $privacyHandler->get($configsTempArray[$i]->getVar('notes'))->getVar('name');
 
-                $GLOBALS['xoopsTpl']->assign('selectorfriends', AM_YOGURT_CONFIGS_FRIENDS);
+                $GLOBALS['xoopsTpl']->assign('selectorfriends', AM_SUICO_CONFIGS_FRIENDS);
 
                 $configsArray['friends'] = $privacyHandler->get($configsTempArray[$i]->getVar('friends'))->getVar('name');
 
-                $GLOBALS['xoopsTpl']->assign('selectorprofile_contact', AM_YOGURT_CONFIGS_PROFILE_CONTACT);
+                $GLOBALS['xoopsTpl']->assign('selectorprofile_contact', AM_SUICO_CONFIGS_PROFILE_CONTACT);
 
                 $configsArray['profile_contact'] = $privacyHandler->get($configsTempArray[$i]->getVar('profile_contact'))->getVar('name');
 
-                $GLOBALS['xoopsTpl']->assign('selectorprofile_general', AM_YOGURT_CONFIGS_PROFILE_GENERAL);
+                $GLOBALS['xoopsTpl']->assign('selectorprofile_general', AM_SUICO_CONFIGS_PROFILE_GENERAL);
 
                 $configsArray['profile_general'] = $privacyHandler->get($configsTempArray[$i]->getVar('profile_general'))->getVar('name');
 
-                $GLOBALS['xoopsTpl']->assign('selectorprofile_stats', AM_YOGURT_CONFIGS_PROFILE_STATS);
+                $GLOBALS['xoopsTpl']->assign('selectorprofile_stats', AM_SUICO_CONFIGS_PROFILE_STATS);
 
                 $configsArray['profile_stats'] = $privacyHandler->get($configsTempArray[$i]->getVar('profile_stats'))->getVar('name');
 
-                $GLOBALS['xoopsTpl']->assign('selectorsuspension', AM_YOGURT_CONFIGS_SUSPENSION);
+                $GLOBALS['xoopsTpl']->assign('selectorsuspension', AM_SUICO_CONFIGS_SUSPENSION);
 
                 $configsArray['suspension'] = $configsTempArray[$i]->getVar('suspension');
 
-                $GLOBALS['xoopsTpl']->assign('selectorbackup_password', AM_YOGURT_CONFIGS_BACKUP_PASSWORD);
+                $GLOBALS['xoopsTpl']->assign('selectorbackup_password', AM_SUICO_CONFIGS_BACKUP_PASSWORD);
 
                 $configsArray['backup_password'] = $configsTempArray[$i]->getVar('backup_password');
 
-                $GLOBALS['xoopsTpl']->assign('selectorbackup_email', AM_YOGURT_CONFIGS_BACKUP_EMAIL);
+                $GLOBALS['xoopsTpl']->assign('selectorbackup_email', AM_SUICO_CONFIGS_BACKUP_EMAIL);
 
                 $configsArray['backup_email'] = $configsTempArray[$i]->getVar('backup_email');
 
-                $GLOBALS['xoopsTpl']->assign('selectorend_suspension', AM_YOGURT_CONFIGS_END_SUSPENSION);
+                $GLOBALS['xoopsTpl']->assign('selectorend_suspension', AM_SUICO_CONFIGS_END_SUSPENSION);
 
                 $configsArray['end_suspension'] = formatTimestamp($configsTempArray[$i]->getVar('end_suspension'), 's');
 
@@ -271,7 +271,7 @@ switch ($op) {
 
             //                    <tr>
 
-            //                     <th class='center width5'>".AM_YOGURT_FORM_ACTION."XXX</th>
+            //                     <th class='center width5'>".AM_SUICO_FORM_ACTION."XXX</th>
 
             //                    </tr><tr><td class='errorMsg' colspan='16'>There are noXXX configs</td></tr>";
 
@@ -282,7 +282,7 @@ switch ($op) {
             echo $GLOBALS['xoopsTpl']->fetch(
                 XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar(
                     'dirname'
-                ) . '/templates/admin/yogurt_admin_configs.tpl'
+                ) . '/templates/admin/suico_admin_configs.tpl'
             );
         }
 

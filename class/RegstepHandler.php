@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /**
  * Extended User Profile
@@ -33,7 +33,7 @@ class RegstepHandler extends \XoopsPersistableObjectHandler
 
     public function __construct($db)
     {
-        parent::__construct($db, 'yogurt_profile_regstep', Regstep::class, 'step_id', 'step_name');
+        parent::__construct($db, 'suico_profile_regstep', Regstep::class, 'step_id', 'step_name');
     }
 
     /**
@@ -48,7 +48,7 @@ class RegstepHandler extends \XoopsPersistableObjectHandler
     public function delete(\XoopsObject $obj, $force = false)
     {
         if (parent::delete($obj, $force)) {
-            $fieldHandler = \XoopsModules\Yogurt\Helper::getInstance()->getHandler('Field');
+            $fieldHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Field');
 
             return $fieldHandler->updateAll('step_id', 0, new \Criteria('step_id', $obj->getVar('step_id')), $force);
         }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /**
  * Extended User Profile
@@ -27,11 +27,11 @@ namespace XoopsModules\Yogurt;
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
  */
 
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 /**
  * Class ProfileHandler
- * @package XoopsModules\Yogurt
+ * @package XoopsModules\Suico
  */
 class ProfileHandler extends \XoopsPersistableObjectHandler
 {
@@ -42,7 +42,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
     public $_fHandler;
 
     /**
-     * Array of {@link XoopsYogurt\Field} objects
+     * Array of {@link XoopsSuico\Field} objects
      * @var array
      */
 
@@ -54,9 +54,9 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
 
     public function __construct(\XoopsDatabase $db)
     {
-        parent::__construct($db, 'yogurt_profile', Profile::class, 'profile_id');
+        parent::__construct($db, 'suico_profile', Profile::class, 'profile_id');
 
-        $this->_fHandler = \XoopsModules\Yogurt\Helper::getInstance()->getHandler('Field');
+        $this->_fHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Field');
     }
 
     /**
@@ -107,11 +107,11 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * Create new {@link Yogurt\Field} object
+     * Create new {@link Suico\Field} object
      *
      * @param bool $isNew
      *
-     * @return Yogurt\Field
+     * @return Suico\Field
      */
 
     public function createField($isNew = true)
@@ -154,13 +154,13 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
     /**
      * Insert a field in the database
      *
-     * @param \XoopsModules\Yogurt\Field $field
+     * @param \XoopsModules\Suico\Field $field
      * @param bool                       $force
      *
      * @return bool
      */
 
-    public function insertField(Yogurt\Field $field, $force = false)
+    public function insertField(Suico\Field $field, $force = false)
     {
         return $this->_fHandler->insert($field, $force);
     }
@@ -168,13 +168,13 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
     /**
      * Delete a field from the database
      *
-     * @param \XoopsModules\Yogurt\Field $field
+     * @param \XoopsModules\Suico\Field $field
      * @param bool                       $force
      *
      * @return bool
      */
 
-    public function deleteField(Yogurt\Field $field, $force = false)
+    public function deleteField(Suico\Field $field, $force = false)
     {
         return $this->_fHandler->delete($field, $force);
     }

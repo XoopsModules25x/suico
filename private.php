@@ -14,21 +14,21 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
 
 //require_once __DIR__ . '/class/Image.php';
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
 
 $cod_img = Request::getInt('cod_img', 0, 'POST');
@@ -36,7 +36,7 @@ $cod_img = Request::getInt('cod_img', 0, 'POST');
 /**
  * Creating the factory  loading the picture changing its caption
  */
-$imageFactory = new Yogurt\ImageHandler(
+$imageFactory = new Suico\ImageHandler(
     $xoopsDB
 );
 $picture      = $imageFactory->create(false);
@@ -50,12 +50,12 @@ $uid = (int)$xoopsUser->getVar('uid');
 if ($uid === (int)$picture->getVar('uid_owner')) {
     if ($imageFactory->insert2($picture)) {
         if (1 === Request::getInt('private', 0, 'POST')) {
-            redirect_header('album.php', 2, _MD_YOGURT_PRIVATIZED);
+            redirect_header('album.php', 2, _MD_SUICO_PRIVATIZED);
         } else {
-            redirect_header('album.php', 2, _MD_YOGURT_UNPRIVATIZED);
+            redirect_header('album.php', 2, _MD_SUICO_UNPRIVATIZED);
         }
     } else {
-        redirect_header('album.php', 2, _MD_YOGURT_ERROR);
+        redirect_header('album.php', 2, _MD_SUICO_ERROR);
     }
 }
 

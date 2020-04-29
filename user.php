@@ -29,7 +29,7 @@ declare(strict_types=1);
 
 use Xmf\Request;
 
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_user.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'suico_user.tpl';
 require __DIR__ . '/header.php';
 
 /**
@@ -44,13 +44,13 @@ if (($xoopsUser)) {
         $uid_owner = (int)$xoopsUser->getVar('uid');
         $isOwner   = 1;
     }
-    redirect_header('' . XOOPS_URL . "/modules/yogurt/index.php?uid=$uid_owner");
+    redirect_header('' . XOOPS_URL . "/modules/suico/index.php?uid=$uid_owner");
 }
 
 $op = $_REQUEST['op'] ?? '';
 
 if ('register' === $op) {
-    $GLOBALS['xoopsOption']['template_main'] = 'yogurt_register.tpl';
+    $GLOBALS['xoopsOption']['template_main'] = 'suico_register.tpl';
     include $GLOBALS['xoops']->path('header.php');
 
     if (!empty($_GET['op']) && in_array($_GET['op'], ['actv', 'activate'])) {
@@ -91,7 +91,7 @@ if ('register' === $op) {
 
     // First step is already secured by with the captcha Token so lets check the others
     if ($current_step > 0 && !$GLOBALS['xoopsSecurity']->check()) {
-        redirect_header('user.php', 5, _MD_YOGURT_EXPIRED);
+        redirect_header('user.php', 5, _MD_SUICO_EXPIRED);
     }
 
     $criteria = new CriteriaCompo();
@@ -99,7 +99,7 @@ if ('register' === $op) {
     $regstepHandler = $helper->getHandler('Regstep');
 
     if (!$steps = $regstepHandler->getAll($criteria, null, false, false)) {
-        redirect_header(XOOPS_URL . '/', 6, _MD_YOGURT_NOSTEPSAVAILABLE);
+        redirect_header(XOOPS_URL . '/', 6, _MD_SUICO_NOSTEPSAVAILABLE);
     }
 
     foreach (array_keys($steps) as $key) {
@@ -107,11 +107,11 @@ if ('register' === $op) {
     }
 
     $GLOBALS['xoopsTpl']->assign('steps', $steps);
-    $GLOBALS['xoopsTpl']->assign('lang_register_steps', _MD_YOGURT_REGISTER_STEPS);
+    $GLOBALS['xoopsTpl']->assign('lang_register_steps', _MD_SUICO_REGISTER_STEPS);
 
     $xoBreadcrumbs[] = [
         'link'  => XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/register.php',
-        'title' => _MD_YOGURT_REGISTER,
+        'title' => _MD_SUICO_REGISTER,
     ];
     if (isset($steps[$current_step])) {
         $xoBreadcrumbs[] = ['title' => $steps[$current_step]['step_name']];
@@ -286,7 +286,7 @@ if ('register' === $op) {
 
                     $message = '';
                     if (!$memberHandler->addUserToGroup(XOOPS_GROUP_USERS, $newuser->getVar('uid'))) {
-                        $message = _MD_YOGURT_REGISTER_NOTGROUP . '<br>';
+                        $message = _MD_SUICO_REGISTER_NOTGROUP . '<br>';
                     } else {
                         if (1 == $GLOBALS['xoopsConfigUser']['activation_type']) {
                             XoopsUserUtility::sendWelcome($newuser);
@@ -346,16 +346,16 @@ if ('register' === $op) {
     if (!empty($stop) || isset($steps[$current_step])) {
         include_once __DIR__ . '/include/forms.php';
         $current_step = empty($stop) ? $current_step : $current_step - 1;
-        $reg_form     = yogurt_getRegisterForm($newuser, $profile, $steps[$current_step]);
+        $reg_form     = suico_getRegisterForm($newuser, $profile, $steps[$current_step]);
         $reg_form->assign($GLOBALS['xoopsTpl']);
         $GLOBALS['xoopsTpl']->assign('current_step', $current_step);
         $GLOBALS['xoopsTpl']->assign('stop', $stop);
     } else {
         // No errors and no more steps, finish
-        $GLOBALS['xoopsTpl']->assign('finish', _MD_YOGURT_REGISTER_FINISH);
+        $GLOBALS['xoopsTpl']->assign('finish', _MD_SUICO_REGISTER_FINISH);
         $GLOBALS['xoopsTpl']->assign('current_step', -1);
         if (1 == $GLOBALS['xoopsConfigUser']['activation_type'] && !empty($_SESSION['profile_post']['pass'])) {
-            $GLOBALS['xoopsTpl']->assign('finish_login', _MD_YOGURT_FINISH_LOGIN);
+            $GLOBALS['xoopsTpl']->assign('finish_login', _MD_SUICO_FINISH_LOGIN);
             $GLOBALS['xoopsTpl']->assign('finish_uname', $newuser->getVar('uname'));
             $GLOBALS['xoopsTpl']->assign('finish_pass', htmlspecialchars($_SESSION['profile_post']['pass'], ENT_QUOTES | ENT_HTML5));
         }

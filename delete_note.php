@@ -14,21 +14,21 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
 
 /**
  * Factories of groups
  */
-$notesFactory = new Yogurt\NotesHandler($xoopsDB);
+$notesFactory = new Suico\NotesHandler($xoopsDB);
 
 $noteId = Request::getInt('note_id', 0, 'POST');
 
@@ -39,8 +39,8 @@ if (1 != Request::getInt('confirm', 0, 'POST')) {
             'confirm' => 1,
         ],
         'delete_note.php',
-        _MD_YOGURT_ASKCONFIRMNOTEDELETION,
-        _MD_YOGURT_CONFIRMNOTEDELETION
+        _MD_SUICO_ASKCONFIRMNOTEDELETION,
+        _MD_SUICO_CONFIRMNOTEDELETION
     );
 } else {
     /**
@@ -60,9 +60,9 @@ if (1 != Request::getInt('confirm', 0, 'POST')) {
      */
     if (1 == $notesFactory->getCount($criteria)) {
         if ($notesFactory->deleteAll($criteria)) {
-            redirect_header('notebook.php?uid=' . $uid, 2, _MD_YOGURT_NOTE_DELETED);
+            redirect_header('notebook.php?uid=' . $uid, 2, _MD_SUICO_NOTE_DELETED);
         } else {
-            redirect_header('notebook.php?uid=' . $uid, 2, _MD_YOGURT_ERROR);
+            redirect_header('notebook.php?uid=' . $uid, 2, _MD_SUICO_ERROR);
         }
     }
 }

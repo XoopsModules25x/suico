@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -32,11 +32,11 @@ if (!defined('XOOPS_ROOT_PATH')) {
  * @param $item_id
  * @return mixed
  */
-function yogurt_iteminfo($category, $item_id)
+function suico_iteminfo($category, $item_id)
 {
     $moduleHandler = xoops_getHandler('module');
 
-    $module = $moduleHandler->getByDirname('yogurt');
+    $module = $moduleHandler->getByDirname('suico');
 
     if ('global' === $category) {
         $item['name'] = '';
@@ -50,7 +50,7 @@ function yogurt_iteminfo($category, $item_id)
 
     if ('picture' === $category) {
         $sql = 'SELECT title,uid_owner,filename FROM ' . $xoopsDB->prefix(
-                'yogurt_images'
+                'suico_images'
             ) . ' WHERE uid_owner = ' . $item_id . ' LIMIT 1';
 
         $result = $xoopsDB->query($sql);
@@ -76,7 +76,7 @@ function yogurt_iteminfo($category, $item_id)
 
     if ('video' === $category) {
         $sql = 'SELECT video_id,uid_owner,video_desc,youtube_code, mainvideo FROM ' . $xoopsDB->prefix(
-                'yogurt_images'
+                'suico_images'
             ) . ' WHERE uid_owner = ' . $item_id . ' LIMIT 1';
 
         $result = $xoopsDB->query($sql);
@@ -102,7 +102,7 @@ function yogurt_iteminfo($category, $item_id)
 
     if ('Note' === $category) {
         $sql = 'SELECT note_id, note_from, note_to, note_text FROM ' . $xoopsDB->prefix(
-                'yogurt_notes'
+                'suico_notes'
             ) . ' WHERE note_from = ' . $item_id . ' LIMIT 1';
 
         $result = $xoopsDB->query($sql);

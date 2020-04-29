@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -32,12 +32,12 @@ $sort  = Request::getString('sort', '');
 
 $adminObject->displayNavigation(basename(__FILE__));
 $permHelper = new Permission();
-$uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/images/';
-$uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/images/';
+$uploadDir  = XOOPS_UPLOAD_PATH . '/suico/images/';
+$uploadUrl  = XOOPS_UPLOAD_URL . '/suico/images/';
 
 switch ($op) {
     case 'new':
-        $adminObject->addItemButton(AM_YOGURT_FRIENDREQUEST_LIST, 'friendrequests.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_FRIENDREQUEST_LIST, 'friendrequests.php', 'list');
         $adminObject->displayButton('left');
 
         $friendrequestObject = $friendrequestHandler->create();
@@ -59,7 +59,7 @@ switch ($op) {
         $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_created', '', 'POST'));
         $friendrequestObject->setVar('date_created', $dateTimeObj->getTimestamp());
         if ($friendrequestHandler->insert($friendrequestObject)) {
-            redirect_header('friendrequests.php?op=list', 2, AM_YOGURT_FORMOK);
+            redirect_header('friendrequests.php?op=list', 2, AM_SUICO_FORMOK);
         }
 
         echo $friendrequestObject->getHtmlErrors();
@@ -67,8 +67,8 @@ switch ($op) {
         $form->display();
         break;
     case 'edit':
-        $adminObject->addItemButton(AM_YOGURT_ADD_FRIENDREQUEST, 'friendrequests.php?op=new', 'add');
-        $adminObject->addItemButton(AM_YOGURT_FRIENDREQUEST_LIST, 'friendrequests.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_ADD_FRIENDREQUEST, 'friendrequests.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_FRIENDREQUEST_LIST, 'friendrequests.php', 'list');
         $adminObject->displayButton('left');
         $friendrequestObject = $friendrequestHandler->get(Request::getString('friendreq_id', ''));
         $form                = $friendrequestObject->getForm();
@@ -82,7 +82,7 @@ switch ($op) {
             }
 
             if ($friendrequestHandler->delete($friendrequestObject)) {
-                redirect_header('friendrequests.php', 3, AM_YOGURT_FORMDELOK);
+                redirect_header('friendrequests.php', 3, AM_SUICO_FORMDELOK);
             } else {
                 echo $friendrequestObject->getHtmlErrors();
             }
@@ -95,7 +95,7 @@ switch ($op) {
                 ],
                 Request::getUrl('REQUEST_URI', '', 'SERVER'),
                 sprintf(
-                    AM_YOGURT_FORMSUREDEL,
+                    AM_SUICO_FORMSUREDEL,
                     $friendrequestObject->getVar('friendreq_id')
                 )
             );
@@ -105,16 +105,16 @@ switch ($op) {
 
         $id_field = Request::getString('friendreq_id', '');
 
-        if ($utility::cloneRecord('yogurt_friendrequests', 'friendreq_id', $id_field)) {
-            redirect_header('friendrequests.php', 3, AM_YOGURT_CLONED_OK);
+        if ($utility::cloneRecord('suico_friendrequests', 'friendreq_id', $id_field)) {
+            redirect_header('friendrequests.php', 3, AM_SUICO_CLONED_OK);
         } else {
-            redirect_header('friendrequests.php', 3, AM_YOGURT_CLONED_FAILED);
+            redirect_header('friendrequests.php', 3, AM_SUICO_CLONED_FAILED);
         }
 
         break;
     case 'list':
     default:
-        $adminObject->addItemButton(AM_YOGURT_ADD_FRIENDREQUEST, 'friendrequests.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_ADD_FRIENDREQUEST, 'friendrequests.php?op=new', 'add');
         $adminObject->displayButton('left');
         $start                        = Request::getInt('start', 0);
         $friendrequestPaginationLimit = $helper->getConfig('userpager');
@@ -162,24 +162,24 @@ switch ($op) {
 
                 $GLOBALS['xoopsTpl']->assign(
                     'selectorfriendreq_id',
-                    AM_YOGURT_FRIENDREQUEST_FRIENDPET_ID
+                    AM_SUICO_FRIENDREQUEST_FRIENDPET_ID
                 );
 
                 $friendrequestArray['friendreq_id'] = $friendrequestTempArray[$i]->getVar('friendreq_id');
 
-                $GLOBALS['xoopsTpl']->assign('selectorfriendrequester_uid', AM_YOGURT_FRIENDREQUEST_FRIENDREQUESTER_UID);
+                $GLOBALS['xoopsTpl']->assign('selectorfriendrequester_uid', AM_SUICO_FRIENDREQUEST_FRIENDREQUESTER_UID);
 
                 $friendrequestArray['friendrequester_uid'] = strip_tags(
                     XoopsUser::getUnameFromId($friendrequestTempArray[$i]->getVar('friendrequester_uid'))
                 );
 
-                $GLOBALS['xoopsTpl']->assign('selectorfriendrequestto_uid', AM_YOGURT_FRIENDREQUEST_FRIENDREQUESTTO_UID);
+                $GLOBALS['xoopsTpl']->assign('selectorfriendrequestto_uid', AM_SUICO_FRIENDREQUEST_FRIENDREQUESTTO_UID);
 
                 $friendrequestArray['friendrequestto_uid'] = strip_tags(
                     XoopsUser::getUnameFromId($friendrequestTempArray[$i]->getVar('friendrequestto_uid'))
                 );
 
-                $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_FRIENDREQUEST_DATE_CREATED);
+                $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_SUICO_FRIENDREQUEST_DATE_CREATED);
 
                 $friendrequestArray['date_created'] = formatTimestamp($friendrequestTempArray[$i]->getVar('date_created'), 's');
 
@@ -209,7 +209,7 @@ switch ($op) {
             echo $GLOBALS['xoopsTpl']->fetch(
                 XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar(
                     'dirname'
-                ) . '/templates/admin/yogurt_admin_friendrequests.tpl'
+                ) . '/templates/admin/suico_admin_friendrequests.tpl'
             );
         }
 

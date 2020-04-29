@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt\Form;
+namespace XoopsModules\Suico\Form;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -16,7 +16,7 @@ namespace XoopsModules\Yogurt\Form;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -28,13 +28,13 @@ use XoopsFormHidden;
 use XoopsFormLabel;
 use XoopsFormSelectUser;
 use XoopsFormText;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 use XoopsThemeForm;
 
 require_once \dirname(__DIR__, 2) . '/include/common.php';
 
 $moduleDirName = \basename(\dirname(__DIR__, 2));
-//$helper = Yogurt\Helper::getInstance();
+//$helper = Suico\Helper::getInstance();
 $permHelper = new Permission();
 
 \xoops_load('XoopsFormLoader');
@@ -60,8 +60,8 @@ class FriendshipForm extends XoopsThemeForm
 
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? \sprintf(\AM_YOGURT_FRIENDSHIP_ADD) : \sprintf(
-            \AM_YOGURT_FRIENDSHIP_EDIT
+        $title = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_FRIENDSHIP_ADD) : \sprintf(
+            \AM_SUICO_FRIENDSHIP_EDIT
         );
 
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
@@ -84,7 +84,7 @@ class FriendshipForm extends XoopsThemeForm
 
         $this->addElement(
             new XoopsFormLabel(
-                \AM_YOGURT_FRIENDSHIP_FRIENDSHIP_ID, $this->targetObject->getVar(
+                \AM_SUICO_FRIENDSHIP_FRIENDSHIP_ID, $this->targetObject->getVar(
                 'friendship_id'
             ), 'friendship_id'
             )
@@ -94,7 +94,7 @@ class FriendshipForm extends XoopsThemeForm
 
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_YOGURT_FRIENDSHIP_FRIEND1_UID, 'friend1_uid', false, $this->targetObject->getVar(
+                \AM_SUICO_FRIENDSHIP_FRIEND1_UID, 'friend1_uid', false, $this->targetObject->getVar(
                 'friend1_uid'
             ), 1, false
             ),
@@ -105,7 +105,7 @@ class FriendshipForm extends XoopsThemeForm
 
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_YOGURT_FRIENDSHIP_FRIEND2_UID, 'friend2_uid', false, $this->targetObject->getVar(
+                \AM_SUICO_FRIENDSHIP_FRIEND2_UID, 'friend2_uid', false, $this->targetObject->getVar(
                 'friend2_uid'
             ), 1, false
             ),
@@ -115,35 +115,35 @@ class FriendshipForm extends XoopsThemeForm
         // Level
 
         $this->addElement(
-            new XoopsFormText(\AM_YOGURT_FRIENDSHIP_LEVEL, 'level', 50, 255, $this->targetObject->getVar('level')),
+            new XoopsFormText(\AM_SUICO_FRIENDSHIP_LEVEL, 'level', 50, 255, $this->targetObject->getVar('level')),
             false
         );
 
         // Hot
 
         $this->addElement(
-            new XoopsFormText(\AM_YOGURT_FRIENDSHIP_HOT, 'hot', 50, 255, $this->targetObject->getVar('hot')),
+            new XoopsFormText(\AM_SUICO_FRIENDSHIP_HOT, 'hot', 50, 255, $this->targetObject->getVar('hot')),
             false
         );
 
         // Trust
 
         $this->addElement(
-            new XoopsFormText(\AM_YOGURT_FRIENDSHIP_TRUST, 'trust', 50, 255, $this->targetObject->getVar('trust')),
+            new XoopsFormText(\AM_SUICO_FRIENDSHIP_TRUST, 'trust', 50, 255, $this->targetObject->getVar('trust')),
             false
         );
 
         // Cool
 
         $this->addElement(
-            new XoopsFormText(\AM_YOGURT_FRIENDSHIP_COOL, 'cool', 50, 255, $this->targetObject->getVar('cool')),
+            new XoopsFormText(\AM_SUICO_FRIENDSHIP_COOL, 'cool', 50, 255, $this->targetObject->getVar('cool')),
             false
         );
 
         // Fan
 
         $this->addElement(
-            new XoopsFormText(\AM_YOGURT_FRIENDSHIP_FAN, 'fan', 50, 255, $this->targetObject->getVar('fan')),
+            new XoopsFormText(\AM_SUICO_FRIENDSHIP_FAN, 'fan', 50, 255, $this->targetObject->getVar('fan')),
             false
         );
 
@@ -151,13 +151,13 @@ class FriendshipForm extends XoopsThemeForm
 
         $this->addElement(
             new \XoopsFormTextDateSelect(
-                \AM_YOGURT_FRIENDSHIP_DATE_CREATED, 'date_created', 0, \formatTimestamp($this->targetObject->getVar('date_created'), 's')
+                \AM_SUICO_FRIENDSHIP_DATE_CREATED, 'date_created', 0, \formatTimestamp($this->targetObject->getVar('date_created'), 's')
             )
         );
 
         $this->addElement(
             new \XoopsFormTextDateSelect(
-                \AM_YOGURT_FRIENDSHIP_DATE_UPDATED, 'date_updated', 0, \formatTimestamp($this->targetObject->getVar('date_updated'), 's')
+                \AM_SUICO_FRIENDSHIP_DATE_UPDATED, 'date_updated', 0, \formatTimestamp($this->targetObject->getVar('date_updated'), 's')
             )
         );
 

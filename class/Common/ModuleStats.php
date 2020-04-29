@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt\Common;
+namespace XoopsModules\Suico\Common;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -16,7 +16,7 @@ namespace XoopsModules\Yogurt\Common;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -24,7 +24,7 @@ namespace XoopsModules\Yogurt\Common;
 trait ModuleStats
 {
     /**
-     * @param \XoopsModules\Yogurt\Common\Configurator $configurator
+     * @param \XoopsModules\Suico\Common\Configurator $configurator
      * @param array                                    $moduleStats
      * @return array
      */

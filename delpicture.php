@@ -14,19 +14,19 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
 
 $cod_img = Request::getInt('cod_img', 0, 'POST');
@@ -38,15 +38,15 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
             'confirm' => 1,
         ],
         'delpicture.php',
-        _MD_YOGURT_ASK_CONFIRM_DELETION,
-        _MD_YOGURT_CONFIRM_DELETION
+        _MD_SUICO_ASK_CONFIRM_DELETION,
+        _MD_SUICO_CONFIRM_DELETION
     );
 } else {
     /**
      * Creating the factory  and the criteria to delete the picture
      * The user must be the owner
      */
-    $imageFactory = new Yogurt\ImageHandler(
+    $imageFactory = new Suico\ImageHandler(
         $xoopsDB
     );
     $criteria_img = new Criteria('cod_img', $cod_img);
@@ -66,9 +66,9 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
         if (1 === $helper->getConfig('physical_delete')) {
             //unlink($xoopsModuleConfig['path_upload']."\/".$image_name);
             unlink(
-                XOOPS_ROOT_PATH . '/uploads' . '/images/yogurt/' . $image_name
+                XOOPS_ROOT_PATH . '/uploads' . '/images/suico/' . $image_name
             );
-            unlink(XOOPS_ROOT_PATH . '/uploads' . '/images/yogurt/resized_' . $image_name);
+            unlink(XOOPS_ROOT_PATH . '/uploads' . '/images/suico/resized_' . $image_name);
             /**
              * Delete the thumb (avatar now has another name)
              */
@@ -76,9 +76,9 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
             unlink(XOOPS_ROOT_PATH . '/uploads' . '/images/thumb_' . $image_name);
             //}
         }
-        redirect_header('album.php', 2, _MD_YOGURT_DELETED);
+        redirect_header('album.php', 2, _MD_SUICO_DELETED);
     } else {
-        redirect_header('album.php', 2, _MD_YOGURT_ERROR);
+        redirect_header('album.php', 2, _MD_SUICO_ERROR);
     }
 }
 

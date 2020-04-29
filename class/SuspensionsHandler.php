@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -16,7 +16,7 @@ namespace XoopsModules\Yogurt;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -46,14 +46,14 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
     /**
      * Constructor
      * @param \XoopsDatabase|null              $xoopsDatabase
-     * @param \XoopsModules\Yogurt\Helper|null $helper
+     * @param \XoopsModules\Suico\Helper|null $helper
      */
 
     public function __construct(
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Yogurt\Helper $this ->helper */
+        /** @var \XoopsModules\Suico\Helper $this ->helper */
 
         if (null === $helper) {
             $this->helper = Helper::getInstance();
@@ -63,7 +63,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
 
         $isAdmin = $this->helper->isUserAdmin();
 
-        parent::__construct($xoopsDatabase, 'yogurt_suspensions', Suspensions::class, 'uid', 'uid');
+        parent::__construct($xoopsDatabase, 'suico_suspensions', Suspensions::class, 'uid', 'uid');
     }
 
     /**
@@ -101,7 +101,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
         $id = null,
         $fields = null
     ) {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_suspensions') . ' WHERE uid=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_suspensions') . ' WHERE uid=' . $id;
 
         if (!$result = $this->db->query($sql)) {
             return false;
@@ -168,7 +168,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
 
             $sql = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_suspensions'),
+                $this->db->prefix('suico_suspensions'),
                 $uid,
                 $this->db->quoteString($old_pass),
                 $this->db->quoteString($old_email),
@@ -186,7 +186,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
 
             $sql = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_suspensions'),
+                $this->db->prefix('suico_suspensions'),
                 $uid,
                 $this->db->quoteString($old_pass),
                 $this->db->quoteString($old_email),
@@ -233,7 +233,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
 
         $sql = \sprintf(
             'DELETE FROM %s WHERE uid = %u',
-            $this->db->prefix('yogurt_suspensions'),
+            $this->db->prefix('suico_suspensions'),
             $xoopsObject->getVar('uid')
         );
 
@@ -251,7 +251,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * retrieve yogurt_suspensionss from the database
+     * retrieve suico_suspensionss from the database
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key       use the UID as key for the array?
@@ -268,7 +268,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
 
         $limit = $start = 0;
 
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_suspensions');
+        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_suspensions');
 
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
@@ -306,16 +306,16 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * count yogurt_suspensionss matching a condition
+     * count suico_suspensionss matching a condition
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} to match
-     * @return int count of yogurt_suspensionss
+     * @return int count of suico_suspensionss
      */
 
     public function getCount(
         ?CriteriaElement $criteriaElement = null
     ) {
-        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_suspensions');
+        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_suspensions');
 
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
@@ -333,7 +333,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * delete yogurt_suspensionss matching a set of conditions
+     * delete suico_suspensionss matching a set of conditions
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement}
      * @param bool                                 $force
@@ -346,7 +346,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
         $force = true,
         $asObject = false
     ) {
-        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_suspensions');
+        $sql = 'DELETE FROM ' . $this->db->prefix('suico_suspensions');
 
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();

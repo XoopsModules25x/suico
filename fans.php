@@ -14,18 +14,18 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_fans.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'suico_fans.tpl';
 require __DIR__ . '/header.php';
-$controller = new Yogurt\FriendsController($xoopsDB, $xoopsUser);
+$controller = new Suico\FriendsController($xoopsDB, $xoopsUser);
 
 $start = Request::getInt('start', 0, 'GET');
 
@@ -46,7 +46,7 @@ $criteria_compo_fans->setLimit($helper->getConfig('friendsperpage'));
 $criteria_compo_fans->setStart($start);
 $vetor = $controller->friendshipsFactory->getFans('', $criteria_compo_fans, 0);
 if (0 === $countFriends) {
-    $xoopsTpl->assign('lang_nofansyet', _MD_YOGURT_NOFANSYET);
+    $xoopsTpl->assign('lang_nofansyet', _MD_SUICO_NOFANSYET);
 }
 
 /**
@@ -64,17 +64,17 @@ $navigationBar = new XoopsPageNav(
 $navegacao     = $navigationBar->renderImageNav(2);
 
 //navbar
-$xoopsTpl->assign('lang_mysection', _MD_YOGURT_MYFANS);
-$xoopsTpl->assign('section_name', _MD_YOGURT_FANS);
+$xoopsTpl->assign('lang_mysection', _MD_SUICO_MYFANS);
+$xoopsTpl->assign('section_name', _MD_SUICO_FANS);
 
 //Navigation Bar
 $xoopsTpl->assign('navegacao', $navegacao);
 
-$xoopsTpl->assign('lang_fanstitle', sprintf(_MD_YOGURT_FANSTITLE, $identifier));
-//$xoopsTpl->assign('path_yogurt_uploads',$helper->getConfig('link_path_upload'));
+$xoopsTpl->assign('lang_fanstitle', sprintf(_MD_SUICO_FANSTITLE, $identifier));
+//$xoopsTpl->assign('path_suico_uploads',$helper->getConfig('link_path_upload'));
 $xoopsTpl->assign('friends', $vetor);
-$xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
-$xoopsTpl->assign('lang_evaluate', _MD_YOGURT_FRIENDSHIP_CONFIGS);
+$xoopsTpl->assign('lang_delete', _MD_SUICO_DELETE);
+$xoopsTpl->assign('lang_evaluate', _MD_SUICO_FRIENDSHIP_CONFIGS);
 
 require __DIR__ . '/footer.php';
 require dirname(__DIR__, 2) . '/footer.php';

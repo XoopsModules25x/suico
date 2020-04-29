@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -32,12 +32,12 @@ $sort  = Request::getString('sort', '');
 
 $adminObject->displayNavigation(basename(__FILE__));
 $permHelper = new Permission();
-$uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/images/';
-$uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/images/';
+$uploadDir  = XOOPS_UPLOAD_PATH . '/suico/images/';
+$uploadUrl  = XOOPS_UPLOAD_URL . '/suico/images/';
 
 switch ($op) {
     case 'new':
-        $adminObject->addItemButton(AM_YOGURT_NOTES_LIST, 'notes.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_NOTES_LIST, 'notes.php', 'list');
         $adminObject->displayButton('left');
 
         $notesObject = $notesHandler->create();
@@ -62,7 +62,7 @@ switch ($op) {
         $notesObject->setVar('date_created', $dateTimeObj->getTimestamp());
 
         if ($notesHandler->insert($notesObject)) {
-            redirect_header('notes.php?op=list', 2, AM_YOGURT_FORMOK);
+            redirect_header('notes.php?op=list', 2, AM_SUICO_FORMOK);
         }
 
         echo $notesObject->getHtmlErrors();
@@ -70,8 +70,8 @@ switch ($op) {
         $form->display();
         break;
     case 'edit':
-        $adminObject->addItemButton(AM_YOGURT_ADD_NOTES, 'notes.php?op=new', 'add');
-        $adminObject->addItemButton(AM_YOGURT_NOTES_LIST, 'notes.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_ADD_NOTES, 'notes.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_NOTES_LIST, 'notes.php', 'list');
         $adminObject->displayButton('left');
         $notesObject = $notesHandler->get(Request::getString('note_id', ''));
         $form        = $notesObject->getForm();
@@ -85,7 +85,7 @@ switch ($op) {
             }
 
             if ($notesHandler->delete($notesObject)) {
-                redirect_header('notes.php', 3, AM_YOGURT_FORMDELOK);
+                redirect_header('notes.php', 3, AM_SUICO_FORMDELOK);
             } else {
                 echo $notesObject->getHtmlErrors();
             }
@@ -98,7 +98,7 @@ switch ($op) {
                 ],
                 Request::getUrl('REQUEST_URI', '', 'SERVER'),
                 sprintf(
-                    AM_YOGURT_FORMSUREDEL,
+                    AM_SUICO_FORMSUREDEL,
                     $notesObject->getVar('note_id')
                 )
             );
@@ -108,16 +108,16 @@ switch ($op) {
 
         $id_field = Request::getString('note_id', '');
 
-        if ($utility::cloneRecord('yogurt_notes', 'note_id', $id_field)) {
-            redirect_header('notes.php', 3, AM_YOGURT_CLONED_OK);
+        if ($utility::cloneRecord('suico_notes', 'note_id', $id_field)) {
+            redirect_header('notes.php', 3, AM_SUICO_CLONED_OK);
         } else {
-            redirect_header('notes.php', 3, AM_YOGURT_CLONED_FAILED);
+            redirect_header('notes.php', 3, AM_SUICO_CLONED_FAILED);
         }
 
         break;
     case 'list':
     default:
-        $adminObject->addItemButton(AM_YOGURT_ADD_NOTES, 'notes.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_ADD_NOTES, 'notes.php?op=new', 'add');
         $adminObject->displayButton('left');
         $start                = Request::getInt('start', 0);
         $notesPaginationLimit = $helper->getConfig('userpager');
@@ -132,7 +132,7 @@ switch ($op) {
         /*
         //
         //
-                            <th class='center width5'>".AM_YOGURT_FORM_ACTION."</th>
+                            <th class='center width5'>".AM_SUICO_FORM_ACTION."</th>
         //                    </tr>";
         //            $class = "odd";
         */
@@ -172,34 +172,34 @@ switch ($op) {
 
                 $GLOBALS['xoopsTpl']->assign(
                     'selectornote_id',
-                    AM_YOGURT_NOTES_NOTE_ID
+                    AM_SUICO_NOTES_NOTE_ID
                 );
 
                 $notesArray['note_id'] = $notesTempArray[$i]->getVar('note_id');
 
-                $GLOBALS['xoopsTpl']->assign('selectornote_text', AM_YOGURT_NOTES_NOTE_TEXT);
+                $GLOBALS['xoopsTpl']->assign('selectornote_text', AM_SUICO_NOTES_NOTE_TEXT);
 
                 $notesArray['note_text'] = $notesTempArray[$i]->getVar('note_text');
 
                 $notesArray['note_text'] = $utility::truncateHtml($notesArray['note_text'], $helper->getConfig('truncatelength'));
 
-                $GLOBALS['xoopsTpl']->assign('selectornote_from', AM_YOGURT_NOTES_NOTE_FROM);
+                $GLOBALS['xoopsTpl']->assign('selectornote_from', AM_SUICO_NOTES_NOTE_FROM);
 
                 $notesArray['note_from'] = strip_tags(
                     XoopsUser::getUnameFromId($notesTempArray[$i]->getVar('note_from'))
                 );
 
-                $GLOBALS['xoopsTpl']->assign('selectornote_to', AM_YOGURT_NOTES_NOTE_TO);
+                $GLOBALS['xoopsTpl']->assign('selectornote_to', AM_SUICO_NOTES_NOTE_TO);
 
                 $notesArray['note_to'] = strip_tags(
                     XoopsUser::getUnameFromId($notesTempArray[$i]->getVar('note_to'))
                 );
 
-                $GLOBALS['xoopsTpl']->assign('selectorprivate', AM_YOGURT_NOTES_PRIVATE);
+                $GLOBALS['xoopsTpl']->assign('selectorprivate', AM_SUICO_NOTES_PRIVATE);
 
                 $notesArray['private'] = $notesTempArray[$i]->getVar('private');
 
-                $GLOBALS['xoopsTpl']->assign('selectordate', AM_YOGURT_NOTES_DATE);
+                $GLOBALS['xoopsTpl']->assign('selectordate', AM_SUICO_NOTES_DATE);
 
                 $notesArray['date_created'] = formatTimestamp($notesTempArray[$i]->getVar('date_created'), 's');
 
@@ -246,7 +246,7 @@ switch ($op) {
 
             //                    <tr>
 
-            //                     <th class='center width5'>".AM_YOGURT_FORM_ACTION."XXX</th>
+            //                     <th class='center width5'>".AM_SUICO_FORM_ACTION."XXX</th>
 
             //                    </tr><tr><td class='errorMsg' colspan='7'>There are noXXX notes</td></tr>";
 
@@ -257,7 +257,7 @@ switch ($op) {
             echo $GLOBALS['xoopsTpl']->fetch(
                 XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar(
                     'dirname'
-                ) . '/templates/admin/yogurt_admin_notes.tpl'
+                ) . '/templates/admin/suico_admin_notes.tpl'
             );
         }
 

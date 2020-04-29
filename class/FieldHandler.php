@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /**
  * Extended User Profile
@@ -34,7 +34,7 @@ class FieldHandler extends \XoopsPersistableObjectHandler
 
     public function __construct(\XoopsDatabase $db)
     {
-        parent::__construct($db, 'yogurt_profile_field', Field::class, 'field_id', 'field_title');
+        parent::__construct($db, 'suico_profile_field', Field::class, 'field_id', 'field_title');
     }
 
     /**
@@ -50,7 +50,7 @@ class FieldHandler extends \XoopsPersistableObjectHandler
         static $fields = [];
 
         if (!empty($force_update) || 0 == \count($fields)) {
-            $this->table_link = $this->db->prefix('yogurt_profile_category');
+            $this->table_link = $this->db->prefix('suico_profile_category');
 
             $criteria = new \Criteria('o.field_id', 0, '!=');
 
@@ -84,7 +84,7 @@ class FieldHandler extends \XoopsPersistableObjectHandler
 
         /* @var ProfileProfileHandler $profileHandler */
 
-        $profileHandler = \XoopsModules\Yogurt\Helper::getInstance()->getHandler('Profile');
+        $profileHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Profile');
 
         $obj->setVar('field_name', \str_replace(' ', '_', $obj->getVar('field_name')));
 
@@ -232,7 +232,7 @@ class FieldHandler extends \XoopsPersistableObjectHandler
 
         /* @var ProfileProfileHandler $profileHandler */
 
-        $profileHandler = \XoopsModules\Yogurt\Helper::getInstance()->getHandler('Profile');
+        $profileHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Profile');
 
         // remove column from table
 
@@ -250,16 +250,16 @@ class FieldHandler extends \XoopsPersistableObjectHandler
 
                 $moduleHandler = \xoops_getHandler('module');
 
-                $yogurt_module = $moduleHandler->getByDirname('yogurt');
+                $suico_module = $moduleHandler->getByDirname('suico');
 
-                if (\is_object($yogurt_module)) {
+                if (\is_object($suico_module)) {
                     // Remove group permissions
 
                     /* @var XoopsGroupPermHandler $grouppermHandler */
 
                     $grouppermHandler = \xoops_getHandler('groupperm');
 
-                    $criteria = new \CriteriaCompo(new \Criteria('gperm_modid', $yogurt_module->getVar('mid')));
+                    $criteria = new \CriteriaCompo(new \Criteria('gperm_modid', $suico_module->getVar('mid')));
 
                     $criteria->add(new \Criteria('gperm_itemid', $obj->getVar('field_id')));
 

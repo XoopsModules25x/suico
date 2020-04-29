@@ -14,17 +14,17 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 define(
-    '_MB_YOGURT_ALLFRIENDS',
+    '_MB_SUICO_ALLFRIENDS',
     'View all friends'
 );
-define('_MB_YOGURT_NOFRIENDSYET', 'You have no friends yet. Make some Friends');
-define('_MB_YOGURT_TOTALFRIENDSTOSHOW', 'Total Friends To Show');
-define('_MB_YOGURT_ENABLEPM', 'Show Private Message Button');
-define('_MB_YOGURT_PRIVATEMESSAGE', 'Private Message');
-define('_MB_YOGURT_PM', 'PM');
+define('_MB_SUICO_NOFRIENDSYET', 'You have no friends yet. Make some Friends');
+define('_MB_SUICO_TOTALFRIENDSTOSHOW', 'Total Friends To Show');
+define('_MB_SUICO_ENABLEPM', 'Show Private Message Button');
+define('_MB_SUICO_PRIVATEMESSAGE', 'Private Message');
+define('_MB_SUICO_PM', 'PM');
