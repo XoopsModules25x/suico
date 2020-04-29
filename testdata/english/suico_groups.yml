@@ -1,0 +1,56 @@
+-
+    group_id: '12'
+    owner_uid: '1'
+    group_title: Facebook
+    group_desc: '<p>For developers interested in <strong>Facebook</strong></p>'
+    group_img: group_1_5e8961ec22fe7.png
+    date_created: '1585749472'
+    date_updated: '1585922272'
+-
+    group_id: '9'
+    owner_uid: '1'
+    group_title: Google
+    group_desc: '<p>For developers interested in&nbsp;<strong>Google</strong></p>'
+    group_img: group_1_5e8960c615341.png
+    date_created: '1585922438'
+    date_updated: '1587650438'
+-
+    group_id: '10'
+    owner_uid: '1'
+    group_title: XOOPS
+    group_desc: '<p>For developers interested in&nbsp;<strong>XOOPS!!!&nbsp;</strong></p>'
+    group_img: group_1_5e8961cb23a58.jpg
+    date_created: '1586008852'
+    date_updated: '1587736852'
+-
+    group_id: '11'
+    owner_uid: '1'
+    group_title: Microsoft
+    group_desc: '<p>For developers interested in&nbsp;<strong>Microsoft </strong>products</p>'
+    group_img: group_1_5e8961dcb4d56.png
+    date_created: '1586095267'
+    date_updated: '1587823267'
+-
+    group_id: '13'
+    owner_uid: '999'
+    group_title: 'Horse Breeders'
+    group_desc: '<p>Horse Breeders Association</p>'
+    group_img: group_2_5e96b93f6459a.jpg
+    date_created: '1586181683'
+    date_updated: '1587909683'
+-
+    group_id: '14'
+    owner_uid: '1'
+    group_title: Sharks
+    group_desc: '<p>Windsurfers</p>'
+    group_img: group_1_5e97c77470e2d.jpg
+    date_created: '1586268102'
+    date_updated: '1587996102'
+-
+    group_id: '15'
+    owner_uid: '1'
+    group_title: Horses2
+    group_desc: '<p>Horses3</p>'
+    group_img: group_1_5e981ff36847c.jpg
+    date_created: '1586440918'
+    date_updated: '1588168918'

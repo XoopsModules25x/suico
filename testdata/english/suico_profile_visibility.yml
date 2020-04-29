@@ -1,0 +1,240 @@
+-
+    field_id: '1'
+    user_group: '1'
+    profile_group: '1'
+-
+    field_id: '1'
+    user_group: '1'
+    profile_group: '2'
+-
+    field_id: '1'
+    user_group: '2'
+    profile_group: '1'
+-
+    field_id: '1'
+    user_group: '2'
+    profile_group: '2'
+-
+    field_id: '1'
+    user_group: '3'
+    profile_group: '1'
+-
+    field_id: '1'
+    user_group: '3'
+    profile_group: '2'
+-
+    field_id: '2'
+    user_group: '1'
+    profile_group: '1'
+-
+    field_id: '2'
+    user_group: '1'
+    profile_group: '2'
+-
+    field_id: '2'
+    user_group: '2'
+    profile_group: '1'
+-
+    field_id: '2'
+    user_group: '2'
+    profile_group: '2'
+-
+    field_id: '2'
+    user_group: '3'
+    profile_group: '1'
+-
+    field_id: '2'
+    user_group: '3'
+    profile_group: '2'
+-
+    field_id: '3'
+    user_group: '1'
+    profile_group: '1'
+-
+    field_id: '3'
+    user_group: '1'
+    profile_group: '2'
+-
+    field_id: '3'
+    user_group: '2'
+    profile_group: '1'
+-
+    field_id: '3'
+    user_group: '2'
+    profile_group: '2'
+-
+    field_id: '3'
+    user_group: '3'
+    profile_group: '1'
+-
+    field_id: '3'
+    user_group: '3'
+    profile_group: '2'
+-
+    field_id: '4'
+    user_group: '1'
+    profile_group: '1'
+-
+    field_id: '4'
+    user_group: '1'
+    profile_group: '2'
+-
+    field_id: '4'
+    user_group: '2'
+    profile_group: '1'
+-
+    field_id: '4'
+    user_group: '2'
+    profile_group: '2'
+-
+    field_id: '4'
+    user_group: '3'
+    profile_group: '1'
+-
+    field_id: '4'
+    user_group: '3'
+    profile_group: '2'
+-
+    field_id: '5'
+    user_group: '1'
+    profile_group: '1'
+-
+    field_id: '5'
+    user_group: '1'
+    profile_group: '2'
+-
+    field_id: '5'
+    user_group: '2'
+    profile_group: '1'
+-
+    field_id: '5'
+    user_group: '2'
+    profile_group: '2'
+-
+    field_id: '5'
+    user_group: '3'
+    profile_group: '1'
+-
+    field_id: '5'
+    user_group: '3'
+    profile_group: '2'
+-
+    field_id: '6'
+    user_group: '1'
+    profile_group: '1'
+-
+    field_id: '6'
+    user_group: '1'
+    profile_group: '2'
+-
+    field_id: '6'
+    user_group: '2'
+    profile_group: '1'
+-
+    field_id: '6'
+    user_group: '2'
+    profile_group: '2'
+-
+    field_id: '6'
+    user_group: '3'
+    profile_group: '1'
+-
+    field_id: '6'
+    user_group: '3'
+    profile_group: '2'
+-
+    field_id: '17'
+    user_group: '1'
+    profile_group: '1'
+-
+    field_id: '17'
+    user_group: '1'
+    profile_group: '2'
+-
+    field_id: '17'
+    user_group: '2'
+    profile_group: '1'
+-
+    field_id: '17'
+    user_group: '2'
+    profile_group: '2'
+-
+    field_id: '17'
+    user_group: '3'
+    profile_group: '1'
+-
+    field_id: '17'
+    user_group: '3'
+    profile_group: '2'
+-
+    field_id: '18'
+    user_group: '1'
+    profile_group: '1'
+-
+    field_id: '18'
+    user_group: '1'
+    profile_group: '2'
+-
+    field_id: '18'
+    user_group: '2'
+    profile_group: '1'
+-
+    field_id: '18'
+    user_group: '2'
+    profile_group: '2'
+-
+    field_id: '18'
+    user_group: '3'
+    profile_group: '1'
+-
+    field_id: '18'
+    user_group: '3'
+    profile_group: '2'
+-
+    field_id: '19'
+    user_group: '1'
+    profile_group: '1'
+-
+    field_id: '19'
+    user_group: '1'
+    profile_group: '2'
+-
+    field_id: '19'
+    user_group: '2'
+    profile_group: '1'
+-
+    field_id: '19'
+    user_group: '2'
+    profile_group: '2'
+-
+    field_id: '19'
+    user_group: '3'
+    profile_group: '1'
+-
+    field_id: '19'
+    user_group: '3'
+    profile_group: '2'
+-
+    field_id: '20'
+    user_group: '1'
+    profile_group: '1'
+-
+    field_id: '20'
+    user_group: '1'
+    profile_group: '2'
+-
+    field_id: '20'
+    user_group: '2'
+    profile_group: '1'
+-
+    field_id: '20'
+    user_group: '2'
+    profile_group: '2'
+-
+    field_id: '20'
+    user_group: '3'
+    profile_group: '1'
+-
+    field_id: '20'
+    user_group: '3'
+    profile_group: '2'
