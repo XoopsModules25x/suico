@@ -64,8 +64,10 @@
 
                         <{section name=i loop=$videos}>
                             <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<{$videos[i].url}>?rel=0" allowfullscreen></iframe>
-                            </div>
+                                <a name="<{$videos[i].id}>"></a>
+								<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<{$videos[i].url}>?rel=0" allowfullscreen></iframe>
+								
+							</div>
                             <div class="alert alert-primary">
                                 <{$videos[i].desc}>
                                 <{if $isOwner==1 }>

@@ -60,7 +60,7 @@ $newvideo->setVar('date_created', \time());
 $newvideo->setVar('date_updated', \time());
 
 $videoFactory->insert($newvideo);
-
+$insertId = $xoopsDB->getInsertId();
 if ($videoFactory->insert($newvideo)) {
     $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
     $extra_tags['X_OWNER_UID']  = (int)$xoopsUser->getVar('uid');
@@ -68,7 +68,7 @@ if ($videoFactory->insert($newvideo)) {
     $notificationHandler = xoops_getHandler('notification');
     $notificationHandler->triggerEvent('video', (int)$xoopsUser->getVar('uid'), 'new_video', $extra_tags);
     redirect_header(
-        XOOPS_URL . '/modules/yogurt/videos.php?uid=' . (int)$xoopsUser->getVar('uid'),
+        XOOPS_URL . '/modules/yogurt/videos.php?uid=' . (int)$xoopsUser->getVar('uid') . '#' . $insertId,
         2,
         _MD_YOGURT_VIDEOSAVED
     );
