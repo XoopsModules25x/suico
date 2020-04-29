@@ -163,18 +163,6 @@ if (is_object($helper->getModule()) && $helper->getConfig('displayDeveloperTools
     ];
 }
 
-//$adminmenu[] = [
-//    'title' => _MI_YOGURT_MENU_02,
-//    'link'  => 'admin/main.php',
-//    'icon'  => $pathIcon32 . '/manage.png',
-//];
-
-//$adminmenu[] = [
-//    'title' => _MI_YOGURT_ADMENU2,
-//    'link'  => 'admin/main.php?op=about',
-//    'icon'  => $pathIcon32 . '/about.png',
-//];
-
 $adminmenu[] = [
     'title' => MI_YOGURT_ADMENU16,
     'link'  => 'admin/about.php',
