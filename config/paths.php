@@ -16,7 +16,7 @@ return (object)[
         'uploadUrl'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName,
     ],
     'uploadPaths' => [
-        'yogurt'  => XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
+        'suico'  => XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
         'avatars' => XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/avatars',
         'images'  => XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images',
         'mp3'     => XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/audio',
@@ -27,7 +27,7 @@ return (object)[
         //XOOPS_UPLOAD_PATH . '/flags'
     ],
     'uploadUrls'  => [
-        'yogurt'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName,
+        'suico'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName,
         'avatars' => XOOPS_UPLOAD_URL . '/' . $moduleDirName . '/avatars',
         'images'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName . '/images',
         'mp3'     => XOOPS_UPLOAD_URL . '/' . $moduleDirName . '/audio',

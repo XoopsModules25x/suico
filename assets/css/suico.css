@@ -1,0 +1,701 @@
+/*
+General properties
+*/
+
+div.suico-profile-group1 {
+    float: left;
+    width: 60%;
+
+}
+
+div.suico-profile-group2 {
+    float: left;
+    width: 40%;
+}
+
+div#suico-suspension {
+    float: right;
+}
+
+img#suico-suspensiontools {
+    cursor: pointer;
+}
+
+.present {
+    background-color: #FFFFCC;
+}
+
+
+div#suico-nav-bar {
+    margin: 3px;
+    width: 95%;
+    padding: 1px;
+}
+
+div#suico-footer {
+    margin: 3px;
+    float: left;
+    padding: 1px;
+    width: 95%;
+    overflow: hidden;
+    text-align: right;
+}
+
+img.suico-nav-bar-icon {
+    width: 15px;
+    height: 15px;
+    border: none;
+}
+
+
+p#breadcrumbs {
+    display: block;
+    border-bottom: 2px solid;
+    margin: 0 0 5px;
+    padding: 2px;
+}
+
+/*
+Search
+*/
+
+div.search-element {
+    clear: both;
+}
+
+div.search-element-label {
+    float: left;
+    width: 300px;
+}
+
+div.search-element-body {
+    float: left;
+
+}
+
+/*
+CONFIGS
+*/
+
+form#form_configs input {
+
+
+}
+
+form#form_configs label {
+
+}
+
+form#form_configs fieldset {
+    display: inline;
+    width: 90%;
+}
+
+
+/*
+Profile
+*/
+
+div#suico-profile-friendrequest {
+    margin: 3px;
+}
+
+div#suico-profile-friendrequest img {
+    margin: 15px 3px;
+    float: left;
+}
+
+div#suico-album-visitors, div#suico-profile-search-results, div#suico-profile-visual, div#suico-profile-statistics, div#suico-profile-details {
+    margin: 3px;
+    float: left;
+    padding: 1px;
+    width: 95%;
+    overflow: hidden;
+}
+
+
+div#suico-profile-groups, div#suico-profile-friends {
+    margin: 3px;
+    padding: 1px;
+    width: 95%;
+    overflow: hidden;
+    text-align: center;
+}
+
+div.suico-profile-friend {
+    margin: 1px;
+    width: 27%;
+    height: 100px;
+    float: left;
+    text-align: center;
+    padding: 5px;
+}
+
+div.suico-profile-friend img {
+    margin: auto;
+    width: 60px;
+    display: block;
+}
+
+
+div#suico-profile-avatar {
+
+    margin: 1px;
+    width: 45%;
+    float: left;
+    text-align: center;
+}
+
+div#suico-profile-avatar img {
+    border: 2px solid #000000;
+}
+
+div#suico-profile-mainvideo {
+    margin: 1px;
+    width: 45%;
+    float: left;
+}
+
+
+span.suico-profileinfo-label {
+    margin: 1px 5px;
+    font-weight: bold;
+    width: 60px;
+    min-width: 60px;
+    display: inline;
+}
+
+span.suico-profileinfo-value {
+    margin: 1px 5px;
+}
+
+p.suico-profileinfo-valuebigtext {
+    text-align: justify;
+    margin: 1px 5px;
+}
+
+
+p#suico-profile-friend-viewall {
+    margin: 1px;
+    float: left;
+    padding: 1px;
+    width: 100%;
+    overflow: hidden;
+}
+
+div#suico-profile-groups h2, div#suico-profile-search-results p, div#suico-profile-statistics p, div#suico-profile-details p, div#suico-profile-search-results h2, div#suico-profile-search-results h4, div#suico-profile-friends h2, div#suico-profile-visual h2, div#suico-profile-statistics h2, div#suico-profile-details h2 {
+    margin: 0;
+}
+
+/******************************************************************************************************
+ *  NOTES
+ */
+
+a.suico-Notes-replyNote {
+    clear: both;
+    cursor: pointer;
+}
+
+div#suico-Notes-container {
+    margin: 3px;
+    float: left;
+    padding: 1px;
+    width: 95%;
+    overflow: hidden;
+}
+
+div#suico-Notes-container h2 {
+    margin: 0;
+}
+
+img.avatar_Note {
+    border: 1px solid;
+    padding: 1px;
+    margin: 3px;
+    overflow: hidden;
+
+
+}
+
+div#suico-Notes-form {
+    margin: 3px;
+    float: left;
+    padding: 1px;
+    width: 95%;
+    overflow: hidden;
+}
+
+p.suico-Note-uname {
+    clear: both;
+}
+
+div.suico-Note-details {
+    min-height: 200px;
+    margin: 3px;
+    clear: both;
+    padding: 1px;
+    width: 95%;
+}
+
+div.suico-Note-avatarandname {
+    float: left;
+}
+
+form.suico-Note-form {
+    height: 75px;
+    width: 450px;
+    border: 1px solid #000000;
+    padding: 1px;
+    margin: auto;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+form.suico-Note-form-delete {
+    display: inline;
+}
+
+input.post {
+    display: block;
+}
+
+
+div.suico-Note-details-texts {
+    float: left;
+    width: 70%;
+}
+
+div.suico-Note-details-form {
+    height: 100px;
+    margin: 3px;
+    clear: both;
+    padding: 1px;
+    width: 95%;
+    overflow: hidden;
+}
+
+p.suico-Notes-editdelete-forms {
+    float: right;
+}
+
+
+/* **********************************************************************************************************
+Videos
+*/
+
+div#suico-videos-container {
+    margin: 3px;
+    float: left;
+    padding: 1px;
+    width: 95%;
+    overflow: hidden;
+}
+
+div.suico-video-container {
+    margin: 1px;
+    float: left;
+    padding: 1px;
+    width: 95%;
+    overflow: hidden;
+}
+
+div.suico-video {
+    margin: 3px;
+    float: left;
+    overflow: hidden;
+    text-align: center;
+    vertical-align: bottom;
+}
+
+div.suico-video embed {
+    margin: auto;
+}
+
+div.suico-video-details form {
+    display: inline;
+}
+
+div.suico-video-details {
+    text-align: left;
+    margin: 3px;
+    float: left;
+    width: 50%;
+}
+
+
+h2#suico-videos-title {
+    margin: 0;
+}
+
+
+div#suico-video-form p, div#suico-video-form h2 {
+    margin: 0;
+}
+
+div#suico-video-form {
+    margin: 3px;
+    float: left;
+    padding: 1px;
+    width: 95%;
+    overflow: hidden;
+}
+
+
+/*****************************************************************************************************************
+Audio
+*/
+
+div#suico-audio-form p, div#suico-audio-form h2, div#suico-audio-allaudiocontainer p, div#suico-audio-allaudiocontainer h2, h2#suico-audio-title {
+    margin: 0;
+}
+
+
+div#suico-audio-form, div#suico-audio-container, div#suico-audio-allaudiocontainer {
+    margin: 3px;
+    float: left;
+    padding: 1px;
+    width: 95%;
+    overflow: hidden;
+}
+
+/*****************************************************************************************************************
+Friends
+*/
+
+div#suico-friends-container {
+    margin: 3px;
+    float: left;
+    padding: 1px;
+    width: 95%;
+    overflow: hidden;
+}
+
+div#suico-friends-container h2 {
+    margin: 0;
+}
+
+div.suico-friend {
+    margin: 1px;
+    width: 23%;
+    height: 250px;
+    float: left;
+    text-align: center;
+}
+
+div.suico-friend img {
+    margin: auto;
+    display: block;
+}
+
+form.suico-friends-evaluateform, form.suico-friends-deleteform {
+
+    display: inline;
+}
+
+/*
+NAVEGACAO MAIS
+*/
+div#suico-navegacao {
+    margin: auto;
+    float: left;
+    width: 300px;
+    overflow: hidden;
+}
+
+p#funnybw {
+    display: inline;
+    height: 18px;
+    background-image: url(../images/funnybw.gif);
+    background-repeat: no-repeat;
+    width: 48px;
+}
+
+span#funnycolor {
+    width: 32px;
+    background-image: url(../images/funnycolor.gif);
+    background-repeat: no-repeat;
+}
+
+p#coolbw {
+    display: inline;
+    height: 18px;
+    background-image: url(../images/coolbw.gif);
+    background-repeat: no-repeat;
+    width: 48px;
+}
+
+span#coolcolor {
+    width: 32px;
+    background-image: url(../images/coolcolor.gif);
+    background-repeat: no-repeat;
+}
+
+p#friendlybw {
+    display: inline;
+    height: 18px;
+    background-image: url(../images/friendlybw.gif);
+    background-repeat: no-repeat;
+    width: 48px;
+}
+
+span#friendlycolor {
+    width: 32px;
+    background-image: url(../images/friendlycolor.gif);
+    background-repeat: no-repeat;
+}
+
+p#suico-profile-fans {
+    display: inline;
+    height: 18px;
+}
+
+/***************************************************************************************************************************************
+album
+***************************************************************************************************************************************/
+
+div#suico-album-form {
+    margin: 3px;
+    padding: 1px;
+    float: left;
+    width: 95%;
+    overflow: hidden;
+}
+
+div#suico-album-visitors h2, div#suico-album-container h2, div#suico-album-form h2, div#suico-album-form p {
+    margin: 0;
+}
+
+div#suico-album-container {
+    padding: 1px;
+    margin: 3px;
+    float: left;
+    width: 95%;
+    overflow: hidden;
+}
+
+div.suico-album-picture {
+    margin: 0;
+    width: 31%;
+    height: 250px;
+    float: left;
+    text-align: center;
+
+}
+
+div.suico-album-picture img {
+    border: 3px solid;
+    padding: 3px;
+}
+
+div.class {
+    margin: 10px;
+}
+
+form.suico-album-formquick {
+    display: inline;
+}
+
+
+/*********************************************************************************************************
+groups
+*/
+
+div#suico-group-edit-members, form#suico-group-edit-form, form#form_group_search, form#form_group, div#suico-group-container, div#suico-groups-container, div#suico-mygroups-container {
+    margin: 3px;
+    float: left;
+    padding: 1px;
+    width: 95%;
+    overflow: hidden;
+}
+
+div#suico-group-edit-members h2, div.suico-group-edit-member h2, form#suico-group-edit-form h2, form#form_group_search h2, form#form_group h2, div#suico-groups-container h2, div#suico-mygroups-container h2, div#suico-group-container p, div#suico-group-container h2 {
+    margin: 0;
+}
+
+
+div.suico-group-edit-member, div.suico-group-my {
+    margin: 1px;
+    width: 23%;
+    height: 250px;
+    float: left;
+    text-align: center;
+}
+
+div.suico-group-all {
+    min-height: 100px;
+}
+
+div.suico-group-all img {
+    float: left;
+    margin: 3px;
+}
+
+form#form_group_search p, form#suico-group-edit-form p, form#form_group p, div.suico-group-all h4, div.suico-group-all p {
+    margin: 1px;
+}
+
+form.suico-groups-form-becomemember, form.suico-groups-form-delete, form.suico-groups-form-edit {
+    display: inline;
+}
+
+/*
+Others
+*/
+
+.yogerrors {
+    color: #FF0000;
+    background-color: #FFEAF4;
+    border-color: #FF0000;
+    border-width: thick;
+}
+
+fieldset.myconfigs-fieldset {
+    border: 1px dotted #80021A;
+    padding: 10px;
+}
+
+legend.myconfigs-legend {
+    color: #80021a;
+    font-size: 1.5em;
+}
+
+p.alert {
+    background-color: #ffc;
+    border: 2px solid #fc6;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+
+div#nav {
+    margin-right: auto;
+    margin-left: auto;
+    width: 100px;
+    page-break-after: always;
+
+
+}
+
+div#titulo-friends div {
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    page-break-after: always;
+}
+
+div#wrapper-titulo-ishot div {
+    float: left;
+    margin-bottom: 10px;
+}
+
+div#titulo {
+    width: 35%;
+}
+
+div#titulo h2 {
+    font-size: 1.5em;
+}
+
+div#ishot {
+    width: 60%;
+}
+
+div#ishot form {
+    display: inline;
+}
+
+div#ishot p#ishot-result {
+    font-size: 0.5em;
+}
+
+div#album {
+    margin: auto;
+    text-align: center;
+
+}
+
+ul#album_photos {
+    padding: 0;
+    margin: auto;
+    text-align: center;
+
+
+}
+
+ul#album_photos:after {
+    content: ".";
+    width: 95%;
+    clear: both;
+    display: block;
+    visibility: hidden;
+    font-size: 1px;
+}
+
+ul#album_photos li {
+    list-style: none;
+    width: 180px;
+    float: left;
+    padding: 0;
+    margin: 0 6px 20px 0;
+}
+
+ul#friend {
+    padding: 3px;
+    margin: auto;
+    text-align: center;
+
+
+}
+
+ul#friend li {
+    list-style: none;
+    width: 75px;
+    float: left;
+    padding: 0;
+    margin: 5px 6px 20px 5px;
+}
+
+ul#friend:after {
+    content: ".";
+    width: 95%;
+    clear: both;
+    display: block;
+    visibility: hidden;
+    font-size: 1px;
+}
+
+ul#album_photos li div.photo_in_album {
+    height: 240px;
+    text-align: center;
+}
+
+ul#album_photos li div.photo_in_album:hover {
+    background-color: #E1C3C3;
+}
+
+ul#album_photos li div.photo_in_album p a {
+    /*background-color:#99FFFF;*/
+    height: 110px;
+    display: block;
+}
+
+ul#album_photos li div.photo_in_album img {
+    border: 5px solid #000;
+    padding: 2px;
+}
+
+ul#album_photos li div.photo_in_album a:hover img {
+    border-color: #80021A;
+}
+
+ul#album_photos li div.photo_in_album a:hover {
+    color: #80021A;
+}
+
+div.photo_in_album p#desc {
+    height: 50px;
+}
+
+div.photo_in_album form {
+    display: inline;
+}

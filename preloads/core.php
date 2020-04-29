@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -23,9 +23,9 @@ declare(strict_types=1);
 use Xmf\Request;
 
 /**
- * Class YogurtCorePreload
+ * Class SuicoCorePreload
  */
-class YogurtCorePreload extends XoopsPreloadItem
+class SuicoCorePreload extends XoopsPreloadItem
 {
     // to add PSR-4 autoloader
 
@@ -42,7 +42,7 @@ class YogurtCorePreload extends XoopsPreloadItem
      */
     public static function eventCoreEdituserStart($args)
     {
-        header('location: ./modules/yogurt/edituser.php' . (Request::getString('QUERY_STRING', '', 'SERVER')));
+        header('location: ./modules/suico/edituser.php' . (Request::getString('QUERY_STRING', '', 'SERVER')));
         exit();
     }
 
@@ -51,7 +51,7 @@ class YogurtCorePreload extends XoopsPreloadItem
      */
     public static function eventCoreRegisterStart($args)
     {
-        header('location: ./modules/yogurt/user.php?op=register' . (Request::getString('QUERY_STRING', '', 'SERVER')));
+        header('location: ./modules/suico/user.php?op=register' . (Request::getString('QUERY_STRING', '', 'SERVER')));
         exit();
     }
 
@@ -60,7 +60,7 @@ class YogurtCorePreload extends XoopsPreloadItem
      */
     public static function eventCoreUserinfoStart($args)
     {
-        header('location: ./modules/yogurt/index.php?' . (Request::getString('QUERY_STRING', '', 'SERVER')));
+        header('location: ./modules/suico/index.php?' . (Request::getString('QUERY_STRING', '', 'SERVER')));
         exit();
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /**
  * Extended User Profile
@@ -33,7 +33,7 @@ class VisibilityHandler extends \XoopsPersistableObjectHandler
 
     public function __construct(\XoopsDatabase $db)
     {
-        parent::__construct($db, 'yogurt_profile_visibility', Visibility::class, 'field_id');
+        parent::__construct($db, 'suico_profile_visibility', Visibility::class, 'field_id');
     }
 
     /**

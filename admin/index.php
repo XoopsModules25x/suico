@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -23,7 +23,7 @@ declare(strict_types=1);
 use Xmf\Module\Admin;
 use Xmf\Request;
 use Xmf\Yaml;
-use XoopsModules\Yogurt\Common;
+use XoopsModules\Suico\Common;
 
 require __DIR__ . '/admin_header.php';
 // Display Admin header
@@ -44,9 +44,9 @@ foreach (array_keys($configurator->uploadFolders) as $i) {
 //count "total quotes"
 $quotesCount = $quotesHandler->getCount();
 // InfoBox quotes
-$adminObject->addInfoBox(_AM_YOGURT_STATISTICS);
+$adminObject->addInfoBox(_AM_SUICO_STATISTICS);
 // InfoBox quotes
-$adminObject->addInfoBoxLine(sprintf(_AM_YOGURT_THEREARE_QUOTES, $quotesCount));
+$adminObject->addInfoBoxLine(sprintf(_AM_SUICO_THEREARE_QUOTES, $quotesCount));
 */
 
 //count "total Images"
@@ -75,48 +75,48 @@ $totalAudio = $audioHandler->getCount();
 //count "total Privacy"
 $totalPrivacy = $privacyHandler->getCount();
 // InfoBox Statistics
-$adminObject->addInfoBox(AM_YOGURT_STATISTICS);
+$adminObject->addInfoBox(AM_SUICO_STATISTICS);
 
 // InfoBox images
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_IMAGES, $totalImages));
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_IMAGES, $totalImages));
 
 // InfoBox friendship
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_FRIENDS, $totalFriendship));
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_FRIENDS, $totalFriendship));
 
 // InfoBox friendrequest
 $adminObject->addInfoBoxLine(
-    sprintf(AM_YOGURT_THEREARE_FRIENDREQUEST, $totalFriendrequest)
+    sprintf(AM_SUICO_THEREARE_FRIENDREQUEST, $totalFriendrequest)
 );
 
 // InfoBox visitors
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_VISITORS, $totalVisitors));
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_VISITORS, $totalVisitors));
 
 // InfoBox video
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_VIDEO, $totalVideo));
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_VIDEO, $totalVideo));
 
 // InfoBox friendrequest
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_FRIENDREQUEST, $totalFriendrequest));
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_FRIENDREQUEST, $totalFriendrequest));
 
 // InfoBox groups
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_GROUPS, $totalGroups));
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_GROUPS, $totalGroups));
 
 // InfoBox relgroupuser
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_MEMBERS, $totalRelgroupuser));
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_MEMBERS, $totalRelgroupuser));
 
 // InfoBox notes
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_NOTES, $totalNotes));
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_NOTES, $totalNotes));
 
 // InfoBox configs
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_CONFIGS, $totalConfigs));
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_CONFIGS, $totalConfigs));
 
 // InfoBox suspensions
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_SUSPENSIONS, $totalSuspensions));
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_SUSPENSIONS, $totalSuspensions));
 
 // InfoBox audio
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_AUDIO, $totalAudio));
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_AUDIO, $totalAudio));
 
 // InfoBox privacy
-$adminObject->addInfoBoxLine(sprintf(AM_YOGURT_THEREARE_PRIVACY, $totalPrivacy));
+$adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_PRIVACY, $totalPrivacy));
 // Render Index
 $adminObject->displayNavigation(basename(__FILE__));
 

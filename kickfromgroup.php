@@ -14,14 +14,14 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
 
@@ -36,18 +36,18 @@ if (1 !== Request::getInt('confirm', 0, 'POST')) {
             'confirm'      => 1,
         ],
         'kickfromgroup.php',
-        _MD_YOGURT_ASKCONFIRMKICKFROMGROUP,
-        _MD_YOGURT_CONFIRMKICK
+        _MD_SUICO_ASKCONFIRMKICKFROMGROUP,
+        _MD_SUICO_CONFIRMKICK
     );
 } else {
     /**
      * Creating the factory  and the criteria to delete the picture
      * The user must be the owner
      */
-    $relgroupuserFactory = new Yogurt\RelgroupuserHandler(
+    $relgroupuserFactory = new Suico\RelgroupuserHandler(
         $xoopsDB
     );
-    $groupsFactory       = new Yogurt\GroupsHandler($xoopsDB);
+    $groupsFactory       = new Suico\GroupsHandler($xoopsDB);
     $group               = $groupsFactory->get2($group_id);
     //  echo "<pre>";
     //  print_r($group);
@@ -60,12 +60,12 @@ if (1 !== Request::getInt('confirm', 0, 'POST')) {
          * Try to delete
          */
         if ($relgroupuserFactory->deleteAll($criteria)) {
-            redirect_header('group.php?group_id=' . $group_id . '', 2, _MD_YOGURT_GROUPKICKED);
+            redirect_header('group.php?group_id=' . $group_id . '', 2, _MD_SUICO_GROUPKICKED);
         } else {
-            redirect_header('group.php?group_id=' . $group_id . '', 2, _MD_YOGURT_ERROR);
+            redirect_header('group.php?group_id=' . $group_id . '', 2, _MD_SUICO_ERROR);
         }
     } else {
-        redirect_header('group.php?group_id=' . $group_id . '', 2, _MD_YOGURT_ERROR);
+        redirect_header('group.php?group_id=' . $group_id . '', 2, _MD_SUICO_ERROR);
     }
 }
 

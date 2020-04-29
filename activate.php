@@ -107,5 +107,5 @@ if (!empty($_GET['id']) && !empty($_GET['actkey'])) {
     $form->display();
 }
 
-$xoBreadcrumbs[] = ['title' => _MD_YOGURT_REGISTER];
+$xoBreadcrumbs[] = ['title' => _MD_SUICO_REGISTER];
 include __DIR__ . '/footer.php';

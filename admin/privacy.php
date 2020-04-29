@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -31,12 +31,12 @@ $sort  = \Xmf\Request::getString('sort', '');
 
 $adminObject->displayNavigation(basename(__FILE__));
 $permHelper = new \Xmf\Module\Helper\Permission();
-$uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/images/';
-$uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/images/';
+$uploadDir  = XOOPS_UPLOAD_PATH . '/suico/images/';
+$uploadUrl  = XOOPS_UPLOAD_URL . '/suico/images/';
 
 switch ($op) {
     case 'new':
-        $adminObject->addItemButton(AM_YOGURT_PRIVACY_LIST, 'privacy.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_PRIVACY_LIST, 'privacy.php', 'list');
         $adminObject->displayButton('left');
 
         $privacyObject = $privacyHandler->create();
@@ -57,7 +57,7 @@ switch ($op) {
         $privacyObject->setVar('name', Request::getVar('name', ''));
         $privacyObject->setVar('description', Request::getText('description', ''));
         if ($privacyHandler->insert($privacyObject)) {
-            redirect_header('privacy.php?op=list', 2, AM_YOGURT_FORMOK);
+            redirect_header('privacy.php?op=list', 2, AM_SUICO_FORMOK);
         }
 
         echo $privacyObject->getHtmlErrors();
@@ -65,8 +65,8 @@ switch ($op) {
         $form->display();
         break;
     case 'edit':
-        $adminObject->addItemButton(AM_YOGURT_ADD_PRIVACY, 'privacy.php?op=new', 'add');
-        $adminObject->addItemButton(AM_YOGURT_PRIVACY_LIST, 'privacy.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_ADD_PRIVACY, 'privacy.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_PRIVACY_LIST, 'privacy.php', 'list');
         $adminObject->displayButton('left');
         $privacyObject = $privacyHandler->get(Request::getString('id', ''));
         $form          = $privacyObject->getForm();
@@ -80,28 +80,28 @@ switch ($op) {
             }
 
             if ($privacyHandler->delete($privacyObject)) {
-                redirect_header('privacy.php', 3, AM_YOGURT_FORMDELOK);
+                redirect_header('privacy.php', 3, AM_SUICO_FORMDELOK);
             } else {
                 echo $privacyObject->getHtmlErrors();
             }
         } else {
-            xoops_confirm(['ok' => 1, 'id' => Request::getString('id', ''), 'op' => 'delete'], Request::getUrl('REQUEST_URI', '', 'SERVER'), sprintf(AM_YOGURT_FORMSUREDEL, $privacyObject->getVar('name')));
+            xoops_confirm(['ok' => 1, 'id' => Request::getString('id', ''), 'op' => 'delete'], Request::getUrl('REQUEST_URI', '', 'SERVER'), sprintf(AM_SUICO_FORMSUREDEL, $privacyObject->getVar('name')));
         }
         break;
     case 'clone':
 
         $id_field = \Xmf\Request::getString('id', '');
 
-        if ($utility::cloneRecord('yogurt_privacy', 'id', $id_field)) {
-            redirect_header('privacy.php', 3, AM_YOGURT_CLONED_OK);
+        if ($utility::cloneRecord('suico_privacy', 'id', $id_field)) {
+            redirect_header('privacy.php', 3, AM_SUICO_CLONED_OK);
         } else {
-            redirect_header('privacy.php', 3, AM_YOGURT_CLONED_FAILED);
+            redirect_header('privacy.php', 3, AM_SUICO_CLONED_FAILED);
         }
 
         break;
     case 'list':
     default:
-        $adminObject->addItemButton(AM_YOGURT_ADD_PRIVACY, 'privacy.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_ADD_PRIVACY, 'privacy.php?op=new', 'add');
         $adminObject->displayButton('left');
         $start                  = \Xmf\Request::getInt('start', 0);
         $privacyPaginationLimit = $helper->getConfig('userpager');
@@ -116,7 +116,7 @@ switch ($op) {
         /*
         //
         //
-                            <th class='center width5'>".AM_YOGURT_FORM_ACTION."</th>
+                            <th class='center width5'>".AM_SUICO_FORM_ACTION."</th>
         //                    </tr>";
         //            $class = "odd";
         */
@@ -154,21 +154,21 @@ switch ($op) {
             foreach (array_keys($privacyTempArray) as $i) {
                 //        $field = explode(':', $fields[$i]);
 
-                $GLOBALS['xoopsTpl']->assign('selectorid', AM_YOGURT_PRIVACY_ID);
+                $GLOBALS['xoopsTpl']->assign('selectorid', AM_SUICO_PRIVACY_ID);
 
                 $privacyArray['id'] = $privacyTempArray[$i]->getVar('id');
 
-                $selectorlevel = $utility::selectSorting(AM_YOGURT_PRIVACY_LEVEL, 'level');
+                $selectorlevel = $utility::selectSorting(AM_SUICO_PRIVACY_LEVEL, 'level');
 
                 $GLOBALS['xoopsTpl']->assign('selectorlevel', $selectorlevel);
 
                 $privacyArray['level'] = $privacyTempArray[$i]->getVar('level');
 
-                $GLOBALS['xoopsTpl']->assign('selectorname', AM_YOGURT_PRIVACY_NAME);
+                $GLOBALS['xoopsTpl']->assign('selectorname', AM_SUICO_PRIVACY_NAME);
 
                 $privacyArray['name'] = $privacyTempArray[$i]->getVar('name');
 
-                $GLOBALS['xoopsTpl']->assign('selectordescription', AM_YOGURT_PRIVACY_DESCRIPTION);
+                $GLOBALS['xoopsTpl']->assign('selectordescription', AM_SUICO_PRIVACY_DESCRIPTION);
 
                 $privacyArray['description'] = $privacyTempArray[$i]->getVar('description');
 
@@ -217,7 +217,7 @@ switch ($op) {
 
             //                    <tr>
 
-            //                     <th class='center width5'>".AM_YOGURT_FORM_ACTION."XXX</th>
+            //                     <th class='center width5'>".AM_SUICO_FORM_ACTION."XXX</th>
 
             //                    </tr><tr><td class='errorMsg' colspan='5'>There are noXXX privacy</td></tr>";
 
@@ -226,7 +226,7 @@ switch ($op) {
             //-------------------------------------------
 
             echo $GLOBALS['xoopsTpl']->fetch(
-                XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname') . '/templates/admin/yogurt_admin_privacy.tpl'
+                XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname') . '/templates/admin/suico_admin_privacy.tpl'
             );
         }
 

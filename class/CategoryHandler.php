@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /**
  * Extended User Profile
@@ -34,6 +34,6 @@ class CategoryHandler extends \XoopsPersistableObjectHandler
 
     public function __construct(\XoopsDatabase $db)
     {
-        parent::__construct($db, 'yogurt_profile_category', Category::class, 'cat_id', 'cat_title');
+        parent::__construct($db, 'suico_profile_category', Category::class, 'cat_id', 'cat_title');
     }
 }

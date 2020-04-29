@@ -14,18 +14,18 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_configs.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'suico_configs.tpl';
 require __DIR__ . '/header.php';
 
-$controller = new Yogurt\ConfigController($xoopsDB, $xoopsUser);
+$controller = new Suico\ConfigController($xoopsDB, $xoopsUser);
 
 /**
  * Fetching numbers of groups friends videos pictures etc...
@@ -39,7 +39,7 @@ if (!$xoopsUser) {
 /**
  * Factories of groups
  */
-$configsFactory = new Yogurt\ConfigsHandler($xoopsDB);
+$configsFactory = new Suico\ConfigsHandler($xoopsDB);
 
 $uid = (int)$xoopsUser->getVar('uid');
 
@@ -87,32 +87,32 @@ if ($configsFactory->getCount($criteria) > 0) {
 }
 
 //form
-$xoopsTpl->assign('lang_whocan', _MD_YOGURT_WHOCAN);
-$xoopsTpl->assign('lang_configtitle', _MD_YOGURT_CONFIGS_TITLE);
-$xoopsTpl->assign('lang_configprofilestats', _MD_YOGURT_CONFIGS_PROFILESTATS);
-$xoopsTpl->assign('lang_configprofilegeneral', _MD_YOGURT_CONFIGS_PROFILEGENERAL);
-$xoopsTpl->assign('lang_configprofilecontact', _MD_YOGURT_CONFIGS_PROFILECONTACT);
-$xoopsTpl->assign('lang_configfriends', _MD_YOGURT_CONFIGS_FRIENDS);
-$xoopsTpl->assign('lang_confignotes', _MD_YOGURT_CONFIGS_NOTES);
-$xoopsTpl->assign('lang_configsendnotes', _MD_YOGURT_CONFIGS_NOTESSEND);
-$xoopsTpl->assign('lang_configgroups', _MD_YOGURT_CONFIGS_GROUPS);
-$xoopsTpl->assign('lang_configaudio', _MD_YOGURT_CONFIGS_AUDIOS);
-$xoopsTpl->assign('lang_configvideos', _MD_YOGURT_CONFIGS_VIDEOS);
-$xoopsTpl->assign('lang_configpictures', _MD_YOGURT_CONFIGS_PICTURES);
-$xoopsTpl->assign('lang_only_me', _MD_YOGURT_CONFIGS_ONLYME);
-$xoopsTpl->assign('lang_only_friends', _MD_YOGURT_CONFIGS_ONLYEFRIENDS);
-$xoopsTpl->assign('lang_only_users', _MD_YOGURT_CONFIGS_ONLYEUSERS);
-$xoopsTpl->assign('lang_everyone', _MD_YOGURT_CONFIGS_EVERYONE);
+$xoopsTpl->assign('lang_whocan', _MD_SUICO_WHOCAN);
+$xoopsTpl->assign('lang_configtitle', _MD_SUICO_CONFIGS_TITLE);
+$xoopsTpl->assign('lang_configprofilestats', _MD_SUICO_CONFIGS_PROFILESTATS);
+$xoopsTpl->assign('lang_configprofilegeneral', _MD_SUICO_CONFIGS_PROFILEGENERAL);
+$xoopsTpl->assign('lang_configprofilecontact', _MD_SUICO_CONFIGS_PROFILECONTACT);
+$xoopsTpl->assign('lang_configfriends', _MD_SUICO_CONFIGS_FRIENDS);
+$xoopsTpl->assign('lang_confignotes', _MD_SUICO_CONFIGS_NOTES);
+$xoopsTpl->assign('lang_configsendnotes', _MD_SUICO_CONFIGS_NOTESSEND);
+$xoopsTpl->assign('lang_configgroups', _MD_SUICO_CONFIGS_GROUPS);
+$xoopsTpl->assign('lang_configaudio', _MD_SUICO_CONFIGS_AUDIOS);
+$xoopsTpl->assign('lang_configvideos', _MD_SUICO_CONFIGS_VIDEOS);
+$xoopsTpl->assign('lang_configpictures', _MD_SUICO_CONFIGS_PICTURES);
+$xoopsTpl->assign('lang_only_me', _MD_SUICO_CONFIGS_ONLYME);
+$xoopsTpl->assign('lang_only_friends', _MD_SUICO_CONFIGS_ONLYEFRIENDS);
+$xoopsTpl->assign('lang_only_users', _MD_SUICO_CONFIGS_ONLYEUSERS);
+$xoopsTpl->assign('lang_everyone', _MD_SUICO_CONFIGS_EVERYONE);
 
-$xoopsTpl->assign('lang_cancel', _MD_YOGURT_CANCEL);
+$xoopsTpl->assign('lang_cancel', _MD_SUICO_CANCEL);
 
 //Notes
 //$xoopsTpl->assign('notes',$notes);
-$xoopsTpl->assign('lang_answerNote', _MD_YOGURT_ANSWERNOTE);
+$xoopsTpl->assign('lang_answerNote', _MD_SUICO_ANSWERNOTE);
 
 //navbar
-$xoopsTpl->assign('lang_mysection', _MD_YOGURT_CONFIGS_TITLE);
-$xoopsTpl->assign('section_name', _MD_YOGURT_CONFIGS_TITLE);
+$xoopsTpl->assign('lang_mysection', _MD_SUICO_CONFIGS_TITLE);
+$xoopsTpl->assign('section_name', _MD_SUICO_CONFIGS_TITLE);
 
 require __DIR__ . '/footer.php';
 require dirname(__DIR__, 2) . '/footer.php';

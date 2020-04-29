@@ -1,0 +1,20 @@
+-
+    cat_id: '1'
+    cat_title: Personal
+    cat_description: ''
+    cat_weight: '1'
+-
+    cat_id: '2'
+    cat_title: Messaging
+    cat_description: ''
+    cat_weight: '2'
+-
+    cat_id: '3'
+    cat_title: Settings
+    cat_description: ''
+    cat_weight: '3'
+-
+    cat_id: '4'
+    cat_title: Community
+    cat_description: ''
+    cat_weight: '4'

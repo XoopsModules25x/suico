@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -16,13 +16,13 @@ namespace XoopsModules\Yogurt;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 $moduleDirName = \basename(\dirname(__DIR__));
 
@@ -42,12 +42,12 @@ class PrivacyHandler extends \XoopsPersistableObjectHandler
     /**
      * Constructor
      * @param \XoopsDatabase|null              $db
-     * @param null|\XoopsModules\Yogurt\Helper $helper
+     * @param null|\XoopsModules\Suico\Helper $helper
      */
 
     public function __construct(\XoopsDatabase $db = null, $helper = null)
     {
-        /** @var \XoopsModules\Yogurt\Helper $this ->helper */
+        /** @var \XoopsModules\Suico\Helper $this ->helper */
 
         if (null === $helper) {
             $this->helper = Helper::getInstance();
@@ -55,7 +55,7 @@ class PrivacyHandler extends \XoopsPersistableObjectHandler
             $this->helper = $helper;
         }
 
-        parent::__construct($db, 'yogurt_privacy', Privacy::class, 'id', 'name');
+        parent::__construct($db, 'suico_privacy', Privacy::class, 'id', 'name');
     }
 
     /**

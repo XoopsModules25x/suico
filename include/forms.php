@@ -23,70 +23,70 @@
 /**
  * Get {@link XoopsThemeForm} for adding/editing fields
  *
- * @param Yogurt\Field $field  {@link Yogurt\Field} object to get edit form for
+ * @param Suico\Field $field  {@link Suico\Field} object to get edit form for
  * @param mixed        $action URL to submit to - or false for $_SERVER['REQUEST_URI']
  *
  * @return object
  */
 
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 /**
- * @param Yogurt\Field $field
+ * @param Suico\Field $field
  * @param bool         $action
  * @return \XoopsThemeForm
  */
-function yogurt_getFieldForm(Yogurt\Field $field, $action = false)
+function suico_getFieldForm(Suico\Field $field, $action = false)
 {
     if (!$action) {
         $action = $_SERVER['REQUEST_URI'];
     }
-    $title = $field->isNew() ? sprintf(_AM_YOGURT_ADD, _AM_YOGURT_FIELD) : sprintf(_AM_YOGURT_EDIT, _AM_YOGURT_FIELD);
+    $title = $field->isNew() ? sprintf(_AM_SUICO_ADD, _AM_SUICO_FIELD) : sprintf(_AM_SUICO_EDIT, _AM_SUICO_FIELD);
 
     include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
     $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
 
-    $form->addElement(new XoopsFormText(_AM_YOGURT_TITLE, 'field_title', 35, 255, $field->getVar('field_title', 'e')));
-    $form->addElement(new XoopsFormTextArea(_AM_YOGURT_DESCRIPTION, 'field_description', $field->getVar('field_description', 'e')));
+    $form->addElement(new XoopsFormText(_AM_SUICO_TITLE, 'field_title', 35, 255, $field->getVar('field_title', 'e')));
+    $form->addElement(new XoopsFormTextArea(_AM_SUICO_DESCRIPTION, 'field_description', $field->getVar('field_description', 'e')));
 
     $fieldcat_id = 0;
     if (!$field->isNew()) {
         $fieldcat_id = $field->getVar('cat_id');
     }
-    $categoryHandler = $helper->getHandler('Category');
-    $cat_select       = new XoopsFormSelect(_AM_YOGURT_CATEGORY, 'field_category', $fieldcat_id);
-    $cat_select->addOption(0, _AM_YOGURT_DEFAULT);
+    $categoryHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Category');
+    $cat_select       = new XoopsFormSelect(_AM_SUICO_CATEGORY, 'field_category', $fieldcat_id);
+    $cat_select->addOption(0, _AM_SUICO_DEFAULT);
     $cat_select->addOptionArray($categoryHandler->getList());
     $form->addElement($cat_select);
-    $form->addElement(new XoopsFormText(_AM_YOGURT_WEIGHT, 'field_weight', 10, 10, $field->getVar('field_weight', 'e')));
+    $form->addElement(new XoopsFormText(_AM_SUICO_WEIGHT, 'field_weight', 10, 10, $field->getVar('field_weight', 'e')));
     if ($field->getVar('field_config') || $field->isNew()) {
         if (!$field->isNew()) {
-            $form->addElement(new XoopsFormLabel(_AM_YOGURT_NAME, $field->getVar('field_name')));
+            $form->addElement(new XoopsFormLabel(_AM_SUICO_NAME, $field->getVar('field_name')));
             $form->addElement(new XoopsFormHidden('id', $field->getVar('field_id')));
         } else {
-            $form->addElement(new XoopsFormText(_AM_YOGURT_NAME, 'field_name', 35, 255, $field->getVar('field_name', 'e')));
+            $form->addElement(new XoopsFormText(_AM_SUICO_NAME, 'field_name', 35, 255, $field->getVar('field_name', 'e')));
         }
 
         //autotext and theme left out of this one as fields of that type should never be changed (valid assumption, I think)
         $fieldtypes = [
-            'checkbox'     => _AM_YOGURT_CHECKBOX,
-            'date'         => _AM_YOGURT_DATE,
-            'datetime'     => _AM_YOGURT_DATETIME,
-            'longdate'     => _AM_YOGURT_LONGDATE,
-            'group'        => _AM_YOGURT_GROUP,
-            'group_multi'  => _AM_YOGURT_GROUPMULTI,
-            'language'     => _AM_YOGURT_LANGUAGE,
-            'radio'        => _AM_YOGURT_RADIO,
-            'select'       => _AM_YOGURT_SELECT,
-            'select_multi' => _AM_YOGURT_SELECTMULTI,
-            'textarea'     => _AM_YOGURT_TEXTAREA,
-            'dhtml'        => _AM_YOGURT_DHTMLTEXTAREA,
-            'textbox'      => _AM_YOGURT_TEXTBOX,
-            'timezone'     => _AM_YOGURT_TIMEZONE,
-            'yesno'        => _AM_YOGURT_YESNO,
+            'checkbox'     => _AM_SUICO_CHECKBOX,
+            'date'         => _AM_SUICO_DATE,
+            'datetime'     => _AM_SUICO_DATETIME,
+            'longdate'     => _AM_SUICO_LONGDATE,
+            'group'        => _AM_SUICO_GROUP,
+            'group_multi'  => _AM_SUICO_GROUPMULTI,
+            'language'     => _AM_SUICO_LANGUAGE,
+            'radio'        => _AM_SUICO_RADIO,
+            'select'       => _AM_SUICO_SELECT,
+            'select_multi' => _AM_SUICO_SELECTMULTI,
+            'textarea'     => _AM_SUICO_TEXTAREA,
+            'dhtml'        => _AM_SUICO_DHTMLTEXTAREA,
+            'textbox'      => _AM_SUICO_TEXTBOX,
+            'timezone'     => _AM_SUICO_TIMEZONE,
+            'yesno'        => _AM_SUICO_YESNO,
         ];
 
-        $element_select = new XoopsFormSelect(_AM_YOGURT_TYPE, 'field_type', $field->getVar('field_type', 'e'));
+        $element_select = new XoopsFormSelect(_AM_SUICO_TYPE, 'field_type', $field->getVar('field_type', 'e'));
         $element_select->addOptionArray($fieldtypes);
 
         $form->addElement($element_select);
@@ -94,57 +94,57 @@ function yogurt_getFieldForm(Yogurt\Field $field, $action = false)
         switch ($field->getVar('field_type')) {
             case 'textbox':
                 $valuetypes = [
-                    XOBJ_DTYPE_TXTBOX          => _AM_YOGURT_TXTBOX,
-                    XOBJ_DTYPE_EMAIL           => _AM_YOGURT_EMAIL,
-                    XOBJ_DTYPE_INT             => _AM_YOGURT_INT,
-                    XOBJ_DTYPE_FLOAT           => _AM_YOGURT_FLOAT,
-                    XOBJ_DTYPE_DECIMAL         => _AM_YOGURT_DECIMAL,
-                    XOBJ_DTYPE_TXTAREA         => _AM_YOGURT_TXTAREA,
-                    XOBJ_DTYPE_URL             => _AM_YOGURT_URL,
-                    XOBJ_DTYPE_OTHER           => _AM_YOGURT_OTHER,
-                    XOBJ_DTYPE_ARRAY           => _AM_YOGURT_ARRAY,
-                    XOBJ_DTYPE_UNICODE_ARRAY   => _AM_YOGURT_UNICODE_ARRAY,
-                    XOBJ_DTYPE_UNICODE_TXTBOX  => _AM_YOGURT_UNICODE_TXTBOX,
-                    XOBJ_DTYPE_UNICODE_TXTAREA => _AM_YOGURT_UNICODE_TXTAREA,
-                    XOBJ_DTYPE_UNICODE_EMAIL   => _AM_YOGURT_UNICODE_EMAIL,
-                    XOBJ_DTYPE_UNICODE_URL     => _AM_YOGURT_UNICODE_URL,
+                    XOBJ_DTYPE_TXTBOX          => _AM_SUICO_TXTBOX,
+                    XOBJ_DTYPE_EMAIL           => _AM_SUICO_EMAIL,
+                    XOBJ_DTYPE_INT             => _AM_SUICO_INT,
+                    XOBJ_DTYPE_FLOAT           => _AM_SUICO_FLOAT,
+                    XOBJ_DTYPE_DECIMAL         => _AM_SUICO_DECIMAL,
+                    XOBJ_DTYPE_TXTAREA         => _AM_SUICO_TXTAREA,
+                    XOBJ_DTYPE_URL             => _AM_SUICO_URL,
+                    XOBJ_DTYPE_OTHER           => _AM_SUICO_OTHER,
+                    XOBJ_DTYPE_ARRAY           => _AM_SUICO_ARRAY,
+                    XOBJ_DTYPE_UNICODE_ARRAY   => _AM_SUICO_UNICODE_ARRAY,
+                    XOBJ_DTYPE_UNICODE_TXTBOX  => _AM_SUICO_UNICODE_TXTBOX,
+                    XOBJ_DTYPE_UNICODE_TXTAREA => _AM_SUICO_UNICODE_TXTAREA,
+                    XOBJ_DTYPE_UNICODE_EMAIL   => _AM_SUICO_UNICODE_EMAIL,
+                    XOBJ_DTYPE_UNICODE_URL     => _AM_SUICO_UNICODE_URL,
                 ];
 
-                $type_select = new XoopsFormSelect(_AM_YOGURT_VALUETYPE, 'field_valuetype', $field->getVar('field_valuetype', 'e'));
+                $type_select = new XoopsFormSelect(_AM_SUICO_VALUETYPE, 'field_valuetype', $field->getVar('field_valuetype', 'e'));
                 $type_select->addOptionArray($valuetypes);
                 $form->addElement($type_select);
                 break;
             case 'select':
             case 'radio':
                 $valuetypes = [
-                    XOBJ_DTYPE_TXTBOX          => _AM_YOGURT_TXTBOX,
-                    XOBJ_DTYPE_EMAIL           => _AM_YOGURT_EMAIL,
-                    XOBJ_DTYPE_INT             => _AM_YOGURT_INT,
-                    XOBJ_DTYPE_FLOAT           => _AM_YOGURT_FLOAT,
-                    XOBJ_DTYPE_DECIMAL         => _AM_YOGURT_DECIMAL,
-                    XOBJ_DTYPE_TXTAREA         => _AM_YOGURT_TXTAREA,
-                    XOBJ_DTYPE_URL             => _AM_YOGURT_URL,
-                    XOBJ_DTYPE_OTHER           => _AM_YOGURT_OTHER,
-                    XOBJ_DTYPE_ARRAY           => _AM_YOGURT_ARRAY,
-                    XOBJ_DTYPE_UNICODE_ARRAY   => _AM_YOGURT_UNICODE_ARRAY,
-                    XOBJ_DTYPE_UNICODE_TXTBOX  => _AM_YOGURT_UNICODE_TXTBOX,
-                    XOBJ_DTYPE_UNICODE_TXTAREA => _AM_YOGURT_UNICODE_TXTAREA,
-                    XOBJ_DTYPE_UNICODE_EMAIL   => _AM_YOGURT_UNICODE_EMAIL,
-                    XOBJ_DTYPE_UNICODE_URL     => _AM_YOGURT_UNICODE_URL,
+                    XOBJ_DTYPE_TXTBOX          => _AM_SUICO_TXTBOX,
+                    XOBJ_DTYPE_EMAIL           => _AM_SUICO_EMAIL,
+                    XOBJ_DTYPE_INT             => _AM_SUICO_INT,
+                    XOBJ_DTYPE_FLOAT           => _AM_SUICO_FLOAT,
+                    XOBJ_DTYPE_DECIMAL         => _AM_SUICO_DECIMAL,
+                    XOBJ_DTYPE_TXTAREA         => _AM_SUICO_TXTAREA,
+                    XOBJ_DTYPE_URL             => _AM_SUICO_URL,
+                    XOBJ_DTYPE_OTHER           => _AM_SUICO_OTHER,
+                    XOBJ_DTYPE_ARRAY           => _AM_SUICO_ARRAY,
+                    XOBJ_DTYPE_UNICODE_ARRAY   => _AM_SUICO_UNICODE_ARRAY,
+                    XOBJ_DTYPE_UNICODE_TXTBOX  => _AM_SUICO_UNICODE_TXTBOX,
+                    XOBJ_DTYPE_UNICODE_TXTAREA => _AM_SUICO_UNICODE_TXTAREA,
+                    XOBJ_DTYPE_UNICODE_EMAIL   => _AM_SUICO_UNICODE_EMAIL,
+                    XOBJ_DTYPE_UNICODE_URL     => _AM_SUICO_UNICODE_URL,
                 ];
 
-                $type_select = new XoopsFormSelect(_AM_YOGURT_VALUETYPE, 'field_valuetype', $field->getVar('field_valuetype', 'e'));
+                $type_select = new XoopsFormSelect(_AM_SUICO_VALUETYPE, 'field_valuetype', $field->getVar('field_valuetype', 'e'));
                 $type_select->addOptionArray($valuetypes);
                 $form->addElement($type_select);
                 break;
         }
 
-        //$form->addElement(new XoopsFormRadioYN(_AM_YOGURT_NOTNULL, 'field_notnull', $field->getVar('field_notnull', 'e') ));
+        //$form->addElement(new XoopsFormRadioYN(_AM_SUICO_NOTNULL, 'field_notnull', $field->getVar('field_notnull', 'e') ));
 
         if ('select' === $field->getVar('field_type') || 'select_multi' === $field->getVar('field_type') || 'radio' === $field->getVar('field_type') || 'checkbox' === $field->getVar('field_type')) {
             $options = $field->getVar('field_options');
             if (count($options) > 0) {
-                $remove_options          = new XoopsFormCheckBox(_AM_YOGURT_REMOVEOPTIONS, 'removeOptions');
+                $remove_options          = new XoopsFormCheckBox(_AM_SUICO_REMOVEOPTIONS, 'removeOptions');
                 $remove_options->columns = 3;
                 asort($options);
                 foreach (array_keys($options) as $key) {
@@ -154,13 +154,13 @@ function yogurt_getFieldForm(Yogurt\Field $field, $action = false)
                 $form->addElement($remove_options);
             }
 
-            $option_text = "<table  cellspacing='1'><tr><td class='width20'>" . _AM_YOGURT_KEY . '</td><td>' . _AM_YOGURT_VALUE . '</td></tr>';
+            $option_text = "<table  cellspacing='1'><tr><td class='width20'>" . _AM_SUICO_KEY . '</td><td>' . _AM_SUICO_VALUE . '</td></tr>';
             for ($i = 0; $i < 3; ++$i) {
                 $option_text .= "<tr><td><input type='text' name='addOption[{$i}][key]' id='addOption[{$i}][key]' size='15' /></td><td><input type='text' name='addOption[{$i}][value]' id='addOption[{$i}][value]' size='35' /></td></tr>";
                 $option_text .= "<tr height='3px'><td colspan='2'> </td></tr>";
             }
             $option_text .= '</table>';
-            $form->addElement(new XoopsFormLabel(_AM_YOGURT_ADDOPTION, $option_text));
+            $form->addElement(new XoopsFormLabel(_AM_SUICO_ADDOPTION, $option_text));
         }
     }
 
@@ -169,13 +169,13 @@ function yogurt_getFieldForm(Yogurt\Field $field, $action = false)
             case 'textbox':
             case 'textarea':
             case 'dhtml':
-                $form->addElement(new XoopsFormText(_AM_YOGURT_MAXLENGTH, 'field_maxlength', 35, 35, $field->getVar('field_maxlength', 'e')));
-                $form->addElement(new XoopsFormTextArea(_AM_YOGURT_DEFAULT, 'field_default', $field->getVar('field_default', 'e')));
+                $form->addElement(new XoopsFormText(_AM_SUICO_MAXLENGTH, 'field_maxlength', 35, 35, $field->getVar('field_maxlength', 'e')));
+                $form->addElement(new XoopsFormTextArea(_AM_SUICO_DEFAULT, 'field_default', $field->getVar('field_default', 'e')));
                 break;
             case 'checkbox':
             case 'select_multi':
                 $def_value = null != $field->getVar('field_default', 'e') ? unserialize($field->getVar('field_default', 'n')) : null;
-                $element   = new XoopsFormSelect(_AM_YOGURT_DEFAULT, 'field_default', $def_value, 8, true);
+                $element   = new XoopsFormSelect(_AM_SUICO_DEFAULT, 'field_default', $def_value, 8, true);
                 $options   = $field->getVar('field_options');
                 asort($options);
                 // If options do not include an empty element, then add a blank option to prevent any default selection
@@ -189,7 +189,7 @@ function yogurt_getFieldForm(Yogurt\Field $field, $action = false)
             case 'select':
             case 'radio':
                 $def_value = null != $field->getVar('field_default', 'e') ? $field->getVar('field_default') : null;
-                $element   = new XoopsFormSelect(_AM_YOGURT_DEFAULT, 'field_default', $def_value);
+                $element   = new XoopsFormSelect(_AM_SUICO_DEFAULT, 'field_default', $def_value);
                 $options   = $field->getVar('field_options');
                 asort($options);
                 // If options do not include an empty element, then add a blank option to prevent any default selection
@@ -201,34 +201,34 @@ function yogurt_getFieldForm(Yogurt\Field $field, $action = false)
                 $form->addElement($element);
                 break;
             case 'date':
-                $form->addElement(new XoopsFormTextDateSelect(_AM_YOGURT_DEFAULT, 'field_default', 15, $field->getVar('field_default', 'e')));
+                $form->addElement(new XoopsFormTextDateSelect(_AM_SUICO_DEFAULT, 'field_default', 15, $field->getVar('field_default', 'e')));
                 break;
             case 'longdate':
-                $form->addElement(new XoopsFormTextDateSelect(_AM_YOGURT_DEFAULT, 'field_default', 15, strtotime($field->getVar('field_default', 'e'))));
+                $form->addElement(new XoopsFormTextDateSelect(_AM_SUICO_DEFAULT, 'field_default', 15, strtotime($field->getVar('field_default', 'e'))));
                 break;
             case 'datetime':
-                $form->addElement(new XoopsFormDateTime(_AM_YOGURT_DEFAULT, 'field_default', 15, $field->getVar('field_default', 'e')));
+                $form->addElement(new XoopsFormDateTime(_AM_SUICO_DEFAULT, 'field_default', 15, $field->getVar('field_default', 'e')));
                 break;
             case 'yesno':
-                $form->addElement(new XoopsFormRadioYN(_AM_YOGURT_DEFAULT, 'field_default', $field->getVar('field_default', 'e')));
+                $form->addElement(new XoopsFormRadioYN(_AM_SUICO_DEFAULT, 'field_default', $field->getVar('field_default', 'e')));
                 break;
             case 'timezone':
-                $form->addElement(new XoopsFormSelectTimezone(_AM_YOGURT_DEFAULT, 'field_default', $field->getVar('field_default', 'e')));
+                $form->addElement(new XoopsFormSelectTimezone(_AM_SUICO_DEFAULT, 'field_default', $field->getVar('field_default', 'e')));
                 break;
             case 'language':
-                $form->addElement(new XoopsFormSelectLang(_AM_YOGURT_DEFAULT, 'field_default', $field->getVar('field_default', 'e')));
+                $form->addElement(new XoopsFormSelectLang(_AM_SUICO_DEFAULT, 'field_default', $field->getVar('field_default', 'e')));
                 break;
             case 'group':
-                $form->addElement(new XoopsFormSelectGroup(_AM_YOGURT_DEFAULT, 'field_default', true, $field->getVar('field_default', 'e')));
+                $form->addElement(new XoopsFormSelectGroup(_AM_SUICO_DEFAULT, 'field_default', true, $field->getVar('field_default', 'e')));
                 break;
             case 'group_multi':
-                $form->addElement(new XoopsFormSelectGroup(_AM_YOGURT_DEFAULT, 'field_default', true, unserialize($field->getVar('field_default', 'n')), 5, true));
+                $form->addElement(new XoopsFormSelectGroup(_AM_SUICO_DEFAULT, 'field_default', true, unserialize($field->getVar('field_default', 'n')), 5, true));
                 break;
             case 'theme':
-                $form->addElement(new XoopsFormSelectTheme(_AM_YOGURT_DEFAULT, 'field_default', $field->getVar('field_default', 'e')));
+                $form->addElement(new XoopsFormSelectTheme(_AM_SUICO_DEFAULT, 'field_default', $field->getVar('field_default', 'e')));
                 break;
             case 'autotext':
-                $form->addElement(new XoopsFormTextArea(_AM_YOGURT_DEFAULT, 'field_default', $field->getVar('field_default', 'e')));
+                $form->addElement(new XoopsFormTextArea(_AM_SUICO_DEFAULT, 'field_default', $field->getVar('field_default', 'e')));
                 break;
         }
     }
@@ -246,7 +246,7 @@ function yogurt_getFieldForm(Yogurt\Field $field, $action = false)
     ];
     if (in_array($field->getVar('field_type'), $searchable_types)) {
         $search_groups = $grouppermHandler->getGroupIds('profile_search', $field->getVar('field_id'), $GLOBALS['xoopsModule']->getVar('mid'));
-        $form->addElement(new XoopsFormSelectGroup(_AM_YOGURT_PROF_SEARCH, 'profile_search', true, $search_groups, 5, true));
+        $form->addElement(new XoopsFormSelectGroup(_AM_SUICO_PROF_SEARCH, 'profile_search', true, $search_groups, 5, true));
     }
     if ($field->getVar('field_edit') || $field->isNew()) {
         $editable_groups = [];
@@ -254,11 +254,11 @@ function yogurt_getFieldForm(Yogurt\Field $field, $action = false)
             //Load groups
             $editable_groups = $grouppermHandler->getGroupIds('profile_edit', $field->getVar('field_id'), $GLOBALS['xoopsModule']->getVar('mid'));
         }
-        $form->addElement(new XoopsFormSelectGroup(_AM_YOGURT_PROF_EDITABLE, 'profile_edit', false, $editable_groups, 5, true));
-        $form->addElement(new XoopsFormRadioYN(_AM_YOGURT_REQUIRED, 'field_required', $field->getVar('field_required', 'e')));
-        $regstep_select = new XoopsFormSelect(_AM_YOGURT_PROF_REGISTER, 'step_id', $field->getVar('step_id', 'e'));
+        $form->addElement(new XoopsFormSelectGroup(_AM_SUICO_PROF_EDITABLE, 'profile_edit', false, $editable_groups, 5, true));
+        $form->addElement(new XoopsFormRadioYN(_AM_SUICO_REQUIRED, 'field_required', $field->getVar('field_required', 'e')));
+        $regstep_select = new XoopsFormSelect(_AM_SUICO_PROF_REGISTER, 'step_id', $field->getVar('step_id', 'e'));
         $regstep_select->addOption(0, _NO);
-        $regstepHandler = $helper->getHandler('Regstep');
+        $regstepHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Regstep');
         $regstep_select->addOptionArray($regstepHandler->getList());
         $form->addElement($regstep_select);
     }
@@ -278,7 +278,7 @@ function yogurt_getFieldForm(Yogurt\Field $field, $action = false)
  * @return object
  * @internal param \profileRegstep $next_step
  */
-function yogurt_getRegisterForm(XoopsUser $user, $profile, $step = null)
+function suico_getRegisterForm(XoopsUser $user, $profile, $step = null)
 {
     global $opkey; // should be set in register.php
     if (empty($opkey)) {
@@ -306,15 +306,15 @@ function yogurt_getRegisterForm(XoopsUser $user, $profile, $step = null)
         //$uname_size = $GLOBALS['xoopsConfigUser']['maxuname'] < 35 ? $GLOBALS['xoopsConfigUser']['maxuname'] : 35;
 
         $elements[0][] = [
-            'element'  => new XoopsFormText(_MD_YOGURT_NICKNAME, 'uname', 35, $GLOBALS['xoopsConfigUser']['maxuname'], $user->getVar('uname', 'e')),
+            'element'  => new XoopsFormText(_MD_SUICO_NICKNAME, 'uname', 35, $GLOBALS['xoopsConfigUser']['maxuname'], $user->getVar('uname', 'e')),
             'required' => true,
         ];
         $weights[0][]  = 0;
 
-        $elements[0][] = ['element' => new XoopsFormText(_MD_YOGURT_EMAILADDRESS, 'email', 35, 255, $user->getVar('email', 'e')), 'required' => true];
+        $elements[0][] = ['element' => new XoopsFormText(_MD_SUICO_EMAILADDRESS, 'email', 35, 255, $user->getVar('email', 'e')), 'required' => true];
         $weights[0][]  = 0;
 
-        $elements[0][] = ['element' => new XoopsFormPassword(_MD_YOGURT_PASSWORD, 'pass', 35, 32, ''), 'required' => true];
+        $elements[0][] = ['element' => new XoopsFormPassword(_MD_SUICO_PASSWORD, 'pass', 35, 32, ''), 'required' => true];
         $weights[0][]  = 0;
 
         $elements[0][] = ['element' => new XoopsFormPassword(_US_VERIFYPASS, 'vpass', 35, 32, ''), 'required' => true];
@@ -322,7 +322,7 @@ function yogurt_getRegisterForm(XoopsUser $user, $profile, $step = null)
     }
 
     // Dynamic fields
-    $profileHandler              = \XoopsModules\Yogurt\Helper::getInstance()->getHandler('Profile');
+    $profileHandler              = \XoopsModules\Suico\Helper::getInstance()->getHandler('Profile');
     $fields                       = $profileHandler->loadFields();
     $_SESSION['profile_required'] = [];
     foreach (array_keys($fields) as $i) {
@@ -341,12 +341,12 @@ function yogurt_getRegisterForm(XoopsUser $user, $profile, $step = null)
     ksort($elements);
 
     // Get categories
-    $categoryHandler = \XoopsModules\Yogurt\Helper::getInstance()->getHandler('Category');
+    $categoryHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Category');
     $categories  = $categoryHandler->getObjects(null, true, false);
 
     foreach (array_keys($elements) as $k) {
         array_multisort($weights[$k], SORT_ASC, array_keys($elements[$k]), SORT_ASC, $elements[$k]);
-        //$title = isset($categories[$k]) ? $categories[$k]['cat_title'] : _MD_YOGURT_DEFAULT;
+        //$title = isset($categories[$k]) ? $categories[$k]['cat_title'] : _MD_SUICO_DEFAULT;
         //$desc = isset($categories[$k]) ? $categories[$k]['cat_description'] : "";
         //$reg_form->insertBreak("<p>{$title}</p>{$desc}");
         //$reg_form->addElement(new XoopsFormLabel("<h2>".$title."</h2>", $desc), false);
@@ -384,14 +384,14 @@ function yogurt_getRegisterForm(XoopsUser $user, $profile, $step = null)
  * Get {@link XoopsThemeForm} for editing a user
  *
  * @param XoopsUser                    $user {@link XoopsUser} to edit
- * @param \XoopsModules\Yogurt\Profile $profile
+ * @param \XoopsModules\Suico\Profile $profile
  * @param bool                         $action
  *
  * @return object
  */
-function yogurt_getUserForm(XoopsUser $user, Yogurt\Profile $profile = null, $action = false)
+function suico_getUserForm(XoopsUser $user, Suico\Profile $profile = null, $action = false)
 {
-    $helper = \XoopsModules\Yogurt\Helper::getInstance();
+    $helper = \XoopsModules\Suico\Helper::getInstance();
     if (!$action) {
         $action = $_SERVER['REQUEST_URI'];
     }
@@ -403,18 +403,18 @@ function yogurt_getUserForm(XoopsUser $user, Yogurt\Profile $profile = null, $ac
 
     require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
 
-    $title = $user->isNew() ? _AM_YOGURT_ADDUSER : _US_EDITPROFILE;
+    $title = $user->isNew() ? _AM_SUICO_ADDUSER : _US_EDITPROFILE;
 
     $form = new XoopsThemeForm($title, 'userinfo', $action, 'post', true);
 
     /* @var ProfileHandler $profileHandler */
 
-    $profileHandler = $helper->getHandler('Profile');
+    $profileHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Profile');
     // Dynamic fields
     if (!$profile) {
         /* @var ProfileHandler $profileHandler */
 
-        $profileHandler = $helper->getHandler('Profile');
+        $profileHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Profile');
         $profile         = $profileHandler->get($user->getVar('uid'));
     }
     // Get fields
@@ -426,15 +426,15 @@ function yogurt_getUserForm(XoopsUser $user, Yogurt\Profile $profile = null, $ac
 
     if ($user->isNew() || $GLOBALS['xoopsUser']->isAdmin()) {
         $elements[0][] = [
-            'element'  => new XoopsFormText(_MD_YOGURT_NICKNAME, 'uname', 25, $GLOBALS['xoopsUser']->isAdmin() ? 60 : $GLOBALS['xoopsConfigUser']['maxuname'], $user->getVar('uname', 'e')),
+            'element'  => new XoopsFormText(_MD_SUICO_NICKNAME, 'uname', 25, $GLOBALS['xoopsUser']->isAdmin() ? 60 : $GLOBALS['xoopsConfigUser']['maxuname'], $user->getVar('uname', 'e')),
             'required' => 1,
         ];
         $email_text    = new XoopsFormText('', 'email', 30, 60, $user->getVar('email'));
     } else {
-        $elements[0][] = ['element' => new XoopsFormLabel(_MD_YOGURT_NICKNAME, $user->getVar('uname')), 'required' => 0];
+        $elements[0][] = ['element' => new XoopsFormLabel(_MD_SUICO_NICKNAME, $user->getVar('uname')), 'required' => 0];
         $email_text    = new XoopsFormLabel('', $user->getVar('email'));
     }
-    $email_tray = new XoopsFormElementTray(_MD_YOGURT_EMAILADDRESS, '<br>');
+    $email_tray = new XoopsFormElementTray(_MD_SUICO_EMAILADDRESS, '<br>');
     $email_tray->addElement($email_text, ($user->isNew() || $GLOBALS['xoopsUser']->isAdmin()) ? 1 : 0);
     $weights[0][]  = 0;
     $elements[0][] = ['element' => $email_tray, 'required' => 0];
@@ -444,16 +444,16 @@ function yogurt_getUserForm(XoopsUser $user, Yogurt\Profile $profile = null, $ac
         //If the user is an admin and is editing someone else
         $pwd_text  = new XoopsFormPassword('', 'password', 10, 32);
         $pwd_text2 = new XoopsFormPassword('', 'vpass', 10, 32);
-        $pwd_tray  = new XoopsFormElementTray(_MD_YOGURT_PASSWORD . '<br>' . _MD_YOGURT_CONFIRMPASSWORD);
+        $pwd_tray  = new XoopsFormElementTray(_MD_SUICO_PASSWORD . '<br>' . _MD_SUICO_CONFIRMPASSWORD);
         $pwd_tray->addElement($pwd_text);
         $pwd_tray->addElement($pwd_text2);
         $elements[0][] = ['element' => $pwd_tray, 'required' => 0]; //cannot set an element tray required
         $weights[0][]  = 0;
 
-        $level_radio = new XoopsFormRadio(_MD_YOGURT_USERLEVEL, 'level', $user->getVar('level'));
-        $level_radio->addOption(1, _MD_YOGURT_ACTIVE);
-        $level_radio->addOption(0, _MD_YOGURT_INACTIVE);
-        //$level_radio->addOption(-1, _MD_YOGURT_DISABLED);
+        $level_radio = new XoopsFormRadio(_MD_SUICO_USERLEVEL, 'level', $user->getVar('level'));
+        $level_radio->addOption(1, _MD_SUICO_ACTIVE);
+        $level_radio->addOption(0, _MD_SUICO_INACTIVE);
+        //$level_radio->addOption(-1, _MD_SUICO_DISABLED);
         $elements[0][] = ['element' => $level_radio, 'required' => 0];
         $weights[0][]  = 0;
     }
@@ -463,7 +463,7 @@ function yogurt_getUserForm(XoopsUser $user, Yogurt\Profile $profile = null, $ac
     $elements[0][] = ['element' => new XoopsFormHidden('op', 'save'), 'required' => 0];
     $weights[0][]  = 0;
 
-    $categoryHandler    = $helper->getHandler('Category');
+    $categoryHandler    = \XoopsModules\Suico\Helper::getInstance()->getHandler('Category');
     $categories     = [];
     $all_categories = $categoryHandler->getObjects(null, true, false);
     $count_fields   = count($fields);
@@ -501,7 +501,7 @@ function yogurt_getUserForm(XoopsUser $user, Yogurt\Profile $profile = null, $ac
         include_once $GLOBALS['xoops']->path('modules/system/constants.php');
         if ($grouppermHandler->checkRight('system_admin', XOOPS_SYSTEM_GROUP, $GLOBALS['xoopsUser']->getGroups(), 1)) {
             //add group selection
-            $group_select  = new XoopsFormSelectGroup(_MD_YOGURT_USERGROUPS, 'groups', false, $user->getGroups(), 5, true);
+            $group_select  = new XoopsFormSelectGroup(_MD_SUICO_USERGROUPS, 'groups', false, $user->getGroups(), 5, true);
             $elements[0][] = ['element' => $group_select, 'required' => 0];
             //set as latest;
             $weights[0][] = $count_fields + 1;
@@ -511,7 +511,7 @@ function yogurt_getUserForm(XoopsUser $user, Yogurt\Profile $profile = null, $ac
     ksort($elements);
     foreach (array_keys($elements) as $k) {
         array_multisort($weights[$k], SORT_ASC, array_keys($elements[$k]), SORT_ASC, $elements[$k]);
-        $title = isset($categories[$k]) ? $categories[$k]['cat_title'] : _MD_YOGURT_DEFAULT;
+        $title = isset($categories[$k]) ? $categories[$k]['cat_title'] : _MD_SUICO_DEFAULT;
         $desc  = isset($categories[$k]) ? $categories[$k]['cat_description'] : '';
         $form->addElement(new XoopsFormLabel("<h3>{$title}</h3>", $desc), false);
         foreach (array_keys($elements[$k]) as $i) {
@@ -520,7 +520,7 @@ function yogurt_getUserForm(XoopsUser $user, Yogurt\Profile $profile = null, $ac
     }
 
     $form->addElement(new XoopsFormHidden('uid', $user->getVar('uid')));
-    $form->addElement(new XoopsFormButton('', 'submit', _MD_YOGURT_SAVECHANGES, 'submit'));
+    $form->addElement(new XoopsFormButton('', 'submit', _MD_SUICO_SAVECHANGES, 'submit'));
 
     return $form;
 }
@@ -528,12 +528,12 @@ function yogurt_getUserForm(XoopsUser $user, Yogurt\Profile $profile = null, $ac
 /**
  * Get {@link XoopsThemeForm} for editing a step
  *
- * @param \XoopsModules\Yogurt\Regstep $step {@link Regstep} to edit
+ * @param \XoopsModules\Suico\Regstep $step {@link Regstep} to edit
  * @param bool                         $action
  *
  * @return object
  */
-function yogurt_getStepForm(Yogurt\Regstep $step = null, $action = false)
+function suico_getStepForm(Suico\Regstep $step = null, $action = false)
 {
     if (!$action) {
         $action = $_SERVER['REQUEST_URI'];
@@ -545,16 +545,16 @@ function yogurt_getStepForm(Yogurt\Regstep $step = null, $action = false)
     }
     include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
 
-    $form = new XoopsThemeForm(_AM_YOGURT_STEP, 'stepform', 'step.php', 'post', true);
+    $form = new XoopsThemeForm(_AM_SUICO_STEP, 'stepform', 'step.php', 'post', true);
 
     if (!$step->isNew()) {
         $form->addElement(new XoopsFormHidden('id', $step->getVar('step_id')));
     }
     $form->addElement(new XoopsFormHidden('op', 'save'));
-    $form->addElement(new XoopsFormText(_AM_YOGURT_STEPNAME, 'step_name', 25, 255, $step->getVar('step_name', 'e')));
-    $form->addElement(new XoopsFormText(_AM_YOGURT_STEPINTRO, 'step_desc', 25, 255, $step->getVar('step_desc', 'e')));
-    $form->addElement(new XoopsFormText(_AM_YOGURT_STEPORDER, 'step_order', 10, 10, $step->getVar('step_order', 'e')));
-    $form->addElement(new XoopsFormRadioYN(_AM_YOGURT_STEPSAVE, 'step_save', $step->getVar('step_save', 'e')));
+    $form->addElement(new XoopsFormText(_AM_SUICO_STEPNAME, 'step_name', 25, 255, $step->getVar('step_name', 'e')));
+    $form->addElement(new XoopsFormText(_AM_SUICO_STEPINTRO, 'step_desc', 25, 255, $step->getVar('step_desc', 'e')));
+    $form->addElement(new XoopsFormText(_AM_SUICO_STEPORDER, 'step_order', 10, 10, $step->getVar('step_order', 'e')));
+    $form->addElement(new XoopsFormRadioYN(_AM_SUICO_STEPSAVE, 'step_save', $step->getVar('step_save', 'e')));
     $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
 
     return $form;

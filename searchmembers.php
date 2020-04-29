@@ -28,14 +28,14 @@ declare(strict_types=1);
 //  ------------------------------------------------------------------------ //
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
 
 $op = Request::getCmd('op', 'form', 'POST');
 
-//require_once __DIR__ . '/class/yogurt_controller.php';
-$controller = new Yogurt\IndexController($xoopsDB, $xoopsUser);
+//require_once __DIR__ . '/class/suico_controller.php';
+$controller = new Suico\IndexController($xoopsDB, $xoopsUser);
 
 /**
  * Fetching numbers of groups friends videos pictures etc...
@@ -43,7 +43,7 @@ $controller = new Yogurt\IndexController($xoopsDB, $xoopsUser);
 $nbSections = $controller->getNumbersSections();
 
 if ('form' === $op) {
-    $GLOBALS['xoopsOption']['template_main'] = 'yogurt_searchform.tpl';
+    $GLOBALS['xoopsOption']['template_main'] = 'suico_searchform.tpl';
     require XOOPS_ROOT_PATH . '/header.php';
     /** @var \XoopsMemberHandler $memberHandler */
     $memberHandler = xoops_getHandler('member');
@@ -51,52 +51,52 @@ if ('form' === $op) {
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
     $uname_text  = new XoopsFormText('', 'user_uname', 30, 60);
     $uname_match = new XoopsFormSelectMatchOption('', 'user_uname_match');
-    $uname_tray  = new XoopsFormElementTray(_MD_YOGURT_UNAME, '&nbsp;');
+    $uname_tray  = new XoopsFormElementTray(_MD_SUICO_UNAME, '&nbsp;');
     $uname_tray->addElement($uname_match);
     $uname_tray->addElement($uname_text);
     $name_text  = new XoopsFormText('', 'user_name', 30, 60);
     $name_match = new XoopsFormSelectMatchOption('', 'user_name_match');
-    $name_tray  = new XoopsFormElementTray(_MD_YOGURT_REALNAME, '&nbsp;');
+    $name_tray  = new XoopsFormElementTray(_MD_SUICO_REALNAME, '&nbsp;');
     $name_tray->addElement($name_match);
     $name_tray->addElement($name_text);
     $email_text  = new XoopsFormText('', 'user_email', 30, 60);
     $email_match = new XoopsFormSelectMatchOption('', 'user_email_match');
-    $email_tray  = new XoopsFormElementTray(_MD_YOGURT_EMAIL, '&nbsp;');
+    $email_tray  = new XoopsFormElementTray(_MD_SUICO_EMAIL, '&nbsp;');
     $email_tray->addElement($email_match);
     $email_tray->addElement($email_text);
-    $url_text        = new XoopsFormText(_MD_YOGURT_URL_CONTAINS, 'user_url', 30, 100);
-    $location_text   = new XoopsFormText(_MD_YOGURT_LOCATION_CONTAINS, 'user_from', 30, 100);
-    $occupation_text = new XoopsFormText(_MD_YOGURT_OCCUPATION_CONTAINS, 'user_occ', 30, 100);
-    $interest_text   = new XoopsFormText(_MD_YOGURT_INTEREST_CONTAINS, 'user_intrest', 30, 100);
-    $extrainfo_text  = new XoopsFormText(_MD_YOGURT_EXTRAINFO_CONTAINS, 'bio', 30, 100);
-    $signature_text  = new XoopsFormText(_MD_YOGURT_SIGNATURE_CONTAINS, 'user_sig', 30, 100);
+    $url_text        = new XoopsFormText(_MD_SUICO_URL_CONTAINS, 'user_url', 30, 100);
+    $location_text   = new XoopsFormText(_MD_SUICO_LOCATION_CONTAINS, 'user_from', 30, 100);
+    $occupation_text = new XoopsFormText(_MD_SUICO_OCCUPATION_CONTAINS, 'user_occ', 30, 100);
+    $interest_text   = new XoopsFormText(_MD_SUICO_INTEREST_CONTAINS, 'user_intrest', 30, 100);
+    $extrainfo_text  = new XoopsFormText(_MD_SUICO_EXTRAINFO_CONTAINS, 'bio', 30, 100);
+    $signature_text  = new XoopsFormText(_MD_SUICO_SIGNATURE_CONTAINS, 'user_sig', 30, 100);
 
     $lastlog_more = new XoopsFormText(
-        _MD_YOGURT_LASTLOGMORE, 'user_lastlog_more', 10, 5
+        _MD_SUICO_LASTLOGMORE, 'user_lastlog_more', 10, 5
     );
-    $lastlog_less = new XoopsFormText(_MD_YOGURT_LASTLOGLESS, 'user_lastlog_less', 10, 5);
-    $reg_more     = new XoopsFormText(_MD_YOGURT_REGMORE, 'user_reg_more', 10, 5);
-    $reg_less     = new XoopsFormText(_MD_YOGURT_REGLESS, 'user_reg_less', 10, 5);
-    $posts_more   = new XoopsFormText(_MD_YOGURT_POSTSMORE, 'user_posts_more', 10, 5);
-    $posts_less   = new XoopsFormText(_MD_YOGURT_POSTSLESS, 'user_posts_less', 10, 5);
-    $sort_select  = new XoopsFormSelect(_MD_YOGURT_SORT, 'user_sort');
+    $lastlog_less = new XoopsFormText(_MD_SUICO_LASTLOGLESS, 'user_lastlog_less', 10, 5);
+    $reg_more     = new XoopsFormText(_MD_SUICO_REGMORE, 'user_reg_more', 10, 5);
+    $reg_less     = new XoopsFormText(_MD_SUICO_REGLESS, 'user_reg_less', 10, 5);
+    $posts_more   = new XoopsFormText(_MD_SUICO_POSTSMORE, 'user_posts_more', 10, 5);
+    $posts_less   = new XoopsFormText(_MD_SUICO_POSTSLESS, 'user_posts_less', 10, 5);
+    $sort_select  = new XoopsFormSelect(_MD_SUICO_SORT, 'user_sort');
     $sort_select->addOptionArray(
         [
-            'uname'        => _MD_YOGURT_UNAME,
-            'email'        => _MD_YOGURT_EMAIL,
-            'last_login'   => _MD_YOGURT_LASTLOGIN,
-            'user_regdate' => _MD_YOGURT_REGDATE,
-            'posts'        => _MD_YOGURT_POSTS,
+            'uname'        => _MD_SUICO_UNAME,
+            'email'        => _MD_SUICO_EMAIL,
+            'last_login'   => _MD_SUICO_LASTLOGIN,
+            'user_regdate' => _MD_SUICO_REGDATE,
+            'posts'        => _MD_SUICO_POSTS,
         ]
     );
-    $order_select = new XoopsFormSelect(_MD_YOGURT_ORDER, 'user_order');
+    $order_select = new XoopsFormSelect(_MD_SUICO_ORDER, 'user_order');
     $order_select->addOptionArray(
         [
-            'ASC'  => _MD_YOGURT_ASC,
-            'DESC' => _MD_YOGURT_DESC,
+            'ASC'  => _MD_SUICO_ASC,
+            'DESC' => _MD_SUICO_DESC,
         ]
     );
-    $limit_text    = new XoopsFormText(_MD_YOGURT_LIMIT, 'limit', 6, 2);
+    $limit_text    = new XoopsFormText(_MD_SUICO_LIMIT, 'limit', 6, 2);
     $op_hidden     = new XoopsFormHidden('op', 'submit');
     $submit_button = new XoopsFormButton('', 'user_submit', _SUBMIT, 'submit');
 
@@ -150,16 +150,16 @@ if ('form' === $op) {
     $form->addElement($op_hidden);
     $form->addElement($submit_button);
     $form->assign($xoopsTpl);
-    $xoopsTpl->assign('lang_search', _MD_YOGURT_SEARCH);
+    $xoopsTpl->assign('lang_search', _MD_SUICO_SEARCH);
     $xoopsTpl->assign(
         'lang_totalusers',
-        sprintf(_MD_YOGURT_TOTALUSERS, '<span style="color:#ff0000;">' . $total . '</span>')
+        sprintf(_MD_SUICO_TOTALUSERS, '<span style="color:#ff0000;">' . $total . '</span>')
     );
     $xoopsTpl->assign('totalmember', $total);
 }
 
 if ('submit' === $op) {
-    $GLOBALS['xoopsOption']['template_main'] = 'yogurt_searchresults.tpl';
+    $GLOBALS['xoopsOption']['template_main'] = 'suico_searchresults.tpl';
     require XOOPS_ROOT_PATH . '/header.php';
     $iamadmin = $xoopsUserIsAdmin;
     $myts     = MyTextSanitizer::getInstance();
@@ -300,22 +300,22 @@ if ('submit' === $op) {
     $start         = Request::getInt('start', 0, 'POST');
     $memberHandler = xoops_getHandler('member');
     $total         = $memberHandler->getUserCount($criteria);
-    $xoopsTpl->assign('lang_search', _MD_YOGURT_SEARCH);
-    $xoopsTpl->assign('lang_results', _MD_YOGURT_RESULTS);
+    $xoopsTpl->assign('lang_search', _MD_SUICO_SEARCH);
+    $xoopsTpl->assign('lang_results', _MD_SUICO_RESULTS);
     $xoopsTpl->assign('total_found', $total);
     if (0 === $total) {
-        $xoopsTpl->assign('lang_nonefound', _MD_YOGURT_NOFOUND);
+        $xoopsTpl->assign('lang_nonefound', _MD_SUICO_NOFOUND);
     } elseif ($start < $total) {
-        $xoopsTpl->assign('lang_username', _MD_YOGURT_UNAME);
-        $xoopsTpl->assign('lang_realname', _MD_YOGURT_REALNAME);
-        $xoopsTpl->assign('lang_avatar', _MD_YOGURT_AVATAR);
-        $xoopsTpl->assign('lang_email', _MD_YOGURT_EMAIL);
-        $xoopsTpl->assign('lang_privmsg', _MD_YOGURT_PM);
-        $xoopsTpl->assign('lang_regdate', _MD_YOGURT_REGDATE);
-        $xoopsTpl->assign('lang_lastlogin', _MD_YOGURT_LASTLOGIN);
-        $xoopsTpl->assign('lang_posts', _MD_YOGURT_POSTS);
-        $xoopsTpl->assign('lang_url', _MD_YOGURT_URL);
-        $xoopsTpl->assign('lang_admin', _MD_YOGURT_ADMIN);
+        $xoopsTpl->assign('lang_username', _MD_SUICO_UNAME);
+        $xoopsTpl->assign('lang_realname', _MD_SUICO_REALNAME);
+        $xoopsTpl->assign('lang_avatar', _MD_SUICO_AVATAR);
+        $xoopsTpl->assign('lang_email', _MD_SUICO_EMAIL);
+        $xoopsTpl->assign('lang_privmsg', _MD_SUICO_PM);
+        $xoopsTpl->assign('lang_regdate', _MD_SUICO_REGDATE);
+        $xoopsTpl->assign('lang_lastlogin', _MD_SUICO_LASTLOGIN);
+        $xoopsTpl->assign('lang_posts', _MD_SUICO_POSTS);
+        $xoopsTpl->assign('lang_url', _MD_SUICO_URL);
+        $xoopsTpl->assign('lang_admin', _MD_SUICO_ADMIN);
         if ($iamadmin) {
             $xoopsTpl->assign('is_admin', true);
         }
@@ -337,7 +337,7 @@ if ('submit' === $op) {
             $controller->isFriend = $controller->friendshipsFactory->getCount($criteria_isfriend);
             $userdata['isFriend'] = $controller->isFriend;
 
-            $friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
+            $friendrequestFactory = new Suico\FriendrequestHandler($xoopsDB);
 
             $criteria_selfrequest   = new Criteria('friendrequester_uid', $controller->uidOwner);
             $criteria_isselfrequest = new CriteriaCompo(new Criteria('friendrequestto_uid', $userdata['uid']));
@@ -347,9 +347,9 @@ if ('submit' === $op) {
             if ($controller->isSelfRequest > 0) {
                 $xoopsTpl->assign('self_uid', $controller->uidOwner);
             }
-            $xoopsTpl->assign('lang_myfriend', _MD_YOGURT_MYFRIEND);
-            $xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUEST_SENT);
-            $xoopsTpl->assign('lang_friendshipstatus', _MD_YOGURT_FRIENDSHIP_STATUS);
+            $xoopsTpl->assign('lang_myfriend', _MD_SUICO_MYFRIEND);
+            $xoopsTpl->assign('lang_friendrequestsent', _MD_SUICO_FRIENDREQUEST_SENT);
+            $xoopsTpl->assign('lang_friendshipstatus', _MD_SUICO_FRIENDSHIP_STATUS);
 
             $criteria_otherrequest   = new Criteria('friendrequester_uid', $userdata['uid']);
             $criteria_isotherrequest = new CriteriaCompo(new Criteria('friendrequestto_uid', $controller->uidOwner));
@@ -399,7 +399,7 @@ if ('submit' === $op) {
             if (0 !== $foundusers[$j]->getVar('last_login')) {
                 $userdata['lastlogin'] = formatTimestamp($foundusers[$j]->getVar('last_login'), 'm');
             } else {
-                $userdata['lastlogin'] = _MD_YOGURT_NEVERLOGIN;
+                $userdata['lastlogin'] = _MD_SUICO_NEVERLOGIN;
             }
             $userdata['posts'] = $foundusers[$j]->getVar('posts');
             if ($iamadmin) {
@@ -446,7 +446,7 @@ if ('submit' === $op) {
             }
             $prev = $start - $limit;
             if ($start - $limit >= 0) {
-                $hiddenform .= "<a href='#0' onclick='document.findnext.start.value=" . $prev . ";document.findnext.submit();'>" . _MD_YOGURT_PREVIOUS . "</a>&nbsp;\n";
+                $hiddenform .= "<a href='#0' onclick='document.findnext.start.value=" . $prev . ";document.findnext.submit();'>" . _MD_SUICO_PREVIOUS . "</a>&nbsp;\n";
             }
             $counter     = 1;
             $currentpage = ($start + $limit) / $limit;
@@ -466,21 +466,21 @@ if ('submit' === $op) {
             }
             $next = $start + $limit;
             if ($total > $next) {
-                $hiddenform .= "&nbsp;<a href='#" . $total . "' onclick='document.findnext.start.value=" . $next . ";document.findnext.submit();'>" . _MD_YOGURT_NEXT . "</a>\n";
+                $hiddenform .= "&nbsp;<a href='#" . $total . "' onclick='document.findnext.start.value=" . $next . ";document.findnext.submit();'>" . _MD_SUICO_NEXT . "</a>\n";
             }
             $hiddenform .= '</form>';
             $xoopsTpl->assign('pagenav', $hiddenform);
-            $xoopsTpl->assign('lang_numfound', sprintf(_MD_YOGURT_USER_SFOUND, $total));
+            $xoopsTpl->assign('lang_numfound', sprintf(_MD_SUICO_USER_SFOUND, $total));
         }
     }
 }
 
 //requests to become friend
 
-$xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
-$xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
-$xoopsTpl->assign('lang_friendshippending', _MD_YOGURT_FRIENDREQUEST_PENDING);
-$xoopsTpl->assign('lang_cancelfriendrequest', _MD_YOGURT_FRIENDREQUEST_CANCEL);
+$xoopsTpl->assign('lang_askusertobefriend', _MD_SUICO_ASKBEFRIEND);
+$xoopsTpl->assign('lang_addfriend', _MD_SUICO_ADDFRIEND);
+$xoopsTpl->assign('lang_friendshippending', _MD_SUICO_FRIENDREQUEST_PENDING);
+$xoopsTpl->assign('lang_cancelfriendrequest', _MD_SUICO_FRIENDREQUEST_CANCEL);
 
 if (isset($_POST['addfriend'])) {
     $newFriendrequest = $friendrequestFactory->create(true);
@@ -488,9 +488,9 @@ if (isset($_POST['addfriend'])) {
     $newFriendrequest->setVar('friendrequestto_uid', 5, 0, 'POST');
     $friendrequestFactory->insert2($newFriendrequest);
     redirect_header(
-        XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('friendrequestfrom_uid', 0, 'POST'),
+        XOOPS_URL . '/modules/suico/index.php?uid=' . Request::getInt('friendrequestfrom_uid', 0, 'POST'),
         3,
-        _MD_YOGURT_FRIENDREQUEST_FROM
+        _MD_SUICO_FRIENDREQUEST_FROM
     );
 }
 
@@ -499,8 +499,8 @@ $thisUser      = $memberHandler->getUser($controller->uidOwner);
 $myts          = MyTextSanitizer::getInstance();
 
 //navbar
-$xoopsTpl->assign('lang_mysection', _MD_YOGURT_SEARCH);
-$xoopsTpl->assign('section_name', _MD_YOGURT_SEARCH);
+$xoopsTpl->assign('lang_mysection', _MD_SUICO_SEARCH);
+$xoopsTpl->assign('section_name', _MD_SUICO_SEARCH);
 
 // temporary solution for profile module integration
 if (xoops_isActiveModule('profile')) {

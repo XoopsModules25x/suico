@@ -14,14 +14,14 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
 
@@ -29,7 +29,7 @@ if (!$xoopsUser) {
     redirect_header('index.php');
 }
 
-$friendshipFactory = new Yogurt\FriendshipHandler($xoopsDB);
+$friendshipFactory = new Suico\FriendshipHandler($xoopsDB);
 $friend2_uid       = Request::getInt('friend_uid', 0, 'POST');
 $marker            = Request::getInt('marker', 0, 'POST');
 
@@ -70,7 +70,7 @@ if (1 === $marker) {
 
     $friendshipFactory->insert2($friendship);
 
-    redirect_header('friends.php', 2, _MD_YOGURT_FRIENDSHIP_UPDATED);
+    redirect_header('friends.php', 2, _MD_SUICO_FRIENDSHIP_UPDATED);
 } else {
     $friendshipFactory->renderFormSubmit($friend);
 }

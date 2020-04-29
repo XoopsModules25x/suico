@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -16,7 +16,7 @@ namespace XoopsModules\Yogurt;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -49,7 +49,7 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 /**
  * Class PhotosController
  */
-class PhotosController extends YogurtController
+class PhotosController extends SuicoController
 {
     /**
      * @return bool|void
@@ -58,7 +58,7 @@ class PhotosController extends YogurtController
     public function checkPrivilege()
     {
         if (0 === $this->helper->getConfig('enable_pictures')) {
-            \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, \_MD_YOGURT_PICTURES_ENABLED_NOT);
+            \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, \_MD_SUICO_PICTURES_ENABLED_NOT);
         }
 
         $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
@@ -69,7 +69,7 @@ class PhotosController extends YogurtController
             $config = $configs[0]->getVar('pictures');
 
             if (!$this->checkPrivilegeLevel($config)) {
-                \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, \_MD_YOGURT_NOPRIVILEGE);
+                \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, \_MD_SUICO_NOPRIVILEGE);
             }
         }
 

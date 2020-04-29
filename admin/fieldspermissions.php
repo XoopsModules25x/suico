@@ -27,25 +27,25 @@ $op = \Xmf\Request::getCmd('op', 'edit');
 $perm_desc = '';
 switch ($op) {
     case 'visibility':
-        //redirect_header("fieldsvisibility.php", 0, _AM_YOGURT_PROF_VISIBLE);
+        //redirect_header("fieldsvisibility.php", 0, _AM_SUICO_PROF_VISIBLE);
         header('Location: fieldsvisibility.php');
         break;
     case 'edit':
-        $title_of_form = _AM_YOGURT_PROF_EDITABLE;
+        $title_of_form = _AM_SUICO_PROF_EDITABLE;
         $perm_name     = 'profile_edit';
         $restriction   = 'field_edit';
         $anonymous     = false;
         break;
     case 'search':
-        $title_of_form = _AM_YOGURT_PROF_SEARCH;
+        $title_of_form = _AM_SUICO_PROF_SEARCH;
         $perm_name     = 'profile_search';
         $restriction   = '';
         $anonymous     = true;
         break;
     case 'access':
-        $title_of_form = _AM_YOGURT_PROF_ACCESS;
+        $title_of_form = _AM_SUICO_PROF_ACCESS;
         $perm_name     = 'profile_access';
-        $perm_desc     = _AM_YOGURT_PROF_ACCESS_DESC;
+        $perm_desc     = _AM_SUICO_PROF_ACCESS_DESC;
         $restriction   = '';
         $anonymous     = true;
         break;
@@ -55,10 +55,10 @@ include_once $GLOBALS['xoops']->path('/class/xoopsformloader.php');
 $opform    = new XoopsSimpleForm('', 'opform', 'fieldspermissions.php', 'get');
 $op_select = new XoopsFormSelect('', 'op', $op);
 $op_select->setExtra('onchange="document.forms.opform.submit()"');
-$op_select->addOption('visibility', _AM_YOGURT_PROF_VISIBLE);
-$op_select->addOption('edit', _AM_YOGURT_PROF_EDITABLE);
-$op_select->addOption('search', _AM_YOGURT_PROF_SEARCH);
-$op_select->addOption('access', _AM_YOGURT_PROF_ACCESS);
+$op_select->addOption('visibility', _AM_SUICO_PROF_VISIBLE);
+$op_select->addOption('edit', _AM_SUICO_PROF_EDITABLE);
+$op_select->addOption('search', _AM_SUICO_PROF_SEARCH);
+$op_select->addOption('access', _AM_SUICO_PROF_ACCESS);
 $opform->addElement($op_select);
 $opform->display();
 

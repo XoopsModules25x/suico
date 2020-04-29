@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -20,7 +20,7 @@ use XoopsObject;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -89,7 +89,7 @@ class Ishot extends XoopsObject
 
     public function load($id)
     {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_ishot') . ' WHERE cod_ishot=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_ishot') . ' WHERE cod_ishot=' . $id;
 
         $myrow = $this->db->fetchArray($this->db->query($sql));
 
@@ -138,16 +138,16 @@ class Ishot extends XoopsObject
 
         if (!$asobject) {
             $sql = 'SELECT cod_ishot FROM ' . $db->prefix(
-                    'yogurt_ishot'
+                    'suico_ishot'
                 ) . "${whereQuery} ORDER BY ${sort} ${order}";
 
             $result = $db->query($sql, $limit, $start);
 
             while (false !== ($myrow = $db->fetchArray($result))) {
-                $ret[] = $myrow['yogurt_ishot_id'];
+                $ret[] = $myrow['suico_ishot_id'];
             }
         } else {
-            $sql = 'SELECT * FROM ' . $db->prefix('yogurt_ishot') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql = 'SELECT * FROM ' . $db->prefix('suico_ishot') . "${whereQuery} ORDER BY ${sort} ${order}";
 
             $result = $db->query($sql, $limit, $start);
 

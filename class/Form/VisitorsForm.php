@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt\Form;
+namespace XoopsModules\Suico\Form;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -16,7 +16,7 @@ namespace XoopsModules\Yogurt\Form;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -29,13 +29,13 @@ use XoopsFormLabel;
 use XoopsFormSelectUser;
 use XoopsFormText;
 use XoopsFormTextDateSelect;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 use XoopsThemeForm;
 
 require_once \dirname(__DIR__, 2) . '/include/common.php';
 
 $moduleDirName = \basename(\dirname(__DIR__, 2));
-//$helper = Yogurt\Helper::getInstance();
+//$helper = Suico\Helper::getInstance();
 $permHelper = new Permission();
 
 \xoops_load('XoopsFormLoader');
@@ -61,7 +61,7 @@ class VisitorsForm extends XoopsThemeForm
 
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? \sprintf(\AM_YOGURT_VISITORS_ADD) : \sprintf(\AM_YOGURT_VISITORS_EDIT);
+        $title = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_VISITORS_ADD) : \sprintf(\AM_SUICO_VISITORS_EDIT);
 
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
 
@@ -82,14 +82,14 @@ class VisitorsForm extends XoopsThemeForm
         // Cod_visit
 
         $this->addElement(
-            new XoopsFormLabel(\AM_YOGURT_VISITORS_COD_VISIT, $this->targetObject->getVar('cod_visit'), 'cod_visit')
+            new XoopsFormLabel(\AM_SUICO_VISITORS_COD_VISIT, $this->targetObject->getVar('cod_visit'), 'cod_visit')
         );
 
         // Uid_owner
 
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_YOGURT_VISITORS_UID_OWNER, 'uid_owner', false, $this->targetObject->getVar(
+                \AM_SUICO_VISITORS_UID_OWNER, 'uid_owner', false, $this->targetObject->getVar(
                 'uid_owner'
             ), 1, false
             ),
@@ -100,7 +100,7 @@ class VisitorsForm extends XoopsThemeForm
 
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_YOGURT_VISITORS_UID_VISITOR, 'uid_visitor', false, $this->targetObject->getVar(
+                \AM_SUICO_VISITORS_UID_VISITOR, 'uid_visitor', false, $this->targetObject->getVar(
                 'uid_visitor'
             ), 1, false
             ),
@@ -111,7 +111,7 @@ class VisitorsForm extends XoopsThemeForm
 
         $this->addElement(
             new XoopsFormText(
-                \AM_YOGURT_VISITORS_UNAME_VISITOR, 'uname_visitor', 50, 255, $this->targetObject->getVar(
+                \AM_SUICO_VISITORS_UNAME_VISITOR, 'uname_visitor', 50, 255, $this->targetObject->getVar(
                 'uname_visitor'
             )
             ),
@@ -122,7 +122,7 @@ class VisitorsForm extends XoopsThemeForm
 
         $this->addElement(
             new XoopsFormTextDateSelect(
-                \AM_YOGURT_VISITORS_DATETIME, 'date_visited', 0, \formatTimestamp($this->targetObject->getVar('date_visited'), 's')
+                \AM_SUICO_VISITORS_DATETIME, 'date_visited', 0, \formatTimestamp($this->targetObject->getVar('date_visited'), 's')
             )
         );
 

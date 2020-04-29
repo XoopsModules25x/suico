@@ -22,7 +22,7 @@ $I->amOnPage('/modules/system/admin.php?fct=modulesadmin&op=installlist');
 
 //need to find a way to click on image
 //$I->seeElement('//img[@src="/install.png"]');
-$I->amOnPage('/modules/system/admin.php?fct=modulesadmin&op=install&module=yogurt');
+$I->amOnPage('/modules/system/admin.php?fct=modulesadmin&op=install&module=suico');
 
 $I->see('Install');
 $I->click('Install');
@@ -30,7 +30,7 @@ $I->click('Install');
 //Factory
 //$I->havePosts(40);
 
-//if (!$yogurtHandler->insert($yogurtObj)) {
+//if (!$suicoHandler->insert($suicoObj)) {
 //    redirect_header('index.php', 3, _MD_CONTACT_MES_NOTSAVE);
 //    exit();
 //}

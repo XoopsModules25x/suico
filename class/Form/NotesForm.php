@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt\Form;
+namespace XoopsModules\Suico\Form;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -16,7 +16,7 @@ namespace XoopsModules\Yogurt\Form;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -31,13 +31,13 @@ use XoopsFormHidden;
 use XoopsFormLabel;
 use XoopsFormSelectUser;
 use XoopsFormTextDateSelect;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 use XoopsThemeForm;
 
 require_once \dirname(__DIR__, 2) . '/include/common.php';
 
 $moduleDirName = \basename(\dirname(__DIR__, 2));
-//$helper = Yogurt\Helper::getInstance();
+//$helper = Suico\Helper::getInstance();
 $permHelper = new Permission();
 
 \xoops_load('XoopsFormLoader');
@@ -63,7 +63,7 @@ class NotesForm extends XoopsThemeForm
 
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? \sprintf(\AM_YOGURT_NOTES_ADD) : \sprintf(\AM_YOGURT_NOTES_EDIT);
+        $title = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_NOTES_ADD) : \sprintf(\AM_SUICO_NOTES_EDIT);
 
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
 
@@ -84,7 +84,7 @@ class NotesForm extends XoopsThemeForm
         // Note_id
 
         $this->addElement(
-            new XoopsFormLabel(\AM_YOGURT_NOTES_NOTE_ID, $this->targetObject->getVar('note_id'), 'note_id')
+            new XoopsFormLabel(\AM_SUICO_NOTES_NOTE_ID, $this->targetObject->getVar('note_id'), 'note_id')
         );
 
         // Note_text
@@ -104,26 +104,26 @@ class NotesForm extends XoopsThemeForm
 
             $editorOptions['height'] = '400px';
 
-            //$editorOptions['editor'] = xoops_getModuleOption('yogurt_editor', 'yogurt');
+            //$editorOptions['editor'] = xoops_getModuleOption('suico_editor', 'suico');
 
-            //$this->addElement( new \XoopsFormEditor(AM_YOGURT_NOTES_NOTE_TEXT, 'note_text', $editorOptions), false  );
+            //$this->addElement( new \XoopsFormEditor(AM_SUICO_NOTES_NOTE_TEXT, 'note_text', $editorOptions), false  );
 
             if ($this->helper->isUserAdmin()) {
                 $descEditor = new XoopsFormEditor(
-                    \AM_YOGURT_NOTES_NOTE_TEXT, $this->helper->getConfig(
-                    'yogurtEditorAdmin'
+                    \AM_SUICO_NOTES_NOTE_TEXT, $this->helper->getConfig(
+                    'suicoEditorAdmin'
                 ), $editorOptions, $nohtml = false, $onfailure = 'textarea'
                 );
             } else {
                 $descEditor = new XoopsFormEditor(
-                    \AM_YOGURT_NOTES_NOTE_TEXT, $this->helper->getConfig(
-                    'yogurtEditorUser'
+                    \AM_SUICO_NOTES_NOTE_TEXT, $this->helper->getConfig(
+                    'suicoEditorUser'
                 ), $editorOptions, $nohtml = false, $onfailure = 'textarea'
                 );
             }
         } else {
             $descEditor = new XoopsFormDhtmlTextArea(
-                \AM_YOGURT_NOTES_NOTE_TEXT, 'description', $this->targetObject->getVar(
+                \AM_SUICO_NOTES_NOTE_TEXT, 'description', $this->targetObject->getVar(
                 'description',
                 'e'
             ), 5, 50
@@ -136,7 +136,7 @@ class NotesForm extends XoopsThemeForm
 
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_YOGURT_NOTES_NOTE_FROM, 'note_from', false, $this->targetObject->getVar(
+                \AM_SUICO_NOTES_NOTE_FROM, 'note_from', false, $this->targetObject->getVar(
                 'note_from'
             ), 1, false
             ),
@@ -147,7 +147,7 @@ class NotesForm extends XoopsThemeForm
 
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_YOGURT_NOTES_NOTE_TO, 'note_to', false, $this->targetObject->getVar(
+                \AM_SUICO_NOTES_NOTE_TO, 'note_to', false, $this->targetObject->getVar(
                 'note_to'
             ), 1, false
             ),
@@ -158,7 +158,7 @@ class NotesForm extends XoopsThemeForm
 
         $private = $this->targetObject->isNew() ? 0 : $this->targetObject->getVar('private');
 
-        $check_private = new XoopsFormCheckBox(\AM_YOGURT_NOTES_PRIVATE, 'private', $private);
+        $check_private = new XoopsFormCheckBox(\AM_SUICO_NOTES_PRIVATE, 'private', $private);
 
         $check_private->addOption(1, ' ');
 
@@ -166,11 +166,11 @@ class NotesForm extends XoopsThemeForm
 
         // Date
 
-        //        $this->addElement(new XoopsFormTextDateSelect(AM_YOGURT_NOTES_DATE, 'date',0, \strtotime($this->targetObject->getVar('date'))));
+        //        $this->addElement(new XoopsFormTextDateSelect(AM_SUICO_NOTES_DATE, 'date',0, \strtotime($this->targetObject->getVar('date'))));
 
         $noteCreated = $this->targetObject->isNew() ? 0 : $this->targetObject->getVar('date_created');
 
-        $this->addElement(new \XoopsFormTextDateSelect(\AM_YOGURT_NOTES_DATE, 'date_created', '', $noteCreated), true);
+        $this->addElement(new \XoopsFormTextDateSelect(\AM_SUICO_NOTES_DATE, 'date_created', '', $noteCreated), true);
 
         $this->addElement(new XoopsFormHidden('op', 'save'));
 

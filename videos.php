@@ -14,19 +14,19 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_videos.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'suico_videos.tpl';
 require __DIR__ . '/header.php';
 
-$controller = new Yogurt\VideoController($xoopsDB, $xoopsUser);
+$controller = new Suico\VideoController($xoopsDB, $xoopsUser);
 
 /**
  * Fetching numbers of groups friends videos pictures etc...
@@ -55,30 +55,30 @@ if (isset($nbSections['countGroups'])) {
 if (is_array($videosArray)) {
     $xoopsTpl->assign('videos', $videosArray);
 } else {
-    $xoopsTpl->assign('lang_novideoyet', _MD_YOGURT_NOVIDEOSYET);
+    $xoopsTpl->assign('lang_novideoyet', _MD_SUICO_NOVIDEOSYET);
 }
-$xoopsTpl->assign('lang_selectmainvideo', _MD_YOGURT_SELECTMAINVIDEO);
+$xoopsTpl->assign('lang_selectmainvideo', _MD_SUICO_SELECTMAINVIDEO);
 
 if (isset($nbSections['countGroups']) && $nbSections['countGroups'] > 0) {
     $pageNav = $controller->videosNavBar($nbSections['countGroups'], $helper->getConfig('videosperpage'), $start, 2);
 }
 //form actions
-$xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
-$xoopsTpl->assign('lang_editdesc', _MD_YOGURT_EDIT_DESC);
-$xoopsTpl->assign('lang_makemain', _MD_YOGURT_MAKEMAIN);
+$xoopsTpl->assign('lang_delete', _MD_SUICO_DELETE);
+$xoopsTpl->assign('lang_editdesc', _MD_SUICO_EDIT_DESC);
+$xoopsTpl->assign('lang_makemain', _MD_SUICO_MAKEMAIN);
 
 //FORM SUBMIT
-$xoopsTpl->assign('lang_addvideos', _MD_YOGURT_ADDFAVORITEVIDEOS);
-$xoopsTpl->assign('lang_youtubecodeLabel', _MD_YOGURT_YOUTUBECODE);
-$xoopsTpl->assign('lang_captionLabel', _MD_YOGURT_CAPTION);
-$xoopsTpl->assign('lang_submitValue', _MD_YOGURT_ADDVIDEO);
+$xoopsTpl->assign('lang_addvideos', _MD_SUICO_ADDFAVORITEVIDEOS);
+$xoopsTpl->assign('lang_youtubecodeLabel', _MD_SUICO_YOUTUBECODE);
+$xoopsTpl->assign('lang_captionLabel', _MD_SUICO_CAPTION);
+$xoopsTpl->assign('lang_submitValue', _MD_SUICO_ADDVIDEO);
 
 $xoopsTpl->assign('width', $helper->getConfig('width_tube'));
 $xoopsTpl->assign('height', $helper->getConfig('height_tube'));
-$xoopsTpl->assign('lang_videohelp', _MD_YOGURT_ADDVIDEOSHELP);
+$xoopsTpl->assign('lang_videohelp', _MD_SUICO_ADDVIDEOSHELP);
 
-$xoopsTpl->assign('lang_mysection', _MD_YOGURT_MYVIDEOS);
-$xoopsTpl->assign('section_name', _MD_YOGURT_VIDEOS);
+$xoopsTpl->assign('lang_mysection', _MD_SUICO_MYVIDEOS);
+$xoopsTpl->assign('section_name', _MD_SUICO_VIDEOS);
 
 //Navigation
 $xoopsTpl->assign('pageNav', $pageNav);

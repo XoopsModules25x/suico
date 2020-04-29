@@ -13,7 +13,7 @@ declare(strict_types=1);
 */
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -88,30 +88,30 @@ return (object)[
         '/tcpdf',
     ],
     'renameTables'    => [
-        'yogurt_seutubo'        => 'yogurt_videos',
-        'yogurt_Groups'         => 'yogurt_groups',
-        'yogurt_Configs'        => 'yogurt_configs',
-        'yogurt_friendpetition' => 'yogurt_friendrequests',
-        'yogurt_audio'          => 'yogurt_audios',
-        'yogurt_friendship'     => 'yogurt_friendships',
+        'suico_seutubo'        => 'suico_videos',
+        'suico_Groups'         => 'suico_groups',
+        'suico_Configs'        => 'suico_configs',
+        'suico_friendpetition' => 'suico_friendrequests',
+        'suico_audio'          => 'suico_audios',
+        'suico_friendship'     => 'suico_friendships',
     ],
     'renameColumns'   => [
         '3.5' => [
-            'yogurt_notes'          => [
+            'suico_notes'          => [
                 'Note_id'   => 'note_id',
                 'Note_text' => 'note_text',
                 'Note_from' => 'note_from',
                 'Note_to'   => 'note_to',
             ],
-            'yogurt_friendrequests' => [
+            'suico_friendrequests' => [
                 'requespet_uid' => 'friendreq_id',
                 'requester_uid' => 'friendrequester_uid',
                 'requestto_uid' => 'friendrequestto_uid',
             ],
-            'yogurt_audios'         => [
+            'suico_audios'         => [
                 'url' => 'filename',
             ],
-            'yogurt_images'         => [
+            'suico_images'         => [
                 'url' => 'filename',
             ],
         ],

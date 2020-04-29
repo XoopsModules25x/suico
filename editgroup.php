@@ -14,19 +14,19 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_editgroup.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'suico_editgroup.tpl';
 require __DIR__ . '/header.php';
 
-$controller = new Yogurt\GroupController($xoopsDB, $xoopsUser);
+$controller = new Suico\GroupController($xoopsDB, $xoopsUser);
 
 /**
  * Fetching numbers of groups friends videos pictures etc...
@@ -50,7 +50,7 @@ if (1 === $marker && $group->getVar('owner_uid') === $uid) {
 
     $updateImg = 1 === Request::getInt('flag_oldimg', 0, 'POST') ? 0 : 1;
 
-    $path_upload = XOOPS_ROOT_PATH . '/uploads/yogurt/images';
+    $path_upload = XOOPS_ROOT_PATH . '/uploads/suico/images';
 
     $maxfilebytes = $helper->getConfig('maxfilesize');
 
@@ -70,7 +70,7 @@ if (1 === $marker && $group->getVar('owner_uid') === $uid) {
         $group
     );
 
-    redirect_header('group.php?group_id=' . $group_id . '', 3, _MD_YOGURT_GROUPEDITED);
+    redirect_header('group.php?group_id=' . $group_id . '', 3, _MD_SUICO_GROUPEDITED);
 } else {
     /**
      * Render a form with the info of the user
@@ -86,7 +86,7 @@ if (1 === $marker && $group->getVar('owner_uid') === $uid) {
 
     $maxfilebytes = $helper->getConfig('maxfilesize');
 
-    $xoopsTpl->assign('lang_savegroup', _MD_YOGURT_UPLOADGROUP);
+    $xoopsTpl->assign('lang_savegroup', _MD_SUICO_UPLOADGROUP);
 
     $xoopsTpl->assign('maxfilesize', $maxfilebytes);
 
@@ -118,19 +118,19 @@ if (1 === $marker && $group->getVar('owner_uid') === $uid) {
 
     $xoopsTpl->assign('allow_profile_stats', $controller->checkPrivilege('profile_stats') ? 1 : 0);
 
-    $xoopsTpl->assign('lang_membersofgroup', _MD_YOGURT_MEMBERSDOFGROUP);
+    $xoopsTpl->assign('lang_membersofgroup', _MD_SUICO_MEMBERSDOFGROUP);
 
-    $xoopsTpl->assign('lang_editgroup', _MD_YOGURT_EDIT_GROUP);
+    $xoopsTpl->assign('lang_editgroup', _MD_SUICO_EDIT_GROUP);
 
-    $xoopsTpl->assign('lang_groupimage', _MD_YOGURT_GROUP_IMAGE);
+    $xoopsTpl->assign('lang_groupimage', _MD_SUICO_GROUP_IMAGE);
 
-    $xoopsTpl->assign('lang_keepimage', _MD_YOGURT_MAINTAIN_OLD_IMAGE);
+    $xoopsTpl->assign('lang_keepimage', _MD_SUICO_MAINTAIN_OLD_IMAGE);
 
-    $xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOU_CAN_UPLOAD, $maxfilebytes / 1024));
+    $xoopsTpl->assign('lang_youcanupload', sprintf(_MD_SUICO_YOU_CAN_UPLOAD, $maxfilebytes / 1024));
 
-    $xoopsTpl->assign('lang_titlegroup', _MD_YOGURT_GROUP_TITLE);
+    $xoopsTpl->assign('lang_titlegroup', _MD_SUICO_GROUP_TITLE);
 
-    $xoopsTpl->assign('lang_descgroup', _MD_YOGURT_GROUP_DESC);
+    $xoopsTpl->assign('lang_descgroup', _MD_SUICO_GROUP_DESC);
 
     //Owner data
 
@@ -160,27 +160,27 @@ if (1 === $marker && $group->getVar('owner_uid') === $uid) {
 
     $xoopsTpl->assign('module_name', $xoopsModule->getVar('name'));
 
-    $xoopsTpl->assign('lang_mysection', _MD_YOGURT_GROUPS . ' :: ' . _MD_YOGURT_EDIT_GROUP);
+    $xoopsTpl->assign('lang_mysection', _MD_SUICO_GROUPS . ' :: ' . _MD_SUICO_EDIT_GROUP);
 
-    $xoopsTpl->assign('section_name', _MD_YOGURT_GROUPS . '> ' . _MD_YOGURT_EDIT_GROUP);
+    $xoopsTpl->assign('section_name', _MD_SUICO_GROUPS . '> ' . _MD_SUICO_EDIT_GROUP);
 
-    $xoopsTpl->assign('lang_home', _MD_YOGURT_HOME);
+    $xoopsTpl->assign('lang_home', _MD_SUICO_HOME);
 
-    $xoopsTpl->assign('lang_photos', _MD_YOGURT_PHOTOS);
+    $xoopsTpl->assign('lang_photos', _MD_SUICO_PHOTOS);
 
-    $xoopsTpl->assign('lang_friends', _MD_YOGURT_FRIENDS);
+    $xoopsTpl->assign('lang_friends', _MD_SUICO_FRIENDS);
 
-    $xoopsTpl->assign('lang_videos', _MD_YOGURT_VIDEOS);
+    $xoopsTpl->assign('lang_videos', _MD_SUICO_VIDEOS);
 
-    $xoopsTpl->assign('lang_notebook', _MD_YOGURT_NOTEBOOK);
+    $xoopsTpl->assign('lang_notebook', _MD_SUICO_NOTEBOOK);
 
-    $xoopsTpl->assign('lang_profile', _MD_YOGURT_PROFILE);
+    $xoopsTpl->assign('lang_profile', _MD_SUICO_PROFILE);
 
-    $xoopsTpl->assign('lang_groups', _MD_YOGURT_GROUPS);
+    $xoopsTpl->assign('lang_groups', _MD_SUICO_GROUPS);
 
-    $xoopsTpl->assign('lang_configs', _MD_YOGURT_CONFIGS_TITLE);
+    $xoopsTpl->assign('lang_configs', _MD_SUICO_CONFIGS_TITLE);
 
-    $xoopsTpl->assign('lang_audio', _MD_YOGURT_AUDIOS);
+    $xoopsTpl->assign('lang_audio', _MD_SUICO_AUDIOS);
 
     //xoopsToken
 
@@ -190,19 +190,19 @@ if (1 === $marker && $group->getVar('owner_uid') === $uid) {
 
     $xoopsTpl->assign(
         'xoops_pagetitle',
-        sprintf(_MD_YOGURT_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner)
+        sprintf(_MD_SUICO_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner)
     );
 
-    //$xoopsTpl->assign('path_yogurt_uploads',$helper->getConfig('link_path_upload'));
+    //$xoopsTpl->assign('path_suico_uploads',$helper->getConfig('link_path_upload'));
 
     $xoopsTpl->assign(
         'lang_owner',
-        _MD_YOGURT_GROUPOWNER
+        _MD_SUICO_GROUPOWNER
     );
 }
 
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/yogurt.js');
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/yogurt.css');
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/suico.js');
+$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/suico.css');
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
 if (false !== mb_stripos($_SERVER['HTTP_USER_AGENT'], 'msie')) {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt\Common;
+namespace XoopsModules\Suico\Common;
 
 /*
  Utility Class Definition
@@ -26,8 +26,8 @@ namespace XoopsModules\Yogurt\Common;
 use Xmf\Request;
 use XoopsFormDhtmlTextArea;
 use XoopsFormEditor;
-use XoopsModules\Yogurt;
-use XoopsModules\Yogurt\Helper;
+use XoopsModules\Suico;
+use XoopsModules\Suico\Helper;
 
 /**
  * Class SysUtility

@@ -14,19 +14,19 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 /**
  * Xoops header ...
  */
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'suico_index.tpl';
 require __DIR__ . '/header.php';
 
 /**
@@ -37,7 +37,7 @@ require __DIR__ . '/header.php';
 /**
  * Audio Factory created
  */
-$audioFactory = new Yogurt\AudioHandler($xoopsDB);
+$audioFactory = new Suico\AudioHandler($xoopsDB);
 
 $myts = MyTextSanitizer::getInstance();
 /**
@@ -50,7 +50,7 @@ $description = Request::getText('description', '', 'POST');
 /**
  * Getting parameters defined in admin side
  */
-$path_upload  = XOOPS_ROOT_PATH . '/uploads/yogurt/audio/';
+$path_upload  = XOOPS_ROOT_PATH . '/uploads/suico/audio/';
 $maxfilebytes = $helper->getConfig('maxfilesize');
 
 /**
@@ -61,7 +61,7 @@ if ('sel_audio' === (Request::getArray('xoops_upload_file', '', 'POST')[0])) {
      * Verify Token
      */
     if (!$GLOBALS['xoopsSecurity']->check()) {
-        redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+        redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
     }
 
     /**
@@ -79,17 +79,17 @@ if ('sel_audio' === (Request::getArray('xoops_upload_file', '', 'POST')[0])) {
         // /** @var \XoopsNotificationHandler $notificationHandler */
         //                     $notificationHandler = xoops_getHandler('notification');
         //                     $notificationHandler->triggerEvent ("picture", $xoopsUser->getVar('uid'), "new_picture",$extra_tags);
-        //header("Location: ".XOOPS_URL."/modules/yogurt/index.php?uid=".$xoopsUser->getVar('uid'));
+        //header("Location: ".XOOPS_URL."/modules/suico/index.php?uid=".$xoopsUser->getVar('uid'));
         redirect_header(
-            XOOPS_URL . '/modules/yogurt/audios.php?uid=' . $xoopsUser->getVar('uid'),
+            XOOPS_URL . '/modules/suico/audios.php?uid=' . $xoopsUser->getVar('uid'),
             50,
-            _MD_YOGURT_UPLOADEDAUDIO
+            _MD_SUICO_UPLOADEDAUDIO
         );
     } else {
         redirect_header(
-            XOOPS_URL . '/modules/yogurt/audios.php?uid=' . $xoopsUser->getVar('uid'),
+            XOOPS_URL . '/modules/suico/audios.php?uid=' . $xoopsUser->getVar('uid'),
             50,
-            _MD_YOGURT_ERROR
+            _MD_SUICO_ERROR
         );
     }
 }

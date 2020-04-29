@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -22,8 +22,8 @@ declare(strict_types=1);
 
 use Xmf\Module\Admin;
 use Xmf\Request;
-use XoopsModules\Yogurt;
-use XoopsModules\Yogurt\Common\ModuleFeedback;
+use XoopsModules\Suico;
+use XoopsModules\Suico\Common\ModuleFeedback;
 
 require __DIR__ . '/admin_header.php';
 

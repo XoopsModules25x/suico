@@ -14,15 +14,15 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
-use XoopsModules\Yogurt\Helper;
+use XoopsModules\Suico;
+use XoopsModules\Suico\Helper;
 
 require __DIR__ . '/preloads/autoloader.php';
 
@@ -84,11 +84,11 @@ if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl))
     $xoopsTpl = new XoopsTpl();
 }
 
-$imageFactory         = new Yogurt\ImageHandler($xoopsDB);
-$visitorsFactory      = new Yogurt\VisitorsHandler($xoopsDB);
-$videosFactory        = new Yogurt\VideoHandler($xoopsDB);
-$friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
-$friendshipFactory    = new Yogurt\FriendshipHandler($xoopsDB);
+$imageFactory         = new Suico\ImageHandler($xoopsDB);
+$visitorsFactory      = new Suico\VisitorsHandler($xoopsDB);
+$videosFactory        = new Suico\VideoHandler($xoopsDB);
+$friendrequestFactory = new Suico\FriendrequestHandler($xoopsDB);
+$friendshipFactory    = new Suico\FriendshipHandler($xoopsDB);
 
 $isOwner  = 0;
 $isAnonym = 1;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -16,7 +16,7 @@ namespace XoopsModules\Yogurt;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -47,7 +47,7 @@ if (!\defined('XOOPS_ROOT_PATH')) {
 // -------------------------------------------------------------------------
 
 /**
- * yogurt_groupshandler class.
+ * suico_groupshandler class.
  * This class provides simple mecanisme for Groups object
  */
 class GroupsHandler extends XoopsPersistableObjectHandler
@@ -59,14 +59,14 @@ class GroupsHandler extends XoopsPersistableObjectHandler
     /**
      * Constructor
      * @param \XoopsDatabase|null              $xoopsDatabase
-     * @param \XoopsModules\Yogurt\Helper|null $helper
+     * @param \XoopsModules\Suico\Helper|null $helper
      */
 
     public function __construct(
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Yogurt\Helper $this ->helper */
+        /** @var \XoopsModules\Suico\Helper $this ->helper */
 
         if (null === $helper) {
             $this->helper = Helper::getInstance();
@@ -76,7 +76,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
 
         $isAdmin = $this->helper->isUserAdmin();
 
-        parent::__construct($xoopsDatabase, 'yogurt_groups', Groups::class, 'group_id', 'group_title');
+        parent::__construct($xoopsDatabase, 'suico_groups', Groups::class, 'group_id', 'group_title');
     }
 
     /**
@@ -114,7 +114,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $id = null,
         $fields = null
     ) {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_groups') . ' WHERE group_id=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_groups') . ' WHERE group_id=' . $id;
 
         if (!$result = $this->db->query($sql)) {
             return false;
@@ -123,11 +123,11 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $numrows = $this->db->getRowsNum($result);
 
         if (1 === $numrows) {
-            $yogurt_groups = new Groups();
+            $suico_groups = new Groups();
 
-            $yogurt_groups->assignVars($this->db->fetchArray($result));
+            $suico_groups->assignVars($this->db->fetchArray($result));
 
-            return $yogurt_groups;
+            return $suico_groups;
         }
 
         return false;
@@ -175,7 +175,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
 
             $sql = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_groups'),
+                $this->db->prefix('suico_groups'),
                 $group_id,
                 $owner_uid,
                 $this->db->quoteString($group_title),
@@ -193,7 +193,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
 
             $sql = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_groups'),
+                $this->db->prefix('suico_groups'),
                 $group_id,
                 $owner_uid,
                 $this->db->quoteString($group_title),
@@ -240,7 +240,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
 
         $sql = \sprintf(
             'DELETE FROM %s WHERE group_id = %u',
-            $this->db->prefix('yogurt_groups'),
+            $this->db->prefix('suico_groups'),
             $xoopsObject->getVar('group_id')
         );
 
@@ -258,7 +258,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * retrieve yogurt_groupss from the database
+     * retrieve suico_groupss from the database
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key       use the UID as key for the array?
@@ -275,7 +275,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
 
         $limit = $start = 0;
 
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_groups');
+        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_groups');
 
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
@@ -296,24 +296,24 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         }
 
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $yogurt_groups = new Groups();
+            $suico_groups = new Groups();
 
-            $yogurt_groups->assignVars($myrow);
+            $suico_groups->assignVars($myrow);
 
             if (!$id_as_key) {
-                $ret[] = &$yogurt_groups;
+                $ret[] = &$suico_groups;
             } else {
-                $ret[$myrow['group_id']] = &$yogurt_groups;
+                $ret[$myrow['group_id']] = &$suico_groups;
             }
 
-            unset($yogurt_groups);
+            unset($suico_groups);
         }
 
         return $ret;
     }
 
     /**
-     * retrieve yogurt_groupss from the database
+     * retrieve suico_groupss from the database
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteria  {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key use the UID as key for the array?
@@ -328,7 +328,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
 
         $limit = $start = 0;
 
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_groups');
+        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_groups');
 
         if (isset($criteria) && $criteria instanceof CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
@@ -363,14 +363,14 @@ class GroupsHandler extends XoopsPersistableObjectHandler
 
             $groupid = $myrow['group_id'];
 
-            $query = 'SELECT COUNT(rel_id) AS grouptotalmembers FROM ' . $GLOBALS['xoopsDB']->prefix('yogurt_relgroupuser') . ' WHERE rel_group_id=' . $groupid . '';
+            $query = 'SELECT COUNT(rel_id) AS grouptotalmembers FROM ' . $GLOBALS['xoopsDB']->prefix('suico_relgroupuser') . ' WHERE rel_group_id=' . $groupid . '';
 
             $queryresult = $GLOBALS['xoopsDB']->query($query);
 
             $row = $GLOBALS['xoopsDB']->fetchArray($queryresult);
 
             $grouptotalmembers            = $row['grouptotalmembers'];
-            $ret[$i]['grouptotalmembers'] = $grouptotalmembers . ' ' . \_MD_YOGURT_GROUPMEMBERS;
+            $ret[$i]['grouptotalmembers'] = $grouptotalmembers . ' ' . \_MD_SUICO_GROUPMEMBERS;
             $i++;
         }
 
@@ -378,16 +378,16 @@ class GroupsHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * count yogurt_groupss matching a condition
+     * count suico_groupss matching a condition
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} to match
-     * @return int count of yogurt_groupss
+     * @return int count of suico_groupss
      */
 
     public function getCount(
         ?CriteriaElement $criteriaElement = null
     ) {
-        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_groups');
+        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_groups');
 
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
@@ -405,7 +405,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * delete yogurt_groupss matching a set of conditions
+     * delete suico_groupss matching a set of conditions
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement}
      * @param bool                                 $force
@@ -418,7 +418,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $force = true,
         $asObject = false
     ) {
-        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_groups');
+        $sql = 'DELETE FROM ' . $this->db->prefix('suico_groups');
 
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
@@ -441,15 +441,15 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $maxbytes,
         $xoopsTpl
     ) {
-        $form = new XoopsThemeForm(\_MD_YOGURT_SUBMIT_GROUP, 'form_group', 'submitGroup.php', 'post', true);
+        $form = new XoopsThemeForm(\_MD_SUICO_SUBMIT_GROUP, 'form_group', 'submitGroup.php', 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
 
-        $field_url     = new XoopsFormFile(\_MD_YOGURT_GROUP_IMAGE, 'group_img', $maxbytes);
-        $field_title   = new XoopsFormText(\_MD_YOGURT_GROUP_TITLE, 'group_title', 35, 55);
-        $field_desc    = new XoopsFormText(\_MD_YOGURT_GROUP_DESC, 'group_desc', 35, 55);
+        $field_url     = new XoopsFormFile(\_MD_SUICO_GROUP_IMAGE, 'group_img', $maxbytes);
+        $field_title   = new XoopsFormText(\_MD_SUICO_GROUP_TITLE, 'group_title', 35, 55);
+        $field_desc    = new XoopsFormText(\_MD_SUICO_GROUP_DESC, 'group_desc', 35, 55);
         $field_marker  = new XoopsFormHidden('marker', '1');
-        $buttonSend    = new XoopsFormButton('', 'submit_button', \_MD_YOGURT_UPLOADGROUP, 'submit');
-        $field_warning = new XoopsFormLabel(\sprintf(\_MD_YOGURT_YOU_CAN_UPLOAD, $maxbytes / 1024));
+        $buttonSend    = new XoopsFormButton('', 'submit_button', \_MD_SUICO_UPLOADGROUP, 'submit');
+        $field_warning = new XoopsFormLabel(\sprintf(\_MD_SUICO_YOU_CAN_UPLOAD, $maxbytes / 1024));
 
         $form->addElement($field_warning);
 
@@ -476,26 +476,26 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $group,
         $maxbytes
     ) {
-        $form = new XoopsThemeForm(\_MD_YOGURT_EDIT_GROUP, 'form_editgroup', 'editgroup.php', 'post', true);
+        $form = new XoopsThemeForm(\_MD_SUICO_EDIT_GROUP, 'form_editgroup', 'editgroup.php', 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
 
         $field_groupid = new XoopsFormHidden('group_id', $group->getVar('group_id'));
-        $field_url     = new XoopsFormFile(\_MD_YOGURT_GROUP_IMAGE, 'img', $maxbytes);
+        $field_url     = new XoopsFormFile(\_MD_SUICO_GROUP_IMAGE, 'img', $maxbytes);
         $field_url->setExtra('style="visibility:hidden;"');
-        $field_title   = new XoopsFormText(\_MD_YOGURT_GROUP_TITLE, 'title', 35, 55, $group->getVar('group_title'));
-        $field_desc    = new XoopsFormTextArea(\_MD_YOGURT_GROUP_DESC, 'desc', $group->getVar('group_desc'));
+        $field_title   = new XoopsFormText(\_MD_SUICO_GROUP_TITLE, 'title', 35, 55, $group->getVar('group_title'));
+        $field_desc    = new XoopsFormTextArea(\_MD_SUICO_GROUP_DESC, 'desc', $group->getVar('group_desc'));
         $field_marker  = new XoopsFormHidden('marker', '1');
-        $buttonSend    = new XoopsFormButton('', 'submit_button', \_MD_YOGURT_UPLOADGROUP, 'submit');
-        $field_warning = new XoopsFormLabel(\sprintf(\_MD_YOGURT_YOU_CAN_UPLOAD, $maxbytes / 1024));
+        $buttonSend    = new XoopsFormButton('', 'submit_button', \_MD_SUICO_UPLOADGROUP, 'submit');
+        $field_warning = new XoopsFormLabel(\sprintf(\_MD_SUICO_YOU_CAN_UPLOAD, $maxbytes / 1024));
 
         $field_oldpicture = new XoopsFormLabel(
-            \_MD_YOGURT_GROUP_IMAGE, '<img src="' . \XOOPS_UPLOAD_URL . '/' . $group->getVar(
+            \_MD_SUICO_GROUP_IMAGE, '<img src="' . \XOOPS_UPLOAD_URL . '/' . $group->getVar(
                                        'group_img'
                                    ) . '">'
         );
 
         $field_maintainimage = new XoopsFormLabel(
-            \_MD_YOGURT_MAINTAIN_OLD_IMAGE, "<input type='checkbox' value='1' id='flag_oldimg' name='flag_oldimg' onclick=\"groupImgSwitch(img)\"  checked>"
+            \_MD_SUICO_MAINTAIN_OLD_IMAGE, "<input type='checkbox' value='1' id='flag_oldimg' name='flag_oldimg' onclick=\"groupImgSwitch(img)\"  checked>"
         );
 
         $form->addElement($field_oldpicture);
@@ -596,7 +596,7 @@ var elestyle = xoopsGetElementById(img).style;
 
             $maxfilesize = $maxfilebytes;
 
-            $uploadDir = \XOOPS_UPLOAD_PATH . '/yogurt/groups/';
+            $uploadDir = \XOOPS_UPLOAD_PATH . '/suico/groups/';
 
             // create the object to upload
 

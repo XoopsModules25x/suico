@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -16,7 +16,7 @@ namespace XoopsModules\Yogurt;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -35,7 +35,7 @@ require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 
 /**
  * AudioHandler class.
- * This class provides simple mecanisme for yogurt_audio object
+ * This class provides simple mecanisme for suico_audio object
  */
 class AudioHandler extends XoopsPersistableObjectHandler
 {
@@ -63,7 +63,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
 
         $isAdmin = $this->helper->isUserAdmin();
 
-        parent::__construct($xoopsDatabase, 'yogurt_audios', Audio::class, 'audio_id', 'title');
+        parent::__construct($xoopsDatabase, 'suico_audios', Audio::class, 'audio_id', 'title');
     }
 
     /**
@@ -88,10 +88,10 @@ class AudioHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * retrieve a yogurt_audio
+     * retrieve a suico_audio
      *
-     * @param int $id of the yogurt_audio
-     * @return mixed reference to the {@link yogurt_audio} object, FALSE if failed
+     * @param int $id of the suico_audio
+     * @return mixed reference to the {@link suico_audio} object, FALSE if failed
      */
 
     public function get2(
@@ -99,7 +99,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         //        $fields = null
     )
     {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_audios') . ' WHERE audio_id=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_audios') . ' WHERE audio_id=' . $id;
 
         if (!$result = $this->db->query($sql)) {
             return false;
@@ -108,11 +108,11 @@ class AudioHandler extends XoopsPersistableObjectHandler
         $numrows = $this->db->getRowsNum($result);
 
         if (1 === $numrows) {
-            $yogurtAudio = new Audio();
+            $suicoAudio = new Audio();
 
-            $yogurtAudio->assignVars($this->db->fetchArray($result));
+            $suicoAudio->assignVars($this->db->fetchArray($result));
 
-            return $yogurtAudio;
+            return $suicoAudio;
         }
 
         return false;
@@ -121,7 +121,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
     /**
      * insert a new Audio in the database
      *
-     * @param XoopsObject $xoopsObject reference to the {@link yogurt_audio}
+     * @param XoopsObject $xoopsObject reference to the {@link suico_audio}
      *                                 object
      * @param bool        $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
@@ -161,7 +161,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         //        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
 
         if ($xoopsObject->isNew()) {
-            // adding / modifying a yogurt_audio
+            // adding / modifying a suico_audio
 
             $xoopsObject = new Audio();
 
@@ -171,7 +171,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
 
             $sql = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_audios'),
+                $this->db->prefix('suico_audios'),
                 $audio_id,
                 $this->db->quoteString($author),
                 $this->db->quoteString($title),
@@ -192,7 +192,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
 
             $sql = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_audios'),
+                $this->db->prefix('suico_audios'),
                 $audio_id,
                 $this->db->quoteString($title),
                 $this->db->quoteString($author),
@@ -224,9 +224,9 @@ class AudioHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * delete a yogurt_audio from the database
+     * delete a suico_audio from the database
      *
-     * @param XoopsObject $xoopsObject reference to the yogurt_audio to delete
+     * @param XoopsObject $xoopsObject reference to the suico_audio to delete
      * @param bool        $force
      * @return bool FALSE if failed.
      */
@@ -235,13 +235,13 @@ class AudioHandler extends XoopsPersistableObjectHandler
         XoopsObject $xoopsObject,
         $force = false
     ) {
-        if ('yogurt_audio' !== \get_class($xoopsObject)) {
+        if ('suico_audio' !== \get_class($xoopsObject)) {
             return false;
         }
 
         $sql = \sprintf(
             'DELETE FROM %s WHERE audio_id = %u',
-            $this->db->prefix('yogurt_audios'),
+            $this->db->prefix('suico_audios'),
             $xoopsObject->getVar('audio_id')
         );
 
@@ -259,12 +259,12 @@ class AudioHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * retrieve yogurt_audios from the database
+     * retrieve suico_audios from the database
      *
      * @param CriteriaElement|CriteriaCompo|null $criteriaElement {@link \CriteriaElement} conditions to be met
      * @param bool                               $id_as_key       use the UID as key for the array?
      * @param bool                               $as_object
-     * @return array array of {@link yogurt_audio} objects
+     * @return array array of {@link suico_audio} objects
      */
 
     public function &getObjects(
@@ -276,7 +276,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
 
         $limit = $start = 0;
 
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_audios');
+        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_audios');
 
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
@@ -297,33 +297,33 @@ class AudioHandler extends XoopsPersistableObjectHandler
         }
 
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $yogurtAudio = new Audio();
+            $suicoAudio = new Audio();
 
-            $yogurtAudio->assignVars($myrow);
+            $suicoAudio->assignVars($myrow);
 
             if (!$id_as_key) {
-                $ret[] = &$yogurtAudio;
+                $ret[] = &$suicoAudio;
             } else {
-                $ret[$myrow['audio_id']] = &$yogurtAudio;
+                $ret[$myrow['audio_id']] = &$suicoAudio;
             }
 
-            unset($yogurtAudio);
+            unset($suicoAudio);
         }
 
         return $ret;
     }
 
     /**
-     * count yogurt_audios matching a condition
+     * count suico_audios matching a condition
      *
      * @param CriteriaElement|CriteriaCompo|null $criteriaElement {@link \CriteriaElement} to match
-     * @return int count of yogurt_audios
+     * @return int count of suico_audios
      */
 
     public function getCount(
         ?CriteriaElement $criteriaElement = null
     ) {
-        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_audios');
+        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_audios');
 
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
@@ -341,7 +341,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * delete yogurt_audios matching a set of conditions
+     * delete suico_audios matching a set of conditions
      *
      * @param CriteriaElement|CriteriaCompo|null $criteriaElement {@link \CriteriaElement}
      * @param bool                               $force
@@ -354,7 +354,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         $force = true,
         $asObject = false
     ) {
-        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_audios');
+        $sql = 'DELETE FROM ' . $this->db->prefix('suico_audios');
 
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();

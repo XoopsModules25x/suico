@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -16,7 +16,7 @@ namespace XoopsModules\Yogurt;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -27,7 +27,7 @@ use XoopsDatabaseFactory;
 use XoopsObject;
 
 const GROUPID = 'group_id';
-const YOGURTGROUPS = 'yogurt_groups'; //table
+const SUICOGROUPS = 'suico_groups'; //table
 
 /**
  * Includes of form objects and uploader
@@ -72,7 +72,7 @@ class Groups extends XoopsObject
 
         $this->initVar('group_title', \XOBJ_DTYPE_TXTBOX, null, false);
 
-        $this->initVar('group_desc', \XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('group_desc', \XOBJ_DTYPE_OTHER, null, false);
 
         $this->initVar('group_img', \XOBJ_DTYPE_TXTBOX, null, false);
 
@@ -97,7 +97,7 @@ class Groups extends XoopsObject
 
     public function load($id)
     {
-        $sql = 'SELECT * FROM ' . $this->xoopsDb->prefix(YOGURTGROUPS) . ' WHERE group_id=' . $id;
+        $sql = 'SELECT * FROM ' . $this->xoopsDb->prefix(SUICOGROUPS) . ' WHERE group_id=' . $id;
 
         $myrow = $this->xoopsDb->fetchArray($this->xoopsDb->query($sql));
 
@@ -144,16 +144,16 @@ class Groups extends XoopsObject
 
         if (!$asobject) {
             $sql = 'SELECT group_id FROM ' . $this->xoopsDb->prefix(
-                    YOGURTGROUPS
+                    SUICOGROUPS
                 ) . "${whereQuery} ORDER BY ${sort} ${order}";
 
             $result = $this->xoopsDb->query($sql, $limit, $start);
 
             while (false !== ($myrow = $this->xoopsDb->fetchArray($result))) {
-                $ret[] = $myrow['yogurt_groups_id'];
+                $ret[] = $myrow['suico_groups_id'];
             }
         } else {
-            $sql = 'SELECT * FROM ' . $this->xoopsDb->prefix(YOGURTGROUPS) . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql = 'SELECT * FROM ' . $this->xoopsDb->prefix(SUICOGROUPS) . "${whereQuery} ORDER BY ${sort} ${order}";
 
             $result = $this->xoopsDb->query($sql, $limit, $start);
 
@@ -168,7 +168,7 @@ class Groups extends XoopsObject
     /**
      * Get form
      *
-     * @return \XoopsModules\Yogurt\Form\GroupsForm
+     * @return \XoopsModules\Suico\Form\GroupsForm
      */
 
     public function getForm()

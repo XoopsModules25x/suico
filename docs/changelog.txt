@@ -3,7 +3,7 @@
 
 - Fix Sub-Menu visible to Guest (liomj)
 - Add Profile Module 1.90 features (liomj)
-- Make yogurt the main userpage on install (liomj)
+- Make suico the main userpage on install (liomj)
 - Add Caption in Album (liomj)
 - Add Dates in Album and Audio Templates (liomj/mamba)
 - Add group total members (liomj)
@@ -80,7 +80,7 @@
 <h5>3.5 Alpha 4   [2020-04-05]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
 <hr>
 - add friend friendrequest in friend section & change add as a friend image (liomj)
-- correction for pettition in yogurt_friends.tpl (liomj)
+- correction for pettition in suico_friends.tpl (liomj)
 - language - profile & video template updates (liomj)
 - /photos renamed to /images (mamba)
 - CSS from h2 to h4 (mamba)
@@ -102,27 +102,27 @@
 - fix for blank avatar is missing in friendship request and friends block (liomj/mamba)
 - fix wrong function name (mamba)
 - fix for video main, and private images (liomj/mamba)
-- minor update to yogurt_index.tpl (liomj)
+- minor update to suico_index.tpl (liomj)
 - video fix (liomj/mamba)
-- fix friends avatar in yogurt_friends.tpl (liomj)
+- fix friends avatar in suico_friends.tpl (liomj)
 
 
 
 <h5>3.5 Alpha 2   [2020-04-04]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
 <hr>
 - Missing Post date in notes (liomj)
-- Update yogurt_navbar.tpl (liomj)
+- Update suico_navbar.tpl (liomj)
 - Fix missing lightbox icons (liomj)
 - hide empty field in profile, text spacing in album template (liomj)
-- Update yogurt_index.tpl (liomj)
-- Update yogurt_searchresults.tpl (liomj)
+- Update suico_index.tpl (liomj)
+- Update suico_searchresults.tpl (liomj)
 - Update main.php (liomj)
 - fix blank.gif avatar (liomj)
 - Hide empty website field and private email address in profile (liomj)
 - fix uploading/resizing group logos (mamba)
 - added new test data (mamba)
 - partial fixes for image folders (mamba)
-- renamed language variables from _YOG_ to _YOGURT_ for consistency (mamba)
+- renamed language variables from _YOG_ to _SUICO_ for consistency (mamba)
 - fix install error (mjoel/mamba)
 
 
@@ -135,7 +135,7 @@
 - template cleanup (mamba)
 - fix redirection after friendship request (mjoel/mamba)
 - fix config saving (mjoel/mamba)
-- fix missing $this is YogurtController (mamba)
+- fix missing $this is SuicoController (mamba)
 - type compatibility (mamba)
 - added BlocksAdmin (mamba)
 - added Migrate (mamba)
@@ -155,7 +155,7 @@
 - DB renamed table/fields (mamba)
 - moved js, css, and images to /assets (mjoel/mamba)
 - fix redirect to wrong URL after posting in notes (mjoel/mamba)
-- fix for YogurtController, other fixes (mamba)
+- fix for SuicoController, other fixes (mamba)
 - cosmetics (mamba)
 - spelling (mamba)
 - wrong file names (mamba)
@@ -216,7 +216,7 @@
 Bugs fixed
 
 fixed #2074440 file upload size on the search page (m0nty_)
-fixed #2074263 check for /uploads/yogurt/audio in the backend (dhcst)
+fixed #2074263 check for /uploads/suico/audio in the backend (dhcst)
 fixed #2074362 MP3 player read now ID3v1 and v2 (dhcst)
 fixed #1993627 deleting Photos with errors (dhcst)
 fixed #1939798 Smarty error: mailto: missing (dhcst)
@@ -228,8 +228,8 @@ fixed sanitize $_GET['uid'] (dhcst)
 fixed some sanitizing (m0nty_)
 fixed configuration> cosmetic (sato-san)
 added tables for impresscms (m0nty_)
-added folder uploads/yogurt/audio (sato-san)
-added yogurt works now without Frameworks (dhcst)
+added folder uploads/suico/audio (sato-san)
+added suico works now without Frameworks (dhcst)
 added code for simple-xoops updater
 deleted URL is not available (sato-san)
 
@@ -250,7 +250,7 @@ Bugs fixed:
 1904670 Textual error: "see your emails" dbrazil
 1933885 No avatar for userid above 100
 1902089 filename for thumbnail is too long frogx
-1888645 yogurt.css
+1888645 suico.css
 1888643 cr in Notes
 1888640 display error with right column
 1888639 too much friends, no second page
@@ -268,7 +268,7 @@ Bugs report treated. Most of them corrected, some I could not reproduce
 
 1844542     groups insert [saba]
 1844582     Some definitions not in lang files [irmtfan]
-1849511     If I use yogurt as profile page I can't upload avatar
+1849511     If I use suico as profile page I can't upload avatar
 1844586     place holder for main video and avatar [irtmfan]
 1844541     true videos problem [saba]
 1844538     blank video area after insert [pewy]
@@ -290,7 +290,7 @@ Bugs report treated. Most of them corrected, some I could not reproduce
 1852981     New Feature-User Album
 1851942     missing semicolon in french file
 1844587     repeated definitions [irtmfan]
-1844552     no search on yogurt [takeaweb]
+1844552     no search on suico [takeaweb]
 1844590     album page missing requirements [patrick80]
 1854041     Typo
 1875338     notification.inc Note $item['url']
@@ -310,7 +310,7 @@ Bugs report treated. Most of them corrected, some I could not reproduce
 1844558     star smile, heart problem with ie [takeaweb]
 1844556     view all not defined [takeaweb]
 1844555     you can upload only... not defined [takeaweb]
-1844554     _MI_YOGURT_FRIENDS_DESC not defined [takeaweb]
+1844554     _MI_SUICO_FRIENDS_DESC not defined [takeaweb]
 1844553     Note error on ie on delete [takeaweb]
 1844549     xoops.js $ click smilies doesn t work [maxxy]
 1844546     album: newest first [maxxy]
@@ -322,7 +322,7 @@ Bugs report treated. Most of them corrected, some I could not reproduce
 1844535     user listed in visitors of the profile [maxxy]
 1851078     French translation
 1844520     ENGINE=MyISAM I can't install it. [sinoer]
-1844518     in yogurt_visitors the column datetime no present [takeaweb]
+1844518     in suico_visitors the column datetime no present [takeaweb]
 1802818     Imagem modelo de tribo dando pau
 1783746     link to album won t show for anonyms
 
@@ -331,7 +331,7 @@ and help this project reporting your bugs too
 
 ## 26/11/2007
 First Beta Release Version 2.9
-Changed the project to yogurt social network
+Changed the project to suico social network
 Picures, Videos, Notes, Groups, Configs, Friends
 
 ## 26/08/2007

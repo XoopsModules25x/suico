@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -32,12 +32,12 @@ $sort  = Request::getString('sort', '');
 
 $adminObject->displayNavigation(basename(__FILE__));
 $permHelper = new Permission();
-$uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/images/';
-$uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/images/';
+$uploadDir  = XOOPS_UPLOAD_PATH . '/suico/images/';
+$uploadUrl  = XOOPS_UPLOAD_URL . '/suico/images/';
 
 switch ($op) {
     case 'new':
-        $adminObject->addItemButton(AM_YOGURT_FRIENDSHIP_LIST, 'friendships.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_FRIENDSHIP_LIST, 'friendships.php', 'list');
         $adminObject->displayButton('left');
 
         $friendshipObject = $friendshipHandler->create();
@@ -68,7 +68,7 @@ switch ($op) {
         $friendshipObject->setVar('date_updated', $dateTimeObj->getTimestamp());
 
         if ($friendshipHandler->insert($friendshipObject)) {
-            redirect_header('friendships.php?op=list', 2, AM_YOGURT_FORMOK);
+            redirect_header('friendships.php?op=list', 2, AM_SUICO_FORMOK);
         }
 
         echo $friendshipObject->getHtmlErrors();
@@ -76,8 +76,8 @@ switch ($op) {
         $form->display();
         break;
     case 'edit':
-        $adminObject->addItemButton(AM_YOGURT_ADD_FRIENDSHIP, 'friendships.php?op=new', 'add');
-        $adminObject->addItemButton(AM_YOGURT_FRIENDSHIP_LIST, 'friendships.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_ADD_FRIENDSHIP, 'friendships.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_FRIENDSHIP_LIST, 'friendships.php', 'list');
         $adminObject->displayButton('left');
         $friendshipObject = $friendshipHandler->get(Request::getString('friendship_id', ''));
         $form             = $friendshipObject->getForm();
@@ -91,7 +91,7 @@ switch ($op) {
             }
 
             if ($friendshipHandler->delete($friendshipObject)) {
-                redirect_header('friendships.php', 3, AM_YOGURT_FORMDELOK);
+                redirect_header('friendships.php', 3, AM_SUICO_FORMDELOK);
             } else {
                 echo $friendshipObject->getHtmlErrors();
             }
@@ -104,7 +104,7 @@ switch ($op) {
                 ],
                 Request::getUrl('REQUEST_URI', '', 'SERVER'),
                 sprintf(
-                    AM_YOGURT_FORMSUREDEL,
+                    AM_SUICO_FORMSUREDEL,
                     $friendshipObject->getVar('friendship_id')
                 )
             );
@@ -114,16 +114,16 @@ switch ($op) {
 
         $id_field = Request::getString('friendship_id', '');
 
-        if ($utility::cloneRecord('yogurt_friendships', 'friendship_id', $id_field)) {
-            redirect_header('friendships.php', 3, AM_YOGURT_CLONED_OK);
+        if ($utility::cloneRecord('suico_friendships', 'friendship_id', $id_field)) {
+            redirect_header('friendships.php', 3, AM_SUICO_CLONED_OK);
         } else {
-            redirect_header('friendships.php', 3, AM_YOGURT_CLONED_FAILED);
+            redirect_header('friendships.php', 3, AM_SUICO_CLONED_FAILED);
         }
 
         break;
     case 'list':
     default:
-        $adminObject->addItemButton(AM_YOGURT_ADD_FRIENDSHIP, 'friendships.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_ADD_FRIENDSHIP, 'friendships.php?op=new', 'add');
         $adminObject->displayButton('left');
         $start                     = Request::getInt('start', 0);
         $friendshipPaginationLimit = $helper->getConfig('userpager');
@@ -138,7 +138,7 @@ switch ($op) {
         /*
         //
         //
-                            <th class='center width5'>".AM_YOGURT_FORM_ACTION."</th>
+                            <th class='center width5'>".AM_SUICO_FORM_ACTION."</th>
         //                    </tr>";
         //            $class = "odd";
         */
@@ -178,48 +178,48 @@ switch ($op) {
 
                 $GLOBALS['xoopsTpl']->assign(
                     'selectorfriendship_id',
-                    AM_YOGURT_FRIENDSHIP_FRIENDSHIP_ID
+                    AM_SUICO_FRIENDSHIP_FRIENDSHIP_ID
                 );
 
                 $friendshipArray['friendship_id'] = $friendshipTempArray[$i]->getVar('friendship_id');
 
-                $GLOBALS['xoopsTpl']->assign('selectorfriend1_uid', AM_YOGURT_FRIENDSHIP_FRIEND1_UID);
+                $GLOBALS['xoopsTpl']->assign('selectorfriend1_uid', AM_SUICO_FRIENDSHIP_FRIEND1_UID);
 
                 $friendshipArray['friend1_uid'] = strip_tags(
                     XoopsUser::getUnameFromId($friendshipTempArray[$i]->getVar('friend1_uid'))
                 );
 
-                $GLOBALS['xoopsTpl']->assign('selectorfriend2_uid', AM_YOGURT_FRIENDSHIP_FRIEND2_UID);
+                $GLOBALS['xoopsTpl']->assign('selectorfriend2_uid', AM_SUICO_FRIENDSHIP_FRIEND2_UID);
 
                 $friendshipArray['friend2_uid'] = strip_tags(
                     XoopsUser::getUnameFromId($friendshipTempArray[$i]->getVar('friend2_uid'))
                 );
 
-                $GLOBALS['xoopsTpl']->assign('selectorlevel', AM_YOGURT_FRIENDSHIP_LEVEL);
+                $GLOBALS['xoopsTpl']->assign('selectorlevel', AM_SUICO_FRIENDSHIP_LEVEL);
 
                 $friendshipArray['level'] = $friendshipTempArray[$i]->getVar('level');
 
-                $GLOBALS['xoopsTpl']->assign('selectorhot', AM_YOGURT_FRIENDSHIP_HOT);
+                $GLOBALS['xoopsTpl']->assign('selectorhot', AM_SUICO_FRIENDSHIP_HOT);
 
                 $friendshipArray['hot'] = $friendshipTempArray[$i]->getVar('hot');
 
-                $GLOBALS['xoopsTpl']->assign('selectortrust', AM_YOGURT_FRIENDSHIP_TRUST);
+                $GLOBALS['xoopsTpl']->assign('selectortrust', AM_SUICO_FRIENDSHIP_TRUST);
 
                 $friendshipArray['trust'] = $friendshipTempArray[$i]->getVar('trust');
 
-                $GLOBALS['xoopsTpl']->assign('selectorcool', AM_YOGURT_FRIENDSHIP_COOL);
+                $GLOBALS['xoopsTpl']->assign('selectorcool', AM_SUICO_FRIENDSHIP_COOL);
 
                 $friendshipArray['cool'] = $friendshipTempArray[$i]->getVar('cool');
 
-                $GLOBALS['xoopsTpl']->assign('selectorfan', AM_YOGURT_FRIENDSHIP_FAN);
+                $GLOBALS['xoopsTpl']->assign('selectorfan', AM_SUICO_FRIENDSHIP_FAN);
 
                 $friendshipArray['fan'] = $friendshipTempArray[$i]->getVar('fan');
 
-                $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_FRIENDSHIP_DATE_CREATED);
+                $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_SUICO_FRIENDSHIP_DATE_CREATED);
 
                 $friendshipArray['date_created'] = formatTimestamp($friendshipTempArray[$i]->getVar('date_created'), 's');
 
-                $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_YOGURT_FRIENDSHIP_DATE_UPDATED);
+                $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_SUICO_FRIENDSHIP_DATE_UPDATED);
 
                 $friendshipArray['date_updated'] = formatTimestamp($friendshipTempArray[$i]->getVar('date_updated'), 's');
 
@@ -266,7 +266,7 @@ switch ($op) {
 
             //                    <tr>
 
-            //                     <th class='center width5'>".AM_YOGURT_FORM_ACTION."XXX</th>
+            //                     <th class='center width5'>".AM_SUICO_FORM_ACTION."XXX</th>
 
             //                    </tr><tr><td class='errorMsg' colspan='9'>There are noXXX friendship</td></tr>";
 
@@ -277,7 +277,7 @@ switch ($op) {
             echo $GLOBALS['xoopsTpl']->fetch(
                 XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar(
                     'dirname'
-                ) . '/templates/admin/yogurt_admin_friendships.tpl'
+                ) . '/templates/admin/suico_admin_friendships.tpl'
             );
         }
 

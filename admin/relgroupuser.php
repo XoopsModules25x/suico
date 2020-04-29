@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -32,12 +32,12 @@ $sort  = Request::getString('sort', '');
 
 $adminObject->displayNavigation(basename(__FILE__));
 $permHelper = new Permission();
-$uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/images/';
-$uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/images/';
+$uploadDir  = XOOPS_UPLOAD_PATH . '/suico/images/';
+$uploadUrl  = XOOPS_UPLOAD_URL . '/suico/images/';
 
 switch ($op) {
     case 'new':
-        $adminObject->addItemButton(AM_YOGURT_RELGROUPUSER_LIST, 'relgroupuser.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_RELGROUPUSER_LIST, 'relgroupuser.php', 'list');
         $adminObject->displayButton('left');
 
         $relgroupuserObject = $relgroupuserHandler->create();
@@ -57,7 +57,7 @@ switch ($op) {
         $relgroupuserObject->setVar('rel_group_id', Request::getVar('rel_group_id', ''));
         $relgroupuserObject->setVar('rel_user_uid', Request::getVar('rel_user_uid', ''));
         if ($relgroupuserHandler->insert($relgroupuserObject)) {
-            redirect_header('relgroupuser.php?op=list', 2, AM_YOGURT_FORMOK);
+            redirect_header('relgroupuser.php?op=list', 2, AM_SUICO_FORMOK);
         }
 
         echo $relgroupuserObject->getHtmlErrors();
@@ -65,8 +65,8 @@ switch ($op) {
         $form->display();
         break;
     case 'edit':
-        $adminObject->addItemButton(AM_YOGURT_ADD_RELGROUPUSER, 'relgroupuser.php?op=new', 'add');
-        $adminObject->addItemButton(AM_YOGURT_RELGROUPUSER_LIST, 'relgroupuser.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_ADD_RELGROUPUSER, 'relgroupuser.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_RELGROUPUSER_LIST, 'relgroupuser.php', 'list');
         $adminObject->displayButton('left');
         $relgroupuserObject = $relgroupuserHandler->get(Request::getString('rel_id', ''));
         $form               = $relgroupuserObject->getForm();
@@ -80,7 +80,7 @@ switch ($op) {
             }
 
             if ($relgroupuserHandler->delete($relgroupuserObject)) {
-                redirect_header('relgroupuser.php', 3, AM_YOGURT_FORMDELOK);
+                redirect_header('relgroupuser.php', 3, AM_SUICO_FORMDELOK);
             } else {
                 echo $relgroupuserObject->getHtmlErrors();
             }
@@ -93,7 +93,7 @@ switch ($op) {
                 ],
                 Request::getUrl('REQUEST_URI', '', 'SERVER'),
                 sprintf(
-                    AM_YOGURT_FORMSUREDEL,
+                    AM_SUICO_FORMSUREDEL,
                     $relgroupuserObject->getVar('rel_id')
                 )
             );
@@ -103,16 +103,16 @@ switch ($op) {
 
         $id_field = Request::getString('rel_id', '');
 
-        if ($utility::cloneRecord('yogurt_relgroupuser', 'rel_id', $id_field)) {
-            redirect_header('relgroupuser.php', 3, AM_YOGURT_CLONED_OK);
+        if ($utility::cloneRecord('suico_relgroupuser', 'rel_id', $id_field)) {
+            redirect_header('relgroupuser.php', 3, AM_SUICO_CLONED_OK);
         } else {
-            redirect_header('relgroupuser.php', 3, AM_YOGURT_CLONED_FAILED);
+            redirect_header('relgroupuser.php', 3, AM_SUICO_CLONED_FAILED);
         }
 
         break;
     case 'list':
     default:
-        $adminObject->addItemButton(AM_YOGURT_ADD_RELGROUPUSER, 'relgroupuser.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_ADD_RELGROUPUSER, 'relgroupuser.php?op=new', 'add');
         $adminObject->displayButton('left');
         $start                       = Request::getInt('start', 0);
         $relgroupuserPaginationLimit = $helper->getConfig('userpager');
@@ -127,7 +127,7 @@ switch ($op) {
         /*
         //
         //
-                            <th class='center width5'>".AM_YOGURT_FORM_ACTION."</th>
+                            <th class='center width5'>".AM_SUICO_FORM_ACTION."</th>
         //                    </tr>";
         //            $class = "odd";
         */
@@ -165,16 +165,16 @@ switch ($op) {
             foreach (array_keys($relgroupuserTempArray) as $i) {
                 //        $field = explode(':', $fields[$i]);
 
-                $GLOBALS['xoopsTpl']->assign('selectorrel_id', AM_YOGURT_RELGROUPUSER_REL_ID);
+                $GLOBALS['xoopsTpl']->assign('selectorrel_id', AM_SUICO_RELGROUPUSER_REL_ID);
                 $relgroupuserArray['rel_id'] = $relgroupuserTempArray[$i]->getVar('rel_id');
 
-                $GLOBALS['xoopsTpl']->assign('selectorrel_group_id', AM_YOGURT_RELGROUPUSER_REL_GROUP_ID);
-                $relgroupuserArray['rel_group_id'] = $groupsHandler->get($relgroupuserTempArray[$i]->getVar('rel_group_id'))->getVar('group_title');
-
-                $GLOBALS['xoopsTpl']->assign('selectorrel_user_uid', AM_YOGURT_RELGROUPUSER_REL_USER_UID);
+                $GLOBALS['xoopsTpl']->assign('selectorrel_group_id', AM_SUICO_RELGROUPUSER_REL_GROUP_ID);
+//                $relgroupuserArray['rel_group_id'] = ($groupsHandler->get($relgroupuserTempArray[$i]->getVar('rel_group_id')))->getVar('group_title');
+                $relgroupuserArray['rel_group_id'] = $relgroupuserTempArray[$i]->getVar('rel_group_id');
+                $GLOBALS['xoopsTpl']->assign('selectorrel_user_uid', AM_SUICO_RELGROUPUSER_REL_USER_UID);
                 $relgroupuserArray['rel_user_uid'] = strip_tags(XoopsUser::getUnameFromId($relgroupuserTempArray[$i]->getVar('rel_user_uid')));
 
-                $selectorrel_user_uid = $utility::selectSorting(AM_YOGURT_RELGROUPUSER_REL_USER_UID, 'rel_user_uid');
+                $selectorrel_user_uid = $utility::selectSorting(AM_SUICO_RELGROUPUSER_REL_USER_UID, 'rel_user_uid');
 
                 $GLOBALS['xoopsTpl']->assign('selectorrel_user_uid', $selectorrel_user_uid);
 
@@ -223,7 +223,7 @@ switch ($op) {
 
             //                    <tr>
 
-            //                     <th class='center width5'>".AM_YOGURT_FORM_ACTION."XXX</th>
+            //                     <th class='center width5'>".AM_SUICO_FORM_ACTION."XXX</th>
 
             //                    </tr><tr><td class='errorMsg' colspan='4'>There are noXXX relgroupuser</td></tr>";
 
@@ -234,7 +234,7 @@ switch ($op) {
             echo $GLOBALS['xoopsTpl']->fetch(
                 XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar(
                     'dirname'
-                ) . '/templates/admin/yogurt_admin_relgroupuser.tpl'
+                ) . '/templates/admin/suico_admin_relgroupuser.tpl'
             );
         }
 

@@ -14,20 +14,20 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
-use XoopsModules\Yogurt\IndexController;
+use XoopsModules\Suico;
+use XoopsModules\Suico\IndexController;
 
 /**
  * Xoops header
  */
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'suico_index.tpl';
 require __DIR__ . '/header.php';
 
 $helper->loadLanguage('user');
@@ -170,7 +170,7 @@ $GLOBALS['xoopsTpl']->assign('categories', $categories);
 $mainvideocode = '';
 $mainvideodesc = '';
 
-//require_once __DIR__ . '/class/yogurt_controller.php';
+//require_once __DIR__ . '/class/suico_controller.php';
 //if (!@ require_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/user.php') {
 //    require_once XOOPS_ROOT_PATH . '/language/english/user.php';
 //}
@@ -243,7 +243,7 @@ if (0 === $controller->isAnonym) {
     }
 
     $xoopsTpl->assign('visitors', $visitorsArray);
-    $xoopsTpl->assign('lang_visitors', _MD_YOGURT_VISITORS);
+    $xoopsTpl->assign('lang_visitors', _MD_SUICO_VISITORS);
     /*    $criteria_deletevisitors = new criteria('uid_owner',$uid);
         $criteria_deletevisitors->setStart(5);
 
@@ -259,26 +259,26 @@ $thisUser      = $memberHandler->getUser($controller->uidOwner);
 $myts          = MyTextSanitizer::getInstance();
 
 //navbar
-$xoopsTpl->assign('lang_mysection', _MD_YOGURT_MYPROFILE);
-$xoopsTpl->assign('section_name', _MD_YOGURT_PROFILE);
+$xoopsTpl->assign('lang_mysection', _MD_SUICO_MYPROFILE);
+$xoopsTpl->assign('section_name', _MD_SUICO_PROFILE);
 
-//$xoopsTpl->assign('path_yogurt_uploads',$helper->getConfig('link_path_upload'));
+//$xoopsTpl->assign('path_suico_uploads',$helper->getConfig('link_path_upload'));
 
 //groups
 $xoopsTpl->assign('groups', $groups);
 if (isset($nbSections['countGroups']) && $nbSections['countGroups'] <= 0) {
-    $xoopsTpl->assign('lang_nogroupsyet', _MD_YOGURT_NOGROUPSYET);
+    $xoopsTpl->assign('lang_nogroupsyet', _MD_SUICO_NOGROUPSYET);
 }
-$xoopsTpl->assign('lang_viewallgroups', _MD_YOGURT_ALLGROUPS);
+$xoopsTpl->assign('lang_viewallgroups', _MD_SUICO_ALLGROUPS);
 
 //Avatar and Main
 $xoopsTpl->assign('avatar_url', $avatar);
-$xoopsTpl->assign('lang_selectavatar', _MD_YOGURT_SELECTAVATAR);
-$xoopsTpl->assign('lang_selectmainvideo', _MD_YOGURT_SELECTMAINVIDEO);
-$xoopsTpl->assign('lang_noavatar', _MD_YOGURT_NOAVATARYET);
-$xoopsTpl->assign('lang_nomainvideo', _MD_YOGURT_NOMAINVIDEOYET);
-$xoopsTpl->assign('lang_featuredvideo', _MD_YOGURT_VIDEO_FEATURED);
-$xoopsTpl->assign('lang_viewallvideos', _MD_YOGURT_ALLVIDEOS);
+$xoopsTpl->assign('lang_selectavatar', _MD_SUICO_SELECTAVATAR);
+$xoopsTpl->assign('lang_selectmainvideo', _MD_SUICO_SELECTMAINVIDEO);
+$xoopsTpl->assign('lang_noavatar', _MD_SUICO_NOAVATARYET);
+$xoopsTpl->assign('lang_nomainvideo', _MD_SUICO_NOMAINVIDEOYET);
+$xoopsTpl->assign('lang_featuredvideo', _MD_SUICO_VIDEO_FEATURED);
+$xoopsTpl->assign('lang_viewallvideos', _MD_SUICO_ALLVIDEOS);
 
 if (isset($nbSections['countGroups']) && $nbSections['countGroups'] > 0) {
     $xoopsTpl->assign('mainvideocode', $mainvideocode);
@@ -297,7 +297,7 @@ if (isset($nbSections['countGroups']) && $nbSections['countGroups'] > 0) {
  * Friends
  */
 if ($xoopsUser) {
-    $controller = new Yogurt\FriendsController($xoopsDB, $xoopsUser);
+    $controller = new Suico\FriendsController($xoopsDB, $xoopsUser);
 
     $friendrequest = 0;
     if (1 === $controller->isOwner) {
@@ -317,53 +317,53 @@ if ($xoopsUser) {
 
     //requests to become friend
     if (1 === $friendrequest) {
-        $xoopsTpl->assign('lang_you_have_x_friendrequests', sprintf(_MD_YOGURT_YOU_HAVE_X_FRIENDREQUESTS, $countFriendrequest));
+        $xoopsTpl->assign('lang_you_have_x_friendrequests', sprintf(_MD_SUICO_YOU_HAVE_X_FRIENDREQUESTS, $countFriendrequest));
         $xoopsTpl->assign('friendrequester_uid', $friendrequester_uid);
         $xoopsTpl->assign('friendrequester_uname', $friendrequester_uname);
         $xoopsTpl->assign('friendrequester_avatar', $friendrequester_avatar);
         $xoopsTpl->assign('friendrequest', $friendrequest);
         $xoopsTpl->assign('friendrequest_id', $friendrequest_id);
-        $xoopsTpl->assign('lang_rejected', _MD_YOGURT_UNKNOWN_REJECTING);
-        $xoopsTpl->assign('lang_accepted', _MD_YOGURT_UNKNOWN_ACCEPTING);
-        $xoopsTpl->assign('lang_acquaintance', _MD_YOGURT_AQUAITANCE);
-        $xoopsTpl->assign('lang_friend', _MD_YOGURT_FRIEND);
-        $xoopsTpl->assign('lang_bestfriend', _MD_YOGURT_BESTFRIEND);
+        $xoopsTpl->assign('lang_rejected', _MD_SUICO_UNKNOWN_REJECTING);
+        $xoopsTpl->assign('lang_accepted', _MD_SUICO_UNKNOWN_ACCEPTING);
+        $xoopsTpl->assign('lang_acquaintance', _MD_SUICO_AQUAITANCE);
+        $xoopsTpl->assign('lang_friend', _MD_SUICO_FRIEND);
+        $xoopsTpl->assign('lang_bestfriend', _MD_SUICO_BESTFRIEND);
         $linkedpetioner = '<a href="index.php?uid=' . $friendrequester_uid . '">' . $friendrequester_uname . '</a>';
-        $xoopsTpl->assign('lang_askingfriend', sprintf(_MD_YOGURT_ASKINGFRIEND, $linkedpetioner));
+        $xoopsTpl->assign('lang_askingfriend', sprintf(_MD_SUICO_ASKINGFRIEND, $linkedpetioner));
     }
 }
 
-$xoopsTpl->assign('lang_askusertobefriend', _MD_YOGURT_ASKBEFRIEND);
-$xoopsTpl->assign('lang_addfriend', _MD_YOGURT_ADDFRIEND);
-$xoopsTpl->assign('lang_friendrequestpending', _MD_YOGURT_FRIENDREQUEST_PENDING);
-$xoopsTpl->assign('lang_myfriend', _MD_YOGURT_MYFRIEND);
-$xoopsTpl->assign('lang_friendrequestsent', _MD_YOGURT_FRIENDREQUEST_SENT);
-$xoopsTpl->assign('lang_acceptfriend', _MD_YOGURT_FRIEND_ACCEPT);
-$xoopsTpl->assign('lang_rejectfriend', _MD_YOGURT_FRIEND_REJECT);
+$xoopsTpl->assign('lang_askusertobefriend', _MD_SUICO_ASKBEFRIEND);
+$xoopsTpl->assign('lang_addfriend', _MD_SUICO_ADDFRIEND);
+$xoopsTpl->assign('lang_friendrequestpending', _MD_SUICO_FRIENDREQUEST_PENDING);
+$xoopsTpl->assign('lang_myfriend', _MD_SUICO_MYFRIEND);
+$xoopsTpl->assign('lang_friendrequestsent', _MD_SUICO_FRIENDREQUEST_SENT);
+$xoopsTpl->assign('lang_acceptfriend', _MD_SUICO_FRIEND_ACCEPT);
+$xoopsTpl->assign('lang_rejectfriend', _MD_SUICO_FRIEND_REJECT);
 
 $criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
 $friends          = $controller->friendshipsFactory->getFriends(8, $criteria_friends);
 $xoopsTpl->assign('friends', $friends);
-$xoopsTpl->assign('lang_friendstitle', sprintf(_MD_YOGURT_FRIENDSTITLE, $controller->nameOwner));
-$xoopsTpl->assign('lang_viewallfriends', _MD_YOGURT_ALLFRIENDS);
-$xoopsTpl->assign('lang_nofriendsyet', _MD_YOGURT_NOFRIENDSYET);
+$xoopsTpl->assign('lang_friendstitle', sprintf(_MD_SUICO_FRIENDSTITLE, $controller->nameOwner));
+$xoopsTpl->assign('lang_viewallfriends', _MD_SUICO_ALLFRIENDS);
+$xoopsTpl->assign('lang_nofriendsyet', _MD_SUICO_NOFRIENDSYET);
 
 //search
-$xoopsTpl->assign('lang_usercontributions', _MD_YOGURT_USER_CONTRIBUTIONS);
+$xoopsTpl->assign('lang_usercontributions', _MD_SUICO_USER_CONTRIBUTIONS);
 
 //Profile
-$xoopsTpl->assign('lang_detailsinfo', _MD_YOGURT_USER_DETAILS);
-$xoopsTpl->assign('lang_contactinfo', _MD_YOGURT_CONTACTINFO);
-//$xoopsTpl->assign('path_yogurt_uploads',$helper->getConfig('link_path_upload'));
+$xoopsTpl->assign('lang_detailsinfo', _MD_SUICO_USER_DETAILS);
+$xoopsTpl->assign('lang_contactinfo', _MD_SUICO_CONTACTINFO);
+//$xoopsTpl->assign('path_suico_uploads',$helper->getConfig('link_path_upload'));
 $xoopsTpl->assign(
     'lang_max_countPicture',
-    sprintf(_MD_YOGURT_YOUCANHAVE, $helper->getConfig('countPicture'))
+    sprintf(_MD_SUICO_YOUCANHAVE, $helper->getConfig('countPicture'))
 );
-$xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
-$xoopsTpl->assign('lang_editdesc', _MD_YOGURT_EDIT_DESC);
-$xoopsTpl->assign('lang_visitors', _MD_YOGURT_VISITORS);
-$xoopsTpl->assign('lang_profilevisitors', _MD_YOGURT_PROFILEVISITORS);
-$xoopsTpl->assign('lang_editprofile', _MD_YOGURT_EDITPROFILE);
+$xoopsTpl->assign('lang_delete', _MD_SUICO_DELETE);
+$xoopsTpl->assign('lang_editdesc', _MD_SUICO_EDIT_DESC);
+$xoopsTpl->assign('lang_visitors', _MD_SUICO_VISITORS);
+$xoopsTpl->assign('lang_profilevisitors', _MD_SUICO_PROFILEVISITORS);
+$xoopsTpl->assign('lang_editprofile', _MD_SUICO_EDITPROFILE);
 
 $xoopsTpl->assign('user_uname', $thisUser->getVar('uname'));
 $xoopsTpl->assign('user_realname', $thisUser->getVar('name'));
@@ -416,7 +416,7 @@ if (1 === $thisUser->getVar('user_viewemail')) {
 }
 
 $xoopsTpl->assign('user_onlinestatus', $thisUser->isOnline());
-$xoopsTpl->assign('lang_onlinestatus', _MD_YOGURT_ONLINESTATUS);
+$xoopsTpl->assign('lang_onlinestatus', _MD_SUICO_ONLINESTATUS);
 $xoopsTpl->assign('uname', $thisUser->getVar('uname'));
 $xoopsTpl->assign('lang_realname', _US_REALNAME);
 $xoopsTpl->assign('name', $thisUser->getVar('name'));

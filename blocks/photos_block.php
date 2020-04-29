@@ -14,25 +14,25 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 if (!defined('XOOPS_ROOT_PATH')) {
     exit();
 }
 //include_once(XOOPS_ROOT_PATH."/class/criteria.php");
-//require_once XOOPS_ROOT_PATH . '/modules/yogurt/class/Image.php';
+//require_once XOOPS_ROOT_PATH . '/modules/suico/class/Image.php';
 
 /**
  * @param $options
  * @return array
  */
-function b_yogurt_lastpictures_show($options)
+function b_suico_lastpictures_show($options)
 {
     global $xoopsDB, $xoopsModule, $xoopsModuleConfig;
 
@@ -58,7 +58,7 @@ function b_yogurt_lastpictures_show($options)
 
     //$albumFactory      = new ImagesHandler($xoopsDB);
 
-    $imageFactory = new Yogurt\ImageHandler($xoopsDB);
+    $imageFactory = new Suico\ImageHandler($xoopsDB);
 
     return $imageFactory->getLastPicturesForBlock($options[0]);
 }
@@ -67,7 +67,7 @@ function b_yogurt_lastpictures_show($options)
  * @param $options
  * @return string
  */
-function b_yogurt_lastpictures_edit($options)
+function b_suico_lastpictures_edit($options)
 {
     return "<input type='text' value='" . $options['0'] . "'id='options[]' name='options[]'>";
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /**
  * Extended User Profile
@@ -33,37 +33,21 @@ class Field extends \XoopsObject
     public function __construct()
     {
         $this->initVar('field_id', \XOBJ_DTYPE_INT, null);
-
         $this->initVar('cat_id', \XOBJ_DTYPE_INT, null, true);
-
         $this->initVar('field_type', \XOBJ_DTYPE_TXTBOX);
-
         $this->initVar('field_valuetype', \XOBJ_DTYPE_INT, null, true);
-
         $this->initVar('field_name', \XOBJ_DTYPE_TXTBOX, null, true);
-
         $this->initVar('field_title', \XOBJ_DTYPE_TXTBOX);
-
         $this->initVar('field_description', \XOBJ_DTYPE_TXTAREA);
-
         $this->initVar('field_required', \XOBJ_DTYPE_INT, 0); //0 = no, 1 = yes
-
         $this->initVar('field_maxlength', \XOBJ_DTYPE_INT, 0);
-
         $this->initVar('field_weight', \XOBJ_DTYPE_INT, 0);
-
         $this->initVar('field_default', \XOBJ_DTYPE_TXTAREA, '');
-
         $this->initVar('field_notnull', \XOBJ_DTYPE_INT, 1);
-
         $this->initVar('field_edit', \XOBJ_DTYPE_INT, 0);
-
         $this->initVar('field_show', \XOBJ_DTYPE_INT, 0);
-
         $this->initVar('field_config', \XOBJ_DTYPE_INT, 0);
-
         $this->initVar('field_options', \XOBJ_DTYPE_ARRAY, []);
-
         $this->initVar('step_id', \XOBJ_DTYPE_INT, 0);
     }
 
@@ -109,10 +93,10 @@ class Field extends \XoopsObject
     /**
      * Returns a {@link XoopsFormElement} for editing the value of this field
      *
-     * @param XoopsUser      $user    {@link XoopsUser} object to edit the value of
-     * @param ProfileProfile $profile {@link ProfileProfile} object to edit the value of
+     * @param \XoopsUser      $user    {@link \XoopsUser} object to edit the value of
+     * @param Profile $profile {@link Profile} object to edit the value of
      *
-     * @return \XoopsModules\Yogurt\XoopsFormCheckBox|\XoopsModules\Yogurt\XoopsFormDatetime|\XoopsModules\Yogurt\XoopsFormDhtmlTextArea|\XoopsModules\Yogurt\XoopsFormLabel|\XoopsModules\Yogurt\XoopsFormRadio|\XoopsModules\Yogurt\XoopsFormRadioYN|\XoopsModules\Yogurt\XoopsFormSelect|\XoopsModules\Yogurt\XoopsFormSelectGroup|\XoopsModules\Yogurt\XoopsFormSelectLang|\XoopsModules\Yogurt\XoopsFormSelectTheme|\XoopsModules\Yogurt\XoopsFormSelectTimezone|\XoopsModules\Yogurt\XoopsFormText|\XoopsModules\Yogurt\XoopsFormTextArea|\XoopsModules\Yogurt\XoopsFormTextDateSelect
+     * @return \XoopsFormCheckBox|\XoopsFormDatetime|\XoopsFormDhtmlTextArea|\XoopsFormLabel|\XoopsFormRadio|\XoopsFormRadioYN|\XoopsFormSelect|\XoopsFormSelectGroup|\XoopsFormSelectLang|\XoopsFormSelectTheme|\XoopsFormSelectTimezone|\XoopsFormText|\XoopsFormTextArea|\XoopsFormTextDateSelect
      */
 
     public function getEditElement($user, $profile)
@@ -243,10 +227,10 @@ class Field extends \XoopsObject
 
     public function getOutputValue($user, $profile)
     {
-        if (\file_exists($file = $GLOBALS['xoops']->path('modules/yogurt/language/' . $GLOBALS['xoopsConfig']['language'] . '/modinfo.php'))) {
+        if (\file_exists($file = $GLOBALS['xoops']->path('modules/suico/language/' . $GLOBALS['xoopsConfig']['language'] . '/modinfo.php'))) {
             include_once $file;
         } else {
-            include_once $GLOBALS['xoops']->path('modules/yogurt/language/english/modinfo.php');
+            include_once $GLOBALS['xoops']->path('modules/suico/language/english/modinfo.php');
         }
 
         $value = \in_array($this->getVar('field_name'), $this->getUserVars()) ? $user->getVar($this->getVar('field_name')) : $profile->getVar($this->getVar('field_name'));
@@ -324,7 +308,7 @@ class Field extends \XoopsObject
                     return \formatTimestamp($value, 'm');
                 }
 
-                return $value = _MI_YOGURT_NEVER_LOGGED_IN;
+                return $value = _MI_SUICO_NEVER_LOGGED_IN;
                 break;
             case 'autotext':
                 $value = $user->getVar($this->getVar('field_name'), 'n'); //autotext can have HTML in it
@@ -409,9 +393,9 @@ class Field extends \XoopsObject
 
     public function getUserVars()
     {
-        /* @var Yogurt\ProfileHandler $profileHandler */
+        /* @var Suico\ProfileHandler $profileHandler */
 
-        $helper = \XoopsModules\Yogurt\Helper::getInstance();
+        $helper = \XoopsModules\Suico\Helper::getInstance();
         $profileHandler = $helper->getHandler('Profile');
 
         return $profileHandler->getUserVars();
