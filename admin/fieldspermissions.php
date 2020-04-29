@@ -19,8 +19,8 @@
  */
 include_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
-$indexAdmin = new ModuleAdmin();
-echo $indexAdmin->addNavigation(basename(__FILE__));
+
+$adminObject->displayNavigation(basename(__FILE__));
 
 $op = \Xmf\Request::getCmd('op', 'edit');
 

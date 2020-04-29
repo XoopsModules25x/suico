@@ -19,11 +19,11 @@
  */
 include_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
-$indexAdmin = new ModuleAdmin();
 
-$indexAdmin->addItemButton(_ADD . ' ' . _AM_YOGURT_STEP, 'registrationstep.php?op=new', 'add', '');
-echo $indexAdmin->addNavigation(basename(__FILE__));
-echo $indexAdmin->renderButton('right', '');
+
+$adminObject->addItemButton( _AM_YOGURT_STEP, 'registrationstep.php?op=new', 'add');
+$adminObject->displayNavigation(basename(__FILE__));
+$adminObject->displayButton('left');
 
 $op = $_REQUEST['op'] ?? (isset($_REQUEST['id']) ? 'edit' : 'list');
 

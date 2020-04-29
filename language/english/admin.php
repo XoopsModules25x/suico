@@ -312,10 +312,10 @@ define('AM_YOGURT_PRIVACY_LIST', 'List of Privacy');
 define('_AM_YOGURT_UPLOAD_ERROR', 'Upload Error');
 
 //Profile Module
-define('_AM_YOGURT_FIELD', 'Field');
+define('_AM_YOGURT_FIELD', 'Add Field');
 define('_AM_YOGURT_FIELDS', 'Fields');
-define('_AM_YOGURT_CATEGORY', 'Category');
-define('_AM_YOGURT_STEP', 'Step');
+define('_AM_YOGURT_CATEGORY', 'Add Category');
+define('_AM_YOGURT_STEP', 'Add Step');
 define('_AM_YOGURT_SAVEDSUCCESS', '%s saved successfully');
 define('_AM_YOGURT_DELETEDSUCCESS', '%s deleted successfully');
 define('_AM_YOGURT_RUSUREDEL', 'Are you sure you want to delete %s');

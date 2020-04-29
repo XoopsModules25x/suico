@@ -133,7 +133,7 @@ class Field extends \XoopsObject
             foreach (\array_keys($options) as $key) {
                 $optval = \defined($options[$key]) ? \constant($options[$key]) : $options[$key];
 
-                $optkey = \defined($key) ? \constant($key) : $key;
+                $optkey = \defined((string)$key) ? \constant($key) : $key;
 
                 unset($options[$key]);
 
