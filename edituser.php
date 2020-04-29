@@ -67,7 +67,7 @@ if ('save' === $op) {
         $op = 'editprofile';
     } else {
         // Dynamic fields
-        $profile_handler = xoops_getModuleHandler('profile');
+        $profile_handler = $helper->getHandler('Profile');
         // Get fields
         $fields = $profile_handler->loadFields();
         // Get ids of fields that can be edited

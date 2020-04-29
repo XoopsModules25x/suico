@@ -39,6 +39,7 @@ $controller = new IndexController($xoopsDB, $xoopsUser);
 $nbSections = $controller->getNumbersSections();
 
 $uid = $controller->uidOwner;
+$categories = [];
 
 /* @var  XoopsGroupPermHandler $grouppermHandler */
 $grouppermHandler = xoops_getHandler('groupperm');
@@ -122,13 +123,13 @@ if (is_object($GLOBALS['xoopsUser']) && $GLOBALS['xoopsUser']->isAdmin()) {
 
 // Dynamic User Profiles
 $thisUsergroups     = $thisUser->getGroups();
-$visibility_handler = xoops_getModuleHandler('visibility');
+$visibility_handler = $helper->getHandler('Visibility');
 //search for visible Fields or null for none
 $field_ids_visible = $visibility_handler->getVisibleFields($thisUsergroups, $groups);
 
-$profile_handler = xoops_getModuleHandler('profile');
+$profile_handler = $helper->getHandler('Profile');
 $fields          = $profile_handler->loadFields();
-$cat_handler     = xoops_getModuleHandler('category');
+$cat_handler     = $helper->getHandler('Category');
 $cat_crit        = new CriteriaCompo();
 $cat_crit->setSort('cat_weight');
 $cats = $cat_handler->getObjects($cat_crit, true, false);
@@ -143,7 +144,7 @@ foreach (array_keys($cats) as $i) {
     $categories[$i] = $cats[$i];
 }
 
-$profile_handler = xoops_getModuleHandler('profile');
+$profile_handler = $helper->getHandler('Profile');
 $profile         = $profile_handler->get($thisUser->getVar('uid'));
 // Add dynamic fields
 foreach (array_keys($fields) as $i) {

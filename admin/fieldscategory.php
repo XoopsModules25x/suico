@@ -28,7 +28,7 @@ echo $indexAdmin->renderButton('right', '');
 $op = $_REQUEST['op'] ?? (isset($_REQUEST['id']) ? 'edit' : 'list');
 
 /* @var YogurtCategoryHandler $handler */
-$handler = xoops_getModuleHandler('category');
+$handler = $helper->getHandler('Category');
 switch ($op) {
     default:
     case 'list':

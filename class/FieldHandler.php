@@ -84,7 +84,7 @@ class FieldHandler extends \XoopsPersistableObjectHandler
 
         /* @var ProfileProfileHandler $profile_handler */
 
-        $profile_handler = \xoops_getModuleHandler('profile', 'yogurt');
+        $profile_handler = \XoopsModules\Yogurt\Helper::getInstance()->getHandler('Profile');
 
         $obj->setVar('field_name', \str_replace(' ', '_', $obj->getVar('field_name')));
 
@@ -232,7 +232,7 @@ class FieldHandler extends \XoopsPersistableObjectHandler
 
         /* @var ProfileProfileHandler $profile_handler */
 
-        $profile_handler = \xoops_getModuleHandler('profile', 'yogurt');
+        $profile_handler = \XoopsModules\Yogurt\Helper::getInstance()->getHandler('Profile');
 
         // remove column from table
 

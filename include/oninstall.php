@@ -255,7 +255,7 @@ function yogurt_install_addField($name, $title, $description, $category, $type, 
 {
     global $module_id;
 
-    $yogurtfield_handler = xoops_getModuleHandler('field', 'yogurt');
+    $yogurtfield_handler = $helper->getHandler('Field');
     $obj                 = $yogurtfield_handler->create();
     $obj->setVar('field_name', $name, true);
     $obj->setVar('field_moduleid', $module_id, true);

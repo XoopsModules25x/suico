@@ -69,7 +69,7 @@ if ($current_step > 0 && !$GLOBALS['xoopsSecurity']->check()) {
 
 $criteria = new CriteriaCompo();
 $criteria->setSort('step_order');
-$regstep_handler = xoops_getModuleHandler('regstep');
+$regstep_handler = $helper->getHandler('Regstep');
 
 if (!$steps = $regstep_handler->getAll($criteria, null, false, false)) {
     redirect_header(XOOPS_URL . '/', 6, _PROFILE_MA_NOSTEPSAVAILABLE);
@@ -92,7 +92,7 @@ if (isset($steps[$current_step])) {
 
 /* @var XoopsMemberHandler $memberHandler */
 $memberHandler  = xoops_getHandler('member');
-$profile_handler = xoops_getModuleHandler('profile');
+$profile_handler = $helper->getHandler('Profile');
 
 $fields     = $profile_handler->loadFields();
 $userfields = $profile_handler->getUserVars();

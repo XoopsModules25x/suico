@@ -23,7 +23,7 @@
 /**
  * Get {@link XoopsThemeForm} for adding/editing fields
  *
- * @param \Field $field  {@link Yogurt\Field} object to get edit form for
+ * @param Yogurt\Field $field  {@link Yogurt\Field} object to get edit form for
  * @param mixed  $action URL to submit to - or false for $_SERVER['REQUEST_URI']
  *
  * @return object
@@ -32,7 +32,7 @@
 use XoopsModules\Yogurt;
 
 /**
- * @param \Yougurt\Field $field
+ * @param Yogurt\Field $field
  * @param bool           $action
  * @return \XoopsThemeForm
  */
@@ -53,7 +53,7 @@ function yogurt_getFieldForm(Yogurt\Field $field, $action = false)
     if (!$field->isNew()) {
         $fieldcat_id = $field->getVar('cat_id');
     }
-    $category_handler = xoops_getModuleHandler('category');
+    $category_handler = $helper->getHandler('Category');
     $cat_select       = new XoopsFormSelect(_AM_YOGURT_CATEGORY, 'field_category', $fieldcat_id);
     $cat_select->addOption(0, _AM_YOGURT_DEFAULT);
     $cat_select->addOptionArray($category_handler->getList());
@@ -258,7 +258,7 @@ function yogurt_getFieldForm(Yogurt\Field $field, $action = false)
         $form->addElement(new XoopsFormRadioYN(_AM_YOGURT_REQUIRED, 'field_required', $field->getVar('field_required', 'e')));
         $regstep_select = new XoopsFormSelect(_AM_YOGURT_PROF_REGISTER, 'step_id', $field->getVar('step_id', 'e'));
         $regstep_select->addOption(0, _NO);
-        $regstep_handler = xoops_getModuleHandler('regstep');
+        $regstep_handler = $helper->getHandler('Regstep');
         $regstep_select->addOptionArray($regstep_handler->getList());
         $form->addElement($regstep_select);
     }
@@ -322,7 +322,7 @@ function yogurt_getRegisterForm(XoopsUser $user, $profile, $step = null)
     }
 
     // Dynamic fields
-    $profile_handler              = xoops_getModuleHandler('profile');
+    $profile_handler              = $helper->getHandler('Profile');
     $fields                       = $profile_handler->loadFields();
     $_SESSION['profile_required'] = [];
     foreach (array_keys($fields) as $i) {
@@ -341,7 +341,7 @@ function yogurt_getRegisterForm(XoopsUser $user, $profile, $step = null)
     ksort($elements);
 
     // Get categories
-    $cat_handler = xoops_getModuleHandler('category');
+    $cat_handler = $helper->getHandler('Category');
     $categories  = $cat_handler->getObjects(null, true, false);
 
     foreach (array_keys($elements) as $k) {
@@ -408,12 +408,12 @@ function yogurt_getUserForm(XoopsUser $user, Yogurt\Profile $profile = null, $ac
 
     /* @var ProfileHandler $profile_handler */
 
-    $profile_handler = xoops_getModuleHandler('profile');
+    $profile_handler = $helper->getHandler('Profile');
     // Dynamic fields
     if (!$profile) {
         /* @var ProfileHandler $profile_handler */
 
-        $profile_handler = xoops_getModuleHandler('profile', 'yogurt');
+        $profile_handler = $helper->getHandler('Profile');
         $profile         = $profile_handler->get($user->getVar('uid'));
     }
     // Get fields
@@ -462,7 +462,7 @@ function yogurt_getUserForm(XoopsUser $user, Yogurt\Profile $profile = null, $ac
     $elements[0][] = ['element' => new XoopsFormHidden('op', 'save'), 'required' => 0];
     $weights[0][]  = 0;
 
-    $cat_handler    = xoops_getModuleHandler('category');
+    $cat_handler    = $helper->getHandler('Category');
     $categories     = [];
     $all_categories = $cat_handler->getObjects(null, true, false);
     $count_fields   = count($fields);

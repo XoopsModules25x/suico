@@ -73,7 +73,7 @@ switch ($op) {
 
         // Dynamic fields
         /* @var  ProfileProfileHandler $profile_handler */
-        $profile_handler = xoops_getModuleHandler('profile');
+        $profile_handler = $helper->getHandler('Profile');
         // Get fields
         $fields     = $profile_handler->loadFields();
         $userfields = $profile_handler->getUserVars();
@@ -202,7 +202,7 @@ switch ($op) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('profile_user.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()), false);
             }
-            $profile_handler = xoops_getModuleHandler('profile');
+            $profile_handler = $helper->getHandler('Profile');
             $profile         = $profile_handler->get($obj->getVar('uid'));
             if (!$profile || $profile->isNew() || $profile_handler->delete($profile)) {
                 if ($handler->deleteUser($obj)) {

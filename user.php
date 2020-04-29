@@ -96,7 +96,7 @@ if ('register' === $op) {
 
     $criteria = new CriteriaCompo();
     $criteria->setSort('step_order');
-    $regstep_handler = xoops_getModuleHandler('regstep');
+    $regstep_handler = $helper->getHandler('Regstep');
 
     if (!$steps = $regstep_handler->getAll($criteria, null, false, false)) {
         redirect_header(XOOPS_URL . '/', 6, _MD_YOGURT_NOSTEPSAVAILABLE);
@@ -119,7 +119,7 @@ if ('register' === $op) {
 
     /* @var XoopsMemberHandler $memberHandler */
     $memberHandler  = xoops_getHandler('member');
-    $profile_handler = xoops_getModuleHandler('profile');
+    $profile_handler = $helper->getHandler('Profile');
 
     $fields     = $profile_handler->loadFields();
     $userfields = $profile_handler->getUserVars();

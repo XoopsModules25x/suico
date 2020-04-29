@@ -75,7 +75,7 @@ if ('access' === $op) {
         }
     }
 } else {
-    $profile_handler = xoops_getModuleHandler('profile');
+    $profile_handler = $helper->getHandler('Profile');
     $fields          = $profile_handler->loadFields();
 
     if ('search' !== $op) {

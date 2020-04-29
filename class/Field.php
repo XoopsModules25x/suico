@@ -411,7 +411,7 @@ class Field extends \XoopsObject
     {
         /* @var ProfileProfileHandler $profile_handler */
 
-        $profile_handler = \xoops_getModuleHandler('profile', 'yogurt');
+        $profile_handler = \$helper->getHandler('Profile');
 
         return $profile_handler->getUserVars();
     }

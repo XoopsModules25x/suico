@@ -27,8 +27,8 @@ xoops_cp_header();
 
 $op = $_REQUEST['op'] ?? 'visibility';
 
-$visibility_handler = xoops_getModuleHandler('visibility');
-$field_handler      = xoops_getModuleHandler('field');
+$visibility_handler = $helper->getHandler('Visibility');
+$field_handler      = $helper->getHandler('Field');
 $fields             = $field_handler->getList();
 
 if (isset($_REQUEST['submit'])) {

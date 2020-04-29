@@ -51,7 +51,7 @@ switch ($op) {
         $sortby_arr = [];
 
         // Dynamic fields
-        $profile_handler = xoops_getModuleHandler('profile');
+        $profile_handler = $helper->getHandler('Profile');
         // Get fields
         $fields = $profile_handler->loadFields();
         // Get ids of fields that can be searched
@@ -176,7 +176,7 @@ switch ($op) {
         /* @var XoopsMemberHandler $memberHandler */
         $memberHandler = xoops_getHandler('member');
         // Dynamic fields
-        $profile_handler = xoops_getModuleHandler('profile');
+        $profile_handler = $helper->getHandler('Profile');
         // Get fields
         $fields = $profile_handler->loadFields();
         // Get ids of fields that can be searched

@@ -27,7 +27,7 @@ echo $indexAdmin->renderButton('right', '');
 
 $op = $_REQUEST['op'] ?? (isset($_REQUEST['id']) ? 'edit' : 'list');
 
-$handler = xoops_getModuleHandler('regstep');
+$handler = $helper->getHandler('Regstep');
 switch ($op) {
     case 'list':
         $GLOBALS['xoopsTpl']->assign('steps', $handler->getObjects(null, true, false));
@@ -104,7 +104,7 @@ if (!empty($template_main)) {
 function profile_stepsave_toggle($step_d, $step_save)
 {
     $step_save = (1 == $step_save) ? 0 : 1;
-    $handler   = xoops_getModuleHandler('regstep');
+    $handler   = $helper->getHandler('Regstep');
     $obj       = $handler->get($_REQUEST['step_id']);
     $obj->setVar('step_save', $step_save);
     if ($handler->insert($obj, true)) {

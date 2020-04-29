@@ -28,7 +28,7 @@ echo $indexAdmin->renderButton('right', '');
 
 $op = $_REQUEST['op'] ?? (isset($_REQUEST['id']) ? 'edit' : 'list');
 /* @var XoopsModuleHandler $profilefield_handler */
-$yogurtfield_handler = xoops_getModuleHandler('field');
+$yogurtfield_handler = $helper->getHandler('Field');
 
 switch ($op) {
     default:
@@ -40,7 +40,7 @@ switch ($op) {
         $modules        = $module_handler->getObjects(null, true);
 
         /* @var XoopsModuleHandler $cat_handler */
-        $cat_handler = xoops_getModuleHandler('category');
+        $cat_handler = $helper->getHandler('Category');
         $criteria    = new CriteriaCompo();
         $criteria->setSort('cat_weight');
         $cats = $cat_handler->getObjects($criteria, true);
@@ -138,7 +138,7 @@ switch ($op) {
                 $errors = [];
                 //if there are changed fields, fetch the fieldcategory objects
                 /* @var XoopsModuleHandler $field_handler */
-                $field_handler = xoops_getModuleHandler('field');
+                $field_handler = $helper->getHandler('Field');
                 $fields        = $field_handler->getObjects(new Criteria('field_id', '(' . implode(',', $ids) . ')', 'IN'), true);
                 foreach ($ids as $i) {
                     $fields[$i]->setVar('field_weight', (int)$weight[$i]);
@@ -336,7 +336,7 @@ if (isset($template_main)) {
 function yogurt_visible_toggle($field_id, $field_required)
 {
     $field_required = (1 == $field_required) ? 0 : 1;
-    $this_handler   = xoops_getModuleHandler('field', 'yogurt');
+    $this_handler   = $helper->getHandler('Field');
     $obj            = $this_handler->get($field_id);
     $obj->setVar('field_required', $field_required);
     if ($this_handler->insert($obj, true)) {

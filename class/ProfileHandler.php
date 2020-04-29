@@ -30,6 +30,10 @@ namespace XoopsModules\Yogurt;
 
 use XoopsModules\Yogurt;
 
+/**
+ * Class ProfileHandler
+ * @package XoopsModules\Yogurt
+ */
 class ProfileHandler extends \XoopsPersistableObjectHandler
 {
     /**
@@ -53,7 +57,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
     {
         parent::__construct($db, 'yogurt_profile', Profile::class, 'profile_id');
 
-        $this->_fHandler = \xoops_getModuleHandler('field', 'yogurt');
+        $this->_fHandler = \XoopsModules\Yogurt\Helper::getInstance()->getHandler('Field');
     }
 
     /**
