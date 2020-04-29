@@ -308,12 +308,12 @@ class NotesHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * @param                                      $nbNotes
+     * @param                                      $countNotes
      * @param \CriteriaElement|\CriteriaCompo|null $criteria
      * @return array
      */
     public function getNotes(
-        $nbNotes,
+        $countNotes,
         $criteria
     ) {
         $myts = new MyTextSanitizer();

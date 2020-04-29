@@ -193,7 +193,7 @@ $criteria_mainvideo = new Criteria('main_video', '1');
 $criteria_video     = new CriteriaCompo($criteria_mainvideo);
 $criteria_video->add($criteriaUidVideo);
 
-if ((isset($nbSections['nbVideos']) && $nbSections['nbVideos'] > 0) && ($videos = $controller->videosFactory->getObjects($criteria_video))) {
+if ((isset($nbSections['countGroups']) && $nbSections['countGroups'] > 0) && ($videos = $controller->videosFactory->getObjects($criteria_video))) {
     $mainvideocode = $videos[0]->getVar('youtube_code');
     $mainvideodesc = $videos[0]->getVar('video_desc');
 }
@@ -266,7 +266,7 @@ $xoopsTpl->assign('section_name', _MD_YOGURT_PROFILE);
 
 //groups
 $xoopsTpl->assign('groups', $groups);
-if (isset($nbSections['nbGroups']) && $nbSections['nbGroups'] <= 0) {
+if (isset($nbSections['countGroups']) && $nbSections['countGroups'] <= 0) {
     $xoopsTpl->assign('lang_nogroupsyet', _MD_YOGURT_NOGROUPSYET);
 }
 $xoopsTpl->assign('lang_viewallgroups', _MD_YOGURT_ALLGROUPS);
@@ -280,7 +280,7 @@ $xoopsTpl->assign('lang_nomainvideo', _MD_YOGURT_NOMAINVIDEOYET);
 $xoopsTpl->assign('lang_featuredvideo', _MD_YOGURT_VIDEO_FEATURED);
 $xoopsTpl->assign('lang_viewallvideos', _MD_YOGURT_ALLVIDEOS);
 
-if (isset($nbSections['nbVideos']) && $nbSections['nbVideos'] > 0) {
+if (isset($nbSections['countGroups']) && $nbSections['countGroups'] > 0) {
     $xoopsTpl->assign('mainvideocode', $mainvideocode);
     $xoopsTpl->assign('mainvideodesc', $mainvideodesc);
     $xoopsTpl->assign(

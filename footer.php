@@ -96,12 +96,12 @@ if ($xoopsUser && $xoopsUser->isAdmin(1)) {
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
-$xoopsTpl->assign('countGroups', $nbSections['nbGroups']);
-$xoopsTpl->assign('countPhotos', $nbSections['nbPhotos']);
-$xoopsTpl->assign('countVideos', $nbSections['nbVideos']);
-$xoopsTpl->assign('countNotes', $nbSections['nbNotes']);
-$xoopsTpl->assign('countFriends', $nbSections['nbFriends']);
-$xoopsTpl->assign('countAudio', $nbSections['nbAudio']);
+$xoopsTpl->assign('countGroups', $nbSections['countGroups']);
+$xoopsTpl->assign('countPhotos', $nbSections['countPhotos']);
+$xoopsTpl->assign('countVideos', $nbSections['countGroups']);
+$xoopsTpl->assign('countNotes', $nbSections['countNotes']);
+$xoopsTpl->assign('countFriends', $nbSections['countFriends']);
+$xoopsTpl->assign('countAudio', $nbSections['countAudios']);
 
 //navbar
 $xoopsTpl->assign('module_name', $xoopsModule->getVar('name'));

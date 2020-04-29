@@ -65,17 +65,17 @@ class AudioController extends YogurtController
 
     /**
      * Assign Audio Content to Template
-     * @param int   $nbAudios
+     * @param int   $countAudios
      * @param array $audios
      * @return bool|array
      * @throws Exception
      * @throws Exception
      */
     public function assignAudioContent(
-        $nbAudios,
+        $countAudios,
         $audios
     ) {
-        if (0 === $nbAudios) {
+        if (0 === $countAudios) {
             return false;
         }
         //audio info
@@ -110,7 +110,7 @@ class AudioController extends YogurtController
 
     /**
      * Create a page navbar for videos
-     * @param     $nbAudios
+     * @param     $countAudios
      * @param int $audiosPerPage the number of videos in a page
      * @param int $start         at which position of the array we start
      * @param int $interval      how many pages between the first link and the next one
@@ -118,12 +118,12 @@ class AudioController extends YogurtController
      * @return string|null
      */
     public function getAudiosNavBar(
-        $nbAudios,
+        $countAudios,
         $audiosPerPage,
         $start,
         $interval
     ) {
-        $pageNav = new XoopsPageNav($nbAudios, $audiosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
+        $pageNav = new XoopsPageNav($countAudios, $audiosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
 
         return $pageNav->renderImageNav($interval);
     }

@@ -86,16 +86,16 @@ class VideoController extends YogurtController
 
     /**
      * Assign Video Content to Template
-     * @param $nbVideos
+     * @param $countVideos
      * @param $videos
      * @return bool
      */
 
     public function assignVideoContent(
-        $nbVideos,
+        $countVideos,
         $videos
     ) {
-        if (0 === $nbVideos) {
+        if (0 === $countVideos) {
             return false;
         }
 
@@ -120,7 +120,7 @@ class VideoController extends YogurtController
 
     /**
      * Create a page navbar for videos
-     * @param     $nbVideos
+     * @param     $countVideos
      * @param int $videosPerPage the number of videos in a page
      * @param int $start         at which position of the array we start
      * @param int $interval      how many pages between the first link and the next one
@@ -129,12 +129,12 @@ class VideoController extends YogurtController
      */
 
     public function videosNavBar(
-        $nbVideos,
+        $countVideos,
         $videosPerPage,
         $start,
         $interval
     ) {
-        $pageNav = new XoopsPageNav($nbVideos, $videosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
+        $pageNav = new XoopsPageNav($countVideos, $videosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
 
         return $pageNav->renderImageNav($interval);
     }

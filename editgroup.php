@@ -144,17 +144,17 @@ if (1 === $marker && $group->getVar('owner_uid') === $uid) {
 
     //numbers
 
-    $xoopsTpl->assign('countGroups', $nbSections['nbGroups']);
+    $xoopsTpl->assign('countGroups', $nbSections['countGroups']);
 
-    $xoopsTpl->assign('countPhotos', $nbSections['nbPhotos']);
+    $xoopsTpl->assign('countPhotos', $nbSections['countPhotos']);
 
-    $xoopsTpl->assign('countVideos', $nbSections['nbVideos']);
+    $xoopsTpl->assign('countVideos', $nbSections['countGroups']);
 
-    $xoopsTpl->assign('countNotes', $nbSections['nbNotes']);
+    $xoopsTpl->assign('countNotes', $nbSections['countNotes']);
 
-    $xoopsTpl->assign('countFriends', $nbSections['nbFriends']);
+    $xoopsTpl->assign('countFriends', $nbSections['countFriends']);
 
-    $xoopsTpl->assign('countAudio', $nbSections['nbAudio']);
+    $xoopsTpl->assign('countAudio', $nbSections['countAudios']);
 
     //navbar
 

@@ -298,14 +298,14 @@ class YogurtController extends \XoopsObject
     /**
      * Get for each section the number of objects the user possess
      *
-     * @return array(nbGroups=>"",nbPhotos=>"",nbFriends=>"",nbVideos=>"")
+     * @return array(countGroups=>"",countPhotos=>"",countFriends=>"",countGroups=>"")
      */
 
     public function getNumbersSections()
     {
         $criteriaGroups = new Criteria('rel_user_uid', $this->uidOwner);
 
-        $nbSections['nbGroups'] = $this->relgroupusersFactory->getCount($criteriaGroups);
+        $nbSections['countGroups'] = $this->relgroupusersFactory->getCount($criteriaGroups);
 
         $criteriaUid = new Criteria('uid_owner', $this->uidOwner);
 
@@ -317,23 +317,23 @@ class YogurtController extends \XoopsObject
             $criteriaAlbum->add($criteriaPrivate);
         }
 
-        $nbSections['nbPhotos'] = $this->albumFactory->getCount($criteriaAlbum);
+        $nbSections['countPhotos'] = $this->albumFactory->getCount($criteriaAlbum);
 
         $criteriaFriends = new Criteria('friend1_uid', $this->uidOwner);
 
-        $nbSections['nbFriends'] = $this->friendshipsFactory->getCount($criteriaFriends);
+        $nbSections['countFriends'] = $this->friendshipsFactory->getCount($criteriaFriends);
 
         $criteriaUidAudio = new Criteria('uid_owner', $this->uidOwner);
 
-        $nbSections['nbAudio'] = $this->audioFactory->getCount($criteriaUidAudio);
+        $nbSections['countAudios'] = $this->audioFactory->getCount($criteriaUidAudio);
 
         $criteriaUidVideo = new Criteria('uid_owner', $this->uidOwner);
 
-        $nbSections['nbVideos'] = $this->videosFactory->getCount($criteriaUidVideo);
+        $nbSections['countGroups'] = $this->videosFactory->getCount($criteriaUidVideo);
 
         $criteriaUidNotes = new Criteria('note_to', $this->uidOwner);
 
-        $nbSections['nbNotes'] = $this->notesFactory->getCount($criteriaUidNotes);
+        $nbSections['countNotes'] = $this->notesFactory->getCount($criteriaUidNotes);
 
         return $nbSections;
     }

@@ -37,7 +37,7 @@ $criteriaUid = new Criteria('note_to', $controller->uidOwner);
 $criteriaUid->setOrder('DESC');
 $criteriaUid->setSort('note_id');
 
-if (!($notes = $controller->fetchNotes($nbSections['nbNotes'], $criteriaUid))) {
+if (!($notes = $controller->fetchNotes($nbSections['countNotes'], $criteriaUid))) {
     $xoopsTpl->assign('lang_noNotesyet', _MD_YOGURT_NONOTESYET);
 }
 

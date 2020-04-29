@@ -65,12 +65,12 @@ switch ($op) {
         $uploader  = new \XoopsMediaUploader(
             $uploadDir, $helper->getConfig('mimetypes'), $helper->getConfig('maxsize'), null, null
         );
-        if ($uploader->fetchMedia(Request::getString('xoops_upload_file')[0], '', 'POST')) {
+        if ($uploader->fetchMedia(Request::getString('xoops_upload_file', '', 'POST')[0])) {
             //            $uploader->setPrefix('url_');
 
             $uploader->setPrefix('aud_' . $uid . '_');
 
-            $uploader->fetchMedia(Request::getString('xoops_upload_file')[0], '', 'POST');
+            $uploader->fetchMedia(Request::getString('xoops_upload_file', '', 'POST')[0]);
 
             if (!$uploader->upload()) {
                 $errors = $uploader->getErrors();

@@ -23,7 +23,7 @@ declare(strict_types=1);
 use Xmf\Request;
 use XoopsModules\Yogurt;
 
-const NBPHOTOS = 'nbPhotos';
+const COUNTPHOTOS = 'countPhotos';
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_album.tpl';
 require __DIR__ . '/header.php';
@@ -77,7 +77,7 @@ $criteriaUid->setStart(0);
 /**
  * If there is no pictures in the album show in template lang_nopicyet
  */
-if (isset($nbSections[NBPHOTOS]) && 0 === $nbSections[NBPHOTOS]) {
+if (isset($nbSections[COUNTPHOTOS]) && 0 === $nbSections[COUNTPHOTOS]) {
     $nopicturesyet = _MD_YOGURT_NOTHINGYET;
     $xoopsTpl->assign('lang_nopicyet', $nopicturesyet);
 } else {
@@ -106,7 +106,7 @@ if (isset($nbSections[NBPHOTOS]) && 0 === $nbSections[NBPHOTOS]) {
  */
 $maxfilebytes = $helper->getConfig('maxfilesize');
 if (!empty($xoopsUser)) {
-    if ((isset($nbSections[NBPHOTOS]) && 1 === $controller->isOwner) && $helper->getConfig('countPicture') > $nbSections[NBPHOTOS]) {
+    if ((isset($nbSections[COUNTPHOTOS]) && 1 === $controller->isOwner) && $helper->getConfig('countPicture') > $nbSections[COUNTPHOTOS]) {
         //        $maxfilebytes = $helper->getConfig('maxfilesize');
         $xoopsTpl->assign('maxfilebytes', $maxfilebytes);
         $xoopsTpl->assign('showForm', '1');
@@ -123,9 +123,9 @@ $avatar     = $owner->getVar('user_avatar');
 /**
  * Creating the navigation bar if you have a lot of friends
  */
-$nbPhotos      = $nbSections[NBPHOTOS] ?? 0;
+$countPhotos      = $nbSections[COUNTPHOTOS] ?? 0;
 $navigationBar = new XoopsPageNav(
-    $nbPhotos, $helper->getConfig('picturesperpage'), $start, 'start', 'uid=' . (int)$controller->uidOwner
+    $countPhotos, $helper->getConfig('picturesperpage'), $start, 'start', 'uid=' . (int)$controller->uidOwner
 );
 $navegacao     = $navigationBar->renderImageNav(2);
 
@@ -144,7 +144,7 @@ $xoopsTpl->assign(
 );
 $xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
 $xoopsTpl->assign('lang_editdesc', _MD_YOGURT_EDIT_DESC);
-$xoopsTpl->assign('lang_countPicture', sprintf(_MD_YOGURT_YOUHAVE, ($nbSections[NBPHOTOS] ?? '')));
+$xoopsTpl->assign('lang_countPicture', sprintf(_MD_YOGURT_YOUHAVE, ($nbSections[COUNTPHOTOS] ?? '')));
 
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 $xoopsTpl->assign('navegacao', $navegacao);

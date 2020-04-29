@@ -23,7 +23,7 @@ declare(strict_types=1);
 use Xmf\Request;
 use XoopsModules\Yogurt;
 
-const NBAUDIO = 'nbAudio';
+const COUNTAUDIOS = 'countAudios';
 
 $GLOBALS['xoopsOption']['template_main'] = 'yogurt_audios.tpl';
 require __DIR__ . '/header.php';
@@ -58,7 +58,7 @@ $audios      = $controller->getAudio($criteriaUidAudio);
 /**
  * If there is no audio files show in template lang_noaudioyet
  */
-if (isset($nbSections[NBAUDIO]) && 0 === $nbSections[NBAUDIO]) {
+if (isset($nbSections[COUNTAUDIOS]) && 0 === $nbSections[COUNTAUDIOS]) {
     //    $lang_noaudioyet = _MD_YOGURT_NOTHINGYET;
 
     //    $xoopsTpl->assign('lang_nopicyet', $lang_noaudioyet);
@@ -95,10 +95,10 @@ if (isset($nbSections[NBAUDIO]) && 0 === $nbSections[NBAUDIO]) {
 }
 
 $xoopsTpl->assign('audios', $audios);
-$nbAudio = $nbSections[NBAUDIO] ?? 0;
+$countAudio = $nbSections[COUNTAUDIOS] ?? 0;
 
 try {
-    $audiosArray = $controller->assignAudioContent($nbAudio, $audios);
+    $audiosArray = $controller->assignAudioContent($countAudio, $audios);
 } catch (\RuntimeException $e) {
 }
 
@@ -118,8 +118,8 @@ if (is_array($audiosArray) && count($audiosArray) > 0) {
     $xoopsTpl->assign('lang_noaudioyet', _MD_YOGURT_NOAUDIOYET);
 }
 $pageNav = '';
-if (isset($nbSections[NBAUDIO]) && $nbSections[NBAUDIO] > 0) {
-    $pageNav = $controller->getAudiosNavBar($nbSections[NBAUDIO], $helper->getConfig('audiosperpage'), $start, 2);
+if (isset($nbSections[COUNTAUDIOS]) && $nbSections[COUNTAUDIOS] > 0) {
+    $pageNav = $controller->getAudiosNavBar($nbSections[COUNTAUDIOS], $helper->getConfig('audiosperpage'), $start, 2);
 }
 $xoTheme->addScript('https://unpkg.com/wavesurfer.js');
 

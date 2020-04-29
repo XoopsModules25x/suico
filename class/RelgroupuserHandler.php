@@ -346,14 +346,14 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * @param      $nbgroups
+     * @param      $countGroups
      * @param null $criteria
      * @param int  $shuffle
      * @return array
      */
 
     public function getGroups(
-        $nbgroups,
+        $countGroups,
         $criteria = null,
         $shuffle = 1
     ) {
@@ -405,7 +405,7 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
             if (1 === $shuffle) {
                 \shuffle($vetor);
 
-                $vetor = \array_slice($vetor, 0, $nbgroups);
+                $vetor = \array_slice($vetor, 0, $countGroups);
             }
 
             return $vetor;

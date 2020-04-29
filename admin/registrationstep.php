@@ -103,6 +103,7 @@ if (!empty($template_main)) {
  */
 function profile_stepsave_toggle($step_d, $step_save)
 {
+    $helper = XoopsModules\Yogurt\Helper::getInstance();
     $step_save = (1 == $step_save) ? 0 : 1;
     $handler   = $helper->getHandler('Regstep');
     $obj       = $handler->get($_REQUEST['step_id']);

@@ -375,14 +375,14 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * @param      $nbfriends
+     * @param      $countFriends
      * @param null $criteria
      * @param int  $shuffle
      * @return array
      */
 
     public function getFriends(
-        $nbfriends,
+        $countFriends,
         $criteria = null,
         $shuffle = 1
     ) {
@@ -430,7 +430,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
             if (1 === $shuffle) {
                 \shuffle($vetor);
 
-                $vetor = \array_slice($vetor, 0, $nbfriends);
+                $vetor = \array_slice($vetor, 0, $countFriends);
             }
 
             return $vetor;
@@ -438,14 +438,14 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * @param      $nbfriends
+     * @param      $countFriends
      * @param null $criteria
      * @param int  $shuffle
      * @return array
      */
 
     public function getFans(
-        $nbfriends,
+        $countFriends,
         $criteria = null,
         $shuffle = 1
     ) {
@@ -493,7 +493,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
             if (1 === $shuffle) {
                 \shuffle($vetor);
 
-                $vetor = \array_slice($vetor, 0, $nbfriends);
+                $vetor = \array_slice($vetor, 0, $countFriends);
             }
 
             return $vetor;
