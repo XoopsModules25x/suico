@@ -17,9 +17,9 @@
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
-use XoopsModules\Yogurt\IndexController;
+use XoopsModules\Suico\IndexController;
 
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_changepass.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'suico_changepass.tpl';
 require __DIR__ . '/header.php';
 
 /**
@@ -32,19 +32,19 @@ if (!$GLOBALS['xoopsUser']) {
     redirect_header(XOOPS_URL, 2, _NOPERM);
 }
 
-$xoopsOption['xoops_pagetitle'] = sprintf(_MD_YOGURT_CHANGEPASSWORD, $xoopsModule->getVar('name'), $controller->nameOwner);
+$xoopsOption['xoops_pagetitle'] = sprintf(_MD_SUICO_CHANGEPASSWORD, $xoopsModule->getVar('name'), $controller->nameOwner);
 
 if (!isset($_POST['submit'])) {
     //show change password form
     include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
-    $form = new XoopsThemeForm(_MD_YOGURT_CHANGEPASSWORD, 'form', $_SERVER['REQUEST_URI'], 'post', true);
-    $form->addElement(new XoopsFormPassword(_MD_YOGURT_OLDPASSWORD, 'oldpass', 15, 50), true);
-    $form->addElement(new XoopsFormPassword(_MD_YOGURT_NEWPASSWORD, 'newpass', 15, 50), true);
+    $form = new XoopsThemeForm(_MD_SUICO_CHANGEPASSWORD, 'form', $_SERVER['REQUEST_URI'], 'post', true);
+    $form->addElement(new XoopsFormPassword(_MD_SUICO_OLDPASSWORD, 'oldpass', 15, 50), true);
+    $form->addElement(new XoopsFormPassword(_MD_SUICO_NEWPASSWORD, 'newpass', 15, 50), true);
     $form->addElement(new XoopsFormPassword(_US_VERIFYPASS, 'vpass', 15, 50), true);
     $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
     $form->assign($GLOBALS['xoopsTpl']);
 
-    $xoBreadcrumbs[] = ['title' => _MD_YOGURT_CHANGEPASSWORD];
+    $xoBreadcrumbs[] = ['title' => _MD_SUICO_CHANGEPASSWORD];
 } else {
     /* @var XoopsConfigHandler $configHandler */
     $configHandler             = xoops_getHandler('config');
@@ -55,7 +55,7 @@ if (!isset($_POST['submit'])) {
     $vpass                      = @$myts->stripSlashesGPC(trim($_POST['vpass']));
     $errors                     = [];
     if (!password_verify($oldpass, $GLOBALS['xoopsUser']->getVar('pass', 'n'))) {
-        $errors[] = _MD_YOGURT_WRONGPASSWORD;
+        $errors[] = _MD_SUICO_WRONGPASSWORD;
     }
     if (mb_strlen($password) < $GLOBALS['xoopsConfigUser']['minpass']) {
         $errors[] = sprintf(_US_PWDTOOSHORT, $GLOBALS['xoopsConfigUser']['minpass']);
@@ -71,9 +71,9 @@ if (!isset($_POST['submit'])) {
         $GLOBALS['xoopsUser']->setVar('pass', password_hash($password, PASSWORD_DEFAULT));
         /* @var XoopsMemberHandler $memberHandler */
         $memberHandler = xoops_getHandler('member');
-        $msg           = _MD_YOGURT_ERRORDURINGSAVE;
+        $msg           = _MD_SUICO_ERRORDURINGSAVE;
         if ($memberHandler->insertUser($GLOBALS['xoopsUser'])) {
-            $msg = _MD_YOGURT_PASSWORDCHANGED;
+            $msg = _MD_SUICO_PASSWORDCHANGED;
         }
     }
     redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/index.php?uid=' . $GLOBALS['xoopsUser']->getVar('uid'), 2, $msg);

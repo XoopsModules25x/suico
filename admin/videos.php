@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -32,12 +32,12 @@ $sort  = Request::getString('sort', '');
 
 $adminObject->displayNavigation(basename(__FILE__));
 $permHelper = new Permission();
-$uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/videos/';
-$uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/videos/';
+$uploadDir  = XOOPS_UPLOAD_PATH . '/suico/videos/';
+$uploadUrl  = XOOPS_UPLOAD_URL . '/suico/videos/';
 
 switch ($op) {
     case 'new':
-        $adminObject->addItemButton(AM_YOGURT_VIDEO_LIST, 'videos.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_VIDEO_LIST, 'videos.php', 'list');
         $adminObject->displayButton('left');
 
         $videoObject = $videoHandler->create();
@@ -65,7 +65,7 @@ switch ($op) {
         $videoObject->setVar('date_updated', $dateTimeObj->getTimestamp());
 
         if ($videoHandler->insert($videoObject)) {
-            redirect_header('videos.php?op=list', 2, AM_YOGURT_FORMOK);
+            redirect_header('videos.php?op=list', 2, AM_SUICO_FORMOK);
         }
 
         echo $videoObject->getHtmlErrors();
@@ -73,8 +73,8 @@ switch ($op) {
         $form->display();
         break;
     case 'edit':
-        $adminObject->addItemButton(AM_YOGURT_ADD_VIDEO, 'videos.php?op=new', 'add');
-        $adminObject->addItemButton(AM_YOGURT_VIDEO_LIST, 'videos.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_ADD_VIDEO, 'videos.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_VIDEO_LIST, 'videos.php', 'list');
         $adminObject->displayButton('left');
         $videoObject = $videoHandler->get(Request::getString('video_id', ''));
         $form        = $videoObject->getForm();
@@ -88,7 +88,7 @@ switch ($op) {
             }
 
             if ($videoHandler->delete($videoObject)) {
-                redirect_header('videos.php', 3, AM_YOGURT_FORMDELOK);
+                redirect_header('videos.php', 3, AM_SUICO_FORMDELOK);
             } else {
                 echo $videoObject->getHtmlErrors();
             }
@@ -101,7 +101,7 @@ switch ($op) {
                 ],
                 Request::getUrl('REQUEST_URI', '', 'SERVER'),
                 sprintf(
-                    AM_YOGURT_FORMSUREDEL,
+                    AM_SUICO_FORMSUREDEL,
                     $videoObject->getVar('video_desc')
                 )
             );
@@ -111,16 +111,16 @@ switch ($op) {
 
         $id_field = Request::getString('video_id', '');
 
-        if ($utility::cloneRecord('yogurt_videos', 'video_id', $id_field)) {
-            redirect_header('videos.php', 3, AM_YOGURT_CLONED_OK);
+        if ($utility::cloneRecord('suico_videos', 'video_id', $id_field)) {
+            redirect_header('videos.php', 3, AM_SUICO_CLONED_OK);
         } else {
-            redirect_header('videos.php', 3, AM_YOGURT_CLONED_FAILED);
+            redirect_header('videos.php', 3, AM_SUICO_CLONED_FAILED);
         }
 
         break;
     case 'list':
     default:
-        $adminObject->addItemButton(AM_YOGURT_ADD_VIDEO, 'videos.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_ADD_VIDEO, 'videos.php?op=new', 'add');
         $adminObject->displayButton('left');
         $start                = Request::getInt('start', 0);
         $videoPaginationLimit = $helper->getConfig('userpager');
@@ -135,7 +135,7 @@ switch ($op) {
         /*
         //
         //
-                            <th class='center width5'>".AM_YOGURT_FORM_ACTION."</th>
+                            <th class='center width5'>".AM_SUICO_FORM_ACTION."</th>
         //                    </tr>";
         //            $class = "odd";
         */
@@ -173,33 +173,33 @@ switch ($op) {
             foreach (array_keys($videoTempArray) as $i) {
                 //        $field = explode(':', $fields[$i]);
 
-                $GLOBALS['xoopsTpl']->assign('selectorvideo_id', AM_YOGURT_VIDEO_VIDEO_ID);
+                $GLOBALS['xoopsTpl']->assign('selectorvideo_id', AM_SUICO_VIDEO_VIDEO_ID);
 
                 $videoArray['video_id'] = $videoTempArray[$i]->getVar('video_id');
 
-                $GLOBALS['xoopsTpl']->assign('selectoruid_owner', AM_YOGURT_VIDEO_UID_OWNER);
+                $GLOBALS['xoopsTpl']->assign('selectoruid_owner', AM_SUICO_VIDEO_UID_OWNER);
 
                 $videoArray['uid_owner'] = strip_tags(
                     XoopsUser::getUnameFromId($videoTempArray[$i]->getVar('uid_owner'))
                 );
 
-                $GLOBALS['xoopsTpl']->assign('selectorvideo_desc', AM_YOGURT_VIDEO_VIDEO_DESC);
+                $GLOBALS['xoopsTpl']->assign('selectorvideo_desc', AM_SUICO_VIDEO_VIDEO_DESC);
 
                 $videoArray['video_desc'] = strip_tags($videoTempArray[$i]->getVar('video_desc'));
 
-                $GLOBALS['xoopsTpl']->assign('selectoryoutube_code', AM_YOGURT_VIDEO_YOUTUBE_CODE);
+                $GLOBALS['xoopsTpl']->assign('selectoryoutube_code', AM_SUICO_VIDEO_YOUTUBE_CODE);
 
                 $videoArray['youtube_code'] = $videoTempArray[$i]->getVar('youtube_code');
 
-                $GLOBALS['xoopsTpl']->assign('selectormain_video', AM_YOGURT_VIDEO_MAIN_VIDEO);
+                $GLOBALS['xoopsTpl']->assign('selectormain_video', AM_SUICO_VIDEO_MAIN_VIDEO);
 
                 $videoArray['main_video'] = $videoTempArray[$i]->getVar('main_video');
 
-                $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_VIDEO_DATE_CREATED);
+                $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_SUICO_VIDEO_DATE_CREATED);
 
                 $videoArray['date_created'] = formatTimestamp($videoTempArray[$i]->getVar('date_created'), 's');
 
-                $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_YOGURT_VIDEO_DATE_UPDATED);
+                $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_SUICO_VIDEO_DATE_UPDATED);
 
                 $videoArray['date_updated'] = formatTimestamp($videoTempArray[$i]->getVar('date_updated'), 's');
 
@@ -246,7 +246,7 @@ switch ($op) {
 
             //                    <tr>
 
-            //                     <th class='center width5'>".AM_YOGURT_FORM_ACTION."XXX</th>
+            //                     <th class='center width5'>".AM_SUICO_FORM_ACTION."XXX</th>
 
             //                    </tr><tr><td class='errorMsg' colspan='6'>There are noXXX video</td></tr>";
 
@@ -255,7 +255,7 @@ switch ($op) {
             //-------------------------------------------
 
             echo $GLOBALS['xoopsTpl']->fetch(
-                XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname') . '/templates/admin/yogurt_admin_videos.tpl'
+                XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname') . '/templates/admin/suico_admin_videos.tpl'
             );
         }
 

@@ -14,15 +14,15 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Module\Admin;
-use XoopsModules\Yogurt;
-use XoopsModules\Yogurt\Helper;
+use XoopsModules\Suico;
+use XoopsModules\Suico\Helper;
 
 require dirname(__DIR__) . '/preloads/autoloader.php';
 
@@ -45,105 +45,105 @@ if (is_object($helper->getModule())) {
 }
 
 $adminmenu[] = [
-    'title' => _MI_YOGURT_ADMENU1,
+    'title' => _MI_SUICO_ADMENU1,
     'link'  => 'admin/index.php',
     'icon'  => $pathIcon32 . '/home.png',
 ];
 
 $adminmenu[] = [
-    'title' => MI_YOGURT_ADMENU2,
+    'title' => MI_SUICO_ADMENU2,
     'link'  => 'admin/images.php',
     'icon'  => "{$pathIcon32}/photo.png",
 ];
 
 $adminmenu[] = [
-    'title' => MI_YOGURT_ADMENU3,
+    'title' => MI_SUICO_ADMENU3,
     'link'  => 'admin/friendships.php',
     'icon'  => "{$pathIcon32}/users.png",
 ];
 
 $adminmenu[] = [
-    'title' => MI_YOGURT_ADMENU4,
+    'title' => MI_SUICO_ADMENU4,
     'link'  => 'admin/visitors.php',
     'icon'  => "{$pathIcon32}/user-icon.png",
 ];
 
 $adminmenu[] = [
-    'title' => MI_YOGURT_ADMENU5,
+    'title' => MI_SUICO_ADMENU5,
     'link'  => 'admin/videos.php',
     'icon'  => "{$pathIcon32}/marquee.png",
 ];
 
 $adminmenu[] = [
-    'title' => MI_YOGURT_ADMENU6,
+    'title' => MI_SUICO_ADMENU6,
     'link'  => 'admin/friendrequests.php',
     'icon'  => "{$pathIcon32}/face-smile.png",
 ];
 
 $adminmenu[] = [
-    'title' => MI_YOGURT_ADMENU7,
+    'title' => MI_SUICO_ADMENU7,
     'link'  => 'admin/groups.php',
     'icon'  => "{$pathIcon32}/groupmod.png",
 ];
 
 $adminmenu[] = [
-    'title' => MI_YOGURT_ADMENU8,
+    'title' => MI_SUICO_ADMENU8,
     'link'  => 'admin/relgroupuser.php',
     'icon'  => "{$pathIcon32}/penguin.png",
 ];
 
 $adminmenu[] = [
-    'title' => MI_YOGURT_ADMENU9,
+    'title' => MI_SUICO_ADMENU9,
     'link'  => 'admin/notes.php',
     'icon'  => "{$pathIcon32}/translations.png",
 ];
 
 $adminmenu[] = [
-    'title' => MI_YOGURT_ADMENU10,
+    'title' => MI_SUICO_ADMENU10,
     'link'  => 'admin/configs.php',
     'icon'  => "{$pathIcon32}/administration.png",
 ];
 
 $adminmenu[] = [
-    'title' => MI_YOGURT_ADMENU11,
+    'title' => MI_SUICO_ADMENU11,
     'link'  => 'admin/suspensions.php',
     'icon'  => "{$pathIcon32}/alert.png",
 ];
 
 $adminmenu[] = [
-    'title' => MI_YOGURT_ADMENU12,
+    'title' => MI_SUICO_ADMENU12,
     'link'  => 'admin/audios.php',
     'icon'  => "{$pathIcon32}/playlist.png",
 ];
 
 $adminmenu[] = [
-    'title' => MI_YOGURT_ADMENU13,
+    'title' => MI_SUICO_ADMENU13,
     'link'  => 'admin/privacy.php',
     'icon'  => "{$pathIcon32}/album.png",
 ];
 
 $adminmenu[] = [
-    'title' => MI_YOGURT_ADMENU17,
+    'title' => MI_SUICO_ADMENU17,
     'link'  => 'admin/user.php',
     'icon'  => $pathIcon32 . '/users.png',
 ];
 $adminmenu[] = [
-    'title' => MI_YOGURT_ADMENU18,
+    'title' => MI_SUICO_ADMENU18,
     'link'  => 'admin/fieldscategory.php',
     'icon'  => $pathIcon32 . '/category.png',
 ];
 $adminmenu[] = [
-    'title' => MI_YOGURT_ADMENU19,
+    'title' => MI_SUICO_ADMENU19,
     'link'  => 'admin/fieldslist.php',
     'icon'  => $pathIcon32 . '/index.png',
 ];
 $adminmenu[] = [
-    'title' => MI_YOGURT_ADMENU20,
+    'title' => MI_SUICO_ADMENU20,
     'link'  => 'admin/registrationstep.php',
     'icon'  => $pathIcon32 . '/stats.png',
 ];
 $adminmenu[] = [
-    'title' => MI_YOGURT_ADMENU21,
+    'title' => MI_SUICO_ADMENU21,
     'link'  => 'admin/fieldspermissions.php',
     'icon'  => $pathIcon32 . '/permissions.png',
 ];
@@ -164,7 +164,7 @@ if (is_object($helper->getModule()) && $helper->getConfig('displayDeveloperTools
 }
 
 $adminmenu[] = [
-    'title' => MI_YOGURT_ADMENU16,
+    'title' => MI_SUICO_ADMENU16,
     'link'  => 'admin/about.php',
     'icon'  => "{$pathIcon32}/about.png",
 ];

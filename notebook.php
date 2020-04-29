@@ -14,18 +14,18 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_notebook.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'suico_notebook.tpl';
 require __DIR__ . '/header.php';
 
-$controller = new Yogurt\NotesController($xoopsDB, $xoopsUser);
+$controller = new Suico\NotesController($xoopsDB, $xoopsUser);
 
 /**
  * Fetching numbers of groups friends videos pictures etc...
@@ -38,24 +38,24 @@ $criteriaUid->setOrder('DESC');
 $criteriaUid->setSort('note_id');
 
 if (!($notes = $controller->fetchNotes($nbSections['countNotes'], $criteriaUid))) {
-    $xoopsTpl->assign('lang_noNotesyet', _MD_YOGURT_NONOTESYET);
+    $xoopsTpl->assign('lang_noNotesyet', _MD_SUICO_NONOTESYET);
 }
 
 //form
-$xoopsTpl->assign('lang_entertext', _MD_YOGURT_ENTERTEXTNOTE);
-$xoopsTpl->assign('lang_submit', _MD_YOGURT_SENDNOTE);
-$xoopsTpl->assign('lang_cancel', _MD_YOGURT_CANCEL);
+$xoopsTpl->assign('lang_entertext', _MD_SUICO_ENTERTEXTNOTE);
+$xoopsTpl->assign('lang_submit', _MD_SUICO_SENDNOTE);
+$xoopsTpl->assign('lang_cancel', _MD_SUICO_CANCEL);
 
 //Notes
 $xoopsTpl->assign('notes', $notes);
-$xoopsTpl->assign('lang_answerNote', _MD_YOGURT_ANSWERNOTE);
-$xoopsTpl->assign('lang_tips', _MD_YOGURT_NOTETIPS);
-$xoopsTpl->assign('lang_bold', _MD_YOGURT_BOLD);
-$xoopsTpl->assign('lang_italic', _MD_YOGURT_ITALIC);
-$xoopsTpl->assign('lang_underline', _MD_YOGURT_UNDERLINE);
+$xoopsTpl->assign('lang_answerNote', _MD_SUICO_ANSWERNOTE);
+$xoopsTpl->assign('lang_tips', _MD_SUICO_NOTETIPS);
+$xoopsTpl->assign('lang_bold', _MD_SUICO_BOLD);
+$xoopsTpl->assign('lang_italic', _MD_SUICO_ITALIC);
+$xoopsTpl->assign('lang_underline', _MD_SUICO_UNDERLINE);
 
-$xoopsTpl->assign('lang_mysection', _MD_YOGURT_MYNOTEBOOK);
-$xoopsTpl->assign('section_name', _MD_YOGURT_NOTEBOOK);
+$xoopsTpl->assign('lang_mysection', _MD_SUICO_MYNOTEBOOK);
+$xoopsTpl->assign('section_name', _MD_SUICO_NOTEBOOK);
 
 require __DIR__ . '/footer.php';
 require dirname(__DIR__, 2) . '/footer.php';

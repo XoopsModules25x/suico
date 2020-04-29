@@ -14,14 +14,14 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
 
@@ -35,8 +35,8 @@ require __DIR__ . '/header.php';
 /**
  * Factories of groups
  */
-$relgroupuserFactory = new Yogurt\RelgroupuserHandler($xoopsDB);
-$groupsFactory       = new Yogurt\GroupsHandler($xoopsDB);
+$relgroupuserFactory = new Suico\RelgroupuserHandler($xoopsDB);
+$groupsFactory       = new Suico\GroupsHandler($xoopsDB);
 
 $marker = Request::getInt('marker', 0, 'POST');
 
@@ -45,7 +45,7 @@ if (1 == $marker) { //if (1 === $marker) {
      * Verify Token
      */
     if (!$GLOBALS['xoopsSecurity']->check()) {
-        redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+        redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
     }
 
     if (0 !== \Xmf\Request::getInt('group_id', 0)) {
@@ -67,7 +67,7 @@ if (1 == $marker) { //if (1 === $marker) {
     $groupsObject->setVar('date_updated', \time());
 
     require_once XOOPS_ROOT_PATH . '/class/uploader.php';
-    $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/groups/';
+    $uploadDir = XOOPS_UPLOAD_PATH . '/suico/groups/';
     $uploader  = new \XoopsMediaUploader(
         $uploadDir, $helper->getConfig('mimetypes'), $helper->getConfig('maxsize'), null, null
     );
@@ -99,17 +99,17 @@ if (1 == $marker) { //if (1 === $marker) {
 
         $relgroupuserFactory->insert($relgroupuser);
         $group_id = $relgroupuser->getVar('rel_group_id', $xoopsDB->getInsertId());
-        redirect_header('group.php?group_id=' . $group_id . '', 500, _MD_YOGURT_GROUP_CREATED);
-        redirect_header('groups.php?op=list', 2, _MD_YOGURT_GROUP_SAVED);
+        redirect_header('group.php?group_id=' . $group_id . '', 500, _MD_SUICO_GROUP_CREATED);
+        redirect_header('groups.php?op=list', 2, _MD_SUICO_GROUP_SAVED);
     } else {
         redirect_header(
-            XOOPS_URL . '/modules/yogurt/audios.php?uid=' . (int)$xoopsUser->getVar('uid'),
+            XOOPS_URL . '/modules/suico/audios.php?uid=' . (int)$xoopsUser->getVar('uid'),
             2,
-            _MD_YOGURT_ERROR
+            _MD_SUICO_ERROR
         );
 
         $group_img   = !empty($_POST['group_img']) ? Request::getString('group_img', '', 'POST') : '';
-        $path_upload = XOOPS_UPLOAD_PATH . '/yogurt/groups';
+        $path_upload = XOOPS_UPLOAD_PATH . '/suico/groups';
 
         $pictwidth   = $helper->getConfig('resized_width');
         $pictheight  = $helper->getConfig('resized_height');
@@ -135,7 +135,7 @@ if (1 == $marker) { //if (1 === $marker) {
             $relgroupuser->setVar('rel_user_uid', $xoopsUser->getVar('uid'));
             $relgroupuserFactory->insert2($relgroupuser);
             $group_id = $relgroupuser->getVar('rel_group_id', $xoopsDB->getInsertId());
-            redirect_header('group.php?group_id=' . $group_id . '', 500, _MD_YOGURT_GROUP_CREATED);
+            redirect_header('group.php?group_id=' . $group_id . '', 500, _MD_SUICO_GROUP_CREATED);
         } else {
             $groupsFactory->renderFormSubmit(120000, $xoopsTpl);
         }

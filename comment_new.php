@@ -14,18 +14,18 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
 
-$controller = new Yogurt\GroupController($xoopsDB, $xoopsUser);
+$controller = new Suico\GroupController($xoopsDB, $xoopsUser);
 
 /**
  * Receiving info from get parameters
@@ -37,7 +37,7 @@ $group    = $groups[0];
 
 $comItemid = Request::getInt('com_itemid', 0, 'GET');
 if ($comItemid > 0) {
-    $com_replytitle = _MD_YOGURT_GROUPS . ': ' . $group->getVar('group_title');
+    $com_replytitle = _MD_SUICO_GROUPS . ': ' . $group->getVar('group_title');
 
     require XOOPS_ROOT_PATH . '/include/comment_new.php';
 }

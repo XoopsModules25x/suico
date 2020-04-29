@@ -18,7 +18,7 @@
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt\IndexController;
+use XoopsModules\Suico\IndexController;
 
 $op = $_REQUEST['op'] ?? 'search';
 
@@ -26,7 +26,7 @@ switch ($op) {
     default:
     case 'search':
 
-        $GLOBALS['xoopsOption']['template_main'] = 'yogurt_search.tpl';
+        $GLOBALS['xoopsOption']['template_main'] = 'suico_search.tpl';
         require __DIR__ . '/header.php';
 
         $myts       = MyTextSanitizer::getInstance();
@@ -87,8 +87,8 @@ switch ($op) {
             switch ($fields[$i]->getVar('field_type')) {
                 case 'textbox':
                     if (XOBJ_DTYPE_INT == $fields[$i]->getVar('field_valuetype')) {
-                        $searchform->addElement(new XoopsFormText(sprintf(_MD_YOGURT_LARGERTHAN, $fields[$i]->getVar('field_title')), $fields[$i]->getVar('field_name') . '_larger', 35, 35));
-                        $searchform->addElement(new XoopsFormText(sprintf(_MD_YOGURT_SMALLERTHAN, $fields[$i]->getVar('field_title')), $fields[$i]->getVar('field_name') . '_smaller', 35, 35));
+                        $searchform->addElement(new XoopsFormText(sprintf(_MD_SUICO_LARGERTHAN, $fields[$i]->getVar('field_title')), $fields[$i]->getVar('field_name') . '_larger', 35, 35));
+                        $searchform->addElement(new XoopsFormText(sprintf(_MD_SUICO_SMALLERTHAN, $fields[$i]->getVar('field_title')), $fields[$i]->getVar('field_name') . '_smaller', 35, 35));
                     } else {
                         $tray = new XoopsFormElementTray($fields[$i]->getVar('field_title'));
                         $tray->addElement(new XoopsFormSelectMatchOption('', $fields[$i]->getVar('field_name') . '_match'));
@@ -116,8 +116,8 @@ switch ($op) {
                     break;
                 case 'date':
                 case 'datetime':
-                    $searchform->addElement(new XoopsFormTextDateSelect(sprintf(_MD_YOGURT_LATERTHAN, $fields[$i]->getVar('field_title')), $fields[$i]->getVar('field_name') . '_larger', 15, 1));
-                    $searchform->addElement(new XoopsFormTextDateSelect(sprintf(_MD_YOGURT_EARLIERTHAN, $fields[$i]->getVar('field_title')), $fields[$i]->getVar('field_name') . '_smaller', 15, time()));
+                    $searchform->addElement(new XoopsFormTextDateSelect(sprintf(_MD_SUICO_LATERTHAN, $fields[$i]->getVar('field_title')), $fields[$i]->getVar('field_name') . '_larger', 15, 1));
+                    $searchform->addElement(new XoopsFormTextDateSelect(sprintf(_MD_SUICO_EARLIERTHAN, $fields[$i]->getVar('field_title')), $fields[$i]->getVar('field_name') . '_smaller', 15, time()));
                     break;
                 case 'timezone':
                     $element = new XoopsFormSelect($fields[$i]->getVar('field_title'), $fields[$i]->getVar('field_name'), null, 6, true);
@@ -135,44 +135,44 @@ switch ($op) {
         }
         asort($sortby_arr);
         $sortby_arr    = array_merge(['' => _NONE, 'uname' => _US_NICKNAME, 'email' => _US_EMAIL], $sortby_arr);
-        $sortby_select = new XoopsFormSelect(_MD_YOGURT_SORTBY, 'sortby');
+        $sortby_select = new XoopsFormSelect(_MD_SUICO_SORTBY, 'sortby');
         $sortby_select->addOptionArray($sortby_arr);
         $searchform->addElement($sortby_select);
 
-        $order_select = new XoopsFormRadio(_MD_YOGURT_ORDER, 'order', 0);
+        $order_select = new XoopsFormRadio(_MD_SUICO_ORDER, 'order', 0);
         $order_select->addOption(0, _ASCENDING);
         $order_select->addOption(1, _DESCENDING);
         $searchform->addElement($order_select);
 
-        $limit_text = new XoopsFormText(_MD_YOGURT_PERPAGE, 'limit', 15, 10, $limit_default);
+        $limit_text = new XoopsFormText(_MD_SUICO_PERPAGE, 'limit', 15, 10, $limit_default);
         $searchform->addElement($limit_text);
         $searchform->addElement(new XoopsFormHidden('op', 'results'));
         $searchform->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
 
         $searchform->assign($GLOBALS['xoopsTpl']);
-        $GLOBALS['xoopsTpl']->assign('page_title', _MD_YOGURT_SEARCH);
+        $GLOBALS['xoopsTpl']->assign('page_title', _MD_SUICO_SEARCH);
 
         //added count user
         /* @var XoopsMemberHandler $memberHandler */
         $memberHandler = xoops_getHandler('member');
         $acttotal      = $memberHandler->getUserCount(new Criteria('level', 0, '>'));
-        $total         = sprintf(_MD_YOGURT_ACTUS, "<span style='color:#ff0000;'>{$acttotal}</span>");
+        $total         = sprintf(_MD_SUICO_ACTUS, "<span style='color:#ff0000;'>{$acttotal}</span>");
         $GLOBALS['xoopsTpl']->assign('total_users', $total);
         break;
     case 'results':
-        $GLOBALS['xoopsOption']['template_main'] = 'yogurt_results.tpl';
+        $GLOBALS['xoopsOption']['template_main'] = 'suico_results.tpl';
         require __DIR__ . '/header.php';
 
         $myts       = MyTextSanitizer::getInstance();
         $controller = new IndexController($xoopsDB, $xoopsUser, $xoopsModule);
         $nbSections = $controller->getNumbersSections();
 
-        $GLOBALS['xoopsTpl']->assign('page_title', _MD_YOGURT_RESULTS);
+        $GLOBALS['xoopsTpl']->assign('page_title', _MD_SUICO_RESULTS);
         $xoBreadcrumbs[] = [
             'link'  => XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/searchuser.php',
             'title' => _SEARCH,
         ];
-        $xoBreadcrumbs[] = ['title' => _MD_YOGURT_RESULTS];
+        $xoBreadcrumbs[] = ['title' => _MD_SUICO_RESULTS];
         /* @var XoopsMemberHandler $memberHandler */
         $memberHandler = xoops_getHandler('member');
         // Dynamic fields
@@ -393,7 +393,7 @@ switch ($op) {
 
         [$users, $profiles, $total_users] = $profileHandler->search($criteria, $searchvars, $searchgroups);
 
-        $total = sprintf(_MD_YOGURT_FOUNDUSER, "<span class='red'>{$total_users}</span>") . ' ';
+        $total = sprintf(_MD_SUICO_FOUNDUSER, "<span class='red'>{$total_users}</span>") . ' ';
         $GLOBALS['xoopsTpl']->assign('total_users', $total);
 
         //Sort information

@@ -14,15 +14,15 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
-use XoopsModules\Yogurt\Common\Migrate;
+use XoopsModules\Suico;
+use XoopsModules\Suico\Common\Migrate;
 
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
@@ -45,7 +45,7 @@ EOF;
 
 //XoopsLoad::load('migrate', 'newbb');
 
-$configurator = new Yogurt\Common\Configurator();
+$configurator = new Suico\Common\Configurator();
 
 $migrator = new Migrate($configurator);
 

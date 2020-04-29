@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt\Form;
+namespace XoopsModules\Suico\Form;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -16,7 +16,7 @@ namespace XoopsModules\Yogurt\Form;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -28,13 +28,13 @@ use XoopsFormHidden;
 use XoopsFormLabel;
 use XoopsFormSelectUser;
 use XoopsFormText;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 use XoopsThemeForm;
 
 require_once \dirname(__DIR__, 2) . '/include/common.php';
 
 $moduleDirName = \basename(\dirname(__DIR__, 2));
-//$helper = Yogurt\Helper::getInstance();
+//$helper = Suico\Helper::getInstance();
 $permHelper = new Permission();
 
 \xoops_load('XoopsFormLoader');
@@ -60,7 +60,7 @@ class ConfigsForm extends XoopsThemeForm
 
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? \sprintf(\AM_YOGURT_CONFIGS_ADD) : \sprintf(\AM_YOGURT_CONFIGS_EDIT);
+        $title = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_CONFIGS_ADD) : \sprintf(\AM_SUICO_CONFIGS_EDIT);
 
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
 
@@ -81,14 +81,14 @@ class ConfigsForm extends XoopsThemeForm
         // Config_id
 
         $this->addElement(
-            new XoopsFormLabel(\AM_YOGURT_CONFIGS_CONFIG_ID, $this->targetObject->getVar('config_id'), 'config_id')
+            new XoopsFormLabel(\AM_SUICO_CONFIGS_CONFIG_ID, $this->targetObject->getVar('config_id'), 'config_id')
         );
 
         // Config_uid
 
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_YOGURT_CONFIGS_CONFIG_UID, 'config_uid', false, $this->targetObject->getVar(
+                \AM_SUICO_CONFIGS_CONFIG_UID, 'config_uid', false, $this->targetObject->getVar(
                 'config_uid'
             ), 1, false
             ),
@@ -105,7 +105,7 @@ class ConfigsForm extends XoopsThemeForm
 
         $privacyHandler = $this->helper->getHandler('Privacy');
 
-        $privacy_id_select = new \XoopsFormSelect(\AM_YOGURT_CONFIGS_PICTURES, 'pictures', $this->targetObject->getVar('pictures'));
+        $privacy_id_select = new \XoopsFormSelect(\AM_SUICO_CONFIGS_PICTURES, 'pictures', $this->targetObject->getVar('pictures'));
 
         $privacy_id_select->addOptionArray($privacyHandler->getList());
 
@@ -121,7 +121,7 @@ class ConfigsForm extends XoopsThemeForm
 
         $privacyHandler = $this->helper->getHandler('Privacy');
 
-        $privacy_id_select = new \XoopsFormSelect(\AM_YOGURT_CONFIGS_AUDIO, 'audio', $this->targetObject->getVar('audio'));
+        $privacy_id_select = new \XoopsFormSelect(\AM_SUICO_CONFIGS_AUDIO, 'audio', $this->targetObject->getVar('audio'));
 
         $privacy_id_select->addOptionArray($privacyHandler->getList());
 
@@ -137,7 +137,7 @@ class ConfigsForm extends XoopsThemeForm
 
         $privacyHandler = $this->helper->getHandler('Privacy');
 
-        $privacy_id_select = new \XoopsFormSelect(\AM_YOGURT_CONFIGS_VIDEOS, 'videos', $this->targetObject->getVar('videos'));
+        $privacy_id_select = new \XoopsFormSelect(\AM_SUICO_CONFIGS_VIDEOS, 'videos', $this->targetObject->getVar('videos'));
 
         $privacy_id_select->addOptionArray($privacyHandler->getList());
 
@@ -153,7 +153,7 @@ class ConfigsForm extends XoopsThemeForm
 
         $privacyHandler = $this->helper->getHandler('Privacy');
 
-        $privacy_id_select = new \XoopsFormSelect(\AM_YOGURT_CONFIGS_GROUPS, 'groups', $this->targetObject->getVar('groups'));
+        $privacy_id_select = new \XoopsFormSelect(\AM_SUICO_CONFIGS_GROUPS, 'groups', $this->targetObject->getVar('groups'));
 
         $privacy_id_select->addOptionArray($privacyHandler->getList());
 
@@ -169,7 +169,7 @@ class ConfigsForm extends XoopsThemeForm
 
         $privacyHandler = $this->helper->getHandler('Privacy');
 
-        $privacy_id_select = new \XoopsFormSelect(\AM_YOGURT_CONFIGS_NOTES, 'notes', $this->targetObject->getVar('notes'));
+        $privacy_id_select = new \XoopsFormSelect(\AM_SUICO_CONFIGS_NOTES, 'notes', $this->targetObject->getVar('notes'));
 
         $privacy_id_select->addOptionArray($privacyHandler->getList());
 
@@ -185,7 +185,7 @@ class ConfigsForm extends XoopsThemeForm
 
         $privacyHandler = $this->helper->getHandler('Privacy');
 
-        $privacy_id_select = new \XoopsFormSelect(\AM_YOGURT_CONFIGS_FRIENDS, 'friends', $this->targetObject->getVar('friends'));
+        $privacy_id_select = new \XoopsFormSelect(\AM_SUICO_CONFIGS_FRIENDS, 'friends', $this->targetObject->getVar('friends'));
 
         $privacy_id_select->addOptionArray($privacyHandler->getList());
 
@@ -201,7 +201,7 @@ class ConfigsForm extends XoopsThemeForm
 
         $privacyHandler = $this->helper->getHandler('Privacy');
 
-        $privacy_id_select = new \XoopsFormSelect(\AM_YOGURT_CONFIGS_PROFILE_CONTACT, 'profile_contact', $this->targetObject->getVar('profile_contact'));
+        $privacy_id_select = new \XoopsFormSelect(\AM_SUICO_CONFIGS_PROFILE_CONTACT, 'profile_contact', $this->targetObject->getVar('profile_contact'));
 
         $privacy_id_select->addOptionArray($privacyHandler->getList());
 
@@ -217,7 +217,7 @@ class ConfigsForm extends XoopsThemeForm
 
         $privacyHandler = $this->helper->getHandler('Privacy');
 
-        $privacy_id_select = new \XoopsFormSelect(\AM_YOGURT_CONFIGS_PROFILE_GENERAL, 'profile_general', $this->targetObject->getVar('profile_general'));
+        $privacy_id_select = new \XoopsFormSelect(\AM_SUICO_CONFIGS_PROFILE_GENERAL, 'profile_general', $this->targetObject->getVar('profile_general'));
 
         $privacy_id_select->addOptionArray($privacyHandler->getList());
 
@@ -233,7 +233,7 @@ class ConfigsForm extends XoopsThemeForm
 
         $privacyHandler = $this->helper->getHandler('Privacy');
 
-        $privacy_id_select = new \XoopsFormSelect(\AM_YOGURT_CONFIGS_PROFILE_STATS, 'profile_stats', $this->targetObject->getVar('profile_stats'));
+        $privacy_id_select = new \XoopsFormSelect(\AM_SUICO_CONFIGS_PROFILE_STATS, 'profile_stats', $this->targetObject->getVar('profile_stats'));
 
         $privacy_id_select->addOptionArray($privacyHandler->getList());
 
@@ -243,7 +243,7 @@ class ConfigsForm extends XoopsThemeForm
 
         $suspension = $this->targetObject->isNew() ? 0 : $this->targetObject->getVar('suspension');
 
-        $check_suspension = new \XoopsFormCheckBox(\AM_YOGURT_CONFIGS_SUSPENSION, 'suspension', $suspension);
+        $check_suspension = new \XoopsFormCheckBox(\AM_SUICO_CONFIGS_SUSPENSION, 'suspension', $suspension);
 
         $check_suspension->addOption(1, ' ');
 
@@ -253,7 +253,7 @@ class ConfigsForm extends XoopsThemeForm
 
         $this->addElement(
             new XoopsFormText(
-                \AM_YOGURT_CONFIGS_BACKUP_PASSWORD, 'backup_password', 50, 255, $this->targetObject->getVar(
+                \AM_SUICO_CONFIGS_BACKUP_PASSWORD, 'backup_password', 50, 255, $this->targetObject->getVar(
                 'backup_password'
             )
             ),
@@ -264,7 +264,7 @@ class ConfigsForm extends XoopsThemeForm
 
         $this->addElement(
             new XoopsFormText(
-                \AM_YOGURT_CONFIGS_BACKUP_EMAIL, 'backup_email', 50, 255, $this->targetObject->getVar(
+                \AM_SUICO_CONFIGS_BACKUP_EMAIL, 'backup_email', 50, 255, $this->targetObject->getVar(
                 'backup_email'
             )
             ),
@@ -273,11 +273,11 @@ class ConfigsForm extends XoopsThemeForm
 
         // End_suspension
 
-        //        $this->addElement(new \XoopsFormDateTime(AM_YOGURT_CONFIGS_END_SUSPENSION, 'end_suspension', '', \strtotime($this->targetObject->getVar('end_suspension'))));
+        //        $this->addElement(new \XoopsFormDateTime(AM_SUICO_CONFIGS_END_SUSPENSION, 'end_suspension', '', \strtotime($this->targetObject->getVar('end_suspension'))));
 
         $endSuspension = $this->targetObject->isNew() ? 0 : $this->targetObject->getVar('end_suspension');
 
-        $this->addElement(new \XoopsFormTextDateSelect(\AM_YOGURT_CONFIGS_END_SUSPENSION, 'end_suspension', 0, $endSuspension), true);
+        $this->addElement(new \XoopsFormTextDateSelect(\AM_SUICO_CONFIGS_END_SUSPENSION, 'end_suspension', 0, $endSuspension), true);
 
         $this->addElement(new XoopsFormHidden('op', 'save'));
 

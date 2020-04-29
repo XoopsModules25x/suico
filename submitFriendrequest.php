@@ -14,16 +14,16 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'suico_index.tpl';
 require __DIR__ . '/header.php';
 
 /**
@@ -34,7 +34,7 @@ require __DIR__ . '/header.php';
 /**
  * Factory of friendrequests created
  */
-$friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
+$friendrequestFactory = new Suico\FriendrequestHandler($xoopsDB);
 
 /**
  * Getting the uid of the user which user want to ask to be friend
@@ -42,7 +42,7 @@ $friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
 $friendrequestfrom_uid = $_POST['friendrequestfrom_uid'];
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
 
 //Verify if the user has already asked for friendship or if the user he s asking to be a friend has already asked him
@@ -54,18 +54,18 @@ $criteria = new CriteriaCompo(
 $criteria->add(new Criteria('friendrequester_uid', $xoopsUser->getVar('uid')));
 if ($friendrequestFactory->getCount($criteria) > 0) {
     redirect_header(
-        XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('friendrequestfrom_uid', 0, 'POST'),
+        XOOPS_URL . '/modules/suico/index.php?uid=' . Request::getInt('friendrequestfrom_uid', 0, 'POST'),
         3,
-        _MD_YOGURT_ALREADY_FRIEND_REQUESTFROM
+        _MD_SUICO_ALREADY_FRIEND_REQUESTFROM
     );
 } else {
     $criteria2 = new CriteriaCompo(new Criteria('friendrequester_uid', $friendrequestfrom_uid));
     $criteria2->add(new Criteria('friendrequestto_uid', $xoopsUser->getVar('uid')));
     if ($friendrequestFactory->getCount($criteria2) > 0) {
         redirect_header(
-            XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('friendrequestfrom_uid', 0, 'POST'),
+            XOOPS_URL . '/modules/suico/index.php?uid=' . Request::getInt('friendrequestfrom_uid', 0, 'POST'),
             3,
-            _MD_YOGURT_ALREADY_FRIEND_REQUESTFROM
+            _MD_SUICO_ALREADY_FRIEND_REQUESTFROM
         );
     }
 }
@@ -84,15 +84,15 @@ if ($friendrequestFactory->insert2($newFriendrequest)) {
     $notificationHandler->triggerEvent('friendship', Request::getInt('friendrequestfrom_uid', 0, 'POST'), 'new_friendship', $extra_tags);
 
     redirect_header(
-        XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('friendrequestfrom_uid', 0, 'POST'),
+        XOOPS_URL . '/modules/suico/index.php?uid=' . Request::getInt('friendrequestfrom_uid', 0, 'POST'),
         3,
-        _MD_YOGURT_FRIENDREQUEST_FROM
+        _MD_SUICO_FRIENDREQUEST_FROM
     );
 } else {
     redirect_header(
-        XOOPS_URL . '/modules/yogurt/index.php?uid=' . $xoopsUser->getVar('uid'),
+        XOOPS_URL . '/modules/suico/index.php?uid=' . $xoopsUser->getVar('uid'),
         3,
-        _MD_YOGURT_ERROR
+        _MD_SUICO_ERROR
     );
 }
 

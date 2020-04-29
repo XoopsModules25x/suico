@@ -14,21 +14,21 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_group.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'suico_group.tpl';
 require __DIR__ . '/header.php';
 
 $helper->loadLanguage('main');
 
-$controller = new Yogurt\GroupController($xoopsDB, $xoopsUser);
+$controller = new Suico\GroupController($xoopsDB, $xoopsUser);
 
 /**
  * Fetching numbers of groups friends videos pictures etc...
@@ -43,7 +43,7 @@ $group    = $groups[0];
 /**
  * Fetching rel_id
  */
-$sql               = 'SELECT * FROM ' . $GLOBALS['xoopsDB']->prefix('yogurt_relgroupuser') . ' WHERE rel_group_id=' . $group_id . ' AND rel_user_uid=' . $controller->uidOwner . '';
+$sql               = 'SELECT * FROM ' . $GLOBALS['xoopsDB']->prefix('suico_relgroupuser') . ' WHERE rel_group_id=' . $group_id . ' AND rel_user_uid=' . $controller->uidOwner . '';
 $result            = $GLOBALS['xoopsDB']->query($sql);
 $myrow             = $GLOBALS['xoopsDB']->fetchArray($result);
 $mygroup['rel_id'] = $myrow['rel_id'];
@@ -63,7 +63,7 @@ foreach ($group_members as $group_member) {
     $uids[] = (int)$group_member['uid'];
     $grouptotalmembers++;
 }
-$xoopsTpl->assign('grouptotalmembers', $grouptotalmembers . ' ' . _MD_YOGURT_GROUPMEMBERS);
+$xoopsTpl->assign('grouptotalmembers', $grouptotalmembers . ' ' . _MD_SUICO_GROUPMEMBERS);
 
 if (!empty($uids)) {
     if ($xoopsUser) {
@@ -79,7 +79,7 @@ $group_ownername = XoopsUser::getUnameFromId($owner_uid);
 
 $xoopsTpl->assign('group_members', $group_members);
 $maxfilebytes = $helper->getConfig('maxfilesize');
-$xoopsTpl->assign('lang_savegroup', _MD_YOGURT_UPLOADGROUP);
+$xoopsTpl->assign('lang_savegroup', _MD_SUICO_UPLOADGROUP);
 $xoopsTpl->assign('maxfilesize', $maxfilebytes);
 $xoopsTpl->assign('group_title', $group->getVar('group_title'));
 $xoopsTpl->assign('group_desc', $group->getVar('group_desc'));
@@ -88,29 +88,29 @@ $xoopsTpl->assign('group_id', $group->getVar('group_id'));
 $xoopsTpl->assign('group_owneruid', $group->getVar('owner_uid'));
 $xoopsTpl->assign('group_ownername', $group_ownername);
 
-$xoopsTpl->assign('lang_groupdatecreated', _MD_YOGURT_GROUPDATECREATED);
-$xoopsTpl->assign('lang_grouptotalmembers', _MD_YOGURT_GROUPTOTALMEMBERS);
-$xoopsTpl->assign('lang_groupmembers', _MD_YOGURT_GROUPMEMBERS);
-$xoopsTpl->assign('lang_membersofgroup', _MD_YOGURT_MEMBERSOFGROUP);
-$xoopsTpl->assign('lang_editgroup', _MD_YOGURT_EDIT_GROUP);
-$xoopsTpl->assign('lang_groupimage', _MD_YOGURT_GROUP_IMAGE);
-$xoopsTpl->assign('lang_keepimage', _MD_YOGURT_MAINTAIN_OLD_IMAGE);
-$xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOU_CAN_UPLOAD, $maxfilebytes / 1024));
-$xoopsTpl->assign('lang_titlegroup', _MD_YOGURT_GROUP_TITLE);
-$xoopsTpl->assign('lang_descgroup', _MD_YOGURT_GROUP_DESC);
-$xoopsTpl->assign('lang_abandongroup', _MD_YOGURT_GROUP_ABANDON);
-$xoopsTpl->assign('lang_joingroup', _MD_YOGURT_GROUP_JOIN);
-$xoopsTpl->assign('lang_ownerofgroup', _MD_YOGURT_OWNEROFGROUP);
-$xoopsTpl->assign('lang_removemember', _MD_YOGURT_KICKOUT);
+$xoopsTpl->assign('lang_groupdatecreated', _MD_SUICO_GROUPDATECREATED);
+$xoopsTpl->assign('lang_grouptotalmembers', _MD_SUICO_GROUPTOTALMEMBERS);
+$xoopsTpl->assign('lang_groupmembers', _MD_SUICO_GROUPMEMBERS);
+$xoopsTpl->assign('lang_membersofgroup', _MD_SUICO_MEMBERSOFGROUP);
+$xoopsTpl->assign('lang_editgroup', _MD_SUICO_EDIT_GROUP);
+$xoopsTpl->assign('lang_groupimage', _MD_SUICO_GROUP_IMAGE);
+$xoopsTpl->assign('lang_keepimage', _MD_SUICO_MAINTAIN_OLD_IMAGE);
+$xoopsTpl->assign('lang_youcanupload', sprintf(_MD_SUICO_YOU_CAN_UPLOAD, $maxfilebytes / 1024));
+$xoopsTpl->assign('lang_titlegroup', _MD_SUICO_GROUP_TITLE);
+$xoopsTpl->assign('lang_descgroup', _MD_SUICO_GROUP_DESC);
+$xoopsTpl->assign('lang_abandongroup', _MD_SUICO_GROUP_ABANDON);
+$xoopsTpl->assign('lang_joingroup', _MD_SUICO_GROUP_JOIN);
+$xoopsTpl->assign('lang_ownerofgroup', _MD_SUICO_OWNEROFGROUP);
+$xoopsTpl->assign('lang_removemember', _MD_SUICO_KICKOUT);
 
-//$xoopsTpl->assign('path_yogurt_uploads',$helper->getConfig('link_path_upload'));
+//$xoopsTpl->assign('path_suico_uploads',$helper->getConfig('link_path_upload'));
 $xoopsTpl->assign(
     'lang_owner',
-    _MD_YOGURT_GROUPOWNER
+    _MD_SUICO_GROUPOWNER
 );
 
-$xoopsTpl->assign('lang_mysection', _MD_YOGURT_GROUPS . ' :: ' . $group->getVar('group_title'));
-$xoopsTpl->assign('section_name', _MD_YOGURT_GROUPS . '> ' . $group->getVar('group_title'));
+$xoopsTpl->assign('lang_mysection', _MD_SUICO_GROUPS . ' :: ' . $group->getVar('group_title'));
+$xoopsTpl->assign('section_name', _MD_SUICO_GROUPS . '> ' . $group->getVar('group_title'));
 
 require_once XOOPS_ROOT_PATH . '/include/comment_view.php';
 

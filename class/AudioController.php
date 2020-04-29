@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 use Criteria;
 use Exception;
@@ -20,7 +20,7 @@ use XoopsPageNav;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -48,9 +48,9 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 //}
 
 /**
- * Class YogurtAudioController
+ * Class SuicoAudioController
  */
-class AudioController extends YogurtController
+class AudioController extends SuicoController
 {
     /**
      * Fetch audios
@@ -91,7 +91,7 @@ class AudioController extends YogurtController
             $audiosArray[$i]['author']       = $audio->getVar('author', 's');
             $audiosArray[$i]['date_created'] = \formatTimestamp($audio->getVar('date_created', 's'));
             $audiosArray[$i]['date_updated'] = \formatTimestamp($audio->getVar('date_updated', 's'));
-            $audio_path                      = XOOPS_ROOT_PATH . '/uploads/yogurt/audio/' . $audio->getVar('filename', 's');
+            $audio_path                      = XOOPS_ROOT_PATH . '/uploads/suico/audio/' . $audio->getVar('filename', 's');
             // echo $audio_path;
             $mp3filemetainfo                = new Id3v1($audio_path, true);
             $mp3filemetainfoarray           = [];
@@ -134,7 +134,7 @@ class AudioController extends YogurtController
     public function checkPrivilege()
     {
         if (0 === $this->helper->getConfig('enable_audio')) {
-            \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, \_MD_YOGURT_AUDIO_ENABLED_NOT);
+            \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, \_MD_SUICO_AUDIO_ENABLED_NOT);
         }
         $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
         if (1 === $this->configsFactory->getCount($criteria)) {
@@ -143,7 +143,7 @@ class AudioController extends YogurtController
             $config = $configs[0]->getVar('audio');
 
             if (!$this->checkPrivilegeLevel($config)) {
-                \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, \_MD_YOGURT_NOPRIVILEGE);
+                \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, \_MD_SUICO_NOPRIVILEGE);
             }
         }
 

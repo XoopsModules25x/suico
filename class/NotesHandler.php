@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -16,7 +16,7 @@ namespace XoopsModules\Yogurt;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -48,20 +48,20 @@ class NotesHandler extends XoopsPersistableObjectHandler
     /**
      * Constructor
      * @param \XoopsDatabase|null              $xoopsDatabase
-     * @param \XoopsModules\Yogurt\Helper|null $helper
+     * @param \XoopsModules\Suico\Helper|null $helper
      */
     public function __construct(
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Yogurt\Helper $this ->helper */
+        /** @var \XoopsModules\Suico\Helper $this ->helper */
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
             $this->helper = $helper;
         }
         $isAdmin = $this->helper->isUserAdmin();
-        parent::__construct($xoopsDatabase, 'yogurt_notes', Notes::class, 'note_id', 'note_id');
+        parent::__construct($xoopsDatabase, 'suico_notes', Notes::class, 'note_id', 'note_id');
     }
 
     /**
@@ -95,16 +95,16 @@ class NotesHandler extends XoopsPersistableObjectHandler
         $id = null,
         $fields = null
     ) {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_notes') . ' WHERE note_id=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_notes') . ' WHERE note_id=' . $id;
         if (!$result = $this->db->query($sql)) {
             return false;
         }
         $numrows = $this->db->getRowsNum($result);
         if (1 === $numrows) {
-            $yogurt_notes = new Notes();
-            $yogurt_notes->assignVars($this->db->fetchArray($result));
+            $suico_notes = new Notes();
+            $suico_notes->assignVars($this->db->fetchArray($result));
 
-            return $yogurt_notes;
+            return $suico_notes;
         }
 
         return false;
@@ -147,7 +147,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
             $format      .= 'VALUES (%u, %s, %u, %u, %u,%u)';
             $sql         = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_notes'),
+                $this->db->prefix('suico_notes'),
                 $noteId,
                 $this->db->quoteString($note_text),
                 $note_from,
@@ -162,7 +162,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
             $format .= ' WHERE note_id = %u';
             $sql    = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_notes'),
+                $this->db->prefix('suico_notes'),
                 $noteId,
                 $this->db->quoteString($note_text),
                 $note_from,
@@ -204,7 +204,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
         }
         $sql = \sprintf(
             'DELETE FROM %s WHERE note_id = %u',
-            $this->db->prefix('yogurt_notes'),
+            $this->db->prefix('suico_notes'),
             $xoopsObject->getVar('note_id')
         );
         if ($force) {
@@ -220,7 +220,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * retrieve yogurt_notes from the database
+     * retrieve suico_notes from the database
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key       use the UID as key for the array?
@@ -234,7 +234,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
     ) {
         $ret   = [];
         $limit = $start = 0;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_notes');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_notes');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
             if ('' !== $criteriaElement->getSort()) {
@@ -248,29 +248,29 @@ class NotesHandler extends XoopsPersistableObjectHandler
             return $ret;
         }
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $yogurt_notes = new Notes();
-            $yogurt_notes->assignVars($myrow);
+            $suico_notes = new Notes();
+            $suico_notes->assignVars($myrow);
             if (!$id_as_key) {
-                $ret[] = &$yogurt_notes;
+                $ret[] = &$suico_notes;
             } else {
-                $ret[$myrow['note_id']] = &$yogurt_notes;
+                $ret[$myrow['note_id']] = &$suico_notes;
             }
-            unset($yogurt_notes);
+            unset($suico_notes);
         }
 
         return $ret;
     }
 
     /**
-     * count yogurt_notes matching a condition
+     * count suico_notes matching a condition
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link CriteriaElement} to match
-     * @return int count of yogurt_notes
+     * @return int count of suico_notes
      */
     public function getCount(
         ?CriteriaElement $criteriaElement = null
     ) {
-        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_notes');
+        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_notes');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
         }
@@ -284,7 +284,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * delete yogurt_notes matching a set of conditions
+     * delete suico_notes matching a set of conditions
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link CriteriaElement}
      * @param bool                                 $force
@@ -296,7 +296,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
         $force = true,
         $asObject = false
     ) {
-        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_notes');
+        $sql = 'DELETE FROM ' . $this->db->prefix('suico_notes');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
         }
@@ -319,7 +319,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
         $myts = new MyTextSanitizer();
         $ret  = [];
         $sql  = 'SELECT note_id, uid, uname, user_avatar, note_from, note_text, date_created FROM ' . $this->db->prefix(
-                'yogurt_notes'
+                'suico_notes'
             ) . ', ' . $this->db->prefix(
                 'users'
             );

@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -24,9 +24,9 @@ use Xmf\Database\TableLoad;
 use Xmf\Module\Helper;
 use Xmf\Request;
 use Xmf\Yaml;
-use XoopsModules\Yogurt;
-use XoopsModules\Yogurt\Common;
-use XoopsModules\Yogurt\Utility;
+use XoopsModules\Suico;
+use XoopsModules\Suico\Common;
+use XoopsModules\Suico\Utility;
 
 require_once dirname(__DIR__, 3) . '/include/cp_header.php';
 require dirname(__DIR__) . '/preloads/autoloader.php';
@@ -36,7 +36,7 @@ $op = Request::getCmd('op', '');
 $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-$helper = Yogurt\Helper::getInstance();
+$helper = Suico\Helper::getInstance();
 // Load language files
 $helper->loadLanguage('common');
 
@@ -82,7 +82,7 @@ function loadSampleData()
 
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-    $utility = new Yogurt\Utility();
+    $utility = new Suico\Utility();
 
     $configurator = new Common\Configurator();
 
@@ -169,7 +169,7 @@ function exportSchema()
 
     try {
         // TODO set exportSchema
-        //        $migrate = new Yogurt\Migrate($moduleDirName);
+        //        $migrate = new Suico\Migrate($moduleDirName);
         //        $migrate->saveCurrentSchema();
         //
         //        redirect_header('../admin/index.php', 1, constant('CO_' . $moduleDirNameUpper . '_' . 'EXPORT_SCHEMA_SUCCESS'));

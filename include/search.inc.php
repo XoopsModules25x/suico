@@ -13,7 +13,7 @@ declare(strict_types=1);
 */
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -36,7 +36,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
  * @param int    $userid     from which user to look
  * @return array with all results
  */
-function yogurt_search(
+function suico_search(
     $queryarray,
     $andor,
     $limit,
@@ -46,7 +46,7 @@ function yogurt_search(
     global $xoopsDB, $module;
     //getting the url to the uploads directory
     $moduleHandler = xoops_getHandler('module');
-    $modulo        = $moduleHandler->getByDirname('yogurt');
+    $modulo        = $moduleHandler->getByDirname('suico');
     /** @var \XoopsConfigHandler $configHandler */
     $configHandler     = xoops_getHandler('config');
     $moduleConfig      = $configHandler->getConfigsByCat(0, $modulo->getVar('mid'));
@@ -54,7 +54,7 @@ function yogurt_search(
 
     $ret = [];
     $sql = 'SELECT cod_img, title, caption,  date_created,  uid_owner, filename FROM ' . $xoopsDB->prefix(
-            'yogurt_images'
+            'suico_images'
         ) . ' WHERE ';
     if (0 !== $userid) {
         $sql .= '(uid_owner =' . (int)$userid . ')';
@@ -82,36 +82,36 @@ function yogurt_search(
             if ($limit > 5) {
                 $ret[$i]['image'] = "assets/images/search.png'><a href='"
                                     . XOOPS_URL
-                                    . '/modules/yogurt/album.php?uid='
+                                    . '/modules/suico/album.php?uid='
                                     . $myrow['uid_owner']
                                     . "'><img src='"
                                     . $path_uploadimages
-                                    . '/yogurt/images/thumb_'
+                                    . '/suico/images/thumb_'
                                     . $myrow['filename']
                                     . "'></a><br>"
                                     . '<img src='
                                     . XOOPS_URL
-                                    . '/modules/yogurt/images/search.png';
+                                    . '/modules/suico/images/search.png';
                 $ret[$i]['link']  = 'album.php?uid=' . $myrow['uid_owner'];
                 $ret[$i]['title'] = $myrow['title'];
                 //$ret[$i]['time'] = $myrow['date_created'];
                 $ret[$i]['uid'] = $myrow['uid_owner'];
             } else {
-                $stringofimage .= '<a href="' . XOOPS_URL . '/modules/yogurt/album.php?uid=' . $myrow['uid_owner'] . '" title="' . $myrow['title'] . '"><img src="' . $path_uploadimages . '/yogurt/images/thumb_' . $myrow['filename'] . '"></a>&nbsp;';
+                $stringofimage .= '<a href="' . XOOPS_URL . '/modules/suico/album.php?uid=' . $myrow['uid_owner'] . '" title="' . $myrow['title'] . '"><img src="' . $path_uploadimages . '/suico/images/thumb_' . $myrow['filename'] . '"></a>&nbsp;';
             }
         } else {
             $ret[$i]['image'] = "assets/images/search.png'><a href='"
                                 . XOOPS_URL
-                                . '/modules/yogurt/album.php?uid='
+                                . '/modules/suico/album.php?uid='
                                 . $myrow['uid_owner']
                                 . "'><img src='"
                                 . $path_uploadimages
-                                . '/yogurt/images/thumb_'
+                                . '/suico/images/thumb_'
                                 . $myrow['filename']
                                 . "'></a><br>"
                                 . "<img src='"
                                 . XOOPS_URL
-                                . '/modules/yogurt/images/search.png';
+                                . '/modules/suico/images/search.png';
             $ret[$i]['link']  = 'album.php?uid=' . $myrow['uid_owner'];
             $ret[$i]['title'] = $myrow['title'];
             //$ret[$i]['time'] = $myrow['date_created'];
@@ -128,7 +128,7 @@ function yogurt_search(
             $ret[0]['time']  = time();
             $ret[0]['uid']   = $userid;
             $ret[0]['link']  = 'album.php?uid=' . $userid;
-            $stringofimage   .= '<img src="' . XOOPS_URL . '/modules/yogurt/assets/images/search.png';
+            $stringofimage   .= '<img src="' . XOOPS_URL . '/modules/suico/assets/images/search.png';
             $ret[0]['image'] = $stringofimage;
         }
     }

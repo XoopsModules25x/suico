@@ -14,25 +14,25 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 if (!defined('XOOPS_ROOT_PATH')) {
     exit();
 }
 //include_once(XOOPS_ROOT_PATH."/class/criteria.php");
-//require_once XOOPS_ROOT_PATH . '/modules/yogurt/class/Friendship.php';
+//require_once XOOPS_ROOT_PATH . '/modules/suico/class/Friendship.php';
 
 /**
  * @param $options
  * @return array
  */
-function b_yogurt_friends_show($options)
+function b_suico_friends_show($options)
 {
     global $xoopsDB, $xoopsModule, $xoopsModuleConfig, $xoopsUser;
 
@@ -57,13 +57,13 @@ function b_yogurt_friends_show($options)
 
         //$albumFactory      = new ImagesHandler($xoopsDB);
 
-        $friendsFactory = new Yogurt\FriendshipHandler($xoopsDB);
+        $friendsFactory = new Suico\FriendshipHandler($xoopsDB);
 
         $block['friends'] = $friendsFactory->getFriends($options[0], $criteria2);
 
-        $block['lang_allfriends'] = _MB_YOGURT_ALLFRIENDS;
+        $block['lang_allfriends'] = _MB_SUICO_ALLFRIENDS;
 
-        $block['lang_nofriends'] = _MB_YOGURT_NOFRIENDSYET;
+        $block['lang_nofriends'] = _MB_SUICO_NOFRIENDSYET;
 
         $block['enablepm'] = $options[1] ?? '';
 
@@ -75,13 +75,13 @@ function b_yogurt_friends_show($options)
  * @param $options
  * @return string
  */
-function b_yogurt_friends_edit($options)
+function b_suico_friends_edit($options)
 {
-    $form .= _MB_YOGURT_TOTALFRIENDSTOSHOW . '&nbsp;';
+    $form .= _MB_SUICO_TOTALFRIENDSTOSHOW . '&nbsp;';
 
     $form .= "<input type='text' name='options[0]' value='" . $options[0] . "'><br>";
 
-    $form .= _MB_YOGURT_ENABLEPM . '&nbsp;';
+    $form .= _MB_SUICO_ENABLEPM . '&nbsp;';
 
     if (1 === $options[1]) {
         $chk = ' checked';

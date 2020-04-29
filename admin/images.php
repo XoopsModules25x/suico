@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -32,12 +32,12 @@ $sort  = Request::getString('sort', '');
 
 $adminObject->displayNavigation(basename(__FILE__));
 $permHelper = new Permission();
-$uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/images/';
-$uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/images/';
+$uploadDir  = XOOPS_UPLOAD_PATH . '/suico/images/';
+$uploadUrl  = XOOPS_UPLOAD_URL . '/suico/images/';
 
 switch ($op) {
     case 'new':
-        $adminObject->addItemButton(AM_YOGURT_IMAGES_LIST, 'images.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_IMAGES_LIST, 'images.php', 'list');
         $adminObject->displayButton('left');
 
         $imagesObject = $imageHandler->create();
@@ -66,7 +66,7 @@ switch ($op) {
         $imagesObject->setVar('uid_owner', Request::getVar('uid_owner', ''));
 
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
-        $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/images/';
+        $uploadDir = XOOPS_UPLOAD_PATH . '/suico/images/';
         $uploader  = new \XoopsMediaUploader(
             $uploadDir, $helper->getConfig('mimetypes'), $helper->getConfig('maxsize'), null, null
         );
@@ -88,7 +88,7 @@ switch ($op) {
 
         $imagesObject->setVar('private', ((1 == \Xmf\Request::getInt('private', 0)) ? '1' : '0'));
         if ($imageHandler->insert($imagesObject)) {
-            redirect_header('images.php?op=list', 2, AM_YOGURT_FORMOK);
+            redirect_header('images.php?op=list', 2, AM_SUICO_FORMOK);
         }
 
         echo $imagesObject->getHtmlErrors();
@@ -96,8 +96,8 @@ switch ($op) {
         $form->display();
         break;
     case 'edit':
-        $adminObject->addItemButton(AM_YOGURT_ADD_IMAGES, 'images.php?op=new', 'add');
-        $adminObject->addItemButton(AM_YOGURT_IMAGES_LIST, 'images.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_ADD_IMAGES, 'images.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_IMAGES_LIST, 'images.php', 'list');
         $adminObject->displayButton('left');
         $imagesObject = $imageHandler->get(Request::getString('cod_img', ''));
         $form         = $imagesObject->getForm();
@@ -110,7 +110,7 @@ switch ($op) {
                 redirect_header('images.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
             if ($imageHandler->delete($imagesObject)) {
-                redirect_header('images.php', 3, AM_YOGURT_FORMDELOK);
+                redirect_header('images.php', 3, AM_SUICO_FORMDELOK);
             } else {
                 echo $imagesObject->getHtmlErrors();
             }
@@ -123,7 +123,7 @@ switch ($op) {
                 ],
                 Request::getUrl('REQUEST_URI', '', 'SERVER'),
                 sprintf(
-                    AM_YOGURT_FORMSUREDEL,
+                    AM_SUICO_FORMSUREDEL,
                     $imagesObject->getVar('title')
                 )
             );
@@ -133,16 +133,16 @@ switch ($op) {
 
         $id_field = Request::getString('cod_img', '');
 
-        if ($utility::cloneRecord('yogurt_images', 'cod_img', $id_field)) {
-            redirect_header('images.php', 3, AM_YOGURT_CLONED_OK);
+        if ($utility::cloneRecord('suico_images', 'cod_img', $id_field)) {
+            redirect_header('images.php', 3, AM_SUICO_CLONED_OK);
         } else {
-            redirect_header('images.php', 3, AM_YOGURT_CLONED_FAILED);
+            redirect_header('images.php', 3, AM_SUICO_CLONED_FAILED);
         }
 
         break;
     case 'list':
     default:
-        $adminObject->addItemButton(AM_YOGURT_ADD_IMAGES, 'images.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_ADD_IMAGES, 'images.php?op=new', 'add');
         $adminObject->displayButton('left');
         $start                 = Request::getInt('start', 0);
         $imagesPaginationLimit = $helper->getConfig('userpager');
@@ -157,7 +157,7 @@ switch ($op) {
         /*
         //
         //
-                            <th class='center width5'>".AM_YOGURT_FORM_ACTION."</th>
+                            <th class='center width5'>".AM_SUICO_FORM_ACTION."</th>
         //                    </tr>";
         //            $class = "odd";
         */
@@ -196,31 +196,31 @@ switch ($op) {
 
                 $GLOBALS['xoopsTpl']->assign(
                     'selectorcod_img',
-                    AM_YOGURT_IMAGES_COD_IMG
+                    AM_SUICO_IMAGES_COD_IMG
                 );
                 $imagesArray['cod_img'] = $imagesTempArray[$i]->getVar('cod_img');
 
-                $GLOBALS['xoopsTpl']->assign('selectortitle', AM_YOGURT_IMAGES_TITLE);
+                $GLOBALS['xoopsTpl']->assign('selectortitle', AM_SUICO_IMAGES_TITLE);
                 $imagesArray['title'] = $imagesTempArray[$i]->getVar('title');
 
-                $GLOBALS['xoopsTpl']->assign('selectorcaption', AM_YOGURT_IMAGES_CAPTION);
+                $GLOBALS['xoopsTpl']->assign('selectorcaption', AM_SUICO_IMAGES_CAPTION);
                 $imagesArray['caption'] = $imagesTempArray[$i]->getVar('caption');
 
-                $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_IMAGES_DATE_CREATED);
+                $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_SUICO_IMAGES_DATE_CREATED);
                 $imagesArray['date_created'] = formatTimestamp($imagesTempArray[$i]->getVar('date_created'), 's');
 
-                $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_YOGURT_IMAGES_DATE_UPDATED);
+                $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_SUICO_IMAGES_DATE_UPDATED);
                 $imagesArray['date_updated'] = formatTimestamp($imagesTempArray[$i]->getVar('date_updated'), 's');
 
-                $GLOBALS['xoopsTpl']->assign('selectoruid_owner', AM_YOGURT_IMAGES_UID_OWNER);
+                $GLOBALS['xoopsTpl']->assign('selectoruid_owner', AM_SUICO_IMAGES_UID_OWNER);
                 $imagesArray['uid_owner'] = strip_tags(
                     XoopsUser::getUnameFromId($imagesTempArray[$i]->getVar('uid_owner'))
                 );
 
-                $GLOBALS['xoopsTpl']->assign('selectorurl', AM_YOGURT_IMAGES_URL);
+                $GLOBALS['xoopsTpl']->assign('selectorurl', AM_SUICO_IMAGES_URL);
                 $imagesArray['filename'] = "<img src='" . $uploadUrl . $imagesTempArray[$i]->getVar('filename') . "' name='" . 'name' . "' id=" . 'id' . " alt='' style='max-width:100px'>";
 
-                $GLOBALS['xoopsTpl']->assign('selectorprivate', AM_YOGURT_IMAGES_PRIVATE);
+                $GLOBALS['xoopsTpl']->assign('selectorprivate', AM_SUICO_IMAGES_PRIVATE);
                 $imagesArray['private']     = $imagesTempArray[$i]->getVar('private');
                 $imagesArray['edit_delete'] = "<a href='images.php?op=edit&cod_img=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='images.php?op=delete&cod_img=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
@@ -257,7 +257,7 @@ switch ($op) {
 
             //                    <tr>
 
-            //                     <th class='center width5'>".AM_YOGURT_FORM_ACTION."XXX</th>
+            //                     <th class='center width5'>".AM_SUICO_FORM_ACTION."XXX</th>
             //                    </tr><tr><td class='errorMsg' colspan='8'>There are noXXX images</td></tr>";
             //            echo "</table><br><br>";
 
@@ -266,7 +266,7 @@ switch ($op) {
             echo $GLOBALS['xoopsTpl']->fetch(
                 XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar(
                     'dirname'
-                ) . '/templates/admin/yogurt_admin_images.tpl'
+                ) . '/templates/admin/suico_admin_images.tpl'
             );
         }
 

@@ -14,15 +14,15 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsModules\Yogurt;
-use XoopsModules\Yogurt\Common\Configurator;
-use XoopsModules\Yogurt\Common\Migrate;
+use XoopsModules\Suico;
+use XoopsModules\Suico\Common\Configurator;
+use XoopsModules\Suico\Common\Migrate;
 
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
     || !$GLOBALS['xoopsUser']->isAdmin()) {
@@ -48,14 +48,14 @@ function tableExists($tablename)
  * @param \XoopsModule $module {@link \XoopsModule}
  * @return bool true if ready to install, false if not
  */
-function xoops_module_pre_update_yogurt(
+function xoops_module_pre_update_suico(
     \XoopsModule $module
 ) {
     $moduleDirName = basename(dirname(__DIR__));
-    /** @var Yogurt\Helper $helper */
-    /** @var Yogurt\Utility $utility */
-    $helper  = Yogurt\Helper::getInstance();
-    $utility = new Yogurt\Utility();
+    /** @var Suico\Helper $helper */
+    /** @var Suico\Utility $utility */
+    $helper  = Suico\Helper::getInstance();
+    $utility = new Suico\Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
@@ -64,7 +64,7 @@ function xoops_module_pre_update_yogurt(
 
     $migrator = new Migrate($configurator);
 
-    //    $migrator = new \XoopsModules\Yogurt\Common\Migrate();
+    //    $migrator = new \XoopsModules\Suico\Common\Migrate();
     $migrator->synchronizeSchema();
 
     return $xoopsSuccess && $phpSuccess;
@@ -77,17 +77,17 @@ function xoops_module_pre_update_yogurt(
  *
  * @return bool true if update successful, false if not
  */
-function xoops_module_update_yogurt(
+function xoops_module_update_suico(
     XoopsModule $module,
     $previousVersion = null
 ) {
     $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-    /** @var Yogurt\Helper $helper */ /** @var Yogurt\Utility $utility */
-    /** @var Yogurt\Common\Configurator $configurator */
-    $helper       = Yogurt\Helper::getInstance();
-    $utility      = new Yogurt\Utility();
+    /** @var Suico\Helper $helper */ /** @var Suico\Utility $utility */
+    /** @var Suico\Common\Configurator $configurator */
+    $helper       = Suico\Helper::getInstance();
+    $utility      = new Suico\Utility();
     $configurator = new Configurator();
 
     $helper->loadLanguage('common');

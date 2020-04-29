@@ -12,19 +12,19 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 const COUNTAUDIOS = 'countAudios';
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_audios.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'suico_audios.tpl';
 require __DIR__ . '/header.php';
-$controller = new Yogurt\AudioController($xoopsDB, $xoopsUser);
+$controller = new Suico\AudioController($xoopsDB, $xoopsUser);
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
@@ -49,7 +49,7 @@ $audios      = $controller->getAudio($criteriaUidAudio);
  * If there is no audio files show in template lang_noaudioyet
  */
 if (isset($nbSections[COUNTAUDIOS]) && 0 === $nbSections[COUNTAUDIOS]) {
-        $lang_noaudioyet = _MD_YOGURT_NOTHINGYET;
+        $lang_noaudioyet = _MD_SUICO_NOTHINGYET;
         $xoopsTpl->assign('lang_nopicyet', $lang_noaudioyet);
 //    echo '<script>alert("Please add some audio files here")</script>';
 } else {
@@ -80,12 +80,12 @@ if (is_array($audiosArray) && count($audiosArray) > 0) {
     $xoopsTpl->assign('audios', $audiosArray);
     $audio_list = [];
     foreach ($audiosArray as $audio_item) {
-        $audio_list[] = XOOPS_UPLOAD_URL . '/yogurt/audio/' . $audio_item['filename']; // . ' | ';
+        $audio_list[] = XOOPS_UPLOAD_URL . '/suico/audio/' . $audio_item['filename']; // . ' | ';
     }
     //$audio_list = substr($audio_list,-2);
     $xoopsTpl->assign('audio_list', $audio_list);
 } else {
-    $xoopsTpl->assign('lang_noaudioyet', _MD_YOGURT_NOAUDIOYET);
+    $xoopsTpl->assign('lang_noaudioyet', _MD_SUICO_NOAUDIOYET);
 }
 $pageNav = '';
 if (isset($nbSections[COUNTAUDIOS]) && $nbSections[COUNTAUDIOS] > 0) {
@@ -93,28 +93,28 @@ if (isset($nbSections[COUNTAUDIOS]) && $nbSections[COUNTAUDIOS] > 0) {
 }
 $xoTheme->addScript('https://unpkg.com/wavesurfer.js');
 //meta language names
-$xoopsTpl->assign('lang_meta', _MD_YOGURT_META);
-$xoopsTpl->assign('lang_title', _MD_YOGURT_META_TITLE);
-$xoopsTpl->assign('lang_album', _MD_YOGURT_META_ALBUM);
-$xoopsTpl->assign('lang_artist', _MD_YOGURT_META_ARTIST);
-$xoopsTpl->assign('lang_year', _MD_YOGURT_META_YEAR);
+$xoopsTpl->assign('lang_meta', _MD_SUICO_META);
+$xoopsTpl->assign('lang_title', _MD_SUICO_META_TITLE);
+$xoopsTpl->assign('lang_album', _MD_SUICO_META_ALBUM);
+$xoopsTpl->assign('lang_artist', _MD_SUICO_META_ARTIST);
+$xoopsTpl->assign('lang_year', _MD_SUICO_META_YEAR);
 //form actions
-$xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
-$xoopsTpl->assign('lang_editdesc', _MD_YOGURT_EDIT_DESC);
-$xoopsTpl->assign('lang_makemain', _MD_YOGURT_MAKEMAIN);
+$xoopsTpl->assign('lang_delete', _MD_SUICO_DELETE);
+$xoopsTpl->assign('lang_editdesc', _MD_SUICO_EDIT_DESC);
+$xoopsTpl->assign('lang_makemain', _MD_SUICO_MAKEMAIN);
 //Form Submit
-$xoopsTpl->assign('lang_selectaudio', _MD_YOGURT_AUDIO_SELECT);
-$xoopsTpl->assign('lang_authorLabel', _MD_YOGURT_AUDIO_AUTHOR);
-$xoopsTpl->assign('lang_titleLabel', _MD_YOGURT_AUDIO_TITLE);
-$xoopsTpl->assign('lang_submitValue', _MD_YOGURT_AUDIO_SUBMIT);
-$xoopsTpl->assign('lang_addaudios', _MD_YOGURT_AUDIO_ADD);
+$xoopsTpl->assign('lang_selectaudio', _MD_SUICO_AUDIO_SELECT);
+$xoopsTpl->assign('lang_authorLabel', _MD_SUICO_AUDIO_AUTHOR);
+$xoopsTpl->assign('lang_titleLabel', _MD_SUICO_AUDIO_TITLE);
+$xoopsTpl->assign('lang_submitValue', _MD_SUICO_AUDIO_SUBMIT);
+$xoopsTpl->assign('lang_addaudios', _MD_SUICO_AUDIO_ADD);
 $xoopsTpl->assign('width', $helper->getConfig('width_tube'));
 $xoopsTpl->assign('height', $helper->getConfig('height_tube'));
-$xoopsTpl->assign('player_from_list', _MD_YOGURT_PLAYER);
-$xoopsTpl->assign('lang_audiohelp', sprintf(_MD_YOGURT_AUDIO_ADD_HELP, $helper->getConfig('maxfilesize')));
+$xoopsTpl->assign('player_from_list', _MD_SUICO_PLAYER);
+$xoopsTpl->assign('lang_audiohelp', sprintf(_MD_SUICO_AUDIO_ADD_HELP, $helper->getConfig('maxfilesize')));
 $xoopsTpl->assign('max_youcanupload', $helper->getConfig('maxfilesize'));
-$xoopsTpl->assign('lang_mysection', _MD_YOGURT_MYAUDIOS);
-$xoopsTpl->assign('section_name', _MD_YOGURT_AUDIOS);
+$xoopsTpl->assign('lang_mysection', _MD_SUICO_MYAUDIOS);
+$xoopsTpl->assign('section_name', _MD_SUICO_AUDIOS);
 //Page Navigation
 $xoopsTpl->assign('pageNav', $pageNav);
 require __DIR__ . '/footer.php';

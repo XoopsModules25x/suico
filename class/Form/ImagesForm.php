@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt\Form;
+namespace XoopsModules\Suico\Form;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -16,7 +16,7 @@ namespace XoopsModules\Yogurt\Form;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -30,13 +30,13 @@ use XoopsFormSelectUser;
 use XoopsFormText;
 use XoopsFormTextArea;
 use XoopsFormTextDateSelect;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 use XoopsThemeForm;
 
 require_once \dirname(__DIR__, 2) . '/include/common.php';
 
 $moduleDirName = \basename(\dirname(__DIR__, 2));
-//$helper = Yogurt\Helper::getInstance();
+//$helper = Suico\Helper::getInstance();
 $permHelper = new Permission();
 
 \xoops_load('XoopsFormLoader');
@@ -60,7 +60,7 @@ class ImagesForm extends XoopsThemeForm
         $this->helper       = $target->helper;
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? \sprintf(\AM_YOGURT_IMAGES_ADD) : \sprintf(\AM_YOGURT_IMAGES_EDIT);
+        $title = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_IMAGES_ADD) : \sprintf(\AM_SUICO_IMAGES_EDIT);
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
 
@@ -76,36 +76,36 @@ class ImagesForm extends XoopsThemeForm
 
         // Cod_img
         $this->addElement(
-            new XoopsFormLabel(\AM_YOGURT_IMAGES_COD_IMG, $this->targetObject->getVar('cod_img'), 'cod_img')
+            new XoopsFormLabel(\AM_SUICO_IMAGES_COD_IMG, $this->targetObject->getVar('cod_img'), 'cod_img')
         );
         // Title
         $this->addElement(
-            new XoopsFormText(\AM_YOGURT_IMAGES_TITLE, 'title', 50, 255, $this->targetObject->getVar('title')),
+            new XoopsFormText(\AM_SUICO_IMAGES_TITLE, 'title', 50, 255, $this->targetObject->getVar('title')),
             false
         );
 
         // Caption
         $this->addElement(
-            new XoopsFormText(\AM_YOGURT_IMAGES_CAPTION, 'caption', 50, 255, $this->targetObject->getVar('caption')),
+            new XoopsFormText(\AM_SUICO_IMAGES_CAPTION, 'caption', 50, 255, $this->targetObject->getVar('caption')),
             false
         );
 
         // Data_creation
         $this->addElement(
             new XoopsFormTextDateSelect(
-                \AM_YOGURT_IMAGES_DATE_CREATED, 'date_created', 0, \formatTimestamp($this->targetObject->getVar('date_created'), 's')
+                \AM_SUICO_IMAGES_DATE_CREATED, 'date_created', 0, \formatTimestamp($this->targetObject->getVar('date_created'), 's')
             )
         );
         // Data_update
         $this->addElement(
             new XoopsFormTextDateSelect(
-                \AM_YOGURT_IMAGES_DATE_UPDATED, 'date_updated', 0, \formatTimestamp($this->targetObject->getVar('date_updated'), 's')
+                \AM_SUICO_IMAGES_DATE_UPDATED, 'date_updated', 0, \formatTimestamp($this->targetObject->getVar('date_updated'), 's')
             )
         );
         // Uid_owner
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_YOGURT_IMAGES_UID_OWNER, 'uid_owner', false, $this->targetObject->getVar(
+                \AM_SUICO_IMAGES_UID_OWNER, 'uid_owner', false, $this->targetObject->getVar(
                 'uid_owner'
             ), 1, false
             ),
@@ -113,15 +113,15 @@ class ImagesForm extends XoopsThemeForm
         );
         // Url
         //        $this->addElement(
-        //            new XoopsFormTextArea(AM_YOGURT_IMAGES_URL, 'filename', $this->targetObject->getVar('filename'), 4, 47),
+        //            new XoopsFormTextArea(AM_SUICO_IMAGES_URL, 'filename', $this->targetObject->getVar('filename'), 4, 47),
         //            false
         //        );
 
         $filename = $this->targetObject->getVar('filename') ?: 'blank.png';
 
-        $uploadDir   = '/uploads/yogurt/images/';
-        $imgtray     = new \XoopsFormElementTray(\AM_YOGURT_IMAGES_URL, '<br>');
-        $imgpath     = \sprintf(\AM_YOGURT_FORMIMAGE_PATH, $uploadDir);
+        $uploadDir   = '/uploads/suico/images/';
+        $imgtray     = new \XoopsFormElementTray(\AM_SUICO_IMAGES_URL, '<br>');
+        $imgpath     = \sprintf(\AM_SUICO_FORMIMAGE_PATH, $uploadDir);
         $imageselect = new \XoopsFormSelect($imgpath, 'filename', $filename);
         $imageArray  = \XoopsLists::getImgListAsArray(XOOPS_ROOT_PATH . $uploadDir);
         foreach ($imageArray as $image) {
@@ -131,18 +131,18 @@ class ImagesForm extends XoopsThemeForm
         $imgtray->addElement($imageselect);
         $imgtray->addElement(new \XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $uploadDir . '/' . $url . "' name='image_url' id='image_url' alt='' style='max-width:300px'>"));
         $fileseltray = new \XoopsFormElementTray('', '<br>');
-        $fileseltray->addElement(new \XoopsFormFile(\AM_YOGURT_FORMUPLOAD, 'filename', $this->helper->getConfig('maxsize')));
+        $fileseltray->addElement(new \XoopsFormFile(\AM_SUICO_FORMUPLOAD, 'filename', $this->helper->getConfig('maxsize')));
         $fileseltray->addElement(new \XoopsFormLabel(''));
         $imgtray->addElement($fileseltray);
         $this->addElement($imgtray);
         // Private
         //        $this->addElement(
-        //            new XoopsFormText(AM_YOGURT_IMAGES_PRIVATE, 'private', 50, 255, $this->targetObject->getVar('private')),
+        //            new XoopsFormText(AM_SUICO_IMAGES_PRIVATE, 'private', 50, 255, $this->targetObject->getVar('private')),
         //            false
         //        );
 
         $private       = $this->targetObject->isNew() ? 0 : $this->targetObject->getVar('private');
-        $check_private = new \XoopsFormCheckBox(\AM_YOGURT_IMAGES_PRIVATE, 'private', $private);
+        $check_private = new \XoopsFormCheckBox(\AM_SUICO_IMAGES_PRIVATE, 'private', $private);
         $check_private->addOption(1, ' ');
         $this->addElement($check_private);
 

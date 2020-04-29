@@ -14,16 +14,16 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_index.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'suico_index.tpl';
 require __DIR__ . '/header.php';
 
 //require_once dirname(dirname(__DIR__)) . '/header.php';
@@ -36,7 +36,7 @@ require __DIR__ . '/header.php';
 /**
  * Factory of pictures created
  */
-$imageFactory = new Yogurt\ImageHandler($xoopsDB);
+$imageFactory = new Suico\ImageHandler($xoopsDB);
 
 /**
  * Getting the title
@@ -46,7 +46,7 @@ $caption = Request::getString('caption', '', 'POST');
 /**
  * Getting parameters defined in admin side
  */
-$path_upload   = XOOPS_ROOT_PATH . '/uploads/yogurt/images';
+$path_upload   = XOOPS_ROOT_PATH . '/uploads/suico/images';
 $pictwidth     = $helper->getConfig('resized_width');
 $pictheight    = $helper->getConfig('resized_height');
 $thumbwidth    = $helper->getConfig('thumb_width');
@@ -63,7 +63,7 @@ if ('sel_photo' === Request::getArray('xoops_upload_file', '', 'POST')[0]) {
      * Verify Token
      */
     if (!$GLOBALS['xoopsSecurity']->check()) {
-        redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+        redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
     }
     ini_set('memory_limit', '50M');
     /**
@@ -86,17 +86,17 @@ if ('sel_photo' === Request::getArray('xoops_upload_file', '', 'POST')[0]) {
         /** @var \XoopsNotificationHandler $notificationHandler */
         $notificationHandler = xoops_getHandler('notification');
         $notificationHandler->triggerEvent('picture', $xoopsUser->getVar('uid'), 'new_picture', $extra_tags);
-        //header("Location: ".XOOPS_URL."/modules/yogurt/index.php?uid=".$xoopsUser->getVar('uid'));
+        //header("Location: ".XOOPS_URL."/modules/suico/index.php?uid=".$xoopsUser->getVar('uid'));
         redirect_header(
-            XOOPS_URL . '/modules/yogurt/album.php?uid=' . $xoopsUser->getVar('uid'),
+            XOOPS_URL . '/modules/suico/album.php?uid=' . $xoopsUser->getVar('uid'),
             3,
-            _MD_YOGURT_UPLOADED
+            _MD_SUICO_UPLOADED
         );
     } else {
         redirect_header(
-            XOOPS_URL . '/modules/yogurt/album.php?uid=' . $xoopsUser->getVar('uid'),
+            XOOPS_URL . '/modules/suico/album.php?uid=' . $xoopsUser->getVar('uid'),
             3,
-            _MD_YOGURT_ERROR
+            _MD_SUICO_ERROR
         );
     }
 }

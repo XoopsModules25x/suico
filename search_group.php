@@ -14,19 +14,19 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_groups_results.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'suico_groups_results.tpl';
 require __DIR__ . '/header.php';
 
-$controller = new Yogurt\GroupController($xoopsDB, $xoopsUser);
+$controller = new Suico\GroupController($xoopsDB, $xoopsUser);
 
 /**
  * Fetching numbers of groups friends videos pictures etc...
@@ -82,26 +82,26 @@ $navigationBar = new XoopsPageNav(
 $imageNav      = $navigationBar->renderImageNav(2);
 
 //form
-//$xoopsTpl->assign('lang_youcanupload',sprintf(_MD_YOGURT_YOU_CAN_UPLOAD,$maxfilebytes/1024));
+//$xoopsTpl->assign('lang_youcanupload',sprintf(_MD_SUICO_YOU_CAN_UPLOAD,$maxfilebytes/1024));
 $xoopsTpl->assign(
     'lang_groupimage',
-    _MD_YOGURT_GROUP_IMAGE
+    _MD_SUICO_GROUP_IMAGE
 );
 //$xoopsTpl->assign('maxfilesize',$maxfilebytes);
-$xoopsTpl->assign('lang_title', _MD_YOGURT_GROUP_TITLE);
-$xoopsTpl->assign('lang_description', _MD_YOGURT_GROUP_DESC);
-$xoopsTpl->assign('lang_savegroup', _MD_YOGURT_UPLOADGROUP);
+$xoopsTpl->assign('lang_title', _MD_SUICO_GROUP_TITLE);
+$xoopsTpl->assign('lang_description', _MD_SUICO_GROUP_DESC);
+$xoopsTpl->assign('lang_savegroup', _MD_SUICO_UPLOADGROUP);
 
 //navbar
-$xoopsTpl->assign('lang_mysection', _MD_YOGURT_MYGROUPS);
-$xoopsTpl->assign('section_name', _MD_YOGURT_GROUPS);
+$xoopsTpl->assign('lang_mysection', _MD_SUICO_MYGROUPS);
+$xoopsTpl->assign('section_name', _MD_SUICO_GROUPS);
 
-//$xoopsTpl->assign('path_yogurt_uploads',$helper->getConfig('link_path_upload'));
+//$xoopsTpl->assign('path_suico_uploads',$helper->getConfig('link_path_upload'));
 $xoopsTpl->assign('groups', $groups);
 //$xoopsTpl->assign('mygroups',$mygroups);
-$xoopsTpl->assign('lang_mygroupstitle', _MD_YOGURT_MYGROUPS);
-$xoopsTpl->assign('lang_groupstitle', _MD_YOGURT_ALLGROUPS . ' (' . $countGroups . ')');
-$xoopsTpl->assign('lang_nogroupsyet', _MD_YOGURT_NOGROUPSYET);
+$xoopsTpl->assign('lang_mygroupstitle', _MD_SUICO_MYGROUPS);
+$xoopsTpl->assign('lang_groupstitle', _MD_SUICO_ALLGROUPS . ' (' . $countGroups . ')');
+$xoopsTpl->assign('lang_nogroupsyet', _MD_SUICO_NOGROUPSYET);
 
 //page nav
 $xoopsTpl->assign('navigationBar', $imageNav);
@@ -112,13 +112,13 @@ $xoopsTpl->assign(
     $countGroups
 ); //this is total number of groups
 
-$xoopsTpl->assign('lang_creategroup', _MD_YOGURTCREATEYOURGROUP);
-$xoopsTpl->assign('lang_owner', _MD_YOGURT_GROUPOWNER);
-$xoopsTpl->assign('lang_abandongroup', _MD_YOGURT_GROUP_ABANDON);
-$xoopsTpl->assign('lang_joingroup', _MD_YOGURT_GROUP_JOIN);
-$xoopsTpl->assign('lang_searchgroup', _MD_YOGURT_GROUP_SEARCH);
-$xoopsTpl->assign('lang_groupkeyword', _MD_YOGURT_GROUP_SEARCHKEYWORD);
-$xoopsTpl->assign('lang_memberofgroup', _MD_YOGURT_MEMBEROFGROUP);
+$xoopsTpl->assign('lang_creategroup', _MD_SUICOCREATEYOURGROUP);
+$xoopsTpl->assign('lang_owner', _MD_SUICO_GROUPOWNER);
+$xoopsTpl->assign('lang_abandongroup', _MD_SUICO_GROUP_ABANDON);
+$xoopsTpl->assign('lang_joingroup', _MD_SUICO_GROUP_JOIN);
+$xoopsTpl->assign('lang_searchgroup', _MD_SUICO_GROUP_SEARCH);
+$xoopsTpl->assign('lang_groupkeyword', _MD_SUICO_GROUP_SEARCHKEYWORD);
+$xoopsTpl->assign('lang_memberofgroup', _MD_SUICO_MEMBEROFGROUP);
 
 require __DIR__ . '/footer.php';
 require dirname(__DIR__, 2) . '/footer.php';

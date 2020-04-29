@@ -23,10 +23,10 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
-use XoopsModules\Yogurt\IndexController;
+use XoopsModules\Suico;
+use XoopsModules\Suico\IndexController;
 
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_editprofile.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'suico_editprofile.tpl';
 require __DIR__ . '/header.php';
 
 /**
@@ -106,7 +106,7 @@ if ('save' === $op) {
 if ('editprofile' === $op) {
     require_once $GLOBALS['xoops']->path('header.php');
     require_once __DIR__ . '/include/forms.php';
-    $form = yogurt_getUserForm($GLOBALS['xoopsUser']);
+    $form = suico_getUserForm($GLOBALS['xoopsUser']);
     $form->assign($GLOBALS['xoopsTpl']);
     if (!empty($stop)) {
         $GLOBALS['xoopsTpl']->assign('stop', $stop);
@@ -116,7 +116,7 @@ if ('editprofile' === $op) {
 }
 
 if ('avatarform' === $op) {
-    $GLOBALS['xoopsOption']['template_main'] = 'yogurt_avatar.tpl';
+    $GLOBALS['xoopsOption']['template_main'] = 'suico_avatar.tpl';
     require $GLOBALS['xoops']->path('header.php');
     $xoBreadcrumbs[] = ['title' => _US_MYAVATAR];
 

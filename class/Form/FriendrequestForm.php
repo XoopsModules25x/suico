@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt\Form;
+namespace XoopsModules\Suico\Form;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -16,7 +16,7 @@ namespace XoopsModules\Yogurt\Form;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -27,13 +27,13 @@ use XoopsFormButton;
 use XoopsFormHidden;
 use XoopsFormLabel;
 use XoopsFormSelectUser;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 use XoopsThemeForm;
 
 require_once \dirname(__DIR__, 2) . '/include/common.php';
 
 $moduleDirName = \basename(\dirname(__DIR__, 2));
-//$helper = Yogurt\Helper::getInstance();
+//$helper = Suico\Helper::getInstance();
 $permHelper = new Permission();
 
 \xoops_load('XoopsFormLoader');
@@ -59,8 +59,8 @@ class FriendrequestForm extends XoopsThemeForm
 
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? \sprintf(\AM_YOGURT_FRIENDREQUEST_ADD) : \sprintf(
-            \AM_YOGURT_FRIENDREQUEST_EDIT
+        $title = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_FRIENDREQUEST_ADD) : \sprintf(
+            \AM_SUICO_FRIENDREQUEST_EDIT
         );
 
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
@@ -83,7 +83,7 @@ class FriendrequestForm extends XoopsThemeForm
 
         $this->addElement(
             new XoopsFormLabel(
-                \AM_YOGURT_FRIENDREQUEST_FRIENDPET_ID, $this->targetObject->getVar(
+                \AM_SUICO_FRIENDREQUEST_FRIENDPET_ID, $this->targetObject->getVar(
                 'friendreq_id'
             ), 'friendreq_id'
             )
@@ -93,7 +93,7 @@ class FriendrequestForm extends XoopsThemeForm
 
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_YOGURT_FRIENDREQUEST_FRIENDREQUESTER_UID, 'friendrequester_uid', false, $this->targetObject->getVar(
+                \AM_SUICO_FRIENDREQUEST_FRIENDREQUESTER_UID, 'friendrequester_uid', false, $this->targetObject->getVar(
                 'friendrequester_uid'
             ), 1, false
             ),
@@ -104,7 +104,7 @@ class FriendrequestForm extends XoopsThemeForm
 
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_YOGURT_FRIENDREQUEST_FRIENDREQUESTTO_UID, 'friendrequestto_uid', false, $this->targetObject->getVar(
+                \AM_SUICO_FRIENDREQUEST_FRIENDREQUESTTO_UID, 'friendrequestto_uid', false, $this->targetObject->getVar(
                 'friendrequestto_uid'
             ), 1, false
             ),
@@ -115,7 +115,7 @@ class FriendrequestForm extends XoopsThemeForm
 
         $this->addElement(
             new \XoopsFormTextDateSelect(
-                \AM_YOGURT_FRIENDREQUEST_DATE_CREATED, 'date_created', 0, \formatTimestamp($this->targetObject->getVar('date_created'), 's')
+                \AM_SUICO_FRIENDREQUEST_DATE_CREATED, 'date_created', 0, \formatTimestamp($this->targetObject->getVar('date_created'), 's')
             )
         );
 

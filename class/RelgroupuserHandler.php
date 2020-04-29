@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -16,7 +16,7 @@ namespace XoopsModules\Yogurt;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -34,7 +34,7 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 // -------------------------------------------------------------------------
 
 /**
- * yogurt_relgroupuserhandler class.
+ * suico_relgroupuserhandler class.
  * This class provides simple mecanisme for Relgroupuser object
  */
 class RelgroupuserHandler extends XoopsPersistableObjectHandler
@@ -46,14 +46,14 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
     /**
      * Constructor
      * @param \XoopsDatabase|null              $xoopsDatabase
-     * @param \XoopsModules\Yogurt\Helper|null $helper
+     * @param \XoopsModules\Suico\Helper|null $helper
      */
 
     public function __construct(
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Yogurt\Helper $this ->helper */
+        /** @var \XoopsModules\Suico\Helper $this ->helper */
 
         if (null === $helper) {
             $this->helper = Helper::getInstance();
@@ -63,7 +63,7 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
 
         $isAdmin = $this->helper->isUserAdmin();
 
-        parent::__construct($xoopsDatabase, 'yogurt_relgroupuser', Relgroupuser::class, 'rel_id', 'rel_id');
+        parent::__construct($xoopsDatabase, 'suico_relgroupuser', Relgroupuser::class, 'rel_id', 'rel_id');
     }
 
     /**
@@ -101,7 +101,7 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
         $id = null,
         $fields = null
     ) {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_relgroupuser') . ' WHERE rel_id=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_relgroupuser') . ' WHERE rel_id=' . $id;
 
         if (!$result = $this->db->query($sql)) {
             return false;
@@ -110,11 +110,11 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
         $numrows = $this->db->getRowsNum($result);
 
         if (1 === $numrows) {
-            $yogurt_relgroupuser = new Relgroupuser();
+            $suico_relgroupuser = new Relgroupuser();
 
-            $yogurt_relgroupuser->assignVars($this->db->fetchArray($result));
+            $suico_relgroupuser->assignVars($this->db->fetchArray($result));
 
-            return $yogurt_relgroupuser;
+            return $suico_relgroupuser;
         }
 
         return false;
@@ -162,7 +162,7 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
 
             $format .= 'VALUES (%u, %u, %u)';
 
-            $sql = \sprintf($format, $this->db->prefix('yogurt_relgroupuser'), $rel_id, $rel_group_id, $rel_user_uid);
+            $sql = \sprintf($format, $this->db->prefix('suico_relgroupuser'), $rel_id, $rel_group_id, $rel_user_uid);
 
             $force = true;
         } else {
@@ -174,7 +174,7 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
 
             $sql = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_relgroupuser'),
+                $this->db->prefix('suico_relgroupuser'),
                 $rel_id,
                 $rel_group_id,
                 $rel_user_uid,
@@ -219,7 +219,7 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
 
         $sql = \sprintf(
             'DELETE FROM %s WHERE rel_id = %u',
-            $this->db->prefix('yogurt_relgroupuser'),
+            $this->db->prefix('suico_relgroupuser'),
             $xoopsObject->getVar('rel_id')
         );
 
@@ -237,7 +237,7 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * retrieve yogurt_relgroupusers from the database
+     * retrieve suico_relgroupusers from the database
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key       use the UID as key for the array?
@@ -254,7 +254,7 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
 
         $limit = $start = 0;
 
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_relgroupuser');
+        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_relgroupuser');
 
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
@@ -275,33 +275,33 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
         }
 
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $yogurt_relgroupuser = new Relgroupuser();
+            $suico_relgroupuser = new Relgroupuser();
 
-            $yogurt_relgroupuser->assignVars($myrow);
+            $suico_relgroupuser->assignVars($myrow);
 
             if (!$id_as_key) {
-                $ret[] = &$yogurt_relgroupuser;
+                $ret[] = &$suico_relgroupuser;
             } else {
-                $ret[$myrow['rel_id']] = &$yogurt_relgroupuser;
+                $ret[$myrow['rel_id']] = &$suico_relgroupuser;
             }
 
-            unset($yogurt_relgroupuser);
+            unset($suico_relgroupuser);
         }
 
         return $ret;
     }
 
     /**
-     * count yogurt_relgroupusers matching a condition
+     * count suico_relgroupusers matching a condition
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} to match
-     * @return int count of yogurt_relgroupusers
+     * @return int count of suico_relgroupusers
      */
 
     public function getCount(
         ?CriteriaElement $criteriaElement = null
     ) {
-        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_relgroupuser');
+        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_relgroupuser');
 
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
@@ -319,7 +319,7 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * delete yogurt_relgroupusers matching a set of conditions
+     * delete suico_relgroupusers matching a set of conditions
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement}
      * @param bool                                 $force
@@ -332,7 +332,7 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
         $force = true,
         $asObject = false
     ) {
-        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_relgroupuser');
+        $sql = 'DELETE FROM ' . $this->db->prefix('suico_relgroupuser');
 
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
@@ -360,9 +360,9 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
         $ret = [];
 
         $sql = 'SELECT rel_id, rel_group_id, rel_user_uid, group_title, group_desc, group_img, owner_uid FROM ' . $this->db->prefix(
-                'yogurt_groups'
+                'suico_groups'
             ) . ', ' . $this->db->prefix(
-                'yogurt_relgroupuser'
+                'suico_relgroupuser'
             );
 
         if (isset($criteria) && $criteria instanceof CriteriaElement) {
@@ -431,9 +431,9 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
         $sql = 'SELECT rel_group_id, rel_user_uid, owner_uid, uname, user_avatar, uid FROM ' . $this->db->prefix(
                 'users'
             ) . ', ' . $this->db->prefix(
-                'yogurt_groups'
+                'suico_groups'
             ) . ', ' . $this->db->prefix(
-                'yogurt_relgroupuser'
+                'suico_relgroupuser'
             );
 
         $sql .= ' WHERE rel_user_uid = uid AND rel_group_id = group_id AND group_id =' . $groupId . ' GROUP BY rel_user_uid ';

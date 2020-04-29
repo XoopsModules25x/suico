@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -16,7 +16,7 @@ namespace XoopsModules\Yogurt;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -30,8 +30,8 @@ use XoopsPersistableObjectHandler;
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
 /**
- * yogurt_visitorshandler class.
- * This class provides simple mecanisme for Yogurt\Visitors object
+ * suico_visitorshandler class.
+ * This class provides simple mecanisme for Suico\Visitors object
  */
 class VisitorsHandler extends XoopsPersistableObjectHandler
 {
@@ -42,14 +42,14 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
     /**
      * Constructor
      * @param \XoopsDatabase|null              $xoopsDatabase
-     * @param \XoopsModules\Yogurt\Helper|null $helper
+     * @param \XoopsModules\Suico\Helper|null $helper
      */
 
     public function __construct(
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Yogurt\Helper $this ->helper */
+        /** @var \XoopsModules\Suico\Helper $this ->helper */
 
         if (null === $helper) {
             $this->helper = Helper::getInstance();
@@ -59,7 +59,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
 
         $isAdmin = $this->helper->isUserAdmin();
 
-        parent::__construct($xoopsDatabase, 'yogurt_visitors', Visitors::class, 'cod_visit', 'uname_visitor');
+        parent::__construct($xoopsDatabase, 'suico_visitors', Visitors::class, 'cod_visit', 'uname_visitor');
     }
 
     /**
@@ -86,18 +86,18 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * retrieve a Yogurt\Visitors
+     * retrieve a Suico\Visitors
      *
-     * @param int  $id of the Yogurt\Visitors
+     * @param int  $id of the Suico\Visitors
      * @param null $fields
-     * @return mixed reference to the {@link yogurt_visitors} object, FALSE if failed
+     * @return mixed reference to the {@link suico_visitors} object, FALSE if failed
      */
 
     public function get2(
         $id = null,
         $fields = null
     ) {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_visitors') . ' WHERE cod_visit=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_visitors') . ' WHERE cod_visit=' . $id;
 
         if (!$result = $this->db->query($sql)) {
             return false;
@@ -152,7 +152,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         //        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
 
         if ($xoopsObject->isNew()) {
-            // ajout/modification d'un Yogurt\Visitors
+            // ajout/modification d'un Suico\Visitors
 
             $xoopsObject = new Visitors();
 
@@ -162,7 +162,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
 
             $sql = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_visitors'),
+                $this->db->prefix('suico_visitors'),
                 $cod_visit,
                 $uid_owner,
                 $uid_visitor,
@@ -179,7 +179,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
 
             $sql = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_visitors'),
+                $this->db->prefix('suico_visitors'),
                 $cod_visit,
                 $uid_owner,
                 $uid_visitor,
@@ -208,9 +208,9 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * delete a yogurt_visitors from the database
+     * delete a suico_visitors from the database
      *
-     * @param \XoopsObject $xoopsObject reference to the Yogurt\Visitors to delete
+     * @param \XoopsObject $xoopsObject reference to the Suico\Visitors to delete
      * @param bool         $force
      * @return bool FALSE if failed.
      */
@@ -225,7 +225,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
 
         $sql = \sprintf(
             'DELETE FROM %s WHERE cod_visit = %u',
-            $this->db->prefix('yogurt_visitors'),
+            $this->db->prefix('suico_visitors'),
             $xoopsObject->getVar('cod_visit')
         );
 
@@ -243,7 +243,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * retrieve yogurt_visitorss from the database
+     * retrieve suico_visitorss from the database
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key       use the UID as key for the array?
@@ -260,7 +260,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
 
         $limit = $start = 0;
 
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_visitors');
+        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_visitors');
 
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
@@ -286,28 +286,28 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
             $visitors->assignVars($myrow);
 
             if (!$id_as_key) {
-                $ret[] = &$yogurt_visitors;
+                $ret[] = &$suico_visitors;
             } else {
-                $ret[$myrow['cod_visit']] = &$yogurt_visitors;
+                $ret[$myrow['cod_visit']] = &$suico_visitors;
             }
 
-            unset($yogurt_visitors);
+            unset($suico_visitors);
         }
 
         return $ret;
     }
 
     /**
-     * count yogurt_visitorss matching a condition
+     * count suico_visitorss matching a condition
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} to match
-     * @return int count of yogurt_visitorss
+     * @return int count of suico_visitorss
      */
 
     public function getCount(
         ?CriteriaElement $criteriaElement = null
     ) {
-        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_visitors');
+        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_visitors');
 
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
@@ -325,7 +325,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * delete yogurt_visitorss matching a set of conditions
+     * delete suico_visitorss matching a set of conditions
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement}
      * @param bool                                 $force
@@ -338,7 +338,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         $force = true,
         $asObject = false
     ) {
-        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_visitors');
+        $sql = 'DELETE FROM ' . $this->db->prefix('suico_visitors');
 
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
@@ -362,7 +362,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
     public function purgeVisits()
     {
         $sql = 'DELETE FROM ' . $this->db->prefix(
-                'yogurt_visitors'
+                'suico_visitors'
             ) . ' WHERE (date_visited<(DATE_SUB(NOW(), INTERVAL 7 DAY))) ';
 
         if (!$result = $this->db->queryF($sql)) {

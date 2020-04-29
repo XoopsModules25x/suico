@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /**
  * Extended User Profile
@@ -227,10 +227,10 @@ class Field extends \XoopsObject
 
     public function getOutputValue($user, $profile)
     {
-        if (\file_exists($file = $GLOBALS['xoops']->path('modules/yogurt/language/' . $GLOBALS['xoopsConfig']['language'] . '/modinfo.php'))) {
+        if (\file_exists($file = $GLOBALS['xoops']->path('modules/suico/language/' . $GLOBALS['xoopsConfig']['language'] . '/modinfo.php'))) {
             include_once $file;
         } else {
-            include_once $GLOBALS['xoops']->path('modules/yogurt/language/english/modinfo.php');
+            include_once $GLOBALS['xoops']->path('modules/suico/language/english/modinfo.php');
         }
 
         $value = \in_array($this->getVar('field_name'), $this->getUserVars()) ? $user->getVar($this->getVar('field_name')) : $profile->getVar($this->getVar('field_name'));
@@ -308,7 +308,7 @@ class Field extends \XoopsObject
                     return \formatTimestamp($value, 'm');
                 }
 
-                return $value = _MI_YOGURT_NEVER_LOGGED_IN;
+                return $value = _MI_SUICO_NEVER_LOGGED_IN;
                 break;
             case 'autotext':
                 $value = $user->getVar($this->getVar('field_name'), 'n'); //autotext can have HTML in it
@@ -393,9 +393,9 @@ class Field extends \XoopsObject
 
     public function getUserVars()
     {
-        /* @var Yogurt\ProfileHandler $profileHandler */
+        /* @var Suico\ProfileHandler $profileHandler */
 
-        $helper = \XoopsModules\Yogurt\Helper::getInstance();
+        $helper = \XoopsModules\Suico\Helper::getInstance();
         $profileHandler = $helper->getHandler('Profile');
 
         return $profileHandler->getUserVars();

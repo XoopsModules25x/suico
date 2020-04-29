@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt\Common;
+namespace XoopsModules\Suico\Common;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -16,13 +16,13 @@ namespace XoopsModules\Yogurt\Common;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsModules\Yogurt\Common;
+use XoopsModules\Suico\Common;
 
 /**
  * Class Migrate synchronize existing tables with target schema
@@ -76,13 +76,13 @@ class Migrate extends \Xmf\Database\Migrate
             $this->renameTable();
         }
 
-        $this->renameColumn('yogurt_notes', 'Note_id', 'note_id');
+        $this->renameColumn('suico_notes', 'Note_id', 'note_id');
 
-        $this->renameColumn('yogurt_notes', 'Note_text', 'note_text');
+        $this->renameColumn('suico_notes', 'Note_text', 'note_text');
 
-        $this->renameColumn('yogurt_notes', 'Note_from', 'note_from');
+        $this->renameColumn('suico_notes', 'Note_from', 'note_from');
 
-        $this->renameColumn('yogurt_notes', 'Note_to', 'note_to');
+        $this->renameColumn('suico_notes', 'Note_to', 'note_to');
     }
 
     /**

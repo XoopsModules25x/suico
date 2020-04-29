@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /*
  * You may not change or alter any portion of this comment or credits
@@ -48,7 +48,7 @@ class Helper extends \Xmf\Module\Helper
     /**
      * @param bool $debug
      *
-     * @return \XoopsModules\Yogurt\Helper
+     * @return \XoopsModules\Suico\Helper
      */
 
     public static function getInstance(

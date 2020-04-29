@@ -21,7 +21,7 @@
 
 use Xmf\Request;
 
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_register.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'suico_register.tpl';
 require __DIR__ . '/header.php';
 
 if ($GLOBALS['xoopsUser']) {

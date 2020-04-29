@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /**
  * Extended User Profile
@@ -55,13 +55,13 @@ class Category extends \XoopsObject
             $action = $_SERVER['REQUEST_URI'];
         }
 
-        $title = $this->isNew() ? \sprintf(_AM_YOGURT_ADD, _AM_YOGURT_CATEGORY) : \sprintf(_AM_YOGURT_EDIT, _AM_YOGURT_CATEGORY);
+        $title = $this->isNew() ? \sprintf(_AM_SUICO_ADD, _AM_SUICO_CATEGORY) : \sprintf(_AM_SUICO_EDIT, _AM_SUICO_CATEGORY);
 
         include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
 
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
 
-        $form->addElement(new \XoopsFormText(_AM_YOGURT_TITLE, 'cat_title', 35, 255, $this->getVar('cat_title')));
+        $form->addElement(new \XoopsFormText(_AM_SUICO_TITLE, 'cat_title', 35, 255, $this->getVar('cat_title')));
 
         if (!$this->isNew()) {
             //Load groups
@@ -69,9 +69,9 @@ class Category extends \XoopsObject
             $form->addElement(new \XoopsFormHidden('id', $this->getVar('cat_id')));
         }
 
-        $form->addElement(new \XoopsFormTextArea(_AM_YOGURT_DESCRIPTION, 'cat_description', $this->getVar('cat_description', 'e')));
+        $form->addElement(new \XoopsFormTextArea(_AM_SUICO_DESCRIPTION, 'cat_description', $this->getVar('cat_description', 'e')));
 
-        $form->addElement(new \XoopsFormText(_AM_YOGURT_WEIGHT, 'cat_weight', 35, 35, $this->getVar('cat_weight', 'e')));
+        $form->addElement(new \XoopsFormText(_AM_SUICO_WEIGHT, 'cat_weight', 35, 35, $this->getVar('cat_weight', 'e')));
 
         $form->addElement(new \XoopsFormHidden('op', 'save'));
 

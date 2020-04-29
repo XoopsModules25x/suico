@@ -14,19 +14,19 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
 
 $cod_img = Request::getInt('video_id', 0, 'POST');
@@ -34,7 +34,7 @@ $cod_img = Request::getInt('video_id', 0, 'POST');
 /**
  * Creating the factory  loading the video changing its caption
  */
-$videoFactory = new Yogurt\VideoHandler(
+$videoFactory = new Suico\VideoHandler(
     $xoopsDB
 );
 $video        = $videoFactory->create(false);
@@ -48,9 +48,9 @@ $uid = (int)$xoopsUser->getVar('uid');
 if ($uid === $video->getVar('uid_owner')) {
     if ($videoFactory->unsetAllMainsbyID($uid)) {
         if ($videoFactory->insert2($video)) {
-            redirect_header('videos.php', 2, _MD_YOGURT_SETMAINVIDEO);
+            redirect_header('videos.php', 2, _MD_SUICO_SETMAINVIDEO);
         } else {
-            redirect_header('videos.php', 2, _MD_YOGURT_SETMAINVIDEO_ERROR);
+            redirect_header('videos.php', 2, _MD_SUICO_SETMAINVIDEO_ERROR);
         }
     } else {
         echo 'did not work';

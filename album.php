@@ -14,21 +14,21 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 const COUNTPHOTOS = 'countPhotos';
 
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_album.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'suico_album.tpl';
 require __DIR__ . '/header.php';
 
-$controller = new Yogurt\PhotosController($xoopsDB, $xoopsUser);
+$controller = new Suico\PhotosController($xoopsDB, $xoopsUser);
 
 /**
  * Fetching numbers of groups friends videos pictures etc...
@@ -78,7 +78,7 @@ $criteriaUid->setStart(0);
  * If there is no pictures in the album show in template lang_nopicyet
  */
 if (isset($nbSections[COUNTPHOTOS]) && 0 === $nbSections[COUNTPHOTOS]) {
-    $nopicturesyet = _MD_YOGURT_NOTHINGYET;
+    $nopicturesyet = _MD_SUICO_NOTHINGYET;
     $xoopsTpl->assign('lang_nopicyet', $nopicturesyet);
 } else {
     /**
@@ -130,33 +130,33 @@ $navigationBar = new XoopsPageNav(
 $navegacao     = $navigationBar->renderImageNav(2);
 
 //form
-$xoopsTpl->assign('lang_formtitle', _MD_YOGURT_SUBMIT_PIC_TITLE);
-$xoopsTpl->assign('lang_selectphoto', _MD_YOGURT_SELECT_PHOTO);
-$xoopsTpl->assign('lang_phototitle', _MD_YOGURT_PHOTOTITLE);
-$xoopsTpl->assign('lang_caption', _MD_YOGURT_CAPTION);
-$xoopsTpl->assign('lang_uploadpicture', _MD_YOGURT_UPLOADPICTURE);
-$xoopsTpl->assign('lang_youcanupload', sprintf(_MD_YOGURT_YOU_CAN_UPLOAD, $maxfilebytes / 1024));
+$xoopsTpl->assign('lang_formtitle', _MD_SUICO_SUBMIT_PIC_TITLE);
+$xoopsTpl->assign('lang_selectphoto', _MD_SUICO_SELECT_PHOTO);
+$xoopsTpl->assign('lang_phototitle', _MD_SUICO_PHOTOTITLE);
+$xoopsTpl->assign('lang_caption', _MD_SUICO_CAPTION);
+$xoopsTpl->assign('lang_uploadpicture', _MD_SUICO_UPLOADPICTURE);
+$xoopsTpl->assign('lang_youcanupload', sprintf(_MD_SUICO_YOU_CAN_UPLOAD, $maxfilebytes / 1024));
 
-//$xoopsTpl->assign('path_yogurt_uploads',$helper->getConfig('link_path_upload'));
+//$xoopsTpl->assign('path_suico_uploads',$helper->getConfig('link_path_upload'));
 $xoopsTpl->assign(
     'lang_max_countPicture',
-    sprintf(_MD_YOGURT_YOUCANHAVE, $helper->getConfig('countPicture'))
+    sprintf(_MD_SUICO_YOUCANHAVE, $helper->getConfig('countPicture'))
 );
-$xoopsTpl->assign('lang_delete', _MD_YOGURT_DELETE);
-$xoopsTpl->assign('lang_editdesc', _MD_YOGURT_EDIT_DESC);
-$xoopsTpl->assign('lang_countPicture', sprintf(_MD_YOGURT_YOUHAVE, ($nbSections[COUNTPHOTOS] ?? '')));
+$xoopsTpl->assign('lang_delete', _MD_SUICO_DELETE);
+$xoopsTpl->assign('lang_editdesc', _MD_SUICO_EDIT_DESC);
+$xoopsTpl->assign('lang_countPicture', sprintf(_MD_SUICO_YOUHAVE, ($nbSections[COUNTPHOTOS] ?? '')));
 
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 $xoopsTpl->assign('navegacao', $navegacao);
-$xoopsTpl->assign('lang_avatarchange', _MD_YOGURT_AVATARCHANGE);
+$xoopsTpl->assign('lang_avatarchange', _MD_SUICO_AVATARCHANGE);
 $xoopsTpl->assign('avatar_url', $avatar);
 
-$xoopsTpl->assign('lang_setprivate', _MD_YOGURT_PRIVATIZE);
-$xoopsTpl->assign('lang_unsetprivate', _MD_YOGURT_UNPRIVATIZE);
-$xoopsTpl->assign('lang_privatephoto', _MD_YOGURT_PRIVATEPHOTO);
+$xoopsTpl->assign('lang_setprivate', _MD_SUICO_PRIVATIZE);
+$xoopsTpl->assign('lang_unsetprivate', _MD_SUICO_UNPRIVATIZE);
+$xoopsTpl->assign('lang_privatephoto', _MD_SUICO_PRIVATEPHOTO);
 
-$xoopsTpl->assign('lang_mysection', _MD_YOGURT_MYPHOTOS);
-$xoopsTpl->assign('section_name', _MD_YOGURT_PHOTOS);
+$xoopsTpl->assign('lang_mysection', _MD_SUICO_MYPHOTOS);
+$xoopsTpl->assign('section_name', _MD_SUICO_PHOTOS);
 
 require XOOPS_ROOT_PATH . '/include/comment_view.php';
 

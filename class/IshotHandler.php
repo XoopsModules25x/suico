@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -21,7 +21,7 @@ use XoopsPersistableObjectHandler;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -38,7 +38,7 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 // -------------------------------------------------------------------------
 
 /**
- * yogurt_ishothandler class.
+ * suico_ishothandler class.
  * This class provides simple mecanisme for Ishot object
  */
 class IshotHandler extends XoopsPersistableObjectHandler
@@ -50,14 +50,14 @@ class IshotHandler extends XoopsPersistableObjectHandler
     /**
      * Constructor
      * @param \XoopsDatabase|null              $xoopsDatabase
-     * @param \XoopsModules\Yogurt\Helper|null $helper
+     * @param \XoopsModules\Suico\Helper|null $helper
      */
 
     public function __construct(
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Yogurt\Helper $this ->helper */
+        /** @var \XoopsModules\Suico\Helper $this ->helper */
 
         if (null === $helper) {
             $this->helper = Helper::getInstance();
@@ -66,7 +66,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
         }
 
         $isAdmin = $this->helper->isUserAdmin();
-        //        parent::__construct($db, 'yogurt_groups', Image::class, 'group_id', 'group_title');
+        //        parent::__construct($db, 'suico_groups', Image::class, 'group_id', 'group_title');
     }
 
     /**
@@ -104,7 +104,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
         $id = null,
         $fields = null
     ) {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_ishot') . ' WHERE cod_ishot=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_ishot') . ' WHERE cod_ishot=' . $id;
 
         if (!$result = $this->db->query($sql)) {
             return false;
@@ -113,11 +113,11 @@ class IshotHandler extends XoopsPersistableObjectHandler
         $numrows = $this->db->getRowsNum($result);
 
         if (1 === $numrows) {
-            $yogurt_ishot = new Ishot();
+            $suico_ishot = new Ishot();
 
-            $yogurt_ishot->assignVars($this->db->fetchArray($result));
+            $suico_ishot->assignVars($this->db->fetchArray($result));
 
-            return $yogurt_ishot;
+            return $suico_ishot;
         }
 
         return false;
@@ -169,7 +169,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
 
             $sql = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_ishot'),
+                $this->db->prefix('suico_ishot'),
                 $cod_ishot,
                 $uid_voter,
                 $uid_voted,
@@ -187,7 +187,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
 
             $sql = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_ishot'),
+                $this->db->prefix('suico_ishot'),
                 $cod_ishot,
                 $uid_voter,
                 $uid_voted,
@@ -234,7 +234,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
 
         $sql = \sprintf(
             'DELETE FROM %s WHERE cod_ishot = %u',
-            $this->db->prefix('yogurt_ishot'),
+            $this->db->prefix('suico_ishot'),
             $xoopsObject->getVar('cod_ishot')
         );
 
@@ -252,7 +252,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * retrieve yogurt_ishots from the database
+     * retrieve suico_ishots from the database
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key       use the UID as key for the array?
@@ -269,7 +269,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
 
         $limit = $start = 0;
 
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_ishot');
+        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_ishot');
 
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
@@ -290,33 +290,33 @@ class IshotHandler extends XoopsPersistableObjectHandler
         }
 
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $yogurt_ishot = new Ishot();
+            $suico_ishot = new Ishot();
 
-            $yogurt_ishot->assignVars($myrow);
+            $suico_ishot->assignVars($myrow);
 
             if (!$id_as_key) {
-                $ret[] = &$yogurt_ishot;
+                $ret[] = &$suico_ishot;
             } else {
-                $ret[$myrow['cod_ishot']] = &$yogurt_ishot;
+                $ret[$myrow['cod_ishot']] = &$suico_ishot;
             }
 
-            unset($yogurt_ishot);
+            unset($suico_ishot);
         }
 
         return $ret;
     }
 
     /**
-     * count yogurt_ishots matching a condition
+     * count suico_ishots matching a condition
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link CriteriaElement} to match
-     * @return int count of yogurt_ishots
+     * @return int count of suico_ishots
      */
 
     public function getCount(
         ?CriteriaElement $criteriaElement = null
     ) {
-        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_ishot');
+        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_ishot');
 
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
@@ -334,7 +334,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * delete yogurt_ishots matching a set of conditions
+     * delete suico_ishots matching a set of conditions
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link CriteriaElement}
      * @param bool                                 $force
@@ -347,7 +347,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
         $force = true,
         $asObject = false
     ) {
-        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_ishot');
+        $sql = 'DELETE FROM ' . $this->db->prefix('suico_ishot');
 
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
@@ -368,7 +368,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
     public function getHottest($criteria = null)
     {
         $sql = 'SELECT DISTINCTROW uname, user_avatar, uid_voted, COUNT(cod_ishot) AS qtd FROM ' . $this->db->prefix(
-                'yogurt_ishot'
+                'suico_ishot'
             ) . ', ' . $this->db->prefix(
                 'users'
             );
@@ -429,7 +429,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
         $limit = $start = 0;
 
         $sql = 'SELECT uname, user_avatar, uid_voted FROM ' . $this->db->prefix(
-                'yogurt_ishot'
+                'suico_ishot'
             ) . ', ' . $this->db->prefix(
                 'users'
             );

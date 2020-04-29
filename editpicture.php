@@ -14,19 +14,19 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
 
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
 
 $cod_img = Request::getInt('cod_img', 0, 'POST');
@@ -37,7 +37,7 @@ if (1 === $marker) {
     /**
      * Creating the factory loading the picture changing its caption
      */
-    $imageFactory = new Yogurt\ImageHandler(
+    $imageFactory = new Suico\ImageHandler(
         $xoopsDB
     );
     $picture      = $imageFactory->create(false);
@@ -49,9 +49,9 @@ if (1 === $marker) {
      */
     if ($uid === (int)$picture->getVar('uid_owner')) {
         if ($imageFactory->insert2($picture)) {
-            redirect_header('album.php', 2, _MD_YOGURT_DESC_EDITED);
+            redirect_header('album.php', 2, _MD_SUICO_DESC_EDITED);
         } else {
-            redirect_header('album.php', 2, _MD_YOGURT_ERROR);
+            redirect_header('album.php', 2, _MD_SUICO_ERROR);
         }
     }
 }
@@ -59,7 +59,7 @@ if (1 === $marker) {
  * Creating the factory  and the criteria to edit the desc of the picture
  * The user must be the owner
  */
-$imageFactory = new Yogurt\ImageHandler(
+$imageFactory = new Suico\ImageHandler(
     $xoopsDB
 );
 $criteria_img = new Criteria('cod_img', $cod_img);
@@ -80,7 +80,7 @@ if ($array_pict) {
     $filename     = $array_pict[0]->getVar('filename');
 }
 //$url = $xoopsModuleConfig['link_path_upload']."/thumb_".$url;
-$url = XOOPS_URL . '/uploads/yogurt/images/thumb_' . $filename;
+$url = XOOPS_URL . '/uploads/suico/images/thumb_' . $filename;
 $imageFactory->renderFormEdit($title, $caption, $cod_img, $url);
 
 require dirname(__DIR__, 2) . '/footer.php';

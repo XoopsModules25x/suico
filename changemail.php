@@ -16,10 +16,10 @@
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
-use XoopsModules\Yogurt\IndexController;
+use XoopsModules\Suico\IndexController;
 use Xmf\Request;
 
-$GLOBALS['xoopsOption']['template_main'] = 'yogurt_email.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'suico_email.tpl';
 require __DIR__ . '/header.php';
 
 /**
@@ -39,9 +39,9 @@ if (!$GLOBALS['xoopsUser'] || 1 != $GLOBALS['xoopsConfigUser']['allow_chgmail'])
 if (!isset($_POST['submit']) || !isset($_POST['passwd'])) {
     //show change password form
     include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
-    $form = new XoopsThemeForm(_MD_YOGURT_CHANGEMAIL, 'emailform', $_SERVER['REQUEST_URI'], 'post', true);
+    $form = new XoopsThemeForm(_MD_SUICO_CHANGEMAIL, 'emailform', $_SERVER['REQUEST_URI'], 'post', true);
     $form->addElement(new XoopsFormPassword(_US_PASSWORD, 'passwd', 15, 50), true);
-    $form->addElement(new XoopsFormText(_MD_YOGURT_NEWMAIL, 'newmail', 15, 50), true);
+    $form->addElement(new XoopsFormText(_MD_SUICO_NEWMAIL, 'newmail', 15, 50), true);
     $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
     $form->assign($GLOBALS['xoopsTpl']);
 } else {
@@ -50,7 +50,7 @@ if (!isset($_POST['submit']) || !isset($_POST['passwd'])) {
     $email  = Request::getString('newmail', '', 'POST');
     $errors = [];
     if (!password_verify($oldpass, $GLOBALS['xoopsUser']->getVar('pass', 'n'))) {
-        $errors[] = _MA_YOGURT_WRONGPASSWORD;
+        $errors[] = _MA_SUICO_WRONGPASSWORD;
     }
     if (!checkEmail($email)) {
         $errors[] = _US_INVALIDMAIL;
@@ -64,7 +64,7 @@ if (!isset($_POST['submit']) || !isset($_POST['passwd'])) {
         /* @var XoopsMemberHandler $memberHandler */
         $memberHandler = xoops_getHandler('member');
         if ($memberHandler->insertUser($GLOBALS['xoopsUser'])) {
-            $msg = _MD_YOGURT_EMAILCHANGED;
+            $msg = _MD_SUICO_EMAILCHANGED;
 
             //send email to new email address
             $xoopsMailer = xoops_getMailer();
@@ -78,7 +78,7 @@ if (!isset($_POST['submit']) || !isset($_POST['passwd'])) {
             $xoopsMailer->setToEmails($email);
             $xoopsMailer->setFromEmail($GLOBALS['xoopsConfig']['adminmail']);
             $xoopsMailer->setFromName($GLOBALS['xoopsConfig']['sitename']);
-            $xoopsMailer->setSubject(sprintf(_MD_YOGURT_NEWEMAIL, $GLOBALS['xoopsConfig']['sitename']));
+            $xoopsMailer->setSubject(sprintf(_MD_SUICO_NEWEMAIL, $GLOBALS['xoopsConfig']['sitename']));
             $xoopsMailer->send();
         } else {
             $msg = implode('<br>', $GLOBALS['xoopsUser']->getErrors());
@@ -87,7 +87,7 @@ if (!isset($_POST['submit']) || !isset($_POST['passwd'])) {
     redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/index.php?uid=' . $GLOBALS['xoopsUser']->getVar('uid'), 2, $msg);
 }
 
-$xoopsOption['xoops_pagetitle'] = sprintf(_MD_YOGURT_CHANGEMAIL, $xoopsModule->getVar('name'), $controller->nameOwner);
+$xoopsOption['xoops_pagetitle'] = sprintf(_MD_SUICO_CHANGEMAIL, $xoopsModule->getVar('name'), $controller->nameOwner);
 
 require __DIR__ . '/footer.php';
 require dirname(__DIR__, 2) . '/footer.php';

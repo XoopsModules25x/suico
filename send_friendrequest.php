@@ -14,18 +14,18 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
 
-$friendrequestFactory = new Yogurt\FriendrequestHandler($xoopsDB);
+$friendrequestFactory = new Suico\FriendrequestHandler($xoopsDB);
 /**
  * create the friendrequest in database
  */
@@ -41,15 +41,15 @@ if ($friendrequestFactory->insert2($newFriendrequest)) {
     $notificationHandler->triggerEvent('friendship', Request::getInt('friendrequestto_uid', 0, 'POST'), 'new_friendship', $extra_tags);
 
     redirect_header(
-        XOOPS_URL . '/modules/yogurt/index.php?uid=' . Request::getInt('friendrequestto_uid', 0, 'POST'),
+        XOOPS_URL . '/modules/suico/index.php?uid=' . Request::getInt('friendrequestto_uid', 0, 'POST'),
         3,
-        _MD_YOGURT_FRIENDREQUEST_TO
+        _MD_SUICO_FRIENDREQUEST_TO
     );
 } else {
     redirect_header(
-        XOOPS_URL . '/modules/yogurt/index.php?uid=' . $xoopsUser->getVar('uid'),
+        XOOPS_URL . '/modules/suico/index.php?uid=' . $xoopsUser->getVar('uid'),
         3,
-        _MD_YOGURT_ERROR
+        _MD_SUICO_ERROR
     );
 }
 

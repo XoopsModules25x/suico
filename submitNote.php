@@ -14,14 +14,14 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Request;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
 
@@ -33,13 +33,13 @@ require __DIR__ . '/header.php';
 /**
  * Factories of groups
  */
-$notesFactory = new Yogurt\NotesHandler($xoopsDB);
+$notesFactory = new Suico\NotesHandler($xoopsDB);
 
 /**
  * Verify Token
  */
 if (!$GLOBALS['xoopsSecurity']->check()) {
-    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_YOGURT_TOKENEXPIRED);
+    redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
 
 $myts         = MyTextSanitizer::getInstance();
@@ -59,9 +59,9 @@ $extra_tags['X_OWNER_UID']  = $notebook_uid;
 $notificationHandler = xoops_getHandler('notification');
 $notificationHandler->triggerEvent('Note', $xoopsUser->getVar('uid'), 'new_Note', $extra_tags);
 if (1 == $mainform) {
-    redirect_header('notebook.php?uid=' . $notebook_uid . '#' . $noteId, 1, _MD_YOGURT_NOTE_SENT);
+    redirect_header('notebook.php?uid=' . $notebook_uid . '#' . $noteId, 1, _MD_SUICO_NOTE_SENT);
 } else {
-    redirect_header('notebook.php?uid=' . $xoopsUser->getVar('uid'), 1, _MD_YOGURT_NOTE_SENT);
+    redirect_header('notebook.php?uid=' . $xoopsUser->getVar('uid'), 1, _MD_SUICO_NOTE_SENT);
 }
 
 /**

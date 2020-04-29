@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt\Form;
+namespace XoopsModules\Suico\Form;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -16,7 +16,7 @@ namespace XoopsModules\Yogurt\Form;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -28,13 +28,13 @@ use XoopsFormHidden;
 use XoopsFormLabel;
 use XoopsFormSelect;
 use XoopsFormSelectUser;
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 use XoopsThemeForm;
 
 require_once \dirname(__DIR__, 2) . '/include/common.php';
 
 $moduleDirName = \basename(\dirname(__DIR__, 2));
-//$helper = Yogurt\Helper::getInstance();
+//$helper = Suico\Helper::getInstance();
 $permHelper = new Permission();
 
 \xoops_load('XoopsFormLoader');
@@ -60,8 +60,8 @@ class RelgroupuserForm extends XoopsThemeForm
 
         $this->targetObject = $target;
 
-        $title = $this->targetObject->isNew() ? \sprintf(\AM_YOGURT_RELGROUPUSER_ADD) : \sprintf(
-            \AM_YOGURT_RELGROUPUSER_EDIT
+        $title = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_RELGROUPUSER_ADD) : \sprintf(
+            \AM_SUICO_RELGROUPUSER_EDIT
         );
 
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
@@ -83,7 +83,7 @@ class RelgroupuserForm extends XoopsThemeForm
         // Rel_id
 
         $this->addElement(
-            new XoopsFormLabel(\AM_YOGURT_RELGROUPUSER_REL_ID, $this->targetObject->getVar('rel_id'), 'rel_id')
+            new XoopsFormLabel(\AM_SUICO_RELGROUPUSER_REL_ID, $this->targetObject->getVar('rel_id'), 'rel_id')
         );
 
         // Rel_group_id
@@ -97,7 +97,7 @@ class RelgroupuserForm extends XoopsThemeForm
         $groupsHandler = $this->helper->getHandler('Groups');
 
         $groups_id_select = new XoopsFormSelect(
-            \AM_YOGURT_RELGROUPUSER_REL_GROUP_ID, 'rel_group_id', $this->targetObject->getVar(
+            \AM_SUICO_RELGROUPUSER_REL_GROUP_ID, 'rel_group_id', $this->targetObject->getVar(
             'rel_group_id'
         )
         );
@@ -110,7 +110,7 @@ class RelgroupuserForm extends XoopsThemeForm
 
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_YOGURT_RELGROUPUSER_REL_USER_UID, 'rel_user_uid', false, $this->targetObject->getVar(
+                \AM_SUICO_RELGROUPUSER_REL_USER_UID, 'rel_user_uid', false, $this->targetObject->getVar(
                 'rel_user_uid'
             ), 1, false
             ),

@@ -18,19 +18,19 @@
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
-use XoopsModules\Yogurt;
+use XoopsModules\Suico;
 
 include_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 
 
-$adminObject->addItemButton( _AM_YOGURT_FIELD, 'fieldslist.php?op=new', 'add');
+$adminObject->addItemButton( _AM_SUICO_FIELD, 'fieldslist.php?op=new', 'add');
 
 $adminObject->displayNavigation(basename(__FILE__));
 $adminObject->displayButton('left');
 
 $op = $_REQUEST['op'] ?? (isset($_REQUEST['id']) ? 'edit' : 'list');
-/* @var Yogurt\FieldHandler $fieldHandler */
+/* @var Suico\FieldHandler $fieldHandler */
 $fieldHandler = $helper->getHandler('Field');
 
 switch ($op) {
@@ -42,14 +42,14 @@ switch ($op) {
         $moduleHandler = xoops_getHandler('module');
         $modules        = $moduleHandler->getObjects(null, true);
 
-        /* @var Yogurt\CategoryHandler $categoryHandler */
+        /* @var Suico\CategoryHandler $categoryHandler */
         $categoryHandler = $helper->getHandler('Category');
         $criteria    = new CriteriaCompo();
         $criteria->setSort('cat_weight');
         $cats = $categoryHandler->getObjects($criteria, true);
         unset($criteria);
 
-        $categories[0] = _AM_YOGURT_DEFAULT;
+        $categories[0] = _AM_SUICO_DEFAULT;
         if (count($cats) > 0) {
             foreach (array_keys($cats) as $i) {
                 $categories[$cats[$i]->getVar('cat_id')] = $cats[$i]->getVar('cat_title');
@@ -58,35 +58,35 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('categories', $categories);
         unset($categories);
         $valuetypes = [
-            XOBJ_DTYPE_ARRAY   => _AM_YOGURT_ARRAY,
-            XOBJ_DTYPE_EMAIL   => _AM_YOGURT_EMAIL,
-            XOBJ_DTYPE_INT     => _AM_YOGURT_INT,
-            XOBJ_DTYPE_TXTAREA => _AM_YOGURT_TXTAREA,
-            XOBJ_DTYPE_TXTBOX  => _AM_YOGURT_TXTBOX,
-            XOBJ_DTYPE_URL     => _AM_YOGURT_URL,
-            XOBJ_DTYPE_OTHER   => _AM_YOGURT_OTHER,
-            XOBJ_DTYPE_MTIME   => _AM_YOGURT_DATE,
+            XOBJ_DTYPE_ARRAY   => _AM_SUICO_ARRAY,
+            XOBJ_DTYPE_EMAIL   => _AM_SUICO_EMAIL,
+            XOBJ_DTYPE_INT     => _AM_SUICO_INT,
+            XOBJ_DTYPE_TXTAREA => _AM_SUICO_TXTAREA,
+            XOBJ_DTYPE_TXTBOX  => _AM_SUICO_TXTBOX,
+            XOBJ_DTYPE_URL     => _AM_SUICO_URL,
+            XOBJ_DTYPE_OTHER   => _AM_SUICO_OTHER,
+            XOBJ_DTYPE_MTIME   => _AM_SUICO_DATE,
         ];
 
         $fieldtypes = [
-            'checkbox'     => _AM_YOGURT_CHECKBOX,
-            'group'        => _AM_YOGURT_GROUP,
-            'group_multi'  => _AM_YOGURT_GROUPMULTI,
-            'language'     => _AM_YOGURT_LANGUAGE,
-            'radio'        => _AM_YOGURT_RADIO,
-            'select'       => _AM_YOGURT_SELECT,
-            'select_multi' => _AM_YOGURT_SELECTMULTI,
-            'textarea'     => _AM_YOGURT_TEXTAREA,
-            'dhtml'        => _AM_YOGURT_DHTMLTEXTAREA,
-            'textbox'      => _AM_YOGURT_TEXTBOX,
-            'timezone'     => _AM_YOGURT_TIMEZONE,
-            'yesno'        => _AM_YOGURT_YESNO,
-            'date'         => _AM_YOGURT_DATE,
-            'datetime'     => _AM_YOGURT_DATETIME,
-            'longdate'     => _AM_YOGURT_LONGDATE,
-            'theme'        => _AM_YOGURT_THEME,
-            'autotext'     => _AM_YOGURT_AUTOTEXT,
-            'rank'         => _AM_YOGURT_RANK,
+            'checkbox'     => _AM_SUICO_CHECKBOX,
+            'group'        => _AM_SUICO_GROUP,
+            'group_multi'  => _AM_SUICO_GROUPMULTI,
+            'language'     => _AM_SUICO_LANGUAGE,
+            'radio'        => _AM_SUICO_RADIO,
+            'select'       => _AM_SUICO_SELECT,
+            'select_multi' => _AM_SUICO_SELECTMULTI,
+            'textarea'     => _AM_SUICO_TEXTAREA,
+            'dhtml'        => _AM_SUICO_DHTMLTEXTAREA,
+            'textbox'      => _AM_SUICO_TEXTBOX,
+            'timezone'     => _AM_SUICO_TIMEZONE,
+            'yesno'        => _AM_SUICO_YESNO,
+            'date'         => _AM_SUICO_DATE,
+            'datetime'     => _AM_SUICO_DATETIME,
+            'longdate'     => _AM_SUICO_LONGDATE,
+            'theme'        => _AM_SUICO_THEME,
+            'autotext'     => _AM_SUICO_AUTOTEXT,
+            'rank'         => _AM_SUICO_RANK,
         ];
 
         foreach (array_keys($fields) as $i) {
@@ -104,21 +104,21 @@ switch ($op) {
         ksort($categories);
         $GLOBALS['xoopsTpl']->assign('fieldcategories', $categories);
         $GLOBALS['xoopsTpl']->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
-        $template_main = 'admin/yogurt_admin_fieldslist.tpl';
+        $template_main = 'admin/suico_admin_fieldslist.tpl';
         break;
     case 'new':
         include_once dirname(__DIR__) . '/include/forms.php';
         $obj  = $fieldHandler->create();
-        $form = yogurt_getFieldForm($obj);
+        $form = suico_getFieldForm($obj);
         $form->display();
         break;
     case 'edit':
         $obj = $fieldHandler->get($_REQUEST['id']);
         if (!$obj->getVar('field_config') && !$obj->getVar('field_show') && !$obj->getVar('field_edit')) { //If no configs exist
-            redirect_header('fieldslist.php', 2, _AM_YOGURT_FIELDNOTCONFIGURABLE);
+            redirect_header('fieldslist.php', 2, _AM_SUICO_FIELDNOTCONFIGURABLE);
         }
         include_once dirname(__DIR__) . '/include/forms.php';
-        $form = yogurt_getFieldForm($obj);
+        $form = suico_getFieldForm($obj);
         $form->display();
         break;
     case 'reorder':
@@ -152,7 +152,7 @@ switch ($op) {
                 }
                 if (0 == count($errors)) {
                     //no errors
-                    redirect_header('fieldslist.php', 2, sprintf(_AM_YOGURT_SAVEDSUCCESS, _AM_YOGURT_FIELDS));
+                    redirect_header('fieldslist.php', 2, sprintf(_AM_SUICO_SAVEDSUCCESS, _AM_SUICO_FIELDS));
                 } else {
                     redirect_header('fieldslist.php', 3, implode('<br>', $errors));
                 }
@@ -167,7 +167,7 @@ switch ($op) {
         if (isset($_REQUEST['id'])) {
             $obj = $fieldHandler->get($_REQUEST['id']);
             if (!$obj->getVar('field_config') && !$obj->getVar('field_show') && !$obj->getVar('field_edit')) { //If no configs exist
-                redirect_header('admin.php', 2, _AM_YOGURT_FIELDNOTCONFIGURABLE);
+                redirect_header('admin.php', 2, _AM_SUICO_FIELDNOTCONFIGURABLE);
             }
         } else {
             $obj = $fieldHandler->create();
@@ -284,24 +284,24 @@ switch ($op) {
                 }
             }
             $url = $redirect_to_edit ? 'fieldslist.php?op=edit&amp;id=' . $obj->getVar('field_id') : 'fieldslist.php';
-            redirect_header($url, 3, sprintf(_AM_YOGURT_SAVEDSUCCESS, _AM_YOGURT_FIELD));
+            redirect_header($url, 3, sprintf(_AM_SUICO_SAVEDSUCCESS, _AM_SUICO_FIELD));
         }
         include_once dirname(__DIR__) . '/include/forms.php';
         echo $obj->getHtmlErrors();
-        $form = yogurt_getFieldForm($obj);
+        $form = suico_getFieldForm($obj);
         $form->display();
         break;
     case 'delete':
         $obj = $fieldHandler->get($_REQUEST['id']);
         if (!$obj->getVar('field_config')) {
-            redirect_header('index.php', 2, _AM_YOGURT_FIELDNOTCONFIGURABLE);
+            redirect_header('index.php', 2, _AM_SUICO_FIELDNOTCONFIGURABLE);
         }
         if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('fieldslist.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }
             if ($fieldHandler->delete($obj)) {
-                redirect_header('fieldslist.php', 3, sprintf(_AM_YOGURT_DELETEDSUCCESS, _AM_YOGURT_FIELD));
+                redirect_header('fieldslist.php', 3, sprintf(_AM_SUICO_DELETEDSUCCESS, _AM_SUICO_FIELD));
             } else {
                 echo $obj->getHtmlErrors();
             }
@@ -313,7 +313,7 @@ switch ($op) {
                     'op' => 'delete',
                 ],
                 $_SERVER['REQUEST_URI'],
-                sprintf(_AM_YOGURT_RUSUREDEL, $obj->getVar('field_title'))
+                sprintf(_AM_SUICO_RUSUREDEL, $obj->getVar('field_title'))
             );
         }
         break;
@@ -322,7 +322,7 @@ switch ($op) {
             $field_id = (int)$_REQUEST['field_id'];
             if (isset($_REQUEST['field_required'])) {
                 $field_required = (int)$_REQUEST['field_required'];
-                yogurt_visible_toggle($field_id, $field_required, $helper);
+                suico_visible_toggle($field_id, $field_required, $helper);
             }
         }
         break;
@@ -336,16 +336,16 @@ if (isset($template_main)) {
  * @param $field_id
  * @param $field_required
  */
-function yogurt_visible_toggle($field_id, $field_required, $helper)
+function suico_visible_toggle($field_id, $field_required, $helper)
 {
     $field_required = (1 == $field_required) ? 0 : 1;
     $fieldHandler   = $helper->getHandler('Field');
     $obj            = $fieldHandler->get($field_id);
     $obj->setVar('field_required', $field_required);
     if ($fieldHandler->insert($obj, true)) {
-        redirect_header('fieldslist.php', 1, _AM_YOGURT_REQUIRED_TOGGLE_SUCCESS);
+        redirect_header('fieldslist.php', 1, _AM_SUICO_REQUIRED_TOGGLE_SUCCESS);
     } else {
-        redirect_header('fieldslist.php', 1, _AM_YOGURT_REQUIRED_TOGGLE_FAILED);
+        redirect_header('fieldslist.php', 1, _AM_SUICO_REQUIRED_TOGGLE_FAILED);
     }
 }
 

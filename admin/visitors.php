@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -32,12 +32,12 @@ $sort  = Request::getString('sort', '');
 
 $adminObject->displayNavigation(basename(__FILE__));
 $permHelper = new Permission();
-$uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/images/';
-$uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/images/';
+$uploadDir  = XOOPS_UPLOAD_PATH . '/suico/images/';
+$uploadUrl  = XOOPS_UPLOAD_URL . '/suico/images/';
 
 switch ($op) {
     case 'new':
-        $adminObject->addItemButton(AM_YOGURT_VISITORS_LIST, 'visitors.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_VISITORS_LIST, 'visitors.php', 'list');
         $adminObject->displayButton('left');
 
         $visitorsObject = $visitorsHandler->create();
@@ -61,7 +61,7 @@ switch ($op) {
         $visitorsObject->setVar('date_visited', $dateTimeObj->getTimestamp());
 
         if ($visitorsHandler->insert($visitorsObject)) {
-            redirect_header('visitors.php?op=list', 2, AM_YOGURT_FORMOK);
+            redirect_header('visitors.php?op=list', 2, AM_SUICO_FORMOK);
         }
 
         echo $visitorsObject->getHtmlErrors();
@@ -69,8 +69,8 @@ switch ($op) {
         $form->display();
         break;
     case 'edit':
-        $adminObject->addItemButton(AM_YOGURT_ADD_VISITORS, 'visitors.php?op=new', 'add');
-        $adminObject->addItemButton(AM_YOGURT_VISITORS_LIST, 'visitors.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_ADD_VISITORS, 'visitors.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_VISITORS_LIST, 'visitors.php', 'list');
         $adminObject->displayButton('left');
         $visitorsObject = $visitorsHandler->get(Request::getString('cod_visit', ''));
         $form           = $visitorsObject->getForm();
@@ -84,7 +84,7 @@ switch ($op) {
             }
 
             if ($visitorsHandler->delete($visitorsObject)) {
-                redirect_header('visitors.php', 3, AM_YOGURT_FORMDELOK);
+                redirect_header('visitors.php', 3, AM_SUICO_FORMDELOK);
             } else {
                 echo $visitorsObject->getHtmlErrors();
             }
@@ -97,7 +97,7 @@ switch ($op) {
                 ],
                 Request::getUrl('REQUEST_URI', '', 'SERVER'),
                 sprintf(
-                    AM_YOGURT_FORMSUREDEL,
+                    AM_SUICO_FORMSUREDEL,
                     $visitorsObject->getVar('uname_visitor')
                 )
             );
@@ -107,16 +107,16 @@ switch ($op) {
 
         $id_field = Request::getString('cod_visit', '');
 
-        if ($utility::cloneRecord('yogurt_visitors', 'cod_visit', $id_field)) {
-            redirect_header('visitors.php', 3, AM_YOGURT_CLONED_OK);
+        if ($utility::cloneRecord('suico_visitors', 'cod_visit', $id_field)) {
+            redirect_header('visitors.php', 3, AM_SUICO_CLONED_OK);
         } else {
-            redirect_header('visitors.php', 3, AM_YOGURT_CLONED_FAILED);
+            redirect_header('visitors.php', 3, AM_SUICO_CLONED_FAILED);
         }
 
         break;
     case 'list':
     default:
-        $adminObject->addItemButton(AM_YOGURT_ADD_VISITORS, 'visitors.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_ADD_VISITORS, 'visitors.php?op=new', 'add');
         $adminObject->displayButton('left');
         $start                   = Request::getInt('start', 0);
         $visitorsPaginationLimit = $helper->getConfig('userpager');
@@ -131,7 +131,7 @@ switch ($op) {
         /*
         //
         //
-                            <th class='center width5'>".AM_YOGURT_FORM_ACTION."</th>
+                            <th class='center width5'>".AM_SUICO_FORM_ACTION."</th>
         //                    </tr>";
         //            $class = "odd";
         */
@@ -171,28 +171,28 @@ switch ($op) {
 
                 $GLOBALS['xoopsTpl']->assign(
                     'selectorcod_visit',
-                    AM_YOGURT_VISITORS_COD_VISIT
+                    AM_SUICO_VISITORS_COD_VISIT
                 );
 
                 $visitorsArray['cod_visit'] = $visitorsTempArray[$i]->getVar('cod_visit');
 
-                $GLOBALS['xoopsTpl']->assign('selectoruid_owner', AM_YOGURT_VISITORS_UID_OWNER);
+                $GLOBALS['xoopsTpl']->assign('selectoruid_owner', AM_SUICO_VISITORS_UID_OWNER);
 
                 $visitorsArray['uid_owner'] = strip_tags(
                     XoopsUser::getUnameFromId($visitorsTempArray[$i]->getVar('uid_owner'))
                 );
 
-                $GLOBALS['xoopsTpl']->assign('selectoruid_visitor', AM_YOGURT_VISITORS_UID_VISITOR);
+                $GLOBALS['xoopsTpl']->assign('selectoruid_visitor', AM_SUICO_VISITORS_UID_VISITOR);
 
                 $visitorsArray['uid_visitor'] = strip_tags(
                     XoopsUser::getUnameFromId($visitorsTempArray[$i]->getVar('uid_visitor'))
                 );
 
-                $GLOBALS['xoopsTpl']->assign('selectoruname_visitor', AM_YOGURT_VISITORS_UNAME_VISITOR);
+                $GLOBALS['xoopsTpl']->assign('selectoruname_visitor', AM_SUICO_VISITORS_UNAME_VISITOR);
 
                 $visitorsArray['uname_visitor'] = $visitorsTempArray[$i]->getVar('uname_visitor');
 
-                $GLOBALS['xoopsTpl']->assign('selectordate_visited', AM_YOGURT_VISITORS_DATETIME);
+                $GLOBALS['xoopsTpl']->assign('selectordate_visited', AM_SUICO_VISITORS_DATETIME);
 
                 $visitorsArray['date_visited'] = formatTimestamp($visitorsTempArray[$i]->getVar('date_visited'), 's');
 
@@ -239,7 +239,7 @@ switch ($op) {
 
             //                    <tr>
 
-            //                     <th class='center width5'>".AM_YOGURT_FORM_ACTION."XXX</th>
+            //                     <th class='center width5'>".AM_SUICO_FORM_ACTION."XXX</th>
 
             //                    </tr><tr><td class='errorMsg' colspan='6'>There are noXXX visitors</td></tr>";
 
@@ -250,7 +250,7 @@ switch ($op) {
             echo $GLOBALS['xoopsTpl']->fetch(
                 XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar(
                     'dirname'
-                ) . '/templates/admin/yogurt_admin_visitors.tpl'
+                ) . '/templates/admin/suico_admin_visitors.tpl'
             );
         }
 

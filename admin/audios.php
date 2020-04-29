@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -32,12 +32,12 @@ $sort  = Request::getString('sort', '');
 
 $adminObject->displayNavigation(basename(__FILE__));
 $permHelper = new Permission();
-$uploadDir  = XOOPS_UPLOAD_PATH . '/yogurt/audio/';
-$uploadUrl  = XOOPS_UPLOAD_URL . '/yogurt/audio/';
+$uploadDir  = XOOPS_UPLOAD_PATH . '/suico/audio/';
+$uploadUrl  = XOOPS_UPLOAD_URL . '/suico/audio/';
 
 switch ($op) {
     case 'new':
-        $adminObject->addItemButton(AM_YOGURT_AUDIO_LIST, 'audios.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_AUDIO_LIST, 'audios.php', 'list');
         $adminObject->displayButton('left');
 
         $audioObject = $audioHandler->create();
@@ -61,7 +61,7 @@ switch ($op) {
         $audioObject->setVar('description', Request::getText('description', ''));
         //        $audioObject->setVar('filename', Request::getVar('filename', ''));
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
-        $uploadDir = XOOPS_UPLOAD_PATH . '/yogurt/audio/';
+        $uploadDir = XOOPS_UPLOAD_PATH . '/suico/audio/';
         $uploader  = new \XoopsMediaUploader(
             $uploadDir, $helper->getConfig('mimetypes'), $helper->getConfig('maxsize'), null, null
         );
@@ -88,7 +88,7 @@ switch ($op) {
 
         //insert object
         if ($audioHandler->insert($audioObject)) {
-            redirect_header('audios.php?op=list', 2, AM_YOGURT_FORMOK);
+            redirect_header('audios.php?op=list', 2, AM_SUICO_FORMOK);
         }
 
         echo $audioObject->getHtmlErrors();
@@ -96,8 +96,8 @@ switch ($op) {
         $form->display();
         break;
     case 'edit':
-        $adminObject->addItemButton(AM_YOGURT_ADD_AUDIO, 'audios.php?op=new', 'add');
-        $adminObject->addItemButton(AM_YOGURT_AUDIO_LIST, 'audios.php', 'list');
+        $adminObject->addItemButton(AM_SUICO_ADD_AUDIO, 'audios.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_AUDIO_LIST, 'audios.php', 'list');
         $adminObject->displayButton('left');
         $audioObject = $audioHandler->get(Request::getString('audio_id', ''));
         $form        = $audioObject->getForm();
@@ -111,7 +111,7 @@ switch ($op) {
             }
 
             if ($audioHandler->delete($audioObject)) {
-                redirect_header('audios.php', 3, AM_YOGURT_FORMDELOK);
+                redirect_header('audios.php', 3, AM_SUICO_FORMDELOK);
             } else {
                 echo $audioObject->getHtmlErrors();
             }
@@ -124,7 +124,7 @@ switch ($op) {
                 ],
                 Request::getUrl('REQUEST_URI', '', 'SERVER'),
                 sprintf(
-                    AM_YOGURT_FORMSUREDEL,
+                    AM_SUICO_FORMSUREDEL,
                     $audioObject->getVar('title')
                 )
             );
@@ -134,16 +134,16 @@ switch ($op) {
 
         $id_field = Request::getString('audio_id', '');
 
-        if ($utility::cloneRecord('yogurt_audios', 'audio_id', $id_field)) {
-            redirect_header('audios.php', 3, AM_YOGURT_CLONED_OK);
+        if ($utility::cloneRecord('suico_audios', 'audio_id', $id_field)) {
+            redirect_header('audios.php', 3, AM_SUICO_CLONED_OK);
         } else {
-            redirect_header('audios.php', 3, AM_YOGURT_CLONED_FAILED);
+            redirect_header('audios.php', 3, AM_SUICO_CLONED_FAILED);
         }
 
         break;
     case 'list':
     default:
-        $adminObject->addItemButton(AM_YOGURT_ADD_AUDIO, 'audios.php?op=new', 'add');
+        $adminObject->addItemButton(AM_SUICO_ADD_AUDIO, 'audios.php?op=new', 'add');
         $adminObject->displayButton('left');
         $start                = Request::getInt('start', 0);
         $audioPaginationLimit = $helper->getConfig('userpager');
@@ -158,7 +158,7 @@ switch ($op) {
         /*
         //
         //
-                            <th class='center width5'>".AM_YOGURT_FORM_ACTION."</th>
+                            <th class='center width5'>".AM_SUICO_FORM_ACTION."</th>
         //                    </tr>";
         //            $class = "odd";
         */
@@ -198,38 +198,38 @@ switch ($op) {
 
                 $GLOBALS['xoopsTpl']->assign(
                     'selectoraudio_id',
-                    AM_YOGURT_AUDIO_AUDIO_ID
+                    AM_SUICO_AUDIO_AUDIO_ID
                 );
 
                 $audioArray['audio_id'] = $audioTempArray[$i]->getVar('audio_id');
 
-                $GLOBALS['xoopsTpl']->assign('selectoruid_owner', AM_YOGURT_AUDIO_UID_OWNER);
+                $GLOBALS['xoopsTpl']->assign('selectoruid_owner', AM_SUICO_AUDIO_UID_OWNER);
 
                 $audioArray['uid_owner'] = strip_tags(
                     XoopsUser::getUnameFromId($audioTempArray[$i]->getVar('uid_owner'))
                 );
 
-                $GLOBALS['xoopsTpl']->assign('selectorauthor', AM_YOGURT_AUDIO_AUTHOR);
+                $GLOBALS['xoopsTpl']->assign('selectorauthor', AM_SUICO_AUDIO_AUTHOR);
 
                 $audioArray['author'] = $audioTempArray[$i]->getVar('author');
 
-                $GLOBALS['xoopsTpl']->assign('selectortitle', AM_YOGURT_AUDIO_TITLE);
+                $GLOBALS['xoopsTpl']->assign('selectortitle', AM_SUICO_AUDIO_TITLE);
 
                 $audioArray['title'] = $audioTempArray[$i]->getVar('title');
 
-                $GLOBALS['xoopsTpl']->assign('selectordescription', AM_YOGURT_AUDIO_DESCRIPTION);
+                $GLOBALS['xoopsTpl']->assign('selectordescription', AM_SUICO_AUDIO_DESCRIPTION);
 
                 $audioArray['description'] = $audioTempArray[$i]->getVar('description');
 
-                $GLOBALS['xoopsTpl']->assign('selectorfilename', AM_YOGURT_AUDIO_URL);
+                $GLOBALS['xoopsTpl']->assign('selectorfilename', AM_SUICO_AUDIO_URL);
 
                 $audioArray['filename'] = $audioTempArray[$i]->getVar('filename');
 
-                $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_YOGURT_AUDIO_DATE_CREATED);
+                $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_SUICO_AUDIO_DATE_CREATED);
 
                 $audioArray['date_created'] = formatTimestamp($audioTempArray[$i]->getVar('date_created'), 's');
 
-                $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_YOGURT_AUDIO_DATE_UPDATED);
+                $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_SUICO_AUDIO_DATE_UPDATED);
 
                 $audioArray['date_updated'] = formatTimestamp($audioTempArray[$i]->getVar('date_updated'), 's');
 
@@ -276,7 +276,7 @@ switch ($op) {
 
             //                    <tr>
 
-            //                     <th class='center width5'>".AM_YOGURT_FORM_ACTION."XXX</th>
+            //                     <th class='center width5'>".AM_SUICO_FORM_ACTION."XXX</th>
 
             //                    </tr><tr><td class='errorMsg' colspan='8'>There are noXXX audio</td></tr>";
 
@@ -287,7 +287,7 @@ switch ($op) {
             echo $GLOBALS['xoopsTpl']->fetch(
                 XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar(
                     'dirname'
-                ) . '/templates/admin/yogurt_admin_audios.tpl'
+                ) . '/templates/admin/suico_admin_audios.tpl'
             );
         }
 

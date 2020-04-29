@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XoopsModules\Yogurt;
+namespace XoopsModules\Suico;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -29,7 +29,7 @@ use XoopsThemeForm;
 
 /**
  * @category        Module
- * @package         yogurt
+ * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -54,7 +54,7 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 // -------------------------------------------------------------------------
 
 /**
- * yogurt_imageshandler class.
+ * suico_imageshandler class.
  * This class provides simple mechanism for Image object and generate forms for inclusion etc
  */
 class ImageHandler extends XoopsPersistableObjectHandler
@@ -66,20 +66,20 @@ class ImageHandler extends XoopsPersistableObjectHandler
     /**
      * Constructor
      * @param \XoopsDatabase|null              $xoopsDatabase
-     * @param \XoopsModules\Yogurt\Helper|null $helper
+     * @param \XoopsModules\Suico\Helper|null $helper
      */
     public function __construct(
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Yogurt\Helper $this ->helper */
+        /** @var \XoopsModules\Suico\Helper $this ->helper */
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
             $this->helper = $helper;
         }
         $isAdmin = $this->helper->isUserAdmin();
-        parent::__construct($xoopsDatabase, 'yogurt_images', Image::class, 'cod_img', 'title', 'caption');
+        parent::__construct($xoopsDatabase, 'suico_images', Image::class, 'cod_img', 'title', 'caption');
     }
 
     /**
@@ -116,7 +116,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $id = null,
         $fields = null
     ) {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('yogurt_images') . ' WHERE cod_img=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_images') . ' WHERE cod_img=' . $id;
         if (!$result = $this->db->query($sql)) {
             return false;
         }
@@ -165,7 +165,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $format      .= 'VALUES (%u, %s, %s, %s, %s, %s, %s, 0)';
             $sql         = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_images'),
+                $this->db->prefix('suico_images'),
                 $cod_img,
                 $this->db->quoteString($title),
                 $this->db->quoteString($caption),
@@ -181,7 +181,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $format .= ' WHERE cod_img = %u';
             $sql    = \sprintf(
                 $format,
-                $this->db->prefix('yogurt_images'),
+                $this->db->prefix('suico_images'),
                 $cod_img,
                 $this->db->quoteString($title),
                 $this->db->quoteString($caption),
@@ -225,7 +225,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         }
         $sql = \sprintf(
             'DELETE FROM %s WHERE cod_img = %u',
-            $this->db->prefix('yogurt_images'),
+            $this->db->prefix('suico_images'),
             $xoopsObject->getVar('cod_img')
         );
         if ($force) {
@@ -241,7 +241,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * retrieve yogurt_imagess from the database
+     * retrieve suico_imagess from the database
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key       use the UID as key for the array?
@@ -255,7 +255,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
     ) {
         $ret   = [];
         $limit = $start = 0;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('yogurt_images');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_images');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
             if ('' !== $criteriaElement->getSort()) {
@@ -283,15 +283,15 @@ class ImageHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * count yogurt_imagess matching a condition
+     * count suico_imagess matching a condition
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} to match
-     * @return int count of yogurt_imagess
+     * @return int count of suico_imagess
      */
     public function getCount(
         ?CriteriaElement $criteriaElement = null
     ) {
-        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('yogurt_images');
+        $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_images');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
         }
@@ -305,7 +305,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * delete yogurt_imagess matching a set of conditions
+     * delete suico_imagess matching a set of conditions
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement}
      * @param bool                                 $force
@@ -317,7 +317,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $force = true,
         $asObject = false
     ) {
-        $sql = 'DELETE FROM ' . $this->db->prefix('yogurt_images');
+        $sql = 'DELETE FROM ' . $this->db->prefix('suico_images');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
         }
@@ -341,13 +341,13 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $maxbytes,
         $xoopsTpl
     ) {
-        $form          = new XoopsThemeForm(\_MD_YOGURT_SUBMIT_PIC_TITLE, 'form_picture', 'submitImage.php', 'post', true);
-        $field_url     = new XoopsFormFile(\_MD_YOGURT_SELECT_PHOTO, 'sel_photo', 2000000);
-        $field_title   = new XoopsFormText(\_MD_YOGURT_PHOTOTITLE, 'title', 35, 55);
-        $field_caption = new XoopsFormText(\_MD_YOGURT_CAPTION, 'caption', 35, 55);
+        $form          = new XoopsThemeForm(\_MD_SUICO_SUBMIT_PIC_TITLE, 'form_picture', 'submitImage.php', 'post', true);
+        $field_url     = new XoopsFormFile(\_MD_SUICO_SELECT_PHOTO, 'sel_photo', 2000000);
+        $field_title   = new XoopsFormText(\_MD_SUICO_PHOTOTITLE, 'title', 35, 55);
+        $field_caption = new XoopsFormText(\_MD_SUICO_CAPTION, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
-        $buttonSend    = new XoopsFormButton('', 'submit_button', \_MD_YOGURT_UPLOADPICTURE, 'submit');
-        $field_warning = new XoopsFormLabel(\sprintf(\_MD_YOGURT_YOU_CAN_UPLOAD, $maxbytes / 1024));
+        $buttonSend    = new XoopsFormButton('', 'submit_button', \_MD_SUICO_UPLOADPICTURE, 'submit');
+        $field_warning = new XoopsFormLabel(\sprintf(\_MD_SUICO_YOU_CAN_UPLOAD, $maxbytes / 1024));
         $form->addElement($field_warning);
         $form->addElement($field_url, true);
         $form->addElement($field_title);
@@ -373,11 +373,11 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $cod_img,
         $filename
     ) {
-        $form          = new XoopsThemeForm(\_MD_YOGURT_EDIT_DESC, 'form_picture', 'editpicture.php', 'post', true);
+        $form          = new XoopsThemeForm(\_MD_SUICO_EDIT_DESC, 'form_picture', 'editpicture.php', 'post', true);
         $field_title   = new XoopsFormText($title, 'title', 35, 55);
         $field_caption = new XoopsFormText($caption, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
-        $buttonSend    = new XoopsFormButton('', 'submit_button', \_MD_YOGURT_SUBMIT, 'submit');
+        $buttonSend    = new XoopsFormButton('', 'submit_button', \_MD_SUICO_SUBMIT, 'submit');
         $field_warning = new XoopsFormLabel("<img src='" . $filename . "' alt='thumb'>");
         $field_cod_img = new XoopsFormHidden('cod_img', $cod_img);
         $field_marker  = new XoopsFormHidden('marker', 1);
@@ -432,7 +432,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         );
         $maxfilesize       = $maxfilebytes;
 
-        //        $uploadDir = \XOOPS_UPLOAD_PATH . '/yogurt/images/';
+        //        $uploadDir = \XOOPS_UPLOAD_PATH . '/suico/images/';
         // create the object to upload
         $uploader = new XoopsMediaUploader(
             $pathUpload, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight
@@ -571,7 +571,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $ret = [];
 
         $sql = 'SELECT uname, t.uid_owner, t.filename FROM ' . $this->db->prefix(
-                'yogurt_images'
+                'suico_images'
             ) . ' AS t, ' . $this->db->prefix(
                 'users'
             );
@@ -599,7 +599,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $ret = [];
 
         $sql = 'SELECT uname, t.uid_owner, t.filename, t.title, t.caption  FROM ' . $this->db->prefix(
-                'yogurt_images'
+                'suico_images'
             ) . ' AS t, ' . $this->db->prefix(
                 'users'
             );
