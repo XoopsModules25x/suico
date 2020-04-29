@@ -1,257 +1,479 @@
 yogurt_friendrequests:
-  options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
-  columns:
-    - name: friendreq_id
-      attributes: ' int(11)  NOT NULL auto_increment'
-    - name: friendrequester_uid
-      attributes: ' int(11) NOT NULL '
-    - name: friendrequestto_uid
-      attributes: ' int(11) NOT NULL '
-    - name: date_created
-      attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
-  keys:
-    PRIMARY:
-      columns: friendreq_id
-      unique: true
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: friendreq_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: friendrequester_uid
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: friendrequestto_uid
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: date_created
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: friendreq_id
+            unique: true
 yogurt_friendships:
-  options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
-  columns:
-    - name: friendship_id
-      attributes: ' int(11)  NOT NULL auto_increment'
-    - name: friend1_uid
-      attributes: ' int(11)  NOT NULL '
-    - name: friend2_uid
-      attributes: ' int(11)  NOT NULL '
-    - name: level
-      attributes: ' int(11)  NOT NULL '
-    - name: hot
-      attributes: ' tinyint(4)  NOT NULL '
-    - name: trust
-      attributes: ' tinyint(4)  NOT NULL '
-    - name: cool
-      attributes: ' tinyint(4)  NOT NULL '
-    - name: fan
-      attributes: ' tinyint(4)  NOT NULL '
-    - name: date_created
-      attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: date_updated
-      attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
-  keys:
-    PRIMARY:
-      columns: friendship_id
-      unique: true
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: friendship_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: friend1_uid
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: friend2_uid
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: level
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: hot
+            attributes: ' tinyint(4)  NOT NULL '
+        -
+            name: trust
+            attributes: ' tinyint(4)  NOT NULL '
+        -
+            name: cool
+            attributes: ' tinyint(4)  NOT NULL '
+        -
+            name: fan
+            attributes: ' tinyint(4)  NOT NULL '
+        -
+            name: date_created
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: date_updated
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: friendship_id
+            unique: true
 yogurt_images:
-  options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
-  columns:
-    - name: cod_img
-      attributes: ' int(11)  NOT NULL auto_increment'
-    - name: title
-      attributes: ' varchar(255)  NOT NULL '
-    - name: caption
-      attributes: ' varchar(255)  NOT NULL '
-    - name: date_created
-      attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: date_updated
-      attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: uid_owner
-      attributes: ' varchar(50)  NOT NULL '
-    - name: filename
-      attributes: ' varchar(50)  NOT NULL '
-    - name: private
-      attributes: ' tinyint(1)  NOT NULL '
-  keys:
-    PRIMARY:
-      columns: cod_img
-      unique: true
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: cod_img
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: title
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: caption
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: date_created
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: date_updated
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: uid_owner
+            attributes: ' varchar(50)  NOT NULL '
+        -
+            name: filename
+            attributes: ' varchar(50)  NOT NULL '
+        -
+            name: private
+            attributes: ' tinyint(1)  NOT NULL '
+    keys:
+        PRIMARY:
+            columns: cod_img
+            unique: true
 yogurt_visitors:
-  options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
-  columns:
-    - name: cod_visit
-      attributes: ' int(11)  NOT NULL auto_increment'
-    - name: uid_owner
-      attributes: ' int(11)  NOT NULL '
-    - name: uid_visitor
-      attributes: ' int(11)  NOT NULL '
-    - name: uname_visitor
-      attributes: ' varchar(30)  NOT NULL '
-    - name: date_visited
-      attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
-  keys:
-    PRIMARY:
-      columns: cod_visit
-      unique: true
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: cod_visit
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: uid_owner
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: uid_visitor
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: uname_visitor
+            attributes: ' varchar(30)  NOT NULL '
+        -
+            name: date_visited
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: cod_visit
+            unique: true
 yogurt_videos:
-  options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
-  columns:
-    - name: video_id
-      attributes: ' int(11)  NOT NULL auto_increment'
-    - name: uid_owner
-      attributes: ' int(11)  NOT NULL '
-    - name: video_desc
-      attributes: ' text  NOT NULL '
-    - name: youtube_code
-      attributes: ' varchar(11)  NOT NULL '
-    - name: main_video
-      attributes: ' tinyint(1)  NOT NULL  DEFAULT ''0'' '
-    - name: date_created
-      attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: date_updated
-      attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
-  keys:
-    PRIMARY:
-      columns: video_id
-      unique: true
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: video_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: uid_owner
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: video_desc
+            attributes: ' text  NOT NULL '
+        -
+            name: youtube_code
+            attributes: ' varchar(11)  NOT NULL '
+        -
+            name: main_video
+            attributes: ' tinyint(1)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: date_created
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: date_updated
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: video_id
+            unique: true
 yogurt_relgroupuser:
-  options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
-  columns:
-    - name: rel_id
-      attributes: ' int(11)  NOT NULL auto_increment'
-    - name: rel_group_id
-      attributes: ' int(11)  NOT NULL '
-    - name: rel_user_uid
-      attributes: ' int(11)  NOT NULL '
-  keys:
-    PRIMARY:
-      columns: rel_id
-      unique: true
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: rel_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: rel_group_id
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: rel_user_uid
+            attributes: ' int(11)  NOT NULL '
+    keys:
+        PRIMARY:
+            columns: rel_id
+            unique: true
 yogurt_groups:
-  options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
-  columns:
-    - name: group_id
-      attributes: ' int(11)  NOT NULL auto_increment'
-    - name: owner_uid
-      attributes: ' int(11)  NOT NULL '
-    - name: group_title
-      attributes: ' varchar(255)  NOT NULL '
-    - name: group_desc
-      attributes: ' tinytext  NOT NULL '
-    - name: group_img
-      attributes: ' varchar(255)  NOT NULL '
-    - name: date_created
-      attributes: ' int(11)  NOT NULL '
-    - name: date_updated
-      attributes: ' int(11)  NOT NULL '
-  keys:
-    PRIMARY:
-      columns: group_id
-      unique: true
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: group_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: owner_uid
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: group_title
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: group_desc
+            attributes: ' tinytext  NOT NULL '
+        -
+            name: group_img
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: date_created
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: date_updated
+            attributes: ' int(11)  NOT NULL '
+    keys:
+        PRIMARY:
+            columns: group_id
+            unique: true
 yogurt_notes:
-  options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
-  columns:
-    - name: note_id
-      attributes: ' int(11)  NOT NULL auto_increment'
-    - name: note_text
-      attributes: ' text  NOT NULL '
-    - name: note_from
-      attributes: ' int(11)  NOT NULL '
-    - name: note_to
-      attributes: ' int(11)  NOT NULL '
-    - name: private
-      attributes: ' tinyint(1)  NOT NULL '
-    - name: date_created
-      attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: date_updated
-      attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
-  keys:
-    PRIMARY:
-      columns: note_id
-      unique: true
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: note_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: note_text
+            attributes: ' text  NOT NULL '
+        -
+            name: note_from
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: note_to
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: private
+            attributes: ' tinyint(1)  NOT NULL '
+        -
+            name: date_created
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: date_updated
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: note_id
+            unique: true
 yogurt_configs:
-  options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
-  columns:
-    - name: config_id
-      attributes: ' int(11)  NOT NULL auto_increment'
-    - name: config_uid
-      attributes: ' int(11)  NOT NULL '
-    - name: pictures
-      attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
-    - name: audio
-      attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
-    - name: videos
-      attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
-    - name: groups
-      attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
-    - name: notes
-      attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
-    - name: friends
-      attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
-    - name: profile_contact
-      attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
-    - name: profile_general
-      attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
-    - name: profile_stats
-      attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
-    - name: suspension
-      attributes: ' tinyint(1)  NOT NULL '
-    - name: backup_password
-      attributes: ' varchar(255)  NOT NULL '
-    - name: backup_email
-      attributes: ' varchar(255)  NOT NULL '
-    - name: end_suspension
-      attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
-  keys:
-    config_uid:
-      columns: config_uid
-      unique: false
-    PRIMARY:
-      columns: config_id
-      unique: true
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: config_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: config_uid
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: pictures
+            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: audio
+            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: videos
+            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: groups
+            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: notes
+            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: friends
+            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: profile_contact
+            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: profile_general
+            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: profile_stats
+            attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: suspension
+            attributes: ' tinyint(1)  NOT NULL '
+        -
+            name: backup_password
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: backup_email
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: end_suspension
+            attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+    keys:
+        config_uid:
+            columns: config_uid
+            unique: false
+        PRIMARY:
+            columns: config_id
+            unique: true
 yogurt_suspensions:
-  options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
-  columns:
-    - name: uid
-      attributes: ' int(11)  NOT NULL auto_increment'
-    - name: old_pass
-      attributes: ' varchar(255)  NOT NULL '
-    - name: old_email
-      attributes: ' varchar(100)  NOT NULL '
-    - name: old_signature
-      attributes: ' text  NOT NULL '
-    - name: suspension_time
-      attributes: ' int(11)  NOT NULL '
-    - name: old_enc_type
-      attributes: ' int(2)  NOT NULL  DEFAULT ''0'' '
-    - name: old_pass_expired
-      attributes: ' int(1)  NOT NULL  DEFAULT ''0'' '
-  keys:
-    PRIMARY:
-      columns: uid
-      unique: true
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: uid
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: old_pass
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: old_email
+            attributes: ' varchar(100)  NOT NULL '
+        -
+            name: old_signature
+            attributes: ' text  NOT NULL '
+        -
+            name: suspension_time
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: old_enc_type
+            attributes: ' int(2)  NOT NULL  DEFAULT ''0'' '
+        -
+            name: old_pass_expired
+            attributes: ' int(1)  NOT NULL  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: uid
+            unique: true
 yogurt_audios:
-  options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
-  columns:
-    - name: audio_id
-      attributes: ' int(11)  NOT NULL auto_increment'
-    - name: title
-      attributes: ' varchar(100)  NOT NULL '
-    - name: author
-      attributes: ' varchar(100)  NOT NULL '
-    - name: description
-      attributes: ' text  NOT NULL '
-    - name: filename
-      attributes: ' varchar(50)  NOT NULL '
-    - name: uid_owner
-      attributes: ' int(11)  NOT NULL '
-    - name: date_created
-      attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: date_updated
-      attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
-  keys:
-    PRIMARY:
-      columns: audio_id
-      unique: true
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: audio_id
+            attributes: ' int(11)  NOT NULL auto_increment'
+        -
+            name: title
+            attributes: ' varchar(100)  NOT NULL '
+        -
+            name: author
+            attributes: ' varchar(100)  NOT NULL '
+        -
+            name: description
+            attributes: ' text  NOT NULL '
+        -
+            name: filename
+            attributes: ' varchar(50)  NOT NULL '
+        -
+            name: uid_owner
+            attributes: ' int(11)  NOT NULL '
+        -
+            name: date_created
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: date_updated
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: audio_id
+            unique: true
 yogurt_privacy:
-  options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
-  columns:
-    - name: id
-      attributes: ' int(8)  NOT NULL auto_increment'
-    - name: level
-      attributes: ' int(8)  NOT NULL '
-    - name: name
-      attributes: ' varchar(20)  NOT NULL '
-    - name: description
-      attributes: ' text  NOT NULL '
-  keys:
-    PRIMARY:
-      columns: id
-      unique: true
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: id
+            attributes: ' int(8)  NOT NULL auto_increment'
+        -
+            name: level
+            attributes: ' int(8)  NOT NULL '
+        -
+            name: name
+            attributes: ' varchar(20)  NOT NULL '
+        -
+            name: description
+            attributes: ' text  NOT NULL '
+    keys:
+        PRIMARY:
+            columns: id
+            unique: true
+yogurt_profile:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: profile_id
+            attributes: ' int(12) unsigned  NOT NULL  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: profile_id
+            unique: true
+yogurt_profile_category:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: cat_id
+            attributes: ' smallint(5) unsigned  NOT NULL auto_increment'
+        -
+            name: cat_title
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: cat_description
+            attributes: ' text '
+        -
+            name: cat_weight
+            attributes: ' smallint(5) unsigned  NOT NULL  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: cat_id
+            unique: true
+yogurt_profile_field:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: field_id
+            attributes: ' int(12) unsigned  NOT NULL auto_increment'
+        -
+            name: cat_id
+            attributes: ' smallint(5) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: field_type
+            attributes: ' varchar(30)  NOT NULL  DEFAULT '''' '
+        -
+            name: field_valuetype
+            attributes: ' tinyint(2) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: field_name
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: field_title
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: field_description
+            attributes: ' text '
+        -
+            name: field_required
+            attributes: ' tinyint(1) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: field_maxlength
+            attributes: ' smallint(6) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: field_weight
+            attributes: ' smallint(6) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: field_default
+            attributes: ' text '
+        -
+            name: field_notnull
+            attributes: ' tinyint(1) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: field_edit
+            attributes: ' tinyint(1) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: field_show
+            attributes: ' tinyint(1) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: field_config
+            attributes: ' tinyint(1) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: field_options
+            attributes: ' text '
+        -
+            name: step_id
+            attributes: ' smallint(3) unsigned  NOT NULL  DEFAULT ''0'' '
+    keys:
+        field_name:
+            columns: field_name
+            unique: true
+        PRIMARY:
+            columns: field_id
+            unique: true
+        step:
+            columns: 'step_id, field_weight'
+            unique: false
+yogurt_profile_regstep:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: step_id
+            attributes: ' smallint(3) unsigned  NOT NULL auto_increment'
+        -
+            name: step_name
+            attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
+        -
+            name: step_desc
+            attributes: ' text '
+        -
+            name: step_order
+            attributes: ' smallint(3) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: step_save
+            attributes: ' tinyint(1) unsigned  NOT NULL  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: step_id
+            unique: true
+        sort:
+            columns: 'step_order, step_name'
+            unique: false
+yogurt_profile_visibility:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: field_id
+            attributes: ' int(12) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: user_group
+            attributes: ' smallint(5) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: profile_group
+            attributes: ' smallint(5) unsigned  NOT NULL  DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: 'field_id, user_group, profile_group'
+            unique: true
+        visible:
+            columns: 'user_group, profile_group'
+            unique: false
