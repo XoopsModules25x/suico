@@ -32,28 +32,14 @@ $xoTheme->addStylesheet(
 $xoTheme->addStylesheet(
     XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/pagination.css'
 );
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs.css');
-// what browser they use if IE then add corrective script.
-if (false !== mb_stripos($_SERVER['HTTP_USER_AGENT'], 'msie')) {
-    $xoTheme->addStylesheet(
-        XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css'
-    );
-}
-//if (stripos($_SERVER['REQUEST_URI'], 'album.php')) {
-//$xoTheme->addStylesheet(
- //   XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.lightbox-0.3.css'
-//);
+
 $xoTheme->addStylesheet(
     XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/magnific-popup.css'
 );
-//}
-
-//if (stripos($_SERVER['REQUEST_URI'], 'album.php')) {
-//$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js');
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.magnific-popup.js');
-//}
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/suico.js');
 //$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/crud.js');
+
 if (mb_stripos($_SERVER['REQUEST_URI'], 'memberslist.php')) {
     if ('datatables' == $xoopsModuleConfig['memberslisttemplate']) {
         $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.dataTables.css');
