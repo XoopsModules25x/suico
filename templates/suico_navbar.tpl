@@ -79,15 +79,15 @@
 
                                         <{if $allow_profile_general==1}>
                                             <{if $user_occupation || $user_location }>
-                                                <p class="m-b-10"><{if $user_occupation}><i class="fa fa-briefcase"></i><{$user_occupation}><{/if}> <{if $user_occupation}><i class="fa fa-map-marker"></i><{$user_location}><{/if}></p>
+                                                <p class="m-b-10"><{if $user_occupation}><i class="fa fa-briefcase"></i>&nbsp;<{$user_occupation}><{/if}> <{if $user_occupation}><i class="fa fa-map-marker"></i>&nbsp;<{$user_location}><{/if}></p>
                                             <{/if}>
                                         <{/if}>
 
                                         <{if $allow_profile_contact==1}>
                                             <{if $user_email || $user_websiteurl }>
                                                 <p class="m-b-10">
-                                                    <{if $user_viewemail!='0'}><i class="fa fa-envelope"></i><{mailto address=$user_email encode="javascript"}><{/if}>
-                                                    <{if $user_websiteurl}><i class="fa fa-globe"></i><{$user_websiteurl}><{else}><br><{/if}>
+                                                    <{if $user_viewemail!='0'}><i class="fa fa-envelope"></i>&nbsp;<{mailto address=$user_email encode="javascript"}><{/if}>
+                                                    <{if $user_websiteurl}><i class="fa fa-globe"></i>&nbsp;<{$user_websiteurl}><{else}><br><{/if}>
                                                 </p>
                                             <{/if}>
                                         <{/if}>
