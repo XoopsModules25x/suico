@@ -30,13 +30,10 @@ use XoopsPersistableObjectHandler;
 
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 require_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';
-// -------------------------------------------------------------------------
-// ------------------Notes user handler class -------------------
-// -------------------------------------------------------------------------
 
 /**
  * NotesHandler class.
- * This class provides simple mecanisme forNotes object
+ * This class provides simple mechanism forNotes object
  */
 class NotesHandler extends XoopsPersistableObjectHandler
 {

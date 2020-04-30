@@ -28,13 +28,10 @@ use XoopsObject;
 use XoopsPersistableObjectHandler;
 
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
-// -------------------------------------------------------------------------
-// ------------------Configs user handler class -------------------
-// -------------------------------------------------------------------------
 
 /**
  * ConfigsHandler class.
- * This class provides simple mecanisme for Configs object
+ * This class provides simple mechanism for Configs object
  */
 class ConfigsHandler extends XoopsPersistableObjectHandler
 {

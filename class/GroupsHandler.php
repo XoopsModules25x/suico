@@ -41,13 +41,10 @@ use XoopsThemeForm;
 if (!\defined('XOOPS_ROOT_PATH')) {
     die('XOOPS root path not defined');
 }
-// -------------------------------------------------------------------------
-// ------------------Groups user handler class -------------------
-// -------------------------------------------------------------------------
 
 /**
  * suico_groupshandler class.
- * This class provides simple mecanisme for Groups object
+ * This class provides simple mechanism for Groups object
  */
 class GroupsHandler extends XoopsPersistableObjectHandler
 {
