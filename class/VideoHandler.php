@@ -428,7 +428,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
         $cod_img,
         $filename
     ) {
-        $form = new XoopsThemeForm(\_MD_SUICO_EDIT_DESC, 'form_picture', 'editdescvideo.php', 'post', true);
+        $form = new XoopsThemeForm(\_MD_SUICO_EDIT_DESC, 'form_picture', 'editvideo.php', 'post', true);
 
         $field_desc = new XoopsFormText($caption, 'caption', 35, 55);
 
