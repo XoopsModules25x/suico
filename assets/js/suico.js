@@ -1,5 +1,5 @@
 //configs lightbox
-jQuery(document).ready(function () {
+$(document).ready(function () {
     $(function () {
         $('a[@rel*=lightbox]').lightBox({
             overlayBgColor: '#000',
@@ -19,13 +19,13 @@ jQuery(document).ready(function () {
 
 
 //validation of album form
-jQuery(document).ready(function () {
+$(document).ready(function () {
     $("form#form_picture").submit(function () {
         return xoopsFormValidate_form_picture();
     });
 });
 // validation of youtube videos
-jQuery(document).ready(function () {
+$(document).ready(function () {
     $("form#form_videos").submit(function () {
 
         if ($("form#form_videos input#codigo").val() === "") {
@@ -39,26 +39,26 @@ jQuery(document).ready(function () {
 
 
 //validation of Notes
-jQuery(document).ready(function () {
+$(document).ready(function () {
     $("form#formNoteNew").submit(function () {
         return xoopsFormValidate_formNoteNew();
     });
 });
 
 
-jQuery(document).ready(function () {
+$(document).ready(function () {
     $("div.suico-Note-details-form").hide();
 });
 
 
-jQuery(document).ready(function () {
+$(document).ready(function () {
     $("a.suico-Notes-replyNote").click(function () {
         $(this).parents("div.suico-Note-details").find('div.suico-Note-details-form').slideToggle("slow");
 
     });
 });
 
-jQuery(document).ready(function () {
+$(document).ready(function () {
     $("input.resetNote").click(function () {
         $(this).parents("div.suico-Note-details-form").slideToggle("slow");
 
@@ -67,25 +67,25 @@ jQuery(document).ready(function () {
 });
 
 // in album page show tips effect
-jQuery(document).ready(function () {
+$(document).ready(function () {
     $("a#show_tips").click(function () {
         $("div#xtips").slideToggle("slow");
     });
 });
 
-jQuery(document).ready(function () {
+$(document).ready(function () {
 
     $("div#xtips").hide();
 
 });
 // in index.php
-jQuery(document).ready(function () {
+$(document).ready(function () {
 
     $("div#suico-suspension").hide();
 
 });
 
-jQuery(document).ready(function () {
+$(document).ready(function () {
     $("img#suico-suspensiontools").toggle(function () {
         $("div#suico-suspension").show();
     }, function () {
@@ -94,11 +94,11 @@ jQuery(document).ready(function () {
 });
 
 
-jQuery(document).ready(function () {
+$(document).ready(function () {
     $("div#suico-license").hide();
 });
 
-jQuery(document).ready(function () {
+$(document).ready(function () {
 
 //    $("a#suico-license-link").click(function() {
     $("a#suico-license-link").mouseover(function () {
@@ -109,14 +109,14 @@ jQuery(document).ready(function () {
 });
 
 //close all search results in contributions when the page loads for the first time
-jQuery(document).ready(function () {
+$(document).ready(function () {
     $("div.suico-profile-search-module-results").slideUp("fast");
 });
 
 //open the search results for one specific module and close the others.
 //If the button is clicked when the module results are open then it closes it
 
-jQuery(document).ready(function () {
+$(document).ready(function () {
 
     $("a.suico-profile-search-module-title").click(function () {
         $("div.suico-profile-search-module-results").slideUp("slow");
@@ -127,7 +127,7 @@ jQuery(document).ready(function () {
 
 });
 
-jQuery(document).ready(function () {
+$(document).ready(function () {
     $("p.odd").mouseover(function () {
         $(this).addClass("present");
 
@@ -135,7 +135,7 @@ jQuery(document).ready(function () {
 
 });
 
-jQuery(document).ready(function () {
+$(document).ready(function () {
     $("p.odd").mouseout(function () {
         $(this).removeClass("present");
 
@@ -143,7 +143,7 @@ jQuery(document).ready(function () {
 
 });
 
-jQuery(document).ready(function () {
+$(document).ready(function () {
     $("p.even").mouseover(function () {
         $(this).addClass("present");
 
@@ -151,7 +151,7 @@ jQuery(document).ready(function () {
 
 });
 
-jQuery(document).ready(function () {
+$(document).ready(function () {
     $("p.even").mouseout(function () {
         $(this).removeClass("present");
 
@@ -159,7 +159,7 @@ jQuery(document).ready(function () {
 
 });
 
-jQuery(document).ready(function () {
+$(document).ready(function () {
     $("#text").click(function () {
         $(this).html("");
 
@@ -167,7 +167,7 @@ jQuery(document).ready(function () {
 
 });
 
-jQuery(document).ready(function () {
+$(document).ready(function () {
 
     let ifChecked = "0";
     $("input#allbox").click(function () {
