@@ -54,7 +54,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
             $this->helper = $helper;
         }
         $isAdmin = $this->helper->isUserAdmin();
-        parent::__construct($xoopsDatabase, 'suico_visitors', Visitors::class, 'cod_visit', 'uname_visitor');
+        parent::__construct($xoopsDatabase, 'suico_visitors', Visitors::class, 'visit_id', 'uname_visitor');
     }
 
     /**
@@ -87,7 +87,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         $id = null,
         $fields = null
     ) {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_visitors') . ' WHERE cod_visit=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_visitors') . ' WHERE visit_id=' . $id;
         if (!$result = $this->db->query($sql)) {
             return false;
         }
@@ -122,7 +122,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject->cleanVars()) {
             return false;
         }
-        $cod_visit = $uid_owner = $uid_visitor = '';
+        $visit_id = $uid_owner = $uid_visitor = '';
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
@@ -130,12 +130,12 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Suico\Visitors
             $xoopsObject = new Visitors();
-            $format      = 'INSERT INTO %s (cod_visit, uid_owner, uid_visitor,uname_visitor)';
+            $format      = 'INSERT INTO %s (visit_id, uid_owner, uid_visitor,uname_visitor)';
             $format      .= 'VALUES (%u, %u, %u, %s)';
             $sql         = \sprintf(
                 $format,
                 $this->db->prefix('suico_visitors'),
-                $cod_visit,
+                $visit_id,
                 $uid_owner,
                 $uid_visitor,
                 $this->db->quoteString($uname_visitor)
@@ -143,16 +143,16 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
             $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
-            $format .= 'cod_visit=%u, uid_owner=%u, uid_visitor=%u, uname_visitor=%s ';
-            $format .= ' WHERE cod_visit = %u';
+            $format .= 'visit_id=%u, uid_owner=%u, uid_visitor=%u, uname_visitor=%s ';
+            $format .= ' WHERE visit_id = %u';
             $sql    = \sprintf(
                 $format,
                 $this->db->prefix('suico_visitors'),
-                $cod_visit,
+                $visit_id,
                 $uid_owner,
                 $uid_visitor,
                 $this->db->quoteString($uname_visitor),
-                $cod_visit
+                $visit_id
             );
         }
         if ($force) {
@@ -163,10 +163,10 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         if (!$result) {
             return false;
         }
-        if (empty($cod_visit)) {
-            $cod_visit = $this->db->getInsertId();
+        if (empty($visit_id)) {
+            $visit_id = $this->db->getInsertId();
         }
-        $xoopsObject->assignVar('cod_visit', $cod_visit);
+        $xoopsObject->assignVar('visit_id', $visit_id);
         return true;
     }
 
@@ -185,9 +185,9 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
             return false;
         }
         $sql = \sprintf(
-            'DELETE FROM %s WHERE cod_visit = %u',
+            'DELETE FROM %s WHERE visit_id = %u',
             $this->db->prefix('suico_visitors'),
-            $xoopsObject->getVar('cod_visit')
+            $xoopsObject->getVar('visit_id')
         );
         if ($force) {
             $result = $this->db->queryF($sql);
@@ -234,7 +234,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
             if (!$id_as_key) {
                 $ret[] = &$suico_visitors;
             } else {
-                $ret[$myrow['cod_visit']] = &$suico_visitors;
+                $ret[$myrow['visit_id']] = &$suico_visitors;
             }
             unset($suico_visitors);
         }

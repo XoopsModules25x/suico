@@ -49,7 +49,7 @@ function suico_search(
     $moduleConfig      = $configHandler->getConfigsByCat(0, $modulo->getVar('mid'));
     $path_uploadimages = XOOPS_UPLOAD_URL;
     $ret               = [];
-    $sql               = 'SELECT cod_img, title, caption,  date_created,  uid_owner, filename FROM ' . $xoopsDB->prefix(
+    $sql               = 'SELECT image_id, title, caption,  date_created,  uid_owner, filename FROM ' . $xoopsDB->prefix(
             'suico_images'
         ) . ' WHERE ';
     if (0 !== $userid) {
@@ -66,7 +66,7 @@ function suico_search(
         }
         $sql .= ') ';
     }
-    $sql .= 'ORDER BY cod_img DESC';
+    $sql .= 'ORDER BY image_id DESC';
     //echo $sql;
     //printr($xoopsModules);
     $result        = $xoopsDB->query($sql, $limit, $offset);

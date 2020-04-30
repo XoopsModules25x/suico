@@ -50,7 +50,7 @@ class Visitors extends XoopsObject
         $this->helper     = Helper::getInstance();
         $this->permHelper = new Permission();
         $this->db         = XoopsDatabaseFactory::getDatabaseConnection();
-        $this->initVar('cod_visit', \XOBJ_DTYPE_INT, null, false, 10);
+        $this->initVar('visit_id', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('uid_owner', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('uid_visitor', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('uname_visitor', \XOBJ_DTYPE_TXTBOX, null, false);
@@ -71,7 +71,7 @@ class Visitors extends XoopsObject
      */
     public function load($id)
     {
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_visitors') . ' WHERE cod_visit=' . $id;
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_visitors') . ' WHERE visit_id=' . $id;
         $myrow = $this->db->fetchArray($this->db->query($sql));
         $this->assignVars($myrow);
         if (!$myrow) {
@@ -91,7 +91,7 @@ class Visitors extends XoopsObject
     public function getAllVisitors(
         $criteria = [],
         $asobject = false,
-        $sort = 'cod_visit',
+        $sort = 'visit_id',
         $order = 'ASC',
         $limit = 0,
         $start = 0
@@ -109,7 +109,7 @@ class Visitors extends XoopsObject
             $whereQuery = ' WHERE ' . $criteria;
         }
         if (!$asobject) {
-            $sql    = 'SELECT cod_visit FROM ' . $db->prefix(
+            $sql    = 'SELECT visit_id FROM ' . $db->prefix(
                     'suico_visitors'
                 ) . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
@@ -144,7 +144,7 @@ class Visitors extends XoopsObject
         //$permHelper = new \Xmf\Module\Helper\Permission();
         return $this->permHelper->getGroupsForItem(
             'sbcolumns_read',
-            $this->getVar('cod_visit')
+            $this->getVar('visit_id')
         );
     }
 
@@ -156,7 +156,7 @@ class Visitors extends XoopsObject
         //$permHelper = new \Xmf\Module\Helper\Permission();
         return $this->permHelper->getGroupsForItem(
             'sbcolumns_submit',
-            $this->getVar('cod_visit')
+            $this->getVar('visit_id')
         );
     }
 
@@ -168,7 +168,7 @@ class Visitors extends XoopsObject
         //$permHelper = new \Xmf\Module\Helper\Permission();
         return $this->permHelper->getGroupsForItem(
             'sbcolumns_moderation',
-            $this->getVar('cod_visit')
+            $this->getVar('visit_id')
         );
     }
 }

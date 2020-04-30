@@ -20,7 +20,7 @@
             <table class="$visitors" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                     <th align="center" width="5%"><input name="allbox" title="allbox" id="allbox" onclick="xoopsCheckAll('select', 'allbox');" type="checkbox" title="Check All" value="Check All"></th>
-                    <th class="left"><{$selectorcod_visit}></th>
+                    <th class="left"><{$selectorvisit_id}></th>
                     <th class="left"><{$selectoruid_owner}></th>
                     <th class="left"><{$selectoruid_visitor}></th>
                     <th class="left"><{$selectoruname_visitor}></th>
@@ -32,7 +32,7 @@
                     <tr class="<{cycle values="odd,even"}>">
 
                         <td align="center" style="vertical-align:middle;"><input type="checkbox" name="visitors_id[]" title="visitors_id[]" id="visitors_id[]" value="<{$visitorsArray.visitors_id}>"></td>
-                        <td class='left'><{$visitorsArray.cod_visit}></td>
+                        <td class='left'><{$visitorsArray.visit_id}></td>
                         <td class='left'><{$visitorsArray.uid_owner}></td>
                         <td class='left'><{$visitorsArray.uid_visitor}></td>
                         <td class='left'><{$visitorsArray.uname_visitor}></td>
@@ -50,7 +50,7 @@
                 <tr>
 
                     <th align="center" width="5%"><input name="allbox" title="allbox" id="allbox" onclick="xoopsCheckAll('select', 'allbox');" type="checkbox" title="Check All" value="Check All"></th>
-                    <th class="left"><{$selectorcod_visit}></th>
+                    <th class="left"><{$selectorvisit_id}></th>
                     <th class="left"><{$selectoruid_owner}></th>
                     <th class="left"><{$selectoruid_visitor}></th>
                     <th class="left"><{$selectoruname_visitor}></th>

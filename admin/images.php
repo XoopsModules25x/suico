@@ -44,8 +44,8 @@ switch ($op) {
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('images.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
-        if (0 !== Request::getInt('cod_img', 0)) {
-            $imagesObject = $imageHandler->get(Request::getInt('cod_img', 0));
+        if (0 !== Request::getInt('image_id', 0)) {
+            $imagesObject = $imageHandler->get(Request::getInt('image_id', 0));
         } else {
             $imagesObject = $imageHandler->create();
         }
@@ -88,12 +88,12 @@ switch ($op) {
         $adminObject->addItemButton(AM_SUICO_ADD_IMAGES, 'images.php?op=new', 'add');
         $adminObject->addItemButton(AM_SUICO_IMAGES_LIST, 'images.php', 'list');
         $adminObject->displayButton('left');
-        $imagesObject = $imageHandler->get(Request::getString('cod_img', ''));
+        $imagesObject = $imageHandler->get(Request::getString('image_id', ''));
         $form         = $imagesObject->getForm();
         $form->display();
         break;
     case 'delete':
-        $imagesObject = $imageHandler->get(Request::getString('cod_img', ''));
+        $imagesObject = $imageHandler->get(Request::getString('image_id', ''));
         if (1 === Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('images.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -107,7 +107,7 @@ switch ($op) {
             xoops_confirm(
                 [
                     'ok'      => 1,
-                    'cod_img' => Request::getString('cod_img', ''),
+                    'image_id' => Request::getString('image_id', ''),
                     'op'      => 'delete',
                 ],
                 Request::getUrl('REQUEST_URI', '', 'SERVER'),
@@ -119,8 +119,8 @@ switch ($op) {
         }
         break;
     case 'clone':
-        $id_field = Request::getString('cod_img', '');
-        if ($utility::cloneRecord('suico_images', 'cod_img', $id_field)) {
+        $id_field = Request::getString('image_id', '');
+        if ($utility::cloneRecord('suico_images', 'image_id', $id_field)) {
             redirect_header('images.php', 3, AM_SUICO_CLONED_OK);
         } else {
             redirect_header('images.php', 3, AM_SUICO_CLONED_FAILED);
@@ -133,7 +133,7 @@ switch ($op) {
         $start                 = Request::getInt('start', 0);
         $imagesPaginationLimit = $helper->getConfig('userpager');
         $criteria              = new CriteriaCompo();
-        $criteria->setSort('cod_img ASC, title');
+        $criteria->setSort('image_id ASC, title');
         $criteria->setOrder('ASC');
         $criteria->setLimit($imagesPaginationLimit);
         $criteria->setStart($start);
@@ -156,7 +156,7 @@ switch ($op) {
         }
         $GLOBALS['xoopsTpl']->assign('imagesRows', $imagesTempRows);
         $imagesArray = [];
-        //    $fields = explode('|', cod_img:int:11::NOT NULL::primary:cod_img|title:varchar:255::NOT NULL:::title|date_created:date:0::NOT NULL:::date_created|date_updated:date:0::NOT NULL:::date_updated|uid_owner:varchar:50::NOT NULL:::uid_owner|filename:text:0::NOT NULL:::filename|private:varchar:1::NOT NULL:::private);
+        //    $fields = explode('|', image_id:int:11::NOT NULL::primary:image_id|title:varchar:255::NOT NULL:::title|date_created:date:0::NOT NULL:::date_created|date_updated:date:0::NOT NULL:::date_updated|uid_owner:varchar:50::NOT NULL:::uid_owner|filename:text:0::NOT NULL:::filename|private:varchar:1::NOT NULL:::private);
         //    $fieldsCount    = count($fields);
         $criteria = new CriteriaCompo();
         //$criteria->setOrder('DESC');
@@ -171,10 +171,10 @@ switch ($op) {
             foreach (array_keys($imagesTempArray) as $i) {
                 //        $field = explode(':', $fields[$i]);
                 $GLOBALS['xoopsTpl']->assign(
-                    'selectorcod_img',
-                    AM_SUICO_IMAGES_COD_IMG
+                    'selectorimage_id',
+                    AM_SUICO_IMAGES_IMAGE_ID
                 );
-                $imagesArray['cod_img'] = $imagesTempArray[$i]->getVar('cod_img');
+                $imagesArray['image_id'] = $imagesTempArray[$i]->getVar('image_id');
                 $GLOBALS['xoopsTpl']->assign('selectortitle', AM_SUICO_IMAGES_TITLE);
                 $imagesArray['title'] = $imagesTempArray[$i]->getVar('title');
                 $GLOBALS['xoopsTpl']->assign('selectorcaption', AM_SUICO_IMAGES_CAPTION);
@@ -191,9 +191,9 @@ switch ($op) {
                 $imagesArray['filename'] = "<img src='" . $uploadUrl . $imagesTempArray[$i]->getVar('filename') . "' name='" . 'name' . "' id=" . 'id' . " alt='' style='max-width:100px'>";
                 $GLOBALS['xoopsTpl']->assign('selectorprivate', AM_SUICO_IMAGES_PRIVATE);
                 $imagesArray['private']     = $imagesTempArray[$i]->getVar('private');
-                $imagesArray['edit_delete'] = "<a href='images.php?op=edit&cod_img=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
-               <a href='images.php?op=delete&cod_img=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
-               <a href='images.php?op=clone&cod_img=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
+                $imagesArray['edit_delete'] = "<a href='images.php?op=edit&image_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
+               <a href='images.php?op=delete&image_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
+               <a href='images.php?op=clone&image_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
                 $GLOBALS['xoopsTpl']->append_by_ref('imagesArrays', $imagesArray);
                 unset($imagesArray);
             }
@@ -207,8 +207,8 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
             //                     echo "<td class='center width5'>
-            //                    <a href='images.php?op=edit&cod_img=".$i."'><img src=".$pathIcon16."/edit.png alt='"._EDIT."' title='"._EDIT."'></a>
-            //                    <a href='images.php?op=delete&cod_img=".$i."'><img src=".$pathIcon16."/delete.png alt='"._DELETE."' title='"._DELETE."'></a>
+            //                    <a href='images.php?op=edit&image_id=".$i."'><img src=".$pathIcon16."/edit.png alt='"._EDIT."' title='"._EDIT."'></a>
+            //                    <a href='images.php?op=delete&image_id=".$i."'><img src=".$pathIcon16."/delete.png alt='"._DELETE."' title='"._DELETE."'></a>
             //                    </td>";
             //                echo "</tr>";
             //            }

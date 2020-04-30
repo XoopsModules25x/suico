@@ -38,8 +38,8 @@ function b_suico_lastpictures_show($options)
     /**
      * Filter for fetch votes ishot and isnothot
      */
-    $criteria = new Criteria('cod_img', 0, '>');
-    $criteria->setSort('cod_img');
+    $criteria = new Criteria('image_id', 0, '>');
+    $criteria->setSort('image_id');
     $criteria->setOrder('DESC');
     $criteria->setLimit($options[0]);
     /**

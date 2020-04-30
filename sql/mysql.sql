@@ -1,5 +1,5 @@
 CREATE TABLE `suico_images` (
-    `cod_img`      INT(11)          NOT NULL AUTO_INCREMENT,
+    `image_id`      INT(11)          NOT NULL AUTO_INCREMENT,
     `title`        VARCHAR(255)     NOT NULL,
     `caption`      VARCHAR(255)     NOT NULL,
     `date_created` INT(11) UNSIGNED NOT NULL DEFAULT 0,
@@ -7,7 +7,7 @@ CREATE TABLE `suico_images` (
     `uid_owner`    VARCHAR(50)      NOT NULL,
     `filename`     VARCHAR(50)      NOT NULL,
     `private`      TINYINT(1)       NOT NULL,
-    PRIMARY KEY (`cod_img`)
+    PRIMARY KEY (`image_id`)
 )
     ENGINE = MyISAM;
 CREATE TABLE `suico_friendships` (
@@ -26,12 +26,12 @@ CREATE TABLE `suico_friendships` (
     ENGINE = MyISAM;
 
 CREATE TABLE `suico_visitors` (
-    `cod_visit`     INT(11)          NOT NULL AUTO_INCREMENT,
+    `visit_id`     INT(11)          NOT NULL AUTO_INCREMENT,
     `uid_owner`     INT(11)          NOT NULL,
     `uid_visitor`   INT(11)          NOT NULL,
     `uname_visitor` VARCHAR(30)      NOT NULL,
     `date_visited`  INT(11) UNSIGNED NOT NULL DEFAULT 0,
-    PRIMARY KEY (`cod_visit`)
+    PRIMARY KEY (`visit_id`)
 )
     ENGINE = MyISAM;
 

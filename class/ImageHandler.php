@@ -75,7 +75,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $this->helper = $helper;
         }
         $isAdmin = $this->helper->isUserAdmin();
-        parent::__construct($xoopsDatabase, 'suico_images', Image::class, 'cod_img', 'title', 'caption');
+        parent::__construct($xoopsDatabase, 'suico_images', Image::class, 'image_id', 'title', 'caption');
     }
 
     /**
@@ -111,7 +111,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $id = null,
         $fields = null
     ) {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_images') . ' WHERE cod_img=' . $id;
+        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_images') . ' WHERE image_id=' . $id;
         if (!$result = $this->db->query($sql)) {
             return false;
         }
@@ -145,7 +145,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject->cleanVars()) {
             return false;
         }
-        $cod_img = '';
+        $image_id = '';
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
@@ -153,12 +153,12 @@ class ImageHandler extends XoopsPersistableObjectHandler
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Image
             $xoopsObject = new Image();
-            $format      = 'INSERT INTO %s (cod_img, title, caption, date_created, date_updated, uid_owner, filename, private)';
+            $format      = 'INSERT INTO %s (image_id, title, caption, date_created, date_updated, uid_owner, filename, private)';
             $format      .= 'VALUES (%u, %s, %s, %s, %s, %s, %s, 0)';
             $sql         = \sprintf(
                 $format,
                 $this->db->prefix('suico_images'),
-                $cod_img,
+                $image_id,
                 $this->db->quoteString($title),
                 $this->db->quoteString($caption),
                 \time(),//$now,
@@ -169,12 +169,12 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
-            $format .= 'cod_img=%u, title=%s, caption=%s, date_created=%s, date_updated=%s, uid_owner=%s, filename=%s, private=%s';
-            $format .= ' WHERE cod_img = %u';
+            $format .= 'image_id=%u, title=%s, caption=%s, date_created=%s, date_updated=%s, uid_owner=%s, filename=%s, private=%s';
+            $format .= ' WHERE image_id = %u';
             $sql    = \sprintf(
                 $format,
                 $this->db->prefix('suico_images'),
-                $cod_img,
+                $image_id,
                 $this->db->quoteString($title),
                 $this->db->quoteString($caption),
                 $xoopsObject->getVar('date_created'), // $now,
@@ -182,7 +182,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
                 $this->db->quoteString($uid_owner),
                 $this->db->quoteString($filename),
                 $this->db->quoteString($private),
-                $cod_img
+                $image_id
             );
         }
         if ($force) {
@@ -193,10 +193,10 @@ class ImageHandler extends XoopsPersistableObjectHandler
         if (!$result) {
             return false;
         }
-        if (empty($cod_img)) {
-            $cod_img = $this->db->getInsertId();
+        if (empty($image_id)) {
+            $image_id = $this->db->getInsertId();
         }
-        $xoopsObject->assignVar('cod_img', $cod_img);
+        $xoopsObject->assignVar('image_id', $image_id);
         return true;
     }
 
@@ -215,9 +215,9 @@ class ImageHandler extends XoopsPersistableObjectHandler
             return false;
         }
         $sql = \sprintf(
-            'DELETE FROM %s WHERE cod_img = %u',
+            'DELETE FROM %s WHERE image_id = %u',
             $this->db->prefix('suico_images'),
-            $xoopsObject->getVar('cod_img')
+            $xoopsObject->getVar('image_id')
         );
         if ($force) {
             $result = $this->db->queryF($sql);
@@ -264,7 +264,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             if (!$id_as_key) {
                 $ret[] = &$image;
             } else {
-                $ret[$myrow['cod_img']] = &$image;
+                $ret[$myrow['image_id']] = &$image;
             }
             unset($image);
         }
@@ -349,14 +349,14 @@ class ImageHandler extends XoopsPersistableObjectHandler
      *
      * @param        $title
      * @param string $caption  The description of the picture
-     * @param int    $cod_img  the id of the image in database
+     * @param int    $image_id  the id of the image in database
      * @param string $filename the url to the thumb of the image so it can be displayed
      * @return bool TRUE
      */
     public function renderFormEdit(
         $title,
         $caption,
-        $cod_img,
+        $image_id,
         $filename
     ) {
         $form          = new XoopsThemeForm(\_MD_SUICO_EDIT_PICTURE, 'form_picture', 'editpicture.php', 'post', true);
@@ -365,12 +365,12 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $form->setExtra('enctype="multipart/form-data"');
         $buttonSend    = new XoopsFormButton('', 'submit_button', \_MD_SUICO_SUBMIT, 'submit');
         $field_warning = new XoopsFormLabel("<img src='" . $filename . "' alt='thumb'>");
-        $field_cod_img = new XoopsFormHidden('cod_img', $cod_img);
+        $field_image_id = new XoopsFormHidden('image_id', $image_id);
         $field_marker  = new XoopsFormHidden('marker', 1);
         $form->addElement($field_warning);
         $form->addElement($field_title);
         $form->addElement($field_caption);
-        $form->addElement($field_cod_img);
+        $form->addElement($field_image_id);
         $form->addElement($field_marker);
         $form->addElement($buttonSend);
         $form->display();
@@ -550,7 +550,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             ) . ' AS t, ' . $this->db->prefix(
                 'users'
             );
-        $sql    .= ' WHERE uid_owner = uid AND private=0 ORDER BY cod_img DESC';
+        $sql    .= ' WHERE uid_owner = uid AND private=0 ORDER BY image_id DESC';
         $result = $this->db->query($sql, $limit, 0);
         $vetor  = [];
         $i      = 0;
@@ -575,7 +575,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             ) . ' AS t, ' . $this->db->prefix(
                 'users'
             );
-        $sql    .= ' WHERE uid_owner = uid AND private=0 ORDER BY cod_img DESC';
+        $sql    .= ' WHERE uid_owner = uid AND private=0 ORDER BY image_id DESC';
         $result = $this->db->query($sql, $limit, 0);
         $vetor  = [];
         $i      = 0;

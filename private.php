@@ -27,7 +27,7 @@ require __DIR__ . '/header.php';
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
-$cod_img = Request::getInt('cod_img', 0, 'POST');
+$image_id = Request::getInt('image_id', 0, 'POST');
 /**
  * Creating the factory  loading the picture changing its caption
  */
@@ -35,7 +35,7 @@ $imageFactory = new Suico\ImageHandler(
     $xoopsDB
 );
 $picture      = $imageFactory->create(false);
-$picture->load($cod_img);
+$picture->load($image_id);
 $picture->setVar('private', Request::getInt('private', 0, 'POST'));
 /**
  * Verifying who's the owner to allow changes

@@ -61,15 +61,15 @@ class ImagesForm extends XoopsThemeForm
         $this->setExtra('enctype="multipart/form-data"');
         //include ID field, it's needed so the module knows if it is a new form or an edited form
         $hidden = new XoopsFormHidden(
-            'cod_img', $this->targetObject->getVar(
-            'cod_img'
+            'image_id', $this->targetObject->getVar(
+            'image_id'
         )
         );
         $this->addElement($hidden);
         unset($hidden);
-        // Cod_img
+        // image_id
         $this->addElement(
-            new XoopsFormLabel(\AM_SUICO_IMAGES_COD_IMG, $this->targetObject->getVar('cod_img'), 'cod_img')
+            new XoopsFormLabel(\AM_SUICO_IMAGES_IMAGE_ID, $this->targetObject->getVar('image_id'), 'image_id')
         );
         // Title
         $this->addElement(

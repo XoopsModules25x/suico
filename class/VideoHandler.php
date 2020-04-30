@@ -339,14 +339,14 @@ class VideoHandler extends XoopsPersistableObjectHandler
      * Render a form to edit the description of the pictures
      *
      * @param string $caption  The description of the picture
-     * @param int    $cod_img  the id of the image in database
+     * @param int    $video_id  the id of the image in database
      * @param string $filename the url to the thumb of the image so it can be displayed
      * @return bool TRUE
      */
     public function renderFormEdit(
 		$title,
         $caption,
-        $cod_img,
+        $video_id,
         $filename
     ) {
         $form = new XoopsThemeForm(\_MD_SUICO_EDIT_VIDEO, 'form_picture', 'editvideo.php', 'post', true);
@@ -361,7 +361,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
 <embed src="http://www.youtube.com/v/' . $filename . '" type="application/x-shockwave-flash" wmode="transparent" width="425" height="353"></embed>
 </object>'
         );
-        $field_video_id = new XoopsFormHidden('video_id', $cod_img);
+        $field_video_id = new XoopsFormHidden('video_id', $video_id);
         $field_marker = new XoopsFormHidden('marker', 1);
         $form->addElement($field_warning);
 		$form->addElement($field_title);
