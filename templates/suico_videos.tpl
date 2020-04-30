@@ -73,7 +73,7 @@
                                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<{$videos[i].url}>?rel=0" allowfullscreen></iframe>
                             </div>
                             <div class="alert alert-primary">
-                                <h6><{$videos[i].title}></h6>
+                                <h6 class="text-muted"><{$videos[i].title}></h6>
 								<{$videos[i].desc}>
 								<p class="text-muted"><i class="fa fa-calendar"></i>
                                                         <{if $videos[i].date_created == $videos[i].date_updated}>
