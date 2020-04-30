@@ -56,7 +56,7 @@ function suico_iteminfo($category, $item_id)
         return $item;
     }
     if ('video' === $category) {
-        $sql = 'SELECT video_id,uid_owner,video_desc,youtube_code, mainvideo FROM ' . $xoopsDB->prefix(
+        $sql = 'SELECT video_id,uid_owner,video_title,video_desc,youtube_code, mainvideo FROM ' . $xoopsDB->prefix(
                 'suico_images'
             ) . ' WHERE uid_owner = ' . $item_id . ' LIMIT 1';
         $result = $xoopsDB->query($sql);

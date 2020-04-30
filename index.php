@@ -315,7 +315,6 @@ $xoopsTpl->assign(
     sprintf(_MD_SUICO_YOUCANHAVE, $helper->getConfig('countPicture'))
 );
 $xoopsTpl->assign('lang_delete', _MD_SUICO_DELETE);
-$xoopsTpl->assign('lang_editdesc', _MD_SUICO_EDIT_DESC);
 $xoopsTpl->assign('lang_visitors', _MD_SUICO_VISITORS);
 $xoopsTpl->assign('lang_profilevisitors', _MD_SUICO_PROFILEVISITORS);
 $xoopsTpl->assign('lang_editprofile', _MD_SUICO_EDITPROFILE);

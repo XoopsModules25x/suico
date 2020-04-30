@@ -39,6 +39,7 @@ $newvideo = $videoFactory->create(
     true
 );
 $newvideo->setVar('uid_owner', (int)$xoopsUser->getVar('uid'));
+$newvideo->setVar('video_title', Request::getString('title', '', 'POST'));
 $newvideo->setVar('video_desc', Request::getString('caption', '', 'POST'));
 if (11 === mb_strlen($url)) {
     $code = $url;
@@ -58,8 +59,8 @@ if ($videoFactory->insert($newvideo)) {
     /** @var \XoopsNotificationHandler $notificationHandler */
     $notificationHandler = xoops_getHandler('notification');
     $notificationHandler->triggerEvent('video', (int)$xoopsUser->getVar('uid'), 'new_video', $extra_tags);
-    redirect_header(
-        XOOPS_URL . '/modules/suico/videos.php?uid=' . (int)$xoopsUser->getVar('uid'),
+	redirect_header(
+        XOOPS_URL . '/modules/suico/videos.php?uid=' . (int)$xoopsUser->getVar('uid') . '#' . $insertId,
         2,
         _MD_SUICO_VIDEOSAVED
     );

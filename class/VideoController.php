@@ -98,11 +98,12 @@ class VideoController extends SuicoController
          */
         $i = 0;
         foreach ($videos as $video) {
-            $videosArray[$i]['url'] = $video->getVar('youtube_code', 's');
+            $videosArray[$i]['url'] = $video->getVar('youtube_code', 's');			
+			$videosArray[$i]['title'] = $video->getVar('video_title', 's');
             $videosArray[$i]['desc'] = $video->getVar('video_desc', 's');
             $videosArray[$i]['id'] = $video->getVar('video_id', 's');
-            $videosArray[$i]['date_created'] = formatTimestamp($video->getVar('date_created', 's'));
-            $videosArray[$i]['date_updated'] = formatTimestamp($video->getVar('date_updated', 's'));
+			$videosArray[$i]['date_created'] = formatTimestamp($video->getVar('date_created', 's'));
+			$videosArray[$i]['date_updated'] = formatTimestamp($video->getVar('date_updated', 's'));
             $i++;
         }
         return $videosArray;

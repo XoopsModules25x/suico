@@ -56,7 +56,7 @@ if (isset($nbSections['countGroups']) && $nbSections['countGroups'] > 0) {
 }
 //form actions
 $xoopsTpl->assign('lang_delete', _MD_SUICO_DELETE);
-$xoopsTpl->assign('lang_editdesc', _MD_SUICO_EDIT_DESC);
+$xoopsTpl->assign('lang_editvideo', _MD_SUICO_EDIT_VIDEO);
 $xoopsTpl->assign('lang_makemain', _MD_SUICO_MAKEMAIN);
 //FORM SUBMIT
 $xoopsTpl->assign('lang_addvideos', _MD_SUICO_ADDFAVORITEVIDEOS);

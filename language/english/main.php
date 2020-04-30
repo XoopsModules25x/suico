@@ -19,7 +19,7 @@ declare(strict_types=1);
  */
 //Present in many files (videos pictures etc...)
 define('_MD_SUICO_DELETE', 'Delete');
-define('_MD_SUICO_EDIT_DESC', 'Edit description');
+define('_MD_SUICO_EDIT_VIDEO', 'Edit Video');
 define('_MD_SUICO_TOKENEXPIRED', 'Your Security Token has Expired<br>Please Try Again');
 define('_MD_SUICO_DESC_EDITED', 'The description was edited successfully');
 define('_MD_SUICO_CAPTION', 'Caption');
@@ -121,8 +121,9 @@ define('_MD_SUICO_FRIENDSHIP_TERMINATED', 'You have broken your friendship with 
 //mainvideo.php
 define('_MD_SUICO_SETMAINVIDEO', 'This video is featured on your profile page from now on');
 //videos.php
-define('_MD_SUICO_YOUTUBECODE', 'YouTube code or URL');
+define('_MD_SUICO_YOUTUBECODE', 'YouTube code');
 define('_MD_SUICO_ADDVIDEO', 'Add video');
+define('_MD_SUICO_VIDEOTITLE', 'Video Title');
 define('_MD_SUICO_ADDFAVORITEVIDEOS', 'Add favourite videos');
 define(
     '_MD_SUICO_ADDVIDEOSHELP',
@@ -495,4 +496,5 @@ define('_MD_SUICO_CONFIRMPASSWORD', 'Type again to confirm your password');
 define('_MD_SUICO_LOGOUT', 'Logout');
 define('_MD_SUICO_CHANGEAVATAR', 'Change Avatar');
 define('_MD_SUICO_CHANGEAVATARHELP', 'You can also change your avatar by selecting any of the photos upload in your photo album section.');
-
+define('_MD_SUICO_EDIT_PICTURE', 'Edit Picture');
+define('_MD_SUICO_EDIT_AUDIO', 'Edit Audio');

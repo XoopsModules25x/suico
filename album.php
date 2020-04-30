@@ -127,7 +127,7 @@ $xoopsTpl->assign(
     sprintf(_MD_SUICO_YOUCANHAVE, $helper->getConfig('countPicture'))
 );
 $xoopsTpl->assign('lang_delete', _MD_SUICO_DELETE);
-$xoopsTpl->assign('lang_editdesc', _MD_SUICO_EDIT_DESC);
+$xoopsTpl->assign('lang_editpicture', _MD_SUICO_EDIT_PICTURE);
 $xoopsTpl->assign('lang_countPicture', sprintf(_MD_SUICO_YOUHAVE, ($nbSections[COUNTPHOTOS] ?? '')));
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
 $xoopsTpl->assign('navegacao', $navegacao);

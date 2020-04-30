@@ -359,7 +359,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $cod_img,
         $filename
     ) {
-        $form          = new XoopsThemeForm(\_MD_SUICO_EDIT_DESC, 'form_picture', 'editpicture.php', 'post', true);
+        $form          = new XoopsThemeForm(\_MD_SUICO_EDIT_PICTURE, 'form_picture', 'editpicture.php', 'post', true);
         $field_title   = new XoopsFormText($title, 'title', 35, 55);
         $field_caption = new XoopsFormText($caption, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');

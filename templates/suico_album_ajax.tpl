@@ -77,7 +77,7 @@
                                                         <form action="editpicture.php" method="post" id="editform" class="suico-album-formquick">
                                                             <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">
                                                             <{$token}>
-                                                            <input name="submit" type="image" alt="<{$lang_editdesc}>" title="<{$lang_editdesc}>" src="<{xoModuleIcons16 edit.png}>">
+                                                            <input name="submit" type="image" alt="<{$lang_editpicture}>" title="<{$lang_editpicture}>" src="<{xoModuleIcons16 edit.png}>">
                                                         </form>
                                                         <form action="avatar.php" method="post" id="setavatar" class="suico-album-formquick">
                                                             <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">
@@ -136,7 +136,7 @@
                                                             <form action="editpicture.php" method="post" id="editform" class="suico-album-formquick">
                                                                 <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">
                                                                 <{$token}>
-                                                                <input name="submit" type="image" alt="<{$lang_editdesc}>" title="<{$lang_editdesc}>" src="<{xoModuleIcons16 edit.png}>">
+                                                                <input name="submit" type="image" alt="<{$lang_editpicture}>" title="<{$lang_editpicture}>" src="<{xoModuleIcons16 edit.png}>">
                                                             </form>
                                                             <form action="avatar.php" method="post" id="setavatar" class="suico-album-formquick">
                                                                 <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">

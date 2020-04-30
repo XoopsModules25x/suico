@@ -51,6 +51,7 @@ switch ($op) {
         }
         // Form save fields
         $videoObject->setVar('uid_owner', Request::getVar('uid_owner', ''));
+		$videoObject->setVar('video_title', Request::getVar('video_title', ''));
         $videoObject->setVar('video_desc', Request::getVar('video_desc', ''));
         $videoObject->setVar('youtube_code', Request::getVar('youtube_code', ''));
         $videoObject->setVar('main_video', Request::getVar('main_video', ''));
@@ -157,6 +158,10 @@ switch ($op) {
                 $videoArray['uid_owner'] = strip_tags(
                     XoopsUser::getUnameFromId($videoTempArray[$i]->getVar('uid_owner'))
                 );
+				
+				$GLOBALS['xoopsTpl']->assign('selectorvideo_title', AM_SUICO_VIDEO_TITLE);
+				$videoArray['video_title'] = strip_tags($videoTempArray[$i]->getVar('video_title'));
+
                 $GLOBALS['xoopsTpl']->assign('selectorvideo_desc', AM_SUICO_VIDEO_VIDEO_DESC);
                 $videoArray['video_desc'] = strip_tags($videoTempArray[$i]->getVar('video_desc'));
                 $GLOBALS['xoopsTpl']->assign('selectoryoutube_code', AM_SUICO_VIDEO_YOUTUBE_CODE);
