@@ -66,7 +66,7 @@
                                                 <button name="" type="image" class="btn btn-primary btn-sm float-right"><i class="fa fa-user-circle-o"></i> <{$lang_memberofgroup}></button>
                                             <{/if}>
 
-                                            <a href="group.php?group_id=<{$mygroups[i].group_id}>"><img src="<{$xoops_upload_url}>/suico/groups/<{$mygroups[i].img}>" alt="<{$mygroups[i].title}>" title="<{$mygroups[i].title}>" class="float-left pr-2" width="120" height="120"></a>
+                                            <a href="group.php?group_id=<{$mygroups[i].group_id}>"><img src="<{$xoops_upload_url}>/suico/groups/<{$mygroups[i].img}>" alt="<{$mygroups[i].title}>" title="<{$mygroups[i].title}>" class="float-left pr-2" width="120"></a>
                                             <h6><a href="group.php?group_id=<{$mygroups[i].group_id}>"><{$mygroups[i].title}></a></h6>
                                             <{$mygroups[i].desc}>
                                             <br>
@@ -154,7 +154,7 @@
                                                     <{/if}>
                                                 <{/if}>
 
-                                                <a href="group.php?group_id=<{$groups[j].id}>"><img src="<{$xoops_upload_url}>/suico/groups/<{$groups[j].img}>" alt="<{$groups[j].title}>" title="<{$groups[j].title}>" class="float-left pr-2" width="120" height="120"></a>
+                                                <a href="group.php?group_id=<{$groups[j].id}>"><img src="<{$xoops_upload_url}>/suico/groups/<{$groups[j].img}>" alt="<{$groups[j].title}>" title="<{$groups[j].title}>" class="float-left pr-2" width="120" ></a>
                                                 <h6>
                                                     <a href="group.php?group_id=<{$groups[j].id}>"><{$groups[j].title}></a>
                                                 </h6>
