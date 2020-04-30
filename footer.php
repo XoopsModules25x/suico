@@ -44,11 +44,7 @@ $xoTheme->addStylesheet(
     XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.lightbox-0.3.css'
 );
 //}
-if (!mb_stripos($_SERVER['REQUEST_URI'], 'memberslist.php')) {
-    $xoTheme->addScript(
-        XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.js'
-    );
-}
+
 //if (stripos($_SERVER['REQUEST_URI'], 'album.php')) {
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js');
 //}
