@@ -19,18 +19,15 @@
  */
 include_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
-
 $adminObject->addItemButton(_AM_SUICO_ADDUSER, 'user.php?op=new', 'add');
 $adminObject->displayNavigation(basename(__FILE__));
 $adminObject->displayButton('left');
-
 $op = $_REQUEST['op'] ?? 'list';
 if ('editordelete' === $op) {
     $op = isset($_REQUEST['delete']) ? 'delete' : 'edit';
 }
 /* @var XoopsMemberHandler $handler */
 $handler = xoops_getHandler('member');
-
 switch ($op) {
     default:
     case 'list':
@@ -70,7 +67,6 @@ switch ($op) {
             redirect_header('user.php', 3, _US_NOEDITRIGHT . '<br>' . implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
             exit;
         }
-
         // Dynamic fields
         /* @var  ProfileProfileHandler $profileHandler */
         $profileHandler = $helper->getHandler('Profile');
@@ -81,7 +77,6 @@ switch ($op) {
         /* @var  XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler = xoops_getHandler('groupperm');
         $editable_fields  = $grouppermHandler->getItemIds('profile_edit', $GLOBALS['xoopsUser']->getGroups(), $GLOBALS['xoopsModule']->getVar('mid'));
-
         $uid = empty($_POST['uid']) ? 0 : (int)$_POST['uid'];
         if (!empty($uid)) {
             $user    = $handler->getUser($uid);
@@ -125,12 +120,10 @@ switch ($op) {
         }
         xoops_load('xoopsuserutility');
         $stop = XoopsUserUtility::validate($user, $password, $vpass);
-
         $errors = [];
         if ('' != $stop) {
             $errors[] = $stop;
         }
-
         foreach (array_keys($fields) as $i) {
             $fieldname = $fields[$i]->getVar('field_name');
             if (in_array($fields[$i]->getVar('field_id'), $editable_fields) && isset($_REQUEST[$fieldname])) {
@@ -143,9 +136,7 @@ switch ($op) {
                 }
             }
         }
-
         $new_groups = $_POST['groups'] ?? [];
-
         if (0 == count($errors)) {
             if ($handler->insertUser($user)) {
                 $profile->setVar('profile_id', $user->getVar('uid'));
@@ -154,10 +145,8 @@ switch ($op) {
                 if ($grouppermHandler->checkRight('system_admin', XOOPS_SYSTEM_GROUP, $GLOBALS['xoopsUser']->getGroups(), 1)) {
                     //Update group memberships
                     $cur_groups = $user->getGroups();
-
                     $added_groups   = array_diff($new_groups, $cur_groups);
                     $removed_groups = array_diff($cur_groups, $new_groups);
-
                     if (count($added_groups) > 0) {
                         foreach ($added_groups as $groupid) {
                             $handler->addUserToGroup($groupid, $user->getVar('uid'));
@@ -197,13 +186,12 @@ switch ($op) {
         if (in_array(XOOPS_GROUP_ADMIN, $groups)) {
             redirect_header('user.php', 3, _AM_SUICO_CANNOTDELETEADMIN, false);
         }
-
         if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('user.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()), false);
             }
             $profileHandler = $helper->getHandler('Profile');
-            $profile         = $profileHandler->get($obj->getVar('uid'));
+            $profile        = $profileHandler->get($obj->getVar('uid'));
             if (!$profile || $profile->isNew() || $profileHandler->delete($profile)) {
                 if ($handler->deleteUser($obj)) {
                     redirect_header('user.php', 3, sprintf(_AM_SUICO_DELETEDSUCCESS, $obj->getVar('uname') . ' (' . $obj->getVar('email') . ')'), false);
@@ -226,6 +214,5 @@ switch ($op) {
         }
         break;
 }
-
 include_once __DIR__ . '/admin_footer.php';
 //xoops_cp_footer();

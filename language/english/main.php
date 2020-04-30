@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -18,7 +17,6 @@ declare(strict_types=1);
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
-
 //Present in many files (videos pictures etc...)
 define('_MD_SUICO_DELETE', 'Delete');
 define('_MD_SUICO_EDIT_DESC', 'Edit description');
@@ -45,15 +43,12 @@ define('_MD_SUICO_MYGROUPS', 'My Groups');
 define('_MD_SUICO_PROFILE', 'Profile');
 define('_MD_SUICO_HOME', 'Home');
 define('_MD_SUICO_CONFIGS_TITLE', 'Settings');
-
 ##################################################### PICTURES #######################################################
 //submitImage.php (for pictures submission
 define('_MD_SUICO_UPLOADED', 'Upload Successful');
-
 //delpicture.php
 define('_MD_SUICO_ASK_CONFIRM_DELETION', 'Are you sure you want to delete this picture?');
 define('_MD_SUICO_CONFIRM_DELETION', 'Yes please delete it!');
-
 //album.php
 define('_MD_SUICO_YOUHAVE', 'You have %s picture(s) in your album.');
 define('_MD_SUICO_YOUCANHAVE', 'You can have up to %s picture(s).');
@@ -65,21 +60,17 @@ define('_MD_SUICO_AVATARCHANGE', 'Make this picture your new avatar');
 define('_MD_SUICO_PRIVATIZE', 'Only you will see this image in your album');
 define('_MD_SUICO_UNPRIVATIZE', 'Everyone will be able to see this image in your album');
 define('_MD_SUICO_MYPHOTOS', 'My Photos');
-
 //avatar.php
 define('_MD_SUICO_AVATAR_EDITED', 'You changed your avatar!');
-
 //private.php
 define('_MD_SUICO_PRIVATIZED', 'From now on only you can see this image in your album');
 define('_MD_SUICO_UNPRIVATIZED', 'From now everyone can see this image in your album');
-
 ########################################################## FRIENDS ###################################################
 //friends.php
 define('_MD_SUICO_FRIENDSTITLE', "%s's Friends");
 define('_MD_SUICO_NOFRIENDSYET', 'No friends yet'); //also present in index.php
 define('_MD_SUICO_MYFRIENDS', 'My Friends');
 define('_MD_SUICO_FRIENDSHIP_CONFIGS', 'Set the configs of this friendship.');
-
 //class/suicofriendship.php
 define('_MD_SUICO_EDIT_FRIENDSHIP', 'Your friendship with this member:');
 define('_MD_SUICO_FRIENDNAME', 'Username');
@@ -103,10 +94,8 @@ define('_MD_SUICO_COOLYES', 'Yes');
 define('_MD_SUICO_COOLALOT', 'Very much');
 define('_MD_SUICO_PHOTO', "Friend's Photo");
 define('_MD_SUICO_UPDATEFRIEND', 'Update Friendship');
-
 //editfriendship.php
 define('_MD_SUICO_FRIENDSHIP_UPDATED', 'Friendship Updated');
-
 //submitfriendrequest.php
 define(
     '_MD_SUICO_FRIENDREQUEST_FROM',
@@ -116,7 +105,6 @@ define(
     '_MD_SUICO_ALREADY_FRIEND_REQUESTFROM',
     'You have already sent a friendship request to this user or vice-versa <br>, Wait untill he accepts or rejects it or check if he has asked you as a friend visiting your profile page.'
 );
-
 define(
     '_MD_SUICO_FRIENDREQUEST_TO',
     'A friend request has been sent to this user, Wait until he accepts to have him in your friends list.'
@@ -125,17 +113,13 @@ define(
     '_MD_SUICO_ALREADY_FRIEND_REQUESTTO',
     'You have already sent a friendship request to this user or vice-versa <br>, Wait untill he accepts or rejects it or check if he has asked you as a friend visiting your profile page.'
 );
-
 //makefriends.php
 define('_MD_SUICO_FRIENDMADE', 'Added as a friend!');
-
 //delfriendship.php
 define('_MD_SUICO_FRIENDSHIP_TERMINATED', 'You have broken your friendship with this user!');
-
 ############################################ VIDEOS ############################################################
 //mainvideo.php
 define('_MD_SUICO_SETMAINVIDEO', 'This video is featured on your profile page from now on');
-
 //videos.php
 define('_MD_SUICO_YOUTUBECODE', 'YouTube code or URL');
 define('_MD_SUICO_ADDVIDEO', 'Add video');
@@ -148,24 +132,19 @@ define(
 define('_MD_SUICO_MYVIDEOS', 'My Videos');
 define('_MD_SUICO_MAKEMAIN', 'Feature this video in your main page');
 define('_MD_SUICO_NOVIDEOSYET', 'No videos yet!');
-
 //delvideo.php
 define('_MD_SUICO_ASKCONFIRMVIDEODELETION', 'Are you sure you want to delete this video?');
 define('_MD_SUICO_CONFIRMVIDEODELETION', 'Yes I am!');
 define('_MD_SUICO_VIDEO_DELETED', 'Your video was deleted');
-
 //submitVideo.php
 define('_MD_SUICO_VIDEOSAVED', 'Your video was saved');
-
 ############################## GROUPS ########################################################
 //class/Groups.php
 define('_MD_SUICO_SUBMIT_GROUP', 'Create a new group');
 define('_MD_SUICO_UPLOADGROUP', 'Save Group'); //also present in many groups related areas
-define(    '_MD_SUICO_GROUP_IMAGE',    'Group Image'); //also present in many groups related areas
-
+define('_MD_SUICO_GROUP_IMAGE', 'Group Image'); //also present in many groups related areas
 define('_MD_SUICO_GROUP_SAVED', 'Your Group was saved');
-define('_MD_SUICO_GROUP_SAVED_ERROR',    'Error : Unfortunately, We could not save your group. Please try again. ');
-
+define('_MD_SUICO_GROUP_SAVED_ERROR', 'Error : Unfortunately, We could not save your group. Please try again. ');
 define(
     '_MD_SUICO_GROUP_TITLE',
     'Title'
@@ -178,16 +157,13 @@ define(
     '_MD_SUICOCREATEYOURGROUP',
     'Create your own Group'
 ); //also present in many ther groups related
-
 //abandongroup.php
 define('_MD_SUICO_ASKCONFIRMABANDONGROUP', 'Are you sure you want to leave this Group?');
 define('_MD_SUICO_CONFIRMABANDON', 'Yes please remove me from this Group!');
 define('_MD_SUICO_GROUPABANDONED', "You don't belong to this Group anymore.");
-
 //becomemembergroup.php
 define('_MD_SUICO_YOUAREMEMBERNOW', 'You are now member of this community');
 define('_MD_SUICO_YOUAREMEMBERALREADY', 'You are already a member of this Group');
-
 //delete_group.php
 define(
     '_MD_SUICO_ASKCONFIRMGROUPDELETION',
@@ -195,7 +171,6 @@ define(
 );
 define('_MD_SUICO_CONFIRMGROUPDELETION', 'Yes, please delete this Group!');
 define('_MD_SUICO_GROUP_DELETED', 'Group deleted!');
-
 //edit_group.php
 define('_MD_SUICO_MAINTAIN_OLD_IMAGE', 'Keep this image'); //also present in other groups related
 define('_MD_SUICO_GROUPEDITED', 'Group edited');
@@ -208,10 +183,8 @@ define(
     '_MD_SUICO_MEMBERSOFGROUP',
     'Members of Group'
 ); //also present in other groups related
-
 //submitGroup.php
 define('_MD_SUICO_GROUP_CREATED', 'Your Group was created');
-
 //kickfromgroup.php
 define('_MD_SUICO_KICKOUT', 'Remove');
 define('_MD_SUICO_CONFIRMKICK', 'Yes remove this member');
@@ -220,14 +193,12 @@ define(
     '_MD_SUICO_GROUPKICKED',
     "You've banished this user from the Group, but who knows when he'll try and comeback!"
 );
-
 //Groups.php
 define('_MD_SUICO_GROUP_ABANDON', 'Leave');
 define('_MD_SUICO_GROUP_JOIN', 'Join');
 define('_MD_SUICO_GROUP_SEARCH', 'Search a Group');
 define('_MD_SUICO_GROUP_SEARCHKEYWORD', 'Keyword');
 define('_MD_SUICO_GROUPSEARCHRESULT', 'Group Search Result');
-
 ######################################### NOTES #####################################################
 //notebook.php
 define('_MD_SUICO_ENTERTEXTNOTE', 'Enter Text or Xoops Codes');
@@ -241,15 +212,12 @@ define('_MD_SUICO_ITALIC', 'italic');
 define('_MD_SUICO_UNDERLINE', 'underline');
 define('_MD_SUICO_NONOTESYET', 'No Notes created in this Notebook yet');
 define('_MD_SUICO_SENDNOTESTO', 'Send notes to');
-
 //submitNote.php
 define('_MD_SUICO_NOTE_SENT', 'Thanks for participating, Note sent');
-
 //delete_note.php
 define('_MD_SUICO_ASKCONFIRMNOTEDELETION', 'Are you sure you want to delete this Note?');
 define('_MD_SUICO_CONFIRMNOTEDELETION', 'Yes please delete this Note.');
 define('_MD_SUICO_NOTE_DELETED', 'The Note was deleted');
-
 ############################ CONFIGS ##############################################
 //configs.php
 define('_MD_SUICO_CONFIGS_EVERYONE', 'Everyone');
@@ -266,19 +234,15 @@ define('_MD_SUICO_CONFIGS_PROFILECONTACT', 'See your contact info');
 define('_MD_SUICO_CONFIGS_PROFILEGENERAL', 'See your Info');
 define('_MD_SUICO_CONFIGS_PROFILESTATS', 'See your Stats');
 define('_MD_SUICO_WHOCAN', 'Who can:');
-
 //submitConfigs.php
 define('_MD_SUICO_CONFIGS_SAVE', 'Configuration saved!');
 define('_MD_SUICO_CONFIGS_SAVE_FAILED', 'ERROR: Configuration has not been saved');
-
 //class/suico_controller.php
 define(
     '_MD_SUICO_NOPRIVILEGE',
     "The owner of this profile has set the privileges to see it, <br>higher than you have now. <br>Login to become their friend. <br>If they haven't set it, so only they can see, <br>then you will be able to view it."
 );
-
 ###################################### OTHERS ##############################
-
 //index.php
 define('_MD_SUICO_VISITORS', 'Visitors (who visited your profile recently)');
 define('_MD_SUICO_USER_DETAILS', 'Member Details');
@@ -304,14 +268,11 @@ define('_MD_SUICO_SUSPENSIONADMIN', 'Suspension Admin Tools');
 define('_MD_SUICO_USER_PERSONAL', 'Personal');
 define('_MD_SUICO_ACTIVITY', 'Activity');
 define('_MD_SUICO_COMMUNITY', 'Community');
-
 //suspend.php
 define('_MD_SUICO_SUSPENDED', 'User under suspension until %s');
 define('_MD_SUICO_USER_SUSPENDED', 'User suspended!'); //als0 present in index.php
-
 //unsuspend.php
 define('_MD_SUICO_USER_UNSUSPENDED', 'User Unsuspended');
-
 //searchmembers.php
 define('_MD_SUICO_SEARCH', 'Search Members');
 define('_MD_SUICO_AVATAR', 'Avatar');
@@ -345,33 +306,27 @@ define('_MD_SUICO_ASC', 'Ascending order');
 define('_MD_SUICO_DESC', 'Descending order');
 define('_MD_SUICO_LIMIT', 'Number of members per page');
 define('_MD_SUICO_RESULTS', 'Search results');
-
 //26/10/2007
 define('_MD_SUICO_VIDEOS_ENABLED_NOT', 'The administrator of the site has disabled videos feature');
 define('_MD_SUICO_FRIENDS_ENABLED_NOT', 'The administrator of the site has disabled friends feature');
 define('_MD_SUICO_GROUPS_ENABLED_NOT', 'The administrator of the site has disabled groups feature');
 define('_MD_SUICO_PICTURES_ENABLED_NOT', 'The administrator of the site has disabled pictures feature');
 define('_MD_SUICO_NOTES_ENABLED_NOT', 'The administrator of the site has disabled Notes feature');
-
 //26/01/2008
 define('_MD_SUICO_ALLFRIENDS', 'View all friends');
 define('_MD_SUICO_ALLGROUPS', 'View all groups');
-
 //31/01/2008
 define('_MD_SUICO_FRIENDSHIP_NOTACCEPTED', 'Friendship rejected');
-
 //07/04/2008
 define('_MD_SUICO_USER_DOESNTEXIST', "This user doesn't exist or was deleted");
 define('_MD_SUICO_FANSTITLE', "%s's Fans");
 define('_MD_SUICO_NOFANSYET', 'No fans yet');
-
 //17/04/2008
 define('_MD_SUICO_AUDIO_ENABLED_NOT', 'The administrator of the site has disabled audio feature');
 define('_MD_SUICO_NOAUDIOYET', "This user hasn't uploaded any audio files yet");
 define('_MD_SUICO_AUDIOS', 'Audio');
 define('_MD_SUICO_CONFIGS_AUDIOS', 'See your Audio files');
 define('_MD_SUICO_UPLOADEDAUDIO', 'Audio file uploaded');
-
 define('_MD_SUICO_AUDIO_SELECT', 'Browse for your mp3 file');
 define('_MD_SUICO_AUDIO_AUTHOR', 'Author/Singer');
 define('_MD_SUICO_AUDIO_TITLE', 'Title of file or song');
@@ -381,21 +336,17 @@ define(
     '_MD_SUICO_AUDIO_ADD_HELP',
     'Choose an mp3 file on your computer, max size %s .'
 );
-
 //19/04/2008
 define('_MD_SUICO_AUDIO_DELETED', 'Your mp3 file was deleted!');
 define('_MD_SUICO_AUDIO_DELETE_CONFIRM_ASK', 'Do you really want to delete your audio file?');
 define('_MD_SUICO_AUDIO_DELETE_CONFIRM', 'Yes please delete it!');
-
 define('_MD_SUICO_META', 'Meta Info');
 define('_MD_SUICO_META_TITLE', 'Title');
 define('_MD_SUICO_META_ALBUM', 'Album');
 define('_MD_SUICO_META_ARTIST', 'Artist');
 define('_MD_SUICO_META_YEAR', 'Year');
-
 // v3.3RC2
 define('_MD_SUICO_PLAYER', 'Your audio player');
-
 // 3.5
 define('_MD_SUICO_ADDFRIEND', 'Add Friend');
 define('_MD_SUICO_FRIENDREQUEST_PENDING', 'Friend Request Pending');
@@ -471,7 +422,6 @@ define('_MD_SUICO_FRIENDREQUEST_CANCELLED', 'You have cancel your friendship req
 define('_MD_SUICO_GROUPTOTALMEMBERS', 'Group Total Members');
 define('_MD_SUICO_GROUPDATECREATED', 'Founded Date');
 define('_MD_SUICO_GROUPMEMBERS', 'member(s)');
-
 //Data Tables
 define('_MD_SUICO_DTABLE_DECIMAL', '');
 define('_MD_SUICO_DTABLE_EMPTYTABLE', 'No data available in table');
@@ -496,11 +446,9 @@ define('_MD_SUICO_DTABLE_NEXT', 'Next');
 define('_MD_SUICO_DTABLE_PREVIOUS', 'Previous');
 define('_MD_SUICO_DTABLE_SORT_ASCENDING', ': activate to sort column ascending');
 define('_MD_SUICO_DTABLE_SORT_DESCENSING', ': activate to sort column descending');
-
 define('_MD_SUICO_CANTVOTEOWN', 'You can not vote for yourself');
 define('_MD_SUICO_VOTED', 'Vote');
 define('_MD_SUICO_ALREADYVOTED', 'Sorry, you have already voted once.');
-
 //Profile Module
 define('_MD_SUICO_DISPLAYNAME', 'Display Name');
 define('_MD_SUICO_SORTBY', 'Sort by');

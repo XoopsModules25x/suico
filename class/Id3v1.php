@@ -56,15 +56,11 @@ class Id3v1
     /**
      * Represents Id3v1.0
      */
-
     public const ID3V1_0 = 'ID3V1_0';
-
     /**
      * Represents Id3v1.1
      */
-
     public const ID3V1_1 = 'ID3V1_1';
-
     /**
      * Holds the tags
      *
@@ -86,17 +82,13 @@ class Id3v1
      * @see setGenre()
      * @see setGenreId()
      */
-
     protected $_tags = [];
-
     /**
      * Holds the PHP stream
      *
      * @see __construct()
      */
-
     protected $_stream = null;
-
     /**
      * Holds the Id3v1 version
      *
@@ -105,17 +97,13 @@ class Id3v1
      * @see setId3v1Version()
      * @see getId3v1Version()
      */
-
     protected $_version = null;
-
     /**
      * Indicates if the source is read-only
      *
      * @see __construct()
      */
-
     protected $_readOnly = false;
-
     /**
      * Holds all known ID3 Genres
      *
@@ -124,7 +112,6 @@ class Id3v1
      * @see  getGenreNameByid()
      * @see  getGenreIdByName()
      */
-
     protected static $_genres = [
         'Blues',
         'Classic Rock',
@@ -264,7 +251,6 @@ class Id3v1
      * @param bool $readOnly
      * @see $_tags
      */
-
     public function __construct(
         $filename,
         $readOnly = false
@@ -272,43 +258,30 @@ class Id3v1
         if (\is_bool($readOnly)) {
             $this->_readOnly = $readOnly;
         }
-
         if (!\is_string($filename)) {
             throw new RuntimeException('Filename must be a string');
         }
-
         if (!\is_file($filename)) {
             throw new RuntimeException('File doesn\'t exist');
         }
-
         $mode = $this->_readOnly ? 'rb' : 'rb+';
-
         if (!$this->_stream = @\fopen($filename, $mode, false)) {
             throw new RuntimeException('File cannot be opened');
         }
-
         if (!$this->_readOnly) {
             \flock($this->_stream, \LOCK_SH);
         }
-
         \fseek($this->_stream, -128, \SEEK_END);
-
         $rawTag = \fread($this->_stream, 128);
-
         if ($rawTag[125] === \chr(0) && $rawTag[126] !== \chr(0)) {
             $format = 'a3marking/a30title/a30artist/a30album/a4year' . '/a28comment/x1/C1track/C1genre';
-
             $this->_version = self::ID3V1_1;
         } else {
             $format = 'a3marking/a30title/a30artist/a30album/a4year' . '/a30comment/C1genre';
-
             $this->_version = self::ID3V1_0;
         }
-
         $tags = \unpack($format, $rawTag);
-
         $this->clearAllTags();
-
         if ('TAG' === $tags['marking']) {
             $this->_tags = $tags;
         }
@@ -334,7 +307,6 @@ class Id3v1
      * @return mixed Depends on tag, which will be returned
      * @throws \Exception
      */
-
     public function __get(
         $name
     ) {
@@ -347,11 +319,9 @@ class Id3v1
             'track',
             'genre',
         ];
-
         if (\in_array($name, $validNames, true)) {
             return $this->{'get' . \ucfirst($name)}();
         }
-
         throw new RuntimeException('Property doesn\'t exist');
     }
 
@@ -376,7 +346,6 @@ class Id3v1
      * @return mixed Depends on tag
      * @throws \Exception
      */
-
     public function __set(
         $name,
         $value
@@ -390,11 +359,9 @@ class Id3v1
             'track',
             'genre',
         ];
-
         if (\in_array($name, $validNames, true)) {
             return $this->{'set' . \ucfirst($name)}($value);
         }
-
         throw new RuntimeException('Property doesn\'t exist');
     }
 
@@ -415,29 +382,22 @@ class Id3v1
      *
      * @return string
      */
-
     public function __toString()
     {
         $returnedTags = [];
-
         foreach ($this->_tags as $tagKey => $tagVal) {
             if ('TAG' === $tagVal) {
                 continue;
             }
-
             if (null === $tagVal || !$tagVal) {
                 continue;
             }
-
             if ('genre' === $tagKey) {
                 $returnedTags[] = self::getGenreNameById($tagVal);
-
                 continue;
             }
-
             $returnedTags[] = $tagVal;
         }
-
         if (\count($returnedTags) > 0) {
             return \implode(', ', $returnedTags);
         }
@@ -448,13 +408,11 @@ class Id3v1
      *
      * @return string
      */
-
     public function getTitle()
     {
         if (!empty($this->_tags['title'])) {
             return $this->_tags['title'];
         }
-
         return null;
     }
 
@@ -463,13 +421,11 @@ class Id3v1
      *
      * @return string
      */
-
     public function getArtist()
     {
         if (!empty($this->_tags['artists'])) {
             return $this->_tags['artist'];
         }
-
         return null;
     }
 
@@ -478,13 +434,11 @@ class Id3v1
      *
      * @return string
      */
-
     public function getAlbum()
     {
         if (!empty($this->_tags['album'])) {
             return $this->_tags['album'];
         }
-
         return null;
     }
 
@@ -493,13 +447,11 @@ class Id3v1
      *
      * @return string
      */
-
     public function getComment()
     {
         if (self::ID3V1_1 === $this->_version) {
             return mb_substr($this->_tags['comment'], 0, 28);
         }
-
         return $this->_tags['comment'];
     }
 
@@ -509,7 +461,6 @@ class Id3v1
      * @return string
      * @uses getGenreNameById()
      */
-
     public function getGenre()
     {
         return self::getGenreNameById($this->_tags['genre']);
@@ -520,7 +471,6 @@ class Id3v1
      *
      * @return int
      */
-
     public function getGenreId()
     {
         return $this->_tags['genre'];
@@ -531,13 +481,11 @@ class Id3v1
      *
      * @return int
      */
-
     public function getYear()
     {
         if (!empty($this->_tags['year'])) {
             return (int)$this->_tags['year'];
         }
-
         return null;
     }
 
@@ -546,13 +494,11 @@ class Id3v1
      *
      * @return mixed If there is no track false will be returned, else the track
      */
-
     public function getTrack()
     {
         if (self::ID3V1_0 === $this->_version || !isset($this->_tags['track'])) {
             return false;
         }
-
         return (int)$this->_tags['track'];
     }
 
@@ -563,7 +509,6 @@ class Id3v1
      * @see self::ID3V1_1
      * @see self::ID3V1_0
      */
-
     public function getId3v1Version()
     {
         return \constant('self::' . $this->_version);
@@ -578,14 +523,12 @@ class Id3v1
      * @see self::ID3V1_1
      * @see self::ID3V1_0
      */
-
     public function setId3v1Version(
         $version
     ) {
         if ($this->_readOnly) {
             return $this;
         }
-
         switch ($version) {
             case self::ID3V1_0:
             case self::ID3V1_1:
@@ -593,9 +536,7 @@ class Id3v1
             default:
                 throw new RuntimeException('Invalid version');
         }
-
         $this->_version = $version;
-
         return $this;
     }
 
@@ -610,20 +551,17 @@ class Id3v1
      * @throws \Exception
      * @see $_tags
      */
-
     public function setTitle(
         $title
     ) {
         if ($this->_readOnly) {
             return $this;
         }
-
         if (\is_string($title)) {
             $this->_tags['title'] = $title;
         } else {
             throw new RuntimeException('Title has to be a string');
         }
-
         return $this;
     }
 
@@ -638,20 +576,17 @@ class Id3v1
      * @throws \Exception
      * @see $_tags
      */
-
     public function setArtist(
         $artist
     ) {
         if ($this->_readOnly) {
             return $this;
         }
-
         if (\is_string($artist)) {
             $this->_tags['artist'] = $artist;
         } else {
             throw new RuntimeException('Artist has to be a string');
         }
-
         return $this;
     }
 
@@ -666,20 +601,17 @@ class Id3v1
      * @throws \Exception
      * @see $_tags
      */
-
     public function setAlbum(
         $album
     ) {
         if ($this->_readOnly) {
             return $this;
         }
-
         if (\is_string($album)) {
             $this->_tags['album'] = $album;
         } else {
             throw new RuntimeException('Album has to be a string');
         }
-
         return $this;
     }
 
@@ -696,20 +628,17 @@ class Id3v1
      * @throws \Exception
      * @see $_tags
      */
-
     public function setComment(
         $comment
     ) {
         if ($this->_readOnly) {
             return $this;
         }
-
         if (\is_string($comment)) {
             $this->_tags['comment'] = $comment;
         } else {
             throw new RuntimeException('Comment has to be a string');
         }
-
         return $this;
     }
 
@@ -723,14 +652,12 @@ class Id3v1
      * @throws \Exception
      * @see $_tags
      */
-
     public function setGenre(
         $genre
     ) {
         if ($this->_readOnly) {
             return $this;
         }
-
         if (\is_int($genre)) {
             $this->_tags['genre'] = $genre;
         } elseif (\is_string($genre)) {
@@ -738,7 +665,6 @@ class Id3v1
         } else {
             throw new RuntimeException('Genre type invalid');
         }
-
         return $this;
     }
 
@@ -750,20 +676,17 @@ class Id3v1
      * @throws \Exception
      * @see $_tags
      */
-
     public function setYear(
         $year
     ) {
         if ($this->_readOnly) {
             return $this;
         }
-
         if (\is_int($year)) {
             $this->_tags['year'] = $year;
         } else {
             throw new RuntimeException('Year has to be an interger');
         }
-
         return $this;
     }
 
@@ -781,22 +704,18 @@ class Id3v1
      * @see setId3v1Version()
      * @see getId3v1Version()
      */
-
     public function setTrack(
         $track
     ) {
         if ($this->_readOnly) {
             return $this;
         }
-
         if (\is_int($track) && 0 !== $track) {
             $this->_tags['track'] = $track;
-
             $this->_version = self::ID3V1_1;
         } else {
             throw new RuntimeException('Track type invalid or zero');
         }
-
         return $this;
     }
 
@@ -808,29 +727,19 @@ class Id3v1
      * @return Id3v1 Implements fluent interface
      * @see $_tags
      */
-
     public function clearAllTags()
     {
         if ($this->_readOnly) {
             return $this;
         }
-
         $this->_tags['marking'] = 'TAG';
-
         $this->_tags['title'] = '';
-
         $this->_tags['artist'] = '';
-
         $this->_tags['album'] = '';
-
         $this->_tags['year'] = null;
-
         $this->_tags['comment'] = '';
-
         $this->_tags['track'] = null;
-
         $this->_tags['genre'] = 255;
-
         return $this;
     }
 
@@ -841,16 +750,13 @@ class Id3v1
      * @return int
      * @see $_genres
      */
-
     public static function getGenreIdByName(
         $genreName
     ) {
         $genres = \array_flip(self::$_genres);
-
         if (!isset($genres[$genreName])) {
             return 255;
         }
-
         return (int)$genres[$genreName];
     }
 
@@ -861,7 +767,6 @@ class Id3v1
      * @return string|bool
      * @see $_genres
      */
-
     public static function getGenreNameById(
         $genreId
     ) {
@@ -874,7 +779,6 @@ class Id3v1
      * @return array
      * @see $_genres
      */
-
     public static function getGenreList()
     {
         return self::$_genres;
@@ -897,21 +801,16 @@ class Id3v1
      * @see setYear()
      * @see setTrack()
      */
-
     public function save()
     {
         if ($this->_readOnly) {
             return $this;
         }
-
         \fseek($this->_stream, -128, \SEEK_END);
-
         if ('TAG' !== $this->_tags['marking']) {
             \fseek($this->_stream, 0, \SEEK_END);
         }
-
         $newTag = '';
-
         if (self::ID3V1_0 === $this->_version) {
             $newTag = \pack(
                 'a3a30a30a30a4a30C1',
@@ -936,11 +835,9 @@ class Id3v1
                 $this->_tags['genre']
             );
         }
-
         if (false === \fwrite($this->_stream, $newTag, 128)) {
             throw new RuntimeException('Not possible to write ID3 tags');
         }
-
         return $this;
     }
 }

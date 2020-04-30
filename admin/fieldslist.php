@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Extended User Profile
  *
@@ -22,33 +21,25 @@ use XoopsModules\Suico;
 
 include_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
-
-
-$adminObject->addItemButton( _AM_SUICO_FIELD, 'fieldslist.php?op=new', 'add');
-
+$adminObject->addItemButton(_AM_SUICO_FIELD, 'fieldslist.php?op=new', 'add');
 $adminObject->displayNavigation(basename(__FILE__));
 $adminObject->displayButton('left');
-
 $op = $_REQUEST['op'] ?? (isset($_REQUEST['id']) ? 'edit' : 'list');
 /* @var Suico\FieldHandler $fieldHandler */
 $fieldHandler = $helper->getHandler('Field');
-
 switch ($op) {
     default:
     case 'list':
         $fields = $fieldHandler->getObjects(null, true, false);
-
         /* @var XoopsModuleHandler $moduleHandler */
         $moduleHandler = xoops_getHandler('module');
-        $modules        = $moduleHandler->getObjects(null, true);
-
+        $modules       = $moduleHandler->getObjects(null, true);
         /* @var Suico\CategoryHandler $categoryHandler */
         $categoryHandler = $helper->getHandler('Category');
-        $criteria    = new CriteriaCompo();
+        $criteria        = new CriteriaCompo();
         $criteria->setSort('cat_weight');
         $cats = $categoryHandler->getObjects($criteria, true);
         unset($criteria);
-
         $categories[0] = _AM_SUICO_DEFAULT;
         if (count($cats) > 0) {
             foreach (array_keys($cats) as $i) {
@@ -67,7 +58,6 @@ switch ($op) {
             XOBJ_DTYPE_OTHER   => _AM_SUICO_OTHER,
             XOBJ_DTYPE_MTIME   => _AM_SUICO_DATE,
         ];
-
         $fieldtypes = [
             'checkbox'     => _AM_SUICO_CHECKBOX,
             'group'        => _AM_SUICO_GROUP,
@@ -88,7 +78,6 @@ switch ($op) {
             'autotext'     => _AM_SUICO_AUTOTEXT,
             'rank'         => _AM_SUICO_RANK,
         ];
-
         foreach (array_keys($fields) as $i) {
             $fields[$i]['canEdit']               = $fields[$i]['field_config'] || $fields[$i]['field_show'] || $fields[$i]['field_edit'];
             $fields[$i]['canDelete']             = $fields[$i]['field_config'];
@@ -142,7 +131,7 @@ switch ($op) {
                 //if there are changed fields, fetch the fieldcategory objects
                 /* @var XoopsModuleHandler $fieldHandler */
                 $fieldHandler = $helper->getHandler('Field');
-                $fields        = $fieldHandler->getObjects(new Criteria('field_id', '(' . implode(',', $ids) . ')', 'IN'), true);
+                $fields       = $fieldHandler->getObjects(new Criteria('field_id', '(' . implode(',', $ids) . ')', 'IN'), true);
                 foreach ($ids as $i) {
                     $fields[$i]->setVar('field_weight', (int)$weight[$i]);
                     $fields[$i]->setVar('cat_id', (int)$category[$i]);
@@ -186,14 +175,12 @@ switch ($op) {
                 $obj->setVar('field_valuetype', $_REQUEST['field_valuetype']);
             }
             $options = $obj->getVar('field_options');
-
             if (isset($_REQUEST['removeOptions']) && is_array($_REQUEST['removeOptions'])) {
                 foreach ($_REQUEST['removeOptions'] as $index) {
                     unset($options[$index]);
                 }
                 $redirect_to_edit = true;
             }
-
             if (!empty($_REQUEST['addOption'])) {
                 foreach ($_REQUEST['addOption'] as $option) {
                     if (empty($option['value'])) {
@@ -221,7 +208,6 @@ switch ($op) {
                 }
             }
         }
-
         if ($obj->getVar('field_show')) {
             $obj->setVar('field_weight', $_REQUEST['field_weight']);
             $obj->setVar('cat_id', $_REQUEST['field_category']);
@@ -233,7 +219,6 @@ switch ($op) {
         if ($fieldHandler->insert($obj)) {
             /* @var XoopsGroupPermHandler $grouppermHandler */
             $grouppermHandler = xoops_getHandler('groupperm');
-
             $perm_arr = [];
             if ($obj->getVar('field_show')) {
                 $perm_arr[] = 'profile_show';
@@ -327,11 +312,9 @@ switch ($op) {
         }
         break;
 }
-
 if (isset($template_main)) {
     $GLOBALS['xoopsTpl']->display("db:{$template_main}");
 }
-
 /**
  * @param $field_id
  * @param $field_required

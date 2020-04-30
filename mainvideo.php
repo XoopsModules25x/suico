@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -24,13 +23,10 @@ use Xmf\Request;
 use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
-
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
-
 $cod_img = Request::getInt('video_id', 0, 'POST');
-
 /**
  * Creating the factory  loading the video changing its caption
  */
@@ -40,7 +36,6 @@ $videoFactory = new Suico\VideoHandler(
 $video        = $videoFactory->create(false);
 $video->load($cod_img);
 $video->setVar('main_video', 1);
-
 /**
  * Verifying who's the owner to allow changes
  */
@@ -56,5 +51,4 @@ if ($uid === $video->getVar('uid_owner')) {
         echo 'did not work';
     }
 }
-
 require dirname(__DIR__, 2) . '/footer.php';

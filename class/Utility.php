@@ -31,21 +31,17 @@ use Xmf\Request;
 class Utility extends Common\SysUtility
 {
     //--------------- Custom module methods -----------------------------
-
     /**
      * Access the only instance of this class
      *
      * @return object
      */
-
     public static function getInstance()
     {
         static $instance;
-
         if (null === $instance) {
             $instance = new static();
         }
-
         return $instance;
     }
 
@@ -57,43 +53,30 @@ class Utility extends Common\SysUtility
      * @param bool   $trimname
      * @return string  The unique filename to use (with its extension)
      */
-
     public static function createUploadName($folder, $filename, $trimname = false)
     {
         $workingfolder = $folder;
-
         if ('/' !== \xoops_substr($workingfolder, mb_strlen($workingfolder) - 1, 1)) {
             $workingfolder .= '/';
         }
-
         $ext = \basename($filename);
-
         $ext = \explode('.', $ext);
-
         $ext = '.' . $ext[\count($ext) - 1];
-
         $true = true;
-
         while ($true) {
             $ipbits = \explode('.', $_SERVER['REMOTE_ADDR']);
-
             [$usec, $sec] = \explode(' ', \microtime());
-
             $usec *= 65536;
-
             $sec = ((int)$sec) & 0xFFFF;
-
             if ($trimname) {
                 $uid = \sprintf('%06x%04x%04x', ($ipbits[0] << 24) | ($ipbits[1] << 16) | ($ipbits[2] << 8) | $ipbits[3], $sec, $usec);
             } else {
                 $uid = \sprintf('%08x-%04x-%04x', ($ipbits[0] << 24) | ($ipbits[1] << 16) | ($ipbits[2] << 8) | $ipbits[3], $sec, $usec);
             }
-
             if (!\file_exists($workingfolder . $uid . $ext)) {
                 $true = false;
             }
         }
-
         return $uid . $ext;
     }
 
@@ -109,7 +92,6 @@ class Utility extends Common\SysUtility
      *
      * @return bool
      */
-
     public static function resizePicture(
         $src_path,
         $dst_path,
@@ -119,35 +101,26 @@ class Utility extends Common\SysUtility
         $fit = 'inside'
     ) {
         $resize = true;
-
         if ($moduleDirNameUpper . '_DONT_RESIZE_IF_SMALLER') {
             $pictureDimensions = \getimagesize($src_path);
-
             if (\is_array($pictureDimensions)) {
                 $width = $pictureDimensions[0];
-
                 $height = $pictureDimensions[1];
-
                 if ($width < $param_width && $height < $param_height) {
                     $resize = false;
                 }
             }
         }
-
         $img = WideImage::load($src_path);
-
         if ($resize) {
             $result = $img->resize($param_width, $param_height, $fit);
-
             $result->saveToFile($dst_path);
         } else {
             @\copy($src_path, $dst_path);
         }
-
         if (!$keep_original) {
             @\unlink($src_path);
         }
-
         return true;
     }
 
@@ -159,7 +132,6 @@ class Utility extends Common\SysUtility
      * @param bool   $keepOriginal
      * @param string $fit
      */
-
     public static function resizeSavePicture(
         $srcPath,
         $destPath,
@@ -171,34 +143,22 @@ class Utility extends Common\SysUtility
         if ($allowupload) { // L'image
             if (Request::hasVar('xoops_upload_file', 'POST')) {
                 $helper = Helper::getInstance();
-
                 $fldname = $_FILES[$_POST['xoops_upload_file'][1]];
-
                 $fldname = $fldname['name'];
-
                 if (\xoops_trim('' !== $fldname)) {
                     $destname = self::createUploadName($destPath, $fldname);
-
                     $permittedTypes = $helper->getConfig('mimetypes'); //['image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png'];
-
                     $uploader = new \XoopsMediaUploader(XOOPS_ROOT_PATH . '/uploads/news/image', $permittedTypes, $helper->getConfig('maxuploadsize'));
-
                     $uploader->setTargetFileName($destname);
-
                     if ($uploader->fetchMedia($_POST['xoops_upload_file'][1])) {
                         if ($uploader->upload()) {
                             $fullPictureName = XOOPS_ROOT_PATH . '/uploads/news/image/' . \basename($destname);
-
                             $newName = XOOPS_ROOT_PATH . '/uploads/news/image/redim_' . \basename($destname);
-
                             self::resizePicture($fullPictureName, $newName, $helper->getConfig('maxwidth'), $helper->getConfig('maxheight'));
-
                             if (\file_exists($newName)) {
                                 @\unlink($fullPictureName);
-
                                 \rename($newName, $fullPictureName);
                             }
-
                             $story->setPicture(\basename($destname));
                         } else {
                             echo _AM_UPLOAD_ERROR . ' ' . $uploader->getErrors();
@@ -207,7 +167,6 @@ class Utility extends Common\SysUtility
                         echo $uploader->getErrors();
                     }
                 }
-
                 $story->setPictureinfo(Request::getString('pictureinfo', '', 'POST'));
             }
         }

@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -26,14 +25,11 @@ use XoopsModules\Suico;
 $GLOBALS['xoopsOption']['template_main'] = 'suico_fans.tpl';
 require __DIR__ . '/header.php';
 $controller = new Suico\FriendsController($xoopsDB, $xoopsUser);
-
 $start = Request::getInt('start', 0, 'GET');
-
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
 $nbSections = $controller->getNumbersSections();
-
 /**
  * Friends
  */
@@ -48,13 +44,11 @@ $vetor = $controller->friendshipsFactory->getFans('', $criteria_compo_fans, 0);
 if (0 === $countFriends) {
     $xoopsTpl->assign('lang_nofansyet', _MD_SUICO_NOFANSYET);
 }
-
 /**
  * Let's get the user name of the owner of the album
  */
 $owner      = new XoopsUser();
 $identifier = $owner::getUnameFromId($controller->uidOwner);
-
 /**
  * Creating the navigation bar if you have a lot of friends
  */
@@ -62,19 +56,15 @@ $navigationBar = new XoopsPageNav(
     $countFriends, $helper->getConfig('friendsperpage'), $start, 'start', 'uid=' . (int)$controller->uidOwner
 );
 $navegacao     = $navigationBar->renderImageNav(2);
-
 //navbar
 $xoopsTpl->assign('lang_mysection', _MD_SUICO_MYFANS);
 $xoopsTpl->assign('section_name', _MD_SUICO_FANS);
-
 //Navigation Bar
 $xoopsTpl->assign('navegacao', $navegacao);
-
 $xoopsTpl->assign('lang_fanstitle', sprintf(_MD_SUICO_FANSTITLE, $identifier));
 //$xoopsTpl->assign('path_suico_uploads',$helper->getConfig('link_path_upload'));
 $xoopsTpl->assign('friends', $vetor);
 $xoopsTpl->assign('lang_delete', _MD_SUICO_DELETE);
 $xoopsTpl->assign('lang_evaluate', _MD_SUICO_FRIENDSHIP_CONFIGS);
-
 require __DIR__ . '/footer.php';
 require dirname(__DIR__, 2) . '/footer.php';

@@ -31,7 +31,6 @@ class FieldHandler extends \XoopsPersistableObjectHandler
     /**
      * @param \XoopsDatabase $db
      */
-
     public function __construct(\XoopsDatabase $db)
     {
         parent::__construct($db, 'suico_profile_field', Field::class, 'field_id', 'field_title');
@@ -44,25 +43,18 @@ class FieldHandler extends \XoopsPersistableObjectHandler
      *
      * @return array
      */
-
     public function loadFields($force_update = false)
     {
         static $fields = [];
-
         if (!empty($force_update) || 0 == \count($fields)) {
             $this->table_link = $this->db->prefix('suico_profile_category');
-
             $criteria = new \Criteria('o.field_id', 0, '!=');
-
             $criteria->setSort('l.cat_weight ASC, o.field_weight');
-
             $field_objs = &$this->getByLink($criteria, ['o.*'], true, 'cat_id', 'cat_id');
-
             foreach (\array_keys($field_objs) as $i) {
                 $fields[$field_objs[$i]->getVar('field_name')] = $field_objs[$i];
             }
         }
-
         return $fields;
     }
 
@@ -75,23 +67,16 @@ class FieldHandler extends \XoopsPersistableObjectHandler
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      * @internal param bool $checkObject check if the object is dirty and clean the attributes
      */
-
     public function insert(\XoopsObject $obj, $force = false)
     {
         if (!($obj instanceof $this->className)) {
             return false;
         }
-
         /* @var ProfileProfileHandler $profileHandler */
-
         $profileHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Profile');
-
         $obj->setVar('field_name', \str_replace(' ', '_', $obj->getVar('field_name')));
-
         $obj->cleanVars();
-
         $defaultstring = '';
-
         switch ($obj->getVar('field_type')) {
             case 'datetime':
             case 'date':
@@ -130,26 +115,19 @@ class FieldHandler extends \XoopsPersistableObjectHandler
                 $obj->setVar('field_valuetype', \XOBJ_DTYPE_TXTAREA);
                 break;
         }
-
         if ('' === $obj->getVar('field_valuetype')) {
             $obj->setVar('field_valuetype', \XOBJ_DTYPE_TXTBOX);
         }
-
         if ((!\in_array($obj->getVar('field_name'), $this->getUserVars())) && isset($_REQUEST['field_required'])) {
             if ($obj->isNew()) {
                 //add column to table
-
                 $changetype = 'ADD';
             } else {
                 //update column information
-
                 $changetype = 'MODIFY COLUMN';
             }
-
             $maxlengthstring = $obj->getVar('field_maxlength') > 0 ? '(' . $obj->getVar('field_maxlength') . ')' : '';
-
             //set type
-
             switch ($obj->getVar('field_valuetype')) {
                 default:
                 case \XOBJ_DTYPE_ARRAY:
@@ -167,9 +145,7 @@ class FieldHandler extends \XoopsPersistableObjectHandler
                     // varchars must have a maxlength
                     if (!$maxlengthstring) {
                         //so set it to max if maxlength is not set - or should it fail?
-
                         $maxlengthstring = '(255)';
-
                         $obj->setVar('field_maxlength', 255);
                     }
                     break;
@@ -193,26 +169,18 @@ class FieldHandler extends \XoopsPersistableObjectHandler
                     $maxlengthstring = '';
                     break;
             }
-
             $sql = 'ALTER TABLE `' . $profileHandler->table . '` ' . $changetype . ' `' . $obj->cleanVars['field_name'] . '` ' . $type . $maxlengthstring . ' NULL';
-
             $result = $force ? $this->db->queryF($sql) : $this->db->query($sql);
-
             if (!$result) {
                 $obj->setErrors($this->db->error());
-
                 return false;
             }
         }
-
         //change this to also update the cached field information storage
-
         $obj->setDirty();
-
         if (!parent::insert($obj, $force)) {
             return false;
         }
-
         return $obj->getVar('field_id');
     }
 
@@ -223,51 +191,34 @@ class FieldHandler extends \XoopsPersistableObjectHandler
      * @param bool         $force
      * @return bool FALSE if failed.
      */
-
     public function delete(\XoopsObject $obj, $force = false)
     {
         if (!($obj instanceof $this->className)) {
             return false;
         }
-
         /* @var ProfileProfileHandler $profileHandler */
-
         $profileHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Profile');
-
         // remove column from table
-
         $sql = 'ALTER TABLE ' . $profileHandler->table . ' DROP `' . $obj->getVar('field_name', 'n') . '`';
-
         if ($this->db->query($sql)) {
             //change this to update the cached field information storage
-
             if (!parent::delete($obj, $force)) {
                 return false;
             }
-
             if ($obj->getVar('field_show') || $obj->getVar('field_edit')) {
                 /* @var XoopsModuleHandler $moduleHandler */
-
                 $moduleHandler = \xoops_getHandler('module');
-
                 $suico_module = $moduleHandler->getByDirname('suico');
-
                 if (\is_object($suico_module)) {
                     // Remove group permissions
-
                     /* @var XoopsGroupPermHandler $grouppermHandler */
-
                     $grouppermHandler = \xoops_getHandler('groupperm');
-
                     $criteria = new \CriteriaCompo(new \Criteria('gperm_modid', $suico_module->getVar('mid')));
-
                     $criteria->add(new \Criteria('gperm_itemid', $obj->getVar('field_id')));
-
                     return $grouppermHandler->deleteAll($criteria);
                 }
             }
         }
-
         return false;
     }
 
@@ -276,7 +227,6 @@ class FieldHandler extends \XoopsPersistableObjectHandler
      *
      * @return array
      */
-
     public function getUserVars()
     {
         return [

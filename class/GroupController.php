@@ -53,25 +53,19 @@ class GroupController extends SuicoController
     /**
      * @return bool|void
      */
-
     public function checkPrivilege()
     {
         if (0 === $this->helper->getConfig('enable_groups')) {
             \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, \_MD_SUICO_GROUPS_ENABLED_NOT);
         }
-
         $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
-
         if (1 === $this->configsFactory->getCount($criteria)) {
             $configs = $this->configsFactory->getObjects($criteria);
-
             $config = $configs[0]->getVar('groups');
-
             if (!$this->checkPrivilegeLevel($config)) {
                 \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, \_MD_SUICO_NOPRIVILEGE);
             }
         }
-
         return true;
     }
 }

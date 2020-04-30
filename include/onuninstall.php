@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -32,7 +31,6 @@ function xoops_module_pre_uninstall_suico(
     XoopsModule $module
 ) {
     // Do some synchronization if needed
-
     return true;
 }
 
@@ -46,51 +44,32 @@ function xoops_module_uninstall_suico(
     XoopsModule $module
 ) {
     require __DIR__ . '/common.php';
-
     $moduleDirName = basename(dirname(__DIR__));
-
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-
     $helper = Suico\Helper::getInstance();
-
     $utility = new Suico\Utility();
-
     //    $configurator = new Suico\Common\Configurator();
-
     // Load language files
-
     $helper->loadLanguage('admin');
-
     $helper->loadLanguage('common');
-
     $success = true;
-
     //------------------------------------------------------------------
-
     // Remove uploads folder (and all subfolders) if they exist
-
     //------------------------------------------------------------------
-
     $old_directories = [
         $GLOBALS['xoops']->path("uploads/{$moduleDirName}"),
     ];
-
     foreach ($old_directories as $old_dir) {
         $dirInfo = new SplFileInfo($old_dir);
-
         if ($dirInfo->isDir()) {
             // The directory exists so delete it
-
             if (!$utility::rrmdir($old_dir)) {
                 $module->setErrors(sprintf(constant('CO_' . $moduleDirNameUpper . '_ERROR_BAD_DEL_PATH'), $old_dir));
-
                 $success = false;
             }
         }
-
         unset($dirInfo);
     }
-
     /*
     //------------ START ----------------
     //------------------------------------------------------------------
@@ -104,7 +83,6 @@ function xoops_module_uninstall_suico(
     }
 //    return $success && $delOk; // use this if you're using this routine
 */
-
     return $success;
     //------------ END  ----------------
 }

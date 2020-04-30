@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -25,31 +24,25 @@ use XoopsModules\Suico;
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_index.tpl';
 require __DIR__ . '/header.php';
-
 //require_once __DIR__ . '/class/Friendrequest.php';
 //require_once __DIR__ . '/class/Friendship.php';
-
 /**
  * Factory of friendrequests created
  */
 $friendrequestFactory = new Suico\FriendrequestHandler($xoopsDB);
 $friendshipFactory    = new Suico\FriendshipHandler($xoopsDB);
-
 $friendrequest_id = Request::getInt('friendrequest_id', 0, 'POST');
 $friendship_level = Request::getInt('level', 0, 'POST');
 $uid              = (int)$xoopsUser->getVar('uid');
-
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
-
 $criteria = new CriteriaCompo(new Criteria('friendreq_id', $friendrequest_id));
 $criteria->add(new Criteria('friendrequestto_uid', $uid));
 if ($friendrequestFactory->getCount($criteria) > 0) {
     if (($friendship_level > 0) && ($friendrequest = $friendrequestFactory->getObjects($criteria))) {
         $friend1_uid = $friendrequest[0]->getVar('friendrequester_uid');
         $friend2_uid = $friendrequest[0]->getVar('friendrequestto_uid');
-
         $newfriendship1 = $friendshipFactory->create(true);
         $newfriendship1->setVar('level', 3);
         $newfriendship1->setVar('friend1_uid', $friend1_uid);
@@ -61,7 +54,6 @@ if ($friendrequestFactory->getCount($criteria) > 0) {
         $friendrequestFactory->deleteAll($criteria);
         $friendshipFactory->insert2($newfriendship1);
         $friendshipFactory->insert2($newfriendship2);
-
         redirect_header(XOOPS_URL . '/modules/suico/friends.php?uid=' . $friend2_uid, 3, _MD_SUICO_FRIENDMADE);
     } else {
         if (0 === $friendship_level) {
@@ -73,5 +65,4 @@ if ($friendrequestFactory->getCount($criteria) > 0) {
 } else {
     redirect_header(XOOPS_URL . '/modules/suico/index.php?uid=' . $uid, 3, _MD_SUICO_ERROR);
 }
-
 require dirname(__DIR__, 2) . '/footer.php';

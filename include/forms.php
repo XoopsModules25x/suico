@@ -24,7 +24,7 @@
  * Get {@link XoopsThemeForm} for adding/editing fields
  *
  * @param Suico\Field $field  {@link Suico\Field} object to get edit form for
- * @param mixed        $action URL to submit to - or false for $_SERVER['REQUEST_URI']
+ * @param mixed       $action URL to submit to - or false for $_SERVER['REQUEST_URI']
  *
  * @return object
  */
@@ -33,7 +33,7 @@ use XoopsModules\Suico;
 
 /**
  * @param Suico\Field $field
- * @param bool         $action
+ * @param bool        $action
  * @return \XoopsThemeForm
  */
 function suico_getFieldForm(Suico\Field $field, $action = false)
@@ -42,19 +42,16 @@ function suico_getFieldForm(Suico\Field $field, $action = false)
         $action = $_SERVER['REQUEST_URI'];
     }
     $title = $field->isNew() ? sprintf(_AM_SUICO_ADD, _AM_SUICO_FIELD) : sprintf(_AM_SUICO_EDIT, _AM_SUICO_FIELD);
-
     include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
     $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
-
     $form->addElement(new XoopsFormText(_AM_SUICO_TITLE, 'field_title', 35, 255, $field->getVar('field_title', 'e')));
     $form->addElement(new XoopsFormTextArea(_AM_SUICO_DESCRIPTION, 'field_description', $field->getVar('field_description', 'e')));
-
     $fieldcat_id = 0;
     if (!$field->isNew()) {
         $fieldcat_id = $field->getVar('cat_id');
     }
     $categoryHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Category');
-    $cat_select       = new XoopsFormSelect(_AM_SUICO_CATEGORY, 'field_category', $fieldcat_id);
+    $cat_select      = new XoopsFormSelect(_AM_SUICO_CATEGORY, 'field_category', $fieldcat_id);
     $cat_select->addOption(0, _AM_SUICO_DEFAULT);
     $cat_select->addOptionArray($categoryHandler->getList());
     $form->addElement($cat_select);
@@ -66,7 +63,6 @@ function suico_getFieldForm(Suico\Field $field, $action = false)
         } else {
             $form->addElement(new XoopsFormText(_AM_SUICO_NAME, 'field_name', 35, 255, $field->getVar('field_name', 'e')));
         }
-
         //autotext and theme left out of this one as fields of that type should never be changed (valid assumption, I think)
         $fieldtypes = [
             'checkbox'     => _AM_SUICO_CHECKBOX,
@@ -85,12 +81,9 @@ function suico_getFieldForm(Suico\Field $field, $action = false)
             'timezone'     => _AM_SUICO_TIMEZONE,
             'yesno'        => _AM_SUICO_YESNO,
         ];
-
         $element_select = new XoopsFormSelect(_AM_SUICO_TYPE, 'field_type', $field->getVar('field_type', 'e'));
         $element_select->addOptionArray($fieldtypes);
-
         $form->addElement($element_select);
-
         switch ($field->getVar('field_type')) {
             case 'textbox':
                 $valuetypes = [
@@ -109,7 +102,6 @@ function suico_getFieldForm(Suico\Field $field, $action = false)
                     XOBJ_DTYPE_UNICODE_EMAIL   => _AM_SUICO_UNICODE_EMAIL,
                     XOBJ_DTYPE_UNICODE_URL     => _AM_SUICO_UNICODE_URL,
                 ];
-
                 $type_select = new XoopsFormSelect(_AM_SUICO_VALUETYPE, 'field_valuetype', $field->getVar('field_valuetype', 'e'));
                 $type_select->addOptionArray($valuetypes);
                 $form->addElement($type_select);
@@ -132,15 +124,12 @@ function suico_getFieldForm(Suico\Field $field, $action = false)
                     XOBJ_DTYPE_UNICODE_EMAIL   => _AM_SUICO_UNICODE_EMAIL,
                     XOBJ_DTYPE_UNICODE_URL     => _AM_SUICO_UNICODE_URL,
                 ];
-
                 $type_select = new XoopsFormSelect(_AM_SUICO_VALUETYPE, 'field_valuetype', $field->getVar('field_valuetype', 'e'));
                 $type_select->addOptionArray($valuetypes);
                 $form->addElement($type_select);
                 break;
         }
-
         //$form->addElement(new XoopsFormRadioYN(_AM_SUICO_NOTNULL, 'field_notnull', $field->getVar('field_notnull', 'e') ));
-
         if ('select' === $field->getVar('field_type') || 'select_multi' === $field->getVar('field_type') || 'radio' === $field->getVar('field_type') || 'checkbox' === $field->getVar('field_type')) {
             $options = $field->getVar('field_options');
             if (count($options) > 0) {
@@ -153,7 +142,6 @@ function suico_getFieldForm(Suico\Field $field, $action = false)
                 $remove_options->addOptionArray($options);
                 $form->addElement($remove_options);
             }
-
             $option_text = "<table  cellspacing='1'><tr><td class='width20'>" . _AM_SUICO_KEY . '</td><td>' . _AM_SUICO_VALUE . '</td></tr>';
             for ($i = 0; $i < 3; ++$i) {
                 $option_text .= "<tr><td><input type='text' name='addOption[{$i}][key]' id='addOption[{$i}][key]' size='15' /></td><td><input type='text' name='addOption[{$i}][value]' id='addOption[{$i}][value]' size='35' /></td></tr>";
@@ -163,7 +151,6 @@ function suico_getFieldForm(Suico\Field $field, $action = false)
             $form->addElement(new XoopsFormLabel(_AM_SUICO_ADDOPTION, $option_text));
         }
     }
-
     if ($field->getVar('field_edit')) {
         switch ($field->getVar('field_type')) {
             case 'textbox':
@@ -234,7 +221,7 @@ function suico_getFieldForm(Suico\Field $field, $action = false)
     }
     /* @var XoopsGroupPermHandler $grouppermHandler */
     $grouppermHandler = xoops_getHandler('groupperm');
-    $searchable_types  = [
+    $searchable_types = [
         'textbox',
         'select',
         'radio',
@@ -264,7 +251,6 @@ function suico_getFieldForm(Suico\Field $field, $action = false)
     }
     $form->addElement(new XoopsFormHidden('op', 'save'));
     $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
-
     return $form;
 }
 
@@ -286,43 +272,35 @@ function suico_getRegisterForm(XoopsUser $user, $profile, $step = null)
     }
     $next_opname      = 'op' . mt_rand(10000, 99999);
     $_SESSION[$opkey] = $next_opname;
-
     include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
     if (empty($GLOBALS['xoopsConfigUser'])) {
         /* @var XoopsConfigHandler $configHandler */
-        $configHandler             = xoops_getHandler('config');
+        $configHandler              = xoops_getHandler('config');
         $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
     }
     $action    = $_SERVER['REQUEST_URI'];
     $step_no   = $step['step_no'];
     $use_token = $step['step_no'] > 0; // ? true : false;
     $reg_form  = new XoopsThemeForm($step['step_name'], 'regform', $action, 'post', $use_token);
-
     if ($step['step_desc']) {
         $reg_form->addElement(new XoopsFormLabel('', $step['step_desc']));
     }
-
     if (1 == $step_no) {
         //$uname_size = $GLOBALS['xoopsConfigUser']['maxuname'] < 35 ? $GLOBALS['xoopsConfigUser']['maxuname'] : 35;
-
         $elements[0][] = [
             'element'  => new XoopsFormText(_MD_SUICO_NICKNAME, 'uname', 35, $GLOBALS['xoopsConfigUser']['maxuname'], $user->getVar('uname', 'e')),
             'required' => true,
         ];
         $weights[0][]  = 0;
-
         $elements[0][] = ['element' => new XoopsFormText(_MD_SUICO_EMAILADDRESS, 'email', 35, 255, $user->getVar('email', 'e')), 'required' => true];
         $weights[0][]  = 0;
-
         $elements[0][] = ['element' => new XoopsFormPassword(_MD_SUICO_PASSWORD, 'pass', 35, 32, ''), 'required' => true];
         $weights[0][]  = 0;
-
         $elements[0][] = ['element' => new XoopsFormPassword(_US_VERIFYPASS, 'vpass', 35, 32, ''), 'required' => true];
         $weights[0][]  = 0;
     }
-
     // Dynamic fields
-    $profileHandler              = \XoopsModules\Suico\Helper::getInstance()->getHandler('Profile');
+    $profileHandler               = \XoopsModules\Suico\Helper::getInstance()->getHandler('Profile');
     $fields                       = $profileHandler->loadFields();
     $_SESSION['profile_required'] = [];
     foreach (array_keys($fields) as $i) {
@@ -332,18 +310,15 @@ function suico_getRegisterForm(XoopsUser $user, $profile, $step = null)
             if ($fieldinfo['required'] = $fields[$i]->getVar('field_required')) {
                 $_SESSION['profile_required'][$fields[$i]->getVar('field_name')] = $fields[$i]->getVar('field_title');
             }
-
             $key              = $fields[$i]->getVar('cat_id');
             $elements[$key][] = $fieldinfo;
             $weights[$key][]  = $fields[$i]->getVar('field_weight');
         }
     }
     ksort($elements);
-
     // Get categories
     $categoryHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Category');
-    $categories  = $categoryHandler->getObjects(null, true, false);
-
+    $categories      = $categoryHandler->getObjects(null, true, false);
     foreach (array_keys($elements) as $k) {
         array_multisort($weights[$k], SORT_ASC, array_keys($elements[$k]), SORT_ASC, $elements[$k]);
         //$title = isset($categories[$k]) ? $categories[$k]['cat_title'] : _MD_SUICO_DEFAULT;
@@ -355,7 +330,6 @@ function suico_getRegisterForm(XoopsUser $user, $profile, $step = null)
         }
     }
     //end of Dynamic User fields
-
     if (1 == $step_no && 0 != $GLOBALS['xoopsConfigUser']['reg_dispdsclmr'] && '' != $GLOBALS['xoopsConfigUser']['reg_disclaimer']) {
         $disc_tray = new XoopsFormElementTray(_US_DISCLAIMER, '<br>');
         $disc_text = new XoopsFormLabel('', '<div class="pad5">' . $GLOBALS['myts']->displayTarea($GLOBALS['xoopsConfigUser']['reg_disclaimer'], 1) . '</div>');
@@ -367,25 +341,22 @@ function suico_getRegisterForm(XoopsUser $user, $profile, $step = null)
     }
     global $xoopsModuleConfig;
     $useCaptchaAfterStep2 = $xoopsModuleConfig['profileCaptchaAfterStep1'] + 1;
-
     if ($step_no <= $useCaptchaAfterStep2) {
         $reg_form->addElement(new XoopsFormCaptcha(), true);
     }
-
     $reg_form->addElement(new XoopsFormHidden($next_opname, 'register'));
     $reg_form->addElement(new XoopsFormHidden('uid', $user->getVar('uid')));
     $reg_form->addElement(new XoopsFormHidden('step', $step_no));
     $reg_form->addElement(new XoopsFormButton('', 'submitButton', _SUBMIT, 'submit'));
-
     return $reg_form;
 }
 
 /**
  * Get {@link XoopsThemeForm} for editing a user
  *
- * @param XoopsUser                    $user {@link XoopsUser} to edit
+ * @param XoopsUser                   $user {@link XoopsUser} to edit
  * @param \XoopsModules\Suico\Profile $profile
- * @param bool                         $action
+ * @param bool                        $action
  *
  * @return object
  */
@@ -397,25 +368,19 @@ function suico_getUserForm(XoopsUser $user, Suico\Profile $profile = null, $acti
     }
     if (empty($GLOBALS['xoopsConfigUser'])) {
         /* @var XoopsConfigHandler $configHandler */
-        $configHandler             = xoops_getHandler('config');
+        $configHandler              = xoops_getHandler('config');
         $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
     }
-
     require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
-
     $title = $user->isNew() ? _AM_SUICO_ADDUSER : _US_EDITPROFILE;
-
     $form = new XoopsThemeForm($title, 'userinfo', $action, 'post', true);
-
     /* @var ProfileHandler $profileHandler */
-
     $profileHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Profile');
     // Dynamic fields
     if (!$profile) {
         /* @var ProfileHandler $profileHandler */
-
         $profileHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Profile');
-        $profile         = $profileHandler->get($user->getVar('uid'));
+        $profile        = $profileHandler->get($user->getVar('uid'));
     }
     // Get fields
     $fields = $profileHandler->loadFields();
@@ -423,7 +388,6 @@ function suico_getUserForm(XoopsUser $user, Suico\Profile $profile = null, $acti
     /* @var  XoopsGroupPermHandler $grouppermHandler */
     $grouppermHandler = xoops_getHandler('groupperm');
     $editable_fields  = $grouppermHandler->getItemIds('profile_edit', $GLOBALS['xoopsUser']->getGroups(), $GLOBALS['xoopsModule']->getVar('mid'));
-
     if ($user->isNew() || $GLOBALS['xoopsUser']->isAdmin()) {
         $elements[0][] = [
             'element'  => new XoopsFormText(_MD_SUICO_NICKNAME, 'uname', 25, $GLOBALS['xoopsUser']->isAdmin() ? 60 : $GLOBALS['xoopsConfigUser']['maxuname'], $user->getVar('uname', 'e')),
@@ -439,7 +403,6 @@ function suico_getUserForm(XoopsUser $user, Suico\Profile $profile = null, $acti
     $weights[0][]  = 0;
     $elements[0][] = ['element' => $email_tray, 'required' => 0];
     $weights[0][]  = 0;
-
     if ($GLOBALS['xoopsUser']->isAdmin() && $user->getVar('uid') != $GLOBALS['xoopsUser']->getVar('uid')) {
         //If the user is an admin and is editing someone else
         $pwd_text  = new XoopsFormPassword('', 'password', 10, 32);
@@ -449,7 +412,6 @@ function suico_getUserForm(XoopsUser $user, Suico\Profile $profile = null, $acti
         $pwd_tray->addElement($pwd_text2);
         $elements[0][] = ['element' => $pwd_tray, 'required' => 0]; //cannot set an element tray required
         $weights[0][]  = 0;
-
         $level_radio = new XoopsFormRadio(_MD_SUICO_USERLEVEL, 'level', $user->getVar('level'));
         $level_radio->addOption(1, _MD_SUICO_ACTIVE);
         $level_radio->addOption(0, _MD_SUICO_INACTIVE);
@@ -457,17 +419,14 @@ function suico_getUserForm(XoopsUser $user, Suico\Profile $profile = null, $acti
         $elements[0][] = ['element' => $level_radio, 'required' => 0];
         $weights[0][]  = 0;
     }
-
     $elements[0][] = ['element' => new XoopsFormHidden('uid', $user->getVar('uid')), 'required' => 0];
     $weights[0][]  = 0;
     $elements[0][] = ['element' => new XoopsFormHidden('op', 'save'), 'required' => 0];
     $weights[0][]  = 0;
-
-    $categoryHandler    = \XoopsModules\Suico\Helper::getInstance()->getHandler('Category');
-    $categories     = [];
-    $all_categories = $categoryHandler->getObjects(null, true, false);
-    $count_fields   = count($fields);
-
+    $categoryHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Category');
+    $categories      = [];
+    $all_categories  = $categoryHandler->getObjects(null, true, false);
+    $count_fields    = count($fields);
     foreach (array_keys($fields) as $i) {
         if (in_array($fields[$i]->getVar('field_id'), $editable_fields)) {
             // Set default value for user fields if available
@@ -477,22 +436,18 @@ function suico_getUserForm(XoopsUser $user, Suico\Profile $profile = null, $acti
                     $user->setVar($fields[$i]->getVar('field_name'), $default);
                 }
             }
-
             if (null === $profile->getVar($fields[$i]->getVar('field_name'), 'n')) {
                 $default = $fields[$i]->getVar('field_default', 'n');
                 $profile->setVar($fields[$i]->getVar('field_name'), $default);
             }
-
             $fieldinfo['element']  = $fields[$i]->getEditElement($user, $profile);
             $fieldinfo['required'] = $fields[$i]->getVar('field_required');
-
             $key              = @$all_categories[$fields[$i]->getVar('cat_id')]['cat_weight'] * $count_fields + $fields[$i]->getVar('cat_id');
             $elements[$key][] = $fieldinfo;
             $weights[$key][]  = $fields[$i]->getVar('field_weight');
             $categories[$key] = @$all_categories[$fields[$i]->getVar('cat_id')];
         }
     }
-
     if ($GLOBALS['xoopsUser'] && $GLOBALS['xoopsUser']->isAdmin()) {
         xoops_loadLanguage('admin', 'profile');
         /* @var  XoopsGroupPermHandler $grouppermHandler */
@@ -507,7 +462,6 @@ function suico_getUserForm(XoopsUser $user, Suico\Profile $profile = null, $acti
             $weights[0][] = $count_fields + 1;
         }
     }
-
     ksort($elements);
     foreach (array_keys($elements) as $k) {
         array_multisort($weights[$k], SORT_ASC, array_keys($elements[$k]), SORT_ASC, $elements[$k]);
@@ -518,10 +472,8 @@ function suico_getUserForm(XoopsUser $user, Suico\Profile $profile = null, $acti
             $form->addElement($elements[$k][$i]['element'], $elements[$k][$i]['required']);
         }
     }
-
     $form->addElement(new XoopsFormHidden('uid', $user->getVar('uid')));
     $form->addElement(new XoopsFormButton('', 'submit', _MD_SUICO_SAVECHANGES, 'submit'));
-
     return $form;
 }
 
@@ -529,7 +481,7 @@ function suico_getUserForm(XoopsUser $user, Suico\Profile $profile = null, $acti
  * Get {@link XoopsThemeForm} for editing a step
  *
  * @param \XoopsModules\Suico\Regstep $step {@link Regstep} to edit
- * @param bool                         $action
+ * @param bool                        $action
  *
  * @return object
  */
@@ -540,13 +492,11 @@ function suico_getStepForm(Suico\Regstep $step = null, $action = false)
     }
     if (empty($GLOBALS['xoopsConfigUser'])) {
         /* @var XoopsConfigHandler $configHandler */
-        $configHandler             = xoops_getHandler('config');
+        $configHandler              = xoops_getHandler('config');
         $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
     }
     include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
-
     $form = new XoopsThemeForm(_AM_SUICO_STEP, 'stepform', 'step.php', 'post', true);
-
     if (!$step->isNew()) {
         $form->addElement(new XoopsFormHidden('id', $step->getVar('step_id')));
     }
@@ -556,6 +506,5 @@ function suico_getStepForm(Suico\Regstep $step = null, $action = false)
     $form->addElement(new XoopsFormText(_AM_SUICO_STEPORDER, 'step_order', 10, 10, $step->getVar('step_order', 'e')));
     $form->addElement(new XoopsFormRadioYN(_AM_SUICO_STEPSAVE, 'step_save', $step->getVar('step_save', 'e')));
     $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
-
     return $form;
 }

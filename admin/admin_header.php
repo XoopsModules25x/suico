@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -25,31 +24,22 @@ use XoopsModules\Suico\Helper;
 use XoopsModules\Suico\Utility;
 
 include dirname(__DIR__) . '/preloads/autoloader.php';
-
 require dirname(__DIR__, 3) . '/include/cp_header.php';
 //require $GLOBALS['xoops']->path('www/class/xoopsformloader.php');
-
 require dirname(__DIR__) . '/include/common.php';
-
 $moduleDirName = basename(dirname(__DIR__));
-
 $helper  = Helper::getInstance();
 $utility = Utility::getInstance();
-
 /** @var Admin $adminObject */
 $adminObject = Admin::getInstance();
-
 // Load language files
 $helper->loadLanguage('admin');
 $helper->loadLanguage('modinfo');
 $helper->loadLanguage('common');
-
 $db = XoopsDatabaseFactory::getDatabaseConnection();
-
 $pathIcon16    = Admin::iconUrl('', 16);
 $pathIcon32    = Admin::iconUrl('', 32);
 $pathModIcon32 = $helper->getConfig('modicons32');
-
 /** @var XoopsPersistableObjectHandler $imageHandler */
 $imageHandler = $helper->getHandler('Image');
 /** @var XoopsPersistableObjectHandler $friendshipHandler */
@@ -74,18 +64,14 @@ $suspensionsHandler = $helper->getHandler('Suspensions');
 $audioHandler = $helper->getHandler('Audio');
 /** @var XoopsPersistableObjectHandler $privacyHandler */
 $privacyHandler = $helper->getHandler('Privacy');
-
 $myts = MyTextSanitizer::getInstance();
 if (!isset($xoopsTpl) || !is_object($xoopsTpl)) {
     require XOOPS_ROOT_PATH . '/class/template.php';
-
     $xoopsTpl = new XoopsTpl();
 }
-
 $pathIcon16    = Xmf\Module\Admin::iconUrl('', 16);
 $pathIcon32    = Xmf\Module\Admin::iconUrl('', 32);
 $pathModIcon32 = $helper->getConfig('modicons32');
-
 // Local icons path
 $xoopsTpl->assign('pathModIcon16', $pathIcon16);
 $xoopsTpl->assign('pathModIcon32', $pathIcon32);

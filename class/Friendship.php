@@ -43,50 +43,31 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 class Friendship extends XoopsObject
 {
     public $db;
-
     public $helper;
-
     public $permHelper;
-
     // constructor
 
     /**
      * Friendship constructor.
      * @param null $id
      */
-
     public function __construct($id = null)
     {
         parent::__construct();
-
         /** @var Helper $helper */
-
         $this->helper = Helper::getInstance();
-
         $this->permHelper = new Permission();
-
         $this->db = XoopsDatabaseFactory::getDatabaseConnection();
-
         $this->initVar('friendship_id', \XOBJ_DTYPE_INT, null, false, 10);
-
         $this->initVar('friend1_uid', \XOBJ_DTYPE_INT, null, false, 10);
-
         $this->initVar('friend2_uid', \XOBJ_DTYPE_INT, null, false, 10);
-
         $this->initVar('level', \XOBJ_DTYPE_INT, null, false, 10);
-
         $this->initVar('hot', \XOBJ_DTYPE_INT, null, false, 10);
-
         $this->initVar('trust', \XOBJ_DTYPE_INT, null, false, 10);
-
         $this->initVar('cool', \XOBJ_DTYPE_INT, null, false, 10);
-
         $this->initVar('fan', \XOBJ_DTYPE_INT, null, false, 10);
-
         $this->initVar('date_created', \XOBJ_DTYPE_INT, 0, false);
-
         $this->initVar('date_updated', \XOBJ_DTYPE_INT, 0, false);
-
         if (!empty($id)) {
             if (\is_array($id)) {
                 $this->assignVars($id);
@@ -101,15 +82,11 @@ class Friendship extends XoopsObject
     /**
      * @param $id
      */
-
     public function load($id)
     {
         $sql = 'SELECT * FROM ' . $this->db->prefix('suico_friendships') . ' WHERE friendship_id=' . $id;
-
         $myrow = $this->db->fetchArray($this->db->query($sql));
-
         $this->assignVars($myrow);
-
         if (!$myrow) {
             $this->setNew();
         }
@@ -124,7 +101,6 @@ class Friendship extends XoopsObject
      * @param int    $start
      * @return array
      */
-
     public function getAllFriendships(
         $criteria = [],
         $asobject = false,
@@ -134,43 +110,32 @@ class Friendship extends XoopsObject
         $start = 0
     ) {
         $db = XoopsDatabaseFactory::getDatabaseConnection();
-
         $ret = [];
-
         $whereQuery = '';
-
         if (\is_array($criteria) && \count($criteria) > 0) {
             $whereQuery = ' WHERE';
-
             foreach ($criteria as $c) {
                 $whereQuery .= " ${c} AND";
             }
-
             $whereQuery = mb_substr($whereQuery, 0, -4);
         } elseif (!\is_array($criteria) && $criteria) {
             $whereQuery = ' WHERE ' . $criteria;
         }
-
         if (!$asobject) {
             $sql = 'SELECT friendship_id FROM ' . $db->prefix(
                     'suico_friendships'
                 ) . "${whereQuery} ORDER BY ${sort} ${order}";
-
             $result = $db->query($sql, $limit, $start);
-
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['suico_friendship_id'];
             }
         } else {
             $sql = 'SELECT * FROM ' . $db->prefix('suico_friendships') . "${whereQuery} ORDER BY ${sort} ${order}";
-
             $result = $db->query($sql, $limit, $start);
-
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new self($myrow);
             }
         }
-
         return $ret;
     }
 
@@ -179,7 +144,6 @@ class Friendship extends XoopsObject
      *
      * @return \XoopsModules\Suico\Form\FriendshipForm
      */
-
     public function getForm()
     {
         return new Form\FriendshipForm($this);
@@ -188,11 +152,9 @@ class Friendship extends XoopsObject
     /**
      * @return array|null
      */
-
     public function getGroupsRead()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
-
         return $this->permHelper->getGroupsForItem(
             'sbcolumns_read',
             $this->getVar('friendship_id')
@@ -202,11 +164,9 @@ class Friendship extends XoopsObject
     /**
      * @return array|null
      */
-
     public function getGroupsSubmit()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
-
         return $this->permHelper->getGroupsForItem(
             'sbcolumns_submit',
             $this->getVar('friendship_id')
@@ -216,11 +176,9 @@ class Friendship extends XoopsObject
     /**
      * @return array|null
      */
-
     public function getGroupsModeration()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
-
         return $this->permHelper->getGroupsForItem(
             'sbcolumns_moderation',
             $this->getVar('friendship_id')

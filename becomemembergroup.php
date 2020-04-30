@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -24,11 +23,9 @@ use Xmf\Request;
 use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
-
 //require_once __DIR__ . '/class/Friendrequest.php';
 //require_once __DIR__ . '/class/Relgroupuser.php';
 //require_once __DIR__ . '/class/Groups.php';
-
 /**
  * Factories of groups... testing for zend editor
  */
@@ -36,10 +33,8 @@ $relgroupuserFactory = new Suico\RelgroupuserHandler(
     $xoopsDB
 );
 $groupsFactory       = new Suico\GroupsHandler($xoopsDB);
-
 $group_id = Request::getInt('group_id', 0, 'POST');
 $uid      = (int)$xoopsUser->getVar('uid');
-
 $criteriaUid       = new Criteria('rel_user_uid', $uid);
 $criteria_group_id = new Criteria('rel_group_id', $group_id);
 $criteria          = new CriteriaCompo($criteriaUid);
@@ -56,5 +51,4 @@ if ($relgroupuserFactory->getCount($criteria) < 1) {
 } else {
     redirect_header('group.php?group_id=' . $group_id . '', 1, _MD_SUICO_YOUAREMEMBERALREADY);
 }
-
 require dirname(__DIR__, 2) . '/footer.php';

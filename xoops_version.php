@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -10,7 +9,6 @@ declare(strict_types=1);
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
-
 /**
  * @category        Module
  * @package         suico
@@ -22,7 +20,6 @@ $moduleDirName      = basename(
     __DIR__
 );
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-
 // ------------------- Informations ------------------- //
 $modversion = [
     'version'             => 3.5,
@@ -43,7 +40,6 @@ $modversion = [
     // ------------------- Folders & Files -------------------
     'release_info'        => 'Changelog',
     'release_file'        => XOOPS_URL . "/modules/${moduleDirName}/docs/changelog.txt",
-
     'manual'              => 'link to manual file',
     'manual_file'         => XOOPS_URL . "/modules/${moduleDirName}/docs/install.txt",
     // images
@@ -74,7 +70,6 @@ $modversion = [
     'adminmenu'           => 'admin/menu.php',
     // ------------------- Main Menu -------------------
     'hasMain'             => 1,
-
     // ------------------- Install/Update -------------------
     'onInstall'           => 'include/oninstall.php',
     'onUpdate'            => 'include/onupdate.php',
@@ -111,7 +106,6 @@ $modversion = [
         $moduleDirName . '_' . 'profile_visibility',
     ],
 ];
-
 // ------------------- Help files ------------------- //
 $modversion['helpsection'] = [
     [
@@ -131,12 +125,10 @@ $modversion['helpsection'] = [
         'link' => 'page=support',
     ],
 ];
-
 // SX Updater/Installer
 $modversion['simpleversion'] = '3.4';
 $modversion['simplename']    = 'suico';
 $modversion['simpleid']      = 22;
-
 //Adicionado para rodar no about
 $modversion['developer_website_url']  = 'https://sourceforge.net/projects/galeriasuico/';
 $modversion['developer_website_name'] = 'Sourceforge - galeriasuico';
@@ -144,36 +136,29 @@ $modversion['developer_email']        = 'marcello.brandao@gmail.com';
 $modversion['status_version']         = 'Beta';
 $modversion['status']                 = 'Beta';
 $modversion['date']                   = '2017-11-11';
-
 $modversion['people']['developers'][] = 'Suico (Dev)';
 $modversion['people']['developers'][] = 'Alfred (Dev)';
 $modversion['people']['developers'][] = 'm0nty_ (Dev)';
 $modversion['people']['developers'][] = 'sato-san (Design)';
-
 $modversion['people']['testers'][] = 'Luix (xoopstotal.com.br)';
 $modversion['people']['testers'][] = 'BoOot (xoopstotal.com.br)';
 $modversion['people']['testers'][] = 'Rodrigo (komeia)';
 $modversion['people']['testers'][] = 'Casar Felipe (komeia)';
-
 $modversion['people']['translators'][] = 'Wizanda (english)';
 $modversion['people']['translators'][] = 'Daniel Woo (simplified chinese)';
 $modversion['people']['translators'][] = 'Werner Feichtlbauer (german)';
 $modversion['people']['translators'][] = 'Francesco (italian)';
 $modversion['people']['translators'][] = 'Erik Philippe (french)';
 //$modversion['people']['documenters'][] = "documenter 1";
-
 $modversion['people']['other'][] = 'Komeia (patrocanio)';
-
 $modversion['demo_site_url']     = 'http://www.marcellobrandao.eti.br';
 $modversion['demo_site_name']    = 'Marcello Brandao Site';
 $modversion['support_site_url']  = 'http://sourceforge.net/projects/galeriasuico/';
 $modversion['support_site_name'] = 'Sourceforge';
 $modversion['submit_bug']        = 'http://sourceforge.net/tracker/?func=add&group_id=204109&atid=988288';
 $modversion['submit_feature']    = 'http://sourceforge.net/tracker/?func=add&group_id=204109&atid=988291';
-
 //$modversion['config'][1]['valuetype'] = 'int';
 //can be 'int', 'float', 'textarea' or 'array'. All items with formtype 'multi_xxx' must have the valuetype 'array'
-
 xoops_load(
     'xoopseditorhandler'
 );
@@ -229,9 +214,7 @@ $modversion['configcat']['admin']      = [
     'description' => _MI_SUICO_CONFCAT_ADMIN_DSC,
 ];
 */
-
 //Configs
-
 $modversion['config'][] = [
     'name'        => 'general_configs',
     'title'       => '_MI_SUICO_CONFIG_GENERAL',
@@ -241,7 +224,6 @@ $modversion['config'][] = [
     'default'     => 'odd',
     'category'    => 'group_header',
 ];
-
 $modversion['config'][] = [
     'name'        => 'adminpager',
     'title'       => 'MI_SUICO_ADMINPAGER',
@@ -250,7 +232,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'default'     => 10,
 ];
-
 $modversion['config'][] = [
     'name'        => 'userpager',
     'title'       => 'MI_SUICO_USERPAGER',
@@ -259,7 +240,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'default'     => 10,
 ];
-
 $modversion['config'][] = [
     'name'        => 'enable_guestaccess',
     'title'       => '_MI_SUICO_ENABLEGUESTACCESS_TITLE',
@@ -269,7 +249,6 @@ $modversion['config'][] = [
     'default'     => 0,
     'category'    => 'general',
 ];
-
 $modversion['config'][] = [
     'name'        => 'displaybreadcrumb',
     'title'       => '_MI_SUICO_DISPLAYBREADCRUMB',
@@ -279,7 +258,6 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'general',
 ];
-
 $modversion['config'][] = [
     'name'        => 'allow_usersuspension',
     'title'       => '_MI_SUICO_ENABLEUSERSUSPENSION_TITLE',
@@ -289,7 +267,6 @@ $modversion['config'][] = [
     'default'     => 0,
     'category'    => 'general',
 ];
-
 $modversion['config'][] = [
     'name'        => 'profile_search',
     'title'       => '_MI_SUICO_PROFILE_SEARCH',
@@ -299,7 +276,6 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'general',
 ];
-
 $modversion['config'][] = [
     'name'        => 'profileCaptchaAfterStep1',
     'title'       => '_MI_SUICO_PROFILE_CAPTCHA_STEP1',
@@ -309,7 +285,6 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'general',
 ];
-
 // group header
 $modversion['config'][] = [
     'name'        => 'notes_config',
@@ -320,7 +295,6 @@ $modversion['config'][] = [
     'default'     => 'odd',
     'category'    => 'group_header',
 ];
-
 $modversion['config'][] = [
     'name'        => 'enable_notes',
     'title'       => '_MI_SUICO_ENABLENOTES_TITLE',
@@ -330,7 +304,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'notes',
 ];
-
 $modversion['config'][] = [
     'name'        => 'notesperpage',
     'title'       => '_MI_SUICO_NOTESPERPAGE_TITLE',
@@ -340,7 +313,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'notes',
 ];
-
 // group header
 $modversion['config'][] = [
     'name'        => 'photos_config',
@@ -351,7 +323,6 @@ $modversion['config'][] = [
     'default'     => 'odd',
     'category'    => 'group_header',
 ];
-
 $modversion['config'][] = [
     'name'        => 'enable_pictures',
     'title'       => '_MI_SUICO_ENABLEPICT_TITLE',
@@ -361,7 +332,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'photos',
 ];
-
 $modversion['config'][] = [
     'name'        => 'countPicture',
     'title'       => '_MI_SUICO_NUMBPICT_TITLE',
@@ -371,7 +341,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'photos',
 ];
-
 $modversion['config'][] = [
     'name'        => 'resized_width',
     'title'       => '_MI_SUICO_RESIZEDW_TITLE',
@@ -381,7 +350,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'photos',
 ];
-
 $modversion['config'][] = [
     'name'        => 'resized_height',
     'title'       => '_MI_SUICO_RESIZEDH_TITLE',
@@ -391,7 +359,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'photos',
 ];
-
 $modversion['config'][] = [
     'name'        => 'max_original_width',
     'title'       => '_MI_SUICO_ORIGINALW_TITLE',
@@ -401,7 +368,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'photos',
 ];
-
 $modversion['config'][] = [
     'name'        => 'max_original_height',
     'title'       => '_MI_SUICO_ORIGINALH_TITLE',
@@ -411,7 +377,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'photos',
 ];
-
 $modversion['config'][] = [
     'name'        => 'maxfilesize',
     'title'       => '_MI_SUICO_MAXFILEBYTES_TITLE',
@@ -421,7 +386,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'photos',
 ];
-
 $modversion['config'][] = [
     'name'        => 'thumb_width',
     'title'       => '_MI_SUICO_THUMW_TITLE',
@@ -431,7 +395,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'photos',
 ];
-
 $modversion['config'][] = [
     'name'        => 'thumb_height',
     'title'       => '_MI_SUICO_THUMBH_TITLE',
@@ -441,7 +404,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'photos',
 ];
-
 $modversion['config'][] = [
     'name'        => 'picturesperpage',
     'title'       => '_MI_SUICO_PICTURESPERPAGE_TITLE',
@@ -451,7 +413,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'photos',
 ];
-
 $modversion['config'][] = [
     'name'        => 'images_order',
     'title'       => '_MI_SUICO_IMGORDER_TITLE',
@@ -461,7 +422,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'photos',
 ];
-
 // group header
 $modversion['config'][] = [
     'name'        => 'audios_config',
@@ -472,7 +432,6 @@ $modversion['config'][] = [
     'default'     => 'odd',
     'category'    => 'group_header',
 ];
-
 $modversion['config'][] = [
     'name'        => 'enable_audio',
     'title'       => '_MI_SUICO_ENABLEAUDIO_TITLE',
@@ -482,7 +441,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'audios',
 ];
-
 $modversion['config'][] = [
     'name'        => 'countAudio',
     'title'       => '_MI_SUICO_NUMBAUDIO_TITLE',
@@ -492,7 +450,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'audios',
 ];
-
 $modversion['config'][] = [
     'name'        => 'audiosperpage',
     'title'       => '_MI_SUICO_AUDIOSPERPAGE_TITLE',
@@ -502,7 +459,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'audios',
 ];
-
 // group header
 $modversion['config'][] = [
     'name'        => 'videos_config',
@@ -513,7 +469,6 @@ $modversion['config'][] = [
     'default'     => 'odd',
     'category'    => 'group_header',
 ];
-
 $modversion['config'][] = [
     'name'        => 'enable_videos',
     'title'       => '_MI_SUICO_ENABLEVIDEOS_TITLE',
@@ -523,7 +478,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'videos',
 ];
-
 $modversion['config'][] = [
     'name'        => 'videosperpage',
     'title'       => '_MI_SUICO_VIDEOSPERPAGE_TITLE',
@@ -533,7 +487,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'videos',
 ];
-
 $modversion['config'][] = [
     'name'        => 'width_tube',
     'title'       => '_MI_SUICO_TUBEW_TITLE',
@@ -543,7 +496,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'videos',
 ];
-
 $modversion['config'][] = [
     'name'        => 'height_tube',
     'title'       => '_MI_SUICO_TUBEH_TITLE',
@@ -553,7 +505,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'videos',
 ];
-
 $modversion['config'][] = [
     'name'        => 'width_maintube',
     'title'       => '_MI_SUICO_MAINTUBEW_TITLE',
@@ -563,7 +514,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'videos',
 ];
-
 $modversion['config'][] = [
     'name'        => 'height_maintube',
     'title'       => '_MI_SUICO_MAINTUBEH_TITLE',
@@ -573,7 +523,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'videos',
 ];
-
 // group header
 $modversion['config'][] = [
     'name'        => 'friends_config',
@@ -584,7 +533,6 @@ $modversion['config'][] = [
     'default'     => 'odd',
     'category'    => 'group_header',
 ];
-
 $modversion['config'][] = [
     'name'        => 'enable_friends',
     'title'       => '_MI_SUICO_ENABLEFRIENDS_TITLE',
@@ -594,7 +542,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'friends',
 ];
-
 $modversion['config'][] = [
     'name'        => 'friendsperpage',
     'title'       => '_MI_SUICO_FRIENDSPERPAGE_TITLE',
@@ -604,7 +551,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'friends',
 ];
-
 $modversion['config'][] = [
     'name'        => 'allow_friendshiplevel',
     'title'       => '_MI_SUICO_ENABLEFRIENDSHIPLEVEL_TITLE',
@@ -614,7 +560,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'friends',
 ];
-
 $modversion['config'][] = [
     'name'        => 'allow_fanssevaluation',
     'title'       => '_MI_SUICO_ENABLEFANSSEVALUATION_TITLE',
@@ -624,7 +569,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'friends',
 ];
-
 // group header
 $modversion['config'][] = [
     'name'        => 'groups_config',
@@ -635,7 +579,6 @@ $modversion['config'][] = [
     'default'     => 'odd',
     'category'    => 'group_header',
 ];
-
 $modversion['config'][] = [
     'name'        => 'enable_groups',
     'title'       => '_MI_SUICO_ENABLEGROUPS_TITLE',
@@ -645,7 +588,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'groups',
 ];
-
 $modversion['config'][] = [
     'name'        => 'groupsperpage',
     'title'       => '_MI_SUICO_GROUPSPERPAGE_TITLE',
@@ -655,7 +597,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'groups',
 ];
-
 $modversion['config'][] = [
     'name'        => 'groupslogo_width',
     'title'       => '_MI_SUICO_GROUPS_LOGO_WIDTH',
@@ -665,7 +606,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'groups',
 ];
-
 $modversion['config'][] = [
     'name'        => 'groupslogo_height',
     'title'       => '_MI_SUICO_GROUPS_LOGO_HEIGHT',
@@ -675,7 +615,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'groups',
 ];
-
 // group header
 $modversion['config'][] = [
     'name'        => 'uploads_config',
@@ -686,7 +625,6 @@ $modversion['config'][] = [
     'default'     => 'odd',
     'category'    => 'group_header',
 ];
-
 // --------------Uploads : mimetypes of image --------------
 $modversion['config'][] = [
     'name'        => 'mimetypes',
@@ -706,7 +644,6 @@ $modversion['config'][] = [
     ],
     'category'    => 'editor',
 ];
-
 $modversion['config'][] = [
     'name'        => 'physical_delete',
     'title'       => '_MI_SUICO_DELETEPHYSICAL_TITLE',
@@ -716,7 +653,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'category'    => 'upload',
 ];
-
 // group header
 $modversion['config'][] = [
     'name'        => 'editor_config',
@@ -727,7 +663,6 @@ $modversion['config'][] = [
     'default'     => 'odd',
     'category'    => 'group_header',
 ];
-
 $editorHandler          = XoopsEditorHandler::getInstance();
 $modversion['config'][] = [
     'name'        => 'suicoEditorAdmin',
@@ -739,7 +674,6 @@ $modversion['config'][] = [
     'default'     => 'tinymce',
     'category'    => 'editor',
 ];
-
 $modversion['config'][] = [
     'name'        => 'suicoEditorUser',
     'title'       => 'MI_SUICO_EDITOR_USER',
@@ -750,7 +684,6 @@ $modversion['config'][] = [
     'default'     => 'dhtmltextarea',
     'category'    => 'editor',
 ];
-
 $modversion['config'][] = [
     'name'        => 'memberslist_configs',
     'title'       => '_MI_SUICO_CONFIG_MEMBER_LIST',
@@ -760,7 +693,6 @@ $modversion['config'][] = [
     'default'     => 'odd',
     'category'    => 'group_header',
 ];
-
 $modversion['config'][] = [
     'name'        => 'displaywelcomemessage',
     'title'       => '_MI_SUICO_MEMBER_LIST_DISPLAYWELCOMEMSG',
@@ -770,7 +702,6 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'memberslist',
 ];
-
 $modversion['config'][] = [
     'name'        => 'welcomemessage',
     'title'       => '_MI_SUICO_MEMBER_LIST_WELCOMEMSG',
@@ -780,7 +711,6 @@ $modversion['config'][] = [
     'default'     => _MI_SUICO_MEMBER_LIST_DEFAULTWELCOMEMSG,
     'category'    => 'memberslist',
 ];
-
 $modversion['config'][] = [
     'name'        => 'displaylatestmember',
     'title'       => '_MI_SUICO_MEMBER_LIST_LATESTMEMBER',
@@ -790,7 +720,6 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'memberslist',
 ];
-
 $modversion['config'][] = [
     'name'        => 'membersperpage',
     'title'       => '_MI_SUICO_MEMBER_LIST_MPAGE',
@@ -800,7 +729,6 @@ $modversion['config'][] = [
     'default'     => 15,
     'category'    => 'memberslist',
 ];
-
 $modversion['config'][] = [
     'name'        => 'sortmembers',
     'title'       => '_MI_SUICO_MEMBER_LIST_SORT',
@@ -817,7 +745,6 @@ $modversion['config'][] = [
     ],
     'category'    => 'memberslist',
 ];
-
 $modversion['config'][] = [
     'name'        => 'membersorder',
     'title'       => '_MI_SUICO_MEMBER_LIST_ORDER',
@@ -831,7 +758,6 @@ $modversion['config'][] = [
     ],
     'category'    => 'memberslist',
 ];
-
 $modversion['config'][] = [
     'name'        => 'memberslisttemplate',
     'title'       => '_MI_SUICO_MEMBER_LIST_TEMPSTYLE',
@@ -845,7 +771,6 @@ $modversion['config'][] = [
     ],
     'category'    => 'memberslist',
 ];
-
 // group header
 $modversion['config'][] = [
     'name'        => 'memberslistsearch_configs',
@@ -856,7 +781,6 @@ $modversion['config'][] = [
     'default'     => 'even',
     'category'    => 'group_header',
 ];
-
 $modversion['config'][] = [
     'name'        => 'displaytotalmember',
     'title'       => '_MI_SUICO_DISPLAYTOTALMEMBER',
@@ -866,7 +790,6 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'memberlistsearch',
 ];
-
 $modversion['config'][] = [
     'name'        => 'displayavatar',
     'title'       => '_MI_SUICO_DISPLAYAVATAR',
@@ -876,7 +799,6 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'memberlistsearch',
 ];
-
 $modversion['config'][] = [
     'name'        => 'displayrealname',
     'title'       => '_MI_SUICO_DISPLAYREALNAME',
@@ -886,7 +808,6 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'memberlistsearch',
 ];
-
 $modversion['config'][] = [
     'name'        => 'displayemail',
     'title'       => '_MI_SUICO_DISPLAYEMAIL',
@@ -896,7 +817,6 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'memberlistsearch',
 ];
-
 $modversion['config'][] = [
     'name'        => 'displaypm',
     'title'       => '_MI_SUICO_DISPLAYPM',
@@ -906,7 +826,6 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'memberlistsearch',
 ];
-
 $modversion['config'][] = [
     'name'        => 'displayurl',
     'title'       => '_MI_SUICO_DISPLAYURL',
@@ -916,7 +835,6 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'memberlistsearch',
 ];
-
 $modversion['config'][] = [
     'name'        => 'displayregdate',
     'title'       => '_MI_SUICO_DISPLAYREGDATE',
@@ -926,7 +844,6 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'memberlistsearch',
 ];
-
 $modversion['config'][] = [
     'name'        => 'displayfrom',
     'title'       => '_MI_SUICO_DISPLAYFROM',
@@ -936,7 +853,6 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'memberlistsearch',
 ];
-
 $modversion['config'][] = [
     'name'        => 'displayposts',
     'title'       => '_MI_SUICO_DISPLAYPOSTS',
@@ -946,7 +862,6 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'memberlistsearch',
 ];
-
 $modversion['config'][] = [
     'name'        => 'displaylastlogin',
     'title'       => '_MI_SUICO_DISPLAYLASTLOGIN',
@@ -956,7 +871,6 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'memberlistsearch',
 ];
-
 $modversion['config'][] = [
     'name'        => 'displayoccupation',
     'title'       => '_MI_SUICO_DISPLAYOCC',
@@ -966,7 +880,6 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'memberlistsearch',
 ];
-
 $modversion['config'][] = [
     'name'        => 'displayinterest',
     'title'       => '_MI_SUICO_DISPLAYINTEREST',
@@ -976,7 +889,6 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'memberlistsearch',
 ];
-
 $modversion['config'][] = [
     'name'        => 'displayextrainfo',
     'title'       => '_MI_SUICO_DISPLAYBIO',
@@ -986,7 +898,6 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'memberlistsearch',
 ];
-
 $modversion['config'][] = [
     'name'        => 'displayonlinestatus',
     'title'       => '_MI_SUICO_DISPLAYONLINESTATUS',
@@ -996,7 +907,6 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'memberlistsearch',
 ];
-
 $modversion['config'][] = [
     'name'        => 'displaysignature',
     'title'       => '_MI_SUICO_DISPLAYSIGNATURE',
@@ -1006,7 +916,6 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'memberlistsearch',
 ];
-
 $modversion['config'][] = [
     'name'        => 'displayrank',
     'title'       => '_MI_SUICO_DISPLAYRANK',
@@ -1016,7 +925,6 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'memberlistsearch',
 ];
-
 $modversion['config'][] = [
     'name'        => 'displaygroups',
     'title'       => '_MI_SUICO_DISPLAYGROUPS',
@@ -1026,7 +934,6 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'memberlistsearch',
 ];
-
 // group header
 $modversion['config'][] = [
     'name'        => 'admin_config',
@@ -1037,7 +944,6 @@ $modversion['config'][] = [
     'default'     => 'odd',
     'category'    => 'group_header',
 ];
-
 // -------------- Get Admin groups --------------
 $criteria = new CriteriaCompo();
 $criteria->add(new Criteria('group_type', 'Admin'));
@@ -1057,7 +963,6 @@ $modversion['config'][] = [
     'default'     => $admin_groups,
     'category'    => 'admin',
 ];
-
 // Truncate Max. length
 $modversion['config'][] = [
     'name'        => 'truncatelength',
@@ -1067,7 +972,6 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'default'     => 100,
 ];
-
 /**
  * Make Sample button visible?
  */
@@ -1080,7 +984,6 @@ $modversion['config'][] = [
     'default'     => 1,
     'category'    => 'admin',
 ];
-
 /**
  * Show Developer Tools?
  */
@@ -1093,7 +996,6 @@ $modversion['config'][] = [
     'default'     => 0,
     'category'    => 'admin',
 ];
-
 $modversion['templates'] = [
     ['file' => 'admin/suico_admin_about.tpl', 'description' => ''],
     ['file' => 'admin/suico_admin_audios.tpl', 'description' => ''],
@@ -1147,19 +1049,16 @@ $modversion['templates'] = [
     ['file' => 'suico_user.tpl', 'description' => _MI_SUICO_TEMPLATE_USERDESC],
     ['file' => 'suico_videos.tpl', 'description' => _MI_SUICO_TEMPLATE_VIDEOSDESC],
 ];
-
 global $xoopsModule;
 if (is_object($xoopsModule) && $xoopsModule->dirname() === $modversion['dirname']) {
     $moduleHandler = xoops_getHandler('module');
-    $mod_suico    = $moduleHandler->getByDirname('suico');
+    $mod_suico     = $moduleHandler->getByDirname('suico');
     /** @var \XoopsConfigHandler $confHandler */
     $confHandler  = xoops_getHandler('config');
     $moduleConfig = $confHandler->getConfigsByCat(0, $mod_suico->getVar('mid'));
-
     if ($GLOBALS['xoopsUser']) {
         $modversion['sub'][0]['name'] = _MI_SUICO_MYPROFILE;
         $modversion['sub'][0]['url']  = 'index.php';
-
         if (1 === $moduleConfig['enable_notes']) {
             $modversion['sub'][1]['name'] = _MI_SUICO_MYNOTES;
             $modversion['sub'][1]['url']  = 'notebook.php';
@@ -1186,38 +1085,29 @@ if (is_object($xoopsModule) && $xoopsModule->dirname() === $modversion['dirname'
         }
     }
 }
-
 if ($GLOBALS['xoopsUser']) {
     $modversion['sub'][7]['name'] = _MI_SUICO_MYCONFIGS;
     $modversion['sub'][7]['url']  = 'configs.php';
-
     $modversion['sub'][8]['name'] = _MI_SUICO_EDITPROFILE;
     $modversion['sub'][8]['url']  = 'edituser.php';
-
     $modversion['sub'][9]['name'] = _MI_SUICO_CHANGEPASS;
     $modversion['sub'][9]['url']  = 'changepass.php';
-
     $modversion['sub'][10]['name'] = _MI_SUICO_CHANGEAVATAR;
     $modversion['sub'][10]['url']  = 'edituser.php?op=avatarform';
 }
-
 $modversion['sub'][11]['name'] = _MI_SUICO_MEMBERSLIST;
 $modversion['sub'][11]['url']  = 'memberslist.php';
-
 if ($GLOBALS['xoopsUser']) {
     $modversion['sub'][12]['name'] = _MI_SUICO_SEARCH;
     $modversion['sub'][12]['url']  = 'searchmembers.php';
 }
-
 $modversion['hasComments']          = 1;
 $modversion['comments']['itemName'] = 'group_id';
 $modversion['comments']['pageName'] = 'group.php';
-
 // Search
 $modversion['hasSearch']      = 0; //disabled for version 3.0 will come back in a next release
 $modversion['search']['file'] = 'include/search.inc.php';
 $modversion['search']['func'] = 'suico_search';
-
 //Notifications
 $modversion['hasNotification']                               = 1;
 $modversion['notification']['category'][1]['name']           = 'picture';
@@ -1233,7 +1123,6 @@ $modversion['notification']['event'][1]['caption']           = _MI_SUICO_PICTURE
 $modversion['notification']['event'][1]['description']       = _MI_SUICO_PICTURE_NEWPOST_NOTIFYDSC;
 $modversion['notification']['event'][1]['mail_template']     = 'picture_newpic_notify';
 $modversion['notification']['event'][1]['mail_subject']      = _MI_SUICO_PICTURE_NEWPIC_NOTIFYSBJ;
-
 $modversion['notification']['category'][2]['name']           = 'video';
 $modversion['notification']['category'][2]['title']          = _MI_SUICO_VIDEO_NOTIFYTIT;
 $modversion['notification']['category'][2]['description']    = _MI_SUICO_VIDEO_NOTIFYDSC;
@@ -1247,7 +1136,6 @@ $modversion['notification']['event'][2]['caption']           = _MI_SUICO_VIDEO_N
 $modversion['notification']['event'][2]['description']       = _MI_SUICO_VIDEO_NEWVIDEO_NOTIFYDSC;
 $modversion['notification']['event'][2]['mail_template']     = 'video_newvideo_notify';
 $modversion['notification']['event'][2]['mail_subject']      = _MI_SUICO_VIDEO_NEWVIDEO_NOTIFYSBJ;
-
 $modversion['notification']['category'][3]['name']           = 'Note';
 $modversion['notification']['category'][3]['title']          = _MI_SUICO_NOTE_NOTIFYTIT;
 $modversion['notification']['category'][3]['description']    = _MI_SUICO_NOTE_NOTIFYDSC;
@@ -1261,7 +1149,6 @@ $modversion['notification']['event'][3]['caption']           = _MI_SUICO_NOTE_NE
 $modversion['notification']['event'][3]['description']       = _MI_SUICO_NOTE_NEWNOTE_NOTIFYDSC;
 $modversion['notification']['event'][3]['mail_template']     = 'note_newnote_notify';
 $modversion['notification']['event'][3]['mail_subject']      = _MI_SUICO_NOTE_NEWNOTE_NOTIFYSBJ;
-
 $modversion['notification']['category'][4]['name']           = 'friendship';
 $modversion['notification']['category'][4]['title']          = _MI_SUICO_FRIENDSHIP_NOTIFYTIT;
 $modversion['notification']['category'][4]['description']    = _MI_SUICO_FRIENDSHIP_NOTIFYDSC;
@@ -1275,12 +1162,10 @@ $modversion['notification']['event'][4]['caption']           = _MI_SUICO_FRIEND_
 $modversion['notification']['event'][4]['description']       = _MI_SUICO_FRIEND_NEWFRIENDREQUEST_NOTIFYDSC;
 $modversion['notification']['event'][4]['mail_template']     = 'friendship_newFriendrequest_notify';
 $modversion['notification']['event'][4]['mail_subject']      = _MI_SUICO_FRIEND_NEWFRIENDREQUEST_NOTIFYSBJ;
-
 $modversion['notification']['lookup_file'] = 'include/notification.inc.php';
 $modversion['notification']['lookup_func'] = 'suico_iteminfo';
 //$modversion['notification']['tags_file'] = 'include/notification.inc.php';
 //$modversion['notification']['tags_func'] = 'suico_tags';
-
 $modversion['blocks'][] = [
     'file'        => 'friends_block.php',
     'name'        => _MI_SUICO_FRIENDS,
@@ -1290,7 +1175,6 @@ $modversion['blocks'][] = [
     'edit_func'   => 'b_suico_friends_edit',
     'template'    => 'suico_block_friends.tpl',
 ];
-
 $modversion['blocks'][] = [
     'file'        => 'photos_block.php',
     'name'        => _MI_SUICO_LAST,

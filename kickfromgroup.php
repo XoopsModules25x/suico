@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -24,10 +23,8 @@ use Xmf\Request;
 use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
-
 $group_id     = Request::getInt('group_id', 0, 'POST');
 $rel_user_uid = Request::getInt('rel_user_uid', 0, 'POST');
-
 if (1 !== Request::getInt('confirm', 0, 'POST')) {
     xoops_confirm(
         [
@@ -68,5 +65,4 @@ if (1 !== Request::getInt('confirm', 0, 'POST')) {
         redirect_header('group.php?group_id=' . $group_id . '', 2, _MD_SUICO_ERROR);
     }
 }
-
 require dirname(__DIR__, 2) . '/footer.php';

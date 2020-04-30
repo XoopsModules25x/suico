@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -25,27 +24,18 @@ use XoopsModules\Suico;
 use XoopsModules\Suico\Helper;
 
 require __DIR__ . '/preloads/autoloader.php';
-
 require dirname(__DIR__, 2) . '/mainfile.php';
 require XOOPS_ROOT_PATH . '/header.php';
-
 $moduleDirName = basename(__DIR__);
-
 $helper = Helper::getInstance();
-
 $modulePath = XOOPS_ROOT_PATH . '/modules/' . $moduleDirName;
-
 $myts = MyTextSanitizer::getInstance();
-
 if (!isset($GLOBALS['xoTheme']) || !is_object($GLOBALS['xoTheme'])) {
     require $GLOBALS['xoops']->path('class/theme.php');
-
     $GLOBALS['xoTheme'] = new xos_opal_Theme();
 }
-
 //Handlers
 //$XXXHandler = xoops_getModuleHandler('XXX', $moduleDirName);
-
 /** @var \XoopsPersistableObjectHandler $imageHandler */
 $imageHandler = $helper->getHandler('Image');
 /** @var \XoopsPersistableObjectHandler $friendshipHandler */
@@ -68,7 +58,6 @@ $configsHandler = $helper->getHandler('Configs');
 $suspensionsHandler = $helper->getHandler('Suspensions');
 /** @var \XoopsPersistableObjectHandler $audioHandler */
 $audioHandler = $helper->getHandler('Audio');
-
 // Load language files
 $helper->loadLanguage('blocks');
 $helper->loadLanguage('common');
@@ -77,50 +66,39 @@ $helper->loadLanguage('modinfo');
 $helper->loadLanguage('main');
 //$helper->loadLanguage('user');
 xoops_loadLanguage('user');
-
 if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
     require $GLOBALS['xoops']->path('class/template.php');
-
     $xoopsTpl = new XoopsTpl();
 }
-
 $imageFactory         = new Suico\ImageHandler($xoopsDB);
 $visitorsFactory      = new Suico\VisitorsHandler($xoopsDB);
 $videosFactory        = new Suico\VideoHandler($xoopsDB);
 $friendrequestFactory = new Suico\FriendrequestHandler($xoopsDB);
 $friendshipFactory    = new Suico\FriendshipHandler($xoopsDB);
-
 $isOwner  = 0;
 $isAnonym = 1;
 $isFriend = 0;
-
 if (1 === $helper->getConfig('enable_guestaccess')) {
     /**
      * Enable Guest Access
      * If anonym and uid not set then redirect to admins profile
      * Else redirects to own profile
      */
-
     if (empty($xoopsUser)) {
         $isAnonym = 1;
-
         if (isset($_GET['uid'])) {
             $uid_owner = Request::getInt('uid', 0, 'GET');
         } else {
             $uid_owner = 1;
-
             $isOwner = 0;
         }
     } else {
         $isAnonym = 0;
-
         if (isset($_GET['uid'])) {
             $uid_owner = Request::getInt('uid', 0, 'GET');
-
             $isOwner = $xoopsUser->getVar('uid') === $uid_owner ? 1 : 0;
         } else {
             $uid_owner = (int)$xoopsUser->getVar('uid');
-
             $isOwner = 1;
         }
     }
@@ -130,23 +108,18 @@ if (1 === $helper->getConfig('enable_guestaccess')) {
      * If anonym redirect to landing guest page
      * Else redirects to own profile
      */
-
     if (empty($xoopsUser)) {
         $isAnonym = 1;
-
         if (!mb_stripos($_SERVER['REQUEST_URI'], 'user.php')) {
             $xoopsUser || redirect_header('user.php', 3, _NOPERM);
         }
     } else {
         $isAnonym = 0;
-
         if (isset($_GET['uid'])) {
             $uid_owner = Request::getInt('uid', 0, 'GET');
-
             $isOwner = $xoopsUser->getVar('uid') === $uid_owner ? 1 : 0;
         } else {
             $uid_owner = (int)$xoopsUser->getVar('uid');
-
             $isOwner = 1;
         }
     }

@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -28,26 +27,21 @@ use XoopsModules\Suico\IndexController;
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_editprofile.tpl';
 require __DIR__ . '/header.php';
-
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
 $controller = new IndexController($xoopsDB, $xoopsUser, $xoopsModule);
 $nbSections = $controller->getNumbersSections();
-
 require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
-
 // If not a user, redirect
 if (!is_object($GLOBALS['xoopsUser'])) {
     redirect_header(XOOPS_URL, 3, _US_NOEDITRIGHT);
 }
-
 $myts = MyTextSanitizer::getInstance();
 $op   = Request::getCmd('op', 'editprofile');
 /* @var XoopsConfigHandler $configHandler */
-$configHandler             = xoops_getHandler('config');
+$configHandler              = xoops_getHandler('config');
 $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
-
 if ('save' === $op) {
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/', 3, _US_NOEDITRIGHT . '<br>' . implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -62,7 +56,6 @@ if ('save' === $op) {
     }
     xoops_load('XoopsUserUtility');
     $stop = XoopsUserUtility::validate($edituser);
-
     if (!empty($stop)) {
         $op = 'editprofile';
     } else {
@@ -74,12 +67,10 @@ if ('save' === $op) {
         /* @var  XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler = xoops_getHandler('groupperm');
         $editable_fields  = $grouppermHandler->getItemIds('profile_edit', $GLOBALS['xoopsUser']->getGroups(), $GLOBALS['xoopsModule']->getVar('mid'));
-
         if (!$profile = $profileHandler->get($edituser->getVar('uid'))) {
             $profile = $profileHandler->create();
             $profile->setVar('profile_id', $edituser->getVar('uid'));
         }
-
         foreach (array_keys($fields) as $i) {
             $fieldname = $fields[$i]->getVar('field_name');
             if (in_array($fields[$i]->getVar('field_id'), $editable_fields) && isset($_REQUEST[$fieldname])) {
@@ -102,7 +93,6 @@ if ('save' === $op) {
         }
     }
 }
-
 if ('editprofile' === $op) {
     require_once $GLOBALS['xoops']->path('header.php');
     require_once __DIR__ . '/include/forms.php';
@@ -111,21 +101,16 @@ if ('editprofile' === $op) {
     if (!empty($stop)) {
         $GLOBALS['xoopsTpl']->assign('stop', $stop);
     }
-
     $xoBreadcrumbs[] = ['title' => _US_EDITPROFILE];
 }
-
 if ('avatarform' === $op) {
     $GLOBALS['xoopsOption']['template_main'] = 'suico_avatar.tpl';
     require $GLOBALS['xoops']->path('header.php');
     $xoBreadcrumbs[] = ['title' => _US_MYAVATAR];
-
     $oldavatar = $GLOBALS['xoopsUser']->getVar('user_avatar');
-
     if (!empty($oldavatar) && 'blank.gif' !== $oldavatar) {
         $GLOBALS['xoopsTpl']->assign('old_avatar', XOOPS_UPLOAD_URL . '/' . $oldavatar);
     }
-
     if (1 == $GLOBALS['xoopsConfigUser']['avatar_allow_upload'] && $GLOBALS['xoopsUser']->getVar('posts') >= $GLOBALS['xoopsConfigUser']['avatar_minposts']) {
         require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
         $form = new XoopsThemeForm(_US_UPLOADMYAVATAR, 'uploadavatar', XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/edituser.php', 'post', true);
@@ -138,7 +123,7 @@ if ('avatarform' === $op) {
         $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
         $form->assign($GLOBALS['xoopsTpl']);
     }
-    $avatarHandler  = xoops_getHandler('avatar');
+    $avatarHandler   = xoops_getHandler('avatar');
     $form2           = new XoopsThemeForm(_US_CHOOSEAVT, 'chooseavatar', XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/edituser.php', 'post', true);
     $avatar_select   = new XoopsFormSelect('', 'user_avatar', $GLOBALS['xoopsUser']->getVar('user_avatar'));
     $avatar_list     = $avatarHandler->getList('S', true);
@@ -157,7 +142,6 @@ if ('avatarform' === $op) {
     $form2->addElement(new XoopsFormButton('', 'submit2', _SUBMIT, 'submit'));
     $form2->assign($GLOBALS['xoopsTpl']);
 }
-
 if ('avatarupload' === $op) {
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header('index.php', 3, _US_NOEDITRIGHT . '<br>' . implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -170,7 +154,6 @@ if ('avatarupload' === $op) {
     if (!empty($_POST['uid'])) {
         $uid = Request::getInt('uid', 0, 'POST');
     }
-
     if (empty($uid) || $GLOBALS['xoopsUser']->getVar('uid') != $uid) {
         redirect_header('index.php', 3, _US_NOEDITRIGHT);
     }
@@ -216,7 +199,6 @@ if ('avatarupload' === $op) {
         redirect_header('edituser . php ? op = avatarform', 3, $uploader->getErrors());
     }
 }
-
 if ('avatarchoose' === $op) {
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header('index . php', 3, _US_NOEDITRIGHT . ' < br > ' . implode(' < br > ', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -241,7 +223,6 @@ if ('avatarchoose' === $op) {
         unset($avatars, $criteria_avatar);
     }
     $user_avatarpath = realpath(XOOPS_UPLOAD_PATH . ' / ' . $user_avatar);
-
     if (0 === mb_strpos($user_avatarpath, realpath(XOOPS_UPLOAD_PATH)) && is_file($user_avatarpath)) {
         $oldavatar = $GLOBALS['xoopsUser']->getVar('user_avatar');
         $GLOBALS['xoopsUser']->setVar('user_avatar', $user_avatar);
@@ -251,24 +232,19 @@ if ('avatarchoose' === $op) {
             require $GLOBALS['xoops']->path('header . php');
             echo $GLOBALS['xoopsUser']->getHtmlErrors();
             require $GLOBALS['xoops']->path('footer.php');
-
             exit();
         }
         //        if ($oldavatar && preg_match("/^cavt/", strtolower(substr($oldavatar, 8)))) {
-
         if ($oldavatar && 0 === mb_stripos(mb_substr($oldavatar, 8), 'cavt')) {
             $avatars = $avtHandler->getObjects(new Criteria('avatar_file', $oldavatar));
-
             if (!empty($avatars) && 1 == count($avatars) && is_object($avatars[0])) {
                 $avtHandler->delete($avatars[0]);
                 $oldavatar_path = realpath(XOOPS_UPLOAD_PATH . ' / ' . $oldavatar);
-
                 if (0 === mb_strpos($oldavatar_path, realpath(XOOPS_UPLOAD_PATH)) && is_file($oldavatar_path)) {
                     unlink($oldavatar_path);
                 }
             }
         }
-
         if ('avatars/blank.gif' !== $user_avatar) {
             $avatars = $avtHandler->getObjects(new Criteria('avatar_file', $user_avatar));
             if (is_object($avatars[0])) {
@@ -278,6 +254,5 @@ if ('avatarchoose' === $op) {
     }
     redirect_header('index . php ? uid = ' . $uid, 0, _US_PROFUPDATED);
 }
-
 require __DIR__ . '/footer.php';
 require dirname(__DIR__, 2) . '/footer.php';

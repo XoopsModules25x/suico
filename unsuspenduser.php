@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -24,11 +23,9 @@ use Xmf\Request;
 use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
-
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
-
 $uid = Request::getInt('uid', 0, 'POST');
 /**
  * Creating the factory  loading the picture changing its caption
@@ -38,27 +35,16 @@ $suspensionsFactory = new Suico\SuspensionsHandler(
 );
 $suspension         = $suspensionsFactory->create(false);
 $suspension->load($uid);
-
 if ($xoopsUser->isAdmin(1)) {
     /** @var \XoopsMemberHandler $memberHandler */
-
     $memberHandler = xoops_getHandler('member');
-
     $thisUser = $memberHandler->getUser($uid);
-
     $thisUser->setVar('email', $suspension->getVar('old_email', 'n'));
-
     $thisUser->setVar('pass', $suspension->getVar('old_pass', 'n'));
-
     $thisUser->setVar('user_sig', $suspension->getVar('old_signature', 'n'));
-
     $memberHandler->insertUser($thisUser);
-
     $criteria = new Criteria('uid', $uid);
-
     $suspensionsFactory->deleteAll($criteria);
-
     redirect_header('index.php?uid=' . $uid, 3, _MD_SUICO_USER_UNSUSPENDED);
 }
-
 require dirname(__DIR__, 2) . '/footer.php';

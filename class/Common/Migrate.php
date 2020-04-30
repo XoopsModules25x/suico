@@ -36,7 +36,6 @@ use XoopsModules\Suico\Common;
 class Migrate extends \Xmf\Database\Migrate
 {
     private $renameTables;
-
     private $renameColumns;
 
     /**
@@ -45,17 +44,13 @@ class Migrate extends \Xmf\Database\Migrate
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-
     public function __construct(
         ?Common\Configurator $configurator = null
     ) {
         if (null !== $configurator) {
             $this->renameTables = $configurator->renameTables;
-
             $this->renameColumns = $configurator->renameColumns;
-
             $moduleDirName = \basename(\dirname(__DIR__, 2));
-
             parent::__construct($moduleDirName);
         }
     }
@@ -67,28 +62,21 @@ class Migrate extends \Xmf\Database\Migrate
      *   table and column renames
      *   data conversions
      */
-
     protected function preSyncActions()
     {
         // rename table
-
         if ($this->renameTables && \is_array($this->renameTables)) {
             $this->renameTable();
         }
-
         $this->renameColumn('suico_notes', 'Note_id', 'note_id');
-
         $this->renameColumn('suico_notes', 'Note_text', 'note_text');
-
         $this->renameColumn('suico_notes', 'Note_from', 'note_from');
-
         $this->renameColumn('suico_notes', 'Note_to', 'note_to');
     }
 
     /**
      * rename table if needed
      */
-
     private function renameTable()
     {
         foreach ($this->renameTables as $oldName => $newName) {
@@ -103,7 +91,6 @@ class Migrate extends \Xmf\Database\Migrate
      * @param $columnName
      * @param $newName
      */
-
     private function renameColumn(
         $tableName,
         $columnName,
@@ -111,9 +98,7 @@ class Migrate extends \Xmf\Database\Migrate
     ) {
         if ($this->tableHandler->useTable($tableName)) {
             $attributes = $this->tableHandler->getColumnAttributes($tableName, $columnName);
-
             //            if (false !== strpos($attributes, ' int(')) {
-
             $this->tableHandler->alterColumn(
                 $tableName,
                 $columnName,

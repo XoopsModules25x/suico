@@ -21,19 +21,15 @@ use XoopsModules\Suico\IndexController;
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_changepass.tpl';
 require __DIR__ . '/header.php';
-
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
 $controller = new IndexController($xoopsDB, $xoopsUser, $xoopsModule);
 $nbSections = $controller->getNumbersSections();
-
 if (!$GLOBALS['xoopsUser']) {
     redirect_header(XOOPS_URL, 2, _NOPERM);
 }
-
 $xoopsOption['xoops_pagetitle'] = sprintf(_MD_SUICO_CHANGEPASSWORD, $xoopsModule->getVar('name'), $controller->nameOwner);
-
 if (!isset($_POST['submit'])) {
     //show change password form
     include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
@@ -43,11 +39,10 @@ if (!isset($_POST['submit'])) {
     $form->addElement(new XoopsFormPassword(_US_VERIFYPASS, 'vpass', 15, 50), true);
     $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
     $form->assign($GLOBALS['xoopsTpl']);
-
     $xoBreadcrumbs[] = ['title' => _MD_SUICO_CHANGEPASSWORD];
 } else {
     /* @var XoopsConfigHandler $configHandler */
-    $configHandler             = xoops_getHandler('config');
+    $configHandler              = xoops_getHandler('config');
     $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
     $myts                       = MyTextSanitizer::getInstance();
     $oldpass                    = @$myts->stripSlashesGPC(trim($_POST['oldpass']));
@@ -63,7 +58,6 @@ if (!isset($_POST['submit'])) {
     if ($password != $vpass) {
         $errors[] = _US_PASSNOTSAME;
     }
-
     if ($errors) {
         $msg = implode('<br>', $errors);
     } else {
@@ -78,6 +72,5 @@ if (!isset($_POST['submit'])) {
     }
     redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/index.php?uid=' . $GLOBALS['xoopsUser']->getVar('uid'), 2, $msg);
 }
-
 require __DIR__ . '/footer.php';
 require dirname(__DIR__, 2) . '/footer.php';

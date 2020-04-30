@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -24,20 +23,17 @@ use Xmf\Request;
 use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
-
 /**
  * Verify Token
  */
 //if (!($GLOBALS['xoopsSecurity']->check())){
 //            redirect_header(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER'), 5, _MD_SUICO_TOKENEXPIRED);
 //}
-
 /**
  * Receiving info from get parameters
  */
 $relgroupuser_id = Request::getInt('relgroup_id', 0, 'POST');
 $group_id        = Request::getInt('group_id', 0, 'POST');
-
 if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
     xoops_confirm(
         [
@@ -62,7 +58,6 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
     $criteriaUid         = new Criteria('rel_user_uid', $uid);
     $criteria            = new CriteriaCompo($criteria_rel_id);
     $criteria->add($criteriaUid);
-
     /**
      * Try to delete
      */

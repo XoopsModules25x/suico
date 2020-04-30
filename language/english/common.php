@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -22,7 +21,6 @@ $moduleDirName      = basename(
     dirname(__DIR__, 2)
 );
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-
 define('CO_' . $moduleDirNameUpper . '_GDLIBSTATUS', 'GD library support: ');
 define('CO_' . $moduleDirNameUpper . '_GDLIBVERSION', 'GD Library version: ');
 define(
@@ -59,10 +57,8 @@ define(
     'CO_' . $moduleDirNameUpper . '_UPLOADPATHDSC',
     'Note. Upload path *MUST* contain the full server path of your upload folder.'
 );
-
 define('CO_' . $moduleDirNameUpper . '_PRINT', "<span style='font-weight: bold;'>Print</span>");
 define('CO_' . $moduleDirNameUpper . '_PDF', "<span style='font-weight: bold;'>Create PDF</span>");
-
 define('CO_' . $moduleDirNameUpper . '_UPGRADEFAILED0', "Update failed - couldn't rename field '%s'");
 define('CO_' . $moduleDirNameUpper . '_UPGRADEFAILED1', "Update failed - couldn't add new fields");
 define('CO_' . $moduleDirNameUpper . '_UPGRADEFAILED2', "Update failed - couldn't rename table '%s'");
@@ -70,27 +66,21 @@ define('CO_' . $moduleDirNameUpper . '_ERROR_COLUMN', 'Could not create column i
 define('CO_' . $moduleDirNameUpper . '_ERROR_BAD_XOOPS', 'This module requires XOOPS %s+ (%s installed)');
 define('CO_' . $moduleDirNameUpper . '_ERROR_BAD_PHP', 'This module requires PHP version %s+ (%s installed)');
 define('CO_' . $moduleDirNameUpper . '_ERROR_TAG_REMOVAL', 'Could not remove tags from Tag Module');
-
 define('CO_' . $moduleDirNameUpper . '_FOLDERS_DELETED_OK', 'Upload Folders have been deleted');
-
 // Error Msgs
 define('CO_' . $moduleDirNameUpper . '_ERROR_BAD_DEL_PATH', 'Could not delete %s directory');
 define('CO_' . $moduleDirNameUpper . '_ERROR_BAD_REMOVE', 'Could not delete %s');
 define('CO_' . $moduleDirNameUpper . '_ERROR_NO_PLUGIN', 'Could not load plugin');
-
 //Help
 define('CO_' . $moduleDirNameUpper . '_DIRNAME', basename(dirname(__DIR__, 2)));
 define('CO_' . $moduleDirNameUpper . '_HELP_HEADER', __DIR__ . '/help/helpheader.tpl');
 define('CO_' . $moduleDirNameUpper . '_BACK_2_ADMIN', 'Back to Administration of ');
 define('CO_' . $moduleDirNameUpper . '_OVERVIEW', 'Overview');
-
 //define('CO_' . $moduleDirNameUpper . '_HELP_DIR', __DIR__);
-
 //help multi-page
 define('CO_' . $moduleDirNameUpper . '_DISCLAIMER', 'Disclaimer');
 define('CO_' . $moduleDirNameUpper . '_LICENSE', 'License');
 define('CO_' . $moduleDirNameUpper . '_SUPPORT', 'Support');
-
 //Sample Data
 define(
     'CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA',
@@ -113,7 +103,6 @@ define(
 define('CO_' . $moduleDirNameUpper . '_' . 'HIDE_SAMPLEDATA_BUTTONS', 'Hide the Import buttons)');
 define('CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLEDATA_BUTTONS', 'Show the Import buttons)');
 define('CO_' . $moduleDirNameUpper . '_' . 'CONFIRM', 'Confirm');
-
 //letter choice
 define(
     'CO_' . $moduleDirNameUpper . '_' . 'BROWSETOTOPIC',
@@ -121,7 +110,6 @@ define(
 );
 define('CO_' . $moduleDirNameUpper . '_' . 'OTHER', 'Other');
 define('CO_' . $moduleDirNameUpper . '_' . 'ALL', 'All');
-
 // block defines
 define('CO_' . $moduleDirNameUpper . '_' . 'ACCESSRIGHTS', 'Access Rights');
 define('CO_' . $moduleDirNameUpper . '_' . 'ACTION', 'Action');
@@ -138,26 +126,21 @@ define('CO_' . $moduleDirNameUpper . '_' . 'TITLE', 'Title');
 define('CO_' . $moduleDirNameUpper . '_' . 'VISIBLE', 'Visible');
 define('CO_' . $moduleDirNameUpper . '_' . 'VISIBLEIN', 'Visible In');
 define('CO_' . $moduleDirNameUpper . '_' . 'WEIGHT', 'Weight');
-
 define('CO_' . $moduleDirNameUpper . '_' . 'PERMISSIONS', 'Permissions');
 define('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS', 'Blocks');
 define('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS_DESC', 'Blocks/Group Admin');
-
 define('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS_MANAGMENT', 'Manage');
 define('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS_ADDBLOCK', 'Add a new block');
 define('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS_EDITBLOCK', 'Edit a block');
 define('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS_CLONEBLOCK', 'Clone a block');
-
 //myblocksadmin
 define('CO_' . $moduleDirNameUpper . '_' . 'AGDS', 'Admin Groups');
 define('CO_' . $moduleDirNameUpper . '_' . 'BCACHETIME', 'Cache Time');
 define('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS_ADMIN', 'Blocks Admin');
-
 //Template Admin
 define('CO_' . $moduleDirNameUpper . '_' . 'TPLSETS', 'Template Management');
 define('CO_' . $moduleDirNameUpper . '_' . 'GENERATE', 'Generate');
 define('CO_' . $moduleDirNameUpper . '_' . 'FILENAME', 'File Name');
-
 //Menu
 define('CO_' . $moduleDirNameUpper . '_' . 'ADMENU_MIGRATE', 'Migrate');
 define('CO_' . $moduleDirNameUpper . '_' . 'FOLDER_YES', 'Folder "%s" exist');
@@ -171,10 +154,8 @@ define(
     'If yes, the "Migrate" Tab and other Development tools will be visible to the Admin.'
 );
 define('CO_' . $moduleDirNameUpper . '_' . 'ADMENU_FEEDBACK', 'Feedback');
-
 //Latest Version Check
 define('CO_' . $moduleDirNameUpper . '_' . 'NEW_VERSION', 'New Version: ');
-
 //DirectoryChecker
 define(
     'CO_' . $moduleDirNameUpper . '_' . 'AVAILABLE',
@@ -191,7 +172,6 @@ define('CO_' . $moduleDirNameUpper . '_' . 'DIRCREATED', 'The directory has been
 define('CO_' . $moduleDirNameUpper . '_' . 'DIRNOTCREATED', 'The directory cannot be created');
 define('CO_' . $moduleDirNameUpper . '_' . 'PERMSET', 'The permission has been set');
 define('CO_' . $moduleDirNameUpper . '_' . 'PERMNOTSET', 'The permission cannot be set');
-
 //FileChecker
 //define('CO_' . $moduleDirNameUpper . '_' . 'AVAILABLE', "<span style='color: green;'>Available</span>");
 //define('CO_' . $moduleDirNameUpper . '_' . 'NOTAVAILABLE', "<span style='color: red;'>Not available</span>");
@@ -199,16 +179,13 @@ define('CO_' . $moduleDirNameUpper . '_' . 'PERMNOTSET', 'The permission cannot 
 //define('CO_' . $moduleDirNameUpper . '_' . 'COPYTHEFILE', 'Copy it');
 //define('CO_' . $moduleDirNameUpper . '_' . 'CREATETHEFILE', 'Create it');
 //define('CO_' . $moduleDirNameUpper . '_' . 'SETMPERM', 'Set the permission');
-
 define(
     'CO_' . $moduleDirNameUpper . '_' . 'FILECOPIED',
     'The file has been copied'
 );
 define('CO_' . $moduleDirNameUpper . '_' . 'FILENOTCOPIED', 'The file cannot be copied');
-
 //define('CO_' . $moduleDirNameUpper . '_' . 'PERMSET', 'The permission has been set');
 //define('CO_' . $moduleDirNameUpper . '_' . 'PERMNOTSET', 'The permission cannot be set');
-
 //image config
 define('CO_' . $moduleDirNameUpper . '_' . 'IMAGE_WIDTH', 'Image Display Width');
 define('CO_' . $moduleDirNameUpper . '_' . 'IMAGE_WIDTH_DSC', 'Display width for image');
@@ -221,13 +198,11 @@ define(
 define('CO_' . $moduleDirNameUpper . '_' . 'IMAGE_CONFIG_DSC', '');
 define('CO_' . $moduleDirNameUpper . '_' . 'IMAGE_UPLOAD_PATH', 'Image Upload path');
 define('CO_' . $moduleDirNameUpper . '_' . 'IMAGE_UPLOAD_PATH_DSC', 'Path for uploading images');
-
 define('CO_' . $moduleDirNameUpper . '_' . 'IMAGE_FILE_SIZE', 'Image File Size (in Bytes)');
 define(
     'CO_' . $moduleDirNameUpper . '_' . 'IMAGE_FILE_SIZE_DSC',
     'The maximum file size of the image file (in Bytes)'
 );
-
 //Preferences
 define(
     'CO_' . $moduleDirNameUpper . '_' . 'TRUNCATE_LENGTH',
@@ -237,7 +212,6 @@ define(
     'CO_' . $moduleDirNameUpper . '_' . 'TRUNCATE_LENGTH_DESC',
     'Set the maximum number of characters to truncate the long text fields'
 );
-
 //Module Stats
 define('CO_' . $moduleDirNameUpper . '_' . 'STATS_SUMMARY', 'Module Statistics');
 define('CO_' . $moduleDirNameUpper . '_' . 'TOTAL_CATEGORIES', 'Categories:');

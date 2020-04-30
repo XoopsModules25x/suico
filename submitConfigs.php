@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -24,19 +23,16 @@ use Xmf\Request;
 use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
-
 /**
  * Factories of groups
  */
 $configsFactory = new Suico\ConfigsHandler($xoopsDB);
-
 /**
  * Verify Token
  */
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
-
 //      $this->initVar("config_id",XOBJ_DTYPE_INT,null,false,10);
 //      $this->initVar("config_uid",XOBJ_DTYPE_INT,null,false,10);
 //      $this->initVar("pictures",XOBJ_DTYPE_INT,null,false,10);
@@ -51,7 +47,6 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 //      $this->initVar("backup_password",XOBJ_DTYPE_TXTBOX, null, false);
 //      $this->initVar("backup_email",XOBJ_DTYPE_TXTBOX, null, false);
 //      $this->initVar("end_suspension",XOBJ_DTYPE_TXTBOX, null, false);
-
 //$pic  = $_POST['pic'];
 //$vid  = $_POST['vid'];
 //$aud    = $_POST['aud'];
@@ -61,18 +56,14 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 //$pcon   = $_POST['profileContact'];
 //$pgen   = $_POST['gen'];
 //$psta   = $_POST['stat'];
-
 $criteria = new Criteria('config_uid', $xoopsUser->getVar('uid'));
 if ($configsFactory->getCount($criteria) > 0) {
     $configs = $configsFactory->getObjects($criteria);
-
     $config = $configs[0];
-
     $config->unsetNew();
 } else {
     $config = $configsFactory->create();
 }
-
 $config->setVar('config_uid', $xoopsUser->getVar('uid'));
 if (isset($_POST['pic'])) {
     $config->setVar('pictures', Request::getInt('pic', 0, 'POST'));

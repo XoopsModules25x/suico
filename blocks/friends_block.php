@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -27,7 +26,6 @@ if (!defined('XOOPS_ROOT_PATH')) {
 }
 //include_once(XOOPS_ROOT_PATH."/class/criteria.php");
 //require_once XOOPS_ROOT_PATH . '/modules/suico/class/Friendship.php';
-
 /**
  * @param $options
  * @return array
@@ -35,38 +33,26 @@ if (!defined('XOOPS_ROOT_PATH')) {
 function b_suico_friends_show($options)
 {
     global $xoopsDB, $xoopsModule, $xoopsModuleConfig, $xoopsUser;
-
     $myts = MyTextSanitizer::getInstance();
-
     $block = [];
-
     if ($xoopsUser) {
         /**
          * Filter for fetch votes ishot and isnothot
          */
-
         $criteria2 = new Criteria(
             'friend1_uid', $xoopsUser->getVar(
             'uid'
         )
         );
-
         /**
          * Creating factories of pictures and votes
          */
-
         //$albumFactory      = new ImagesHandler($xoopsDB);
-
         $friendsFactory = new Suico\FriendshipHandler($xoopsDB);
-
         $block['friends'] = $friendsFactory->getFriends($options[0], $criteria2);
-
         $block['lang_allfriends'] = _MB_SUICO_ALLFRIENDS;
-
         $block['lang_nofriends'] = _MB_SUICO_NOFRIENDSYET;
-
         $block['enablepm'] = $options[1] ?? '';
-
         return $block;
     }
 }
@@ -78,24 +64,16 @@ function b_suico_friends_show($options)
 function b_suico_friends_edit($options)
 {
     $form .= _MB_SUICO_TOTALFRIENDSTOSHOW . '&nbsp;';
-
     $form .= "<input type='text' name='options[0]' value='" . $options[0] . "'><br>";
-
     $form .= _MB_SUICO_ENABLEPM . '&nbsp;';
-
     if (1 === $options[1]) {
         $chk = ' checked';
     }
-
     $form .= "<input type='radio' name='options[1]' value='1'" . $chk . '>&nbsp;' . _YES . '';
-
     $chk = '';
-
     if (0 === $options[1]) {
         $chk = ' checked';
     }
-
     $form .= "&nbsp;<input type='radio' name='options[1]' value='0'" . $chk . '>' . _NO . '<br>';
-
     return $form;
 }

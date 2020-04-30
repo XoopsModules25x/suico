@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -24,15 +23,12 @@ use Xmf\Request;
 use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
-
 /**
  * Factories of groups
  */
 $relgroupuserFactory = new Suico\RelgroupuserHandler($xoopsDB);
 $groupsFactory       = new Suico\GroupsHandler($xoopsDB);
-
 $group_id = Request::getInt('group_id', 0, 'POST');
-
 if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
     xoops_confirm(
         [
@@ -55,7 +51,6 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
     $criteriaUid       = new Criteria('owner_uid', $uid);
     $criteria          = new CriteriaCompo($criteria_group_id);
     $criteria->add($criteriaUid);
-
     /**
      * Try to delete
      */
@@ -69,5 +64,4 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
         }
     }
 }
-
 require dirname(__DIR__, 2) . '/footer.php';

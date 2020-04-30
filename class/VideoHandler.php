@@ -39,7 +39,6 @@ use XoopsThemeForm;
 if (!\defined('XOOPS_ROOT_PATH')) {
     die('XOOPS root path not defined');
 }
-
 // -------------------------------------------------------------------------
 // ------------------Video user handler class -------------------
 // -------------------------------------------------------------------------
@@ -51,29 +50,24 @@ if (!\defined('XOOPS_ROOT_PATH')) {
 class VideoHandler extends XoopsPersistableObjectHandler
 {
     public $helper;
-
     public $isAdmin;
 
     /**
      * Constructor
-     * @param \XoopsDatabase|null              $xoopsDatabase
+     * @param \XoopsDatabase|null             $xoopsDatabase
      * @param \XoopsModules\Suico\Helper|null $helper
      */
-
     public function __construct(
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
         /** @var \XoopsModules\Suico\Helper $this ->helper */
-
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
             $this->helper = $helper;
         }
-
         $isAdmin = $this->helper->isUserAdmin();
-
         parent::__construct($xoopsDatabase, 'suico_videos', Video::class, 'video_id', 'video_desc');
     }
 
@@ -83,22 +77,18 @@ class VideoHandler extends XoopsPersistableObjectHandler
      * @param bool $isNew flag the new objects as "new"?
      * @return \XoopsObject Groups
      */
-
     public function create(
         $isNew = true
     ) {
         $obj = parent::create($isNew);
-
         if ($isNew) {
             $obj->setNew();
         } else {
             $obj->unsetNew();
         }
-
         if ($isNew) {
             $obj->helper = $this->helper;
         }
-
         return $obj;
     }
 
@@ -109,27 +99,20 @@ class VideoHandler extends XoopsPersistableObjectHandler
      * @param null $fields
      * @return mixed reference to the {@link Video} object, FALSE if failed
      */
-
     public function get2(
         $id = null,
         $fields = null
     ) {
         $sql = 'SELECT * FROM ' . $this->db->prefix('suico_videos') . ' WHERE video_id=' . $id;
-
         if (!$result = $this->db->query($sql)) {
             return false;
         }
-
         $numrows = $this->db->getRowsNum($result);
-
         if (1 === $numrows) {
             $video = new Video();
-
             $video->assignVars($this->db->fetchArray($result));
-
             return $video;
         }
-
         return false;
     }
 
@@ -141,42 +124,30 @@ class VideoHandler extends XoopsPersistableObjectHandler
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-
     public function insert2(
         XoopsObject $xoopsObject,
         $force = false
     ) {
         global $xoopsConfig;
-
         if (!$xoopsObject instanceof Video) {
             return false;
         }
-
         if (!$xoopsObject->isDirty()) {
             return true;
         }
-
         if (!$xoopsObject->cleanVars()) {
             return false;
         }
-
         $video_id = $uid_owner = '';
-
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
-
         //        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
-
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Video
-
             $xoopsObject = new Video();
-
             $format = 'INSERT INTO %s (video_id, uid_owner, video_desc, youtube_code, main_video)';
-
             $format .= 'VALUES (%u, %u, %s, %s, %s)';
-
             $sql = \sprintf(
                 $format,
                 $this->db->prefix('suico_videos'),
@@ -186,15 +157,11 @@ class VideoHandler extends XoopsPersistableObjectHandler
                 $this->db->quoteString($youtube_code),
                 $this->db->quoteString($main_video)
             );
-
             $force = true;
         } else {
             $format = 'UPDATE %s SET ';
-
             $format .= 'video_id=%u, uid_owner=%u, video_desc=%s, youtube_code=%s, main_video=%s';
-
             $format .= ' WHERE video_id = %u';
-
             $sql = \sprintf(
                 $format,
                 $this->db->prefix('suico_videos'),
@@ -206,23 +173,18 @@ class VideoHandler extends XoopsPersistableObjectHandler
                 $video_id
             );
         }
-
         if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
         }
-
         if (!$result) {
             return false;
         }
-
         if (empty($video_id)) {
             $video_id = $this->db->getInsertId();
         }
-
         $xoopsObject->assignVar('video_id', $video_id);
-
         return true;
     }
 
@@ -233,7 +195,6 @@ class VideoHandler extends XoopsPersistableObjectHandler
      * @param bool         $force
      * @return bool FALSE if failed.
      */
-
     public function delete(
         XoopsObject $xoopsObject,
         $force = false
@@ -241,23 +202,19 @@ class VideoHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject instanceof Video) {
             return false;
         }
-
         $sql = \sprintf(
             'DELETE FROM %s WHERE video_id = %u',
             $this->db->prefix('suico_videos'),
             $xoopsObject->getVar('video_id')
         );
-
         if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
         }
-
         if (!$result) {
             return false;
         }
-
         return true;
     }
 
@@ -269,57 +226,41 @@ class VideoHandler extends XoopsPersistableObjectHandler
      * @param bool                                 $as_object
      * @return array array of {@link Video} objects
      */
-
     public function &getObjects(
         ?CriteriaElement $criteriaElement = null,
         $id_as_key = false,
         $as_object = true
     ) {
         $ret = [];
-
         $limit = $start = 0;
-
         $sql = 'SELECT * FROM ' . $this->db->prefix('suico_videos');
-
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
-
-			 $sort = 'video_id';
-			 $order = 'DESC';
-			 
+            $sort  = 'video_id';
+            $order = 'DESC';
             //if ('' !== $criteriaElement->getSort()) {
             //    $sql .= ' ORDER BY ' . $criteriaElement->getSort() . ' ' . $criteriaElement->getOrder();
             //}
-			
-			if ('' !== $sort) {
+            if ('' !== $sort) {
                 $sql .= ' ORDER BY ' . $sort . ' ' . $order;
             }
-
             $limit = $criteriaElement->getLimit();
-
             $start = $criteriaElement->getStart();
         }
-
         $result = $this->db->query($sql, $limit, $start);
-
         if (!$result) {
             return $ret;
         }
-
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $video = new Video();
-
             $video->assignVars($myrow);
-
             if (!$id_as_key) {
                 $ret[] = &$video;
             } else {
                 $ret[$myrow['video_id']] = &$video;
             }
-
             unset($video);
         }
-
         return $ret;
     }
 
@@ -329,24 +270,18 @@ class VideoHandler extends XoopsPersistableObjectHandler
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} to match
      * @return int count of suico_videos
      */
-
     public function getCount(
         ?CriteriaElement $criteriaElement = null
     ) {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_videos');
-
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
         }
-
         $result = $this->db->query($sql);
-
         if (!$result) {
             return 0;
         }
-
         [$count] = $this->db->fetchRow($result);
-
         return (int)$count;
     }
 
@@ -358,22 +293,18 @@ class VideoHandler extends XoopsPersistableObjectHandler
      * @param bool                                 $asObject
      * @return bool FALSE if deletion failed
      */
-
     public function deleteAll(
         ?CriteriaElement $criteriaElement = null,
         $force = true,
         $asObject = false
     ) {
         $sql = 'DELETE FROM ' . $this->db->prefix('suico_videos');
-
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
         }
-
         if (!$result = $this->db->query($sql)) {
             return false;
         }
-
         return true;
     }
 
@@ -385,32 +316,20 @@ class VideoHandler extends XoopsPersistableObjectHandler
      *
      * obs: Some functions wont work on php 4 so edit lines down under acording to your version
      */
-
     public function renderFormSubmit(
         $xoopsTpl
     ) {
         $form = new XoopsThemeForm(\_MD_SUICO_ADDFAVORITEVIDEOS, 'form_videos', 'submitVideo.php', 'post', true);
-
         $field_code = new XoopsFormText(\_MD_SUICO_YOUTUBECODE, 'codigo', 50, 250);
-
         $field_desc = new XoopsFormTextArea(\_MD_SUICO_CAPTION, 'caption');
-
         $form->setExtra('enctype="multipart/form-data"');
-
         $buttonSend = new XoopsFormButton('', 'submit_button', \_MD_SUICO_ADDVIDEO, 'submit');
-
         $form->addElement($field_warning);
-
         $form->addElement($field_code, true);
-
         $form->addElement($field_desc);
-
         $form->addElement($buttonSend);
-
         $form->assign($xoopsTpl); //If your server is php 5
-
         //$form->display();
-
         return true;
     }
 
@@ -422,20 +341,15 @@ class VideoHandler extends XoopsPersistableObjectHandler
      * @param string $filename the url to the thumb of the image so it can be displayed
      * @return bool TRUE
      */
-
     public function renderFormEdit(
         $caption,
         $cod_img,
         $filename
     ) {
         $form = new XoopsThemeForm(\_MD_SUICO_EDIT_DESC, 'form_picture', 'editvideo.php', 'post', true);
-
         $field_desc = new XoopsFormText($caption, 'caption', 35, 55);
-
         $form->setExtra('enctype="multipart/form-data"');
-
         $buttonSend = new XoopsFormButton('', 'submit_button', \_MD_SUICO_SUBMIT, 'submit');
-
         $field_warning = new XoopsFormLabel(
             '<object width="425" height="353">
 <param name="movie" value="http://www.youtube.com/v/' . $filename . '"></param>
@@ -443,23 +357,14 @@ class VideoHandler extends XoopsPersistableObjectHandler
 <embed src="http://www.youtube.com/v/' . $filename . '" type="application/x-shockwave-flash" wmode="transparent" width="425" height="353"></embed>
 </object>'
         );
-
         $field_video_id = new XoopsFormHidden('video_id', $cod_img);
-
         $field_marker = new XoopsFormHidden('marker', 1);
-
         $form->addElement($field_warning);
-
         $form->addElement($field_desc);
-
         $form->addElement($field_video_id, true);
-
         $form->addElement($field_marker);
-
         $form->addElement($buttonSend);
-
         $form->display();
-
         return true;
     }
 
@@ -467,15 +372,12 @@ class VideoHandler extends XoopsPersistableObjectHandler
      * @param null $uid_owner
      * @return bool
      */
-
     public function unsetAllMainsbyID($uid_owner = null)
     {
         $sql = 'UPDATE ' . $this->db->prefix('suico_videos') . ' SET main_video=0 WHERE uid_owner=' . $uid_owner;
-
         if (!$result = $this->db->query($sql)) {
             return false;
         }
-
         return true;
     }
 }

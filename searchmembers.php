@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
@@ -26,22 +25,17 @@ declare(strict_types=1);
 //  along with this program; if not, write to the Free Software              //
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
-
 use Xmf\Request;
 use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
-
 $op = Request::getCmd('op', 'form', 'POST');
-
 //require_once __DIR__ . '/class/suico_controller.php';
 $controller = new Suico\IndexController($xoopsDB, $xoopsUser);
-
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
 $nbSections = $controller->getNumbersSections();
-
 if ('form' === $op) {
     $GLOBALS['xoopsOption']['template_main'] = 'suico_searchform.tpl';
     require XOOPS_ROOT_PATH . '/header.php';
@@ -70,7 +64,6 @@ if ('form' === $op) {
     $interest_text   = new XoopsFormText(_MD_SUICO_INTEREST_CONTAINS, 'user_intrest', 30, 100);
     $extrainfo_text  = new XoopsFormText(_MD_SUICO_EXTRAINFO_CONTAINS, 'bio', 30, 100);
     $signature_text  = new XoopsFormText(_MD_SUICO_SIGNATURE_CONTAINS, 'user_sig', 30, 100);
-
     $lastlog_more = new XoopsFormText(
         _MD_SUICO_LASTLOGMORE, 'user_lastlog_more', 10, 5
     );
@@ -99,51 +92,40 @@ if ('form' === $op) {
     $limit_text    = new XoopsFormText(_MD_SUICO_LIMIT, 'limit', 6, 2);
     $op_hidden     = new XoopsFormHidden('op', 'submit');
     $submit_button = new XoopsFormButton('', 'user_submit', _SUBMIT, 'submit');
-
     $form = new XoopsThemeForm('', 'searchform', 'searchmembers.php');
     $form->addElement($uname_tray);
     $form->addElement($name_tray);
     $form->addElement($email_tray);
-
     if (1 == $xoopsModuleConfig['displayurl']) {
         $form->addElement($url_text);
     }
-
     if (1 == $xoopsModuleConfig['displayfrom']) {
         $form->addElement($location_text);
     }
-
     if (1 == $xoopsModuleConfig['displayoccupation']) {
         $form->addElement($occupation_text);
     }
-
     if (1 == $xoopsModuleConfig['displayinterest']) {
         $form->addElement($interest_text);
     }
-
     if (1 == $xoopsModuleConfig['displayextrainfo']) {
         $form->addElement($extrainfo_text);
     }
-
     if (1 == $xoopsModuleConfig['displaysignature']) {
         $form->addElement($signature_text);
     }
-
     if (1 == $xoopsModuleConfig['displaylastlogin']) {
         $form->addElement($lastlog_more);
         $form->addElement($lastlog_less);
     }
-
     if (1 == $xoopsModuleConfig['displayregdate']) {
         $form->addElement($reg_more);
         $form->addElement($reg_less);
     }
-
     if (1 == $xoopsModuleConfig['displayposts']) {
         $form->addElement($posts_more);
         $form->addElement($posts_less);
     }
-
     $form->addElement($sort_select);
     $form->addElement($order_select);
     $form->addElement($limit_text);
@@ -157,7 +139,6 @@ if ('form' === $op) {
     );
     $xoopsTpl->assign('totalmember', $total);
 }
-
 if ('submit' === $op) {
     $GLOBALS['xoopsOption']['template_main'] = 'suico_searchresults.tpl';
     require XOOPS_ROOT_PATH . '/header.php';
@@ -230,7 +211,6 @@ if ('submit' === $op) {
         //        $url = Request::getUrl('user_url', '', 'POST');
         $criteria->add(new Criteria('url', Request::getUrl('user_url', '', 'POST') . '%', 'LIKE'));
     }
-
     if (!empty($_POST['user_from'])) {
         $criteria->add(new Criteria('user_from', '%' . Request::getString('user_from', '', 'POST') . '%', 'LIKE'));
     }
@@ -242,15 +222,12 @@ if ('submit' === $op) {
     if (!empty($_POST['user_occ'])) {
         $criteria->add(new Criteria('user_occ', '%' . Request::getString('user_occ', '', 'POST') . '%', 'LIKE'));
     }
-
     if (!empty($_POST['bio'])) {
         $criteria->add(new Criteria('bio', '%' . Request::getString('bio', '', 'POST') . '%', 'LIKE'));
     }
-
     if (!empty($_POST['user_sig'])) {
         $criteria->add(new Criteria('user_sig', '%' . Request::getString('user_sig', '', 'POST') . '%', 'LIKE'));
     }
-
     if (!empty($_POST['user_lastlog_more']) && is_numeric($_POST['user_lastlog_more'])) {
         $f_user_lastlog_more = Request::getInt('user_lastlog_more', 0, 'POST');
         $time                = time() - (60 * 60 * 24 * $f_user_lastlog_more);
@@ -296,7 +273,6 @@ if ('submit' === $op) {
     if (0 === $limit || $limit > 50) {
         $limit = 50;
     }
-
     $start         = Request::getInt('start', 0, 'POST');
     $memberHandler = xoops_getHandler('member');
     $total         = $memberHandler->getUserCount($criteria);
@@ -330,15 +306,12 @@ if ('submit' === $op) {
             $userdata['name']     = $foundusers[$j]->getVar('uname');
             $userdata['id']       = $foundusers[$j]->getVar('uid');
             $userdata['uid']      = $foundusers[$j]->getVar('uid');
-
             $criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
             $criteriaIsfriend = new CriteriaCompo(new Criteria('friend2_uid', $userdata['uid']));
             $criteriaIsfriend->add($criteria_friends);
             $controller->isFriend = $controller->friendshipsFactory->getCount($criteria_isfriend);
             $userdata['isFriend'] = $controller->isFriend;
-
             $friendrequestFactory = new Suico\FriendrequestHandler($xoopsDB);
-
             $criteria_selfrequest   = new Criteria('friendrequester_uid', $controller->uidOwner);
             $criteria_isselfrequest = new CriteriaCompo(new Criteria('friendrequestto_uid', $userdata['uid']));
             $criteria_isselfrequest->add($criteria_selfrequest);
@@ -350,7 +323,6 @@ if ('submit' === $op) {
             $xoopsTpl->assign('lang_myfriend', _MD_SUICO_MYFRIEND);
             $xoopsTpl->assign('lang_friendrequestsent', _MD_SUICO_FRIENDREQUEST_SENT);
             $xoopsTpl->assign('lang_friendshipstatus', _MD_SUICO_FRIENDSHIP_STATUS);
-
             $criteria_otherrequest   = new Criteria('friendrequester_uid', $userdata['uid']);
             $criteria_isotherrequest = new CriteriaCompo(new Criteria('friendrequestto_uid', $controller->uidOwner));
             $criteria_isotherrequest->add($criteria_otherrequest);
@@ -359,7 +331,6 @@ if ('submit' === $op) {
             if ($controller->isOtherRequest > 0) {
                 $xoopsTpl->assign('other_uid', $userdata['uid']);
             }
-
             if (1 === $foundusers[$j]->getVar('user_viewemail') || $iamadmin) {
                 $userdata['email']        = "<a href='mailto:" . $foundusers[$j]->getVar(
                         'email'
@@ -385,7 +356,6 @@ if ('submit' === $op) {
             } else {
                 $userdata['pmlink'] = '&nbsp;';
             }
-
             if ('' !== $foundusers[$j]->getVar('url', 'E')) {
                 $userdata['website'] = "<a href='" . $foundusers[$j]->getVar(
                         'url',
@@ -409,7 +379,6 @@ if ('submit' === $op) {
                         'uid'
                     ) . "'>" . _DELETE . '</a>';
             }
-
             $userdata['location']     = $foundusers[$j]->getVar('user_from');
             $userdata['occupation']   = $foundusers[$j]->getVar('user_occ');
             $userdata['interest']     = $foundusers[$j]->getVar('user_intrest');
@@ -421,7 +390,6 @@ if ('submit' === $op) {
                 $userdata['rankimage'] = '<img src="' . XOOPS_UPLOAD_URL . '/' . $userrank['image'] . '" alt="">';
             }
             $userdata['ranktitle'] = $userrank['title'];
-
             $uid        = $userdata['id'];
             $groups     = $memberHandler->getGroupsByUser($uid, true);
             $usergroups = [];
@@ -429,7 +397,6 @@ if ('submit' === $op) {
                 $usergroups[] = $group->getVar('name');
             }
             $userdata['groups'] = implode(', ', $usergroups);
-
             $xoopsTpl->append('users', $userdata);
         }
         $totalpages = ceil($total / $limit);
@@ -474,14 +441,11 @@ if ('submit' === $op) {
         }
     }
 }
-
 //requests to become friend
-
 $xoopsTpl->assign('lang_askusertobefriend', _MD_SUICO_ASKBEFRIEND);
 $xoopsTpl->assign('lang_addfriend', _MD_SUICO_ADDFRIEND);
 $xoopsTpl->assign('lang_friendshippending', _MD_SUICO_FRIENDREQUEST_PENDING);
 $xoopsTpl->assign('lang_cancelfriendrequest', _MD_SUICO_FRIENDREQUEST_CANCEL);
-
 if (isset($_POST['addfriend'])) {
     $newFriendrequest = $friendrequestFactory->create(true);
     $newFriendrequest->setVar('friendrequester_uid', $controller->uidOwner);
@@ -493,15 +457,12 @@ if (isset($_POST['addfriend'])) {
         _MD_SUICO_FRIENDREQUEST_FROM
     );
 }
-
 $memberHandler = xoops_getHandler('member');
 $thisUser      = $memberHandler->getUser($controller->uidOwner);
 $myts          = MyTextSanitizer::getInstance();
-
 //navbar
 $xoopsTpl->assign('lang_mysection', _MD_SUICO_SEARCH);
 $xoopsTpl->assign('section_name', _MD_SUICO_SEARCH);
-
 // temporary solution for profile module integration
 if (xoops_isActiveModule('profile')) {
     $profileHandler = $helper->getHandler('Profile');
@@ -517,6 +478,5 @@ if (xoops_isActiveModule('profile')) {
         $profile = $profileHandler->get($uid);
     }
 }
-
 require __DIR__ . '/footer.php';
 require_once XOOPS_ROOT_PATH . '/footer.php';

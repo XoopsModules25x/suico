@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -24,68 +23,42 @@ use XoopsModules\Suico;
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_configs.tpl';
 require __DIR__ . '/header.php';
-
 $controller = new Suico\ConfigController($xoopsDB, $xoopsUser);
-
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
 $nbSections = $controller->getNumbersSections();
-
 if (!$xoopsUser) {
     redirect_header('index.php');
 }
-
 /**
  * Factories of groups
  */
 $configsFactory = new Suico\ConfigsHandler($xoopsDB);
-
 $uid = (int)$xoopsUser->getVar('uid');
-
 $criteria = new Criteria('config_uid', $uid);
 if ($configsFactory->getCount($criteria) > 0) {
     $configs = $configsFactory->getObjects($criteria);
-
     $config = $configs[0];
-
     $pic = $config->getVar('pictures');
-
     $aud = $config->getVar('audio');
-
     $vid = $config->getVar('videos');
-
     $tri = $config->getVar('groups');
-
     $scr = $config->getVar('notes');
-
     $fri = $config->getVar('friends');
-
     $pcon = $config->getVar('profile_contact');
-
     $pgen = $config->getVar('profile_general');
-
     $psta = $config->getVar('profile_stats');
-
     $xoopsTpl->assign('pic', $pic);
-
     $xoopsTpl->assign('aud', $aud);
-
     $xoopsTpl->assign('vid', $vid);
-
     $xoopsTpl->assign('tri', $tri);
-
     $xoopsTpl->assign('scr', $scr);
-
     $xoopsTpl->assign('fri', $fri);
-
     $xoopsTpl->assign('pcon', $pcon);
-
     $xoopsTpl->assign('pgen', $pgen);
-
     $xoopsTpl->assign('psta', $psta);
 }
-
 //form
 $xoopsTpl->assign('lang_whocan', _MD_SUICO_WHOCAN);
 $xoopsTpl->assign('lang_configtitle', _MD_SUICO_CONFIGS_TITLE);
@@ -103,16 +76,12 @@ $xoopsTpl->assign('lang_only_me', _MD_SUICO_CONFIGS_ONLYME);
 $xoopsTpl->assign('lang_only_friends', _MD_SUICO_CONFIGS_ONLYEFRIENDS);
 $xoopsTpl->assign('lang_only_users', _MD_SUICO_CONFIGS_ONLYEUSERS);
 $xoopsTpl->assign('lang_everyone', _MD_SUICO_CONFIGS_EVERYONE);
-
 $xoopsTpl->assign('lang_cancel', _MD_SUICO_CANCEL);
-
 //Notes
 //$xoopsTpl->assign('notes',$notes);
 $xoopsTpl->assign('lang_answerNote', _MD_SUICO_ANSWERNOTE);
-
 //navbar
 $xoopsTpl->assign('lang_mysection', _MD_SUICO_CONFIGS_TITLE);
 $xoopsTpl->assign('section_name', _MD_SUICO_CONFIGS_TITLE);
-
 require __DIR__ . '/footer.php';
 require dirname(__DIR__, 2) . '/footer.php';

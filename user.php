@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
@@ -26,12 +25,10 @@ declare(strict_types=1);
 //  along with this program; if not, write to the Free Software              //
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
-
 use Xmf\Request;
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_user.tpl';
 require __DIR__ . '/header.php';
-
 /**
  * If is user redirects to own profile
  */
@@ -46,28 +43,22 @@ if (($xoopsUser)) {
     }
     redirect_header('' . XOOPS_URL . "/modules/suico/index.php?uid=$uid_owner");
 }
-
 $op = $_REQUEST['op'] ?? '';
-
 if ('register' === $op) {
     $GLOBALS['xoopsOption']['template_main'] = 'suico_register.tpl';
     include $GLOBALS['xoops']->path('header.php');
-
     if (!empty($_GET['op']) && in_array($_GET['op'], ['actv', 'activate'])) {
         header('location: ./activate.php' . (Request::getString('QUERY_STRING', '', 'SERVER')));
         exit();
     }
-
     xoops_load('XoopsUserUtility');
     $myts = MyTextSanitizer::getInstance();
-
     /* @var XoopsConfigHandler $configHandler */
-    $configHandler             = xoops_getHandler('config');
+    $configHandler              = xoops_getHandler('config');
     $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
     if (empty($GLOBALS['xoopsConfigUser']['allow_register'])) {
         redirect_header('index.php', 6, _US_NOREGISTER);
     }
-
     // get the key we need to access our 'op' in $_POST
     // if this key is not set, empty $_POST since this is a new registration and
     // no legitimate data would be there.
@@ -82,33 +73,25 @@ if ('register' === $op) {
         $_POST          = [];
         $current_opname = 'op'; // does not matter, it isn't there
     }
-
     $op           = $_POST[$current_opname] ?? 'register';
     $current_step = isset($_POST['step']) ? (int)$_POST['step'] : 0;
-
     // The newly introduced variable $_SESSION['profile_post'] is contaminated by $_POST, thus we use an old vaiable to hold uid parameter
     $uid = !empty($_SESSION['profile_register_uid']) ? (int)$_SESSION['profile_register_uid'] : 0;
-
     // First step is already secured by with the captcha Token so lets check the others
     if ($current_step > 0 && !$GLOBALS['xoopsSecurity']->check()) {
         redirect_header('user.php', 5, _MD_SUICO_EXPIRED);
     }
-
     $criteria = new CriteriaCompo();
     $criteria->setSort('step_order');
     $regstepHandler = $helper->getHandler('Regstep');
-
     if (!$steps = $regstepHandler->getAll($criteria, null, false, false)) {
         redirect_header(XOOPS_URL . '/', 6, _MD_SUICO_NOSTEPSAVAILABLE);
     }
-
     foreach (array_keys($steps) as $key) {
         $steps[$key]['step_no'] = $key + 1;
     }
-
     $GLOBALS['xoopsTpl']->assign('steps', $steps);
     $GLOBALS['xoopsTpl']->assign('lang_register_steps', _MD_SUICO_REGISTER_STEPS);
-
     $xoBreadcrumbs[] = [
         'link'  => XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/register.php',
         'title' => _MD_SUICO_REGISTER,
@@ -116,14 +99,11 @@ if ('register' === $op) {
     if (isset($steps[$current_step])) {
         $xoBreadcrumbs[] = ['title' => $steps[$current_step]['step_name']];
     }
-
     /* @var XoopsMemberHandler $memberHandler */
-    $memberHandler   = xoops_getHandler('member');
+    $memberHandler  = xoops_getHandler('member');
     $profileHandler = $helper->getHandler('Profile');
-
     $fields     = $profileHandler->loadFields();
     $userfields = $profileHandler->getUserVars();
-
     if (0 == $uid) {
         // No user yet? Create one and set default values.
         $newuser = $memberHandler->createUser();
@@ -145,7 +125,6 @@ if ('register' === $op) {
         $newuser = $memberHandler->getUser($uid);
         $profile = $profileHandler->get($uid);
     }
-
     // Lets merge current $_POST  with $_SESSION['profile_post'] so we can have access to info submited in previous steps
     // Get all fields that we can expect from a $_POST inlcuding our private '_message_'
     $fieldnames = [];
@@ -154,7 +133,6 @@ if ('register' === $op) {
     }
     $fieldnames   = array_merge($fieldnames, $userfields);
     $fieldnames[] = '_message_';
-
     // Get $_POST that matches above criteria, we do not need to store step, tokens, etc
     $postfields = [];
     foreach ($fieldnames as $fieldname) {
@@ -162,7 +140,6 @@ if ('register' === $op) {
             $postfields[$fieldname] = $_POST[$fieldname];
         }
     }
-
     if (0 == $current_step) {
         // Reset any previous session for first step
         $_SESSION['profile_post']         = [];
@@ -172,13 +149,11 @@ if ('register' === $op) {
         $_SESSION['profile_post'] = array_merge($_SESSION['profile_post'], $postfields);
         $_POST                    = array_merge($_SESSION['profile_post'], $_POST);
     }
-
     // Set vars from $_POST/$_SESSION['profile_post']
     foreach (array_keys($fields) as $field) {
         if (!isset($_POST[$field])) {
             continue;
         }
-
         $value = $fields[$field]->getValueForSave($_POST[$field]);
         if (in_array($field, $userfields)) {
             $newuser->setVar($field, $value);
@@ -186,9 +161,7 @@ if ('register' === $op) {
             $profile->setVar($field, $value);
         }
     }
-
     $stop = '';
-
     //Client side validation
     if (isset($_POST['step']) && isset($_SESSION['profile_required'])) {
         foreach ($_SESSION['profile_required'] as $name => $title) {
@@ -197,7 +170,6 @@ if ('register' === $op) {
             }
         }
     }
-
     // Check user data at first step
     if (1 == $current_step) {
         $uname      = isset($_POST['uname']) ? $myts->stripSlashesGPC(trim($_POST['uname'])) : '';
@@ -206,25 +178,21 @@ if ('register' === $op) {
         $pass       = isset($_POST['pass']) ? $myts->stripSlashesGPC(trim($_POST['pass'])) : '';
         $vpass      = isset($_POST['vpass']) ? $myts->stripSlashesGPC(trim($_POST['vpass'])) : '';
         $agree_disc = (isset($_POST['agree_disc']) && (int)$_POST['agree_disc']) ? 1 : 0;
-
         if (0 != $GLOBALS['xoopsConfigUser']['reg_dispdsclmr'] && '' !== $GLOBALS['xoopsConfigUser']['reg_disclaimer']) {
             if (empty($agree_disc)) {
                 $stop .= _US_UNEEDAGREE . '<br>';
             }
         }
-
         $newuser->setVar('uname', $uname);
         $newuser->setVar('email', $email);
         $newuser->setVar('pass', $pass ? password_hash($pass, PASSWORD_DEFAULT) : '');
         $stop .= XoopsUserUtility::validate($newuser, $pass, $vpass);
-
         xoops_load('XoopsCaptcha');
         $xoopsCaptcha = XoopsCaptcha::getInstance();
         if (!$xoopsCaptcha->verify()) {
             $stop .= $xoopsCaptcha->getMessage();
         }
     }
-
     // If the last step required SAVE or if we're on the last step then we will insert/update user on database
     if ($current_step > 0 && empty($stop) && (!empty($steps[$current_step - 1]['step_save']) || !isset($steps[$current_step]))) {
         if (1 == $GLOBALS['xoopsModuleConfig']['profileCaptchaAfterStep1'] && $current_step > 1) {
@@ -234,10 +202,8 @@ if ('register' === $op) {
                 $stop .= $xoopsCaptcha2->getMessage();
             }
         }
-
         if (empty($stop)) {
             $isNew = $newuser->isNew();
-
             //Did created an user already? If not then let us set some extra info
             if ($isNew) {
                 $uname = isset($_POST['uname']) ? $myts->stripSlashesGPC(trim($_POST['uname'])) : '';
@@ -260,7 +226,6 @@ if ('register' === $op) {
                     $newuser->setVar('level', 0, true);
                 }
             }
-
             // Insert/update user and check if we have succeded
             if (!$memberHandler->insertUser($newuser)) {
                 $stop .= _US_REGISTERNG . '<br>';
@@ -269,7 +234,6 @@ if ('register' === $op) {
                 // User inserted! Now insert custom profile fields
                 $profile->setVar('profile_id', $newuser->getVar('uid'));
                 $profileHandler->insert($profile);
-
                 // We are good! If this is 'was' a new user then we handle notification
                 if ($isNew) {
                     if (1 == $GLOBALS['xoopsConfigUser']['new_user_notify'] && !empty($GLOBALS['xoopsConfigUser']['new_user_notify_group'])) {
@@ -283,7 +247,6 @@ if ('register' === $op) {
                         $xoopsMailer->setBody(sprintf(_US_HASJUSTREG, $newuser->getVar('uname')));
                         $xoopsMailer->send(true);
                     }
-
                     $message = '';
                     if (!$memberHandler->addUserToGroup(XOOPS_GROUP_USERS, $newuser->getVar('uid'))) {
                         $message = _MD_SUICO_REGISTER_NOTGROUP . '<br>';
@@ -342,7 +305,6 @@ if ('register' === $op) {
             }
         }
     }
-
     if (!empty($stop) || isset($steps[$current_step])) {
         include_once __DIR__ . '/include/forms.php';
         $current_step = empty($stop) ? $current_step : $current_step - 1;
@@ -367,5 +329,4 @@ if ('register' === $op) {
         $_SESSION['profile_post'] = null;
     }
 }
-
 require_once XOOPS_ROOT_PATH . '/footer.php';

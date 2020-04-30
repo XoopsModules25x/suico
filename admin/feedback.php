@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -26,19 +25,14 @@ use XoopsModules\Suico;
 use XoopsModules\Suico\Common\ModuleFeedback;
 
 require __DIR__ . '/admin_header.php';
-
 $adminObject = Admin::getInstance();
-
 $feedback = new ModuleFeedback();
-
 // It recovered the value of argument op in URL$
 $op                 = Request::getString('op', 'list');
 $moduleDirName      = $GLOBALS['xoopsModule']->getVar('dirname');
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 xoops_loadLanguage('feedback', $moduleDirName);
-
 xoops_cp_header();
-
 switch ($op) {
     case 'list':
     default:
@@ -54,9 +48,7 @@ switch ($op) {
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('index.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
-
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('feedback.php'));
-
         $your_name  = Request::getString('your_name', '');
         $your_site  = Request::getString('your_site', '');
         $your_mail  = Request::getString('your_mail', '');
@@ -74,7 +66,6 @@ switch ($op) {
             '<br>',
             $fb_content
         ); //clean line break from dhtmltextarea
-
         $title       = constant(
                            'CO_' . $moduleDirNameUpper . '_' . 'FB_SEND_FOR'
                        ) . $GLOBALS['xoopsModule']->getVar(
@@ -98,7 +89,6 @@ switch ($op) {
         if ($ret) {
             redirect_header('index.php', 3, constant('CO_' . $moduleDirNameUpper . '_' . 'FB_SEND_SUCCESS'));
         }
-
         // show form with content again
         $feedback->name    = $your_name;
         $feedback->email   = $your_mail;
@@ -110,7 +100,6 @@ switch ($op) {
             </div>';
         $form = $feedback->getFormFeedback();
         echo $form->render();
-
         break;
 }
 require __DIR__ . '/admin_footer.php';

@@ -63,20 +63,20 @@
 
 
                         <{section name=i loop=$videos}>
-							 <a name="<{$videos[i].id}>"></a>
+                            <a name="<{$videos[i].id}>"></a>
                             <div class="embed-responsive embed-responsive-16by9">
                                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<{$videos[i].url}>?rel=0" allowfullscreen></iframe>
                             </div>
                             <div class="alert alert-primary">
                                 <{$videos[i].desc}>
-								<p class="text-muted"><i class="fa fa-calendar"></i>
-                                                        <{if $videos[i].date_created == $videos[i].date_updated}>
-                                                            <small><{$videos[i].date_created|date_format}></small>
-                                                        <{else}>
-                                                            <small><{$videos[i].date_updated|date_format}></small>
-                                                        <{/if}>
+                                <p class="text-muted"><i class="fa fa-calendar"></i>
+                                    <{if $videos[i].date_created == $videos[i].date_updated}>
+                                        <small><{$videos[i].date_created|date_format}></small>
+                                    <{else}>
+                                        <small><{$videos[i].date_updated|date_format}></small>
+                                    <{/if}>
                                 </p>
-												
+
                                 <{if $isOwner==1 }>
                                     <form action="delvideo.php" method="post" id="deleteform" class="suico-video-forms">
                                         <input type="hidden" value="<{$videos[i].id}>" name="cod_video">

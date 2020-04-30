@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -25,27 +24,22 @@ use XoopsModules\Suico;
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_index.tpl';
 require __DIR__ . '/header.php';
-
 /**
  * Factory of pictures created
  */
 $ishotFactory = new Suico\IshotHandler($xoopsDB);
-
 $uid_voted = Request::getInt('uid_voted', 0, 'POST');
 $ishot     = Request::getInt('ishot', 0, 'POST');
 $uid_voter = (int)$xoopsUser->getVar('uid');
-
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
-
 /**
  * Verify if user is trying to vote for himself
  */
 if ($uid_voter === $uid_voted) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_CANTVOTEOWN);
 }
-
 /**
  * Verify that this user hasn't voted or added this user yet
  */
@@ -55,25 +49,18 @@ $criteria_uidvoter = new Criteria(
 $criteria_uidvoted = new Criteria('uid_voted', $uid_voted);
 $criteria          = new CriteriaCompo($criteria_uidvoter);
 $criteria->add($criteria_uidvoted);
-
 if (0 === $ishotFactory->getCount($criteria)) {
     $vote = $ishotFactory->create(true);
-
     $vote->setVar('uid_voted', $uid_voted);
-
     $vote->setVar('uid_voter', $uid_voter);
-
     if (1 === $ishot) {
         $vote->setVar('ishot', 1);
     } else {
         $vote->setVar('ishot', 0);
     }
-
     $ishotFactory->insert2($vote);
-
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_VOTED);
 } else {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_ALREADYVOTED);
 }
-
 require dirname(__DIR__, 2) . '/footer.php';

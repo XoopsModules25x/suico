@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -27,7 +26,6 @@ if (!defined('XOOPS_ROOT_PATH')) {
 }
 //include_once(XOOPS_ROOT_PATH."/class/criteria.php");
 //require_once XOOPS_ROOT_PATH . '/modules/suico/class/Image.php';
-
 /**
  * @param $options
  * @return array
@@ -35,31 +33,20 @@ if (!defined('XOOPS_ROOT_PATH')) {
 function b_suico_lastpictures_show($options)
 {
     global $xoopsDB, $xoopsModule, $xoopsModuleConfig;
-
     $myts = MyTextSanitizer::getInstance();
-
     $block = [];
-
     /**
      * Filter for fetch votes ishot and isnothot
      */
-
     $criteria = new Criteria('cod_img', 0, '>');
-
     $criteria->setSort('cod_img');
-
     $criteria->setOrder('DESC');
-
     $criteria->setLimit($options[0]);
-
     /**
      * Creating factories of pictures and votes
      */
-
     //$albumFactory      = new ImagesHandler($xoopsDB);
-
     $imageFactory = new Suico\ImageHandler($xoopsDB);
-
     return $imageFactory->getLastPicturesForBlock($options[0]);
 }
 

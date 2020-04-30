@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
@@ -26,32 +25,25 @@ declare(strict_types=1);
 //  along with this program; if not, write to the Free Software              //
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
-
 use Xmf\Request;
 use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
-
 $op = 'form';
-
 //require_once __DIR__ . '/class/suico_controller.php';
 $controller = new Suico\IndexController($xoopsDB, $xoopsUser);
-
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
 $nbSections = $controller->getNumbersSections();
-
 $GLOBALS['xoopsOption']['template_main'] = 'suico_memberslist_datatables.tpl';
 require XOOPS_ROOT_PATH . '/header.php';
 $iamadmin = $xoopsUserIsAdmin;
 $myts     = MyTextSanitizer::getInstance();
 $criteria = new CriteriaCompo();
-
 $criteria->add(new Criteria('level', 0, '>'));
 $validsort = ['uname', 'email', 'last_login', 'user_regdate', 'posts'];
 $sort      = (!in_array($xoopsModuleConfig['sortmembers'], $validsort)) ? 'uname' : $xoopsModuleConfig['sortmembers'];
-
 $order = 'ASC';
 if (isset($xoopsModuleConfig['membersorder']) && 'DESC' == $xoopsModuleConfig['membersorder']) {
     $order = 'DESC';
@@ -72,7 +64,6 @@ $result = $GLOBALS['xoopsDB']->query('SELECT uid, uname FROM ' . $GLOBALS['xoops
 [$latestuid, $latestuser] = $GLOBALS['xoopsDB']->fetchRow($result);
 $xoopsTpl->assign('latestmember', " <a href='" . XOOPS_URL . '/modules/suico/index.php?uid=' . $latestuid . "'>" . $latestuser . '</a>');
 $xoopsTpl->assign('welcomemessage', $xoopsModuleConfig['welcomemessage']);
-
 $xoopsTpl->assign('lang_search', _MD_SUICO_SEARCH);
 $xoopsTpl->assign('lang_results', _MD_SUICO_RESULTS);
 if (0 === $total) {
@@ -98,22 +89,18 @@ if (0 === $total) {
         $criteria->setLimit($limit);
     }
     $foundusers = $memberHandler->getUsers($criteria, true);
-
     foreach (array_keys($foundusers) as $j) {
         $userdata['avatar']   = $foundusers[$j]->getVar('user_avatar');
         $userdata['realname'] = $foundusers[$j]->getVar('name');
         $userdata['name']     = $foundusers[$j]->getVar('uname');
         $userdata['id']       = $foundusers[$j]->getVar('uid');
         $userdata['uid']      = $foundusers[$j]->getVar('uid');
-
         $criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
         $criteriaIsfriend = new CriteriaCompo(new Criteria('friend2_uid', $userdata['uid']));
         $criteriaIsfriend->add($criteria_friends);
         $controller->isFriend = $controller->friendshipsFactory->getCount($criteria_isfriend);
         $userdata['isFriend'] = $controller->isFriend;
-
         $friendrequestFactory = new Suico\FriendrequestHandler($xoopsDB);
-
         $criteria_selfrequest   = new Criteria('friendrequester_uid', $controller->uidOwner);
         $criteria_isselfrequest = new CriteriaCompo(new Criteria('friendrequestto_uid', $userdata['uid']));
         $criteria_isselfrequest->add($criteria_selfrequest);
@@ -125,7 +112,6 @@ if (0 === $total) {
         $xoopsTpl->assign('lang_myfriend', _MD_SUICO_MYFRIEND);
         $xoopsTpl->assign('lang_friendrequestsent', _MD_SUICO_FRIENDREQUEST_SENT);
         $xoopsTpl->assign('lang_friendshipstatus', _MD_SUICO_FRIENDSHIP_STATUS);
-
         $criteria_otherrequest   = new Criteria('friendrequester_uid', $userdata['uid']);
         $criteria_isotherrequest = new CriteriaCompo(new Criteria('friendrequestto_uid', $controller->uidOwner));
         $criteria_isotherrequest->add($criteria_otherrequest);
@@ -134,7 +120,6 @@ if (0 === $total) {
         if ($controller->isOtherRequest > 0) {
             $xoopsTpl->assign('other_uid', $userdata['uid']);
         }
-
         if (1 === $foundusers[$j]->getVar('user_viewemail') || $iamadmin) {
             $userdata['email']        = "<a href='mailto:" . $foundusers[$j]->getVar(
                     'email'
@@ -160,7 +145,6 @@ if (0 === $total) {
         } else {
             $userdata['pmlink'] = '&nbsp;';
         }
-
         if ('' !== $foundusers[$j]->getVar('url', 'E')) {
             $userdata['website'] = "<a href='" . $foundusers[$j]->getVar(
                     'url',
@@ -184,7 +168,6 @@ if (0 === $total) {
                     'uid'
                 ) . "'>" . _DELETE . '</a>';
         }
-
         $userdata['location']     = $foundusers[$j]->getVar('user_from');
         $userdata['occupation']   = $foundusers[$j]->getVar('user_occ');
         $userdata['interest']     = $foundusers[$j]->getVar('user_intrest');
@@ -196,7 +179,6 @@ if (0 === $total) {
             $userdata['rankimage'] = '<img src="' . XOOPS_UPLOAD_URL . '/' . $userrank['image'] . '" alt="">';
         }
         $userdata['ranktitle'] = $userrank['title'];
-
         $uid        = $userdata['id'];
         $groups     = $memberHandler->getGroupsByUser($uid, true);
         $usergroups = [];
@@ -204,7 +186,6 @@ if (0 === $total) {
             $usergroups[] = $group->getVar('name');
         }
         $userdata['groups'] = implode(', ', $usergroups);
-
         $xoopsTpl->append('users', $userdata);
     }
     if ('normal' == $xoopsModuleConfig['memberslisttemplate']) {
@@ -250,12 +231,10 @@ if (0 === $total) {
         }
     }
 }
-
 $xoopsTpl->assign('lang_askusertobefriend', _MD_SUICO_ASKBEFRIEND);
 $xoopsTpl->assign('lang_addfriend', _MD_SUICO_ADDFRIEND);
 $xoopsTpl->assign('lang_friendshippending', _MD_SUICO_FRIENDREQUEST_PENDING);
 $xoopsTpl->assign('lang_cancelfriendrequest', _MD_SUICO_FRIENDREQUEST_CANCEL);
-
 if (isset($_POST['addfriend'])) {
     $newFriendrequest = $friendrequestFactory->create(true);
     $newFriendrequest->setVar('friendrequester_uid', $controller->uidOwner);
@@ -267,15 +246,12 @@ if (isset($_POST['addfriend'])) {
         _MD_SUICO_FRIENDREQUEST_FROM
     );
 }
-
 $memberHandler = xoops_getHandler('member');
 $thisUser      = $memberHandler->getUser($controller->uidOwner);
 $myts          = MyTextSanitizer::getInstance();
-
 //navbar
 $xoopsTpl->assign('lang_mysection', _MD_SUICO_MEMBERSLIST);
 $xoopsTpl->assign('section_name', _MD_SUICO_MEMBERSLIST);
-
 // temporary solution for profile module integration
 if (xoops_isActiveModule('profile')) {
     $profileHandler = $helper->getHandler('Profile');
@@ -291,6 +267,5 @@ if (xoops_isActiveModule('profile')) {
         $profile = $profileHandler->get($uid);
     }
 }
-
 require __DIR__ . '/footer.php';
 require_once XOOPS_ROOT_PATH . '/footer.php';

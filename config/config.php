@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -18,13 +17,11 @@ declare(strict_types=1);
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
-
 $moduleDirName      = basename(
     dirname(__DIR__)
 );
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 require_once dirname(__DIR__) . '/include/common.php';
-
 return (object)[
     'name'           => mb_strtoupper($moduleDirName) . ' ModuleConfigurator',
     'paths'          => [
@@ -55,7 +52,6 @@ return (object)[
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/videos',
         //XOOPS_UPLOAD_PATH . '/flags'
     ],
-
     'copyTestFolders' => [
         [
             XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/testdata/uploads',
@@ -66,7 +62,6 @@ return (object)[
         //                XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/thumbs',
         //            ],
     ],
-
     'templateFolders' => [
         '/templates/',
         //            '/templates/blocks/',
