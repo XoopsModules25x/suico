@@ -32,13 +32,10 @@ if (!\defined(
     exit();
 }
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
-// -------------------------------------------------------------------------
-// ------------------Ishot user handler class -------------------
-// -------------------------------------------------------------------------
 
 /**
  * suico_ishothandler class.
- * This class provides simple mecanisme for Ishot object
+ * This class provides simple mechanism for Ishot object
  */
 class IshotHandler extends XoopsPersistableObjectHandler
 {

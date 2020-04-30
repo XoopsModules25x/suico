@@ -46,7 +46,7 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
 /**
  * suico_friendshiphandler class.
- * This class provides simple mecanisme for Friendship object
+ * This class provides simple mechanism for Friendship object
  */
 class FriendshipHandler extends XoopsPersistableObjectHandler
 {

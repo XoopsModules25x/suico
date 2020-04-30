@@ -31,7 +31,7 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
 /**
  * suico_visitorshandler class.
- * This class provides simple mecanisme for Suico\Visitors object
+ * This class provides simple mechanism for Suico\Visitors object
  */
 class VisitorsHandler extends XoopsPersistableObjectHandler
 {

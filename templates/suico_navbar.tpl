@@ -117,8 +117,8 @@
                                         <{/if}>
 
                                         <{if $allow_usersuspension==1}><{if $isWebmaster==1 }>
-                                            <a href="#" name='show_suspension' id='show_suspension' type="button" title="<{$lang_suspensionadmin}>" class="btn btn-sm btn-primary"><i class="fa fa-close"></i> <{$smarty.const._MD_SUICO_SUSPENDUSER}></a> 
-                                         <{/if}><{/if}>
+                                            <a href="#" name='show_suspension' id='show_suspension' type="button" title="<{$lang_suspensionadmin}>" class="btn btn-sm btn-primary"><i class="fa fa-close"></i> <{$smarty.const._MD_SUICO_SUSPENDUSER}></a>
+                                        <{/if}><{/if}>
 
                                         <{if $allow_usersuspension==1}>
                                             <{if $isWebmaster==1 }>

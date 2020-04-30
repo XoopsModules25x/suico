@@ -39,13 +39,10 @@ use XoopsThemeForm;
 if (!\defined('XOOPS_ROOT_PATH')) {
     die('XOOPS root path not defined');
 }
-// -------------------------------------------------------------------------
-// ------------------Video user handler class -------------------
-// -------------------------------------------------------------------------
 
 /**
  * suico_videohandler class.
- * This class provides simple mecanisme for Video object
+ * This class provides simple mechanism for Video object
  */
 class VideoHandler extends XoopsPersistableObjectHandler
 {
