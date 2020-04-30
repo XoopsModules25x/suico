@@ -184,20 +184,6 @@ switch ($op) {
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
-            //                     echo "<td class='center width5'>
-            //                    <a href='notes.php?op=edit&note_id=".$i."'><img src=".$pathIcon16."/edit.png alt='"._EDIT."' title='"._EDIT."'></a>
-            //                    <a href='notes.php?op=delete&note_id=".$i."'><img src=".$pathIcon16."/delete.png alt='"._DELETE."' title='"._DELETE."'></a>
-            //                    </td>";
-            //                echo "</tr>";
-            //            }
-            //            echo "</table><br><br>";
-            //        } else {
-            //            echo "<table width='100%' cellspacing='1' class='outer'>
-            //                    <tr>
-            //                     <th class='center width5'>".AM_SUICO_FORM_ACTION."XXX</th>
-            //                    </tr><tr><td class='errorMsg' colspan='7'>There are noXXX notes</td></tr>";
-            //            echo "</table><br><br>";
-            //-------------------------------------------
             echo $GLOBALS['xoopsTpl']->fetch(
                 XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar(
                     'dirname'

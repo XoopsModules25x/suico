@@ -28,13 +28,10 @@ use XoopsObject;
 use XoopsPersistableObjectHandler;
 
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
-// -------------------------------------------------------------------------
-// ------------------Suspensions user handler class -------------------
-// -------------------------------------------------------------------------
 
 /**
  * Suspensionshandler class.
- * This class provides simple mecanisme for Suspensions object
+ * This class provides simple mechanism for Suspensions object
  */
 class SuspensionsHandler extends XoopsPersistableObjectHandler
 {

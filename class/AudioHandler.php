@@ -35,7 +35,7 @@ require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 
 /**
  * AudioHandler class.
- * This class provides simple mecanisme for suico_audio object
+ * This class provides simple mechanism for suico_audio object
  */
 class AudioHandler extends XoopsPersistableObjectHandler
 {

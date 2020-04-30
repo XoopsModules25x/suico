@@ -134,8 +134,6 @@ switch ($op) {
         }
         $GLOBALS['xoopsTpl']->assign('configsRows', $configsTempRows);
         $configsArray = [];
-        //    $fields = explode('|', config_id:int:11::NOT NULL::primary:config_id|config_uid:int:11::NOT NULL:::config_uid|pictures:tinyint:1::NOT NULL:::pictures|audio:tinyint:1::NOT NULL:::audio|videos:tinyint:1::NOT NULL:::videos|groups:tinyint:1::NOT NULL:::groups|notes:tinyint:1::NOT NULL:::notes|friends:tinyint:1::NOT NULL:::friends|profile_contact:tinyint:1::NOT NULL:::profile_contact|profile_general:tinyint:1::NOT NULL:::profile_general|profile_stats:tinyint:1::NOT NULL:::profile_stats|suspension:tinyint:1::NOT NULL:::suspension|backup_password:varchar:255::NOT NULL:::backup_password|backup_email:varchar:255::NOT NULL:::backup_email|end_suspension:timestamp:0::NOT NULL:CURRENT_TIMESTAMP::end_suspension);
-        //    $fieldsCount    = count($fields);
         $criteria = new CriteriaCompo();
         //$criteria->setOrder('DESC');
         $criteria->setSort($sort);
@@ -192,20 +190,6 @@ switch ($op) {
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
-            //                     echo "<td class='center width5'>
-            //                    <a href='configs.php?op=edit&config_id=".$i."'><img src=".$pathIcon16."/edit.png alt='"._EDIT."' title='"._EDIT."'></a>
-            //                    <a href='configs.php?op=delete&config_id=".$i."'><img src=".$pathIcon16."/delete.png alt='"._DELETE."' title='"._DELETE."'></a>
-            //                    </td>";
-            //                echo "</tr>";
-            //            }
-            //            echo "</table><br><br>";
-            //        } else {
-            //            echo "<table width='100%' cellspacing='1' class='outer'>
-            //                    <tr>
-            //                     <th class='center width5'>".AM_SUICO_FORM_ACTION."XXX</th>
-            //                    </tr><tr><td class='errorMsg' colspan='16'>There are noXXX configs</td></tr>";
-            //            echo "</table><br><br>";
-            //-------------------------------------------
             echo $GLOBALS['xoopsTpl']->fetch(
                 XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar(
                     'dirname'

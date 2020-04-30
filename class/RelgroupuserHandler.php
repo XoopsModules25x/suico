@@ -28,13 +28,10 @@ use XoopsObject;
 use XoopsPersistableObjectHandler;
 
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
-// -------------------------------------------------------------------------
-// ------------------Relgroupuser user handler class -------------------
-// -------------------------------------------------------------------------
 
 /**
  * suico_relgroupuserhandler class.
- * This class provides simple mecanisme for Relgroupuser object
+ * This class provides simple mechanism for Relgroupuser object
  */
 class RelgroupuserHandler extends XoopsPersistableObjectHandler
 {

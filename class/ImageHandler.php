@@ -46,9 +46,6 @@ if (!\defined('XOOPS_ROOT_PATH')) {
 require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-// -------------------------------------------------------------------------
-// ------------------Image user handler class -------------------
-// -------------------------------------------------------------------------
 
 /**
  * suico_imageshandler class.

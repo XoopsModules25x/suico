@@ -28,23 +28,6 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once XOOPS_ROOT_PATH . '/class/criteria.php';
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-/**
- * Module classes
- */
-//require_once __DIR__ . '/Image.php';
-//require_once __DIR__ . '/Visitors.php';
-//require_once __DIR__ . '/Video.php';
-//require_once __DIR__ . '/Audio.php';
-//require_once __DIR__ . '/Friendrequest.php';
-//require_once __DIR__ . '/Friendship.php';
-//require_once __DIR__ . '/Relgroupuser.php';
-//require_once __DIR__ . '/Groups.php';
-//require_once __DIR__ . '/Notes.php';
-//require_once __DIR__ . '/Configs.php';
-//require_once __DIR__ . '/Suspensions.php';
-//if (str_replace('.', '', PHP_VERSION) > 499) {
-//    require_once __DIR__ . '/Id3v1.php';
-//}
 
 /**
  * Class SuicoAudioController
