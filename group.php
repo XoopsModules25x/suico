@@ -75,6 +75,8 @@ $xoopsTpl->assign('group_title', $group->getVar('group_title'));
 $xoopsTpl->assign('group_desc', $group->getVar('group_desc'));
 $xoopsTpl->assign('group_img', $group->getVar('group_img'));
 $xoopsTpl->assign('group_id', $group->getVar('group_id'));
+$xoopsTpl->assign('group_date_created', formatTimestamp($group->getVar('date_created')));
+$xoopsTpl->assign('group_date_updated', formatTimestamp($group->getVar('date_updated')));
 $xoopsTpl->assign('group_owneruid', $group->getVar('owner_uid'));
 $xoopsTpl->assign('group_ownername', $group_ownername);
 $xoopsTpl->assign('lang_groupdatecreated', _MD_SUICO_GROUPDATECREATED);

@@ -87,7 +87,7 @@ $(document).ready(function () {
 
 });
 
-// in album page show tips effect
+// in notes page show tips effect
 $(document).ready(function () {
     $("a#show_tips").click(function () {
         $("div#xtips").slideToggle("slow");
@@ -99,35 +99,20 @@ $(document).ready(function () {
     $("div#xtips").hide();
 
 });
-// in index.php
+
+// user suspension
 $(document).ready(function () {
-
-    $("div#suico-suspension").hide();
-
-});
-
-$(document).ready(function () {
-    $("img#suico-suspensiontools").toggle(function () {
-        $("div#suico-suspension").show();
-    }, function () {
-        $("div#suico-suspension").hide();
+    $("a#show_suspension").click(function () {
+        $("div#suspension").slideToggle("fast");
     });
 });
 
-
-$(document).ready(function () {
-    $("div#suico-license").hide();
-});
-
 $(document).ready(function () {
 
-//    $("a#suico-license-link").click(function() {
-    $("a#suico-license-link").mouseover(function () {
+    $("div#suspension").hide();
 
-        $("div#suico-license").slideToggle("slow");
-
-    });
 });
+
 
 //close all search results in contributions when the page loads for the first time
 $(document).ready(function () {
