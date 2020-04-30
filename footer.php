@@ -40,13 +40,17 @@ if (false !== mb_stripos($_SERVER['HTTP_USER_AGENT'], 'msie')) {
     );
 }
 //if (stripos($_SERVER['REQUEST_URI'], 'album.php')) {
+//$xoTheme->addStylesheet(
+ //   XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.lightbox-0.3.css'
+//);
 $xoTheme->addStylesheet(
-    XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.lightbox-0.3.css'
+    XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/magnific-popup.css'
 );
 //}
 
 //if (stripos($_SERVER['REQUEST_URI'], 'album.php')) {
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js');
+//$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js');
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.magnific-popup.js');
 //}
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/suico.js');
 //$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/crud.js');
