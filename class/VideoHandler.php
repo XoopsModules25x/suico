@@ -284,8 +284,15 @@ class VideoHandler extends XoopsPersistableObjectHandler
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
 
-            if ('' !== $criteriaElement->getSort()) {
-                $sql .= ' ORDER BY ' . $criteriaElement->getSort() . ' ' . $criteriaElement->getOrder();
+			 $sort = 'video_id';
+			 $order = 'DESC';
+			 
+            //if ('' !== $criteriaElement->getSort()) {
+            //    $sql .= ' ORDER BY ' . $criteriaElement->getSort() . ' ' . $criteriaElement->getOrder();
+            //}
+			
+			if ('' !== $sort) {
+                $sql .= ' ORDER BY ' . $sort . ' ' . $order;
             }
 
             $limit = $criteriaElement->getLimit();
