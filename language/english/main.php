@@ -133,8 +133,8 @@ define('_MD_SUICO_FRIENDMADE', 'Added as a friend!');
 define('_MD_SUICO_FRIENDSHIP_TERMINATED', 'You have broken your friendship with this user!');
 
 ############################################ VIDEOS ############################################################
-//mainvideo.php
-define('_MD_SUICO_SETMAINVIDEO', 'This video is featured on your profile page from now on');
+//featuredvideo.php
+define('_MD_SUICO_SETFEATUREDVIDEO', 'This video is featured on your profile page from now on');
 
 //videos.php
 define('_MD_SUICO_YOUTUBECODE', 'YouTube code');
@@ -147,7 +147,7 @@ define(
 <a href=https://www.youtube.com>YouTube</a> and then add the URL here in'
 ); //The name of the site will show after this
 define('_MD_SUICO_MYVIDEOS', 'My Videos');
-define('_MD_SUICO_MAKEMAIN', 'Feature this video in your main page');
+define('_MD_SUICO_FEATURETHISVIDEO', 'Feature this video in your main page');
 define('_MD_SUICO_NOVIDEOSYET', 'No videos yet!');
 
 //delvideo.php
@@ -291,9 +291,9 @@ define('_MD_SUICO_ASKINGFRIEND', 'Is %s your friend?');
 define('_MD_SUICO_ASKBEFRIEND', 'Ask this user to be your friend?');
 define('_MD_SUICO_EDITPROFILE', 'Edit Profile');
 define('_MD_SUICO_SELECTAVATAR', 'Upload pictures to your album and select one as your avatar.');
-define('_MD_SUICO_SELECTMAINVIDEO', 'Then you can select a video to feature in your profile page');
+define('_MD_SUICO_SELECTFEATUREDVIDEO', 'Then you can select a video to feature in your profile page');
 define('_MD_SUICO_NOAVATARYET', 'No avatar yet');
-define('_MD_SUICO_NOMAINVIDEOYET', 'No featured video yet');
+define('_MD_SUICO_NOFEATUREDVIDEOYET', 'No featured video yet');
 define('_MD_SUICO_MYPROFILE', 'My Profile');
 define('_MD_SUICO_YOU_HAVE_X_FRIENDREQUESTS', 'You have %u requests for friendship.');
 define('_MD_SUICO_CONTACTINFO', 'Contact Info');

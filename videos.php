@@ -57,7 +57,7 @@ if (is_array($videosArray)) {
 } else {
     $xoopsTpl->assign('lang_novideoyet', _MD_SUICO_NOVIDEOSYET);
 }
-$xoopsTpl->assign('lang_selectmainvideo', _MD_SUICO_SELECTMAINVIDEO);
+$xoopsTpl->assign('lang_selectfeaturedvideo', _MD_SUICO_SELECTFEATUREDVIDEO);
 
 if (isset($nbSections['countGroups']) && $nbSections['countGroups'] > 0) {
     $pageNav = $controller->videosNavBar($nbSections['countGroups'], $helper->getConfig('videosperpage'), $start, 2);
@@ -65,7 +65,7 @@ if (isset($nbSections['countGroups']) && $nbSections['countGroups'] > 0) {
 //form actions
 $xoopsTpl->assign('lang_delete', _MD_SUICO_DELETE);
 $xoopsTpl->assign('lang_editvideo', _MD_SUICO_EDIT_VIDEO);
-$xoopsTpl->assign('lang_makemain', _MD_SUICO_MAKEMAIN);
+$xoopsTpl->assign('lang_featurethisvideo', _MD_SUICO_FEATURETHISVIDEO);
 
 //FORM SUBMIT
 $xoopsTpl->assign('lang_addvideos', _MD_SUICO_ADDFAVORITEVIDEOS);

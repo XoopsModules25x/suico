@@ -29,7 +29,7 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
 
-$cod_img = Request::getInt('video_id', 0, 'POST');
+$video_id = Request::getInt('video_id', 0, 'POST');
 
 /**
  * Creating the factory  loading the video changing its caption
@@ -38,8 +38,8 @@ $videoFactory = new Suico\VideoHandler(
     $xoopsDB
 );
 $video        = $videoFactory->create(false);
-$video->load($cod_img);
-$video->setVar('main_video', 1);
+$video->load($video_id);
+$video->setVar('featured_video', 1);
 
 /**
  * Verifying who's the owner to allow changes
@@ -48,9 +48,9 @@ $uid = (int)$xoopsUser->getVar('uid');
 if ($uid === $video->getVar('uid_owner')) {
     if ($videoFactory->unsetAllMainsbyID($uid)) {
         if ($videoFactory->insert2($video)) {
-            redirect_header('videos.php', 2, _MD_SUICO_SETMAINVIDEO);
+            redirect_header('videos.php?uid=' . (int)$xoopsUser->getVar('uid') . '#' . $video_id, 2, _MD_SUICO_SETFEATUREDVIDEO);
         } else {
-            redirect_header('videos.php', 2, _MD_SUICO_SETMAINVIDEO_ERROR);
+            redirect_header('videos.php', 2, _MD_SUICO_ERROR);
         }
     } else {
         echo 'did not work';

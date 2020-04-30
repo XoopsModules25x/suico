@@ -58,7 +58,7 @@ switch ($op) {
 		$videoObject->setVar('video_title', Request::getVar('video_title', ''));
         $videoObject->setVar('video_desc', Request::getVar('video_desc', ''));
         $videoObject->setVar('youtube_code', Request::getVar('youtube_code', ''));
-        $videoObject->setVar('main_video', Request::getVar('main_video', ''));
+        $videoObject->setVar('featured_video', Request::getVar('featured_video', ''));
 
         $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_created', '', 'POST'));
         $videoObject->setVar('date_created', $dateTimeObj->getTimestamp());
@@ -155,7 +155,7 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('videoRows', $videoTempRows);
         $videoArray = [];
 
-        //    $fields = explode('|', video_id:int:11::NOT NULL::primary:video_id|uid_owner:int:11::NOT NULL:::uid_owner|video_desc:text:0::NOT NULL:::video_desc|youtube_code:varchar:11::NOT NULL:::youtube_code|main_video:varchar:1::NOT NULL:::main_video);
+        //    $fields = explode('|', video_id:int:11::NOT NULL::primary:video_id|uid_owner:int:11::NOT NULL:::uid_owner|video_desc:text:0::NOT NULL:::video_desc|youtube_code:varchar:11::NOT NULL:::youtube_code|featured_video:varchar:1::NOT NULL:::featured_video);
         //    $fieldsCount    = count($fields);
 
         $criteria = new CriteriaCompo();
@@ -196,9 +196,9 @@ switch ($op) {
 
                 $videoArray['youtube_code'] = $videoTempArray[$i]->getVar('youtube_code');
 
-                $GLOBALS['xoopsTpl']->assign('selectormain_video', AM_SUICO_VIDEO_MAIN_VIDEO);
+                $GLOBALS['xoopsTpl']->assign('selectorfeatured_video', AM_SUICO_VIDEO_MAIN_VIDEO);
 
-                $videoArray['main_video'] = $videoTempArray[$i]->getVar('main_video');
+                $videoArray['featured_video'] = $videoTempArray[$i]->getVar('featured_video');
 
                 $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_SUICO_VIDEO_DATE_CREATED);
 

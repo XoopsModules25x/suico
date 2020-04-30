@@ -4,7 +4,7 @@
     video_title: 'XOOPS Installation on Ubuntu'
     video_desc: 'How to install XOOPS on Ubuntu'
     youtube_code: b7ryOTbxoJM
-    main_video: '1'
+    featured_video: '1'
     date_created: '1585748818'
     date_updated: '1587649618'
 -
@@ -13,6 +13,6 @@
     video_title: "GraphQL Full Course"
     video_desc: "Novice to Expert\r\nGreat video"
     youtube_code: ed8SzALpx1Q
-    main_video: '0'
+    featured_video: '0'
     date_created: '1585748818'
     date_updated: '1587649618'

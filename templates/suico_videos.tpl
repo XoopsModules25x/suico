@@ -18,7 +18,7 @@
                                     <{$token}>
 
                                     <div class="form-group">
-                                        <label for="video"><{$lang_videohelp}> <{$xoops_sitename}>. <{$lang_selectmainvideo}></label>
+                                        <label for="video"><{$lang_videohelp}> <{$xoops_sitename}>. <{$lang_selectfeaturedvideo}></label>
                                     </div>
 									
 									<div class="form-group">
@@ -73,7 +73,7 @@
                                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<{$videos[i].url}>?rel=0" allowfullscreen></iframe>
                             </div>
                             <div class="alert alert-primary">
-                                <h6><{$videos[i].title}></h6>
+                                <h6 class="text-muted"><{$videos[i].title}></h6>
 								<{$videos[i].desc}>
 								<p class="text-muted"><i class="fa fa-calendar"></i>
                                                         <{if $videos[i].date_created == $videos[i].date_updated}>
@@ -94,10 +94,10 @@
                                         <{$token}>
                                         <input name="submit" type="image" alt="<{$lang_editvideo}>" title="<{$lang_editvideo}>" src="<{xoModuleIcons16 edit.png}>" class="float-left">
                                     </form>
-                                    <form action="mainvideo.php" method="post" id="mainform" class="suico-video-forms">
+                                    <form action="featuredvideo.php" method="post" id="mainform" class="suico-video-forms">
                                         <input type="hidden" value="<{$videos[i].id}>" name="video_id">
                                         <{$token}>
-                                        <input name="submit" type="image" alt="<{$lang_makemain}>" title="<{$lang_makemain}>" src="assets/images/mainvideo.gif" class="float-left">
+                                        <input name="submit" type="image" alt="<{$lang_featurethisvideo}>" title="<{$lang_featurethisvideo}>" src="assets/images/featuredvideo.gif" class="float-left">
                                     </form>
                                 <{/if}>
                                 <br>

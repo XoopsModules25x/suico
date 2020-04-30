@@ -87,7 +87,7 @@ suico_seutubo:
       attributes: ' text  NOT NULL '
     - name: youtube_code
       attributes: ' varchar(11)  NOT NULL '
-    - name: main_video
+    - name: featured_video
       attributes: ' varchar(1)  NOT NULL '
   keys:
     PRIMARY:
