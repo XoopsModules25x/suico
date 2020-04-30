@@ -418,7 +418,8 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         $weight,
         $visible,
         $side,
-        $bcachetime
+        $bcachetime,
+        $bmodule
     ) {
         $myblock = new XoopsBlock($bid);
         $myblock->setVar('title', $title);
@@ -426,6 +427,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         $myblock->setVar('visible', $visible);
         $myblock->setVar('side', $side);
         $myblock->setVar('bcachetime', $bcachetime);
+        $myblock->setVar('bmodule', $bmodule);
         $myblock->store();
     }
 
