@@ -117,14 +117,13 @@
                                         <{/if}>
 
                                         <{if $allow_usersuspension==1}><{if $isWebmaster==1 }>
-                                            <!--<button id="suico-suspensiontools" type="submit" title="<{$lang_suspensionadmin}>" class="btn btn-sm btn-primary"><i class="fa fa-close"></i> <{$smarty.const._MD_SUICO_SUSPENDUSER}></button> -->
-                                            <img id="suico-suspensiontools" src="assets/images/suspend.png" alt="<{$lang_suspensionadmin}>" title="<{$lang_suspensionadmin}>">
-                                        <{/if}><{/if}>
+                                            <a href="#" name='show_suspension' id='show_suspension' type="button" title="<{$lang_suspensionadmin}>" class="btn btn-sm btn-primary"><i class="fa fa-close"></i> <{$smarty.const._MD_SUICO_SUSPENDUSER}></a> 
+                                         <{/if}><{/if}>
 
                                         <{if $allow_usersuspension==1}>
                                             <{if $isWebmaster==1 }>
                                                 <br>
-                                                <div id="suico-suspension" class="alert alert-danger">
+                                                <div id="suspension" name="suspension" class="alert alert-danger">
                                                     <{if $isSuspended==0 }>
                                                         <form action="suspend.php" method="POST" name="suspend_form" id="suspend_form">
                                                         <div class="form-group">
