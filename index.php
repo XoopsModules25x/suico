@@ -169,7 +169,7 @@ $criteriaUidVideo   = new Criteria('uid_owner', $controller->uidOwner);
 $criteria_featuredvideo = new Criteria('featured_video', '1');
 $criteria_video     = new CriteriaCompo($criteria_featuredvideo);
 $criteria_video->add($criteriaUidVideo);
-if ((isset($nbSections['countGroups']) && $nbSections['countGroups'] > 0) && ($videos = $controller->videosFactory->getObjects($criteria_video))) {
+if ((isset($nbSections['countVideos']) && $nbSections['countVideos'] > 0) && ($videos = $controller->videosFactory->getObjects($criteria_video))) {
     $featuredvideocode = $videos[0]->getVar('youtube_code');
 	$featuredvideotitle = $videos[0]->getVar('video_title');
     $featuredvideodesc = $videos[0]->getVar('video_desc');
