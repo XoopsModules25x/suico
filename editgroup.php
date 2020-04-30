@@ -128,14 +128,6 @@ if (1 === $marker && $group->getVar('owner_uid') === $uid) {
         _MD_SUICO_GROUPOWNER
     );
 }
-$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/suico.js');
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/suico.css');
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs.css');
-// what browser they use if IE then add corrective script.
-if (false !== mb_stripos($_SERVER['HTTP_USER_AGENT'], 'msie')) {
-    $xoTheme->addStylesheet(
-        XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs-ie.css'
-    );
-}
+
 require __DIR__ . '/footer.php';
 require dirname(__DIR__, 2) . '/footer.php';
