@@ -30,7 +30,6 @@ use XoopsPersistableObjectHandler;
 
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 require_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';
-
 // -------------------------------------------------------------------------
 // ------------------Notes user handler class -------------------
 // -------------------------------------------------------------------------
@@ -42,12 +41,11 @@ require_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';
 class NotesHandler extends XoopsPersistableObjectHandler
 {
     public $helper;
-
     public $isAdmin;
 
     /**
      * Constructor
-     * @param \XoopsDatabase|null              $xoopsDatabase
+     * @param \XoopsDatabase|null             $xoopsDatabase
      * @param \XoopsModules\Suico\Helper|null $helper
      */
     public function __construct(
@@ -80,7 +78,6 @@ class NotesHandler extends XoopsPersistableObjectHandler
             $obj->unsetNew();
         }
         $obj->helper = $this->helper;
-
         return $obj;
     }
 
@@ -103,10 +100,8 @@ class NotesHandler extends XoopsPersistableObjectHandler
         if (1 === $numrows) {
             $suico_notes = new Notes();
             $suico_notes->assignVars($this->db->fetchArray($result));
-
             return $suico_notes;
         }
-
         return false;
     }
 
@@ -132,14 +127,11 @@ class NotesHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject->cleanVars()) {
             return false;
         }
-
         $noteId = $note_from = $note_to = $date_created = $private = '';
-
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
         //        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
-
         if ($xoopsObject->isNew()) {
             // add / modify a Notes
             $xoopsObject = new Notes();
@@ -184,7 +176,6 @@ class NotesHandler extends XoopsPersistableObjectHandler
             $noteId = $this->db->getInsertId();
         }
         $xoopsObject->assignVar('note_id', $noteId);
-
         return true;
     }
 
@@ -215,7 +206,6 @@ class NotesHandler extends XoopsPersistableObjectHandler
         if (!$result) {
             return false;
         }
-
         return true;
     }
 
@@ -257,7 +247,6 @@ class NotesHandler extends XoopsPersistableObjectHandler
             }
             unset($suico_notes);
         }
-
         return $ret;
     }
 
@@ -279,7 +268,6 @@ class NotesHandler extends XoopsPersistableObjectHandler
             return 0;
         }
         [$count] = $this->db->fetchRow($result);
-
         return (int)$count;
     }
 
@@ -303,7 +291,6 @@ class NotesHandler extends XoopsPersistableObjectHandler
         if (!$result = $this->db->query($sql)) {
             return false;
         }
-
         return true;
     }
 
@@ -330,13 +317,11 @@ class NotesHandler extends XoopsPersistableObjectHandler
             if ('' !== $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
-            $limit = $criteria->getLimit();
-            $start = $criteria->getStart();
-
+            $limit  = $criteria->getLimit();
+            $start  = $criteria->getStart();
             $result = $this->db->query($sql, $limit, $start);
             $vetor  = [];
             $i      = 0;
-
             while (false !== ($myrow = $this->db->fetchArray($result))) {
                 $vetor[$i]['uid']          = $myrow['uid'];
                 $vetor[$i]['uname']        = $myrow['uname'];
@@ -345,10 +330,8 @@ class NotesHandler extends XoopsPersistableObjectHandler
                 $vetor[$i]['text']         = $myts->nl2Br($temptext);
                 $vetor[$i]['id']           = $myrow['note_id'];
                 $vetor[$i]['date_created'] = \formatTimestamp($myrow['date_created'], 's');
-
                 $i++;
             }
-
             return $vetor;
         }
     }

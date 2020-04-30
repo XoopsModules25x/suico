@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -29,17 +28,14 @@ xoops_cp_header();
 $op    = Request::getString('op', 'list');
 $order = Request::getString('order', 'desc');
 $sort  = Request::getString('sort', '');
-
 $adminObject->displayNavigation(basename(__FILE__));
 $permHelper = new Permission();
 $uploadDir  = XOOPS_UPLOAD_PATH . '/suico/images/';
 $uploadUrl  = XOOPS_UPLOAD_URL . '/suico/images/';
-
 switch ($op) {
     case 'new':
         $adminObject->addItemButton(AM_SUICO_FRIENDSHIP_LIST, 'friendships.php', 'list');
         $adminObject->displayButton('left');
-
         $friendshipObject = $friendshipHandler->create();
         $form             = $friendshipObject->getForm();
         $form->display();
@@ -61,16 +57,13 @@ switch ($op) {
         $friendshipObject->setVar('trust', Request::getVar('trust', ''));
         $friendshipObject->setVar('cool', Request::getVar('cool', ''));
         $friendshipObject->setVar('fan', Request::getVar('fan', ''));
-
         $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_created', '', 'POST'));
         $friendshipObject->setVar('date_created', $dateTimeObj->getTimestamp());
         $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_updated', '', 'POST'));
         $friendshipObject->setVar('date_updated', $dateTimeObj->getTimestamp());
-
         if ($friendshipHandler->insert($friendshipObject)) {
             redirect_header('friendships.php?op=list', 2, AM_SUICO_FORMOK);
         }
-
         echo $friendshipObject->getHtmlErrors();
         $form = $friendshipObject->getForm();
         $form->display();
@@ -89,7 +82,6 @@ switch ($op) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('friendships.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
-
             if ($friendshipHandler->delete($friendshipObject)) {
                 redirect_header('friendships.php', 3, AM_SUICO_FORMDELOK);
             } else {
@@ -111,15 +103,12 @@ switch ($op) {
         }
         break;
     case 'clone':
-
         $id_field = Request::getString('friendship_id', '');
-
         if ($utility::cloneRecord('suico_friendships', 'friendship_id', $id_field)) {
             redirect_header('friendships.php', 3, AM_SUICO_CLONED_OK);
         } else {
             redirect_header('friendships.php', 3, AM_SUICO_CLONED_FAILED);
         }
-
         break;
     case 'list':
     default:
@@ -127,8 +116,7 @@ switch ($op) {
         $adminObject->displayButton('left');
         $start                     = Request::getInt('start', 0);
         $friendshipPaginationLimit = $helper->getConfig('userpager');
-
-        $criteria = new CriteriaCompo();
+        $criteria                  = new CriteriaCompo();
         $criteria->setSort('friendship_id ASC, friendship_id');
         $criteria->setOrder('ASC');
         $criteria->setLimit($friendshipPaginationLimit);
@@ -142,145 +130,92 @@ switch ($op) {
         //                    </tr>";
         //            $class = "odd";
         */
-
         // Display Page Navigation
         if ($friendshipTempRows > $friendshipPaginationLimit) {
             xoops_load('XoopsPageNav');
-
             $pagenav = new XoopsPageNav(
                 $friendshipTempRows, $friendshipPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
-
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
-
         $GLOBALS['xoopsTpl']->assign('friendshipRows', $friendshipTempRows);
         $friendshipArray = [];
-
         //    $fields = explode('|', friendship_id:int:11::NOT NULL::primary:friendship_id|friend1_uid:int:11::NOT NULL:::friend1_uid|friend2_uid:int:11::NOT NULL:::friend2_uid|level:int:11::NOT NULL:::level|hot:tinyint:4::NOT NULL:::hot|trust:tinyint:4::NOT NULL:::trust|cool:tinyint:4::NOT NULL:::cool|fan:tinyint:4::NOT NULL:::fan);
         //    $fieldsCount    = count($fields);
-
         $criteria = new CriteriaCompo();
-
         //$criteria->setOrder('DESC');
         $criteria->setSort($sort);
         $criteria->setOrder($order);
         $criteria->setLimit($friendshipPaginationLimit);
         $criteria->setStart($start);
-
         $friendshipCount     = $friendshipHandler->getCount($criteria);
         $friendshipTempArray = $friendshipHandler->getAll($criteria);
-
         //    for ($i = 0; $i < $fieldsCount; ++$i) {
         if ($friendshipCount > 0) {
             foreach (array_keys($friendshipTempArray) as $i) {
                 //        $field = explode(':', $fields[$i]);
-
                 $GLOBALS['xoopsTpl']->assign(
                     'selectorfriendship_id',
                     AM_SUICO_FRIENDSHIP_FRIENDSHIP_ID
                 );
-
                 $friendshipArray['friendship_id'] = $friendshipTempArray[$i]->getVar('friendship_id');
-
                 $GLOBALS['xoopsTpl']->assign('selectorfriend1_uid', AM_SUICO_FRIENDSHIP_FRIEND1_UID);
-
                 $friendshipArray['friend1_uid'] = strip_tags(
                     XoopsUser::getUnameFromId($friendshipTempArray[$i]->getVar('friend1_uid'))
                 );
-
                 $GLOBALS['xoopsTpl']->assign('selectorfriend2_uid', AM_SUICO_FRIENDSHIP_FRIEND2_UID);
-
                 $friendshipArray['friend2_uid'] = strip_tags(
                     XoopsUser::getUnameFromId($friendshipTempArray[$i]->getVar('friend2_uid'))
                 );
-
                 $GLOBALS['xoopsTpl']->assign('selectorlevel', AM_SUICO_FRIENDSHIP_LEVEL);
-
                 $friendshipArray['level'] = $friendshipTempArray[$i]->getVar('level');
-
                 $GLOBALS['xoopsTpl']->assign('selectorhot', AM_SUICO_FRIENDSHIP_HOT);
-
                 $friendshipArray['hot'] = $friendshipTempArray[$i]->getVar('hot');
-
                 $GLOBALS['xoopsTpl']->assign('selectortrust', AM_SUICO_FRIENDSHIP_TRUST);
-
                 $friendshipArray['trust'] = $friendshipTempArray[$i]->getVar('trust');
-
                 $GLOBALS['xoopsTpl']->assign('selectorcool', AM_SUICO_FRIENDSHIP_COOL);
-
                 $friendshipArray['cool'] = $friendshipTempArray[$i]->getVar('cool');
-
                 $GLOBALS['xoopsTpl']->assign('selectorfan', AM_SUICO_FRIENDSHIP_FAN);
-
                 $friendshipArray['fan'] = $friendshipTempArray[$i]->getVar('fan');
-
                 $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_SUICO_FRIENDSHIP_DATE_CREATED);
-
                 $friendshipArray['date_created'] = formatTimestamp($friendshipTempArray[$i]->getVar('date_created'), 's');
-
                 $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_SUICO_FRIENDSHIP_DATE_UPDATED);
-
                 $friendshipArray['date_updated'] = formatTimestamp($friendshipTempArray[$i]->getVar('date_updated'), 's');
-
-                $friendshipArray['edit_delete'] = "<a href='friendships.php?op=edit&friendship_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
+                $friendshipArray['edit_delete']  = "<a href='friendships.php?op=edit&friendship_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='friendships.php?op=delete&friendship_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='friendships.php?op=clone&friendship_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
-
                 $GLOBALS['xoopsTpl']->append_by_ref('friendshipsArray', $friendshipArray);
-
                 unset($friendshipArray);
             }
-
             unset($friendshipTempArray);
-
             // Display Navigation
-
             if ($friendshipCount > $friendshipPaginationLimit) {
                 xoops_load('XoopsPageNav');
-
                 $pagenav = new XoopsPageNav(
                     $friendshipCount, $friendshipPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
-
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
-
             //                     echo "<td class='center width5'>
-
             //                    <a href='friendships.php?op=edit&friendship_id=".$i."'><img src=".$pathIcon16."/edit.png alt='"._EDIT."' title='"._EDIT."'></a>
-
             //                    <a href='friendships.php?op=delete&friendship_id=".$i."'><img src=".$pathIcon16."/delete.png alt='"._DELETE."' title='"._DELETE."'></a>
-
             //                    </td>";
-
             //                echo "</tr>";
-
             //            }
-
             //            echo "</table><br><br>";
-
             //        } else {
-
             //            echo "<table width='100%' cellspacing='1' class='outer'>
-
             //                    <tr>
-
             //                     <th class='center width5'>".AM_SUICO_FORM_ACTION."XXX</th>
-
             //                    </tr><tr><td class='errorMsg' colspan='9'>There are noXXX friendship</td></tr>";
-
             //            echo "</table><br><br>";
-
             //-------------------------------------------
-
             echo $GLOBALS['xoopsTpl']->fetch(
                 XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar(
                     'dirname'
                 ) . '/templates/admin/suico_admin_friendships.tpl'
             );
         }
-
         break;
 }
 require __DIR__ . '/admin_footer.php';

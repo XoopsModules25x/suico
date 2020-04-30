@@ -13,7 +13,6 @@ namespace XoopsModules\Suico\Common;
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
-
 /**
  * @category        Module
  * @package         suico
@@ -41,8 +40,7 @@ use xos_opal_Theme;
  */
 class Breadcrumb
 {
-    public $dirname;
-
+    public  $dirname;
     private $bread = [];
 
     public function __construct()
@@ -56,7 +54,6 @@ class Breadcrumb
      * @param string $title
      * @param string $link
      */
-
     public function addLink(
         $title = '',
         $link = ''
@@ -70,25 +67,17 @@ class Breadcrumb
     /**
      * Render BreadCrumb
      */
-
     public function render()
     {
         if (!isset($GLOBALS['xoTheme']) || !\is_object($GLOBALS['xoTheme'])) {
             require $GLOBALS['xoops']->path('class/theme.php');
-
             $GLOBALS['xoTheme'] = new xos_opal_Theme();
         }
-
         require $GLOBALS['xoops']->path('class/template.php');
-
         $breadcrumbTpl = new XoopsTpl();
-
         $breadcrumbTpl->assign('breadcrumb', $this->bread);
-
         $html = $breadcrumbTpl->fetch('db:' . $this->dirname . '_common_breadcrumb.tpl');
-
         unset($breadcrumbTpl);
-
         return $html;
     }
 }

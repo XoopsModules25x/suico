@@ -32,7 +32,6 @@ $xoTheme->addStylesheet(
 $xoTheme->addStylesheet(
     XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/pagination.css'
 );
-
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.tabs.css');
 // what browser they use if IE then add corrective script.
 if (false !== mb_stripos($_SERVER['HTTP_USER_AGENT'], 'msie')) {
@@ -45,19 +44,16 @@ $xoTheme->addStylesheet(
     XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.lightbox-0.3.css'
 );
 //}
-
 if (!mb_stripos($_SERVER['REQUEST_URI'], 'memberslist.php')) {
     $xoTheme->addScript(
         XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.js'
     );
 }
-
 //if (stripos($_SERVER['REQUEST_URI'], 'album.php')) {
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.lightbox-0.3.js');
 //}
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/suico.js');
 //$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/crud.js');
-
 if (mb_stripos($_SERVER['REQUEST_URI'], 'memberslist.php')) {
     if ('datatables' == $xoopsModuleConfig['memberslisttemplate']) {
         $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.dataTables.css');
@@ -66,7 +62,6 @@ if (mb_stripos($_SERVER['REQUEST_URI'], 'memberslist.php')) {
         $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/dataTables.responsive.min.js');
     }
 }
-
 //permissions
 $xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('notes'));
 $xoopsTpl->assign('allow_friends', $controller->checkPrivilegeBySection('friends'));
@@ -77,23 +72,19 @@ $xoopsTpl->assign('allow_audios', $controller->checkPrivilegeBySection('audio'))
 $xoopsTpl->assign('allow_profile_contact', $controller->checkPrivilege('profile_contact') ? 1 : 0);
 $xoopsTpl->assign('allow_profile_general', $controller->checkPrivilege('profile_general') ? 1 : 0);
 $xoopsTpl->assign('allow_profile_stats', $controller->checkPrivilege('profile_stats') ? 1 : 0);
-
 //Owner data
-
 $xoopsTpl->assign('uid_owner', $controller->uidOwner);
 $xoopsTpl->assign('owner_uname', $controller->nameOwner);
 $xoopsTpl->assign('isOwner', $controller->isOwner);
 $xoopsTpl->assign('isAnonym', $controller->isAnonym);
 $xoopsTpl->assign('isUser', $controller->isUser);
 $xoopsTpl->assign('isFriend', $controller->isFriend);
-
 //Is Webmaster/Administrator
 if ($xoopsUser && $xoopsUser->isAdmin(1)) {
     $xoopsTpl->assign('isWebmaster', '1');
 } else {
     $xoopsTpl->assign('isWebmaster', '0');
 }
-
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
@@ -103,7 +94,6 @@ $xoopsTpl->assign('countVideos', $nbSections['countGroups']);
 $xoopsTpl->assign('countNotes', $nbSections['countNotes']);
 $xoopsTpl->assign('countFriends', $nbSections['countFriends']);
 $xoopsTpl->assign('countAudio', $nbSections['countAudios']);
-
 //navbar
 $xoopsTpl->assign('module_name', $xoopsModule->getVar('name'));
 $xoopsTpl->assign('lang_home', _MD_SUICO_HOME);
@@ -115,22 +105,18 @@ $xoopsTpl->assign('lang_notebook', _MD_SUICO_NOTEBOOK);
 $xoopsTpl->assign('lang_profile', _MD_SUICO_PROFILE);
 $xoopsTpl->assign('lang_groups', _MD_SUICO_GROUPS);
 $xoopsTpl->assign('lang_configs', _MD_SUICO_CONFIGS_TITLE);
-
 //xoopsToken
 $xoopsTpl->assign('token', $GLOBALS['xoopsSecurity']->getTokenHTML());
-
 //page atributes
 $xoopsTpl->assign(
     'xoops_pagetitle',
     sprintf(_MD_SUICO_PAGETITLE, $xoopsModule->getVar('name'), $controller->nameOwner)
 );
-
 //Navbar User Info
 $avatar        = $controller->owner->getVar('user_avatar');
 $memberHandler = xoops_getHandler('member');
 $thisUser      = $memberHandler->getUser($controller->uidOwner);
 $myts          = MyTextSanitizer::getInstance();
-
 $xoopsTpl->assign('user_uname', $thisUser->getVar('uname'));
 $xoopsTpl->assign('user_realname', $thisUser->getVar('name'));
 $xoopsTpl->assign('lang_uname', _US_NICKNAME);
@@ -154,7 +140,6 @@ $xoopsTpl->assign('lang_selectavatar', _MD_SUICO_SELECTAVATAR);
 $xoopsTpl->assign('lang_noavatar', _MD_SUICO_NOAVATARYET);
 $xoopsTpl->assign('user_onlinestatus', $thisUser->isOnline());
 $xoopsTpl->assign('lang_onlinestatus', _MD_SUICO_ONLINESTATUS);
-
 /**
  * Filter for new friend request
  */
@@ -179,9 +164,7 @@ if ($xoopsUser) {
     $criteriaIsfriend->add($criteria_friends);
     $controller->isFriend = $controller->friendshipsFactory->getCount($criteriaIsfriend);
     $xoopsTpl->assign('isFriend', $controller->isFriend);
-
-    $friendrequestFactory = new Suico\FriendrequestHandler($xoopsDB);
-
+    $friendrequestFactory   = new Suico\FriendrequestHandler($xoopsDB);
     $criteria_selfrequest   = new Criteria('friendrequester_uid', $xoopsUser->getVar('uid'));
     $criteria_isselfrequest = new CriteriaCompo(new Criteria('friendrequestto_uid', $controller->uidOwner));
     $criteria_isselfrequest->add($criteria_selfrequest);
@@ -193,7 +176,6 @@ if ($xoopsUser) {
     $xoopsTpl->assign('lang_myfriend', _MD_SUICO_MYFRIEND);
     $xoopsTpl->assign('lang_friendrequestsent', _MD_SUICO_FRIENDREQUEST_SENT);
     $xoopsTpl->assign('lang_friendshipstatus', _MD_SUICO_FRIENDSHIP_STATUS);
-
     $criteria_otherrequest   = new Criteria('friendrequester_uid', $controller->uidOwner);
     $criteria_isotherrequest = new CriteriaCompo(new Criteria('friendrequestto_uid', $xoopsUser->getVar('uid')));
     $criteria_isotherrequest->add($criteria_otherrequest);
@@ -203,9 +185,7 @@ if ($xoopsUser) {
         $xoopsTpl->assign('other_uid', $controller->uidOwner);
     }
 }
-
 $evaluation = $controller->friendshipsFactory->getMoyennes($controller->uidOwner);
-
 //evaluations
 $xoopsTpl->assign('lang_fans', _MD_SUICO_FANS);
 $xoopsTpl->assign('countFans', $evaluation['sumfan']);
@@ -219,7 +199,6 @@ $xoopsTpl->assign('lang_cool', _MD_SUICO_COOL);
 $xoopsTpl->assign('cool', $evaluation['mediacool']);
 $xoopsTpl->assign('cool_rest', 48 - $evaluation['mediacool']);
 $xoopsTpl->assign('allow_fanssevaluation', $helper->getConfig('allow_fanssevaluation'));
-
 //request to become friend
 if (1 === $friendrequest) {
     $xoopsTpl->assign('lang_you_have_x_friendrequests', sprintf(_MD_SUICO_YOU_HAVE_X_FRIENDREQUESTS, $countFriendrequests));
@@ -244,7 +223,6 @@ $xoopsTpl->assign('lang_myfriend', _MD_SUICO_MYFRIEND);
 $xoopsTpl->assign('lang_friendrequestsent', _MD_SUICO_FRIENDREQUEST_SENT);
 $xoopsTpl->assign('lang_acceptfriend', _MD_SUICO_FRIEND_ACCEPT);
 $xoopsTpl->assign('lang_rejectfriend', _MD_SUICO_FRIEND_REJECT);
-
 // Member Suspension
 $xoopsTpl->assign('allow_usersuspension', $xoopsModuleConfig['allow_usersuspension']);
 $xoopsTpl->assign('lang_suspensionadmin', _MD_SUICO_SUSPENSIONADMIN);
@@ -257,7 +235,6 @@ if (0 === $controller->isSuspended) {
     $xoopsTpl->assign('isSuspended', 1);
     $xoopsTpl->assign('lang_suspended', _MD_SUICO_USER_SUSPENDED);
 }
-
 //Memberslist and Search Members
 $xoopsTpl->assign('displayrealname', $xoopsModuleConfig['displayrealname']);
 $xoopsTpl->assign('displayemail', $xoopsModuleConfig['displayemail']);

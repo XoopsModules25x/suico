@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -28,31 +27,26 @@ use XoopsModules\Suico;
  */
 $GLOBALS['xoopsOption']['template_main'] = 'suico_index.tpl';
 require __DIR__ . '/header.php';
-
 /**
  * Modules class includes
  */
 //require_once __DIR__ . '/class/Audio.php';
-
 /**
  * Audio Factory created
  */
 $audioFactory = new Suico\AudioHandler($xoopsDB);
-
-$myts = MyTextSanitizer::getInstance();
+$myts         = MyTextSanitizer::getInstance();
 /**
  * Getting the title
  */
-$title  = Request::getString('title', '', 'POST');
-$author = Request::getString('author', '', 'POST');
+$title       = Request::getString('title', '', 'POST');
+$author      = Request::getString('author', '', 'POST');
 $description = Request::getText('description', '', 'POST');
-
 /**
  * Getting parameters defined in admin side
  */
 $path_upload  = XOOPS_ROOT_PATH . '/uploads/suico/audio/';
 $maxfilebytes = $helper->getConfig('maxfilesize');
-
 /**
  * If we are receiving a file
  */
@@ -63,7 +57,6 @@ if ('sel_audio' === (Request::getArray('xoops_upload_file', '', 'POST')[0])) {
     if (!$GLOBALS['xoopsSecurity']->check()) {
         redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
     }
-
     /**
      * Try to upload the audio file, insert in database, and then redirect to index
      */
@@ -93,7 +86,6 @@ if ('sel_audio' === (Request::getArray('xoops_upload_file', '', 'POST')[0])) {
         );
     }
 }
-
 /**
  * Close page
  */

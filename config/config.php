@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -18,16 +17,14 @@ declare(strict_types=1);
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
-
 $moduleDirName      = basename(
     dirname(__DIR__)
 );
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 require_once dirname(__DIR__) . '/include/common.php';
-
 return (object)[
-    'name'           => mb_strtoupper($moduleDirName) . ' ModuleConfigurator',
-    'paths'          => [
+    'name'            => mb_strtoupper($moduleDirName) . ' ModuleConfigurator',
+    'paths'           => [
         'dirname'    => $moduleDirName,
         'admin'      => XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/admin',
         'modPath'    => XOOPS_ROOT_PATH . '/modules/' . $moduleDirName,
@@ -35,7 +32,7 @@ return (object)[
         'uploadPath' => XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
         'uploadUrl'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName,
     ],
-    'uploadFolders'  => [
+    'uploadFolders'   => [
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/avatars',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images',
@@ -45,7 +42,7 @@ return (object)[
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/videos',
         //XOOPS_UPLOAD_PATH . '/flags'
     ],
-    'copyBlankFiles' => [
+    'copyBlankFiles'  => [
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/avatars',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images',
@@ -55,7 +52,6 @@ return (object)[
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/videos',
         //XOOPS_UPLOAD_PATH . '/flags'
     ],
-
     'copyTestFolders' => [
         [
             XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/testdata/uploads',
@@ -66,7 +62,6 @@ return (object)[
         //                XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/thumbs',
         //            ],
     ],
-
     'templateFolders' => [
         '/templates/',
         //            '/templates/blocks/',

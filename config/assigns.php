@@ -1,9 +1,7 @@
 <?php
 
 declare(strict_types=1);
-
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
-
 $GLOBALS['myalbum_assign_globals'] = [
     'lang_total'           => _ALBM_CAPTION_TOTAL,
     'mod_url'              => $mod_url,
@@ -31,7 +29,6 @@ $GLOBALS['myalbum_assign_globals'] = [
     'canrateview'          => $GLOBALS['global_perms'] && GPERM_RATEVIEW,
     'canratevote'          => $GLOBALS['global_perms'] && GPERM_RATEVOTE,
 ];
-
 //Gnavi
 $gnavi_assign_globals = [
     'mod_url'            => $mod_url,

@@ -21,7 +21,6 @@ namespace XoopsModules\Suico;
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
-
 // defined('XOOPS_ROOT_PATH') || exit("XOOPS root path not defined");
 
 /**
@@ -32,9 +31,7 @@ class Visibility extends \XoopsObject
     public function __construct()
     {
         $this->initVar('field_id', \XOBJ_DTYPE_INT);
-
         $this->initVar('user_group', \XOBJ_DTYPE_INT);
-
         $this->initVar('profile_group', \XOBJ_DTYPE_INT);
     }
 }

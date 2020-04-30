@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -71,7 +70,6 @@ define(
     '_MI_SUICO_MAXFILEBYTES_DESC',
     'This is the maximum size a picture file can be<br> You can set it in bytes like this: 512000 for 500 KB<br> Be careful that the maximum size is also set in the php.ini file. The server is currently set to ' . ini_get('post_max_size')
 );
-
 define('_MI_SUICO_PICTURE_NOTIFYTIT', 'Album');
 define('_MI_SUICO_PICTURE_NOTIFYDSC', "Notifications related to user's album");
 define('_MI_SUICO_PICTURE_NEWPIC_NOTIFY', 'New Picture');
@@ -91,7 +89,6 @@ define('_MI_SUICO_MYFRIENDS', 'My Friends');
 define('_MI_SUICO_FRIENDSPERPAGE_TITLE', 'Friends per page');
 define('_MI_SUICO_FRIENDSPERPAGE_DESC', 'Set the number of friends to show per page<br>In the my Friends page');
 define('_MI_SUICO_PICTURESPERPAGE_TITLE', 'Pictures showing per page before pagination');
-
 define('_MI_SUICO_LAST', 'Last pictures block');
 define('_MI_SUICO_LAST_DESC', 'Last pictures sent independently of the album');
 define('_MI_SUICO_DELETEPHYSICAL_TITLE', 'DELETE files FROM the upload folder TO');
@@ -99,7 +96,6 @@ define(
     '_MI_SUICO_DELETEPHYSICAL_DESC',
     "Confirming yes here, will allow the script to delete the files from the uploaded data in the database as well.<br> Be careful about this feature, if you exclude the files from the folder and not only in the database, some people who may have linked to the image directly in another part of the site may also lose their content;<br> at the same time if you don't exclude them, you may use to much space in the server hard disk.<br>Configure this item well for your needs."
 );
-
 define('_MI_SUICO_MYVIDEOS', 'My Videos');
 define('_MI_SUICO_TEMPLATE_ALBUMDESC', 'Template for the picture gallery');
 define('_MI_SUICO_MYPICTURES', 'My Photos');
@@ -114,7 +110,6 @@ define('_MI_SUICO_TEMPLATE_GROUPSDESC', 'Template for the Groups');
 define('_MI_SUICO_MYNOTES', 'My Notes');
 define('_MI_SUICO_MYGROUPS', 'My Groups');
 define('_MI_SUICO_TEMPLATE_NAVBARDESC', 'Template for the upper navbar used in all pages');
-
 define('_MI_SUICO_VIDEOSPERPAGE_TITLE', 'Videos per Page');
 define('_MI_SUICO_VIDEO_NOTIFYTIT', 'Videos');
 define('_MI_SUICO_VIDEO_NOTIFYDSC', 'Video notifications');
@@ -122,38 +117,32 @@ define('_MI_SUICO_VIDEO_NEWVIDEO_NOTIFY', 'New video');
 define('_MI_SUICO_VIDEO_NEWVIDEO_NOTIFYCAP', 'Notify me when a new video is submitted by this user');
 define('_MI_SUICO_VIDEO_NEWVIDEO_NOTIFYDSC', 'New video notify description');
 define('_MI_SUICO_VIDEO_NEWVIDEO_NOTIFYSBJ', '{X_OWNER_NAME} has submitted a new video to their profile');
-
 define('_MI_SUICO_NOTE_NOTIFYTIT', 'Notes');
 define('_MI_SUICO_NOTE_NOTIFYDSC', 'Notebook notifications');
 define('_MI_SUICO_NOTE_NEWNOTE_NOTIFY', 'New Note');
 define('_MI_SUICO_NOTE_NEWNOTE_NOTIFYCAP', 'Notify me when a new Note is sent to this Notebook');
 define('_MI_SUICO_NOTE_NEWNOTE_NOTIFYDSC', 'New Note notification description');
 define('_MI_SUICO_NOTE_NEWNOTE_NOTIFYSBJ', '{X_OWNER_NAME} has received a new Note into their Notebook');
-
 define('_MI_SUICO_MAINTUBEW_TITLE', 'Main Video width');
 define('_MI_SUICO_MAINTUBEW_DESC', 'Width of the video, which shows in the front page of the module');
 define('_MI_SUICO_MAINTUBEH_TITLE', 'Main Video height');
 define('_MI_SUICO_MAINTUBEH_DESC', 'Height of the video, that shows in the front page of the module');
-
 //24/09/2007
 define('_MI_SUICO_MYCONFIGS', 'My Settings');
 define('_MI_SUICO_TEMPLATE_CONFIGSDESC', 'Template settings for the user');
 define('_MI_SUICO_TEMPLATE_FOOTERDESC', 'Template for the footer of the module');
 define('_MI_SUICO_TEMPLATE_EDITGROUP', 'Template for the Groups page atributes');
 //define('_MI_SUICO_LICENSE', 'Suico by Marcello Brand�o is licensed under a Attribution-No Derivative Works 2.5 Brazil.');
-
 //19/10/2007
 define('_MI_SUICO_GROUPSPERPAGE_TITLE', 'Groups per page');
 define('_MI_SUICO_GROUPSPERPAGE_DESC', 'Groups per page before pagination show up');
 define('_MI_SUICO_TEMPLATE_SEARCHRESULTDESC', 'This template shows the results of a search for comunities');
 define('_MI_SUICO_TEMPLATE_GROUPDESC', 'This template shows a Group and its members');
-
 //22/10/2007
 define('_MI_SUICO_MYPROFILE', 'My Profile');
 define('_MI_SUICO_SEARCH', 'Search Members');
 define('_MI_SUICO_TEMPLATE_SEARCHRESULTSDESC', 'Template for the search results');
 define('_MI_SUICO_TEMPLATE_SEARCHFORMDESC', 'Template for the search form');
-
 //26/10/2007
 define('_MI_SUICO_ENABLEPICT_TITLE', 'Enable pictures section');
 define('_MI_SUICO_ENABLEPICT_DESC', 'Enabling the pictures section for the users, will enable the pictures gallery');
@@ -173,18 +162,14 @@ define(
 );
 define('_MI_SUICO_NOTESPERPAGE_TITLE', 'Number of Notes per page');
 define('_MI_SUICO_NOTESPERPAGE_DESC', 'Number of Notes in a page before the page navigation shows ');
-
 //25/11/2007
 define('_MI_SUICO_FRIENDS', 'My Friends');
 define('_MI_SUICO_FRIENDS_DESC', 'This block shows the user friends');
-
 //26/01/2008
 define('_MI_SUICO_IMGORDER_TITLE', 'Pictures Order');
 define('_MI_SUICO_IMGORDER_DESC', 'Show the newest pictures first?');
-
 //08/04/2008
 define('_MI_SUICO_TEMPLATE_NOTIFICATIONS', 'Template for the notifications');
-
 //11/04/2008
 define('_MI_SUICO_FRIENDSHIP_NOTIFYTIT', 'Friendships');
 define('_MI_SUICO_FRIENDSHIP_NOTIFYDSC', 'Friends Requests');
@@ -192,34 +177,26 @@ define('_MI_SUICO_FRIEND_NEWFRIENDREQUEST_NOTIFY', 'New Friend Requests');
 define('_MI_SUICO_FRIEND_NEWFRIENDREQUEST_NOTIFYCAP', 'Notify me when someone ask for friendship');
 define('_MI_SUICO_FRIEND_NEWFRIENDREQUEST_NOTIFYDSC', 'Notify me when someone ask for friendship');
 define('_MI_SUICO_FRIEND_NEWFRIENDREQUEST_NOTIFYSBJ', 'Someone has just asked to be your friend');
-
 //13/04/2008
 define('_MI_SUICO_TEMPLATE_FANS', 'Template for the fans page');
-
 //17/07/2008
 define('_MI_SUICO_ENABLEAUDIO_TITLE', 'Enable audio section');
 define('_MI_SUICO_ENABLEAUDIO_DESC', 'Enabling audio section for the users, will enable the audio playlist');
 define('_MI_SUICO_TEMPLATE_AUDIOSDESC', 'Template of audios page');
 define('_MI_SUICO_NUMBAUDIO_TITLE', 'Max number of audio for a user');
 define('_MI_SUICO_AUDIOSPERPAGE_TITLE', 'Number of mp3 files per page');
-
 //19/04/2008
 define('_MI_SUICO_MYAUDIOS', 'My Audios');
-
 //3.4
 define('_MI_SUICO_MODULE_NAME', 'Social Network');
 define('_MI_SUICO_NAME', _MI_SUICO_MODULE_NAME);
-
 define('_MI_SUICO_MENU_02', 'Admin');
-
 //Help
 define('_MI_SUICO_DIRNAME', basename(dirname(__DIR__, 2)));
 define('_MI_SUICO_HELP_HEADER', __DIR__ . '/help/helpheader.tpl');
 define('_MI_SUICO_BACK_2_ADMIN', 'Back to Administration of ');
 define('_MI_SUICO_OVERVIEW', 'Overview');
-
 //define('_MI_SUICO_HELP_DIR', __DIR__);
-
 //help multi-page
 define('_MI_SUICO_DISCLAIMER', 'Disclaimer');
 define('_MI_SUICO_LICENSE', 'License');
@@ -246,7 +223,6 @@ define('MI_SUICO_ADMENU18', 'Category');
 define('MI_SUICO_ADMENU19', 'Fields');
 define('MI_SUICO_ADMENU20', 'Reg-Steps');
 define('MI_SUICO_ADMENU21', 'Fields Permission');
-
 //Config
 define('MI_SUICO_EDITOR_ADMIN', 'Editor: Admin');
 define('MI_SUICO_EDITOR_ADMIN_DESC', 'Select the Editor to use by the Admin');
@@ -254,13 +230,11 @@ define('MI_SUICO_EDITOR_USER', 'Editor: User');
 define('MI_SUICO_EDITOR_USER_DESC', 'Select the Editor to use by the User');
 define('MI_SUICO_MIMETYPES', 'Mime Types');
 define('MI_SUICO_MIMETYPES_DESC', 'Set the mime types selected');
-
 // Permissions Groups
 define('MI_SUICO_GROUPS', 'Groups access');
 define('MI_SUICO_GROUPS_DESC', 'Select general access permission for groups.');
 define('MI_SUICO_ADMINGROUPS', 'Admin Group Permissions');
 define('MI_SUICO_ADMINGROUPS_DESC', 'Which groups have access to tools and permissions page');
-
 //3.5
 define('_MI_SUICO_GROUPS_LOGO_WIDTH', 'Group Logo Width');
 define(
@@ -272,7 +246,6 @@ define(
     '_MI_SUICO_GROUPS_LOGO_HEIGHT_DESC',
     'Group Logo Height in pixels<br>This means your logo will be most of this size in height<br>All proportions are maintained'
 );
-
 define('_MI_SUICO_ENABLEFRIENDSHIPLEVEL_TITLE', 'Enable Friendship Level');
 define('_MI_SUICO_ENABLEFRIENDSHIPLEVEL_DESC', 'Options to set level of friendship');
 define('_MI_SUICO_ENABLEFANSSEVALUATION_TITLE', 'Enable Fans Evaluation Ranking');
@@ -284,7 +257,6 @@ define('_MI_SUICO_ENABLEUSERSUSPENSION_TITLE', 'Enable user suspension');
 define('_MI_SUICO_ENABLEUSERSUSPENSION_DESC', 'Option to enable user suspension');
 define('_MI_SUICO_ENABLEGUESTACCESS_TITLE', 'Enable access by Guest');
 define('_MI_SUICO_ENABLEGUESTACCESS_DESC', 'Option to enable access by guest user');
-
 //Config Categories
 define('_MI_SUICO_CONFCAT_NOTES', 'Notes Preferences');
 define('_MI_SUICO_CONFCAT_NOTES_DSC', '');
@@ -312,7 +284,6 @@ define('_MI_SUICO_CONFCAT_GENERAL', 'General Preferences');
 define('_MI_SUICO_CONFCAT_GENERAL_DSC', '');
 define('_MI_SUICO_CONFCAT_COMMENTANDNOTIFICATION', 'Comment & Notification Preferences');
 define('_MI_SUICO_CONFCAT_COMMENTANDNOTIFICATION_DSC', '');
-
 define('_MI_SUICO_MEMBER_LIST_LATESTMEMBER', 'Display Latest Member');
 define('_MI_SUICO_MEMBER_LIST_LATESTMEMBER_DSC', 'Display last register member in index page ?');
 define('_MI_SUICO_MEMBER_LIST_DISPLAYWELCOMEMSG', 'Display Welcome Message');
@@ -338,7 +309,6 @@ define('_MI_SUICO_LASTLOGIN', 'Last login');
 define('_MI_SUICO_POSTS', 'Number of posts');
 define('_MI_SUICO_ASCORDER', 'Ascending order');
 define('_MI_SUICO_DESCORDER', 'Descending order');
-
 define('_MI_SUICO_DISPLAYREALNAME', 'Display Real Name');
 define('_MI_SUICO_DISPLAYREALNAME_DSC', 'Hide or Display Members Real Name');
 define('_MI_SUICO_DISPLAYEMAIL', 'Display Email');
@@ -375,7 +345,6 @@ define('_MI_SUICO_DISPLAYGROUPS', 'Display Groups');
 define('_MI_SUICO_DISPLAYGROUPS_DSC', 'Hide or Display Members Groups');
 define('_MI_SUICO_DISPLAYONLINESTATUS', 'Display Members Online Status');
 define('_MI_SUICO_DISPLAYONLINESTATUS_DSC', 'Hide or Display Members Online Status');
-
 //define('_MI_SUICO_CONFIG_GENERAL', '<h4>:: General Preferences ::</h4>');
 //define('_MI_SUICO_CONFIG_GENERAL_DSC', '');
 //define('_MI_SUICO_CONFIG_NOTES', '<h4>:: Notes Preferences ::</h4>');
@@ -402,54 +371,37 @@ define('_MI_SUICO_DISPLAYONLINESTATUS_DSC', 'Hide or Display Members Online Stat
 //define('_MI_SUICO_CONFIG_ADMIN_DSC', '');
 //define('_MI_SUICO_CONFIG_COMMENTANDNOTIFICATION', '<h4>:: Comment & Notification Preferences ::</h4>');
 //define('_MI_SUICO_CONFIG_COMMENTANDNOTIFICATION_DSC', '');
-
 //Config Categories Styling:
-
 define('_MI_SUICO_CONFIG_STYLING_START', '<span style="color: #FF0000; font-size: Small;  font-weight: bold;">:: ');
 define('_MI_SUICO_CONFIG_STYLING_END', ' ::</span> ');
-
 define('_MI_SUICO_CONFIG_STYLING_DESC_START', '<span style="color: #FF0000; font-size: Small;">');
 define('_MI_SUICO_CONFIG_STYLING_DESC_END', '</span> ');
-
 define('_MI_SUICO_CONFIG_GENERAL', _MI_SUICO_CONFIG_STYLING_START . _MI_SUICO_CONFCAT_GENERAL . _MI_SUICO_CONFIG_STYLING_END);
 define('_MI_SUICO_CONFIG_GENERAL_DSC', _MI_SUICO_CONFIG_STYLING_DESC_START . _MI_SUICO_CONFCAT_GENERAL_DSC . _MI_SUICO_CONFIG_STYLING_DESC_END);
-
 define('_MI_SUICO_CONFIG_NOTES', _MI_SUICO_CONFIG_STYLING_START . _MI_SUICO_CONFCAT_NOTES . _MI_SUICO_CONFIG_STYLING_END);
 define('_MI_SUICO_CONFIG_NOTES_DSC', _MI_SUICO_CONFIG_STYLING_DESC_START . _MI_SUICO_CONFCAT_NOTES_DSC . _MI_SUICO_CONFIG_STYLING_DESC_END);
-
 define('_MI_SUICO_CONFIG_PHOTOS', _MI_SUICO_CONFIG_STYLING_START . _MI_SUICO_CONFCAT_PHOTOS . _MI_SUICO_CONFIG_STYLING_END);
 define('_MI_SUICO_CONFIG_PHOTOS_DSC', _MI_SUICO_CONFIG_STYLING_DESC_START . _MI_SUICO_CONFCAT_PHOTOS_DSC . _MI_SUICO_CONFIG_STYLING_DESC_END);
-
 define('_MI_SUICO_CONFIG_AUDIOS', _MI_SUICO_CONFIG_STYLING_START . _MI_SUICO_CONFCAT_AUDIOS . _MI_SUICO_CONFIG_STYLING_END);
 define('_MI_SUICO_CONFIG_AUDIOS_DSC', _MI_SUICO_CONFIG_STYLING_DESC_START . _MI_SUICO_CONFCAT_AUDIOS_DSC . _MI_SUICO_CONFIG_STYLING_DESC_END);
-
 define('_MI_SUICO_CONFIG_VIDEOS', _MI_SUICO_CONFIG_STYLING_START . _MI_SUICO_CONFCAT_VIDEOS . _MI_SUICO_CONFIG_STYLING_END);
 define('_MI_SUICO_CONFIG_VIDEOS_DSC', _MI_SUICO_CONFIG_STYLING_DESC_START . _MI_SUICO_CONFCAT_VIDEOS_DSC . _MI_SUICO_CONFIG_STYLING_DESC_END);
-
 define('_MI_SUICO_CONFIG_FRIENDS', _MI_SUICO_CONFIG_STYLING_START . _MI_SUICO_CONFCAT_FRIENDS . _MI_SUICO_CONFIG_STYLING_END);
 define('_MI_SUICO_CONFIG_FRIENDS_DSC', _MI_SUICO_CONFIG_STYLING_DESC_START . _MI_SUICO_CONFCAT_FRIENDS_DSC . _MI_SUICO_CONFIG_STYLING_DESC_END);
-
 define('_MI_SUICO_CONFIG_GROUPS', _MI_SUICO_CONFIG_STYLING_START . _MI_SUICO_CONFCAT_GROUPS . _MI_SUICO_CONFIG_STYLING_END);
 define('_MI_SUICO_CONFIG_GROUPS_DSC', _MI_SUICO_CONFIG_STYLING_DESC_START . _MI_SUICO_CONFCAT_GROUPS_DSC . _MI_SUICO_CONFIG_STYLING_DESC_END);
-
 define('_MI_SUICO_CONFIG_EDITOR', _MI_SUICO_CONFIG_STYLING_START . _MI_SUICO_CONFCAT_EDITOR . _MI_SUICO_CONFIG_STYLING_END);
 define('_MI_SUICO_CONFIG_EDITOR_DSC', _MI_SUICO_CONFIG_STYLING_DESC_START . _MI_SUICO_CONFCAT_EDITOR_DSC . _MI_SUICO_CONFIG_STYLING_DESC_END);
-
 define('_MI_SUICO_CONFIG_UPLOAD', _MI_SUICO_CONFIG_STYLING_START . _MI_SUICO_CONFCAT_UPLOAD . _MI_SUICO_CONFIG_STYLING_END);
 define('_MI_SUICO_CONFIG_UPLOAD_DSC', _MI_SUICO_CONFIG_STYLING_DESC_START . _MI_SUICO_CONFCAT_UPLOAD_DSC . _MI_SUICO_CONFIG_STYLING_DESC_END);
-
 define('_MI_SUICO_CONFIG_MEMBER_LIST', _MI_SUICO_CONFIG_STYLING_START . _MI_SUICO_CONFCAT_MEMBERSLIST . _MI_SUICO_CONFIG_STYLING_END);
 define('_MI_SUICO_CONFIG_MEMBER_LIST_DSC', _MI_SUICO_CONFIG_STYLING_DESC_START . _MI_SUICO_CONFCAT_GENERAL_DSC . _MI_SUICO_CONFIG_STYLING_DESC_END);
-
 define('_MI_SUICO_CONFIG_MEMBER_LIST_SEARCH', _MI_SUICO_CONFIG_STYLING_START . _MI_SUICO_CONFCAT_MEMBERSLISTSEARCH . _MI_SUICO_CONFIG_STYLING_END);
 define('_MI_SUICO_CONFIG_MEMBER_LIST_SEARCH_DSC', _MI_SUICO_CONFIG_STYLING_DESC_START . _MI_SUICO_CONFCAT_MEMBERSLISTSEARCH_DSC . _MI_SUICO_CONFIG_STYLING_DESC_END);
-
 define('_MI_SUICO_CONFIG_ADMIN', _MI_SUICO_CONFIG_STYLING_START . _MI_SUICO_CONFCAT_ADMIN . _MI_SUICO_CONFIG_STYLING_END);
 define('_MI_SUICO_CONFIG_ADMIN_DSC', _MI_SUICO_CONFIG_STYLING_DESC_START . _MI_SUICO_CONFCAT_ADMIN_DSC . _MI_SUICO_CONFIG_STYLING_DESC_END);
-
 define('_MI_SUICO_CONFIG_COMMENTANDNOTIFICATION', _MI_SUICO_CONFIG_STYLING_START . _MI_SUICO_CONFCAT_COMMENTANDNOTIFICATION . _MI_SUICO_CONFIG_STYLING_END);
 define('_MI_SUICO_CONFIG_COMMENTANDNOTIFICATION_DSC', _MI_SUICO_CONFIG_STYLING_DESC_START . _MI_SUICO_CONFCAT_COMMENTANDNOTIFICATION_DSC . _MI_SUICO_CONFIG_STYLING_DESC_END);
-
 //Profile Module
 define('_MI_SUICO_EDITACCOUNT', 'Edit Profile');
 define('_MI_SUICO_CHANGEPASS', 'Change Password');
@@ -482,7 +434,6 @@ define('_MI_SUICO_PROFILE_CAPTCHA_STEP1', 'Use Captcha after the second Registra
 define('_MI_SUICO_PROFILE_CAPTCHA_STEP1_DESC', "Select 'Yes' to add extra measure against Spam registration by bots");
 define('_MI_SUICO_EDITPROFILE', 'Edit Profile');
 define('_MI_SUICO_CHANGEAVATAR', 'Change Avatar');
-
 define('MI_SUICO_ADMINPAGER', 'Admin: records / page');
 define('MI_SUICO_ADMINPAGER_DESC', 'Admin: # of records shown per page');
 define('MI_SUICO_USERPAGER', 'User: records / page');

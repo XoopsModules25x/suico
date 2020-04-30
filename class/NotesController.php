@@ -51,61 +51,38 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 class NotesController extends SuicoController
 {
     //  function renderFormNewPost($tpl){
-
     //
-
     //
-
     //
-
     //      $form = new XoopsThemeForm("",'formNoteNew','submitNote.php','post',true);
-
     //      $fieldNote = new XoopsFormTextArea('','text',_MD_SUICO_ENTERTEXTNOTE);
-
     //      $fieldNote->setExtra(' onclick="cleanNoteForm(text,\''._MD_SUICO_ENTERTEXTNOTE.'\')"');
-
     //
-
     //
-
     //      $fieldScrabookUid = new XoopsFormHidden ("uid", $this->uidOwner);
-
     //
-
     //      $submitButton = new XoopsFormButton("","post_Note",_MD_SUICO_SENDNOTE,"submit");
-
     //
-
     //      $form->addElement($fieldScrabookUid);
-
     //      $form->addElement($fieldNote,true);
-
     //      $form->addElement($submitButton);
-
     //
-
     //      //$form->display();
-
     //      $form->assign($tpl);
-
     //  }
-
     /**
      * @param                                      $countNotes
      * @param \CriteriaElement|\CriteriaCompo|null $criteria
      * @return bool|array
      */
-
     public function fetchNotes(
         $countNotes,
         $criteria
     ) {
         $notes = $this->notesFactory->getNotes($countNotes, $criteria);
-
         if ($notes) {
             return $notes;
         }
-
         return false;
     }
 
@@ -113,36 +90,27 @@ class NotesController extends SuicoController
      * @param string $privilegeType
      * @return bool|void
      */
-
     public function checkPrivilege(
         $privilegeType = ''
     ) {
         if (0 === $this->helper->getConfig('enable_notes')) {
             \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, \_MD_SUICO_NOTES_ENABLED_NOT);
         }
-
         if ('sendNotes' === $privilegeType) {
             $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
-
             if (1 === $this->configsFactory->getCount($criteria)) {
                 $configs = $this->configsFactory->getObjects($criteria);
-
-                $config = $configs[0]->getVar('sendNotes');
+                $config  = $configs[0]->getVar('sendNotes');
             }
         }
-
         $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
-
         if (1 === $this->configsFactory->getCount($criteria)) {
             $configs = $this->configsFactory->getObjects($criteria);
-
-            $config = $configs[0]->getVar('notes');
-
+            $config  = $configs[0]->getVar('notes');
             if (!$this->checkPrivilegeLevel($config)) {
                 \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, \_MD_SUICO_NOPRIVILEGE);
             }
         }
-
         return true;
     }
 }

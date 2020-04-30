@@ -18,15 +18,10 @@
  */
 include_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
-
-
-$adminObject->addItemButton( _AM_SUICO_CATEGORY, 'fieldscategory.php?op=new', 'add');
-
+$adminObject->addItemButton(_AM_SUICO_CATEGORY, 'fieldscategory.php?op=new', 'add');
 $adminObject->displayNavigation(basename(__FILE__));
 $adminObject->displayButton('left');
-
 $op = $_REQUEST['op'] ?? (isset($_REQUEST['id']) ? 'edit' : 'list');
-
 /* @var SuicoCategoryHandler $handler */
 $handler = $helper->getHandler('Category');
 switch ($op) {

@@ -72,7 +72,7 @@
                                                 <h5><a href="<{$xoops_url}>/modules/suico/index.php?uid=<{$users[i].id}>"><{$users[i].name}></a></h5>
                                                 <{if $displayavatar == 1}>
                                                     <a href="<{$xoops_url}>/modules/suico/index.php?uid=<{$users[i].id}>"><img src='<{$xoops_url}>/uploads/<{$users[i].avatar}>' class='rounded-circle float-left' title='<{$users[i].name}>' alt='<{$users[i].name}>' style='padding:10px' width='100'
-                                                                                                                                height='100'></a>
+                                                                                                                               height='100'></a>
                                                 <{/if}>
                                                 <{if $displayrealname == 1 && $users[i].realname!=''}>
                                                     <span class="text-muted"><b><{$smarty.const._MD_SUICO_REALNAME}> :</b> <a href="<{$xoops_url}>/modules/suico/index.php?uid=<{$users[i].id}>"><{$users[i].realname}></a></span>

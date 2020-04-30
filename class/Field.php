@@ -21,7 +21,6 @@ namespace XoopsModules\Suico;
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
-
 // defined('XOOPS_ROOT_PATH') || exit("XOOPS root path not defined");
 
 /**
@@ -58,7 +57,6 @@ class Field extends \XoopsObject
      * @param mixed  $value
      * @param bool   $not_gpc
      */
-
     public function setVar($key, $value, $not_gpc = false)
     {
         if ('field_options' === $key && \is_array($value)) {
@@ -66,7 +64,6 @@ class Field extends \XoopsObject
                 $value[$idx] = \base64_encode($value[$idx]);
             }
         }
-
         parent::setVar($key, $value, $not_gpc);
     }
 
@@ -76,57 +73,42 @@ class Field extends \XoopsObject
      *
      * @return mixed
      */
-
     public function getVar($key, $format = 's')
     {
         $value = parent::getVar($key, $format);
-
         if ('field_options' === $key && !empty($value)) {
             foreach (\array_keys($value) as $idx) {
                 $value[$idx] = \base64_decode($value[$idx]);
             }
         }
-
         return $value;
     }
 
     /**
      * Returns a {@link XoopsFormElement} for editing the value of this field
      *
-     * @param \XoopsUser      $user    {@link \XoopsUser} object to edit the value of
-     * @param Profile $profile {@link Profile} object to edit the value of
+     * @param \XoopsUser $user    {@link \XoopsUser} object to edit the value of
+     * @param Profile    $profile {@link Profile} object to edit the value of
      *
      * @return \XoopsFormCheckBox|\XoopsFormDatetime|\XoopsFormDhtmlTextArea|\XoopsFormLabel|\XoopsFormRadio|\XoopsFormRadioYN|\XoopsFormSelect|\XoopsFormSelectGroup|\XoopsFormSelectLang|\XoopsFormSelectTheme|\XoopsFormSelectTimezone|\XoopsFormText|\XoopsFormTextArea|\XoopsFormTextDateSelect
      */
-
     public function getEditElement($user, $profile)
     {
-        $value = \in_array($this->getVar('field_name'), $this->getUserVars()) ? $user->getVar($this->getVar('field_name'), 'e') : $profile->getVar($this->getVar('field_name'), 'e');
-
+        $value   = \in_array($this->getVar('field_name'), $this->getUserVars()) ? $user->getVar($this->getVar('field_name'), 'e') : $profile->getVar($this->getVar('field_name'), 'e');
         $caption = $this->getVar('field_title');
-
         $caption = \defined($caption) ? \constant($caption) : $caption;
-
-        $name = $this->getVar('field_name', 'e');
-
+        $name    = $this->getVar('field_name', 'e');
         $options = $this->getVar('field_options');
-
         if (\is_array($options)) {
             //asort($options);
-
             foreach (\array_keys($options) as $key) {
                 $optval = \defined($options[$key]) ? \constant($options[$key]) : $options[$key];
-
                 $optkey = \defined((string)$key) ? \constant($key) : $key;
-
                 unset($options[$key]);
-
                 $options[$optkey] = $optval;
             }
         }
-
         include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
-
         switch ($this->getVar('field_type')) {
             default:
             case 'autotext':
@@ -148,11 +130,8 @@ class Field extends \XoopsObject
                 //                if (!in_array('', array_keys($options))) {
                 if (!\array_key_exists('', $options)) {
                     $element->addOption('', \_NONE);
-
-                    $eltmsg = empty($caption) ? \sprintf(\_FORM_ENTER, $name) : \sprintf(\_FORM_ENTER, $caption);
-
-                    $eltmsg = \str_replace('"', '\"', \stripslashes($eltmsg));
-
+                    $eltmsg                          = empty($caption) ? \sprintf(\_FORM_ENTER, $name) : \sprintf(\_FORM_ENTER, $caption);
+                    $eltmsg                          = \str_replace('"', '\"', \stripslashes($eltmsg));
                     $element->customValidationCode[] = "\nvar hasSelected = false; var selectBox = myform.{$name};"
                                                        . "for (i = 0; i < selectBox.options.length; i++) { if (selectBox.options[i].selected == true && selectBox.options[i].value != '') { hasSelected = true; break; } }"
                                                        . "if (!hasSelected) { window.alert(\"{$eltmsg}\"); selectBox.focus(); return false; }";
@@ -198,7 +177,6 @@ class Field extends \XoopsObject
                 break;
             case 'rank':
                 $element = new \XoopsFormSelect($caption, $name, $value);
-
                 include_once $GLOBALS['xoops']->path('class/xoopslists.php');
                 $ranks = \XoopsLists::getUserRankList();
                 $element->addOption(0, '--------------');
@@ -208,11 +186,9 @@ class Field extends \XoopsObject
                 $element = new \XoopsFormSelectTheme($caption, $name, $value, 1, true);
                 break;
         }
-
         if ('' != $this->getVar('field_description')) {
             $element->setDescription($this->getVar('field_description'));
         }
-
         return $element;
     }
 
@@ -224,7 +200,6 @@ class Field extends \XoopsObject
      *
      * @return mixed
      **/
-
     public function getOutputValue($user, $profile)
     {
         if (\file_exists($file = $GLOBALS['xoops']->path('modules/suico/language/' . $GLOBALS['xoopsConfig']['language'] . '/modinfo.php'))) {
@@ -232,9 +207,7 @@ class Field extends \XoopsObject
         } else {
             include_once $GLOBALS['xoops']->path('modules/suico/language/english/modinfo.php');
         }
-
         $value = \in_array($this->getVar('field_name'), $this->getUserVars()) ? $user->getVar($this->getVar('field_name')) : $profile->getVar($this->getVar('field_name'));
-
         switch ($this->getVar('field_type')) {
             default:
             case 'textbox':
@@ -242,7 +215,6 @@ class Field extends \XoopsObject
                 if ('url' === $this->getVar('field_name') && '' !== $value) {
                     return '<a href="' . \formatURL($value) . '" rel="external">' . $value . '</a>';
                 }
-
                 return $value;
                 break;
             case 'textarea':
@@ -260,7 +232,6 @@ class Field extends \XoopsObject
                 } else {
                     $value = '';
                 }
-
                 return $value;
                 break;
             case 'select_multi':
@@ -274,14 +245,12 @@ class Field extends \XoopsObject
                         }
                     }
                 }
-
                 return $ret;
                 break;
             case 'group':
                 /* @var XoopsMemberHandler $memberHandler */ $memberHandler = \xoops_getHandler('member');
                 $options                                                    = $memberHandler->getGroupList();
                 $ret                                                        = $options[$value] ?? '';
-
                 return $ret;
                 break;
             case 'group_multi':
@@ -293,7 +262,6 @@ class Field extends \XoopsObject
                         $ret[$key] = \htmlspecialchars($options[$key]);
                     }
                 }
-
                 return $ret;
                 break;
             case 'longdate':
@@ -307,7 +275,6 @@ class Field extends \XoopsObject
                 if (!empty($value)) {
                     return \formatTimestamp($value, 'm');
                 }
-
                 return $value = _MI_SUICO_NEVER_LOGGED_IN;
                 break;
             case 'autotext':
@@ -315,7 +282,6 @@ class Field extends \XoopsObject
                 $value = \str_replace('{X_UID}', $user->getVar('uid'), $value);
                 $value = \str_replace('{X_URL}', XOOPS_URL, $value);
                 $value = \str_replace('{X_UNAME}', $user->getVar('uname'), $value);
-
                 return $value;
                 break;
             case 'rank':
@@ -324,7 +290,6 @@ class Field extends \XoopsObject
                 if (isset($userrank['image']) && '' !== $userrank['image']) {
                     $user_rankimage = '<img src="' . \XOOPS_UPLOAD_URL . '/' . $userrank['image'] . '" alt="' . $userrank['title'] . '" /> ';
                 }
-
                 return $user_rankimage . $userrank['title'];
                 break;
             case 'yesno':
@@ -334,7 +299,6 @@ class Field extends \XoopsObject
                 include_once $GLOBALS['xoops']->path('class/xoopslists.php');
                 $timezones = \XoopsLists::getTimeZoneList();
                 $value     = empty($value) ? '0' : (string)$value;
-
                 return $timezones[\str_replace('.0', '', $value)];
                 break;
         }
@@ -347,7 +311,6 @@ class Field extends \XoopsObject
      *
      * @return mixed
      */
-
     public function getValueForSave($value)
     {
         switch ($this->getVar('field_type')) {
@@ -372,14 +335,12 @@ class Field extends \XoopsObject
                 if ('' !== $value) {
                     return \strtotime($value);
                 }
-
                 return $value;
                 break;
             case 'datetime':
                 if (!empty($value)) {
                     return \strtotime($value['date']) + (int)$value['time'];
                 }
-
                 return $value;
                 break;
         }
@@ -390,14 +351,11 @@ class Field extends \XoopsObject
      *
      * @return array
      */
-
     public function getUserVars()
     {
         /* @var Suico\ProfileHandler $profileHandler */
-
-        $helper = \XoopsModules\Suico\Helper::getInstance();
+        $helper         = \XoopsModules\Suico\Helper::getInstance();
         $profileHandler = $helper->getHandler('Profile');
-
         return $profileHandler->getUserVars();
     }
 }

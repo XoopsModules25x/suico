@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -25,26 +24,21 @@ use XoopsModules\Suico;
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_index.tpl';
 require __DIR__ . '/header.php';
-
 /**
  * Modules class includes
  */
 //require_once __DIR__ . '/class/Friendrequest.php';
-
 /**
  * Factory of friendrequests created
  */
 $friendrequestFactory = new Suico\FriendrequestHandler($xoopsDB);
-
 /**
  * Getting the uid of the user which user want to ask to be friend
  */
 $friendrequestfrom_uid = $_POST['friendrequestfrom_uid'];
-
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
-
 //Verify if the user has already asked for friendship or if the user he s asking to be a friend has already asked him
 $criteria = new CriteriaCompo(
     new Criteria(
@@ -75,14 +69,12 @@ if ($friendrequestFactory->getCount($criteria) > 0) {
 $newFriendrequest = $friendrequestFactory->create(true);
 $newFriendrequest->setVar('friendrequester_uid', $xoopsUser->getVar('uid'));
 $newFriendrequest->setVar('friendrequestto_uid', Request::getInt('friendrequestfrom_uid', 0, 'POST'));
-
 if ($friendrequestFactory->insert2($newFriendrequest)) {
     $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
     $extra_tags['X_OWNER_UID']  = $xoopsUser->getVar('uid');
     /** @var \XoopsNotificationHandler $notificationHandler */
     $notificationHandler = xoops_getHandler('notification');
     $notificationHandler->triggerEvent('friendship', Request::getInt('friendrequestfrom_uid', 0, 'POST'), 'new_friendship', $extra_tags);
-
     redirect_header(
         XOOPS_URL . '/modules/suico/index.php?uid=' . Request::getInt('friendrequestfrom_uid', 0, 'POST'),
         3,
@@ -95,7 +87,6 @@ if ($friendrequestFactory->insert2($newFriendrequest)) {
         _MD_SUICO_ERROR
     );
 }
-
 /**
  * Close page
  */

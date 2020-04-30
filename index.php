@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -29,31 +28,24 @@ use XoopsModules\Suico\IndexController;
  */
 $GLOBALS['xoopsOption']['template_main'] = 'suico_index.tpl';
 require __DIR__ . '/header.php';
-
 $helper->loadLanguage('user');
-
 $controller = new IndexController($xoopsDB, $xoopsUser);
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
 $nbSections = $controller->getNumbersSections();
-
 $uid        = $controller->uidOwner;
 $categories = [];
-
 /* @var  XoopsGroupPermHandler $grouppermHandler */
 $grouppermHandler = xoops_getHandler('groupperm');
 $groups           = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : [XOOPS_GROUP_ANONYMOUS];
-
 if (is_object($GLOBALS['xoopsUser']) && $uid == $GLOBALS['xoopsUser']->getVar('uid')) {
     //disable cache
     $GLOBALS['xoopsConfig']['module_cache'][$GLOBALS['xoopsModule']->getVar('mid')] = 0;
     include $GLOBALS['xoops']->path('header.php');
-
     /* @var XoopsConfigHandler $configHandler */
     $configHandler             = xoops_getHandler('config');
     $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
-
     $GLOBALS['xoopsTpl']->assign('user_ownpage', true);
     if (1 == $GLOBALS['xoopsConfigUser']['self_delete']) {
         $GLOBALS['xoopsTpl']->assign('user_candelete', true);
@@ -67,12 +59,10 @@ if (is_object($GLOBALS['xoopsUser']) && $uid == $GLOBALS['xoopsUser']->getVar('u
     /* @var XoopsMemberHandler $memberHandler */
     $memberHandler = xoops_getHandler('member');
     $thisUser      = $memberHandler->getUser($uid);
-
     // Redirect if not a user or not active and the current user is not admin
     if (!is_object($thisUser) || (!$thisUser->isActive() && (!$GLOBALS['xoopsUser'] || !$GLOBALS['xoopsUser']->isAdmin()))) {
         redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n'), 3, _US_SELECTNG);
     }
-
     /**
      * Access permission check
      *
@@ -93,7 +83,6 @@ if (is_object($GLOBALS['xoopsUser']) && $uid == $GLOBALS['xoopsUser']->getVar('u
     /* @var  XoopsGroupPermHandler $grouppermHandler */
     $grouppermHandler  = xoops_getHandler('groupperm');
     $groups_accessible = $grouppermHandler->getItemIds('profile_access', $groups_xoopsUser, $GLOBALS['xoopsModule']->getVar('mid'));
-
     $rejected = false;
     if ($thisUser->isAdmin()) {
         $rejected = !in_array(XOOPS_GROUP_ADMIN, $groups_accessible);
@@ -102,31 +91,26 @@ if (is_object($GLOBALS['xoopsUser']) && $uid == $GLOBALS['xoopsUser']->getVar('u
     } else {
         $rejected = !in_array(XOOPS_GROUP_USERS, $groups_accessible);
     }
-
     if ($rejected) {
         // redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n'), 3, _NOPERM);
     }
-
     if (is_object($GLOBALS['xoopsUser']) && $GLOBALS['xoopsUser']->isAdmin()) {
         //disable cache
         $GLOBALS['xoopsConfig']['module_cache'][$GLOBALS['xoopsModule']->getVar('mid')] = 0;
     }
     $GLOBALS['xoopsTpl']->assign('user_ownpage', false);
 }
-
 $GLOBALS['xoopsTpl']->assign('user_uid', $thisUser->getVar('uid'));
 if (is_object($GLOBALS['xoopsUser']) && $GLOBALS['xoopsUser']->isAdmin()) {
     $GLOBALS['xoopsTpl']->assign('lang_editprofile', _US_EDITPROFILE);
     $GLOBALS['xoopsTpl']->assign('lang_deleteaccount', _US_DELACCOUNT);
     $GLOBALS['xoopsTpl']->assign('userlevel', $thisUser->isActive());
 }
-
 // Dynamic User Profiles
 $thisUsergroups     = $thisUser->getGroups();
 $visibilityHandler = $helper->getHandler('Visibility');
 //search for visible Fields or null for none
 $field_ids_visible = $visibilityHandler->getVisibleFields($thisUsergroups, $groups);
-
 $profileHandler = $helper->getHandler('Profile');
 $fields          = $profileHandler->loadFields();
 $categoryHandler     = $helper->getHandler('Category');
@@ -134,16 +118,13 @@ $cat_crit        = new CriteriaCompo();
 $cat_crit->setSort('cat_weight');
 $cats = $categoryHandler->getObjects($cat_crit, true, false);
 unset($cat_crit);
-
 $avatar = '';
 if ($thisUser->getVar('user_avatar') && 'blank.gif' !== $thisUser->getVar('user_avatar')) {
     $avatar = XOOPS_UPLOAD_URL . '/' . $thisUser->getVar('user_avatar');
 }
-
 foreach (array_keys($cats) as $i) {
     $categories[$i] = $cats[$i];
 }
-
 $profileHandler = $helper->getHandler('Profile');
 $profile         = $profileHandler->get($thisUser->getVar('uid'));
 // Add dynamic fields
@@ -163,19 +144,15 @@ foreach (array_keys($fields) as $i) {
         $weights[$cat_id][]              = $fields[$i]->getVar('cat_id');
     }
 }
-
 $GLOBALS['xoopsTpl']->assign('categories', $categories);
 // Dynamic user profiles end
-
 $featuredvideocode = '';
 $featuredvideotitle = '';
 $featuredvideodesc = '';
-
 //require_once __DIR__ . '/class/suico_controller.php';
 //if (!@ require_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/user.php') {
 //    require_once XOOPS_ROOT_PATH . '/language/english/user.php';
 //}
-
 /**
  * This variable define the beginning of the navigation must be
  * set here so all calls to database will take this into account
@@ -185,7 +162,6 @@ $start = Request::getInt(
     0,
     'GET'
 );
-
 /**
  * Criteria for featuredvideo
  */
@@ -193,24 +169,20 @@ $criteriaUidVideo   = new Criteria('uid_owner', $controller->uidOwner);
 $criteria_featuredvideo = new Criteria('featured_video', '1');
 $criteria_video     = new CriteriaCompo($criteria_featuredvideo);
 $criteria_video->add($criteriaUidVideo);
-
 if ((isset($nbSections['countGroups']) && $nbSections['countGroups'] > 0) && ($videos = $controller->videosFactory->getObjects($criteria_video))) {
     $featuredvideocode = $videos[0]->getVar('youtube_code');
 	$featuredvideotitle = $videos[0]->getVar('video_title');
     $featuredvideodesc = $videos[0]->getVar('video_desc');
 }
-
 /**
  * Groups
  */
 $criteria_groups = new Criteria('rel_user_uid', $controller->uidOwner);
 $groups          = $controller->relgroupusersFactory->getGroups(8, $criteria_groups);
-
 /**
  * Visitors
  */
 $controller->visitorsFactory->purgeVisits();
-
 if (0 === $controller->isAnonym) {
     /**
      * Fetching last visitors
@@ -227,7 +199,6 @@ if (0 === $controller->isAnonym) {
     $visitorsObjectArray = $controller->visitorsFactory->getObjects(
         $criteria_visitors
     );
-
     /**
      * Lets populate an array with the data from visitors
      */
@@ -238,12 +209,10 @@ if (0 === $controller->isAnonym) {
             if (null !== $visitor) {
                 $indice                 = $visitor->getVar('uid_visitor', 's');
                 $visitorsArray[$indice] = $visitor->getVar('uname_visitor', 's');
-
                 $i++;
             }
         }
     }
-
     $xoopsTpl->assign('visitors', $visitorsArray);
     $xoopsTpl->assign('lang_visitors', _MD_SUICO_VISITORS);
     /*    $criteria_deletevisitors = new criteria('uid_owner',$uid);
@@ -253,26 +222,20 @@ if (0 === $controller->isAnonym) {
         $visitorsFactory->deleteAll($criteria_deletevisitors, true);
     */
 }
-
 $avatar = $controller->owner->getVar('user_avatar');
-
 $memberHandler = xoops_getHandler('member');
 $thisUser      = $memberHandler->getUser($controller->uidOwner);
 $myts          = MyTextSanitizer::getInstance();
-
 //navbar
 $xoopsTpl->assign('lang_mysection', _MD_SUICO_MYPROFILE);
 $xoopsTpl->assign('section_name', _MD_SUICO_PROFILE);
-
 //$xoopsTpl->assign('path_suico_uploads',$helper->getConfig('link_path_upload'));
-
 //groups
 $xoopsTpl->assign('groups', $groups);
 if (isset($nbSections['countGroups']) && $nbSections['countGroups'] <= 0) {
     $xoopsTpl->assign('lang_nogroupsyet', _MD_SUICO_NOGROUPSYET);
 }
 $xoopsTpl->assign('lang_viewallgroups', _MD_SUICO_ALLGROUPS);
-
 //Avatar and Main
 $xoopsTpl->assign('avatar_url', $avatar);
 $xoopsTpl->assign('lang_selectavatar', _MD_SUICO_SELECTAVATAR);
@@ -281,7 +244,6 @@ $xoopsTpl->assign('lang_noavatar', _MD_SUICO_NOAVATARYET);
 $xoopsTpl->assign('lang_nofeaturedvideo', _MD_SUICO_NOFEATUREDVIDEOYET);
 $xoopsTpl->assign('lang_featuredvideo', _MD_SUICO_VIDEO_FEATURED);
 $xoopsTpl->assign('lang_viewallvideos', _MD_SUICO_ALLVIDEOS);
-
 if (isset($nbSections['countGroups']) && $nbSections['countGroups'] > 0) {
     $xoopsTpl->assign('featuredvideocode', $featuredvideocode);
     $xoopsTpl->assign('featuredvideodesc', $featuredvideodesc);
@@ -295,13 +257,11 @@ if (isset($nbSections['countGroups']) && $nbSections['countGroups'] > 0) {
         $helper->getConfig('height_maintube')
     );
 }
-
 /**
  * Friends
  */
 if ($xoopsUser) {
     $controller = new Suico\FriendsController($xoopsDB, $xoopsUser);
-
     $friendrequest = 0;
     if (1 === $controller->isOwner) {
         $criteria_uidfriendrequest = new Criteria('friendrequestto_uid', $controller->uidOwner);
@@ -317,7 +277,6 @@ if ($xoopsUser) {
             $friendrequest          = 1;
         }
     }
-
     //requests to become friend
     if (1 === $friendrequest) {
         $xoopsTpl->assign('lang_you_have_x_friendrequests', sprintf(_MD_SUICO_YOU_HAVE_X_FRIENDREQUESTS, $countFriendrequest));
@@ -335,7 +294,6 @@ if ($xoopsUser) {
         $xoopsTpl->assign('lang_askingfriend', sprintf(_MD_SUICO_ASKINGFRIEND, $linkedpetioner));
     }
 }
-
 $xoopsTpl->assign('lang_askusertobefriend', _MD_SUICO_ASKBEFRIEND);
 $xoopsTpl->assign('lang_addfriend', _MD_SUICO_ADDFRIEND);
 $xoopsTpl->assign('lang_friendrequestpending', _MD_SUICO_FRIENDREQUEST_PENDING);
@@ -343,17 +301,14 @@ $xoopsTpl->assign('lang_myfriend', _MD_SUICO_MYFRIEND);
 $xoopsTpl->assign('lang_friendrequestsent', _MD_SUICO_FRIENDREQUEST_SENT);
 $xoopsTpl->assign('lang_acceptfriend', _MD_SUICO_FRIEND_ACCEPT);
 $xoopsTpl->assign('lang_rejectfriend', _MD_SUICO_FRIEND_REJECT);
-
 $criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
 $friends          = $controller->friendshipsFactory->getFriends(8, $criteria_friends);
 $xoopsTpl->assign('friends', $friends);
 $xoopsTpl->assign('lang_friendstitle', sprintf(_MD_SUICO_FRIENDSTITLE, $controller->nameOwner));
 $xoopsTpl->assign('lang_viewallfriends', _MD_SUICO_ALLFRIENDS);
 $xoopsTpl->assign('lang_nofriendsyet', _MD_SUICO_NOFRIENDSYET);
-
 //search
 $xoopsTpl->assign('lang_usercontributions', _MD_SUICO_USER_CONTRIBUTIONS);
-
 //Profile
 $xoopsTpl->assign('lang_detailsinfo', _MD_SUICO_USER_DETAILS);
 $xoopsTpl->assign('lang_contactinfo', _MD_SUICO_CONTACTINFO);
@@ -366,7 +321,6 @@ $xoopsTpl->assign('lang_delete', _MD_SUICO_DELETE);
 $xoopsTpl->assign('lang_visitors', _MD_SUICO_VISITORS);
 $xoopsTpl->assign('lang_profilevisitors', _MD_SUICO_PROFILEVISITORS);
 $xoopsTpl->assign('lang_editprofile', _MD_SUICO_EDITPROFILE);
-
 $xoopsTpl->assign('user_uname', $thisUser->getVar('uname'));
 $xoopsTpl->assign('user_realname', $thisUser->getVar('name'));
 $xoopsTpl->assign('lang_uname', _US_NICKNAME);
@@ -405,38 +359,32 @@ if (!empty($date)) {
     $xoopsTpl->assign('user_lastlogin', formatTimestamp($date, 'm'));
 }
 $xoopsTpl->assign('lang_notregistered', _US_NOTREGISTERED);
-
 $xoopsTpl->assign('lang_signature', _US_SIGNATURE);
 $var = $thisUser->getVar('user_sig', 'N');
 $xoopsTpl->assign('user_signature', $myts->displayTarea($var, 0, 1, 1));
-
 $xoopsTpl->assign('user_viewemail', $thisUser->getVar('user_viewemail', 'E'));
 if (1 === $thisUser->getVar('user_viewemail')) {
     $xoopsTpl->assign('user_email', $thisUser->getVar('email', 'E'));
 } else {
     $xoopsTpl->assign('user_email', '&nbsp;');
 }
-
 $xoopsTpl->assign('user_onlinestatus', $thisUser->isOnline());
 $xoopsTpl->assign('lang_onlinestatus', _MD_SUICO_ONLINESTATUS);
 $xoopsTpl->assign('uname', $thisUser->getVar('uname'));
 $xoopsTpl->assign('lang_realname', _US_REALNAME);
 $xoopsTpl->assign('name', $thisUser->getVar('name'));
-
 $gpermHandler  = xoops_getHandler('groupperm');
 $groups        = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
 $moduleHandler = xoops_getHandler('module');
 $criteria      = new CriteriaCompo(new Criteria('hassearch', 1));
 $criteria->add(new Criteria('isactive', 1));
 $mids = array_keys($moduleHandler->getList($criteria));
-
 //user rank
 $userrank = $thisUser->rank();
 if ($userrank['image']) {
     $xoopsTpl->assign('user_rankimage', '<img src="' . XOOPS_UPLOAD_URL . '/' . $userrank['image'] . '" alt="">');
 }
 $xoopsTpl->assign('user_ranktitle', $userrank['title']);
-
 foreach ($mids as $mid) {
     if ($gpermHandler->checkRight('module_read', $mid, $groups)) {
         $module   = $moduleHandler->get($mid);
@@ -452,11 +400,9 @@ foreach ($mids as $mid) {
                 } else {
                     $results[$i]['image'] = 'images/icons/posticon2.gif';
                 }
-
                 if (!preg_match("#^http[s]*:\/\/#i", $results[$i]['link'])) {
                     $results[$i]['link'] = 'modules/' . $module->getVar('dirname') . '/' . $results[$i]['link'];
                 }
-
                 $results[$i]['title'] = $myts->htmlSpecialChars($results[$i]['title']);
                 $results[$i]['time']  = $results[$i]['time'] ? formatTimestamp($results[$i]['time']) : '';
             }
@@ -479,6 +425,5 @@ foreach ($mids as $mid) {
         unset($module);
     }
 }
-
 require __DIR__ . '/footer.php';
 require dirname(__DIR__, 2) . '/footer.php';

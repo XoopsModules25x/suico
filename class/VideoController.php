@@ -56,7 +56,6 @@ class VideoController extends SuicoController
      * @param object $criteria
      * @return array of video objects
      */
-
     public function getVideos(
         $criteria
     ) {
@@ -68,17 +67,14 @@ class VideoController extends SuicoController
      * @param int $maxNbVideos the maximum number of videos a user can have
      * @param     $presentNb
      */
-
     public function showFormSubmitVideos(
         $maxNbVideos,
         $presentNb
     ) {
         global $xoopsTpl;
-
         if ($this->isUser) {
             if ((1 === $this->isOwner) && ($maxNbVideos > $presentNb)) {
                 echo '&nbsp;';
-
                 $this->videosFactory->renderFormSubmit($xoopsTpl);
             }
         }
@@ -90,7 +86,6 @@ class VideoController extends SuicoController
      * @param $videos
      * @return bool
      */
-
     public function assignVideoContent(
         $countVideos,
         $videos
@@ -98,30 +93,19 @@ class VideoController extends SuicoController
         if (0 === $countVideos) {
             return false;
         }
-
         /**
          * Lets populate an array with the dati from the videos
          */
-
         $i = 0;
-
         foreach ($videos as $video) {
-            $videosArray[$i]['url'] = $video->getVar('youtube_code', 's');
-			
-			$videosArray[$i]['title'] = $video->getVar('video_title', 's');
-
-            $videosArray[$i]['desc'] = $video->getVar('video_desc', 's');
-
-            $videosArray[$i]['id'] = $video->getVar('video_id', 's');
-			
-			$videosArray[$i]['date_created'] = formatTimestamp($video->getVar('date_created', 's'));
-
-			$videosArray[$i]['date_updated'] = formatTimestamp($video->getVar('date_updated', 's'));
-
-
+            $videosArray[$i]['url']          = $video->getVar('youtube_code', 's');
+            $videosArray[$i]['title']        = $video->getVar('video_title', 's');
+            $videosArray[$i]['desc']         = $video->getVar('video_desc', 's');
+            $videosArray[$i]['id']           = $video->getVar('video_id', 's');
+            $videosArray[$i]['date_created'] = formatTimestamp($video->getVar('date_created', 's'));
+            $videosArray[$i]['date_updated'] = formatTimestamp($video->getVar('date_updated', 's'));
             $i++;
         }
-
         return $videosArray;
     }
 
@@ -134,7 +118,6 @@ class VideoController extends SuicoController
      * @return string|null
      * @return string|null
      */
-
     public function videosNavBar(
         $countVideos,
         $videosPerPage,
@@ -142,32 +125,25 @@ class VideoController extends SuicoController
         $interval
     ) {
         $pageNav = new XoopsPageNav($countVideos, $videosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
-
         return $pageNav->renderImageNav($interval);
     }
 
     /**
      * @return bool|void
      */
-
     public function checkPrivilege()
     {
         if (0 === $this->helper->getConfig('enable_videos')) {
             \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 3, \_MD_SUICO_VIDEOS_ENABLED_NOT);
         }
-
         $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
-
         if (1 === $this->configsFactory->getCount($criteria)) {
             $configs = $this->configsFactory->getObjects($criteria);
-
-            $config = $configs[0]->getVar('videos');
-
+            $config  = $configs[0]->getVar('videos');
             if (!$this->checkPrivilegeLevel($config)) {
                 \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, \_MD_SUICO_NOPRIVILEGE);
             }
         }
-
         return true;
     }
 }

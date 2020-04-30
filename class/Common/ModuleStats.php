@@ -25,10 +25,9 @@ trait ModuleStats
 {
     /**
      * @param \XoopsModules\Suico\Common\Configurator $configurator
-     * @param array                                    $moduleStats
+     * @param array                                   $moduleStats
      * @return array
      */
-
     public static function getModuleStats(
         $configurator,
         $moduleStats
@@ -38,7 +37,6 @@ trait ModuleStats
                 $moduleStats[$i] = $configurator->moduleStats[$i];
             }
         }
-
         return $moduleStats;
     }
 }

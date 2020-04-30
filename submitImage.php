@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -25,19 +24,15 @@ use XoopsModules\Suico;
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_index.tpl';
 require __DIR__ . '/header.php';
-
 //require_once dirname(dirname(__DIR__)) . '/header.php';
-
 /**
  * Modules class includes
  */
 //require_once __DIR__ . '/class/Image.php';
-
 /**
  * Factory of pictures created
  */
 $imageFactory = new Suico\ImageHandler($xoopsDB);
-
 /**
  * Getting the title
  */
@@ -54,7 +49,6 @@ $thumbheight   = $helper->getConfig('thumb_height');
 $maxfilebytes  = $helper->getConfig('maxfilesize');
 $maxfileheight = $helper->getConfig('max_original_height');
 $maxfilewidth  = $helper->getConfig('max_original_width');
-
 /**
  * If we are receiving a file
  */
@@ -100,7 +94,6 @@ if ('sel_photo' === Request::getArray('xoops_upload_file', '', 'POST')[0]) {
         );
     }
 }
-
 /**
  * Close page
  */

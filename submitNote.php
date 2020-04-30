@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -24,24 +23,20 @@ use Xmf\Request;
 use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
-
 /**
  * Modules class includes
  */
 //require_once __DIR__ . '/class/Notes.php';
-
 /**
  * Factories of groups
  */
 $notesFactory = new Suico\NotesHandler($xoopsDB);
-
 /**
  * Verify Token
  */
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
-
 $myts         = MyTextSanitizer::getInstance();
 $notebook_uid = Request::getInt('uid', 0, 'POST');
 $noteText     = $myts->displayTarea(Request::getText('text', '', 'POST'), 0, 1, 1, 1, 1);
@@ -63,7 +58,6 @@ if (1 == $mainform) {
 } else {
     redirect_header('notebook.php?uid=' . $xoopsUser->getVar('uid'), 1, _MD_SUICO_NOTE_SENT);
 }
-
 /**
  * Close page
  */

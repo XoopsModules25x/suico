@@ -49,9 +49,9 @@ $audios      = $controller->getAudio($criteriaUidAudio);
  * If there is no audio files show in template lang_noaudioyet
  */
 if (isset($nbSections[COUNTAUDIOS]) && 0 === $nbSections[COUNTAUDIOS]) {
-        $lang_noaudioyet = _MD_SUICO_NOTHINGYET;
-        $xoopsTpl->assign('lang_nopicyet', $lang_noaudioyet);
-//    echo '<script>alert("Please add some audio files here")</script>';
+    $lang_noaudioyet = _MD_SUICO_NOTHINGYET;
+    $xoopsTpl->assign('lang_nopicyet', $lang_noaudioyet);
+    //    echo '<script>alert("Please add some audio files here")</script>';
 } else {
     /**
      * Lets populate an array with the data from the pictures

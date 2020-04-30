@@ -26,9 +26,8 @@ use Xmf\Module\Helper\Permission;
 use XoopsDatabaseFactory;
 use XoopsObject;
 
-const GROUPID = 'group_id';
+const GROUPID     = 'group_id';
 const SUICOGROUPS = 'suico_groups'; //table
-
 /**
  * Includes of form objects and uploader
  */
@@ -45,41 +44,26 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 class Groups extends XoopsObject
 {
     public $xoopsDb;
-
     public $helper;
-
     public $permHelper;
-
 
     /**
      * Groups constructor.
      * @param null $id
      */
-
     public function __construct($id = null)
     {
         /** @var Helper $helper */
-
-        $this->helper = Helper::getInstance();
-
+        $this->helper     = Helper::getInstance();
         $this->permHelper = new Permission();
-
-        $this->xoopsDb = XoopsDatabaseFactory::getDatabaseConnection();
-
+        $this->xoopsDb    = XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar(GROUPID, \XOBJ_DTYPE_INT, null, false, 10);
-
         $this->initVar('owner_uid', \XOBJ_DTYPE_INT, null, false, 10);
-
         $this->initVar('group_title', \XOBJ_DTYPE_TXTBOX, null, false);
-
         $this->initVar('group_desc', \XOBJ_DTYPE_OTHER, null, false);
-
         $this->initVar('group_img', \XOBJ_DTYPE_TXTBOX, null, false);
-
         $this->initVar('date_created', \XOBJ_DTYPE_INT);
-
         $this->initVar('date_updated', \XOBJ_DTYPE_INT);
-
         if (!empty($id)) {
             if (\is_array($id)) {
                 $this->assignVars($id);
@@ -94,15 +78,11 @@ class Groups extends XoopsObject
     /**
      * @param $id
      */
-
     public function load($id)
     {
-        $sql = 'SELECT * FROM ' . $this->xoopsDb->prefix(SUICOGROUPS) . ' WHERE group_id=' . $id;
-
+        $sql   = 'SELECT * FROM ' . $this->xoopsDb->prefix(SUICOGROUPS) . ' WHERE group_id=' . $id;
         $myrow = $this->xoopsDb->fetchArray($this->xoopsDb->query($sql));
-
         $this->assignVars($myrow);
-
         if (!$myrow) {
             $this->setNew();
         }
@@ -117,7 +97,6 @@ class Groups extends XoopsObject
      * @param int    $start
      * @return array
      */
-
     public function getAllGroups(
         $criteria = [],
         $asobject = false,
@@ -126,42 +105,32 @@ class Groups extends XoopsObject
         $limit = 0,
         $start = 0
     ) {
-        $ret = [];
-
+        $ret        = [];
         $whereQuery = '';
-
         if (\is_array($criteria) && \count($criteria) > 0) {
             $whereQuery = ' WHERE';
-
             foreach ($criteria as $c) {
                 $whereQuery .= " ${c} AND";
             }
-
             $whereQuery = mb_substr($whereQuery, 0, -4);
         } elseif (!\is_array($criteria) && $criteria) {
             $whereQuery = ' WHERE ' . $criteria;
         }
-
         if (!$asobject) {
-            $sql = 'SELECT group_id FROM ' . $this->xoopsDb->prefix(
+            $sql    = 'SELECT group_id FROM ' . $this->xoopsDb->prefix(
                     SUICOGROUPS
                 ) . "${whereQuery} ORDER BY ${sort} ${order}";
-
             $result = $this->xoopsDb->query($sql, $limit, $start);
-
             while (false !== ($myrow = $this->xoopsDb->fetchArray($result))) {
                 $ret[] = $myrow['suico_groups_id'];
             }
         } else {
-            $sql = 'SELECT * FROM ' . $this->xoopsDb->prefix(SUICOGROUPS) . "${whereQuery} ORDER BY ${sort} ${order}";
-
+            $sql    = 'SELECT * FROM ' . $this->xoopsDb->prefix(SUICOGROUPS) . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $this->xoopsDb->query($sql, $limit, $start);
-
             while (false !== ($myrow = $this->xoopsDb->fetchArray($result))) {
                 $ret[] = new self($myrow);
             }
         }
-
         return $ret;
     }
 
@@ -170,7 +139,6 @@ class Groups extends XoopsObject
      *
      * @return \XoopsModules\Suico\Form\GroupsForm
      */
-
     public function getForm()
     {
         return new Form\GroupsForm($this);
@@ -179,7 +147,6 @@ class Groups extends XoopsObject
     /**
      * @return array|null
      */
-
     public function getGroupsRead()
     {
         return $this->permHelper->getGroupsForItem(
@@ -191,7 +158,6 @@ class Groups extends XoopsObject
     /**
      * @return array|null
      */
-
     public function getGroupsSubmit()
     {
         return $this->permHelper->getGroupsForItem(
@@ -203,7 +169,6 @@ class Groups extends XoopsObject
     /**
      * @return array|null
      */
-
     public function getGroupsModeration()
     {
         return $this->permHelper->getGroupsForItem(

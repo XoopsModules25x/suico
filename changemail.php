@@ -21,21 +21,17 @@ use Xmf\Request;
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_email.tpl';
 require __DIR__ . '/header.php';
-
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
 $controller = new IndexController($xoopsDB, $xoopsUser, $xoopsModule);
 $nbSections = $controller->getNumbersSections();
-
 /* @var XoopsConfigHandler $configHandler */
-$configHandler             = xoops_getHandler('config');
+$configHandler              = xoops_getHandler('config');
 $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
-
 if (!$GLOBALS['xoopsUser'] || 1 != $GLOBALS['xoopsConfigUser']['allow_chgmail']) {
     redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/', 2, _NOPERM);
 }
-
 if (!isset($_POST['submit']) || !isset($_POST['passwd'])) {
     //show change password form
     include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
@@ -55,7 +51,6 @@ if (!isset($_POST['submit']) || !isset($_POST['passwd'])) {
     if (!checkEmail($email)) {
         $errors[] = _US_INVALIDMAIL;
     }
-
     if ($errors) {
         $msg = implode('<br>', $errors);
     } else {
@@ -65,7 +60,6 @@ if (!isset($_POST['submit']) || !isset($_POST['passwd'])) {
         $memberHandler = xoops_getHandler('member');
         if ($memberHandler->insertUser($GLOBALS['xoopsUser'])) {
             $msg = _MD_SUICO_EMAILCHANGED;
-
             //send email to new email address
             $xoopsMailer = xoops_getMailer();
             $xoopsMailer->useMail();
@@ -86,8 +80,6 @@ if (!isset($_POST['submit']) || !isset($_POST['passwd'])) {
     }
     redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/index.php?uid=' . $GLOBALS['xoopsUser']->getVar('uid'), 2, $msg);
 }
-
 $xoopsOption['xoops_pagetitle'] = sprintf(_MD_SUICO_CHANGEMAIL, $xoopsModule->getVar('name'), $controller->nameOwner);
-
 require __DIR__ . '/footer.php';
 require dirname(__DIR__, 2) . '/footer.php';

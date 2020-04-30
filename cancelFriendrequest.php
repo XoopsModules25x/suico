@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -29,7 +28,6 @@ require __DIR__ . '/header.php';
  */
 $friendrequestFactory = new Suico\FriendrequestHandler($xoopsDB);
 $friendshipFactory    = new Suico\FriendshipHandler($xoopsDB);
-
 /**
  * Getting the uid of the user which user want to canel friend request
  */
@@ -39,23 +37,15 @@ $friendrequestto_uid = Request::getInt(
     'POST'
 );
 $friendrequester_uid = (int)$xoopsUser->getVar('uid');
-
-$criteria_friend1 = new Criteria('friendrequestto_uid', $friendrequestto_uid);
-$criteria_friend2 = new Criteria('friendrequester_uid', $friendrequester_uid);
-
-$criteria_delete1 = new CriteriaCompo($criteria_friend1);
+$criteria_friend1    = new Criteria('friendrequestto_uid', $friendrequestto_uid);
+$criteria_friend2    = new Criteria('friendrequester_uid', $friendrequester_uid);
+$criteria_delete1    = new CriteriaCompo($criteria_friend1);
 $criteria_delete1->add($criteria_friend2);
-
 $friendrequestFactory->deleteAll($criteria_delete1);
-
 $criteria_friend1 = new Criteria('friendrequestto_uid', $friendrequester_uid);
 $criteria_friend2 = new Criteria('friendrequester_uid', $friendrequestto_uid);
-
 $criteria_delete1 = new CriteriaCompo($criteria_friend1);
 $criteria_delete1->add($criteria_friend2);
-
 $friendrequestFactory->deleteAll($criteria_delete1);
-
 redirect_header('index.php?uid=' . $friendrequestto_uid . '', 3, _MD_SUICO_FRIENDREQUEST_CANCELLED);
-
 require dirname(__DIR__, 2) . '/footer.php';

@@ -19,11 +19,8 @@
  */
 include_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
-
 $adminObject->displayNavigation(basename(__FILE__));
-
-$op = \Xmf\Request::getCmd('op', 'edit');
-
+$op        = \Xmf\Request::getCmd('op', 'edit');
 $perm_desc = '';
 switch ($op) {
     case 'visibility':
@@ -50,7 +47,6 @@ switch ($op) {
         $anonymous     = true;
         break;
 }
-
 include_once $GLOBALS['xoops']->path('/class/xoopsformloader.php');
 $opform    = new XoopsSimpleForm('', 'opform', 'fieldspermissions.php', 'get');
 $op_select = new XoopsFormSelect('', 'op', $op);
@@ -61,7 +57,6 @@ $op_select->addOption('search', _AM_SUICO_PROF_SEARCH);
 $op_select->addOption('access', _AM_SUICO_PROF_ACCESS);
 $opform->addElement($op_select);
 $opform->display();
-
 $module_id = $GLOBALS['xoopsModule']->getVar('mid');
 include_once $GLOBALS['xoops']->path('/class/xoopsform/grouppermform.php');
 $form = new XoopsGroupPermForm($title_of_form, $module_id, $perm_name, $perm_desc, 'admin/fieldspermissions.php?op=' . $op, $anonymous);
@@ -76,8 +71,7 @@ if ('access' === $op) {
     }
 } else {
     $profileHandler = $helper->getHandler('Profile');
-    $fields          = $profileHandler->loadFields();
-
+    $fields         = $profileHandler->loadFields();
     if ('search' !== $op) {
         foreach (array_keys($fields) as $i) {
             if ('' == $restriction || $fields[$i]->getVar($restriction)) {

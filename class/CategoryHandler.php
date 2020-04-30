@@ -31,7 +31,6 @@ class CategoryHandler extends \XoopsPersistableObjectHandler
     /**
      * @param null|\XoopsDatabase $db
      */
-
     public function __construct(\XoopsDatabase $db)
     {
         parent::__construct($db, 'suico_profile_category', Category::class, 'cat_id', 'cat_title');

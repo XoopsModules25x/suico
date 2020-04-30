@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -26,9 +25,7 @@ use XoopsModules\Suico\Common\Migrate;
 
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
-
 $adminObject->displayNavigation(basename(__FILE__));
-
 echo <<<EOF
 <form method="post" class="form-inline">
 <div class="form-group">
@@ -42,33 +39,25 @@ echo <<<EOF
 </div>
 </form>
 EOF;
-
 //XoopsLoad::load('migrate', 'newbb');
-
 $configurator = new Suico\Common\Configurator();
-
-$migrator = new Migrate($configurator);
-
-$op        = Request::getCmd('op', 'default');
-$opShow    = Request::getCmd('show', null, 'POST');
-$opMigrate = Request::getCmd('migrate', null, 'POST');
-$opSchema  = Request::getCmd('schema', null, 'POST');
-$op        = !empty($opShow) ? 'show' : $op;
-$op        = !empty($opMigrate) ? 'migrate' : $op;
-$op        = !empty($opSchema) ? 'schema' : $op;
-
-$message = '';
-
+$migrator     = new Migrate($configurator);
+$op           = Request::getCmd('op', 'default');
+$opShow       = Request::getCmd('show', null, 'POST');
+$opMigrate    = Request::getCmd('migrate', null, 'POST');
+$opSchema     = Request::getCmd('schema', null, 'POST');
+$op           = !empty($opShow) ? 'show' : $op;
+$op           = !empty($opMigrate) ? 'migrate' : $op;
+$op           = !empty($opSchema) ? 'schema' : $op;
+$message      = '';
 switch ($op) {
     case 'show':
         $queue = $migrator->getSynchronizeDDL();
         if (!empty($queue)) {
             echo "<pre>\n";
-
             foreach ($queue as $line) {
                 echo $line . ";\n";
             }
-
             echo "</pre>\n";
         }
         break;
@@ -87,12 +76,9 @@ switch ($op) {
     case 'confirmwrite':
         if ($GLOBALS['xoopsSecurity']->check()) {
             $migrator->saveCurrentSchema();
-
             $message = 'Current schema file written';
         }
         break;
 }
-
 echo "<div>${message}</div>";
-
 require_once __DIR__ . '/admin_footer.php';

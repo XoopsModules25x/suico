@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -11,7 +10,6 @@ declare(strict_types=1);
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
-
 /**
  * @category        Module
  * @package         suico
@@ -19,7 +17,6 @@ declare(strict_types=1);
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
-
 // Blocks & Groups Admin
 define('_AM_TOPPAGE', 'Top Page');
 define('_AM_ALLPAGES', 'All Pages');
@@ -41,5 +38,4 @@ define('_AM_ALLMODULEPAGES', 'Groups');
 define('_AM_SYSTEMLEVEL', '_AM_SYSTEMLEVEL');
 define('_AM_ADMINBLOCK', '_AM_ADMINBLOCK');
 define('_AM_NOTSELNG', 'Not Sel');
-
 define('_AM_BLOCKTAG1', '%s will print %s');
