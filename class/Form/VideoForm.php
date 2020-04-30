@@ -109,8 +109,8 @@ class VideoForm extends XoopsThemeForm
         // Main_video
         $this->addElement(
             new XoopsFormText(
-                \AM_SUICO_VIDEO_MAIN_VIDEO, 'main_video', 50, 255, $this->targetObject->getVar(
-                'main_video'
+                \AM_SUICO_VIDEO_MAIN_VIDEO, 'featured_video', 50, 255, $this->targetObject->getVar(
+                'featured_video'
             )
             ),
             false

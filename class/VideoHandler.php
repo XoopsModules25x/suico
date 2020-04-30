@@ -54,7 +54,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
 
     /**
      * Constructor
-     * @param \XoopsDatabase|null             $xoopsDatabase
+     * @param \XoopsDatabase|null              $xoopsDatabase
      * @param \XoopsModules\Suico\Helper|null $helper
      */
     public function __construct(
@@ -146,32 +146,32 @@ class VideoHandler extends XoopsPersistableObjectHandler
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Video
             $xoopsObject = new Video();
-            $format      = 'INSERT INTO %s (video_id, uid_owner, video_title, video_desc, youtube_code, main_video)';
-            $format      .= 'VALUES (%u, %u, %s, %s, %s, %s)';
-            $sql         = \sprintf(
+            $format = 'INSERT INTO %s (video_id, uid_owner, video_title, video_desc, youtube_code, featured_video)';
+            $format .= 'VALUES (%u, %u, %s, %s, %s, %s)';
+            $sql = \sprintf(
                 $format,
                 $this->db->prefix('suico_videos'),
                 $video_id,
                 $uid_owner,
-                $this->db->quoteString($video_title),
+				$this->db->quoteString($video_title),
                 $this->db->quoteString($video_desc),
                 $this->db->quoteString($youtube_code),
-                $this->db->quoteString($main_video)
+                $this->db->quoteString($featured_video)
             );
-            $force       = true;
+            $force = true;
         } else {
             $format = 'UPDATE %s SET ';
-            $format .= 'video_id=%u, uid_owner=%u, video_title=%s, video_desc=%s, youtube_code=%s, main_video=%s';
+            $format .= 'video_id=%u, uid_owner=%u, video_title=%s, video_desc=%s, youtube_code=%s, featured_video=%s';
             $format .= ' WHERE video_id = %u';
-            $sql    = \sprintf(
+            $sql = \sprintf(
                 $format,
                 $this->db->prefix('suico_videos'),
                 $video_id,
                 $uid_owner,
-                $this->db->quoteString($video_title),
+				 $this->db->quoteString($video_title),
                 $this->db->quoteString($video_desc),
                 $this->db->quoteString($youtube_code),
-                $this->db->quoteString($main_video),
+                $this->db->quoteString($featured_video),
                 $video_id
             );
         }
@@ -233,17 +233,17 @@ class VideoHandler extends XoopsPersistableObjectHandler
         $id_as_key = false,
         $as_object = true
     ) {
-        $ret   = [];
+        $ret = [];
         $limit = $start = 0;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_videos');
+        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_videos');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql   .= ' ' . $criteriaElement->renderWhere();
-            $sort  = 'video_id';
-            $order = 'DESC';
+            $sql .= ' ' . $criteriaElement->renderWhere();
+			 $sort = 'video_id';
+			 $order = 'DESC';
             //if ('' !== $criteriaElement->getSort()) {
             //    $sql .= ' ORDER BY ' . $criteriaElement->getSort() . ' ' . $criteriaElement->getOrder();
             //}
-            if ('' !== $sort) {
+			if ('' !== $sort) {
                 $sql .= ' ORDER BY ' . $sort . ' ' . $order;
             }
             $limit = $criteriaElement->getLimit();
@@ -321,7 +321,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
     public function renderFormSubmit(
         $xoopsTpl
     ) {
-        $form       = new XoopsThemeForm(\_MD_SUICO_ADDFAVORITEVIDEOS, 'form_videos', 'submitVideo.php', 'post', true);
+        $form = new XoopsThemeForm(\_MD_SUICO_ADDFAVORITEVIDEOS, 'form_videos', 'submitVideo.php', 'post', true);
         $field_code = new XoopsFormText(\_MD_SUICO_YOUTUBECODE, 'codigo', 50, 250);
         $field_desc = new XoopsFormTextArea(\_MD_SUICO_CAPTION, 'caption');
         $form->setExtra('enctype="multipart/form-data"');
@@ -344,17 +344,17 @@ class VideoHandler extends XoopsPersistableObjectHandler
      * @return bool TRUE
      */
     public function renderFormEdit(
-        $title,
+		$title,
         $caption,
         $cod_img,
         $filename
     ) {
-        $form        = new XoopsThemeForm(\_MD_SUICO_EDIT_VIDEO, 'form_picture', 'editvideo.php', 'post', true);
-        $field_title = new XoopsFormText($title, 'title', 35, 55);
-        $field_desc  = new XoopsFormText($caption, 'caption', 35, 55);
+        $form = new XoopsThemeForm(\_MD_SUICO_EDIT_VIDEO, 'form_picture', 'editvideo.php', 'post', true);
+		$field_title = new XoopsFormText($title, 'title', 35, 55);
+        $field_desc = new XoopsFormText($caption, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
-        $buttonSend     = new XoopsFormButton('', 'submit_button', \_MD_SUICO_SUBMIT, 'submit');
-        $field_warning  = new XoopsFormLabel(
+        $buttonSend = new XoopsFormButton('', 'submit_button', \_MD_SUICO_SUBMIT, 'submit');
+        $field_warning = new XoopsFormLabel(
             '<object width="425" height="353">
 <param name="movie" value="http://www.youtube.com/v/' . $filename . '"></param>
 <param name="wmode" value="transparent"></param>
@@ -362,9 +362,9 @@ class VideoHandler extends XoopsPersistableObjectHandler
 </object>'
         );
         $field_video_id = new XoopsFormHidden('video_id', $cod_img);
-        $field_marker   = new XoopsFormHidden('marker', 1);
+        $field_marker = new XoopsFormHidden('marker', 1);
         $form->addElement($field_warning);
-        $form->addElement($field_title);
+		$form->addElement($field_title);
         $form->addElement($field_desc);
         $form->addElement($field_video_id, true);
         $form->addElement($field_marker);
@@ -379,7 +379,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
      */
     public function unsetAllMainsbyID($uid_owner = null)
     {
-        $sql = 'UPDATE ' . $this->db->prefix('suico_videos') . ' SET main_video=0 WHERE uid_owner=' . $uid_owner;
+        $sql = 'UPDATE ' . $this->db->prefix('suico_videos') . ' SET featured_video=0 WHERE uid_owner=' . $uid_owner;
         if (!$result = $this->db->query($sql)) {
             return false;
         }

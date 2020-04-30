@@ -93,7 +93,7 @@ suico_videos:
             attributes: ' text  NOT NULL '
         -   name: youtube_code
             attributes: ' varchar(11)  NOT NULL '
-    - name: main_video
+        -   name: featured_video
             attributes: ' tinyint(1)  NOT NULL  DEFAULT ''0'' '
     - name: date_created
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '

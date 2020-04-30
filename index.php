@@ -44,7 +44,7 @@ if (is_object($GLOBALS['xoopsUser']) && $uid == $GLOBALS['xoopsUser']->getVar('u
     $GLOBALS['xoopsConfig']['module_cache'][$GLOBALS['xoopsModule']->getVar('mid')] = 0;
     include $GLOBALS['xoops']->path('header.php');
     /* @var XoopsConfigHandler $configHandler */
-    $configHandler              = xoops_getHandler('config');
+    $configHandler             = xoops_getHandler('config');
     $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
     $GLOBALS['xoopsTpl']->assign('user_ownpage', true);
     if (1 == $GLOBALS['xoopsConfigUser']['self_delete']) {
@@ -83,7 +83,7 @@ if (is_object($GLOBALS['xoopsUser']) && $uid == $GLOBALS['xoopsUser']->getVar('u
     /* @var  XoopsGroupPermHandler $grouppermHandler */
     $grouppermHandler  = xoops_getHandler('groupperm');
     $groups_accessible = $grouppermHandler->getItemIds('profile_access', $groups_xoopsUser, $GLOBALS['xoopsModule']->getVar('mid'));
-    $rejected          = false;
+    $rejected = false;
     if ($thisUser->isAdmin()) {
         $rejected = !in_array(XOOPS_GROUP_ADMIN, $groups_accessible);
     } elseif ($groups_thisUser_nonbasic) {
@@ -107,14 +107,14 @@ if (is_object($GLOBALS['xoopsUser']) && $GLOBALS['xoopsUser']->isAdmin()) {
     $GLOBALS['xoopsTpl']->assign('userlevel', $thisUser->isActive());
 }
 // Dynamic User Profiles
-$thisUsergroups    = $thisUser->getGroups();
+$thisUsergroups     = $thisUser->getGroups();
 $visibilityHandler = $helper->getHandler('Visibility');
 //search for visible Fields or null for none
 $field_ids_visible = $visibilityHandler->getVisibleFields($thisUsergroups, $groups);
-$profileHandler    = $helper->getHandler('Profile');
-$fields            = $profileHandler->loadFields();
-$categoryHandler   = $helper->getHandler('Category');
-$cat_crit          = new CriteriaCompo();
+$profileHandler = $helper->getHandler('Profile');
+$fields          = $profileHandler->loadFields();
+$categoryHandler     = $helper->getHandler('Category');
+$cat_crit        = new CriteriaCompo();
 $cat_crit->setSort('cat_weight');
 $cats = $categoryHandler->getObjects($cat_crit, true, false);
 unset($cat_crit);
@@ -126,7 +126,7 @@ foreach (array_keys($cats) as $i) {
     $categories[$i] = $cats[$i];
 }
 $profileHandler = $helper->getHandler('Profile');
-$profile        = $profileHandler->get($thisUser->getVar('uid'));
+$profile         = $profileHandler->get($thisUser->getVar('uid'));
 // Add dynamic fields
 foreach (array_keys($fields) as $i) {
     //If field is not visible, skip
@@ -146,8 +146,9 @@ foreach (array_keys($fields) as $i) {
 }
 $GLOBALS['xoopsTpl']->assign('categories', $categories);
 // Dynamic user profiles end
-$mainvideocode = '';
-$mainvideodesc = '';
+$featuredvideocode = '';
+$featuredvideotitle = '';
+$featuredvideodesc = '';
 //require_once __DIR__ . '/class/suico_controller.php';
 //if (!@ require_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/user.php') {
 //    require_once XOOPS_ROOT_PATH . '/language/english/user.php';
@@ -162,15 +163,16 @@ $start = Request::getInt(
     'GET'
 );
 /**
- * Criteria for mainvideo
+ * Criteria for featuredvideo
  */
 $criteriaUidVideo   = new Criteria('uid_owner', $controller->uidOwner);
-$criteria_mainvideo = new Criteria('main_video', '1');
-$criteria_video     = new CriteriaCompo($criteria_mainvideo);
+$criteria_featuredvideo = new Criteria('featured_video', '1');
+$criteria_video     = new CriteriaCompo($criteria_featuredvideo);
 $criteria_video->add($criteriaUidVideo);
 if ((isset($nbSections['countGroups']) && $nbSections['countGroups'] > 0) && ($videos = $controller->videosFactory->getObjects($criteria_video))) {
-    $mainvideocode = $videos[0]->getVar('youtube_code');
-    $mainvideodesc = $videos[0]->getVar('video_desc');
+    $featuredvideocode = $videos[0]->getVar('youtube_code');
+	$featuredvideotitle = $videos[0]->getVar('video_title');
+    $featuredvideodesc = $videos[0]->getVar('video_desc');
 }
 /**
  * Groups
@@ -220,7 +222,7 @@ if (0 === $controller->isAnonym) {
         $visitorsFactory->deleteAll($criteria_deletevisitors, true);
     */
 }
-$avatar        = $controller->owner->getVar('user_avatar');
+$avatar = $controller->owner->getVar('user_avatar');
 $memberHandler = xoops_getHandler('member');
 $thisUser      = $memberHandler->getUser($controller->uidOwner);
 $myts          = MyTextSanitizer::getInstance();
@@ -237,14 +239,15 @@ $xoopsTpl->assign('lang_viewallgroups', _MD_SUICO_ALLGROUPS);
 //Avatar and Main
 $xoopsTpl->assign('avatar_url', $avatar);
 $xoopsTpl->assign('lang_selectavatar', _MD_SUICO_SELECTAVATAR);
-$xoopsTpl->assign('lang_selectmainvideo', _MD_SUICO_SELECTMAINVIDEO);
+$xoopsTpl->assign('lang_selectfeaturedvideo', _MD_SUICO_SELECTFEATUREDVIDEO);
 $xoopsTpl->assign('lang_noavatar', _MD_SUICO_NOAVATARYET);
-$xoopsTpl->assign('lang_nomainvideo', _MD_SUICO_NOMAINVIDEOYET);
+$xoopsTpl->assign('lang_nofeaturedvideo', _MD_SUICO_NOFEATUREDVIDEOYET);
 $xoopsTpl->assign('lang_featuredvideo', _MD_SUICO_VIDEO_FEATURED);
 $xoopsTpl->assign('lang_viewallvideos', _MD_SUICO_ALLVIDEOS);
 if (isset($nbSections['countGroups']) && $nbSections['countGroups'] > 0) {
-    $xoopsTpl->assign('mainvideocode', $mainvideocode);
-    $xoopsTpl->assign('mainvideodesc', $mainvideodesc);
+    $xoopsTpl->assign('featuredvideocode', $featuredvideocode);
+    $xoopsTpl->assign('featuredvideodesc', $featuredvideodesc);
+	$xoopsTpl->assign('featuredvideotitle', $featuredvideotitle);
     $xoopsTpl->assign(
         'width',
         $helper->getConfig('width_maintube')
@@ -258,14 +261,14 @@ if (isset($nbSections['countGroups']) && $nbSections['countGroups'] > 0) {
  * Friends
  */
 if ($xoopsUser) {
-    $controller    = new Suico\FriendsController($xoopsDB, $xoopsUser);
+    $controller = new Suico\FriendsController($xoopsDB, $xoopsUser);
     $friendrequest = 0;
     if (1 === $controller->isOwner) {
         $criteria_uidfriendrequest = new Criteria('friendrequestto_uid', $controller->uidOwner);
         $newFriendrequest          = $controller->friendrequestFactory->getObjects($criteria_uidfriendrequest);
         if ($newFriendrequest) {
             $countFriendrequest     = count($newFriendrequest);
-            $memberHandler          = xoops_getHandler('member');
+            $memberHandler = xoops_getHandler('member');
             $friendrequester        = $memberHandler->getUser($newFriendrequest[0]->getVar('friendrequester_uid'));
             $friendrequester_uid    = $friendrequester->getVar('uid');
             $friendrequester_uname  = $friendrequester->getVar('uname');
