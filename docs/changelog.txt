@@ -8,7 +8,7 @@
 - Make suico the main userpage on install (liomj)
 - Add Caption in Album (liomj)
 - Add Dates in Album and Audio Templates (liomj/mamba)
-- Add group total members (liomj)
+- Add date created & group total members (liomj/mamba)
 - Fix Group Pagination (liomj)
 - New Private Message alert in Navbar (liomj)
 - Add Cancel Friend Request Option (liomj)
