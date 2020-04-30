@@ -36,7 +36,7 @@ $nbSections = $controller->getNumbersSections();
  */
 $criteria_groups = new Criteria('group_id', 0, '>');
 $countGroups     = $controller->groupsFactory->getCount($criteria_groups);
-$criteria_groups->setLimit($helper->getConfig('groupsperpage'));
+//$criteria_groups->setLimit($helper->getConfig('groupsperpage'));
 $criteria_groups->setStart($start_all);
 $groups = $controller->groupsFactory->getGroups($criteria_groups);
 /**
@@ -45,7 +45,7 @@ $groups = $controller->groupsFactory->getGroups($criteria_groups);
 $mygroups          = '';
 $criteria_mygroups = new Criteria('rel_user_uid', $controller->uidOwner);
 $countMyGroups     = $controller->relgroupusersFactory->getCount($criteria_mygroups);
-$criteria_mygroups->setLimit($helper->getConfig('groupsperpage'));
+//$criteria_mygroups->setLimit($helper->getConfig('groupsperpage'));
 $criteria_mygroups->setStart($start_my);
 $mygroups   = $controller->relgroupusersFactory->getGroups('', $criteria_mygroups, 0);
 $mygroupsid = [];

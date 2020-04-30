@@ -83,7 +83,7 @@ if (1 === $marker && $group->getVar('owner_uid') === $uid) {
     $xoopsTpl->assign('allow_profile_contact', $controller->checkPrivilege('profile_contact') ? 1 : 0);
     $xoopsTpl->assign('allow_profile_general', $controller->checkPrivilege('profile_general') ? 1 : 0);
     $xoopsTpl->assign('allow_profile_stats', $controller->checkPrivilege('profile_stats') ? 1 : 0);
-    $xoopsTpl->assign('lang_membersofgroup', _MD_SUICO_MEMBERSDOFGROUP);
+    $xoopsTpl->assign('lang_membersofgroup', _MD_SUICO_MEMBERSOFGROUP);
     $xoopsTpl->assign('lang_editgroup', _MD_SUICO_EDIT_GROUP);
     $xoopsTpl->assign('lang_groupimage', _MD_SUICO_GROUP_IMAGE);
     $xoopsTpl->assign('lang_keepimage', _MD_SUICO_MAINTAIN_OLD_IMAGE);

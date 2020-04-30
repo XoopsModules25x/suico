@@ -40,14 +40,14 @@ $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . 
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/suico.js');
 //$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/crud.js');
 
-if (mb_stripos($_SERVER['REQUEST_URI'], 'memberslist.php')) {
-    if ('datatables' == $xoopsModuleConfig['memberslisttemplate']) {
+//if (mb_stripos($_SERVER['REQUEST_URI'], 'memberslist.php')) {
+  //  if ('datatables' == $xoopsModuleConfig['memberslisttemplate']) {
         $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.dataTables.css');
         $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/responsive.dataTables.min.css');
         $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.dataTables.js');
         $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/dataTables.responsive.min.js');
-    }
-}
+    //}
+//}
 //permissions
 $xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('notes'));
 $xoopsTpl->assign('allow_friends', $controller->checkPrivilegeBySection('friends'));
@@ -221,6 +221,8 @@ if (0 === $controller->isSuspended) {
     $xoopsTpl->assign('isSuspended', 1);
     $xoopsTpl->assign('lang_suspended', _MD_SUICO_USER_SUSPENDED);
 }
+
+$xoopsTpl->assign('groupsperpage', $xoopsModuleConfig['groupsperpage']);
 //Memberslist and Search Members
 $xoopsTpl->assign('displayrealname', $xoopsModuleConfig['displayrealname']);
 $xoopsTpl->assign('displayemail', $xoopsModuleConfig['displayemail']);
@@ -244,3 +246,4 @@ $xoopsTpl->assign('displayonlinestatus', $xoopsModuleConfig['displayonlinestatus
 $xoopsTpl->assign('displayextrainfo', $xoopsModuleConfig['displayextrainfo']);
 $xoopsTpl->assign('membersperpage', $xoopsModuleConfig['membersperpage']);
 $xoopsTpl->assign('memberslisttemplate', $xoopsModuleConfig['memberslisttemplate']);
+
