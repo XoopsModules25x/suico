@@ -26,7 +26,7 @@ require __DIR__ . '/header.php';
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
-$cod_img = Request::getInt('cod_img', 0, 'POST');
+$image_id = Request::getInt('image_id', 0, 'POST');
 $marker  = Request::getInt('marker', 0, 'POST');
 $uid     = (int)$xoopsUser->getVar('uid');
 if (1 === $marker) {
@@ -37,7 +37,7 @@ if (1 === $marker) {
         $xoopsDB
     );
     $picture      = $imageFactory->create(false);
-    $picture->load($cod_img);
+    $picture->load($image_id);
     $picture->setVar('title', Request::getString('title', '', 'POST'));
     $picture->setVar('caption', Request::getString('caption', '', 'POST'));
     /**
@@ -58,7 +58,7 @@ if (1 === $marker) {
 $imageFactory = new Suico\ImageHandler(
     $xoopsDB
 );
-$criteria_img = new Criteria('cod_img', $cod_img);
+$criteria_img = new Criteria('image_id', $image_id);
 $criteriaUid  = new Criteria('uid_owner', $uid);
 $criteria     = new CriteriaCompo($criteria_img);
 $criteria->add($criteriaUid);
@@ -76,5 +76,5 @@ if ($array_pict) {
 }
 //$url = $xoopsModuleConfig['link_path_upload']."/thumb_".$url;
 $url = XOOPS_URL . '/uploads/suico/images/thumb_' . $filename;
-$imageFactory->renderFormEdit($title, $caption, $cod_img, $url);
+$imageFactory->renderFormEdit($title, $caption, $image_id, $url);
 require dirname(__DIR__, 2) . '/footer.php';

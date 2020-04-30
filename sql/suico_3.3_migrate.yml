@@ -37,7 +37,7 @@ suico_friendship:
 suico_images:
   options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
   columns:
-    - name: cod_img
+    - name: image_id
       attributes: ' int(11)  NOT NULL auto_increment'
     - name: caption
       attributes: ' varchar(255)  NOT NULL '
@@ -55,7 +55,7 @@ suico_images:
       attributes: ' varchar(1)  NOT NULL '
   keys:
     PRIMARY:
-      columns: cod_img
+      columns: image_id
       unique: true
 suico_visitors:
   options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'

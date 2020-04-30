@@ -124,7 +124,7 @@ define('AM_SUICO_CLONED_FAILED', 'Cloning of the record has failed');
 define('AM_SUICO_IMAGES_ADD', 'Add a images');
 define('AM_SUICO_IMAGES_EDIT', 'Edit images');
 define('AM_SUICO_IMAGES_DELETE', 'Delete images');
-define('AM_SUICO_IMAGES_COD_IMG', 'ID');
+define('AM_SUICO_IMAGES_IMAGE_ID', 'ID');
 define('AM_SUICO_IMAGES_TITLE', 'Title');
 define('AM_SUICO_IMAGES_CAPTION', 'Caption');
 define('AM_SUICO_IMAGES_DATE_CREATED', 'Created');

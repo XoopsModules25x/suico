@@ -26,11 +26,11 @@ require __DIR__ . '/header.php';
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
-$cod_img = Request::getInt('cod_img', 0, 'POST');
+$image_id = Request::getInt('image_id', 0, 'POST');
 if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
     xoops_confirm(
         [
-            'cod_img' => $cod_img,
+            'image_id' => $image_id,
             'confirm' => 1,
         ],
         'delpicture.php',
@@ -45,7 +45,7 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
     $imageFactory = new Suico\ImageHandler(
         $xoopsDB
     );
-    $criteria_img = new Criteria('cod_img', $cod_img);
+    $criteria_img = new Criteria('image_id', $image_id);
     $uid          = (int)$xoopsUser->getVar('uid');
     $criteriaUid  = new Criteria('uid_owner', $uid);
     $criteria     = new CriteriaCompo($criteria_img);
