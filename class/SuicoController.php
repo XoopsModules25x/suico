@@ -237,7 +237,7 @@ class SuicoController extends \XoopsObject
         $criteriaUidAudio           = new Criteria('uid_owner', $this->uidOwner);
         $nbSections['countAudios']  = $this->audioFactory->getCount($criteriaUidAudio);
         $criteriaUidVideo           = new Criteria('uid_owner', $this->uidOwner);
-        $nbSections['countGroups']  = $this->videosFactory->getCount($criteriaUidVideo);
+        $nbSections['countVideos']  = $this->videosFactory->getCount($criteriaUidVideo);
         $criteriaUidNotes           = new Criteria('note_to', $this->uidOwner);
         $nbSections['countNotes']   = $this->notesFactory->getCount($criteriaUidNotes);
         return $nbSections;
