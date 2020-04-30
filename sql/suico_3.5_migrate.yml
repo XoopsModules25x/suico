@@ -1,13 +1,17 @@
 suico_friendrequests:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
-    - name: friendreq_id
+        -
+            name: friendreq_id
             attributes: ' int(11)  NOT NULL auto_increment'
-    - name: friendrequester_uid
+        -
+            name: friendrequester_uid
             attributes: ' int(11)  NOT NULL '
-    - name: friendrequestto_uid
+        -
+            name: friendrequestto_uid
             attributes: ' int(11)  NOT NULL '
-    - name: date_created
+        -
+            name: date_created
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
     keys:
         PRIMARY:
@@ -16,25 +20,35 @@ suico_friendrequests:
 suico_friendships:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
-    - name: friendship_id
+        -
+            name: friendship_id
             attributes: ' int(11)  NOT NULL auto_increment'
-    - name: friend1_uid
+        -
+            name: friend1_uid
             attributes: ' int(11)  NOT NULL '
-    - name: friend2_uid
+        -
+            name: friend2_uid
             attributes: ' int(11)  NOT NULL '
-    - name: level
+        -
+            name: level
             attributes: ' int(11)  NOT NULL '
-    - name: hot
+        -
+            name: hot
             attributes: ' tinyint(4)  NOT NULL '
-    - name: trust
+        -
+            name: trust
             attributes: ' tinyint(4)  NOT NULL '
-    - name: cool
+        -
+            name: cool
             attributes: ' tinyint(4)  NOT NULL '
-    - name: fan
+        -
+            name: fan
             attributes: ' tinyint(4)  NOT NULL '
-    - name: date_created
+        -
+            name: date_created
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: date_updated
+        -
+            name: date_updated
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
     keys:
         PRIMARY:
@@ -43,21 +57,29 @@ suico_friendships:
 suico_images:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
-    - name: cod_img
+        -
+            name: cod_img
             attributes: ' int(11)  NOT NULL auto_increment'
-    - name: title
+        -
+            name: title
             attributes: ' varchar(255)  NOT NULL '
-    - name: caption
+        -
+            name: caption
             attributes: ' varchar(255)  NOT NULL '
-    - name: date_created
+        -
+            name: date_created
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: date_updated
+        -
+            name: date_updated
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: uid_owner
+        -
+            name: uid_owner
             attributes: ' varchar(50)  NOT NULL '
-    - name: filename
+        -
+            name: filename
             attributes: ' varchar(50)  NOT NULL '
-    - name: private
+        -
+            name: private
             attributes: ' tinyint(1)  NOT NULL '
     keys:
         PRIMARY:
@@ -66,15 +88,20 @@ suico_images:
 suico_visitors:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
-    - name: cod_visit
+        -
+            name: cod_visit
             attributes: ' int(11)  NOT NULL auto_increment'
-    - name: uid_owner
+        -
+            name: uid_owner
             attributes: ' int(11)  NOT NULL '
-    - name: uid_visitor
+        -
+            name: uid_visitor
             attributes: ' int(11)  NOT NULL '
-    - name: uname_visitor
+        -
+            name: uname_visitor
             attributes: ' varchar(30)  NOT NULL '
-    - name: date_visited
+        -
+            name: date_visited
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
     keys:
         PRIMARY:
@@ -83,21 +110,26 @@ suico_visitors:
 suico_videos:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
-    - name: video_id
+        -
+            name: video_id
             attributes: ' int(11)  NOT NULL auto_increment'
-    - name: uid_owner
+        -
+            name: uid_owner
             attributes: ' int(11)  NOT NULL '
-        -   name: video_title
-            attributes: ' varchar(256)  NOT NULL '
-        -   name: video_desc
+        -
+            name: video_desc
             attributes: ' text  NOT NULL '
-        -   name: youtube_code
+        -
+            name: youtube_code
             attributes: ' varchar(11)  NOT NULL '
-        -   name: featured_video
+        -
+            name: main_video
             attributes: ' tinyint(1)  NOT NULL  DEFAULT ''0'' '
-    - name: date_created
+        -
+            name: date_created
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: date_updated
+        -
+            name: date_updated
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
     keys:
         PRIMARY:
@@ -106,11 +138,14 @@ suico_videos:
 suico_relgroupuser:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
-    - name: rel_id
+        -
+            name: rel_id
             attributes: ' int(11)  NOT NULL auto_increment'
-    - name: rel_group_id
+        -
+            name: rel_group_id
             attributes: ' int(11)  NOT NULL '
-    - name: rel_user_uid
+        -
+            name: rel_user_uid
             attributes: ' int(11)  NOT NULL '
     keys:
         PRIMARY:
@@ -119,19 +154,26 @@ suico_relgroupuser:
 suico_groups:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
-    - name: group_id
+        -
+            name: group_id
             attributes: ' int(11)  NOT NULL auto_increment'
-    - name: owner_uid
+        -
+            name: owner_uid
             attributes: ' int(11)  NOT NULL '
-    - name: group_title
+        -
+            name: group_title
             attributes: ' varchar(255)  NOT NULL '
-    - name: group_desc
+        -
+            name: group_desc
             attributes: ' tinytext  NOT NULL '
-    - name: group_img
+        -
+            name: group_img
             attributes: ' varchar(255)  NOT NULL '
-    - name: date_created
+        -
+            name: date_created
             attributes: ' int(11)  NOT NULL '
-    - name: date_updated
+        -
+            name: date_updated
             attributes: ' int(11)  NOT NULL '
     keys:
         PRIMARY:
@@ -140,19 +182,26 @@ suico_groups:
 suico_notes:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
-    - name: note_id
+        -
+            name: note_id
             attributes: ' int(11)  NOT NULL auto_increment'
-    - name: note_text
+        -
+            name: note_text
             attributes: ' text  NOT NULL '
-    - name: note_from
+        -
+            name: note_from
             attributes: ' int(11)  NOT NULL '
-    - name: note_to
+        -
+            name: note_to
             attributes: ' int(11)  NOT NULL '
-    - name: private
+        -
+            name: private
             attributes: ' tinyint(1)  NOT NULL '
-    - name: date_created
+        -
+            name: date_created
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: date_updated
+        -
+            name: date_updated
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
     keys:
         PRIMARY:
@@ -161,35 +210,50 @@ suico_notes:
 suico_configs:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
-    - name: config_id
+        -
+            name: config_id
             attributes: ' int(11)  NOT NULL auto_increment'
-    - name: config_uid
+        -
+            name: config_uid
             attributes: ' int(11)  NOT NULL '
-    - name: pictures
+        -
+            name: pictures
             attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
-    - name: audio
+        -
+            name: audio
             attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
-    - name: videos
+        -
+            name: videos
             attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
-    - name: groups
+        -
+            name: groups
             attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
-    - name: notes
+        -
+            name: notes
             attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
-    - name: friends
+        -
+            name: friends
             attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
-    - name: profile_contact
+        -
+            name: profile_contact
             attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
-    - name: profile_general
+        -
+            name: profile_general
             attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
-    - name: profile_stats
+        -
+            name: profile_stats
             attributes: ' int(8)  NOT NULL  DEFAULT ''0'' '
-    - name: suspension
+        -
+            name: suspension
             attributes: ' tinyint(1)  NOT NULL '
-    - name: backup_password
+        -
+            name: backup_password
             attributes: ' varchar(255)  NOT NULL '
-    - name: backup_email
+        -
+            name: backup_email
             attributes: ' varchar(255)  NOT NULL '
-    - name: end_suspension
+        -
+            name: end_suspension
             attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
     keys:
         config_uid:
@@ -201,19 +265,26 @@ suico_configs:
 suico_suspensions:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
-    - name: uid
+        -
+            name: uid
             attributes: ' int(11)  NOT NULL auto_increment'
-    - name: old_pass
+        -
+            name: old_pass
             attributes: ' varchar(255)  NOT NULL '
-    - name: old_email
+        -
+            name: old_email
             attributes: ' varchar(100)  NOT NULL '
-    - name: old_signature
+        -
+            name: old_signature
             attributes: ' text  NOT NULL '
-    - name: suspension_time
+        -
+            name: suspension_time
             attributes: ' int(11)  NOT NULL '
-    - name: old_enc_type
+        -
+            name: old_enc_type
             attributes: ' int(2)  NOT NULL  DEFAULT ''0'' '
-    - name: old_pass_expired
+        -
+            name: old_pass_expired
             attributes: ' int(1)  NOT NULL  DEFAULT ''0'' '
     keys:
         PRIMARY:
@@ -222,21 +293,29 @@ suico_suspensions:
 suico_audios:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
-    - name: audio_id
+        -
+            name: audio_id
             attributes: ' int(11)  NOT NULL auto_increment'
-    - name: title
+        -
+            name: title
             attributes: ' varchar(100)  NOT NULL '
-    - name: author
+        -
+            name: author
             attributes: ' varchar(100)  NOT NULL '
-    - name: description
+        -
+            name: description
             attributes: ' text  NOT NULL '
-    - name: filename
+        -
+            name: filename
             attributes: ' varchar(50)  NOT NULL '
-    - name: uid_owner
+        -
+            name: uid_owner
             attributes: ' int(11)  NOT NULL '
-    - name: date_created
+        -
+            name: date_created
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: date_updated
+        -
+            name: date_updated
             attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
     keys:
         PRIMARY:
@@ -245,13 +324,17 @@ suico_audios:
 suico_privacy:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
-    - name: id
+        -
+            name: id
             attributes: ' int(8)  NOT NULL auto_increment'
-    - name: level
+        -
+            name: level
             attributes: ' int(8)  NOT NULL '
-    - name: name
+        -
+            name: name
             attributes: ' varchar(20)  NOT NULL '
-    - name: description
+        -
+            name: description
             attributes: ' text  NOT NULL '
     keys:
         PRIMARY:
@@ -260,7 +343,8 @@ suico_privacy:
 suico_profile:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
-    - name: profile_id
+        -
+            name: profile_id
             attributes: ' int(12) unsigned  NOT NULL  DEFAULT ''0'' '
     keys:
         PRIMARY:
@@ -269,13 +353,17 @@ suico_profile:
 suico_profile_category:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
-    - name: cat_id
+        -
+            name: cat_id
             attributes: ' smallint(5) unsigned  NOT NULL auto_increment'
-    - name: cat_title
+        -
+            name: cat_title
             attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
-    - name: cat_description
+        -
+            name: cat_description
             attributes: ' text '
-    - name: cat_weight
+        -
+            name: cat_weight
             attributes: ' smallint(5) unsigned  NOT NULL  DEFAULT ''0'' '
     keys:
         PRIMARY:
@@ -284,39 +372,56 @@ suico_profile_category:
 suico_profile_field:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
-    - name: field_id
+        -
+            name: field_id
             attributes: ' int(12) unsigned  NOT NULL auto_increment'
-    - name: cat_id
+        -
+            name: cat_id
             attributes: ' smallint(5) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: field_type
+        -
+            name: field_type
             attributes: ' varchar(30)  NOT NULL  DEFAULT '''' '
-    - name: field_valuetype
+        -
+            name: field_valuetype
             attributes: ' tinyint(2) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: field_name
+        -
+            name: field_name
             attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
-    - name: field_title
+        -
+            name: field_title
             attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
-    - name: field_description
+        -
+            name: field_description
             attributes: ' text '
-    - name: field_required
+        -
+            name: field_required
             attributes: ' tinyint(1) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: field_maxlength
+        -
+            name: field_maxlength
             attributes: ' smallint(6) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: field_weight
+        -
+            name: field_weight
             attributes: ' smallint(6) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: field_default
+        -
+            name: field_default
             attributes: ' text '
-    - name: field_notnull
+        -
+            name: field_notnull
             attributes: ' tinyint(1) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: field_edit
+        -
+            name: field_edit
             attributes: ' tinyint(1) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: field_show
+        -
+            name: field_show
             attributes: ' tinyint(1) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: field_config
+        -
+            name: field_config
             attributes: ' tinyint(1) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: field_options
+        -
+            name: field_options
             attributes: ' text '
-    - name: step_id
+        -
+            name: step_id
             attributes: ' smallint(3) unsigned  NOT NULL  DEFAULT ''0'' '
     keys:
         field_name:
@@ -331,15 +436,20 @@ suico_profile_field:
 suico_profile_regstep:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
-    - name: step_id
+        -
+            name: step_id
             attributes: ' smallint(3) unsigned  NOT NULL auto_increment'
-    - name: step_name
+        -
+            name: step_name
             attributes: ' varchar(255)  NOT NULL  DEFAULT '''' '
-    - name: step_desc
+        -
+            name: step_desc
             attributes: ' text '
-    - name: step_order
+        -
+            name: step_order
             attributes: ' smallint(3) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: step_save
+        -
+            name: step_save
             attributes: ' tinyint(1) unsigned  NOT NULL  DEFAULT ''0'' '
     keys:
         PRIMARY:
@@ -351,11 +461,14 @@ suico_profile_regstep:
 suico_profile_visibility:
     options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
     columns:
-    - name: field_id
+        -
+            name: field_id
             attributes: ' int(12) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: user_group
+        -
+            name: user_group
             attributes: ' smallint(5) unsigned  NOT NULL  DEFAULT ''0'' '
-    - name: profile_group
+        -
+            name: profile_group
             attributes: ' smallint(5) unsigned  NOT NULL  DEFAULT ''0'' '
     keys:
         PRIMARY:
