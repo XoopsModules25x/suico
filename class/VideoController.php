@@ -111,6 +111,11 @@ class VideoController extends SuicoController
             $videosArray[$i]['desc'] = $video->getVar('video_desc', 's');
 
             $videosArray[$i]['id'] = $video->getVar('video_id', 's');
+			
+			$videosArray[$i]['date_created'] = formatTimestamp($video->getVar('date_created', 's'));
+
+			$videosArray[$i]['date_updated'] = formatTimestamp($video->getVar('date_updated', 's'));
+
 
             $i++;
         }

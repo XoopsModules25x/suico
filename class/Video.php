@@ -127,7 +127,7 @@ class Video extends XoopsObject
         $criteria = [],
         $asobject = false,
         $sort = 'video_id',
-        $order = 'ASC',
+        $order = 'DESC',
         $limit = 0,
         $start = 0
     ) {
