@@ -145,9 +145,9 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Friendship
             $xoopsObject = new Friendship();
-            $format = 'INSERT INTO %s (friendship_id, friend1_uid, friend2_uid, LEVEL, hot, trust, cool, fan)';
-            $format .= 'VALUES (%u, %u, %u, %u, %u, %u, %u, %u)';
-            $sql = \sprintf(
+            $format      = 'INSERT INTO %s (friendship_id, friend1_uid, friend2_uid, LEVEL, hot, trust, cool, fan)';
+            $format      .= 'VALUES (%u, %u, %u, %u, %u, %u, %u, %u)';
+            $sql         = \sprintf(
                 $format,
                 $this->db->prefix('suico_friendships'),
                 $friendship_id,
@@ -159,12 +159,12 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
                 $cool,
                 $fan
             );
-            $force = true;
+            $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'friendship_id=%u, friend1_uid=%u, friend2_uid=%u, level=%u, hot=%u, trust=%u, cool=%u, fan=%u';
             $format .= ' WHERE friendship_id = %u';
-            $sql = \sprintf(
+            $sql    = \sprintf(
                 $format,
                 $this->db->prefix('suico_friendships'),
                 $friendship_id,
@@ -236,9 +236,9 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         $id_as_key = false,
         $as_object = true
     ) {
-        $ret = [];
+        $ret   = [];
         $limit = $start = 0;
-        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_friendships');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_friendships');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
             if ('' !== $criteriaElement->getSort()) {
@@ -319,9 +319,9 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         $criteria = null,
         $shuffle = 1
     ) {
-        $ret = [];
+        $ret   = [];
         $limit = $start = 0;
-        $sql = 'SELECT uname, user_avatar, friend2_uid FROM ' . $this->db->prefix(
+        $sql   = 'SELECT uname, user_avatar, friend2_uid FROM ' . $this->db->prefix(
                 'suico_friendships'
             ) . ', ' . $this->db->prefix(
                 'users'
@@ -333,14 +333,14 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
             if ('' !== $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
-            $limit = $criteria->getLimit();
-            $start = $criteria->getStart();
+            $limit  = $criteria->getLimit();
+            $start  = $criteria->getStart();
             $result = $this->db->query($sql, $limit, $start);
-            $vetor = [];
-            $i = 0;
+            $vetor  = [];
+            $i      = 0;
             while (false !== ($myrow = $this->db->fetchArray($result))) {
-                $vetor[$i]['uid'] = $myrow['friend2_uid'];
-                $vetor[$i]['uname'] = $myrow['uname'];
+                $vetor[$i]['uid']         = $myrow['friend2_uid'];
+                $vetor[$i]['uname']       = $myrow['uname'];
                 $vetor[$i]['user_avatar'] = $myrow['user_avatar'];
                 $i++;
             }
@@ -363,9 +363,9 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         $criteria = null,
         $shuffle = 1
     ) {
-        $ret = [];
+        $ret   = [];
         $limit = $start = 0;
-        $sql = 'SELECT uname, user_avatar, friend1_uid FROM ' . $this->db->prefix(
+        $sql   = 'SELECT uname, user_avatar, friend1_uid FROM ' . $this->db->prefix(
                 'suico_friendships'
             ) . ', ' . $this->db->prefix(
                 'users'
@@ -377,14 +377,14 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
             if ('' !== $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
-            $limit = $criteria->getLimit();
-            $start = $criteria->getStart();
+            $limit  = $criteria->getLimit();
+            $start  = $criteria->getStart();
             $result = $this->db->query($sql, $limit, $start);
-            $vetor = [];
-            $i = 0;
+            $vetor  = [];
+            $i      = 0;
             while (false !== ($myrow = $this->db->fetchArray($result))) {
-                $vetor[$i]['uid'] = $myrow['friend1_uid'];
-                $vetor[$i]['uname'] = $myrow['uname'];
+                $vetor[$i]['uid']         = $myrow['friend1_uid'];
+                $vetor[$i]['uname']       = $myrow['uname'];
                 $vetor[$i]['user_avatar'] = $myrow['user_avatar'];
                 $i++;
             }
@@ -405,18 +405,18 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         /**
          * criteria fetch friendship to be edited
          */
-        $criteria_friend1 = new Criteria(
+        $criteria_friend1    = new Criteria(
             'friend1_uid', $xoopsUser->getVar(
             'uid'
         )
         );
-        $field_friend_fan = $field_friend_friendly = $field_friend_funny = $field_friend_cool = '';
-        $criteria_friend2 = new Criteria('friend2_uid', $friend->getVar('uid'));
+        $field_friend_fan    = $field_friend_friendly = $field_friend_funny = $field_friend_cool = '';
+        $criteria_friend2    = new Criteria('friend2_uid', $friend->getVar('uid'));
         $criteria_friendship = new CriteriaCompo($criteria_friend1);
         $criteria_friendship->add($criteria_friend2);
         $friendships = $this->getObjects($criteria_friendship);
-        $friendship = $friendships[0];
-        $form = new XoopsThemeForm(
+        $friendship  = $friendships[0];
+        $form        = new XoopsThemeForm(
             \_MD_SUICO_EDIT_FRIENDSHIP, 'form_editfriendship', 'editfriendship.php', 'post', true
         );
         //$field_friend_avatar      = new XoopsFormLabel(_MD_SUICO_PHOTO, "<img src=../../uploads/".$friend->getVar('user_avatar').">");
@@ -440,7 +440,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
             $field_friend_level->addOption('7', \_MD_SUICO_BESTFRIEND);
         }
         if (1 === $this->helper->getConfig('allow_fanssevaluation')) {
-            $field_friend_fan = new XoopsFormRadioYN(
+            $field_friend_fan      = new XoopsFormRadioYN(
                 \_MD_SUICO_FAN, 'fan', $friendship->getVar(
                 'fan'
             ), '<img src="assets/images/fans.gif" alt="' . \_YES . '" title="' . \_YES . '">', '<img src="assets/images/fansbw.gif" alt="' . \_NO . '" title="' . \_NO . '">'
@@ -486,9 +486,9 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
             );
         }
         $form->setExtra('enctype="multipart/form-data"');
-        $buttonSend = new XoopsFormButton('', 'submit_button', \_MD_SUICO_UPDATEFRIEND, 'submit');
-        $field_friend_friendid = new XoopsFormHidden('friend_uid', $friend->getVar('uid'));
-        $field_friend_marker = new XoopsFormHidden('marker', '1');
+        $buttonSend                 = new XoopsFormButton('', 'submit_button', \_MD_SUICO_UPDATEFRIEND, 'submit');
+        $field_friend_friendid      = new XoopsFormHidden('friend_uid', $friend->getVar('uid'));
+        $field_friend_marker        = new XoopsFormHidden('marker', '1');
         $field_friend_friendshio_id = new XoopsFormHidden('friendship_id', $friendship->getVar('friendship_id'));
         $form->addElement($field_friend_friendid);
         $form->addElement($field_friend_friendshio_id);
@@ -514,43 +514,43 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         $user_uid
     ) {
         global $xoopsUser;
-        $vetor = [];
-        $vetor['mediahot'] = 0;
+        $vetor               = [];
+        $vetor['mediahot']   = 0;
         $vetor['mediatrust'] = 0;
-        $vetor['mediacool'] = 0;
-        $vetor['sumfan'] = 0;
+        $vetor['mediacool']  = 0;
+        $vetor['sumfan']     = 0;
         //Calculating avg(hot)
-        $sql = 'SELECT friend2_uid, Avg(hot) AS mediahot FROM ' . $this->db->prefix(
+        $sql    = 'SELECT friend2_uid, Avg(hot) AS mediahot FROM ' . $this->db->prefix(
                 'suico_friendships'
             );
-        $sql .= ' WHERE  (hot>0) GROUP BY friend2_uid HAVING (friend2_uid=' . $user_uid . ') ';
+        $sql    .= ' WHERE  (hot>0) GROUP BY friend2_uid HAVING (friend2_uid=' . $user_uid . ') ';
         $result = $this->db->query($sql);
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $vetor['mediahot'] = $myrow['mediahot'] * 16;
         }
         //Calculating avg(trust)
-        $sql = 'SELECT friend2_uid, Avg(trust) AS mediatrust FROM ' . $this->db->prefix(
+        $sql    = 'SELECT friend2_uid, Avg(trust) AS mediatrust FROM ' . $this->db->prefix(
                 'suico_friendships'
             );
-        $sql .= ' WHERE  (trust>0) GROUP BY friend2_uid HAVING (friend2_uid=' . $user_uid . ') ';
+        $sql    .= ' WHERE  (trust>0) GROUP BY friend2_uid HAVING (friend2_uid=' . $user_uid . ') ';
         $result = $this->db->query($sql);
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $vetor['mediatrust'] = $myrow['mediatrust'] * 16;
         }
         //Calculating avg(cool)
-        $sql = 'SELECT friend2_uid, Avg(cool) AS mediacool FROM ' . $this->db->prefix(
+        $sql    = 'SELECT friend2_uid, Avg(cool) AS mediacool FROM ' . $this->db->prefix(
                 'suico_friendships'
             );
-        $sql .= ' WHERE  (cool>0) GROUP BY friend2_uid HAVING (friend2_uid=' . $user_uid . ') ';
+        $sql    .= ' WHERE  (cool>0) GROUP BY friend2_uid HAVING (friend2_uid=' . $user_uid . ') ';
         $result = $this->db->query($sql);
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $vetor['mediacool'] = $myrow['mediacool'] * 16;
         }
         //Calculating sum(fans)
-        $sql = 'SELECT friend2_uid, Sum(fan) AS sumfan FROM ' . $this->db->prefix(
+        $sql    = 'SELECT friend2_uid, Sum(fan) AS sumfan FROM ' . $this->db->prefix(
                 'suico_friendships'
             );
-        $sql .= ' GROUP BY friend2_uid HAVING (friend2_uid=' . $user_uid . ') ';
+        $sql    .= ' GROUP BY friend2_uid HAVING (friend2_uid=' . $user_uid . ') ';
         $result = $this->db->query($sql);
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $vetor['sumfan'] = $myrow['sumfan'];

@@ -544,8 +544,8 @@ class ImageHandler extends XoopsPersistableObjectHandler
      */
     public function getLastPictures($limit)
     {
-        $ret = [];
-        $sql = 'SELECT uname, t.uid_owner, t.filename FROM ' . $this->db->prefix(
+        $ret    = [];
+        $sql    = 'SELECT uname, t.uid_owner, t.filename FROM ' . $this->db->prefix(
                 'suico_images'
             ) . ' AS t, ' . $this->db->prefix(
                 'users'
@@ -569,8 +569,8 @@ class ImageHandler extends XoopsPersistableObjectHandler
      */
     public function getLastPicturesForBlock($limit)
     {
-        $ret = [];
-        $sql = 'SELECT uname, t.uid_owner, t.filename, t.title, t.caption  FROM ' . $this->db->prefix(
+        $ret    = [];
+        $sql    = 'SELECT uname, t.uid_owner, t.filename, t.title, t.caption  FROM ' . $this->db->prefix(
                 'suico_images'
             ) . ' AS t, ' . $this->db->prefix(
                 'users'

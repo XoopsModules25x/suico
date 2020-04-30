@@ -35,7 +35,7 @@ $imageFactory = new Suico\ImageHandler(
 /** @var \XoopsModules\Suico\Image $picture */
 $picture = $imageFactory->create(false);
 $picture->load(Request::getString('cod_img', '', 'POST'));
-$uid = (int)$xoopsUser->getVar('uid');
+$uid         = (int)$xoopsUser->getVar('uid');
 $image       = XOOPS_ROOT_PATH . '/uploads/suico/images/' . 'thumb_' . $picture->getVar('filename');
 $avatar      = 'av' . $uid . '_' . time() . '.jpg';
 $imageavatar = XOOPS_ROOT_PATH . '/uploads/avatars/' . $avatar;

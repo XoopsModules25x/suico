@@ -31,12 +31,12 @@ $friendshipFactory    = new Suico\FriendshipHandler($xoopsDB);
 /**
  * Getting the uid of the user which user want to ask to be friend
  */
-$friend1_uid = Request::getInt(
+$friend1_uid      = Request::getInt(
     'friend_uid',
     0,
     'POST'
 );
-$friend2_uid = (int)$xoopsUser->getVar('uid');
+$friend2_uid      = (int)$xoopsUser->getVar('uid');
 $criteria_friend1 = new Criteria('friend1_uid', $friend1_uid);
 $criteria_friend2 = new Criteria('friend2_uid', $friend2_uid);
 $criteria_delete1 = new CriteriaCompo($criteria_friend1);

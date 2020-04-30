@@ -77,7 +77,7 @@ switch ($op) {
         /* @var  XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler = xoops_getHandler('groupperm');
         $editable_fields  = $grouppermHandler->getItemIds('profile_edit', $GLOBALS['xoopsUser']->getGroups(), $GLOBALS['xoopsModule']->getVar('mid'));
-        $uid = empty($_POST['uid']) ? 0 : (int)$_POST['uid'];
+        $uid              = empty($_POST['uid']) ? 0 : (int)$_POST['uid'];
         if (!empty($uid)) {
             $user    = $handler->getUser($uid);
             $profile = $profileHandler->get($uid);
@@ -119,7 +119,7 @@ switch ($op) {
             $password = $vpass = '';
         }
         xoops_load('xoopsuserutility');
-        $stop = XoopsUserUtility::validate($user, $password, $vpass);
+        $stop   = XoopsUserUtility::validate($user, $password, $vpass);
         $errors = [];
         if ('' != $stop) {
             $errors[] = $stop;
@@ -144,7 +144,7 @@ switch ($op) {
                 include_once $GLOBALS['xoops']->path('/modules/system/constants.php');
                 if ($grouppermHandler->checkRight('system_admin', XOOPS_SYSTEM_GROUP, $GLOBALS['xoopsUser']->getGroups(), 1)) {
                     //Update group memberships
-                    $cur_groups = $user->getGroups();
+                    $cur_groups     = $user->getGroups();
                     $added_groups   = array_diff($new_groups, $cur_groups);
                     $removed_groups = array_diff($cur_groups, $new_groups);
                     if (count($added_groups) > 0) {

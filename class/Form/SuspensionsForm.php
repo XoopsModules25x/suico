@@ -52,9 +52,9 @@ class SuspensionsForm extends XoopsThemeForm
      */
     public function __construct($target)
     {
-        $this->helper = $target->helper;
+        $this->helper       = $target->helper;
         $this->targetObject = $target;
-        $title = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_SUSPENSIONS_ADD) : \sprintf(
+        $title              = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_SUSPENSIONS_ADD) : \sprintf(
             \AM_SUICO_SUSPENSIONS_EDIT
         );
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);

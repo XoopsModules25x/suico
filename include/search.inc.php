@@ -48,8 +48,8 @@ function suico_search(
     $configHandler     = xoops_getHandler('config');
     $moduleConfig      = $configHandler->getConfigsByCat(0, $modulo->getVar('mid'));
     $path_uploadimages = XOOPS_UPLOAD_URL;
-    $ret = [];
-    $sql = 'SELECT cod_img, title, caption,  date_created,  uid_owner, filename FROM ' . $xoopsDB->prefix(
+    $ret               = [];
+    $sql               = 'SELECT cod_img, title, caption,  date_created,  uid_owner, filename FROM ' . $xoopsDB->prefix(
             'suico_images'
         ) . ' WHERE ';
     if (0 !== $userid) {
@@ -116,7 +116,7 @@ function suico_search(
     }
     if (0 !== $userid && $i > 0) {
         if ($limit < 6) {
-            $ret = [];
+            $ret             = [];
             $ret[0]['title'] = 'See its album';
             $ret[0]['time']  = time();
             $ret[0]['uid']   = $userid;

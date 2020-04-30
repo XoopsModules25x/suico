@@ -53,9 +53,9 @@ class VisitorsForm extends XoopsThemeForm
      */
     public function __construct($target)
     {
-        $this->helper = $target->helper;
+        $this->helper       = $target->helper;
         $this->targetObject = $target;
-        $title = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_VISITORS_ADD) : \sprintf(\AM_SUICO_VISITORS_EDIT);
+        $title              = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_VISITORS_ADD) : \sprintf(\AM_SUICO_VISITORS_EDIT);
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
         //include ID field, it's needed so the module knows if it is a new form or an edited form

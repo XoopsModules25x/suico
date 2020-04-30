@@ -317,8 +317,8 @@ class NotesHandler extends XoopsPersistableObjectHandler
             if ('' !== $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
-            $limit = $criteria->getLimit();
-            $start = $criteria->getStart();
+            $limit  = $criteria->getLimit();
+            $start  = $criteria->getStart();
             $result = $this->db->query($sql, $limit, $start);
             $vetor  = [];
             $i      = 0;

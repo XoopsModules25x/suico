@@ -111,7 +111,7 @@ switch ($op) {
         $adminObject->displayButton('left');
         $start                      = Request::getInt('start', 0);
         $suspensionsPaginationLimit = $helper->getConfig('userpager');
-        $criteria = new CriteriaCompo();
+        $criteria                   = new CriteriaCompo();
         $criteria->setSort('uid ASC, uid');
         $criteria->setOrder('ASC');
         $criteria->setLimit($suspensionsPaginationLimit);
@@ -166,7 +166,7 @@ switch ($op) {
                 $suspensionsArray['old_enc_type'] = $suspensionsTempArray[$i]->getVar('old_enc_type');
                 $GLOBALS['xoopsTpl']->assign('selectorold_pass_expired', AM_SUICO_SUSPENSIONS_OLD_PASS_EXPIRED);
                 $suspensionsArray['old_pass_expired'] = $suspensionsTempArray[$i]->getVar('old_pass_expired');
-                $suspensionsArray['edit_delete'] = "<a href='suspensions.php?op=edit&uid=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
+                $suspensionsArray['edit_delete']      = "<a href='suspensions.php?op=edit&uid=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='suspensions.php?op=delete&uid=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='suspensions.php?op=clone&uid=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
                 $GLOBALS['xoopsTpl']->append_by_ref('suspensionsArrays', $suspensionsArray);

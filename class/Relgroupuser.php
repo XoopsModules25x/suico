@@ -47,9 +47,9 @@ class Relgroupuser extends \XoopsObject
     public function __construct($id = null)
     {
         /** @var Helper $helper */
-        $this->helper = Helper::getInstance();
+        $this->helper     = Helper::getInstance();
         $this->permHelper = new Permission();
-        $this->db = XoopsDatabaseFactory::getDatabaseConnection();
+        $this->db         = XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('rel_id', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('rel_group_id', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('rel_user_uid', \XOBJ_DTYPE_INT, null, false, 10);
@@ -69,7 +69,7 @@ class Relgroupuser extends \XoopsObject
      */
     public function load($id)
     {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_relgroupuser') . ' WHERE rel_id=' . $id;
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_relgroupuser') . ' WHERE rel_id=' . $id;
         $myrow = $this->db->fetchArray($this->db->query($sql));
         $this->assignVars($myrow);
         if (!$myrow) {
@@ -94,8 +94,8 @@ class Relgroupuser extends \XoopsObject
         $limit = 0,
         $start = 0
     ) {
-        $db = XoopsDatabaseFactory::getDatabaseConnection();
-        $ret = [];
+        $db         = XoopsDatabaseFactory::getDatabaseConnection();
+        $ret        = [];
         $whereQuery = '';
         if (\is_array($criteria) && \count($criteria) > 0) {
             $whereQuery = ' WHERE';
@@ -107,7 +107,7 @@ class Relgroupuser extends \XoopsObject
             $whereQuery = ' WHERE ' . $criteria;
         }
         if (!$asobject) {
-            $sql = 'SELECT rel_id FROM ' . $db->prefix(
+            $sql    = 'SELECT rel_id FROM ' . $db->prefix(
                     'suico_relgroupuser'
                 ) . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
@@ -115,7 +115,7 @@ class Relgroupuser extends \XoopsObject
                 $ret[] = $myrow['suico_relgroupuser_id'];
             }
         } else {
-            $sql = 'SELECT * FROM ' . $db->prefix('suico_relgroupuser') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql    = 'SELECT * FROM ' . $db->prefix('suico_relgroupuser') . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new self($myrow);

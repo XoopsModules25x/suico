@@ -111,7 +111,7 @@ switch ($op) {
         $adminObject->displayButton('left');
         $start                = Request::getInt('start', 0);
         $notesPaginationLimit = $helper->getConfig('userpager');
-        $criteria = new CriteriaCompo();
+        $criteria             = new CriteriaCompo();
         $criteria->setSort('note_id ASC, note_id');
         $criteria->setOrder('ASC');
         $criteria->setLimit($notesPaginationLimit);
@@ -169,7 +169,7 @@ switch ($op) {
                 $notesArray['private'] = $notesTempArray[$i]->getVar('private');
                 $GLOBALS['xoopsTpl']->assign('selectordate', AM_SUICO_NOTES_DATE);
                 $notesArray['date_created'] = formatTimestamp($notesTempArray[$i]->getVar('date_created'), 's');
-                $notesArray['edit_delete'] = "<a href='notes.php?op=edit&note_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
+                $notesArray['edit_delete']  = "<a href='notes.php?op=edit&note_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='notes.php?op=delete&note_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='notes.php?op=clone&note_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
                 $GLOBALS['xoopsTpl']->append_by_ref('notesArrays', $notesArray);

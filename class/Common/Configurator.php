@@ -27,16 +27,16 @@ namespace XoopsModules\Suico\Common;
 class Configurator
 {
     public $name;
-    public $paths = [];
-    public $uploadFolders = [];
-    public $copyBlankFiles = [];
+    public $paths           = [];
+    public $uploadFolders   = [];
+    public $copyBlankFiles  = [];
     public $copyTestFolders = [];
     public $templateFolders = [];
-    public $oldFiles = [];
-    public $oldFolders = [];
-    public $renameTables = [];
-    public $renameColumns = [];
-    public $moduleStats = [];
+    public $oldFiles        = [];
+    public $oldFolders      = [];
+    public $renameTables    = [];
+    public $renameColumns   = [];
+    public $moduleStats     = [];
     public $icons;
 
     /**
@@ -48,18 +48,18 @@ class Configurator
         //        $moduleDirNameUpper = mb_strtoupper($moduleDirName);
         //        require dirname(dirname(__DIR__)) . '/config/config.php';
         //        $config = getConfig();
-        $config = include \dirname(__DIR__, 2) . '/config/config.php';
-        $this->name = $config->name;
-        $this->paths = $config->paths;
-        $this->uploadFolders = $config->uploadFolders;
-        $this->copyBlankFiles = $config->copyBlankFiles;
+        $config                = include \dirname(__DIR__, 2) . '/config/config.php';
+        $this->name            = $config->name;
+        $this->paths           = $config->paths;
+        $this->uploadFolders   = $config->uploadFolders;
+        $this->copyBlankFiles  = $config->copyBlankFiles;
         $this->copyTestFolders = $config->copyTestFolders;
         $this->templateFolders = $config->templateFolders;
-        $this->oldFiles = $config->oldFiles;
-        $this->oldFolders = $config->oldFolders;
-        $this->renameTables = $config->renameTables;
-        $this->renameColumns = $config->renameColumns;
-        $this->moduleStats = $config->moduleStats;
+        $this->oldFiles        = $config->oldFiles;
+        $this->oldFolders      = $config->oldFolders;
+        $this->renameTables    = $config->renameTables;
+        $this->renameColumns   = $config->renameColumns;
+        $this->moduleStats     = $config->moduleStats;
         //        $this->modCopyright    = $config->modCopyright;
         $this->icons = include \dirname(__DIR__, 2) . '/config/icons.php';
         $this->paths = include \dirname(__DIR__, 2) . '/config/paths.php';

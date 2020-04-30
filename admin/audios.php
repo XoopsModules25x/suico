@@ -131,7 +131,7 @@ switch ($op) {
         $adminObject->displayButton('left');
         $start                = Request::getInt('start', 0);
         $audioPaginationLimit = $helper->getConfig('userpager');
-        $criteria = new CriteriaCompo();
+        $criteria             = new CriteriaCompo();
         $criteria->setSort('audio_id ASC, title');
         $criteria->setOrder('ASC');
         $criteria->setLimit($audioPaginationLimit);
@@ -190,7 +190,7 @@ switch ($op) {
                 $audioArray['date_created'] = formatTimestamp($audioTempArray[$i]->getVar('date_created'), 's');
                 $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_SUICO_AUDIO_DATE_UPDATED);
                 $audioArray['date_updated'] = formatTimestamp($audioTempArray[$i]->getVar('date_updated'), 's');
-                $audioArray['edit_delete'] = "<a href='audios.php?op=edit&audio_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
+                $audioArray['edit_delete']  = "<a href='audios.php?op=edit&audio_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='audios.php?op=delete&audio_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='audios.php?op=clone&audio_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
                 $GLOBALS['xoopsTpl']->append_by_ref('audiosArrays', $audioArray);

@@ -64,15 +64,15 @@ if ('form' === $op) {
     $interest_text   = new XoopsFormText(_MD_SUICO_INTEREST_CONTAINS, 'user_intrest', 30, 100);
     $extrainfo_text  = new XoopsFormText(_MD_SUICO_EXTRAINFO_CONTAINS, 'bio', 30, 100);
     $signature_text  = new XoopsFormText(_MD_SUICO_SIGNATURE_CONTAINS, 'user_sig', 30, 100);
-    $lastlog_more = new XoopsFormText(
+    $lastlog_more    = new XoopsFormText(
         _MD_SUICO_LASTLOGMORE, 'user_lastlog_more', 10, 5
     );
-    $lastlog_less = new XoopsFormText(_MD_SUICO_LASTLOGLESS, 'user_lastlog_less', 10, 5);
-    $reg_more     = new XoopsFormText(_MD_SUICO_REGMORE, 'user_reg_more', 10, 5);
-    $reg_less     = new XoopsFormText(_MD_SUICO_REGLESS, 'user_reg_less', 10, 5);
-    $posts_more   = new XoopsFormText(_MD_SUICO_POSTSMORE, 'user_posts_more', 10, 5);
-    $posts_less   = new XoopsFormText(_MD_SUICO_POSTSLESS, 'user_posts_less', 10, 5);
-    $sort_select  = new XoopsFormSelect(_MD_SUICO_SORT, 'user_sort');
+    $lastlog_less    = new XoopsFormText(_MD_SUICO_LASTLOGLESS, 'user_lastlog_less', 10, 5);
+    $reg_more        = new XoopsFormText(_MD_SUICO_REGMORE, 'user_reg_more', 10, 5);
+    $reg_less        = new XoopsFormText(_MD_SUICO_REGLESS, 'user_reg_less', 10, 5);
+    $posts_more      = new XoopsFormText(_MD_SUICO_POSTSMORE, 'user_posts_more', 10, 5);
+    $posts_less      = new XoopsFormText(_MD_SUICO_POSTSLESS, 'user_posts_less', 10, 5);
+    $sort_select     = new XoopsFormSelect(_MD_SUICO_SORT, 'user_sort');
     $sort_select->addOptionArray(
         [
             'uname'        => _MD_SUICO_UNAME,
@@ -92,7 +92,7 @@ if ('form' === $op) {
     $limit_text    = new XoopsFormText(_MD_SUICO_LIMIT, 'limit', 6, 2);
     $op_hidden     = new XoopsFormHidden('op', 'submit');
     $submit_button = new XoopsFormButton('', 'user_submit', _SUBMIT, 'submit');
-    $form = new XoopsThemeForm('', 'searchform', 'searchmembers.php');
+    $form          = new XoopsThemeForm('', 'searchform', 'searchmembers.php');
     $form->addElement($uname_tray);
     $form->addElement($name_tray);
     $form->addElement($email_tray);
@@ -306,12 +306,12 @@ if ('submit' === $op) {
             $userdata['name']     = $foundusers[$j]->getVar('uname');
             $userdata['id']       = $foundusers[$j]->getVar('uid');
             $userdata['uid']      = $foundusers[$j]->getVar('uid');
-            $criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
-            $criteriaIsfriend = new CriteriaCompo(new Criteria('friend2_uid', $userdata['uid']));
+            $criteria_friends     = new Criteria('friend1_uid', $controller->uidOwner);
+            $criteriaIsfriend     = new CriteriaCompo(new Criteria('friend2_uid', $userdata['uid']));
             $criteriaIsfriend->add($criteria_friends);
-            $controller->isFriend = $controller->friendshipsFactory->getCount($criteria_isfriend);
-            $userdata['isFriend'] = $controller->isFriend;
-            $friendrequestFactory = new Suico\FriendrequestHandler($xoopsDB);
+            $controller->isFriend   = $controller->friendshipsFactory->getCount($criteria_isfriend);
+            $userdata['isFriend']   = $controller->isFriend;
+            $friendrequestFactory   = new Suico\FriendrequestHandler($xoopsDB);
             $criteria_selfrequest   = new Criteria('friendrequester_uid', $controller->uidOwner);
             $criteria_isselfrequest = new CriteriaCompo(new Criteria('friendrequestto_uid', $userdata['uid']));
             $criteria_isselfrequest->add($criteria_selfrequest);
@@ -390,9 +390,9 @@ if ('submit' === $op) {
                 $userdata['rankimage'] = '<img src="' . XOOPS_UPLOAD_URL . '/' . $userrank['image'] . '" alt="">';
             }
             $userdata['ranktitle'] = $userrank['title'];
-            $uid        = $userdata['id'];
-            $groups     = $memberHandler->getGroupsByUser($uid, true);
-            $usergroups = [];
+            $uid                   = $userdata['id'];
+            $groups                = $memberHandler->getGroupsByUser($uid, true);
+            $usergroups            = [];
             foreach ($groups as $group) {
                 $usergroups[] = $group->getVar('name');
             }

@@ -40,7 +40,7 @@ use xos_opal_Theme;
  */
 class Breadcrumb
 {
-    public $dirname;
+    public  $dirname;
     private $bread = [];
 
     public function __construct()

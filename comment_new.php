@@ -27,10 +27,10 @@ $controller = new Suico\GroupController($xoopsDB, $xoopsUser);
 /**
  * Receiving info from get parameters
  */
-$groupId  = Request::getInt('com_itemid', 0, 'GET');
-$criteria = new Criteria('group_id', $groupId);
-$groups   = $controller->groupsFactory->getObjects($criteria);
-$group    = $groups[0];
+$groupId   = Request::getInt('com_itemid', 0, 'GET');
+$criteria  = new Criteria('group_id', $groupId);
+$groups    = $controller->groupsFactory->getObjects($criteria);
+$group     = $groups[0];
 $comItemid = Request::getInt('com_itemid', 0, 'GET');
 if ($comItemid > 0) {
     $com_replytitle = _MD_SUICO_GROUPS . ': ' . $group->getVar('group_title');

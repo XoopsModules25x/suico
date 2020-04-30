@@ -35,20 +35,20 @@ if (!$xoopsUser) {
  * Factories of groups
  */
 $configsFactory = new Suico\ConfigsHandler($xoopsDB);
-$uid = (int)$xoopsUser->getVar('uid');
-$criteria = new Criteria('config_uid', $uid);
+$uid            = (int)$xoopsUser->getVar('uid');
+$criteria       = new Criteria('config_uid', $uid);
 if ($configsFactory->getCount($criteria) > 0) {
     $configs = $configsFactory->getObjects($criteria);
-    $config = $configs[0];
-    $pic = $config->getVar('pictures');
-    $aud = $config->getVar('audio');
-    $vid = $config->getVar('videos');
-    $tri = $config->getVar('groups');
-    $scr = $config->getVar('notes');
-    $fri = $config->getVar('friends');
-    $pcon = $config->getVar('profile_contact');
-    $pgen = $config->getVar('profile_general');
-    $psta = $config->getVar('profile_stats');
+    $config  = $configs[0];
+    $pic     = $config->getVar('pictures');
+    $aud     = $config->getVar('audio');
+    $vid     = $config->getVar('videos');
+    $tri     = $config->getVar('groups');
+    $scr     = $config->getVar('notes');
+    $fri     = $config->getVar('friends');
+    $pcon    = $config->getVar('profile_contact');
+    $pgen    = $config->getVar('profile_general');
+    $psta    = $config->getVar('profile_stats');
     $xoopsTpl->assign('pic', $pic);
     $xoopsTpl->assign('aud', $aud);
     $xoopsTpl->assign('vid', $vid);

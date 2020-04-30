@@ -110,7 +110,7 @@ switch ($op) {
         $adminObject->displayButton('left');
         $start                   = Request::getInt('start', 0);
         $visitorsPaginationLimit = $helper->getConfig('userpager');
-        $criteria = new CriteriaCompo();
+        $criteria                = new CriteriaCompo();
         $criteria->setSort('cod_visit ASC, uname_visitor');
         $criteria->setOrder('ASC');
         $criteria->setLimit($visitorsPaginationLimit);
@@ -165,7 +165,7 @@ switch ($op) {
                 $visitorsArray['uname_visitor'] = $visitorsTempArray[$i]->getVar('uname_visitor');
                 $GLOBALS['xoopsTpl']->assign('selectordate_visited', AM_SUICO_VISITORS_DATETIME);
                 $visitorsArray['date_visited'] = formatTimestamp($visitorsTempArray[$i]->getVar('date_visited'), 's');
-                $visitorsArray['edit_delete'] = "<a href='visitors.php?op=edit&cod_visit=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
+                $visitorsArray['edit_delete']  = "<a href='visitors.php?op=edit&cod_visit=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='visitors.php?op=delete&cod_visit=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='visitors.php?op=clone&cod_visit=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
                 $GLOBALS['xoopsTpl']->append_by_ref('visitorsArrays', $visitorsArray);

@@ -51,7 +51,7 @@ switch ($op) {
         }
         // Form save fields
         $videoObject->setVar('uid_owner', Request::getVar('uid_owner', ''));
-		$videoObject->setVar('video_title', Request::getVar('video_title', ''));
+        $videoObject->setVar('video_title', Request::getVar('video_title', ''));
         $videoObject->setVar('video_desc', Request::getVar('video_desc', ''));
         $videoObject->setVar('youtube_code', Request::getVar('youtube_code', ''));
         $videoObject->setVar('main_video', Request::getVar('main_video', ''));
@@ -114,7 +114,7 @@ switch ($op) {
         $adminObject->displayButton('left');
         $start                = Request::getInt('start', 0);
         $videoPaginationLimit = $helper->getConfig('userpager');
-        $criteria = new CriteriaCompo();
+        $criteria             = new CriteriaCompo();
         $criteria->setSort('video_id ASC, video_desc');
         $criteria->setOrder('ASC');
         $criteria->setLimit($videoPaginationLimit);
@@ -158,10 +158,8 @@ switch ($op) {
                 $videoArray['uid_owner'] = strip_tags(
                     XoopsUser::getUnameFromId($videoTempArray[$i]->getVar('uid_owner'))
                 );
-				
-				$GLOBALS['xoopsTpl']->assign('selectorvideo_title', AM_SUICO_VIDEO_TITLE);
-				$videoArray['video_title'] = strip_tags($videoTempArray[$i]->getVar('video_title'));
-
+                $GLOBALS['xoopsTpl']->assign('selectorvideo_title', AM_SUICO_VIDEO_TITLE);
+                $videoArray['video_title'] = strip_tags($videoTempArray[$i]->getVar('video_title'));
                 $GLOBALS['xoopsTpl']->assign('selectorvideo_desc', AM_SUICO_VIDEO_VIDEO_DESC);
                 $videoArray['video_desc'] = strip_tags($videoTempArray[$i]->getVar('video_desc'));
                 $GLOBALS['xoopsTpl']->assign('selectoryoutube_code', AM_SUICO_VIDEO_YOUTUBE_CODE);
@@ -172,7 +170,7 @@ switch ($op) {
                 $videoArray['date_created'] = formatTimestamp($videoTempArray[$i]->getVar('date_created'), 's');
                 $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_SUICO_VIDEO_DATE_UPDATED);
                 $videoArray['date_updated'] = formatTimestamp($videoTempArray[$i]->getVar('date_updated'), 's');
-                $videoArray['edit_delete'] = "<a href='videos.php?op=edit&video_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
+                $videoArray['edit_delete']  = "<a href='videos.php?op=edit&video_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='videos.php?op=delete&video_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='videos.php?op=clone&video_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
                 $GLOBALS['xoopsTpl']->append_by_ref('videosArray', $videoArray);

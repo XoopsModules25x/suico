@@ -28,9 +28,9 @@ require __DIR__ . '/header.php';
  * Factory of pictures created
  */
 $ishotFactory = new Suico\IshotHandler($xoopsDB);
-$uid_voted = Request::getInt('uid_voted', 0, 'POST');
-$ishot     = Request::getInt('ishot', 0, 'POST');
-$uid_voter = (int)$xoopsUser->getVar('uid');
+$uid_voted    = Request::getInt('uid_voted', 0, 'POST');
+$ishot        = Request::getInt('ishot', 0, 'POST');
+$uid_voter    = (int)$xoopsUser->getVar('uid');
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }

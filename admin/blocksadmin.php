@@ -55,9 +55,9 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
     {
         global $xoopsModule, $pathIcon16;
         require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
-        $moduleDirName = basename(dirname(__DIR__));
+        $moduleDirName      = basename(dirname(__DIR__));
         $moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
-        $db = XoopsDatabaseFactory::getDatabaseConnection();
+        $db                 = XoopsDatabaseFactory::getDatabaseConnection();
         xoops_loadLanguage('admin', 'system');
         xoops_loadLanguage('admin/blocksadmin', 'system');
         xoops_loadLanguage('admin/groups', 'system');
@@ -67,12 +67,12 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         $memberHandler = xoops_getHandler('member');
         /** @var XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler = xoops_getHandler('groupperm');
-        $groups = $memberHandler->getGroups();
-        $criteria = new CriteriaCompo(new Criteria('hasmain', 1));
+        $groups           = $memberHandler->getGroups();
+        $criteria         = new CriteriaCompo(new Criteria('hasmain', 1));
         $criteria->add(new Criteria('isactive', 1));
-        $module_list = $moduleHandler->getList($criteria);
+        $module_list     = $moduleHandler->getList($criteria);
         $module_list[-1] = _AM_SYSTEM_BLOCKS_TOPPAGE;
-        $module_list[0] = _AM_SYSTEM_BLOCKS_ALLPAGES;
+        $module_list[0]  = _AM_SYSTEM_BLOCKS_ALLPAGES;
         ksort($module_list);
         echo "
         <h4 style='text-align:left;'>" . constant('CO_' . $moduleDirNameUpper . '_' . 'BADMIN') . '</h4>';
@@ -86,10 +86,10 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
                  'CO_' . $moduleDirNameUpper . '_' . 'VISIBLE'
              ) . "</th><th align='center'>" . _AM_SYSTEM_BLOCKS_VISIBLEIN . "</th><th align='center'>" . _AM_SYSTEM_ADGS . "</th><th align='center'>" . _AM_SYSTEM_BLOCKS_BCACHETIME . "</th><th align='center'>" . constant('CO_' . $moduleDirNameUpper . '_' . 'ACTION') . '</th></tr>
         ';
-        $block_arr = XoopsBlock::getByModule($xoopsModule->mid());
+        $block_arr   = XoopsBlock::getByModule($xoopsModule->mid());
         $block_count = count($block_arr);
-        $class = 'even';
-        $cachetimes = [
+        $class       = 'even';
+        $cachetimes  = [
             '0'       => _NOCACHE,
             '30'      => sprintf(_SECONDS, 30),
             '60'      => _MINUTE,
@@ -104,13 +104,13 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         ];
         foreach ($block_arr as $i) {
             $groups_perms = $grouppermHandler->getGroupIds('block_read', $i->getVar('bid'));
-            $sql = 'SELECT `module_id` FROM ' . $db->prefix(
+            $sql          = 'SELECT `module_id` FROM ' . $db->prefix(
                     'block_module_link'
                 ) . ' WHERE `block_id` =' . $i->getVar(
                     'bid'
                 );
-            $result = $db->query($sql);
-            $modules = [];
+            $result       = $db->query($sql);
+            $modules      = [];
             while (false !== ($row = $db->fetchArray($result))) {
                 $modules[] = (int)$row['module_id'];
             }
@@ -294,15 +294,15 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         xoops_loadLanguage('admin/groups', 'system');
         //        mpu_adm_menu();
         $myblock = new XoopsBlock($bid);
-        $db = XoopsDatabaseFactory::getDatabaseConnection();
-        $sql = 'SELECT module_id FROM ' . $db->prefix('block_module_link') . ' WHERE block_id=' . (int)$bid;
-        $result = $db->query($sql);
+        $db      = XoopsDatabaseFactory::getDatabaseConnection();
+        $sql     = 'SELECT module_id FROM ' . $db->prefix('block_module_link') . ' WHERE block_id=' . (int)$bid;
+        $result  = $db->query($sql);
         $modules = [];
         while (false !== ($row = $db->fetchArray($result))) {
             $modules[] = (int)$row['module_id'];
         }
         $isCustom = ('C' === $myblock->getVar('block_type') || 'E' === $myblock->getVar('block_type'));
-        $block = [
+        $block    = [
             'title'      => $myblock->getVar('title') . ' Clone',
             'form_title' => constant('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS_CLONEBLOCK'),
             'name'       => $myblock->getVar('name'),
@@ -386,7 +386,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         if ('' !== $clone->getVar('template')) {
             /** @var XoopsTplfileHandler $tplfileHandler */
             $tplfileHandler = xoops_getHandler('tplfile');
-            $btemplate = $tplfileHandler->find($GLOBALS['xoopsConfig']['template_set'], 'block', $bid);
+            $btemplate      = $tplfileHandler->find($GLOBALS['xoopsConfig']['template_set'], 'block', $bid);
             if (count($btemplate) > 0) {
                 $tplclone = $btemplate[0]->xoopsClone();
                 $tplclone->setVar('tpl_id', 0);
@@ -443,22 +443,22 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
     {
         require_once __DIR__ . '/admin_header.php';
         xoops_cp_header();
-        $moduleDirName = basename(dirname(__DIR__));
+        $moduleDirName      = basename(dirname(__DIR__));
         $moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
         xoops_loadLanguage('admin', 'system');
         xoops_loadLanguage('admin/blocksadmin', 'system');
         xoops_loadLanguage('admin/groups', 'system');
         //        mpu_adm_menu();
         $myblock = new XoopsBlock($bid);
-        $db = XoopsDatabaseFactory::getDatabaseConnection();
-        $sql = 'SELECT module_id FROM ' . $db->prefix('block_module_link') . ' WHERE block_id=' . (int)$bid;
-        $result = $db->query($sql);
+        $db      = XoopsDatabaseFactory::getDatabaseConnection();
+        $sql     = 'SELECT module_id FROM ' . $db->prefix('block_module_link') . ' WHERE block_id=' . (int)$bid;
+        $result  = $db->query($sql);
         $modules = [];
         while (false !== ($row = $db->fetchArray($result))) {
             $modules[] = (int)$row['module_id'];
         }
         $isCustom = ('C' === $myblock->getVar('block_type') || 'E' === $myblock->getVar('block_type'));
-        $block = [
+        $block    = [
             'title'      => $myblock->getVar('title'),
             'form_title' => constant('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS_EDITBLOCK'),
             //        'name'       => $myblock->getVar('name'),
@@ -515,7 +515,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         $myblock->setVar('bcachetime', $bcachetime);
         $myblock->store();
         global $xoopsDB;
-        $moduleDirName = basename(dirname(__DIR__));
+        $moduleDirName      = basename(dirname(__DIR__));
         $moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
         if (!empty($bmodule) && count($bmodule) > 0) {
             $sql = sprintf('DELETE FROM `%s` WHERE block_id = %u', $xoopsDB->prefix('block_module_link'), $bid);

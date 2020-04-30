@@ -127,9 +127,9 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Friendrequest
             $xoopsObject = new Friendrequest();
-            $format = 'INSERT INTO %s (friendreq_id, friendrequester_uid, friendrequestto_uid, date_created)';
-            $format .= 'VALUES (%u, %u, %u, %u)';
-            $sql = \sprintf(
+            $format      = 'INSERT INTO %s (friendreq_id, friendrequester_uid, friendrequestto_uid, date_created)';
+            $format      .= 'VALUES (%u, %u, %u, %u)';
+            $sql         = \sprintf(
                 $format,
                 $this->db->prefix('suico_friendrequests'),
                 $friendreq_id,
@@ -137,12 +137,12 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
                 $friendrequestto_uid,
                 $date_created
             );
-            $force = true;
+            $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'friendreq_id=%u, friendrequester_uid=%u, friendrequestto_uid=%u, date_created=%u';
             $format .= ' WHERE friendreq_id = %u';
-            $sql = \sprintf(
+            $sql    = \sprintf(
                 $format,
                 $this->db->prefix('suico_friendrequests'),
                 $friendreq_id,
@@ -210,9 +210,9 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
         $id_as_key = false,
         $as_object = true
     ) {
-        $ret = [];
+        $ret   = [];
         $limit = $start = 0;
-        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_friendrequests');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_friendrequests');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
             if ('' !== $criteriaElement->getSort()) {

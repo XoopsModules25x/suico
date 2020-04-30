@@ -59,7 +59,7 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 $criteria = new Criteria('config_uid', $xoopsUser->getVar('uid'));
 if ($configsFactory->getCount($criteria) > 0) {
     $configs = $configsFactory->getObjects($criteria);
-    $config = $configs[0];
+    $config  = $configs[0];
     $config->unsetNew();
 } else {
     $config = $configsFactory->create();

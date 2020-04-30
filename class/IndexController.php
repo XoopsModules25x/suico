@@ -80,7 +80,7 @@ class IndexController extends SuicoController
         $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
         if (1 === $this->configsFactory->getCount($criteria)) {
             $configs = $this->configsFactory->getObjects($criteria);
-            $config = $configs[0]->getVar($section);
+            $config  = $configs[0]->getVar($section);
             if (!$this->checkPrivilegeLevel($config)) {
                 return 0;
             }

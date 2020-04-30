@@ -96,7 +96,7 @@ switch ($op) {
         $adminObject->displayButton('left');
         $start                  = \Xmf\Request::getInt('start', 0);
         $privacyPaginationLimit = $helper->getConfig('userpager');
-        $criteria = new \CriteriaCompo();
+        $criteria               = new \CriteriaCompo();
         $criteria->setSort('id ASC, name');
         $criteria->setOrder('ASC');
         $criteria->setLimit($privacyPaginationLimit);
@@ -136,7 +136,7 @@ switch ($op) {
                 //        $field = explode(':', $fields[$i]);
                 $GLOBALS['xoopsTpl']->assign('selectorid', AM_SUICO_PRIVACY_ID);
                 $privacyArray['id'] = $privacyTempArray[$i]->getVar('id');
-                $selectorlevel = $utility::selectSorting(AM_SUICO_PRIVACY_LEVEL, 'level');
+                $selectorlevel      = $utility::selectSorting(AM_SUICO_PRIVACY_LEVEL, 'level');
                 $GLOBALS['xoopsTpl']->assign('selectorlevel', $selectorlevel);
                 $privacyArray['level'] = $privacyTempArray[$i]->getVar('level');
                 $GLOBALS['xoopsTpl']->assign('selectorname', AM_SUICO_PRIVACY_NAME);

@@ -139,9 +139,9 @@ class AudioHandler extends XoopsPersistableObjectHandler
         if ($xoopsObject->isNew()) {
             // adding / modifying a suico_audio
             $xoopsObject = new Audio();
-            $format = 'INSERT INTO %s (audio_id, title, author, description, filename, uid_owner, date_created, date_updated)';
-            $format .= ' VALUES (%u, %s, %s, %s, %s, %u, %s, %s)';
-            $sql = \sprintf(
+            $format      = 'INSERT INTO %s (audio_id, title, author, description, filename, uid_owner, date_created, date_updated)';
+            $format      .= ' VALUES (%u, %s, %s, %s, %s, %u, %s, %s)';
+            $sql         = \sprintf(
                 $format,
                 $this->db->prefix('suico_audios'),
                 $audio_id,
@@ -153,12 +153,12 @@ class AudioHandler extends XoopsPersistableObjectHandler
                 $date_created,
                 $date_updated
             );
-            $force = true;
+            $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'audio_id=%u, title=%s, author=%s, filename=%s, description=%s,uid_owner=%u, date_created=%s, date_updated=%s';
             $format .= ' WHERE audio_id = %u';
-            $sql = \sprintf(
+            $sql    = \sprintf(
                 $format,
                 $this->db->prefix('suico_audios'),
                 $audio_id,
@@ -229,9 +229,9 @@ class AudioHandler extends XoopsPersistableObjectHandler
         $id_as_key = false,
         $as_object = true
     ) {
-        $ret = [];
+        $ret   = [];
         $limit = $start = 0;
-        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_audios');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_audios');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
             if ('' !== $criteriaElement->getSort()) {
@@ -329,8 +329,8 @@ class AudioHandler extends XoopsPersistableObjectHandler
             'audio/x-mp3',
             'audio/mpeg',
         ];
-        $maxfilesize = $maxfilebytes;
-        $uploadDir = $path_upload;
+        $maxfilesize       = $maxfilebytes;
+        $uploadDir         = $path_upload;
         // create the object to upload
         $uploader = new XoopsMediaUploader(
             $uploadDir, $allowed_mimetypes, $maxfilesize

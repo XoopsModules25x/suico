@@ -31,9 +31,9 @@ require __DIR__ . '/header.php';
  */
 $friendrequestFactory = new Suico\FriendrequestHandler($xoopsDB);
 $friendshipFactory    = new Suico\FriendshipHandler($xoopsDB);
-$friendrequest_id = Request::getInt('friendrequest_id', 0, 'POST');
-$friendship_level = Request::getInt('level', 0, 'POST');
-$uid              = (int)$xoopsUser->getVar('uid');
+$friendrequest_id     = Request::getInt('friendrequest_id', 0, 'POST');
+$friendship_level     = Request::getInt('level', 0, 'POST');
+$uid                  = (int)$xoopsUser->getVar('uid');
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
@@ -41,8 +41,8 @@ $criteria = new CriteriaCompo(new Criteria('friendreq_id', $friendrequest_id));
 $criteria->add(new Criteria('friendrequestto_uid', $uid));
 if ($friendrequestFactory->getCount($criteria) > 0) {
     if (($friendship_level > 0) && ($friendrequest = $friendrequestFactory->getObjects($criteria))) {
-        $friend1_uid = $friendrequest[0]->getVar('friendrequester_uid');
-        $friend2_uid = $friendrequest[0]->getVar('friendrequestto_uid');
+        $friend1_uid    = $friendrequest[0]->getVar('friendrequester_uid');
+        $friend2_uid    = $friendrequest[0]->getVar('friendrequestto_uid');
         $newfriendship1 = $friendshipFactory->create(true);
         $newfriendship1->setVar('level', 3);
         $newfriendship1->setVar('friend1_uid', $friend1_uid);

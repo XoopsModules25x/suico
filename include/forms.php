@@ -64,7 +64,7 @@ function suico_getFieldForm(Suico\Field $field, $action = false)
             $form->addElement(new XoopsFormText(_AM_SUICO_NAME, 'field_name', 35, 255, $field->getVar('field_name', 'e')));
         }
         //autotext and theme left out of this one as fields of that type should never be changed (valid assumption, I think)
-        $fieldtypes = [
+        $fieldtypes     = [
             'checkbox'     => _AM_SUICO_CHECKBOX,
             'date'         => _AM_SUICO_DATE,
             'datetime'     => _AM_SUICO_DATETIME,
@@ -86,7 +86,7 @@ function suico_getFieldForm(Suico\Field $field, $action = false)
         $form->addElement($element_select);
         switch ($field->getVar('field_type')) {
             case 'textbox':
-                $valuetypes = [
+                $valuetypes  = [
                     XOBJ_DTYPE_TXTBOX          => _AM_SUICO_TXTBOX,
                     XOBJ_DTYPE_EMAIL           => _AM_SUICO_EMAIL,
                     XOBJ_DTYPE_INT             => _AM_SUICO_INT,
@@ -108,7 +108,7 @@ function suico_getFieldForm(Suico\Field $field, $action = false)
                 break;
             case 'select':
             case 'radio':
-                $valuetypes = [
+                $valuetypes  = [
                     XOBJ_DTYPE_TXTBOX          => _AM_SUICO_TXTBOX,
                     XOBJ_DTYPE_EMAIL           => _AM_SUICO_EMAIL,
                     XOBJ_DTYPE_INT             => _AM_SUICO_INT,
@@ -373,7 +373,7 @@ function suico_getUserForm(XoopsUser $user, Suico\Profile $profile = null, $acti
     }
     require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
     $title = $user->isNew() ? _AM_SUICO_ADDUSER : _US_EDITPROFILE;
-    $form = new XoopsThemeForm($title, 'userinfo', $action, 'post', true);
+    $form  = new XoopsThemeForm($title, 'userinfo', $action, 'post', true);
     /* @var ProfileHandler $profileHandler */
     $profileHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Profile');
     // Dynamic fields
@@ -412,17 +412,17 @@ function suico_getUserForm(XoopsUser $user, Suico\Profile $profile = null, $acti
         $pwd_tray->addElement($pwd_text2);
         $elements[0][] = ['element' => $pwd_tray, 'required' => 0]; //cannot set an element tray required
         $weights[0][]  = 0;
-        $level_radio = new XoopsFormRadio(_MD_SUICO_USERLEVEL, 'level', $user->getVar('level'));
+        $level_radio   = new XoopsFormRadio(_MD_SUICO_USERLEVEL, 'level', $user->getVar('level'));
         $level_radio->addOption(1, _MD_SUICO_ACTIVE);
         $level_radio->addOption(0, _MD_SUICO_INACTIVE);
         //$level_radio->addOption(-1, _MD_SUICO_DISABLED);
         $elements[0][] = ['element' => $level_radio, 'required' => 0];
         $weights[0][]  = 0;
     }
-    $elements[0][] = ['element' => new XoopsFormHidden('uid', $user->getVar('uid')), 'required' => 0];
-    $weights[0][]  = 0;
-    $elements[0][] = ['element' => new XoopsFormHidden('op', 'save'), 'required' => 0];
-    $weights[0][]  = 0;
+    $elements[0][]   = ['element' => new XoopsFormHidden('uid', $user->getVar('uid')), 'required' => 0];
+    $weights[0][]    = 0;
+    $elements[0][]   = ['element' => new XoopsFormHidden('op', 'save'), 'required' => 0];
+    $weights[0][]    = 0;
     $categoryHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Category');
     $categories      = [];
     $all_categories  = $categoryHandler->getObjects(null, true, false);
@@ -442,10 +442,10 @@ function suico_getUserForm(XoopsUser $user, Suico\Profile $profile = null, $acti
             }
             $fieldinfo['element']  = $fields[$i]->getEditElement($user, $profile);
             $fieldinfo['required'] = $fields[$i]->getVar('field_required');
-            $key              = @$all_categories[$fields[$i]->getVar('cat_id')]['cat_weight'] * $count_fields + $fields[$i]->getVar('cat_id');
-            $elements[$key][] = $fieldinfo;
-            $weights[$key][]  = $fields[$i]->getVar('field_weight');
-            $categories[$key] = @$all_categories[$fields[$i]->getVar('cat_id')];
+            $key                   = @$all_categories[$fields[$i]->getVar('cat_id')]['cat_weight'] * $count_fields + $fields[$i]->getVar('cat_id');
+            $elements[$key][]      = $fieldinfo;
+            $weights[$key][]       = $fields[$i]->getVar('field_weight');
+            $categories[$key]      = @$all_categories[$fields[$i]->getVar('cat_id')];
         }
     }
     if ($GLOBALS['xoopsUser'] && $GLOBALS['xoopsUser']->isAdmin()) {

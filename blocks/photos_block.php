@@ -33,7 +33,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 function b_suico_lastpictures_show($options)
 {
     global $xoopsDB, $xoopsModule, $xoopsModuleConfig;
-    $myts = MyTextSanitizer::getInstance();
+    $myts  = MyTextSanitizer::getInstance();
     $block = [];
     /**
      * Filter for fetch votes ishot and isnothot

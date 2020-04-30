@@ -44,10 +44,10 @@ function xoops_module_uninstall_suico(
     XoopsModule $module
 ) {
     require __DIR__ . '/common.php';
-    $moduleDirName = basename(dirname(__DIR__));
+    $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-    $helper = Suico\Helper::getInstance();
-    $utility = new Suico\Utility();
+    $helper             = Suico\Helper::getInstance();
+    $utility            = new Suico\Utility();
     //    $configurator = new Suico\Common\Configurator();
     // Load language files
     $helper->loadLanguage('admin');

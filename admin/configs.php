@@ -110,7 +110,7 @@ switch ($op) {
         $adminObject->displayButton('left');
         $start                  = Request::getInt('start', 0);
         $configsPaginationLimit = $helper->getConfig('userpager');
-        $criteria = new CriteriaCompo();
+        $criteria               = new CriteriaCompo();
         $criteria->setSort('config_id ASC, config_id');
         $criteria->setOrder('ASC');
         $criteria->setLimit($configsPaginationLimit);
@@ -177,7 +177,7 @@ switch ($op) {
                 $configsArray['backup_email'] = $configsTempArray[$i]->getVar('backup_email');
                 $GLOBALS['xoopsTpl']->assign('selectorend_suspension', AM_SUICO_CONFIGS_END_SUSPENSION);
                 $configsArray['end_suspension'] = formatTimestamp($configsTempArray[$i]->getVar('end_suspension'), 's');
-                $configsArray['edit_delete'] = "<a href='configs.php?op=edit&config_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
+                $configsArray['edit_delete']    = "<a href='configs.php?op=edit&config_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='configs.php?op=delete&config_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='configs.php?op=clone&config_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
                 $GLOBALS['xoopsTpl']->append_by_ref('configsArrays', $configsArray);

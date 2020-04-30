@@ -20,7 +20,7 @@
 include_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 $adminObject->displayNavigation(basename(__FILE__));
-$op = \Xmf\Request::getCmd('op', 'edit');
+$op        = \Xmf\Request::getCmd('op', 'edit');
 $perm_desc = '';
 switch ($op) {
     case 'visibility':

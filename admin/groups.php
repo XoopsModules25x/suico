@@ -131,7 +131,7 @@ switch ($op) {
         $adminObject->displayButton('left');
         $start                 = Request::getInt('start', 0);
         $groupsPaginationLimit = $helper->getConfig('userpager');
-        $criteria = new CriteriaCompo();
+        $criteria              = new CriteriaCompo();
         $criteria->setSort('group_id ASC, group_title');
         $criteria->setOrder('ASC');
         $criteria->setLimit($groupsPaginationLimit);
@@ -190,7 +190,7 @@ switch ($op) {
                 $groupsArray['date_created'] = formatTimestamp($groupsTempArray[$i]->getVar('date_created'), 's');
                 $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_SUICO_GROUPS_DATE_UPDATED);
                 $groupsArray['date_updated'] = formatTimestamp($groupsTempArray[$i]->getVar('date_updated'), 's');
-                $groupsArray['edit_delete'] = "<a href='groups.php?op=edit&group_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
+                $groupsArray['edit_delete']  = "<a href='groups.php?op=edit&group_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='groups.php?op=delete&group_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='groups.php?op=clone&group_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
                 $GLOBALS['xoopsTpl']->append_by_ref('groupsArrays', $groupsArray);

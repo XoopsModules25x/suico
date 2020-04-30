@@ -116,7 +116,7 @@ switch ($op) {
         $adminObject->displayButton('left');
         $start                     = Request::getInt('start', 0);
         $friendshipPaginationLimit = $helper->getConfig('userpager');
-        $criteria = new CriteriaCompo();
+        $criteria                  = new CriteriaCompo();
         $criteria->setSort('friendship_id ASC, friendship_id');
         $criteria->setOrder('ASC');
         $criteria->setLimit($friendshipPaginationLimit);
@@ -181,7 +181,7 @@ switch ($op) {
                 $friendshipArray['date_created'] = formatTimestamp($friendshipTempArray[$i]->getVar('date_created'), 's');
                 $GLOBALS['xoopsTpl']->assign('selectordate_updated', AM_SUICO_FRIENDSHIP_DATE_UPDATED);
                 $friendshipArray['date_updated'] = formatTimestamp($friendshipTempArray[$i]->getVar('date_updated'), 's');
-                $friendshipArray['edit_delete'] = "<a href='friendships.php?op=edit&friendship_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
+                $friendshipArray['edit_delete']  = "<a href='friendships.php?op=edit&friendship_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='friendships.php?op=delete&friendship_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='friendships.php?op=clone&friendship_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
                 $GLOBALS['xoopsTpl']->append_by_ref('friendshipsArray', $friendshipArray);

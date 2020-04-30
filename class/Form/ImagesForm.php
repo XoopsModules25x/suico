@@ -56,7 +56,7 @@ class ImagesForm extends XoopsThemeForm
     {
         $this->helper       = $target->helper;
         $this->targetObject = $target;
-        $title = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_IMAGES_ADD) : \sprintf(\AM_SUICO_IMAGES_EDIT);
+        $title              = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_IMAGES_ADD) : \sprintf(\AM_SUICO_IMAGES_EDIT);
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
         //include ID field, it's needed so the module knows if it is a new form or an edited form
@@ -107,7 +107,7 @@ class ImagesForm extends XoopsThemeForm
         //            new XoopsFormTextArea(AM_SUICO_IMAGES_URL, 'filename', $this->targetObject->getVar('filename'), 4, 47),
         //            false
         //        );
-        $filename = $this->targetObject->getVar('filename') ?: 'blank.png';
+        $filename    = $this->targetObject->getVar('filename') ?: 'blank.png';
         $uploadDir   = '/uploads/suico/images/';
         $imgtray     = new \XoopsFormElementTray(\AM_SUICO_IMAGES_URL, '<br>');
         $imgpath     = \sprintf(\AM_SUICO_FORMIMAGE_PATH, $uploadDir);

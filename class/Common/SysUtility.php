@@ -48,12 +48,12 @@ class SysUtility
     public static function selectSorting($text, $form_sort)
     {
         global $start, $order, $file_cat, $sort, $xoopsModule;
-        $select_view = '';
+        $select_view   = '';
         $moduleDirName = \basename(\dirname(__DIR__, 2));
-        $helper = Helper::getInstance();
+        $helper        = Helper::getInstance();
         //        $pathModIcon16 = XOOPS_URL . '/modules/' . $moduleDirName . '/' . $helper->getModule()->getInfo('modicons16');
         $pathModIcon16 = $helper->url($helper->getModule()->getInfo('modicons16'));
-        $select_view = '<form name="form_switch" id="form_switch" action="' . Request::getString('REQUEST_URI', '', 'SERVER') . '" method="post"><span style="font-weight: bold;">' . $text . '</span>';
+        $select_view   = '<form name="form_switch" id="form_switch" action="' . Request::getString('REQUEST_URI', '', 'SERVER') . '" method="post"><span style="font-weight: bold;">' . $text . '</span>';
         //$sorts =  $sort ==  'asc' ? 'desc' : 'asc';
         if ($form_sort == $sort) {
             $sel1 = 'asc' === $order ? 'selasc.png' : 'asc.png';
@@ -93,7 +93,7 @@ class SysUtility
     public static function metaKeywords($content)
     {
         global $xoopsTpl, $xoTheme;
-        $myts = \MyTextSanitizer::getInstance();
+        $myts    = \MyTextSanitizer::getInstance();
         $content = $myts->undoHtmlSpecialChars($myts->displayTarea($content));
         if (null !== $xoTheme && \is_object($xoTheme)) {
             $xoTheme->addMeta('meta', 'keywords', \strip_tags($content));
@@ -108,7 +108,7 @@ class SysUtility
     public static function metaDescription($content)
     {
         global $xoopsTpl, $xoTheme;
-        $myts = \MyTextSanitizer::getInstance();
+        $myts    = \MyTextSanitizer::getInstance();
         $content = $myts->undoHtmlSpecialChars($myts->displayTarea($content));
         if (null !== $xoTheme && \is_object($xoTheme)) {
             $xoTheme->addMeta('meta', 'description', \strip_tags($content));
@@ -129,12 +129,12 @@ class SysUtility
         //    $result = $GLOBALS['xoopsDB']->query("SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS
         //        WHERE TABLE_NAME = '" . $table . "' AND COLUMN_NAME = '" . $columnName . "'")
         //    || exit ($GLOBALS['xoopsDB']->error());
-        $sql = 'SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = "' . $table . '" AND COLUMN_NAME = "' . $columnName . '"';
+        $sql    = 'SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = "' . $table . '" AND COLUMN_NAME = "' . $columnName . '"';
         $result = $GLOBALS['xoopsDB']->query($sql);
         if (!$result) {
             exit($GLOBALS['xoopsDB']->error());
         }
-        $row = $GLOBALS['xoopsDB']->fetchBoth($result);
+        $row      = $GLOBALS['xoopsDB']->fetchBoth($result);
         $enumList = \explode(',', \str_replace("'", '', \mb_substr($row['COLUMN_TYPE'], 5, -6)));
         return $enumList;
     }
@@ -149,7 +149,7 @@ class SysUtility
     public static function cloneRecord($tableName, $id_field, $id)
     {
         $new_id = false;
-        $table = $GLOBALS['xoopsDB']->prefix($tableName);
+        $table  = $GLOBALS['xoopsDB']->prefix($tableName);
         // copy content of the record you wish to clone
         $tempTable = $GLOBALS['xoopsDB']->fetchArray($GLOBALS['xoopsDB']->query("SELECT * FROM $table WHERE $id_field='$id' "), \MYSQLI_ASSOC) or exit('Could not select record');
         // set the auto-incremented id's value to blank.
@@ -214,7 +214,7 @@ class SysUtility
                 $content_length = \mb_strlen(\preg_replace('/&[0-9a-z]{2,8};|&#\d{1,7};|[0-9a-f]{1,6};/i', ' ', $line_matchings[2]));
                 if ($total_length + $content_length > $length) {
                     // the number of characters which are left
-                    $left = $length - $total_length;
+                    $left            = $length - $total_length;
                     $entities_length = 0;
                     // search for html entities
                     if (\preg_match_all('/&[0-9a-z]{2,8};|&#\d{1,7};|[0-9a-f]{1,6};/i', $line_matchings[2], $entities, \PREG_OFFSET_CAPTURE)) {
@@ -233,7 +233,7 @@ class SysUtility
                     // maximum lenght is reached, so get off the loop
                     break;
                 }
-                $truncate .= $line_matchings[2];
+                $truncate     .= $line_matchings[2];
                 $total_length += $content_length;
                 // if the maximum length is reached, get off the loop
                 if ($total_length >= $length) {
@@ -275,12 +275,12 @@ class SysUtility
     ) {
         /** @var Helper $helper */
         if (null === $options) {
-            $options = [];
-            $options['name'] = 'Editor';
-            $options['value'] = 'Editor';
-            $options['rows'] = 10;
-            $options['cols'] = '100%';
-            $options['width'] = '100%';
+            $options           = [];
+            $options['name']   = 'Editor';
+            $options['value']  = 'Editor';
+            $options['rows']   = 10;
+            $options['cols']   = '100%';
+            $options['width']  = '100%';
             $options['height'] = '400px';
         }
         if (null === $helper) {

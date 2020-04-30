@@ -30,10 +30,10 @@ $controller = new Suico\GroupController($xoopsDB, $xoopsUser);
  * Fetching numbers of groups friends videos pictures etc...
  */
 $nbSections = $controller->getNumbersSections();
-$group_id = Request::getInt('group_id', 0, 'GET');
-$criteria = new Criteria('group_id', $group_id);
-$groups   = $controller->groupsFactory->getObjects($criteria);
-$group    = $groups[0];
+$group_id   = Request::getInt('group_id', 0, 'GET');
+$criteria   = new Criteria('group_id', $group_id);
+$groups     = $controller->groupsFactory->getObjects($criteria);
+$group      = $groups[0];
 /**
  * Fetching rel_id
  */
@@ -45,7 +45,7 @@ $xoopsTpl->assign('group_rel_id', $mygroup['rel_id']);
 /**
  * Render a form with the info of the user
  */
-$group_members = $controller->relgroupusersFactory->getUsersFromGroup(
+$group_members     = $controller->relgroupusersFactory->getUsersFromGroup(
     $group_id,
     0,
     50

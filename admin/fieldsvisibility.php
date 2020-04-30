@@ -22,7 +22,7 @@ include_once __DIR__ . '/admin_header.php';
 //this dirty hack will have to do it
 $_SERVER['REQUEST_URI'] = 'admin/fieldspermissions.php';
 xoops_cp_header();
-$op = $_REQUEST['op'] ?? 'visibility';
+$op                = $_REQUEST['op'] ?? 'visibility';
 $visibilityHandler = $helper->getHandler('Visibility');
 $fieldHandler      = $helper->getHandler('Field');
 $fields            = $fieldHandler->getList();
@@ -64,7 +64,7 @@ asort($groups);
 $GLOBALS['xoopsTpl']->assign('fields', $fields);
 $GLOBALS['xoopsTpl']->assign('visibilities', $visibilities);
 $GLOBALS['xoopsTpl']->assign('groups', $groups);
-$add_form = new XoopsSimpleForm('', 'addform', 'fieldsvisibility.php');
+$add_form  = new XoopsSimpleForm('', 'addform', 'fieldsvisibility.php');
 $sel_field = new XoopsFormSelect(_AM_SUICO_FIELDVISIBLE, 'field_id');
 $sel_field->setExtra("style='width: 200px;'");
 $sel_field->addOptionArray($fields);

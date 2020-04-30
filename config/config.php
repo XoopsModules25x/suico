@@ -23,8 +23,8 @@ $moduleDirName      = basename(
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 require_once dirname(__DIR__) . '/include/common.php';
 return (object)[
-    'name'           => mb_strtoupper($moduleDirName) . ' ModuleConfigurator',
-    'paths'          => [
+    'name'            => mb_strtoupper($moduleDirName) . ' ModuleConfigurator',
+    'paths'           => [
         'dirname'    => $moduleDirName,
         'admin'      => XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/admin',
         'modPath'    => XOOPS_ROOT_PATH . '/modules/' . $moduleDirName,
@@ -32,7 +32,7 @@ return (object)[
         'uploadPath' => XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
         'uploadUrl'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName,
     ],
-    'uploadFolders'  => [
+    'uploadFolders'   => [
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/avatars',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images',
@@ -42,7 +42,7 @@ return (object)[
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/videos',
         //XOOPS_UPLOAD_PATH . '/flags'
     ],
-    'copyBlankFiles' => [
+    'copyBlankFiles'  => [
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/avatars',
         XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images',

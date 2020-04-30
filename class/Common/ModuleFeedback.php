@@ -37,10 +37,10 @@ use XoopsThemeForm;
  */
 class ModuleFeedback extends XoopsObject
 {
-    public $name = '';
-    public $email = '';
-    public $site = '';
-    public $type = '';
+    public $name    = '';
+    public $email   = '';
+    public $site    = '';
+    public $type    = '';
     public $content = '';
 
     /**
@@ -77,7 +77,7 @@ class ModuleFeedback extends XoopsObject
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];
         }
-        $moduleDirName = \basename(\dirname(__DIR__, 2));
+        $moduleDirName      = \basename(\dirname(__DIR__, 2));
         $moduleDirNameUpper = mb_strtoupper($moduleDirName);
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
@@ -150,21 +150,21 @@ class ModuleFeedback extends XoopsObject
             \constant('CO_' . $moduleDirNameUpper . '_' . 'FB_TYPE_OTHERS')
         );
         $form->addElement($fbtypeSelect, true);
-        $editorConfigs = [];
-        $editorConfigs['name'] = 'fb_content';
-        $editorConfigs['value'] = $this->content;
-        $editorConfigs['rows'] = 5;
-        $editorConfigs['cols'] = 40;
-        $editorConfigs['width'] = '100%';
+        $editorConfigs           = [];
+        $editorConfigs['name']   = 'fb_content';
+        $editorConfigs['value']  = $this->content;
+        $editorConfigs['rows']   = 5;
+        $editorConfigs['cols']   = 40;
+        $editorConfigs['width']  = '100%';
         $editorConfigs['height'] = '400px';
         /** @var \XoopsModuleHandler $moduleHandler */
         $moduleHandler = \xoops_getHandler('module');
-        $module = $moduleHandler->getByDirname('system');
+        $module        = $moduleHandler->getByDirname('system');
         /** @var \XoopsConfigHandler $configHandler */
-        $configHandler = \xoops_getHandler('config');
-        $config = $configHandler->getConfigsByCat(0, $module->getVar('mid'));
+        $configHandler           = \xoops_getHandler('config');
+        $config                  = $configHandler->getConfigsByCat(0, $module->getVar('mid'));
         $editorConfigs['editor'] = $config['general_editor'];
-        $editor = new XoopsFormEditor(
+        $editor                  = new XoopsFormEditor(
             \constant(
                 'CO_' . $moduleDirNameUpper . '_' . 'FB_TYPE_CONTENT'
             ), 'fb_content', $editorConfigs

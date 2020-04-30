@@ -130,20 +130,20 @@ $modversion['simpleversion'] = '3.4';
 $modversion['simplename']    = 'suico';
 $modversion['simpleid']      = 22;
 //Adicionado para rodar no about
-$modversion['developer_website_url']  = 'https://sourceforge.net/projects/galeriasuico/';
-$modversion['developer_website_name'] = 'Sourceforge - galeriasuico';
-$modversion['developer_email']        = 'marcello.brandao@gmail.com';
-$modversion['status_version']         = 'Beta';
-$modversion['status']                 = 'Beta';
-$modversion['date']                   = '2017-11-11';
-$modversion['people']['developers'][] = 'Suico (Dev)';
-$modversion['people']['developers'][] = 'Alfred (Dev)';
-$modversion['people']['developers'][] = 'm0nty_ (Dev)';
-$modversion['people']['developers'][] = 'sato-san (Design)';
-$modversion['people']['testers'][] = 'Luix (xoopstotal.com.br)';
-$modversion['people']['testers'][] = 'BoOot (xoopstotal.com.br)';
-$modversion['people']['testers'][] = 'Rodrigo (komeia)';
-$modversion['people']['testers'][] = 'Casar Felipe (komeia)';
+$modversion['developer_website_url']   = 'https://sourceforge.net/projects/galeriasuico/';
+$modversion['developer_website_name']  = 'Sourceforge - galeriasuico';
+$modversion['developer_email']         = 'marcello.brandao@gmail.com';
+$modversion['status_version']          = 'Beta';
+$modversion['status']                  = 'Beta';
+$modversion['date']                    = '2017-11-11';
+$modversion['people']['developers'][]  = 'Suico (Dev)';
+$modversion['people']['developers'][]  = 'Alfred (Dev)';
+$modversion['people']['developers'][]  = 'm0nty_ (Dev)';
+$modversion['people']['developers'][]  = 'sato-san (Design)';
+$modversion['people']['testers'][]     = 'Luix (xoopstotal.com.br)';
+$modversion['people']['testers'][]     = 'BoOot (xoopstotal.com.br)';
+$modversion['people']['testers'][]     = 'Rodrigo (komeia)';
+$modversion['people']['testers'][]     = 'Casar Felipe (komeia)';
 $modversion['people']['translators'][] = 'Wizanda (english)';
 $modversion['people']['translators'][] = 'Daniel Woo (simplified chinese)';
 $modversion['people']['translators'][] = 'Werner Feichtlbauer (german)';
@@ -987,7 +987,7 @@ $modversion['config'][] = [
 /**
  * Show Developer Tools?
  */
-$modversion['config'][] = [
+$modversion['config'][]  = [
     'name'        => 'displayDeveloperTools',
     'title'       => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_DEV_TOOLS',
     'description' => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_DEV_TOOLS_DESC',
@@ -1086,12 +1086,12 @@ if (is_object($xoopsModule) && $xoopsModule->dirname() === $modversion['dirname'
     }
 }
 if ($GLOBALS['xoopsUser']) {
-    $modversion['sub'][7]['name'] = _MI_SUICO_MYCONFIGS;
-    $modversion['sub'][7]['url']  = 'configs.php';
-    $modversion['sub'][8]['name'] = _MI_SUICO_EDITPROFILE;
-    $modversion['sub'][8]['url']  = 'edituser.php';
-    $modversion['sub'][9]['name'] = _MI_SUICO_CHANGEPASS;
-    $modversion['sub'][9]['url']  = 'changepass.php';
+    $modversion['sub'][7]['name']  = _MI_SUICO_MYCONFIGS;
+    $modversion['sub'][7]['url']   = 'configs.php';
+    $modversion['sub'][8]['name']  = _MI_SUICO_EDITPROFILE;
+    $modversion['sub'][8]['url']   = 'edituser.php';
+    $modversion['sub'][9]['name']  = _MI_SUICO_CHANGEPASS;
+    $modversion['sub'][9]['url']   = 'changepass.php';
     $modversion['sub'][10]['name'] = _MI_SUICO_CHANGEAVATAR;
     $modversion['sub'][10]['url']  = 'edituser.php?op=avatarform';
 }
@@ -1162,8 +1162,8 @@ $modversion['notification']['event'][4]['caption']           = _MI_SUICO_FRIEND_
 $modversion['notification']['event'][4]['description']       = _MI_SUICO_FRIEND_NEWFRIENDREQUEST_NOTIFYDSC;
 $modversion['notification']['event'][4]['mail_template']     = 'friendship_newFriendrequest_notify';
 $modversion['notification']['event'][4]['mail_subject']      = _MI_SUICO_FRIEND_NEWFRIENDREQUEST_NOTIFYSBJ;
-$modversion['notification']['lookup_file'] = 'include/notification.inc.php';
-$modversion['notification']['lookup_func'] = 'suico_iteminfo';
+$modversion['notification']['lookup_file']                   = 'include/notification.inc.php';
+$modversion['notification']['lookup_func']                   = 'suico_iteminfo';
 //$modversion['notification']['tags_file'] = 'include/notification.inc.php';
 //$modversion['notification']['tags_func'] = 'suico_tags';
 $modversion['blocks'][] = [

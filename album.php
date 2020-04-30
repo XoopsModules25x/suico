@@ -78,11 +78,11 @@ if (isset($nbSections[COUNTPHOTOS]) && 0 === $nbSections[COUNTPHOTOS]) {
      */
     $i = 0;
     foreach ($pictures_object_array as $picture) {
-        $pictures_array[$i]['filename'] = $picture->getVar('filename', 's');
-        $pictures_array[$i]['title']    = $picture->getVar('title', 's');
-        $pictures_array[$i]['caption']  = $picture->getVar('caption', 's');
-        $pictures_array[$i]['cod_img']  = $picture->getVar('cod_img', 's');
-        $pictures_array[$i]['private']  = $picture->getVar('private', 's');
+        $pictures_array[$i]['filename']     = $picture->getVar('filename', 's');
+        $pictures_array[$i]['title']        = $picture->getVar('title', 's');
+        $pictures_array[$i]['caption']      = $picture->getVar('caption', 's');
+        $pictures_array[$i]['cod_img']      = $picture->getVar('cod_img', 's');
+        $pictures_array[$i]['private']      = $picture->getVar('private', 's');
         $pictures_array[$i]['date_created'] = formatTimestamp($picture->getVar('date_created', 's'));
         $pictures_array[$i]['date_updated'] = formatTimestamp($picture->getVar('date_updated', 's'));
         $xoopsTpl->assign('pics_array', $pictures_array);

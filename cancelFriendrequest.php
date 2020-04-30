@@ -37,9 +37,9 @@ $friendrequestto_uid = Request::getInt(
     'POST'
 );
 $friendrequester_uid = (int)$xoopsUser->getVar('uid');
-$criteria_friend1 = new Criteria('friendrequestto_uid', $friendrequestto_uid);
-$criteria_friend2 = new Criteria('friendrequester_uid', $friendrequester_uid);
-$criteria_delete1 = new CriteriaCompo($criteria_friend1);
+$criteria_friend1    = new Criteria('friendrequestto_uid', $friendrequestto_uid);
+$criteria_friend2    = new Criteria('friendrequester_uid', $friendrequester_uid);
+$criteria_delete1    = new CriteriaCompo($criteria_friend1);
 $criteria_delete1->add($criteria_friend2);
 $friendrequestFactory->deleteAll($criteria_delete1);
 $criteria_friend1 = new Criteria('friendrequestto_uid', $friendrequester_uid);

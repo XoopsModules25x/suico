@@ -132,7 +132,7 @@ switch ($op) {
         $adminObject->displayButton('left');
         $start                 = Request::getInt('start', 0);
         $imagesPaginationLimit = $helper->getConfig('userpager');
-        $criteria = new CriteriaCompo();
+        $criteria              = new CriteriaCompo();
         $criteria->setSort('cod_img ASC, title');
         $criteria->setOrder('ASC');
         $criteria->setLimit($imagesPaginationLimit);

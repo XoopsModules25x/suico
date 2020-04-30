@@ -26,10 +26,10 @@ switch ($op) {
     case 'search':
         $GLOBALS['xoopsOption']['template_main'] = 'suico_search.tpl';
         require __DIR__ . '/header.php';
-        $myts       = MyTextSanitizer::getInstance();
-        $controller = new IndexController($xoopsDB, $xoopsUser, $xoopsModule);
-        $nbSections = $controller->getNumbersSections();
-        $limit_default = 20;
+        $myts                       = MyTextSanitizer::getInstance();
+        $controller                 = new IndexController($xoopsDB, $xoopsUser, $xoopsModule);
+        $nbSections                 = $controller->getNumbersSections();
+        $limit_default              = 20;
         $groups                     = $GLOBALS['xoopsUser'] ? $GLOBALS['xoopsUser']->getGroups() : [XOOPS_GROUP_ANONYMOUS];
         $xoopsOption['cache_group'] = implode('', $groups);
         $searchable_types           = [
@@ -42,7 +42,7 @@ switch ($op) {
             'timezone',
             'language',
         ];
-        $sortby_arr = [];
+        $sortby_arr                 = [];
         // Dynamic fields
         $profileHandler = $helper->getHandler('Profile');
         // Get fields
@@ -53,7 +53,7 @@ switch ($op) {
         $searchable_fields = $grouppermHandler->getItemIds('profile_search', $groups, $GLOBALS['xoopsModule']->getVar('mid'));
         include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
         $searchform = new XoopsThemeForm('', 'searchform', 'searchuser.php', 'post');
-        $name_tray = new XoopsFormElementTray(_US_NICKNAME);
+        $name_tray  = new XoopsFormElementTray(_US_NICKNAME);
         $name_tray->addElement(new XoopsFormSelectMatchOption('', 'uname_match'));
         $name_tray->addElement(new XoopsFormText('', 'uname', 35, 255));
         $searchform->addElement($name_tray);
@@ -167,7 +167,7 @@ switch ($op) {
         $searchable_fields = $grouppermHandler->getItemIds('profile_search', $groups, $GLOBALS['xoopsModule']->getVar('mid'));
         $searchvars        = [];
         $search_url        = [];
-        $criteria = new CriteriaCompo(new Criteria('level', 0, '>'));
+        $criteria          = new CriteriaCompo(new Criteria('level', 0, '>'));
         if (isset($_REQUEST['uname']) && '' !== $_REQUEST['uname']) {
             $string = $myts->addSlashes(trim($_REQUEST['uname']));
             switch ($_REQUEST['uname_match']) {

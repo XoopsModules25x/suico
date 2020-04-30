@@ -130,9 +130,9 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Suico\Visitors
             $xoopsObject = new Visitors();
-            $format = 'INSERT INTO %s (cod_visit, uid_owner, uid_visitor,uname_visitor)';
-            $format .= 'VALUES (%u, %u, %u, %s)';
-            $sql = \sprintf(
+            $format      = 'INSERT INTO %s (cod_visit, uid_owner, uid_visitor,uname_visitor)';
+            $format      .= 'VALUES (%u, %u, %u, %s)';
+            $sql         = \sprintf(
                 $format,
                 $this->db->prefix('suico_visitors'),
                 $cod_visit,
@@ -140,12 +140,12 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
                 $uid_visitor,
                 $this->db->quoteString($uname_visitor)
             );
-            $force = true;
+            $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'cod_visit=%u, uid_owner=%u, uid_visitor=%u, uname_visitor=%s ';
             $format .= ' WHERE cod_visit = %u';
-            $sql = \sprintf(
+            $sql    = \sprintf(
                 $format,
                 $this->db->prefix('suico_visitors'),
                 $cod_visit,
@@ -213,9 +213,9 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         $id_as_key = false,
         $as_object = true
     ) {
-        $ret = [];
+        $ret   = [];
         $limit = $start = 0;
-        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_visitors');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_visitors');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
             if ('' !== $criteriaElement->getSort()) {

@@ -109,7 +109,7 @@ switch ($op) {
         $adminObject->displayButton('left');
         $start                        = Request::getInt('start', 0);
         $friendrequestPaginationLimit = $helper->getConfig('userpager');
-        $criteria = new CriteriaCompo();
+        $criteria                     = new CriteriaCompo();
         $criteria->setSort('friendreq_id ASC, friendreq_id');
         $criteria->setOrder('ASC');
         $criteria->setLimit($friendrequestPaginationLimit);
@@ -155,7 +155,7 @@ switch ($op) {
                 );
                 $GLOBALS['xoopsTpl']->assign('selectordate_created', AM_SUICO_FRIENDREQUEST_DATE_CREATED);
                 $friendrequestArray['date_created'] = formatTimestamp($friendrequestTempArray[$i]->getVar('date_created'), 's');
-                $friendrequestArray['edit_delete'] = "<a href='friendrequests.php?op=edit&friendreq_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
+                $friendrequestArray['edit_delete']  = "<a href='friendrequests.php?op=edit&friendreq_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='friendrequests.php?op=delete&friendreq_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='friendrequests.php?op=clone&friendreq_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
                 $GLOBALS['xoopsTpl']->append_by_ref('friendrequestsArray', $friendrequestArray);

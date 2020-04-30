@@ -55,9 +55,9 @@ class Friendship extends XoopsObject
     {
         parent::__construct();
         /** @var Helper $helper */
-        $this->helper = Helper::getInstance();
+        $this->helper     = Helper::getInstance();
         $this->permHelper = new Permission();
-        $this->db = XoopsDatabaseFactory::getDatabaseConnection();
+        $this->db         = XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('friendship_id', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('friend1_uid', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('friend2_uid', \XOBJ_DTYPE_INT, null, false, 10);
@@ -84,7 +84,7 @@ class Friendship extends XoopsObject
      */
     public function load($id)
     {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_friendships') . ' WHERE friendship_id=' . $id;
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_friendships') . ' WHERE friendship_id=' . $id;
         $myrow = $this->db->fetchArray($this->db->query($sql));
         $this->assignVars($myrow);
         if (!$myrow) {
@@ -109,8 +109,8 @@ class Friendship extends XoopsObject
         $limit = 0,
         $start = 0
     ) {
-        $db = XoopsDatabaseFactory::getDatabaseConnection();
-        $ret = [];
+        $db         = XoopsDatabaseFactory::getDatabaseConnection();
+        $ret        = [];
         $whereQuery = '';
         if (\is_array($criteria) && \count($criteria) > 0) {
             $whereQuery = ' WHERE';
@@ -122,7 +122,7 @@ class Friendship extends XoopsObject
             $whereQuery = ' WHERE ' . $criteria;
         }
         if (!$asobject) {
-            $sql = 'SELECT friendship_id FROM ' . $db->prefix(
+            $sql    = 'SELECT friendship_id FROM ' . $db->prefix(
                     'suico_friendships'
                 ) . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
@@ -130,7 +130,7 @@ class Friendship extends XoopsObject
                 $ret[] = $myrow['suico_friendship_id'];
             }
         } else {
-            $sql = 'SELECT * FROM ' . $db->prefix('suico_friendships') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql    = 'SELECT * FROM ' . $db->prefix('suico_friendships') . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new self($myrow);

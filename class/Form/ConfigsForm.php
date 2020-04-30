@@ -52,9 +52,9 @@ class ConfigsForm extends XoopsThemeForm
      */
     public function __construct($target)
     {
-        $this->helper = $target->helper;
+        $this->helper       = $target->helper;
         $this->targetObject = $target;
-        $title = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_CONFIGS_ADD) : \sprintf(\AM_SUICO_CONFIGS_EDIT);
+        $title              = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_CONFIGS_ADD) : \sprintf(\AM_SUICO_CONFIGS_EDIT);
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
         //include ID field, it's needed so the module knows if it is a new form or an edited form
@@ -82,7 +82,7 @@ class ConfigsForm extends XoopsThemeForm
         //$privacyHandler = $this->helper->getHandler('Privacy');
         //$db     = \XoopsDatabaseFactory::getDatabaseConnection();
         /** @var \XoopsPersistableObjectHandler $privacyHandler */
-        $privacyHandler = $this->helper->getHandler('Privacy');
+        $privacyHandler    = $this->helper->getHandler('Privacy');
         $privacy_id_select = new \XoopsFormSelect(\AM_SUICO_CONFIGS_PICTURES, 'pictures', $this->targetObject->getVar('pictures'));
         $privacy_id_select->addOptionArray($privacyHandler->getList());
         $this->addElement($privacy_id_select, false);
@@ -90,7 +90,7 @@ class ConfigsForm extends XoopsThemeForm
         //$privacyHandler = $this->helper->getHandler('Privacy');
         //$db     = \XoopsDatabaseFactory::getDatabaseConnection();
         /** @var \XoopsPersistableObjectHandler $privacyHandler */
-        $privacyHandler = $this->helper->getHandler('Privacy');
+        $privacyHandler    = $this->helper->getHandler('Privacy');
         $privacy_id_select = new \XoopsFormSelect(\AM_SUICO_CONFIGS_AUDIO, 'audio', $this->targetObject->getVar('audio'));
         $privacy_id_select->addOptionArray($privacyHandler->getList());
         $this->addElement($privacy_id_select, false);
@@ -98,7 +98,7 @@ class ConfigsForm extends XoopsThemeForm
         //$privacyHandler = $this->helper->getHandler('Privacy');
         //$db     = \XoopsDatabaseFactory::getDatabaseConnection();
         /** @var \XoopsPersistableObjectHandler $privacyHandler */
-        $privacyHandler = $this->helper->getHandler('Privacy');
+        $privacyHandler    = $this->helper->getHandler('Privacy');
         $privacy_id_select = new \XoopsFormSelect(\AM_SUICO_CONFIGS_VIDEOS, 'videos', $this->targetObject->getVar('videos'));
         $privacy_id_select->addOptionArray($privacyHandler->getList());
         $this->addElement($privacy_id_select, false);
@@ -106,7 +106,7 @@ class ConfigsForm extends XoopsThemeForm
         //$privacyHandler = $this->helper->getHandler('Privacy');
         //$db     = \XoopsDatabaseFactory::getDatabaseConnection();
         /** @var \XoopsPersistableObjectHandler $privacyHandler */
-        $privacyHandler = $this->helper->getHandler('Privacy');
+        $privacyHandler    = $this->helper->getHandler('Privacy');
         $privacy_id_select = new \XoopsFormSelect(\AM_SUICO_CONFIGS_GROUPS, 'groups', $this->targetObject->getVar('groups'));
         $privacy_id_select->addOptionArray($privacyHandler->getList());
         $this->addElement($privacy_id_select, false);
@@ -114,7 +114,7 @@ class ConfigsForm extends XoopsThemeForm
         //$privacyHandler = $this->helper->getHandler('Privacy');
         //$db     = \XoopsDatabaseFactory::getDatabaseConnection();
         /** @var \XoopsPersistableObjectHandler $privacyHandler */
-        $privacyHandler = $this->helper->getHandler('Privacy');
+        $privacyHandler    = $this->helper->getHandler('Privacy');
         $privacy_id_select = new \XoopsFormSelect(\AM_SUICO_CONFIGS_NOTES, 'notes', $this->targetObject->getVar('notes'));
         $privacy_id_select->addOptionArray($privacyHandler->getList());
         $this->addElement($privacy_id_select, false);
@@ -122,7 +122,7 @@ class ConfigsForm extends XoopsThemeForm
         //$privacyHandler = $this->helper->getHandler('Privacy');
         //$db     = \XoopsDatabaseFactory::getDatabaseConnection();
         /** @var \XoopsPersistableObjectHandler $privacyHandler */
-        $privacyHandler = $this->helper->getHandler('Privacy');
+        $privacyHandler    = $this->helper->getHandler('Privacy');
         $privacy_id_select = new \XoopsFormSelect(\AM_SUICO_CONFIGS_FRIENDS, 'friends', $this->targetObject->getVar('friends'));
         $privacy_id_select->addOptionArray($privacyHandler->getList());
         $this->addElement($privacy_id_select, false);
@@ -130,7 +130,7 @@ class ConfigsForm extends XoopsThemeForm
         //$privacyHandler = $this->helper->getHandler('Privacy');
         //$db     = \XoopsDatabaseFactory::getDatabaseConnection();
         /** @var \XoopsPersistableObjectHandler $privacyHandler */
-        $privacyHandler = $this->helper->getHandler('Privacy');
+        $privacyHandler    = $this->helper->getHandler('Privacy');
         $privacy_id_select = new \XoopsFormSelect(\AM_SUICO_CONFIGS_PROFILE_CONTACT, 'profile_contact', $this->targetObject->getVar('profile_contact'));
         $privacy_id_select->addOptionArray($privacyHandler->getList());
         $this->addElement($privacy_id_select, false);
@@ -138,7 +138,7 @@ class ConfigsForm extends XoopsThemeForm
         //$privacyHandler = $this->helper->getHandler('Privacy');
         //$db     = \XoopsDatabaseFactory::getDatabaseConnection();
         /** @var \XoopsPersistableObjectHandler $privacyHandler */
-        $privacyHandler = $this->helper->getHandler('Privacy');
+        $privacyHandler    = $this->helper->getHandler('Privacy');
         $privacy_id_select = new \XoopsFormSelect(\AM_SUICO_CONFIGS_PROFILE_GENERAL, 'profile_general', $this->targetObject->getVar('profile_general'));
         $privacy_id_select->addOptionArray($privacyHandler->getList());
         $this->addElement($privacy_id_select, false);
@@ -146,12 +146,12 @@ class ConfigsForm extends XoopsThemeForm
         //$privacyHandler = $this->helper->getHandler('Privacy');
         //$db     = \XoopsDatabaseFactory::getDatabaseConnection();
         /** @var \XoopsPersistableObjectHandler $privacyHandler */
-        $privacyHandler = $this->helper->getHandler('Privacy');
+        $privacyHandler    = $this->helper->getHandler('Privacy');
         $privacy_id_select = new \XoopsFormSelect(\AM_SUICO_CONFIGS_PROFILE_STATS, 'profile_stats', $this->targetObject->getVar('profile_stats'));
         $privacy_id_select->addOptionArray($privacyHandler->getList());
         $this->addElement($privacy_id_select, false);
         // Suspension
-        $suspension = $this->targetObject->isNew() ? 0 : $this->targetObject->getVar('suspension');
+        $suspension       = $this->targetObject->isNew() ? 0 : $this->targetObject->getVar('suspension');
         $check_suspension = new \XoopsFormCheckBox(\AM_SUICO_CONFIGS_SUSPENSION, 'suspension', $suspension);
         $check_suspension->addOption(1, ' ');
         $this->addElement($check_suspension);

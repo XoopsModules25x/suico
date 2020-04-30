@@ -145,9 +145,9 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Groups
             $xoopsObject = new Groups();
-            $format = 'INSERT INTO %s (group_id, owner_uid, group_title, group_desc, group_img)';
-            $format .= 'VALUES (%u, %u, %s, %s, %s)';
-            $sql = \sprintf(
+            $format      = 'INSERT INTO %s (group_id, owner_uid, group_title, group_desc, group_img)';
+            $format      .= 'VALUES (%u, %u, %s, %s, %s)';
+            $sql         = \sprintf(
                 $format,
                 $this->db->prefix('suico_groups'),
                 $group_id,
@@ -156,12 +156,12 @@ class GroupsHandler extends XoopsPersistableObjectHandler
                 $this->db->quoteString($group_desc),
                 $this->db->quoteString($group_img)
             );
-            $force = true;
+            $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'group_id=%u, owner_uid=%u, group_title=%s, group_desc=%s, group_img=%s';
             $format .= ' WHERE group_id = %u';
-            $sql = \sprintf(
+            $sql    = \sprintf(
                 $format,
                 $this->db->prefix('suico_groups'),
                 $group_id,
@@ -230,9 +230,9 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $id_as_key = false,
         $as_object = true
     ) {
-        $ret = [];
+        $ret   = [];
         $limit = $start = 0;
-        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_groups');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_groups');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
             if ('' !== $criteriaElement->getSort()) {
@@ -269,9 +269,9 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $criteria = null,
         $id_as_key = false
     ) {
-        $ret = [];
+        $ret   = [];
         $limit = $start = 0;
-        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_groups');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_groups');
         if (isset($criteria) && $criteria instanceof CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' !== $criteria->getSort()) {
@@ -286,15 +286,15 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         }
         $i = 0;
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $ret[$i]['id'] = $myrow['group_id'];
-            $ret[$i]['title'] = $myrow['group_title'];
-            $ret[$i]['img'] = $myrow['group_img'];
-            $ret[$i]['desc'] = $myrow['group_desc'];
-            $ret[$i]['uid'] = $myrow['owner_uid'];
-            $groupid = $myrow['group_id'];
-            $query = 'SELECT COUNT(rel_id) AS grouptotalmembers FROM ' . $GLOBALS['xoopsDB']->prefix('suico_relgroupuser') . ' WHERE rel_group_id=' . $groupid . '';
-            $queryresult = $GLOBALS['xoopsDB']->query($query);
-            $row = $GLOBALS['xoopsDB']->fetchArray($queryresult);
+            $ret[$i]['id']                = $myrow['group_id'];
+            $ret[$i]['title']             = $myrow['group_title'];
+            $ret[$i]['img']               = $myrow['group_img'];
+            $ret[$i]['desc']              = $myrow['group_desc'];
+            $ret[$i]['uid']               = $myrow['owner_uid'];
+            $groupid                      = $myrow['group_id'];
+            $query                        = 'SELECT COUNT(rel_id) AS grouptotalmembers FROM ' . $GLOBALS['xoopsDB']->prefix('suico_relgroupuser') . ' WHERE rel_group_id=' . $groupid . '';
+            $queryresult                  = $GLOBALS['xoopsDB']->query($query);
+            $row                          = $GLOBALS['xoopsDB']->fetchArray($queryresult);
             $grouptotalmembers            = $row['grouptotalmembers'];
             $ret[$i]['grouptotalmembers'] = $grouptotalmembers . ' ' . \_MD_SUICO_GROUPMEMBERS;
             $i++;
@@ -387,12 +387,12 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $field_groupid = new XoopsFormHidden('group_id', $group->getVar('group_id'));
         $field_url     = new XoopsFormFile(\_MD_SUICO_GROUP_IMAGE, 'img', $maxbytes);
         $field_url->setExtra('style="visibility:hidden;"');
-        $field_title   = new XoopsFormText(\_MD_SUICO_GROUP_TITLE, 'title', 35, 55, $group->getVar('group_title'));
-        $field_desc    = new XoopsFormTextArea(\_MD_SUICO_GROUP_DESC, 'desc', $group->getVar('group_desc'));
-        $field_marker  = new XoopsFormHidden('marker', '1');
-        $buttonSend    = new XoopsFormButton('', 'submit_button', \_MD_SUICO_UPLOADGROUP, 'submit');
-        $field_warning = new XoopsFormLabel(\sprintf(\_MD_SUICO_YOU_CAN_UPLOAD, $maxbytes / 1024));
-        $field_oldpicture = new XoopsFormLabel(
+        $field_title         = new XoopsFormText(\_MD_SUICO_GROUP_TITLE, 'title', 35, 55, $group->getVar('group_title'));
+        $field_desc          = new XoopsFormTextArea(\_MD_SUICO_GROUP_DESC, 'desc', $group->getVar('group_desc'));
+        $field_marker        = new XoopsFormHidden('marker', '1');
+        $buttonSend          = new XoopsFormButton('', 'submit_button', \_MD_SUICO_UPLOADGROUP, 'submit');
+        $field_warning       = new XoopsFormLabel(\sprintf(\_MD_SUICO_YOU_CAN_UPLOAD, $maxbytes / 1024));
+        $field_oldpicture    = new XoopsFormLabel(
             \_MD_SUICO_GROUP_IMAGE, '<img src="' . \XOOPS_UPLOAD_URL . '/' . $group->getVar(
                                       'group_img'
                                   ) . '">'
@@ -468,7 +468,7 @@ var elestyle = xoopsGetElementById(img).style;
         } else {
             $group->unsetNew();
         }
-        $helper = Helper::getInstance();
+        $helper      = Helper::getInstance();
         $pictwidth   = $helper->getConfig('resized_width');
         $pictheight  = $helper->getConfig('resized_height');
         $thumbwidth  = $helper->getConfig('thumb_width');
@@ -478,8 +478,8 @@ var elestyle = xoopsGetElementById(img).style;
             $allowed_mimetypes = Helper::getInstance()->getConfig(
                 'mimetypes'
             );
-            $maxfilesize = $maxfilebytes;
-            $uploadDir = \XOOPS_UPLOAD_PATH . '/suico/groups/';
+            $maxfilesize       = $maxfilebytes;
+            $uploadDir         = \XOOPS_UPLOAD_PATH . '/suico/groups/';
             // create the object to upload
             $uploader = new XoopsMediaUploader(
                 $uploadDir, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight
@@ -499,8 +499,8 @@ var elestyle = xoopsGetElementById(img).style;
                 $group->setVar('group_img', $savedFilename);
                 $imageMimetype = $uploader->getMediaType();
                 $group->setVar('group_img', $savedFilename);
-                $maxWidth_grouplogo  = Helper::getInstance()->getConfig('groupslogo_width');
-                $maxHeight_grouplogo = Helper::getInstance()->getConfig('groupslogo_height');
+                $maxWidth_grouplogo     = Helper::getInstance()->getConfig('groupslogo_width');
+                $maxHeight_grouplogo    = Helper::getInstance()->getConfig('groupslogo_height');
                 $resizer                = new Common\Resizer();
                 $resizer->sourceFile    = $uploadDir . $savedFilename;
                 $resizer->endFile       = $uploadDir . $savedFilename;

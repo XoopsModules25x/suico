@@ -48,9 +48,9 @@ class Migrate extends \Xmf\Database\Migrate
         ?Common\Configurator $configurator = null
     ) {
         if (null !== $configurator) {
-            $this->renameTables = $configurator->renameTables;
+            $this->renameTables  = $configurator->renameTables;
             $this->renameColumns = $configurator->renameColumns;
-            $moduleDirName = \basename(\dirname(__DIR__, 2));
+            $moduleDirName       = \basename(\dirname(__DIR__, 2));
             parent::__construct($moduleDirName);
         }
     }

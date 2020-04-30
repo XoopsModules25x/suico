@@ -63,7 +63,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
      */
     public function create($isNew = true)
     {
-        $obj = new $this->className($this->loadFields());
+        $obj          = new $this->className($this->loadFields());
         $obj->handler = $this;
         if ($isNew) {
             $obj->setNew();
@@ -266,7 +266,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
         $uservars           = $this->getUserVars();
         $searchvars_user    = \array_intersect($searchvars, $uservars);
         $searchvars_profile = \array_diff($searchvars, $uservars);
-        $sv = ['u.uid, u.uname, u.email, u.user_viewemail'];
+        $sv                 = ['u.uid, u.uname, u.email, u.user_viewemail'];
         if (!empty($searchvars_user)) {
             $sv[0] .= ',u.' . \implode(', u.', $searchvars_user);
         }
@@ -274,10 +274,10 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
             $sv[] = 'p.' . \implode(', p.', $searchvars_profile);
         }
         $sql_select = 'SELECT ' . (empty($searchvars) ? 'u.*, p.*' : \implode(', ', $sv));
-        $sql_from = ' FROM ' . $this->db->prefix('users') . ' AS u LEFT JOIN ' . $this->table . ' AS p ON u.uid=p.profile_id' . (empty($groups) ? '' : ' LEFT JOIN ' . $this->db->prefix('groups_users_link') . ' AS g ON u.uid=g.uid');
+        $sql_from   = ' FROM ' . $this->db->prefix('users') . ' AS u LEFT JOIN ' . $this->table . ' AS p ON u.uid=p.profile_id' . (empty($groups) ? '' : ' LEFT JOIN ' . $this->db->prefix('groups_users_link') . ' AS g ON u.uid=g.uid');
         $sql_clause = ' WHERE 1=1';
-        $sql_order = '';
-        $limit = $start = 0;
+        $sql_order  = '';
+        $limit      = $start = 0;
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql_clause .= ' AND ' . $criteria->render();
             if ('' !== $criteria->getSort()) {
@@ -290,17 +290,17 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
             $sql_clause .= ' AND g.groupid IN (' . \implode(', ', $groups) . ')';
         }
         $sql_users = $sql_select . $sql_from . $sql_clause . $sql_order;
-        $result = $this->db->query($sql_users, $limit, $start);
+        $result    = $this->db->query($sql_users, $limit, $start);
         if (!$result) {
             return [[], [], 0];
         }
         $userHandler = \xoops_getHandler('user');
-        $uservars = $this->getUserVars();
-        $users = [];
-        $profiles = [];
+        $uservars    = $this->getUserVars();
+        $users       = [];
+        $profiles    = [];
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $profile = $this->create(false);
-            $user = $userHandler->create(false);
+            $user    = $userHandler->create(false);
             foreach ($myrow as $name => $value) {
                 if (\in_array($name, $uservars)) {
                     $user->assignVar($name, $value);
@@ -309,12 +309,12 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
                 }
             }
             $profiles[$myrow['uid']] = $profile;
-            $users[$myrow['uid']] = $user;
+            $users[$myrow['uid']]    = $user;
         }
         $count = \count($users);
         if ((!empty($limit) && $count >= $limit) || !empty($start)) {
             $sql_count = 'SELECT COUNT(*)' . $sql_from . $sql_clause;
-            $result = $this->db->query($sql_count);
+            $result    = $this->db->query($sql_count);
             [$count] = $this->db->fetchRow($result);
         }
         return [$users, $profiles, (int)$count];

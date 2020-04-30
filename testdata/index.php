@@ -29,10 +29,10 @@ use XoopsModules\Suico\Utility;
 
 require_once dirname(__DIR__, 3) . '/include/cp_header.php';
 require dirname(__DIR__) . '/preloads/autoloader.php';
-$op = Request::getCmd('op', '');
+$op                 = Request::getCmd('op', '');
 $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-$helper = Suico\Helper::getInstance();
+$helper             = Suico\Helper::getInstance();
 // Load language files
 $helper->loadLanguage('common');
 switch ($op) {
@@ -67,12 +67,12 @@ switch ($op) {
 function loadSampleData()
 {
     global $xoopsConfig;
-    $moduleDirName = basename(dirname(__DIR__));
+    $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-    $utility = new Suico\Utility();
-    $configurator = new Common\Configurator();
-    $tables = Helper::getHelper($moduleDirName)->getModule()->getInfo('tables');
-    $language = 'english/';
+    $utility            = new Suico\Utility();
+    $configurator       = new Common\Configurator();
+    $tables             = Helper::getHelper($moduleDirName)->getModule()->getInfo('tables');
+    $language           = 'english/';
     if (is_dir(__DIR__ . '/' . $xoopsConfig['language'])) {
         $language = $xoopsConfig['language'] . '/';
     }
@@ -94,7 +94,7 @@ function loadSampleData()
                 $configurator->copyTestFolders
             ) as $i
         ) {
-            $src = $configurator->copyTestFolders[$i][0];
+            $src  = $configurator->copyTestFolders[$i][0];
             $dest = $configurator->copyTestFolders[$i][1];
             $utility::rcopy($src, $dest);
         }
@@ -105,10 +105,10 @@ function loadSampleData()
 function saveSampleData()
 {
     global $xoopsConfig;
-    $moduleDirName = basename(dirname(__DIR__));
+    $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-    $tables = Helper::getHelper($moduleDirName)->getModule()->getInfo('tables');
-    $language = 'english/';
+    $tables             = Helper::getHelper($moduleDirName)->getModule()->getInfo('tables');
+    $language           = 'english/';
     if (is_dir(__DIR__ . '/' . $xoopsConfig['language'])) {
         $language = $xoopsConfig['language'] . '/';
     }
@@ -126,7 +126,7 @@ function saveSampleData()
 
 function exportSchema()
 {
-    $moduleDirName = basename(dirname(__DIR__));
+    $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
     try {
         // TODO set exportSchema

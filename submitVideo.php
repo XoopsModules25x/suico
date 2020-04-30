@@ -28,7 +28,7 @@ require __DIR__ . '/header.php';
  * Factory of pictures created
  */
 $videoFactory = new Suico\VideoHandler($xoopsDB);
-$url = Request::getUrl('codigo', '', 'POST');
+$url          = Request::getUrl('codigo', '', 'POST');
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
@@ -59,7 +59,7 @@ if ($videoFactory->insert($newvideo)) {
     /** @var \XoopsNotificationHandler $notificationHandler */
     $notificationHandler = xoops_getHandler('notification');
     $notificationHandler->triggerEvent('video', (int)$xoopsUser->getVar('uid'), 'new_video', $extra_tags);
-	redirect_header(
+    redirect_header(
         XOOPS_URL . '/modules/suico/videos.php?uid=' . (int)$xoopsUser->getVar('uid') . '#' . $insertId,
         2,
         _MD_SUICO_VIDEOSAVED

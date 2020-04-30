@@ -29,21 +29,21 @@ $controller = new Suico\GroupController($xoopsDB, $xoopsUser);
  * Fetching numbers of groups friends videos pictures etc...
  */
 $nbSections = $controller->getNumbersSections();
-$group_id = Request::getInt('group_id', 0, 'POST');
-$marker   = Request::getInt('marker', 0, 'POST');
-$criteria = new Criteria('group_id', $group_id);
-$groups   = $controller->groupsFactory->getObjects($criteria);
-$group    = $groups[0];
-$uid = $xoopsUser->getVar('uid');
+$group_id   = Request::getInt('group_id', 0, 'POST');
+$marker     = Request::getInt('marker', 0, 'POST');
+$criteria   = new Criteria('group_id', $group_id);
+$groups     = $controller->groupsFactory->getObjects($criteria);
+$group      = $groups[0];
+$uid        = $xoopsUser->getVar('uid');
 if (1 === $marker && $group->getVar('owner_uid') === $uid) {
-    $title = Request::getString('title', '', 'POST');
-    $desc = Request::getString('desc', '', 'POST');
-    $img = Request::getString('img', '', 'POST');
-    $updateImg = 1 === Request::getInt('flag_oldimg', 0, 'POST') ? 0 : 1;
-    $path_upload = XOOPS_ROOT_PATH . '/uploads/suico/images';
-    $maxfilebytes = $helper->getConfig('maxfilesize');
+    $title         = Request::getString('title', '', 'POST');
+    $desc          = Request::getString('desc', '', 'POST');
+    $img           = Request::getString('img', '', 'POST');
+    $updateImg     = 1 === Request::getInt('flag_oldimg', 0, 'POST') ? 0 : 1;
+    $path_upload   = XOOPS_ROOT_PATH . '/uploads/suico/images';
+    $maxfilebytes  = $helper->getConfig('maxfilesize');
     $maxfileheight = $helper->getConfig('max_original_height');
-    $maxfilewidth = $helper->getConfig('max_original_width');
+    $maxfilewidth  = $helper->getConfig('max_original_width');
     $controller->groupsFactory->receiveGroup(
         $title,
         $desc,

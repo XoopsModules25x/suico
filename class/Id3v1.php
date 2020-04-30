@@ -274,10 +274,10 @@ class Id3v1
         \fseek($this->_stream, -128, \SEEK_END);
         $rawTag = \fread($this->_stream, 128);
         if ($rawTag[125] === \chr(0) && $rawTag[126] !== \chr(0)) {
-            $format = 'a3marking/a30title/a30artist/a30album/a4year' . '/a28comment/x1/C1track/C1genre';
+            $format         = 'a3marking/a30title/a30artist/a30album/a4year' . '/a28comment/x1/C1track/C1genre';
             $this->_version = self::ID3V1_1;
         } else {
-            $format = 'a3marking/a30title/a30artist/a30album/a4year' . '/a30comment/C1genre';
+            $format         = 'a3marking/a30title/a30artist/a30album/a4year' . '/a30comment/C1genre';
             $this->_version = self::ID3V1_0;
         }
         $tags = \unpack($format, $rawTag);
@@ -712,7 +712,7 @@ class Id3v1
         }
         if (\is_int($track) && 0 !== $track) {
             $this->_tags['track'] = $track;
-            $this->_version = self::ID3V1_1;
+            $this->_version       = self::ID3V1_1;
         } else {
             throw new RuntimeException('Track type invalid or zero');
         }
@@ -733,13 +733,13 @@ class Id3v1
             return $this;
         }
         $this->_tags['marking'] = 'TAG';
-        $this->_tags['title'] = '';
-        $this->_tags['artist'] = '';
-        $this->_tags['album'] = '';
-        $this->_tags['year'] = null;
+        $this->_tags['title']   = '';
+        $this->_tags['artist']  = '';
+        $this->_tags['album']   = '';
+        $this->_tags['year']    = null;
         $this->_tags['comment'] = '';
-        $this->_tags['track'] = null;
-        $this->_tags['genre'] = 255;
+        $this->_tags['track']   = null;
+        $this->_tags['genre']   = 255;
         return $this;
     }
 

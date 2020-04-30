@@ -94,10 +94,10 @@ class Field extends \XoopsObject
      */
     public function getEditElement($user, $profile)
     {
-        $value = \in_array($this->getVar('field_name'), $this->getUserVars()) ? $user->getVar($this->getVar('field_name'), 'e') : $profile->getVar($this->getVar('field_name'), 'e');
+        $value   = \in_array($this->getVar('field_name'), $this->getUserVars()) ? $user->getVar($this->getVar('field_name'), 'e') : $profile->getVar($this->getVar('field_name'), 'e');
         $caption = $this->getVar('field_title');
         $caption = \defined($caption) ? \constant($caption) : $caption;
-        $name = $this->getVar('field_name', 'e');
+        $name    = $this->getVar('field_name', 'e');
         $options = $this->getVar('field_options');
         if (\is_array($options)) {
             //asort($options);
@@ -130,8 +130,8 @@ class Field extends \XoopsObject
                 //                if (!in_array('', array_keys($options))) {
                 if (!\array_key_exists('', $options)) {
                     $element->addOption('', \_NONE);
-                    $eltmsg = empty($caption) ? \sprintf(\_FORM_ENTER, $name) : \sprintf(\_FORM_ENTER, $caption);
-                    $eltmsg = \str_replace('"', '\"', \stripslashes($eltmsg));
+                    $eltmsg                          = empty($caption) ? \sprintf(\_FORM_ENTER, $name) : \sprintf(\_FORM_ENTER, $caption);
+                    $eltmsg                          = \str_replace('"', '\"', \stripslashes($eltmsg));
                     $element->customValidationCode[] = "\nvar hasSelected = false; var selectBox = myform.{$name};"
                                                        . "for (i = 0; i < selectBox.options.length; i++) { if (selectBox.options[i].selected == true && selectBox.options[i].value != '') { hasSelected = true; break; } }"
                                                        . "if (!hasSelected) { window.alert(\"{$eltmsg}\"); selectBox.focus(); return false; }";

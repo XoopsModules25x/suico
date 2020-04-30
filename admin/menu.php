@@ -26,7 +26,7 @@ use XoopsModules\Suico\Helper;
 require dirname(__DIR__) . '/preloads/autoloader.php';
 $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-$helper = Helper::getInstance();
+$helper             = Helper::getInstance();
 $helper->loadLanguage('common');
 $helper->loadLanguage('feedback');
 $helper->loadLanguage('admin');

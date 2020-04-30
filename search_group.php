@@ -28,9 +28,9 @@ $controller = new Suico\GroupController($xoopsDB, $xoopsUser);
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
-$nbSections = $controller->getNumbersSections();
-$start_all = Request::getInt('start_all', 0, 'GET');
-$start_my  = Request::getInt('start_my', 0, 'GET');
+$nbSections    = $controller->getNumbersSections();
+$start_all     = Request::getInt('start_all', 0, 'GET');
+$start_my      = Request::getInt('start_my', 0, 'GET');
 $group_keyword = trim(htmlspecialchars(Request::getString('group_keyword', '', 'GET'), ENT_QUOTES | ENT_HTML5));
 /**
  * All Groups
@@ -60,7 +60,7 @@ $criteria_mygroups = new Criteria('rel_user_uid', $controller->uidOwner);
 $countMyGroups     = $controller->relgroupusersFactory->getCount($criteria_mygroups);
 $criteria_mygroups->setLimit($helper->getConfig('groupsperpage'));
 $criteria_mygroups->setStart($start_my);
-$mygroups = $controller->relgroupusersFactory->getGroups('', $criteria_mygroups, 0);
+$mygroups   = $controller->relgroupusersFactory->getGroups('', $criteria_mygroups, 0);
 $mygroupsid = [];
 foreach ($mygroups as $value) {
     $mygroupsid[] = $value['group_id'];

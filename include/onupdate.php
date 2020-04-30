@@ -50,12 +50,12 @@ function xoops_module_pre_update_suico(
     $moduleDirName = basename(dirname(__DIR__));
     /** @var Suico\Helper $helper */
     /** @var Suico\Utility $utility */
-    $helper  = Suico\Helper::getInstance();
-    $utility = new Suico\Utility();
+    $helper       = Suico\Helper::getInstance();
+    $utility      = new Suico\Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
     $configurator = new Configurator();
-    $migrator = new Migrate($configurator);
+    $migrator     = new Migrate($configurator);
     //    $migrator = new \XoopsModules\Suico\Common\Migrate();
     $migrator->synchronizeSchema();
     return $xoopsSuccess && $phpSuccess;

@@ -28,7 +28,7 @@ require __DIR__ . '/header.php';
  */
 $relgroupuserFactory = new Suico\RelgroupuserHandler($xoopsDB);
 $groupsFactory       = new Suico\GroupsHandler($xoopsDB);
-$group_id = Request::getInt('group_id', 0, 'POST');
+$group_id            = Request::getInt('group_id', 0, 'POST');
 if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
     xoops_confirm(
         [

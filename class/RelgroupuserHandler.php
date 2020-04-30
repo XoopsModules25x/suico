@@ -132,15 +132,15 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Relgroupuser
             $xoopsObject = new Relgroupuser();
-            $format = 'INSERT INTO %s (rel_id, rel_group_id, rel_user_uid)';
-            $format .= 'VALUES (%u, %u, %u)';
-            $sql = \sprintf($format, $this->db->prefix('suico_relgroupuser'), $rel_id, $rel_group_id, $rel_user_uid);
-            $force = true;
+            $format      = 'INSERT INTO %s (rel_id, rel_group_id, rel_user_uid)';
+            $format      .= 'VALUES (%u, %u, %u)';
+            $sql         = \sprintf($format, $this->db->prefix('suico_relgroupuser'), $rel_id, $rel_group_id, $rel_user_uid);
+            $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'rel_id=%u, rel_group_id=%u, rel_user_uid=%u';
             $format .= ' WHERE rel_id = %u';
-            $sql = \sprintf(
+            $sql    = \sprintf(
                 $format,
                 $this->db->prefix('suico_relgroupuser'),
                 $rel_id,
@@ -207,9 +207,9 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
         $id_as_key = false,
         $as_object = true
     ) {
-        $ret = [];
+        $ret   = [];
         $limit = $start = 0;
-        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_relgroupuser');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_relgroupuser');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
             if ('' !== $criteriaElement->getSort()) {
@@ -303,17 +303,17 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
             if ('' !== $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
-            $limit = $criteria->getLimit();
-            $start = $criteria->getStart();
+            $limit  = $criteria->getLimit();
+            $start  = $criteria->getStart();
             $result = $this->db->query($sql, $limit, $start);
-            $vetor = [];
-            $i = 0;
+            $vetor  = [];
+            $i      = 0;
             while (false !== ($myrow = $this->db->fetchArray($result))) {
-                $vetor[$i]['title'] = $myrow['group_title'];
-                $vetor[$i]['desc'] = $myrow['group_desc'];
-                $vetor[$i]['img'] = $myrow['group_img'];
-                $vetor[$i]['id'] = $myrow['rel_id'];
-                $vetor[$i]['uid'] = $myrow['owner_uid'];
+                $vetor[$i]['title']    = $myrow['group_title'];
+                $vetor[$i]['desc']     = $myrow['group_desc'];
+                $vetor[$i]['img']      = $myrow['group_img'];
+                $vetor[$i]['id']       = $myrow['rel_id'];
+                $vetor[$i]['uid']      = $myrow['owner_uid'];
                 $vetor[$i]['group_id'] = $myrow['rel_group_id'];
                 $i++;
             }
@@ -338,23 +338,23 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
         $nbUsers,
         $isShuffle = 0
     ) {
-        $ret = [];
-        $sql = 'SELECT rel_group_id, rel_user_uid, owner_uid, uname, user_avatar, uid FROM ' . $this->db->prefix(
+        $ret    = [];
+        $sql    = 'SELECT rel_group_id, rel_user_uid, owner_uid, uname, user_avatar, uid FROM ' . $this->db->prefix(
                 'users'
             ) . ', ' . $this->db->prefix(
                 'suico_groups'
             ) . ', ' . $this->db->prefix(
                 'suico_relgroupuser'
             );
-        $sql .= ' WHERE rel_user_uid = uid AND rel_group_id = group_id AND group_id =' . $groupId . ' GROUP BY rel_user_uid ';
+        $sql    .= ' WHERE rel_user_uid = uid AND rel_group_id = group_id AND group_id =' . $groupId . ' GROUP BY rel_user_uid ';
         $result = $this->db->query($sql, $nbUsers, $start);
-        $ret = [];
-        $i = 0;
+        $ret    = [];
+        $i      = 0;
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $ret[$i]['uid'] = $myrow['uid'];
-            $ret[$i]['uname'] = $myrow['uname'];
-            $ret[$i]['avatar'] = $myrow['user_avatar'];
-            $isOwner = $myrow['rel_user_uid'] === $myrow['owner_uid'] ? 1 : 0;
+            $ret[$i]['uid']     = $myrow['uid'];
+            $ret[$i]['uname']   = $myrow['uname'];
+            $ret[$i]['avatar']  = $myrow['user_avatar'];
+            $isOwner            = $myrow['rel_user_uid'] === $myrow['owner_uid'] ? 1 : 0;
             $ret[$i]['isOwner'] = $isOwner;
             $i++;
         }

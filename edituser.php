@@ -107,7 +107,7 @@ if ('avatarform' === $op) {
     $GLOBALS['xoopsOption']['template_main'] = 'suico_avatar.tpl';
     require $GLOBALS['xoops']->path('header.php');
     $xoBreadcrumbs[] = ['title' => _US_MYAVATAR];
-    $oldavatar = $GLOBALS['xoopsUser']->getVar('user_avatar');
+    $oldavatar       = $GLOBALS['xoopsUser']->getVar('user_avatar');
     if (!empty($oldavatar) && 'blank.gif' !== $oldavatar) {
         $GLOBALS['xoopsTpl']->assign('old_avatar', XOOPS_UPLOAD_URL . '/' . $oldavatar);
     }

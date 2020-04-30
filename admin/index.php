@@ -107,8 +107,8 @@ $adminObject->displayNavigation(basename(__FILE__));
 //}
 //------------- Test Data ----------------------------
 if ($helper->getConfig('displaySampleButton')) {
-    $yamlFile = dirname(__DIR__) . '/config/admin.yml';
-    $config = loadAdminConfig($yamlFile);
+    $yamlFile            = dirname(__DIR__) . '/config/admin.yml';
+    $config              = loadAdminConfig($yamlFile);
     $displaySampleButton = $config['displaySampleButton'];
     if (1 === $displaySampleButton) {
         xoops_loadLanguage('admin/modulesadmin', 'system');
@@ -165,7 +165,7 @@ function hideButtons($yamlFile)
  */
 function showButtons($yamlFile)
 {
-    $app = [];
+    $app                        = [];
     $app['displaySampleButton'] = 1;
     Yaml::save($app, $yamlFile);
     redirect_header('index.php', 0, '');

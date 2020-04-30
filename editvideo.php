@@ -27,8 +27,8 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
 $video_id = Request::getInt('video_id', 0, 'POST');
-$marker  = Request::getInt('marker', 0, 'POST');
-$uid = (int)$xoopsUser->getVar('uid');
+$marker   = Request::getInt('marker', 0, 'POST');
+$uid      = (int)$xoopsUser->getVar('uid');
 if (1 === $marker) {
     /**
      * Creating the factory loading the video changing its caption
@@ -38,7 +38,7 @@ if (1 === $marker) {
     );
     $video        = $videoFactory->create(false);
     $video->load($video_id);
-	$video->setVar('video_title', trim(htmlspecialchars($_POST['title'], ENT_QUOTES | ENT_HTML5)));
+    $video->setVar('video_title', trim(htmlspecialchars($_POST['title'], ENT_QUOTES | ENT_HTML5)));
     $video->setVar('video_desc', trim(htmlspecialchars($_POST['caption'], ENT_QUOTES | ENT_HTML5)));
     /**
      * Verifying who's the owner to allow changes
@@ -70,7 +70,7 @@ $array_vid = $videoFactory->getObjects(
     $criteria
 );
 if ($array_vid) {
-	$title =   $array_vid[0]->getVar('video_title');
+    $title   = $array_vid[0]->getVar('video_title');
     $caption = $array_vid[0]->getVar('video_desc');
     $url     = $array_vid[0]->getVar('youtube_code');
 }

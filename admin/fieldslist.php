@@ -219,7 +219,7 @@ switch ($op) {
         if ($fieldHandler->insert($obj)) {
             /* @var XoopsGroupPermHandler $grouppermHandler */
             $grouppermHandler = xoops_getHandler('groupperm');
-            $perm_arr = [];
+            $perm_arr         = [];
             if ($obj->getVar('field_show')) {
                 $perm_arr[] = 'profile_show';
                 $perm_arr[] = 'profile_visible';

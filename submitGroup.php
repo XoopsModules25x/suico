@@ -34,7 +34,7 @@ require __DIR__ . '/header.php';
  */
 $relgroupuserFactory = new Suico\RelgroupuserHandler($xoopsDB);
 $groupsFactory       = new Suico\GroupsHandler($xoopsDB);
-$marker = Request::getInt('marker', 0, 'POST');
+$marker              = Request::getInt('marker', 0, 'POST');
 if (1 == $marker) { //if (1 === $marker) {
     /**
      * Verify Token
@@ -91,12 +91,12 @@ if (1 == $marker) { //if (1 === $marker) {
             2,
             _MD_SUICO_ERROR
         );
-        $group_img   = !empty($_POST['group_img']) ? Request::getString('group_img', '', 'POST') : '';
-        $path_upload = XOOPS_UPLOAD_PATH . '/suico/groups';
-        $pictwidth   = $helper->getConfig('resized_width');
-        $pictheight  = $helper->getConfig('resized_height');
-        $thumbwidth  = $helper->getConfig('thumb_width');
-        $thumbheight = $helper->getConfig('thumb_height');
+        $group_img     = !empty($_POST['group_img']) ? Request::getString('group_img', '', 'POST') : '';
+        $path_upload   = XOOPS_UPLOAD_PATH . '/suico/groups';
+        $pictwidth     = $helper->getConfig('resized_width');
+        $pictheight    = $helper->getConfig('resized_height');
+        $thumbwidth    = $helper->getConfig('thumb_width');
+        $thumbheight   = $helper->getConfig('thumb_height');
         $maxfilebytes  = $helper->getConfig('maxfilesize');
         $maxfileheight = $helper->getConfig('max_original_height');
         $maxfilewidth  = $helper->getConfig('max_original_width');

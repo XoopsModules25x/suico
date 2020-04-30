@@ -47,9 +47,9 @@ class Suspensions extends XoopsObject
     public function __construct($id = null)
     {
         /** @var Helper $helper */
-        $this->helper = Helper::getInstance();
+        $this->helper     = Helper::getInstance();
         $this->permHelper = new Permission();
-        $this->db = XoopsDatabaseFactory::getDatabaseConnection();
+        $this->db         = XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar('uid', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('old_pass', \XOBJ_DTYPE_TXTBOX, null, false);
         $this->initVar('old_email', \XOBJ_DTYPE_TXTBOX, null, false);
@@ -71,7 +71,7 @@ class Suspensions extends XoopsObject
      */
     public function load($id)
     {
-        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_suspensions') . ' WHERE uid=' . $id;
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_suspensions') . ' WHERE uid=' . $id;
         $myrow = $this->db->fetchArray($this->db->query($sql));
         $this->assignVars($myrow);
         if (!$myrow) {
@@ -96,8 +96,8 @@ class Suspensions extends XoopsObject
         $limit = 0,
         $start = 0
     ) {
-        $db = XoopsDatabaseFactory::getDatabaseConnection();
-        $ret = [];
+        $db         = XoopsDatabaseFactory::getDatabaseConnection();
+        $ret        = [];
         $whereQuery = '';
         if (\is_array($criteria) && \count($criteria) > 0) {
             $whereQuery = ' WHERE';
@@ -109,7 +109,7 @@ class Suspensions extends XoopsObject
             $whereQuery = ' WHERE ' . $criteria;
         }
         if (!$asobject) {
-            $sql = 'SELECT uid FROM ' . $db->prefix(
+            $sql    = 'SELECT uid FROM ' . $db->prefix(
                     'suico_suspensions'
                 ) . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
@@ -117,7 +117,7 @@ class Suspensions extends XoopsObject
                 $ret[] = $myrow['suico_suspensions_id'];
             }
         } else {
-            $sql = 'SELECT * FROM ' . $db->prefix('suico_suspensions') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql    = 'SELECT * FROM ' . $db->prefix('suico_suspensions') . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new self($myrow);

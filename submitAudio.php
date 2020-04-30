@@ -35,7 +35,7 @@ require __DIR__ . '/header.php';
  * Audio Factory created
  */
 $audioFactory = new Suico\AudioHandler($xoopsDB);
-$myts = MyTextSanitizer::getInstance();
+$myts         = MyTextSanitizer::getInstance();
 /**
  * Getting the title
  */

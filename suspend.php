@@ -39,7 +39,7 @@ $suspension->load($uid);
 if ($xoopsUser->isAdmin(1)) {
     /** @var \XoopsMemberHandler $memberHandler */
     $memberHandler = xoops_getHandler('member');
-    $thisUser = $memberHandler->getUser($uid);
+    $thisUser      = $memberHandler->getUser($uid);
     $suspension->setVar('uid', $uid);
     $suspension->setVar('old_email', $thisUser->getVar('email'));
     $suspension->setVar('old_pass', $thisUser->getVar('pass'));

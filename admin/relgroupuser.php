@@ -107,7 +107,7 @@ switch ($op) {
         $adminObject->displayButton('left');
         $start                       = Request::getInt('start', 0);
         $relgroupuserPaginationLimit = $helper->getConfig('userpager');
-        $criteria = new CriteriaCompo();
+        $criteria                    = new CriteriaCompo();
         $criteria->setSort('rel_id ASC, rel_id');
         $criteria->setOrder('ASC');
         $criteria->setLimit($relgroupuserPaginationLimit);
@@ -152,10 +152,10 @@ switch ($op) {
                 $relgroupuserArray['rel_group_id'] = $relgroupuserTempArray[$i]->getVar('rel_group_id');
                 $GLOBALS['xoopsTpl']->assign('selectorrel_user_uid', AM_SUICO_RELGROUPUSER_REL_USER_UID);
                 $relgroupuserArray['rel_user_uid'] = strip_tags(XoopsUser::getUnameFromId($relgroupuserTempArray[$i]->getVar('rel_user_uid')));
-                $selectorrel_user_uid = $utility::selectSorting(AM_SUICO_RELGROUPUSER_REL_USER_UID, 'rel_user_uid');
+                $selectorrel_user_uid              = $utility::selectSorting(AM_SUICO_RELGROUPUSER_REL_USER_UID, 'rel_user_uid');
                 $GLOBALS['xoopsTpl']->assign('selectorrel_user_uid', $selectorrel_user_uid);
                 $relgroupuserArray['rel_user_uid'] = strip_tags(\XoopsUser::getUnameFromId($relgroupuserTempArray[$i]->getVar('rel_user_uid')));
-                $relgroupuserArray['edit_delete'] = "<a href='relgroupuser.php?op=edit&rel_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
+                $relgroupuserArray['edit_delete']  = "<a href='relgroupuser.php?op=edit&rel_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='relgroupuser.php?op=delete&rel_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='relgroupuser.php?op=clone&rel_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
                 $GLOBALS['xoopsTpl']->append_by_ref('relgroupuserArrays', $relgroupuserArray);

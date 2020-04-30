@@ -28,15 +28,15 @@ require dirname(__DIR__, 3) . '/include/cp_header.php';
 //require $GLOBALS['xoops']->path('www/class/xoopsformloader.php');
 require dirname(__DIR__) . '/include/common.php';
 $moduleDirName = basename(dirname(__DIR__));
-$helper  = Helper::getInstance();
-$utility = Utility::getInstance();
+$helper        = Helper::getInstance();
+$utility       = Utility::getInstance();
 /** @var Admin $adminObject */
 $adminObject = Admin::getInstance();
 // Load language files
 $helper->loadLanguage('admin');
 $helper->loadLanguage('modinfo');
 $helper->loadLanguage('common');
-$db = XoopsDatabaseFactory::getDatabaseConnection();
+$db            = XoopsDatabaseFactory::getDatabaseConnection();
 $pathIcon16    = Admin::iconUrl('', 16);
 $pathIcon32    = Admin::iconUrl('', 32);
 $pathModIcon32 = $helper->getConfig('modicons32');
@@ -64,7 +64,7 @@ $suspensionsHandler = $helper->getHandler('Suspensions');
 $audioHandler = $helper->getHandler('Audio');
 /** @var XoopsPersistableObjectHandler $privacyHandler */
 $privacyHandler = $helper->getHandler('Privacy');
-$myts = MyTextSanitizer::getInstance();
+$myts           = MyTextSanitizer::getInstance();
 if (!isset($xoopsTpl) || !is_object($xoopsTpl)) {
     require XOOPS_ROOT_PATH . '/class/template.php';
     $xoopsTpl = new XoopsTpl();

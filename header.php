@@ -27,9 +27,9 @@ require __DIR__ . '/preloads/autoloader.php';
 require dirname(__DIR__, 2) . '/mainfile.php';
 require XOOPS_ROOT_PATH . '/header.php';
 $moduleDirName = basename(__DIR__);
-$helper = Helper::getInstance();
-$modulePath = XOOPS_ROOT_PATH . '/modules/' . $moduleDirName;
-$myts = MyTextSanitizer::getInstance();
+$helper        = Helper::getInstance();
+$modulePath    = XOOPS_ROOT_PATH . '/modules/' . $moduleDirName;
+$myts          = MyTextSanitizer::getInstance();
 if (!isset($GLOBALS['xoTheme']) || !is_object($GLOBALS['xoTheme'])) {
     require $GLOBALS['xoops']->path('class/theme.php');
     $GLOBALS['xoTheme'] = new xos_opal_Theme();
@@ -75,9 +75,9 @@ $visitorsFactory      = new Suico\VisitorsHandler($xoopsDB);
 $videosFactory        = new Suico\VideoHandler($xoopsDB);
 $friendrequestFactory = new Suico\FriendrequestHandler($xoopsDB);
 $friendshipFactory    = new Suico\FriendshipHandler($xoopsDB);
-$isOwner  = 0;
-$isAnonym = 1;
-$isFriend = 0;
+$isOwner              = 0;
+$isAnonym             = 1;
+$isFriend             = 0;
 if (1 === $helper->getConfig('enable_guestaccess')) {
     /**
      * Enable Guest Access
@@ -90,16 +90,16 @@ if (1 === $helper->getConfig('enable_guestaccess')) {
             $uid_owner = Request::getInt('uid', 0, 'GET');
         } else {
             $uid_owner = 1;
-            $isOwner = 0;
+            $isOwner   = 0;
         }
     } else {
         $isAnonym = 0;
         if (isset($_GET['uid'])) {
             $uid_owner = Request::getInt('uid', 0, 'GET');
-            $isOwner = $xoopsUser->getVar('uid') === $uid_owner ? 1 : 0;
+            $isOwner   = $xoopsUser->getVar('uid') === $uid_owner ? 1 : 0;
         } else {
             $uid_owner = (int)$xoopsUser->getVar('uid');
-            $isOwner = 1;
+            $isOwner   = 1;
         }
     }
 } else {
@@ -117,10 +117,10 @@ if (1 === $helper->getConfig('enable_guestaccess')) {
         $isAnonym = 0;
         if (isset($_GET['uid'])) {
             $uid_owner = Request::getInt('uid', 0, 'GET');
-            $isOwner = $xoopsUser->getVar('uid') === $uid_owner ? 1 : 0;
+            $isOwner   = $xoopsUser->getVar('uid') === $uid_owner ? 1 : 0;
         } else {
             $uid_owner = (int)$xoopsUser->getVar('uid');
-            $isOwner = 1;
+            $isOwner   = 1;
         }
     }
 }

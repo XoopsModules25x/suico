@@ -27,7 +27,7 @@ require __DIR__ . '/header.php';
  * Factories of groups
  */
 $notesFactory = new Suico\NotesHandler($xoopsDB);
-$noteId = Request::getInt('note_id', 0, 'POST');
+$noteId       = Request::getInt('note_id', 0, 'POST');
 if (1 != Request::getInt('confirm', 0, 'POST')) {
     xoops_confirm(
         [

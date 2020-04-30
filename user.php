@@ -102,8 +102,8 @@ if ('register' === $op) {
     /* @var XoopsMemberHandler $memberHandler */
     $memberHandler  = xoops_getHandler('member');
     $profileHandler = $helper->getHandler('Profile');
-    $fields     = $profileHandler->loadFields();
-    $userfields = $profileHandler->getUserVars();
+    $fields         = $profileHandler->loadFields();
+    $userfields     = $profileHandler->getUserVars();
     if (0 == $uid) {
         // No user yet? Create one and set default values.
         $newuser = $memberHandler->createUser();

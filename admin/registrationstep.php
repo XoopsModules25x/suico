@@ -22,7 +22,7 @@ xoops_cp_header();
 $adminObject->addItemButton(_AM_SUICO_STEP, 'registrationstep.php?op=new', 'add');
 $adminObject->displayNavigation(basename(__FILE__));
 $adminObject->displayButton('left');
-$op = $_REQUEST['op'] ?? (isset($_REQUEST['id']) ? 'edit' : 'list');
+$op      = $_REQUEST['op'] ?? (isset($_REQUEST['id']) ? 'edit' : 'list');
 $handler = $helper->getHandler('Regstep');
 switch ($op) {
     case 'list':

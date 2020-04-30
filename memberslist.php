@@ -35,7 +35,7 @@ $controller = new Suico\IndexController($xoopsDB, $xoopsUser);
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
-$nbSections = $controller->getNumbersSections();
+$nbSections                              = $controller->getNumbersSections();
 $GLOBALS['xoopsOption']['template_main'] = 'suico_memberslist_datatables.tpl';
 require XOOPS_ROOT_PATH . '/header.php';
 $iamadmin = $xoopsUserIsAdmin;
@@ -44,7 +44,7 @@ $criteria = new CriteriaCompo();
 $criteria->add(new Criteria('level', 0, '>'));
 $validsort = ['uname', 'email', 'last_login', 'user_regdate', 'posts'];
 $sort      = (!in_array($xoopsModuleConfig['sortmembers'], $validsort)) ? 'uname' : $xoopsModuleConfig['sortmembers'];
-$order = 'ASC';
+$order     = 'ASC';
 if (isset($xoopsModuleConfig['membersorder']) && 'DESC' == $xoopsModuleConfig['membersorder']) {
     $order = 'DESC';
 }
@@ -95,12 +95,12 @@ if (0 === $total) {
         $userdata['name']     = $foundusers[$j]->getVar('uname');
         $userdata['id']       = $foundusers[$j]->getVar('uid');
         $userdata['uid']      = $foundusers[$j]->getVar('uid');
-        $criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
-        $criteriaIsfriend = new CriteriaCompo(new Criteria('friend2_uid', $userdata['uid']));
+        $criteria_friends     = new Criteria('friend1_uid', $controller->uidOwner);
+        $criteriaIsfriend     = new CriteriaCompo(new Criteria('friend2_uid', $userdata['uid']));
         $criteriaIsfriend->add($criteria_friends);
-        $controller->isFriend = $controller->friendshipsFactory->getCount($criteria_isfriend);
-        $userdata['isFriend'] = $controller->isFriend;
-        $friendrequestFactory = new Suico\FriendrequestHandler($xoopsDB);
+        $controller->isFriend   = $controller->friendshipsFactory->getCount($criteria_isfriend);
+        $userdata['isFriend']   = $controller->isFriend;
+        $friendrequestFactory   = new Suico\FriendrequestHandler($xoopsDB);
         $criteria_selfrequest   = new Criteria('friendrequester_uid', $controller->uidOwner);
         $criteria_isselfrequest = new CriteriaCompo(new Criteria('friendrequestto_uid', $userdata['uid']));
         $criteria_isselfrequest->add($criteria_selfrequest);
@@ -179,9 +179,9 @@ if (0 === $total) {
             $userdata['rankimage'] = '<img src="' . XOOPS_UPLOAD_URL . '/' . $userrank['image'] . '" alt="">';
         }
         $userdata['ranktitle'] = $userrank['title'];
-        $uid        = $userdata['id'];
-        $groups     = $memberHandler->getGroupsByUser($uid, true);
-        $usergroups = [];
+        $uid                   = $userdata['id'];
+        $groups                = $memberHandler->getGroupsByUser($uid, true);
+        $usergroups            = [];
         foreach ($groups as $group) {
             $usergroups[] = $group->getVar('name');
         }

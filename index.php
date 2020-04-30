@@ -83,7 +83,7 @@ if (is_object($GLOBALS['xoopsUser']) && $uid == $GLOBALS['xoopsUser']->getVar('u
     /* @var  XoopsGroupPermHandler $grouppermHandler */
     $grouppermHandler  = xoops_getHandler('groupperm');
     $groups_accessible = $grouppermHandler->getItemIds('profile_access', $groups_xoopsUser, $GLOBALS['xoopsModule']->getVar('mid'));
-    $rejected = false;
+    $rejected          = false;
     if ($thisUser->isAdmin()) {
         $rejected = !in_array(XOOPS_GROUP_ADMIN, $groups_accessible);
     } elseif ($groups_thisUser_nonbasic) {
@@ -111,10 +111,10 @@ $thisUsergroups    = $thisUser->getGroups();
 $visibilityHandler = $helper->getHandler('Visibility');
 //search for visible Fields or null for none
 $field_ids_visible = $visibilityHandler->getVisibleFields($thisUsergroups, $groups);
-$profileHandler  = $helper->getHandler('Profile');
-$fields          = $profileHandler->loadFields();
-$categoryHandler = $helper->getHandler('Category');
-$cat_crit        = new CriteriaCompo();
+$profileHandler    = $helper->getHandler('Profile');
+$fields            = $profileHandler->loadFields();
+$categoryHandler   = $helper->getHandler('Category');
+$cat_crit          = new CriteriaCompo();
 $cat_crit->setSort('cat_weight');
 $cats = $categoryHandler->getObjects($cat_crit, true, false);
 unset($cat_crit);
@@ -220,7 +220,7 @@ if (0 === $controller->isAnonym) {
         $visitorsFactory->deleteAll($criteria_deletevisitors, true);
     */
 }
-$avatar = $controller->owner->getVar('user_avatar');
+$avatar        = $controller->owner->getVar('user_avatar');
 $memberHandler = xoops_getHandler('member');
 $thisUser      = $memberHandler->getUser($controller->uidOwner);
 $myts          = MyTextSanitizer::getInstance();
@@ -258,7 +258,7 @@ if (isset($nbSections['countGroups']) && $nbSections['countGroups'] > 0) {
  * Friends
  */
 if ($xoopsUser) {
-    $controller = new Suico\FriendsController($xoopsDB, $xoopsUser);
+    $controller    = new Suico\FriendsController($xoopsDB, $xoopsUser);
     $friendrequest = 0;
     if (1 === $controller->isOwner) {
         $criteria_uidfriendrequest = new Criteria('friendrequestto_uid', $controller->uidOwner);

@@ -54,9 +54,9 @@ class Groups extends XoopsObject
     public function __construct($id = null)
     {
         /** @var Helper $helper */
-        $this->helper = Helper::getInstance();
+        $this->helper     = Helper::getInstance();
         $this->permHelper = new Permission();
-        $this->xoopsDb = XoopsDatabaseFactory::getDatabaseConnection();
+        $this->xoopsDb    = XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar(GROUPID, \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('owner_uid', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('group_title', \XOBJ_DTYPE_TXTBOX, null, false);
@@ -80,7 +80,7 @@ class Groups extends XoopsObject
      */
     public function load($id)
     {
-        $sql = 'SELECT * FROM ' . $this->xoopsDb->prefix(SUICOGROUPS) . ' WHERE group_id=' . $id;
+        $sql   = 'SELECT * FROM ' . $this->xoopsDb->prefix(SUICOGROUPS) . ' WHERE group_id=' . $id;
         $myrow = $this->xoopsDb->fetchArray($this->xoopsDb->query($sql));
         $this->assignVars($myrow);
         if (!$myrow) {
@@ -105,7 +105,7 @@ class Groups extends XoopsObject
         $limit = 0,
         $start = 0
     ) {
-        $ret = [];
+        $ret        = [];
         $whereQuery = '';
         if (\is_array($criteria) && \count($criteria) > 0) {
             $whereQuery = ' WHERE';
@@ -117,7 +117,7 @@ class Groups extends XoopsObject
             $whereQuery = ' WHERE ' . $criteria;
         }
         if (!$asobject) {
-            $sql = 'SELECT group_id FROM ' . $this->xoopsDb->prefix(
+            $sql    = 'SELECT group_id FROM ' . $this->xoopsDb->prefix(
                     SUICOGROUPS
                 ) . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $this->xoopsDb->query($sql, $limit, $start);
@@ -125,7 +125,7 @@ class Groups extends XoopsObject
                 $ret[] = $myrow['suico_groups_id'];
             }
         } else {
-            $sql = 'SELECT * FROM ' . $this->xoopsDb->prefix(SUICOGROUPS) . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql    = 'SELECT * FROM ' . $this->xoopsDb->prefix(SUICOGROUPS) . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $this->xoopsDb->query($sql, $limit, $start);
             while (false !== ($myrow = $this->xoopsDb->fetchArray($result))) {
                 $ret[] = new self($myrow);

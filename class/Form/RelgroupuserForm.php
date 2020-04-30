@@ -52,9 +52,9 @@ class RelgroupuserForm extends XoopsThemeForm
      */
     public function __construct($target)
     {
-        $this->helper = $target->helper;
+        $this->helper       = $target->helper;
         $this->targetObject = $target;
-        $title = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_RELGROUPUSER_ADD) : \sprintf(
+        $title              = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_RELGROUPUSER_ADD) : \sprintf(
             \AM_SUICO_RELGROUPUSER_EDIT
         );
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
@@ -75,7 +75,7 @@ class RelgroupuserForm extends XoopsThemeForm
         //$groupsHandler = $this->helper->getHandler('Groups');
         //$db     = \XoopsDatabaseFactory::getDatabaseConnection();
         /** @var \XoopsPersistableObjectHandler $groupsHandler */
-        $groupsHandler = $this->helper->getHandler('Groups');
+        $groupsHandler    = $this->helper->getHandler('Groups');
         $groups_id_select = new XoopsFormSelect(
             \AM_SUICO_RELGROUPUSER_REL_GROUP_ID, 'rel_group_id', $this->targetObject->getVar(
             'rel_group_id'

@@ -84,7 +84,7 @@ if ($block['is_custom']) {
     if ('' !== $block['template']) {
         /** @var \XoopsTplfileHandler $tplfileHandler */
         $tplfileHandler = xoops_getHandler('tplfile');
-        $btemplate = $tplfileHandler->find($GLOBALS['xoopsConfig']['template_set'], 'block', $block['bid']);
+        $btemplate      = $tplfileHandler->find($GLOBALS['xoopsConfig']['template_set'], 'block', $block['bid']);
         if (count($btemplate) > 0) {
             $form->addElement(
                 new XoopsFormLabel(

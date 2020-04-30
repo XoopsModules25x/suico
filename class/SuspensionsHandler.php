@@ -134,9 +134,9 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Suspensions
             $xoopsObject = new Suspensions();
-            $format = 'INSERT INTO %s (uid, old_pass, old_email, old_signature, suspension_time)';
-            $format .= 'VALUES (%u, %s, %s, %s, %u)';
-            $sql = \sprintf(
+            $format      = 'INSERT INTO %s (uid, old_pass, old_email, old_signature, suspension_time)';
+            $format      .= 'VALUES (%u, %s, %s, %s, %u)';
+            $sql         = \sprintf(
                 $format,
                 $this->db->prefix('suico_suspensions'),
                 $uid,
@@ -145,12 +145,12 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
                 $this->db->quoteString($old_signature),
                 $suspension_time
             );
-            $force = true;
+            $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
             $format .= 'uid=%u, old_pass=%s, old_email=%s, old_signature=%s, suspension_time=%u';
             $format .= ' WHERE uid = %u';
-            $sql = \sprintf(
+            $sql    = \sprintf(
                 $format,
                 $this->db->prefix('suico_suspensions'),
                 $uid,
@@ -219,9 +219,9 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
         $id_as_key = false,
         $as_object = true
     ) {
-        $ret = [];
+        $ret   = [];
         $limit = $start = 0;
-        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_suspensions');
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_suspensions');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
             if ('' !== $criteriaElement->getSort()) {

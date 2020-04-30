@@ -54,7 +54,7 @@ class FileChecker
         if (null === $redirectFile) {
             $redirectFile = $_SERVER['SCRIPT_NAME'];
         }
-        $moduleDirName = \basename(\dirname(__DIR__, 2));
+        $moduleDirName      = \basename(\dirname(__DIR__, 2));
         $moduleDirNameUpper = mb_strtoupper($moduleDirName);
         if (null === $original_file_path) {
             if (self::fileExists($file_path)) {
@@ -101,7 +101,7 @@ class FileChecker
         $source_path,
         $destination_path
     ) {
-        $source_path = \str_replace('..', '', $source_path);
+        $source_path      = \str_replace('..', '', $source_path);
         $destination_path = \str_replace('..', '', $destination_path);
         return @\copy($source_path, $destination_path);
     }

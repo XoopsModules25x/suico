@@ -54,9 +54,9 @@ class AudioForm extends XoopsThemeForm
      */
     public function __construct($target)
     {
-        $this->helper = $target->helper;
+        $this->helper       = $target->helper;
         $this->targetObject = $target;
-        $title = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_AUDIO_ADD) : \sprintf(\AM_SUICO_AUDIO_EDIT);
+        $title              = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_AUDIO_ADD) : \sprintf(\AM_SUICO_AUDIO_EDIT);
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
         //include ID field, it's needed so the module knows if it is a new form or an edited form
@@ -92,12 +92,12 @@ class AudioForm extends XoopsThemeForm
         );
         // Description
         if (\class_exists('XoopsFormEditor')) {
-            $editorOptions = [];
-            $editorOptions['name'] = 'description';
-            $editorOptions['value'] = $this->targetObject->getVar('description', 'e');
-            $editorOptions['rows'] = 5;
-            $editorOptions['cols'] = 40;
-            $editorOptions['width'] = '100%';
+            $editorOptions           = [];
+            $editorOptions['name']   = 'description';
+            $editorOptions['value']  = $this->targetObject->getVar('description', 'e');
+            $editorOptions['rows']   = 5;
+            $editorOptions['cols']   = 40;
+            $editorOptions['width']  = '100%';
             $editorOptions['height'] = '400px';
             //$editorOptions['editor'] = xoops_getModuleOption('suico_editor', 'suico');
             //$this->addElement( new \XoopsFormEditor(AM_SUICO_AUDIO_DESCRIPTION, 'description', $editorOptions), false  );

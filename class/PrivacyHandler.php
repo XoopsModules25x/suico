@@ -25,7 +25,7 @@ namespace XoopsModules\Suico;
 use XoopsModules\Suico;
 
 $moduleDirName = \basename(\dirname(__DIR__));
-$permHelper = new \Xmf\Module\Helper\Permission();
+$permHelper    = new \Xmf\Module\Helper\Permission();
 
 /**
  * Class PrivacyHandler
@@ -60,7 +60,7 @@ class PrivacyHandler extends \XoopsPersistableObjectHandler
      */
     public function create($isNew = true)
     {
-        $obj = parent::create($isNew);
+        $obj         = parent::create($isNew);
         $obj->helper = $this->helper;
         return $obj;
     }

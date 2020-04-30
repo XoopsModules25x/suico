@@ -33,7 +33,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 function b_suico_friends_show($options)
 {
     global $xoopsDB, $xoopsModule, $xoopsModuleConfig, $xoopsUser;
-    $myts = MyTextSanitizer::getInstance();
+    $myts  = MyTextSanitizer::getInstance();
     $block = [];
     if ($xoopsUser) {
         /**
@@ -48,11 +48,11 @@ function b_suico_friends_show($options)
          * Creating factories of pictures and votes
          */
         //$albumFactory      = new ImagesHandler($xoopsDB);
-        $friendsFactory = new Suico\FriendshipHandler($xoopsDB);
-        $block['friends'] = $friendsFactory->getFriends($options[0], $criteria2);
+        $friendsFactory           = new Suico\FriendshipHandler($xoopsDB);
+        $block['friends']         = $friendsFactory->getFriends($options[0], $criteria2);
         $block['lang_allfriends'] = _MB_SUICO_ALLFRIENDS;
-        $block['lang_nofriends'] = _MB_SUICO_NOFRIENDSYET;
-        $block['enablepm'] = $options[1] ?? '';
+        $block['lang_nofriends']  = _MB_SUICO_NOFRIENDSYET;
+        $block['enablepm']        = $options[1] ?? '';
         return $block;
     }
 }
@@ -70,7 +70,7 @@ function b_suico_friends_edit($options)
         $chk = ' checked';
     }
     $form .= "<input type='radio' name='options[1]' value='1'" . $chk . '>&nbsp;' . _YES . '';
-    $chk = '';
+    $chk  = '';
     if (0 === $options[1]) {
         $chk = ' checked';
     }
