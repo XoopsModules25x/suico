@@ -147,8 +147,8 @@
                             <br>
                             <br>
                             <script>
-                                jQuery(document).ready(function () {
-                                    jQuery('#memberslist').DataTable({
+                                $(document).ready(function () {
+                                    $('#memberslist').DataTable({
                                         "ordering": false,
                                         "lengthChange": false,
                                         "displayLength": <{$membersperpage}>,
