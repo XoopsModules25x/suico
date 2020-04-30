@@ -55,7 +55,7 @@ if (11 === mb_strlen($url)) {
     $code             = mb_substr($url, $position_of_code + 2, 11);
 }
 $newvideo->setVar('youtube_code', $code);
-$newvideo->setVar('main_video', Request::getInt('main_video', 0, 'POST'));
+$newvideo->setVar('featured_video', Request::getInt('featured_video', 0, 'POST'));
 $newvideo->setVar('date_created', \time());
 $newvideo->setVar('date_updated', \time());
 

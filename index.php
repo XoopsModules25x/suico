@@ -167,8 +167,9 @@ foreach (array_keys($fields) as $i) {
 $GLOBALS['xoopsTpl']->assign('categories', $categories);
 // Dynamic user profiles end
 
-$mainvideocode = '';
-$mainvideodesc = '';
+$featuredvideocode = '';
+$featuredvideotitle = '';
+$featuredvideodesc = '';
 
 //require_once __DIR__ . '/class/suico_controller.php';
 //if (!@ require_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/user.php') {
@@ -186,16 +187,17 @@ $start = Request::getInt(
 );
 
 /**
- * Criteria for mainvideo
+ * Criteria for featuredvideo
  */
 $criteriaUidVideo   = new Criteria('uid_owner', $controller->uidOwner);
-$criteria_mainvideo = new Criteria('main_video', '1');
-$criteria_video     = new CriteriaCompo($criteria_mainvideo);
+$criteria_featuredvideo = new Criteria('featured_video', '1');
+$criteria_video     = new CriteriaCompo($criteria_featuredvideo);
 $criteria_video->add($criteriaUidVideo);
 
 if ((isset($nbSections['countGroups']) && $nbSections['countGroups'] > 0) && ($videos = $controller->videosFactory->getObjects($criteria_video))) {
-    $mainvideocode = $videos[0]->getVar('youtube_code');
-    $mainvideodesc = $videos[0]->getVar('video_desc');
+    $featuredvideocode = $videos[0]->getVar('youtube_code');
+	$featuredvideotitle = $videos[0]->getVar('video_title');
+    $featuredvideodesc = $videos[0]->getVar('video_desc');
 }
 
 /**
@@ -274,15 +276,16 @@ $xoopsTpl->assign('lang_viewallgroups', _MD_SUICO_ALLGROUPS);
 //Avatar and Main
 $xoopsTpl->assign('avatar_url', $avatar);
 $xoopsTpl->assign('lang_selectavatar', _MD_SUICO_SELECTAVATAR);
-$xoopsTpl->assign('lang_selectmainvideo', _MD_SUICO_SELECTMAINVIDEO);
+$xoopsTpl->assign('lang_selectfeaturedvideo', _MD_SUICO_SELECTFEATUREDVIDEO);
 $xoopsTpl->assign('lang_noavatar', _MD_SUICO_NOAVATARYET);
-$xoopsTpl->assign('lang_nomainvideo', _MD_SUICO_NOMAINVIDEOYET);
+$xoopsTpl->assign('lang_nofeaturedvideo', _MD_SUICO_NOFEATUREDVIDEOYET);
 $xoopsTpl->assign('lang_featuredvideo', _MD_SUICO_VIDEO_FEATURED);
 $xoopsTpl->assign('lang_viewallvideos', _MD_SUICO_ALLVIDEOS);
 
 if (isset($nbSections['countGroups']) && $nbSections['countGroups'] > 0) {
-    $xoopsTpl->assign('mainvideocode', $mainvideocode);
-    $xoopsTpl->assign('mainvideodesc', $mainvideodesc);
+    $xoopsTpl->assign('featuredvideocode', $featuredvideocode);
+    $xoopsTpl->assign('featuredvideodesc', $featuredvideodesc);
+	$xoopsTpl->assign('featuredvideotitle', $featuredvideotitle);
     $xoopsTpl->assign(
         'width',
         $helper->getConfig('width_maintube')

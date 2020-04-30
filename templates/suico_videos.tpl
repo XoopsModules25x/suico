@@ -18,7 +18,7 @@
                                     <{$token}>
 
                                     <div class="form-group">
-                                        <label for="video"><{$lang_videohelp}> <{$xoops_sitename}>. <{$lang_selectmainvideo}></label>
+                                        <label for="video"><{$lang_videohelp}> <{$xoops_sitename}>. <{$lang_selectfeaturedvideo}></label>
                                     </div>
 									
 									<div class="form-group">
@@ -94,10 +94,10 @@
                                         <{$token}>
                                         <input name="submit" type="image" alt="<{$lang_editvideo}>" title="<{$lang_editvideo}>" src="<{xoModuleIcons16 edit.png}>" class="float-left">
                                     </form>
-                                    <form action="mainvideo.php" method="post" id="mainform" class="suico-video-forms">
+                                    <form action="featuredvideo.php" method="post" id="mainform" class="suico-video-forms">
                                         <input type="hidden" value="<{$videos[i].id}>" name="video_id">
                                         <{$token}>
-                                        <input name="submit" type="image" alt="<{$lang_makemain}>" title="<{$lang_makemain}>" src="assets/images/mainvideo.gif" class="float-left">
+                                        <input name="submit" type="image" alt="<{$lang_featurethisvideo}>" title="<{$lang_featurethisvideo}>" src="assets/images/featuredvideo.gif" class="float-left">
                                     </form>
                                 <{/if}>
                                 <br>

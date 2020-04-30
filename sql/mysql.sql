@@ -41,7 +41,7 @@ CREATE TABLE `suico_videos` (
 	`video_title`        VARCHAR(255)     NOT NULL,
     `video_desc`   TEXT             NOT NULL,
     `youtube_code` VARCHAR(11)      NOT NULL,
-    `main_video`   TINYINT(1)       NOT NULL DEFAULT 0,
+    `featured_video`   TINYINT(1)       NOT NULL DEFAULT 0,
     `date_created` INT(11) UNSIGNED NOT NULL DEFAULT 0,
     `date_updated` INT(11) UNSIGNED NOT NULL DEFAULT 0,
     PRIMARY KEY (`video_id`)

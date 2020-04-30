@@ -81,7 +81,7 @@ class Video extends XoopsObject
 
         $this->initVar('youtube_code', \XOBJ_DTYPE_TXTBOX, null, false);
 
-        $this->initVar('main_video', \XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('featured_video', \XOBJ_DTYPE_TXTBOX, null, false);
 
         $this->initVar('date_created', \XOBJ_DTYPE_INT);
 

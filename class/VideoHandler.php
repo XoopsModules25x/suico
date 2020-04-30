@@ -173,7 +173,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
 
             $xoopsObject = new Video();
 
-            $format = 'INSERT INTO %s (video_id, uid_owner, video_title, video_desc, youtube_code, main_video)';
+            $format = 'INSERT INTO %s (video_id, uid_owner, video_title, video_desc, youtube_code, featured_video)';
 
             $format .= 'VALUES (%u, %u, %s, %s, %s, %s)';
 
@@ -185,14 +185,14 @@ class VideoHandler extends XoopsPersistableObjectHandler
 				$this->db->quoteString($video_title),
                 $this->db->quoteString($video_desc),
                 $this->db->quoteString($youtube_code),
-                $this->db->quoteString($main_video)
+                $this->db->quoteString($featured_video)
             );
 
             $force = true;
         } else {
             $format = 'UPDATE %s SET ';
 
-            $format .= 'video_id=%u, uid_owner=%u, video_title=%s, video_desc=%s, youtube_code=%s, main_video=%s';
+            $format .= 'video_id=%u, uid_owner=%u, video_title=%s, video_desc=%s, youtube_code=%s, featured_video=%s';
 
             $format .= ' WHERE video_id = %u';
 
@@ -204,7 +204,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
 				 $this->db->quoteString($video_title),
                 $this->db->quoteString($video_desc),
                 $this->db->quoteString($youtube_code),
-                $this->db->quoteString($main_video),
+                $this->db->quoteString($featured_video),
                 $video_id
             );
         }
@@ -476,7 +476,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
 
     public function unsetAllMainsbyID($uid_owner = null)
     {
-        $sql = 'UPDATE ' . $this->db->prefix('suico_videos') . ' SET main_video=0 WHERE uid_owner=' . $uid_owner;
+        $sql = 'UPDATE ' . $this->db->prefix('suico_videos') . ' SET featured_video=0 WHERE uid_owner=' . $uid_owner;
 
         if (!$result = $this->db->query($sql)) {
             return false;

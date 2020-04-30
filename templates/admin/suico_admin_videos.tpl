@@ -25,7 +25,7 @@
 					 <th class="left"><{$selectorvideo_title}></th>
                     <th class="left"><{$selectorvideo_desc}></th>
                     <th class="left"><{$selectoryoutube_code}></th>
-                    <th class="center"><{$selectormain_video}></th>
+                    <th class="center"><{$selectorfeatured_video}></th>
                     <th class="left"><{$selectordate_created}></th>
                     <th class="left"><{$selectordate_updated}></th>
 
@@ -40,7 +40,7 @@
 						<td class='left'><{$videoArray.video_title}></td>
                         <td class='left'><{$videoArray.video_desc}></td>
                         <td class='left'><{$videoArray.youtube_code}></td>
-                        <td class='center'><{$videoArray.main_video}></td>
+                        <td class='center'><{$videoArray.featured_video}></td>
                         <td class='left'><{$videoArray.date_created}></td>
                         <td class='left'><{$videsArray.date_updated}></td>
 
@@ -61,7 +61,7 @@
 					<th class="left"><{$selectorvideo_title}></th>
                     <th class="left"><{$selectorvideo_desc}></th>
                     <th class="left"><{$selectoryoutube_code}></th>
-                    <th class="center"><{$selectormain_video}></th>
+                    <th class="center"><{$selectorfeatured_video}></th>
                     <th class="left"><{$selectordate_created}></th>
                     <th class="left"><{$selectordate_updated}></th>
 

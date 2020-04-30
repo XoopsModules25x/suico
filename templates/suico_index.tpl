@@ -104,16 +104,17 @@
             </div>
 
             <{if $allow_videos==1 }>
-                <{if $mainvideocode!="" }>
+                <{if $featuredvideocode!="" }>
                     <div class="container-fluid">
                         <div class="row">
                             <h5><{$lang_featuredvideo}> <i class="fa fa-youtube-play"></i></h5>
 
                             <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<{$mainvideocode}>?rel=0" allowfullscreen></iframe>
+                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<{$featuredvideocode}>?rel=0" allowfullscreen></iframe>
                             </div>
                             <div class="alert alert-primary">
-                                <{$mainvideodesc}>
+							    <b><{$featuredvideotitle}></b><br>
+                                <{$featuredvideodesc}>
                             </div>
 
                         </div>
