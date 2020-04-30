@@ -44,8 +44,8 @@ switch ($op) {
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header('visitors.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
-        if (0 !== Request::getInt('cod_visit', 0)) {
-            $visitorsObject = $visitorsHandler->get(Request::getInt('cod_visit', 0));
+        if (0 !== Request::getInt('visit_id', 0)) {
+            $visitorsObject = $visitorsHandler->get(Request::getInt('visit_id', 0));
         } else {
             $visitorsObject = $visitorsHandler->create();
         }
@@ -66,12 +66,12 @@ switch ($op) {
         $adminObject->addItemButton(AM_SUICO_ADD_VISITORS, 'visitors.php?op=new', 'add');
         $adminObject->addItemButton(AM_SUICO_VISITORS_LIST, 'visitors.php', 'list');
         $adminObject->displayButton('left');
-        $visitorsObject = $visitorsHandler->get(Request::getString('cod_visit', ''));
+        $visitorsObject = $visitorsHandler->get(Request::getString('visit_id', ''));
         $form           = $visitorsObject->getForm();
         $form->display();
         break;
     case 'delete':
-        $visitorsObject = $visitorsHandler->get(Request::getString('cod_visit', ''));
+        $visitorsObject = $visitorsHandler->get(Request::getString('visit_id', ''));
         if (1 === Request::getInt('ok', 0)) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('visitors.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -85,7 +85,7 @@ switch ($op) {
             xoops_confirm(
                 [
                     'ok'        => 1,
-                    'cod_visit' => Request::getString('cod_visit', ''),
+                    'visit_id' => Request::getString('visit_id', ''),
                     'op'        => 'delete',
                 ],
                 Request::getUrl('REQUEST_URI', '', 'SERVER'),
@@ -97,8 +97,8 @@ switch ($op) {
         }
         break;
     case 'clone':
-        $id_field = Request::getString('cod_visit', '');
-        if ($utility::cloneRecord('suico_visitors', 'cod_visit', $id_field)) {
+        $id_field = Request::getString('visit_id', '');
+        if ($utility::cloneRecord('suico_visitors', 'visit_id', $id_field)) {
             redirect_header('visitors.php', 3, AM_SUICO_CLONED_OK);
         } else {
             redirect_header('visitors.php', 3, AM_SUICO_CLONED_FAILED);
@@ -111,7 +111,7 @@ switch ($op) {
         $start                   = Request::getInt('start', 0);
         $visitorsPaginationLimit = $helper->getConfig('userpager');
         $criteria                = new CriteriaCompo();
-        $criteria->setSort('cod_visit ASC, uname_visitor');
+        $criteria->setSort('visit_id ASC, uname_visitor');
         $criteria->setOrder('ASC');
         $criteria->setLimit($visitorsPaginationLimit);
         $criteria->setStart($start);
@@ -134,7 +134,7 @@ switch ($op) {
         }
         $GLOBALS['xoopsTpl']->assign('visitorsRows', $visitorsTempRows);
         $visitorsArray = [];
-        //    $fields = explode('|', cod_visit:int:11::NOT NULL::primary:cod_visit|uid_owner:int:11::NOT NULL:::uid_owner|uid_visitor:int:11::NOT NULL:::uid_visitor|uname_visitor:varchar:30::NOT NULL:::uname_visitor|date_visited:timestamp:0::NOT NULL:CURRENT_TIMESTAMP::date_visited);
+        //    $fields = explode('|', visit_id:int:11::NOT NULL::primary:visit_id|uid_owner:int:11::NOT NULL:::uid_owner|uid_visitor:int:11::NOT NULL:::uid_visitor|uname_visitor:varchar:30::NOT NULL:::uname_visitor|date_visited:timestamp:0::NOT NULL:CURRENT_TIMESTAMP::date_visited);
         //    $fieldsCount    = count($fields);
         $criteria = new CriteriaCompo();
         //$criteria->setOrder('DESC');
@@ -149,10 +149,10 @@ switch ($op) {
             foreach (array_keys($visitorsTempArray) as $i) {
                 //        $field = explode(':', $fields[$i]);
                 $GLOBALS['xoopsTpl']->assign(
-                    'selectorcod_visit',
-                    AM_SUICO_VISITORS_COD_VISIT
+                    'selectorvisit_id',
+                    AM_SUICO_VISITORS_VISIT_ID
                 );
-                $visitorsArray['cod_visit'] = $visitorsTempArray[$i]->getVar('cod_visit');
+                $visitorsArray['visit_id'] = $visitorsTempArray[$i]->getVar('visit_id');
                 $GLOBALS['xoopsTpl']->assign('selectoruid_owner', AM_SUICO_VISITORS_UID_OWNER);
                 $visitorsArray['uid_owner'] = strip_tags(
                     XoopsUser::getUnameFromId($visitorsTempArray[$i]->getVar('uid_owner'))
@@ -165,9 +165,9 @@ switch ($op) {
                 $visitorsArray['uname_visitor'] = $visitorsTempArray[$i]->getVar('uname_visitor');
                 $GLOBALS['xoopsTpl']->assign('selectordate_visited', AM_SUICO_VISITORS_DATETIME);
                 $visitorsArray['date_visited'] = formatTimestamp($visitorsTempArray[$i]->getVar('date_visited'), 's');
-                $visitorsArray['edit_delete']  = "<a href='visitors.php?op=edit&cod_visit=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
-               <a href='visitors.php?op=delete&cod_visit=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
-               <a href='visitors.php?op=clone&cod_visit=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
+                $visitorsArray['edit_delete']  = "<a href='visitors.php?op=edit&visit_id=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
+               <a href='visitors.php?op=delete&visit_id=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
+               <a href='visitors.php?op=clone&visit_id=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
                 $GLOBALS['xoopsTpl']->append_by_ref('visitorsArrays', $visitorsArray);
                 unset($visitorsArray);
             }
@@ -181,8 +181,8 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
             //                     echo "<td class='center width5'>
-            //                    <a href='visitors.php?op=edit&cod_visit=".$i."'><img src=".$pathIcon16."/edit.png alt='"._EDIT."' title='"._EDIT."'></a>
-            //                    <a href='visitors.php?op=delete&cod_visit=".$i."'><img src=".$pathIcon16."/delete.png alt='"._DELETE."' title='"._DELETE."'></a>
+            //                    <a href='visitors.php?op=edit&visit_id=".$i."'><img src=".$pathIcon16."/edit.png alt='"._EDIT."' title='"._EDIT."'></a>
+            //                    <a href='visitors.php?op=delete&visit_id=".$i."'><img src=".$pathIcon16."/delete.png alt='"._DELETE."' title='"._DELETE."'></a>
             //                    </td>";
             //                echo "</tr>";
             //            }

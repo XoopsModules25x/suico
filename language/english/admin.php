@@ -150,7 +150,7 @@ define('AM_SUICO_FRIENDSHIP_DATE_UPDATED', 'Updated');
 define('AM_SUICO_VISITORS_ADD', 'Add a visitors');
 define('AM_SUICO_VISITORS_EDIT', 'Edit visitors');
 define('AM_SUICO_VISITORS_DELETE', 'Delete visitors');
-define('AM_SUICO_VISITORS_COD_VISIT', 'ID');
+define('AM_SUICO_VISITORS_VISIT_ID', 'ID');
 define('AM_SUICO_VISITORS_UID_OWNER', 'Owner');
 define('AM_SUICO_VISITORS_UID_VISITOR', 'Visitor');
 define('AM_SUICO_VISITORS_UNAME_VISITOR', 'Name');

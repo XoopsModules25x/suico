@@ -60,15 +60,15 @@ class VisitorsForm extends XoopsThemeForm
         $this->setExtra('enctype="multipart/form-data"');
         //include ID field, it's needed so the module knows if it is a new form or an edited form
         $hidden = new XoopsFormHidden(
-            'cod_visit', $this->targetObject->getVar(
-            'cod_visit'
+            'visit_id', $this->targetObject->getVar(
+            'visit_id'
         )
         );
         $this->addElement($hidden);
         unset($hidden);
         // Cod_visit
         $this->addElement(
-            new XoopsFormLabel(\AM_SUICO_VISITORS_COD_VISIT, $this->targetObject->getVar('cod_visit'), 'cod_visit')
+            new XoopsFormLabel(\AM_SUICO_VISITORS_VISIT_ID, $this->targetObject->getVar('visit_id'), 'visit_id')
         );
         // Uid_owner
         $this->addElement(

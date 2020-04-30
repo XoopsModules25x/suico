@@ -66,7 +66,7 @@ suico_images:
 suico_visitors:
   options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
   columns:
-    - name: cod_visit
+    - name: visit_id
       attributes: ' int(11)  NOT NULL auto_increment'
     - name: uid_owner
       attributes: ' int(11)  NOT NULL '
@@ -78,7 +78,7 @@ suico_visitors:
       attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
   keys:
     PRIMARY:
-      columns: cod_visit
+      columns: visit_id
       unique: true
 suico_videos:
   options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'

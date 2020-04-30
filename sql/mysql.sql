@@ -26,12 +26,12 @@ CREATE TABLE `suico_friendships` (
     ENGINE = MyISAM;
 
 CREATE TABLE `suico_visitors` (
-    `cod_visit`     INT(11)          NOT NULL AUTO_INCREMENT,
+    `visit_id`     INT(11)          NOT NULL AUTO_INCREMENT,
     `uid_owner`     INT(11)          NOT NULL,
     `uid_visitor`   INT(11)          NOT NULL,
     `uname_visitor` VARCHAR(30)      NOT NULL,
     `date_visited`  INT(11) UNSIGNED NOT NULL DEFAULT 0,
-    PRIMARY KEY (`cod_visit`)
+    PRIMARY KEY (`visit_id`)
 )
     ENGINE = MyISAM;
 
