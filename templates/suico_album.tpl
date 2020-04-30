@@ -48,7 +48,7 @@
                             <{$lang_photos}>
                         </h5>
                         <{if $lang_nopicyet=="" }>
-                            <div class="row">
+                            <div class="row gallery">
                                 <{section name=i loop=$pics_array}>
                                     <{if (($pics_array[i].private == 0))}>
                                         <!-- Start Normal Photo -->
