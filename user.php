@@ -172,11 +172,11 @@ if ('register' === $op) {
     }
     // Check user data at first step
     if (1 == $current_step) {
-        $uname      = isset($_POST['uname']) ? $myts->stripSlashesGPC(trim($_POST['uname'])) : '';
-        $email      = isset($_POST['email']) ? $myts->stripSlashesGPC(trim($_POST['email'])) : '';
-        $url        = isset($_POST['url']) ? $myts->stripSlashesGPC(trim($_POST['url'])) : '';
-        $pass       = isset($_POST['pass']) ? $myts->stripSlashesGPC(trim($_POST['pass'])) : '';
-        $vpass      = isset($_POST['vpass']) ? $myts->stripSlashesGPC(trim($_POST['vpass'])) : '';
+        $uname      = Request::getString('uname', '', 'POST');
+        $email      = Request::getString('email', '', 'POST');
+        $url        = Request::getString('url', '', 'POST');
+        $pass       = Request::getString('pass', '', 'POST');
+        $vpass      = Request::getString('vpass', '', 'POST');
         $agree_disc = (isset($_POST['agree_disc']) && (int)$_POST['agree_disc']) ? 1 : 0;
         if (0 != $GLOBALS['xoopsConfigUser']['reg_dispdsclmr'] && '' !== $GLOBALS['xoopsConfigUser']['reg_disclaimer']) {
             if (empty($agree_disc)) {
@@ -206,14 +206,14 @@ if ('register' === $op) {
             $isNew = $newuser->isNew();
             //Did created an user already? If not then let us set some extra info
             if ($isNew) {
-                $uname = isset($_POST['uname']) ? $myts->stripSlashesGPC(trim($_POST['uname'])) : '';
-                $email = isset($_POST['email']) ? $myts->stripSlashesGPC(trim($_POST['email'])) : '';
-                $url   = isset($_POST['url']) ? $myts->stripSlashesGPC(trim($_POST['url'])) : '';
-                $pass  = isset($_POST['pass']) ? $myts->stripSlashesGPC(trim($_POST['pass'])) : '';
+                $uname = Request::getString('uname', '', 'POST');
+                $email = Request::getString('email', '', 'POST');
+                $url   = Request::getString('url', '', 'POST');
+                $pass  = Request::getString('pass', '', 'POST');
                 $newuser->setVar('uname', $uname);
                 $newuser->setVar('email', $email);
                 $newuser->setVar('pass', $pass ? password_hash($pass, PASSWORD_DEFAULT) : '');
-                $actkey = mb_substr(md5(uniqid(mt_rand(), 1)), 0, 8);
+                $actkey = bin2hex(random_bytes(4));
                 $newuser->setVar('actkey', $actkey, true);
                 $newuser->setVar('user_regdate', time(), true);
                 $newuser->setVar('uorder', $GLOBALS['xoopsConfig']['com_order'], true);

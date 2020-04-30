@@ -18,6 +18,7 @@
  */
 
 use XoopsModules\Suico\IndexController;
+use Xmf\Request;
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_changepass.tpl';
 require __DIR__ . '/header.php';
@@ -45,9 +46,9 @@ if (!isset($_POST['submit'])) {
     $configHandler              = xoops_getHandler('config');
     $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
     $myts                       = MyTextSanitizer::getInstance();
-    $oldpass                    = @$myts->stripSlashesGPC(trim($_POST['oldpass']));
-    $password                   = @$myts->stripSlashesGPC(trim($_POST['newpass']));
-    $vpass                      = @$myts->stripSlashesGPC(trim($_POST['vpass']));
+    $oldpass                    = Request::getString('oldpass', '', 'POST');
+    $password                   = Request::getString('newpass', '', 'POST');
+    $vpass                      = Request::getString('vpass', '', 'POST');
     $errors                     = [];
     if (!password_verify($oldpass, $GLOBALS['xoopsUser']->getVar('pass', 'n'))) {
         $errors[] = _MD_SUICO_WRONGPASSWORD;
