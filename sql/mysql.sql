@@ -38,6 +38,7 @@ CREATE TABLE `suico_visitors` (
 CREATE TABLE `suico_videos` (
     `video_id`     INT(11)          NOT NULL AUTO_INCREMENT,
     `uid_owner`    INT(11)          NOT NULL,
+	`video_title`        VARCHAR(255)     NOT NULL,
     `video_desc`   TEXT             NOT NULL,
     `youtube_code` VARCHAR(11)      NOT NULL,
     `main_video`   TINYINT(1)       NOT NULL DEFAULT 0,

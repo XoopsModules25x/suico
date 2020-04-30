@@ -100,7 +100,7 @@ $xoopsTpl->assign('lang_artist', _MD_SUICO_META_ARTIST);
 $xoopsTpl->assign('lang_year', _MD_SUICO_META_YEAR);
 //form actions
 $xoopsTpl->assign('lang_delete', _MD_SUICO_DELETE);
-$xoopsTpl->assign('lang_editdesc', _MD_SUICO_EDIT_DESC);
+$xoopsTpl->assign('lang_editaudio', _MD_SUICO_EDIT_AUDIO);
 $xoopsTpl->assign('lang_makemain', _MD_SUICO_MAKEMAIN);
 //Form Submit
 $xoopsTpl->assign('lang_selectaudio', _MD_SUICO_AUDIO_SELECT);

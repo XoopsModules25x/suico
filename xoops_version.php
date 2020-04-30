@@ -1170,11 +1170,11 @@ if (is_object($xoopsModule) && $xoopsModule->dirname() === $modversion['dirname'
         }
         if (1 === $moduleConfig['enable_audio']) {
             $modversion['sub'][3]['name'] = _MI_SUICO_MYAUDIOS;
-            $modversion['sub'][3]['url']  = 'audio.php';
+            $modversion['sub'][3]['url']  = 'audios.php';
         }
         if (1 === $moduleConfig['enable_videos']) {
             $modversion['sub'][4]['name'] = _MI_SUICO_MYVIDEOS;
-            $modversion['sub'][4]['url']  = 'video.php';
+            $modversion['sub'][4]['url']  = 'videos.php';
         }
         if (1 === $moduleConfig['enable_friends']) {
             $modversion['sub'][5]['name'] = _MI_SUICO_MYFRIENDS;
