@@ -90,7 +90,7 @@ if ($xoopsUser && $xoopsUser->isAdmin(1)) {
  */
 $xoopsTpl->assign('countGroups', $nbSections['countGroups']);
 $xoopsTpl->assign('countPhotos', $nbSections['countPhotos']);
-$xoopsTpl->assign('countVideos', $nbSections['countGroups']);
+$xoopsTpl->assign('countVideos', $nbSections['countVideos']);
 $xoopsTpl->assign('countNotes', $nbSections['countNotes']);
 $xoopsTpl->assign('countFriends', $nbSections['countFriends']);
 $xoopsTpl->assign('countAudio', $nbSections['countAudios']);

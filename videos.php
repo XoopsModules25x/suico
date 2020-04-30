@@ -42,8 +42,8 @@ $criteriaUidVideo->setLimit($helper->getConfig('videosperpage'));
 $videos      = $controller->getVideos($criteriaUidVideo);
 $videosArray = [];
 $pageNav     = '';
-if (isset($nbSections['countGroups'])) {
-    $videosArray = $controller->assignVideoContent($nbSections['countGroups'], $videos);
+if (isset($nbSections['countVideos'])) {
+    $videosArray = $controller->assignVideoContent($nbSections['countVideos'], $videos);
 }
 if (is_array($videosArray)) {
     $xoopsTpl->assign('videos', $videosArray);
@@ -51,8 +51,8 @@ if (is_array($videosArray)) {
     $xoopsTpl->assign('lang_novideoyet', _MD_SUICO_NOVIDEOSYET);
 }
 $xoopsTpl->assign('lang_selectfeaturedvideo', _MD_SUICO_SELECTFEATUREDVIDEO);
-if (isset($nbSections['countGroups']) && $nbSections['countGroups'] > 0) {
-    $pageNav = $controller->videosNavBar($nbSections['countGroups'], $helper->getConfig('videosperpage'), $start, 2);
+if (isset($nbSections['countVideos']) && $nbSections['countVideos'] > 0) {
+    $pageNav = $controller->videosNavBar($nbSections['countVideos'], $helper->getConfig('videosperpage'), $start, 2);
 }
 //form actions
 $xoopsTpl->assign('lang_delete', _MD_SUICO_DELETE);
