@@ -6,13 +6,6 @@ Install:
 
 3. Install the module using the module administration panel at 'System Admin -> Modules'.
 
-Compability Important Note
----------------------------
-XOOPS and jQuery have a javascript function with the same name.
-I have changed the calls using jQuery instead of $ in my suico.js file ,
-I am not sure that the compability problem is over with this but maybe it is.
-Anyone please do report or help me on this 
-
 Optional Procedure
 -------------------
 Hack to make the suico userpage as the main userpage of your site If you are using the profile module
