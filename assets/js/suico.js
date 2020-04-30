@@ -19,26 +19,6 @@ $(document).ready(function($) {
     });
 
 
-//configs lightbox
-$(document).ready(function () {
-    $(function () {
-        $('a[@rel*=lightbox]').lightBox({
-            overlayBgColor: '#000',
-            overlayOpacity: 0.6,
-            imageLoading: 'assets/images/lightbox-ico-loading.gif',
-            imageBtnClose: 'assets/images/close.gif',
-            imageBtnPrev: 'assets/images/prev.gif',
-            imageBtnNext: 'assets/images/next.gif',
-            containerResizeSpeed: 800,
-            txtImage: 'Image',
-            txtOf: 'of'
-        });
-    });
-
-
-});
-
-
 //validation of album form
 $(document).ready(function () {
     $("form#form_picture").submit(function () {

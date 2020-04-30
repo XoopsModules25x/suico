@@ -21,7 +21,7 @@ use Xmf\Request;
 use XoopsModules\Suico;
 
 /**
- * Adding to the module js and css of the lightbox and new ones
+ * CSS & JS
  */
 $xoTheme->addStylesheet(
     XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/suico.css'
