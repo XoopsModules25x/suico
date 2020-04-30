@@ -22,6 +22,7 @@
                     <th align="center" width="5%"><input name="allbox" title="allbox" id="allbox" onclick="xoopsCheckAll('select', 'allbox');" type="checkbox" title="Check All" value="Check All"></th>
                     <th class="left"><{$selectorvideo_id}></th>
                     <th class="left"><{$selectoruid_owner}></th>
+					 <th class="left"><{$selectorvideo_title}></th>
                     <th class="left"><{$selectorvideo_desc}></th>
                     <th class="left"><{$selectoryoutube_code}></th>
                     <th class="center"><{$selectormain_video}></th>
@@ -36,6 +37,7 @@
                         <td align="center" style="vertical-align:middle;"><input type="checkbox" name="videos_id[]" title="videos_id[]" id="videos_id[]" value="<{$videosArray.videos_id}>"></td>
                         <td class='left'><{$videoArray.video_id}></td>
                         <td class='left'><{$videoArray.uid_owner}></td>
+						<td class='left'><{$videoArray.video_title}></td>
                         <td class='left'><{$videoArray.video_desc}></td>
                         <td class='left'><{$videoArray.youtube_code}></td>
                         <td class='center'><{$videoArray.main_video}></td>
@@ -56,6 +58,7 @@
                     <th align="center" width="5%"><input name="allbox" title="allbox" id="allbox" onclick="xoopsCheckAll('select', 'allbox');" type="checkbox" title="Check All" value="Check All"></th>
                     <th class="left"><{$selectorvideo_id}></th>
                     <th class="left"><{$selectoruid_owner}></th>
+					<th class="left"><{$selectorvideo_title}></th>
                     <th class="left"><{$selectorvideo_desc}></th>
                     <th class="left"><{$selectoryoutube_code}></th>
                     <th class="center"><{$selectormain_video}></th>

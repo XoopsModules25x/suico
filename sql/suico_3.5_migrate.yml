@@ -117,6 +117,9 @@ suico_videos:
             name: uid_owner
             attributes: ' int(11)  NOT NULL '
         -
+            name: video_title
+            attributes: ' varchar(256)  NOT NULL '
+        -
             name: video_desc
             attributes: ' text  NOT NULL '
         -

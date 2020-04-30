@@ -74,7 +74,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
 
         $isAdmin = $this->helper->isUserAdmin();
 
-        parent::__construct($xoopsDatabase, 'suico_videos', Video::class, 'video_id', 'video_desc');
+        parent::__construct($xoopsDatabase, 'suico_videos', Video::class, 'video_id', 'video_title', 'video_desc');
     }
 
     /**
@@ -173,15 +173,16 @@ class VideoHandler extends XoopsPersistableObjectHandler
 
             $xoopsObject = new Video();
 
-            $format = 'INSERT INTO %s (video_id, uid_owner, video_desc, youtube_code, main_video)';
+            $format = 'INSERT INTO %s (video_id, uid_owner, video_title, video_desc, youtube_code, main_video)';
 
-            $format .= 'VALUES (%u, %u, %s, %s, %s)';
+            $format .= 'VALUES (%u, %u, %s, %s, %s, %s)';
 
             $sql = \sprintf(
                 $format,
                 $this->db->prefix('suico_videos'),
                 $video_id,
                 $uid_owner,
+				$this->db->quoteString($video_title),
                 $this->db->quoteString($video_desc),
                 $this->db->quoteString($youtube_code),
                 $this->db->quoteString($main_video)
@@ -191,7 +192,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
         } else {
             $format = 'UPDATE %s SET ';
 
-            $format .= 'video_id=%u, uid_owner=%u, video_desc=%s, youtube_code=%s, main_video=%s';
+            $format .= 'video_id=%u, uid_owner=%u, video_title=%s, video_desc=%s, youtube_code=%s, main_video=%s';
 
             $format .= ' WHERE video_id = %u';
 
@@ -200,6 +201,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
                 $this->db->prefix('suico_videos'),
                 $video_id,
                 $uid_owner,
+				 $this->db->quoteString($video_title),
                 $this->db->quoteString($video_desc),
                 $this->db->quoteString($youtube_code),
                 $this->db->quoteString($main_video),
@@ -424,12 +426,14 @@ class VideoHandler extends XoopsPersistableObjectHandler
      */
 
     public function renderFormEdit(
+		$title,
         $caption,
         $cod_img,
         $filename
     ) {
-        $form = new XoopsThemeForm(\_MD_SUICO_EDIT_DESC, 'form_picture', 'editvideo.php', 'post', true);
-
+        $form = new XoopsThemeForm(\_MD_SUICO_EDIT_VIDEO, 'form_picture', 'editvideo.php', 'post', true);
+		$field_title = new XoopsFormText($title, 'title', 35, 55);
+		
         $field_desc = new XoopsFormText($caption, 'caption', 35, 55);
 
         $form->setExtra('enctype="multipart/form-data"');
@@ -449,6 +453,8 @@ class VideoHandler extends XoopsPersistableObjectHandler
         $field_marker = new XoopsFormHidden('marker', 1);
 
         $form->addElement($field_warning);
+		
+		$form->addElement($field_title);
 
         $form->addElement($field_desc);
 

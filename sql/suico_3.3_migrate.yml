@@ -81,6 +81,8 @@ suico_seutubo:
       attributes: ' int(11)  NOT NULL auto_increment'
     - name: uid_owner
       attributes: ' int(11)  NOT NULL '
+    - name: video_title
+      attributes: ' varchar(256)  NOT NULL '
     - name: video_desc
       attributes: ' text  NOT NULL '
     - name: youtube_code

@@ -75,6 +75,8 @@ class Video extends XoopsObject
 
         $this->initVar('uid_owner', \XOBJ_DTYPE_INT, null, false, 10);
 
+		$this->initVar('video_title', \XOBJ_DTYPE_OTHER, null, false);
+		
         $this->initVar('video_desc', \XOBJ_DTYPE_OTHER, null, false);
 
         $this->initVar('youtube_code', \XOBJ_DTYPE_TXTBOX, null, false);

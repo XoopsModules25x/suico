@@ -107,6 +107,8 @@ class VideoController extends SuicoController
 
         foreach ($videos as $video) {
             $videosArray[$i]['url'] = $video->getVar('youtube_code', 's');
+			
+			$videosArray[$i]['title'] = $video->getVar('video_title', 's');
 
             $videosArray[$i]['desc'] = $video->getVar('video_desc', 's');
 

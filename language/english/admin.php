@@ -168,6 +168,7 @@ define('AM_SUICO_VIDEO_EDIT', 'Edit video');
 define('AM_SUICO_VIDEO_DELETE', 'Delete video');
 define('AM_SUICO_VIDEO_VIDEO_ID', 'ID');
 define('AM_SUICO_VIDEO_UID_OWNER', 'Owner');
+define('AM_SUICO_VIDEO_TITLE', 'Video Title');
 define('AM_SUICO_VIDEO_VIDEO_DESC', 'Description');
 define('AM_SUICO_VIDEO_YOUTUBE_CODE', 'YouTube_Code');
 define('AM_SUICO_VIDEO_MAIN_VIDEO', 'MainVideo');

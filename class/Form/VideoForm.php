@@ -96,6 +96,17 @@ class VideoForm extends XoopsThemeForm
             false
         );
 
+		// Video Title
+		
+			$this->addElement(
+            new XoopsFormText(
+                \AM_SUICO_VIDEO_TITLE, 'video_title', 50, 255, $this->targetObject->getVar(
+                'video_title'
+            )
+            ),
+            false
+        );
+		
         // Video_desc
 
         $this->addElement(
