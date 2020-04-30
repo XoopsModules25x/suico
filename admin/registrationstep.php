@@ -19,14 +19,10 @@
  */
 include_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
-
-
-$adminObject->addItemButton( _AM_SUICO_STEP, 'registrationstep.php?op=new', 'add');
+$adminObject->addItemButton(_AM_SUICO_STEP, 'registrationstep.php?op=new', 'add');
 $adminObject->displayNavigation(basename(__FILE__));
 $adminObject->displayButton('left');
-
-$op = $_REQUEST['op'] ?? (isset($_REQUEST['id']) ? 'edit' : 'list');
-
+$op      = $_REQUEST['op'] ?? (isset($_REQUEST['id']) ? 'edit' : 'list');
 $handler = $helper->getHandler('Regstep');
 switch ($op) {
     case 'list':
@@ -92,18 +88,16 @@ switch ($op) {
         }
         break;
 }
-
 if (!empty($template_main)) {
     $GLOBALS['xoopsTpl']->display("db:{$template_main}");
 }
-
 /**
  * @param $step_d
  * @param $step_save
  */
 function profile_stepsave_toggle($step_d, $step_save)
 {
-    $helper = XoopsModules\Suico\Helper::getInstance();
+    $helper    = XoopsModules\Suico\Helper::getInstance();
     $step_save = (1 == $step_save) ? 0 : 1;
     $handler   = $helper->getHandler('Regstep');
     $obj       = $handler->get($_REQUEST['step_id']);

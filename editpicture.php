@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -24,15 +23,12 @@ use Xmf\Request;
 use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
-
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
-
 $cod_img = Request::getInt('cod_img', 0, 'POST');
 $marker  = Request::getInt('marker', 0, 'POST');
 $uid     = (int)$xoopsUser->getVar('uid');
-
 if (1 === $marker) {
     /**
      * Creating the factory loading the picture changing its caption
@@ -66,7 +62,6 @@ $criteria_img = new Criteria('cod_img', $cod_img);
 $criteriaUid  = new Criteria('uid_owner', $uid);
 $criteria     = new CriteriaCompo($criteria_img);
 $criteria->add($criteriaUid);
-
 /**
  * Lets fetch the info of the pictures to be able to render the form
  * The user must be the owner
@@ -75,12 +70,11 @@ $array_pict = $imageFactory->getObjects(
     $criteria
 );
 if ($array_pict) {
-    $title   = $array_pict[0]->getVar('title');
-    $caption = $array_pict[0]->getVar('caption');
-    $filename     = $array_pict[0]->getVar('filename');
+    $title    = $array_pict[0]->getVar('title');
+    $caption  = $array_pict[0]->getVar('caption');
+    $filename = $array_pict[0]->getVar('filename');
 }
 //$url = $xoopsModuleConfig['link_path_upload']."/thumb_".$url;
 $url = XOOPS_URL . '/uploads/suico/images/thumb_' . $filename;
 $imageFactory->renderFormEdit($title, $caption, $cod_img, $url);
-
 require dirname(__DIR__, 2) . '/footer.php';

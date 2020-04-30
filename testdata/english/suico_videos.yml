@@ -1,5 +1,4 @@
--
-    video_id: '1'
+- video_id: '1'
     uid_owner: '1'
     video_title: 'XOOPS Installation on Ubuntu'
     video_desc: 'How to install XOOPS on Ubuntu'
@@ -7,8 +6,7 @@
     featured_video: '1'
     date_created: '1585748818'
     date_updated: '1587649618'
--
-    video_id: '2'
+- video_id: '2'
     uid_owner: '1'
     video_title: "GraphQL Full Course"
     video_desc: "Novice to Expert\r\nGreat video"

@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -18,14 +17,12 @@ declare(strict_types=1);
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
-
 /**
  * Protection against inclusion outside the site
  */
 if (!defined('XOOPS_ROOT_PATH')) {
     die('XOOPS root path not defined');
 }
-
 /**
  * Return search results and show images on userinfo page
  *
@@ -51,15 +48,13 @@ function suico_search(
     $configHandler     = xoops_getHandler('config');
     $moduleConfig      = $configHandler->getConfigsByCat(0, $modulo->getVar('mid'));
     $path_uploadimages = XOOPS_UPLOAD_URL;
-
-    $ret = [];
-    $sql = 'SELECT cod_img, title, caption,  date_created,  uid_owner, filename FROM ' . $xoopsDB->prefix(
+    $ret               = [];
+    $sql               = 'SELECT cod_img, title, caption,  date_created,  uid_owner, filename FROM ' . $xoopsDB->prefix(
             'suico_images'
         ) . ' WHERE ';
     if (0 !== $userid) {
         $sql .= '(uid_owner =' . (int)$userid . ')';
     }
-
     // because count() returns 1 even if a supplied variable
     // is not an array, we must check if $querryarray is really an array
     $count = count($queryarray);
@@ -117,13 +112,11 @@ function suico_search(
             //$ret[$i]['time'] = $myrow['date_created'];
             $ret[$i]['uid'] = $myrow['uid_owner'];
         }
-
         $i++;
     }
     if (0 !== $userid && $i > 0) {
         if ($limit < 6) {
-            $ret = [];
-
+            $ret             = [];
             $ret[0]['title'] = 'See its album';
             $ret[0]['time']  = time();
             $ret[0]['uid']   = $userid;
@@ -132,6 +125,5 @@ function suico_search(
             $ret[0]['image'] = $stringofimage;
         }
     }
-
     return $ret;
 }

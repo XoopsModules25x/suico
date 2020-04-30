@@ -95,17 +95,11 @@
                                                                 <input name="submit" type="image" alt="<{$lang_setprivate}>" title="<{$lang_setprivate}>" src="assets/images/lock.gif">
                                                             <{/if}>
                                                         </form>
-
-
-
                                                         <form action="private.php" method="post" id="setprivate" class="suico-album-formquick">
                                                             <input type="hidden" value="<{$pics_array[i].cod_img}>" name="cod_img">
                                                             <{$token}>
                                                             <input type="button" name="edit" value="Edit" id="<{$pics_array[i].cod_img}>" class="btn btn-info btn-sm edit_picture"/>
                                                         </form>
-
-
-
                                                     <{/if}>
                                                 </div>
                                             </div>

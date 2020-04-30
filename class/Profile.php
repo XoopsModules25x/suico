@@ -21,7 +21,6 @@ namespace XoopsModules\Suico;
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
-
 // defined('XOOPS_ROOT_PATH') || exit("XOOPS root path not defined");
 
 /**
@@ -33,11 +32,9 @@ class Profile extends \XoopsObject
     /**
      * @param $fields
      */
-
     public function __construct($fields)
     {
         $this->initVar('profile_id', \XOBJ_DTYPE_INT, null, true);
-
         $this->init($fields);
     }
 
@@ -45,7 +42,6 @@ class Profile extends \XoopsObject
      * Initiate variables
      * @param array $fields field information array of {@link XoopsField} objects
      */
-
     public function init($fields)
     {
         if (\is_array($fields) && \count($fields) > 0) {

@@ -33,11 +33,9 @@ use XoopsModules\Suico;
 use XoopsThemeForm;
 
 require_once \dirname(__DIR__, 2) . '/include/common.php';
-
 $moduleDirName = \basename(\dirname(__DIR__, 2));
 //$helper = Suico\Helper::getInstance();
 $permHelper = new Permission();
-
 \xoops_load('XoopsFormLoader');
 
 /**
@@ -46,7 +44,6 @@ $permHelper = new Permission();
 class VisitorsForm extends XoopsThemeForm
 {
     public $targetObject;
-
     public $helper;
 
     /**
@@ -54,39 +51,26 @@ class VisitorsForm extends XoopsThemeForm
      *
      * @param $target
      */
-
     public function __construct($target)
     {
-        $this->helper = $target->helper;
-
+        $this->helper       = $target->helper;
         $this->targetObject = $target;
-
-        $title = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_VISITORS_ADD) : \sprintf(\AM_SUICO_VISITORS_EDIT);
-
+        $title              = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_VISITORS_ADD) : \sprintf(\AM_SUICO_VISITORS_EDIT);
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
-
         $this->setExtra('enctype="multipart/form-data"');
-
         //include ID field, it's needed so the module knows if it is a new form or an edited form
-
         $hidden = new XoopsFormHidden(
             'cod_visit', $this->targetObject->getVar(
             'cod_visit'
         )
         );
-
         $this->addElement($hidden);
-
         unset($hidden);
-
         // Cod_visit
-
         $this->addElement(
             new XoopsFormLabel(\AM_SUICO_VISITORS_COD_VISIT, $this->targetObject->getVar('cod_visit'), 'cod_visit')
         );
-
         // Uid_owner
-
         $this->addElement(
             new XoopsFormSelectUser(
                 \AM_SUICO_VISITORS_UID_OWNER, 'uid_owner', false, $this->targetObject->getVar(
@@ -95,9 +79,7 @@ class VisitorsForm extends XoopsThemeForm
             ),
             false
         );
-
         // Uid_visitor
-
         $this->addElement(
             new XoopsFormSelectUser(
                 \AM_SUICO_VISITORS_UID_VISITOR, 'uid_visitor', false, $this->targetObject->getVar(
@@ -106,9 +88,7 @@ class VisitorsForm extends XoopsThemeForm
             ),
             false
         );
-
         // Uname_visitor
-
         $this->addElement(
             new XoopsFormText(
                 \AM_SUICO_VISITORS_UNAME_VISITOR, 'uname_visitor', 50, 255, $this->targetObject->getVar(
@@ -117,17 +97,13 @@ class VisitorsForm extends XoopsThemeForm
             ),
             false
         );
-
         // Datetime
-
         $this->addElement(
             new XoopsFormTextDateSelect(
                 \AM_SUICO_VISITORS_DATETIME, 'date_visited', 0, \formatTimestamp($this->targetObject->getVar('date_visited'), 's')
             )
         );
-
         $this->addElement(new XoopsFormHidden('op', 'save'));
-
         $this->addElement(new XoopsFormButton('', 'submit', \_SUBMIT, 'submit'));
     }
 }

@@ -17,7 +17,6 @@ use XoopsPageNav;
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
-
 /**
  * @category        Module
  * @package         suico
@@ -99,12 +98,9 @@ class AudioController extends SuicoController
             $mp3filemetainfoarray['Artist'] = $mp3filemetainfo->getArtist();
             $mp3filemetainfoarray['Album']  = $mp3filemetainfo->getAlbum();
             $mp3filemetainfoarray['Year']   = $mp3filemetainfo->getYear();
-
-            $audiosArray[$i]['meta'] = $mp3filemetainfoarray;
-
+            $audiosArray[$i]['meta']        = $mp3filemetainfoarray;
             $i++;
         }
-
         return $audiosArray;
     }
 
@@ -124,7 +120,6 @@ class AudioController extends SuicoController
         $interval
     ) {
         $pageNav = new XoopsPageNav($countAudios, $audiosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
-
         return $pageNav->renderImageNav($interval);
     }
 
@@ -139,14 +134,11 @@ class AudioController extends SuicoController
         $criteria = new Criteria('config_uid', $this->owner->getVar('uid'));
         if (1 === $this->configsFactory->getCount($criteria)) {
             $configs = $this->configsFactory->getObjects($criteria);
-
-            $config = $configs[0]->getVar('audio');
-
+            $config  = $configs[0]->getVar('audio');
             if (!$this->checkPrivilegeLevel($config)) {
                 \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, \_MD_SUICO_NOPRIVILEGE);
             }
         }
-
         return true;
     }
 }

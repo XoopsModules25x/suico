@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -24,13 +23,10 @@ use Xmf\Request;
 use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
-
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
-
 $cod_img = Request::getInt('cod_img', 0, 'POST');
-
 if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
     xoops_confirm(
         [
@@ -54,11 +50,9 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
     $criteriaUid  = new Criteria('uid_owner', $uid);
     $criteria     = new CriteriaCompo($criteria_img);
     $criteria->add($criteriaUid);
-
     $objects_array = $imageFactory->getObjects($criteria);
     $image_name    = $objects_array[0]->getVar('filename');
     $avatar_image  = $xoopsUser->getVar('user_avatar');
-
     /**
      * Try to delete
      */
@@ -81,5 +75,4 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
         redirect_header('album.php', 2, _MD_SUICO_ERROR);
     }
 }
-
 require dirname(__DIR__, 2) . '/footer.php';

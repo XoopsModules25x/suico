@@ -11,9 +11,7 @@ $I->click('User Login');
 //$I->click('icon-white icon-user');
 $I->see('Administration Menu');
 $I->click('Administration Menu');
-
 $I->amOnPage('/modules/system/admin.php?fct=modulesadmin');
-
 $I->see('http://259alfred/modules/system/admin.php?fct=modulesadmin&amp;op=uninstall&amp;module=suico');
 //$I->see('#mod_9 > td:nth-child(6) > a:nth-child(2)');
 //$I->see('//*[@id="mod_9"]/td[6]/a[2]');
@@ -28,15 +26,12 @@ $I->see('http://259alfred/modules/system/admin.php?fct=modulesadmin&amp;op=unins
 //$I->seeLink('uninstall_contact');
 //$I->seeLink('Uninstall2-contact');
 //$I->click('Uninstall2-contact');
-
 //$I->seeLink('', '/modules/contact/admin/index.php');
 //$I->click('', '/modules/contact/admin/index.php');
 //$I->seeLink(['img' => 'uninstall_contact']);
 //$I->seeLink('img#uninstall2_contact');
 //$I->seeLink(['img' => 'Uninstall2-contact']);
-
 //$I->amOnPage('/modules/system/admin.php?fct=modulesadmin&op=uninstall&module=contact');
-
 $I->amOnPage('modules/suico/admin/index.php');
 //$I->see('Uninstall');
 //$I->seeLink('Uninstall');
@@ -50,11 +45,8 @@ $I->seeLink('Uninstall');
 $I->click('Uninstall');
 $I->see('confirm_submit');
 $I->click('confirm_submit');
-
 //$I->amOnPage('/modules/system/admin.php');
-
 $I->see('XOOPS Module Administration');
 $I->click('XOOPS Module Administration');
-
 $I->amOnPage('/modules/system/admin.php?fct=modulesadmin');
 

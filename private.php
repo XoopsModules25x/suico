@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -24,15 +23,11 @@ use Xmf\Request;
 use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
-
 //require_once __DIR__ . '/class/Image.php';
-
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
-
 $cod_img = Request::getInt('cod_img', 0, 'POST');
-
 /**
  * Creating the factory  loading the picture changing its caption
  */
@@ -42,7 +37,6 @@ $imageFactory = new Suico\ImageHandler(
 $picture      = $imageFactory->create(false);
 $picture->load($cod_img);
 $picture->setVar('private', Request::getInt('private', 0, 'POST'));
-
 /**
  * Verifying who's the owner to allow changes
  */
@@ -58,5 +52,4 @@ if ($uid === (int)$picture->getVar('uid_owner')) {
         redirect_header('album.php', 2, _MD_SUICO_ERROR);
     }
 }
-
 require dirname(__DIR__, 2) . '/footer.php';

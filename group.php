@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -25,21 +24,16 @@ use XoopsModules\Suico;
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_group.tpl';
 require __DIR__ . '/header.php';
-
 $helper->loadLanguage('main');
-
 $controller = new Suico\GroupController($xoopsDB, $xoopsUser);
-
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
 $nbSections = $controller->getNumbersSections();
-
-$group_id = Request::getInt('group_id', 0, 'GET');
-$criteria = new Criteria('group_id', $group_id);
-$groups   = $controller->groupsFactory->getObjects($criteria);
-$group    = $groups[0];
-
+$group_id   = Request::getInt('group_id', 0, 'GET');
+$criteria   = new Criteria('group_id', $group_id);
+$groups     = $controller->groupsFactory->getObjects($criteria);
+$group      = $groups[0];
 /**
  * Fetching rel_id
  */
@@ -48,23 +42,20 @@ $result            = $GLOBALS['xoopsDB']->query($sql);
 $myrow             = $GLOBALS['xoopsDB']->fetchArray($result);
 $mygroup['rel_id'] = $myrow['rel_id'];
 $xoopsTpl->assign('group_rel_id', $mygroup['rel_id']);
-
 /**
  * Render a form with the info of the user
  */
-$group_members = $controller->relgroupusersFactory->getUsersFromGroup(
+$group_members     = $controller->relgroupusersFactory->getUsersFromGroup(
     $group_id,
     0,
     50
 );
-
 $grouptotalmembers = 0;
 foreach ($group_members as $group_member) {
     $uids[] = (int)$group_member['uid'];
     $grouptotalmembers++;
 }
 $xoopsTpl->assign('grouptotalmembers', $grouptotalmembers . ' ' . _MD_SUICO_GROUPMEMBERS);
-
 if (!empty($uids)) {
     if ($xoopsUser) {
         $uid = (int)$xoopsUser->getVar('uid');
@@ -76,7 +67,6 @@ if (!empty($uids)) {
 }
 $owner_uid       = $group->getVar('owner_uid');
 $group_ownername = XoopsUser::getUnameFromId($owner_uid);
-
 $xoopsTpl->assign('group_members', $group_members);
 $maxfilebytes = $helper->getConfig('maxfilesize');
 $xoopsTpl->assign('lang_savegroup', _MD_SUICO_UPLOADGROUP);
@@ -87,7 +77,6 @@ $xoopsTpl->assign('group_img', $group->getVar('group_img'));
 $xoopsTpl->assign('group_id', $group->getVar('group_id'));
 $xoopsTpl->assign('group_owneruid', $group->getVar('owner_uid'));
 $xoopsTpl->assign('group_ownername', $group_ownername);
-
 $xoopsTpl->assign('lang_groupdatecreated', _MD_SUICO_GROUPDATECREATED);
 $xoopsTpl->assign('lang_grouptotalmembers', _MD_SUICO_GROUPTOTALMEMBERS);
 $xoopsTpl->assign('lang_groupmembers', _MD_SUICO_GROUPMEMBERS);
@@ -102,17 +91,13 @@ $xoopsTpl->assign('lang_abandongroup', _MD_SUICO_GROUP_ABANDON);
 $xoopsTpl->assign('lang_joingroup', _MD_SUICO_GROUP_JOIN);
 $xoopsTpl->assign('lang_ownerofgroup', _MD_SUICO_OWNEROFGROUP);
 $xoopsTpl->assign('lang_removemember', _MD_SUICO_KICKOUT);
-
 //$xoopsTpl->assign('path_suico_uploads',$helper->getConfig('link_path_upload'));
 $xoopsTpl->assign(
     'lang_owner',
     _MD_SUICO_GROUPOWNER
 );
-
 $xoopsTpl->assign('lang_mysection', _MD_SUICO_GROUPS . ' :: ' . $group->getVar('group_title'));
 $xoopsTpl->assign('section_name', _MD_SUICO_GROUPS . '> ' . $group->getVar('group_title'));
-
 require_once XOOPS_ROOT_PATH . '/include/comment_view.php';
-
 require __DIR__ . '/footer.php';
 require dirname(__DIR__, 2) . '/footer.php';

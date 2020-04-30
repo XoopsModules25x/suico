@@ -30,7 +30,6 @@ class VisibilityHandler extends \XoopsPersistableObjectHandler
     /**
      * @param \XoopsDatabase $db
      */
-
     public function __construct(\XoopsDatabase $db)
     {
         parent::__construct($db, 'suico_profile_visibility', Visibility::class, 'field_id');
@@ -44,23 +43,17 @@ class VisibilityHandler extends \XoopsPersistableObjectHandler
      *
      * @return array
      */
-
     public function getVisibleFields($profile_groups, $user_groups = null)
     {
         $profile_groups[] = $user_groups[] = 0;
-
-        $sql = "SELECT field_id FROM {$this->table} WHERE profile_group IN (" . \implode(',', $profile_groups) . ')';
-
-        $sql .= ' AND user_group IN (' . \implode(',', $user_groups) . ')';
-
-        $field_ids = [];
-
+        $sql              = "SELECT field_id FROM {$this->table} WHERE profile_group IN (" . \implode(',', $profile_groups) . ')';
+        $sql              .= ' AND user_group IN (' . \implode(',', $user_groups) . ')';
+        $field_ids        = [];
         if (false !== ($result = $this->db->query($sql))) {
             while (false !== (list($field_id) = $this->db->fetchRow($result))) {
                 $field_ids[] = $field_id;
             }
         }
-
         return $field_ids;
     }
 
@@ -71,19 +64,14 @@ class VisibilityHandler extends \XoopsPersistableObjectHandler
      *
      * @return array of row arrays, indexed by field_id
      */
-
     public function getAllByFieldId(\CriteriaElement $criteria = null)
     {
         $rawRows = parent::getAll($criteria, null, false, false);
-
         \usort($rawRows, [$this, 'visibilitySort']);
-
         $rows = [];
-
         foreach ($rawRows as $rawRow) {
             $rows[$rawRow['field_id']][] = $rawRow;
         }
-
         return $rows;
     }
 
@@ -99,23 +87,17 @@ class VisibilityHandler extends \XoopsPersistableObjectHandler
      *              integer zero if $a and $b are equal
      *              integer greater than zero if $a is greater than $b
      */
-
     protected function visibilitySort($a, $b)
     {
         $fieldDiff = $a['field_id'] - $b['field_id'];
-
-        $userDiff = $a['user_group'] - $b['user_group'];
-
-        $profDiff = $a['profile_group'] - $b['profile_group'];
-
+        $userDiff  = $a['user_group'] - $b['user_group'];
+        $profDiff  = $a['profile_group'] - $b['profile_group'];
         if (0 != $fieldDiff) {
             return $fieldDiff;
         }
-
         if (0 !== $userDiff) {
             return $userDiff;
         }
-
         return $profDiff;
     }
 }

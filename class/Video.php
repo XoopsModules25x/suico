@@ -32,7 +32,6 @@ use XoopsObject;
 if (!\defined('XOOPS_ROOT_PATH')) {
     die('XOOPS root path not defined');
 }
-
 /**
  * Includes of form objects and uploader
  */
@@ -49,44 +48,28 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 class Video extends XoopsObject
 {
     public $db;
-
     public $helper;
-
     public $permHelper;
-
     // constructor
 
     /**
      * Video constructor.
      * @param null $id
      */
-
     public function __construct($id = null)
     {
         /** @var Helper $helper */
-
         $this->helper = Helper::getInstance();
-
         $this->permHelper = new Permission();
-
         $this->db = XoopsDatabaseFactory::getDatabaseConnection();
-
         $this->initVar('video_id', \XOBJ_DTYPE_INT, null, false, 10);
-
         $this->initVar('uid_owner', \XOBJ_DTYPE_INT, null, false, 10);
-
 		$this->initVar('video_title', \XOBJ_DTYPE_OTHER, null, false);
-		
         $this->initVar('video_desc', \XOBJ_DTYPE_OTHER, null, false);
-
         $this->initVar('youtube_code', \XOBJ_DTYPE_TXTBOX, null, false);
-
         $this->initVar('featured_video', \XOBJ_DTYPE_TXTBOX, null, false);
-
         $this->initVar('date_created', \XOBJ_DTYPE_INT);
-
         $this->initVar('date_updated', \XOBJ_DTYPE_INT);
-
         if (!empty($id)) {
             if (\is_array($id)) {
                 $this->assignVars($id);
@@ -101,15 +84,11 @@ class Video extends XoopsObject
     /**
      * @param $id
      */
-
     public function load($id)
     {
         $sql = 'SELECT * FROM ' . $this->db->prefix('suico_videos') . ' WHERE video_id=' . $id;
-
         $myrow = $this->db->fetchArray($this->db->query($sql));
-
         $this->assignVars($myrow);
-
         if (!$myrow) {
             $this->setNew();
         }
@@ -124,7 +103,6 @@ class Video extends XoopsObject
      * @param int    $start
      * @return array
      */
-
     public function getAllVideos(
         $criteria = [],
         $asobject = false,
@@ -134,41 +112,30 @@ class Video extends XoopsObject
         $start = 0
     ) {
         $db = XoopsDatabaseFactory::getDatabaseConnection();
-
         $ret = [];
-
         $whereQuery = '';
-
         if (\is_array($criteria) && \count($criteria) > 0) {
             $whereQuery = ' WHERE';
-
             foreach ($criteria as $c) {
                 $whereQuery .= " ${c} AND";
             }
-
             $whereQuery = mb_substr($whereQuery, 0, -4);
         } elseif (!\is_array($criteria) && $criteria) {
             $whereQuery = ' WHERE ' . $criteria;
         }
-
         if (!$asobject) {
             $sql = 'SELECT video_id FROM ' . $db->prefix('suico_videos') . "${whereQuery} ORDER BY ${sort} ${order}";
-
             $result = $db->query($sql, $limit, $start);
-
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['suico_video_id'];
             }
         } else {
             $sql = 'SELECT * FROM ' . $db->prefix('suico_videos') . "${whereQuery} ORDER BY ${sort} ${order}";
-
             $result = $db->query($sql, $limit, $start);
-
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new self($myrow);
             }
         }
-
         return $ret;
     }
 
@@ -177,7 +144,6 @@ class Video extends XoopsObject
      *
      * @return \XoopsModules\Suico\Form\VideoForm
      */
-
     public function getForm()
     {
         return new Form\VideoForm($this);
@@ -186,11 +152,9 @@ class Video extends XoopsObject
     /**
      * @return array|null
      */
-
     public function getGroupsRead()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
-
         return $this->permHelper->getGroupsForItem(
             'sbcolumns_read',
             $this->getVar('video_id')
@@ -200,11 +164,9 @@ class Video extends XoopsObject
     /**
      * @return array|null
      */
-
     public function getGroupsSubmit()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
-
         return $this->permHelper->getGroupsForItem(
             'sbcolumns_submit',
             $this->getVar('video_id')
@@ -214,11 +176,9 @@ class Video extends XoopsObject
     /**
      * @return array|null
      */
-
     public function getGroupsModeration()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
-
         return $this->permHelper->getGroupsForItem(
             'sbcolumns_moderation',
             $this->getVar('video_id')

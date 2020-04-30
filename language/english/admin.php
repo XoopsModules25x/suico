@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -18,7 +17,6 @@ declare(strict_types=1);
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
-
 //index.php
 define(
     '_MD_SUICO_FRAMEWORKSFALSE',
@@ -61,15 +59,12 @@ define('_AM_SUICO_ERROR_COLUMN', 'Could not create column in database : %s');
 define('_AM_SUICO_ERROR_BAD_XOOPS', 'This module requires XOOPS %s+ (%s installed)');
 define('_AM_SUICO_ERROR_BAD_PHP', 'This module requires PHP version %s+ (%s installed)');
 define('_AM_SUICO_ERROR_TAG_REMOVAL', 'Could not remove tags from Tag Module');
-
 define('_AM_SUICO_FOLDERS_DELETED_OK', 'Upload Folders have been deleted');
-
 // Error Msgs
 define('_AM_SUICO_ERROR_BAD_DEL_PATH', 'Could not delete %s directory');
 define('_AM_SUICO_ERROR_BAD_REMOVE', 'Could not delete %s');
 define('_AM_SUICO_ERROR_NO_PLUGIN', 'Could not load plugin');
 //2.0
-
 //Index
 define('AM_SUICO_STATISTICS', 'Suico statistics');
 define('AM_SUICO_THEREARE_IMAGES', "There are <span class='bold'>%s</span> Images in the database");
@@ -125,7 +120,6 @@ define('AM_SUICO_SELECTED_DEACTIVATE', 'De-activate selected item(s)');
 define('AM_SUICO_SELECTED_ERROR', 'You selected nothing to delete');
 define('AM_SUICO_CLONED_OK', 'Record cloned successfully');
 define('AM_SUICO_CLONED_FAILED', 'Cloning of the record has failed');
-
 // Images
 define('AM_SUICO_IMAGES_ADD', 'Add a images');
 define('AM_SUICO_IMAGES_EDIT', 'Edit images');
@@ -152,7 +146,6 @@ define('AM_SUICO_FRIENDSHIP_COOL', 'Cool');
 define('AM_SUICO_FRIENDSHIP_FAN', 'Fan');
 define('AM_SUICO_FRIENDSHIP_DATE_CREATED', 'Created');
 define('AM_SUICO_FRIENDSHIP_DATE_UPDATED', 'Updated');
-
 // Visitors
 define('AM_SUICO_VISITORS_ADD', 'Add a visitors');
 define('AM_SUICO_VISITORS_EDIT', 'Edit visitors');
@@ -182,7 +175,6 @@ define('AM_SUICO_FRIENDREQUEST_FRIENDPET_ID', 'ID');
 define('AM_SUICO_FRIENDREQUEST_FRIENDREQUESTER_UID', 'From');
 define('AM_SUICO_FRIENDREQUEST_FRIENDREQUESTTO_UID', 'To');
 define('AM_SUICO_FRIENDREQUEST_DATE_CREATED', 'Created');
-
 // Groups
 define('AM_SUICO_GROUPS_ADD', 'Add a groups');
 define('AM_SUICO_GROUPS_EDIT', 'Edit groups');
@@ -276,7 +268,6 @@ define('AM_SUICO_PERMISSIONS_SUBMIT', 'Permissions to submit');
 define('AM_SUICO_PERMISSIONS_SUBMIT_DESC', 'Only users in the group that you select may submit this');
 define('AM_SUICO_PERMISSIONS_GPERMUPDATED', 'Permissions have been changed successfully');
 define('AM_SUICO_PERMISSIONS_NOPERMSSET', 'Permission cannot be set: No privacy created yet! Please create a privacy first.');
-
 //Errors
 define('AM_SUICO_UPGRADEFAILED0', "Update failed - couldn't rename field '%s'");
 define('AM_SUICO_UPGRADEFAILED1', "Update failed - couldn't add new fields");
@@ -302,18 +293,15 @@ define('AM_SUICO_VIDEO_EXPIREWARNING', 'The publishing date is after expiration 
 //Sample Data
 define('AM_SUICO_ADD_SAMPLEDATA', 'Import Sample Data (will delete ALL current data)');
 define('AM_SUICO_SAMPLEDATA_SUCCESS', 'Sample Date uploaded successfully');
-
 //Error NoFrameworks
 define(
     '_AM_ERROR_NOFRAMEWORKS',
     'Error: You don&#39;t use the Frameworks \'admin module\'. Please install this Frameworks'
 );
 define('AM_SUICO_MAINTAINEDBY', 'is maintained by the');
-
 define('AM_SUICO_ADD_PRIVACY', 'Add new Privacy');
 define('AM_SUICO_PRIVACY_LIST', 'List of Privacy');
 define('_AM_SUICO_UPLOAD_ERROR', 'Upload Error');
-
 //Profile Module
 define('_AM_SUICO_FIELD', 'Add Field');
 define('_AM_SUICO_FIELDS', 'Fields');

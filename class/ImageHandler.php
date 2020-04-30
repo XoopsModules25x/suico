@@ -34,21 +34,18 @@ use XoopsThemeForm;
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
-
 /**
  * Protection against inclusion outside the site
  */
 if (!\defined('XOOPS_ROOT_PATH')) {
     die('XOOPS root path not defined');
 }
-
 /**
  * Includes of form objects and uploader
  */
 require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-
 // -------------------------------------------------------------------------
 // ------------------Image user handler class -------------------
 // -------------------------------------------------------------------------
@@ -60,12 +57,11 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 class ImageHandler extends XoopsPersistableObjectHandler
 {
     public $helper;
-
     public $isAdmin;
 
     /**
      * Constructor
-     * @param \XoopsDatabase|null              $xoopsDatabase
+     * @param \XoopsDatabase|null             $xoopsDatabase
      * @param \XoopsModules\Suico\Helper|null $helper
      */
     public function __construct(
@@ -101,7 +97,6 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $obj->unsetNew();
         }
         $obj->helper = $this->helper;
-
         return $obj;
     }
 
@@ -124,17 +119,15 @@ class ImageHandler extends XoopsPersistableObjectHandler
         if (1 === $numrows) {
             $image = new Image();
             $image->assignVars($this->db->fetchArray($result));
-
             return $image;
         }
-
         return false;
     }
 
     /**
      * insert a new Image in the database
      *
-     * @param \XoopsObject $xoopsObject   reference to the {@link Image} object
+     * @param \XoopsObject $xoopsObject reference to the {@link Image} object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
@@ -152,7 +145,6 @@ class ImageHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject->cleanVars()) {
             return false;
         }
-
         $cod_img = '';
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
@@ -205,7 +197,6 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $cod_img = $this->db->getInsertId();
         }
         $xoopsObject->assignVar('cod_img', $cod_img);
-
         return true;
     }
 
@@ -236,7 +227,6 @@ class ImageHandler extends XoopsPersistableObjectHandler
         if (!$result) {
             return false;
         }
-
         return true;
     }
 
@@ -278,7 +268,6 @@ class ImageHandler extends XoopsPersistableObjectHandler
             }
             unset($image);
         }
-
         return $ret;
     }
 
@@ -300,7 +289,6 @@ class ImageHandler extends XoopsPersistableObjectHandler
             return 0;
         }
         [$count] = $this->db->fetchRow($result);
-
         return (int)$count;
     }
 
@@ -324,7 +312,6 @@ class ImageHandler extends XoopsPersistableObjectHandler
         if (!$result = $this->db->query($sql)) {
             return false;
         }
-
         return true;
     }
 
@@ -352,7 +339,6 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $form->addElement($field_url, true);
         $form->addElement($field_title);
         $form->addElement($field_caption);
-
         $form->addElement($buttonSend);
         $form->assign($xoopsTpl); //If your server is php 5
         return true;
@@ -388,7 +374,6 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $form->addElement($field_marker);
         $form->addElement($buttonSend);
         $form->display();
-
         return true;
     }
 
@@ -425,13 +410,11 @@ class ImageHandler extends XoopsPersistableObjectHandler
         //create a hash so it does not erase another file
         //$hash1 = date();
         //$hash = substr($hash1,0,4);
-
         // mimetypes and settings put this in admin part later
         $allowed_mimetypes = Helper::getInstance()->getConfig(
             'mimetypes'
         );
         $maxfilesize       = $maxfilebytes;
-
         //        $uploadDir = \XOOPS_UPLOAD_PATH . '/suico/images/';
         // create the object to upload
         $uploader = new XoopsMediaUploader(
@@ -444,9 +427,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             //now let s upload the file
             if (!$uploader->upload()) {
                 // if there are errors lets return them
-
                 echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
-
                 return false;
             }
             // now let s create a new object picture and set its variables
@@ -475,10 +456,8 @@ class ImageHandler extends XoopsPersistableObjectHandler
             );
         } else {
             echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
-
             return false;
         }
-
         return true;
     }
 
@@ -505,7 +484,6 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $img    = \imagecreatefromjpeg($img);
         $xratio = $thumbwidth / \imagesx($img);
         $yratio = $thumbheight / \imagesy($img);
-
         if ($xratio < 1 || $yratio < 1) {
             if ($xratio < $yratio) {
                 $resized = \imagecreatetruecolor($thumbwidth, (int)\floor(\imagesy($img) * $xratio));
@@ -529,7 +507,6 @@ class ImageHandler extends XoopsPersistableObjectHandler
         } else {
             \imagejpeg($img, $pathUpload . '/thumb_' . $path['basename']);
         }
-
         \imagedestroy($img);
         $path2   = \pathinfo($img2);
         $img2    = \imagecreatefromjpeg($img2);
@@ -541,7 +518,6 @@ class ImageHandler extends XoopsPersistableObjectHandler
             } else {
                 $resized2 = \imagecreatetruecolor((int)\floor(\imagesx($img2) * $yratio2), $pictheight);
             }
-
             \imagecopyresampled(
                 $resized2,
                 $img2,
@@ -568,14 +544,12 @@ class ImageHandler extends XoopsPersistableObjectHandler
      */
     public function getLastPictures($limit)
     {
-        $ret = [];
-
-        $sql = 'SELECT uname, t.uid_owner, t.filename FROM ' . $this->db->prefix(
+        $ret    = [];
+        $sql    = 'SELECT uname, t.uid_owner, t.filename FROM ' . $this->db->prefix(
                 'suico_images'
             ) . ' AS t, ' . $this->db->prefix(
                 'users'
             );
-
         $sql    .= ' WHERE uid_owner = uid AND private=0 ORDER BY cod_img DESC';
         $result = $this->db->query($sql, $limit, 0);
         $vetor  = [];
@@ -586,7 +560,6 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $vetor[$i]['user_avatar'] = $myrow['filename'];
             $i++;
         }
-
         return $vetor;
     }
 
@@ -596,14 +569,12 @@ class ImageHandler extends XoopsPersistableObjectHandler
      */
     public function getLastPicturesForBlock($limit)
     {
-        $ret = [];
-
-        $sql = 'SELECT uname, t.uid_owner, t.filename, t.title, t.caption  FROM ' . $this->db->prefix(
+        $ret    = [];
+        $sql    = 'SELECT uname, t.uid_owner, t.filename, t.title, t.caption  FROM ' . $this->db->prefix(
                 'suico_images'
             ) . ' AS t, ' . $this->db->prefix(
                 'users'
             );
-
         $sql    .= ' WHERE uid_owner = uid AND private=0 ORDER BY cod_img DESC';
         $result = $this->db->query($sql, $limit, 0);
         $vetor  = [];
@@ -614,10 +585,8 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $vetor[$i]['img_filename'] = $myrow['filename'];
             $vetor[$i]['title']        = $myrow['title'];
             $vetor[$i]['caption']      = $myrow['caption'];
-
             $i++;
         }
-
         return $vetor;
     }
 
@@ -640,7 +609,6 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $img    = \imagecreatefromjpeg($img);
         $xratio = $thumbwidth / \imagesx($img);
         $yratio = $thumbheight / \imagesy($img);
-
         if ($xratio < 1 || $yratio < 1) {
             if ($xratio < $yratio) {
                 $resized = \imagecreatetruecolor($thumbwidth, (int)\floor(\imagesy($img) * $xratio));
@@ -664,7 +632,6 @@ class ImageHandler extends XoopsPersistableObjectHandler
         } else {
             \imagejpeg($img, $pathUpload . '/thumb_' . $path['basename']);
         }
-
         \imagedestroy($img);
         $path2   = \pathinfo($img2);
         $img2    = \imagecreatefromjpeg($img2);
@@ -676,7 +643,6 @@ class ImageHandler extends XoopsPersistableObjectHandler
             } else {
                 $resized2 = \imagecreatetruecolor((int)\floor(\imagesx($img2) * $yratio2), $pictheight);
             }
-
             \imagecopyresampled(
                 $resized2,
                 $img2,

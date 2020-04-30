@@ -1,6 +1,5 @@
--
-    step_id: '1'
-    step_name: Basic
-    step_desc: ''
-    step_order: '1'
-    step_save: '1'
+- step_id: '1'
+  step_name: Basic
+  step_desc: ''
+  step_order: '1'
+  step_save: '1'

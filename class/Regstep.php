@@ -21,7 +21,6 @@ namespace XoopsModules\Suico;
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
-
 // defined('XOOPS_ROOT_PATH') || exit("XOOPS root path not defined");
 
 /**
@@ -32,13 +31,9 @@ class Regstep extends \XoopsObject
     public function __construct()
     {
         $this->initVar('step_id', \XOBJ_DTYPE_INT);
-
         $this->initVar('step_name', \XOBJ_DTYPE_TXTBOX);
-
         $this->initVar('step_desc', \XOBJ_DTYPE_TXTAREA);
-
         $this->initVar('step_order', \XOBJ_DTYPE_INT, 1);
-
         $this->initVar('step_save', \XOBJ_DTYPE_INT, 0);
     }
 }

@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -24,7 +23,6 @@ use Xmf\Request;
 use XoopsModules\Suico;
 
 require __DIR__ . '/header.php';
-
 $friendrequestFactory = new Suico\FriendrequestHandler($xoopsDB);
 /**
  * create the friendrequest in database
@@ -32,14 +30,12 @@ $friendrequestFactory = new Suico\FriendrequestHandler($xoopsDB);
 $newFriendrequest = $friendrequestFactory->create(true);
 $newFriendrequest->setVar('friendrequester_uid', $xoopsUser->getVar('uid'));
 $newFriendrequest->setVar('friendrequestto_uid', Request::getInt('friendrequestto_uid', 0, 'POST'));
-
 if ($friendrequestFactory->insert2($newFriendrequest)) {
     $extra_tags['X_OWNER_NAME'] = $xoopsUser->getVar('uname');
     $extra_tags['X_OWNER_UID']  = $xoopsUser->getVar('uid');
     /** @var \XoopsNotificationHandler $notificationHandler */
     $notificationHandler = xoops_getHandler('notification');
     $notificationHandler->triggerEvent('friendship', Request::getInt('friendrequestto_uid', 0, 'POST'), 'new_friendship', $extra_tags);
-
     redirect_header(
         XOOPS_URL . '/modules/suico/index.php?uid=' . Request::getInt('friendrequestto_uid', 0, 'POST'),
         3,
@@ -52,7 +48,6 @@ if ($friendrequestFactory->insert2($newFriendrequest)) {
         _MD_SUICO_ERROR
     );
 }
-
 /**
  * Close page
  */

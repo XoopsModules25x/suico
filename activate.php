@@ -19,7 +19,6 @@
  */
 $xoopsOption['pagetype'] = 'user';
 include __DIR__ . '/header.php';
-
 include $GLOBALS['xoops']->path('header.php');
 if (!empty($_GET['id']) && !empty($_GET['actkey'])) {
     $id     = (int)$_GET['id'];
@@ -43,7 +42,7 @@ if (!empty($_GET['id']) && !empty($_GET['actkey'])) {
                 $xoopsPreload = XoopsPreload::getInstance();
                 $xoopsPreload->triggerEvent('core.behavior.user.activate', $thisuser);
                 /* @var XoopsConfigHandler $configHandler */
-                $configHandler             = xoops_getHandler('config');
+                $configHandler              = xoops_getHandler('config');
                 $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
                 if (2 == $GLOBALS['xoopsConfigUser']['activation_type']) {
                     $myts        = MyTextSanitizer::getInstance();
@@ -106,6 +105,5 @@ if (!empty($_GET['id']) && !empty($_GET['actkey'])) {
     $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
     $form->display();
 }
-
 $xoBreadcrumbs[] = ['title' => _MD_SUICO_REGISTER];
 include __DIR__ . '/footer.php';

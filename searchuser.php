@@ -21,20 +21,15 @@ use Xmf\Request;
 use XoopsModules\Suico\IndexController;
 
 $op = $_REQUEST['op'] ?? 'search';
-
 switch ($op) {
     default:
     case 'search':
-
         $GLOBALS['xoopsOption']['template_main'] = 'suico_search.tpl';
         require __DIR__ . '/header.php';
-
-        $myts       = MyTextSanitizer::getInstance();
-        $controller = new IndexController($xoopsDB, $xoopsUser, $xoopsModule);
-        $nbSections = $controller->getNumbersSections();
-
-        $limit_default = 20;
-
+        $myts                       = MyTextSanitizer::getInstance();
+        $controller                 = new IndexController($xoopsDB, $xoopsUser, $xoopsModule);
+        $nbSections                 = $controller->getNumbersSections();
+        $limit_default              = 20;
         $groups                     = $GLOBALS['xoopsUser'] ? $GLOBALS['xoopsUser']->getGroups() : [XOOPS_GROUP_ANONYMOUS];
         $xoopsOption['cache_group'] = implode('', $groups);
         $searchable_types           = [
@@ -47,9 +42,7 @@ switch ($op) {
             'timezone',
             'language',
         ];
-
-        $sortby_arr = [];
-
+        $sortby_arr                 = [];
         // Dynamic fields
         $profileHandler = $helper->getHandler('Profile');
         // Get fields
@@ -58,27 +51,22 @@ switch ($op) {
         /* @var  XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler  = xoops_getHandler('groupperm');
         $searchable_fields = $grouppermHandler->getItemIds('profile_search', $groups, $GLOBALS['xoopsModule']->getVar('mid'));
-
         include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
         $searchform = new XoopsThemeForm('', 'searchform', 'searchuser.php', 'post');
-
-        $name_tray = new XoopsFormElementTray(_US_NICKNAME);
+        $name_tray  = new XoopsFormElementTray(_US_NICKNAME);
         $name_tray->addElement(new XoopsFormSelectMatchOption('', 'uname_match'));
         $name_tray->addElement(new XoopsFormText('', 'uname', 35, 255));
         $searchform->addElement($name_tray);
-
         $email_tray = new XoopsFormElementTray(_US_EMAIL);
         $email_tray->addElement(new XoopsFormSelectMatchOption('', 'email_match'));
         $email_tray->addElement(new XoopsFormText('', 'email', 35, 255));
         $searchform->addElement($email_tray);
-
         // add search groups , only for Webmasters
         if ($GLOBALS['xoopsUser'] && $GLOBALS['xoopsUser']->isAdmin()) {
             $group_tray = new XoopsFormElementTray(_US_GROUPS);
             $group_tray->addElement(new XoopsFormSelectGroup('', 'selgroups', null, false, 5, true));
             $searchform->addElement($group_tray);
         }
-
         foreach (array_keys($fields) as $i) {
             if (!in_array($fields[$i]->getVar('field_id'), $searchable_fields) || !in_array($fields[$i]->getVar('field_type'), $searchable_types)) {
                 continue;
@@ -138,20 +126,16 @@ switch ($op) {
         $sortby_select = new XoopsFormSelect(_MD_SUICO_SORTBY, 'sortby');
         $sortby_select->addOptionArray($sortby_arr);
         $searchform->addElement($sortby_select);
-
         $order_select = new XoopsFormRadio(_MD_SUICO_ORDER, 'order', 0);
         $order_select->addOption(0, _ASCENDING);
         $order_select->addOption(1, _DESCENDING);
         $searchform->addElement($order_select);
-
         $limit_text = new XoopsFormText(_MD_SUICO_PERPAGE, 'limit', 15, 10, $limit_default);
         $searchform->addElement($limit_text);
         $searchform->addElement(new XoopsFormHidden('op', 'results'));
         $searchform->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
-
         $searchform->assign($GLOBALS['xoopsTpl']);
         $GLOBALS['xoopsTpl']->assign('page_title', _MD_SUICO_SEARCH);
-
         //added count user
         /* @var XoopsMemberHandler $memberHandler */
         $memberHandler = xoops_getHandler('member');
@@ -162,11 +146,9 @@ switch ($op) {
     case 'results':
         $GLOBALS['xoopsOption']['template_main'] = 'suico_results.tpl';
         require __DIR__ . '/header.php';
-
         $myts       = MyTextSanitizer::getInstance();
         $controller = new IndexController($xoopsDB, $xoopsUser, $xoopsModule);
         $nbSections = $controller->getNumbersSections();
-
         $GLOBALS['xoopsTpl']->assign('page_title', _MD_SUICO_RESULTS);
         $xoBreadcrumbs[] = [
             'link'  => XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/searchuser.php',
@@ -185,9 +167,7 @@ switch ($op) {
         $searchable_fields = $grouppermHandler->getItemIds('profile_search', $groups, $GLOBALS['xoopsModule']->getVar('mid'));
         $searchvars        = [];
         $search_url        = [];
-
-        $criteria = new CriteriaCompo(new Criteria('level', 0, '>'));
-
+        $criteria          = new CriteriaCompo(new Criteria('level', 0, '>'));
         if (isset($_REQUEST['uname']) && '' !== $_REQUEST['uname']) {
             $string = $myts->addSlashes(trim($_REQUEST['uname']));
             switch ($_REQUEST['uname_match']) {
@@ -225,7 +205,6 @@ switch ($op) {
             $criteria->add(new Criteria('email', $string, 'LIKE'));
             $criteria->add(new Criteria('user_viewemail', 1));
         }
-
         //$search_url = array();
         foreach (array_keys($fields) as $i) {
             //Radio and Select fields
@@ -237,7 +216,6 @@ switch ($op) {
                 if (empty($_REQUEST[$fieldname])) {
                     continue;
                 }
-
                 //If field value is sent through request and is not an empty value
                 switch ($fields[$i]->getVar('field_valuetype')) {
                     case XOBJ_DTYPE_OTHER:
@@ -274,7 +252,6 @@ switch ($op) {
                                     $searchvars[] = $fieldname;
                                     $criteria->add(new Criteria($fieldname, $value, '>='));
                                 }
-
                                 $value = $_REQUEST[$fieldname . '_smaller'];
                                 if (!($value = strtotime($_REQUEST[$fieldname . '_smaller']))) {
                                     $value = (int)$_REQUEST[$fieldname . '_smaller'];
@@ -292,7 +269,6 @@ switch ($op) {
                                     $searchvars[] = $fieldname;
                                     $criteria->add(new Criteria($fieldname, $value, '>='));
                                 }
-
                                 if (isset($_REQUEST[$fieldname . '_smaller']) && 0 !== (int)$_REQUEST[$fieldname . '_smaller']) {
                                     $value        = (int)$_REQUEST[$fieldname . '_smaller'];
                                     $search_url[] = $fieldname . '_smaller=' . $value;
@@ -301,7 +277,6 @@ switch ($op) {
                                 }
                                 break;
                         }
-
                         if (isset($_REQUEST[$fieldname]) && !isset($_REQUEST[$fieldname . '_smaller']) && !isset($_REQUEST[$fieldname . '_larger'])) {
                             if (!is_array($_REQUEST[$fieldname])) {
                                 $value        = (int)$_REQUEST[$fieldname];
@@ -314,7 +289,6 @@ switch ($op) {
                                 }
                                 $criteria->add(new Criteria($fieldname, '(' . implode(',', $value) . ')', 'IN'));
                             }
-
                             $searchvars[] = $fieldname;
                         }
                         break;
@@ -344,7 +318,6 @@ switch ($op) {
                 }
             }
         }
-
         //        if ($_REQUEST['sortby'] == "name") {
         //            $criteria->setSort("name");
         //        } else if ($_REQUEST['sortby'] == "email") {
@@ -354,7 +327,6 @@ switch ($op) {
         //        } else if (isset($fields[$_REQUEST['sortby']])) {
         //            $criteria->setSort($fields[$_REQUEST['sortby']]->getVar('field_name'));
         //        }
-
         // change by zyspec:
         $sortby = 'uname';
         if (!empty($_REQUEST['sortby'])) {
@@ -372,7 +344,6 @@ switch ($op) {
             }
             $criteria->setSort($sortby);
         }
-
         // add search groups , only for Webmasters
         $searchgroups = [];
         if ($GLOBALS['xoopsUser'] && $GLOBALS['xoopsUser']->isAdmin()) {
@@ -381,27 +352,20 @@ switch ($op) {
                 $search_url[] = 'selgroups[]=' . $group;
             }
         }
-
         $order = 0 == $_REQUEST['order'] ? 'ASC' : 'DESC';
         $criteria->setOrder($order);
-
         $limit = empty($_REQUEST['limit']) ? $limit_default : (int)$_REQUEST['limit'];
         $criteria->setLimit($limit);
-
         $start = isset($_REQUEST['start']) ? (int)$_REQUEST['start'] : 0;
         $criteria->setStart($start);
-
         [$users, $profiles, $total_users] = $profileHandler->search($criteria, $searchvars, $searchgroups);
-
         $total = sprintf(_MD_SUICO_FOUNDUSER, "<span class='red'>{$total_users}</span>") . ' ';
         $GLOBALS['xoopsTpl']->assign('total_users', $total);
-
         //Sort information
         foreach (array_keys($users) as $k) {
             $userarray             = [];
             $userarray['output'][] = "<a href='userinfo.php?uid=" . $users[$k]->getVar('uid') . "' title=''>" . $users[$k]->getVar('uname') . '</a>';
             $userarray['output'][] = (1 == $users[$k]->getVar('user_viewemail') || (is_object($GLOBALS['xoopsUser']) && $GLOBALS['xoopsUser']->isAdmin())) ? $users[$k]->getVar('email') : '';
-
             foreach (array_keys($fields) as $i) {
                 if (in_array($fields[$i]->getVar('field_id'), $searchable_fields) && in_array($fields[$i]->getVar('field_type'), $searchable_types) && in_array($fields[$i]->getVar('field_name'), $searchvars)) {
                     $userarray['output'][] = $fields[$i]->getOutputValue($users[$k], $profiles[$k]);
@@ -410,7 +374,6 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->append('users', $userarray);
             unset($userarray);
         }
-
         //Get captions
         $captions[] = _US_NICKNAME;
         $captions[] = _US_EMAIL;
@@ -420,7 +383,6 @@ switch ($op) {
             }
         }
         $GLOBALS['xoopsTpl']->assign('captions', $captions);
-
         if ($total_users > $limit) {
             $search_url[] = 'op=results';
             $search_url[] = 'order=' . $order;
@@ -431,7 +393,6 @@ switch ($op) {
             if (isset($search_url)) {
                 $args = implode('&amp;', $search_url);
             }
-
             include_once $GLOBALS['xoops']->path('class/pagenav.php');
             $nav = new XoopsPageNav($total_users, $limit, $start, 'start', $args);
             $GLOBALS['xoopsTpl']->assign('nav', $nav->renderNav(5));

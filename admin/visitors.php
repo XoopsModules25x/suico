@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -29,17 +28,14 @@ xoops_cp_header();
 $op    = Request::getString('op', 'list');
 $order = Request::getString('order', 'desc');
 $sort  = Request::getString('sort', '');
-
 $adminObject->displayNavigation(basename(__FILE__));
 $permHelper = new Permission();
 $uploadDir  = XOOPS_UPLOAD_PATH . '/suico/images/';
 $uploadUrl  = XOOPS_UPLOAD_URL . '/suico/images/';
-
 switch ($op) {
     case 'new':
         $adminObject->addItemButton(AM_SUICO_VISITORS_LIST, 'visitors.php', 'list');
         $adminObject->displayButton('left');
-
         $visitorsObject = $visitorsHandler->create();
         $form           = $visitorsObject->getForm();
         $form->display();
@@ -59,11 +55,9 @@ switch ($op) {
         $visitorsObject->setVar('uname_visitor', Request::getVar('uname_visitor', ''));
         $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_visited', '', 'POST'));
         $visitorsObject->setVar('date_visited', $dateTimeObj->getTimestamp());
-
         if ($visitorsHandler->insert($visitorsObject)) {
             redirect_header('visitors.php?op=list', 2, AM_SUICO_FORMOK);
         }
-
         echo $visitorsObject->getHtmlErrors();
         $form = $visitorsObject->getForm();
         $form->display();
@@ -82,7 +76,6 @@ switch ($op) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('visitors.php', 3, implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
-
             if ($visitorsHandler->delete($visitorsObject)) {
                 redirect_header('visitors.php', 3, AM_SUICO_FORMDELOK);
             } else {
@@ -104,15 +97,12 @@ switch ($op) {
         }
         break;
     case 'clone':
-
         $id_field = Request::getString('cod_visit', '');
-
         if ($utility::cloneRecord('suico_visitors', 'cod_visit', $id_field)) {
             redirect_header('visitors.php', 3, AM_SUICO_CLONED_OK);
         } else {
             redirect_header('visitors.php', 3, AM_SUICO_CLONED_FAILED);
         }
-
         break;
     case 'list':
     default:
@@ -120,8 +110,7 @@ switch ($op) {
         $adminObject->displayButton('left');
         $start                   = Request::getInt('start', 0);
         $visitorsPaginationLimit = $helper->getConfig('userpager');
-
-        $criteria = new CriteriaCompo();
+        $criteria                = new CriteriaCompo();
         $criteria->setSort('cod_visit ASC, uname_visitor');
         $criteria->setOrder('ASC');
         $criteria->setLimit($visitorsPaginationLimit);
@@ -135,125 +124,82 @@ switch ($op) {
         //                    </tr>";
         //            $class = "odd";
         */
-
         // Display Page Navigation
         if ($visitorsTempRows > $visitorsPaginationLimit) {
             xoops_load('XoopsPageNav');
-
             $pagenav = new XoopsPageNav(
                 $visitorsTempRows, $visitorsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
-
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
-
         $GLOBALS['xoopsTpl']->assign('visitorsRows', $visitorsTempRows);
         $visitorsArray = [];
-
         //    $fields = explode('|', cod_visit:int:11::NOT NULL::primary:cod_visit|uid_owner:int:11::NOT NULL:::uid_owner|uid_visitor:int:11::NOT NULL:::uid_visitor|uname_visitor:varchar:30::NOT NULL:::uname_visitor|date_visited:timestamp:0::NOT NULL:CURRENT_TIMESTAMP::date_visited);
         //    $fieldsCount    = count($fields);
-
         $criteria = new CriteriaCompo();
-
         //$criteria->setOrder('DESC');
         $criteria->setSort($sort);
         $criteria->setOrder($order);
         $criteria->setLimit($visitorsPaginationLimit);
         $criteria->setStart($start);
-
         $visitorsCount     = $visitorsHandler->getCount($criteria);
         $visitorsTempArray = $visitorsHandler->getAll($criteria);
-
         //    for ($i = 0; $i < $fieldsCount; ++$i) {
         if ($visitorsCount > 0) {
             foreach (array_keys($visitorsTempArray) as $i) {
                 //        $field = explode(':', $fields[$i]);
-
                 $GLOBALS['xoopsTpl']->assign(
                     'selectorcod_visit',
                     AM_SUICO_VISITORS_COD_VISIT
                 );
-
                 $visitorsArray['cod_visit'] = $visitorsTempArray[$i]->getVar('cod_visit');
-
                 $GLOBALS['xoopsTpl']->assign('selectoruid_owner', AM_SUICO_VISITORS_UID_OWNER);
-
                 $visitorsArray['uid_owner'] = strip_tags(
                     XoopsUser::getUnameFromId($visitorsTempArray[$i]->getVar('uid_owner'))
                 );
-
                 $GLOBALS['xoopsTpl']->assign('selectoruid_visitor', AM_SUICO_VISITORS_UID_VISITOR);
-
                 $visitorsArray['uid_visitor'] = strip_tags(
                     XoopsUser::getUnameFromId($visitorsTempArray[$i]->getVar('uid_visitor'))
                 );
-
                 $GLOBALS['xoopsTpl']->assign('selectoruname_visitor', AM_SUICO_VISITORS_UNAME_VISITOR);
-
                 $visitorsArray['uname_visitor'] = $visitorsTempArray[$i]->getVar('uname_visitor');
-
                 $GLOBALS['xoopsTpl']->assign('selectordate_visited', AM_SUICO_VISITORS_DATETIME);
-
                 $visitorsArray['date_visited'] = formatTimestamp($visitorsTempArray[$i]->getVar('date_visited'), 's');
-
-                $visitorsArray['edit_delete'] = "<a href='visitors.php?op=edit&cod_visit=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
+                $visitorsArray['edit_delete']  = "<a href='visitors.php?op=edit&cod_visit=" . $i . "'><img src=" . $pathIcon16 . "/edit.png alt='" . _EDIT . "' title='" . _EDIT . "'></a>
                <a href='visitors.php?op=delete&cod_visit=" . $i . "'><img src=" . $pathIcon16 . "/delete.png alt='" . _DELETE . "' title='" . _DELETE . "'></a>
                <a href='visitors.php?op=clone&cod_visit=" . $i . "'><img src=" . $pathIcon16 . "/editcopy.png alt='" . _CLONE . "' title='" . _CLONE . "'></a>";
-
                 $GLOBALS['xoopsTpl']->append_by_ref('visitorsArrays', $visitorsArray);
-
                 unset($visitorsArray);
             }
-
             unset($visitorsTempArray);
-
             // Display Navigation
-
             if ($visitorsCount > $visitorsPaginationLimit) {
                 xoops_load('XoopsPageNav');
-
                 $pagenav = new XoopsPageNav(
                     $visitorsCount, $visitorsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
-
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
-
             //                     echo "<td class='center width5'>
-
             //                    <a href='visitors.php?op=edit&cod_visit=".$i."'><img src=".$pathIcon16."/edit.png alt='"._EDIT."' title='"._EDIT."'></a>
-
             //                    <a href='visitors.php?op=delete&cod_visit=".$i."'><img src=".$pathIcon16."/delete.png alt='"._DELETE."' title='"._DELETE."'></a>
-
             //                    </td>";
-
             //                echo "</tr>";
-
             //            }
-
             //            echo "</table><br><br>";
-
             //        } else {
-
             //            echo "<table width='100%' cellspacing='1' class='outer'>
-
             //                    <tr>
-
             //                     <th class='center width5'>".AM_SUICO_FORM_ACTION."XXX</th>
-
             //                    </tr><tr><td class='errorMsg' colspan='6'>There are noXXX visitors</td></tr>";
-
             //            echo "</table><br><br>";
-
             //-------------------------------------------
-
             echo $GLOBALS['xoopsTpl']->fetch(
                 XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar(
                     'dirname'
                 ) . '/templates/admin/suico_admin_visitors.tpl'
             );
         }
-
         break;
 }
 require __DIR__ . '/admin_footer.php';

@@ -42,70 +42,52 @@ class FileChecker
      * @param string|null $redirectFile
      * @return bool|string
      */
-
     public static function getFileStatus(
         $file_path,
         $original_file_path = null,
         $redirectFile = null
     ) {
         global $pathIcon16;
-
         if (empty($file_path)) {
             return false;
         }
-
         if (null === $redirectFile) {
             $redirectFile = $_SERVER['SCRIPT_NAME'];
         }
-
-        $moduleDirName = \basename(\dirname(__DIR__, 2));
-
+        $moduleDirName      = \basename(\dirname(__DIR__, 2));
         $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-
         if (null === $original_file_path) {
             if (self::fileExists($file_path)) {
                 $pathStatus = "<img src='${pathIcon16}/1.png'>";
-
                 $pathStatus .= "${file_path} (" . \constant(
                         'CO_' . $moduleDirNameUpper . '_' . 'FC_AVAILABLE'
                     ) . ') ';
             } else {
                 $pathStatus = "<img src='${pathIcon16}/0.png'>";
-
                 $pathStatus .= "${file_path} (" . \constant(
                         'CO_' . $moduleDirNameUpper . '_' . 'FC_NOTAVAILABLE'
                     ) . ') ';
             }
         } elseif (self::compareFiles($file_path, $original_file_path)) {
             $pathStatus = "<img src='${pathIcon16}/1.png'>";
-
             $pathStatus .= "${file_path} (" . \constant(
                     'CO_' . $moduleDirNameUpper . '_' . 'FC_AVAILABLE'
                 ) . ') ';
         } else {
             $pathStatus = "<img src='${pathIcon16}/0.png'>";
-
             $pathStatus .= "${file_path} (" . \constant(
                     'CO_' . $moduleDirNameUpper . '_' . 'FC_NOTAVAILABLE'
                 ) . ') ';
-
             $pathStatus .= "<form action='" . $_SERVER['SCRIPT_NAME'] . "' method='post'>";
-
             $pathStatus .= "<input type='hidden' name='op' value='copyfile'>";
-
             $pathStatus .= "<input type='hidden' name='file_path' value='${file_path}'>";
-
             $pathStatus .= "<input type='hidden' name='original_file_path' value='${original_file_path}'>";
-
             $pathStatus .= "<input type='hidden' name='redirect' value='${redirectFile}'>";
-
             $pathStatus .= "<button class='submit' onClick='this.form.submit();'>" . \constant(
                     'CO_' . $moduleDirNameUpper . '_' . 'FC_CREATETHEFILE'
                 ) . '</button>';
-
             $pathStatus .= '</form>';
         }
-
         return $pathStatus;
     }
 
@@ -115,15 +97,12 @@ class FileChecker
      *
      * @return bool
      */
-
     public static function copyFile(
         $source_path,
         $destination_path
     ) {
-        $source_path = \str_replace('..', '', $source_path);
-
+        $source_path      = \str_replace('..', '', $source_path);
         $destination_path = \str_replace('..', '', $destination_path);
-
         return @\copy($source_path, $destination_path);
     }
 
@@ -133,7 +112,6 @@ class FileChecker
      *
      * @return bool
      */
-
     public static function compareFiles(
         $file1_path,
         $file2_path
@@ -141,19 +119,14 @@ class FileChecker
         if (!self::fileExists($file1_path) || !self::fileExists($file2_path)) {
             return false;
         }
-
         if (\filetype($file1_path) !== \filetype($file2_path)) {
             return false;
         }
-
         if (\filesize($file1_path) !== \filesize($file2_path)) {
             return false;
         }
-
         $crc1 = mb_strtoupper(\dechex(\crc32(file_get_contents($file1_path))));
-
         $crc2 = mb_strtoupper(\dechex(\crc32(file_get_contents($file2_path))));
-
         return !($crc1 !== $crc2);
     }
 
@@ -162,7 +135,6 @@ class FileChecker
      *
      * @return bool
      */
-
     public static function fileExists($file_path)
     {
         return \is_file($file_path);
@@ -174,13 +146,11 @@ class FileChecker
      *
      * @return bool
      */
-
     public static function setFilePermissions(
         $target,
         $mode = 0777
     ) {
         $target = \str_replace('..', '', $target);
-
         return @\chmod($target, (int)$mode);
     }
 }

@@ -26,35 +26,24 @@ namespace XoopsModules\Suico\Common;
  */
 class Resizer
 {
-    public $sourceFile = '';
-
-    public $endFile = '';
-
-    public $maxWidth = 0;
-
-    public $maxHeight = 0;
-
+    public $sourceFile    = '';
+    public $endFile       = '';
+    public $maxWidth      = 0;
+    public $maxHeight     = 0;
     public $imageMimetype = '';
-
-    public $jpgQuality = 90;
-
-    public $mergeType = 0;
-
-    public $mergePos = 0;
-
-    public $degrees = 0;
-
-    public $error = '';
+    public $jpgQuality    = 90;
+    public $mergeType     = 0;
+    public $mergePos      = 0;
+    public $degrees       = 0;
+    public $error         = '';
 
     /**
      * resize image if size exceed given width/height
      * @return string|bool
      */
-
     public function resizeImage()
     {
         // check file extension
-
         switch ($this->imageMimetype) {
             case 'image/png':
                 $img = \imagecreatefrompng($this->sourceFile);
@@ -71,44 +60,30 @@ class Resizer
             default:
                 return 'Unsupported format';
         }
-
-        $width = \imagesx($img);
-
+        $width  = \imagesx($img);
         $height = \imagesy($img);
-
         if ($width > $this->maxWidth || $height > $this->maxHeight) {
             // recalc image size based on this->maxWidth/this->maxHeight
-
             if ($width > $height) {
                 if ($width < $this->maxWidth) {
                     $newWidth = $width;
                 } else {
-                    $newWidth = $this->maxWidth;
-
-                    $divisor = $width / $newWidth;
-
+                    $newWidth  = $this->maxWidth;
+                    $divisor   = $width / $newWidth;
                     $newHeight = (int)\floor($height / $divisor);
                 }
             } elseif ($height < $this->maxHeight) {
                 $newHeight = (int)$height;
             } else {
                 $newHeight = $this->maxHeight;
-
-                $divisor = $height / $newHeight;
-
-                $newWidth = (int)\floor($width / $divisor);
+                $divisor   = $height / $newHeight;
+                $newWidth  = (int)\floor($width / $divisor);
             }
-
             // Create a new temporary image.
-
             $tmpimg = \imagecreatetruecolor($newWidth, $newHeight);
-
             imagealphablending($tmpimg, false);
-
             imagesavealpha($tmpimg, true);
-
             // Copy and resize old image into new image.
-
             \imagecopyresampled(
                 $tmpimg,
                 $img,
@@ -121,11 +96,8 @@ class Resizer
                 $width,
                 $height
             );
-
             \unlink($this->endFile);
-
             //compressing the file
-
             switch ($this->imageMimetype) {
                 case 'image/png':
                     \imagepng($tmpimg, $this->endFile, 0);
@@ -137,27 +109,21 @@ class Resizer
                     \imagegif($tmpimg, $this->endFile);
                     break;
             }
-
             // release the memory
-
             \imagedestroy($tmpimg);
         } else {
             return 'copy';
         }
-
         \imagedestroy($img);
-
         return true;
     }
 
     /**
      * @return bool|string
      */
-
     public function resizeAndCrop()
     {
         // check file extension
-
         switch ($this->imageMimetype) {
             case 'image/png':
                 $original = \imagecreatefrompng($this->sourceFile);
@@ -171,43 +137,28 @@ class Resizer
             default:
                 return 'Unsupported format';
         }
-
         if (!$original) {
             return false;
         }
-
         // GET ORIGINAL IMAGE DIMENSIONS
-
         [$original_w, $original_h] = \getimagesize($this->sourceFile);
-
         // RESIZE IMAGE AND PRESERVE PROPORTIONS
-
-        $max_width_resize = $this->maxWidth;
-
+        $max_width_resize  = $this->maxWidth;
         $max_height_resize = $this->maxHeight;
-
         if ($original_w > $original_h) {
             $max_height_ratio = $this->maxHeight / $original_h;
-
             $max_width_resize = (int)\round($original_w * $max_height_ratio);
         } else {
-            $max_width_ratio = $this->maxWidth / $original_w;
-
+            $max_width_ratio   = $this->maxWidth / $original_w;
             $max_height_resize = (int)\round($original_h * $max_width_ratio);
         }
-
         if ($max_width_resize < $this->maxWidth) {
-            $max_height_ratio = $this->maxWidth / $max_width_resize;
-
+            $max_height_ratio  = $this->maxWidth / $max_width_resize;
             $max_height_resize = (int)\round($this->maxHeight * $max_height_ratio);
-
-            $max_width_resize = $this->maxWidth;
+            $max_width_resize  = $this->maxWidth;
         }
-
         // CREATE THE PROPORTIONAL IMAGE RESOURCE
-
         $thumb = \imagecreatetruecolor($max_width_resize, $max_height_resize);
-
         if (!\imagecopyresampled(
             $thumb,
             $original,
@@ -222,24 +173,18 @@ class Resizer
         )) {
             return false;
         }
-
         // CREATE THE CENTERED CROPPED IMAGE TO THE SPECIFIED DIMENSIONS
-
-        $final = \imagecreatetruecolor(
+        $final             = \imagecreatetruecolor(
             $this->maxWidth,
             $this->maxHeight
         );
-
-        $max_width_offset = 0;
-
+        $max_width_offset  = 0;
         $max_height_offset = 0;
-
         if ($this->maxWidth < $max_width_resize) {
             $max_width_offset = (int)\round(($max_width_resize - $this->maxWidth) / 2);
         } else {
             $max_height_offset = (int)\round(($max_height_resize - $this->maxHeight) / 2);
         }
-
         if (!\imagecopy(
             $final,
             $thumb,
@@ -252,9 +197,7 @@ class Resizer
         )) {
             return false;
         }
-
         // STORE THE FINAL IMAGE - WILL OVERWRITE $this->endFile
-
         if (!\imagejpeg(
             $final,
             $this->endFile,
@@ -262,25 +205,18 @@ class Resizer
         )) {
             return false;
         }
-
         return true;
     }
 
     public function mergeImage()
     {
         $dest = \imagecreatefromjpeg($this->endFile);
-
-        $src = \imagecreatefromjpeg($this->sourceFile);
-
+        $src  = \imagecreatefromjpeg($this->sourceFile);
         if (4 === $this->mergeType) {
-            $imgWidth = (int)\round($this->maxWidth / 2 - 1);
-
+            $imgWidth  = (int)\round($this->maxWidth / 2 - 1);
             $imgHeight = (int)\round($this->maxHeight / 2 - 1);
-
-            $posCol2 = (int)\round($this->maxWidth / 2 + 1);
-
-            $posRow2 = (int)\round($this->maxHeight / 2 + 1);
-
+            $posCol2   = (int)\round($this->maxWidth / 2 + 1);
+            $posRow2   = (int)\round($this->maxHeight / 2 + 1);
             switch ($this->mergePos) {
                 case 1:
                     \imagecopy($dest, $src, 0, 0, 0, 0, $imgWidth, $imgHeight); //top left
@@ -296,18 +232,12 @@ class Resizer
                     break;
             }
         }
-
         if (6 === $this->mergeType) {
-            $imgWidth = (int)\round($this->maxWidth / 3 - 1);
-
+            $imgWidth  = (int)\round($this->maxWidth / 3 - 1);
             $imgHeight = (int)\round($this->maxHeight / 2 - 1);
-
-            $posCol2 = (int)\round($this->maxWidth / 3 + 1);
-
-            $posCol3 = $posCol2 + (int)\round($this->maxWidth / 3 + 1);
-
-            $posRow2 = (int)\round($this->maxHeight / 2 + 1);
-
+            $posCol2   = (int)\round($this->maxWidth / 3 + 1);
+            $posCol3   = $posCol2 + (int)\round($this->maxWidth / 3 + 1);
+            $posRow2   = (int)\round($this->maxHeight / 2 + 1);
             switch ($this->mergePos) {
                 case 1:
                     \imagecopy($dest, $src, 0, 0, 0, 0, $imgWidth, $imgHeight); //top left
@@ -329,22 +259,17 @@ class Resizer
                     break;
             }
         }
-
         \imagejpeg($dest, $this->endFile);
-
         \imagedestroy($src);
-
         \imagedestroy($dest);
     }
 
     /**
      * @return bool|string
      */
-
     public function rotateImage()
     {
         // check file extension
-
         switch ($this->imageMimetype) {
             case 'image/png':
                 $original = \imagecreatefrompng($this->sourceFile);
@@ -358,19 +283,13 @@ class Resizer
             default:
                 return 'Unsupported format';
         }
-
         if (!$original) {
             return false;
         }
-
         // Rotate
-
         $tmpimg = \imagerotate($original, $this->degrees, 0);
-
         \unlink($this->endFile);
-
         //compressing the file
-
         switch ($this->imageMimetype) {
             case 'image/png':
                 if (!\imagepng($tmpimg, $this->endFile, 0)) {
@@ -388,11 +307,8 @@ class Resizer
                 }
                 break;
         }
-
         // release the memory
-
         \imagedestroy($tmpimg);
-
         return true;
     }
 }

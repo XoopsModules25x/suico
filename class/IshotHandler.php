@@ -32,7 +32,6 @@ if (!\defined(
     exit();
 }
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
-
 // -------------------------------------------------------------------------
 // ------------------Ishot user handler class -------------------
 // -------------------------------------------------------------------------
@@ -44,27 +43,23 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 class IshotHandler extends XoopsPersistableObjectHandler
 {
     public $helper;
-
     public $isAdmin;
 
     /**
      * Constructor
-     * @param \XoopsDatabase|null              $xoopsDatabase
+     * @param \XoopsDatabase|null             $xoopsDatabase
      * @param \XoopsModules\Suico\Helper|null $helper
      */
-
     public function __construct(
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
         /** @var \XoopsModules\Suico\Helper $this ->helper */
-
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
             $this->helper = $helper;
         }
-
         $isAdmin = $this->helper->isUserAdmin();
         //        parent::__construct($db, 'suico_groups', Image::class, 'group_id', 'group_title');
     }
@@ -75,20 +70,16 @@ class IshotHandler extends XoopsPersistableObjectHandler
      * @param bool $isNew flag the new objects as "new"?
      * @return \XoopsObject Groups
      */
-
     public function create(
         $isNew = true
     ) {
         $obj = parent::create($isNew);
-
         if ($isNew) {
             $obj->setNew();
         } else {
             $obj->unsetNew();
         }
-
         $obj->helper = $this->helper;
-
         return $obj;
     }
 
@@ -99,27 +90,20 @@ class IshotHandler extends XoopsPersistableObjectHandler
      * @param null $fields
      * @return mixed reference to the {@link Ishot} object, FALSE if failed
      */
-
     public function get2(
         $id = null,
         $fields = null
     ) {
         $sql = 'SELECT * FROM ' . $this->db->prefix('suico_ishot') . ' WHERE cod_ishot=' . $id;
-
         if (!$result = $this->db->query($sql)) {
             return false;
         }
-
         $numrows = $this->db->getRowsNum($result);
-
         if (1 === $numrows) {
             $suico_ishot = new Ishot();
-
             $suico_ishot->assignVars($this->db->fetchArray($result));
-
             return $suico_ishot;
         }
-
         return false;
     }
 
@@ -131,43 +115,31 @@ class IshotHandler extends XoopsPersistableObjectHandler
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-
     public function insert2(
         XoopsObject $xoopsObject,
         $force = false
     ) {
         global $xoopsConfig;
-
         if (!$xoopsObject instanceof Ishot) {
             return false;
         }
-
         if (!$xoopsObject->isDirty()) {
             return true;
         }
-
         if (!$xoopsObject->cleanVars()) {
             return false;
         }
-
         $cod_ishot = $uid_voter = $uid_voted = $ishot = '';
-
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
-
         //        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
-
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Ishot
-
             $xoopsObject = new Ishot();
-
-            $format = 'INSERT INTO %s (cod_ishot, uid_voter, uid_voted, ishot, DATE)';
-
-            $format .= 'VALUES (%u, %u, %u, %u, %s)';
-
-            $sql = \sprintf(
+            $format      = 'INSERT INTO %s (cod_ishot, uid_voter, uid_voted, ishot, DATE)';
+            $format      .= 'VALUES (%u, %u, %u, %u, %s)';
+            $sql         = \sprintf(
                 $format,
                 $this->db->prefix('suico_ishot'),
                 $cod_ishot,
@@ -176,16 +148,12 @@ class IshotHandler extends XoopsPersistableObjectHandler
                 $ishot,
                 $this->db->quoteString($date)
             );
-
-            $force = true;
+            $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
-
             $format .= 'cod_ishot=%u, uid_voter=%u, uid_voted=%u, ishot=%u, date_created=%s';
-
             $format .= ' WHERE cod_ishot = %u';
-
-            $sql = \sprintf(
+            $sql    = \sprintf(
                 $format,
                 $this->db->prefix('suico_ishot'),
                 $cod_ishot,
@@ -196,23 +164,18 @@ class IshotHandler extends XoopsPersistableObjectHandler
                 $cod_ishot
             );
         }
-
         if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
         }
-
         if (!$result) {
             return false;
         }
-
         if (empty($cod_ishot)) {
             $cod_ishot = $this->db->getInsertId();
         }
-
         $xoopsObject->assignVar('cod_ishot', $cod_ishot);
-
         return true;
     }
 
@@ -223,7 +186,6 @@ class IshotHandler extends XoopsPersistableObjectHandler
      * @param bool         $force
      * @return bool FALSE if failed.
      */
-
     public function delete(
         XoopsObject $xoopsObject,
         $force = false
@@ -231,23 +193,19 @@ class IshotHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject instanceof Ishot) {
             return false;
         }
-
         $sql = \sprintf(
             'DELETE FROM %s WHERE cod_ishot = %u',
             $this->db->prefix('suico_ishot'),
             $xoopsObject->getVar('cod_ishot')
         );
-
         if ($force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
         }
-
         if (!$result) {
             return false;
         }
-
         return true;
     }
 
@@ -259,50 +217,36 @@ class IshotHandler extends XoopsPersistableObjectHandler
      * @param bool                                 $as_object
      * @return array array of {@link Ishot} objects
      */
-
     public function &getObjects(
         ?CriteriaElement $criteriaElement = null,
         $id_as_key = false,
         $as_object = true
     ) {
-        $ret = [];
-
+        $ret   = [];
         $limit = $start = 0;
-
-        $sql = 'SELECT * FROM ' . $this->db->prefix('suico_ishot');
-
+        $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_ishot');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
-
             if ('' !== $criteriaElement->getSort()) {
                 $sql .= ' ORDER BY ' . $criteriaElement->getSort() . ' ' . $criteriaElement->getOrder();
             }
-
             $limit = $criteriaElement->getLimit();
-
             $start = $criteriaElement->getStart();
         }
-
         $result = $this->db->query($sql, $limit, $start);
-
         if (!$result) {
             return $ret;
         }
-
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $suico_ishot = new Ishot();
-
             $suico_ishot->assignVars($myrow);
-
             if (!$id_as_key) {
                 $ret[] = &$suico_ishot;
             } else {
                 $ret[$myrow['cod_ishot']] = &$suico_ishot;
             }
-
             unset($suico_ishot);
         }
-
         return $ret;
     }
 
@@ -312,24 +256,18 @@ class IshotHandler extends XoopsPersistableObjectHandler
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link CriteriaElement} to match
      * @return int count of suico_ishots
      */
-
     public function getCount(
         ?CriteriaElement $criteriaElement = null
     ) {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_ishot');
-
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
         }
-
         $result = $this->db->query($sql);
-
         if (!$result) {
             return 0;
         }
-
         [$count] = $this->db->fetchRow($result);
-
         return $count;
     }
 
@@ -341,22 +279,18 @@ class IshotHandler extends XoopsPersistableObjectHandler
      * @param bool                                 $asObject
      * @return bool FALSE if deletion failed
      */
-
     public function deleteAll(
         ?CriteriaElement $criteriaElement = null,
         $force = true,
         $asObject = false
     ) {
         $sql = 'DELETE FROM ' . $this->db->prefix('suico_ishot');
-
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
         }
-
         if (!$result = $this->db->query($sql)) {
             return false;
         }
-
         return true;
     }
 
@@ -364,7 +298,6 @@ class IshotHandler extends XoopsPersistableObjectHandler
      * @param null $criteria
      * @return array
      */
-
     public function getHottest($criteria = null)
     {
         $sql = 'SELECT DISTINCTROW uname, user_avatar, uid_voted, COUNT(cod_ishot) AS qtd FROM ' . $this->db->prefix(
@@ -372,45 +305,29 @@ class IshotHandler extends XoopsPersistableObjectHandler
             ) . ', ' . $this->db->prefix(
                 'users'
             );
-
         if (isset($criteria) && $criteria instanceof CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
         }
-
         //attention here this is kind of a hack
-
         $sql .= ' AND uid = uid_voted';
-
         if ('' !== $criteria->getGroupby()) {
             $sql .= $criteria->getGroupby();
         }
-
         if ('' !== $criteria->getSort()) {
             $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
         }
-
-        $limit = $criteria->getLimit();
-
-        $start = $criteria->getStart();
-
+        $limit  = $criteria->getLimit();
+        $start  = $criteria->getStart();
         $result = $this->db->query($sql, $limit, $start);
-
-        $vetor = [];
-
-        $i = 0;
-
+        $vetor  = [];
+        $i      = 0;
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $vetor[$i]['qtd'] = $myrow['qtd'];
-
-            $vetor[$i]['uid_voted'] = $myrow['uid_voted'];
-
-            $vetor[$i]['uname'] = $myrow['uname'];
-
+            $vetor[$i]['qtd']         = $myrow['qtd'];
+            $vetor[$i]['uid_voted']   = $myrow['uid_voted'];
+            $vetor[$i]['uname']       = $myrow['uname'];
             $vetor[$i]['user_avatar'] = $myrow['user_avatar'];
-
             $i++;
         }
-
         return $vetor;
     }
 
@@ -419,52 +336,35 @@ class IshotHandler extends XoopsPersistableObjectHandler
      * @param bool $id_as_key
      * @return array
      */
-
     public function getHotFriends(
         $criteria = null,
         $id_as_key = false
     ) {
-        $ret = [];
-
+        $ret   = [];
         $limit = $start = 0;
-
-        $sql = 'SELECT uname, user_avatar, uid_voted FROM ' . $this->db->prefix(
+        $sql   = 'SELECT uname, user_avatar, uid_voted FROM ' . $this->db->prefix(
                 'suico_ishot'
             ) . ', ' . $this->db->prefix(
                 'users'
             );
-
         if (isset($criteria) && $criteria instanceof CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
-
             //attention here this is kind of a hack
-
             $sql .= ' AND uid = uid_voted AND ishot=1';
-
             if ('' !== $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
-
-            $limit = $criteria->getLimit();
-
-            $start = $criteria->getStart();
-
+            $limit  = $criteria->getLimit();
+            $start  = $criteria->getStart();
             $result = $this->db->query($sql, $limit, $start);
-
-            $vetor = [];
-
-            $i = 0;
-
+            $vetor  = [];
+            $i      = 0;
             while (false !== ($myrow = $this->db->fetchArray($result))) {
-                $vetor[$i]['uid_voted'] = $myrow['uid_voted'];
-
-                $vetor[$i]['uname'] = $myrow['uname'];
-
+                $vetor[$i]['uid_voted']   = $myrow['uid_voted'];
+                $vetor[$i]['uname']       = $myrow['uname'];
                 $vetor[$i]['user_avatar'] = $myrow['user_avatar'];
-
                 $i++;
             }
-
             return $vetor;
         }
     }

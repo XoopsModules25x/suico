@@ -25,8 +25,7 @@ namespace XoopsModules\Suico;
 use XoopsModules\Suico;
 
 $moduleDirName = \basename(\dirname(__DIR__));
-
-$permHelper = new \Xmf\Module\Helper\Permission();
+$permHelper    = new \Xmf\Module\Helper\Permission();
 
 /**
  * Class PrivacyHandler
@@ -36,25 +35,21 @@ class PrivacyHandler extends \XoopsPersistableObjectHandler
     /**
      * @var Helper
      */
-
     public $helper;
 
     /**
      * Constructor
-     * @param \XoopsDatabase|null              $db
+     * @param \XoopsDatabase|null             $db
      * @param null|\XoopsModules\Suico\Helper $helper
      */
-
     public function __construct(\XoopsDatabase $db = null, $helper = null)
     {
         /** @var \XoopsModules\Suico\Helper $this ->helper */
-
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
             $this->helper = $helper;
         }
-
         parent::__construct($db, 'suico_privacy', Privacy::class, 'id', 'name');
     }
 
@@ -63,13 +58,10 @@ class PrivacyHandler extends \XoopsPersistableObjectHandler
      *
      * @return \XoopsObject
      */
-
     public function create($isNew = true)
     {
-        $obj = parent::create($isNew);
-
+        $obj         = parent::create($isNew);
         $obj->helper = $this->helper;
-
         return $obj;
     }
 }

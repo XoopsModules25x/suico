@@ -32,7 +32,6 @@ use XoopsModules\Suico;
 class Privacy extends \XoopsObject
 {
     public $helper;
-
     public $permHelper;
 
     /**
@@ -40,23 +39,15 @@ class Privacy extends \XoopsObject
      *
      * @param null
      */
-
     public function __construct()
     {
         parent::__construct();
-
         //        /** @var  Suico\Helper $helper */
-
         //        $this->helper = Suico\Helper::getInstance();
-
         $this->permHelper = new \Xmf\Module\Helper\Permission();
-
         $this->initVar('id', \XOBJ_DTYPE_INT);
-
         $this->initVar('level', \XOBJ_DTYPE_INT);
-
         $this->initVar('name', \XOBJ_DTYPE_TXTBOX);
-
         $this->initVar('description', \XOBJ_DTYPE_OTHER);
     }
 
@@ -66,44 +57,36 @@ class Privacy extends \XoopsObject
      * @param null
      * @return Suico\Form\PrivacyForm
      */
-
     public function getForm()
     {
         $form = new Form\PrivacyForm($this);
-
         return $form;
     }
 
     /**
      * @return array|null
      */
-
     public function getGroupsRead()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
-
         return $this->permHelper->getGroupsForItem('sbcolumns_read', $this->getVar('id'));
     }
 
     /**
      * @return array|null
      */
-
     public function getGroupsSubmit()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
-
         return $this->permHelper->getGroupsForItem('sbcolumns_submit', $this->getVar('id'));
     }
 
     /**
      * @return array|null
      */
-
     public function getGroupsModeration()
     {
         //$permHelper = new \Xmf\Module\Helper\Permission();
-
         return $this->permHelper->getGroupsForItem('sbcolumns_moderation', $this->getVar('id'));
     }
 }

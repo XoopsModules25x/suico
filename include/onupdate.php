@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -28,9 +27,7 @@ if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUs
     || !$GLOBALS['xoopsUser']->isAdmin()) {
     exit('Restricted access' . PHP_EOL);
 }
-
 include dirname(__DIR__) . '/preloads/autoloader.php';
-
 /**
  * @param string $tablename
  *
@@ -39,7 +36,6 @@ include dirname(__DIR__) . '/preloads/autoloader.php';
 function tableExists($tablename)
 {
     $result = $GLOBALS['xoopsDB']->queryF("SHOW TABLES LIKE '${tablename}'");
-
     return $GLOBALS['xoopsDB']->getRowsNum($result) > 0;
 }
 
@@ -54,19 +50,14 @@ function xoops_module_pre_update_suico(
     $moduleDirName = basename(dirname(__DIR__));
     /** @var Suico\Helper $helper */
     /** @var Suico\Utility $utility */
-    $helper  = Suico\Helper::getInstance();
-    $utility = new Suico\Utility();
-
+    $helper       = Suico\Helper::getInstance();
+    $utility      = new Suico\Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
-
     $configurator = new Configurator();
-
-    $migrator = new Migrate($configurator);
-
+    $migrator     = new Migrate($configurator);
     //    $migrator = new \XoopsModules\Suico\Common\Migrate();
     $migrator->synchronizeSchema();
-
     return $xoopsSuccess && $phpSuccess;
 }
 
@@ -83,18 +74,14 @@ function xoops_module_update_suico(
 ) {
     $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-
     /** @var Suico\Helper $helper */ /** @var Suico\Utility $utility */
     /** @var Suico\Common\Configurator $configurator */
     $helper       = Suico\Helper::getInstance();
     $utility      = new Suico\Utility();
     $configurator = new Configurator();
-
     $helper->loadLanguage('common');
-
     $migrator = new Migrate($configurator);
     $migrator->synchronizeSchema();
-
     if ($previousVersion < 360) {
         //rename column EXAMPLE
         //        $tables = new Tables();
@@ -108,7 +95,6 @@ function xoops_module_update_suico(
         //                echo '<br>' . constant('CO_' . $moduleDirNameUpper . '_UPGRADEFAILED0') . ' ' . $migrate->getLastError();
         //            }
         //        }
-
         //delete old HTML templates
         if (count($configurator->templateFolders) > 0) {
             foreach ($configurator->templateFolders as $folder) {
@@ -126,7 +112,6 @@ function xoops_module_update_suico(
                 }
             }
         }
-
         //  ---  DELETE OLD FILES ---------------
         if (count($configurator->oldFiles) > 0) {
             //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
@@ -141,7 +126,6 @@ function xoops_module_update_suico(
                 }
             }
         }
-
         //  ---  DELETE OLD FOLDERS ---------------
         xoops_load('XoopsFile');
         if (count($configurator->oldFolders) > 0) {
@@ -160,7 +144,6 @@ function xoops_module_update_suico(
                 $folderHandler->delete($tempFolder);
             }
         }
-
         //  ---  CREATE UPLOAD FOLDERS ---------------
         if (count($configurator->uploadFolders) > 0) {
             //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
@@ -172,7 +155,6 @@ function xoops_module_update_suico(
                 $utility::createFolder($configurator->uploadFolders[$i]);
             }
         }
-
         //  ---  COPY blank.png FILES ---------------
         if (count($configurator->copyBlankFiles) > 0) {
             $file = dirname(__DIR__) . '/assets/images/blank.png';
@@ -181,7 +163,6 @@ function xoops_module_update_suico(
                 $utility::copyFile($file, $dest);
             }
         }
-
         //delete .html entries from the tpl table
         $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix(
                 'tplfile'
@@ -190,19 +171,15 @@ function xoops_module_update_suico(
                 'n'
             ) . "' AND `tpl_file` LIKE '%.html%'";
         $GLOBALS['xoopsDB']->queryF($sql);
-
         /** @var XoopsGroupPermHandler $gpermHandler */
         $gpermHandler = xoops_getHandler('groupperm');
-
         return $gpermHandler->deleteByModule($module->getVar('mid'), 'item_read');
     }
-
     $profileHandler = $helper->getHandler('Profile');
     $profileHandler->cleanOrphan($GLOBALS['xoopsDB']->prefix('users'), 'uid', 'profile_id');
     $fieldHandler = $helper->getHandler('Field');
-    $user_fields   = $fieldHandler->getUserVars();
-    $criteria      = new Criteria('field_name', "('" . implode("', '", $user_fields) . "')", 'IN');
+    $user_fields  = $fieldHandler->getUserVars();
+    $criteria     = new Criteria('field_name', "('" . implode("', '", $user_fields) . "')", 'IN');
     $fieldHandler->updateAll('field_config', 0, $criteria);
-
     return true;
 }

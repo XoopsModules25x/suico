@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -25,16 +24,12 @@ use XoopsModules\Suico;
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_friends.tpl';
 require __DIR__ . '/header.php';
-
 $controller = new Suico\FriendsController($xoopsDB, $xoopsUser);
-
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
 $nbSections = $controller->getNumbersSections();
-
-$start = Request::getInt('start', 0, 'GET');
-
+$start      = Request::getInt('start', 0, 'GET');
 /**
  * Filter for new friend friendrequest
  */
@@ -53,7 +48,6 @@ if (1 === $controller->isOwner) {
         $friendrequest          = 1;
     }
 }
-
 /**
  * Friends
  */
@@ -65,13 +59,11 @@ $vetor = $controller->friendshipsFactory->getFriends('', $criteria_friends, 0);
 if (0 === $countFriends) {
     $xoopsTpl->assign('lang_nofriendsyet', _MD_SUICO_NOFRIENDSYET);
 }
-
 /**
  * Let's get the user name of the owner of the album
  */
 $owner      = new XoopsUser();
 $identifier = $owner::getUnameFromId($controller->uidOwner);
-
 /**
  * Creating the navigation bar if you have a lot of friends
  */
@@ -79,7 +71,6 @@ $navigationBar = new XoopsPageNav(
     $nbSections['countFriends'], $helper->getConfig('friendsperpage'), $start, 'start', 'uid=' . (int)$controller->uidOwner
 );
 $navegacao     = $navigationBar->renderImageNav(2);
-
 //requests to become friend
 if (1 === $friendrequest) {
     $xoopsTpl->assign('lang_you_have_x_friendrequests', sprintf(_MD_SUICO_YOU_HAVE_X_FRIENDREQUESTS, $countFriendrequest));
@@ -105,22 +96,17 @@ $xoopsTpl->assign('lang_acceptfriend', _MD_SUICO_FRIEND_ACCEPT);
 $xoopsTpl->assign('lang_rejectfriend', _MD_SUICO_FRIEND_REJECT);
 $xoopsTpl->assign('lang_deletefriend', _MD_SUICO_FRIENDSHIP_DELETE);
 $xoopsTpl->assign('lang_friendshipsettings', _MD_SUICO_FRIENDSHIP_SETTINGS);
-
 //navbar
 $xoopsTpl->assign('module_name', $xoopsModule->getVar('name'));
 $xoopsTpl->assign('lang_mysection', _MD_SUICO_MYFRIENDS);
 $xoopsTpl->assign('lang_friendstitle', sprintf(_MD_SUICO_FRIENDSTITLE, $identifier));
 //$xoopsTpl->assign('path_suico_uploads',$helper->getConfig('link_path_upload'));
-
 $xoopsTpl->assign('friends', $vetor);
-
 $xoopsTpl->assign('lang_delete', _MD_SUICO_DELETE);
 $xoopsTpl->assign('lang_evaluate', _MD_SUICO_FRIENDSHIP_CONFIGS);
 $xoopsTpl->assign('allow_friendshiplevel', $helper->getConfig('allow_friendshiplevel'));
 $xoopsTpl->assign('allow_fanssevaluation', $helper->getConfig('allow_fanssevaluation'));
-
 // Navigation
 $xoopsTpl->assign('navegacao', $navegacao);
-
 require __DIR__ . '/footer.php';
 require dirname(__DIR__, 2) . '/footer.php';

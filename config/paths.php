@@ -1,10 +1,8 @@
 <?php
 
 declare(strict_types=1);
-
 $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-
 return (object)[
     'name'        => mb_strtoupper($moduleDirName) . ' PathConfigurator',
     'paths'       => [
@@ -16,7 +14,7 @@ return (object)[
         'uploadUrl'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName,
     ],
     'uploadPaths' => [
-        'suico'  => XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
+        'suico'   => XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
         'avatars' => XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/avatars',
         'images'  => XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images',
         'mp3'     => XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/audio',
@@ -27,7 +25,7 @@ return (object)[
         //XOOPS_UPLOAD_PATH . '/flags'
     ],
     'uploadUrls'  => [
-        'suico'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName,
+        'suico'   => XOOPS_UPLOAD_URL . '/' . $moduleDirName,
         'avatars' => XOOPS_UPLOAD_URL . '/' . $moduleDirName . '/avatars',
         'images'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName . '/images',
         'mp3'     => XOOPS_UPLOAD_URL . '/' . $moduleDirName . '/audio',
