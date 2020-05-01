@@ -53,8 +53,10 @@
                                     <{$grouptotalmembers}>
                                     <br>
                                 <{/if}>
-								
-							
+								<b><{$smarty.const._MD_SUICO_GROUPTOTALCOMMENTS}></b>
+                                    <br>
+                                    <{$group_total_comments}>
+                                    <br>
                                 
                                 <{if $isOwner }>
                                     <{if $xoops_userid == $group_owneruid }>

@@ -293,7 +293,16 @@ class GroupsHandler extends XoopsPersistableObjectHandler
             $queryresult                  = $GLOBALS['xoopsDB']->query($query);
             $row                          = $GLOBALS['xoopsDB']->fetchArray($queryresult);
             $grouptotalmembers            = $row['grouptotalmembers'];
-            $ret[$i]['grouptotalmembers'] = $grouptotalmembers . ' ' . \_MD_SUICO_GROUPMEMBERS;
+			
+			if ($grouptotalmembers > 0) {
+                if (1 == $grouptotalmembers) {
+                    $ret[$i]['grouptotalmembers'] ='' . _MD_SUICO_ONEMEMBER . '&nbsp;';
+                } else {
+                    $ret[$i]['grouptotalmembers'] ='' . $grouptotalmembers . '&nbsp;' . _MD_SUICO_GROUPMEMBERS . '&nbsp;';
+                }
+            } else {
+                $ret[$i]['grouptotalmembers'] ='' . _MD_SUICO_NO_MEMBER . '&nbsp;';
+            }
             $i++;
         }
         return $ret;
