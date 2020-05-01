@@ -5,6 +5,7 @@
 												<a href="<{$xoops_url}>/modules/suico/album.php?uid=<{$block.picture[i].uid_owner}>" alt="<{$block.picture[i].caption}>" title="<{$block.picture[i].caption}>">
 													<img class="card-img-top thumb square" src="<{$xoops_upload_url}>/suico/images/<{$block.picture[i].img_filename}>" height="120" width="120">
 												</a>
+												<{if $block.showtitle == 1 || $block.showcaption == 1 || $block.showowner == 1 || $block.showdate == 1}>
                                                 <div class="card-body">
 													<{if $block.showtitle == 1}>
                                                     <h6 class="card-title"><{$block.picture[i].title}></h6>
@@ -27,6 +28,7 @@
 														<{/if}>
 													 </p>
                                                 </div>
+												<{/if}>
                                             </div>
                                         </div>
 							<{/section}>
