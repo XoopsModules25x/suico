@@ -1180,7 +1180,7 @@ $modversion['blocks'][] = [
     'name'        => _MI_SUICO_LAST,
     'description' => _MI_SUICO_LAST_DESC,
     'show_func'   => 'b_suico_lastpictures_show',
-    'options'     => '8',
+    'options'     => '1|0|0|1|8',
     'edit_func'   => 'b_suico_lastpictures_edit',
     'template'    => 'suico_block_lastpictures.tpl',
 ];
