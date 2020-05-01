@@ -53,7 +53,7 @@
                                     <{if (($pics_array[i].private == 0))}>
                                         <!-- Start Normal Photo -->
                                         <div class="col-6 h-100 mb-3">
-                                            <div class="card" style="width:400px">
+                                            <div class="card">
                                                 <a name="<{$pics_array[i].image_id}>" href="<{$xoops_url}>/uploads/suico/images/resized_<{$pics_array[i].filename}>" rel="lightbox[album]" title="<{$pics_array[i].title}> - <{$pics_array[i].caption}>">
                                                     <img class="card-img-top thumb" src="<{$xoops_url}>/uploads/suico/images/<{$pics_array[i].filename}>" rel="lightbox" title="<{$pics_array[i].title}> - <{$pics_array[i].caption}>">
                                                 </a>
@@ -109,7 +109,7 @@
                                         <!-- start private photo -->
                                         <{if ($pics_array[i].private == 1) }>
                                             <div class="col-6 h-100 mb-3">
-                                                <div class="card" style="width:400px">
+                                                <div class="card">
                                                     <a href="<{$xoops_url}>/uploads/suico/images/resized_<{$pics_array[i].filename}>" rel="lightbox[album]" title="<{$pics_array[i].title}> - <{$pics_array[i].caption}>">
                                                         <img class="card-img-top thumb" src="<{$xoops_url}>/uploads/suico/images/<{$pics_array[i].filename}>" rel="lightbox" title="<{$pics_array[i].title}> - <{$pics_array[i].caption}>">
                                                     </a>
