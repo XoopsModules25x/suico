@@ -35,19 +35,26 @@ function b_suico_lastpictures_show($options)
     global $xoopsDB, $xoopsModule, $xoopsModuleConfig;
     $myts  = MyTextSanitizer::getInstance();
     $block = [];
+	
     /**
-     * Filter for fetch votes ishot and isnothot
+     * Criteria for Pictures Block
      */
     $criteria = new Criteria('image_id', 0, '>');
     $criteria->setSort('image_id');
     $criteria->setOrder('DESC');
-    $criteria->setLimit($options[0]);
-    /**
-     * Creating factories of pictures and votes
+    $criteria->setLimit($options[4]);
+
+	/**
+     * Creating factories of pictures
      */
-    //$albumFactory      = new ImagesHandler($xoopsDB);
     $imageFactory = new Suico\ImageHandler($xoopsDB);
-    return $imageFactory->getLastPicturesForBlock($options[0]);
+	$block['picture']      = $imageFactory->getLastPicturesForBlock($options[4]);
+	$block['showtitle']    = $options[0];
+	$block['showcaption']  = $options[1];
+ 	$block['showdate']     = $options[2];
+ 	$block['showowner']    = $options[3];
+    return $block;
+	
 }
 
 /**
@@ -56,5 +63,51 @@ function b_suico_lastpictures_show($options)
  */
 function b_suico_lastpictures_edit($options)
 {
-    return "<input type='text' value='" . $options['0'] . "'id='options[]' name='options[]'>";
+    $form = _MB_SUICO_SHOWPICTURETITLE . '&nbsp;';
+    if (1 == $options[0]) {
+        $chk = " checked='checked'";
+    }
+    $form .= "<input type='radio' name='options[0]' value='1'" . $chk . ' >&nbsp;' . _YES . '';
+    $chk  = '';
+    if (0 == $options[0]) {
+        $chk = " checked='checked'";
+    }
+    $form .= "&nbsp;<input type='radio' name='options[0]' value='0'" . $chk . ' >' . _NO . '<br>';
+
+    $form .= _MB_SUICO_SHOWPICTURECAPTION . '&nbsp;';
+    if (1 == $options[1]) {
+        $chk = " checked='checked'";
+    }
+    $form .= "<input type='radio' name='options[1]' value='1'" . $chk . ' >&nbsp;' . _YES . '';
+    $chk  = '';
+    if (0 == $options[1]) {
+        $chk = " checked='checked'";
+    }
+    $form .= "&nbsp;<input type='radio' name='options[1]' value='0'" . $chk . ' >' . _NO . '<br>';
+
+	$form .= _MB_SUICO_SHOWPICTUREDATE . '&nbsp;';
+    if (1 == $options[2]) {
+        $chk = " checked='checked'";
+    }
+    $form .= "<input type='radio' name='options[2]' value='1'" . $chk . ' >&nbsp;' . _YES . '';
+    $chk  = '';
+    if (0 == $options[2]) {
+        $chk = " checked='checked'";
+    }
+    $form .= "&nbsp;<input type='radio' name='options[2]' value='0'" . $chk . ' >' . _NO . '<br>';
+
+	$form .= _MB_SUICO_SHOWPICTUREOWNER . '&nbsp;';
+    if (1 == $options[3]) {
+        $chk = " checked='checked'";
+    }
+    $form .= "<input type='radio' name='options[3]' value='1'" . $chk . ' >&nbsp;' . _YES . '';
+    $chk  = '';
+    if (0 == $options[3]) {
+        $chk = " checked='checked'";
+    }
+    $form .= "&nbsp;<input type='radio' name='options[3]' value='0'" . $chk . ' >' . _NO . '<br>';
+
+	$form .= _MB_SUICO_TOTALPICTUREDISPLAY . '&nbsp;';
+    $form .= "<input type='text' name='options[4]' value='" . $options[4] . "'>";
+    return $form; 
 }
