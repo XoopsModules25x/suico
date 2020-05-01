@@ -33,3 +33,4 @@ define('_MB_SUICO_SHOWPICTURECAPTION', 'Display Pictures Caption');
 define('_MB_SUICO_SHOWPICTUREOWNER', 'Display Pictures Owner');
 define('_MB_SUICO_SHOWPICTUREDATE', 'Display Pictures Date');
 define('_MB_SUICO_TOTALPICTUREDISPLAY', 'Total Pictures to Display');
+
