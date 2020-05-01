@@ -51,7 +51,7 @@
 
 
                         <{if $countGroups!=0}>
-                            <table id="mygroups1" class="display table table-striped">
+						   <table id="" class="display no-wrap table table-striped">
                                 <thead class="thead-dark">
                                 <tr>
                                     <th><{$lang_groupslist}></th>
@@ -123,12 +123,10 @@
                             <{/if}>
 
                             <{if $countGroups_all!=0}>
-								<div class="table-responsive">
-                                <table id='allgroups1' class="display table table-striped table-hover table-bordered">
+								<table id="" class="display no-wrap table table-striped table-hover table-bordered">
                                     <thead class="thead-light">
                                     <tr>
                                         <th><{$lang_groupslist}></th>
-
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -179,7 +177,6 @@
                                     <{/section}>
                                     </tbody>
                                 </table>
-								</div>
                                 <!--<div>
                                     <{$navigationBar}>
                                 </div>-->
@@ -188,42 +185,12 @@
 
 								<script>
                                 $(document).ready(function () {
-                                    $('#mygroups1').DataTable({
-                                        "ordering": false,
-                                        "lengthChange": false,
-                                        "displayLength": <{$groupsperpage}>,
-                                        "language": {
-                                            "decimal": "<{$smarty.const._MD_SUICO_DTABLE_DECIMAL}>",
-                                            "emptyTable": "<{$smarty.const._MD_SUICO_DTABLE_EMPTYTABLE}>",
-                                            "info": "<{$smarty.const._MD_SUICO_DTABLE_INFOSHOWING}> _START_ <{$smarty.const._MD_SUICO_DTABLE_INFOTO}> _END_ <{$smarty.const._MD_SUICO_DTABLE_INFOOF}> _TOTAL_ <{$smarty.const._MD_SUICO_DTABLE_INFOENTRIES}>",
-                                            "infoEmpty": "<{$smarty.const._MD_SUICO_DTABLE_INFOEMPTY}>",
-                                            "infoFiltered": "(<{$smarty.const._MD_SUICO_DTABLE_INFOFILTEREDFROM}> _MAX_ <{$smarty.const._MD_SUICO_DTABLE_INFOFILTEREDTOTALENTRIES}>)",
-                                            "infoPostFix": "<{$smarty.const._MD_SUICO_DTABLE_INFOPOSTFIX}>",
-                                            "thousands": "<{$smarty.const._MD_SUICO_DTABLE_THOUSANDS}>",
-                                            "lengthMenu": "<{$smarty.const._MD_SUICO_DTABLE_LENGTHMENUSHOW}> _MENU_ <{$smarty.const._MD_SUICO_DTABLE_LENGTHMENUENTRIES}>",
-                                            "loadingRecords": "<{$smarty.const._MD_SUICO_DTABLE_LOADINGRECORDS}>",
-                                            "processing": "<{$smarty.const._MD_SUICO_DTABLE_PROCESSING}>",
-                                            "search": "<{$smarty.const._MD_SUICO_DTABLE_SEARCH}>",
-                                            "zeroRecords": "<{$smarty.const._MD_SUICO_DTABLE_ZERORECORDS}>",
-                                            "paginate": {
-                                                "first": "<{$smarty.const._MD_SUICO_DTABLE_FIRST}>",
-                                                "last": "<{$smarty.const._MD_SUICO_DTABLE_LAST}>",
-                                                "next": "<{$smarty.const._MD_SUICO_DTABLE_NEXT}>",
-                                                "previous": "<{$smarty.const._MD_SUICO_DTABLE_PREVIOUS}>"
-                                            },
-                                            "aria": {
-                                                "sortAscending": "<{$smarty.const._MD_SUICO_DTABLE_SORT_ASCENDING}>",
-                                                "sortDescending": "<{$smarty.const._MD_SUICO_DTABLE_SORT_DESCENSING}>"
-                                            }
-                                        }
-                                    });
-                                });
-                            </script>
-
-							<script>
-                                $(document).ready(function () {
-                                    $('#allgroups1').DataTable({
-                                        "ordering": false,
+                                    $('table.display').DataTable({
+										//dom: "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>" +
+										//"<'row'<'col-sm-12'tr>>" +
+										//"<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                                        "responsive": true,
+										"ordering": false,
                                         "lengthChange": false,
                                         "displayLength": <{$groupsperpage}>,
                                         "language": {

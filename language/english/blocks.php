@@ -26,3 +26,6 @@ define('_MB_SUICO_TOTALFRIENDSTOSHOW', 'Total Friends To Show');
 define('_MB_SUICO_ENABLEPM', 'Show Private Message Button');
 define('_MB_SUICO_PRIVATEMESSAGE', 'Private Message');
 define('_MB_SUICO_PM', 'PM');
+define('_MB_SUICO_FINDFRIENDS', 'Find Friends');
+define('_MB_SUICO_FINDMOREFRIENDS', 'Find More Friends');
+
