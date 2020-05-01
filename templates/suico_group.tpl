@@ -33,7 +33,6 @@
                                 <{/if}>
                             <{/if}>
 
-                            <b><{$smarty.const._MD_SUICO_GROUPDESCRIPTION}></b><br>
                             <h6><{$group_title}></h6>
                             <{$group_desc}>
 							<p class="text-muted"><small>
