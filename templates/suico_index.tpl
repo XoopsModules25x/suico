@@ -163,7 +163,7 @@
                                 <{section name=i loop=$groups}>
                                     <div class="col text-center p-2">
                                         <a href="group.php?group_id=<{$groups[i].group_id}>">
-                                            <img alt="<{$groups[i].title}>" title="<{$groups[i].title}>" class="suico-profile-groups-img" src="<{$xoops_upload_url}>/suico/groups/<{$groups[i].img}>" width="90" height="90">
+                                            <img alt="<{$groups[i].title}>" title="<{$groups[i].title}>" class="suico-profile-groups-img" src="<{$xoops_upload_url}>/suico/groups/<{$groups[i].img}>" width="90">
                                             <h6><small><{$groups[i].title}></small></h6></a>
                                         <small><{$groups[i].desc}></small>
                                     </div>
