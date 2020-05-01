@@ -114,8 +114,6 @@ $xoopsTpl->assign('group_date_created', formatTimestamp($group->getVar('date_cre
 $xoopsTpl->assign('group_date_updated', formatTimestamp($group->getVar('date_updated')));
 $xoopsTpl->assign('group_owneruid', $group->getVar('owner_uid'));
 $xoopsTpl->assign('group_ownername', $group_ownername);
-$xoopsTpl->assign('lang_groupdatecreated', _MD_SUICO_GROUPDATECREATED);
-$xoopsTpl->assign('lang_grouptotalmembers', _MD_SUICO_GROUPTOTALMEMBERS);
 $xoopsTpl->assign('lang_groupmembers', _MD_SUICO_GROUPMEMBERS);
 $xoopsTpl->assign('lang_membersofgroup', _MD_SUICO_MEMBERSOFGROUP);
 $xoopsTpl->assign('lang_editgroup', _MD_SUICO_EDIT_GROUP);
