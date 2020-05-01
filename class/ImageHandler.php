@@ -402,7 +402,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $maxfileheight
     ) {
         global $xoopsUser, $xoopsDB;
-        //busca id do user logado
+        //search logged user id
         $uid = $xoopsUser->getVar('uid');
         //create a hash so it does not erase another file
         //$hash1 = date();
@@ -429,8 +429,8 @@ class ImageHandler extends XoopsPersistableObjectHandler
             }
             // now let s create a new object picture and set its variables
             $picture = $this->create();
-            $url     = $uploader->getSavedFileName();
-            $picture->setVar('filename', $url);
+            $filename     = $uploader->getSavedFileName();
+            $picture->setVar('filename', $filename);
             $picture->setVar('title', $title);
             $picture->setVar('caption', $caption);
             $picture->setVar('date_created', \time());
