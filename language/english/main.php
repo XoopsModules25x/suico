@@ -498,3 +498,6 @@ define('_MD_SUICO_CHANGEAVATAR', 'Change Avatar');
 define('_MD_SUICO_CHANGEAVATARHELP', 'You can also change your avatar by selecting any of the photos upload in your photo album section.');
 define('_MD_SUICO_EDIT_PICTURE', 'Edit Picture');
 define('_MD_SUICO_EDIT_AUDIO', 'Edit Audio');
+define('_MD_SUICO_ONECOMMENT', '1 comment');
+define('_MD_SUICO_NO_COMMENTS', 'No comments');
+define('_MD_SUICO_COMMENTS', 'Comment(s)');
