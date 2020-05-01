@@ -52,8 +52,8 @@
                                 <{section name=i loop=$pics_array}>
                                     <{if (($pics_array[i].private == 0))}>
                                         <!-- Start Normal Photo -->
-                                        <div class="col-6 h-100 mb-3">
-                                            <div class="card" style="width:400px">
+                                        <div class="col-sm-6 h-100 mb-3">
+                                            <div class="card">
                                                 <a name="<{$pics_array[i].image_id}>" href="<{$xoops_url}>/uploads/suico/images/resized_<{$pics_array[i].filename}>" rel="lightbox[album]" title="<{$pics_array[i].title}> - <{$pics_array[i].caption}>">
                                                     <img class="card-img-top thumb" src="<{$xoops_url}>/uploads/suico/images/<{$pics_array[i].filename}>" rel="lightbox" title="<{$pics_array[i].title}> - <{$pics_array[i].caption}>">
                                                 </a>
@@ -67,35 +67,7 @@
                                                             <small><{$pics_array[i].date_updated|date_format}></small>
                                                         <{/if}>
                                                     </p>
-
-                                                    <{if (($isOwner==1))}>
-                                                        <form action="delpicture.php" method="post" id="deleteform" class="suico-album-formquick">
-                                                            <input type="hidden" value="<{$pics_array[i].image_id}>" name="image_id">
-                                                            <{$token}>
-                                                            <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 delete.png}>">
-                                                        </form>
-                                                        <form action="editpicture.php" method="post" id="editform" class="suico-album-formquick">
-                                                            <input type="hidden" value="<{$pics_array[i].image_id}>" name="image_id">
-                                                            <{$token}>
-                                                            <input name="submit" type="image" alt="<{$lang_editpicture}>" title="<{$lang_editpicture}>" src="<{xoModuleIcons16 edit.png}>">
-                                                        </form>
-                                                        <form action="avatar.php" method="post" id="setavatar" class="suico-album-formquick">
-                                                            <input type="hidden" value="<{$pics_array[i].image_id}>" name="image_id">
-                                                            <{$token}>
-                                                            <input name="submit" type="image" alt="<{$lang_avatarchange}>" title="<{$lang_avatarchange}>" src="assets/images/avatar.gif">
-                                                        </form>
-                                                        <form action="private.php" method="post" id="setprivate" class="suico-album-formquick">
-                                                            <input type="hidden" value="<{$pics_array[i].image_id}>" name="image_id">
-                                                            <{$token}>
-                                                            <{if $pics_array[i].private == 1}>
-                                                                <input type="hidden" value="0" name="private">
-                                                                <input name="submit" type="image" alt="<{$lang_unsetprivate}>" title="<{$lang_unsetprivate}>" src="assets/images/unlock.gif">
-                                                            <{else}>
-                                                                <input type="hidden" value="1" name="private">
-                                                                <input name="submit" type="image" alt="<{$lang_setprivate}>" title="<{$lang_setprivate}>" src="assets/images/lock.gif">
-                                                            <{/if}>
-                                                        </form>
-                                                    <{/if}>
+													
                                                 </div>
                                             </div>
                                         </div>
@@ -103,8 +75,8 @@
                                     <{else}>
                                         <!-- start private photo -->
                                         <{if ($pics_array[i].private == 1) }>
-                                            <div class="col-6 h-100 mb-3">
-                                                <div class="card" style="width:400px">
+                                            <div class="col-sm-6 h-100 mb-3">
+                                                <div class="card">
                                                     <a href="<{$xoops_url}>/uploads/suico/images/resized_<{$pics_array[i].filename}>" rel="lightbox[album]" title="<{$pics_array[i].title}> - <{$pics_array[i].caption}>">
                                                         <img class="card-img-top thumb" src="<{$xoops_url}>/uploads/suico/images/<{$pics_array[i].filename}>" rel="lightbox" title="<{$pics_array[i].title}> - <{$pics_array[i].caption}>">
                                                     </a>
