@@ -34,6 +34,26 @@ $group_id   = Request::getInt('group_id', 0, 'GET');
 $criteria   = new Criteria('group_id', $group_id);
 $groups     = $controller->groupsFactory->getObjects($criteria);
 $group      = $groups[0];
+
+/**
+ * Get Total Comment for Group */
+$module_handler = xoops_gethandler("module"); 
+$mod_suico = $module_handler->getByDirname('suico');
+$sql= "SELECT count(com_id) FROM ".$GLOBALS['xoopsDB']->prefix('xoopscomments')." WHERE com_modid = '".$mod_suico->getVar('mid')."' AND com_itemid = '".$group_id."'";
+$result = $GLOBALS['xoopsDB']->query($sql);
+while ($row = $GLOBALS['xoopsDB']->fetchArray($result)) {
+$group_total_comments=$row['count(com_id)'];
+}
+            if ($group_total_comments > 0) {
+                if (1 == $group_total_comments) {
+                    $xoopsTpl->assign('group_total_comments', '' . _MD_SUICO_ONECOMMENT . '&nbsp;');
+                } else {
+                    $xoopsTpl->assign('group_total_comments', '' . $group_total_comments . '&nbsp;' . _MD_SUICO_COMMENTS . '&nbsp;');
+                }
+            } else {
+                $xoopsTpl->assign('group_total_comments', '' . _MD_SUICO_NO_COMMENTS . '&nbsp;');
+            }
+
 /**
  * Fetching rel_id
  */
@@ -55,7 +75,22 @@ foreach ($group_members as $group_member) {
     $uids[] = (int)$group_member['uid'];
     $grouptotalmembers++;
 }
-$xoopsTpl->assign('grouptotalmembers', $grouptotalmembers . ' ' . _MD_SUICO_GROUPMEMBERS);
+            if ($grouptotalmembers > 0) {
+                if (1 == $grouptotalmembers) {
+                    $xoopsTpl->assign('grouptotalmembers', '' . _MD_SUICO_ONEMEMBER . '&nbsp;');
+                } else {
+                    $xoopsTpl->assign('grouptotalmembers', '' . $grouptotalmembers . '&nbsp;' . _MD_SUICO_GROUPSMEMBERS . '&nbsp;');
+                }
+            } else {
+                $xoopsTpl->assign('grouptotalmembers', '' . _MD_SUICO_NO_MEMBER . '&nbsp;');
+            }
+
+
+
+
+
+
+
 if (!empty($uids)) {
     if ($xoopsUser) {
         $uid = (int)$xoopsUser->getVar('uid');
@@ -79,8 +114,6 @@ $xoopsTpl->assign('group_date_created', formatTimestamp($group->getVar('date_cre
 $xoopsTpl->assign('group_date_updated', formatTimestamp($group->getVar('date_updated')));
 $xoopsTpl->assign('group_owneruid', $group->getVar('owner_uid'));
 $xoopsTpl->assign('group_ownername', $group_ownername);
-$xoopsTpl->assign('lang_groupdatecreated', _MD_SUICO_GROUPDATECREATED);
-$xoopsTpl->assign('lang_grouptotalmembers', _MD_SUICO_GROUPTOTALMEMBERS);
 $xoopsTpl->assign('lang_groupmembers', _MD_SUICO_GROUPMEMBERS);
 $xoopsTpl->assign('lang_membersofgroup', _MD_SUICO_MEMBERSOFGROUP);
 $xoopsTpl->assign('lang_editgroup', _MD_SUICO_EDIT_GROUP);

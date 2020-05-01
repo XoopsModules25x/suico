@@ -552,9 +552,9 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $vetor  = [];
         $i      = 0;
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $vetor[$i]['uid_voted']   = $myrow['uid_owner'];
+            $vetor[$i]['uid_owner']   = $myrow['uid_owner'];
             $vetor[$i]['uname']       = $myrow['uname'];
-            $vetor[$i]['user_avatar'] = $myrow['filename'];
+            $vetor[$i]['img_filename'] = $myrow['filename'];
             $i++;
         }
         return $vetor;
@@ -567,7 +567,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
     public function getLastPicturesForBlock($limit)
     {
         $ret    = [];
-        $sql    = 'SELECT uname, t.uid_owner, t.filename, t.title, t.caption  FROM ' . $this->db->prefix(
+        $sql    = 'SELECT uname, t.uid_owner, t.filename, t.title, t.caption, t.date_created, t.date_updated  FROM ' . $this->db->prefix(
                 'suico_images'
             ) . ' AS t, ' . $this->db->prefix(
                 'users'
@@ -577,11 +577,14 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $vetor  = [];
         $i      = 0;
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $vetor[$i]['uid_voted']    = $myrow['uid_owner'];
+            $vetor[$i]['uid_owner']    = $myrow['uid_owner'];
             $vetor[$i]['uname']        = $myrow['uname'];
             $vetor[$i]['img_filename'] = $myrow['filename'];
             $vetor[$i]['title']        = $myrow['title'];
             $vetor[$i]['caption']      = $myrow['caption'];
+			$vetor[$i]['date_created'] = formatTimestamp($myrow['date_created']);
+            $vetor[$i]['date_updated'] = formatTimestamp($myrow['date_updated']);
+           
             $i++;
         }
         return $vetor;

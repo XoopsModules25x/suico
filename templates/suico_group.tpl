@@ -36,26 +36,17 @@
                             <b><{$smarty.const._MD_SUICO_GROUPDESCRIPTION}></b><br>
                             <h6><{$group_title}></h6>
                             <{$group_desc}>
-                            <br><b><{$smarty.const._MD_SUICO_OWNEROFGROUP}></b><br>
-                            <a href><a href="<{$xoops_url}>/modules/suico/index.php?uid=<{$group_owneruid}>" target="_blank"><{$group_ownername}></a><br>
-	
-							<b><{$smarty.const._MD_SUICO_GROUPDATECREATED}></b><br>
-								<p class="text-muted"><i class="fa fa-calendar"></i>
+							<p class="text-muted"><small>
+                            <i class="fa fa-user-circle" title="<{$smarty.const._MD_SUICO_OWNEROFGROUP}>"></i> <a href="<{$xoops_url}>/modules/suico/index.php?uid=<{$group_owneruid}>" target="_blank"><{$group_ownername}></a>
+							<i class="fa fa-calendar" title="<{$smarty.const._MD_SUICO_GROUPDATECREATED}>"></i>
                                                         <{if $group_date_created == $group_date_updated}>
-                                                            <small><{$group_date_created|date_format}></small>
+                                                            <{$group_date_created|date_format}>
                                                         <{else}>
-                                                            <small><{$group_date_updated|date_format}></small>
+                                                            <{$group_date_updated|date_format}>
 														<{/if}>
-								</p>
-								<{if $grouptotalmembers!=''}>
-                                    <b><{$lang_grouptotalmembers}></b>
-                                    <br>
-                                    <{$grouptotalmembers}>
-                                    <br>
-                                <{/if}>
-								
-							
-                                
+							<i class="fa fa-user" title="<{$smarty.const._MD_SUICO_GROUPTOTALMEMBERS}>"></i> <{$grouptotalmembers}>
+							<i class="fa fa-comment" title="<{$smarty.const._MD_SUICO_GROUPTOTALCOMMENTS}>"></i> <{$group_total_comments}>
+                             </small></p> 
                                 <{if $isOwner }>
                                     <{if $xoops_userid == $group_owneruid }>
                                         <form action="delete_group.php" method="POST" id="form_deletegroup" class="suico-groups-form-delete">

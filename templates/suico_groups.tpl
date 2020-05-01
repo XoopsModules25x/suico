@@ -156,7 +156,7 @@
                                                 <h6>
                                                     <a href="group.php?group_id=<{$groups[j].id}>"><{$groups[j].title}></a>
                                                 </h6>
-                                                <{if $groups[j].desc!=''}><{$groups[j].desc}><br><{/if}> <small><{$groups[j].grouptotalmembers}> </small>
+                                                <{if $groups[j].desc!=''}><{$groups[j].desc}><{/if}> <small><span class="text-muted"><{$groups[j].grouptotalmembers}></span></small>
                                                 <br>
 												
                                                 <{if ($uid_owner == $groups[j].uid)}>
