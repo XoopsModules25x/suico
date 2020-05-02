@@ -43,7 +43,7 @@
                                                         <{else}>
                                                             <{$group_date_updated|date_format}>
 														<{/if}>
-							<i class="fa fa-user" title="<{$smarty.const._MD_SUICO_GROUPTOTALMEMBERS}>"></i> <{$grouptotalmembers}>
+							<i class="fa fa-user" title="<{$smarty.const._MD_SUICO_GROUPTOTALMEMBERS}>"></i> <{$group_total_members}>
 							<i class="fa fa-comment" title="<{$smarty.const._MD_SUICO_GROUPTOTALCOMMENTS}>"></i> <{$group_total_comments}>
                              </small></p> 
                                 <{if $isOwner }>

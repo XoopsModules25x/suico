@@ -267,12 +267,14 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $id_as_key = false
     ) {
         $ret   = [];
+		$sort = 'group_title';
+        $order = 'ASC';
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_groups');
         if (isset($criteria) && $criteria instanceof CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
-            if ('' !== $criteria->getSort()) {
-                $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
+            if ('' !== $sort) {
+                $sql .= ' ORDER BY ' . $sort . ' ' . $order;
             }
             $limit = $criteria->getLimit();
             $start = $criteria->getStart();
@@ -292,16 +294,16 @@ class GroupsHandler extends XoopsPersistableObjectHandler
             $query                        = 'SELECT COUNT(rel_id) AS grouptotalmembers FROM ' . $GLOBALS['xoopsDB']->prefix('suico_relgroupuser') . ' WHERE rel_group_id=' . $groupid . '';
             $queryresult                  = $GLOBALS['xoopsDB']->query($query);
             $row                          = $GLOBALS['xoopsDB']->fetchArray($queryresult);
-            $grouptotalmembers            = $row['grouptotalmembers'];
+            $group_total_members          = $row['grouptotalmembers'];
 			
-			if ($grouptotalmembers > 0) {
-                if (1 == $grouptotalmembers) {
-                    $ret[$i]['grouptotalmembers'] ='' . _MD_SUICO_ONEMEMBER . '&nbsp;';
+			if ($group_total_members > 0) {
+                if (1 == $group_total_members) {
+                    $ret[$i]['group_total_members'] ='' . _MD_SUICO_ONEMEMBER . '&nbsp;';
                 } else {
-                    $ret[$i]['grouptotalmembers'] ='' . $grouptotalmembers . '&nbsp;' . _MD_SUICO_GROUPMEMBERS . '&nbsp;';
+                    $ret[$i]['group_total_members'] ='' . $group_total_members . '&nbsp;' . _MD_SUICO_GROUPMEMBERS . '&nbsp;';
                 }
             } else {
-                $ret[$i]['grouptotalmembers'] ='' . _MD_SUICO_NO_MEMBER . '&nbsp;';
+                $ret[$i]['group_total_members'] ='' . _MD_SUICO_NO_MEMBER . '&nbsp;';
             }
             $i++;
         }
@@ -538,5 +540,41 @@ var elestyle = xoopsGetElementById(img).style;
         $group->setVar('owner_uid', $uid);
         $this->insert($group);
         return true;
+    }	
+	
+	
+	 public function isGroupMember($owner_id)
+    {
+        $query                        = 'SELECT COUNT(rel_id) AS grouptotalmembers FROM ' . $GLOBALS['xoopsDB']->prefix('suico_relgroupuser') . ' WHERE rel_group_id=' . $group_id . '';
+		$queryresult                  = $GLOBALS['xoopsDB']->query($query);
+        $row                          = $GLOBALS['xoopsDB']->fetchArray($queryresult);
+        $group_total_members          = $row['grouptotalmembers'];
+
+        return $group_total_members;
     }
+	
+	
+    public function getComment($group_id)
+    {
+        $module_handler = xoops_gethandler("module"); 
+		$mod_suico = $module_handler->getByDirname('suico');
+		$sql= "SELECT count(com_id) FROM ".$GLOBALS['xoopsDB']->prefix('xoopscomments')." WHERE com_modid = '".$mod_suico->getVar('mid')."' AND com_itemid = '".$group_id."'";
+		$result = $GLOBALS['xoopsDB']->query($sql);
+		while ($row = $GLOBALS['xoopsDB']->fetchArray($result)) {
+			$group_total_comments=$row['count(com_id)'];
+		}
+
+        return $group_total_comments;
+    }
+	
+	 public function getGroupTotalMembers($group_id)
+    {
+        $query                        = 'SELECT COUNT(rel_id) AS grouptotalmembers FROM ' . $GLOBALS['xoopsDB']->prefix('suico_relgroupuser') . ' WHERE rel_group_id=' . $group_id . '';
+		$queryresult                  = $GLOBALS['xoopsDB']->query($query);
+        $row                          = $GLOBALS['xoopsDB']->fetchArray($queryresult);
+        $group_total_members          = $row['grouptotalmembers'];
+
+        return $group_total_members;
+    }
+	
 }
