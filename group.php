@@ -36,25 +36,6 @@ $groups     = $controller->groupsFactory->getObjects($criteria);
 $group      = $groups[0];
 
 /**
- * Get Total Comment for Group */
-$module_handler = xoops_gethandler("module"); 
-$mod_suico = $module_handler->getByDirname('suico');
-$sql= "SELECT count(com_id) FROM ".$GLOBALS['xoopsDB']->prefix('xoopscomments')." WHERE com_modid = '".$mod_suico->getVar('mid')."' AND com_itemid = '".$group_id."'";
-$result = $GLOBALS['xoopsDB']->query($sql);
-while ($row = $GLOBALS['xoopsDB']->fetchArray($result)) {
-$group_total_comments=$row['count(com_id)'];
-}
-            if ($group_total_comments > 0) {
-                if (1 == $group_total_comments) {
-                    $xoopsTpl->assign('group_total_comments', '' . _MD_SUICO_ONECOMMENT . '&nbsp;');
-                } else {
-                    $xoopsTpl->assign('group_total_comments', '' . $group_total_comments . '&nbsp;' . _MD_SUICO_COMMENTS . '&nbsp;');
-                }
-            } else {
-                $xoopsTpl->assign('group_total_comments', '' . _MD_SUICO_NO_COMMENTS . '&nbsp;');
-            }
-
-/**
  * Fetching rel_id
  */
 $sql               = 'SELECT * FROM ' . $GLOBALS['xoopsDB']->prefix('suico_relgroupuser') . ' WHERE rel_group_id=' . $group_id . ' AND rel_user_uid=' . $controller->uidOwner . '';
@@ -70,25 +51,6 @@ $group_members     = $controller->relgroupusersFactory->getUsersFromGroup(
     0,
     50
 );
-$grouptotalmembers = 0;
-foreach ($group_members as $group_member) {
-    $uids[] = (int)$group_member['uid'];
-    $grouptotalmembers++;
-}
-            if ($grouptotalmembers > 0) {
-                if (1 == $grouptotalmembers) {
-                    $xoopsTpl->assign('grouptotalmembers', '' . _MD_SUICO_ONEMEMBER . '&nbsp;');
-                } else {
-                    $xoopsTpl->assign('grouptotalmembers', '' . $grouptotalmembers . '&nbsp;' . _MD_SUICO_GROUPSMEMBERS . '&nbsp;');
-                }
-            } else {
-                $xoopsTpl->assign('grouptotalmembers', '' . _MD_SUICO_NO_MEMBER . '&nbsp;');
-            }
-
-
-
-
-
 
 
 if (!empty($uids)) {
@@ -100,6 +62,34 @@ if (!empty($uids)) {
         $xoopsTpl->assign('useruid', $uid);
     }
 }
+
+/**
+ * Get Total Members for Group */
+			$group_total_members=$controller->groupsFactory->getGroupTotalMembers($group_id);
+            if ($group_total_members > 0) {
+                if (1 == $group_total_members) {
+                    $xoopsTpl->assign('group_total_members', '' . _MD_SUICO_ONEMEMBER . '&nbsp;');
+                } else {
+                    $xoopsTpl->assign('group_total_members', '' . $group_total_members . '&nbsp;' . _MD_SUICO_GROUPMEMBERS . '&nbsp;');
+                }
+            } else {
+                $xoopsTpl->assign('group_total_members', '' . _MD_SUICO_NO_MEMBER . '&nbsp;');
+            }
+
+
+/**
+ * Get Total Comment for Group */
+			$group_total_comments=$controller->groupsFactory->getComment($group_id);
+            if ($group_total_comments > 0) {
+                if (1 == $group_total_comments) {
+                    $xoopsTpl->assign('group_total_comments', '' . _MD_SUICO_ONECOMMENT . '&nbsp;');
+                } else {
+                    $xoopsTpl->assign('group_total_comments', '' . $group_total_comments . '&nbsp;' . _MD_SUICO_COMMENTS . '&nbsp;');
+                }
+            } else {
+                $xoopsTpl->assign('group_total_comments', '' . _MD_SUICO_NO_COMMENTS . '&nbsp;');
+            }
+
 $owner_uid       = $group->getVar('owner_uid');
 $group_ownername = XoopsUser::getUnameFromId($owner_uid);
 $xoopsTpl->assign('group_members', $group_members);
