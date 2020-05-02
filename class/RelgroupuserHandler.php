@@ -297,8 +297,10 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
             $sql .= ' ' . $criteria->renderWhere();
             //attention here this is kind of a hack
             $sql .= ' AND group_id = rel_group_id ';
-            if ('' !== $criteria->getSort()) {
-                $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
+			$sort = 'group_title';
+			$order = 'ASC';
+            if ('' !== $sort) {
+                $sql .= ' ORDER BY ' . $sort . ' ' . $order;
             }
             $limit  = $criteria->getLimit();
             $start  = $criteria->getStart();
