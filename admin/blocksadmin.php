@@ -508,6 +508,20 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         $myblock->setVar('visible', $bvisible);
         $myblock->setVar('side', $bside);
         $myblock->setVar('bcachetime', $bcachetime);
+        //update block options
+        if (isset($options)) {
+            $options_count = count($options);
+            if ($options_count > 0) {
+                //Convert array values to comma-separated
+                for ($i = 0; $i < $options_count; ++$i) {
+                    if (is_array($options[$i])) {
+                        $options[$i] = implode(',', $options[$i]);
+                    }
+                }
+                $options = implode('|', $options);
+                $myblock->setVar('options', $options);
+            }
+        }
         $myblock->store();
         global $xoopsDB;
         $moduleDirName      = basename(dirname(__DIR__));
