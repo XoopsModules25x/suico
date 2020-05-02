@@ -185,30 +185,6 @@ $xoopsTpl->assign('lang_cool', _MD_SUICO_COOL);
 $xoopsTpl->assign('cool', $evaluation['mediacool']);
 $xoopsTpl->assign('cool_rest', 48 - $evaluation['mediacool']);
 $xoopsTpl->assign('allow_fanssevaluation', $helper->getConfig('allow_fanssevaluation'));
-//request to become friend
-if (1 === $friendrequest) {
-    $xoopsTpl->assign('lang_you_have_x_friendrequests', sprintf(_MD_SUICO_YOU_HAVE_X_FRIENDREQUESTS, $countFriendrequests));
-    $xoopsTpl->assign('requester_uid', $friendrequester_uid);
-    $xoopsTpl->assign('requester_uname', $friendrequester_uname);
-    $xoopsTpl->assign('requester_avatar', $friendrequester_avatar);
-    $xoopsTpl->assign('request', $friendrequest);
-    $xoopsTpl->assign('request_id', $friendrequest_id);
-    $xoopsTpl->assign('lang_rejected', _MD_SUICO_UNKNOWN_REJECTING);
-    $xoopsTpl->assign('lang_accepted', _MD_SUICO_UNKNOWN_ACCEPTING);
-    $xoopsTpl->assign('lang_acquaintance', _MD_SUICO_AQUAITANCE);
-    $xoopsTpl->assign('lang_friend', _MD_SUICO_FRIEND);
-    $xoopsTpl->assign('lang_bestfriend', _MD_SUICO_BESTFRIEND);
-    $linkedpetioner = '<a href="index.php?uid=' . $friendrequester_uid . '">' . $friendrequester_uname . '</a>';
-    $xoopsTpl->assign('lang_askingfriend', sprintf(_MD_SUICO_ASKINGFRIEND, $linkedpetioner));
-}
-$xoopsTpl->assign('lang_askusertobefriend', _MD_SUICO_ASKBEFRIEND);
-$xoopsTpl->assign('lang_addfriend', _MD_SUICO_ADDFRIEND);
-$xoopsTpl->assign('lang_friendrequestpending', _MD_SUICO_FRIENDREQUEST_PENDING);
-$xoopsTpl->assign('lang_cancelfriendrequest', _MD_SUICO_FRIENDREQUEST_CANCEL);
-$xoopsTpl->assign('lang_myfriend', _MD_SUICO_MYFRIEND);
-$xoopsTpl->assign('lang_friendrequestsent', _MD_SUICO_FRIENDREQUEST_SENT);
-$xoopsTpl->assign('lang_acceptfriend', _MD_SUICO_FRIEND_ACCEPT);
-$xoopsTpl->assign('lang_rejectfriend', _MD_SUICO_FRIEND_REJECT);
 // Member Suspension
 $xoopsTpl->assign('allow_usersuspension', $xoopsModuleConfig['allow_usersuspension']);
 $xoopsTpl->assign('lang_suspensionadmin', _MD_SUICO_SUSPENSIONADMIN);
