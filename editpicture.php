@@ -45,7 +45,7 @@ if (1 === $marker) {
      */
     if ($uid === (int)$picture->getVar('uid_owner')) {
         if ($imageFactory->insert2($picture)) {
-            redirect_header('album.php', 2, _MD_SUICO_DESC_EDITED);
+            redirect_header('album.php#' . $image_id . '', 2, _MD_SUICO_DESC_EDITED);
         } else {
             redirect_header('album.php', 2, _MD_SUICO_ERROR);
         }
