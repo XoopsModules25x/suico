@@ -28,6 +28,10 @@ use SplFileInfo;
 use Throwable;
 use XoopsUser;
 
+/**
+ * Trait FilesManagement
+ * @package XoopsModules\Suico\Common
+ */
 trait FilesManagement
 {
     /**

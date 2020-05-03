@@ -13,6 +13,10 @@ use XoopsFormSelect;
 use XoopsFormLabel;
 use XoopsFormTextDateSelect;
 
+/**
+ * Class FieldForm
+ * @package XoopsModules\Suico\Form
+ */
 class FieldForm extends XoopsThemeForm
 {
     /**

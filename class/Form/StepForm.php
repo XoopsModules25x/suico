@@ -17,6 +17,11 @@ use XoopsFormSelectUser;
  */
 class StepForm extends XoopsThemeForm
 {
+    /**
+     * StepForm constructor.
+     * @param \XoopsModules\Suico\Regstep|null $step
+     * @param bool                             $action
+     */
     public function __construct(Regstep $step = null, $action = false)
     {
         if (!$action) {

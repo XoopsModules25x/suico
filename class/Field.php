@@ -30,6 +30,10 @@ namespace XoopsModules\Suico;
 
 use XoopsModules\Suico\Profile;
 
+/**
+ * Class Field
+ * @package XoopsModules\Suico
+ */
 class Field extends \XoopsObject
 {
     public function __construct()
