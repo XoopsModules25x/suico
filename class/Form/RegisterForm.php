@@ -8,7 +8,6 @@ use XoopsFormButton;
 use XoopsFormHidden;
 use XoopsFormLabel;
 
-
 /**
  * Get {@link XoopsThemeForm} for registering new users
  *
@@ -19,10 +18,8 @@ use XoopsFormLabel;
  * @return object
  * @internal param \profileRegstep $next_step
  */
-
 class RegisterForm extends XoopsThemeForm
 {
-
     function __construct(\XoopsUser $user, $profile, $step = null)
     {
         global $opkey; // should be set in register.php

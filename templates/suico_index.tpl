@@ -55,12 +55,12 @@
 							<br><h5><{$lang_profilevisitors}> <i class="fa fa-user"></i></h5>
 							<div class="container-fluid">
 									<div class="row row-cols-5">
-										<{foreach item=visitor from=$visitors}>
+                                <{foreach item=visitor from=$visitors}>
 										<div class="col text-center p-2">
 											<a href='index.php?uid=<{$visitor.uid_visitor}>' target='_blank'><img src='<{$xoops_url}>/uploads/<{$visitor.avatar_visitor}>' class='rounded-circle' title='<{$visitor.uname_visitor}>' border='0' alt='<{$visitor.uname_visitor}>' height='48' width='48'></a>
 											 <a href="index.php?uid=<{$visitor.uid_visitor}>" target="_blank"><br><small><{$visitor.uname_visitor}></small></a><br><small><i class="fa fa-calendar-o"></i>&nbsp;<{$visitor.date_visited|date_format}></small>
 										</div>
-										<{/foreach}>
+                                <{/foreach}>
 									</div>
 							</div>
                             <{/if}>

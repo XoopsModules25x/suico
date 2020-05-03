@@ -81,7 +81,7 @@ if (isset($nbSections[COUNTPHOTOS]) && 0 === $nbSections[COUNTPHOTOS]) {
         $pictures_array[$i]['filename']     = $picture->getVar('filename', 's');
         $pictures_array[$i]['title']        = $picture->getVar('title', 's');
         $pictures_array[$i]['caption']      = $picture->getVar('caption', 's');
-        $pictures_array[$i]['image_id']      = $picture->getVar('image_id', 's');
+        $pictures_array[$i]['image_id']     = $picture->getVar('image_id', 's');
         $pictures_array[$i]['private']      = $picture->getVar('private', 's');
         $pictures_array[$i]['date_created'] = formatTimestamp($picture->getVar('date_created', 's'));
         $pictures_array[$i]['date_updated'] = formatTimestamp($picture->getVar('date_updated', 's'));

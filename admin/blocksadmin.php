@@ -36,7 +36,6 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
             ${$k} = $v;
         }
     }
-
     $op = Request::getString(
         'op',
         $op

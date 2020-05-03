@@ -31,7 +31,7 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
     xoops_confirm(
         [
             'image_id' => $image_id,
-            'confirm' => 1,
+            'confirm'  => 1,
         ],
         'delpicture.php',
         _MD_SUICO_ASK_CONFIRM_DELETION,

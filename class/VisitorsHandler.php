@@ -202,8 +202,6 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         return true;
     }
 
-
-
     /**
      * count suico_visitorss matching a condition
      *

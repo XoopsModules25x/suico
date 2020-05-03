@@ -65,7 +65,6 @@ function b_suico_friends_edit($options)
 {
     $form .= _MB_SUICO_TOTALFRIENDSTOSHOW . '&nbsp;';
     $form .= "<input type='text' name='options[0]' value='" . $options[0] . "'><br>";
-
     $form .= _MB_SUICO_ENABLEPM . '&nbsp;';
     if (isset($options[1]) && 1 === $options[1]) {
         $chk = ' checked';

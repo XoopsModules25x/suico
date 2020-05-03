@@ -134,7 +134,7 @@ switch ($op) {
         }
         $GLOBALS['xoopsTpl']->assign('configsRows', $configsTempRows);
         $configsArray = [];
-        $criteria = new CriteriaCompo();
+        $criteria     = new CriteriaCompo();
         //$criteria->setOrder('DESC');
         $criteria->setSort($sort);
         $criteria->setOrder($order);

@@ -296,9 +296,9 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
         if (isset($criteria) && $criteria instanceof CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
             //attention here this is kind of a hack
-            $sql .= ' AND group_id = rel_group_id ';
-			$sort = 'group_title';
-			$order = 'ASC';
+            $sql   .= ' AND group_id = rel_group_id ';
+            $sort  = 'group_title';
+            $order = 'ASC';
             if ('' !== $sort) {
                 $sql .= ' ORDER BY ' . $sort . ' ' . $order;
             }

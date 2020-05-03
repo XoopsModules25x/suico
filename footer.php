@@ -32,21 +32,19 @@ $xoTheme->addStylesheet(
 $xoTheme->addStylesheet(
     XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/pagination.css'
 );
-
 $xoTheme->addStylesheet(
     XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/magnific-popup.css'
 );
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.magnific-popup.js');
 $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/suico.js');
 //$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/crud.js');
-
 //if (mb_stripos($_SERVER['REQUEST_URI'], 'memberslist.php')) {
-  //  if ('datatables' == $xoopsModuleConfig['memberslisttemplate']) {
-        $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.dataTables.css');
-        $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/responsive.dataTables.min.css');
-        $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.dataTables.js');
-        $xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/dataTables.responsive.min.js');
-    //}
+//  if ('datatables' == $xoopsModuleConfig['memberslisttemplate']) {
+$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/jquery.dataTables.css');
+$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/css/responsive.dataTables.min.css');
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/jquery.dataTables.js');
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/assets/js/dataTables.responsive.min.js');
+//}
 //}
 //permissions
 $xoopsTpl->assign('allow_notes', $controller->checkPrivilegeBySection('notes'));
@@ -205,7 +203,6 @@ if (0 === $controller->isSuspended) {
     $xoopsTpl->assign('isSuspended', 1);
     $xoopsTpl->assign('lang_suspended', _MD_SUICO_USER_SUSPENDED);
 }
-
 $xoopsTpl->assign('groupsperpage', $xoopsModuleConfig['groupsperpage']);
 //Memberslist and Search Members
 $xoopsTpl->assign('displayrealname', $xoopsModuleConfig['displayrealname']);

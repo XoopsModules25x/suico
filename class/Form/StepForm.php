@@ -13,9 +13,8 @@ use XoopsFormSelectUser;
 /**
  *
  * @param Regstep $step {@link Regstep} to edit
- * @param bool                        $action
+ * @param bool    $action
  */
-
 class StepForm extends XoopsThemeForm
 {
     function __construct(Regstep $step = null, $action = false)
