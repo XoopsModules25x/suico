@@ -141,7 +141,7 @@ class SuicoController extends \XoopsObject
             }
         }
         /**
-         * If anonym and uid not set then redirect to admins profile
+         * If anonymous and uid not set then redirect to admins profile
          * Else redirects to own profile
          */
         if (empty($this->user)) {

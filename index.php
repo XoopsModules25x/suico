@@ -82,7 +82,7 @@ if (is_object($GLOBALS['xoopsUser']) && $uid == $GLOBALS['xoopsUser']->getVar('u
     $groups_xoopsUser         = $groups;
     /* @var  XoopsGroupPermHandler $grouppermHandler */
     $grouppermHandler  = xoops_getHandler('groupperm');
-    $groups_accessible = $grouppermHandler->getItemIds('profile_access', $groups_xoopsUser, $GLOBALS['xoopsModule']->getVar('mid'));
+    $groups_accessible = $grouppermHandler->getItemIds('profile_access', $groups_xoopsUser, $helper->getModule()->getVar('mid'));
     $rejected = false;
     if ($thisUser->isAdmin()) {
         $rejected = !in_array(XOOPS_GROUP_ADMIN, $groups_accessible);
@@ -114,10 +114,10 @@ $field_ids_visible = $visibilityHandler->getVisibleFields($thisUsergroups, $grou
 $profileHandler = $helper->getHandler('Profile');
 $fields          = $profileHandler->loadFields();
 $categoryHandler     = $helper->getHandler('Category');
-$cat_crit        = new CriteriaCompo();
-$cat_crit->setSort('cat_weight');
-$cats = $categoryHandler->getObjects($cat_crit, true, false);
-unset($cat_crit);
+$categoryCriteria        = new CriteriaCompo();
+$categoryCriteria->setSort('cat_weight');
+$cats = $categoryHandler->getObjects($categoryCriteria, true, false);
+unset($categoryCriteria);
 $avatar = '';
 if ($thisUser->getVar('user_avatar') && 'blank.gif' !== $thisUser->getVar('user_avatar')) {
     $avatar = XOOPS_UPLOAD_URL . '/' . $thisUser->getVar('user_avatar');
@@ -157,11 +157,7 @@ $featuredvideodesc = '';
  * This variable define the beginning of the navigation must be
  * set here so all calls to database will take this into account
  */
-$start = Request::getInt(
-    'start',
-    0,
-    'GET'
-);
+$start = Request::getInt('start', 0, 'GET');
 /**
  * Criteria for featuredvideo
  */
