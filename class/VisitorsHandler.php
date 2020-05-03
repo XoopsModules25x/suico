@@ -130,20 +130,21 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         if ($xoopsObject->isNew()) {
             // ajout/modification d'un Suico\Visitors
             $xoopsObject = new Visitors();
-            $format      = 'INSERT INTO %s (visit_id, uid_owner, uid_visitor,uname_visitor)';
-            $format      .= 'VALUES (%u, %u, %u, %s)';
+            $format      = 'INSERT INTO %s (visit_id, uid_owner, uid_visitor, uname_visitor, date_visited)';
+            $format      .= 'VALUES (%u, %u, %u, %s, %u)';
             $sql         = \sprintf(
                 $format,
                 $this->db->prefix('suico_visitors'),
                 $visit_id,
                 $uid_owner,
                 $uid_visitor,
-                $this->db->quoteString($uname_visitor)
+                $this->db->quoteString($uname_visitor),
+                \time()
             );
             $force       = true;
         } else {
             $format = 'UPDATE %s SET ';
-            $format .= 'visit_id=%u, uid_owner=%u, uid_visitor=%u, uname_visitor=%s ';
+            $format .= 'visit_id=%u, uid_owner=%u, uid_visitor=%u, uname_visitor=%s, date_visited=%u ';
             $format .= ' WHERE visit_id = %u';
             $sql    = \sprintf(
                 $format,
@@ -151,6 +152,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
                 $visit_id,
                 $uid_owner,
                 $uid_visitor,
+                \time(),
                 $this->db->quoteString($uname_visitor),
                 $visit_id
             );
