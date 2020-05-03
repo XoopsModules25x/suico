@@ -27,6 +27,9 @@ namespace XoopsModules\Suico;
  * @package             kernel
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
  */
+
+use XoopsModules\Suico\Profile;
+
 class Field extends \XoopsObject
 {
     public function __construct()
@@ -195,8 +198,8 @@ class Field extends \XoopsObject
     /**
      * Returns a value for output of this field
      *
-     * @param XoopsUser      $user    {@link XoopsUser} object to get the value of
-     * @param profileProfile $profile object to get the value of
+     * @param \XoopsUser      $user    {@link XoopsUser} object to get the value of
+     * @param Profile $profile object to get the value of
      *
      * @return mixed
      **/
@@ -248,18 +251,18 @@ class Field extends \XoopsObject
                 return $ret;
                 break;
             case 'group':
-                /* @var XoopsMemberHandler $memberHandler */ $memberHandler = \xoops_getHandler('member');
+                /* @var \XoopsMemberHandler $memberHandler */ $memberHandler = \xoops_getHandler('member');
                 $options                                                    = $memberHandler->getGroupList();
                 $ret                                                        = $options[$value] ?? '';
                 return $ret;
                 break;
             case 'group_multi':
-                /* @var XoopsMemberHandler $memberHandler */ $memberHandler = \xoops_getHandler('member');
+                /* @var \XoopsMemberHandler $memberHandler */ $memberHandler = \xoops_getHandler('member');
                 $options                                                    = $memberHandler->getGroupList();
                 $ret                                                        = [];
                 foreach (\array_keys($options) as $key) {
                     if (\in_array($key, $value)) {
-                        $ret[$key] = \htmlspecialchars($options[$key]);
+                        $ret[$key] = \htmlspecialchars($options[$key], ENT_QUOTES | ENT_HTML5);
                     }
                 }
                 return $ret;
