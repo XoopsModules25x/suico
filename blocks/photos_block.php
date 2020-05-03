@@ -47,7 +47,7 @@ function b_suico_lastpictures_show($options)
 	/**
      * Creating factories of pictures
      */
-    $imageFactory = new Suico\ImageHandler($xoopsDB);
+    $imageFactory = new \XoopsModules\Suico\ImageHandler($xoopsDB);
 	$block['picture']      = $imageFactory->getLastPicturesForBlock($options[4]);
 	$block['showtitle']    = $options[0];
 	$block['showcaption']  = $options[1];
