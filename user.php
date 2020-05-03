@@ -74,7 +74,7 @@ if ('register' === $op) {
         $_POST          = [];
         $current_opname = 'op'; // does not matter, it isn't there
     }
-    $op           = $_POST[$current_opname] ?? 'register';
+    $op           = Request::getString($current_opname, 'register', 'POST');
     $current_step = isset($_POST['step']) ? (int)$_POST['step'] : 0;
     // The newly introduced variable $_SESSION['profile_post'] is contaminated by $_POST, thus we use an old vaiable to hold uid parameter
     $uid = !empty($_SESSION['profile_register_uid']) ? (int)$_SESSION['profile_register_uid'] : 0;
@@ -100,7 +100,7 @@ if ('register' === $op) {
     if (isset($steps[$current_step])) {
         $xoBreadcrumbs[] = ['title' => $steps[$current_step]['step_name']];
     }
-    /* @var XoopsMemberHandler $memberHandler */
+    /* @var \XoopsMemberHandler $memberHandler */
     $memberHandler  = xoops_getHandler('member');
     $profileHandler = $helper->getHandler('Profile');
     $fields         = $profileHandler->loadFields();
