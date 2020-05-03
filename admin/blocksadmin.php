@@ -79,7 +79,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
                  'CO_' . $moduleDirNameUpper . '_' . 'VISIBLE'
              ) . "</th><th align='center'>" . _AM_SYSTEM_BLOCKS_VISIBLEIN . "</th><th align='center'>" . _AM_SYSTEM_ADGS . "</th><th align='center'>" . _AM_SYSTEM_BLOCKS_BCACHETIME . "</th><th align='center'>" . constant('CO_' . $moduleDirNameUpper . '_' . 'ACTION') . '</th></tr>
         ';
-        $block_arr   = XoopsBlock::getByModule($xoopsModule->mid());
+        $block_arr   = \XoopsBlock::getByModule($xoopsModule->mid());
         $block_count = count($block_arr);
         $class       = 'even';
         $cachetimes  = [
@@ -421,6 +421,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         $bcachetime,
         $bmodule
     ) {
+        /** @var \XoopsBlock $myblock */
         $myblock = new XoopsBlock($bid);
         $myblock->setVar('title', $title);
         $myblock->setVar('weight', $weight);
