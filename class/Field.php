@@ -28,6 +28,7 @@ namespace XoopsModules\Suico;
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
  */
 
+use XoopsModules\Suico;
 use XoopsModules\Suico\Profile;
 
 /**
