@@ -188,6 +188,7 @@ if (0 === $total) {
         $userdata['groups'] = implode(', ', $usergroups);
         $xoopsTpl->append('users', $userdata);
     }
+
     if ('normal' == $xoopsModuleConfig['memberslisttemplate']) {
         $totalpages = ceil($total / $limit);
         if ($totalpages > 1) {
