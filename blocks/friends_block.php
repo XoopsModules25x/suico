@@ -48,7 +48,7 @@ function b_suico_friends_show($options)
          * Creating factories of pictures and votes
          */
         //$albumFactory      = new ImagesHandler($xoopsDB);
-        $friendsFactory           = new Suico\FriendshipHandler($xoopsDB);
+        $friendsFactory           = new \XoopsModules\Suico\FriendshipHandler($xoopsDB);
         $block['friends']         = $friendsFactory->getFriends($options[0], $criteria2);
         $block['lang_allfriends'] = _MB_SUICO_ALLFRIENDS;
         $block['lang_nofriends']  = _MB_SUICO_NOFRIENDSYET;
