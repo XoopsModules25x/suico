@@ -46,7 +46,9 @@ class FriendsController extends SuicoController
             $configs = $this->configsFactory->getObjects($criteria);
             $config  = $configs[0]->getVar('friends');
             if (!$this->checkPrivilegeLevel($config)) {
-                \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, \_MD_SUICO_NOPRIVILEGE);
+                //mb temporary fix for self-loop
+//                \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, \_MD_SUICO_NOPRIVILEGE);
+                redirect_header('/', 10, \_MD_SUICO_NOPRIVILEGE);
             }
         }
         return true;

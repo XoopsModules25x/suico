@@ -105,6 +105,8 @@ CREATE TABLE `suico_configs` (
     `backup_password` VARCHAR(255) NOT NULL,
     `backup_email`    VARCHAR(255) NOT NULL,
     `end_suspension`  INT(11)      NOT NULL DEFAULT 0,
+    `date_created` INT(11) UNSIGNED NOT NULL DEFAULT 0,
+    `date_updated` INT(11) UNSIGNED NOT NULL DEFAULT 0,
     PRIMARY KEY (`config_id`),
     KEY `config_uid` (`config_uid`)
 )

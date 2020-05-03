@@ -309,7 +309,7 @@ if ('submit' === $op) {
             $criteria_friends     = new Criteria('friend1_uid', $controller->uidOwner);
             $criteriaIsfriend     = new CriteriaCompo(new Criteria('friend2_uid', $userdata['uid']));
             $criteriaIsfriend->add($criteria_friends);
-            $controller->isFriend   = $controller->friendshipsFactory->getCount($criteria_isfriend);
+            $controller->isFriend   = $controller->friendshipsFactory->getCount($criteriaIsfriend);
             $userdata['isFriend']   = $controller->isFriend;
             $friendrequestFactory   = new Suico\FriendrequestHandler($xoopsDB);
             $criteria_selfrequest   = new Criteria('friendrequester_uid', $controller->uidOwner);

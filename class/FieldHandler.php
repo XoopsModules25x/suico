@@ -72,7 +72,7 @@ class FieldHandler extends \XoopsPersistableObjectHandler
         if (!($obj instanceof $this->className)) {
             return false;
         }
-        /* @var ProfileProfileHandler $profileHandler */
+        /* @var Suico\ProfileHandler $profileHandler */
         $profileHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Profile');
         $obj->setVar('field_name', \str_replace(' ', '_', $obj->getVar('field_name')));
         $obj->cleanVars();
@@ -196,8 +196,8 @@ class FieldHandler extends \XoopsPersistableObjectHandler
         if (!($obj instanceof $this->className)) {
             return false;
         }
-        /* @var ProfileProfileHandler $profileHandler */
-        $profileHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Profile');
+        /* @var ProfileHandler $profileHandler */
+        $profileHandler = Helper::getInstance()->getHandler('Profile');
         // remove column from table
         $sql = 'ALTER TABLE ' . $profileHandler->table . ' DROP `' . $obj->getVar('field_name', 'n') . '`';
         if ($this->db->query($sql)) {
@@ -206,14 +206,12 @@ class FieldHandler extends \XoopsPersistableObjectHandler
                 return false;
             }
             if ($obj->getVar('field_show') || $obj->getVar('field_edit')) {
-                /* @var XoopsModuleHandler $moduleHandler */
-                $moduleHandler = \xoops_getHandler('module');
-                $suico_module  = $moduleHandler->getByDirname('suico');
-                if (\is_object($suico_module)) {
+                $moduleSuico = Helper::getInstance()->getModule();
+                if (\is_object($moduleSuico)) {
                     // Remove group permissions
-                    /* @var XoopsGroupPermHandler $grouppermHandler */
+                    /* @var \XoopsGroupPermHandler $grouppermHandler */
                     $grouppermHandler = \xoops_getHandler('groupperm');
-                    $criteria         = new \CriteriaCompo(new \Criteria('gperm_modid', $suico_module->getVar('mid')));
+                    $criteria         = new \CriteriaCompo(new \Criteria('gperm_modid', $moduleSuico->getVar('mid')));
                     $criteria->add(new \Criteria('gperm_itemid', $obj->getVar('field_id')));
                     return $grouppermHandler->deleteAll($criteria);
                 }

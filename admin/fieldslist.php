@@ -18,6 +18,7 @@
  */
 
 use XoopsModules\Suico;
+use XoopsModules\Suico\Form\FieldForm;
 
 include_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
@@ -31,12 +32,12 @@ switch ($op) {
     default:
     case 'list':
         $fields = $fieldHandler->getObjects(null, true, false);
-        /* @var XoopsModuleHandler $moduleHandler */
+        /* @var \XoopsModuleHandler $moduleHandler */
         $moduleHandler = xoops_getHandler('module');
         $modules       = $moduleHandler->getObjects(null, true);
         /* @var Suico\CategoryHandler $categoryHandler */
         $categoryHandler = $helper->getHandler('Category');
-        $criteria        = new CriteriaCompo();
+        $criteria        = new \CriteriaCompo();
         $criteria->setSort('cat_weight');
         $cats = $categoryHandler->getObjects($criteria, true);
         unset($criteria);
@@ -96,9 +97,8 @@ switch ($op) {
         $template_main = 'admin/suico_admin_fieldslist.tpl';
         break;
     case 'new':
-        include_once dirname(__DIR__) . '/include/forms.php';
         $obj  = $fieldHandler->create();
-        $form = suico_getFieldForm($obj);
+        $form = new FieldForm($obj);
         $form->display();
         break;
     case 'edit':
@@ -106,8 +106,7 @@ switch ($op) {
         if (!$obj->getVar('field_config') && !$obj->getVar('field_show') && !$obj->getVar('field_edit')) { //If no configs exist
             redirect_header('fieldslist.php', 2, _AM_SUICO_FIELDNOTCONFIGURABLE);
         }
-        include_once dirname(__DIR__) . '/include/forms.php';
-        $form = suico_getFieldForm($obj);
+        $form = new FieldForm($obj);
         $form->display();
         break;
     case 'reorder':
@@ -129,9 +128,9 @@ switch ($op) {
             if (count($ids) > 0) {
                 $errors = [];
                 //if there are changed fields, fetch the fieldcategory objects
-                /* @var XoopsModuleHandler $fieldHandler */
+                /* @var \XoopsModuleHandler $fieldHandler */
                 $fieldHandler = $helper->getHandler('Field');
-                $fields       = $fieldHandler->getObjects(new Criteria('field_id', '(' . implode(',', $ids) . ')', 'IN'), true);
+                $fields       = $fieldHandler->getObjects(new \Criteria('field_id', '(' . implode(',', $ids) . ')', 'IN'), true);
                 foreach ($ids as $i) {
                     $fields[$i]->setVar('field_weight', (int)$weight[$i]);
                     $fields[$i]->setVar('cat_id', (int)$category[$i]);
@@ -217,7 +216,7 @@ switch ($op) {
             $obj->setVar('step_id', $_REQUEST['step_id']);
         }
         if ($fieldHandler->insert($obj)) {
-            /* @var XoopsGroupPermHandler $grouppermHandler */
+            /* @var \XoopsGroupPermHandler $grouppermHandler */
             $grouppermHandler = xoops_getHandler('groupperm');
             $perm_arr         = [];
             if ($obj->getVar('field_show')) {
@@ -232,9 +231,9 @@ switch ($op) {
             }
             if (count($perm_arr) > 0) {
                 foreach ($perm_arr as $perm) {
-                    $criteria = new CriteriaCompo(new Criteria('gperm_name', $perm));
-                    $criteria->add(new Criteria('gperm_itemid', (int)$obj->getVar('field_id')));
-                    $criteria->add(new Criteria('gperm_modid', (int)$GLOBALS['xoopsModule']->getVar('mid')));
+                    $criteria = new \CriteriaCompo(new \Criteria('gperm_name', $perm));
+                    $criteria->add(new \Criteria('gperm_itemid', (int)$obj->getVar('field_id')));
+                    $criteria->add(new \Criteria('gperm_modid', (int)$GLOBALS['xoopsModule']->getVar('mid')));
                     if (isset($_REQUEST[$perm]) && is_array($_REQUEST[$perm])) {
                         $perms = $grouppermHandler->getObjects($criteria);
                         if (count($perms) > 0) {
@@ -258,7 +257,7 @@ switch ($op) {
                         }
                         $removed_groups = array_diff(array_keys($groups), $_REQUEST[$perm]);
                         if (count($removed_groups) > 0) {
-                            $criteria->add(new Criteria('gperm_groupid', '(' . implode(',', $removed_groups) . ')', 'IN'));
+                            $criteria->add(new \Criteria('gperm_groupid', '(' . implode(',', $removed_groups) . ')', 'IN'));
                             $grouppermHandler->deleteAll($criteria);
                         }
                         unset($groups);
@@ -271,9 +270,8 @@ switch ($op) {
             $url = $redirect_to_edit ? 'fieldslist.php?op=edit&amp;id=' . $obj->getVar('field_id') : 'fieldslist.php';
             redirect_header($url, 3, sprintf(_AM_SUICO_SAVEDSUCCESS, _AM_SUICO_FIELD));
         }
-        include_once dirname(__DIR__) . '/include/forms.php';
         echo $obj->getHtmlErrors();
-        $form = suico_getFieldForm($obj);
+        $form = new FieldForm($obj);
         $form->display();
         break;
     case 'delete':

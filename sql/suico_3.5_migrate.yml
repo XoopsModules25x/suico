@@ -191,6 +191,10 @@ suico_configs:
       attributes: ' varchar(255)  NOT NULL '
     - name: end_suspension
       attributes: ' int(11)  NOT NULL  DEFAULT ''0'' '
+    - name: date_created
+      attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
+    - name: date_updated
+      attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
   keys:
     config_uid:
       columns: config_uid

@@ -161,7 +161,7 @@ class Utility extends Common\SysUtility
                             }
                             $story->setPicture(\basename($destname));
                         } else {
-                            echo _AM_UPLOAD_ERROR . ' ' . $uploader->getErrors();
+                            echo _AM_SUICO_UPLOAD_ERROR . ' ' . $uploader->getErrors();
                         }
                     } else {
                         echo $uploader->getErrors();

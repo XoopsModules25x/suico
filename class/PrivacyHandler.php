@@ -44,7 +44,7 @@ class PrivacyHandler extends \XoopsPersistableObjectHandler
      */
     public function __construct(\XoopsDatabase $db = null, $helper = null)
     {
-        /** @var \XoopsModules\Suico\Helper $this ->helper */
+        /** @var \XoopsModules\Suico\Helper $this->helper */
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {

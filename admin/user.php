@@ -19,6 +19,7 @@
  */
 
 use Xmf\Request;
+use XoopsModules\Suico\Form\UserForm;
 
 include_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
@@ -47,10 +48,9 @@ switch ($op) {
     // no break;
     case 'new':
         xoops_loadLanguage('main', $GLOBALS['xoopsModule']->getVar('dirname', 'n'));
-        include_once dirname(__DIR__) . '/include/forms.php';
         $obj = $handler->createUser();
         $obj->setGroups([XOOPS_GROUP_USERS]);
-        $form = suico_getUserForm($obj);
+        $form = new UserForm($obj);
         $form->display();
         break;
     case 'edit':
@@ -60,8 +60,7 @@ switch ($op) {
             // If not webmaster trying to edit a webmaster - disallow
             redirect_header('user.php', 3, _US_NOEDITRIGHT);
         }
-        include_once dirname(__DIR__) . '/include/forms.php';
-        $form = suico_getUserForm($obj);
+        $form = new UserForm($obj);
         $form->display();
         break;
     case 'save':
@@ -71,7 +70,7 @@ switch ($op) {
             exit;
         }
         // Dynamic fields
-        /* @var  ProfileProfileHandler $profileHandler */
+        /* @var  Suico\ProfileHandler $profileHandler */
         $profileHandler = $helper->getHandler('Profile');
         // Get fields
         $fields     = $profileHandler->loadFields();
@@ -175,9 +174,8 @@ switch ($op) {
             }
         }
         $user->setGroups($new_groups);
-        include_once dirname(__DIR__) . '/include/forms.php';
         echo $user->getHtmlErrors();
-        $form = suico_getUserForm($user, $profile);
+        $form = new UserForm($user, $profile);
         $form->display();
         break;
     case 'delete':

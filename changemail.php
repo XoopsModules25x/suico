@@ -46,7 +46,7 @@ if (!isset($_POST['submit']) || !isset($_POST['passwd'])) {
     $email  = Request::getString('newmail', '', 'POST');
     $errors = [];
     if (!password_verify($oldpass, $GLOBALS['xoopsUser']->getVar('pass', 'n'))) {
-        $errors[] = _MA_SUICO_WRONGPASSWORD;
+        $errors[] = _MD_SUICO_WRONGPASSWORD;
     }
     if (!checkEmail($email)) {
         $errors[] = _US_INVALIDMAIL;

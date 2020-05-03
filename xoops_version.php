@@ -1052,10 +1052,10 @@ $modversion['templates'] = [
 global $xoopsModule;
 if (is_object($xoopsModule) && $xoopsModule->dirname() === $modversion['dirname']) {
     $moduleHandler = xoops_getHandler('module');
-    $mod_suico     = $moduleHandler->getByDirname('suico');
+    $moduleSuico     = $moduleHandler->getByDirname('suico');
     /** @var \XoopsConfigHandler $confHandler */
     $confHandler  = xoops_getHandler('config');
-    $moduleConfig = $confHandler->getConfigsByCat(0, $mod_suico->getVar('mid'));
+    $moduleConfig = $confHandler->getConfigsByCat(0, $moduleSuico->getVar('mid'));
     if ($GLOBALS['xoopsUser']) {
         $modversion['sub'][0]['name'] = _MI_SUICO_MYPROFILE;
         $modversion['sub'][0]['url']  = 'index.php';
