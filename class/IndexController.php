@@ -37,9 +37,8 @@ class IndexController extends SuicoController
      * @param string|null $section
      * @return int|void
      */
-    public function checkPrivilege(
-        $section = null
-    ) {
+    public function checkPrivilege($section = null)
+    {
         global $xoopsModuleConfig;
         if ('' === \trim($section)) {
             return -1;

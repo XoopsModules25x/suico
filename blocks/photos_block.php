@@ -64,50 +64,58 @@ function b_suico_lastpictures_show($options)
 function b_suico_lastpictures_edit($options)
 {
     $form = _MB_SUICO_SHOWPICTURETITLE . '&nbsp;';
-    if (1 == $options[0]) {
-        $chk = " checked='checked'";
+    $chk = '';
+    if (isset($options[0]) && 0 != $options[0]) {
+        $chk = ' checked';
     }
     $form .= "<input type='radio' name='options[0]' value='1'" . $chk . ' >&nbsp;' . _YES . '';
     $chk  = '';
-    if (0 == $options[0]) {
-        $chk = " checked='checked'";
+    if (!isset($options[0]) || 0 == $options[0]) {
+        $chk = ' checked';
     }
     $form .= "&nbsp;<input type='radio' name='options[0]' value='0'" . $chk . ' >' . _NO . '<br>';
 
+
     $form .= _MB_SUICO_SHOWPICTURECAPTION . '&nbsp;';
-    if (1 == $options[1]) {
-        $chk = " checked='checked'";
+    if (isset($options[1]) && 1 == $options[1]) {
+        $chk = ' checked';
     }
     $form .= "<input type='radio' name='options[1]' value='1'" . $chk . ' >&nbsp;' . _YES . '';
     $chk  = '';
-    if (0 == $options[1]) {
-        $chk = " checked='checked'";
+    if (!isset($options[1]) || 0 == $options[1]) {
+        $chk = ' checked';
     }
     $form .= "&nbsp;<input type='radio' name='options[1]' value='0'" . $chk . ' >' . _NO . '<br>';
 
 	$form .= _MB_SUICO_SHOWPICTUREDATE . '&nbsp;';
-    if (1 == $options[2]) {
-        $chk = " checked='checked'";
+    if (isset($options[2]) && 1 == $options[2]) {
+        $chk = ' checked';
     }
+
+
     $form .= "<input type='radio' name='options[2]' value='1'" . $chk . ' >&nbsp;' . _YES . '';
     $chk  = '';
-    if (0 == $options[2]) {
-        $chk = " checked='checked'";
+    if (!isset($options[2]) || 0 == $options[2]) {
+        $chk = ' checked';
     }
     $form .= "&nbsp;<input type='radio' name='options[2]' value='0'" . $chk . ' >' . _NO . '<br>';
 
+
 	$form .= _MB_SUICO_SHOWPICTUREOWNER . '&nbsp;';
-    if (1 == $options[3]) {
-        $chk = " checked='checked'";
+    if (isset($options[3]) && 1 == $options[3]) {
+        $chk = ' checked';
     }
+
+
     $form .= "<input type='radio' name='options[3]' value='1'" . $chk . ' >&nbsp;' . _YES . '';
     $chk  = '';
-    if (0 == $options[3]) {
-        $chk = " checked='checked'";
+    if (!isset($options[3]) || 0 == $options[3]) {
+        $chk = ' checked';
     }
     $form .= "&nbsp;<input type='radio' name='options[3]' value='0'" . $chk . ' >' . _NO . '<br>';
 
+
 	$form .= _MB_SUICO_TOTALPICTUREDISPLAY . '&nbsp;';
-    $form .= "<input type='text' name='options[4]' value='" . $options[4] . "'>";
+    $form .= "<input type='text' name='options[4]' value='" . (isset($options[4]) ? $options[4]:0) . "'>";
     return $form; 
 }

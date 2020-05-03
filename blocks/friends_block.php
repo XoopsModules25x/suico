@@ -58,20 +58,21 @@ function b_suico_friends_show($options)
 }
 
 /**
- * @param $options
+ * @param array $options
  * @return string
  */
 function b_suico_friends_edit($options)
 {
     $form .= _MB_SUICO_TOTALFRIENDSTOSHOW . '&nbsp;';
     $form .= "<input type='text' name='options[0]' value='" . $options[0] . "'><br>";
+
     $form .= _MB_SUICO_ENABLEPM . '&nbsp;';
-    if (1 === $options[1]) {
+    if (isset($options[1]) && 1 === $options[1]) {
         $chk = ' checked';
     }
     $form .= "<input type='radio' name='options[1]' value='1'" . $chk . '>&nbsp;' . _YES . '';
     $chk  = '';
-    if (0 === $options[1]) {
+    if (!isset($options[1]) || 0 === $options[1]) {
         $chk = ' checked';
     }
     $form .= "&nbsp;<input type='radio' name='options[1]' value='0'" . $chk . '>' . _NO . '<br>';

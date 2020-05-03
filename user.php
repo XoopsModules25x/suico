@@ -26,6 +26,7 @@ declare(strict_types=1);
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 use Xmf\Request;
+use XoopsModules\Suico\Form\RegisterForm;
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_user.tpl';
 require __DIR__ . '/header.php';
@@ -73,7 +74,7 @@ if ('register' === $op) {
         $_POST          = [];
         $current_opname = 'op'; // does not matter, it isn't there
     }
-    $op           = $_POST[$current_opname] ?? 'register';
+    $op           = Request::getString($current_opname, 'register', 'POST');
     $current_step = isset($_POST['step']) ? (int)$_POST['step'] : 0;
     // The newly introduced variable $_SESSION['profile_post'] is contaminated by $_POST, thus we use an old vaiable to hold uid parameter
     $uid = !empty($_SESSION['profile_register_uid']) ? (int)$_SESSION['profile_register_uid'] : 0;
@@ -99,7 +100,7 @@ if ('register' === $op) {
     if (isset($steps[$current_step])) {
         $xoBreadcrumbs[] = ['title' => $steps[$current_step]['step_name']];
     }
-    /* @var XoopsMemberHandler $memberHandler */
+    /* @var \XoopsMemberHandler $memberHandler */
     $memberHandler  = xoops_getHandler('member');
     $profileHandler = $helper->getHandler('Profile');
     $fields         = $profileHandler->loadFields();
@@ -306,9 +307,8 @@ if ('register' === $op) {
         }
     }
     if (!empty($stop) || isset($steps[$current_step])) {
-        include_once __DIR__ . '/include/forms.php';
         $current_step = empty($stop) ? $current_step : $current_step - 1;
-        $reg_form     = suico_getRegisterForm($newuser, $profile, $steps[$current_step]);
+        $reg_form     = new RegisterForm($newuser, $profile, $steps[$current_step]);
         $reg_form->assign($GLOBALS['xoopsTpl']);
         $GLOBALS['xoopsTpl']->assign('current_step', $current_step);
         $GLOBALS['xoopsTpl']->assign('stop', $stop);

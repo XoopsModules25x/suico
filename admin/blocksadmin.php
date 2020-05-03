@@ -79,7 +79,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
                  'CO_' . $moduleDirNameUpper . '_' . 'VISIBLE'
              ) . "</th><th align='center'>" . _AM_SYSTEM_BLOCKS_VISIBLEIN . "</th><th align='center'>" . _AM_SYSTEM_ADGS . "</th><th align='center'>" . _AM_SYSTEM_BLOCKS_BCACHETIME . "</th><th align='center'>" . constant('CO_' . $moduleDirNameUpper . '_' . 'ACTION') . '</th></tr>
         ';
-        $block_arr   = XoopsBlock::getByModule($xoopsModule->mid());
+        $block_arr   = \XoopsBlock::getByModule($xoopsModule->mid());
         $block_count = count($block_arr);
         $class       = 'even';
         $cachetimes  = [
@@ -418,14 +418,17 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         $weight,
         $visible,
         $side,
-        $bcachetime
+        $bcachetime,
+        $bmodule
     ) {
+        /** @var \XoopsBlock $myblock */
         $myblock = new XoopsBlock($bid);
         $myblock->setVar('title', $title);
         $myblock->setVar('weight', $weight);
         $myblock->setVar('visible', $visible);
         $myblock->setVar('side', $side);
         $myblock->setVar('bcachetime', $bcachetime);
+        $myblock->setVar('bmodule', $bmodule);
         $myblock->store();
     }
 
@@ -506,6 +509,20 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         $myblock->setVar('visible', $bvisible);
         $myblock->setVar('side', $bside);
         $myblock->setVar('bcachetime', $bcachetime);
+        //update block options
+        if (isset($options)) {
+            $options_count = count($options);
+            if ($options_count > 0) {
+                //Convert array values to comma-separated
+                for ($i = 0; $i < $options_count; ++$i) {
+                    if (is_array($options[$i])) {
+                        $options[$i] = implode(',', $options[$i]);
+                    }
+                }
+                $options = implode('|', $options);
+                $myblock->setVar('options', $options);
+            }
+        }
         $myblock->store();
         global $xoopsDB;
         $moduleDirName      = basename(dirname(__DIR__));

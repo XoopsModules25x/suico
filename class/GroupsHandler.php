@@ -60,7 +60,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Suico\Helper $this ->helper */
+        /** @var \XoopsModules\Suico\Helper $this->helper */
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
@@ -469,6 +469,7 @@ var elestyle = xoopsGetElementById(img).style;
     )
     {
         global $xoopsUser, $xoopsDB, $_POST, $_FILES;
+        /** @var Groups $group */
         //search logged user id
         $uid = $xoopsUser->getVar('uid');
         if ('' === $group || Groups::class !== \get_class($group)) {
@@ -556,9 +557,8 @@ var elestyle = xoopsGetElementById(img).style;
 	
     public function getComment($group_id)
     {
-        $module_handler = xoops_gethandler("module"); 
-		$mod_suico = $module_handler->getByDirname('suico');
-		$sql= "SELECT count(com_id) FROM ".$GLOBALS['xoopsDB']->prefix('xoopscomments')." WHERE com_modid = '".$mod_suico->getVar('mid')."' AND com_itemid = '".$group_id."'";
+		$moduleSuico = Helper::getInstance()->getModule();
+		$sql= "SELECT count(com_id) FROM ".$GLOBALS['xoopsDB']->prefix('xoopscomments')." WHERE com_modid = '".$moduleSuico->getVar('mid')."' AND com_itemid = '".$group_id."'";
 		$result = $GLOBALS['xoopsDB']->query($sql);
 		while ($row = $GLOBALS['xoopsDB']->fetchArray($result)) {
 			$group_total_comments=$row['count(com_id)'];

@@ -71,10 +71,7 @@ class SuicoController extends \XoopsObject
      * @param \XoopsDatabase $xoopsDatabase
      * @param                $user
      */
-    public function __construct(
-        XoopsDatabase $xoopsDatabase,
-        $user
-    ) {
+    public function __construct(\XoopsDatabase $xoopsDatabase, $user, $xoopsModule=null) {
         $this->helper         = Helper::getInstance();
         $this->db             = $xoopsDatabase;
         $this->user           = $user;
@@ -144,7 +141,7 @@ class SuicoController extends \XoopsObject
             }
         }
         /**
-         * If anonym and uid not set then redirect to admins profile
+         * If anonymous and uid not set then redirect to admins profile
          * Else redirects to own profile
          */
         if (empty($this->user)) {
@@ -180,9 +177,9 @@ class SuicoController extends \XoopsObject
         if (!$xoopsUser) {
             $this->isFriend = 0;
         } else {
-            $criteria_isFriend = new CriteriaCompo(new Criteria('friend2_uid', $this->user->getVar('uid')));
-            $criteria_isFriend->add($criteria_friends);
-            $this->isFriend = $this->friendshipsFactory->getCount($criteria_isFriend);
+            $criteriaIsfriend = new CriteriaCompo(new Criteria('friend2_uid', $this->user->getVar('uid')));
+            $criteriaIsfriend->add($criteria_friends);
+            $this->isFriend = $this->friendshipsFactory->getCount($criteriaIsfriend);
         }
         $this->privilegeLevel = 0;
         if (1 === $this->isAnonym) {
