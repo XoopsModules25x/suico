@@ -26,6 +26,7 @@ use CriteriaElement;
 use XoopsDatabase;
 use XoopsObject;
 use XoopsPersistableObjectHandler;
+use XoopsModules\Suico\Helper;
 
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
@@ -35,19 +36,21 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  */
 class FriendrequestHandler extends XoopsPersistableObjectHandler
 {
+    /**
+     * @var \XoopsModules\Suico\Helper
+     */
     public $helper;
     public $isAdmin;
 
     /**
      * Constructor
      * @param \XoopsDatabase|null             $xoopsDatabase
-     * @param \XoopsModules\Suico\Helper|null $helper
+     * @param Helper|null $helper
      */
     public function __construct(
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Suico\Helper $this->helper */
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
@@ -213,7 +216,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_friendrequests');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
+        if (isset($criteriaElement) && $criteriaElement instanceof \CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
             if ('' !== $criteriaElement->getSort()) {
                 $sql .= ' ORDER BY ' . $criteriaElement->getSort() . ' ' . $criteriaElement->getOrder();

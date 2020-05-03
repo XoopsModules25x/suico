@@ -11,16 +11,14 @@ use XoopsFormLabel;
 use XoopsFormSelectUser;
 
 /**
- * Get {@link XoopsThemeForm} for editing a step
  *
- * @param \XoopsModules\Suico\Regstep $step {@link Regstep} to edit
+ * @param Regstep $step {@link Regstep} to edit
  * @param bool                        $action
  */
 
 class StepForm extends XoopsThemeForm
 {
-
-    function __construct(Suico\Regstep $step = null, $action = false)
+    function __construct(Regstep $step = null, $action = false)
     {
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];
