@@ -355,7 +355,7 @@ define('_MD_SUICO_MYFRIEND', 'Friend');
 define('_MD_SUICO_FRIENDREQUEST_SENT', 'Friend Request Sent');
 define('_MD_SUICO_FRIENDREQUEST_CANCEL', 'Cancel Friend Request');
 define('_MD_SUICO_FRIENDSHIP_STATUS', 'Friendship Status');
-define('_MD_SUICO_PROFILEVISITORS', 'Profile Visitors');
+define('_MD_SUICO_PROFILEVISITORS', 'Latest Visitors');
 define('_MD_SUICO_VIDEO_FEATURED', 'Featured Video');
 define('_MD_SUICO_ALLVIDEOS', 'View all videos');
 define('_MD_SUICO_OWNEROFGROUP', 'Group Owner');
