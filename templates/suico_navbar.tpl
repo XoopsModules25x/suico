@@ -77,13 +77,13 @@
                                     <div class="profile-header-info" style="padding-left:15px;">
                                         <h4 class="m-t-10 m-b-5"><{$owner_uname}></h4> <{if $allow_profile_general==1}><{if $user_realname!=''}><h4 class="m-t-10 m-b-5 font-weight-light"><{$user_uname}></h4><{/if}><{/if}>
 
-                                        <{if $allow_profile_general==1}>
+                                        <{if $allow_profile_general}>
                                             <{if $user_occupation || $user_location }>
                                                 <p class="m-b-10"><{if $user_occupation}><i class="fa fa-briefcase"></i>&nbsp;<{$user_occupation}><{/if}> <{if $user_occupation}><i class="fa fa-map-marker"></i>&nbsp;<{$user_location}><{/if}></p>
                                             <{/if}>
                                         <{/if}>
 
-                                        <{if $allow_profile_contact==1}>
+                                        <{if $allow_profile_contact}>
                                             <{if $user_email || $user_websiteurl }>
                                                 <p class="m-b-10">
                                                     <{if $user_viewemail!='0'}><i class="fa fa-envelope"></i>&nbsp;<{mailto address=$user_email encode="javascript"}><{/if}>
@@ -92,8 +92,7 @@
                                             <{/if}>
                                         <{/if}>
 
-
-                                        <{if $allow_profile_contact==1}>
+                                        <{if $allow_profile_contact}>
                                             <{if $allow_friends}>
                                                 <{if $isAnonym!=1 && $isOwner!=1 }>
                                                     <button type="button" class="btn btn-success btn-sm">

@@ -31,12 +31,7 @@
                             </div>
                         <{/if}>
 
-                        <{if $allow_profile_general==1}>
-                        <{/if}>
-
-                        <{if $allow_profile_stats}>
-
-                        <{/if}>
+						<{if $allow_profile_general}>
                         <h5><{$smarty.const._MD_SUICO_USER_DETAILS}> <i class="fa fa-user-circle"></i></h5>
                         <{foreach item=category from=$categories}>
                             <{if isset($category.fields)}>
@@ -49,6 +44,7 @@
                                 <{/foreach}>
                             <{/if}>
                         <{/foreach}>
+						<{/if}>
 
                         <{if ($isOwner==1)}>
                             <{if $visitors}>
@@ -110,7 +106,7 @@
 
             </div>
 
-            <{if $allow_videos==1 }>
+            <{if $allow_videos==1}>
                 <{if $featuredvideocode!="" }>
                     <div class="container-fluid">
                         <div class="row">
@@ -129,7 +125,6 @@
                 <{/if}>
             <{/if}>
 
-            <{if $allow_profile_general==1}>
                 <{if $allow_friends==1}>
                     <{if $countFriends!=0}>
                         <br>
@@ -157,9 +152,7 @@
                         </div>
                     <{/if}>
                 <{/if}>
-            <{/if}>
 
-            <{if $allow_profile_general==1}>
                 <{if $allow_groups==1}>
                     <br>
                     <{if $countGroups!=0}>
@@ -184,12 +177,9 @@
                         </div>
                     <{/if}>
                 <{/if}>
-            <{/if}>
-
 
         </div><!-- end of group2 -->
         <{include file="db:suico_footer.tpl"}>
-
         <!-- end -->
     </div>
 </div>
