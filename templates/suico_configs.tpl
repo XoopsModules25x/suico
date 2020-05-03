@@ -78,8 +78,8 @@
 
                                         <div class="form-check"><label class="form-check-label"><input type="radio" class="form-check-input" name="friends" id="friends0" value="0" <{if $fri==0}>checked<{/if}>><label for="friends0"><{$lang_everyone}></label></label></div>
                                         <div class="form-check"><label class="form-check-label"><input type="radio" class="form-check-input" name="friends" id="friends1" value="1" <{if $fri==1}>checked<{/if}>><label for="friends1"><{$lang_only_users}></label></label></div>
-                                        <div class="form-check"><label class="form-check-label"><input type="radio" class="form-check-input" name="friends" id="friends2" value="2" <{if $fri==2}>checked<{/if}>><label for="friends2"><{$lang_only_friends}></label></label></div>
-                                        <div class="form-check"><label class="form-check-label"><input type="radio" class="form-check-input" name="friends" id="friends3" value="3" <{if $fri==3}>checked<{/if}>><label for="friends3"><{$lang_only_me}></label></label></div>
+<{*                                        <div class="form-check"><label class="form-check-label"><input type="radio" class="form-check-input" name="friends" id="friends2" value="2" <{if $fri==2}>checked<{/if}>><label for="friends2"><{$lang_only_friends}></label></label></div>*}>
+<{*                                        <div class="form-check"><label class="form-check-label"><input type="radio" class="form-check-input" name="friends" id="friends3" value="3" <{if $fri==3}>checked<{/if}>><label for="friends3"><{$lang_only_me}></label></label></div>*}>
 
                                     </div>
                                     <br>
