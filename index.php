@@ -36,7 +36,7 @@ $controller = new IndexController($xoopsDB, $xoopsUser);
 $nbSections = $controller->getNumbersSections();
 $uid        = $controller->uidOwner;
 $categories = [];
-/* @var  XoopsGroupPermHandler $grouppermHandler */
+/* @var  \XoopsGroupPermHandler $grouppermHandler */
 $grouppermHandler = xoops_getHandler('groupperm');
 $groups           = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : [XOOPS_GROUP_ANONYMOUS];
 if (is_object($GLOBALS['xoopsUser']) && $uid == $GLOBALS['xoopsUser']->getVar('uid')) {
@@ -257,11 +257,11 @@ if (isset($nbSections['countGroups']) && $nbSections['countGroups'] > 0) {
  * Friends
  */
 if ($xoopsUser) {
-    $controller = new Suico\FriendsController($xoopsDB, $xoopsUser);
+    $friendController = new Suico\FriendsController($xoopsDB, $xoopsUser);
     $friendrequest = 0;
-    if (1 === $controller->isOwner) {
-        $criteria_uidfriendrequest = new Criteria('friendrequestto_uid', $controller->uidOwner);
-        $newFriendrequest          = $controller->friendrequestFactory->getObjects($criteria_uidfriendrequest);
+    if (1 === $friendController->isOwner) {
+        $criteria_uidfriendrequest = new Criteria('friendrequestto_uid', $friendController->uidOwner);
+        $newFriendrequest          = $friendController->friendrequestFactory->getObjects($criteria_uidfriendrequest);
         if ($newFriendrequest) {
             $countFriendrequest     = count($newFriendrequest);
             $memberHandler = xoops_getHandler('member');
@@ -297,10 +297,10 @@ $xoopsTpl->assign('lang_myfriend', _MD_SUICO_MYFRIEND);
 $xoopsTpl->assign('lang_friendrequestsent', _MD_SUICO_FRIENDREQUEST_SENT);
 $xoopsTpl->assign('lang_acceptfriend', _MD_SUICO_FRIEND_ACCEPT);
 $xoopsTpl->assign('lang_rejectfriend', _MD_SUICO_FRIEND_REJECT);
-$criteria_friends = new Criteria('friend1_uid', $controller->uidOwner);
-$friends          = $controller->friendshipsFactory->getFriends(8, $criteria_friends);
+$criteria_friends = new Criteria('friend1_uid', $friendController->uidOwner);
+$friends          = $friendController->friendshipsFactory->getFriends(8, $criteria_friends);
 $xoopsTpl->assign('friends', $friends);
-$xoopsTpl->assign('lang_friendstitle', sprintf(_MD_SUICO_FRIENDSTITLE, $controller->nameOwner));
+$xoopsTpl->assign('lang_friendstitle', sprintf(_MD_SUICO_FRIENDSTITLE, $friendController->nameOwner));
 $xoopsTpl->assign('lang_viewallfriends', _MD_SUICO_ALLFRIENDS);
 $xoopsTpl->assign('lang_nofriendsyet', _MD_SUICO_NOFRIENDSYET);
 //search
