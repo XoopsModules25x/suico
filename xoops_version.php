@@ -24,7 +24,7 @@ $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 $modversion = [
     'version'             => 3.5,
     'module_status'       => 'Beta 1',
-    'release_date'        => '2020/05/01',
+    'release_date'        => '2020/05/03',
     'name'                => _MI_SUICO_MODULE_NAME,
     'description'         => _MI_SUICO_MODULEDESC,
     'official'            => 0,
@@ -57,7 +57,7 @@ $modversion = [
     'module_website_url'  => 'https://xoops.org',
     'module_website_name' => 'XOOPS Project',
     // ------------------- Min Requirements -------------------
-    'min_php'             => '7.2',
+    'min_php'             => '7.1',
     'min_xoops'           => '2.5.10',
     'min_admin'           => '1.2',
     'min_db'              => [
@@ -162,58 +162,7 @@ $modversion['submit_feature']    = 'http://sourceforge.net/tracker/?func=add&gro
 xoops_load(
     'xoopseditorhandler'
 );
-/*
-$modversion['configcat']['friends']      = [
-    'name'        => _MI_SUICO_CONFCAT_NOTES,
-    'description' => _MI_SUICO_CONFCAT_NOTES_DSC,
-];
-// Config categories
-$modversion['configcat']['photos'] = [
-    'name'        => _MI_SUICO_CONFCAT_PHOTOS,
-    'description' => _MI_SUICO_CONFCAT_PHOTOS_DSC,
-];
-$modversion['configcat']['audios']      = [
-    'name'        => _MI_SUICO_CONFCAT_AUDIOS,
-    'description' => _MI_SUICO_CONFCAT_AUDIOS_DSC,
-];
-$modversion['configcat']['videos']      = [
-    'name'        => _MI_SUICO_CONFCAT_VIDEOS,
-    'description' => _MI_SUICO_CONFCAT_VIDEOS_DSC,
-];
-$modversion['configcat']['friends']      = [
-    'name'        => _MI_SUICO_CONFCAT_FRIENDS,
-    'description' => _MI_SUICO_CONFCAT_FRIENDS_DSC,
-];
-$modversion['configcat']['groups']      = [
-    'name'        => _MI_SUICO_CONFCAT_GROUPS,
-    'description' => _MI_SUICO_CONFCAT_GROUPS_DSC,
-];
-$modversion['configcat']['editor']      = [
-    'name'        => _MI_SUICO_CONFCAT_EDITOR,
-    'description' => _MI_SUICO_CONFCAT_EDITOR_DSC,
-];
-$modversion['configcat']['upload']      = [
-    'name'        => _MI_SUICO_CONFCAT_UPLOAD,
-    'description' => _MI_SUICO_CONFCAT_UPLOAD_DSC,
-];
-// Config categories
-$modversion['configcat']['memberslist'] = [
-    'name'        => _MI_SUICO_CONFCAT_MEMBERSLIST,
-    'description' => _MI_SUICO_CONFCAT_MEMBERSLIST_DSC,
-];
-$modversion['configcat']['memberslistsearch']      = [
-    'name'        => _MI_SUICO_CONFCAT_MEMBERSLISTSEARCH,
-    'description' => _MI_SUICO_CONFCAT_MEMBERSLISTSEARCH_DSC,
-];
-$modversion['configcat']['general']      = [
-    'name'        => _MI_SUICO_CONFCAT_GENERAL,
-    'description' => _MI_SUICO_CONFCAT_GENERAL_DSC,
-];
-$modversion['configcat']['admin']      = [
-    'name'        => _MI_SUICO_CONFCAT_ADMIN,
-    'description' => _MI_SUICO_CONFCAT_ADMIN_DSC,
-];
-*/
+
 //Configs
 $modversion['config'][] = [
     'name'        => 'general_configs',

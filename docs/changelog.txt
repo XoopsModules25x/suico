@@ -1,5 +1,6 @@
-<h5>3.5 Beta 1    [NOT RELEASED]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.5
+<h5>3.5 Beta 1    [2020-05-03]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.5
 <hr>
+- renamed to SUICO (mamba)
 - Add total comments for Group (liomj)
 - Replace Ligtbox with Magnific Popup Lightbox (liomj)
 - Add Dates and Title in Video Templates (liomj/mamba)
@@ -15,6 +16,26 @@
 - Fix Friendship Status and Approval (liomj)
 - Update templates (liomj)
 - Datetime updates (mamba)
+- fix Recent Visitors (mamba)
+- fix proportional resizing of Pictures in Block (mamba, liomj)
+- fix name missing in friend request (liomj)
+- fix wrong count of groups (liomj)
+- fix online status always "offline" (liomj)
+- fix website button in memberlist (liamj)
+- fix guest access (mamba)
+- fix settings (mamba)
+- fix registered members can see private info (mamba)
+- refactor forms into classes (mamba)
+- update editpicture (liomj)
+- update footer (liomj)
+- fix GUI with tons of templates improvements (liomj)
+- add totals for groups and comments (liomj)
+- use datables in groups (liomj)
+- remove old jQuery (liomj)
+- conversions to Xmf\Request (mamba)
+
+
+
 
 <h5>3.5 Alpha 5    [2020-04-21]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.4
 <hr>

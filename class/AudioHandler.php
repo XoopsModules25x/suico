@@ -53,7 +53,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var Helper $this ->helper */
+        /** @var Helper $this->helper */
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
