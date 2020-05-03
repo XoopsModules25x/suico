@@ -256,8 +256,8 @@ if (isset($nbSections['countGroups']) && $nbSections['countGroups'] > 0) {
 /**
  * Friends
  */
+$friendController = new Suico\FriendsController($xoopsDB, $xoopsUser);
 if ($xoopsUser) {
-    $friendController = new Suico\FriendsController($xoopsDB, $xoopsUser);
     $friendrequest = 0;
     if (1 === $friendController->isOwner) {
         $criteria_uidfriendrequest = new Criteria('friendrequestto_uid', $friendController->uidOwner);
