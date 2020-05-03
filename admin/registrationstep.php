@@ -17,6 +17,10 @@
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
+
+use XoopsModules\Suico\Form\StepForm;
+use XoopsModules\Suico;
+
 include_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 $adminObject->addItemButton(_AM_SUICO_STEP, 'registrationstep.php?op=new', 'add');
@@ -31,14 +35,12 @@ switch ($op) {
         break;
     case 'new':
         $obj = $handler->create();
-        include_once dirname(__DIR__) . '/include/forms.php';
-        $form = profile_getStepForm($obj);
+        $form = new StepForm($obj);
         $form->display();
         break;
     case 'edit':
         $obj = $handler->get($_REQUEST['id']);
-        include_once dirname(__DIR__) . '/include/forms.php';
-        $form = suico_getStepForm($obj);
+        $form = new StepForm($obj);
         $form->display();
         break;
     case 'save':

@@ -26,6 +26,7 @@ declare(strict_types=1);
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 use Xmf\Request;
+use XoopsModules\Suico\Form\RegisterForm;
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_user.tpl';
 require __DIR__ . '/header.php';
@@ -306,9 +307,8 @@ if ('register' === $op) {
         }
     }
     if (!empty($stop) || isset($steps[$current_step])) {
-        include_once __DIR__ . '/include/forms.php';
         $current_step = empty($stop) ? $current_step : $current_step - 1;
-        $reg_form     = suico_getRegisterForm($newuser, $profile, $steps[$current_step]);
+        $reg_form     = new RegisterForm($newuser, $profile, $steps[$current_step]);
         $reg_form->assign($GLOBALS['xoopsTpl']);
         $GLOBALS['xoopsTpl']->assign('current_step', $current_step);
         $GLOBALS['xoopsTpl']->assign('stop', $stop);

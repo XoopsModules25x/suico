@@ -24,6 +24,10 @@ declare(strict_types=1);
 use Xmf\Request;
 use XoopsModules\Suico;
 use XoopsModules\Suico\IndexController;
+use XoopsModules\Suico\Form\FieldForm;
+use XoopsModules\Suico\Form\RegisterForm;
+use XoopsModules\Suico\Form\StepForm;
+use XoopsModules\Suico\Form\UserForm;
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_editprofile.tpl';
 require __DIR__ . '/header.php';
@@ -31,6 +35,8 @@ require __DIR__ . '/header.php';
  * Fetching numbers of groups friends videos pictures etc...
  */
 $controller = new IndexController($xoopsDB, $xoopsUser, $xoopsModule);
+/* @var XoopsMemberHandler $memberHandler */
+$memberHandler = xoops_getHandler('member');
 $nbSections = $controller->getNumbersSections();
 require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
 // If not a user, redirect
@@ -39,7 +45,7 @@ if (!is_object($GLOBALS['xoopsUser'])) {
 }
 $myts = MyTextSanitizer::getInstance();
 $op   = Request::getCmd('op', 'editprofile');
-/* @var XoopsConfigHandler $configHandler */
+/* @var \XoopsConfigHandler $configHandler */
 $configHandler              = xoops_getHandler('config');
 $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
 if ('save' === $op) {
@@ -64,7 +70,7 @@ if ('save' === $op) {
         // Get fields
         $fields = $profileHandler->loadFields();
         // Get ids of fields that can be edited
-        /* @var  XoopsGroupPermHandler $grouppermHandler */
+        /* @var  \XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler = xoops_getHandler('groupperm');
         $editable_fields  = $grouppermHandler->getItemIds('profile_edit', $GLOBALS['xoopsUser']->getGroups(), $GLOBALS['xoopsModule']->getVar('mid'));
         if (!$profile = $profileHandler->get($edituser->getVar('uid'))) {
@@ -95,8 +101,7 @@ if ('save' === $op) {
 }
 if ('editprofile' === $op) {
     require_once $GLOBALS['xoops']->path('header.php');
-    require_once __DIR__ . '/include/forms.php';
-    $form = suico_getUserForm($GLOBALS['xoopsUser']);
+    $form = new UserForm($GLOBALS['xoopsUser']);
     $form->assign($GLOBALS['xoopsTpl']);
     if (!empty($stop)) {
         $GLOBALS['xoopsTpl']->assign('stop', $stop);
@@ -226,8 +231,6 @@ if ('avatarchoose' === $op) {
     if (0 === mb_strpos($user_avatarpath, realpath(XOOPS_UPLOAD_PATH)) && is_file($user_avatarpath)) {
         $oldavatar = $GLOBALS['xoopsUser']->getVar('user_avatar');
         $GLOBALS['xoopsUser']->setVar('user_avatar', $user_avatar);
-        /* @var XoopsMemberHandler $memberHandler */
-        $memberHandler = xoops_getHandler('member');
         if (!$memberHandler->insertUser($GLOBALS['xoopsUser'])) {
             require $GLOBALS['xoops']->path('header . php');
             echo $GLOBALS['xoopsUser']->getHtmlErrors();
