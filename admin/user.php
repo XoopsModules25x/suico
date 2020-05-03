@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Extended User Profile
  *

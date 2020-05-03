@@ -10,6 +10,7 @@ declare(strict_types=1);
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
 /**
  * @category        Module
  * @package         suico

@@ -57,7 +57,6 @@ trait ServerStats
                     ) . '<b>' . $gdlib['GD Version'] . '</b>';
             }
         }
-
         $downloads = \ini_get(
             'file_uploads'
         ) ? '<span style="color: #008000;">' . \constant(

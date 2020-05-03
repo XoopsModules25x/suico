@@ -47,7 +47,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Suico\Helper $this->helper */
+        /** @var \XoopsModules\Suico\Helper $this ->helper */
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
@@ -201,8 +201,6 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         }
         return true;
     }
-
-
 
     /**
      * count suico_visitorss matching a condition

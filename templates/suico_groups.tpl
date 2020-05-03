@@ -51,7 +51,7 @@
 
 
                         <{if $countGroups!=0}>
-						   <table id="" class="display no-wrap table table-striped">
+                            <table id="" class="display no-wrap table table-striped">
                                 <thead class="thead-dark">
                                 <tr>
                                     <th><{$lang_groupslist}></th>
@@ -93,12 +93,8 @@
                         <!--<{$navigationBar_my}>--><br><br>
 
 
-
-
-
-
                         <{if $isOwner==1}>
-                       <!-- <div class="alert alert-info">
+                            <!-- <div class="alert alert-info">
                                 <form name='form_group_search1' id='form_group_search1' action='search_group.php' method='get'>
                                     <h5><{$lang_searchgroup}></h5>
 
@@ -123,7 +119,7 @@
                             <{/if}>
 
                             <{if $countGroups_all!=0}>
-								<table id="" class="display no-wrap table table-striped table-hover table-bordered">
+                                <table id="" class="display no-wrap table table-striped table-hover table-bordered">
                                     <thead class="thead-light">
                                     <tr>
                                         <th><{$lang_groupslist}></th>
@@ -152,13 +148,13 @@
                                                     <{/if}>
                                                 <{/if}>
 
-                                                <a href="group.php?group_id=<{$groups[j].id}>"><img src="<{$xoops_upload_url}>/suico/groups/<{$groups[j].img}>" alt="<{$groups[j].title}>" title="<{$groups[j].title}>" class="float-left pr-2" width="120" ></a>
+                                                <a href="group.php?group_id=<{$groups[j].id}>"><img src="<{$xoops_upload_url}>/suico/groups/<{$groups[j].img}>" alt="<{$groups[j].title}>" title="<{$groups[j].title}>" class="float-left pr-2" width="120"></a>
                                                 <h6>
                                                     <a href="group.php?group_id=<{$groups[j].id}>"><{$groups[j].title}></a>
                                                 </h6>
                                                 <{if $groups[j].desc!=''}><{$groups[j].desc}><{/if}> <small><span class="text-muted"><{$groups[j].group_total_members}></span></small>
                                                 <br>
-												
+
                                                 <{if ($uid_owner == $groups[j].uid)}>
                                                     <form action="delete_group.php" method="POST" id="form_deletegroup" class="suico-groups-form-delete">
                                                         <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
@@ -183,44 +179,44 @@
                             <{/if}>
                         <{/if}>
 
-								<script>
-                                $(document).ready(function () {
-                                    $('table.display').DataTable({
-										//dom: "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>" +
-										//"<'row'<'col-sm-12'tr>>" +
-										//"<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-                                        "responsive": true,
-										"ordering": false,
-                                        "lengthChange": false,
-                                        "displayLength": <{$groupsperpage}>,
-                                        "language": {
-                                            "decimal": "<{$smarty.const._MD_SUICO_DTABLE_DECIMAL}>",
-                                            "emptyTable": "<{$smarty.const._MD_SUICO_DTABLE_EMPTYTABLE}>",
-                                            "info": "<{$smarty.const._MD_SUICO_DTABLE_INFOSHOWING}> _START_ <{$smarty.const._MD_SUICO_DTABLE_INFOTO}> _END_ <{$smarty.const._MD_SUICO_DTABLE_INFOOF}> _TOTAL_ <{$smarty.const._MD_SUICO_DTABLE_INFOENTRIES}>",
-                                            "infoEmpty": "<{$smarty.const._MD_SUICO_DTABLE_INFOEMPTY}>",
-                                            "infoFiltered": "(<{$smarty.const._MD_SUICO_DTABLE_INFOFILTEREDFROM}> _MAX_ <{$smarty.const._MD_SUICO_DTABLE_INFOFILTEREDTOTALENTRIES}>)",
-                                            "infoPostFix": "<{$smarty.const._MD_SUICO_DTABLE_INFOPOSTFIX}>",
-                                            "thousands": "<{$smarty.const._MD_SUICO_DTABLE_THOUSANDS}>",
-                                            "lengthMenu": "<{$smarty.const._MD_SUICO_DTABLE_LENGTHMENUSHOW}> _MENU_ <{$smarty.const._MD_SUICO_DTABLE_LENGTHMENUENTRIES}>",
-                                            "loadingRecords": "<{$smarty.const._MD_SUICO_DTABLE_LOADINGRECORDS}>",
-                                            "processing": "<{$smarty.const._MD_SUICO_DTABLE_PROCESSING}>",
-                                            "search": "<{$smarty.const._MD_SUICO_DTABLE_SEARCH}>",
-                                            "zeroRecords": "<{$smarty.const._MD_SUICO_DTABLE_ZERORECORDS}>",
-                                            "paginate": {
-                                                "first": "<{$smarty.const._MD_SUICO_DTABLE_FIRST}>",
-                                                "last": "<{$smarty.const._MD_SUICO_DTABLE_LAST}>",
-                                                "next": "<{$smarty.const._MD_SUICO_DTABLE_NEXT}>",
-                                                "previous": "<{$smarty.const._MD_SUICO_DTABLE_PREVIOUS}>"
-                                            },
-                                            "aria": {
-                                                "sortAscending": "<{$smarty.const._MD_SUICO_DTABLE_SORT_ASCENDING}>",
-                                                "sortDescending": "<{$smarty.const._MD_SUICO_DTABLE_SORT_DESCENSING}>"
-                                            }
+                        <script>
+                            $(document).ready(function () {
+                                $('table.display').DataTable({
+                                    //dom: "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>" +
+                                    //"<'row'<'col-sm-12'tr>>" +
+                                    //"<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                                    "responsive": true,
+                                    "ordering": false,
+                                    "lengthChange": false,
+                                    "displayLength": <{$groupsperpage}>,
+                                    "language": {
+                                        "decimal": "<{$smarty.const._MD_SUICO_DTABLE_DECIMAL}>",
+                                        "emptyTable": "<{$smarty.const._MD_SUICO_DTABLE_EMPTYTABLE}>",
+                                        "info": "<{$smarty.const._MD_SUICO_DTABLE_INFOSHOWING}> _START_ <{$smarty.const._MD_SUICO_DTABLE_INFOTO}> _END_ <{$smarty.const._MD_SUICO_DTABLE_INFOOF}> _TOTAL_ <{$smarty.const._MD_SUICO_DTABLE_INFOENTRIES}>",
+                                        "infoEmpty": "<{$smarty.const._MD_SUICO_DTABLE_INFOEMPTY}>",
+                                        "infoFiltered": "(<{$smarty.const._MD_SUICO_DTABLE_INFOFILTEREDFROM}> _MAX_ <{$smarty.const._MD_SUICO_DTABLE_INFOFILTEREDTOTALENTRIES}>)",
+                                        "infoPostFix": "<{$smarty.const._MD_SUICO_DTABLE_INFOPOSTFIX}>",
+                                        "thousands": "<{$smarty.const._MD_SUICO_DTABLE_THOUSANDS}>",
+                                        "lengthMenu": "<{$smarty.const._MD_SUICO_DTABLE_LENGTHMENUSHOW}> _MENU_ <{$smarty.const._MD_SUICO_DTABLE_LENGTHMENUENTRIES}>",
+                                        "loadingRecords": "<{$smarty.const._MD_SUICO_DTABLE_LOADINGRECORDS}>",
+                                        "processing": "<{$smarty.const._MD_SUICO_DTABLE_PROCESSING}>",
+                                        "search": "<{$smarty.const._MD_SUICO_DTABLE_SEARCH}>",
+                                        "zeroRecords": "<{$smarty.const._MD_SUICO_DTABLE_ZERORECORDS}>",
+                                        "paginate": {
+                                            "first": "<{$smarty.const._MD_SUICO_DTABLE_FIRST}>",
+                                            "last": "<{$smarty.const._MD_SUICO_DTABLE_LAST}>",
+                                            "next": "<{$smarty.const._MD_SUICO_DTABLE_NEXT}>",
+                                            "previous": "<{$smarty.const._MD_SUICO_DTABLE_PREVIOUS}>"
+                                        },
+                                        "aria": {
+                                            "sortAscending": "<{$smarty.const._MD_SUICO_DTABLE_SORT_ASCENDING}>",
+                                            "sortDescending": "<{$smarty.const._MD_SUICO_DTABLE_SORT_DESCENSING}>"
                                         }
-                                    });
+                                    }
                                 });
-                            </script>
-							
+                            });
+                        </script>
+
                         <{include file="db:suico_footer.tpl"}>
 
                         <!-- end -->

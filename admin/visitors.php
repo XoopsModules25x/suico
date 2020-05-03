@@ -84,9 +84,9 @@ switch ($op) {
         } else {
             xoops_confirm(
                 [
-                    'ok'        => 1,
+                    'ok'       => 1,
                     'visit_id' => Request::getString('visit_id', ''),
-                    'op'        => 'delete',
+                    'op'       => 'delete',
                 ],
                 Request::getUrl('REQUEST_URI', '', 'SERVER'),
                 sprintf(

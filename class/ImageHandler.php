@@ -65,7 +65,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Suico\Helper $this->helper */
+        /** @var \XoopsModules\Suico\Helper $this ->helper */
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
@@ -346,7 +346,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
      *
      * @param        $title
      * @param string $caption  The description of the picture
-     * @param int    $image_id  the id of the image in database
+     * @param int    $image_id the id of the image in database
      * @param string $filename the url to the thumb of the image so it can be displayed
      * @return bool TRUE
      */
@@ -360,10 +360,10 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $field_title   = new XoopsFormText($title, 'title', 35, 55);
         $field_caption = new XoopsFormText($caption, 'caption', 35, 55);
         $form->setExtra('enctype="multipart/form-data"');
-        $buttonSend    = new XoopsFormButton('', 'submit_button', \_MD_SUICO_SUBMIT, 'submit');
-        $field_warning = new XoopsFormLabel("<img src='" . $filename . "' alt='thumb'>");
+        $buttonSend     = new XoopsFormButton('', 'submit_button', \_MD_SUICO_SUBMIT, 'submit');
+        $field_warning  = new XoopsFormLabel("<img src='" . $filename . "' alt='thumb'>");
         $field_image_id = new XoopsFormHidden('image_id', $image_id);
-        $field_marker  = new XoopsFormHidden('marker', 1);
+        $field_marker   = new XoopsFormHidden('marker', 1);
         $form->addElement($field_warning);
         $form->addElement($field_title);
         $form->addElement($field_caption);
@@ -428,8 +428,8 @@ class ImageHandler extends XoopsPersistableObjectHandler
                 return false;
             }
             // now let s create a new object picture and set its variables
-            $picture = $this->create();
-            $filename     = $uploader->getSavedFileName();
+            $picture  = $this->create();
+            $filename = $uploader->getSavedFileName();
             $picture->setVar('filename', $filename);
             $picture->setVar('title', $title);
             $picture->setVar('caption', $caption);
@@ -552,8 +552,8 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $vetor  = [];
         $i      = 0;
         while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $vetor[$i]['uid_owner']   = $myrow['uid_owner'];
-            $vetor[$i]['uname']       = $myrow['uname'];
+            $vetor[$i]['uid_owner']    = $myrow['uid_owner'];
+            $vetor[$i]['uname']        = $myrow['uname'];
             $vetor[$i]['img_filename'] = $myrow['filename'];
             $i++;
         }
@@ -582,9 +582,8 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $vetor[$i]['img_filename'] = $myrow['filename'];
             $vetor[$i]['title']        = $myrow['title'];
             $vetor[$i]['caption']      = $myrow['caption'];
-			$vetor[$i]['date_created'] = formatTimestamp($myrow['date_created']);
+            $vetor[$i]['date_created'] = formatTimestamp($myrow['date_created']);
             $vetor[$i]['date_updated'] = formatTimestamp($myrow['date_updated']);
-           
             $i++;
         }
         return $vetor;

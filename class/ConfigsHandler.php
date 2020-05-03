@@ -47,7 +47,7 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Suico\Helper $this->helper */
+        /** @var \XoopsModules\Suico\Helper $this ->helper */
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {

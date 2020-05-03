@@ -2,7 +2,6 @@
 
 namespace XoopsModules\Suico\Form;
 
-
 use XoopsModules\Suico;
 use XoopsModules\Suico\Profile;
 use XoopsModules\Suico\ProfileHandler;
@@ -15,12 +14,11 @@ use XoopsFormSelectUser;
 /**
  * Get {@link XoopsThemeForm} for editing a user
  *
- * @param \XoopsUser                   $user {@link \XoopsUser} to edit
- * @param Profile $profile
- * @param bool                        $action
+ * @param \XoopsUser $user {@link \XoopsUser} to edit
+ * @param Profile    $profile
+ * @param bool       $action
  *
  */
-
 class UserForm extends XoopsThemeForm
 {
     function __construct(\XoopsUser $user, Profile $profile = null, $action = false)

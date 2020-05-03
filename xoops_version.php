@@ -1052,7 +1052,7 @@ $modversion['templates'] = [
 global $xoopsModule;
 if (is_object($xoopsModule) && $xoopsModule->dirname() === $modversion['dirname']) {
     $moduleHandler = xoops_getHandler('module');
-    $moduleSuico     = $moduleHandler->getByDirname('suico');
+    $moduleSuico   = $moduleHandler->getByDirname('suico');
     /** @var \XoopsConfigHandler $confHandler */
     $confHandler  = xoops_getHandler('config');
     $moduleConfig = $confHandler->getConfigsByCat(0, $moduleSuico->getVar('mid'));

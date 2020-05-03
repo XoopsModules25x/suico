@@ -198,8 +198,8 @@ class Field extends \XoopsObject
     /**
      * Returns a value for output of this field
      *
-     * @param \XoopsUser      $user    {@link XoopsUser} object to get the value of
-     * @param Profile $profile object to get the value of
+     * @param \XoopsUser $user    {@link XoopsUser} object to get the value of
+     * @param Profile    $profile object to get the value of
      *
      * @return mixed
      **/
@@ -252,14 +252,14 @@ class Field extends \XoopsObject
                 break;
             case 'group':
                 /* @var \XoopsMemberHandler $memberHandler */ $memberHandler = \xoops_getHandler('member');
-                $options                                                    = $memberHandler->getGroupList();
-                $ret                                                        = $options[$value] ?? '';
+                $options                                                     = $memberHandler->getGroupList();
+                $ret                                                         = $options[$value] ?? '';
                 return $ret;
                 break;
             case 'group_multi':
                 /* @var \XoopsMemberHandler $memberHandler */ $memberHandler = \xoops_getHandler('member');
-                $options                                                    = $memberHandler->getGroupList();
-                $ret                                                        = [];
+                $options                                                     = $memberHandler->getGroupList();
+                $ret                                                         = [];
                 foreach (\array_keys($options) as $key) {
                     if (\in_array($key, $value)) {
                         $ret[$key] = \htmlspecialchars($options[$key], ENT_QUOTES | ENT_HTML5);

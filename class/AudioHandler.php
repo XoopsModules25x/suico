@@ -53,7 +53,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var Helper $this->helper */
+        /** @var Helper $this ->helper */
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
@@ -222,8 +222,8 @@ class AudioHandler extends XoopsPersistableObjectHandler
      * retrieve suico_audios from the database
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} conditions to be met
-     * @param bool                               $id_as_key       use the UID as key for the array?
-     * @param bool                               $as_object
+     * @param bool                                 $id_as_key       use the UID as key for the array?
+     * @param bool                                 $as_object
      * @return array array of {@link suico_audio} objects
      */
     public function &getObjects(

@@ -37,7 +37,7 @@ require __DIR__ . '/header.php';
 $controller = new IndexController($xoopsDB, $xoopsUser, $xoopsModule);
 /* @var XoopsMemberHandler $memberHandler */
 $memberHandler = xoops_getHandler('member');
-$nbSections = $controller->getNumbersSections();
+$nbSections    = $controller->getNumbersSections();
 require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
 // If not a user, redirect
 if (!is_object($GLOBALS['xoopsUser'])) {

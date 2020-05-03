@@ -71,7 +71,8 @@ class SuicoController extends \XoopsObject
      * @param \XoopsDatabase $xoopsDatabase
      * @param                $user
      */
-    public function __construct(\XoopsDatabase $xoopsDatabase, $user, $xoopsModule=null) {
+    public function __construct(\XoopsDatabase $xoopsDatabase, $user, $xoopsModule = null)
+    {
         $this->helper         = Helper::getInstance();
         $this->db             = $xoopsDatabase;
         $this->user           = $user;

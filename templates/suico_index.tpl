@@ -53,7 +53,8 @@
                         <{if ($isOwner==1)}>
                             <{if $visitors}>
                                 <br>
-                                <span class="suico-profileinfo-label"> <{$lang_profilevisitors}>: </span><br>
+                                <span class="suico-profileinfo-label"> <{$lang_profilevisitors}>: </span>
+                                <br>
                                 <{foreach item=visitor from=$visitors}>
                                     <a href=index.php?uid=<{$visitor.uid_visitor}>> <{$visitor.uname_visitor}>: <{$visitor.date_visited}></a>
                                 <{/foreach}>
@@ -115,7 +116,7 @@
                                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<{$featuredvideocode}>?rel=0" allowfullscreen></iframe>
                             </div>
                             <div class="alert alert-primary">
-							    <b><{$featuredvideotitle}></b><br>
+                                <b><{$featuredvideotitle}></b><br>
                                 <{$featuredvideodesc}>
                             </div>
 

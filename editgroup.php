@@ -128,6 +128,5 @@ if (1 === $marker && $group->getVar('owner_uid') === $uid) {
         _MD_SUICO_GROUPOWNER
     );
 }
-
 require __DIR__ . '/footer.php';
 require dirname(__DIR__, 2) . '/footer.php';
