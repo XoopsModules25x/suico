@@ -20,7 +20,7 @@ use XoopsFormLabel;
  */
 class RegisterForm extends XoopsThemeForm
 {
-    function __construct(\XoopsUser $user, $profile, $step = null)
+    public function __construct(\XoopsUser $user, $profile, $step = null)
     {
         global $opkey; // should be set in register.php
         if (empty($opkey)) {

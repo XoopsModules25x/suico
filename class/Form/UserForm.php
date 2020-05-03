@@ -21,7 +21,7 @@ use XoopsFormSelectUser;
  */
 class UserForm extends XoopsThemeForm
 {
-    function __construct(\XoopsUser $user, Profile $profile = null, $action = false)
+    public function __construct(\XoopsUser $user, Profile $profile = null, $action = false)
     {
         $helper = \XoopsModules\Suico\Helper::getInstance();
         if (!$action) {

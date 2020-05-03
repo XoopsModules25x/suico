@@ -19,7 +19,7 @@ class FieldForm extends XoopsThemeForm
      * @param Suico\Field $field  {@link Suico\Field} object to get edit form for
      * @param mixed       $action URL to submit to - or false for $_SERVER['REQUEST_URI']
      */
-    function __construct(Suico\Field $field, $action = false)
+    public function __construct(Suico\Field $field, $action = false)
     {
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];

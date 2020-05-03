@@ -17,7 +17,7 @@ use XoopsFormSelectUser;
  */
 class StepForm extends XoopsThemeForm
 {
-    function __construct(Regstep $step = null, $action = false)
+    public function __construct(Regstep $step = null, $action = false)
     {
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];
