@@ -310,6 +310,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
      * @param string $path_upload The path to where the file should be uploaded
      * @param string $author      the author of the music or audio file
      * @param        $maxfilebytes
+     * @param        $description
      * @return bool FALSE if upload fails or database fails
      */
     public function receiveAudio(

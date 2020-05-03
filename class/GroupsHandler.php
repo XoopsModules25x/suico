@@ -542,6 +542,10 @@ var elestyle = xoopsGetElementById(img).style;
         return true;
     }
 
+    /**
+     * @param $owner_id
+     * @return mixed
+     */
     public function isGroupMember($owner_id)
     {
         $query               = 'SELECT COUNT(rel_id) AS grouptotalmembers FROM ' . $GLOBALS['xoopsDB']->prefix('suico_relgroupuser') . ' WHERE rel_group_id=' . $group_id . '';
@@ -551,10 +555,14 @@ var elestyle = xoopsGetElementById(img).style;
         return $group_total_members;
     }
 
+    /**
+     * @param $group_id
+     * @return mixed
+     */
     public function getComment($group_id)
     {
         $moduleSuico = Helper::getInstance()->getModule();
-        $sql         = "SELECT count(com_id) FROM " . $GLOBALS['xoopsDB']->prefix('xoopscomments') . " WHERE com_modid = '" . $moduleSuico->getVar('mid') . "' AND com_itemid = '" . $group_id . "'";
+        $sql         = 'SELECT count(com_id) FROM ' . $GLOBALS['xoopsDB']->prefix('xoopscomments') . " WHERE com_modid = '" . $moduleSuico->getVar('mid') . "' AND com_itemid = '" . $group_id . "'";
         $result      = $GLOBALS['xoopsDB']->query($sql);
         while ($row = $GLOBALS['xoopsDB']->fetchArray($result)) {
             $group_total_comments = $row['count(com_id)'];
@@ -562,6 +570,10 @@ var elestyle = xoopsGetElementById(img).style;
         return $group_total_comments;
     }
 
+    /**
+     * @param $group_id
+     * @return mixed
+     */
     public function getGroupTotalMembers($group_id)
     {
         $query               = 'SELECT COUNT(rel_id) AS grouptotalmembers FROM ' . $GLOBALS['xoopsDB']->prefix('suico_relgroupuser') . ' WHERE rel_group_id=' . $group_id . '';

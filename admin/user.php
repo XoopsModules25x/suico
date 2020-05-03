@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Extended User Profile
  *
@@ -18,6 +21,7 @@
  */
 
 use Xmf\Request;
+use XoopsModules\Suico;
 use XoopsModules\Suico\Form\UserForm;
 
 include_once __DIR__ . '/admin_header.php';
@@ -29,7 +33,7 @@ $op = $_REQUEST['op'] ?? 'list';
 if ('editordelete' === $op) {
     $op = isset($_REQUEST['delete']) ? 'delete' : 'edit';
 }
-/* @var XoopsMemberHandler $handler */
+/* @var \XoopsMemberHandler $handler */
 $handler = xoops_getHandler('member');
 switch ($op) {
     default:
@@ -75,7 +79,7 @@ switch ($op) {
         $fields     = $profileHandler->loadFields();
         $userfields = $profileHandler->getUserVars();
         // Get ids of fields that can be edited
-        /* @var  XoopsGroupPermHandler $grouppermHandler */
+        /* @var  \XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler = xoops_getHandler('groupperm');
         $editable_fields  = $grouppermHandler->getItemIds('profile_edit', $GLOBALS['xoopsUser']->getGroups(), $GLOBALS['xoopsModule']->getVar('mid'));
         $uid              = empty($_POST['uid']) ? 0 : (int)$_POST['uid'];

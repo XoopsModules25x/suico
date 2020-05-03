@@ -28,8 +28,13 @@ namespace XoopsModules\Suico;
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
  */
 
+use XoopsModules\Suico;
 use XoopsModules\Suico\Profile;
 
+/**
+ * Class Field
+ * @package XoopsModules\Suico
+ */
 class Field extends \XoopsObject
 {
     public function __construct()
@@ -231,7 +236,7 @@ class Field extends \XoopsObject
                 $value   = \is_array($value) ? $value[0] : $value;
                 $options = $this->getVar('field_options');
                 if (isset($options[$value])) {
-                    $value = \htmlspecialchars(\defined($options[$value]) ? \constant($options[$value]) : $options[$value]);
+                    $value = \htmlspecialchars(\defined($options[$value]) ? \constant($options[$value]) : $options[$value], ENT_QUOTES | ENT_HTML5);
                 } else {
                     $value = '';
                 }
@@ -244,7 +249,7 @@ class Field extends \XoopsObject
                 if (\count($options) > 0) {
                     foreach (\array_keys($options) as $key) {
                         if (\in_array($key, $value)) {
-                            $ret[$key] = \htmlspecialchars(\defined($options[$key]) ? \constant($options[$key]) : $options[$key]);
+                            $ret[$key] = \htmlspecialchars(\defined($options[$key]) ? \constant($options[$key]) : $options[$key], ENT_QUOTES | ENT_HTML5);
                         }
                     }
                 }

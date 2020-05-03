@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace XoopsModules\Suico\Form;
 
 use XoopsModules\Suico;
@@ -13,13 +15,17 @@ use XoopsFormSelect;
 use XoopsFormLabel;
 use XoopsFormTextDateSelect;
 
+/**
+ * Class FieldForm
+ * @package XoopsModules\Suico\Form
+ */
 class FieldForm extends XoopsThemeForm
 {
     /**
      * @param Suico\Field $field  {@link Suico\Field} object to get edit form for
      * @param mixed       $action URL to submit to - or false for $_SERVER['REQUEST_URI']
      */
-    function __construct(Suico\Field $field, $action = false)
+    public function __construct(Suico\Field $field, $action = false)
     {
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];
