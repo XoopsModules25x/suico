@@ -207,8 +207,10 @@ if (0 === $controller->isAnonym) {
                 $myvisitor['uid_visitor'] = $visitor->getVar('uid_visitor', 's');
                 $myvisitor['uname_visitor'] = $visitor->getVar('uname_visitor', 's');
                 $myvisitor['date_visited'] = formatTimestamp($visitor->getVar('date_visited'),'S');
-
-                $visitorsArray[] = $myvisitor;
+				$memberHandler = xoops_getHandler('member');
+				$visitor= $memberHandler->getUser($visitor->getVar('uid_visitor'));
+				$myvisitor['avatar_visitor'] = $visitor->getVar('user_avatar', 's');
+				$visitorsArray[] = $myvisitor;
                 unset($myvisitor);
                 ++$i;
             }
