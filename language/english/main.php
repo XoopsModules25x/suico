@@ -231,9 +231,9 @@ define('_MD_SUICO_CONFIGS_GROUPS', 'See your Groups');
 define('_MD_SUICO_CONFIGS_NOTES', 'See your Notes');
 define('_MD_SUICO_CONFIGS_NOTESSEND', 'Send you Notes');
 define('_MD_SUICO_CONFIGS_FRIENDS', 'See your Friends');
-define('_MD_SUICO_CONFIGS_PROFILECONTACT', 'See your contact info');
-define('_MD_SUICO_CONFIGS_PROFILEGENERAL', 'See your Info');
-define('_MD_SUICO_CONFIGS_PROFILESTATS', 'See your Stats');
+define('_MD_SUICO_CONFIGS_PROFILECONTACT', 'See your Contact Information');
+define('_MD_SUICO_CONFIGS_PROFILEGENERAL', 'See your Personal Information');
+define('_MD_SUICO_CONFIGS_PROFILESTATS', 'See your Contributions');
 define('_MD_SUICO_WHOCAN', 'Who can:');
 //submitConfigs.php
 define('_MD_SUICO_CONFIGS_SAVE', 'Configuration saved!');
