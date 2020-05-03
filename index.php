@@ -202,10 +202,15 @@ if (0 === $controller->isAnonym) {
     $visitorsArray = [];
     if (is_array($visitorsObjectArray) && count($visitorsObjectArray) > 0) {
         foreach ($visitorsObjectArray as $visitor) {
+            $myvisitor= [];
             if (null !== $visitor) {
-                $indice                 = $visitor->getVar('uid_visitor', 's');
-                $visitorsArray[$indice] = $visitor->getVar('uname_visitor', 's');
-                $i++;
+                $myvisitor['uid_visitor'] = $visitor->getVar('uid_visitor', 's');
+                $myvisitor['uname_visitor'] = $visitor->getVar('uname_visitor', 's');
+                $myvisitor['date_visited'] = formatTimestamp($visitor->getVar('date_visited'),'S');
+
+                $visitorsArray[] = $myvisitor;
+                unset($myvisitor);
+                ++$i;
             }
         }
     }

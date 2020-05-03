@@ -202,46 +202,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         return true;
     }
 
-    /**
-     * retrieve suico_visitorss from the database
-     *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} conditions to be met
-     * @param bool                                 $id_as_key       use the UID as key for the array?
-     * @param bool                                 $as_object
-     * @return array array of {@link Visitors} objects
-     */
-    public function &getObjects(
-        ?CriteriaElement $criteriaElement = null,
-        $id_as_key = false,
-        $as_object = true
-    ) {
-        $ret   = [];
-        $limit = $start = 0;
-        $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_visitors');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
-            if ('' !== $criteriaElement->getSort()) {
-                $sql .= ' ORDER BY ' . $criteriaElement->getSort() . ' ' . $criteriaElement->getOrder();
-            }
-            $limit = $criteriaElement->getLimit();
-            $start = $criteriaElement->getStart();
-        }
-        $result = $this->db->query($sql, $limit, $start);
-        if (!$result) {
-            return $ret;
-        }
-        while (false !== ($myrow = $this->db->fetchArray($result))) {
-            $visitors = new Visitors();
-            $visitors->assignVars($myrow);
-            if (!$id_as_key) {
-                $ret[] = &$suico_visitors;
-            } else {
-                $ret[$myrow['visit_id']] = &$suico_visitors;
-            }
-            unset($suico_visitors);
-        }
-        return $ret;
-    }
+
 
     /**
      * count suico_visitorss matching a condition
@@ -298,7 +259,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
     {
         $sql = 'DELETE FROM ' . $this->db->prefix(
                 'suico_visitors'
-            ) . ' WHERE (date_visited<(DATE_SUB(NOW(), INTERVAL 7 DAY))) ';
+            ) . ' WHERE (date_visited<UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 7 DAY))) ';
         if (!$result = $this->db->queryF($sql)) {
             return false;
         }

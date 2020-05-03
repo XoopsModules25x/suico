@@ -50,14 +50,16 @@
                             <{/if}>
                         <{/foreach}>
 
-                        <{if ($isOwner==1)}><{if $visitors}>
-                            <span class="suico-profileinfo-label"> <{$lang_profilevisitors}>: </span>
-                            <{foreach from=$visitors key=k item=v}>
-                                <a href=index.php?uid=<{$k}>> <{$v}> </a>
-                                &nbsp;
-                            <{/foreach}>
-                            <br>
-                        <{/if}><{/if}>
+                        <{if ($isOwner==1)}>
+                            <{if $visitors}>
+                                <br>
+                                <span class="suico-profileinfo-label"> <{$lang_profilevisitors}>: </span><br>
+                                <{foreach item=visitor from=$visitors}>
+                                    <a href=index.php?uid=<{$visitor.uid_visitor}>> <{$visitor.uname_visitor}>: <{$visitor.date_visited}></a>
+                                <{/foreach}>
+                                <br>
+                            <{/if}>
+                        <{/if}>
 
                         <br>
                         <{if $allow_profile_stats}>
