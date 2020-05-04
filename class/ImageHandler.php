@@ -567,13 +567,13 @@ class ImageHandler extends XoopsPersistableObjectHandler
     public function getLastPicturesForBlock($limit)
     {
         $ret    = [];
-        $sql    = 'SELECT uname, t.uid_owner, t.filename, t.title, t.caption, t.date_created, t.date_updated  FROM ' . $this->db->prefix(
-                'suico_images'
-            ) . ' AS t, ' . $this->db->prefix(
-                'users'
-            );
+        $sql    = 'SELECT uname, t.uid_owner, t.filename, t.title, t.caption, t.date_created, t.date_updated  FROM ' . $this->db->prefix('suico_images')
+                  . ' AS t, ' . $this->db->prefix('users');
+
         $sql    .= ' WHERE uid_owner = uid AND private=0 ORDER BY image_id DESC';
         $result = $this->db->query($sql, $limit, 0);
+
+
         $vetor  = [];
         $i      = 0;
         while (false !== ($myrow = $this->db->fetchArray($result))) {
@@ -662,3 +662,4 @@ class ImageHandler extends XoopsPersistableObjectHandler
         \imagedestroy($img2);
     }
 }
+
