@@ -35,30 +35,30 @@
 
                             <h6><{$group_title}></h6>
                             <{$group_desc}>
-							<p class="text-muted"><small>
-                            <i class="fa fa-user-circle" title="<{$smarty.const._MD_SUICO_OWNEROFGROUP}>"></i> <a href="<{$xoops_url}>/modules/suico/index.php?uid=<{$group_owneruid}>" target="_blank"><{$group_ownername}></a>
-							<i class="fa fa-calendar" title="<{$smarty.const._MD_SUICO_GROUPDATECREATED}>"></i>
-                                                        <{if $group_date_created == $group_date_updated}>
-                                                            <{$group_date_created|date_format}>
-                                                        <{else}>
-                                                            <{$group_date_updated|date_format}>
-														<{/if}>
-							<i class="fa fa-user" title="<{$smarty.const._MD_SUICO_GROUPTOTALMEMBERS}>"></i> <{$group_total_members}>
-							<i class="fa fa-comment" title="<{$smarty.const._MD_SUICO_GROUPTOTALCOMMENTS}>"></i> <{$group_total_comments}>
-                             </small></p> 
-                                <{if $isOwner }>
-                                    <{if $xoops_userid == $group_owneruid }>
-                                        <form action="delete_group.php" method="POST" id="form_deletegroup" class="suico-groups-form-delete">
-                                            <input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
-                                            <input type="image" src="<{xoModuleIcons16 delete.png}>">
-                                        </form>
-                                        <form action="editgroup.php" method="POST" id="form_editgroup" class="suico-groups-form-edit">
-                                            <input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
-                                            <input type="image" src="<{xoModuleIcons16 edit.png}>">
-                                        </form>
+                            <p class="text-muted"><small>
+                                    <i class="fa fa-user-circle" title="<{$smarty.const._MD_SUICO_OWNEROFGROUP}>"></i> <a href="<{$xoops_url}>/modules/suico/index.php?uid=<{$group_owneruid}>" target="_blank"><{$group_ownername}></a>
+                                    <i class="fa fa-calendar" title="<{$smarty.const._MD_SUICO_GROUPDATECREATED}>"></i>
+                                    <{if $group_date_created == $group_date_updated}>
+                                        <{$group_date_created|date_format}>
+                                    <{else}>
+                                        <{$group_date_updated|date_format}>
                                     <{/if}>
-
+                                    <i class="fa fa-user" title="<{$smarty.const._MD_SUICO_GROUPTOTALMEMBERS}>"></i> <{$group_total_members}>
+                                    <i class="fa fa-comment" title="<{$smarty.const._MD_SUICO_GROUPTOTALCOMMENTS}>"></i> <{$group_total_comments}>
+                                </small></p>
+                            <{if $isOwner }>
+                                <{if $xoops_userid == $group_owneruid }>
+                                    <form action="delete_group.php" method="POST" id="form_deletegroup" class="suico-groups-form-delete">
+                                        <input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
+                                        <input type="image" src="<{xoModuleIcons16 delete.png}>">
+                                    </form>
+                                    <form action="editgroup.php" method="POST" id="form_editgroup" class="suico-groups-form-edit">
+                                        <input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
+                                        <input type="image" src="<{xoModuleIcons16 edit.png}>">
+                                    </form>
                                 <{/if}>
+
+                            <{/if}>
 
 
                         </div>

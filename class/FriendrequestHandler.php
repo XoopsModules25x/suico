@@ -44,8 +44,8 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
 
     /**
      * Constructor
-     * @param \XoopsDatabase|null             $xoopsDatabase
-     * @param Helper|null $helper
+     * @param \XoopsDatabase|null $xoopsDatabase
+     * @param Helper|null         $helper
      */
     public function __construct(
         ?XoopsDatabase $xoopsDatabase = null,

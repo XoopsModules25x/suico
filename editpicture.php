@@ -27,8 +27,8 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
 $image_id = Request::getInt('image_id', 0, 'POST');
-$marker  = Request::getInt('marker', 0, 'POST');
-$uid     = (int)$xoopsUser->getVar('uid');
+$marker   = Request::getInt('marker', 0, 'POST');
+$uid      = (int)$xoopsUser->getVar('uid');
 if (1 === $marker) {
     /**
      * Creating the factory loading the picture changing its caption

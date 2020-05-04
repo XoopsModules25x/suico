@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Extended User Profile
  *
@@ -192,7 +195,7 @@ if ($current_step > 0 && empty($stop) && (!empty($steps[$current_step - 1]['step
             $newuser->setVar('uname', $uname);
             $newuser->setVar('email', $email);
             $newuser->setVar('pass', $pass ? password_hash($pass, PASSWORD_DEFAULT) : '');
-            $actkey =  bin2hex(random_bytes(4));
+            $actkey = bin2hex(random_bytes(4));
             $newuser->setVar('actkey', $actkey, true);
             $newuser->setVar('user_regdate', time(), true);
             $newuser->setVar('uorder', $GLOBALS['xoopsConfig']['com_order'], true);
@@ -298,7 +301,7 @@ if (!empty($stop) || isset($steps[$current_step])) {
     if (1 == $GLOBALS['xoopsConfigUser']['activation_type'] && !empty($_SESSION['profile_post']['pass'])) {
         $GLOBALS['xoopsTpl']->assign('finish_login', _PROFILE_MA_FINISH_LOGIN);
         $GLOBALS['xoopsTpl']->assign('finish_uname', $newuser->getVar('uname'));
-        $GLOBALS['xoopsTpl']->assign('finish_pass', htmlspecialchars($_SESSION['profile_post']['pass']));
+        $GLOBALS['xoopsTpl']->assign('finish_pass', htmlspecialchars($_SESSION['profile_post']['pass'], ENT_QUOTES | ENT_HTML5));
     }
     if (isset($_SESSION['profile_post']['_message_'])) {
         //todo, if user is activated by admin, then we should inform it along with error messages.  _US_YOURREGMAILNG is not enough

@@ -36,7 +36,6 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
             ${$k} = $v;
         }
     }
-
     $op = Request::getString(
         'op',
         $op
@@ -411,6 +410,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
      * @param bool   $visible
      * @param string $side
      * @param int    $bcachetime
+     * @param        $bmodule
      */
     function setOrder(
         $bid,
@@ -421,7 +421,6 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         $bcachetime,
         $bmodule
     ) {
-        /** @var \XoopsBlock $myblock */
         $myblock = new XoopsBlock($bid);
         $myblock->setVar('title', $title);
         $myblock->setVar('weight', $weight);

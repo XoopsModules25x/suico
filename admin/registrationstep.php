@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Extended User Profile
  *
@@ -34,12 +36,12 @@ switch ($op) {
         $template_main = 'admin/suico_admin_registrationstep.tpl';
         break;
     case 'new':
-        $obj = $handler->create();
+        $obj  = $handler->create();
         $form = new StepForm($obj);
         $form->display();
         break;
     case 'edit':
-        $obj = $handler->get($_REQUEST['id']);
+        $obj  = $handler->get($_REQUEST['id']);
         $form = new StepForm($obj);
         $form->display();
         break;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace XoopsModules\Suico\Form;
 
 use XoopsModules\Suico;
@@ -13,12 +15,16 @@ use XoopsFormSelectUser;
 /**
  *
  * @param Regstep $step {@link Regstep} to edit
- * @param bool                        $action
+ * @param bool    $action
  */
-
 class StepForm extends XoopsThemeForm
 {
-    function __construct(Regstep $step = null, $action = false)
+    /**
+     * StepForm constructor.
+     * @param \XoopsModules\Suico\Regstep|null $step
+     * @param bool                             $action
+     */
+    public function __construct(Regstep $step = null, $action = false)
     {
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];

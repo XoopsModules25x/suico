@@ -222,8 +222,8 @@ class AudioHandler extends XoopsPersistableObjectHandler
      * retrieve suico_audios from the database
      *
      * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} conditions to be met
-     * @param bool                               $id_as_key       use the UID as key for the array?
-     * @param bool                               $as_object
+     * @param bool                                 $id_as_key       use the UID as key for the array?
+     * @param bool                                 $as_object
      * @return array array of {@link suico_audio} objects
      */
     public function &getObjects(
@@ -310,6 +310,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
      * @param string $path_upload The path to where the file should be uploaded
      * @param string $author      the author of the music or audio file
      * @param        $maxfilebytes
+     * @param        $description
      * @return bool FALSE if upload fails or database fails
      */
     public function receiveAudio(

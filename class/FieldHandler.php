@@ -26,6 +26,9 @@ namespace XoopsModules\Suico;
  * @package             kernel
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
  */
+
+use XoopsModules\Suico;
+
 class FieldHandler extends \XoopsPersistableObjectHandler
 {
     /**

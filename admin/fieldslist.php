@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Extended User Profile
  *
@@ -316,6 +319,7 @@ if (isset($template_main)) {
 /**
  * @param $field_id
  * @param $field_required
+ * @param $helper
  */
 function suico_visible_toggle($field_id, $field_required, $helper)
 {

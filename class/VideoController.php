@@ -29,7 +29,6 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 require_once XOOPS_ROOT_PATH . '/class/criteria.php';
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 
-
 /**
  * Class SuicoVideoController
  */

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace XoopsModules\Suico\Form;
 
 use XoopsModules\Suico;
@@ -7,7 +9,6 @@ use XoopsThemeForm;
 use XoopsFormButton;
 use XoopsFormHidden;
 use XoopsFormLabel;
-
 
 /**
  * Get {@link XoopsThemeForm} for registering new users
@@ -19,11 +20,15 @@ use XoopsFormLabel;
  * @return object
  * @internal param \profileRegstep $next_step
  */
-
 class RegisterForm extends XoopsThemeForm
 {
-
-    function __construct(\XoopsUser $user, $profile, $step = null)
+    /**
+     * RegisterForm constructor.
+     * @param \XoopsUser $user
+     * @param            $profile
+     * @param null       $step
+     */
+    public function __construct(\XoopsUser $user, $profile, $step = null)
     {
         global $opkey; // should be set in register.php
         if (empty($opkey)) {

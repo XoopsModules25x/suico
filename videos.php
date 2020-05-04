@@ -29,7 +29,7 @@ $controller = new Suico\VideoController($xoopsDB, $xoopsUser);
  * Fetching numbers of groups friends videos pictures etc...
  */
 $nbSections = $controller->getNumbersSections();
-$start = Request::getInt('start', 0, 'GET');
+$start      = Request::getInt('start', 0, 'GET');
 /**
  * Criteria for Videos
  */

@@ -210,7 +210,7 @@ if (0 === $controller->isAnonym) {
 				$memberHandler = xoops_getHandler('member');
 				$visitor= $memberHandler->getUser($visitor->getVar('uid_visitor'));
 				$myvisitor['avatar_visitor'] = $visitor->getVar('user_avatar', 's');
-				$visitorsArray[] = $myvisitor;
+                $visitorsArray[] = $myvisitor;
                 unset($myvisitor);
                 ++$i;
             }

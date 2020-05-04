@@ -20,17 +20,17 @@
                                     <div class="form-group">
                                         <label for="video"><{$lang_videohelp}> <{$xoops_sitename}>. <{$lang_selectfeaturedvideo}></label>
                                     </div>
-									
-									<div class="form-group">
+
+                                    <div class="form-group">
                                         <label for="video_title"><strong><{$smarty.const._MD_SUICO_VIDEOTITLE}> </strong></label>
                                         <input type='text' class='form-control' name='title' id='title' size='35' maxlength='55' value='' required>
                                     </div>
 
-									<div class="form-group">
+                                    <div class="form-group">
                                         <label for="video_desc"><strong> <{$lang_captionLabel}></strong></label>
                                         <textarea class="form-control" name='caption' id='caption' rows='5' cols='50'></textarea>
                                     </div>
-									
+
                                     <div class="form-group">
                                         <label for="video"><strong> <{$lang_youtubecodeLabel}></strong></label>
                                         <input type='text' name='codigo' id='codigo' class='form-control' value=''>
@@ -65,10 +65,10 @@
                             <div class="alert alert-primary"><{$lang_novideoyet}></div>
                         <{/if}>
 
-						<br>
+                        <br>
 
                         <{section name=i loop=$videos}>
-							 <h6><a name="<{$videos[i].id}>"><{$videos[i].title}></a></h6>
+                            <h6><a name="<{$videos[i].id}>"><{$videos[i].title}></a></h6>
                             <div class="embed-responsive embed-responsive-16by9">
                                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<{$videos[i].url}>?rel=0" allowfullscreen></iframe>
                             </div>
@@ -85,7 +85,7 @@
                                                             <small><{$videos[i].date_updated|date_format}></small>
                                                         <{/if}>
                                 </p>
-												
+
                                 <{if $isOwner==1 }>
                                     <form action="delvideo.php" method="post" id="deleteform" class="suico-video-forms">
                                         <input type="hidden" value="<{$videos[i].id}>" name="cod_video">

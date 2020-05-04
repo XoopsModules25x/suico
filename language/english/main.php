@@ -144,9 +144,9 @@ define('_MD_SUICO_VIDEOSAVED', 'Your video was saved');
 //class/Groups.php
 define('_MD_SUICO_SUBMIT_GROUP', 'Create a new group');
 define('_MD_SUICO_UPLOADGROUP', 'Save Group'); //also present in many groups related areas
-define(    '_MD_SUICO_GROUP_IMAGE',    'Group Image'); //also present in many groups related areas
+define('_MD_SUICO_GROUP_IMAGE', 'Group Image'); //also present in many groups related areas
 define('_MD_SUICO_GROUP_SAVED', 'Your Group was saved');
-define('_MD_SUICO_GROUP_SAVED_ERROR',    'Error : Unfortunately, We could not save your group. Please try again. ');
+define('_MD_SUICO_GROUP_SAVED_ERROR', 'Error : Unfortunately, We could not save your group. Please try again. ');
 define(
     '_MD_SUICO_GROUP_TITLE',
     'Title'
