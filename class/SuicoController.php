@@ -120,7 +120,7 @@ class SuicoController extends \XoopsObject
      * @return bool true if privilege enough
      */
     public function checkPrivilegeLevel(
-        $privilegeNeeded = 0
+        $privilegeNeeded = 1
     ) {
         return $privilegeNeeded <= $this->privilegeLevel;
     }
@@ -183,18 +183,18 @@ class SuicoController extends \XoopsObject
             $criteriaIsfriend->add($criteria_friends);
             $this->isFriend = $this->friendshipsFactory->getCount($criteriaIsfriend);
         }
-        $this->privilegeLevel = 0;
+        $this->privilegeLevel = 1;
         if (1 === $this->isAnonym) {
-            $this->privilegeLevel = 0;
-        }
-        if (1 === $this->isUser) {
             $this->privilegeLevel = 1;
         }
-        if (1 === $this->isFriend) {
+        if (1 === $this->isUser) {
             $this->privilegeLevel = 2;
         }
-        if (1 === $this->isOwner) {
+        if (1 === $this->isFriend) {
             $this->privilegeLevel = 3;
+        }
+        if (1 === $this->isOwner) {
+            $this->privilegeLevel = 4;
         }
     }
 
