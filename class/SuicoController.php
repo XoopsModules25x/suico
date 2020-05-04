@@ -251,10 +251,12 @@ class SuicoController extends \XoopsObject
     {
         global $xoopsModuleConfig;
         $configsectionname = 'enable_' . $section;
+        if (null !== $xoopsModuleConfig){
         if (\array_key_exists($configsectionname, $xoopsModuleConfig)) {
             if (0 === $this->helper->getConfig($configsectionname)) {
                 return -1;
             }
+        }
         }
         //  if ($section=="Notes" && $xoopsModuleConfig['enable_notes']==0){
         //          return false;

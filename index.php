@@ -42,7 +42,7 @@ $groups           = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->ge
 if (is_object($GLOBALS['xoopsUser']) && $uid == $GLOBALS['xoopsUser']->getVar('uid')) {
     //disable cache
     $GLOBALS['xoopsConfig']['module_cache'][$GLOBALS['xoopsModule']->getVar('mid')] = 0;
-    include $GLOBALS['xoops']->path('header.php');
+//    include $GLOBALS['xoops']->path('header.php');
     /* @var XoopsConfigHandler $configHandler */
     $configHandler             = xoops_getHandler('config');
     $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
