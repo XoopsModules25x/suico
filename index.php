@@ -247,7 +247,7 @@ $xoopsTpl->assign('lang_noavatar', _MD_SUICO_NOAVATARYET);
 $xoopsTpl->assign('lang_nofeaturedvideo', _MD_SUICO_NOFEATUREDVIDEOYET);
 $xoopsTpl->assign('lang_featuredvideo', _MD_SUICO_VIDEO_FEATURED);
 $xoopsTpl->assign('lang_viewallvideos', _MD_SUICO_ALLVIDEOS);
-if (isset($nbSections['countGroups']) && $nbSections['countGroups'] > 0) {
+if (isset($nbSections['countVideos']) && $nbSections['countVideos'] > 0) {
     $xoopsTpl->assign('featuredvideocode', $featuredvideocode);
     $xoopsTpl->assign('featuredvideodesc', $featuredvideodesc);
 	$xoopsTpl->assign('featuredvideotitle', $featuredvideotitle);
