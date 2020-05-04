@@ -120,6 +120,7 @@ define('_MD_SUICO_FRIENDSHIP_TERMINATED', 'You have broken your friendship with 
 ############################################ VIDEOS ############################################################
 //featuredvideo.php
 define('_MD_SUICO_SETFEATUREDVIDEO', 'This video is featured on your profile page from now on');
+define('_MD_SUICO_FEATUREDVIDEOPROFILE', 'This video is featured on your profile');
 //videos.php
 define('_MD_SUICO_YOUTUBECODE', 'YouTube code');
 define('_MD_SUICO_ADDVIDEO', 'Add video');

@@ -73,14 +73,17 @@
                                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<{$videos[i].url}>?rel=0" allowfullscreen></iframe>
                             </div>
                             <div class="alert alert-primary">
-                                <h6 class="text-muted"><{$videos[i].title}></h6>
-                                <{$videos[i].desc}>
-                                <p class="text-muted"><i class="fa fa-calendar"></i>
-                                    <{if $videos[i].date_created == $videos[i].date_updated}>
-                                        <small><{$videos[i].date_created|date_format}></small>
-                                    <{else}>
-                                        <small><{$videos[i].date_updated|date_format}></small>
-                                    <{/if}>
+								<{if $videos[i].featured_video==1}>
+                                    <button class="btn btn-danger btn-sm float-right" title="<{$smarty.const._MD_SUICO_FEATUREDVIDEOPROFILE}>"><i class='fa fa-youtube-play' title='<{$smarty.const._MD_SUICO_FEATUREDVIDEOPROFILE}>'></i>&nbsp;<{$smarty.const._MD_SUICO_VIDEO_FEATURED}></button>
+                                <{/if}>
+                                <h6><{$videos[i].title}></h6>
+								<{$videos[i].desc}>
+								<p class="text-muted"><i class="fa fa-calendar"></i>
+                                                        <{if $videos[i].date_created == $videos[i].date_updated}>
+                                                            <small><{$videos[i].date_created|date_format}></small>
+                                                        <{else}>
+                                                            <small><{$videos[i].date_updated|date_format}></small>
+                                                        <{/if}>
                                 </p>
 
                                 <{if $isOwner==1 }>
