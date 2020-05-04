@@ -46,8 +46,8 @@ if ($xoopsUser->isAdmin(1)) {
     $suspension->setVar('old_signature', $thisUser->getVar('user_sig'));
     $suspension->setVar('suspension_time', time() + Request::getInt('time', 0, 'POST'));
     $suspensionsFactory->insert2($suspension);
-    $thisUser->setVar('email', md5(time()));
-    $thisUser->setVar('pass', md5(time()));
+    $thisUser->setVar('email', md5((string)time()));
+    $thisUser->setVar('pass', md5((string)time()));
     $thisUser->setVar('user_sig', sprintf(_MD_SUICO_SUSPENDED, formatTimestamp(time() + Request::getInt('time', 0, 'POST'), 'm')));
     $memberHandler->insertUser($thisUser);
     redirect_header('index.php?uid=' . $uid, 300, _MD_SUICO_USER_SUSPENDED);
