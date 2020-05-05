@@ -15,20 +15,20 @@
 
                         <div class="alert alert-primary">
                             <{if $xoops_userid == $group_owneruid }>
-                                <button title="<{$lang_owner}>" class="btn btn-secondary btn-sm float-right"><i class="fa fa-user"></i> <{$smarty.const._MD_SUICO_OWNEROFGROUP}></button>
+                                <button title="<{$lang_owner}>" class="btn btn-secondary btn-sm float-right"><span class="fa fa-user"></span> <{$smarty.const._MD_SUICO_OWNEROFGROUP}></button>
                             <{/if}>
                             <{if $isAnonym!=1}>
                                 <{if $memberOfGroup ==1}>
                                     <form action="abandongroup.php" method="POST" id="form_abandongroup">
                                         <input type="hidden" value="<{$group_rel_id}>" name="relgroup_id" id="relgroup_id">
                                         <input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
-                                        <button name="" type="image" class="btn btn-primary btn-sm float-right"><i class="fa fa-user-circle-o"></i> <{$smarty.const._MD_SUICO_MEMBEROFGROUP}></button>
-                                        <button name="" type="image" class="btn btn-danger btn-sm float-right"><i class="fa fa-close"></i> <{$lang_abandongroup}></button>
+                                        <button name="" type="image" class="btn btn-primary btn-sm float-right"><span class="fa fa-user-circle-o"></span> <{$smarty.const._MD_SUICO_MEMBEROFGROUP}></button>
+                                        <button name="" type="image" class="btn btn-danger btn-sm float-right"><span class="fa fa-close"></span> <{$lang_abandongroup}></button>
                                     </form>
                                     <{ else}>
                                     <form action="becomemembergroup.php" method="POST" id="form_becomemember" class="suico-groups-form-becomemember">
                                         <input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
-                                        <button name="" type="image" class="btn btn-info btn-sm float-right"><i class="fa fa-handshake-o"></i> <{$lang_joingroup}></button>
+                                        <button name="" type="image" class="btn btn-info btn-sm float-right"><span class="fa fa-handshake-o"></span> <{$lang_joingroup}></button>
                                     </form>
                                 <{/if}>
                             <{/if}>
@@ -36,15 +36,15 @@
                             <h6><{$group_title}></h6>
                             <{$group_desc}>
                             <p class="text-muted"><small>
-                                    <i class="fa fa-user-circle" title="<{$smarty.const._MD_SUICO_OWNEROFGROUP}>"></i> <a href="<{$xoops_url}>/modules/suico/index.php?uid=<{$group_owneruid}>" target="_blank"><{$group_ownername}></a>
-                                    <i class="fa fa-calendar" title="<{$smarty.const._MD_SUICO_GROUPDATECREATED}>"></i>
+                                    <span class="fa fa-user-circle" title="<{$smarty.const._MD_SUICO_OWNEROFGROUP}>"></span> <a href="<{$xoops_url}>/modules/suico/index.php?uid=<{$group_owneruid}>" target="_blank"><{$group_ownername}></a>
+                                    <span class="fa fa-calendar" title="<{$smarty.const._MD_SUICO_GROUPDATECREATED}>"></span>
                                     <{if $group_date_created == $group_date_updated}>
                                         <{$group_date_created|date_format}>
                                     <{else}>
                                         <{$group_date_updated|date_format}>
                                     <{/if}>
-                                    <i class="fa fa-user" title="<{$smarty.const._MD_SUICO_GROUPTOTALMEMBERS}>"></i> <{$group_total_members}>
-                                    <i class="fa fa-comment" title="<{$smarty.const._MD_SUICO_GROUPTOTALCOMMENTS}>"></i> <{$group_total_comments}>
+                                    <span class="fa fa-user" title="<{$smarty.const._MD_SUICO_GROUPTOTALMEMBERS}>"></span> <{$group_total_members}>
+                                    <span class="fa fa-comment" title="<{$smarty.const._MD_SUICO_GROUPTOTALCOMMENTS}>"></span> <{$group_total_comments}>
                                 </small></p>
                             <{if $isOwner }>
                                 <{if $xoops_userid == $group_owneruid }>
@@ -81,14 +81,14 @@
 
                                         <a href="<{$xoops_url}>/modules/suico/index.php?uid=<{$group_members[i].uid}>" alt="<{$group_members[i].uname}>" title="<{$group_members[i].uname}>"><{$group_members[i].uname}></a>
                                         <{if $group_owneruid==$group_members[i].uid}>
-                                            <button title="<{$lang_owner}>" class="btn btn-secondary btn-sm float-right"><i class="fa fa-user"></i> <{$smarty.const._MD_SUICO_OWNEROFGROUP}></button>
+                                            <button title="<{$lang_owner}>" class="btn btn-secondary btn-sm float-right"><span class="fa fa-user"></span> <{$smarty.const._MD_SUICO_OWNEROFGROUP}></button>
                                         <{/if}>
 
                                         <{if $group_owneruid==$useruid && $group_owneruid!=$group_members[i].uid}>
                                             <form action="kickfromgroup.php" method="post">
                                                 <input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
                                                 <input type="hidden" value="<{$group_members[i].uid}>" name="rel_user_uid" id="rel_user_uid">
-                                                <button name="" type="image" class="btn btn-info btn-sm float-right"><i class="fa fa-remove"></i> <{$lang_removemember}></button>
+                                                <button name="" type="image" class="btn btn-info btn-sm float-right"><span class="fa fa-remove"></span> <{$lang_removemember}></button>
                                             </form>
                                         <{/if}>
                                     </td>

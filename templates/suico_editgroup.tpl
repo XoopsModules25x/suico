@@ -62,12 +62,12 @@
                                         <a href="<{$xoops_url}>/modules/suico/index.php?uid=<{$group_members[i].uid}>" alt="<{$group_members[i].uname}>" title="<{$group_members[i].uname}>"><{$group_members[i].uname}></a>
 
                                         <{if $group_members[i].isOwner }>
-                                            <i class="fa fa-user" title="<{$lang_owner}>" style="color:#8B0000;"></i>
+                                            <span class="fa fa-user" title="<{$lang_owner}>" style="color:#8B0000;"></span>
                                         <{else}>
                                             <form action="kickfromgroup.php" method="post">
                                                 <input type="hidden" value="<{$group_id}>" name="group_id" id="group_id">
                                                 <input type="hidden" value="<{$group_members[i].uid}>" name="rel_user_uid" id="rel_user_uid">
-                                                <button name="" type="image" class="btn btn-danger btn-sm float-right"><i class="fa fa-remove"></i><{$smarty.const._MD_SUICO_KICKOUT}></button>
+                                                <button name="" type="image" class="btn btn-danger btn-sm float-right"><span class="fa fa-remove"></span><{$smarty.const._MD_SUICO_KICKOUT}></button>
                                             </form>
                                         <{/if}>
 

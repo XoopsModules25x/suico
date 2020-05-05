@@ -7,7 +7,7 @@
                 <div class="col-md-12">
                     <div id="content" class="content content-full-width">
                         <!-- start -->
-                        <h5><{$smarty.const._MD_SUICO_CHANGEMAIL}> <i class="fa fa-envelope"></i></h5><br>
+                        <h5><{$smarty.const._MD_SUICO_CHANGEMAIL}> <span class="fa fa-envelope"></span></h5><br>
 
                         <{includeq file="db:suico_form.tpl" xoForm=$emailform}>
 

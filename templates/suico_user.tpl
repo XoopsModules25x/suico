@@ -18,7 +18,7 @@
                         <label for="profile-uname"><{$smarty.const._MD_SUICO_USER_NAME}></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                <span class="input-group-text"><span class="fa fa-user" aria-hidden="true"></span></span>
                             </div>
                             <input class="form-control" type="text" name="uname" id="profile-uname" value="" placeholder="<{$smarty.const._MD_SUICO_YOURUSERNAME}>">
                         </div>
@@ -26,7 +26,7 @@
                         <label for="profile-pass"><{$smarty.const._MD_SUICO_PASSWORD}></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                <span class="input-group-text"><span class="fa fa-lock" aria-hidden="true"></span></span>
                             </div>
                             <input class="form-control" type="password" name="pass" id="profile-pass" placeholder="<{$smarty.const._MD_SUICO_YOURPASSWORD}>">
                         </div>

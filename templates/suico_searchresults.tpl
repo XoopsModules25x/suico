@@ -37,18 +37,18 @@
                                                 <{/if}>
                                                 <{if $users[i].uid != $uid_owner}>
                                                     <{if $users[i].selffriendrequest==1 && $self_uid!=0}>
-                                                        <button type="button" class="btn btn-info btn-sm"><i class="fa fa-check-circle"></i> <{$lang_friendrequestsent}></button>
+                                                        <button type="button" class="btn btn-info btn-sm"><span class="fa fa-check-circle"></span> <{$lang_friendrequestsent}></button>
                                                         <form action=cancelFriendrequest.php method="post">
                                                             <input type="hidden" name="friendrequestto_uid" id="friendrequestto_uid" value="<{$users[i].id}>">
-                                                            <button name="" type="image" class="btn btn-danger btn-sm float-right"><i class="fa fa-remove"></i> <{$lang_cancelfriendrequest}></button>
+                                                            <button name="" type="image" class="btn btn-danger btn-sm float-right"><span class="fa fa-remove"></span> <{$lang_cancelfriendrequest}></button>
                                                             <{$token}>
                                                         </form>
                                                     <{/if}>
                                                     <{if $users[i].otherfriendrequest==1 && $other_uid!=0}>
-                                                        <button type="button" class="btn btn-info btn-sm"><i class="fa fa-clock-o"></i> <{$lang_friendshippending}></button>
+                                                        <button type="button" class="btn btn-info btn-sm"><span class="fa fa-clock-o"></span> <{$lang_friendshippending}></button>
                                                         <form action=cancelFriendrequest.php method="post">
                                                             <input type="hidden" name="friendrequestto_uid" id="friendrequestto_uid" value="<{$users[i].id}>">
-                                                            <button name="" type="image" class="btn btn-danger btn-sm float-right"><i class="fa fa-remove"></i> <{$lang_cancelfriendrequest}></button>
+                                                            <button name="" type="image" class="btn btn-danger btn-sm float-right"><span class="fa fa-remove"></span> <{$lang_cancelfriendrequest}></button>
                                                             <{$token}>
                                                         </form>
                                                     <{/if}>
@@ -104,21 +104,21 @@
                                             <br><br>
                                             <{if $displayonlinestatus == 1}>
                                                 <{if $users[i].onlinestatus == 1}>
-                                                    <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-user-circle-o"></i> <{$smarty.const._MD_SUICO_ONLINE}></button>
+                                                    <button type="button" class="btn btn-danger btn-sm"><span class="fa fa-user-circle-o"></span> <{$smarty.const._MD_SUICO_ONLINE}></button>
                                                 <{else}>
-                                                    <button type="button" class="btn btn-dark btn-sm"><i class="fa fa-user-circle-o"></i> <{$smarty.const._MD_SUICO_OFFLINE}></button>
+                                                    <button type="button" class="btn btn-dark btn-sm"><span class="fa fa-user-circle-o"></span> <{$smarty.const._MD_SUICO_OFFLINE}></button>
                                                 <{/if}>
                                             <{/if}>
 
                                             <{if $xoops_isuser AND $displayemail == 1}>
-                                                <a href="mailto:<{$users[i].emailaddresss}>" target="_blank" class="btn btn-primary btn-sm" role="button"><i class="fa fa-envelope" aria-hidden="true"></i> <{$smarty.const._MD_SUICO_EMAIL}></a>
+                                                <a href="mailto:<{$users[i].emailaddresss}>" target="_blank" class="btn btn-primary btn-sm" role="button"><span class="fa fa-envelope" aria-hidden="true"></span> <{$smarty.const._MD_SUICO_EMAIL}></a>
                                             <{/if}>
                                             <{if $xoops_isuser AND $displaypm == 1}>
-                                                <a href="javascript:openWithSelfMain('<{$xoops_url}>/pmlite.php?send2=1&amp;to_userid=<{$users[i].id}>', 'pmlite', 450, 380);" class="btn btn-primary btn-sm" role="button"><i class="fa fa-envelope-o"></i> <{$smarty.const._MD_SUICO_PRIVATEMESSAGE}></a>
+                                                <a href="javascript:openWithSelfMain('<{$xoops_url}>/pmlite.php?send2=1&amp;to_userid=<{$users[i].id}>', 'pmlite', 450, 380);" class="btn btn-primary btn-sm" role="button"><span class="fa fa-envelope-o"></span> <{$smarty.const._MD_SUICO_PRIVATEMESSAGE}></a>
                                                 </button>
                                             <{/if}>
                                             <{if $displayurl == 1 AND $users[i].url!=''}>
-                                                <a href="<{$users[i].url}>" target="_blank" class="btn btn-primary btn-sm" role="button"><i class="fa fa-link" aria-hidden="true"></i> <{$smarty.const._MD_SUICO_URL}></a>
+                                                <a href="<{$users[i].url}>" target="_blank" class="btn btn-primary btn-sm" role="button"><span class="fa fa-link" aria-hidden="true"></span> <{$smarty.const._MD_SUICO_URL}></a>
                                             <{/if}>
                                             <{if $is_admin === true}>
                                                 <p class="float-right"><br><{$users[i].adminlink}></p>

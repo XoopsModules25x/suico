@@ -27,7 +27,7 @@
                                     <a href="#" name='show_tips' id='show_tips' value='Notetips'><{$lang_tips}></a>
                                 </form>
                                 <div id="xtips" name="xtips" style="width:500px;height:50px;" action="">
-                                    [b]<{$lang_bold}>[/b] => <b><{$lang_bold}></b> | [i]<{$lang_italic}>[/i] => <i><{$lang_italic}></i> | [u]<{$lang_underline}>[/u] => <u><{$lang_underline}></u>
+                                    [b]<{$lang_bold}>[/b] => <b><{$lang_bold}></b> | [i]<{$lang_italic}>[/i] => <i><{$lang_italic}></span> | [u]<{$lang_underline}>[/u] => <u><{$lang_underline}></u>
                                 </div>
                             </div>
                         <{/if}>
@@ -61,7 +61,7 @@
                                                 <div class="comment-text w-100 ">
                                                     <{/if}>
                                                     <h5><a name="<{$notes[i].id}>" href="index.php?uid=<{$notes[i].uid}>"><{$notes[i].uname}></a></h5>
-                                                    <div class="comment-footer"><span class="date_created text-muted"> <i class="fa fa-calendar"></i> <{$notes[i].date_created|date_format}></span>
+                                                    <div class="comment-footer"><span class="date_created text-muted"> <span class="fa fa-calendar"></span> <{$notes[i].date_created|date_format}></span>
 
 
                                                         <p class="m-b-5 m-t-10"> &nbsp;<{$notes[i].text}></p>

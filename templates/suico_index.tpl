@@ -32,7 +32,7 @@
                         <{/if}>
 
 						<{if $allow_profile_general}>
-                        <h5><{$smarty.const._MD_SUICO_USER_DETAILS}> <i class="fa fa-user-circle"></i></h5>
+                        <h5><{$smarty.const._MD_SUICO_USER_DETAILS}> <span class="fa fa-user-circle"></span></h5>
                         <{foreach item=category from=$categories}>
                             <{if isset($category.fields)}>
                                 <br>
@@ -48,13 +48,13 @@
 
                         <{if ($isOwner==1)}>
                             <{if $visitors}>
-							<br><h5><{$lang_profilevisitors}> <i class="fa fa-user"></i></h5>
+							<br><h5><{$lang_profilevisitors}> <span class="fa fa-user"></span></h5>
 							<div class="container-fluid">
 									<div class="row row-cols-5">
                                 <{foreach item=visitor from=$visitors}>
 										<div class="col text-center p-2">
 											<a href='index.php?uid=<{$visitor.uid_visitor}>' target='_blank'><img src='<{$xoops_url}>/uploads/<{$visitor.avatar_visitor}>' class='rounded-circle' title='<{$visitor.uname_visitor}>' border='0' alt='<{$visitor.uname_visitor}>' height='48' width='48'></a>
-											 <a href="index.php?uid=<{$visitor.uid_visitor}>" target="_blank"><br><small><{$visitor.uname_visitor}></small></a><br><small><i class="fa fa-calendar-o"></i>&nbsp;<{$visitor.date_visited|date_format}></small>
+											 <a href="index.php?uid=<{$visitor.uid_visitor}>" target="_blank"><br><small><{$visitor.uname_visitor}></small></a><br><small><span class="fa fa-calendar-o"></span>&nbsp;<{$visitor.date_visited|date_format}></small>
 										</div>
                                 <{/foreach}>
 									</div>
@@ -65,7 +65,7 @@
                         <br>
                         <{if $allow_profile_stats}>
                         <{if $modules!=''}>
-                        <h5><{$smarty.const._MD_SUICO_USER_CONTRIBUTIONS}> <i class="fa fa-check-circle"></i></h5>
+                        <h5><{$smarty.const._MD_SUICO_USER_CONTRIBUTIONS}> <span class="fa fa-check-circle"></span></h5>
                         <!-- start module search results loop -->
                         <p>
                             <{foreach item=module from=$modules name="search_results"}>
@@ -88,13 +88,13 @@
                                 </a>
                             </b>
                             <br>
-                            <small> <i class="fa fa-calendar-o"></i> <{$result.time}></small>
+                            <small> <span class="fa fa-calendar-o"></span> <{$result.time}></small>
                         </p>
 
                         <{/foreach}>
                         <!-- end results item loop -->
                         <p>
-                            <button class="btn btn-primary btn-sm link-style"><i class='fa fa-arrow-circle-right'></i> <{$module.showall_link}></button>
+                            <button class="btn btn-primary btn-sm link-style"><span class='fa fa-arrow-circle-right'></span> <{$module.showall_link}></button>
                         </p>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
                 <{if $featuredvideocode!="" }>
                     <div class="container-fluid">
                         <div class="row">
-                            <h5><{$lang_featuredvideo}> <i class="fa fa-youtube-play"></i></h5>
+                            <h5><{$lang_featuredvideo}> <span class="fa fa-youtube-play"></span></h5>
 
                             <div class="embed-responsive embed-responsive-16by9">
                                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<{$featuredvideocode}>?rel=0" allowfullscreen></iframe>
@@ -128,7 +128,7 @@
                 <{if $allow_friends==1}>
                     <{if $countFriends!=0}>
                         <br>
-                        <h5><{$lang_friends}> <i class="fa fa-address-card-o"></i></h5>
+                        <h5><{$lang_friends}> <span class="fa fa-address-card-o"></span></h5>
                         <div class="container-fluid">
                             <div class="row row-cols-4 border">
                                 <{section name=i loop=$friends}>
@@ -146,7 +146,7 @@
                             </div>
                             <{if $countFriends!=0}>
                                 <div class="row p-2">
-                                    <a href="friends.php?uid=<{$uid_owner}>" class="btn btn-primary btn-sm "> <i class='fa fa-arrow-circle-right'></i> <{$lang_viewallfriends}> <span class="badge badge-pill badge-light"><{$countFriends}></span></a>
+                                    <a href="friends.php?uid=<{$uid_owner}>" class="btn btn-primary btn-sm "> <span class='fa fa-arrow-circle-right'></span> <{$lang_viewallfriends}> <span class="badge badge-pill badge-light"><{$countFriends}></span></a>
                                 </div>
                             <{/if}>
                         </div>
@@ -157,7 +157,7 @@
                     <br>
                     <{if $countGroups!=0}>
                         <br>
-                        <h5><{$lang_groups}> <i class="fa fa-group"></i></h5>
+                        <h5><{$lang_groups}> <span class="fa fa-group"></span></h5>
                         <div class="container-fluid">
                             <div class="row row-cols-4 border">
                                 <{section name=i loop=$groups}>
@@ -171,7 +171,7 @@
                             </div>
                             <{if $countGroups!=0}>
                                 <div class="row p-2">
-                                    <br><a href="groups.php?uid=<{$uid_owner}>" class="btn btn-primary btn-sm "><i class='fa fa-arrow-circle-right'></i> <{$lang_viewallgroups}> <span class="badge badge-pill badge-light"><{$countGroups}></span> </a>
+                                    <br><a href="groups.php?uid=<{$uid_owner}>" class="btn btn-primary btn-sm "><span class='fa fa-arrow-circle-right'></span> <{$lang_viewallgroups}> <span class="badge badge-pill badge-light"><{$countGroups}></span> </a>
                                 </div>
                             <{/if}>
                         </div>

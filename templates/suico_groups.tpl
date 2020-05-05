@@ -63,7 +63,7 @@
                                     <tr>
                                         <td>
                                             <{if $isAnonym!=1}>
-                                                <button name="" type="image" class="btn btn-primary btn-sm float-right"><i class="fa fa-user-circle-o"></i> <{$lang_memberofgroup}></button>
+                                                <button name="" type="image" class="btn btn-primary btn-sm float-right"><span class="fa fa-user-circle-o"></span> <{$lang_memberofgroup}></button>
                                             <{/if}>
 
                                             <a href="group.php?group_id=<{$mygroups[i].group_id}>"><img src="<{$xoops_upload_url}>/suico/groups/<{$mygroups[i].img}>" alt="<{$mygroups[i].title}>" title="<{$mygroups[i].title}>" class="float-left pr-2" width="120"></a>
@@ -80,7 +80,7 @@
                                                         <input type="hidden" value="<{$mygroups[i].group_id}>" name="group_id" id="group_id">
                                                         <input type="image" src="<{xoModuleIcons16 edit.png}>">
                                                     </form>
-                                                    <button title="<{$lang_owner}>" class="btn btn-secondary btn-sm float-right"><i class="fa fa-user"></i> <{$smarty.const._MD_SUICO_OWNEROFGROUP}></button>
+                                                    <button title="<{$lang_owner}>" class="btn btn-secondary btn-sm float-right"><span class="fa fa-user"></span> <{$smarty.const._MD_SUICO_OWNEROFGROUP}></button>
                                                 <{/if}>
                                             <{/if}>
 
@@ -134,15 +134,15 @@
                                                     <{if !in_array($groups[j].id, $mygroupsid)}>
                                                         <form action="becomemembergroup.php" method="POST" id="form_becomemember" class="suico-groups-form-becomemember">
                                                             <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
-                                                            <button name="" type="image" class="btn btn-dark btn-sm float-right"><i class="fa fa-handshake-o"></i> <{$lang_joingroup}></button>
+                                                            <button name="" type="image" class="btn btn-dark btn-sm float-right"><span class="fa fa-handshake-o"></span> <{$lang_joingroup}></button>
                                                         </form>
                                                     <{else}>
                                                         <{if $uid_owner == $groups[j].uid OR in_array($groups[j].id, $mygroupsid)}>
-                                                            <button name="" type="image" class="btn btn-primary btn-sm float-right"><i class="fa fa-user-circle-o"></i> <{$lang_memberofgroup}></button>
+                                                            <button name="" type="image" class="btn btn-primary btn-sm float-right"><span class="fa fa-user-circle-o"></span> <{$lang_memberofgroup}></button>
                                                         <{else}>
                                                             <form action="becomemembergroup.php" method="POST" id="form_becomemember" class="suico-groups-form-becomemember">
                                                                 <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
-                                                                <button name="" type="image" class="btn btn-dark btn-sm float-right"><i class="fa fa-handshake-o"></i> <{$lang_joingroup}></button>
+                                                                <button name="" type="image" class="btn btn-dark btn-sm float-right"><span class="fa fa-handshake-o"></span> <{$lang_joingroup}></button>
                                                             </form>
                                                         <{/if}>
                                                     <{/if}>
@@ -164,7 +164,7 @@
                                                         <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
                                                         <input type="image" src="<{xoModuleIcons16 edit.png}>">
                                                     </form>
-                                                    <button title="<{$lang_owner}>" class="btn btn-secondary btn-sm float-right"><i class="fa fa-user"></i> <{$smarty.const._MD_SUICO_OWNEROFGROUP}></button>
+                                                    <button title="<{$lang_owner}>" class="btn btn-secondary btn-sm float-right"><span class="fa fa-user"></span> <{$smarty.const._MD_SUICO_OWNEROFGROUP}></button>
                                                 <{/if}>
 
 

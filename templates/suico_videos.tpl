@@ -74,11 +74,11 @@
                             </div>
                             <div class="alert alert-primary">
 								<{if $videos[i].featured_video==1}>
-                                    <button class="btn btn-danger btn-sm float-right" title="<{$smarty.const._MD_SUICO_FEATUREDVIDEOPROFILE}>"><i class='fa fa-youtube-play' title='<{$smarty.const._MD_SUICO_FEATUREDVIDEOPROFILE}>'></i>&nbsp;<{$smarty.const._MD_SUICO_VIDEO_FEATURED}></button>
+                                    <button class="btn btn-danger btn-sm float-right" title="<{$smarty.const._MD_SUICO_FEATUREDVIDEOPROFILE}>"><span class='fa fa-youtube-play' title='<{$smarty.const._MD_SUICO_FEATUREDVIDEOPROFILE}>'></span>&nbsp;<{$smarty.const._MD_SUICO_VIDEO_FEATURED}></button>
                                 <{/if}>
                                 <h6><{$videos[i].title}></h6>
 								<{$videos[i].desc}>
-								<p class="text-muted"><i class="fa fa-calendar"></i>
+								<p class="text-muted"><span class="fa fa-calendar"></span>
                                                         <{if $videos[i].date_created == $videos[i].date_updated}>
                                                             <small><{$videos[i].date_created|date_format}></small>
                                                         <{else}>

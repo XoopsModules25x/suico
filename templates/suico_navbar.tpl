@@ -32,28 +32,28 @@
                                         <{if (($allow_friends !=-1) && ($isFriend!=1) && ($isOwner==0) && ($isAnonym!=1) && ($selffriendrequest!=1) && ($otherfriendrequest!=1))}>
                                             <form action=submitFriendrequest.php method="post">
                                                 <input type="hidden" name="friendrequestfrom_uid" id="friendrequestfrom_uid" value="<{$uid_owner}>">
-                                                <button name="" type="image" class="btn btn-info btn-sm"><i class="fa fa-user-plus"></i> <{$lang_addfriend}></button>
+                                                <button name="" type="image" class="btn btn-info btn-sm"><span class="fa fa-user-plus"></span> <{$lang_addfriend}></button>
                                                 <{$token}>
                                             </form>
                                         <{/if}>
                                         <{if $allow_friends}>
                                             <{if $isFriend == 1 && $isAnonym!=1}>
-                                                <button type="button" class="btn btn-info btn-sm"><i class="fa fa-user-circle"></i> <{$lang_myfriend}></button>
+                                                <button type="button" class="btn btn-info btn-sm"><span class="fa fa-user-circle"></span> <{$lang_myfriend}></button>
                                             <{/if}>
 
                                             <{if $selffriendrequest==1 && $self_uid!=0 && $isAnonym!=1}>
-                                                <button type="button" class="btn btn-info btn-sm"><i class="fa fa-check-circle"></i> <{$lang_friendrequestsent}></button>
+                                                <button type="button" class="btn btn-info btn-sm"><span class="fa fa-check-circle"></span> <{$lang_friendrequestsent}></button>
                                                 <form action=cancelFriendrequest.php method="post">
                                                     <input type="hidden" name="friendrequestto_uid" id="friendrequestto_uid" value="<{$uid_owner}>">
-                                                    <button name="" type="image" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i> <{$lang_cancelfriendrequest}></button>
+                                                    <button name="" type="image" class="btn btn-danger btn-sm"><span class="fa fa-remove"></span> <{$lang_cancelfriendrequest}></button>
                                                     <{$token}>
                                                 </form>
                                             <{/if}>
                                             <{if $otherfriendrequest==1 && $other_uid!=0 && $isAnonym!=1}>
-                                                <button type="button" class="btn btn-info btn-sm"><i class="fa fa-clock-o"></i> <{$lang_friendrequestpending}></button>
+                                                <button type="button" class="btn btn-info btn-sm"><span class="fa fa-clock-o"></span> <{$lang_friendrequestpending}></button>
                                                 <form action=cancelFriendrequest.php method="post">
                                                     <input type="hidden" name="friendrequestto_uid" id="friendrequestto_uid" value="<{$uid_owner}>">
-                                                    <button name="" type="image" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i> <{$lang_cancelfriendrequest}></button>
+                                                    <button name="" type="image" class="btn btn-danger btn-sm"><span class="fa fa-remove"></span> <{$lang_cancelfriendrequest}></button>
                                                     <{$token}>
                                                 </form>
                                             <{/if}>
@@ -79,15 +79,15 @@
 
                                         <{if $allow_profile_general}>
                                             <{if $user_occupation || $user_location }>
-                                                <p class="m-b-10"><{if $user_occupation}><i class="fa fa-briefcase"></i>&nbsp;<{$user_occupation}><{/if}> <{if $user_occupation}><i class="fa fa-map-marker"></i>&nbsp;<{$user_location}><{/if}></p>
+                                                <p class="m-b-10"><{if $user_occupation}><span class="fa fa-briefcase"></span>&nbsp;<{$user_occupation}><{/if}> <{if $user_occupation}><span class="fa fa-map-marker"></span>&nbsp;<{$user_location}><{/if}></p>
                                             <{/if}>
                                         <{/if}>
 
                                         <{if $allow_profile_contact}>
                                             <{if $user_email || $user_websiteurl }>
                                                 <p class="m-b-10">
-                                                    <{if $user_viewemail!='0'}><i class="fa fa-envelope"></i>&nbsp;<{mailto address=$user_email encode="javascript"}><{/if}>
-                                                    <{if $user_websiteurl}><i class="fa fa-globe"></i>&nbsp;<{$user_websiteurl}><{else}><br><{/if}>
+                                                    <{if $user_viewemail!='0'}><span class="fa fa-envelope"></span>&nbsp;<{mailto address=$user_email encode="javascript"}><{/if}>
+                                                    <{if $user_websiteurl}><span class="fa fa-globe"></span>&nbsp;<{$user_websiteurl}><{else}><br><{/if}>
                                                 </p>
                                             <{/if}>
                                         <{/if}>
@@ -96,27 +96,27 @@
                                             <{if $allow_friends}>
                                                 <{if $isAnonym!=1 && $isOwner!=1 }>
                                                     <button type="button" class="btn btn-success btn-sm">
-                                                        <a href="javascript:openWithSelfMain('<{$xoops_url}>/pmlite.php?send2=1&amp;to_userid=<{$uid_owner}>', 'pmlite', 450, 380);"><i class="fa fa-envelope-o"></i> <{$smarty.const._MD_SUICO_PRIVATEMESSAGE}></a></button>
+                                                        <a href="javascript:openWithSelfMain('<{$xoops_url}>/pmlite.php?send2=1&amp;to_userid=<{$uid_owner}>', 'pmlite', 450, 380);"><span class="fa fa-envelope-o"></span> <{$smarty.const._MD_SUICO_PRIVATEMESSAGE}></a></button>
                                                 <{/if}>
                                             <{/if}>
                                         <{/if}>
 
                                         <{if $isAnonym!=1 && $isOwner==1}>
                                             <{xoInboxCount assign=pmcount}>
-                                            <{if $pmcount}><a href="<{$xoops_url}>/viewpmsg.php" class="btn btn-success btn-sm" > <i class="fa fa-envelope-o"></i> <{$smarty.const._MD_SUICO_PRIVATEMESSAGE}> <span class="badge badge-light"><{$pmcount}></span></a> <{/if}>
-                                            <a href="<{$xoops_url}>/modules/suico/edituser.php" class="btn btn-success btn-sm"> <i class="fa fa-edit"></i> <{$smarty.const._MD_SUICO_EDITPROFILE}></a>
-                                            <a href="<{$xoops_url}>/modules/suico/configs.php?uid=<{$uid_owner}>" class="btn btn-success btn-sm"> <i class="fa fa-gear"></i> <{$lang_configs}></a>
-                                            <a href="<{$xoops_url}>/user.php?op=logout" class="btn btn-success btn-sm"> <i class="fa fa-sign-out"></i> <{$smarty.const._MD_SUICO_LOGOUT}></a>
+                                            <{if $pmcount}><a href="<{$xoops_url}>/viewpmsg.php" class="btn btn-success btn-sm" > <span class="fa fa-envelope-o"></span> <{$smarty.const._MD_SUICO_PRIVATEMESSAGE}> <span class="badge badge-light"><{$pmcount}></span></a> <{/if}>
+                                            <a href="<{$xoops_url}>/modules/suico/edituser.php" class="btn btn-success btn-sm"> <span class="fa fa-edit"></span> <{$smarty.const._MD_SUICO_EDITPROFILE}></a>
+                                            <a href="<{$xoops_url}>/modules/suico/configs.php?uid=<{$uid_owner}>" class="btn btn-success btn-sm"> <span class="fa fa-gear"></span> <{$lang_configs}></a>
+                                            <a href="<{$xoops_url}>/user.php?op=logout" class="btn btn-success btn-sm"> <span class="fa fa-sign-out"></span> <{$smarty.const._MD_SUICO_LOGOUT}></a>
                                         <{/if}>
 
                                         <{if $user_onlinestatus == 1}>
-                                            <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-user-circle-o"></i> <{$smarty.const._MD_SUICO_ONLINE}></button>
+                                            <button type="button" class="btn btn-danger btn-sm"><span class="fa fa-user-circle-o"></span> <{$smarty.const._MD_SUICO_ONLINE}></button>
                                         <{else}>
-                                            <button type="button" class="btn btn-dark btn-sm"><i class="fa fa-user-circle-o"></i> <{$smarty.const._MD_SUICO_OFFLINE}></button>
+                                            <button type="button" class="btn btn-dark btn-sm"><span class="fa fa-user-circle-o"></span> <{$smarty.const._MD_SUICO_OFFLINE}></button>
                                         <{/if}>
 
                                         <{if $allow_usersuspension==1}><{if $isWebmaster==1 }> <{if $isOwner!=1}>
-                                            <a href="#" name='show_suspension' id='show_suspension' type="button" title="<{$lang_suspensionadmin}>" class="btn btn-sm btn-primary"><i class="fa fa-close"></i> <{$smarty.const._MD_SUICO_SUSPENDUSER}></a>
+                                            <a href="#" name='show_suspension' id='show_suspension' type="button" title="<{$lang_suspensionadmin}>" class="btn btn-sm btn-primary"><span class="fa fa-close"></span> <{$smarty.const._MD_SUICO_SUSPENDUSER}></a>
                                         <{/if}><{/if}><{/if}>
 
                                         <{if $allow_usersuspension==1}>
@@ -145,7 +145,7 @@
                                         <{if $allow_friends !=-1}>
                                             <{if $allow_fanssevaluation == 1}>
 
-                                                <!--    <p id="suico-profile-fans"><a href="fans.php?uid=<{$uid_owner}>" alt="<{$lang_fans}>" title="<{$lang_fans}>"> <{$lang_fans}> </a><i class="fa fa-star" style="color:yellow;"></i> (<{$countFans}>)
+                                                <!--    <p id="suico-profile-fans"><a href="fans.php?uid=<{$uid_owner}>" alt="<{$lang_fans}>" title="<{$lang_fans}>"> <{$lang_fans}> </a><span class="fa fa-star" style="color:yellow;"></span> (<{$countFans}>)
                 </p>  <{$lang_funny}>
             <p id="funnybw"><span id="funnycolor">&nbsp;<img width="<{$funny}>" height="0" src="assets/images/transparent.gif"></span>&nbsp;<img width="<{$funny_rest}>" height="0" src="assets/images/transparent.gif"></p>
 
@@ -166,29 +166,29 @@
 
                         <!-- BEGIN profile-header-tab -->
                         <ul class="profile-header-tab nav nav-tabs">
-                            <li class="nav-item"><a href="index.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_profile}>active show<{/if}>"><small><i class="fa fa-user-circle"></i> <{$lang_profile}></small></a></li>
+                            <li class="nav-item"><a href="index.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_profile}>active show<{/if}>"><small><span class="fa fa-user-circle"></span> <{$lang_profile}></small></a></li>
                             <{if $allow_notes!=0}>
-                                <li class="nav-item"><a href="notebook.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_notebook}>active show<{/if}>"><small><i class="fa fa-comment"></i> <{$lang_notebook}> <span
+                                <li class="nav-item"><a href="notebook.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_notebook}>active show<{/if}>"><small><span class="fa fa-comment"></span> <{$lang_notebook}> <span
                                                     class="badge badge-pill badge-primary"><{$countNotes}></span></small></a>
                                 </li>
                             <{/if}>
                             <{if $allow_pictures !=0}>
-                                <li class="nav-item"><a href="album.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_photos}>active show<{/if}>"><small><i class="fa fa-picture-o"></i> <{$lang_photos}> <span class="badge badge-pill badge-primary"><{$countPhotos}></span></small></a>
+                                <li class="nav-item"><a href="album.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_photos}>active show<{/if}>"><small><span class="fa fa-picture-o"></span> <{$lang_photos}> <span class="badge badge-pill badge-primary"><{$countPhotos}></span></small></a>
                                 </li><{/if}>
                             <{if $allow_audios !=0}>
-                                <li class="nav-item"> <a href="audios.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_audio}>active show<{/if}>"><span><small><i class="fa fa-file-audio-o"></i> <{$lang_audio}> <span
+                                <li class="nav-item"> <a href="audios.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_audio}>active show<{/if}>"><span><small><span class="fa fa-file-audio-o"></span> <{$lang_audio}> <span
                                                     class="badge badge-pill badge-primary"><{$countAudio}></span></small></a>
                                 </li><{/if}>
                             <{if $allow_videos !=0}>
-                                <li class="nav-item"><a href="videos.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_videos}>active show<{/if}>"><small><i class="fa fa-youtube-play"></i> <{$lang_videos}> <span
+                                <li class="nav-item"><a href="videos.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_videos}>active show<{/if}>"><small><span class="fa fa-youtube-play"></span> <{$lang_videos}> <span
                                                 class="badge badge-pill badge-primary"><{$countVideos}></span></small></a>
                                 </li><{/if}>
                             <{if $allow_friends !=0}>
-                                <li class="nav-item"> <a href="friends.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_friends}>active show<{/if}>"><small><i class="fa fa-user-circle-o"></i> <{$lang_friends}> <span
+                                <li class="nav-item"> <a href="friends.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_friends}>active show<{/if}>"><small><span class="fa fa-user-circle-o"></span> <{$lang_friends}> <span
                                                 class="badge badge-pill badge-primary"><{$countFriends}></span></small></a>
                                 </li><{/if}>
                             <{if $allow_groups !=0}>
-                                <li class="nav-item"> <a href="groups.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_groups}>active show<{/if}>"><small><i class="fa fa-group"></i> <{$lang_groups}> <span class="badge badge-pill badge-primary"><{$countGroups}></span></small></a>
+                                <li class="nav-item"> <a href="groups.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_groups}>active show<{/if}>"><small><span class="fa fa-group"></span> <{$lang_groups}> <span class="badge badge-pill badge-primary"><{$countGroups}></span></small></a>
                                 </li><{/if}>
 
                         </ul>

@@ -16,10 +16,10 @@
 
                         <p class="text-muted">
                             <{if $block.showowner == 1}>
-                                <small> <i class='fa fa-user-circle'></i> <a href="<{$xoops_url}>/modules/suico/album.php?uid=<{$block.picture[i].uid_owner}>"><{$block.picture[i].uname}></a></small>
+                                <small> <span class='fa fa-user-circle'></span> <a href="<{$xoops_url}>/modules/suico/album.php?uid=<{$block.picture[i].uid_owner}>"><{$block.picture[i].uname}></a></small>
                             <{/if}>
                             <{if $block.showdate == 1}>
-                                <i class="fa fa-calendar"></i>
+                                <span class="fa fa-calendar"></span>
                                 <{if $block.picture[i].date_created == $block.picture[i].date_updated}>
                                     <small><{$block.picture[i].date_created|date_format}></small>
                                 <{else}>

@@ -31,15 +31,15 @@
                                     <td>
                                         <{if $isOwner && $isAnonym!=1}>
                                             <{if $uid_owner == $groups[j].uid }>
-                                                <button title="<{$lang_owner}>" class="btn btn-secondary btn-sm float-right"><i class="fa fa-user"></i> <{$smarty.const._MD_SUICO_OWNEROFGROUP}></button>
+                                                <button title="<{$lang_owner}>" class="btn btn-secondary btn-sm float-right"><span class="fa fa-user"></span> <{$smarty.const._MD_SUICO_OWNEROFGROUP}></button>
                                             <{/if}>
                                             <{if $uid_owner == $groups[j].uid OR in_array($groups[j].id, $mygroupsid)}>
-                                                <button name="" type="image" class="btn btn-primary btn-sm float-right"><i class="fa fa-user-circle-o"></i> <{$lang_memberofgroup}></button>
+                                                <button name="" type="image" class="btn btn-primary btn-sm float-right"><span class="fa fa-user-circle-o"></span> <{$lang_memberofgroup}></button>
                                             <{/if}>
                                             <{if !in_array($groups[j].id, $mygroupsid) && $uid_owner != $groups[j].uid}>
                                                 <form action="becomemembergroup.php" method="POST" id="form_becomemember" class="suico-groups-form-becomemember">
                                                     <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
-                                                    <button name="" type="image" class="btn btn-dark btn-sm float-right"><i class="fa fa-handshake-o"></i> <{$lang_joingroup}></button>
+                                                    <button name="" type="image" class="btn btn-dark btn-sm float-right"><span class="fa fa-handshake-o"></span> <{$lang_joingroup}></button>
                                                 </form>
                                             <{/if}>
 
