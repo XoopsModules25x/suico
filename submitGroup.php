@@ -87,7 +87,7 @@ if (1 == $marker) { //if (1 === $marker) {
         redirect_header('groups.php?op=list', 2, _MD_SUICO_GROUP_SAVED);
     } else {
         redirect_header(
-            XOOPS_URL . '/modules/suico/audios.php?uid=' . (int)$xoopsUser->getVar('uid'),
+            XOOPS_URL . '/modules/suico/groups.php?uid=' . (int)$xoopsUser->getVar('uid'),
             2,
             _MD_SUICO_ERROR
         );
