@@ -7,7 +7,7 @@
                 <div class="col-md-12">
                     <div id="content" class="content content-full-width">
                         <!-- start -->
-                        <h5><{$smarty.const._MD_SUICO_EDITPROFILE}> <i class="fa fa-user-circle"></i></h5><br>
+                        <h5><{$smarty.const._MD_SUICO_EDITPROFILE}> <span class="fa fa-user-circle"></span></h5><br>
 
 
                         <{if $stop}>

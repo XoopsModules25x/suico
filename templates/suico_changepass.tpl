@@ -8,7 +8,7 @@
                     <div id="content" class="content content-full-width">
                         <!-- start -->
 
-                        <h5><{$smarty.const._MD_SUICO_CHANGEPASSWORD}> <i class="fa fa-user-circle"></i></h5><br>
+                        <h5><{$smarty.const._MD_SUICO_CHANGEPASSWORD}> <span class="fa fa-user-circle"></span></h5><br>
 
                         <{includeq file="db:suico_form.tpl" xoForm=$form}>
 

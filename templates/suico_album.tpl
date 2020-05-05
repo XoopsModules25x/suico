@@ -60,7 +60,7 @@
                                                 <div class="card-body">
                                                     <h4 class="card-title"><{$pics_array[i].title}></h4>
                                                     <p class="card-text"><{$pics_array[i].caption}></p>
-                                                    <p class="text-muted"><i class="fa fa-calendar"></i>
+                                                    <p class="text-muted"><span class="fa fa-calendar"></span>
                                                         <{if $pics_array[i].date_created == $pics_array[i].date_updated}>
                                                             <small><{$pics_array[i].date_created|date_format}></small>
                                                         <{else}>
@@ -110,7 +110,7 @@
                                                     <div class="card-body">
                                                         <h4 class="card-title"><{$pics_array[i].title}></h4>
                                                         <p class="card-text"><{$pics_array[i].caption}></p>
-                                                        <p class="text-muted"><i class="fa fa-calendar"></i>
+                                                        <p class="text-muted"><span class="fa fa-calendar"></span>
                                                             <{if $pics_array[i].date_created == $pics_array[i].date_updated}>
                                                                 <small><{$pics_array[i].date_created|date_format}></small>
                                                             <{else}>
@@ -119,7 +119,7 @@
                                                         </p>
 
                                                         <p class="text-center">
-                                                            <button class="btn btn-info btn-sm"><i class='fa fa-lock'></i> <{$lang_privatephoto}></button>
+                                                            <button class="btn btn-info btn-sm"><span class='fa fa-lock'></span> <{$lang_privatephoto}></button>
                                                         </p>
                                                         <{if (($isOwner==1))}>
                                                             <form action="delpicture.php" method="post" id="deleteform" class="suico-album-formquick">

@@ -84,7 +84,7 @@
                             </div>
                             <div class="audio-play-wrapper">
                                 <!-- <a href="#" id="player<{$audios[i].id}>" class="audio-play-button float-left">
-                <i class="fa fa-play"></i>
+                <span class="fa fa-play"></span>
             </a>--> <span><strong><{$audios[i].author}> - <{$audios[i].title}></strong></span>
                             </div>
                             <div id="waveform"></div>
@@ -102,13 +102,13 @@
                                     wavesurfer<{$audios[i].id}>.play();
                                 });
                                 wavesurfer<{$audios[i].id}>.on('play', function () {
-                                    $('#player<{$audios[i].id}>').html('<i class="fa fa-pause"></i>');
+                                    $('#player<{$audios[i].id}>').html('<span class="fa fa-pause"></span>');
                                 });
                                 wavesurfer<{$audios[i].id}>.on('pause', function () {
-                                    $('#player<{$audios[i].id}>').html('<i class="fa fa-play"></i>');
+                                    $('#player<{$audios[i].id}>').html('<span class="fa fa-play"></span>');
                                 });
                                 wavesurfer<{$audios[i].id}>.on('finish', function () {
-                                    $('#player<{$audios[i].id}>').html('<i class="fa fa-play"></i>');
+                                    $('#player<{$audios[i].id}>').html('<span class="fa fa-play"></span>');
                                 });
                                 $('#player<{$audios[i].id}>').click(function () {
                                     wavesurfer<{$audios[i].id}>.playPause();
@@ -117,25 +117,25 @@
                             </script>
                             <div class="controls">
                                 <button class="btn btn-primary" onclick="wavesurfer<{$audios[i].id}>.skipBackward()">
-                                    <i class="fa fa-step-backward"></i>
+                                    <span class="fa fa-step-backward"></span>
                                     Backward
                                 </button>
 
                                 <button class="btn btn-primary" onclick="wavesurfer<{$audios[i].id}>.playPause()">
-                                    <i class="fa fa-play"></i>
+                                    <span class="fa fa-play"></span>
                                     Play
                                     /
-                                    <i class="fa fa-pause"></i>
+                                    <span class="fa fa-pause"></span>
                                     Pause
                                 </button>
 
                                 <button class="btn btn-primary" onclick="wavesurfer<{$audios[i].id}>.skipForward()">
-                                    <i class="fa fa-step-forward"></i>
+                                    <span class="fa fa-step-forward"></span>
                                     Forward
                                 </button>
 
                                 <button class="btn btn-primary" onclick="wavesurfer<{$audios[i].id}>.toggleMute()">
-                                    <i class="fa fa-volume-off"></i>
+                                    <span class="fa fa-volume-off"></span>
                                     Toggle Mute
                                 </button>
                             </div>
@@ -144,7 +144,7 @@
                                 <h5><{$smarty.const._MD_SUICO_DESCRIPTION}></h5>
                                 <{$audios[i].author}> - <{$audios[i].title}> <br>
 
-                                <p class="text-muted"><i class="fa fa-calendar"></i>
+                                <p class="text-muted"><span class="fa fa-calendar"></span>
                                     <{if $audios[i].date_created == $audios[i].date_updated}>
                                         <small><{$audios[i].date_created|date_format}></small>
                                     <{else}>

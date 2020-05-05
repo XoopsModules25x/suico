@@ -25,10 +25,10 @@
 
     <div class="row">
         <{if $block.friends}>
-            <a href="<{$xoops_url}>/modules/suico/friends.php" class="btn btn-primary btn-sm"> <i class='fa fa-arrow-circle-right'></i> <{$block.lang_allfriends}></a>
+            <a href="<{$xoops_url}>/modules/suico/friends.php" class="btn btn-primary btn-sm"> <span class='fa fa-arrow-circle-right'></span> <{$block.lang_allfriends}></a>
         <{else}>
             <div class="alert alert-primary text-center"><{$block.lang_nofriends}><br><br>
-                <a href="<{$xoops_url}>/modules/suico/memberslist.php" class="btn btn-primary btn-sm" role="button"><i class="fa fa-address-card-o"></i> <{$smarty.const._MB_SUICO_FINDFRIENDS}></a>
+                <a href="<{$xoops_url}>/modules/suico/memberslist.php" class="btn btn-primary btn-sm" role="button"><span class="fa fa-address-card-o"></span> <{$smarty.const._MB_SUICO_FINDFRIENDS}></a>
             </div>
         <{/if}>
 

@@ -32,9 +32,9 @@
                         <{/if}>
                         <{if (($isOwner==1))}>
                         <{if $lang_nofriendsyet==""}>
-                        <a href="memberslist.php" class="btn btn-primary btn-sm float-right" role="button"><i class="fa fa-address-card-o"></i> <{$smarty.const._MD_SUICO_FINDMOREFRIENDS}></a>
+                        <a href="memberslist.php" class="btn btn-primary btn-sm float-right" role="button"><span class="fa fa-address-card-o"></span> <{$smarty.const._MD_SUICO_FINDMOREFRIENDS}></a>
                         <{else}>
-                        <a href="memberslist.php" class="btn btn-primary btn-sm float-right" role="button"><i class="fa fa-address-card-o"></i> <{$smarty.const._MD_SUICO_FINDFRIENDS}></a>
+                        <a href="memberslist.php" class="btn btn-primary btn-sm float-right" role="button"><span class="fa fa-address-card-o"></span> <{$smarty.const._MD_SUICO_FINDFRIENDS}></a>
                         <{/if}>
                         <{/if}>
 
@@ -64,14 +64,14 @@
                                                             <li class="p-1">
                                                                 <form action="editfriendship.php" method="post" class="suico-friends-deleteform">
                                                                     <input type="hidden" name="friend_uid" id="friend_uid" value="<{$friends[i].uid}>">
-                                                                    <button name="submit" id="submit" type="image" class="btn btn-primary btn-sm" title="<{$lang_evaluate}>"><i class="fa fa-gear"></i> <{$lang_friendshipsettings}></button>
+                                                                    <button name="submit" id="submit" type="image" class="btn btn-primary btn-sm" title="<{$lang_evaluate}>"><span class="fa fa-gear"></span> <{$lang_friendshipsettings}></button>
                                                                 </form>
                                                             </li>
                                                         <{/if}>
                                                         <li class="p-1">
                                                             <form action="delfriendship.php" method="post">
                                                                 <input type="hidden" name="friend_uid" id="friend_uid" value="<{$friends[i].uid}>">
-                                                                <button name="submit" id="submit" type="image" class="btn btn-danger btn-sm" title="<{$lang_delete}>"><i class="fa fa-remove"></i> <{$lang_deletefriend}></button>
+                                                                <button name="submit" id="submit" type="image" class="btn btn-danger btn-sm" title="<{$lang_delete}>"><span class="fa fa-remove"></span> <{$lang_deletefriend}></button>
                                                             </form>
 
                                                         </li>

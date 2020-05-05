@@ -8,7 +8,7 @@
                     <div id="content" class="content content-full-width">
                         <!-- start -->
 
-                        <h5><{$smarty.const._MD_SUICO_CHANGEAVATAR}> <i class="fa fa-user-circle-o"></i></h5><br>
+                        <h5><{$smarty.const._MD_SUICO_CHANGEAVATAR}> <span class="fa fa-user-circle-o"></span></h5><br>
                         <div class="alert alert-primary">
                             <{if $old_avatar}>
                                 <h5><{$smarty.const._US_OLDDELETED}></h5>
