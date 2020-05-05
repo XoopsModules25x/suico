@@ -47,7 +47,8 @@ class PhotosController extends SuicoController
             $configs = $this->configsFactory->getObjects($criteria);
             $config  = $configs[0]->getVar('pictures');
             if (!$this->checkPrivilegeLevel($config)) {
-                \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, \_MD_SUICO_NOPRIVILEGE);
+//                \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, \_MD_SUICO_NOPRIVILEGE);
+                \redirect_header('index.php', 10, \_MD_SUICO_NOPRIVILEGE);
             }
         }
         return true;

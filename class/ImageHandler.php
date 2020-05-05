@@ -566,11 +566,41 @@ class ImageHandler extends XoopsPersistableObjectHandler
      */
     public function getLastPicturesForBlock($limit)
     {
-        $ret    = [];
-        $sql    = 'SELECT uname, t.uid_owner, t.filename, t.title, t.caption, t.date_created, t.date_updated  FROM ' . $this->db->prefix('suico_images')
-                  . ' AS t, ' . $this->db->prefix('users');
+        global $xoopsUser, $xoopsDB;
+        $memberHandler = xoops_getHandler('member');
+        $user = $xoopsUser;
+        $user2 = $GLOBALS['xoopsUser'];
+        if (is_object($xoopsUser)) {
+            $uid = $xoopsUser->getVar('uid');
+        }
 
-        $sql    .= ' WHERE uid_owner = uid AND private=0 ORDER BY image_id DESC';
+        $controller = new PhotosController($xoopsDB, $xoopsUser);
+
+        $isAdmin     = Helper::getInstance()->isUserAdmin();
+        $isUser      = $controller->isUser;
+        $isAnonymous = $controller->isAnonym;
+
+        $ret    = [];
+
+        if (1 == $isAnonymous) {
+            $sql = 'SELECT uname, t.uid_owner, t.filename, t.title, t.caption, t.date_created, t.date_updated  FROM ' . $this->db->prefix('suico_images') . ' AS t';
+            $sql .= ' INNER JOIN ' . $this->db->prefix('users') . ' u ON t.uid_owner=u.uid';
+            $sql .= ' INNER JOIN ' . $this->db->prefix('suico_configs') . ' c on t.uid_owner=c.config_uid';
+            $sql .= ' WHERE private=0 AND c.pictures < 2 ';
+            $sql .= ' ORDER BY image_id DESC';
+        }
+        if (1 == $isUser) {
+            $sql0 = 'SELECT f.friend2_uid FROM ' . $this->db->prefix('suico_friendships') . ' AS f';
+            $sql0 .= ' WHERE f.friend1_uid = '. $uid ;
+            $sql = 'SELECT uname, t.uid_owner, t.filename, t.title, t.caption, t.date_created, t.date_updated  FROM ' . $this->db->prefix('suico_images') . ' AS t';
+            $sql .= ' INNER JOIN ' . $this->db->prefix('users') . ' u ON t.uid_owner=u.uid';
+            $sql .= ' INNER JOIN ' . $this->db->prefix('suico_configs') . ' c on t.uid_owner=c.config_uid';
+            $sql .= ' WHERE (private=0 AND c.pictures < 3 )'; //all pictures visible to members
+            $sql .= ' OR ( private=0 AND c.pictures = 3 AND c.config_uid IN ( '. $sql0 .')) '; //pictures visible to friends
+            $sql .= ' OR ( c.config_uid = '. $uid .' AND c.pictures = 4) '; //my private pictures
+            $sql .= ' ORDER BY image_id DESC';
+        }
+
         $result = $this->db->query($sql, $limit, 0);
 
 
