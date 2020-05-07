@@ -1,4 +1,4 @@
-<h5>3.5 Beta 1    [2020-05-03]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.5
+<h5>3.5 Beta 1    [2020-05-07]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.5
 <hr>
 - renamed to SUICO (mamba)
 - Add total comments for Group (liomj)
@@ -33,7 +33,12 @@
 - use datables in groups (liomj)
 - remove old jQuery (liomj)
 - conversions to Xmf\Request (mamba)
-
+- added extra users for testing (mamba)
+- add new avatars (mamba)
+- add titles on images for testing (mamba)
+- fix visitors listed more than once (liomj/mamba)
+- fix queries for user photos in blocks (liomj/mamba)
+- update font awesome (liomj)
 
 
 
