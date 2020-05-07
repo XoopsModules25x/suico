@@ -16,3 +16,75 @@
     featured_video: '0'
     date_created: '1585748818'
     date_updated: '1587649618'
+-
+    video_id: '3'
+    uid_owner: '999'
+    video_title: 'How to Install Of Xoops CMS 2.5.10 on Ubuntu 18.10'
+    video_desc: 'This video covers the method to install Xoops CMS 2.5.10 on Ubuntu 18.10. XOOPS CMS is an acronym of eXtensible, OO (Object Oriented) portal System, easy to use dynamic web content management system (CMS) written in PHP.'
+    youtube_code: LupiymlaXrk
+    featured_video: '0'
+    date_created: '1588838831'
+    date_updated: '1588838831'
+-
+    video_id: '4'
+    uid_owner: '999'
+    video_title: 'Adaptar Plantillas HTML y CSS a XOOPS (Spanish)'
+    video_desc: "Una guía básica pero completa sobre como adaptar plantillas, themes o temas en HTML y CSS a XOOPS CMS sin perderse en el camino y sin mayores complicaciones.\r\n\r\nPara poner en práctica lo especificado en este tutorial, pueden descargar el material didáctico que contiene todos los elementos usados en este pequeño curso."
+    youtube_code: k-0sDe67t30
+    featured_video: '0'
+    date_created: '1588838922'
+    date_updated: '1588838922'
+-
+    video_id: '5'
+    uid_owner: '1000'
+    video_title: 'Xoops架站教學 04 _ 安裝新聞模組'
+    video_desc: 'Xoops架站教學 04 _ 安裝新聞模組'
+    youtube_code: 5AuEntZHNks
+    featured_video: '0'
+    date_created: '1588839023'
+    date_updated: '1588839023'
+-
+    video_id: '6'
+    uid_owner: '1000'
+    video_title: 'How to Install Xoops 2.5.10 CMS on CentOS 7.6'
+    video_desc: 'This video covers the method to install Xoops CMS on CentOS 7.6. XOOPS CMS is an acronym of extensible, OO (Object Oriented) portal System.'
+    youtube_code: o1KYX753wzM
+    featured_video: '0'
+    date_created: '1588839065'
+    date_updated: '1588839065'
+-
+    video_id: '7'
+    uid_owner: '1001'
+    video_title: 'XOOPS | Steps for AWS Installation'
+    video_desc: 'XOOPS | Steps for AWS Installation powered by Miri Infotech'
+    youtube_code: 03-Kj19rlkY
+    featured_video: '0'
+    date_created: '1588839146'
+    date_updated: '1588839146'
+-
+    video_id: '8'
+    uid_owner: '1001'
+    video_title: 'XOOPS PROMO V2 HD'
+    video_desc: 'XOOPS is a free open source content management systems (CMS), written in PHP. It uses a modular architecture allowing users to customize, update and theme their websites. XOOPS is released under the terms of the GNU General Public License (GPL) and is free to use, modify and redistribute'
+    youtube_code: otTi_fgNX0A
+    featured_video: '0'
+    date_created: '1588839187'
+    date_updated: '1588839187'
+-
+    video_id: '9'
+    uid_owner: '1002'
+    video_title: 'XOOPS輕鬆架( XOOPS Easy Go)'
+    video_desc: "XOOPS 輕鬆架安裝示範（快速安裝、線上安裝或更新模組及佈景、線上調整佈景）\r\nXOOPS Easy Go simple demo (quick install, install or update modules and themes online , config theme online)"
+    youtube_code: kHY51WnSW_4
+    featured_video: '0'
+    date_created: '1588839384'
+    date_updated: '1588839384'
+-
+    video_id: '10'
+    uid_owner: '998'
+    video_title: 'Creating XOOPS Module with TDMCreate'
+    video_desc: 'Creating XOOPS Module with New version of our Module Builder: TDMCreate 1.38.1'
+    youtube_code: dg7zGFCopxY
+    featured_video: '0'
+    date_created: '1588839607'
+    date_updated: '1588839607'

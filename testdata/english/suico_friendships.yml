@@ -1,1 +1,22 @@
-{  }
+-
+    friendship_id: '1'
+    friend1_uid: '998'
+    friend2_uid: '1000'
+    level: '3'
+    hot: '0'
+    trust: '0'
+    cool: '0'
+    fan: '0'
+    date_created: '0'
+    date_updated: '0'
+-
+    friendship_id: '2'
+    friend1_uid: '1000'
+    friend2_uid: '998'
+    level: '5'
+    hot: '0'
+    trust: '0'
+    cool: '0'
+    fan: '0'
+    date_created: '0'
+    date_updated: '0'
