@@ -81,8 +81,9 @@ if ('sel_photo' === Request::getArray('xoops_upload_file', '', 'POST')[0]) {
         $notificationHandler = xoops_getHandler('notification');
         $notificationHandler->triggerEvent('picture', $xoopsUser->getVar('uid'), 'new_picture', $extra_tags);
         //header("Location: ".XOOPS_URL."/modules/suico/index.php?uid=".$xoopsUser->getVar('uid'));
+        $imageId = $imageFactory->db->getInsertId();
         redirect_header(
-            XOOPS_URL . '/modules/suico/album.php?uid=' . $xoopsUser->getVar('uid'),
+            XOOPS_URL . '/modules/suico/album.php?uid=' . $xoopsUser->getVar('uid'). '#' . $imageId,
             3,
             _MD_SUICO_UPLOADED
         );
