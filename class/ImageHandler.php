@@ -34,12 +34,7 @@ use XoopsThemeForm;
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
-/**
- * Protection against inclusion outside the site
- */
-if (!\defined('XOOPS_ROOT_PATH')) {
-    die('XOOPS root path not defined');
-}
+
 /**
  * Includes of form objects and uploader
  */
@@ -567,20 +562,14 @@ class ImageHandler extends XoopsPersistableObjectHandler
     public function getLastPicturesForBlock($limit)
     {
         global $xoopsUser, $xoopsDB;
-        $memberHandler = xoops_getHandler('member');
-        $user = $xoopsUser;
-        $user2 = $GLOBALS['xoopsUser'];
         if (is_object($xoopsUser)) {
             $uid = $xoopsUser->getVar('uid');
         }
 
         $controller = new PhotosController($xoopsDB, $xoopsUser);
 
-        $isAdmin     = Helper::getInstance()->isUserAdmin();
         $isUser      = $controller->isUser;
         $isAnonymous = $controller->isAnonym;
-
-        $ret    = [];
 
         if (1 == $isAnonymous) {
             $sql = 'SELECT uname, t.uid_owner, t.filename, t.title, t.caption, t.date_created, t.date_updated  FROM ' . $this->db->prefix('suico_images') . ' AS t';
@@ -597,7 +586,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $sql .= ' INNER JOIN ' . $this->db->prefix('suico_configs') . ' c on t.uid_owner=c.config_uid';
             $sql .= ' WHERE (private=0 AND c.pictures < 3 )'; //all pictures visible to members
             $sql .= ' OR ( private=0 AND c.pictures = 3 AND c.config_uid IN ( '. $sql0 .')) '; //pictures visible to friends
-            $sql .= ' OR ( c.config_uid = '. $uid .' AND c.pictures = 4) '; //my private pictures
+            $sql .= ' OR ( c.config_uid = '. $uid .' ) '; //my private pictures
             $sql .= ' ORDER BY image_id DESC';
         }
 

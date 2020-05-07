@@ -20,6 +20,7 @@ declare(strict_types=1);
  */
 
 use XoopsModules\Suico;
+use XoopsModules\Suico\Helper;
 
 if (!defined('XOOPS_ROOT_PATH')) {
     exit();
@@ -33,6 +34,16 @@ if (!defined('XOOPS_ROOT_PATH')) {
 function b_suico_friends_show($options)
 {
     global $xoopsDB, $xoopsModule, $xoopsModuleConfig, $xoopsUser;
+
+    /** @var Helper $helper */
+    if (!class_exists(Helper::class)) {
+        return false;
+    }
+
+    $helper = Helper::getInstance();
+
+    $helper->loadLanguage('main');
+
     $myts  = MyTextSanitizer::getInstance();
     $block = [];
     if ($xoopsUser) {

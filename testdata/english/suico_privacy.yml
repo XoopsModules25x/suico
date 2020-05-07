@@ -1,17 +1,20 @@
-- id: '1'
-  level: '1'
-  name: Everybody
-  description: '<p>Everybody can see it, incl. Anonymous users</p>'
-- id: '2'
-  level: '2'
-  name: Members
-  description: '<p>Only Registered Members</p>'
-- id: '3'
-  level: '3'
-  name: Friends
-  description: '<p>Only my Friends</p>'
-
-- id: '4'
-  level: '4'
-  name: 'Only Me'
-  description: '<p>Highest level of privace - only the author can see it</p>'
+-
+    id: '1'
+    level: '1'
+    name: Everybody
+    description: '<p>Everybody can see it, incl. Anonymous users</p>'
+-
+    id: '2'
+    level: '2'
+    name: Members
+    description: '<p>Only Registered Members</p>'
+-
+    id: '3'
+    level: '3'
+    name: Friends
+    description: '<p>Only my Friends</p>'
+-
+    id: '4'
+    level: '4'
+    name: 'Only Me'
+    description: '<p>Highest level of privace - only the author can see it</p>'

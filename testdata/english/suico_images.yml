@@ -34,3 +34,39 @@
     uid_owner: '999'
     filename: pic_999_5e97d09fb1e0e.jpg
     private: '0'
+-
+    image_id: '9'
+    title: Wave
+    caption: 'The Big Wave!!!'
+    date_created: '1588799890'
+    date_updated: '1588799890'
+    uid_owner: '1000'
+    filename: pic_1000_5eb329929b58d.jpg
+    private: '0'
+-
+    image_id: '8'
+    title: Shark
+    caption: 'Awesome surfing with sharks'
+    date_created: '1588798922'
+    date_updated: '1588798922'
+    uid_owner: '999'
+    filename: pic_998_5eb325ca20376.jpg
+    private: '1'
+-
+    image_id: '10'
+    title: Tree
+    caption: 'Lonely tree'
+    date_created: '1588800664'
+    date_updated: '1588800664'
+    uid_owner: '1002'
+    filename: pic_1002_5eb32c984865f.jpg
+    private: '0'
+-
+    image_id: '11'
+    title: Friends
+    caption: 'This picture is for friends only'
+    date_created: '1588802792'
+    date_updated: '1588802792'
+    uid_owner: '1001'
+    filename: pic_1001_5eb334e8b1547.jpg
+    private: '0'
