@@ -241,8 +241,32 @@ define('_MD_SUICO_CONFIGS_SAVE', 'Configuration saved!');
 define('_MD_SUICO_CONFIGS_SAVE_FAILED', 'ERROR: Configuration has not been saved');
 //class/suico_controller.php
 define(
-    '_MD_SUICO_NOPRIVILEGE',
+    '_MD_SUICO_NOPRIVILEGE_PHOTOS',
     "The owner of this profile has set the privileges to see it, <br>higher than you have now. <br>Login to become their friend. <br>If they haven't set it, so only they can see, <br>then you will be able to view it."
+);
+define(
+    '_MD_SUICO_NOPRIVILEGE_NOTES',
+    "The owner of this profile has set the privileges to see it, <br>higher than you have now. <br>Login to become their friend. <br>If they haven't set it, so only they can see, <br>then you will be able to view it."
+);
+define(
+    '_MD_SUICO_NOPRIVILEGE_AUDIOS',
+    "The owner of this profile has set the privileges to see it, <br>higher than you have now. <br>Login to become their friend. <br>If they haven't set it, so only they can see, <br>then you will be able to view it."
+);
+define(
+    '_MD_SUICO_NOPRIVILEGE_VIDEOS',
+    "The owner of this profile has set the privileges to see it, <br>higher than you have now. <br>Login to become their friend. <br>If they haven't set it, so only they can see, <br>then you will be able to view it."
+);
+define(
+    '_MD_SUICO_NOPRIVILEGE_FRIENDS',
+    "The owner of this profile has set the privileges to see it, <br>higher than you have now. <br>Login to become their friend. <br>If they haven't set it, so only they can see, <br>then you will be able to view it."
+);
+define(
+    '_MD_SUICO_NOPRIVILEGE_GROUPS',
+    "The owner of this profile has set the privileges to see it, <br>higher than you have now. <br>Login to become their friend. <br>If they haven't set it, so only they can see, <br>then you will be able to view it."
+);
+define(
+    '_MD_SUICO_NOPRIVILEGE',
+    "The owner of this profile has set the privileges to see %s, <br>higher than you have now. <br>Login to become their friend. <br>If they haven't set it, so only they can see, <br>then you will be able to view it."
 );
 ###################################### OTHERS ##############################
 //index.php
