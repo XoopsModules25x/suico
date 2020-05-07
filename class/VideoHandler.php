@@ -34,13 +34,6 @@ use XoopsPersistableObjectHandler;
 use XoopsThemeForm;
 
 /**
- * Protection against inclusion outside the site
- */
-if (!\defined('XOOPS_ROOT_PATH')) {
-    die('XOOPS root path not defined');
-}
-
-/**
  * suico_videohandler class.
  * This class provides simple mechanism for Video object
  */

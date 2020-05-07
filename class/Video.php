@@ -27,12 +27,6 @@ use XoopsDatabaseFactory;
 use XoopsObject;
 
 /**
- * Protection against inclusion outside the site
- */
-if (!\defined('XOOPS_ROOT_PATH')) {
-    die('XOOPS root path not defined');
-}
-/**
  * Includes of form objects and uploader
  */
 require_once XOOPS_ROOT_PATH . '/class/uploader.php';

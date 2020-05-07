@@ -25,12 +25,7 @@ use XoopsObject;
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
-/**
- * Protection against inclusion outside the site
- */
-if (!\defined('XOOPS_ROOT_PATH')) {
-    die('XOOPS root path not defined');
-}
+
 /**
  * Includes of form objects and uploader
  */
