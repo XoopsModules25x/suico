@@ -1,6 +1,6 @@
 <h5>3.5 Beta 2    [NOT RELEASED]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.5
 <hr>
-
+- Add youtube code help (liomj)
 
 <h5>3.5 Beta 1    [2020-05-07]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.5
 <hr>
