@@ -33,8 +33,9 @@
 
                                     <div class="form-group">
                                         <label for="video"><strong> <{$lang_youtubecodeLabel}></strong></label>
-                                        <input type='text' name='codigo' id='codigo' class='form-control' value=''>
-                                    </div>
+										<input type='text' name='codigo' id='codigo' class='form-control' value=''>
+                                    `	<label for="video"><small><{$smarty.const._MD_SUICO_YOUTUBE_CODEHELP}></small></label>
+									</div>
 
                                     <input type='submit' class='btn btn-primary' name='submit_button' id='submit_button' value='<{$lang_submitValue}>'>
                                 </form>
