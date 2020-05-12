@@ -23,8 +23,8 @@ $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 // ------------------- Informations ------------------- //
 $modversion = [
     'version'             => 3.5,
-    'module_status'       => 'Beta 1',
-    'release_date'        => '2020/05/07',
+    'module_status'       => 'Beta 2',
+    'release_date'        => '2020/06/01',
     'name'                => _MI_SUICO_MODULE_NAME,
     'description'         => _MI_SUICO_MODULEDESC,
     'official'            => 0,
