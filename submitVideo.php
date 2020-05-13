@@ -42,9 +42,13 @@ $newvideo->setVar('uid_owner', (int)$xoopsUser->getVar('uid'));
 $newvideo->setVar('video_title', Request::getString('title', '', 'POST'));
 $newvideo->setVar('video_desc', Request::getString('caption', '', 'POST'));
 
-//Get youtube video id
-preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $match);
-$code = $match[1];
+if (11 === mb_strlen($url)) {
+    $code = $url;
+} else {
+  //Get youtube video id
+	preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $match);
+	$code = $match[1];
+}
 
 $newvideo->setVar('youtube_code', $code);
 $newvideo->setVar('featured_video', Request::getInt('featured_video', 0, 'POST'));
