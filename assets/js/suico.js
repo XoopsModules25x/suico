@@ -29,9 +29,9 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("form#form_videos").submit(function () {
 
-        if ($("form#form_videos input#codigo").val() === "") {
+        if ($("form#form_videos input#videourl").val() === "") {
             window.alert("Please enter YouTube code");
-            $("form#form_videos input#codigo").focus();
+            $("form#form_videos input#videourl").focus();
             return false;
         }
         return true;

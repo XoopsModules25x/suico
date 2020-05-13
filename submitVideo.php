@@ -28,7 +28,7 @@ require __DIR__ . '/header.php';
  * Factory of pictures created
  */
 $videoFactory = new Suico\VideoHandler($xoopsDB);
-$url          = Request::getUrl('codigo', '', 'POST');
+$url          = Request::getUrl('videourl', '', 'POST');
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
@@ -41,12 +41,15 @@ $newvideo = $videoFactory->create(
 $newvideo->setVar('uid_owner', (int)$xoopsUser->getVar('uid'));
 $newvideo->setVar('video_title', Request::getString('title', '', 'POST'));
 $newvideo->setVar('video_desc', Request::getString('caption', '', 'POST'));
+
 if (11 === mb_strlen($url)) {
     $code = $url;
 } else {
-    $position_of_code = mb_strpos($url, 'v=');
-    $code             = mb_substr($url, $position_of_code + 2, 11);
+  //Get youtube video id
+	preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $match);
+	$code = $match[1];
 }
+
 $newvideo->setVar('youtube_code', $code);
 $newvideo->setVar('featured_video', Request::getInt('featured_video', 0, 'POST'));
 $newvideo->setVar('date_created', \time());

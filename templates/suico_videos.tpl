@@ -33,7 +33,7 @@
 
                                     <div class="form-group">
                                         <label for="video"><strong> <{$lang_youtubecodeLabel}></strong></label>
-										<input type='text' name='codigo' id='codigo' class='form-control' value=''>
+										<input type='text' name='videourl' id='videourl' class='form-control' value=''>
                                     `	<label for="video"><small><{$smarty.const._MD_SUICO_YOUTUBE_CODEHELP}></small></label>
 									</div>
 
@@ -44,9 +44,9 @@
                                     <!--//
                                     function xoopsFormValidate_form_videos() {
                                         myform = window.document.form_videos;
-                                        if (myform.codigo.value == "") {
+                                        if (myform.videourl.value == "") {
                                             window.alert("Please enter YouTube code");
-                                            myform.codigo.focus();
+                                            myform.videourl.focus();
                                             return false;
                                         }
 

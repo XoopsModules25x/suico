@@ -529,4 +529,4 @@ define('_MD_SUICO_GROUPTOTALCOMMENTS', 'Group Total Comments');
 define('_MD_SUICO_ONECOMMENT', '1 comment');
 define('_MD_SUICO_NO_COMMENTS', 'No comments');
 define('_MD_SUICO_COMMENTS', 'Comments');
-define('_MD_SUICO_YOUTUBE_CODEHELP', '<strong>Example:</strong> https://www.youtube.com/watch?v=<span style="color:red;font-weight:bold">jNQXAC9IVRw</span> :: Input the red part only</strong>');
+define('_MD_SUICO_YOUTUBE_CODEHELP', '<strong>Example:</strong> https://www.youtube.com/watch?v=jNQXAC9IVRw');

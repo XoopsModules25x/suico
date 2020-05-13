@@ -53,7 +53,17 @@ switch ($op) {
         $videoObject->setVar('uid_owner', Request::getVar('uid_owner', ''));
         $videoObject->setVar('video_title', Request::getVar('video_title', ''));
         $videoObject->setVar('video_desc', Request::getVar('video_desc', ''));
-        $videoObject->setVar('youtube_code', Request::getVar('youtube_code', ''));
+		
+		$videourl=Request::getVar('youtube_code', '');
+		//Get youtube video id
+		if (11 === mb_strlen($videourl)) {
+			$videocode = $videourl;
+		} else {
+		//Get youtube video id
+			preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $videourl, $match);
+			$videocode = $match[1];	
+		}
+        $videoObject->setVar('youtube_code', $videocode);
         $videoObject->setVar('featured_video', Request::getVar('featured_video', ''));
         $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_created', '', 'POST'));
         $videoObject->setVar('date_created', $dateTimeObj->getTimestamp());

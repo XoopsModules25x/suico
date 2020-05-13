@@ -312,7 +312,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
         $xoopsTpl
     ) {
         $form       = new XoopsThemeForm(\_MD_SUICO_ADDFAVORITEVIDEOS, 'form_videos', 'submitVideo.php', 'post', true);
-        $field_code = new XoopsFormText(\_MD_SUICO_YOUTUBECODE, 'codigo', 50, 250);
+        $field_code = new XoopsFormText(\_MD_SUICO_YOUTUBECODE, 'videourl', 50, 250);
         $field_desc = new XoopsFormTextArea(\_MD_SUICO_CAPTION, 'caption');
         $form->setExtra('enctype="multipart/form-data"');
         $buttonSend = new XoopsFormButton('', 'submit_button', \_MD_SUICO_ADDVIDEO, 'submit');
