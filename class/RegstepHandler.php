@@ -30,7 +30,7 @@ class RegstepHandler extends \XoopsPersistableObjectHandler
     /**
      * @param null|object $db
      */
-    public function __construct($db)
+    public function __construct(\XoopsDatabase $db)
     {
         parent::__construct($db, 'suico_profile_regstep', Regstep::class, 'step_id', 'step_name');
     }

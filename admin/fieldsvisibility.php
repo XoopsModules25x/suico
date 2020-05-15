@@ -18,7 +18,7 @@ declare(strict_types=1);
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
-include_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 //there is no way to override current tabs when using system menu
 //this dirty hack will have to do it
 $_SERVER['REQUEST_URI'] = 'admin/fieldspermissions.php';
@@ -42,7 +42,7 @@ if ('del' === $op) {
     $visibilityHandler->deleteAll($criteria, true);
     redirect_header('fieldsvisibility.php', 2, sprintf(_AM_SUICO_DELETEDSUCCESS, _AM_SUICO_PROF_VISIBLE));
 }
-include_once $GLOBALS['xoops']->path('/class/xoopsformloader.php');
+require_once $GLOBALS['xoops']->path('/class/xoopsformloader.php');
 $opform    = new XoopsSimpleForm('', 'opform', 'fieldspermissions.php', 'get');
 $op_select = new XoopsFormSelect('', 'op', $op);
 $op_select->setExtra('onchange="document.forms.opform.submit()"');
@@ -80,5 +80,5 @@ $add_form->addElement($sel_pg);
 $add_form->addElement(new XoopsFormButton('', 'submit', _ADD, 'submit'));
 $add_form->assign($GLOBALS['xoopsTpl']);
 $GLOBALS['xoopsTpl']->display('db:admin/suico_admin_fieldsvisibility.tpl');
-include_once __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';
 //xoops_cp_footer();

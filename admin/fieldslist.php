@@ -23,7 +23,7 @@ declare(strict_types=1);
 use XoopsModules\Suico;
 use XoopsModules\Suico\Form\FieldForm;
 
-include_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 $adminObject->addItemButton(_AM_SUICO_FIELD, 'fieldslist.php?op=new', 'add');
 $adminObject->displayNavigation(basename(__FILE__));
@@ -334,4 +334,4 @@ function suico_visible_toggle($field_id, $field_required, $helper)
     }
 }
 
-include_once __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

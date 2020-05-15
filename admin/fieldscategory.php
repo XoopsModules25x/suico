@@ -23,7 +23,7 @@ use Xmf\Module\Helper\Permission;
 use Xmf\Request;
 use XoopsModules\Suico;
 
-include_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 $adminObject->addItemButton(_AM_SUICO_CATEGORY, 'fieldscategory.php?op=new', 'add');
 $adminObject->displayNavigation(basename(__FILE__));
@@ -97,4 +97,4 @@ switch ($op) {
 if (isset($template_main)) {
     $GLOBALS['xoopsTpl']->display("db:{$template_main}");
 }
-include_once __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

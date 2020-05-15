@@ -21,7 +21,6 @@ namespace XoopsModules\Suico;
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
-// defined('XOOPS_ROOT_PATH') || exit("XOOPS root path not defined");
 
 /**
  * @package             kernel
@@ -116,7 +115,7 @@ class Field extends \XoopsObject
                 $options[$optkey] = $optval;
             }
         }
-        include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
+        require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
         switch ($this->getVar('field_type')) {
             default:
             case 'autotext':
@@ -141,7 +140,7 @@ class Field extends \XoopsObject
                     $eltmsg                          = empty($caption) ? \sprintf(\_FORM_ENTER, $name) : \sprintf(\_FORM_ENTER, $caption);
                     $eltmsg                          = \str_replace('"', '\"', \stripslashes($eltmsg));
                     $element->customValidationCode[] = "\nvar hasSelected = false; var selectBox = myform.{$name};"
-                                                       . "for (i = 0; i < selectBox.options.length; i++) { if (selectBox.options[i].selected == true && selectBox.options[i].value != '') { hasSelected = true; break; } }"
+                                                       . "for (i = 0; i < selectBox.options.length; i++) { if (selectBox.options[i].selected === true && selectBox.options[i].value != '') { hasSelected = true; break; } }"
                                                        . "if (!hasSelected) { window.alert(\"{$eltmsg}\"); selectBox.focus(); return false; }";
                 }
                 $element->addOptionArray($options);
@@ -185,7 +184,7 @@ class Field extends \XoopsObject
                 break;
             case 'rank':
                 $element = new \XoopsFormSelect($caption, $name, $value);
-                include_once $GLOBALS['xoops']->path('class/xoopslists.php');
+                require_once $GLOBALS['xoops']->path('class/xoopslists.php');
                 $ranks = \XoopsLists::getUserRankList();
                 $element->addOption(0, '--------------');
                 $element->addOptionArray($ranks);
@@ -211,9 +210,9 @@ class Field extends \XoopsObject
     public function getOutputValue($user, $profile)
     {
         if (\file_exists($file = $GLOBALS['xoops']->path('modules/suico/language/' . $GLOBALS['xoopsConfig']['language'] . '/modinfo.php'))) {
-            include_once $file;
+            require_once $file;
         } else {
-            include_once $GLOBALS['xoops']->path('modules/suico/language/english/modinfo.php');
+            require_once $GLOBALS['xoops']->path('modules/suico/language/english/modinfo.php');
         }
         $value = \in_array($this->getVar('field_name'), $this->getUserVars()) ? $user->getVar($this->getVar('field_name')) : $profile->getVar($this->getVar('field_name'));
         switch ($this->getVar('field_type')) {
@@ -296,7 +295,7 @@ class Field extends \XoopsObject
                 $userrank       = $user->rank();
                 $user_rankimage = '';
                 if (isset($userrank['image']) && '' !== $userrank['image']) {
-                    $user_rankimage = '<img src="' . \XOOPS_UPLOAD_URL . '/' . $userrank['image'] . '" alt="' . $userrank['title'] . '" /> ';
+                    $user_rankimage = '<img src="' . \XOOPS_UPLOAD_URL . '/' . $userrank['image'] . '" alt="' . $userrank['title'] . '"> ';
                 }
                 return $user_rankimage . $userrank['title'];
                 break;
@@ -304,7 +303,7 @@ class Field extends \XoopsObject
                 return $value ? \_YES : \_NO;
                 break;
             case 'timezone':
-                include_once $GLOBALS['xoops']->path('class/xoopslists.php');
+                require_once $GLOBALS['xoops']->path('class/xoopslists.php');
                 $timezones = \XoopsLists::getTimeZoneList();
                 $value     = empty($value) ? '0' : (string)$value;
                 return $timezones[\str_replace('.0', '', $value)];

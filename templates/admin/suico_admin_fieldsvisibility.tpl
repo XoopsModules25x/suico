@@ -22,7 +22,7 @@
                                 <{$smarty.const._AM_SUICO_FIELDVISIBLEON}> <{$groups.$profile_gid}>
                                 <a href="fieldsvisibility.php?op=del&amp;field_id=<{$field_id}>&amp;ug=<{$user_gid}>&amp;pg=<{$profile_gid}>"
                                    title="<{$smarty.const._DELETE}>">
-                                    <img src="<{$xoops_url}>/modules/suico/assets/images/no.png" alt="<{$smarty.const._DELETE}>"/>
+                                    <img src="<{$xoops_url}>/modules/suico/assets/images/no.png" alt="<{$smarty.const._DELETE}>">
                                 </a>
                             </li>
                         <{/foreach}>

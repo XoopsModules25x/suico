@@ -12,7 +12,7 @@
 
                         <{if $stop}>
                             <div class='errorMsg txtleft'><{$stop}></div>
-                            <br class='clear'/>
+                            <br class='clear'>
                         <{/if}>
 
                         <{includeq file="db:suico_form.tpl" xoForm=$userinfo}>

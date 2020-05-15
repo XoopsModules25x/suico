@@ -21,7 +21,7 @@ declare(strict_types=1);
  * Protection against inclusion outside the site
  */
 if (!defined('XOOPS_ROOT_PATH')) {
-    die('XOOPS root path not defined');
+    exit('XOOPS root path not defined');
 }
 /**
  * Return search results and show images on userinfo page

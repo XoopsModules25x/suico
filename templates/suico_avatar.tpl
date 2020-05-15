@@ -17,7 +17,7 @@
                                     <br>
                                     <br>
                                 <{/if}>
-                                <img src="<{$old_avatar}>" alt="" class="img-fluid"/>
+                                <img src="<{$old_avatar}>" alt="" class="img-fluid">
                             <{/if}>
 
                             <{if $uploadavatar}>
@@ -30,7 +30,7 @@
                                         </tr>
                                         <!-- start of form elements loop -->
                                         <{foreach item=element from=$uploadavatar.elements}>
-                                            <{if $element.hidden != true}>
+                                            <{if $element.hidden !== true}>
                                                 <tr>
                                                     <td><strong><{$element.caption}></strong>
                                                         <{if $element.description}>
@@ -63,7 +63,7 @@
                                     </tr>
                                     <!-- start of form elements loop -->
                                     <{foreach item=element from=$chooseavatar.elements}>
-                                        <{if $element.hidden != true}>
+                                        <{if $element.hidden !== true}>
                                             <tr>
                                                 <td><b><{$element.caption}></b>
                                                     <{if $element.description}>

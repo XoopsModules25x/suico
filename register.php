@@ -288,7 +288,7 @@ if ($current_step > 0 && empty($stop) && (!empty($steps[$current_step - 1]['step
     }
 }
 if (!empty($stop) || isset($steps[$current_step])) {
-    include_once __DIR__ . '/include/forms.php';
+    require_once __DIR__ . '/include/forms.php';
     $current_step = empty($stop) ? $current_step : $current_step - 1;
     $reg_form     = profile_getRegisterForm($newuser, $profile, $steps[$current_step]);
     $reg_form->assign($GLOBALS['xoopsTpl']);

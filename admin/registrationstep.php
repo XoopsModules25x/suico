@@ -23,7 +23,7 @@ declare(strict_types=1);
 use XoopsModules\Suico\Form\StepForm;
 use XoopsModules\Suico;
 
-include_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 $adminObject->addItemButton(_AM_SUICO_STEP, 'registrationstep.php?op=new', 'add');
 $adminObject->displayNavigation(basename(__FILE__));
@@ -113,4 +113,4 @@ function profile_stepsave_toggle($step_d, $step_save)
     }
 }
 
-include_once __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

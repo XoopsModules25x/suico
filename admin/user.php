@@ -24,7 +24,7 @@ use Xmf\Request;
 use XoopsModules\Suico;
 use XoopsModules\Suico\Form\UserForm;
 
-include_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 $adminObject->addItemButton(_AM_SUICO_ADDUSER, 'user.php?op=new', 'add');
 $adminObject->displayNavigation(basename(__FILE__));
@@ -38,7 +38,7 @@ $handler = xoops_getHandler('member');
 switch ($op) {
     default:
     case 'list':
-        include_once $GLOBALS['xoops']->path('/class/xoopsformloader.php');
+        require_once $GLOBALS['xoops']->path('/class/xoopsformloader.php');
         $form    = new XoopsThemeForm(_AM_SUICO_EDITUSER, 'form', 'user.php');
         $lastUid = \Xmf\Request::getInt('lastuid', null, 'GET');
         $form->addElement(new XoopsFormSelectUser(_AM_SUICO_SELECTUSER, 'id', false, $lastUid));
@@ -146,7 +146,7 @@ switch ($op) {
             if ($handler->insertUser($user)) {
                 $profile->setVar('profile_id', $user->getVar('uid'));
                 $profileHandler->insert($profile);
-                include_once $GLOBALS['xoops']->path('/modules/system/constants.php');
+                require_once $GLOBALS['xoops']->path('/modules/system/constants.php');
                 if ($grouppermHandler->checkRight('system_admin', XOOPS_SYSTEM_GROUP, $GLOBALS['xoopsUser']->getGroups(), 1)) {
                     //Update group memberships
                     $cur_groups     = $user->getGroups();
@@ -218,5 +218,5 @@ switch ($op) {
         }
         break;
 }
-include_once __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';
 //xoops_cp_footer();

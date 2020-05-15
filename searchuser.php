@@ -54,7 +54,7 @@ switch ($op) {
         /* @var  XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler  = xoops_getHandler('groupperm');
         $searchable_fields = $grouppermHandler->getItemIds('profile_search', $groups, $GLOBALS['xoopsModule']->getVar('mid'));
-        include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
+        require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
         $searchform = new XoopsThemeForm('', 'searchform', 'searchuser.php', 'post');
         $name_tray  = new XoopsFormElementTray(_US_NICKNAME);
         $name_tray->addElement(new XoopsFormSelectMatchOption('', 'uname_match'));
@@ -112,7 +112,7 @@ switch ($op) {
                     break;
                 case 'timezone':
                     $element = new XoopsFormSelect($fields[$i]->getVar('field_title'), $fields[$i]->getVar('field_name'), null, 6, true);
-                    include_once $GLOBALS['xoops']->path('class/xoopslists.php');
+                    require_once $GLOBALS['xoops']->path('class/xoopslists.php');
                     $element->addOptionArray(XoopsLists::getTimeZoneList());
                     $searchform->addElement($element);
                     unset($element);
@@ -396,7 +396,7 @@ switch ($op) {
             if (isset($search_url)) {
                 $args = implode('&amp;', $search_url);
             }
-            include_once $GLOBALS['xoops']->path('class/pagenav.php');
+            require_once $GLOBALS['xoops']->path('class/pagenav.php');
             $nav = new XoopsPageNav($total_users, $limit, $start, 'start', $args);
             $GLOBALS['xoopsTpl']->assign('nav', $nav->renderNav(5));
         }

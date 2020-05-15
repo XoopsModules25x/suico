@@ -31,7 +31,7 @@ class FieldForm extends XoopsThemeForm
             $action = $_SERVER['REQUEST_URI'];
         }
         $title = $field->isNew() ? sprintf(_AM_SUICO_ADD, _AM_SUICO_FIELD) : sprintf(_AM_SUICO_EDIT, _AM_SUICO_FIELD);
-        include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
+        require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
         parent::__construct($title, 'form', $action, 'post', true);
         $this->addElement(new XoopsFormText(_AM_SUICO_TITLE, 'field_title', 35, 255, $field->getVar('field_title', 'e')));
         $this->addElement(new XoopsFormTextArea(_AM_SUICO_DESCRIPTION, 'field_description', $field->getVar('field_description', 'e')));
@@ -133,7 +133,7 @@ class FieldForm extends XoopsThemeForm
                 }
                 $option_text = "<table  cellspacing='1'><tr><td class='width20'>" . _AM_SUICO_KEY . '</td><td>' . _AM_SUICO_VALUE . '</td></tr>';
                 for ($i = 0; $i < 3; ++$i) {
-                    $option_text .= "<tr><td><input type='text' name='addOption[{$i}][key]' id='addOption[{$i}][key]' size='15' /></td><td><input type='text' name='addOption[{$i}][value]' id='addOption[{$i}][value]' size='35' /></td></tr>";
+                    $option_text .= "<tr><td><input type='text' name='addOption[{$i}][key]' id='addOption[{$i}][key]' size='15'></td><td><input type='text' name='addOption[{$i}][value]' id='addOption[{$i}][value]' size='35'></td></tr>";
                     $option_text .= "<tr height='3px'><td colspan='2'> </td></tr>";
                 }
                 $option_text .= '</table>';

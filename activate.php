@@ -19,7 +19,7 @@ declare(strict_types=1);
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
 $xoopsOption['pagetype'] = 'user';
-include __DIR__ . '/header.php';
+require __DIR__ . '/header.php';
 include $GLOBALS['xoops']->path('header.php');
 if (!empty($_GET['id']) && !empty($_GET['actkey'])) {
     $id     = (int)$_GET['id'];
@@ -63,7 +63,7 @@ if (!empty($_GET['id']) && !empty($_GET['actkey'])) {
                     } else {
                         printf(_US_ACTVMAILOK, $thisuser->getVar('uname'));
                     }
-                    include __DIR__ . '/footer.php';
+                    require __DIR__ . '/footer.php';
                 } else {
                     redirect_header(XOOPS_URL . '/user.php', 5, _US_ACTLOGIN, false);
                 }
@@ -100,11 +100,11 @@ if (!empty($_GET['id']) && !empty($_GET['actkey'])) {
         echo _US_YOURREGISTERED;
     }
 } else {
-    include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
+    require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
     $form = new XoopsThemeForm('', 'form', 'activate.php');
     $form->addElement(new XoopsFormText(_US_EMAIL, 'email', 25, 255));
     $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
     $form->display();
 }
 $xoBreadcrumbs[] = ['title' => _MD_SUICO_REGISTER];
-include __DIR__ . '/footer.php';
+require __DIR__ . '/footer.php';

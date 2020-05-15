@@ -21,7 +21,6 @@ namespace XoopsModules\Suico;
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
-// defined('XOOPS_ROOT_PATH') || exit("XOOPS root path not defined");
 
 /**
  * Class Regstep
