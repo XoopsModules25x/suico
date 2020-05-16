@@ -74,7 +74,7 @@ function xoops_module_install_suico(XoopsModule $module)
     // Add user fields
     xoops_loadLanguage('notification');
     xoops_loadLanguage('main', $module->getVar('dirname', 'n'));
-    include_once $GLOBALS['xoops']->path('include/notification_constants.php');
+    require_once $GLOBALS['xoops']->path('include/notification_constants.php');
     $umode_options         = [
         'nest'   => _NESTED,
         'flat'   => _FLAT,

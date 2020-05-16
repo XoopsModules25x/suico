@@ -18,7 +18,7 @@ declare(strict_types=1);
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
-include_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 $adminObject->displayNavigation(basename(__FILE__));
 $op        = \Xmf\Request::getCmd('op', 'edit');
@@ -48,7 +48,7 @@ switch ($op) {
         $anonymous     = true;
         break;
 }
-include_once $GLOBALS['xoops']->path('/class/xoopsformloader.php');
+require_once $GLOBALS['xoops']->path('/class/xoopsformloader.php');
 $opform    = new XoopsSimpleForm('', 'opform', 'fieldspermissions.php', 'get');
 $op_select = new XoopsFormSelect('', 'op', $op);
 $op_select->setExtra('onchange="document.forms.opform.submit()"');
@@ -59,7 +59,7 @@ $op_select->addOption('access', _AM_SUICO_PROF_ACCESS);
 $opform->addElement($op_select);
 $opform->display();
 $module_id = $GLOBALS['xoopsModule']->getVar('mid');
-include_once $GLOBALS['xoops']->path('/class/xoopsform/grouppermform.php');
+require_once $GLOBALS['xoops']->path('/class/xoopsform/grouppermform.php');
 $form = new XoopsGroupPermForm($title_of_form, $module_id, $perm_name, $perm_desc, 'admin/fieldspermissions.php?op=' . $op, $anonymous);
 if ('access' === $op) {
     /* @var XoopsMemberHandler $memberHandler */
@@ -98,5 +98,5 @@ if ('access' === $op) {
     }
 }
 $form->display();
-include_once __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';
 //xoops_cp_footer();

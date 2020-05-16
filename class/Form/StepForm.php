@@ -34,7 +34,7 @@ class StepForm extends XoopsThemeForm
             $configHandler              = xoops_getHandler('config');
             $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
         }
-        include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
+        require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
         parent::__construct(_AM_SUICO_STEP, 'stepform', 'step.php', 'post', true);
         if (!$step->isNew()) {
             $this->addElement(new XoopsFormHidden('id', $step->getVar('step_id')));

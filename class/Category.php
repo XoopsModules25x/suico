@@ -21,7 +21,6 @@ namespace XoopsModules\Suico;
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
-// defined('XOOPS_ROOT_PATH') || exit("XOOPS root path not defined");
 
 /**
  * @package             kernel
@@ -50,7 +49,7 @@ class Category extends \XoopsObject
             $action = $_SERVER['REQUEST_URI'];
         }
         $title = $this->isNew() ? \sprintf(_AM_SUICO_ADD, _AM_SUICO_CATEGORY) : \sprintf(_AM_SUICO_EDIT, _AM_SUICO_CATEGORY);
-        include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
+        require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->addElement(new \XoopsFormText(_AM_SUICO_TITLE, 'cat_title', 35, 255, $this->getVar('cat_title')));
         if (!$this->isNew()) {

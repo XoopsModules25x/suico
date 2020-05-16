@@ -558,7 +558,7 @@ var elestyle = xoopsGetElementById(img).style;
         $moduleSuico = Helper::getInstance()->getModule();
         $sql         = 'SELECT count(com_id) FROM ' . $GLOBALS['xoopsDB']->prefix('xoopscomments') . " WHERE com_modid = '" . $moduleSuico->getVar('mid') . "' AND com_itemid = '" . $group_id . "'";
         $result      = $GLOBALS['xoopsDB']->query($sql);
-        while ($row = $GLOBALS['xoopsDB']->fetchArray($result)) {
+        while (false !== ($row = $GLOBALS['xoopsDB']->fetchArray($result))) {
             $group_total_comments = $row['count(com_id)'];
         }
         return $group_total_comments;

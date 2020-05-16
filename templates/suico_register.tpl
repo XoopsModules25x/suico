@@ -24,13 +24,13 @@
 
                         <{if $stop}>
                             <div class='errorMsg txtleft'><{$stop}></div>
-                            <br class='clear'/>
+                            <br class='clear'>
                         <{/if}>
 
                         <{if $confirm}>
                             <{foreach item=msg from=$confirm}>
                                 <div class='confirmMsg txtleft'><{$msg}></div>
-                                <br class='clear'/>
+                                <br class='clear'>
                             <{/foreach}>
                         <{/if}>
 

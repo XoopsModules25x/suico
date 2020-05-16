@@ -26,11 +26,7 @@ use XoopsPersistableObjectHandler;
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
-if (!\defined(
-    'XOOPS_ROOT_PATH'
-)) {
-    exit();
-}
+
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
 /**

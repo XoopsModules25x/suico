@@ -36,7 +36,7 @@ if (!$GLOBALS['xoopsUser']) {
 $xoopsOption['xoops_pagetitle'] = sprintf(_MD_SUICO_CHANGEPASSWORD, $xoopsModule->getVar('name'), $controller->nameOwner);
 if (!isset($_POST['submit'])) {
     //show change password form
-    include_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
+    require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
     $form = new XoopsThemeForm(_MD_SUICO_CHANGEPASSWORD, 'form', $_SERVER['REQUEST_URI'], 'post', true);
     $form->addElement(new XoopsFormPassword(_MD_SUICO_OLDPASSWORD, 'oldpass', 15, 50), true);
     $form->addElement(new XoopsFormPassword(_MD_SUICO_NEWPASSWORD, 'newpass', 15, 50), true);

@@ -98,7 +98,7 @@
                                                         <form action="private.php" method="post" id="setprivate" class="suico-album-formquick">
                                                             <input type="hidden" value="<{$pics_array[i].image_id}>" name="image_id">
                                                             <{$token}>
-                                                            <input type="button" name="edit" value="Edit" id="<{$pics_array[i].image_id}>" class="btn btn-info btn-sm edit_picture"/>
+                                                            <input type="button" name="edit" value="Edit" id="<{$pics_array[i].image_id}>" class="btn btn-info btn-sm edit_picture">
                                                         </form>
                                                     <{/if}>
                                                 </div>

@@ -122,7 +122,7 @@ class UserForm extends XoopsThemeForm
             /* @var  \XoopsGroupPermHandler $grouppermHandler */
             $grouppermHandler = xoops_getHandler('groupperm');
             //If user has admin rights on groups
-            include_once $GLOBALS['xoops']->path('modules/system/constants.php');
+            require_once $GLOBALS['xoops']->path('modules/system/constants.php');
             if ($grouppermHandler->checkRight('system_admin', XOOPS_SYSTEM_GROUP, $GLOBALS['xoopsUser']->getGroups(), 1)) {
                 //add group selection
                 $group_select  = new \XoopsFormSelectGroup(_MD_SUICO_USERGROUPS, 'groups', false, $user->getGroups(), 5, true);
