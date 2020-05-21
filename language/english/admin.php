@@ -293,9 +293,7 @@ define('AM_SUICO_VIDEO_EXPIREWARNING', 'The publishing date is after expiration 
 //Sample Data
 define('AM_SUICO_ADD_SAMPLEDATA', 'Import Sample Data (will delete ALL current data)');
 define('AM_SUICO_SAMPLEDATA_SUCCESS', 'Sample Date uploaded successfully');
-//Error NoFrameworks
-define('_AM_ERROR_NOFRAMEWORKS', 'Error: You don&#39;t use the Frameworks \'admin module\'. Please install this Frameworks'
-);
+
 define('AM_SUICO_MAINTAINEDBY', 'is maintained by the');
 define('AM_SUICO_ADD_PRIVACY', 'Add new Privacy');
 define('AM_SUICO_PRIVACY_LIST', 'List of Privacy');
