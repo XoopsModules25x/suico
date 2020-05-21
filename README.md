@@ -13,7 +13,7 @@
 
 **Suico** module for [XOOPS CMS](https://xoops.org) is a Social Network module.
 
-[![Tutorial Available](https://xoops.org/images/tutorial-available-blue.svg)](https://www.gitbook.com/book/xoops/suico-tutorial/) Tutorial: see [GitBook](https://www.gitbook.com/book/xoops/suico-tutorial/).
+[![Tutorial Available](https://xoops.org/images/tutorial-available-blue.svg)](https://app.gitbook.com/@xoops/s/suico-tutorial/) Tutorial: see [GitBook](https://app.gitbook.com/@xoops/s/suico-tutorial/).
 To contribute to the Tutorial, [fork it on GitHub](https://github.com/XoopsDocs/suico-tutorial)
 
 [![Translations on Transifex](https://xoops.org/images/translations-transifex-blue.svg)](https://www.transifex.com/xoops)
