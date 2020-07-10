@@ -24,7 +24,7 @@ use Xmf\Request;
 /**
  * Class SuicoCorePreload
  */
-class SuicoCorePreload extends XoopsPreloadItem
+class SuicoCorePreload extends \XoopsPreloadItem
 {
     // to add PSR-4 autoloader
     /**
