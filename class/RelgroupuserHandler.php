@@ -79,7 +79,7 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
     /**
      * retrieve a Relgroupuser
      *
-     * @param int  $id of the Relgroupuser
+     * @param int|null $id of the Relgroupuser
      * @param null $fields
      * @return mixed reference to the {@link Relgroupuser} object, FALSE if failed
      */

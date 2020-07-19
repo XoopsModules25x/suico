@@ -29,6 +29,10 @@ namespace XoopsModules\Suico;
 
 use XoopsModules\Suico;
 
+/**
+ * Class FieldHandler
+ * @package XoopsModules\Suico
+ */
 class FieldHandler extends \XoopsPersistableObjectHandler
 {
     /**

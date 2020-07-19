@@ -83,7 +83,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
     /**
      * retrieve a suico_audio
      *
-     * @param int $id of the suico_audio
+     * @param int|null $id of the suico_audio
      * @return mixed reference to the {@link suico_audio} object, FALSE if failed
      */
     public function get2(

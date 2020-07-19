@@ -77,7 +77,7 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
     /**
      * retrieve a Configs
      *
-     * @param int  $id of the Configs
+     * @param int|null $id of the Configs
      * @param null $fields
      * @return mixed reference to the {@link Configs} object, FALSE if failed
      */

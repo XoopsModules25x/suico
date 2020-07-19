@@ -81,7 +81,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
     /**
      * retrieve aNotes
      *
-     * @param int  $id of theNotes
+     * @param int|null $id of theNotes
      * @param null $fields
      * @return mixed reference to the {@linkNotes} object, FALSE if failed
      */

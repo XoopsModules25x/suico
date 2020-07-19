@@ -216,8 +216,9 @@ function loadTableFromArrayWithReplace($table, $data, $search, $replace)
     return $count;
 }
 
-
-
+/**
+ * @return bool
+ */
 function addUsers()
 {
     $ret = false;

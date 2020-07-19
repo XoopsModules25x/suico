@@ -28,9 +28,9 @@ namespace XoopsModules\Suico;
 class RegstepHandler extends \XoopsPersistableObjectHandler
 {
     /**
-     * @param null|object $db
+     * @param \XoopsDatabase|null $db
      */
-    public function __construct(\XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'suico_profile_regstep', Regstep::class, 'step_id', 'step_name');
     }

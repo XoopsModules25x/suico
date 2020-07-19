@@ -257,7 +257,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
      *
      * @param \CriteriaElement $criteria   CriteriaElement
      * @param array            $searchvars Fields to be fetched
-     * @param array            $groups     for Usergroups is selected (only admin!)
+     * @param array|null             $groups     for Usergroups is selected (only admin!)
      *
      * @return array
      */

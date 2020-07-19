@@ -79,7 +79,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
     /**
      * retrieve a Ishot
      *
-     * @param int  $id of the Ishot
+     * @param int|null $id of the Ishot
      * @param null $fields
      * @return mixed reference to the {@link Ishot} object, FALSE if failed
      */

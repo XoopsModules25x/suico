@@ -80,7 +80,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
     /**
      * retrieve a Friendrequest
      *
-     * @param int  $id of the Friendrequest
+     * @param int|null $id of the Friendrequest
      * @param null $fields
      * @return mixed reference to the {@link Friendrequest} object, FALSE if failed
      */

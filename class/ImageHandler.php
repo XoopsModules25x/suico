@@ -95,7 +95,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
     /**
      * retrieve a Image
      *
-     * @param int  $id of the Image
+     * @param int|null $id of the Image
      * @param null $fields
      * @return mixed reference to the {@link Image} object, FALSE if failed
      */

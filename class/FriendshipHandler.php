@@ -94,7 +94,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
     /**
      * retrieve a Friendship
      *
-     * @param int  $id of the Friendship
+     * @param int|null $id of the Friendship
      * @param null $fields
      * @return mixed reference to the {@link Friendship} object, FALSE if failed
      */

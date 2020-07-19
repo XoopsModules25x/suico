@@ -79,7 +79,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
     /**
      * retrieve a Suspensions
      *
-     * @param int  $id of the Suspensions
+     * @param int|null $id of the Suspensions
      * @param null $fields
      * @return mixed reference to the {@link Suspensions} object, FALSE if failed
      */

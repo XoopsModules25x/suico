@@ -85,7 +85,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
     /**
      * retrieve a Video
      *
-     * @param int  $id of the Video
+     * @param int|null $id of the Video
      * @param null $fields
      * @return mixed reference to the {@link Video} object, FALSE if failed
      */
