@@ -75,6 +75,7 @@ $countAudio = $nbSections[COUNTAUDIOS] ?? 0;
 try {
     $audiosArray = $controller->assignAudioContent($countAudio, $audios);
 } catch (\RuntimeException $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
 }
 if (is_array($audiosArray) && count($audiosArray) > 0) {
     $xoopsTpl->assign('audios', $audiosArray);

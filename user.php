@@ -214,7 +214,11 @@ if ('register' === $op) {
                 $newuser->setVar('uname', $uname);
                 $newuser->setVar('email', $email);
                 $newuser->setVar('pass', $pass ? password_hash($pass, PASSWORD_DEFAULT) : '');
-                $actkey = bin2hex(random_bytes(4));
+                try {
+                    $actkey = bin2hex(random_bytes(4));
+                } catch (Exception $e) {
+                    echo 'Caught exception: ',  $e->getMessage(), "\n";
+                }
                 $newuser->setVar('actkey', $actkey, true);
                 $newuser->setVar('user_regdate', time(), true);
                 $newuser->setVar('uorder', $GLOBALS['xoopsConfig']['com_order'], true);
