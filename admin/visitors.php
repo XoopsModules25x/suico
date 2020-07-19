@@ -127,7 +127,7 @@ switch ($op) {
         // Display Page Navigation
         if ($visitorsTempRows > $visitorsPaginationLimit) {
             xoops_load('XoopsPageNav');
-            $pagenav = new XoopsPageNav(
+            $pagenav = new \XoopsPageNav(
                 $visitorsTempRows, $visitorsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
@@ -175,7 +175,7 @@ switch ($op) {
             // Display Navigation
             if ($visitorsCount > $visitorsPaginationLimit) {
                 xoops_load('XoopsPageNav');
-                $pagenav = new XoopsPageNav(
+                $pagenav = new \XoopsPageNav(
                     $visitorsCount, $visitorsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));

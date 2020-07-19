@@ -148,7 +148,7 @@ switch ($op) {
         // Display Page Navigation
         if ($audioTempRows > $audioPaginationLimit) {
             xoops_load('XoopsPageNav');
-            $pagenav = new XoopsPageNav(
+            $pagenav = new \XoopsPageNav(
                 $audioTempRows, $audioPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
@@ -200,7 +200,7 @@ switch ($op) {
             // Display Navigation
             if ($audioCount > $audioPaginationLimit) {
                 xoops_load('XoopsPageNav');
-                $pagenav = new XoopsPageNav(
+                $pagenav = new \XoopsPageNav(
                     $audioCount, $audioPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));

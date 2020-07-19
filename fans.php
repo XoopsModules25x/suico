@@ -47,12 +47,12 @@ if (0 === $countFriends) {
 /**
  * Let's get the user name of the owner of the album
  */
-$owner      = new XoopsUser();
+$owner      = new \XoopsUser();
 $identifier = $owner::getUnameFromId($controller->uidOwner);
 /**
  * Creating the navigation bar if you have a lot of friends
  */
-$navigationBar = new XoopsPageNav(
+$navigationBar = new \XoopsPageNav(
     $countFriends, $helper->getConfig('friendsperpage'), $start, 'start', 'uid=' . (int)$controller->uidOwner
 );
 $navegacao     = $navigationBar->renderImageNav(2);

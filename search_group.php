@@ -68,7 +68,7 @@ foreach ($mygroups as $value) {
 /**
  * Creating the navigation bar if you have a lot of friends
  */
-$navigationBar = new XoopsPageNav(
+$navigationBar = new \XoopsPageNav(
     $countGroups, $helper->getConfig('groupsperpage'), $start_all, 'start_all', 'group_keyword=' . $group_keyword . '&amp;start_my=' . $start_my
 );
 $imageNav      = $navigationBar->renderImageNav(2);

@@ -52,8 +52,8 @@ switch ($op) {
         break;
 }
 require_once $GLOBALS['xoops']->path('/class/xoopsformloader.php');
-$opform    = new XoopsSimpleForm('', 'opform', 'fieldspermissions.php', 'get');
-$op_select = new XoopsFormSelect('', 'op', $op);
+$opform    = new \XoopsSimpleForm('', 'opform', 'fieldspermissions.php', 'get');
+$op_select = new \XoopsFormSelect('', 'op', $op);
 $op_select->setExtra('onchange="document.forms.opform.submit()"');
 $op_select->addOption('visibility', _AM_SUICO_PROF_VISIBLE);
 $op_select->addOption('edit', _AM_SUICO_PROF_EDITABLE);
@@ -63,7 +63,7 @@ $opform->addElement($op_select);
 $opform->display();
 $module_id = $GLOBALS['xoopsModule']->getVar('mid');
 require_once $GLOBALS['xoops']->path('/class/xoopsform/grouppermform.php');
-$form = new XoopsGroupPermForm($title_of_form, $module_id, $perm_name, $perm_desc, 'admin/fieldspermissions.php?op=' . $op, $anonymous);
+$form = new \XoopsGroupPermForm($title_of_form, $module_id, $perm_name, $perm_desc, 'admin/fieldspermissions.php?op=' . $op, $anonymous);
 if ('access' === $op) {
     /* @var XoopsMemberHandler $memberHandler */
     $memberHandler = xoops_getHandler('member');

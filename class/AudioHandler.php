@@ -335,7 +335,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         $maxfilesize       = $maxfilebytes;
         $uploadDir         = $path_upload;
         // create the object to upload
-        $uploader = new XoopsMediaUploader(
+        $uploader = new \XoopsMediaUploader(
             $uploadDir, $allowed_mimetypes, $maxfilesize
         );
         // fetch the media

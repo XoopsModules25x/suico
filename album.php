@@ -103,14 +103,14 @@ if (!empty($xoopsUser)) {
 /**
  * Let's get the user name of the owner of the album
  */
-$owner      = new XoopsUser($controller->uidOwner);
+$owner      = new \XoopsUser($controller->uidOwner);
 $identifier = $owner->getVar('uname');
 $avatar     = $owner->getVar('user_avatar');
 /**
  * Creating the navigation bar if you have a lot of friends
  */
 $countPhotos   = $nbSections[COUNTPHOTOS] ?? 0;
-$navigationBar = new XoopsPageNav(
+$navigationBar = new \XoopsPageNav(
     $countPhotos, $helper->getConfig('picturesperpage'), $start, 'start', 'uid=' . (int)$controller->uidOwner
 );
 $navegacao     = $navigationBar->renderImageNav(2);

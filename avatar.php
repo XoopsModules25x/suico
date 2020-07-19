@@ -43,7 +43,7 @@ if (!copy($image, $imageavatar)) {
     echo 'failed to copy $file...\n';
 }
 $xoopsUser->setVar('user_avatar', 'avatars/' . $avatar);
-$userHandler = new XoopsUserHandler($xoopsDB);
+$userHandler = new \XoopsUserHandler($xoopsDB);
 /**
  * Verifying who's the owner to allow changes
  */

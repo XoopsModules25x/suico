@@ -98,9 +98,9 @@ if (!empty($_GET['id']) && !empty($_GET['actkey'])) {
     }
 } else {
     require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
-    $form = new XoopsThemeForm('', 'form', 'activate.php');
-    $form->addElement(new XoopsFormText(_US_EMAIL, 'email', 25, 255));
-    $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+    $form = new \XoopsThemeForm('', 'form', 'activate.php');
+    $form->addElement(new \XoopsFormText(_US_EMAIL, 'email', 25, 255));
+    $form->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
     $form->display();
 }
 $xoBreadcrumbs[] = ['title' => _MD_SUICO_REGISTER];

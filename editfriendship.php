@@ -29,7 +29,7 @@ if (!$xoopsUser) {
 $friendshipFactory = new Suico\FriendshipHandler($xoopsDB);
 $friend2_uid       = Request::getInt('friend_uid', 0, 'POST');
 $marker            = Request::getInt('marker', 0, 'POST');
-$friend            = new XoopsUser($friend2_uid);
+$friend            = new \XoopsUser($friend2_uid);
 if (1 === $marker) {
     $level         = $_POST['level'];
     $cool          = $_POST['cool'];

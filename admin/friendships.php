@@ -133,7 +133,7 @@ switch ($op) {
         // Display Page Navigation
         if ($friendshipTempRows > $friendshipPaginationLimit) {
             xoops_load('XoopsPageNav');
-            $pagenav = new XoopsPageNav(
+            $pagenav = new \XoopsPageNav(
                 $friendshipTempRows, $friendshipPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
@@ -191,7 +191,7 @@ switch ($op) {
             // Display Navigation
             if ($friendshipCount > $friendshipPaginationLimit) {
                 xoops_load('XoopsPageNav');
-                $pagenav = new XoopsPageNav(
+                $pagenav = new \XoopsPageNav(
                     $friendshipCount, $friendshipPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));

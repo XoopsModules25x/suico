@@ -22,6 +22,11 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
+use XoopsFormButton;
+use XoopsFormHidden;
+use XoopsFormLabel;
+use XoopsFormText;
+use XoopsFormTextArea;
 use XoopsModules\Suico;
 use XoopsModules\Suico\IndexController;
 use XoopsModules\Suico\Form\FieldForm;

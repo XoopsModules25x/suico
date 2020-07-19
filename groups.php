@@ -55,11 +55,11 @@ foreach ($mygroups as $value) {
 /**
  * Creating the navigation bar if you have a lot of friends
  */
-$navigationBar    = new XoopsPageNav(
+$navigationBar    = new \XoopsPageNav(
     $countGroups, $helper->getConfig('groupsperpage'), $start_all, 'start_all', 'uid=' . (int)$controller->uidOwner . '&amp;start_my=' . $start_my . '#allgroups'
 );
 $imageNav         = $navigationBar->renderImageNav(2); //allgroups
-$navigationBar_my = new XoopsPageNav(
+$navigationBar_my = new \XoopsPageNav(
     $countMyGroups, $helper->getConfig('groupsperpage'), $start_my, 'start_my', 'uid=' . (int)$controller->uidOwner . '&amp;start_all=' . $start_all . '#mygroups'
 );
 $imageNav_my      = $navigationBar_my->renderImageNav(2);

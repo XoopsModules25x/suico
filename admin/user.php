@@ -43,13 +43,13 @@ switch ($op) {
     default:
     case 'list':
         require_once $GLOBALS['xoops']->path('/class/xoopsformloader.php');
-        $form    = new XoopsThemeForm(_AM_SUICO_EDITUSER, 'form', 'user.php');
+        $form    = new \XoopsThemeForm(_AM_SUICO_EDITUSER, 'form', 'user.php');
         $lastUid = \Xmf\Request::getInt('lastuid', null, 'GET');
-        $form->addElement(new XoopsFormSelectUser(_AM_SUICO_SELECTUSER, 'id', false, $lastUid));
-        $form->addElement(new XoopsFormHidden('op', 'editordelete'));
-        $button_tray = new XoopsFormElementTray('');
-        $button_tray->addElement(new XoopsFormButton('', 'edit', _EDIT, 'submit'));
-        $button_tray->addElement(new XoopsFormButton('', 'delete', _DELETE, 'submit'));
+        $form->addElement(new \XoopsFormSelectUser(_AM_SUICO_SELECTUSER, 'id', false, $lastUid));
+        $form->addElement(new \XoopsFormHidden('op', 'editordelete'));
+        $button_tray = new \XoopsFormElementTray('');
+        $button_tray->addElement(new \XoopsFormButton('', 'edit', _EDIT, 'submit'));
+        $button_tray->addElement(new \XoopsFormButton('', 'delete', _DELETE, 'submit'));
         $form->addElement($button_tray);
         $form->display();
         break;

@@ -43,36 +43,36 @@ if ('form' === $op) {
     $memberHandler = xoops_getHandler('member');
     $total         = $memberHandler->getUserCount(new Criteria('level', 0, '>'));
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-    $uname_text  = new XoopsFormText('', 'user_uname', 30, 60);
-    $uname_match = new XoopsFormSelectMatchOption('', 'user_uname_match');
-    $uname_tray  = new XoopsFormElementTray(_MD_SUICO_UNAME, '&nbsp;');
+    $uname_text  = new \XoopsFormText('', 'user_uname', 30, 60);
+    $uname_match = new \XoopsFormSelectMatchOption('', 'user_uname_match');
+    $uname_tray  = new \XoopsFormElementTray(_MD_SUICO_UNAME, '&nbsp;');
     $uname_tray->addElement($uname_match);
     $uname_tray->addElement($uname_text);
-    $name_text  = new XoopsFormText('', 'user_name', 30, 60);
-    $name_match = new XoopsFormSelectMatchOption('', 'user_name_match');
-    $name_tray  = new XoopsFormElementTray(_MD_SUICO_REALNAME, '&nbsp;');
+    $name_text  = new \XoopsFormText('', 'user_name', 30, 60);
+    $name_match = new \XoopsFormSelectMatchOption('', 'user_name_match');
+    $name_tray  = new \XoopsFormElementTray(_MD_SUICO_REALNAME, '&nbsp;');
     $name_tray->addElement($name_match);
     $name_tray->addElement($name_text);
-    $email_text  = new XoopsFormText('', 'user_email', 30, 60);
-    $email_match = new XoopsFormSelectMatchOption('', 'user_email_match');
-    $email_tray  = new XoopsFormElementTray(_MD_SUICO_EMAIL, '&nbsp;');
+    $email_text  = new \XoopsFormText('', 'user_email', 30, 60);
+    $email_match = new \XoopsFormSelectMatchOption('', 'user_email_match');
+    $email_tray  = new \XoopsFormElementTray(_MD_SUICO_EMAIL, '&nbsp;');
     $email_tray->addElement($email_match);
     $email_tray->addElement($email_text);
-    $url_text        = new XoopsFormText(_MD_SUICO_URL_CONTAINS, 'user_url', 30, 100);
-    $location_text   = new XoopsFormText(_MD_SUICO_LOCATION_CONTAINS, 'user_from', 30, 100);
-    $occupation_text = new XoopsFormText(_MD_SUICO_OCCUPATION_CONTAINS, 'user_occ', 30, 100);
-    $interest_text   = new XoopsFormText(_MD_SUICO_INTEREST_CONTAINS, 'user_intrest', 30, 100);
-    $extrainfo_text  = new XoopsFormText(_MD_SUICO_EXTRAINFO_CONTAINS, 'bio', 30, 100);
-    $signature_text  = new XoopsFormText(_MD_SUICO_SIGNATURE_CONTAINS, 'user_sig', 30, 100);
-    $lastlog_more    = new XoopsFormText(
+    $url_text        = new \XoopsFormText(_MD_SUICO_URL_CONTAINS, 'user_url', 30, 100);
+    $location_text   = new \XoopsFormText(_MD_SUICO_LOCATION_CONTAINS, 'user_from', 30, 100);
+    $occupation_text = new \XoopsFormText(_MD_SUICO_OCCUPATION_CONTAINS, 'user_occ', 30, 100);
+    $interest_text   = new \XoopsFormText(_MD_SUICO_INTEREST_CONTAINS, 'user_intrest', 30, 100);
+    $extrainfo_text  = new \XoopsFormText(_MD_SUICO_EXTRAINFO_CONTAINS, 'bio', 30, 100);
+    $signature_text  = new \XoopsFormText(_MD_SUICO_SIGNATURE_CONTAINS, 'user_sig', 30, 100);
+    $lastlog_more    = new \XoopsFormText(
         _MD_SUICO_LASTLOGMORE, 'user_lastlog_more', 10, 5
     );
-    $lastlog_less    = new XoopsFormText(_MD_SUICO_LASTLOGLESS, 'user_lastlog_less', 10, 5);
-    $reg_more        = new XoopsFormText(_MD_SUICO_REGMORE, 'user_reg_more', 10, 5);
-    $reg_less        = new XoopsFormText(_MD_SUICO_REGLESS, 'user_reg_less', 10, 5);
-    $posts_more      = new XoopsFormText(_MD_SUICO_POSTSMORE, 'user_posts_more', 10, 5);
-    $posts_less      = new XoopsFormText(_MD_SUICO_POSTSLESS, 'user_posts_less', 10, 5);
-    $sort_select     = new XoopsFormSelect(_MD_SUICO_SORT, 'user_sort');
+    $lastlog_less    = new \XoopsFormText(_MD_SUICO_LASTLOGLESS, 'user_lastlog_less', 10, 5);
+    $reg_more        = new \XoopsFormText(_MD_SUICO_REGMORE, 'user_reg_more', 10, 5);
+    $reg_less        = new \XoopsFormText(_MD_SUICO_REGLESS, 'user_reg_less', 10, 5);
+    $posts_more      = new \XoopsFormText(_MD_SUICO_POSTSMORE, 'user_posts_more', 10, 5);
+    $posts_less      = new \XoopsFormText(_MD_SUICO_POSTSLESS, 'user_posts_less', 10, 5);
+    $sort_select     = new \XoopsFormSelect(_MD_SUICO_SORT, 'user_sort');
     $sort_select->addOptionArray(
         [
             'uname'        => _MD_SUICO_UNAME,
@@ -82,17 +82,17 @@ if ('form' === $op) {
             'posts'        => _MD_SUICO_POSTS,
         ]
     );
-    $order_select = new XoopsFormSelect(_MD_SUICO_ORDER, 'user_order');
+    $order_select = new \XoopsFormSelect(_MD_SUICO_ORDER, 'user_order');
     $order_select->addOptionArray(
         [
             'ASC'  => _MD_SUICO_ASC,
             'DESC' => _MD_SUICO_DESC,
         ]
     );
-    $limit_text    = new XoopsFormText(_MD_SUICO_LIMIT, 'limit', 6, 2);
-    $op_hidden     = new XoopsFormHidden('op', 'submit');
-    $submit_button = new XoopsFormButton('', 'user_submit', _SUBMIT, 'submit');
-    $form          = new XoopsThemeForm('', 'searchform', 'searchmembers.php');
+    $limit_text    = new \XoopsFormText(_MD_SUICO_LIMIT, 'limit', 6, 2);
+    $op_hidden     = new \XoopsFormHidden('op', 'submit');
+    $submit_button = new \XoopsFormButton('', 'user_submit', _SUBMIT, 'submit');
+    $form          = new \XoopsThemeForm('', 'searchform', 'searchmembers.php');
     $form->addElement($uname_tray);
     $form->addElement($name_tray);
     $form->addElement($email_tray);

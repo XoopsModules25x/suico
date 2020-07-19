@@ -68,7 +68,7 @@ $helper->loadLanguage('main');
 xoops_loadLanguage('user');
 if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
     require $GLOBALS['xoops']->path('class/template.php');
-    $xoopsTpl = new XoopsTpl();
+    $xoopsTpl = new \XoopsTpl();
 }
 $imageFactory         = new Suico\ImageHandler($xoopsDB);
 $visitorsFactory      = new Suico\VisitorsHandler($xoopsDB);

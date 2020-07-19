@@ -67,7 +67,7 @@ $privacyHandler = $helper->getHandler('Privacy');
 $myts           = \MyTextSanitizer::getInstance();
 if (!isset($xoopsTpl) || !is_object($xoopsTpl)) {
     require XOOPS_ROOT_PATH . '/class/template.php';
-    $xoopsTpl = new XoopsTpl();
+    $xoopsTpl = new \XoopsTpl();
 }
 $pathIcon16    = Xmf\Module\Admin::iconUrl('', 16);
 $pathIcon32    = Xmf\Module\Admin::iconUrl('', 32);

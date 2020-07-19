@@ -55,19 +55,19 @@ switch ($op) {
         $grouppermHandler  = xoops_getHandler('groupperm');
         $searchable_fields = $grouppermHandler->getItemIds('profile_search', $groups, $GLOBALS['xoopsModule']->getVar('mid'));
         require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
-        $searchform = new XoopsThemeForm('', 'searchform', 'searchuser.php', 'post');
-        $name_tray  = new XoopsFormElementTray(_US_NICKNAME);
-        $name_tray->addElement(new XoopsFormSelectMatchOption('', 'uname_match'));
-        $name_tray->addElement(new XoopsFormText('', 'uname', 35, 255));
+        $searchform = new \XoopsThemeForm('', 'searchform', 'searchuser.php', 'post');
+        $name_tray  = new \XoopsFormElementTray(_US_NICKNAME);
+        $name_tray->addElement(new \XoopsFormSelectMatchOption('', 'uname_match'));
+        $name_tray->addElement(new \XoopsFormText('', 'uname', 35, 255));
         $searchform->addElement($name_tray);
-        $email_tray = new XoopsFormElementTray(_US_EMAIL);
-        $email_tray->addElement(new XoopsFormSelectMatchOption('', 'email_match'));
-        $email_tray->addElement(new XoopsFormText('', 'email', 35, 255));
+        $email_tray = new \XoopsFormElementTray(_US_EMAIL);
+        $email_tray->addElement(new \XoopsFormSelectMatchOption('', 'email_match'));
+        $email_tray->addElement(new \XoopsFormText('', 'email', 35, 255));
         $searchform->addElement($email_tray);
         // add search groups , only for Webmasters
         if ($GLOBALS['xoopsUser'] && $GLOBALS['xoopsUser']->isAdmin()) {
-            $group_tray = new XoopsFormElementTray(_US_GROUPS);
-            $group_tray->addElement(new XoopsFormSelectGroup('', 'selgroups', null, false, 5, true));
+            $group_tray = new \XoopsFormElementTray(_US_GROUPS);
+            $group_tray->addElement(new \XoopsFormSelectGroup('', 'selgroups', null, false, 5, true));
             $searchform->addElement($group_tray);
         }
         foreach (array_keys($fields) as $i) {
@@ -78,12 +78,12 @@ switch ($op) {
             switch ($fields[$i]->getVar('field_type')) {
                 case 'textbox':
                     if (XOBJ_DTYPE_INT == $fields[$i]->getVar('field_valuetype')) {
-                        $searchform->addElement(new XoopsFormText(sprintf(_MD_SUICO_LARGERTHAN, $fields[$i]->getVar('field_title')), $fields[$i]->getVar('field_name') . '_larger', 35, 35));
-                        $searchform->addElement(new XoopsFormText(sprintf(_MD_SUICO_SMALLERTHAN, $fields[$i]->getVar('field_title')), $fields[$i]->getVar('field_name') . '_smaller', 35, 35));
+                        $searchform->addElement(new \XoopsFormText(sprintf(_MD_SUICO_LARGERTHAN, $fields[$i]->getVar('field_title')), $fields[$i]->getVar('field_name') . '_larger', 35, 35));
+                        $searchform->addElement(new \XoopsFormText(sprintf(_MD_SUICO_SMALLERTHAN, $fields[$i]->getVar('field_title')), $fields[$i]->getVar('field_name') . '_smaller', 35, 35));
                     } else {
-                        $tray = new XoopsFormElementTray($fields[$i]->getVar('field_title'));
-                        $tray->addElement(new XoopsFormSelectMatchOption('', $fields[$i]->getVar('field_name') . '_match'));
-                        $tray->addElement(new XoopsFormText('', $fields[$i]->getVar('field_name'), 35, $fields[$i]->getVar('field_maxlength')));
+                        $tray = new \XoopsFormElementTray($fields[$i]->getVar('field_title'));
+                        $tray->addElement(new \XoopsFormSelectMatchOption('', $fields[$i]->getVar('field_name') . '_match'));
+                        $tray->addElement(new \XoopsFormText('', $fields[$i]->getVar('field_name'), 35, $fields[$i]->getVar('field_maxlength')));
                         $searchform->addElement($tray);
                         unset($tray);
                     }
@@ -92,14 +92,14 @@ switch ($op) {
                 case 'select':
                     $options = $fields[$i]->getVar('field_options');
                     $size    = min(count($options), 10);
-                    $element = new XoopsFormSelect($fields[$i]->getVar('field_title'), $fields[$i]->getVar('field_name'), null, $size, true);
+                    $element = new \XoopsFormSelect($fields[$i]->getVar('field_title'), $fields[$i]->getVar('field_name'), null, $size, true);
                     asort($options);
                     $element->addOptionArray($options);
                     $searchform->addElement($element);
                     unset($element);
                     break;
                 case 'yesno':
-                    $element = new XoopsFormSelect($fields[$i]->getVar('field_title'), $fields[$i]->getVar('field_name'), null, 2, true);
+                    $element = new \XoopsFormSelect($fields[$i]->getVar('field_title'), $fields[$i]->getVar('field_name'), null, 2, true);
                     $element->addOption(1, _YES);
                     $element->addOption(0, _NO);
                     $searchform->addElement($element);
@@ -107,18 +107,18 @@ switch ($op) {
                     break;
                 case 'date':
                 case 'datetime':
-                    $searchform->addElement(new XoopsFormTextDateSelect(sprintf(_MD_SUICO_LATERTHAN, $fields[$i]->getVar('field_title')), $fields[$i]->getVar('field_name') . '_larger', 15, 1));
-                    $searchform->addElement(new XoopsFormTextDateSelect(sprintf(_MD_SUICO_EARLIERTHAN, $fields[$i]->getVar('field_title')), $fields[$i]->getVar('field_name') . '_smaller', 15, time()));
+                    $searchform->addElement(new \XoopsFormTextDateSelect(sprintf(_MD_SUICO_LATERTHAN, $fields[$i]->getVar('field_title')), $fields[$i]->getVar('field_name') . '_larger', 15, 1));
+                    $searchform->addElement(new \XoopsFormTextDateSelect(sprintf(_MD_SUICO_EARLIERTHAN, $fields[$i]->getVar('field_title')), $fields[$i]->getVar('field_name') . '_smaller', 15, time()));
                     break;
                 case 'timezone':
-                    $element = new XoopsFormSelect($fields[$i]->getVar('field_title'), $fields[$i]->getVar('field_name'), null, 6, true);
+                    $element = new \XoopsFormSelect($fields[$i]->getVar('field_title'), $fields[$i]->getVar('field_name'), null, 6, true);
                     require_once $GLOBALS['xoops']->path('class/xoopslists.php');
                     $element->addOptionArray(XoopsLists::getTimeZoneList());
                     $searchform->addElement($element);
                     unset($element);
                     break;
                 case 'language':
-                    $element = new XoopsFormSelectLang($fields[$i]->getVar('field_title'), $fields[$i]->getVar('field_name'), null, 6);
+                    $element = new \XoopsFormSelectLang($fields[$i]->getVar('field_title'), $fields[$i]->getVar('field_name'), null, 6);
                     $searchform->addElement($element);
                     unset($element);
                     break;
@@ -126,17 +126,17 @@ switch ($op) {
         }
         asort($sortby_arr);
         $sortby_arr    = array_merge(['' => _NONE, 'uname' => _US_NICKNAME, 'email' => _US_EMAIL], $sortby_arr);
-        $sortby_select = new XoopsFormSelect(_MD_SUICO_SORTBY, 'sortby');
+        $sortby_select = new \XoopsFormSelect(_MD_SUICO_SORTBY, 'sortby');
         $sortby_select->addOptionArray($sortby_arr);
         $searchform->addElement($sortby_select);
-        $order_select = new XoopsFormRadio(_MD_SUICO_ORDER, 'order', 0);
+        $order_select = new \XoopsFormRadio(_MD_SUICO_ORDER, 'order', 0);
         $order_select->addOption(0, _ASCENDING);
         $order_select->addOption(1, _DESCENDING);
         $searchform->addElement($order_select);
-        $limit_text = new XoopsFormText(_MD_SUICO_PERPAGE, 'limit', 15, 10, $limit_default);
+        $limit_text = new \XoopsFormText(_MD_SUICO_PERPAGE, 'limit', 15, 10, $limit_default);
         $searchform->addElement($limit_text);
-        $searchform->addElement(new XoopsFormHidden('op', 'results'));
-        $searchform->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+        $searchform->addElement(new \XoopsFormHidden('op', 'results'));
+        $searchform->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
         $searchform->assign($GLOBALS['xoopsTpl']);
         $GLOBALS['xoopsTpl']->assign('page_title', _MD_SUICO_SEARCH);
         //added count user
@@ -397,7 +397,7 @@ switch ($op) {
                 $args = implode('&amp;', $search_url);
             }
             require_once $GLOBALS['xoops']->path('class/pagenav.php');
-            $nav = new XoopsPageNav($total_users, $limit, $start, 'start', $args);
+            $nav = new \XoopsPageNav($total_users, $limit, $start, 'start', $args);
             $GLOBALS['xoopsTpl']->assign('nav', $nav->renderNav(5));
         }
         break;

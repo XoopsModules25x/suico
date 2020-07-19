@@ -55,7 +55,7 @@ switch ($op) {
         $groupsObject->setVar('group_desc', Request::getText('group_desc', ''));
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $uploadDir = XOOPS_UPLOAD_PATH . '/suico/groups/';
-        $uploader  = new XoopsMediaUploader(
+        $uploader  = new \XoopsMediaUploader(
             $uploadDir, $helper->getConfig('mimetypes'), $helper->getConfig('maxsize'), null, null
         );
         if ($uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0])) {
@@ -148,7 +148,7 @@ switch ($op) {
         // Display Page Navigation
         if ($groupsTempRows > $groupsPaginationLimit) {
             xoops_load('XoopsPageNav');
-            $pagenav = new XoopsPageNav(
+            $pagenav = new \XoopsPageNav(
                 $groupsTempRows, $groupsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
@@ -200,7 +200,7 @@ switch ($op) {
             // Display Navigation
             if ($groupsCount > $groupsPaginationLimit) {
                 xoops_load('XoopsPageNav');
-                $pagenav = new XoopsPageNav(
+                $pagenav = new \XoopsPageNav(
                     $groupsCount, $groupsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
