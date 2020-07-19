@@ -57,7 +57,7 @@ $criteria = new CriteriaCompo();
 $criteria->setSort('field_id, user_group, profile_group');
 $criteria->setOrder('DESC');
 $visibilities = $visibilityHandler->getAllByFieldId($criteria);
-/* @var XoopsMemberHandler $memberHandler */
+/* @var \XoopsMemberHandler $memberHandler */
 $memberHandler = xoops_getHandler('member');
 $groups        = $memberHandler->getGroupList();
 $groups[0]     = _AM_SUICO_FIELDVISIBLETOALL;

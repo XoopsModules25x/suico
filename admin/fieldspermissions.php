@@ -18,10 +18,13 @@ declare(strict_types=1);
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
+
+use Xmf\Request;
+
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 $adminObject->displayNavigation(basename(__FILE__));
-$op        = \Xmf\Request::getCmd('op', 'edit');
+$op        = Request::getCmd('op', 'edit');
 $perm_desc = '';
 switch ($op) {
     case 'visibility':

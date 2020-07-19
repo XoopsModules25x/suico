@@ -20,8 +20,11 @@ declare(strict_types=1);
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
-use XoopsModules\Suico;
-use XoopsModules\Suico\Form\FieldForm;
+use XoopsModules\Suico\{
+    CategoryHandler,
+    Form\FieldForm,
+    FieldHandler
+};
 
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
@@ -29,7 +32,7 @@ $adminObject->addItemButton(_AM_SUICO_FIELD, 'fieldslist.php?op=new', 'add');
 $adminObject->displayNavigation(basename(__FILE__));
 $adminObject->displayButton('left');
 $op = $_REQUEST['op'] ?? (isset($_REQUEST['id']) ? 'edit' : 'list');
-/* @var Suico\FieldHandler $fieldHandler */
+/* @var FieldHandler $fieldHandler */
 $fieldHandler = $helper->getHandler('Field');
 switch ($op) {
     default:
@@ -38,7 +41,7 @@ switch ($op) {
         /* @var \XoopsModuleHandler $moduleHandler */
         $moduleHandler = xoops_getHandler('module');
         $modules       = $moduleHandler->getObjects(null, true);
-        /* @var Suico\CategoryHandler $categoryHandler */
+        /* @var CategoryHandler $categoryHandler */
         $categoryHandler = $helper->getHandler('Category');
         $criteria        = new \CriteriaCompo();
         $criteria->setSort('cat_weight');
@@ -131,7 +134,7 @@ switch ($op) {
             if (count($ids) > 0) {
                 $errors = [];
                 //if there are changed fields, fetch the fieldcategory objects
-                /* @var \XoopsModuleHandler $fieldHandler */
+                /* @var FieldHandler $fieldHandler */
                 $fieldHandler = $helper->getHandler('Field');
                 $fields       = $fieldHandler->getObjects(new \Criteria('field_id', '(' . implode(',', $ids) . ')', 'IN'), true);
                 foreach ($ids as $i) {
@@ -324,8 +327,9 @@ if (isset($template_main)) {
 function suico_visible_toggle($field_id, $field_required, $helper)
 {
     $field_required = (1 == $field_required) ? 0 : 1;
-    $fieldHandler   = $helper->getHandler('Field');
-    $obj            = $fieldHandler->get($field_id);
+    /** @var FieldHandler $fieldHandler */
+    $fieldHandler = $helper->getHandler('Field');
+    $obj          = $fieldHandler->get($field_id);
     $obj->setVar('field_required', $field_required);
     if ($fieldHandler->insert($obj, true)) {
         redirect_header('fieldslist.php', 1, _AM_SUICO_REQUIRED_TOGGLE_SUCCESS);
