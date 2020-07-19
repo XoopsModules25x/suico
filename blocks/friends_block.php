@@ -43,7 +43,7 @@ function b_suico_friends_show($options)
     $helper = Helper::getInstance();
     $helper->loadLanguage('main');
 
-    $myts  = MyTextSanitizer::getInstance();
+    $myts  = \MyTextSanitizer::getInstance();
     $block = [];
     if ($xoopsUser) {
         /**

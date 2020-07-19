@@ -43,7 +43,7 @@ require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
 if (!is_object($GLOBALS['xoopsUser'])) {
     redirect_header(XOOPS_URL, 3, _US_NOEDITRIGHT);
 }
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 $op   = Request::getCmd('op', 'editprofile');
 /* @var \XoopsConfigHandler $configHandler */
 $configHandler              = xoops_getHandler('config');

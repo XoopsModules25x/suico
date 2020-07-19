@@ -143,7 +143,7 @@ if ('submit' === $op) {
     $GLOBALS['xoopsOption']['template_main'] = 'suico_searchresults.tpl';
     require XOOPS_ROOT_PATH . '/header.php';
     $iamadmin = $xoopsUserIsAdmin;
-    $myts     = MyTextSanitizer::getInstance();
+    $myts     = \MyTextSanitizer::getInstance();
     $criteria = new CriteriaCompo();
     if (!empty($_POST['user_uname'])) {
         $match = !empty($_POST['user_uname_match']) ? Request::getInt('user_uname_match', 0, 'POST') : XOOPS_MATCH_START;
@@ -459,7 +459,7 @@ if (isset($_POST['addfriend'])) {
 }
 $memberHandler = xoops_getHandler('member');
 $thisUser      = $memberHandler->getUser($controller->uidOwner);
-$myts          = MyTextSanitizer::getInstance();
+$myts          = \MyTextSanitizer::getInstance();
 //navbar
 $xoopsTpl->assign('lang_mysection', _MD_SUICO_SEARCH);
 $xoopsTpl->assign('section_name', _MD_SUICO_SEARCH);

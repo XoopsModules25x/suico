@@ -29,7 +29,7 @@ switch ($op) {
     case 'search':
         $GLOBALS['xoopsOption']['template_main'] = 'suico_search.tpl';
         require __DIR__ . '/header.php';
-        $myts                       = MyTextSanitizer::getInstance();
+        $myts                       = \MyTextSanitizer::getInstance();
         $controller                 = new IndexController($xoopsDB, $xoopsUser, $xoopsModule);
         $nbSections                 = $controller->getNumbersSections();
         $limit_default              = 20;
@@ -149,7 +149,7 @@ switch ($op) {
     case 'results':
         $GLOBALS['xoopsOption']['template_main'] = 'suico_results.tpl';
         require __DIR__ . '/header.php';
-        $myts       = MyTextSanitizer::getInstance();
+        $myts       = \MyTextSanitizer::getInstance();
         $controller = new IndexController($xoopsDB, $xoopsUser, $xoopsModule);
         $nbSections = $controller->getNumbersSections();
         $GLOBALS['xoopsTpl']->assign('page_title', _MD_SUICO_RESULTS);

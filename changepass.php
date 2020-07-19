@@ -48,7 +48,7 @@ if (!isset($_POST['submit'])) {
     /* @var XoopsConfigHandler $configHandler */
     $configHandler              = xoops_getHandler('config');
     $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
-    $myts                       = MyTextSanitizer::getInstance();
+    $myts                       = \MyTextSanitizer::getInstance();
     $oldpass                    = Request::getString('oldpass', '', 'POST');
     $password                   = Request::getString('newpass', '', 'POST');
     $vpass                      = Request::getString('vpass', '', 'POST');

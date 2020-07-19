@@ -228,7 +228,7 @@ if (0 === $controller->isAnonym) {
 $avatar        = $controller->owner->getVar('user_avatar');
 $memberHandler = xoops_getHandler('member');
 $thisUser      = $memberHandler->getUser($controller->uidOwner);
-$myts          = MyTextSanitizer::getInstance();
+$myts          = \MyTextSanitizer::getInstance();
 //navbar
 $xoopsTpl->assign('lang_mysection', _MD_SUICO_MYPROFILE);
 $xoopsTpl->assign('section_name', _MD_SUICO_PROFILE);

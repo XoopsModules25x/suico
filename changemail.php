@@ -44,7 +44,7 @@ if (!isset($_POST['submit'], $_POST['passwd'])) {
     $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
     $form->assign($GLOBALS['xoopsTpl']);
 } else {
-    $myts   = MyTextSanitizer::getInstance();
+    $myts   = \MyTextSanitizer::getInstance();
     $pass   = Request::getString('passwd', '', 'POST');
     $email  = Request::getString('newmail', '', 'POST');
     $errors = [];

@@ -64,7 +64,7 @@ $suspensionsHandler = $helper->getHandler('Suspensions');
 $audioHandler = $helper->getHandler('Audio');
 /** @var XoopsPersistableObjectHandler $privacyHandler */
 $privacyHandler = $helper->getHandler('Privacy');
-$myts           = MyTextSanitizer::getInstance();
+$myts           = \MyTextSanitizer::getInstance();
 if (!isset($xoopsTpl) || !is_object($xoopsTpl)) {
     require XOOPS_ROOT_PATH . '/class/template.php';
     $xoopsTpl = new XoopsTpl();

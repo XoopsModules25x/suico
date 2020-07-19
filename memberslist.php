@@ -39,7 +39,7 @@ $nbSections                              = $controller->getNumbersSections();
 $GLOBALS['xoopsOption']['template_main'] = 'suico_memberslist_datatables.tpl';
 require XOOPS_ROOT_PATH . '/header.php';
 $iamadmin = $xoopsUserIsAdmin;
-$myts     = MyTextSanitizer::getInstance();
+$myts     = \MyTextSanitizer::getInstance();
 $criteria = new CriteriaCompo();
 $criteria->add(new Criteria('level', 0, '>'));
 $validsort = ['uname', 'email', 'last_login', 'user_regdate', 'posts'];
@@ -238,7 +238,7 @@ $xoopsTpl->assign('lang_cancelfriendrequest', _MD_SUICO_FRIENDREQUEST_CANCEL);
 if (isset($_POST['addfriend'])) {
     $newFriendrequest = $friendrequestFactory->create(true);
     $newFriendrequest->setVar('friendrequester_uid', $controller->uidOwner);
-    $newFriendrequest->setVar('friendrequestto_uid', 5, 0, 'POST');
+    $newFriendrequest->setVar('friendrequestto_uid', 5, 0);
     $friendrequestFactory->insert2($newFriendrequest);
     redirect_header(
         XOOPS_URL . '/modules/suico/index.php?uid=' . Request::getInt('friendrequestfrom_uid', 0, 'POST'),
@@ -248,7 +248,7 @@ if (isset($_POST['addfriend'])) {
 }
 $memberHandler = xoops_getHandler('member');
 $thisUser      = $memberHandler->getUser($controller->uidOwner);
-$myts          = MyTextSanitizer::getInstance();
+$myts          = \MyTextSanitizer::getInstance();
 //navbar
 $xoopsTpl->assign('lang_mysection', _MD_SUICO_MEMBERSLIST);
 $xoopsTpl->assign('section_name', _MD_SUICO_MEMBERSLIST);

@@ -29,7 +29,7 @@ require XOOPS_ROOT_PATH . '/header.php';
 $moduleDirName = basename(__DIR__);
 $helper        = Helper::getInstance();
 $modulePath    = XOOPS_ROOT_PATH . '/modules/' . $moduleDirName;
-$myts          = MyTextSanitizer::getInstance();
+$myts          = \MyTextSanitizer::getInstance();
 if (!isset($GLOBALS['xoTheme']) || !is_object($GLOBALS['xoTheme'])) {
     require $GLOBALS['xoops']->path('class/theme.php');
     $GLOBALS['xoTheme'] = new xos_opal_Theme();

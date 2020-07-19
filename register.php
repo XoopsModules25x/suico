@@ -34,7 +34,7 @@ if (!empty($_GET['op']) && in_array($_GET['op'], ['actv', 'activate'])) {
     exit();
 }
 xoops_load('XoopsUserUtility');
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 /* @var XoopsConfigHandler $configHandler */
 $configHandler              = xoops_getHandler('config');
 $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
