@@ -562,7 +562,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
     public function getLastPicturesForBlock($limit)
     {
         global $xoopsUser, $xoopsDB;
-        if (is_object($xoopsUser)) {
+        if (\is_object($xoopsUser)) {
             $uid = $xoopsUser->getVar('uid');
         }
 
@@ -601,8 +601,8 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $vetor[$i]['img_filename'] = $myrow['filename'];
             $vetor[$i]['title']        = $myrow['title'];
             $vetor[$i]['caption']      = $myrow['caption'];
-            $vetor[$i]['date_created'] = formatTimestamp($myrow['date_created']);
-            $vetor[$i]['date_updated'] = formatTimestamp($myrow['date_updated']);
+            $vetor[$i]['date_created'] = \formatTimestamp($myrow['date_created']);
+            $vetor[$i]['date_updated'] = \formatTimestamp($myrow['date_updated']);
             $i++;
         }
         return $vetor;
