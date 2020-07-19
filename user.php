@@ -164,7 +164,7 @@ if ('register' === $op) {
     }
     $stop = '';
     //Client side validation
-    if (isset($_POST['step']) && isset($_SESSION['profile_required'])) {
+    if (isset($_POST['step'], $_SESSION['profile_required'])) {
         foreach ($_SESSION['profile_required'] as $name => $title) {
             if (!isset($_POST[$name]) || empty($_POST[$name])) {
                 $stop .= sprintf(_FORM_ENTER, $title) . '<br>';
@@ -255,11 +255,9 @@ if ('register' === $op) {
                     $message = '';
                     if (!$memberHandler->addUserToGroup(XOOPS_GROUP_USERS, $newuser->getVar('uid'))) {
                         $message = _MD_SUICO_REGISTER_NOTGROUP . '<br>';
-                    } else {
-                        if (1 == $GLOBALS['xoopsConfigUser']['activation_type']) {
+                    } elseif (1 == $GLOBALS['xoopsConfigUser']['activation_type']) {
                             XoopsUserUtility::sendWelcome($newuser);
-                        } else {
-                            if (0 == $GLOBALS['xoopsConfigUser']['activation_type']) {
+                        } elseif (0 == $GLOBALS['xoopsConfigUser']['activation_type']) {
                                 $xoopsMailer = xoops_getMailer();
                                 $xoopsMailer->reset();
                                 $xoopsMailer->useMail();
@@ -277,8 +275,7 @@ if ('register' === $op) {
                                 } else {
                                     $_SESSION['profile_post']['_message_'] = 1;
                                 }
-                            } else {
-                                if (2 == $GLOBALS['xoopsConfigUser']['activation_type']) {
+                            } elseif (2 == $GLOBALS['xoopsConfigUser']['activation_type']) {
                                     $xoopsMailer = xoops_getMailer();
                                     $xoopsMailer->reset();
                                     $xoopsMailer->useMail();
@@ -299,9 +296,6 @@ if ('register' === $op) {
                                         $_SESSION['profile_post']['_message_'] = 3;
                                     }
                                 }
-                            }
-                        }
-                    }
                     if ($message) {
                         $GLOBALS['xoopsTpl']->append('confirm', $message);
                     }

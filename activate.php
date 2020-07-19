@@ -35,11 +35,9 @@ if (!empty($_GET['id']) && !empty($_GET['actkey'])) {
     }
     if ($thisuser->getVar('actkey') != $actkey) {
         redirect_header(XOOPS_URL . '/', 5, _US_ACTKEYNOT);
-    } else {
-        if ($thisuser->getVar('level') > 0) {
+    } elseif ($thisuser->getVar('level') > 0) {
             redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/index.php', 5, _US_ACONTACT, false);
-        } else {
-            if (false !== $memberHandler->activateUser($thisuser)) {
+        } elseif (false !== $memberHandler->activateUser($thisuser)) {
                 $xoopsPreload = XoopsPreload::getInstance();
                 $xoopsPreload->triggerEvent('core.behavior.user.activate', $thisuser);
                 /* @var XoopsConfigHandler $configHandler */
@@ -70,8 +68,7 @@ if (!empty($_GET['id']) && !empty($_GET['actkey'])) {
             } else {
                 redirect_header(XOOPS_URL . '/index.php', 5, 'Activation failed!');
             }
-        }
-    }
+
     // Not implemented yet: re-send activiation code
 } elseif (!empty($_REQUEST['email']) && 0 != $xoopsConfigUser['activation_type']) {
     $myts = MyTextSanitizer::getInstance();

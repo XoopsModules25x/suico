@@ -35,7 +35,7 @@ $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
 if (!$GLOBALS['xoopsUser'] || 1 != $GLOBALS['xoopsConfigUser']['allow_chgmail']) {
     redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/', 2, _NOPERM);
 }
-if (!isset($_POST['submit']) || !isset($_POST['passwd'])) {
+if (!isset($_POST['submit'], $_POST['passwd'])) {
     //show change password form
     require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
     $form = new XoopsThemeForm(_MD_SUICO_CHANGEMAIL, 'emailform', $_SERVER['REQUEST_URI'], 'post', true);
