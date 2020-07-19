@@ -23,6 +23,7 @@ declare(strict_types=1);
 use XoopsModules\Suico\{
     CategoryHandler,
     Form\FieldForm,
+    Field,
     FieldHandler
 };
 
@@ -103,6 +104,7 @@ switch ($op) {
         $template_main = 'admin/suico_admin_fieldslist.tpl';
         break;
     case 'new':
+        /** @var Field $obj */
         $obj  = $fieldHandler->create();
         $form = new FieldForm($obj);
         $form->display();

@@ -23,8 +23,9 @@ use Xmf\Database\TableLoad;
 use Xmf\Request;
 use Xmf\Yaml;
 use XoopsModules\Suico\{
-    Helper,
     Common,
+    Helper,
+    Common\Migrate,
     Utility
 };
 
@@ -70,7 +71,7 @@ function loadSampleData()
     global $xoopsConfig;
     $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-    $utility            = new Suico\Utility();
+    $utility            = new Utility();
     $configurator       = new Common\Configurator();
     $tables             = Helper::getHelper($moduleDirName)->getModule()->getInfo('tables');
     $language           = 'english/';
@@ -151,7 +152,7 @@ function exportSchema()
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
     try {
         // TODO set exportSchema
-        //        $migrate = new Suico\Migrate($moduleDirName);
+        //        $migrate = new Migrate($moduleDirName);
         //        $migrate->saveCurrentSchema();
         //
         //        redirect_header('../admin/index.php', 1, constant('CO_' . $moduleDirNameUpper . '_' . 'EXPORT_SCHEMA_SUCCESS'));
