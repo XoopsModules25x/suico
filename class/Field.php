@@ -209,7 +209,7 @@ class Field extends \XoopsObject
      **/
     public function getOutputValue($user, $profile)
     {
-        if (\file_exists($file = $GLOBALS['xoops']->path('modules/suico/language/' . $GLOBALS['xoopsConfig']['language'] . '/modinfo.php'))) {
+        if (\is_file($file = $GLOBALS['xoops']->path('modules/suico/language/' . $GLOBALS['xoopsConfig']['language'] . '/modinfo.php'))) {
             require_once $file;
         } else {
             require_once $GLOBALS['xoops']->path('modules/suico/language/english/modinfo.php');
