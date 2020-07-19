@@ -27,7 +27,7 @@
                                     <a href="#" name='show_tips' id='show_tips' value='Notetips'><{$lang_tips}></a>
                                 </form>
                                 <div id="xtips" name="xtips" style="width:500px;height:50px;" action="">
-                                    [b]<{$lang_bold}>[/b] => <b><{$lang_bold}></b> | [i]<{$lang_italic}>[/i] => <i><{$lang_italic}></span> | [u]<{$lang_underline}>[/u] => <u><{$lang_underline}></u>
+                                    [b]<{$lang_bold}>[/b] => <b><{$lang_bold}></b> | [i]<{$lang_italic}>[/i] => </i><{$lang_italic}></span> | [u]<{$lang_underline}>[/u] => <u><{$lang_underline}></u>
                                 </div>
                             </div>
                         <{/if}>
