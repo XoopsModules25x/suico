@@ -20,7 +20,9 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    VideoHandler
+};
 
 require __DIR__ . '/header.php';
 if (!$GLOBALS['xoopsSecurity']->check()) {
@@ -33,7 +35,7 @@ if (1 === $marker) {
     /**
      * Creating the factory loading the video changing its caption
      */
-    $videoFactory = new Suico\VideoHandler(
+    $videoFactory = new VideoHandler(
         $xoopsDB
     );
     $video        = $videoFactory->create(false);
@@ -55,7 +57,7 @@ if (1 === $marker) {
  * Creating the factory  and the criteria to edit the video
  * The user must be the owner
  */
-$videoFactory   = new Suico\VideoHandler(
+$videoFactory   = new VideoHandler(
     $xoopsDB
 );
 $criteria_video = new Criteria('video_id', $video_id);

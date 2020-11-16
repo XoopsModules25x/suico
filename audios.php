@@ -19,12 +19,14 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    AudioController
+};
 
 const COUNTAUDIOS = 'countAudios';
 $GLOBALS['xoopsOption']['template_main'] = 'suico_audios.tpl';
 require __DIR__ . '/header.php';
-$controller = new Suico\AudioController($xoopsDB, $xoopsUser);
+$controller = new AudioController($xoopsDB, $xoopsUser);
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */

@@ -26,12 +26,15 @@ declare(strict_types=1);
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    FriendrequestHandler,
+    IndexController
+};
 
 require __DIR__ . '/header.php';
 $op = 'form';
 //require_once __DIR__ . '/class/suico_controller.php';
-$controller = new Suico\IndexController($xoopsDB, $xoopsUser);
+$controller = new IndexController($xoopsDB, $xoopsUser);
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
@@ -100,7 +103,7 @@ if (0 === $total) {
         $criteriaIsfriend->add($criteria_friends);
         $controller->isFriend   = $controller->friendshipsFactory->getCount($criteriaIsfriend);
         $userdata['isFriend']   = $controller->isFriend;
-        $friendrequestFactory   = new Suico\FriendrequestHandler($xoopsDB);
+        $friendrequestFactory   = new FriendrequestHandler($xoopsDB);
         $criteria_selfrequest   = new Criteria('friendrequester_uid', $controller->uidOwner);
         $criteria_isselfrequest = new CriteriaCompo(new Criteria('friendrequestto_uid', $userdata['uid']));
         $criteria_isselfrequest->add($criteria_selfrequest);

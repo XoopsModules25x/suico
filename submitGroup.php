@@ -20,7 +20,10 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    RelgroupuserHandler,
+    GroupsHandler
+};
 
 require __DIR__ . '/header.php';
 /**
@@ -32,8 +35,8 @@ require __DIR__ . '/header.php';
 /**
  * Factories of groups
  */
-$relgroupuserFactory = new Suico\RelgroupuserHandler($xoopsDB);
-$groupsFactory       = new Suico\GroupsHandler($xoopsDB);
+$relgroupuserFactory = new RelgroupuserHandler($xoopsDB);
+$groupsFactory       = new GroupsHandler($xoopsDB);
 $marker              = Request::getInt('marker', 0, 'POST');
 if (1 == $marker) { //if (1 === $marker) {
     /**

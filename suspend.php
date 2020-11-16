@@ -20,7 +20,9 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    SuspensionsHandler
+};
 
 require __DIR__ . '/header.php';
 //require_once __DIR__ . '/class/Suspensions.php';
@@ -31,7 +33,7 @@ $uid = Request::getInt('uid', 0, 'POST');
 /**
  * Creating the factory  loading the picture changing its caption
  */
-$suspensionsFactory = new Suico\SuspensionsHandler(
+$suspensionsFactory = new SuspensionsHandler(
     $xoopsDB
 );
 $suspension         = $suspensionsFactory->create(false);

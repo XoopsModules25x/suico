@@ -10,7 +10,7 @@
                         <h5><{$smarty.const._MD_SUICO_EDITPROFILE}> <span class="fa fa-user-circle"></span></h5><br>
 
 
-                        <{if $stop}>
+                        <{if $stop|default:false}>
                             <div class='errorMsg txtleft'><{$stop}></div>
                             <br class='clear'>
                         <{/if}>

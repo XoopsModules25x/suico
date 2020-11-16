@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 use Xmf\Request;
 use XoopsModules\Suico\{
+    Form\UserForm,
     IndexController
 };
 

@@ -20,13 +20,15 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    FriendshipHandler
+};
 
 require __DIR__ . '/header.php';
 if (!$xoopsUser) {
     redirect_header('index.php');
 }
-$friendshipFactory = new Suico\FriendshipHandler($xoopsDB);
+$friendshipFactory = new FriendshipHandler($xoopsDB);
 $friend2_uid       = Request::getInt('friend_uid', 0, 'POST');
 $marker            = Request::getInt('marker', 0, 'POST');
 $friend            = new \XoopsUser($friend2_uid);

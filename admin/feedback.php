@@ -21,8 +21,14 @@ declare(strict_types=1);
 
 use Xmf\Module\Admin;
 use Xmf\Request;
-use XoopsModules\Suico;
-use XoopsModules\Suico\Common\ModuleFeedback;
+use XoopsModules\Suico\{
+    Helper,
+    Utility,
+    Common\ModuleFeedback
+};
+/** @var Helper $helper */
+/** @var Utility $utility */
+/** @var Admin $adminObject */
 
 require __DIR__ . '/admin_header.php';
 $adminObject = Admin::getInstance();

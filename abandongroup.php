@@ -20,7 +20,9 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    RelgroupuserHandler
+};
 
 require __DIR__ . '/header.php';
 /**
@@ -50,7 +52,7 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
      * Creating the factory  and the criteria to delete the picture
      * The user must be the owner
      */
-    $relgroupuserFactory = new Suico\RelgroupuserHandler(
+    $relgroupuserFactory = new RelgroupuserHandler(
         $xoopsDB
     );
     $criteria_rel_id     = new Criteria('rel_id', $relgroupuser_id);

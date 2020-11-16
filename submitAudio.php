@@ -20,7 +20,9 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    AudioHandler
+};
 
 /**
  * Xoops header ...
@@ -34,7 +36,7 @@ require __DIR__ . '/header.php';
 /**
  * Audio Factory created
  */
-$audioFactory = new Suico\AudioHandler($xoopsDB);
+$audioFactory = new AudioHandler($xoopsDB);
 $myts         = \MyTextSanitizer::getInstance();
 /**
  * Getting the title

@@ -20,11 +20,13 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    VideoController
+};
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_videos.tpl';
 require __DIR__ . '/header.php';
-$controller = new Suico\VideoController($xoopsDB, $xoopsUser);
+$controller = new VideoController($xoopsDB, $xoopsUser);
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */

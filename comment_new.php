@@ -20,10 +20,12 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    GroupController
+};
 
 require __DIR__ . '/header.php';
-$controller = new Suico\GroupController($xoopsDB, $xoopsUser);
+$controller = new GroupController($xoopsDB, $xoopsUser);
 /**
  * Receiving info from get parameters
  */

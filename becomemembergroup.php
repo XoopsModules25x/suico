@@ -20,7 +20,10 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    RelgroupuserHandler,
+    GroupsHandler
+};
 
 require __DIR__ . '/header.php';
 //require_once __DIR__ . '/class/Friendrequest.php';
@@ -29,10 +32,10 @@ require __DIR__ . '/header.php';
 /**
  * Factories of groups... testing for zend editor
  */
-$relgroupuserFactory = new Suico\RelgroupuserHandler(
+$relgroupuserFactory = new RelgroupuserHandler(
     $xoopsDB
 );
-$groupsFactory       = new Suico\GroupsHandler($xoopsDB);
+$groupsFactory       = new GroupsHandler($xoopsDB);
 $group_id            = Request::getInt('group_id', 0, 'POST');
 $uid                 = (int)$xoopsUser->getVar('uid');
 $criteriaUid         = new Criteria('rel_user_uid', $uid);

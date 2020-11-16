@@ -12,7 +12,7 @@
 
                         <{if $total_found != 0}>
 
-                            <{$lang_numfound}>
+                            <{$lang_numfound|default:''}>
                             <table class="table table-striped table-hover">
                                 <thead>
                                 <tr>
@@ -128,10 +128,10 @@
                                 <{/section}>
                                 </tbody>
                             </table>
-                            <{$pagenav}>
+                            <{$pagenav|default:''}>
                             <br>
                         <{else}>
-                            <{$lang_nonefound}>
+                            <{$lang_nonefound|default:''}>
                         <{/if}>
 
                         <{include file="db:suico_footer.tpl"}>

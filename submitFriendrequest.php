@@ -20,7 +20,9 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    FriendrequestHandler
+};
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_index.tpl';
 require __DIR__ . '/header.php';
@@ -31,7 +33,7 @@ require __DIR__ . '/header.php';
 /**
  * Factory of friendrequests created
  */
-$friendrequestFactory = new Suico\FriendrequestHandler($xoopsDB);
+$friendrequestFactory = new FriendrequestHandler($xoopsDB);
 /**
  * Getting the uid of the user which user want to ask to be friend
  */

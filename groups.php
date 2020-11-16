@@ -20,11 +20,14 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    GroupController
+};
+
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_groups.tpl';
 require __DIR__ . '/header.php';
-$controller = new Suico\GroupController($xoopsDB, $xoopsUser);
+$controller = new GroupController($xoopsDB, $xoopsUser);
 $start_all  = Request::getInt('start_all', 0, 'GET');
 $start_my   = Request::getInt('start_my', 0, 'GET');
 /**

@@ -20,7 +20,9 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    ImageHandler
+};
 
 require __DIR__ . '/header.php';
 if (!$GLOBALS['xoopsSecurity']->check()) {
@@ -33,7 +35,7 @@ if (1 === $marker) {
     /**
      * Creating the factory loading the picture changing its caption
      */
-    $imageFactory = new Suico\ImageHandler(
+    $imageFactory = new ImageHandler(
         $xoopsDB
     );
     $picture      = $imageFactory->create(false);
@@ -55,7 +57,7 @@ if (1 === $marker) {
  * Creating the factory  and the criteria to edit the desc of the picture
  * The user must be the owner
  */
-$imageFactory = new Suico\ImageHandler(
+$imageFactory = new ImageHandler(
     $xoopsDB
 );
 $criteria_img = new Criteria('image_id', $image_id);

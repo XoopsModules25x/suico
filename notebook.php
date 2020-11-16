@@ -19,11 +19,13 @@ declare(strict_types=1);
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    NotesController
+};
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_notebook.tpl';
 require __DIR__ . '/header.php';
-$controller = new Suico\NotesController($xoopsDB, $xoopsUser);
+$controller = new NotesController($xoopsDB, $xoopsUser);
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */

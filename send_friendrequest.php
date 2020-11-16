@@ -20,10 +20,12 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    FriendrequestHandler
+};
 
 require __DIR__ . '/header.php';
-$friendrequestFactory = new Suico\FriendrequestHandler($xoopsDB);
+$friendrequestFactory = new FriendrequestHandler($xoopsDB);
 /**
  * create the friendrequest in database
  */

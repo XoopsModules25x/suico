@@ -20,8 +20,13 @@ declare(strict_types=1);
  */
 
 use Xmf\Module\Admin;
-use XoopsModules\Suico\Helper;
-use XoopsModules\Suico\Utility;
+use XoopsModules\Suico\{
+    Helper,
+    Utility
+};
+/** @var Helper $helper */
+/** @var Utility $utility */
+/** @var Admin $adminObject */
 
 include dirname(__DIR__) . '/preloads/autoloader.php';
 require dirname(__DIR__, 3) . '/include/cp_header.php';

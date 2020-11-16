@@ -20,7 +20,9 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    NotesHandler
+};
 
 require __DIR__ . '/header.php';
 /**
@@ -30,7 +32,7 @@ require __DIR__ . '/header.php';
 /**
  * Factories of groups
  */
-$notesFactory = new Suico\NotesHandler($xoopsDB);
+$notesFactory = new NotesHandler($xoopsDB);
 /**
  * Verify Token
  */

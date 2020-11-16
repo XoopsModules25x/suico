@@ -20,7 +20,7 @@
                                 <img src="<{$old_avatar}>" alt="" class="img-fluid">
                             <{/if}>
 
-                            <{if $uploadavatar}>
+                            <{if $uploadavatar|default:false}>
                                 <{$uploadavatar.javascript}>
                                 <form name="<{$uploadavatar.name}>" action="<{$uploadavatar.action}>" method="<{$uploadavatar.method}>" <{$uploadavatar.extra}>>
                                     <table class="table table-borderless">
@@ -66,7 +66,7 @@
                                         <{if $element.hidden !== true}>
                                             <tr>
                                                 <td><b><{$element.caption}></b>
-                                                    <{if $element.description}>
+                                                    <{if $element.description|default:''}>
                                                         <{$element.description}>
                                                     <{/if}>
                                                 </td>

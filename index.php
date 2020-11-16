@@ -20,8 +20,10 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
-use XoopsModules\Suico\IndexController;
+use XoopsModules\Suico\{
+    FriendsController,
+    IndexController
+};
 
 /**
  * Xoops header
@@ -263,7 +265,7 @@ if (isset($nbSections['countVideos']) && $nbSections['countVideos'] > 0) {
 /**
  * Friends
  */
-$friendController = new Suico\FriendsController($xoopsDB, $xoopsUser);
+$friendController = new FriendsController($xoopsDB, $xoopsUser);
 if ($xoopsUser) {
     $friendrequest = 0;
     if (1 === $friendController->isOwner) {

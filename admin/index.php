@@ -22,7 +22,15 @@ declare(strict_types=1);
 use Xmf\Module\Admin;
 use Xmf\Request;
 use Xmf\Yaml;
-use XoopsModules\Suico\Common;
+use XoopsModules\Suico\{
+    Common,
+    Helper,
+    Utility
+};
+
+/** @var Admin $adminObject */
+/** @var Helper $helper */
+/** @var Utility $utility */
 
 require __DIR__ . '/admin_header.php';
 // Display Admin header

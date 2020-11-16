@@ -20,7 +20,9 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    VideoHandler
+};
 
 require __DIR__ . '/header.php';
 if (!$GLOBALS['xoopsSecurity']->check()) {
@@ -42,7 +44,7 @@ if (!Request::hasVar('confirm', 'POST') || 1 !== Request::getInt('confirm', 0, '
      * Creating the factory  and the criteria to delete the picture
      * The user must be the owner
      */
-    $videoFactory = new Suico\VideoHandler(
+    $videoFactory = new VideoHandler(
         $xoopsDB
     );
     $criteria_img = new Criteria('video_id', $cod_video);

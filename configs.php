@@ -20,7 +20,8 @@ declare(strict_types=1);
  */
 
 use XoopsModules\Suico\{
-    ConfigController
+    ConfigController,
+    ConfigsHandler
 };
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_configs.tpl';
@@ -36,7 +37,7 @@ if (!$xoopsUser) {
 /**
  * Factories of groups
  */
-$configsFactory = new Suico\ConfigsHandler($xoopsDB);
+$configsFactory = new ConfigsHandler($xoopsDB);
 $uid            = (int)$xoopsUser->getVar('uid');
 $criteria       = new Criteria('config_uid', $uid);
 if ($configsFactory->getCount($criteria) > 0) {

@@ -20,7 +20,9 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    ImageHandler
+};
 
 require __DIR__ . '/header.php';
 //require_once __DIR__ . '/class/Image.php';
@@ -31,7 +33,7 @@ $image_id = Request::getInt('image_id', 0, 'POST');
 /**
  * Creating the factory  loading the picture changing its caption
  */
-$imageFactory = new Suico\ImageHandler(
+$imageFactory = new ImageHandler(
     $xoopsDB
 );
 $picture      = $imageFactory->create(false);

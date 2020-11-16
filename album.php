@@ -20,12 +20,14 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    PhotosController
+};
 
 const COUNTPHOTOS = 'countPhotos';
 $GLOBALS['xoopsOption']['template_main'] = 'suico_album.tpl';
 require __DIR__ . '/header.php';
-$controller = new Suico\PhotosController($xoopsDB, $xoopsUser);
+$controller = new PhotosController($xoopsDB, $xoopsUser);
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */

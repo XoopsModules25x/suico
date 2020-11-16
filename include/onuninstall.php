@@ -19,7 +19,12 @@ declare(strict_types=1);
  * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    Helper,
+    Utility
+};
+/** @var Helper $helper */
+/** @var Utility $utility */
 
 /**
  * Prepares system prior to attempting to uninstall module
@@ -46,8 +51,8 @@ function xoops_module_uninstall_suico(
     require __DIR__ . '/common.php';
     $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-    $helper             = Suico\Helper::getInstance();
-    $utility            = new Suico\Utility();
+    $helper             = Helper::getInstance();
+    $utility            = new Utility();
     //    $configurator = new Suico\Common\Configurator();
     // Load language files
     $helper->loadLanguage('admin');

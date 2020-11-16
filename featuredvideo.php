@@ -20,7 +20,9 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    VideoHandler
+};
 
 require __DIR__ . '/header.php';
 if (!$GLOBALS['xoopsSecurity']->check()) {
@@ -30,7 +32,7 @@ $video_id = Request::getInt('video_id', 0, 'POST');
 /**
  * Creating the factory  loading the video changing its caption
  */
-$videoFactory = new Suico\VideoHandler(
+$videoFactory = new VideoHandler(
     $xoopsDB
 );
 $video        = $videoFactory->create(false);

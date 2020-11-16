@@ -20,11 +20,13 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    FriendsController
+};
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_fans.tpl';
 require __DIR__ . '/header.php';
-$controller = new Suico\FriendsController($xoopsDB, $xoopsUser);
+$controller = new FriendsController($xoopsDB, $xoopsUser);
 $start      = Request::getInt('start', 0, 'GET');
 /**
  * Fetching numbers of groups friends videos pictures etc...

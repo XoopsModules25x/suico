@@ -20,14 +20,17 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    RelgroupuserHandler,
+    GroupsHandler
+};
 
 require __DIR__ . '/header.php';
 /**
  * Factories of groups
  */
-$relgroupuserFactory = new Suico\RelgroupuserHandler($xoopsDB);
-$groupsFactory       = new Suico\GroupsHandler($xoopsDB);
+$relgroupuserFactory = new RelgroupuserHandler($xoopsDB);
+$groupsFactory       = new GroupsHandler($xoopsDB);
 $group_id            = Request::getInt('group_id', 0, 'POST');
 if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
     xoops_confirm(
