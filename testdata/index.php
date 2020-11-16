@@ -246,10 +246,10 @@ function addUsers()
         $userHandler = xoops_getHandler('user');
         if (0 == $userHandler->getCount($criteria)) {
             // add to the query
-            $sql .= "(" . $cit->current() . ")";
+            $sql .= '(' . $cit->current() . ')';
             // if there is another array member, add a comma
             if ($cit->hasNext()) {
-                $sql .= ",";
+                $sql .= ',';
             }
         }
     }
