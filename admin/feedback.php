@@ -55,14 +55,7 @@ switch ($op) {
         $fb_type     = Request::getString('fb_type', '');
         $fb_content  = Request::getText('fb_content', '');
         $fb_content  = str_replace(
-            [
-                '
-',
-                '
-',
-                '
-',
-            ],
+            ['', '', '',],
             '<br>',
             $fb_content
         ); //clean line break from dhtmltextarea
