@@ -114,7 +114,16 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
                     $cachetime_options .= "<option value='${cachetime}'>${cachetime_name}</option>\n";
                 }
             }
-            $sel0 = $sel1 = $ssel0 = $ssel1 = $ssel2 = $ssel3 = $ssel4 = $ssel5 = $ssel6 = $ssel7 = '';
+            $ssel7 = '';
+            $ssel6 = $ssel7;
+            $ssel5 = $ssel6;
+            $ssel4 = $ssel5;
+            $ssel3 = $ssel4;
+            $ssel2 = $ssel3;
+            $ssel1 = $ssel2;
+            $ssel0 = $ssel1;
+            $sel1  = $ssel0;
+            $sel0  = $sel1;
             if (1 === $i->getVar('visible')) {
                 $sel1 = ' checked';
             } else {

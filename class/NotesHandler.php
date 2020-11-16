@@ -124,7 +124,11 @@ class NotesHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject->cleanVars()) {
             return false;
         }
-        $noteId = $note_from = $note_to = $date_created = $private = '';
+        $private      = '';
+        $date_created = $private;
+        $note_to      = $date_created;
+        $note_from    = $note_to;
+        $noteId       = $note_from;
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
@@ -220,7 +224,8 @@ class NotesHandler extends XoopsPersistableObjectHandler
         $as_object = true
     ) {
         $ret   = [];
-        $limit = $start = 0;
+        $start = 0;
+        $limit = $start;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_notes');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
