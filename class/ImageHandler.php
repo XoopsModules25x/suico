@@ -253,10 +253,10 @@ class ImageHandler extends XoopsPersistableObjectHandler
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $image = new Image();
             $image->assignVars($myrow);
-            if (!$id_as_key) {
-                $ret[] = &$image;
-            } else {
+            if ($id_as_key) {
                 $ret[$myrow['image_id']] = &$image;
+            } else {
+                $ret[] = &$image;
             }
             unset($image);
         }

@@ -254,10 +254,10 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $suico_friendship = new Friendship();
             $suico_friendship->assignVars($myrow);
-            if (!$id_as_key) {
-                $ret[] = &$suico_friendship;
-            } else {
+            if ($id_as_key) {
                 $ret[$myrow['friendship_id']] = &$suico_friendship;
+            } else {
+                $ret[] = &$suico_friendship;
             }
             unset($suico_friendship);
         }

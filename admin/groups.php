@@ -63,11 +63,11 @@ switch ($op) {
             //$imgName = str_replace(' ', '', $_POST['group_img']).'.'.$extension;
             $uploader->setPrefix('group_img_');
             $uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0]);
-            if (!$uploader->upload()) {
+            if ($uploader->upload()) {
+                $groupsObject->setVar('group_img', $uploader->getSavedFileName());
+            } else {
                 $errors = $uploader->getErrors();
                 redirect_header('javascript:history.go(-1)', 3, $errors);
-            } else {
-                $groupsObject->setVar('group_img', $uploader->getSavedFileName());
             }
         } else {
             $groupsObject->setVar('group_img', Request::getVar('group_img', ''));

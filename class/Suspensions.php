@@ -108,19 +108,19 @@ class Suspensions extends XoopsObject
         } elseif (!\is_array($criteria) && $criteria) {
             $whereQuery = ' WHERE ' . $criteria;
         }
-        if (!$asobject) {
+        if ($asobject) {
+            $sql    = 'SELECT * FROM ' . $db->prefix('suico_suspensions') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $result = $db->query($sql, $limit, $start);
+            while (false !== ($myrow = $db->fetchArray($result))) {
+                $ret[] = new self($myrow);
+            }
+        } else {
             $sql    = 'SELECT uid FROM ' . $db->prefix(
                     'suico_suspensions'
                 ) . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['suico_suspensions_id'];
-            }
-        } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('suico_suspensions') . "${whereQuery} ORDER BY ${sort} ${order}";
-            $result = $db->query($sql, $limit, $start);
-            while (false !== ($myrow = $db->fetchArray($result))) {
-                $ret[] = new self($myrow);
             }
         }
         return $ret;

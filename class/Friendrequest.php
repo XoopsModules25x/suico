@@ -107,21 +107,21 @@ class Friendrequest extends XoopsObject
         } elseif (!\is_array($criteria) && $criteria) {
             $whereQuery = ' WHERE ' . $criteria;
         }
-        if (!$asobject) {
-            $sql    = 'SELECT friendreq_id FROM ' . $db->prefix(
-                    'suico_friendrequests'
-                ) . "${whereQuery} ORDER BY ${sort} ${order}";
-            $result = $db->query($sql, $limit, $start);
-            while (false !== ($myrow = $db->fetchArray($result))) {
-                $ret[] = $myrow['suico_friendrequest_id'];
-            }
-        } else {
+        if ($asobject) {
             $sql    = 'SELECT * FROM ' . $db->prefix(
                     'suico_friendrequests'
                 ) . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new self($myrow);
+            }
+        } else {
+            $sql    = 'SELECT friendreq_id FROM ' . $db->prefix(
+                    'suico_friendrequests'
+                ) . "${whereQuery} ORDER BY ${sort} ${order}";
+            $result = $db->query($sql, $limit, $start);
+            while (false !== ($myrow = $db->fetchArray($result))) {
+                $ret[] = $myrow['suico_friendrequest_id'];
             }
         }
         return $ret;

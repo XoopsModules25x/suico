@@ -35,15 +35,7 @@ $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
 if (!$GLOBALS['xoopsUser'] || 1 != $GLOBALS['xoopsConfigUser']['allow_chgmail']) {
     redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/', 2, _NOPERM);
 }
-if (!isset($_POST['submit'], $_POST['passwd'])) {
-    //show change password form
-    require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
-    $form = new \XoopsThemeForm(_MD_SUICO_CHANGEMAIL, 'emailform', $_SERVER['REQUEST_URI'], 'post', true);
-    $form->addElement(new \XoopsFormPassword(_US_PASSWORD, 'passwd', 15, 50), true);
-    $form->addElement(new \XoopsFormText(_MD_SUICO_NEWMAIL, 'newmail', 15, 50), true);
-    $form->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
-    $form->assign($GLOBALS['xoopsTpl']);
-} else {
+if (isset($_POST['submit'], $_POST['passwd'])) {
     $myts   = \MyTextSanitizer::getInstance();
     $pass   = Request::getString('passwd', '', 'POST');
     $email  = Request::getString('newmail', '', 'POST');
@@ -82,6 +74,14 @@ if (!isset($_POST['submit'], $_POST['passwd'])) {
         }
     }
     redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/index.php?uid=' . $GLOBALS['xoopsUser']->getVar('uid'), 2, $msg);
+} else {
+    //show change password form
+    require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
+    $form = new \XoopsThemeForm(_MD_SUICO_CHANGEMAIL, 'emailform', $_SERVER['REQUEST_URI'], 'post', true);
+    $form->addElement(new \XoopsFormPassword(_US_PASSWORD, 'passwd', 15, 50), true);
+    $form->addElement(new \XoopsFormText(_MD_SUICO_NEWMAIL, 'newmail', 15, 50), true);
+    $form->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+    $form->assign($GLOBALS['xoopsTpl']);
 }
 $xoopsOption['xoops_pagetitle'] = sprintf(_MD_SUICO_CHANGEMAIL, $xoopsModule->getVar('name'), $controller->nameOwner);
 require __DIR__ . '/footer.php';

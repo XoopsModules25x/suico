@@ -234,10 +234,10 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $suspensions = new Suspensions();
             $suspensions->assignVars($myrow);
-            if (!$id_as_key) {
-                $ret[] = &$suspensions;
-            } else {
+            if ($id_as_key) {
                 $ret[$myrow['uid']] = &$suspensions;
+            } else {
+                $ret[] = &$suspensions;
             }
             unset($suspensions);
         }

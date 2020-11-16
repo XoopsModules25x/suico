@@ -232,10 +232,7 @@ if ('register' === $op) {
                 }
             }
             // Insert/update user and check if we have succeded
-            if (!$memberHandler->insertUser($newuser)) {
-                $stop .= _US_REGISTERNG . '<br>';
-                $stop .= implode('<br>', $newuser->getErrors());
-            } else {
+            if ($memberHandler->insertUser($newuser)) {
                 // User inserted! Now insert custom profile fields
                 $profile->setVar('profile_id', $newuser->getVar('uid'));
                 $profileHandler->insert($profile);
@@ -270,10 +267,10 @@ if ('register' === $op) {
                                 $xoopsMailer->setFromEmail($GLOBALS['xoopsConfig']['adminmail']);
                                 $xoopsMailer->setFromName($GLOBALS['xoopsConfig']['sitename']);
                                 $xoopsMailer->setSubject(sprintf(_US_USERKEYFOR, $newuser->getVar('uname')));
-                                if (!$xoopsMailer->send(true)) {
-                                    $_SESSION['profile_post']['_message_'] = 0;
-                                } else {
+                                if ($xoopsMailer->send(true)) {
                                     $_SESSION['profile_post']['_message_'] = 1;
+                                } else {
+                                    $_SESSION['profile_post']['_message_'] = 0;
                                 }
                             } elseif (2 == $GLOBALS['xoopsConfigUser']['activation_type']) {
                                     $xoopsMailer = xoops_getMailer();
@@ -290,10 +287,10 @@ if ('register' === $op) {
                                     $xoopsMailer->setFromEmail($GLOBALS['xoopsConfig']['adminmail']);
                                     $xoopsMailer->setFromName($GLOBALS['xoopsConfig']['sitename']);
                                     $xoopsMailer->setSubject(sprintf(_US_USERKEYFOR, $newuser->getVar('uname')));
-                                    if (!$xoopsMailer->send()) {
-                                        $_SESSION['profile_post']['_message_'] = 2;
-                                    } else {
+                                    if ($xoopsMailer->send()) {
                                         $_SESSION['profile_post']['_message_'] = 3;
+                                    } else {
+                                        $_SESSION['profile_post']['_message_'] = 2;
                                     }
                                 }
                     if ($message) {
@@ -301,6 +298,9 @@ if ('register' === $op) {
                     }
                     $_SESSION['profile_register_uid'] = $newuser->getVar('uid');
                 }
+            } else {
+                $stop .= _US_REGISTERNG . '<br>';
+                $stop .= implode('<br>', $newuser->getErrors());
             }
         }
     }

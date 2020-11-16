@@ -67,11 +67,11 @@ switch ($op) {
             //$imgName = str_replace(' ', '', $_POST['filename']).'.'.$extension;
             $uploader->setPrefix('pic_');
             $uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0]);
-            if (!$uploader->upload()) {
+            if ($uploader->upload()) {
+                $imagesObject->setVar('filename', $uploader->getSavedFileName());
+            } else {
                 $errors = $uploader->getErrors();
                 redirect_header('javascript:history.go(-1)', 3, $errors);
-            } else {
-                $imagesObject->setVar('filename', $uploader->getSavedFileName());
             }
         } else {
             $imagesObject->setVar('filename', Request::getVar('filename', ''));

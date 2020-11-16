@@ -48,11 +48,11 @@ class FieldForm extends XoopsThemeForm
         $this->addElement($cat_select);
         $this->addElement(new XoopsFormText(\_AM_SUICO_WEIGHT, 'field_weight', 10, 10, $field->getVar('field_weight', 'e')));
         if ($field->getVar('field_config') || $field->isNew()) {
-            if (!$field->isNew()) {
+            if ($field->isNew()) {
+                $this->addElement(new XoopsFormText(\_AM_SUICO_NAME, 'field_name', 35, 255, $field->getVar('field_name', 'e')));
+            } else {
                 $this->addElement(new XoopsFormLabel(\_AM_SUICO_NAME, $field->getVar('field_name')));
                 $this->addElement(new XoopsFormHidden('id', $field->getVar('field_id')));
-            } else {
-                $this->addElement(new XoopsFormText(\_AM_SUICO_NAME, 'field_name', 35, 255, $field->getVar('field_name', 'e')));
             }
             //autotext and theme left out of this one as fields of that type should never be changed (valid assumption, I think)
             $fieldtypes     = [

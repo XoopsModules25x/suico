@@ -251,10 +251,10 @@ class AudioHandler extends XoopsPersistableObjectHandler
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $suicoAudio = new Audio();
             $suicoAudio->assignVars($myrow);
-            if (!$id_as_key) {
-                $ret[] = &$suicoAudio;
-            } else {
+            if ($id_as_key) {
                 $ret[$myrow['audio_id']] = &$suicoAudio;
+            } else {
+                $ret[] = &$suicoAudio;
             }
             unset($suicoAudio);
         }

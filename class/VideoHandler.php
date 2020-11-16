@@ -246,10 +246,10 @@ class VideoHandler extends XoopsPersistableObjectHandler
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $video = new Video();
             $video->assignVars($myrow);
-            if (!$id_as_key) {
-                $ret[] = &$video;
-            } else {
+            if ($id_as_key) {
                 $ret[$myrow['video_id']] = &$video;
+            } else {
+                $ret[] = &$video;
             }
             unset($video);
         }

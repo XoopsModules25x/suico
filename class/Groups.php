@@ -116,19 +116,19 @@ class Groups extends XoopsObject
         } elseif (!\is_array($criteria) && $criteria) {
             $whereQuery = ' WHERE ' . $criteria;
         }
-        if (!$asobject) {
+        if ($asobject) {
+            $sql    = 'SELECT * FROM ' . $this->xoopsDb->prefix(SUICOGROUPS) . "${whereQuery} ORDER BY ${sort} ${order}";
+            $result = $this->xoopsDb->query($sql, $limit, $start);
+            while (false !== ($myrow = $this->xoopsDb->fetchArray($result))) {
+                $ret[] = new self($myrow);
+            }
+        } else {
             $sql    = 'SELECT group_id FROM ' . $this->xoopsDb->prefix(
                     SUICOGROUPS
                 ) . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $this->xoopsDb->query($sql, $limit, $start);
             while (false !== ($myrow = $this->xoopsDb->fetchArray($result))) {
                 $ret[] = $myrow['suico_groups_id'];
-            }
-        } else {
-            $sql    = 'SELECT * FROM ' . $this->xoopsDb->prefix(SUICOGROUPS) . "${whereQuery} ORDER BY ${sort} ${order}";
-            $result = $this->xoopsDb->query($sql, $limit, $start);
-            while (false !== ($myrow = $this->xoopsDb->fetchArray($result))) {
-                $ret[] = new self($myrow);
             }
         }
         return $ret;

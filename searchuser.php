@@ -281,16 +281,16 @@ switch ($op) {
                                 break;
                         }
                         if (isset($_REQUEST[$fieldname]) && !isset($_REQUEST[$fieldname . '_smaller']) && !isset($_REQUEST[$fieldname . '_larger'])) {
-                            if (!is_array($_REQUEST[$fieldname])) {
-                                $value        = (int)$_REQUEST[$fieldname];
-                                $search_url[] = $fieldname . '=' . $value;
-                                $criteria->add(new Criteria($fieldname, $value, '='));
-                            } else {
+                            if (is_array($_REQUEST[$fieldname])) {
                                 $value = array_map('\intval', $_REQUEST[$fieldname]);
                                 foreach ($value as $thisvalue) {
                                     $search_url[] = $fieldname . '[]=' . $thisvalue;
                                 }
                                 $criteria->add(new Criteria($fieldname, '(' . implode(',', $value) . ')', 'IN'));
+                            } else {
+                                $value        = (int)$_REQUEST[$fieldname];
+                                $search_url[] = $fieldname . '=' . $value;
+                                $criteria->add(new Criteria($fieldname, $value, '='));
                             }
                             $searchvars[] = $fieldname;
                         }

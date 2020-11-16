@@ -86,14 +86,14 @@ if ('save' === $op) {
                 }
             }
         }
-        if (!$memberHandler->insertUser($edituser)) {
-            $stop = $edituser->getHtmlErrors();
-            $op   = 'editprofile';
-        } else {
+        if ($memberHandler->insertUser($edituser)) {
             $profile->setVar('profile_id', $edituser->getVar('uid'));
             $profileHandler->insert($profile);
             unset($_SESSION['xoopsUserTheme']);
             redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/index.php?uid=' . $edituser->getVar('uid'), 2, _US_PROFUPDATED);
+        } else {
+            $stop = $edituser->getHtmlErrors();
+            $op   = 'editprofile';
         }
     }
 }
@@ -178,9 +178,7 @@ if ('avatarupload' === $op) {
                 $avatar->setVar('avatar_mimetype', $uploader->getMediaType());
                 $avatar->setVar('avatar_display', 1);
                 $avatar->setVar('avatar_type', 'C');
-                if (!$avtHandler->insert($avatar)) {
-                    @unlink($uploader->getSavedDestination());
-                } else {
+                if ($avtHandler->insert($avatar)) {
                     $oldavatar = $GLOBALS['xoopsUser']->getVar('user_avatar');
                     if (!empty($oldavatar) && false !== stripos($oldavatar, 'cavt')) {
                         $avatars = $avtHandler->getObjects(new Criteria('avatar_file', $oldavatar));
@@ -196,6 +194,8 @@ if ('avatarupload' === $op) {
                     $GLOBALS['xoopsDB']->query($sql);
                     $avtHandler->addUser($avatar->getVar('avatar_id'), $GLOBALS['xoopsUser']->getVar('uid'));
                     redirect_header('index . php ? t = ' . time() . ' & amp;uid = ' . $GLOBALS['xoopsUser']->getVar('uid'), 3, _US_PROFUPDATED);
+                } else {
+                    @unlink($uploader->getSavedDestination());
                 }
             }
         }

@@ -56,10 +56,10 @@ if (!empty($_GET['id']) && !empty($_GET['actkey'])) {
                     $xoopsMailer->setFromName($GLOBALS['xoopsConfig']['sitename']);
                     $xoopsMailer->setSubject(sprintf(_US_YOURACCOUNT, $GLOBALS['xoopsConfig']['sitename']));
                     include $GLOBALS['xoops']->path('header.php');
-                    if (!$xoopsMailer->send()) {
-                        printf(_US_ACTVMAILNG, $thisuser->getVar('uname'));
-                    } else {
+                    if ($xoopsMailer->send()) {
                         printf(_US_ACTVMAILOK, $thisuser->getVar('uname'));
+                    } else {
+                        printf(_US_ACTVMAILNG, $thisuser->getVar('uname'));
                     }
                     require __DIR__ . '/footer.php';
                 } else {
@@ -91,10 +91,10 @@ if (!empty($_GET['id']) && !empty($_GET['actkey'])) {
     $xoopsMailer->setFromEmail($GLOBALS['xoopsConfig']['adminmail']);
     $xoopsMailer->setFromName($GLOBALS['xoopsConfig']['sitename']);
     $xoopsMailer->setSubject(sprintf(_US_USERKEYFOR, $getuser[0]->getVar('uname')));
-    if (!$xoopsMailer->send()) {
-        echo _US_YOURREGMAILNG;
-    } else {
+    if ($xoopsMailer->send()) {
         echo _US_YOURREGISTERED;
+    } else {
+        echo _US_YOURREGMAILNG;
     }
 } else {
     require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
