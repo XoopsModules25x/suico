@@ -39,7 +39,7 @@ class FieldForm extends XoopsThemeForm
         if (!$field->isNew()) {
             $fieldcat_id = $field->getVar('cat_id');
         }
-        $categoryHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Category');
+        $categoryHandler = Helper::getInstance()->getHandler('Category');
         $cat_select      = new XoopsFormSelect(\_AM_SUICO_CATEGORY, 'field_category', $fieldcat_id);
         $cat_select->addOption(0, \_AM_SUICO_DEFAULT);
         $cat_select->addOptionArray($categoryHandler->getList());
@@ -234,7 +234,7 @@ class FieldForm extends XoopsThemeForm
             $this->addElement(new \XoopsFormRadioYN(\_AM_SUICO_REQUIRED, 'field_required', $field->getVar('field_required', 'e')));
             $regstep_select = new XoopsFormSelect(\_AM_SUICO_PROF_REGISTER, 'step_id', $field->getVar('step_id', 'e'));
             $regstep_select->addOption(0, \_NO);
-            $regstepHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Regstep');
+            $regstepHandler = Helper::getInstance()->getHandler('Regstep');
             $regstep_select->addOptionArray($regstepHandler->getList());
             $this->addElement($regstep_select);
         }

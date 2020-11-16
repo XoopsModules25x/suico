@@ -361,7 +361,7 @@ class Field extends \XoopsObject
     public function getUserVars()
     {
         /* @var Suico\ProfileHandler $profileHandler */
-        $helper         = \XoopsModules\Suico\Helper::getInstance();
+        $helper         = Helper::getInstance();
         $profileHandler = $helper->getHandler('Profile');
         return $profileHandler->getUserVars();
     }

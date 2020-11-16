@@ -62,7 +62,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Suico\Helper $this->helper */
+        /** @var \XoopsModules\Suico\Helper $this- >helper */
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
@@ -95,7 +95,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
      * retrieve a Friendship
      *
      * @param int|null $id of the Friendship
-     * @param null $fields
+     * @param null     $fields
      * @return mixed reference to the {@link Friendship} object, FALSE if failed
      */
     public function get2(
@@ -309,7 +309,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * @param      $countFriends
+     * @param int  $countFriends
      * @param null $criteria
      * @param int  $shuffle
      * @return array
@@ -346,7 +346,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
             }
             if (1 === $shuffle) {
                 \shuffle($vetor);
-                $vetor = \array_slice($vetor, 0, $countFriends);
+                $vetor = \array_slice($vetor, 0, (int)$countFriends);
             }
             return $vetor;
         }

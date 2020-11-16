@@ -80,7 +80,7 @@ class FieldHandler extends \XoopsPersistableObjectHandler
             return false;
         }
         /* @var Suico\ProfileHandler $profileHandler */
-        $profileHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Profile');
+        $profileHandler = Helper::getInstance()->getHandler('Profile');
         $obj->setVar('field_name', \str_replace(' ', '_', $obj->getVar('field_name')));
         $obj->cleanVars();
         $defaultstring = '';

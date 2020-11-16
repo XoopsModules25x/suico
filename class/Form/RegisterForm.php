@@ -64,7 +64,7 @@ class RegisterForm extends XoopsThemeForm
             $weights[0][]  = 0;
         }
         // Dynamic fields
-        $profileHandler               = \XoopsModules\Suico\Helper::getInstance()->getHandler('Profile');
+        $profileHandler               = Helper::getInstance()->getHandler('Profile');
         $fields                       = $profileHandler->loadFields();
         $_SESSION['profile_required'] = [];
         foreach (\array_keys($fields) as $i) {

@@ -20,8 +20,7 @@ declare(strict_types=1);
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
-use XoopsModules\Suico\{
-    CategoryHandler,
+use XoopsModules\Suico\{CategoryHandler,
     Form\FieldForm,
     Field,
     FieldHandler

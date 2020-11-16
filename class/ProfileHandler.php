@@ -51,7 +51,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
     public function __construct(\XoopsDatabase $db)
     {
         parent::__construct($db, 'suico_profile', Profile::class, 'profile_id');
-        $this->fieldHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Field');
+        $this->fieldHandler = Helper::getInstance()->getHandler('Field');
     }
 
     /**

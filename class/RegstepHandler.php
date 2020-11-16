@@ -46,7 +46,7 @@ class RegstepHandler extends \XoopsPersistableObjectHandler
     public function delete(\XoopsObject $obj, $force = false)
     {
         if (parent::delete($obj, $force)) {
-            $fieldHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Field');
+            $fieldHandler = Helper::getInstance()->getHandler('Field');
             return $fieldHandler->updateAll('step_id', 0, new \Criteria('step_id', $obj->getVar('step_id')), $force);
         }
         return false;
