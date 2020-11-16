@@ -55,10 +55,8 @@ switch ($op) {
         break;
     case 'new':
         xoops_loadLanguage('main', $GLOBALS['xoopsModule']->getVar('dirname', 'n'));
-        /** @var \XoopsUser $obj */
         $obj = $memberHandler->createUser();
         $obj->setGroups([XOOPS_GROUP_USERS]);
-        /** @var UserForm $form */
         $form = new UserForm($obj);
         $form->display();
         break;
