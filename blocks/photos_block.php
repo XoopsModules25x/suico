@@ -21,6 +21,7 @@ declare(strict_types=1);
 
 use XoopsModules\Suico;
 use XoopsModules\Suico\Helper;
+use XoopsModules\Suico\ImageHandler;
 
 if (!defined('XOOPS_ROOT_PATH')) {
     exit();
@@ -55,7 +56,7 @@ function b_suico_lastpictures_show($options)
     /**
      * Creating factories of pictures
      */
-    $imageFactory         = new \XoopsModules\Suico\ImageHandler($xoopsDB);
+    $imageFactory         = new ImageHandler($xoopsDB);
     $block['picture']     = $imageFactory->getLastPicturesForBlock($options[4]);
     $block['showtitle']   = $options[0];
     $block['showcaption'] = $options[1];
