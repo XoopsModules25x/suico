@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace XoopsModules\Suico\Form;
 
-use XoopsModules\Suico;
-use XoopsModules\Suico\Field;
 use XoopsThemeForm;
 use XoopsFormButton;
 use XoopsFormText;
@@ -14,6 +12,10 @@ use XoopsFormHidden;
 use XoopsFormSelect;
 use XoopsFormLabel;
 use XoopsFormTextDateSelect;
+use XoopsModules\Suico\{
+    Helper
+};
+/** @var Helper $helper */
 
 /**
  * Class FieldForm

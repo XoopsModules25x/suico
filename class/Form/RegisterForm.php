@@ -9,6 +9,10 @@ use XoopsThemeForm;
 use XoopsFormButton;
 use XoopsFormHidden;
 use XoopsFormLabel;
+use XoopsModules\Suico\{
+    Helper
+};
+/** @var Helper $helper */
 
 /**
  * Get {@link XoopsThemeForm} for registering new users
