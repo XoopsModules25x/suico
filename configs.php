@@ -19,11 +19,13 @@ declare(strict_types=1);
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    ConfigController
+};
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_configs.tpl';
 require __DIR__ . '/header.php';
-$controller = new Suico\ConfigController($xoopsDB, $xoopsUser);
+$controller = new ConfigController($xoopsDB, $xoopsUser);
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */

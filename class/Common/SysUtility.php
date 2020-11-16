@@ -26,8 +26,10 @@ namespace XoopsModules\Suico\Common;
 use Xmf\Request;
 use XoopsFormDhtmlTextArea;
 use XoopsFormEditor;
-use XoopsModules\Suico;
-use XoopsModules\Suico\Helper;
+use XoopsModules\Suico\{
+    Helper
+};
+/** @var Helper $helper */
 
 /**
  * Class SysUtility

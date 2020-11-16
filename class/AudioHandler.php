@@ -29,8 +29,10 @@ use XoopsDatabase;
 use XoopsMediaUploader;
 use XoopsObject;
 use XoopsPersistableObjectHandler;
-use XoopsModules\Suico;
-use XoopsModules\Suico\Helper;
+use XoopsModules\Suico\{
+    Helper
+};
+/** @var Helper $helper */
 
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 require_once XOOPS_ROOT_PATH . '/class/uploader.php';

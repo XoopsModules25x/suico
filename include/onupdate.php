@@ -19,9 +19,16 @@ declare(strict_types=1);
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsModules\Suico;
-use XoopsModules\Suico\Common\Configurator;
-use XoopsModules\Suico\Common\Migrate;
+use XoopsModules\Suico\{
+    Common\Configurator,
+    Common\Migrate,
+    Helper,
+    Utility
+};
+/** @var Helper $helper */
+/** @var Utility $utility */
+/** @var Common\Configurator $configurator */
+/** @var Common\Migrate $migrator */
 
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
     || !$GLOBALS['xoopsUser']->isAdmin()) {
@@ -48,15 +55,12 @@ function xoops_module_pre_update_suico(
     \XoopsModule $module
 ) {
     $moduleDirName = basename(dirname(__DIR__));
-    /** @var Suico\Helper $helper */
-    /** @var Suico\Utility $utility */
-    $helper       = Suico\Helper::getInstance();
-    $utility      = new Suico\Utility();
+    $helper       = Helper::getInstance();
+    $utility      = new Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
     $configurator = new Configurator();
     $migrator     = new Migrate($configurator);
-    //    $migrator = new \XoopsModules\Suico\Common\Migrate();
     $migrator->synchronizeSchema();
     return $xoopsSuccess && $phpSuccess;
 }
@@ -74,10 +78,9 @@ function xoops_module_update_suico(
 ) {
     $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-    /** @var Suico\Helper $helper */ /** @var Suico\Utility $utility */
-    /** @var Suico\Common\Configurator $configurator */
-    $helper       = Suico\Helper::getInstance();
-    $utility      = new Suico\Utility();
+
+    $helper       = Helper::getInstance();
+    $utility      = new Utility();
     $configurator = new Configurator();
     $helper->loadLanguage('common');
     $migrator = new Migrate($configurator);

@@ -19,9 +19,11 @@ declare(strict_types=1);
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsModules\Suico;
-use XoopsModules\Suico\Helper;
-use XoopsModules\Suico\ImageHandler;
+use XoopsModules\Suico\{
+    Helper,
+    ImageHandler
+};
+/** @var Helper $helper */
 
 if (!defined('XOOPS_ROOT_PATH')) {
     exit();

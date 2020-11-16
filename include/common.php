@@ -20,16 +20,17 @@ declare(strict_types=1);
  */
 
 use Xmf\Module\Admin;
-use XoopsModules\Suico;
-use XoopsModules\Suico\Helper;
-use XoopsModules\Suico\Utility;
+use XoopsModules\Suico\{
+    Helper,
+    Utility
+};
+/** @var Helper $helper */
+/** @var Utility $utility */
 
 include dirname(__DIR__) . '/preloads/autoloader.php';
 $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
 /** @var \XoopsDatabase $db */
-/** @var \XoopsModules\Suico\Helper $helper */
-/** @var \XoopsModules\Suico\Utility $utility */
 $db      = XoopsDatabaseFactory::getDatabaseConnection();
 $debug   = false;
 $helper  = Helper::getInstance($debug);
