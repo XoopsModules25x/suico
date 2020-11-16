@@ -22,17 +22,10 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsFormButton;
-use XoopsFormHidden;
-use XoopsFormLabel;
-use XoopsFormText;
-use XoopsFormTextArea;
-use XoopsModules\Suico;
-use XoopsModules\Suico\IndexController;
-use XoopsModules\Suico\Form\FieldForm;
-use XoopsModules\Suico\Form\RegisterForm;
-use XoopsModules\Suico\Form\StepForm;
-use XoopsModules\Suico\Form\UserForm;
+use XoopsModules\Suico\{
+    IndexController
+};
+
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_editprofile.tpl';
 require __DIR__ . '/header.php';
