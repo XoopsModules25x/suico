@@ -217,8 +217,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
         $as_object = true
     ) {
         $ret   = [];
-        $start = 0;
-        $limit = $start;
+        $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_suspensions');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();

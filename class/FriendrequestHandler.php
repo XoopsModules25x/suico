@@ -214,8 +214,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
         $as_object = true
     ) {
         $ret   = [];
-        $start = 0;
-        $limit = $start;
+        $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_friendrequests');
         if (isset($criteriaElement) && $criteriaElement instanceof \CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();

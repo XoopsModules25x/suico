@@ -122,9 +122,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject->cleanVars()) {
             return false;
         }
-        $uid_visitor = '';
-        $uid_owner   = $uid_visitor;
-        $visit_id    = $uid_owner;
+        $visit_id = $uid_owner = $uid_visitor = '';
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }

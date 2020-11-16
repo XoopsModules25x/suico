@@ -222,8 +222,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $as_object = true
     ) {
         $ret   = [];
-        $start = 0;
-        $limit = $start;
+        $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_groups');
         if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
             $sql .= ' ' . $criteriaElement->renderWhere();
@@ -264,8 +263,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $ret   = [];
         $sort  = 'group_title';
         $order = 'ASC';
-        $start = 0;
-        $limit = $start;
+        $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_groups');
         if (isset($criteria) && $criteria instanceof CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();

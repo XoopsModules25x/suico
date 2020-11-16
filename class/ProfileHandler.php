@@ -277,8 +277,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
         $sql_from   = ' FROM ' . $this->db->prefix('users') . ' AS u LEFT JOIN ' . $this->table . ' AS p ON u.uid=p.profile_id' . (empty($groups) ? '' : ' LEFT JOIN ' . $this->db->prefix('groups_users_link') . ' AS g ON u.uid=g.uid');
         $sql_clause = ' WHERE 1=1';
         $sql_order  = '';
-        $start      = 0;
-        $limit      = $start;
+        $limit      = $start = 0;
         if (isset($criteria) && $criteria instanceof \CriteriaElement) {
             $sql_clause .= ' AND ' . $criteria->render();
             if ('' !== $criteria->getSort()) {

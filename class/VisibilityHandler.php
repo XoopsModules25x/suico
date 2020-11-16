@@ -46,7 +46,7 @@ class VisibilityHandler extends \XoopsPersistableObjectHandler
     public function getVisibleFields($profile_groups, $user_groups = null)
     {
         $user_groups[]    = 0;
-        $profile_groups[] = $user_groups[];
+        $profile_groups[] = 0;
         $sql              = "SELECT field_id FROM {$this->table} WHERE profile_group IN (" . \implode(',', $profile_groups) . ')';
         $sql              .= ' AND user_group IN (' . \implode(',', $user_groups) . ')';
         $field_ids        = [];

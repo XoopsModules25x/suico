@@ -120,15 +120,13 @@ switch ($op) {
         if (isset($_POST['level']) && $user->getVar('level') != (int)$_POST['level']) {
             $user->setVar('level', (int)$_POST['level']);
         }
-        $vpass    = null;
-        $password = $vpass;
+        $password = $vpass = null;
         if (!empty($_POST['password'])) {
             $password = Request::getString('password', '', 'POST');
             $vpass    = Request::getString('vpass', '', 'POST');
             $user->setVar('pass', password_hash($password, PASSWORD_DEFAULT));
         } elseif ($user->isNew()) {
-            $vpass    = '';
-            $password = $vpass;
+            $password = $vpass = '';
         }
         xoops_load('xoopsuserutility');
         $stop   = XoopsUserUtility::validate($user, $password, $vpass);
