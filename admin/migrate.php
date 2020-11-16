@@ -22,7 +22,7 @@ declare(strict_types=1);
 use Xmf\Module\Admin;
 use Xmf\Request;
 use XoopsModules\Suico\{
-    ommon\Configurator,
+    Common\Configurator,
     Common\Migrate
 };
 /** @var Admin $adminObject */
