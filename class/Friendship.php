@@ -121,19 +121,19 @@ class Friendship extends XoopsObject
         } elseif (!\is_array($criteria) && $criteria) {
             $whereQuery = ' WHERE ' . $criteria;
         }
-        if (!$asobject) {
+        if ($asobject) {
+            $sql    = 'SELECT * FROM ' . $db->prefix('suico_friendships') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $result = $db->query($sql, $limit, $start);
+            while (false !== ($myrow = $db->fetchArray($result))) {
+                $ret[] = new self($myrow);
+            }
+        } else {
             $sql    = 'SELECT friendship_id FROM ' . $db->prefix(
                     'suico_friendships'
                 ) . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['suico_friendship_id'];
-            }
-        } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('suico_friendships') . "${whereQuery} ORDER BY ${sort} ${order}";
-            $result = $db->query($sql, $limit, $start);
-            while (false !== ($myrow = $db->fetchArray($result))) {
-                $ret[] = new self($myrow);
             }
         }
         return $ret;

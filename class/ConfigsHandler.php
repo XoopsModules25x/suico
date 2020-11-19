@@ -77,7 +77,7 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
     /**
      * retrieve a Configs
      *
-     * @param int  $id of the Configs
+     * @param int|null $id of the Configs
      * @param null $fields
      * @return mixed reference to the {@link Configs} object, FALSE if failed
      */
@@ -251,10 +251,10 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $suico_configs = new Configs();
             $suico_configs->assignVars($myrow);
-            if (!$id_as_key) {
-                $ret[] = &$suico_configs;
-            } else {
+            if ($id_as_key) {
                 $ret[$myrow['config_id']] = &$suico_configs;
+            } else {
+                $ret[] = &$suico_configs;
             }
             unset($suico_configs);
         }

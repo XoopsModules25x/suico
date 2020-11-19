@@ -12,7 +12,7 @@
                         <{$owner_uname}>
                     </a>
                     &nbsp;&raquo;&nbsp;
-                    <{$section_name}>
+                    <{$section_name|default:''}>
                 </div>
             <{/if}>
 
@@ -166,29 +166,29 @@
 
                         <!-- BEGIN profile-header-tab -->
                         <ul class="profile-header-tab nav nav-tabs">
-                            <li class="nav-item"><a href="index.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_profile}>active show<{/if}>"><small><span class="fa fa-user-circle"></span> <{$lang_profile}></small></a></li>
+                            <li class="nav-item"><a href="index.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name|default:''==$lang_profile}>active show<{/if}>"><small><span class="fa fa-user-circle"></span> <{$lang_profile}></small></a></li>
                             <{if $allow_notes!=0}>
-                                <li class="nav-item"><a href="notebook.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_notebook}>active show<{/if}>"><small><span class="fa fa-comment"></span> <{$lang_notebook}> <span
+                                <li class="nav-item"><a href="notebook.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name|default:''==$lang_notebook}>active show<{/if}>"><small><span class="fa fa-comment"></span> <{$lang_notebook}> <span
                                                     class="badge badge-pill badge-primary"><{$countNotes}></span></small></a>
                                 </li>
                             <{/if}>
                             <{if $allow_pictures !=0}>
-                                <li class="nav-item"><a href="album.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_photos}>active show<{/if}>"><small><span class="fa fa-picture-o"></span> <{$lang_photos}> <span class="badge badge-pill badge-primary"><{$countPhotos}></span></small></a>
+                                <li class="nav-item"><a href="album.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name|default:''==$lang_photos}>active show<{/if}>"><small><span class="fa fa-picture-o"></span> <{$lang_photos}> <span class="badge badge-pill badge-primary"><{$countPhotos}></span></small></a>
                                 </li><{/if}>
                             <{if $allow_audios !=0}>
-                                <li class="nav-item"> <a href="audios.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_audio}>active show<{/if}>"><span><small><span class="fa fa-file-audio-o"></span> <{$lang_audio}> <span
+                                <li class="nav-item"> <a href="audios.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name|default:''==$lang_audio}>active show<{/if}>"><span><small><span class="fa fa-file-audio-o"></span> <{$lang_audio}> <span
                                                     class="badge badge-pill badge-primary"><{$countAudio}></span></small></a>
                                 </li><{/if}>
                             <{if $allow_videos !=0}>
-                                <li class="nav-item"><a href="videos.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_videos}>active show<{/if}>"><small><span class="fa fa-youtube-play"></span> <{$lang_videos}> <span
+                                <li class="nav-item"><a href="videos.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name|default:''==$lang_videos}>active show<{/if}>"><small><span class="fa fa-youtube-play"></span> <{$lang_videos}> <span
                                                 class="badge badge-pill badge-primary"><{$countVideos}></span></small></a>
                                 </li><{/if}>
                             <{if $allow_friends !=0}>
-                                <li class="nav-item"> <a href="friends.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_friends}>active show<{/if}>"><small><span class="fa fa-user-circle-o"></span> <{$lang_friends}> <span
+                                <li class="nav-item"> <a href="friends.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name|default:''==$lang_friends}>active show<{/if}>"><small><span class="fa fa-user-circle-o"></span> <{$lang_friends}> <span
                                                 class="badge badge-pill badge-primary"><{$countFriends}></span></small></a>
                                 </li><{/if}>
                             <{if $allow_groups !=0}>
-                                <li class="nav-item"> <a href="groups.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name==$lang_groups}>active show<{/if}>"><small><span class="fa fa-group"></span> <{$lang_groups}> <span class="badge badge-pill badge-primary"><{$countGroups}></span></small></a>
+                                <li class="nav-item"> <a href="groups.php?uid=<{$uid_owner}>" class="nav-link <{if $section_name|default:''==$lang_groups}>active show<{/if}>"><small><span class="fa fa-group"></span> <{$lang_groups}> <span class="badge badge-pill badge-primary"><{$countGroups}></span></small></a>
                                 </li><{/if}>
 
                         </ul>

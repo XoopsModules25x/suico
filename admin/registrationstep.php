@@ -20,8 +20,12 @@ declare(strict_types=1);
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
-use XoopsModules\Suico\Form\StepForm;
-use XoopsModules\Suico;
+
+use XoopsModules\Suico\{
+    Form\StepForm,
+    Regstep,
+    RegstepHandler
+};
 
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
@@ -29,33 +33,35 @@ $adminObject->addItemButton(_AM_SUICO_STEP, 'registrationstep.php?op=new', 'add'
 $adminObject->displayNavigation(basename(__FILE__));
 $adminObject->displayButton('left');
 $op      = $_REQUEST['op'] ?? (isset($_REQUEST['id']) ? 'edit' : 'list');
-$handler = $helper->getHandler('Regstep');
+/** @var RegstepHandler $regstepHandler */
+$regstepHandler = $helper->getHandler('Regstep');
 switch ($op) {
     case 'list':
-        $GLOBALS['xoopsTpl']->assign('steps', $handler->getObjects(null, true, false));
+        $GLOBALS['xoopsTpl']->assign('steps', $regstepHandler->getObjects(null, true, false));
         $template_main = 'admin/suico_admin_registrationstep.tpl';
         break;
     case 'new':
-        $obj  = $handler->create();
+        /** @var Regstep $obj */
+        $obj  = $regstepHandler->create();
         $form = new StepForm($obj);
         $form->display();
         break;
     case 'edit':
-        $obj  = $handler->get($_REQUEST['id']);
+        $obj  = $regstepHandler->get($_REQUEST['id']);
         $form = new StepForm($obj);
         $form->display();
         break;
     case 'save':
         if (isset($_REQUEST['id'])) {
-            $obj = $handler->get($_REQUEST['id']);
+            $obj = $regstepHandler->get($_REQUEST['id']);
         } else {
-            $obj = $handler->create();
+            $obj = $regstepHandler->create();
         }
         $obj->setVar('step_name', $_REQUEST['step_name']);
         $obj->setVar('step_order', $_REQUEST['step_order']);
         $obj->setVar('step_desc', $_REQUEST['step_desc']);
         $obj->setVar('step_save', $_REQUEST['step_save']);
-        if ($handler->insert($obj)) {
+        if ($regstepHandler->insert($obj)) {
             redirect_header('registrationstep.php', 3, sprintf(_AM_SUICO_SAVEDSUCCESS, _AM_SUICO_STEP));
         }
         echo $obj->getHtmlErrors();
@@ -63,9 +69,9 @@ switch ($op) {
         $form->display();
         break;
     case 'delete':
-        $obj = $handler->get($_REQUEST['id']);
+        $obj = $regstepHandler->get($_REQUEST['id']);
         if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
-            if ($handler->delete($obj)) {
+            if ($regstepHandler->delete($obj)) {
                 redirect_header('registrationstep.php', 3, sprintf(_AM_SUICO_DELETEDSUCCESS, _AM_SUICO_STEP));
             } else {
                 echo $obj->getHtmlErrors();
@@ -103,10 +109,10 @@ function profile_stepsave_toggle($step_d, $step_save)
 {
     $helper    = XoopsModules\Suico\Helper::getInstance();
     $step_save = (1 == $step_save) ? 0 : 1;
-    $handler   = $helper->getHandler('Regstep');
-    $obj       = $handler->get($_REQUEST['step_id']);
+    $regstepHandler   = $helper->getHandler('Regstep');
+    $obj       = $regstepHandler->get($_REQUEST['step_id']);
     $obj->setVar('step_save', $step_save);
-    if ($handler->insert($obj, true)) {
+    if ($regstepHandler->insert($obj, true)) {
         redirect_header('registrationstep.php', 1, _AM_SUICO_SAVESTEP_TOGGLE_SUCCESS);
     } else {
         redirect_header('registrationstep.php', 1, _AM_SUICO_SAVESTEP_TOGGLE_FAILED);

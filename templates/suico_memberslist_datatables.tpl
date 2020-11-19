@@ -124,7 +124,7 @@
                                                 <{/if}>
 
                                                 <{if $xoops_isuser AND $displayemail == 1}>
-                                                    <a href="mailto:<{$users[i].emailaddresss}>" target="_blank" class="btn btn-primary btn-sm" role="button"><span class="fa fa-envelope" aria-hidden="true"></span> <{$smarty.const._MD_SUICO_EMAIL}></a>
+                                                    <a href="mailto:<{$users[i].emailaddress}>" target="_blank" class="btn btn-primary btn-sm" role="button"><span class="fa fa-envelope" aria-hidden="true"></span> <{$smarty.const._MD_SUICO_EMAIL}></a>
                                                 <{/if}>
                                                 <{if $xoops_isuser AND $displaypm == 1}>
                                                     <a href="javascript:openWithSelfMain('<{$xoops_url}>/pmlite.php?send2=1&amp;to_userid=<{$users[i].id}>', 'pmlite', 450, 380);" class="btn btn-primary btn-sm" role="button"><span class="fa fa-envelope-o"></span> <{$smarty.const._MD_SUICO_PRIVATEMESSAGE}>
@@ -143,7 +143,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <{$pagenav}>
+                            <{$pagenav|default:''}>
                             <br>
                             <br>
                             <script>

@@ -36,9 +36,9 @@ use XoopsModules\Suico;
 class ProfileHandler extends \XoopsPersistableObjectHandler
 {
     /**
-     * holds reference to {@link profileFieldHandler} object
+     * holds reference to {@link ProfileFieldHandler} object
      */
-    public $_fHandler;
+    public $fieldHandler;
     /**
      * Array of {@link Suico\Field} objects
      * @var array
@@ -51,7 +51,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
     public function __construct(\XoopsDatabase $db)
     {
         parent::__construct($db, 'suico_profile', Profile::class, 'profile_id');
-        $this->_fHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Field');
+        $this->fieldHandler = Helper::getInstance()->getHandler('Field');
     }
 
     /**
@@ -99,11 +99,11 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
      *
      * @param bool $isNew
      *
-     * @return Suico\Field
+     * @return \XoopsModules\Suico\Field|\XoopsObject
      */
     public function createField($isNew = true)
     {
-        $return = $this->_fHandler->create($isNew);
+        $return = $this->fieldHandler->create($isNew);
         return $return;
     }
 
@@ -115,7 +115,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
     public function loadFields()
     {
         if (0 == \count($this->_fields)) {
-            $this->_fields = $this->_fHandler->loadFields();
+            $this->_fields = $this->fieldHandler->loadFields();
         }
         return $this->_fields;
     }
@@ -131,7 +131,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
      */
     public function getFields(\CriteriaElement $criteria, $id_as_key = true, $as_object = true)
     {
-        return $this->_fHandler->getObjects($criteria, $id_as_key, $as_object);
+        return $this->fieldHandler->getObjects($criteria, $id_as_key, $as_object);
     }
 
     /**
@@ -144,7 +144,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
      */
     public function insertField(Suico\Field $field, $force = false)
     {
-        return $this->_fHandler->insert($field, $force);
+        return $this->fieldHandler->insert($field, $force);
     }
 
     /**
@@ -157,7 +157,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
      */
     public function deleteField(Suico\Field $field, $force = false)
     {
-        return $this->_fHandler->delete($field, $force);
+        return $this->fieldHandler->delete($field, $force);
     }
 
     /**
@@ -249,7 +249,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
      */
     public function getUserVars()
     {
-        return $this->_fHandler->getUserVars();
+        return $this->fieldHandler->getUserVars();
     }
 
     /**
@@ -257,7 +257,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
      *
      * @param \CriteriaElement $criteria   CriteriaElement
      * @param array            $searchvars Fields to be fetched
-     * @param array            $groups     for Usergroups is selected (only admin!)
+     * @param array|null             $groups     for Usergroups is selected (only admin!)
      *
      * @return array
      */

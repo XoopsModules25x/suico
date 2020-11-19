@@ -79,7 +79,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
     /**
      * retrieve a Suspensions
      *
-     * @param int  $id of the Suspensions
+     * @param int|null $id of the Suspensions
      * @param null $fields
      * @return mixed reference to the {@link Suspensions} object, FALSE if failed
      */
@@ -234,10 +234,10 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $suspensions = new Suspensions();
             $suspensions->assignVars($myrow);
-            if (!$id_as_key) {
-                $ret[] = &$suspensions;
-            } else {
+            if ($id_as_key) {
                 $ret[$myrow['uid']] = &$suspensions;
+            } else {
+                $ret[] = &$suspensions;
             }
             unset($suspensions);
         }

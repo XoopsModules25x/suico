@@ -27,7 +27,7 @@
                                     <a href="#" name='show_tips' id='show_tips' value='Notetips'><{$lang_tips}></a>
                                 </form>
                                 <div id="xtips" name="xtips" style="width:500px;height:50px;" action="">
-                                    [b]<{$lang_bold}>[/b] => <b><{$lang_bold}></b> | [i]<{$lang_italic}>[/i] => <i><{$lang_italic}></span> | [u]<{$lang_underline}>[/u] => <u><{$lang_underline}></u>
+                                    [b]<{$lang_bold}>[/b] => <b><{$lang_bold}></b> | [i]<{$lang_italic}>[/i] => </i><{$lang_italic}></span> | [u]<{$lang_underline}>[/u] => <u><{$lang_underline}></u>
                                 </div>
                             </div>
                         <{/if}>
@@ -36,7 +36,7 @@
                             <{$section_name}>
                         </h5>
 
-                        <{ if $lang_noNotesyet=="" }>
+                        <{if $lang_noNotesyet|default:''=="" }>
 
                         <div class="row">
                             <div class="col-md-12">
@@ -65,7 +65,7 @@
 
 
                                                         <p class="m-b-5 m-t-10"> &nbsp;<{$notes[i].text}></p>
-                                                        <{ if $isOwner==1}>
+                                                        <{if $isOwner==1}>
 
                                                         <form name="delete_note" method="post" action="delete_note.php" class="suico-Note-form-delete">
                                                             <button type="image" id="note_idimage" name="note_idimage" class="btn btn-primary btn-xs">Delete</button>
@@ -77,37 +77,36 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!--
-           <div class="suico-Note-details-texts">
-                    <p class="suico-Note-text"><img src="assets/images/notes.gif" alt="<{$section_name}>" title="<{$section_name}>">
-                        &nbsp;<{$notes[i].text}><br>&nbsp;<small><{$notes[i].date_created}></small>
-                        <a name="replyform<{$notes[i].id}>" id="replyform<{$notes[i].id}>"></a>
-                    </p>
-                    <{if $isOwner==1}>
-                        <div class="suico-Note-details-form">
-                            <form action="submitNote.php" method="post" name="form_reply_<{$notes[i].id}>"
-                                  id="form_reply_<{$notes[i].id}>" class="suico-Note-form">
-                                <input type="hidden" value="<{$notes[i].uid}>" name="uid" id="uid">
-                                <textarea name="text" id="text" cols="50"></textarea>
-                                <{$token}>
-                                <div>
-                                    <input type="submit" name="submit" value="<{$lang_answerNote}>"><input type="reset" name="reset"
-                                                                                                           value="<{$lang_cancel}>" class="resetNote">
-                                </div>
-                            </form>
-                        </div>
-                    <{/if}>
-                </div>
-                
-        <{if $isOwner==1}>
-          <div><a  class="suico-Notes-replyNote">
-            <{$lang_answerNote}>
-          </a></div>
-        <{/if}>
-        -->
+
+
+<{*                                            <div class="suico-Note-details-texts">*}>
+<{*                                                <p class="suico-Note-text"><img src="assets/images/notes.gif" alt="<{$section_name}>" title="<{$section_name}>">*}>
+<{*                                                    &nbsp;<{$notes[i].text}><br>&nbsp;<small><{$notes[i].date_created}></small>*}>
+<{*                                                    <a name="replyform<{$notes[i].id}>" id="replyform<{$notes[i].id}>"></a>*}>
+<{*                                                </p>*}>
+<{*                                                <{if $isOwner==1}>*}>
+<{*                                                    <div class="suico-Note-details-form">*}>
+<{*                                                        <form action="submitNote.php" method="post" name="form_reply_<{$notes[i].id}>"*}>
+<{*                                                              id="form_reply_<{$notes[i].id}>" class="suico-Note-form">*}>
+<{*                                                            <input type="hidden" value="<{$notes[i].uid}>" name="uid" id="uid">*}>
+<{*                                                            <textarea name="text" id="text" cols="50"></textarea>*}>
+<{*                                                            <{$token}>*}>
+<{*                                                            <div>*}>
+<{*                                                                <input type="submit" name="submit" value="<{$lang_answerNote}>"><input type="reset" name="reset"*}>
+<{*                                                                                                                                       value="<{$lang_cancel}>" class="resetNote">*}>
+<{*                                                            </div>*}>
+<{*                                                        </form>*}>
+<{*                                                    </div>*}>
+<{*                                                <{/if}>*}>
+<{*                                            </div>*}>
+
+<{*                                            <{if $isOwner==1}>*}>
+<{*                                            <div><a class="suico-Notes-replyNote">*}>
+<{*                                                    <{$lang_answerNote}>*}>
+<{*                                                </a></div>*}>
+<{*                                            <{/if}>*}>
+
                                         </div>
-
-
                                         <{/section}>
 
                                     </div>
@@ -118,7 +117,7 @@
                             <{/if}>
 
                             <div>
-                                <{$pageNav}>
+                                <{$pageNav|default:''}>
                             </div>
 
 

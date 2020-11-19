@@ -60,7 +60,7 @@ function suico_search(
     $count = count($queryarray);
     if ($count > 0 && is_array($queryarray)) {
         $sql .= " ((title LIKE '%" . $queryarray[0] . "%')";
-        for ($i = 1; $i < $count; $i++) {
+        for ($i = 1; $i < $count; ++$i) {
             $sql .= " ${andor} ";
             $sql .= "(title LIKE '%" . $queryarray[$i] . "%')";
         }

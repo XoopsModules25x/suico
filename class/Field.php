@@ -209,7 +209,7 @@ class Field extends \XoopsObject
      **/
     public function getOutputValue($user, $profile)
     {
-        if (\file_exists($file = $GLOBALS['xoops']->path('modules/suico/language/' . $GLOBALS['xoopsConfig']['language'] . '/modinfo.php'))) {
+        if (\is_file($file = $GLOBALS['xoops']->path('modules/suico/language/' . $GLOBALS['xoopsConfig']['language'] . '/modinfo.php'))) {
             require_once $file;
         } else {
             require_once $GLOBALS['xoops']->path('modules/suico/language/english/modinfo.php');
@@ -235,7 +235,7 @@ class Field extends \XoopsObject
                 $value   = \is_array($value) ? $value[0] : $value;
                 $options = $this->getVar('field_options');
                 if (isset($options[$value])) {
-                    $value = \htmlspecialchars(\defined($options[$value]) ? \constant($options[$value]) : $options[$value], ENT_QUOTES | ENT_HTML5);
+                    $value = \htmlspecialchars(\defined($options[$value]) ? \constant($options[$value]) : $options[$value], \ENT_QUOTES | \ENT_HTML5);
                 } else {
                     $value = '';
                 }
@@ -248,7 +248,7 @@ class Field extends \XoopsObject
                 if (\count($options) > 0) {
                     foreach (\array_keys($options) as $key) {
                         if (\in_array($key, $value)) {
-                            $ret[$key] = \htmlspecialchars(\defined($options[$key]) ? \constant($options[$key]) : $options[$key], ENT_QUOTES | ENT_HTML5);
+                            $ret[$key] = \htmlspecialchars(\defined($options[$key]) ? \constant($options[$key]) : $options[$key], \ENT_QUOTES | \ENT_HTML5);
                         }
                     }
                 }
@@ -266,7 +266,7 @@ class Field extends \XoopsObject
                 $ret                                                         = [];
                 foreach (\array_keys($options) as $key) {
                     if (\in_array($key, $value)) {
-                        $ret[$key] = \htmlspecialchars($options[$key], ENT_QUOTES | ENT_HTML5);
+                        $ret[$key] = \htmlspecialchars($options[$key], \ENT_QUOTES | \ENT_HTML5);
                     }
                 }
                 return $ret;
@@ -282,7 +282,7 @@ class Field extends \XoopsObject
                 if (!empty($value)) {
                     return \formatTimestamp($value, 'm');
                 }
-                return $value = _MI_SUICO_NEVER_LOGGED_IN;
+                return $value = \_MI_SUICO_NEVER_LOGGED_IN;
                 break;
             case 'autotext':
                 $value = $user->getVar($this->getVar('field_name'), 'n'); //autotext can have HTML in it
@@ -361,7 +361,7 @@ class Field extends \XoopsObject
     public function getUserVars()
     {
         /* @var Suico\ProfileHandler $profileHandler */
-        $helper         = \XoopsModules\Suico\Helper::getInstance();
+        $helper         = Helper::getInstance();
         $profileHandler = $helper->getHandler('Profile');
         return $profileHandler->getUserVars();
     }

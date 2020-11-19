@@ -95,7 +95,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
     /**
      * retrieve a Image
      *
-     * @param int  $id of the Image
+     * @param int|null $id of the Image
      * @param null $fields
      * @return mixed reference to the {@link Image} object, FALSE if failed
      */
@@ -253,10 +253,10 @@ class ImageHandler extends XoopsPersistableObjectHandler
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $image = new Image();
             $image->assignVars($myrow);
-            if (!$id_as_key) {
-                $ret[] = &$image;
-            } else {
+            if ($id_as_key) {
                 $ret[$myrow['image_id']] = &$image;
+            } else {
+                $ret[] = &$image;
             }
             unset($image);
         }
@@ -562,7 +562,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
     public function getLastPicturesForBlock($limit)
     {
         global $xoopsUser, $xoopsDB;
-        if (is_object($xoopsUser)) {
+        if (\is_object($xoopsUser)) {
             $uid = $xoopsUser->getVar('uid');
         }
 
@@ -601,8 +601,8 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $vetor[$i]['img_filename'] = $myrow['filename'];
             $vetor[$i]['title']        = $myrow['title'];
             $vetor[$i]['caption']      = $myrow['caption'];
-            $vetor[$i]['date_created'] = formatTimestamp($myrow['date_created']);
-            $vetor[$i]['date_updated'] = formatTimestamp($myrow['date_updated']);
+            $vetor[$i]['date_created'] = \formatTimestamp($myrow['date_created']);
+            $vetor[$i]['date_updated'] = \formatTimestamp($myrow['date_updated']);
             $i++;
         }
         return $vetor;

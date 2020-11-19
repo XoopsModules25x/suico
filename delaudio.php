@@ -20,7 +20,9 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    AudioHandler
+};
 
 require __DIR__ . '/header.php';
 if (!$GLOBALS['xoopsSecurity']->check()) {
@@ -45,7 +47,7 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
      * Creating the factory  and the criteria to delete the picture
      * The user must be the owner
      */
-    $audioFactory = new Suico\AudioHandler(
+    $audioFactory = new AudioHandler(
         $xoopsDB
     );
     $criteria_aud = new Criteria('audio_id', $cod_audio);

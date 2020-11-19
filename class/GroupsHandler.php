@@ -239,10 +239,10 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $suico_groups = new Groups();
             $suico_groups->assignVars($myrow);
-            if (!$id_as_key) {
-                $ret[] = &$suico_groups;
-            } else {
+            if ($id_as_key) {
                 $ret[$myrow['group_id']] = &$suico_groups;
+            } else {
+                $ret[] = &$suico_groups;
             }
             unset($suico_groups);
         }

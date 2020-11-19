@@ -45,7 +45,7 @@ trait FilesManagement
         $folder
     ) {
         try {
-            if (!\file_exists($folder)) {
+            if (!\is_dir($folder)) {
                 if (!\is_dir($folder) && !\mkdir($folder) && !\is_dir($folder)) {
                     throw new RuntimeException(\sprintf('Unable to create the %s directory', $folder));
                 }

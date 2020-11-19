@@ -20,7 +20,9 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    ImageHandler
+};
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_index.tpl';
 require __DIR__ . '/header.php';
@@ -32,7 +34,7 @@ require __DIR__ . '/header.php';
 /**
  * Factory of pictures created
  */
-$imageFactory = new Suico\ImageHandler($xoopsDB);
+$imageFactory = new ImageHandler($xoopsDB);
 /**
  * Getting the title
  */

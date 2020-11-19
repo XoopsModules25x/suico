@@ -19,7 +19,9 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    VideoHandler
+};
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_index.tpl';
 require __DIR__ . '/header.php';
@@ -27,7 +29,7 @@ require __DIR__ . '/header.php';
 /**
  * Factory of pictures created
  */
-$videoFactory = new Suico\VideoHandler($xoopsDB);
+$videoFactory = new VideoHandler($xoopsDB);
 $url          = Request::getUrl('videourl', '', 'POST');
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);

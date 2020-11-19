@@ -118,19 +118,19 @@ class Configs extends XoopsObject
         } elseif (!\is_array($criteria) && $criteria) {
             $whereQuery = ' WHERE ' . $criteria;
         }
-        if (!$asobject) {
+        if ($asobject) {
+            $sql    = 'SELECT * FROM ' . $db->prefix('suico_configs') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $result = $db->query($sql, $limit, $start);
+            while (false !== ($myrow = $db->fetchArray($result))) {
+                $ret[] = new self($myrow);
+            }
+        } else {
             $sql    = 'SELECT config_id FROM ' . $db->prefix(
                     'suico_configs'
                 ) . "${whereQuery} ORDER BY ${sort} ${order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['suico_configs_id'];
-            }
-        } else {
-            $sql    = 'SELECT * FROM ' . $db->prefix('suico_configs') . "${whereQuery} ORDER BY ${sort} ${order}";
-            $result = $db->query($sql, $limit, $start);
-            while (false !== ($myrow = $db->fetchArray($result))) {
-                $ret[] = new self($myrow);
             }
         }
         return $ret;

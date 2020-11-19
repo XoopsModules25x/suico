@@ -67,11 +67,11 @@ switch ($op) {
             //$imgName = str_replace(' ', '', $_POST['filename']).'.'.$extension;
             $uploader->setPrefix('pic_');
             $uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0]);
-            if (!$uploader->upload()) {
+            if ($uploader->upload()) {
+                $imagesObject->setVar('filename', $uploader->getSavedFileName());
+            } else {
                 $errors = $uploader->getErrors();
                 redirect_header('javascript:history.go(-1)', 3, $errors);
-            } else {
-                $imagesObject->setVar('filename', $uploader->getSavedFileName());
             }
         } else {
             $imagesObject->setVar('filename', Request::getVar('filename', ''));
@@ -149,7 +149,7 @@ switch ($op) {
         // Display Page Navigation
         if ($imagesTempRows > $imagesPaginationLimit) {
             xoops_load('XoopsPageNav');
-            $pagenav = new XoopsPageNav(
+            $pagenav = new \XoopsPageNav(
                 $imagesTempRows, $imagesPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
@@ -201,7 +201,7 @@ switch ($op) {
             // Display Navigation
             if ($imagesCount > $imagesPaginationLimit) {
                 xoops_load('XoopsPageNav');
-                $pagenav = new XoopsPageNav(
+                $pagenav = new \XoopsPageNav(
                     $imagesCount, $imagesPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));

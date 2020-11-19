@@ -26,12 +26,15 @@ declare(strict_types=1);
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    FriendrequestHandler,
+    IndexController
+};
 
 require __DIR__ . '/header.php';
 $op = 'form';
 //require_once __DIR__ . '/class/suico_controller.php';
-$controller = new Suico\IndexController($xoopsDB, $xoopsUser);
+$controller = new IndexController($xoopsDB, $xoopsUser);
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
@@ -39,7 +42,7 @@ $nbSections                              = $controller->getNumbersSections();
 $GLOBALS['xoopsOption']['template_main'] = 'suico_memberslist_datatables.tpl';
 require XOOPS_ROOT_PATH . '/header.php';
 $iamadmin = $xoopsUserIsAdmin;
-$myts     = MyTextSanitizer::getInstance();
+$myts     = \MyTextSanitizer::getInstance();
 $criteria = new CriteriaCompo();
 $criteria->add(new Criteria('level', 0, '>'));
 $validsort = ['uname', 'email', 'last_login', 'user_regdate', 'posts'];
@@ -100,7 +103,7 @@ if (0 === $total) {
         $criteriaIsfriend->add($criteria_friends);
         $controller->isFriend   = $controller->friendshipsFactory->getCount($criteriaIsfriend);
         $userdata['isFriend']   = $controller->isFriend;
-        $friendrequestFactory   = new Suico\FriendrequestHandler($xoopsDB);
+        $friendrequestFactory   = new FriendrequestHandler($xoopsDB);
         $criteria_selfrequest   = new Criteria('friendrequester_uid', $controller->uidOwner);
         $criteria_isselfrequest = new CriteriaCompo(new Criteria('friendrequestto_uid', $userdata['uid']));
         $criteria_isselfrequest->add($criteria_selfrequest);
@@ -238,7 +241,7 @@ $xoopsTpl->assign('lang_cancelfriendrequest', _MD_SUICO_FRIENDREQUEST_CANCEL);
 if (isset($_POST['addfriend'])) {
     $newFriendrequest = $friendrequestFactory->create(true);
     $newFriendrequest->setVar('friendrequester_uid', $controller->uidOwner);
-    $newFriendrequest->setVar('friendrequestto_uid', 5, 0, 'POST');
+    $newFriendrequest->setVar('friendrequestto_uid', 5, 0);
     $friendrequestFactory->insert2($newFriendrequest);
     redirect_header(
         XOOPS_URL . '/modules/suico/index.php?uid=' . Request::getInt('friendrequestfrom_uid', 0, 'POST'),
@@ -248,7 +251,7 @@ if (isset($_POST['addfriend'])) {
 }
 $memberHandler = xoops_getHandler('member');
 $thisUser      = $memberHandler->getUser($controller->uidOwner);
-$myts          = MyTextSanitizer::getInstance();
+$myts          = \MyTextSanitizer::getInstance();
 //navbar
 $xoopsTpl->assign('lang_mysection', _MD_SUICO_MEMBERSLIST);
 $xoopsTpl->assign('section_name', _MD_SUICO_MEMBERSLIST);

@@ -53,7 +53,7 @@ if ('register' === $op) {
         exit();
     }
     xoops_load('XoopsUserUtility');
-    $myts = MyTextSanitizer::getInstance();
+    $myts = \MyTextSanitizer::getInstance();
     /* @var XoopsConfigHandler $configHandler */
     $configHandler              = xoops_getHandler('config');
     $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
@@ -164,7 +164,7 @@ if ('register' === $op) {
     }
     $stop = '';
     //Client side validation
-    if (isset($_POST['step']) && isset($_SESSION['profile_required'])) {
+    if (isset($_POST['step'], $_SESSION['profile_required'])) {
         foreach ($_SESSION['profile_required'] as $name => $title) {
             if (!isset($_POST[$name]) || empty($_POST[$name])) {
                 $stop .= sprintf(_FORM_ENTER, $title) . '<br>';
@@ -214,7 +214,11 @@ if ('register' === $op) {
                 $newuser->setVar('uname', $uname);
                 $newuser->setVar('email', $email);
                 $newuser->setVar('pass', $pass ? password_hash($pass, PASSWORD_DEFAULT) : '');
-                $actkey = bin2hex(random_bytes(4));
+                try {
+                    $actkey = bin2hex(random_bytes(4));
+                } catch (Exception $e) {
+                    echo 'Caught exception: ',  $e->getMessage(), "\n";
+                }
                 $newuser->setVar('actkey', $actkey, true);
                 $newuser->setVar('user_regdate', time(), true);
                 $newuser->setVar('uorder', $GLOBALS['xoopsConfig']['com_order'], true);
@@ -228,10 +232,7 @@ if ('register' === $op) {
                 }
             }
             // Insert/update user and check if we have succeded
-            if (!$memberHandler->insertUser($newuser)) {
-                $stop .= _US_REGISTERNG . '<br>';
-                $stop .= implode('<br>', $newuser->getErrors());
-            } else {
+            if ($memberHandler->insertUser($newuser)) {
                 // User inserted! Now insert custom profile fields
                 $profile->setVar('profile_id', $newuser->getVar('uid'));
                 $profileHandler->insert($profile);
@@ -251,11 +252,9 @@ if ('register' === $op) {
                     $message = '';
                     if (!$memberHandler->addUserToGroup(XOOPS_GROUP_USERS, $newuser->getVar('uid'))) {
                         $message = _MD_SUICO_REGISTER_NOTGROUP . '<br>';
-                    } else {
-                        if (1 == $GLOBALS['xoopsConfigUser']['activation_type']) {
+                    } elseif (1 == $GLOBALS['xoopsConfigUser']['activation_type']) {
                             XoopsUserUtility::sendWelcome($newuser);
-                        } else {
-                            if (0 == $GLOBALS['xoopsConfigUser']['activation_type']) {
+                        } elseif (0 == $GLOBALS['xoopsConfigUser']['activation_type']) {
                                 $xoopsMailer = xoops_getMailer();
                                 $xoopsMailer->reset();
                                 $xoopsMailer->useMail();
@@ -268,13 +267,12 @@ if ('register' === $op) {
                                 $xoopsMailer->setFromEmail($GLOBALS['xoopsConfig']['adminmail']);
                                 $xoopsMailer->setFromName($GLOBALS['xoopsConfig']['sitename']);
                                 $xoopsMailer->setSubject(sprintf(_US_USERKEYFOR, $newuser->getVar('uname')));
-                                if (!$xoopsMailer->send(true)) {
-                                    $_SESSION['profile_post']['_message_'] = 0;
-                                } else {
+                                if ($xoopsMailer->send(true)) {
                                     $_SESSION['profile_post']['_message_'] = 1;
+                                } else {
+                                    $_SESSION['profile_post']['_message_'] = 0;
                                 }
-                            } else {
-                                if (2 == $GLOBALS['xoopsConfigUser']['activation_type']) {
+                            } elseif (2 == $GLOBALS['xoopsConfigUser']['activation_type']) {
                                     $xoopsMailer = xoops_getMailer();
                                     $xoopsMailer->reset();
                                     $xoopsMailer->useMail();
@@ -289,20 +287,20 @@ if ('register' === $op) {
                                     $xoopsMailer->setFromEmail($GLOBALS['xoopsConfig']['adminmail']);
                                     $xoopsMailer->setFromName($GLOBALS['xoopsConfig']['sitename']);
                                     $xoopsMailer->setSubject(sprintf(_US_USERKEYFOR, $newuser->getVar('uname')));
-                                    if (!$xoopsMailer->send()) {
-                                        $_SESSION['profile_post']['_message_'] = 2;
-                                    } else {
+                                    if ($xoopsMailer->send()) {
                                         $_SESSION['profile_post']['_message_'] = 3;
+                                    } else {
+                                        $_SESSION['profile_post']['_message_'] = 2;
                                     }
                                 }
-                            }
-                        }
-                    }
                     if ($message) {
                         $GLOBALS['xoopsTpl']->append('confirm', $message);
                     }
                     $_SESSION['profile_register_uid'] = $newuser->getVar('uid');
                 }
+            } else {
+                $stop .= _US_REGISTERNG . '<br>';
+                $stop .= implode('<br>', $newuser->getErrors());
             }
         }
     }

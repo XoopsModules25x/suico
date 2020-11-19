@@ -20,8 +20,16 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
-use XoopsModules\Suico\Helper;
+use XoopsModules\Suico\{
+    Helper,
+    ImageHandler,
+    VisitorsHandler,
+    VideoHandler,
+    FriendrequestHandler,
+    FriendshipHandler
+};
+
+/** @var Helper $helper */
 
 require __DIR__ . '/preloads/autoloader.php';
 require dirname(__DIR__, 2) . '/mainfile.php';
@@ -29,7 +37,7 @@ require XOOPS_ROOT_PATH . '/header.php';
 $moduleDirName = basename(__DIR__);
 $helper        = Helper::getInstance();
 $modulePath    = XOOPS_ROOT_PATH . '/modules/' . $moduleDirName;
-$myts          = MyTextSanitizer::getInstance();
+$myts          = \MyTextSanitizer::getInstance();
 if (!isset($GLOBALS['xoTheme']) || !is_object($GLOBALS['xoTheme'])) {
     require $GLOBALS['xoops']->path('class/theme.php');
     $GLOBALS['xoTheme'] = new xos_opal_Theme();
@@ -68,13 +76,13 @@ $helper->loadLanguage('main');
 xoops_loadLanguage('user');
 if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
     require $GLOBALS['xoops']->path('class/template.php');
-    $xoopsTpl = new XoopsTpl();
+    $xoopsTpl = new \XoopsTpl();
 }
-$imageFactory         = new Suico\ImageHandler($xoopsDB);
-$visitorsFactory      = new Suico\VisitorsHandler($xoopsDB);
-$videosFactory        = new Suico\VideoHandler($xoopsDB);
-$friendrequestFactory = new Suico\FriendrequestHandler($xoopsDB);
-$friendshipFactory    = new Suico\FriendshipHandler($xoopsDB);
+$imageFactory         = new ImageHandler($xoopsDB);
+$visitorsFactory      = new VisitorsHandler($xoopsDB);
+$videosFactory        = new VideoHandler($xoopsDB);
+$friendrequestFactory = new FriendrequestHandler($xoopsDB);
+$friendshipFactory    = new FriendshipHandler($xoopsDB);
 $isOwner              = 0;
 $isAnonym             = 1;
 $isFriend             = 0;

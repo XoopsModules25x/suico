@@ -40,9 +40,7 @@ class Migrate extends \Xmf\Database\Migrate
 
     /**
      * Migrate constructor.
-     * @param Common\Configurator $configurator
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
+     * @param \XoopsModules\Suico\Common\Configurator|null $configurator
      */
     public function __construct(
         ?Common\Configurator $configurator = null

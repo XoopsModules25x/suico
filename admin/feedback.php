@@ -21,8 +21,14 @@ declare(strict_types=1);
 
 use Xmf\Module\Admin;
 use Xmf\Request;
-use XoopsModules\Suico;
-use XoopsModules\Suico\Common\ModuleFeedback;
+use XoopsModules\Suico\{
+    Helper,
+    Utility,
+    Common\ModuleFeedback
+};
+/** @var Helper $helper */
+/** @var Utility $utility */
+/** @var Admin $adminObject */
 
 require __DIR__ . '/admin_header.php';
 $adminObject = Admin::getInstance();
@@ -55,14 +61,7 @@ switch ($op) {
         $fb_type     = Request::getString('fb_type', '');
         $fb_content  = Request::getText('fb_content', '');
         $fb_content  = str_replace(
-            [
-                '
-',
-                '
-',
-                '
-',
-            ],
+            ['', '', '',],
             '<br>',
             $fb_content
         ); //clean line break from dhtmltextarea

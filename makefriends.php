@@ -20,7 +20,10 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    FriendrequestHandler,
+    FriendshipHandler
+};
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_index.tpl';
 require __DIR__ . '/header.php';
@@ -29,8 +32,8 @@ require __DIR__ . '/header.php';
 /**
  * Factory of friendrequests created
  */
-$friendrequestFactory = new Suico\FriendrequestHandler($xoopsDB);
-$friendshipFactory    = new Suico\FriendshipHandler($xoopsDB);
+$friendrequestFactory = new FriendrequestHandler($xoopsDB);
+$friendshipFactory    = new FriendshipHandler($xoopsDB);
 $friendrequest_id     = Request::getInt('friendrequest_id', 0, 'POST');
 $friendship_level     = Request::getInt('level', 0, 'POST');
 $uid                  = (int)$xoopsUser->getVar('uid');

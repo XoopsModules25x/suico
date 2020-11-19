@@ -35,18 +35,16 @@ if (!empty($_GET['id']) && !empty($_GET['actkey'])) {
     }
     if ($thisuser->getVar('actkey') != $actkey) {
         redirect_header(XOOPS_URL . '/', 5, _US_ACTKEYNOT);
-    } else {
-        if ($thisuser->getVar('level') > 0) {
+    } elseif ($thisuser->getVar('level') > 0) {
             redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/index.php', 5, _US_ACONTACT, false);
-        } else {
-            if (false !== $memberHandler->activateUser($thisuser)) {
+        } elseif (false !== $memberHandler->activateUser($thisuser)) {
                 $xoopsPreload = XoopsPreload::getInstance();
                 $xoopsPreload->triggerEvent('core.behavior.user.activate', $thisuser);
                 /* @var XoopsConfigHandler $configHandler */
                 $configHandler              = xoops_getHandler('config');
                 $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
                 if (2 == $GLOBALS['xoopsConfigUser']['activation_type']) {
-                    $myts        = MyTextSanitizer::getInstance();
+                    $myts        = \MyTextSanitizer::getInstance();
                     $xoopsMailer = xoops_getMailer();
                     $xoopsMailer->useMail();
                     $xoopsMailer->setTemplate('activated.tpl');
@@ -58,10 +56,10 @@ if (!empty($_GET['id']) && !empty($_GET['actkey'])) {
                     $xoopsMailer->setFromName($GLOBALS['xoopsConfig']['sitename']);
                     $xoopsMailer->setSubject(sprintf(_US_YOURACCOUNT, $GLOBALS['xoopsConfig']['sitename']));
                     include $GLOBALS['xoops']->path('header.php');
-                    if (!$xoopsMailer->send()) {
-                        printf(_US_ACTVMAILNG, $thisuser->getVar('uname'));
-                    } else {
+                    if ($xoopsMailer->send()) {
                         printf(_US_ACTVMAILOK, $thisuser->getVar('uname'));
+                    } else {
+                        printf(_US_ACTVMAILNG, $thisuser->getVar('uname'));
                     }
                     require __DIR__ . '/footer.php';
                 } else {
@@ -70,11 +68,10 @@ if (!empty($_GET['id']) && !empty($_GET['actkey'])) {
             } else {
                 redirect_header(XOOPS_URL . '/index.php', 5, 'Activation failed!');
             }
-        }
-    }
+
     // Not implemented yet: re-send activiation code
 } elseif (!empty($_REQUEST['email']) && 0 != $xoopsConfigUser['activation_type']) {
-    $myts = MyTextSanitizer::getInstance();
+    $myts = \MyTextSanitizer::getInstance();
     /* @var XoopsMemberHandler $memberHandler */
     $memberHandler = xoops_getHandler('member');
     $getuser       = $memberHandler->getUsers(new Criteria('email', $myts->addSlashes(trim($_REQUEST['email']))));
@@ -94,16 +91,16 @@ if (!empty($_GET['id']) && !empty($_GET['actkey'])) {
     $xoopsMailer->setFromEmail($GLOBALS['xoopsConfig']['adminmail']);
     $xoopsMailer->setFromName($GLOBALS['xoopsConfig']['sitename']);
     $xoopsMailer->setSubject(sprintf(_US_USERKEYFOR, $getuser[0]->getVar('uname')));
-    if (!$xoopsMailer->send()) {
-        echo _US_YOURREGMAILNG;
-    } else {
+    if ($xoopsMailer->send()) {
         echo _US_YOURREGISTERED;
+    } else {
+        echo _US_YOURREGMAILNG;
     }
 } else {
     require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
-    $form = new XoopsThemeForm('', 'form', 'activate.php');
-    $form->addElement(new XoopsFormText(_US_EMAIL, 'email', 25, 255));
-    $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+    $form = new \XoopsThemeForm('', 'form', 'activate.php');
+    $form->addElement(new \XoopsFormText(_US_EMAIL, 'email', 25, 255));
+    $form->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
     $form->display();
 }
 $xoBreadcrumbs[] = ['title' => _MD_SUICO_REGISTER];

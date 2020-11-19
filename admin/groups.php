@@ -55,7 +55,7 @@ switch ($op) {
         $groupsObject->setVar('group_desc', Request::getText('group_desc', ''));
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $uploadDir = XOOPS_UPLOAD_PATH . '/suico/groups/';
-        $uploader  = new XoopsMediaUploader(
+        $uploader  = new \XoopsMediaUploader(
             $uploadDir, $helper->getConfig('mimetypes'), $helper->getConfig('maxsize'), null, null
         );
         if ($uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0])) {
@@ -63,11 +63,11 @@ switch ($op) {
             //$imgName = str_replace(' ', '', $_POST['group_img']).'.'.$extension;
             $uploader->setPrefix('group_img_');
             $uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0]);
-            if (!$uploader->upload()) {
+            if ($uploader->upload()) {
+                $groupsObject->setVar('group_img', $uploader->getSavedFileName());
+            } else {
                 $errors = $uploader->getErrors();
                 redirect_header('javascript:history.go(-1)', 3, $errors);
-            } else {
-                $groupsObject->setVar('group_img', $uploader->getSavedFileName());
             }
         } else {
             $groupsObject->setVar('group_img', Request::getVar('group_img', ''));
@@ -148,7 +148,7 @@ switch ($op) {
         // Display Page Navigation
         if ($groupsTempRows > $groupsPaginationLimit) {
             xoops_load('XoopsPageNav');
-            $pagenav = new XoopsPageNav(
+            $pagenav = new \XoopsPageNav(
                 $groupsTempRows, $groupsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
@@ -200,7 +200,7 @@ switch ($op) {
             // Display Navigation
             if ($groupsCount > $groupsPaginationLimit) {
                 xoops_load('XoopsPageNav');
-                $pagenav = new XoopsPageNav(
+                $pagenav = new \XoopsPageNav(
                     $groupsCount, $groupsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));

@@ -20,7 +20,9 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    NotesHandler
+};
 
 require __DIR__ . '/header.php';
 /**
@@ -30,14 +32,14 @@ require __DIR__ . '/header.php';
 /**
  * Factories of groups
  */
-$notesFactory = new Suico\NotesHandler($xoopsDB);
+$notesFactory = new NotesHandler($xoopsDB);
 /**
  * Verify Token
  */
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_TOKENEXPIRED);
 }
-$myts         = MyTextSanitizer::getInstance();
+$myts         = \MyTextSanitizer::getInstance();
 $notebook_uid = Request::getInt('uid', 0, 'POST');
 $noteText     = $myts->displayTarea(Request::getText('text', '', 'POST'), 0, 1, 1, 1, 1);
 $mainform     = !empty($_POST['mainform']) ? 1 : 0;

@@ -7,7 +7,7 @@
                 <div class="col-md-12">
                     <div id="content" class="content content-full-width">
                         <!-- start -->
-                        <{if $allow_friends !=-1 && $friendrequest==1 && $isOwner==1 && $isFriend==0}>
+                        <{if $allow_friends !=-1 && $friendrequest|default:0==1 && $isOwner==1 && $isFriend==0}>
                         <!-- if not owner and not friend -->
                         <div class="alert alert-warning">
                             <h5><{$lang_you_have_x_friendrequests}></h5>
@@ -31,7 +31,7 @@
                         </div>
                         <{/if}>
                         <{if (($isOwner==1))}>
-                        <{if $lang_nofriendsyet==""}>
+                        <{if $lang_nofriendsyet|default:''==""}>
                         <a href="memberslist.php" class="btn btn-primary btn-sm float-right" role="button"><span class="fa fa-address-card-o"></span> <{$smarty.const._MD_SUICO_FINDMOREFRIENDS}></a>
                         <{else}>
                         <a href="memberslist.php" class="btn btn-primary btn-sm float-right" role="button"><span class="fa fa-address-card-o"></span> <{$smarty.const._MD_SUICO_FINDFRIENDS}></a>
@@ -41,7 +41,7 @@
                         <h5 class="m-t-0 m-b-20"><{$lang_friends}></h5>
 
                         <!-- begin row -->
-                        <{if $lang_nofriendsyet==""}>
+                        <{if $lang_nofriendsyet|default:''==""}>
                         <div class="row row-space-2">
                             <{section name=i loop=$friends}>
                             <!-- begin col-6 -->
@@ -49,7 +49,7 @@
                                 <div class="p-10 bg-white">
                                     <div class="media media-xs overflow-visible">
                                         <a class="media-left" href="<{$xoops_url}>/modules/suico/index.php?uid=<{$friends[i].uid}>" alt=" <{$friends[i].uname}>" title="<{$friends[i].uname}>">
-                                            <{ if $friends[i].user_avatar=="blank.gif" }><img src="<{$xoops_url}>/uploads/avatars/blank.gif" class="media-object"> <{else}> <img src="<{$xoops_upload_url}>/<{$friends[i].user_avatar}>" class="media-object"><{/if}>
+                                            <{if $friends[i].user_avatar=="blank.gif" }><img src="<{$xoops_url}>/uploads/avatars/blank.gif" class="media-object"> <{else}> <img src="<{$xoops_upload_url}>/<{$friends[i].user_avatar}>" class="media-object"><{/if}>
                                         </a>
                                         <div class="media-body valign-middle">
                                             <b class="text-inverse"><a class="media-left" href="<{$xoops_url}>/modules/suico/index.php?uid=<{$friends[i].uid}>" alt=" <{$friends[i].uname}>" title="<{$friends[i].uname}>">  <{$friends[i].uname}></a></b>
@@ -90,13 +90,13 @@
                         <{else}>
                         <br>
                         <div class="alert alert-primary">
-                            <{$lang_nofriendsyet}></div>
+                            <{$lang_nofriendsyet|default:''}></div>
 
 
                         <{/if}>
 
 
-                        <{ if $navegacao!='' }>
+                        <{if $navegacao!='' }>
                         <div><{$navegacao}></div>
                         <{/if}>
 

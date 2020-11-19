@@ -20,8 +20,10 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
-use XoopsModules\Suico\IndexController;
+use XoopsModules\Suico\{
+    FriendsController,
+    IndexController
+};
 
 /**
  * Xoops header
@@ -228,7 +230,7 @@ if (0 === $controller->isAnonym) {
 $avatar        = $controller->owner->getVar('user_avatar');
 $memberHandler = xoops_getHandler('member');
 $thisUser      = $memberHandler->getUser($controller->uidOwner);
-$myts          = MyTextSanitizer::getInstance();
+$myts          = \MyTextSanitizer::getInstance();
 //navbar
 $xoopsTpl->assign('lang_mysection', _MD_SUICO_MYPROFILE);
 $xoopsTpl->assign('section_name', _MD_SUICO_PROFILE);
@@ -263,7 +265,7 @@ if (isset($nbSections['countVideos']) && $nbSections['countVideos'] > 0) {
 /**
  * Friends
  */
-$friendController = new Suico\FriendsController($xoopsDB, $xoopsUser);
+$friendController = new FriendsController($xoopsDB, $xoopsUser);
 if ($xoopsUser) {
     $friendrequest = 0;
     if (1 === $friendController->isOwner) {
@@ -397,13 +399,13 @@ foreach ($mids as $mid) {
             $count = count($results);
         }
         if (is_array($results) && $count > 0) {
-            for ($i = 0; $i < $count; $i++) {
+            for ($i = 0; $i < $count; ++$i) {
                 if (isset($results[$i]['image']) && '' !== $results[$i]['image']) {
                     $results[$i]['image'] = 'modules/' . $module->getVar('dirname') . '/' . $results[$i]['image'];
                 } else {
                     $results[$i]['image'] = 'images/icons/posticon2.gif';
                 }
-                if (!preg_match("#^http[s]*:\/\/#i", $results[$i]['link'])) {
+                if (!preg_match('#^http[s]*:\/\/#i', $results[$i]['link'])) {
                     $results[$i]['link'] = 'modules/' . $module->getVar('dirname') . '/' . $results[$i]['link'];
                 }
                 $results[$i]['title'] = $myts->htmlSpecialChars($results[$i]['title']);

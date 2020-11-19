@@ -102,7 +102,7 @@ class AudioController extends SuicoController
         $start,
         $interval
     ) {
-        $pageNav = new XoopsPageNav($countAudios, $audiosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
+        $pageNav = new \XoopsPageNav($countAudios, $audiosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
         return $pageNav->renderImageNav($interval);
     }
 

@@ -8,7 +8,7 @@
                     <div id="content" class="content content-full-width">
                         <!-- start -->
 
-                        <{if ($showForm==1) }>
+                        <{if ($showForm|default:0 ==1) }>
                             <div class="alert alert-primary">
                                 <h5>
                                     <{$lang_formtitle}>
@@ -47,7 +47,7 @@
                         <h5>
                             <{$lang_photos}>
                         </h5>
-                        <{if $lang_nopicyet=="" }>
+                        <{if $lang_nopicyet|default:'' =="" }>
                             <div class="row gallery">
                                 <{section name=i loop=$pics_array}>
                                     <{if (($pics_array[i].private == 0))}>

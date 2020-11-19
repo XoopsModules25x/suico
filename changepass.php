@@ -34,21 +34,11 @@ if (!$GLOBALS['xoopsUser']) {
     redirect_header(XOOPS_URL, 2, _NOPERM);
 }
 $xoopsOption['xoops_pagetitle'] = sprintf(_MD_SUICO_CHANGEPASSWORD, $xoopsModule->getVar('name'), $controller->nameOwner);
-if (!isset($_POST['submit'])) {
-    //show change password form
-    require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
-    $form = new XoopsThemeForm(_MD_SUICO_CHANGEPASSWORD, 'form', $_SERVER['REQUEST_URI'], 'post', true);
-    $form->addElement(new XoopsFormPassword(_MD_SUICO_OLDPASSWORD, 'oldpass', 15, 50), true);
-    $form->addElement(new XoopsFormPassword(_MD_SUICO_NEWPASSWORD, 'newpass', 15, 50), true);
-    $form->addElement(new XoopsFormPassword(_US_VERIFYPASS, 'vpass', 15, 50), true);
-    $form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
-    $form->assign($GLOBALS['xoopsTpl']);
-    $xoBreadcrumbs[] = ['title' => _MD_SUICO_CHANGEPASSWORD];
-} else {
+if (isset($_POST['submit'])) {
     /* @var XoopsConfigHandler $configHandler */
     $configHandler              = xoops_getHandler('config');
     $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
-    $myts                       = MyTextSanitizer::getInstance();
+    $myts                       = \MyTextSanitizer::getInstance();
     $oldpass                    = Request::getString('oldpass', '', 'POST');
     $password                   = Request::getString('newpass', '', 'POST');
     $vpass                      = Request::getString('vpass', '', 'POST');
@@ -75,6 +65,16 @@ if (!isset($_POST['submit'])) {
         }
     }
     redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/index.php?uid=' . $GLOBALS['xoopsUser']->getVar('uid'), 2, $msg);
+} else {
+    //show change password form
+    require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
+    $form = new \XoopsThemeForm(_MD_SUICO_CHANGEPASSWORD, 'form', $_SERVER['REQUEST_URI'], 'post', true);
+    $form->addElement(new \XoopsFormPassword(_MD_SUICO_OLDPASSWORD, 'oldpass', 15, 50), true);
+    $form->addElement(new \XoopsFormPassword(_MD_SUICO_NEWPASSWORD, 'newpass', 15, 50), true);
+    $form->addElement(new \XoopsFormPassword(_US_VERIFYPASS, 'vpass', 15, 50), true);
+    $form->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+    $form->assign($GLOBALS['xoopsTpl']);
+    $xoBreadcrumbs[] = ['title' => _MD_SUICO_CHANGEPASSWORD];
 }
 require __DIR__ . '/footer.php';
 require dirname(__DIR__, 2) . '/footer.php';

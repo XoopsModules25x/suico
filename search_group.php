@@ -20,11 +20,14 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    GroupController
+};
+
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_groups_results.tpl';
 require __DIR__ . '/header.php';
-$controller = new Suico\GroupController($xoopsDB, $xoopsUser);
+$controller = new GroupController($xoopsDB, $xoopsUser);
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
@@ -68,7 +71,7 @@ foreach ($mygroups as $value) {
 /**
  * Creating the navigation bar if you have a lot of friends
  */
-$navigationBar = new XoopsPageNav(
+$navigationBar = new \XoopsPageNav(
     $countGroups, $helper->getConfig('groupsperpage'), $start_all, 'start_all', 'group_keyword=' . $group_keyword . '&amp;start_my=' . $start_my
 );
 $imageNav      = $navigationBar->renderImageNav(2);

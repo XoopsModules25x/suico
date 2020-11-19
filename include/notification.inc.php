@@ -47,7 +47,7 @@ function suico_iteminfo($category, $item_id)
         /**
          * Let's get the user name of the owner of the album
          */
-        $owner        = new XoopsUser();
+        $owner        = new \XoopsUser();
         $identifier   = $owner::getUnameFromId($result_array['uid_owner']);
         $item['name'] = $identifier . "'s Album";
         $item['url']  = XOOPS_URL . '/modules/' . $module->getVar(
@@ -64,7 +64,7 @@ function suico_iteminfo($category, $item_id)
         /**
          * Let's get the user name of the owner of the album
          */
-        $owner        = new XoopsUser();
+        $owner        = new \XoopsUser();
         $identifier   = $owner::getUnameFromId($result_array['uid_owner']);
         $item['name'] = $identifier . "'s Videos";
         $item['url']  = XOOPS_URL . '/modules/' . $module->getVar(
@@ -81,7 +81,7 @@ function suico_iteminfo($category, $item_id)
         /**
          * Let's get the user name of the owner of the album
          */
-        $owner        = new XoopsUser();
+        $owner        = new \XoopsUser();
         $identifier   = $owner::getUnameFromId($result_array['note_from']);
         $item['name'] = $identifier . "'s Notes";
         $item['url']  = XOOPS_URL . '/modules/' . $module->getVar(

@@ -20,13 +20,15 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    ConfigsHandler
+};
 
 require __DIR__ . '/header.php';
 /**
  * Factories of groups
  */
-$configsFactory = new Suico\ConfigsHandler($xoopsDB);
+$configsFactory = new ConfigsHandler($xoopsDB);
 /**
  * Verify Token
  */

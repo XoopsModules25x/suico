@@ -48,16 +48,16 @@ class Category extends \XoopsObject
         if (false === $action) {
             $action = $_SERVER['REQUEST_URI'];
         }
-        $title = $this->isNew() ? \sprintf(_AM_SUICO_ADD, _AM_SUICO_CATEGORY) : \sprintf(_AM_SUICO_EDIT, _AM_SUICO_CATEGORY);
+        $title = $this->isNew() ? \sprintf(\_AM_SUICO_ADD, \_AM_SUICO_CATEGORY) : \sprintf(\_AM_SUICO_EDIT, \_AM_SUICO_CATEGORY);
         require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
-        $form->addElement(new \XoopsFormText(_AM_SUICO_TITLE, 'cat_title', 35, 255, $this->getVar('cat_title')));
+        $form->addElement(new \XoopsFormText(\_AM_SUICO_TITLE, 'cat_title', 35, 255, $this->getVar('cat_title')));
         if (!$this->isNew()) {
             //Load groups
             $form->addElement(new \XoopsFormHidden('id', $this->getVar('cat_id')));
         }
-        $form->addElement(new \XoopsFormTextArea(_AM_SUICO_DESCRIPTION, 'cat_description', $this->getVar('cat_description', 'e')));
-        $form->addElement(new \XoopsFormText(_AM_SUICO_WEIGHT, 'cat_weight', 35, 35, $this->getVar('cat_weight', 'e')));
+        $form->addElement(new \XoopsFormTextArea(\_AM_SUICO_DESCRIPTION, 'cat_description', $this->getVar('cat_description', 'e')));
+        $form->addElement(new \XoopsFormText(\_AM_SUICO_WEIGHT, 'cat_weight', 35, 35, $this->getVar('cat_weight', 'e')));
         $form->addElement(new \XoopsFormHidden('op', 'save'));
         $form->addElement(new \XoopsFormButton('', 'submit', \_SUBMIT, 'submit'));
         return $form;

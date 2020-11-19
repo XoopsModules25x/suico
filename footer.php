@@ -18,7 +18,9 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    FriendrequestHandler
+};
 
 /**
  * CSS & JS
@@ -100,7 +102,7 @@ $xoopsTpl->assign(
 $avatar        = $controller->owner->getVar('user_avatar');
 $memberHandler = xoops_getHandler('member');
 $thisUser      = $memberHandler->getUser($controller->uidOwner);
-$myts          = MyTextSanitizer::getInstance();
+$myts          = \MyTextSanitizer::getInstance();
 $xoopsTpl->assign('user_uname', $thisUser->getVar('uname'));
 $xoopsTpl->assign('user_realname', $thisUser->getVar('name'));
 $xoopsTpl->assign('lang_uname', _US_NICKNAME);
@@ -148,7 +150,7 @@ if ($xoopsUser) {
     $criteriaIsfriend->add($criteria_friends);
     $controller->isFriend = $controller->friendshipsFactory->getCount($criteriaIsfriend);
     $xoopsTpl->assign('isFriend', $controller->isFriend);
-    $friendrequestFactory   = new Suico\FriendrequestHandler($xoopsDB);
+    $friendrequestFactory   = new FriendrequestHandler($xoopsDB);
     $criteria_selfrequest   = new Criteria('friendrequester_uid', $xoopsUser->getVar('uid'));
     $criteria_isselfrequest = new CriteriaCompo(new Criteria('friendrequestto_uid', $controller->uidOwner));
     $criteria_isselfrequest->add($criteria_selfrequest);

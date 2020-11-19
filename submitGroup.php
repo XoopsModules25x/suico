@@ -20,7 +20,10 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    RelgroupuserHandler,
+    GroupsHandler
+};
 
 require __DIR__ . '/header.php';
 /**
@@ -32,8 +35,8 @@ require __DIR__ . '/header.php';
 /**
  * Factories of groups
  */
-$relgroupuserFactory = new Suico\RelgroupuserHandler($xoopsDB);
-$groupsFactory       = new Suico\GroupsHandler($xoopsDB);
+$relgroupuserFactory = new RelgroupuserHandler($xoopsDB);
+$groupsFactory       = new GroupsHandler($xoopsDB);
 $marker              = Request::getInt('marker', 0, 'POST');
 if (1 == $marker) { //if (1 === $marker) {
     /**
@@ -67,11 +70,11 @@ if (1 == $marker) { //if (1 === $marker) {
         //$imgName = str_replace(' ', '', $_POST['group_img']).'.'.$extension;
         $uploader->setPrefix('group_img_');
         $uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0]);
-        if (!$uploader->upload()) {
+        if ($uploader->upload()) {
+            $groupsObject->setVar('group_img', $uploader->getSavedFileName());
+        } else {
             $errors = $uploader->getErrors();
             redirect_header('javascript:history.go(-1)', 3, $errors);
-        } else {
-            $groupsObject->setVar('group_img', $uploader->getSavedFileName());
         }
     } else {
         $groupsObject->setVar('group_img', Request::getVar('group_img', ''));

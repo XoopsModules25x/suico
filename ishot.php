@@ -20,14 +20,16 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    IshotHandler
+};
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_index.tpl';
 require __DIR__ . '/header.php';
 /**
  * Factory of pictures created
  */
-$ishotFactory = new Suico\IshotHandler($xoopsDB);
+$ishotFactory = new IshotHandler($xoopsDB);
 $uid_voted    = Request::getInt('uid_voted', 0, 'POST');
 $ishot        = Request::getInt('ishot', 0, 'POST');
 $uid_voter    = (int)$xoopsUser->getVar('uid');

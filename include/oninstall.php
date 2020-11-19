@@ -20,9 +20,14 @@ declare(strict_types=1);
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
-use XoopsModules\Suico\Common\Configurator;
-use XoopsModules\Suico\Helper;
-use XoopsModules\Suico\Utility;
+use XoopsModules\Suico\{
+    Common\Configurator,
+    Helper,
+    Utility
+};
+/** @var Helper $helper */
+/** @var Utility $utility */
+/** @var Common\Configurator $configurator */
 
 include dirname(
             __DIR__
@@ -115,8 +120,6 @@ function xoops_module_install_suico(XoopsModule $module)
     suico_install_addField('rank', _US_RANK, '', 4, 'rank', 3, 3, 2, [], 0, 0);
     suico_install_addField('last_login', _US_LASTLOGIN, '', 4, 'datetime', 3, 4, 0, [], 0, 10);
     suico_install_initializeProfiles();
-    /** @var \XoopsModules\Suico\Helper $helper */ /** @var \XoopsModules\Suico\Utility $utility */
-    /** @var \XoopsModules\Suico\Common\Configurator $configurator */
     $helper       = Helper::getInstance();
     $utility      = new Utility();
     $configurator = new Configurator();

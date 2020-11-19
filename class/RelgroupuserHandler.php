@@ -79,7 +79,7 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
     /**
      * retrieve a Relgroupuser
      *
-     * @param int  $id of the Relgroupuser
+     * @param int|null $id of the Relgroupuser
      * @param null $fields
      * @return mixed reference to the {@link Relgroupuser} object, FALSE if failed
      */
@@ -222,10 +222,10 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $suico_relgroupuser = new Relgroupuser();
             $suico_relgroupuser->assignVars($myrow);
-            if (!$id_as_key) {
-                $ret[] = &$suico_relgroupuser;
-            } else {
+            if ($id_as_key) {
                 $ret[$myrow['rel_id']] = &$suico_relgroupuser;
+            } else {
+                $ret[] = &$suico_relgroupuser;
             }
             unset($suico_relgroupuser);
         }

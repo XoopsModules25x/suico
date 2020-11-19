@@ -43,8 +43,8 @@ if ('del' === $op) {
     redirect_header('fieldsvisibility.php', 2, sprintf(_AM_SUICO_DELETEDSUCCESS, _AM_SUICO_PROF_VISIBLE));
 }
 require_once $GLOBALS['xoops']->path('/class/xoopsformloader.php');
-$opform    = new XoopsSimpleForm('', 'opform', 'fieldspermissions.php', 'get');
-$op_select = new XoopsFormSelect('', 'op', $op);
+$opform    = new \XoopsSimpleForm('', 'opform', 'fieldspermissions.php', 'get');
+$op_select = new \XoopsFormSelect('', 'op', $op);
 $op_select->setExtra('onchange="document.forms.opform.submit()"');
 $op_select->addOption('visibility', _AM_SUICO_PROF_VISIBLE);
 $op_select->addOption('edit', _AM_SUICO_PROF_EDITABLE);
@@ -57,7 +57,7 @@ $criteria = new CriteriaCompo();
 $criteria->setSort('field_id, user_group, profile_group');
 $criteria->setOrder('DESC');
 $visibilities = $visibilityHandler->getAllByFieldId($criteria);
-/* @var XoopsMemberHandler $memberHandler */
+/* @var \XoopsMemberHandler $memberHandler */
 $memberHandler = xoops_getHandler('member');
 $groups        = $memberHandler->getGroupList();
 $groups[0]     = _AM_SUICO_FIELDVISIBLETOALL;
@@ -65,19 +65,19 @@ asort($groups);
 $GLOBALS['xoopsTpl']->assign('fields', $fields);
 $GLOBALS['xoopsTpl']->assign('visibilities', $visibilities);
 $GLOBALS['xoopsTpl']->assign('groups', $groups);
-$add_form  = new XoopsSimpleForm('', 'addform', 'fieldsvisibility.php');
-$sel_field = new XoopsFormSelect(_AM_SUICO_FIELDVISIBLE, 'field_id');
+$add_form  = new \XoopsSimpleForm('', 'addform', 'fieldsvisibility.php');
+$sel_field = new \XoopsFormSelect(_AM_SUICO_FIELDVISIBLE, 'field_id');
 $sel_field->setExtra("style='width: 200px;'");
 $sel_field->addOptionArray($fields);
 $add_form->addElement($sel_field);
-$sel_ug = new XoopsFormSelect(_AM_SUICO_FIELDVISIBLEFOR, 'ug');
+$sel_ug = new \XoopsFormSelect(_AM_SUICO_FIELDVISIBLEFOR, 'ug');
 $sel_ug->addOptionArray($groups);
 $add_form->addElement($sel_ug);
 unset($groups[XOOPS_GROUP_ANONYMOUS]);
-$sel_pg = new XoopsFormSelect(_AM_SUICO_FIELDVISIBLEON, 'pg');
+$sel_pg = new \XoopsFormSelect(_AM_SUICO_FIELDVISIBLEON, 'pg');
 $sel_pg->addOptionArray($groups);
 $add_form->addElement($sel_pg);
-$add_form->addElement(new XoopsFormButton('', 'submit', _ADD, 'submit'));
+$add_form->addElement(new \XoopsFormButton('', 'submit', _ADD, 'submit'));
 $add_form->assign($GLOBALS['xoopsTpl']);
 $GLOBALS['xoopsTpl']->display('db:admin/suico_admin_fieldsvisibility.tpl');
 require_once __DIR__ . '/admin_footer.php';

@@ -29,8 +29,10 @@ use XoopsDatabase;
 use XoopsMediaUploader;
 use XoopsObject;
 use XoopsPersistableObjectHandler;
-use XoopsModules\Suico;
-use XoopsModules\Suico\Helper;
+use XoopsModules\Suico\{
+    Helper
+};
+/** @var Helper $helper */
 
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 require_once XOOPS_ROOT_PATH . '/class/uploader.php';
@@ -83,7 +85,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
     /**
      * retrieve a suico_audio
      *
-     * @param int $id of the suico_audio
+     * @param int|null $id of the suico_audio
      * @return mixed reference to the {@link suico_audio} object, FALSE if failed
      */
     public function get2(
@@ -249,10 +251,10 @@ class AudioHandler extends XoopsPersistableObjectHandler
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $suicoAudio = new Audio();
             $suicoAudio->assignVars($myrow);
-            if (!$id_as_key) {
-                $ret[] = &$suicoAudio;
-            } else {
+            if ($id_as_key) {
                 $ret[$myrow['audio_id']] = &$suicoAudio;
+            } else {
+                $ret[] = &$suicoAudio;
             }
             unset($suicoAudio);
         }
@@ -335,7 +337,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         $maxfilesize       = $maxfilebytes;
         $uploadDir         = $path_upload;
         // create the object to upload
-        $uploader = new XoopsMediaUploader(
+        $uploader = new \XoopsMediaUploader(
             $uploadDir, $allowed_mimetypes, $maxfilesize
         );
         // fetch the media

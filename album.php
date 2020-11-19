@@ -20,12 +20,14 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    PhotosController
+};
 
 const COUNTPHOTOS = 'countPhotos';
 $GLOBALS['xoopsOption']['template_main'] = 'suico_album.tpl';
 require __DIR__ . '/header.php';
-$controller = new Suico\PhotosController($xoopsDB, $xoopsUser);
+$controller = new PhotosController($xoopsDB, $xoopsUser);
 /**
  * Fetching numbers of groups friends videos pictures etc...
  */
@@ -103,14 +105,14 @@ if (!empty($xoopsUser)) {
 /**
  * Let's get the user name of the owner of the album
  */
-$owner      = new XoopsUser($controller->uidOwner);
+$owner      = new \XoopsUser($controller->uidOwner);
 $identifier = $owner->getVar('uname');
 $avatar     = $owner->getVar('user_avatar');
 /**
  * Creating the navigation bar if you have a lot of friends
  */
 $countPhotos   = $nbSections[COUNTPHOTOS] ?? 0;
-$navigationBar = new XoopsPageNav(
+$navigationBar = new \XoopsPageNav(
     $countPhotos, $helper->getConfig('picturesperpage'), $start, 'start', 'uid=' . (int)$controller->uidOwner
 );
 $navegacao     = $navigationBar->renderImageNav(2);

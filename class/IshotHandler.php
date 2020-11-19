@@ -79,7 +79,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
     /**
      * retrieve a Ishot
      *
-     * @param int  $id of the Ishot
+     * @param int|null $id of the Ishot
      * @param null $fields
      * @return mixed reference to the {@link Ishot} object, FALSE if failed
      */
@@ -233,10 +233,10 @@ class IshotHandler extends XoopsPersistableObjectHandler
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $suico_ishot = new Ishot();
             $suico_ishot->assignVars($myrow);
-            if (!$id_as_key) {
-                $ret[] = &$suico_ishot;
-            } else {
+            if ($id_as_key) {
                 $ret[$myrow['cod_ishot']] = &$suico_ishot;
+            } else {
+                $ret[] = &$suico_ishot;
             }
             unset($suico_ishot);
         }

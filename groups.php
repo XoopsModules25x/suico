@@ -20,11 +20,14 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    GroupController
+};
+
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_groups.tpl';
 require __DIR__ . '/header.php';
-$controller = new Suico\GroupController($xoopsDB, $xoopsUser);
+$controller = new GroupController($xoopsDB, $xoopsUser);
 $start_all  = Request::getInt('start_all', 0, 'GET');
 $start_my   = Request::getInt('start_my', 0, 'GET');
 /**
@@ -55,11 +58,11 @@ foreach ($mygroups as $value) {
 /**
  * Creating the navigation bar if you have a lot of friends
  */
-$navigationBar    = new XoopsPageNav(
+$navigationBar    = new \XoopsPageNav(
     $countGroups, $helper->getConfig('groupsperpage'), $start_all, 'start_all', 'uid=' . (int)$controller->uidOwner . '&amp;start_my=' . $start_my . '#allgroups'
 );
 $imageNav         = $navigationBar->renderImageNav(2); //allgroups
-$navigationBar_my = new XoopsPageNav(
+$navigationBar_my = new \XoopsPageNav(
     $countMyGroups, $helper->getConfig('groupsperpage'), $start_my, 'start_my', 'uid=' . (int)$controller->uidOwner . '&amp;start_all=' . $start_all . '#mygroups'
 );
 $imageNav_my      = $navigationBar_my->renderImageNav(2);

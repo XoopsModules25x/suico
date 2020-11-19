@@ -57,7 +57,7 @@
                         <{/if}>
 
                         <h5>
-                            <a href="<{$xoops_url}>/userinfo.php?uid=<{$owner_uid}>">
+                            <a href="<{$xoops_url}>/userinfo.php?uid=<{$owner_uid|default:''}>">
                                 <{$lang_videos}>
                             </a>
                         </h5>
@@ -94,7 +94,7 @@
                                         <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 delete.png}>" class="float-left">
                                     </form>
                                     <form action="editvideo.php" method="post" id="editform" class="suico-video-forms">
-                                        <input type="hidden" alt="<{$lang_edit}>" title="<{$lang_edit}>" value="<{$videos[i].id}>" name="video_id">
+                                        <input type="hidden" alt="<{$lang_edit|default:''}>" title="<{$lang_edit|default:''}>" value="<{$videos[i].id}>" name="video_id">
                                         <{$token}>
                                         <input name="submit" type="image" alt="<{$lang_editvideo}>" title="<{$lang_editvideo}>" src="<{xoModuleIcons16 edit.png}>" class="float-left">
                                     </form>

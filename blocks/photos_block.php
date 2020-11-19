@@ -19,8 +19,11 @@ declare(strict_types=1);
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
-use XoopsModules\Suico;
-use XoopsModules\Suico\Helper;
+use XoopsModules\Suico\{
+    Helper,
+    ImageHandler
+};
+/** @var Helper $helper */
 
 if (!defined('XOOPS_ROOT_PATH')) {
     exit();
@@ -55,7 +58,7 @@ function b_suico_lastpictures_show($options)
     /**
      * Creating factories of pictures
      */
-    $imageFactory         = new \XoopsModules\Suico\ImageHandler($xoopsDB);
+    $imageFactory         = new ImageHandler($xoopsDB);
     $block['picture']     = $imageFactory->getLastPicturesForBlock($options[4]);
     $block['showtitle']   = $options[0];
     $block['showcaption'] = $options[1];
@@ -112,6 +115,6 @@ function b_suico_lastpictures_edit($options)
     }
     $form .= "&nbsp;<input type='radio' name='options[3]' value='0'" . $chk . ' >' . _NO . '<br>';
     $form .= _MB_SUICO_TOTALPICTUREDISPLAY . '&nbsp;';
-    $form .= "<input type='text' name='options[4]' value='" . (isset($options[4]) ? $options[4] : 0) . "'>";
+    $form .= "<input type='text' name='options[4]' value='" . ($options[4] ?? 0) . "'>";
     return $form;
 }

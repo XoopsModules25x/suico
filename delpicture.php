@@ -20,7 +20,9 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
+use XoopsModules\Suico\{
+    ImageHandler
+};
 
 require __DIR__ . '/header.php';
 if (!$GLOBALS['xoopsSecurity']->check()) {
@@ -42,7 +44,7 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
      * Creating the factory  and the criteria to delete the picture
      * The user must be the owner
      */
-    $imageFactory = new Suico\ImageHandler(
+    $imageFactory = new ImageHandler(
         $xoopsDB
     );
     $criteria_img = new Criteria('image_id', $image_id);

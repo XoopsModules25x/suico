@@ -80,7 +80,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
     /**
      * retrieve a Friendrequest
      *
-     * @param int  $id of the Friendrequest
+     * @param int|null $id of the Friendrequest
      * @param null $fields
      * @return mixed reference to the {@link Friendrequest} object, FALSE if failed
      */
@@ -231,10 +231,10 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $suico_friendrequest = new Friendrequest();
             $suico_friendrequest->assignVars($myrow);
-            if (!$id_as_key) {
-                $ret[] = &$suico_friendrequest;
-            } else {
+            if ($id_as_key) {
                 $ret[$myrow['friendreq_id']] = &$suico_friendrequest;
+            } else {
+                $ret[] = &$suico_friendrequest;
             }
             unset($suico_friendrequest);
         }

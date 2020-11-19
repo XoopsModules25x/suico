@@ -19,6 +19,7 @@ declare(strict_types=1);
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
+use Xmf\Module\Helper\Permission;
 use Xmf\Request;
 
 require __DIR__ . '/admin_header.php';
@@ -28,7 +29,7 @@ $op    = \Xmf\Request::getString('op', 'list');
 $order = \Xmf\Request::getString('order', 'desc');
 $sort  = \Xmf\Request::getString('sort', '');
 $adminObject->displayNavigation(basename(__FILE__));
-$permHelper = new \Xmf\Module\Helper\Permission();
+$permHelper = new Permission();
 $uploadDir  = XOOPS_UPLOAD_PATH . '/suico/images/';
 $uploadUrl  = XOOPS_UPLOAD_URL . '/suico/images/';
 switch ($op) {

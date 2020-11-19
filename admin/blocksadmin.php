@@ -285,7 +285,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         xoops_loadLanguage('admin/blocksadmin', 'system');
         xoops_loadLanguage('admin/groups', 'system');
         //        mpu_adm_menu();
-        $myblock = new XoopsBlock($bid);
+        $myblock = new \XoopsBlock($bid);
         $db      = XoopsDatabaseFactory::getDatabaseConnection();
         $sql     = 'SELECT module_id FROM ' . $db->prefix('block_module_link') . ' WHERE block_id=' . (int)$bid;
         $result  = $db->query($sql);
@@ -341,7 +341,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         xoops_loadLanguage('admin', 'system');
         xoops_loadLanguage('admin/blocksadmin', 'system');
         xoops_loadLanguage('admin/groups', 'system');
-        $block = new XoopsBlock($bid);
+        $block = new \XoopsBlock($bid);
         $clone = $block->xoopsClone();
         if (empty($bmodule)) {
             xoops_cp_header();
@@ -421,7 +421,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         $bcachetime,
         $bmodule
     ) {
-        $myblock = new XoopsBlock($bid);
+        $myblock = new \XoopsBlock($bid);
         $myblock->setVar('title', $title);
         $myblock->setVar('weight', $weight);
         $myblock->setVar('visible', $visible);
@@ -444,7 +444,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         xoops_loadLanguage('admin/blocksadmin', 'system');
         xoops_loadLanguage('admin/groups', 'system');
         //        mpu_adm_menu();
-        $myblock = new XoopsBlock($bid);
+        $myblock = new \XoopsBlock($bid);
         $db      = XoopsDatabaseFactory::getDatabaseConnection();
         $sql     = 'SELECT module_id FROM ' . $db->prefix('block_module_link') . ' WHERE block_id=' . (int)$bid;
         $result  = $db->query($sql);
@@ -502,7 +502,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
         $options,
         $groups
     ) {
-        $myblock = new XoopsBlock($bid);
+        $myblock = new \XoopsBlock($bid);
         $myblock->setVar('title', $btitle);
         $myblock->setVar('weight', $bweight);
         $myblock->setVar('visible', $bvisible);
@@ -513,9 +513,9 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
             $options_count = count($options);
             if ($options_count > 0) {
                 //Convert array values to comma-separated
-                for ($i = 0; $i < $options_count; ++$i) {
-                    if (is_array($options[$i])) {
-                        $options[$i] = implode(',', $options[$i]);
+                foreach ($options as $i => $iValue) {
+                    if (is_array($iValue)) {
+                        $options[$i] = implode(',', $iValue);
                     }
                 }
                 $options = implode('|', $options);

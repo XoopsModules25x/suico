@@ -64,11 +64,11 @@ switch ($op) {
             //            $uploader->setPrefix('url_');
             $uploader->setPrefix('aud_' . $uid . '_');
             $uploader->fetchMedia(Request::getString('xoops_upload_file', '', 'POST')[0]);
-            if (!$uploader->upload()) {
+            if ($uploader->upload()) {
+                $audioObject->setVar('filename', $uploader->getSavedFileName());
+            } else {
                 $errors = $uploader->getErrors();
                 redirect_header('javascript:history.go(-1)', 3, $errors);
-            } else {
-                $audioObject->setVar('filename', $uploader->getSavedFileName());
             }
         }
         $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_created', '', 'POST'));
@@ -148,7 +148,7 @@ switch ($op) {
         // Display Page Navigation
         if ($audioTempRows > $audioPaginationLimit) {
             xoops_load('XoopsPageNav');
-            $pagenav = new XoopsPageNav(
+            $pagenav = new \XoopsPageNav(
                 $audioTempRows, $audioPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
@@ -200,7 +200,7 @@ switch ($op) {
             // Display Navigation
             if ($audioCount > $audioPaginationLimit) {
                 xoops_load('XoopsPageNav');
-                $pagenav = new XoopsPageNav(
+                $pagenav = new \XoopsPageNav(
                     $audioCount, $audioPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));

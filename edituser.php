@@ -22,12 +22,11 @@ declare(strict_types=1);
  */
 
 use Xmf\Request;
-use XoopsModules\Suico;
-use XoopsModules\Suico\IndexController;
-use XoopsModules\Suico\Form\FieldForm;
-use XoopsModules\Suico\Form\RegisterForm;
-use XoopsModules\Suico\Form\StepForm;
-use XoopsModules\Suico\Form\UserForm;
+use XoopsModules\Suico\{
+    Form\UserForm,
+    IndexController
+};
+
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_editprofile.tpl';
 require __DIR__ . '/header.php';
@@ -43,7 +42,7 @@ require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
 if (!is_object($GLOBALS['xoopsUser'])) {
     redirect_header(XOOPS_URL, 3, _US_NOEDITRIGHT);
 }
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 $op   = Request::getCmd('op', 'editprofile');
 /* @var \XoopsConfigHandler $configHandler */
 $configHandler              = xoops_getHandler('config');
@@ -88,14 +87,14 @@ if ('save' === $op) {
                 }
             }
         }
-        if (!$memberHandler->insertUser($edituser)) {
-            $stop = $edituser->getHtmlErrors();
-            $op   = 'editprofile';
-        } else {
+        if ($memberHandler->insertUser($edituser)) {
             $profile->setVar('profile_id', $edituser->getVar('uid'));
             $profileHandler->insert($profile);
             unset($_SESSION['xoopsUserTheme']);
             redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/index.php?uid=' . $edituser->getVar('uid'), 2, _US_PROFUPDATED);
+        } else {
+            $stop = $edituser->getHtmlErrors();
+            $op   = 'editprofile';
         }
     }
 }
@@ -180,9 +179,7 @@ if ('avatarupload' === $op) {
                 $avatar->setVar('avatar_mimetype', $uploader->getMediaType());
                 $avatar->setVar('avatar_display', 1);
                 $avatar->setVar('avatar_type', 'C');
-                if (!$avtHandler->insert($avatar)) {
-                    @unlink($uploader->getSavedDestination());
-                } else {
+                if ($avtHandler->insert($avatar)) {
                     $oldavatar = $GLOBALS['xoopsUser']->getVar('user_avatar');
                     if (!empty($oldavatar) && false !== stripos($oldavatar, 'cavt')) {
                         $avatars = $avtHandler->getObjects(new Criteria('avatar_file', $oldavatar));
@@ -198,6 +195,8 @@ if ('avatarupload' === $op) {
                     $GLOBALS['xoopsDB']->query($sql);
                     $avtHandler->addUser($avatar->getVar('avatar_id'), $GLOBALS['xoopsUser']->getVar('uid'));
                     redirect_header('index . php ? t = ' . time() . ' & amp;uid = ' . $GLOBALS['xoopsUser']->getVar('uid'), 3, _US_PROFUPDATED);
+                } else {
+                    @unlink($uploader->getSavedDestination());
                 }
             }
         }

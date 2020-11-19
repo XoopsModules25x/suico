@@ -81,7 +81,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
     /**
      * retrieve aNotes
      *
-     * @param int  $id of theNotes
+     * @param int|null $id of theNotes
      * @param null $fields
      * @return mixed reference to the {@linkNotes} object, FALSE if failed
      */
@@ -237,10 +237,10 @@ class NotesHandler extends XoopsPersistableObjectHandler
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $suico_notes = new Notes();
             $suico_notes->assignVars($myrow);
-            if (!$id_as_key) {
-                $ret[] = &$suico_notes;
-            } else {
+            if ($id_as_key) {
                 $ret[$myrow['note_id']] = &$suico_notes;
+            } else {
+                $ret[] = &$suico_notes;
             }
             unset($suico_notes);
         }

@@ -19,9 +19,13 @@ declare(strict_types=1);
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
+use Xmf\Module\Admin;
 use Xmf\Request;
-use XoopsModules\Suico;
-use XoopsModules\Suico\Common\Migrate;
+use XoopsModules\Suico\{
+    Common\Configurator,
+    Common\Migrate
+};
+/** @var Admin $adminObject */
 
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
@@ -40,7 +44,7 @@ echo <<<EOF
 </form>
 EOF;
 //XoopsLoad::load('migrate', 'newbb');
-$configurator = new Suico\Common\Configurator();
+$configurator = new Configurator();
 $migrator     = new Migrate($configurator);
 $op           = Request::getCmd('op', 'default');
 $opShow       = Request::getCmd('show', null, 'POST');

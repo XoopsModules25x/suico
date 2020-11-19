@@ -176,12 +176,12 @@ class SuicoController extends \XoopsObject
         }
         //isFriend?
         $criteria_friends = new Criteria('friend1_uid', $this->uidOwner);
-        if (!$xoopsUser) {
-            $this->isFriend = 0;
-        } else {
+        if ($xoopsUser) {
             $criteriaIsfriend = new CriteriaCompo(new Criteria('friend2_uid', $this->user->getVar('uid')));
             $criteriaIsfriend->add($criteria_friends);
             $this->isFriend = $this->friendshipsFactory->getCount($criteriaIsfriend);
+        } else {
+            $this->isFriend = 0;
         }
         $this->privilegeLevel = 1;
         if (1 === $this->isAnonym) {
