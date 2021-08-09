@@ -77,4 +77,4 @@ if ($array_vid) {
     $url     = $array_vid[0]->getVar('youtube_code');
 }
 $videoFactory->renderFormEdit($title, $caption, $video_id, $url);
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

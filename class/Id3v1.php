@@ -32,7 +32,7 @@ use RuntimeException;
 /**
  * @author      Karol Babioch <karol@babioch.de>
  * @copyright   Karol Babioch
- * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU GPL
+ * @license     https://www.gnu.org/licenses/gpl-3.0.html GNU GPL
  * @package     Id3v1
  */
 
@@ -49,7 +49,7 @@ use RuntimeException;
  * @package      Id3v1
  * @author       Karol Babioch <karol@babioch.de>
  * @copyright    Karol Babioch
- * @license      http://www.gnu.org/licenses/gpl-3.0.html GNU GPL
+ * @license      https://www.gnu.org/licenses/gpl-3.0.html GNU GPL
  */
 class Id3v1
 {

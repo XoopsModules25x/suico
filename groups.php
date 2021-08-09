@@ -106,4 +106,4 @@ $xoopsTpl->assign('lang_grouptotalmembers', _MD_SUICO_GROUPTOTALMEMBERS);
 $xoopsTpl->assign('lang_mysection', _MD_SUICO_MYGROUPS);
 $xoopsTpl->assign('section_name', _MD_SUICO_GROUPS);
 require __DIR__ . '/footer.php';
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

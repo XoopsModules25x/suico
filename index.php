@@ -378,7 +378,7 @@ $xoopsTpl->assign('lang_onlinestatus', _MD_SUICO_ONLINESTATUS);
 $xoopsTpl->assign('uname', $thisUser->getVar('uname'));
 $xoopsTpl->assign('lang_realname', _US_REALNAME);
 $xoopsTpl->assign('name', $thisUser->getVar('name'));
-$gpermHandler  = xoops_getHandler('groupperm');
+$grouppermHandler  = xoops_getHandler('groupperm');
 $groups        = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
 $moduleHandler = xoops_getHandler('module');
 $criteria      = new CriteriaCompo(new Criteria('hassearch', 1));
@@ -391,7 +391,7 @@ if ($userrank['image']) {
 }
 $xoopsTpl->assign('user_ranktitle', $userrank['title']);
 foreach ($mids as $mid) {
-    if ($gpermHandler->checkRight('module_read', $mid, $groups)) {
+    if ($grouppermHandler->checkRight('module_read', $mid, $groups)) {
         $module   = $moduleHandler->get($mid);
         $user_uid = $thisUser->getVar('uid');
         $results  = $module->search('', '', 5, 0, $user_uid);
@@ -431,4 +431,4 @@ foreach ($mids as $mid) {
     }
 }
 require __DIR__ . '/footer.php';
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

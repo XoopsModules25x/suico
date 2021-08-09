@@ -68,4 +68,4 @@ if (1 !== Request::getInt('confirm', 0, 'POST')) {
         redirect_header('group.php?group_id=' . $group_id . '', 2, _MD_SUICO_ERROR);
     }
 }
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

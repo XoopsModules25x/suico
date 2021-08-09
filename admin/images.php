@@ -22,7 +22,7 @@ declare(strict_types=1);
 use Xmf\Module\Helper\Permission;
 use Xmf\Request;
 
-require __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 //It recovered the value of argument op in URL$
 $op    = Request::getString('op', 'list');
@@ -214,4 +214,4 @@ switch ($op) {
         }
         break;
 }
-require __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

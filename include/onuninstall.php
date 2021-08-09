@@ -49,7 +49,7 @@ function xoops_module_uninstall_suico(
     XoopsModule $module
 ) {
     require __DIR__ . '/common.php';
-    $moduleDirName      = basename(dirname(__DIR__));
+    $moduleDirName      = \basename(\dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
     $helper             = Helper::getInstance();
     $utility            = new Utility();

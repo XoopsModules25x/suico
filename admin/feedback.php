@@ -30,7 +30,7 @@ use XoopsModules\Suico\{
 /** @var Utility $utility */
 /** @var Admin $adminObject */
 
-require __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 $adminObject = Admin::getInstance();
 $feedback    = new ModuleFeedback();
 // It recovered the value of argument op in URL$
@@ -101,4 +101,4 @@ switch ($op) {
         echo $form->render();
         break;
 }
-require __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

@@ -61,4 +61,4 @@ if (!Request::hasVar('confirm', 'POST') || 1 !== Request::getInt('confirm', 0, '
         redirect_header('videos.php?uid=' . $uid, 2, _MD_SUICO_ERROR);
     }
 }
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

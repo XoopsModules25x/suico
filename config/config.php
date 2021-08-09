@@ -20,9 +20,9 @@ declare(strict_types=1);
 
 use Xmf\Module\Admin;
 
-$moduleDirName      = basename(dirname(__DIR__));
+$moduleDirName      = \basename(\dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-require_once dirname(__DIR__) . '/include/common.php';
+require_once \dirname(__DIR__) . '/include/common.php';
 return (object)[
     'name'            => mb_strtoupper($moduleDirName) . ' ModuleConfigurator',
     'paths'           => [

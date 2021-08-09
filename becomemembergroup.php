@@ -54,4 +54,4 @@ if ($relgroupuserFactory->getCount($criteria) < 1) {
 } else {
     redirect_header('group.php?group_id=' . $group_id . '', 1, _MD_SUICO_YOUAREMEMBERALREADY);
 }
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

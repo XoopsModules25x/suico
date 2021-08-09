@@ -32,7 +32,7 @@ use XoopsModules\Suico\{
 /** @var Helper $helper */
 
 require __DIR__ . '/preloads/autoloader.php';
-require dirname(__DIR__, 2) . '/mainfile.php';
+require_once \dirname(__DIR__, 2) . '/mainfile.php';
 require XOOPS_ROOT_PATH . '/header.php';
 $moduleDirName = basename(__DIR__);
 $helper        = Helper::getInstance();

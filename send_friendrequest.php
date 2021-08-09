@@ -53,4 +53,4 @@ if ($friendrequestFactory->insert2($newFriendrequest)) {
 /**
  * Close page
  */
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

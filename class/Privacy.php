@@ -23,6 +23,7 @@ namespace XoopsModules\Suico;
  */
 
 use XoopsModules\Suico;
+use Xmf\Module\Helper\Permission;
 
 //$permHelper = new \Xmf\Module\Helper\Permission();
 
@@ -44,7 +45,7 @@ class Privacy extends \XoopsObject
         parent::__construct();
         //        /** @var  Suico\Helper $helper */
         //        $this->helper = Suico\Helper::getInstance();
-        $this->permHelper = new \Xmf\Module\Helper\Permission();
+        $this->permHelper = new Permission();
         $this->initVar('id', \XOBJ_DTYPE_INT);
         $this->initVar('level', \XOBJ_DTYPE_INT);
         $this->initVar('name', \XOBJ_DTYPE_TXTBOX);

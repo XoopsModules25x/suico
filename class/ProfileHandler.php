@@ -15,7 +15,7 @@ namespace XoopsModules\Suico;
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
- * @license             GNU GPL 2 (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license             GNU GPL 2 (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package             profile
  * @since               2.3.0
  * @author              Jan Pedersen
@@ -278,7 +278,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
         $sql_clause = ' WHERE 1=1';
         $sql_order  = '';
         $limit      = $start = 0;
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
+        if (\is_object($criteria) && \is_subclass_of($criteria, \CriteriaElement::class)) {
             $sql_clause .= ' AND ' . $criteria->render();
             if ('' !== $criteria->getSort()) {
                 $sql_order = ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();

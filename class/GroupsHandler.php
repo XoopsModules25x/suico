@@ -265,7 +265,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $order = 'ASC';
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_groups');
-        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+        if (\is_object($criteria) && \is_subclass_of($criteria, \CriteriaElement::class)) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' !== $sort) {
                 $sql .= ' ORDER BY ' . $sort . ' ' . $order;
@@ -291,12 +291,12 @@ class GroupsHandler extends XoopsPersistableObjectHandler
             $group_total_members = $row['grouptotalmembers'];
             if ($group_total_members > 0) {
                 if (1 == $group_total_members) {
-                    $ret[$i]['group_total_members'] = '' . _MD_SUICO_ONEMEMBER . '&nbsp;';
+                    $ret[$i]['group_total_members'] = '' . \_MD_SUICO_ONEMEMBER . '&nbsp;';
                 } else {
-                    $ret[$i]['group_total_members'] = '' . $group_total_members . '&nbsp;' . _MD_SUICO_GROUPMEMBERS . '&nbsp;';
+                    $ret[$i]['group_total_members'] = '' . $group_total_members . '&nbsp;' . \_MD_SUICO_GROUPMEMBERS . '&nbsp;';
                 }
             } else {
-                $ret[$i]['group_total_members'] = '' . _MD_SUICO_NO_MEMBER . '&nbsp;';
+                $ret[$i]['group_total_members'] = '' . \_MD_SUICO_NO_MEMBER . '&nbsp;';
             }
             $i++;
         }

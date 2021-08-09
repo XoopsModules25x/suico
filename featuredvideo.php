@@ -53,4 +53,4 @@ if ($uid === $video->getVar('uid_owner')) {
         echo 'did not work';
     }
 }
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

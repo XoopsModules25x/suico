@@ -54,4 +54,4 @@ if ($xoopsUser->isAdmin(1)) {
     $memberHandler->insertUser($thisUser);
     redirect_header('index.php?uid=' . $uid, 300, _MD_SUICO_USER_SUSPENDED);
 }
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

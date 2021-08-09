@@ -14,8 +14,8 @@ declare(strict_types=1);
 /**
  * Extended User Profile
  *
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @copyright    XOOPS Project (https://xoops.org)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       Jan Pedersen
  * @author       Taiwen Jiang <phppp@users.sourceforge.net>
  * @author       Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -257,4 +257,4 @@ if ('avatarchoose' === $op) {
     redirect_header('index . php ? uid = ' . $uid, 0, _US_PROFUPDATED);
 }
 require __DIR__ . '/footer.php';
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

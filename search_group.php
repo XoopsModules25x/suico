@@ -110,4 +110,4 @@ $xoopsTpl->assign('lang_searchgroup', _MD_SUICO_GROUP_SEARCH);
 $xoopsTpl->assign('lang_groupkeyword', _MD_SUICO_GROUP_SEARCHKEYWORD);
 $xoopsTpl->assign('lang_memberofgroup', _MD_SUICO_MEMBEROFGROUP);
 require __DIR__ . '/footer.php';
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

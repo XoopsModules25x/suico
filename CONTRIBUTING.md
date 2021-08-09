@@ -1,7 +1,7 @@
-![alt XOOPS CMS](https://xoops.org/images/logoXoops4GithubRepository.png)
+![alt XOOPS CMS](https://xoops.org/images/logoXoopsPhp8.png)
 # Contributing to [XOOPS CMS](https://xoops.org)
 [![XOOPS CMS Module](https://img.shields.io/badge/XOOPS%20CMS-Module-blue.svg)](https://xoops.org)
-[![Software License](https://img.shields.io/badge/license-GPL-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
+[![Software License](https://img.shields.io/badge/license-GPL-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/gpl-2.0.html)
 
 Contributions are **welcome** and will be fully **credited**.
 
@@ -9,7 +9,7 @@ We accept contributions via Pull Requests on [Github](https://github.com/XoopsMo
 
 ## Pull Requests
 
-- **[PSR-2 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)** - The easiest way to apply the conventions is to install [PHP Code Sniffer](http://pear.php.net/package/PHP_CodeSniffer).
+- **[PSR-12 Coding Standard](https://www.php-fig.org/psr/psr-12/)** - The easiest way to apply the conventions is to install [PHP Code Sniffer](http://pear.php.net/package/PHP_CodeSniffer).
 - **Add tests!** - We encourage providing tests with your contributions. We're using [Codeception](https://www.codeception.com) and PhpUnit
 - **Document any change in behavior** - Make sure the `/docs/changelog.txt` and any other relevant documentation are kept up-to-date.
 - **Consider our release cycle** - We try to follow [Semantic Versioning v2.0.0](http://semver.org/). Randomly breaking public APIs is not an option.

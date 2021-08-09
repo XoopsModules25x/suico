@@ -51,4 +51,4 @@ $criteria_delete1 = new CriteriaCompo($criteria_friend1);
 $criteria_delete1->add($criteria_friend2);
 $friendrequestFactory->deleteAll($criteria_delete1);
 redirect_header('index.php?uid=' . $friendrequestto_uid . '', 3, _MD_SUICO_FRIENDREQUEST_CANCELLED);
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

@@ -15,11 +15,9 @@ namespace XoopsModules\Suico;
  */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @package
- * @since
- * @author       XOOPS Development Team
+ * @copyright    XOOPS Project (https://xoops.org)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author      XOOPS Development Team
  */
 
 use RuntimeException;
@@ -52,7 +50,7 @@ class Helper extends \Xmf\Module\Helper
     ) {
         static $instance;
         if (null === $instance) {
-            $instance = new static($debug);
+            $instance = new self($debug);
         }
         return $instance;
     }
@@ -88,4 +86,4 @@ class Helper extends \Xmf\Module\Helper
         return $ret;
     }
 }
-//require  dirname(dirname(__DIR__)) . '/mainfile.php';
+//require_once \dirname(__DIR__, 2) . '/mainfile.php';

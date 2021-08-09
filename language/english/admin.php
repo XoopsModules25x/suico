@@ -291,7 +291,7 @@ define('AM_SUICO_PERMSET', 'The permission has been set');
 define('AM_SUICO_PERMNOTSET', 'The permission can not be set');
 define('AM_SUICO_VIDEO_EXPIREWARNING', 'The publishing date is after expiration date!!!');
 //Sample Data
-define('AM_SUICO_ADD_SAMPLEDATA', 'Import Sample Data (will delete ALL current data)');
+define('AM_SUICO_LOAD_SAMPLEDATA', 'Import Sample Data (will delete ALL current data)');
 define('AM_SUICO_SAMPLEDATA_SUCCESS', 'Sample Date uploaded successfully');
 
 define('AM_SUICO_MAINTAINEDBY', 'is maintained by the');

@@ -6,20 +6,18 @@ declare(strict_types=1);
  * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
  *
- * PHP version 5
  *
  * @category        Module
  * @author          XOOPS Development Team
  * @copyright       XOOPS Project
  * @link            https://xoops.org
- * @license         GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-$moduleDirName      = basename(dirname(__DIR__));
-$moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
-//$helper = \XoopsModules\Suico\Helper::getInstance();
-//$helper->loadLanguage('blocksadmin');
-xoops_loadLanguage('blocksadmin', $moduleDirName);
+
+$moduleDirName      = \basename(\dirname(__DIR__));
+$moduleDirNameUpper = \mb_strtoupper($moduleDirName);
+
 $form = new \XoopsThemeForm($block['form_title'], 'blockform', 'blocksadmin.php', 'post', true);
 if (isset($block['name'])) {
     $form->addElement(new \XoopsFormLabel(_AM_SYSTEM_BLOCKS_NAME, $block['name']));
@@ -59,7 +57,7 @@ $module_list[0]  = _AM_SYSTEM_BLOCKS_ALLPAGES;
 ksort($module_list);
 $mod_select->addOptionArray($module_list);
 $form->addElement($mod_select);
-$form->addElement(new \XoopsFormText(_AM_TITLE, 'btitle', 50, 255, $block['title']), false);
+$form->addElement(new \XoopsFormText(_AM_SYSTEM_BLOCKS_TITLE, 'btitle', 50, 255, $block['title']), false);
 if ($block['is_custom']) {
     $textarea = new \XoopsFormDhtmlTextArea(_AM_SYSTEM_BLOCKS_CONTENT, 'bcontent', $block['content'], 15, 70);
     $textarea->setDescription(
@@ -113,17 +111,17 @@ if ($block['is_custom']) {
 $cache_select = new \XoopsFormSelect(_AM_SYSTEM_BLOCKS_BCACHETIME, 'bcachetime', $block['bcachetime']);
 $cache_select->addOptionArray(
     [
-        '0'       => _NOCACHE,
-        '30'      => sprintf(_SECONDS, 30),
-        '60'      => _MINUTE,
-        '300'     => sprintf(_MINUTES, 5),
-        '1800'    => sprintf(_MINUTES, 30),
-        '3600'    => _HOUR,
-        '18000'   => sprintf(_HOURS, 5),
-        '86400'   => _DAY,
-        '259200'  => sprintf(_DAYS, 3),
-        '604800'  => _WEEK,
-        '2592000' => _MONTH,
+        0       => _NOCACHE,
+        30      => sprintf(_SECONDS, 30),
+        60      => _MINUTE,
+        300     => sprintf(_MINUTES, 5),
+        1800    => sprintf(_MINUTES, 30),
+        3600    => _HOUR,
+        18000   => sprintf(_HOURS, 5),
+        86400   => _DAY,
+        259200  => sprintf(_DAYS, 3),
+        604800  => _WEEK,
+        2592000 => _MONTH,
     ]
 );
 $form->addElement($cache_select);

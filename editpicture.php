@@ -79,4 +79,4 @@ if ($array_pict) {
 //$url = $xoopsModuleConfig['link_path_upload']."/thumb_".$url;
 $url = XOOPS_URL . '/uploads/suico/images/thumb_' . $filename;
 $imageFactory->renderFormEdit($title, $caption, $image_id, $url);
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

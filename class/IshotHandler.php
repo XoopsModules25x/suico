@@ -298,7 +298,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
             ) . ', ' . $this->db->prefix(
                 'users'
             );
-        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+        if (\is_object($criteria) && \is_subclass_of($criteria, \CriteriaElement::class)) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         //attention here this is kind of a hack
@@ -340,7 +340,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
             ) . ', ' . $this->db->prefix(
                 'users'
             );
-        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+        if (\is_object($criteria) && \is_subclass_of($criteria, \CriteriaElement::class)) {
             $sql .= ' ' . $criteria->renderWhere();
             //attention here this is kind of a hack
             $sql .= ' AND uid = uid_voted AND ishot=1';

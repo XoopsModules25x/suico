@@ -17,5 +17,5 @@ declare(strict_types=1);
  * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
-include dirname(__DIR__, 2) . '/mainfile.php';
+include \dirname(__DIR__, 2) . '/mainfile.php';
 require XOOPS_ROOT_PATH . '/include/comment_delete.php';

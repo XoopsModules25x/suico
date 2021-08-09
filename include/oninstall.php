@@ -29,7 +29,7 @@ use XoopsModules\Suico\{
 /** @var Utility $utility */
 /** @var Common\Configurator $configurator */
 
-include dirname(
+include \dirname(
             __DIR__
         ) . '/preloads/autoloader.php';
 /**
@@ -67,8 +67,8 @@ function xoops_module_install_suico(XoopsModule $module)
     global $module_id;
     $module_id = $module->getVar('mid');
     xoops_loadLanguage('user');
-    require_once dirname(__DIR__) . '/preloads/autoloader.php';
-    $moduleDirName = basename(dirname(__DIR__));
+    require_once \dirname(__DIR__) . '/preloads/autoloader.php';
+    $moduleDirName = \basename(\dirname(__DIR__));
     // Create registration steps
     suico_install_addStep(_MI_SUICO_STEP_BASIC, '', 1, 1);
     // Create categories
@@ -154,7 +154,7 @@ function xoops_module_install_suico(XoopsModule $module)
     }
     //  ---  COPY blank.png FILES ---------------
     if (count($configurator->copyBlankFiles) > 0) {
-        $file = dirname(__DIR__) . '/assets/images/blank.png';
+        $file = \dirname(__DIR__) . '/assets/images/blank.png';
         foreach (array_keys($configurator->copyBlankFiles) as $i) {
             $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
             $utility::copyFile($file, $dest);
@@ -163,7 +163,7 @@ function xoops_module_install_suico(XoopsModule $module)
     /*
         //  ---  COPY test folder files ---------------
     if (count($configurator->copyTestFolders) > 0) {
-        //        $file =  dirname(__DIR__) . '/testdata/images/';
+        //        $file =  \dirname(__DIR__) . '/testdata/images/';
         foreach (array_keys($configurator->copyTestFolders) as $i) {
             $src  = $configurator->copyTestFolders[$i][0];
             $dest = $configurator->copyTestFolders[$i][1];

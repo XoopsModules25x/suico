@@ -28,11 +28,11 @@ use XoopsModules\Suico\{
 /** @var Utility $utility */
 /** @var Admin $adminObject */
 
-include dirname(__DIR__) . '/preloads/autoloader.php';
-require dirname(__DIR__, 3) . '/include/cp_header.php';
+include \dirname(__DIR__) . '/preloads/autoloader.php';
+require \dirname(__DIR__, 3) . '/include/cp_header.php';
 //require $GLOBALS['xoops']->path('www/class/xoopsformloader.php');
-require dirname(__DIR__) . '/include/common.php';
-$moduleDirName = basename(dirname(__DIR__));
+require \dirname(__DIR__) . '/include/common.php';
+$moduleDirName = \basename(\dirname(__DIR__));
 $helper        = Helper::getInstance();
 $utility       = Utility::getInstance();
 /** @var Admin $adminObject */

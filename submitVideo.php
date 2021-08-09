@@ -76,4 +76,4 @@ if ($videoFactory->insert($newvideo)) {
         _MD_SUICO_ERROR
     );
 }
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

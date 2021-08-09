@@ -69,4 +69,4 @@ $xoopsTpl->assign('friends', $vetor);
 $xoopsTpl->assign('lang_delete', _MD_SUICO_DELETE);
 $xoopsTpl->assign('lang_evaluate', _MD_SUICO_FRIENDSHIP_CONFIGS);
 require __DIR__ . '/footer.php';
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

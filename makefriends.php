@@ -68,4 +68,4 @@ if ($friendrequestFactory->getCount($criteria) > 0) {
 } else {
     redirect_header(XOOPS_URL . '/modules/suico/index.php?uid=' . $uid, 3, _MD_SUICO_ERROR);
 }
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

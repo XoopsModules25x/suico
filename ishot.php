@@ -65,4 +65,4 @@ if (0 === $ishotFactory->getCount($criteria)) {
 } else {
     redirect_header(Request::getString('HTTP_REFERER', '', 'SERVER'), 3, _MD_SUICO_ALREADYVOTED);
 }
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

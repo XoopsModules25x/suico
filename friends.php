@@ -111,4 +111,4 @@ $xoopsTpl->assign('allow_fanssevaluation', $helper->getConfig('allow_fanssevalua
 // Navigation
 $xoopsTpl->assign('navegacao', $navegacao);
 require __DIR__ . '/footer.php';
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

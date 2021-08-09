@@ -119,6 +119,6 @@ $xoopsTpl->assign(
 );
 $xoopsTpl->assign('lang_mysection', _MD_SUICO_GROUPS . ' :: ' . $group->getVar('group_title'));
 $xoopsTpl->assign('section_name', _MD_SUICO_GROUPS . '> ' . $group->getVar('group_title'));
-require_once XOOPS_ROOT_PATH . '/include/comment_view.php';
+require XOOPS_ROOT_PATH . '/include/comment_view.php';
 require __DIR__ . '/footer.php';
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

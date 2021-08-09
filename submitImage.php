@@ -26,7 +26,7 @@ use XoopsModules\Suico\{
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_index.tpl';
 require __DIR__ . '/header.php';
-//require_once dirname(dirname(__DIR__)) . '/header.php';
+//require_once \dirname(__DIR__, 2) . '/header.php';
 /**
  * Modules class includes
  */
@@ -100,4 +100,4 @@ if ('sel_photo' === Request::getArray('xoops_upload_file', '', 'POST')[0]) {
 /**
  * Close page
  */
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

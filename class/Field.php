@@ -15,7 +15,7 @@ namespace XoopsModules\Suico;
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
- * @license             GNU GPL 2 (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license             GNU GPL 2 (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package             profile
  * @since               2.3.0
  * @author              Jan Pedersen
@@ -209,11 +209,8 @@ class Field extends \XoopsObject
      **/
     public function getOutputValue($user, $profile)
     {
-        if (\is_file($file = $GLOBALS['xoops']->path('modules/suico/language/' . $GLOBALS['xoopsConfig']['language'] . '/modinfo.php'))) {
-            require_once $file;
-        } else {
-            require_once $GLOBALS['xoops']->path('modules/suico/language/english/modinfo.php');
-        }
+        \xoops_loadLanguage('modinfo', 'suico');
+
         $value = \in_array($this->getVar('field_name'), $this->getUserVars()) ? $user->getVar($this->getVar('field_name')) : $profile->getVar($this->getVar('field_name'));
         switch ($this->getVar('field_type')) {
             default:

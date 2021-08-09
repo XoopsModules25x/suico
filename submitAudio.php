@@ -91,4 +91,4 @@ if ('sel_audio' === (Request::getArray('xoops_upload_file', '', 'POST')[0])) {
 /**
  * Close page
  */
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

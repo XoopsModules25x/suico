@@ -142,4 +142,4 @@ $xoopsTpl->assign('lang_mysection', _MD_SUICO_MYPHOTOS);
 $xoopsTpl->assign('section_name', _MD_SUICO_PHOTOS);
 require XOOPS_ROOT_PATH . '/include/comment_view.php';
 require __DIR__ . '/footer.php';
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';
