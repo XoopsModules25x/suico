@@ -105,7 +105,7 @@ class Controller extends \XoopsObject
         }
     }
 
-    public function checkPrivilege(): void
+    public function checkPrivilege()
     {
     }
 
