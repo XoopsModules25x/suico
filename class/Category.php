@@ -24,6 +24,11 @@ namespace XoopsModules\Suico;
  */
 class Category extends \XoopsObject
 {
+    public $cat_id;
+    public $cat_title;
+    public $cat_description;
+    public $cat_weight;
+
     public function __construct()
     {
         $this->initVar('cat_id', \XOBJ_DTYPE_INT, null, true);

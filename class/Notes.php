@@ -36,6 +36,14 @@ class Notes extends XoopsObject
     public $db;
     public $helper;
     public $permHelper;
+    public $note_id;
+    public $note_text;
+    public $note_from;
+    public $note_to;
+    public $private;
+    public $date_created;
+    
+    
     // constructor
 
     /**

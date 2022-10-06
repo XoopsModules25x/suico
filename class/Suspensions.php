@@ -35,6 +35,11 @@ class Suspensions extends XoopsObject
     public $db;
     public $helper;
     public $permHelper;
+    public $uid;
+    public $old_pass;
+    public $old_email;
+    public $old_signature;
+    public $suspension_time;
     // constructor
 
     /**

@@ -41,6 +41,15 @@ class Video extends XoopsObject
     public $db;
     public $helper;
     public $permHelper;
+    public $video_id;
+    public $uid_owner;
+    public $video_title;
+    public $video_desc;
+    public $youtube_code;
+    public $featured_video;
+    public $date_created;
+public $date_updated ;
+
     // constructor
 
     /**

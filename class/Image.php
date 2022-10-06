@@ -40,8 +40,16 @@ class Image extends XoopsObject
     public $db;
     public $helper;
     public $permHelper;
-    // constructor
+    public $image_id;
+    public $title;
+    public $caption;
+    public $date_created;
+    public $date_updated;
+    public $uid_owner;
+    public $filename;
+    public $private;
 
+    // constructor
     /**
      * Image constructor.
      * @param null $id

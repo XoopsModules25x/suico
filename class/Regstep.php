@@ -24,6 +24,12 @@ namespace XoopsModules\Suico;
  */
 class Regstep extends \XoopsObject
 {
+    public $step_id;
+    public $step_name;
+    public $step_desc;
+    public $step_order;
+    public $step_save;
+
     public function __construct()
     {
         $this->initVar('step_id', \XOBJ_DTYPE_INT);

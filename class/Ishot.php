@@ -34,6 +34,11 @@ class Ishot extends XoopsObject
     public $db;
     public $helper;
     public $permHelper;
+    public $cod_ishot;
+    public $uid_voter;
+    public $uid_voted;
+    public $ishot;
+    public $date_created;
     // constructor
 
     /**

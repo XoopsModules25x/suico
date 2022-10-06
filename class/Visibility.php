@@ -24,6 +24,10 @@ namespace XoopsModules\Suico;
  */
 class Visibility extends \XoopsObject
 {
+    public $field_id;
+    public $user_group;
+    public $profile_group;
+
     public function __construct()
     {
         $this->initVar('field_id', \XOBJ_DTYPE_INT);

@@ -35,6 +35,11 @@ class Visitors extends XoopsObject
     public $db;
     public $helper;
     public $permHelper;
+    public $visit_id;
+    public $uid_owner;
+    public $uid_visitor;
+    public $uname_visitor;
+    public $date_visited;
     // constructor
 
     /**

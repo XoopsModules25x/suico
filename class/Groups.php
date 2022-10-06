@@ -43,6 +43,13 @@ class Groups extends XoopsObject
     public $xoopsDB;
     public $helper;
     public $permHelper;
+    public $group_id;
+    public $owner_uid;
+    public $group_title;
+    public $group_desc;
+    public $group_img;
+    public $date_created;
+    public $date_updated;
 
     /**
      * Groups constructor.

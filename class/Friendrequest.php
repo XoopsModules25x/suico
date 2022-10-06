@@ -35,6 +35,10 @@ class Friendrequest extends XoopsObject
     public $db;
     public $helper;
     public $permHelper;
+    public $friendreq_id;
+    public $friendrequester_uid;
+    public $friendrequestto_uid;
+    public $date_created;
     // constructor
 
     /**

@@ -42,6 +42,16 @@ class Friendship extends XoopsObject
     public $db;
     public $helper;
     public $permHelper;
+    public $friendship_id;
+    public $friend;
+    public $level;
+    public $hot;
+    public $trust;
+    public $cool;
+    public $fan;
+    public $date_created;
+    public $date_updated;
+    
     // constructor
 
     /**

@@ -37,7 +37,14 @@ class Audio extends XoopsObject
     public $db;
     public $helper;
     public $permHelper;
-    // constructor
+    public $audio_id;
+    public $uid_owner;
+    public $author;
+    public $title;
+    public $description;
+    public $filename;
+    public $date_created;
+    public $date_updated;
 
     /**
      * Audio constructor.

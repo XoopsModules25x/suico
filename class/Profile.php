@@ -24,6 +24,8 @@ namespace XoopsModules\Suico;
  */
 class Profile extends \XoopsObject
 {
+    public $profile_id;
+
     /**
      * @param $fields
      */

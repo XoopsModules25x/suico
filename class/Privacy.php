@@ -31,6 +31,10 @@ class Privacy extends \XoopsObject
 {
     public $helper;
     public $permHelper;
+    public $id;
+    public $level;
+    public $name;
+    public $description;
 
     /**
      * Constructor

@@ -35,6 +35,21 @@ class Configs extends XoopsObject
     public $db;
     public $helper;
     public $permHelper;
+    public $config_id;
+    public $config_uid;
+    public $pictures;
+    public $audio;
+    public $videos;
+    public $groups;
+    public $notes;
+    public $friends;
+    public $profile_contact;
+    public $profile_general;
+    public $profile_stats;
+    public $suspension;
+    public $backup_password;
+    public $backup_email;
+    public $end_suspension;
     // constructor
 
     /**
