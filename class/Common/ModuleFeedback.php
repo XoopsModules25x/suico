@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico\Common;
 
@@ -18,8 +16,8 @@ namespace XoopsModules\Suico\Common;
  * Feedback plugin for XOOPS modules
  *
  * @copyright      XOOPS Project  (https://xoops.org)
- * @license        GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
- * @author         Michael Beck <mambax7@gmailc.com>
+ * @license        GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author         Michael Beck <mambax7@gmail.com>
  * @author         Wedega - Email:<webmaster@wedega.com>
  * @author         Fernando Santos (topet05) <fernando@mastop.com.br>
  */
@@ -57,7 +55,7 @@ class ModuleFeedback extends XoopsObject
      *
      * @param null
      */
-    public static function getInstance()
+    public static function getInstance(): void
     {
         static $instance = false;
         if (!$instance) {
@@ -78,7 +76,7 @@ class ModuleFeedback extends XoopsObject
             $action = $_SERVER['REQUEST_URI'];
         }
         $moduleDirName      = \basename(\dirname(__DIR__, 2));
-        $moduleDirNameUpper = mb_strtoupper($moduleDirName);
+        $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
         $form = new XoopsThemeForm(
@@ -91,8 +89,8 @@ class ModuleFeedback extends XoopsObject
             \constant(
                 'CO_' . $moduleDirNameUpper . '_' . 'FB_RECIPIENT'
             ), 'recipient', 50, 255, $GLOBALS['xoopsModule']->getInfo(
-            'author_mail'
-        )
+                'author_mail'
+            )
         );
         $recipient->setExtra('disabled="disabled"');
         $form->addElement($recipient);
@@ -172,6 +170,7 @@ class ModuleFeedback extends XoopsObject
         $form->addElement($editor, true);
         $form->addElement(new XoopsFormHidden('op', 'send'));
         $form->addElement(new XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
+
         return $form;
     }
 }

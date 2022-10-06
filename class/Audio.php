@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -74,7 +71,7 @@ class Audio extends XoopsObject
     /**
      * @param int $id
      */
-    public function load($id)
+    public function load($id): void
     {
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_audios') . ' WHERE audio_id=' . $id;
         $myrow = $this->db->fetchArray($this->db->query($sql));
@@ -126,6 +123,7 @@ class Audio extends XoopsObject
                 $ret[] = $myrow['suico_audio_id'];
             }
         }
+
         return $ret;
     }
 

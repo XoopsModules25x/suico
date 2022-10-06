@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -16,14 +14,12 @@ namespace XoopsModules\Suico;
  *
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
  * @license             GNU GPL 2 (https://www.gnu.org/licenses/gpl-2.0.html)
- * @package             profile
  * @since               2.3.0
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
 /**
- * @package             kernel
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
  */
 
@@ -31,7 +27,6 @@ use XoopsModules\Suico;
 
 /**
  * Class ProfileHandler
- * @package XoopsModules\Suico
  */
 class ProfileHandler extends \XoopsPersistableObjectHandler
 {
@@ -68,6 +63,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
         if ($isNew) {
             $obj->setNew();
         }
+
         return $obj;
     }
 
@@ -91,6 +87,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
         if (!\is_object($obj)) {
             $obj = $this->create();
         }
+
         return $obj;
     }
 
@@ -104,6 +101,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
     public function createField($isNew = true)
     {
         $return = $this->fieldHandler->create($isNew);
+
         return $return;
     }
 
@@ -117,6 +115,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
         if (0 == \count($this->_fields)) {
             $this->_fields = $this->fieldHandler->loadFields();
         }
+
         return $this->_fields;
     }
 
@@ -216,6 +215,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
             $msg = '&nbsp;&nbsp;<span class="red">ERROR: Could not insert field <strong>' . $vars['name'] . '</strong> into the database. ' . \implode(' ', $field->getErrors()) . $this->db->error() . '</span>';
         }
         unset($field);
+
         return $msg;
     }
 
@@ -239,6 +239,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
         if (0 == \count($obj->vars)) {
             return true;
         }
+
         return parent::insert($obj, $force);
     }
 
@@ -257,7 +258,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
      *
      * @param \CriteriaElement $criteria   CriteriaElement
      * @param array            $searchvars Fields to be fetched
-     * @param array|null             $groups     for Usergroups is selected (only admin!)
+     * @param array|null       $groups     for Usergroups is selected (only admin!)
      *
      * @return array
      */
@@ -278,7 +279,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
         $sql_clause = ' WHERE 1=1';
         $sql_order  = '';
         $limit      = $start = 0;
-        if (\is_object($criteria) && \is_subclass_of($criteria, \CriteriaElement::class)) {
+        if (($criteria instanceof \CriteriaCompo) || ($criteria instanceof \Criteria)) {
             $sql_clause .= ' AND ' . $criteria->render();
             if ('' !== $criteria->getSort()) {
                 $sql_order = ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
@@ -302,7 +303,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
             $profile = $this->create(false);
             $user    = $userHandler->create(false);
             foreach ($myrow as $name => $value) {
-                if (\in_array($name, $uservars)) {
+                if (\in_array($name, $uservars, true)) {
                     $user->assignVar($name, $value);
                 } else {
                     $profile->assignVar($name, $value);
@@ -317,6 +318,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
             $result    = $this->db->query($sql_count);
             [$count] = $this->db->fetchRow($result);
         }
+
         return [$users, $profiles, (int)$count];
     }
 }

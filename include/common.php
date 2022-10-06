@@ -1,11 +1,9 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -13,9 +11,8 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -39,8 +36,8 @@ $helper->loadLanguage('common');
 //handlers
 //$categoryHandler     = new Suico\CategoryHandler($db);
 //$downloadHandler     = new Suico\DownloadHandler($db);
-$pathIcon16 = Admin::iconUrl('', 16);
-$pathIcon32 = Admin::iconUrl('', 32);
+$pathIcon16 = Admin::iconUrl('', '16');
+$pathIcon32 = Admin::iconUrl('', '32');
 if (is_object($helper->getModule())) {
     $pathModIcon16 = $helper->getConfig('modicons16');
     $pathModIcon32 = $helper->getConfig('modicons32');
@@ -81,7 +78,7 @@ if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl))
     require_once $GLOBALS['xoops']->path('class/template.php');
     $GLOBALS['xoopsTpl'] = new \XoopsTpl();
 }
-$GLOBALS['xoopsTpl']->assign('mod_url', XOOPS_URL . '/modules/' . $moduleDirName);
+$GLOBALS['xoopsTpl']->assign('mod_url', $helper->url());
 // Local icons path
 if (is_object($helper->getModule())) {
     $pathModIcon16 = $helper->getConfig('modicons16');

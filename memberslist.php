@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
@@ -46,7 +44,7 @@ $myts     = \MyTextSanitizer::getInstance();
 $criteria = new CriteriaCompo();
 $criteria->add(new Criteria('level', 0, '>'));
 $validsort = ['uname', 'email', 'last_login', 'user_regdate', 'posts'];
-$sort      = (!in_array($xoopsModuleConfig['sortmembers'], $validsort)) ? 'uname' : $xoopsModuleConfig['sortmembers'];
+$sort      = (!in_array($xoopsModuleConfig['sortmembers'], $validsort, true)) ? 'uname' : $xoopsModuleConfig['sortmembers'];
 $order     = 'ASC';
 if (isset($xoopsModuleConfig['membersorder']) && 'DESC' == $xoopsModuleConfig['membersorder']) {
     $order = 'DESC';
@@ -196,7 +194,7 @@ if (0 === $total) {
         if ($totalpages > 1) {
             $hiddenform = "<form name='findnext' action='memberslist.php' method='post'>";
             foreach ($_POST as $k => $v) {
-                $hiddenform .= "<input type='hidden' name='" . $myts->htmlSpecialChars($k) . "' value='" . $myts->htmlSpecialChars($v) . "'>\n";
+                $hiddenform .= "<input type='hidden' name='" . htmlspecialchars($k) . "' value='" . htmlspecialchars($v) . "'>\n";
             }
             if (!isset($_POST['limit'])) {
                 $hiddenform .= "<input type='hidden' name='limit' value='" . $limit . "'>\n";

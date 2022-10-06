@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico\Form;
 
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico\Form;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -56,14 +53,15 @@ class ImagesForm extends XoopsThemeForm
     {
         $this->helper       = $target->helper;
         $this->targetObject = $target;
-        $title              = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_IMAGES_ADD) : \sprintf(\AM_SUICO_IMAGES_EDIT);
+        $title              = $this->targetObject->isNew() ? \AM_SUICO_IMAGES_ADD : \AM_SUICO_IMAGES_EDIT;
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
         //include ID field, it's needed so the module knows if it is a new form or an edited form
         $hidden = new XoopsFormHidden(
-            'image_id', $this->targetObject->getVar(
-            'image_id'
-        )
+            'image_id',
+            $this->targetObject->getVar(
+                'image_id'
+            )
         );
         $this->addElement($hidden);
         unset($hidden);
@@ -84,21 +82,32 @@ class ImagesForm extends XoopsThemeForm
         // Data_creation
         $this->addElement(
             new XoopsFormTextDateSelect(
-                \AM_SUICO_IMAGES_DATE_CREATED, 'date_created', 0, \formatTimestamp($this->targetObject->getVar('date_created'), 's')
+                \AM_SUICO_IMAGES_DATE_CREATED,
+                'date_created',
+                0,
+                \formatTimestamp($this->targetObject->getVar('date_created'), 's')
             )
         );
         // Data_update
         $this->addElement(
             new XoopsFormTextDateSelect(
-                \AM_SUICO_IMAGES_DATE_UPDATED, 'date_updated', 0, \formatTimestamp($this->targetObject->getVar('date_updated'), 's')
+                \AM_SUICO_IMAGES_DATE_UPDATED,
+                'date_updated',
+                0,
+                \formatTimestamp($this->targetObject->getVar('date_updated'), 's')
             )
         );
         // Uid_owner
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_SUICO_IMAGES_UID_OWNER, 'uid_owner', false, $this->targetObject->getVar(
-                'uid_owner'
-            ), 1, false
+                \AM_SUICO_IMAGES_UID_OWNER,
+                'uid_owner',
+                false,
+                $this->targetObject->getVar(
+                    'uid_owner'
+                ),
+                1,
+                false
             ),
             false
         );

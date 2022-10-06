@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -16,14 +14,12 @@ namespace XoopsModules\Suico;
  *
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
  * @license             GNU GPL 2 (https://www.gnu.org/licenses/gpl-2.0.html)
- * @package             profile
  * @since               2.3.0
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
 /**
- * @package             kernel
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
  */
 
@@ -31,7 +27,6 @@ use XoopsModules\Suico;
 
 /**
  * Class FieldHandler
- * @package XoopsModules\Suico
  */
 class FieldHandler extends \XoopsPersistableObjectHandler
 {
@@ -62,6 +57,7 @@ class FieldHandler extends \XoopsPersistableObjectHandler
                 $fields[$field_objs[$i]->getVar('field_name')] = $field_objs[$i];
             }
         }
+
         return $fields;
     }
 
@@ -79,7 +75,7 @@ class FieldHandler extends \XoopsPersistableObjectHandler
         if (!($obj instanceof $this->className)) {
             return false;
         }
-        /* @var Suico\ProfileHandler $profileHandler */
+        /** @var Suico\ProfileHandler $profileHandler */
         $profileHandler = Helper::getInstance()->getHandler('Profile');
         $obj->setVar('field_name', \str_replace(' ', '_', $obj->getVar('field_name')));
         $obj->cleanVars();
@@ -125,7 +121,7 @@ class FieldHandler extends \XoopsPersistableObjectHandler
         if ('' === $obj->getVar('field_valuetype')) {
             $obj->setVar('field_valuetype', \XOBJ_DTYPE_TXTBOX);
         }
-        if ((!\in_array($obj->getVar('field_name'), $this->getUserVars())) && isset($_REQUEST['field_required'])) {
+        if ((!\in_array($obj->getVar('field_name'), $this->getUserVars(), true)) && isset($_REQUEST['field_required'])) {
             if ($obj->isNew()) {
                 //add column to table
                 $changetype = 'ADD';
@@ -180,6 +176,7 @@ class FieldHandler extends \XoopsPersistableObjectHandler
             $result = $force ? $this->db->queryF($sql) : $this->db->query($sql);
             if (!$result) {
                 $obj->setErrors($this->db->error());
+
                 return false;
             }
         }
@@ -188,6 +185,7 @@ class FieldHandler extends \XoopsPersistableObjectHandler
         if (!parent::insert($obj, $force)) {
             return false;
         }
+
         return $obj->getVar('field_id');
     }
 
@@ -203,7 +201,7 @@ class FieldHandler extends \XoopsPersistableObjectHandler
         if (!($obj instanceof $this->className)) {
             return false;
         }
-        /* @var ProfileHandler $profileHandler */
+        /** @var ProfileHandler $profileHandler */
         $profileHandler = Helper::getInstance()->getHandler('Profile');
         // remove column from table
         $sql = 'ALTER TABLE ' . $profileHandler->table . ' DROP `' . $obj->getVar('field_name', 'n') . '`';
@@ -216,14 +214,16 @@ class FieldHandler extends \XoopsPersistableObjectHandler
                 $moduleSuico = Helper::getInstance()->getModule();
                 if (\is_object($moduleSuico)) {
                     // Remove group permissions
-                    /* @var \XoopsGroupPermHandler $grouppermHandler */
+                    /** @var \XoopsGroupPermHandler $grouppermHandler */
                     $grouppermHandler = \xoops_getHandler('groupperm');
                     $criteria         = new \CriteriaCompo(new \Criteria('gperm_modid', $moduleSuico->getVar('mid')));
                     $criteria->add(new \Criteria('gperm_itemid', $obj->getVar('field_id')));
+
                     return $grouppermHandler->deleteAll($criteria);
                 }
             }
         }
+
         return false;
     }
 

@@ -1,11 +1,9 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -13,9 +11,8 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -128,7 +125,11 @@ switch ($op) {
         if ($configsTempRows > $configsPaginationLimit) {
             xoops_load('XoopsPageNav');
             $pagenav = new \XoopsPageNav(
-                $configsTempRows, $configsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                $configsTempRows,
+                $configsPaginationLimit,
+                $start,
+                'start',
+                'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
@@ -186,7 +187,11 @@ switch ($op) {
             if ($configsCount > $configsPaginationLimit) {
                 xoops_load('XoopsPageNav');
                 $pagenav = new \XoopsPageNav(
-                    $configsCount, $configsPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                    $configsCount,
+                    $configsPaginationLimit,
+                    $start,
+                    'start',
+                    'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }

@@ -1,19 +1,13 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico\Form;
 
-use XoopsModules\Suico;
-use XoopsModules\Suico\Regstep;
-use XoopsThemeForm;
 use XoopsFormButton;
 use XoopsFormHidden;
-use XoopsFormLabel;
-use XoopsFormSelectUser;
+use XoopsModules\Suico\Regstep;
+use XoopsThemeForm;
 
 /**
- *
  * @param Regstep $step {@link Regstep} to edit
  * @param bool    $action
  */
@@ -21,8 +15,7 @@ class StepForm extends XoopsThemeForm
 {
     /**
      * StepForm constructor.
-     * @param \XoopsModules\Suico\Regstep|null $step
-     * @param bool                             $action
+     * @param bool $action
      */
     public function __construct(Regstep $step = null, $action = false)
     {
@@ -30,7 +23,7 @@ class StepForm extends XoopsThemeForm
             $action = $_SERVER['REQUEST_URI'];
         }
         if (empty($GLOBALS['xoopsConfigUser'])) {
-            /* @var \XoopsConfigHandler $configHandler */
+            /** @var \XoopsConfigHandler $configHandler */
             $configHandler              = \xoops_getHandler('config');
             $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(\XOOPS_CONF_USER);
         }

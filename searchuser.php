@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /**
  * Extended User Profile
@@ -14,7 +12,6 @@ declare(strict_types=1);
  *
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
  * @license             GNU GPL 2 (https://www.gnu.org/licenses/gpl-2.0.html)
- * @package             profile
  * @since               2.3.0
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
@@ -51,7 +48,7 @@ switch ($op) {
         // Get fields
         $fields = $profileHandler->loadFields();
         // Get ids of fields that can be searched
-        /* @var  XoopsGroupPermHandler $grouppermHandler */
+        /** @var XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler  = xoops_getHandler('groupperm');
         $searchable_fields = $grouppermHandler->getItemIds('profile_search', $groups, $GLOBALS['xoopsModule']->getVar('mid'));
         require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
@@ -71,7 +68,7 @@ switch ($op) {
             $searchform->addElement($group_tray);
         }
         foreach (array_keys($fields) as $i) {
-            if (!in_array($fields[$i]->getVar('field_id'), $searchable_fields) || !in_array($fields[$i]->getVar('field_type'), $searchable_types)) {
+            if (!in_array($fields[$i]->getVar('field_id'), $searchable_fields, true) || !in_array($fields[$i]->getVar('field_type'), $searchable_types, true)) {
                 continue;
             }
             $sortby_arr[$i] = $fields[$i]->getVar('field_title');
@@ -140,7 +137,7 @@ switch ($op) {
         $searchform->assign($GLOBALS['xoopsTpl']);
         $GLOBALS['xoopsTpl']->assign('page_title', _MD_SUICO_SEARCH);
         //added count user
-        /* @var XoopsMemberHandler $memberHandler */
+        /** @var XoopsMemberHandler $memberHandler */
         $memberHandler = xoops_getHandler('member');
         $acttotal      = $memberHandler->getUserCount(new Criteria('level', 0, '>'));
         $total         = sprintf(_MD_SUICO_ACTUS, "<span style='color:#ff0000;'>{$acttotal}</span>");
@@ -158,21 +155,21 @@ switch ($op) {
             'title' => _SEARCH,
         ];
         $xoBreadcrumbs[] = ['title' => _MD_SUICO_RESULTS];
-        /* @var XoopsMemberHandler $memberHandler */
+        /** @var XoopsMemberHandler $memberHandler */
         $memberHandler = xoops_getHandler('member');
         // Dynamic fields
         $profileHandler = $helper->getHandler('Profile');
         // Get fields
         $fields = $profileHandler->loadFields();
         // Get ids of fields that can be searched
-        /* @var  XoopsGroupPermHandler $grouppermHandler */
+        /** @var XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler  = xoops_getHandler('groupperm');
         $searchable_fields = $grouppermHandler->getItemIds('profile_search', $groups, $GLOBALS['xoopsModule']->getVar('mid'));
         $searchvars        = [];
         $search_url        = [];
         $criteria          = new CriteriaCompo(new Criteria('level', 0, '>'));
         if (isset($_REQUEST['uname']) && '' !== $_REQUEST['uname']) {
-            $string = $myts->addSlashes(trim($_REQUEST['uname']));
+            $string = $GLOBALS['xoopsDB']->escape(trim($_REQUEST['uname']));
             switch ($_REQUEST['uname_match']) {
                 case XOOPS_MATCH_START:
                     $string .= '%';
@@ -190,7 +187,7 @@ switch ($op) {
             $searchvars[] = 'uname';
         }
         if (isset($_REQUEST['email']) && '' !== $_REQUEST['email']) {
-            $string = $myts->addSlashes(trim($_REQUEST['email']));
+            $string = $GLOBALS['xoopsDB']->escape(trim($_REQUEST['email']));
             switch ($_REQUEST['email_match']) {
                 case XOOPS_MATCH_START:
                     $string .= '%';
@@ -211,11 +208,11 @@ switch ($op) {
         //$search_url = array();
         foreach (array_keys($fields) as $i) {
             //Radio and Select fields
-            if (!in_array($fields[$i]->getVar('field_id'), $searchable_fields) || !in_array($fields[$i]->getVar('field_type'), $searchable_types)) {
+            if (!in_array($fields[$i]->getVar('field_id'), $searchable_fields, true) || !in_array($fields[$i]->getVar('field_type'), $searchable_types, true)) {
                 continue;
             }
             $fieldname = $fields[$i]->getVar('field_name');
-            if (in_array($fields[$i]->getVar('field_type'), ['select', 'radio'])) {
+            if (in_array($fields[$i]->getVar('field_type'), ['select', 'radio'], true)) {
                 if (empty($_REQUEST[$fieldname])) {
                     continue;
                 }
@@ -299,7 +296,7 @@ switch ($op) {
                     case XOBJ_DTYPE_TXTBOX:
                     case XOBJ_DTYPE_TXTAREA:
                         if (isset($_REQUEST[$fieldname]) && '' !== $_REQUEST[$fieldname]) {
-                            $value = $myts->addSlashes(trim($_REQUEST[$fieldname]));
+                            $value = $GLOBALS['xoopsDB']->escape(trim($_REQUEST[$fieldname]));
                             switch ($_REQUEST[$fieldname . '_match']) {
                                 case XOOPS_MATCH_START:
                                     $value .= '%';
@@ -370,7 +367,7 @@ switch ($op) {
             $userarray['output'][] = "<a href='userinfo.php?uid=" . $users[$k]->getVar('uid') . "' title=''>" . $users[$k]->getVar('uname') . '</a>';
             $userarray['output'][] = (1 == $users[$k]->getVar('user_viewemail') || (is_object($GLOBALS['xoopsUser']) && $GLOBALS['xoopsUser']->isAdmin())) ? $users[$k]->getVar('email') : '';
             foreach (array_keys($fields) as $i) {
-                if (in_array($fields[$i]->getVar('field_id'), $searchable_fields) && in_array($fields[$i]->getVar('field_type'), $searchable_types) && in_array($fields[$i]->getVar('field_name'), $searchvars)) {
+                if (in_array($fields[$i]->getVar('field_id'), $searchable_fields, true) && in_array($fields[$i]->getVar('field_type'), $searchable_types, true) && in_array($fields[$i]->getVar('field_name'), $searchvars, true)) {
                     $userarray['output'][] = $fields[$i]->getOutputValue($users[$k], $profiles[$k]);
                 }
             }
@@ -381,7 +378,7 @@ switch ($op) {
         $captions[] = _US_NICKNAME;
         $captions[] = _US_EMAIL;
         foreach (array_keys($fields) as $i) {
-            if (in_array($fields[$i]->getVar('field_id'), $searchable_fields) && in_array($fields[$i]->getVar('field_type'), $searchable_types) && in_array($fields[$i]->getVar('field_name'), $searchvars)) {
+            if (in_array($fields[$i]->getVar('field_id'), $searchable_fields, true) && in_array($fields[$i]->getVar('field_type'), $searchable_types, true) && in_array($fields[$i]->getVar('field_name'), $searchvars, true)) {
                 $captions[] = $fields[$i]->getVar('field_title');
             }
         }

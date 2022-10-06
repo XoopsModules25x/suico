@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico\Common;
 
@@ -17,7 +15,7 @@ namespace XoopsModules\Suico\Common;
  */
 
 /**
- * @license      https://www.fsf.org/copyleft/gpl.html GNU public license
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @copyright    https://xoops.org 2000-2020 &copy; XOOPS Project
  * @author       ZySpec <zyspec@yahoo.com>
  * @author       Mamba <mambax7@gmail.com>
@@ -42,6 +40,7 @@ class SysUtility
 
     // Files Management Trait
     //--------------- Custom module methods -----------------------------
+
     /**
      * @param $text
      * @param $form_sort
@@ -67,10 +66,12 @@ class SysUtility
         $select_view .= '  <a href="' . Request::getString('PHP_SELF', '', 'SERVER') . '?start=' . $start . '&sort=' . $form_sort . '&order=asc"><img src="' . $pathModIcon16 . '/' . $sel1 . '" title="ASC" alt="ASC"></a>';
         $select_view .= '<a href="' . Request::getString('PHP_SELF', '', 'SERVER') . '?start=' . $start . '&sort=' . $form_sort . '&order=desc"><img src="' . $pathModIcon16 . '/' . $sel2 . '" title="DESC" alt="DESC"></a>';
         $select_view .= '</form>';
+
         return $select_view;
     }
 
     /***************Blocks***************/
+
     /**
      * @param array $cats
      * @return string
@@ -86,13 +87,14 @@ class SysUtility
             }
             $cat_sql .= ')';
         }
+
         return $cat_sql;
     }
 
     /**
      * @param $content
      */
-    public static function metaKeywords($content)
+    public static function metaKeywords($content): void
     {
         global $xoopsTpl, $xoTheme;
         $myts    = \MyTextSanitizer::getInstance();
@@ -107,7 +109,7 @@ class SysUtility
     /**
      * @param $content
      */
-    public static function metaDescription($content)
+    public static function metaDescription($content): void
     {
         global $xoopsTpl, $xoTheme;
         $myts    = \MyTextSanitizer::getInstance();
@@ -134,16 +136,17 @@ class SysUtility
         $sql    = 'SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = "' . $table . '" AND COLUMN_NAME = "' . $columnName . '"';
         $result = $GLOBALS['xoopsDB']->query($sql);
         if (!$result) {
-            exit($GLOBALS['xoopsDB']->error());
+            \trigger_error($GLOBALS['xoopsDB']->error());
         }
         $row      = $GLOBALS['xoopsDB']->fetchBoth($result);
         $enumList = \explode(',', \str_replace("'", '', \mb_substr($row['COLUMN_TYPE'], 5, -6)));
+
         return $enumList;
     }
 
     /**
      * @param array|string $tableName
-     * @param int          $id_field
+     * @param string       $id_field
      * @param int          $id
      *
      * @return mixed
@@ -156,7 +159,7 @@ class SysUtility
         $sql    = "SELECT * FROM $table WHERE $id_field='$id' ";
         $result = $GLOBALS['xoopsDB']->query($sql);
         if (!$result) {
-            exit($GLOBALS['xoopsDB']->error());
+            \trigger_error($GLOBALS['xoopsDB']->error());
         }
         $tempTable = $GLOBALS['xoopsDB']->fetchArray($result, \MYSQLI_ASSOC);
 
@@ -166,7 +169,7 @@ class SysUtility
         $sql    = "INSERT INTO $table (" . \implode(', ', \array_keys($tempTable)) . ") VALUES ('" . \implode("', '", $tempTable) . "')";
         $result = $GLOBALS['xoopsDB']->queryF($sql);
         if (!$result) {
-            exit($GLOBALS['xoopsDB']->error());
+            \trigger_error($GLOBALS['xoopsDB']->error());
         }
 
         // Return the new id
@@ -210,7 +213,7 @@ class SysUtility
                         // if tag is a closing tag
                     } elseif (\preg_match('/^<\s*\/(\S+?)\s*>$/s', $line_matchings[1], $tag_matchings)) {
                         // delete tag from $openTags list
-                        $pos = \array_search($tag_matchings[1], $openTags);
+                        $pos = \array_search($tag_matchings[1], $openTags, true);
                         if (false !== $pos) {
                             unset($openTags[$pos]);
                         }
@@ -273,6 +276,7 @@ class SysUtility
                 $truncate .= '</' . $tag . '>';
             }
         }
+
         return $truncate;
     }
 
@@ -302,22 +306,34 @@ class SysUtility
         if (\class_exists('XoopsFormEditor')) {
             if ($isAdmin) {
                 $descEditor = new XoopsFormEditor(
-                    \ucfirst($options['name']), $helper->getConfig(
-                    'editorAdmin'
-                ), $options, $nohtml = false, $onfailure = 'textarea'
+                    \ucfirst($options['name']),
+                    $helper->getConfig(
+                        'editorAdmin'
+                    ),
+                    $options,
+                    $nohtml = false,
+                    $onfailure = 'textarea'
                 );
             } else {
                 $descEditor = new XoopsFormEditor(
-                    \ucfirst($options['name']), $helper->getConfig(
-                    'editorUser'
-                ), $options, $nohtml = false, $onfailure = 'textarea'
+                    \ucfirst($options['name']),
+                    $helper->getConfig(
+                        'editorUser'
+                    ),
+                    $options,
+                    $nohtml = false,
+                    $onfailure = 'textarea'
                 );
             }
         } else {
             $descEditor = new XoopsFormDhtmlTextArea(
                 \ucfirst(
                     $options['name']
-                ), $options['name'], $options['value'], '100%', '100%'
+                ),
+                $options['name'],
+                $options['value'],
+                '100%',
+                '100%'
             );
         }
         //        $form->addElement($descEditor);
@@ -336,6 +352,7 @@ class SysUtility
     ) {
         global $xoopsDB;
         $result = $xoopsDB->queryF("SHOW COLUMNS FROM   ${table} LIKE '${fieldname}'");
+
         return $xoopsDB->getRowsNum($result) > 0;
     }
 }

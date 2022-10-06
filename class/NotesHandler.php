@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -8,7 +6,7 @@ namespace XoopsModules\Suico;
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -49,7 +46,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Suico\Helper $this->helper */
+        /** @var \XoopsModules\Suico\Helper $this- >helper */
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
@@ -75,6 +72,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
             $obj->unsetNew();
         }
         $obj->helper = $this->helper;
+
         return $obj;
     }
 
@@ -82,7 +80,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
      * retrieve aNotes
      *
      * @param int|null $id of theNotes
-     * @param null $fields
+     * @param null     $fields
      * @return mixed reference to the {@linkNotes} object, FALSE if failed
      */
     public function get2(
@@ -97,8 +95,10 @@ class NotesHandler extends XoopsPersistableObjectHandler
         if (1 === $numrows) {
             $suico_notes = new Notes();
             $suico_notes->assignVars($this->db->fetchArray($result));
+
             return $suico_notes;
         }
+
         return false;
     }
 
@@ -173,6 +173,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
             $noteId = $this->db->getInsertId();
         }
         $xoopsObject->assignVar('note_id', $noteId);
+
         return true;
     }
 
@@ -203,6 +204,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
         if (!$result) {
             return false;
         }
+
         return true;
     }
 
@@ -244,6 +246,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
             }
             unset($suico_notes);
         }
+
         return $ret;
     }
 
@@ -265,6 +268,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
             return 0;
         }
         [$count] = $this->db->fetchRow($result);
+
         return (int)$count;
     }
 
@@ -288,6 +292,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
         if (!$result = $this->db->query($sql)) {
             return false;
         }
+
         return true;
     }
 
@@ -307,7 +312,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
             ) . ', ' . $this->db->prefix(
                 'users'
             );
-        if (\is_object($criteria) && \is_subclass_of($criteria, \CriteriaElement::class)) {
+        if (($criteria instanceof \CriteriaCompo) || ($criteria instanceof \Criteria)) {
             $sql .= ' ' . $criteria->renderWhere();
             //attention here this is kind of a hack
             $sql .= ' AND uid = note_from';
@@ -329,6 +334,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
                 $vetor[$i]['date_created'] = \formatTimestamp($myrow['date_created'], 's');
                 $i++;
             }
+
             return $vetor;
         }
     }

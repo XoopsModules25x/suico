@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -26,14 +23,12 @@ use CriteriaCompo;
 use CriteriaElement;
 use Xmf\Request;
 use XoopsDatabase;
-use XoopsMediaUploader;
 use XoopsObject;
 use XoopsPersistableObjectHandler;
 use XoopsModules\Suico\{
     Helper
 };
 /** @var Helper $helper */
-
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 
@@ -49,13 +44,13 @@ class AudioHandler extends XoopsPersistableObjectHandler
     /**
      * Constructor
      * @param \XoopsDatabase|null $xoopsDatabase
-     * @param Helper|null         $helper
+     * @param Helper|null $helper
      */
     public function __construct(
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var Helper $this->helper */
+        /** @var Helper $this- >helper */
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
@@ -79,6 +74,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
             $obj->unsetNew();
         }
         $obj->helper = $this->helper;
+
         return $obj;
     }
 
@@ -101,8 +97,10 @@ class AudioHandler extends XoopsPersistableObjectHandler
         if (1 === $numrows) {
             $suicoAudio = new Audio();
             $suicoAudio->assignVars($this->db->fetchArray($result));
+
             return $suicoAudio;
         }
+
         return false;
     }
 
@@ -187,6 +185,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
             $audio_id = $this->db->getInsertId();
         }
         $xoopsObject->assignVar('audio_id', $audio_id);
+
         return true;
     }
 
@@ -217,6 +216,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         if (!$result) {
             return false;
         }
+
         return true;
     }
 
@@ -258,6 +258,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
             }
             unset($suicoAudio);
         }
+
         return $ret;
     }
 
@@ -279,6 +280,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
             return 0;
         }
         [$count] = $this->db->fetchRow($result);
+
         return (int)$count;
     }
 
@@ -302,6 +304,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         if (!$result = $this->db->query($sql)) {
             return false;
         }
+
         return true;
     }
 
@@ -338,7 +341,9 @@ class AudioHandler extends XoopsPersistableObjectHandler
         $uploadDir         = $path_upload;
         // create the object to upload
         $uploader = new \XoopsMediaUploader(
-            $uploadDir, $allowed_mimetypes, $maxfilesize
+            $uploadDir,
+            $allowed_mimetypes,
+            $maxfilesize
         );
         // fetch the media
         if ($uploader->fetchMedia((Request::getArray('xoops_upload_file', '', 'POST')[0]))) {
@@ -348,6 +353,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
             if (!$uploader->upload()) {
                 // if there are errors lets return them
                 echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
+
                 return false;
             }
             // now let s create a new object audio and set its variables
@@ -368,8 +374,10 @@ class AudioHandler extends XoopsPersistableObjectHandler
             //print_r($_FILES);
         } else {
             echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
+
             return false;
         }
+
         return true;
     }
 }

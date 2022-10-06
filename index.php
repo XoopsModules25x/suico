@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -13,9 +11,8 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -38,14 +35,14 @@ $controller = new IndexController($xoopsDB, $xoopsUser);
 $nbSections = $controller->getNumbersSections();
 $uid        = $controller->uidOwner;
 $categories = [];
-/* @var  \XoopsGroupPermHandler $grouppermHandler */
+/** @var \XoopsGroupPermHandler $grouppermHandler */
 $grouppermHandler = xoops_getHandler('groupperm');
 $groups           = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : [XOOPS_GROUP_ANONYMOUS];
 if (is_object($GLOBALS['xoopsUser']) && $uid == $GLOBALS['xoopsUser']->getVar('uid')) {
     //disable cache
     $GLOBALS['xoopsConfig']['module_cache'][$GLOBALS['xoopsModule']->getVar('mid')] = 0;
     //    include $GLOBALS['xoops']->path('header.php');
-    /* @var XoopsConfigHandler $configHandler */
+    /** @var XoopsConfigHandler $configHandler */
     $configHandler              = xoops_getHandler('config');
     $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
     $GLOBALS['xoopsTpl']->assign('user_ownpage', true);
@@ -58,7 +55,7 @@ if (is_object($GLOBALS['xoopsUser']) && $uid == $GLOBALS['xoopsUser']->getVar('u
     $GLOBALS['xoopsTpl']->assign('user_changeemail', $GLOBALS['xoopsConfigUser']['allow_chgmail']);
     $thisUser = &$GLOBALS['xoopsUser'];
 } else {
-    /* @var XoopsMemberHandler $memberHandler */
+    /** @var XoopsMemberHandler $memberHandler */
     $memberHandler = xoops_getHandler('member');
     $thisUser      = $memberHandler->getUser($uid);
     // Redirect if not a user or not active and the current user is not admin
@@ -82,16 +79,16 @@ if (is_object($GLOBALS['xoopsUser']) && $uid == $GLOBALS['xoopsUser']->getVar('u
     $groups_thisUser          = $thisUser->getGroups();
     $groups_thisUser_nonbasic = array_diff($groups_thisUser, $groups_basic);
     $groups_xoopsUser         = $groups;
-    /* @var  XoopsGroupPermHandler $grouppermHandler */
+    /** @var XoopsGroupPermHandler $grouppermHandler */
     $grouppermHandler  = xoops_getHandler('groupperm');
     $groups_accessible = $grouppermHandler->getItemIds('profile_access', $groups_xoopsUser, $helper->getModule()->getVar('mid'));
     $rejected          = false;
     if ($thisUser->isAdmin()) {
-        $rejected = !in_array(XOOPS_GROUP_ADMIN, $groups_accessible);
+        $rejected = !in_array(XOOPS_GROUP_ADMIN, $groups_accessible, true);
     } elseif ($groups_thisUser_nonbasic) {
         $rejected = !array_intersect($groups_thisUser_nonbasic, $groups_accessible);
     } else {
-        $rejected = !in_array(XOOPS_GROUP_USERS, $groups_accessible);
+        $rejected = !in_array(XOOPS_GROUP_USERS, $groups_accessible, true);
     }
     if ($rejected) {
         // redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n'), 3, _NOPERM);
@@ -133,7 +130,7 @@ $profile        = $profileHandler->get($thisUser->getVar('uid'));
 foreach (array_keys($fields) as $i) {
     //If field is not visible, skip
     //if ( $field_ids_visible && !in_array($fields[$i]->getVar('field_id'), $field_ids_visible) ) continue;
-    if (!in_array($fields[$i]->getVar('field_id'), $field_ids_visible)) {
+    if (!in_array($fields[$i]->getVar('field_id'), $field_ids_visible, true)) {
         continue;
     }
     $cat_id = $fields[$i]->getVar('cat_id');
@@ -188,8 +185,6 @@ if (0 === $controller->isAnonym) {
         $criteriaDeleteOldVisits->add(new Criteria('uid_visitor', $xoopsUser->getVar('uid')));
         $visitorsFactory->deleteAll($criteriaDeleteOldVisits, true);
 
-
-
         $visitor_now = $controller->visitorsFactory->create();
         $visitor_now->setVar('uid_owner', $controller->uidOwner);
         $visitor_now->setVar('uid_visitor', $xoopsUser->getVar('uid'));
@@ -222,8 +217,8 @@ if (0 === $controller->isAnonym) {
     }
     $xoopsTpl->assign('visitors', $visitorsArray);
     $xoopsTpl->assign('lang_visitors', _MD_SUICO_VISITORS);
-//    $criteria_deletevisitors = new criteria('uid_owner', $uid);
-//    $criteria_deletevisitors->setStart(5);
+    //    $criteria_deletevisitors = new criteria('uid_owner', $uid);
+    //    $criteria_deletevisitors->setStart(5);
     //        print_r($criteria_deletevisitors);
     //        $visitorsFactory->deleteAll($criteria_deletevisitors, true);
 }
@@ -378,10 +373,10 @@ $xoopsTpl->assign('lang_onlinestatus', _MD_SUICO_ONLINESTATUS);
 $xoopsTpl->assign('uname', $thisUser->getVar('uname'));
 $xoopsTpl->assign('lang_realname', _US_REALNAME);
 $xoopsTpl->assign('name', $thisUser->getVar('name'));
-$grouppermHandler  = xoops_getHandler('groupperm');
-$groups        = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-$moduleHandler = xoops_getHandler('module');
-$criteria      = new CriteriaCompo(new Criteria('hassearch', 1));
+$grouppermHandler = xoops_getHandler('groupperm');
+$groups           = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+$moduleHandler    = xoops_getHandler('module');
+$criteria         = new CriteriaCompo(new Criteria('hassearch', 1));
 $criteria->add(new Criteria('isactive', 1));
 $mids = array_keys($moduleHandler->getList($criteria));
 //user rank
@@ -408,7 +403,7 @@ foreach ($mids as $mid) {
                 if (!preg_match('#^http[s]*:\/\/#i', $results[$i]['link'])) {
                     $results[$i]['link'] = 'modules/' . $module->getVar('dirname') . '/' . $results[$i]['link'];
                 }
-                $results[$i]['title'] = $myts->htmlSpecialChars($results[$i]['title']);
+                $results[$i]['title'] = htmlspecialchars($results[$i]['title']);
                 $results[$i]['time']  = $results[$i]['time'] ? formatTimestamp($results[$i]['time']) : '';
             }
             if (5 === $count) {

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /**
  * Extended User Profile
@@ -14,13 +12,12 @@ declare(strict_types=1);
  *
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
  * @license             GNU GPL 2 (https://www.gnu.org/licenses/gpl-2.0.html)
- * @package             profile
  * @since               2.3.0
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
-use XoopsModules\Suico\IndexController;
 use Xmf\Request;
+use XoopsModules\Suico\IndexController;
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_email.tpl';
 require __DIR__ . '/header.php';
@@ -29,7 +26,7 @@ require __DIR__ . '/header.php';
  */
 $controller = new IndexController($xoopsDB, $xoopsUser, $xoopsModule);
 $nbSections = $controller->getNumbersSections();
-/* @var XoopsConfigHandler $configHandler */
+/** @var XoopsConfigHandler $configHandler */
 $configHandler              = xoops_getHandler('config');
 $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
 if (!$GLOBALS['xoopsUser'] || 1 != $GLOBALS['xoopsConfigUser']['allow_chgmail']) {
@@ -51,7 +48,7 @@ if (isset($_POST['submit'], $_POST['passwd'])) {
     } else {
         //update password
         $GLOBALS['xoopsUser']->setVar('email', Request::getString('newmail', '', 'POST'));
-        /* @var XoopsMemberHandler $memberHandler */
+        /** @var XoopsMemberHandler $memberHandler */
         $memberHandler = xoops_getHandler('member');
         if ($memberHandler->insertUser($GLOBALS['xoopsUser'])) {
             $msg = _MD_SUICO_EMAILCHANGED;

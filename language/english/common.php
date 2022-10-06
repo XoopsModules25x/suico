@@ -1,26 +1,23 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 $moduleDirName      = basename(
     \dirname(__DIR__, 2)
 );
-$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+$moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 define('CO_' . $moduleDirNameUpper . '_GDLIBSTATUS', 'GD library support: ');
 define('CO_' . $moduleDirNameUpper . '_GDLIBVERSION', 'GD Library version: ');
 define(
@@ -77,7 +74,7 @@ define('CO_' . $moduleDirNameUpper . '_HELP_HEADER', __DIR__ . '/help/helpheader
 define('CO_' . $moduleDirNameUpper . '_BACK_2_ADMIN', 'Back to Administration of ');
 define('CO_' . $moduleDirNameUpper . '_OVERVIEW', 'Overview');
 //define('CO_' . $moduleDirNameUpper . '_HELP_DIR', __DIR__);
-//help multi-page
+//help multipage
 define('CO_' . $moduleDirNameUpper . '_DISCLAIMER', 'Disclaimer');
 define('CO_' . $moduleDirNameUpper . '_LICENSE', 'License');
 define('CO_' . $moduleDirNameUpper . '_SUPPORT', 'Support');
@@ -178,10 +175,18 @@ define('CO_' . $moduleDirNameUpper . '_SUPPORT', 'Support');
 \define('CO_' . $moduleDirNameUpper . '_' . 'FILECOPIED', 'The file has been copied');
 \define('CO_' . $moduleDirNameUpper . '_' . 'FILENOTCOPIED', 'The file cannot be copied');
 
-\define('CO_' . $moduleDirNameUpper . '_' . 'TRUNCATE_LENGTH', 'Number of Characters to truncate to the long text field');
-\define('CO_' . $moduleDirNameUpper . '_' . 'TRUNCATE_LENGTH_DESC', 'Set the maximum number of characters to truncate the long text fields');
+//\define('CO_' . $moduleDirNameUpper . '_' . 'PERMSET', 'The permission has been set');
+//\define('CO_' . $moduleDirNameUpper . '_' . 'PERMNOTSET', 'The permission cannot be set');
 
 //image config
+\define('CO_' . $moduleDirNameUpper . '_' . 'CONFIG_EXT_IMAGE', 'EXTERNAL Image configuration');
+
+\define('CO_' . $moduleDirNameUpper . '_' . 'CONFIG_STYLING_START', '<span style="color: #FF0000; font-size: Small;  font-weight: bold;">:: ');
+\define('CO_' . $moduleDirNameUpper . '_' . 'CONFIG_STYLING_END', ' ::</span> ');
+\define('CO_' . $moduleDirNameUpper . '_' . 'CONFIG_STYLING_DESC_START', '<span style="color: #FF0000; font-size: Small;">');
+\define('CO_' . $moduleDirNameUpper . '_' . 'CONFIG_STYLING_DESC_END', '</span> ');
+
+\define('CO_' . $moduleDirNameUpper . '_' . 'PREFERENCE_BREAK_CONFIG_IMAGE', constant('CO_' . $moduleDirNameUpper . '_' . 'CONFIG_STYLING_START') . constant('CO_' . $moduleDirNameUpper . '_' . 'CONFIG_EXT_IMAGE') . constant('CO_' . $moduleDirNameUpper . '_' . 'CONFIG_STYLING_END'));
 \define('CO_' . $moduleDirNameUpper . '_' . 'IMAGE_WIDTH', 'Image Display Width');
 \define('CO_' . $moduleDirNameUpper . '_' . 'IMAGE_WIDTH_DSC', 'Display width for image');
 \define('CO_' . $moduleDirNameUpper . '_' . 'IMAGE_HEIGHT', 'Image Display Height');
@@ -194,7 +199,6 @@ define('CO_' . $moduleDirNameUpper . '_SUPPORT', 'Support');
 \define('CO_' . $moduleDirNameUpper . '_' . 'IMAGE_FILE_SIZE', 'Image File Size (in Bytes)');
 \define('CO_' . $moduleDirNameUpper . '_' . 'IMAGE_FILE_SIZE_DSC','The maximum file size of the image file (in Bytes)');
 
-
 //Module Stats
 \define('CO_' . $moduleDirNameUpper . '_' . 'STATS_SUMMARY', 'Module Statistics');
 \define('CO_' . $moduleDirNameUpper . '_' . 'TOTAL_CATEGORIES', 'Categories:');
@@ -205,4 +209,36 @@ define('CO_' . $moduleDirNameUpper . '_SUPPORT', 'Support');
 \define('CO_' . $moduleDirNameUpper . '_' . 'TOTAL_SUBMITTED', 'Submitted');
 
 \define('CO_' . $moduleDirNameUpper . '_' . 'ERROR403', 'You are not allowed to view this page!');
+
+//Preferences
+\define('CO_' . $moduleDirNameUpper . '_' . 'TRUNCATE_LENGTH', 'Number of Characters to truncate to the long text field');
+\define('CO_' . $moduleDirNameUpper . '_' . 'TRUNCATE_LENGTH_DESC', 'Set the maximum number of characters to truncate the long text fields');
+
+\define('CO_' . $moduleDirNameUpper . '_' . 'DELETE_BLOCK_CONFIRM', 'Are you sure to delete this Block?');
+
+//Cloning
+\define('CO_' . $moduleDirNameUpper . '_' . 'CLONE', 'Clone');
+\define('CO_' . $moduleDirNameUpper . '_' . 'CLONE_DSC', 'Cloning a module has never been this easy! Just type in the name you want for it and hit submit button!');
+\define('CO_' . $moduleDirNameUpper . '_' . 'CLONE_TITLE', 'Clone %s');
+\define('CO_' . $moduleDirNameUpper . '_' . 'CLONE_NAME', 'Choose a name for the new module');
+\define('CO_' . $moduleDirNameUpper . '_' . 'CLONE_NAME_DSC', 'Do not use special characters! <br>Do not choose an existing module dirname or database table name!');
+\define('CO_' . $moduleDirNameUpper . '_' . 'CLONE_INVALIDNAME', 'ERROR: Invalid module name, please try another one!');
+\define('CO_' . $moduleDirNameUpper . '_' . 'CLONE_EXISTS', 'ERROR: Module name already taken, please try another one!');
+\define('CO_' . $moduleDirNameUpper . '_' . 'CLONE_CONGRAT', 'Congratulations! %s was sucessfully created!<br>You may want to make changes in language files.');
+\define('CO_' . $moduleDirNameUpper . '_' . 'CLONE_IMAGEFAIL', 'Attention, we failed creating the new module logo. Please consider modifying assets/images/logo_module.png manually!');
+\define('CO_' . $moduleDirNameUpper . '_' . 'CLONE_FAIL', "Sorry, we failed in creating the new clone. Maybe you need to temporally set write permissions (CHMOD 777) to 'modules' folder and try again.");
+
+//JSON-LD generation of www.schema.org
+\define('CO_' . $moduleDirNameUpper . '_' . 'GENERATE_JSONLD', 'Generate Schema Markup through JSON LD');
+\define('CO_' . $moduleDirNameUpper . '_' . 'GENERATE_JSONLD_DESC', 'Mark up your module with structured data to help search engines better understand the content of your web page');
+
+//Repository not found
+\define('CO_' . $moduleDirNameUpper . '_' . 'REPO_NOT_FOUND', 'Repository Not Found: ');
+//Release not found
+\define('CO_' . $moduleDirNameUpper . '_' . 'NO_REL_FOUND', 'Released Version Not Found: ');
+//rename upload folder on uninstall
+\define('CO_' . $moduleDirNameUpper . '_' . 'ERROR_FOLDER_RENAME_FAILED', 'Could not rename upload folder, please rename manually');
+
+//TCPDF
+\define('CO_' . $moduleDirNameUpper . '_' . 'ERROR_NO_PDF', 'TCPDF for XOOPS is not installed in /class/libraries/vendor/tecnickcom/tcpdf/ <br> Please read the /docs/readme.txt or click on the Help tab to learn how to get it!');
 

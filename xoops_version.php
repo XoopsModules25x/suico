@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -11,20 +9,19 @@ declare(strict_types=1);
 */
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 $moduleDirName      = basename(
     __DIR__
 );
-$moduleDirNameUpper = mb_strtoupper($moduleDirName);
-// ------------------- Informations ------------------- //
+$moduleDirNameUpper = \mb_strtoupper($moduleDirName);
+// ------------------- Information ------------------- /
 $modversion = [
-    'version'             => 3.5,
-    'module_status'       => 'Final',
-    'release_date'        => '2020/11/16',
+    'version'             => '3.5.1',
+    'module_status'       => 'Beta-1',
+    'release_date'        => '2022/10/07',
     'name'                => _MI_SUICO_MODULE_NAME,
     'description'         => _MI_SUICO_MODULEDESC,
     'official'            => 0,
@@ -151,12 +148,12 @@ $modversion['people']['translators'][] = 'Francesco (italian)';
 $modversion['people']['translators'][] = 'Erik Philippe (french)';
 //$modversion['people']['documenters'][] = "documenter 1";
 $modversion['people']['other'][] = 'Komeia (patrocanio)';
-$modversion['demo_site_url']     = 'http://www.marcellobrandao.eti.br';
+$modversion['demo_site_url']     = 'https://www.marcellobrandao.eti.br';
 $modversion['demo_site_name']    = 'Marcello Brandao Site';
-$modversion['support_site_url']  = 'http://sourceforge.net/projects/galeriasuico/';
+$modversion['support_site_url']  = 'https://sourceforge.net/projects/galeriasuico/';
 $modversion['support_site_name'] = 'Sourceforge';
-$modversion['submit_bug']        = 'http://sourceforge.net/tracker/?func=add&group_id=204109&atid=988288';
-$modversion['submit_feature']    = 'http://sourceforge.net/tracker/?func=add&group_id=204109&atid=988291';
+$modversion['submit_bug']        = 'https://sourceforge.net/tracker/?func=add&group_id=204109&atid=988288';
+$modversion['submit_feature']    = 'https://sourceforge.net/tracker/?func=add&group_id=204109&atid=988291';
 //$modversion['config'][1]['valuetype'] = 'int';
 //can be 'int', 'float', 'textarea' or 'array'. All items with formtype 'multi_xxx' must have the valuetype 'array'
 xoops_load(

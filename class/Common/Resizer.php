@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico\Common;
 
@@ -18,8 +16,7 @@ namespace XoopsModules\Suico\Common;
  * Image resizer class for xoops
  *
  * @copyright      2000-2020 XOOPS Project (https://xoops.org)
- * @license        GPL 2.0 or later
- * @package        XOOPS common
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @since          1.0
  * @min_xoops      2.5.9
  * @author         Goffy - Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
@@ -115,6 +112,7 @@ class Resizer
             return 'copy';
         }
         \imagedestroy($img);
+
         return true;
     }
 
@@ -205,10 +203,11 @@ class Resizer
         )) {
             return false;
         }
+
         return true;
     }
 
-    public function mergeImage()
+    public function mergeImage(): void
     {
         $dest = \imagecreatefromjpeg($this->endFile);
         $src  = \imagecreatefromjpeg($this->sourceFile);
@@ -309,6 +308,7 @@ class Resizer
         }
         // release the memory
         \imagedestroy($tmpimg);
+
         return true;
     }
 }

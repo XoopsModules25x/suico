@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -16,23 +14,19 @@ namespace XoopsModules\Suico;
  *
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
  * @license             GNU GPL 2 (https://www.gnu.org/licenses/gpl-2.0.html)
- * @package             profile
  * @since               2.3.0
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
 /**
- * @package             kernel
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
  */
 
 use XoopsModules\Suico;
-use XoopsModules\Suico\Profile;
 
 /**
  * Class Field
- * @package XoopsModules\Suico
  */
 class Field extends \XoopsObject
 {
@@ -64,7 +58,7 @@ class Field extends \XoopsObject
      * @param mixed  $value
      * @param bool   $not_gpc
      */
-    public function setVar($key, $value, $not_gpc = false)
+    public function setVar($key, $value, $not_gpc = false): void
     {
         if ('field_options' === $key && \is_array($value)) {
             foreach (\array_keys($value) as $idx) {
@@ -85,9 +79,10 @@ class Field extends \XoopsObject
         $value = parent::getVar($key, $format);
         if ('field_options' === $key && !empty($value)) {
             foreach (\array_keys($value) as $idx) {
-                $value[$idx] = \base64_decode($value[$idx]);
+                $value[$idx] = \base64_decode($value[$idx], true);
             }
         }
+
         return $value;
     }
 
@@ -101,7 +96,7 @@ class Field extends \XoopsObject
      */
     public function getEditElement($user, $profile)
     {
-        $value   = \in_array($this->getVar('field_name'), $this->getUserVars()) ? $user->getVar($this->getVar('field_name'), 'e') : $profile->getVar($this->getVar('field_name'), 'e');
+        $value   = \in_array($this->getVar('field_name'), $this->getUserVars(), true) ? $user->getVar($this->getVar('field_name'), 'e') : $profile->getVar($this->getVar('field_name'), 'e');
         $caption = $this->getVar('field_title');
         $caption = \defined($caption) ? \constant($caption) : $caption;
         $name    = $this->getVar('field_name', 'e');
@@ -196,6 +191,7 @@ class Field extends \XoopsObject
         if ('' != $this->getVar('field_description')) {
             $element->setDescription($this->getVar('field_description'));
         }
+
         return $element;
     }
 
@@ -211,7 +207,7 @@ class Field extends \XoopsObject
     {
         \xoops_loadLanguage('modinfo', 'suico');
 
-        $value = \in_array($this->getVar('field_name'), $this->getUserVars()) ? $user->getVar($this->getVar('field_name')) : $profile->getVar($this->getVar('field_name'));
+        $value = \in_array($this->getVar('field_name'), $this->getUserVars(), true) ? $user->getVar($this->getVar('field_name')) : $profile->getVar($this->getVar('field_name'));
         switch ($this->getVar('field_type')) {
             default:
             case 'textbox':
@@ -219,6 +215,7 @@ class Field extends \XoopsObject
                 if ('url' === $this->getVar('field_name') && '' !== $value) {
                     return '<a href="' . \formatURL($value) . '" rel="external">' . $value . '</a>';
                 }
+
                 return $value;
                 break;
             case 'textarea':
@@ -236,6 +233,7 @@ class Field extends \XoopsObject
                 } else {
                     $value = '';
                 }
+
                 return $value;
                 break;
             case 'select_multi':
@@ -244,28 +242,31 @@ class Field extends \XoopsObject
                 $ret     = [];
                 if (\count($options) > 0) {
                     foreach (\array_keys($options) as $key) {
-                        if (\in_array($key, $value)) {
+                        if (\in_array($key, $value, true)) {
                             $ret[$key] = \htmlspecialchars(\defined($options[$key]) ? \constant($options[$key]) : $options[$key], \ENT_QUOTES | \ENT_HTML5);
                         }
                     }
                 }
+
                 return $ret;
                 break;
             case 'group':
-                /* @var \XoopsMemberHandler $memberHandler */ $memberHandler = \xoops_getHandler('member');
-                $options                                                     = $memberHandler->getGroupList();
-                $ret                                                         = $options[$value] ?? '';
+                /** @var \XoopsMemberHandler $memberHandler */ $memberHandler = \xoops_getHandler('member');
+                $options                                                      = $memberHandler->getGroupList();
+                $ret                                                          = $options[$value] ?? '';
+
                 return $ret;
                 break;
             case 'group_multi':
-                /* @var \XoopsMemberHandler $memberHandler */ $memberHandler = \xoops_getHandler('member');
-                $options                                                     = $memberHandler->getGroupList();
-                $ret                                                         = [];
+                /** @var \XoopsMemberHandler $memberHandler */ $memberHandler = \xoops_getHandler('member');
+                $options                                                      = $memberHandler->getGroupList();
+                $ret                                                          = [];
                 foreach (\array_keys($options) as $key) {
-                    if (\in_array($key, $value)) {
+                    if (\in_array($key, $value, true)) {
                         $ret[$key] = \htmlspecialchars($options[$key], \ENT_QUOTES | \ENT_HTML5);
                     }
                 }
+
                 return $ret;
                 break;
             case 'longdate':
@@ -279,6 +280,7 @@ class Field extends \XoopsObject
                 if (!empty($value)) {
                     return \formatTimestamp($value, 'm');
                 }
+
                 return $value = \_MI_SUICO_NEVER_LOGGED_IN;
                 break;
             case 'autotext':
@@ -286,6 +288,7 @@ class Field extends \XoopsObject
                 $value = \str_replace('{X_UID}', $user->getVar('uid'), $value);
                 $value = \str_replace('{X_URL}', XOOPS_URL, $value);
                 $value = \str_replace('{X_UNAME}', $user->getVar('uname'), $value);
+
                 return $value;
                 break;
             case 'rank':
@@ -294,6 +297,7 @@ class Field extends \XoopsObject
                 if (isset($userrank['image']) && '' !== $userrank['image']) {
                     $user_rankimage = '<img src="' . \XOOPS_UPLOAD_URL . '/' . $userrank['image'] . '" alt="' . $userrank['title'] . '"> ';
                 }
+
                 return $user_rankimage . $userrank['title'];
                 break;
             case 'yesno':
@@ -303,6 +307,7 @@ class Field extends \XoopsObject
                 require_once $GLOBALS['xoops']->path('class/xoopslists.php');
                 $timezones = \XoopsLists::getTimeZoneList();
                 $value     = empty($value) ? '0' : (string)$value;
+
                 return $timezones[\str_replace('.0', '', $value)];
                 break;
         }
@@ -339,12 +344,14 @@ class Field extends \XoopsObject
                 if ('' !== $value) {
                     return \strtotime($value);
                 }
+
                 return $value;
                 break;
             case 'datetime':
                 if (!empty($value)) {
                     return \strtotime($value['date']) + (int)$value['time'];
                 }
+
                 return $value;
                 break;
         }
@@ -357,9 +364,10 @@ class Field extends \XoopsObject
      */
     public function getUserVars()
     {
-        /* @var Suico\ProfileHandler $profileHandler */
+        /** @var Suico\ProfileHandler $profileHandler */
         $helper         = Helper::getInstance();
         $profileHandler = $helper->getHandler('Profile');
+
         return $profileHandler->getUserVars();
     }
 }

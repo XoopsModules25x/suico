@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -8,7 +6,7 @@ namespace XoopsModules\Suico;
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -51,7 +48,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Suico\Helper $this->helper */
+        /** @var \XoopsModules\Suico\Helper $this- >helper */
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
@@ -79,6 +76,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
         if ($isNew) {
             $obj->helper = $this->helper;
         }
+
         return $obj;
     }
 
@@ -86,7 +84,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
      * retrieve a Video
      *
      * @param int|null $id of the Video
-     * @param null $fields
+     * @param null     $fields
      * @return mixed reference to the {@link Video} object, FALSE if failed
      */
     public function get2(
@@ -101,8 +99,10 @@ class VideoHandler extends XoopsPersistableObjectHandler
         if (1 === $numrows) {
             $video = new Video();
             $video->assignVars($this->db->fetchArray($result));
+
             return $video;
         }
+
         return false;
     }
 
@@ -177,6 +177,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
             $video_id = $this->db->getInsertId();
         }
         $xoopsObject->assignVar('video_id', $video_id);
+
         return true;
     }
 
@@ -207,6 +208,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
         if (!$result) {
             return false;
         }
+
         return true;
     }
 
@@ -253,6 +255,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
             }
             unset($video);
         }
+
         return $ret;
     }
 
@@ -274,6 +277,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
             return 0;
         }
         [$count] = $this->db->fetchRow($result);
+
         return (int)$count;
     }
 
@@ -297,6 +301,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
         if (!$result = $this->db->query($sql)) {
             return false;
         }
+
         return true;
     }
 
@@ -347,9 +352,9 @@ class VideoHandler extends XoopsPersistableObjectHandler
         $buttonSend     = new XoopsFormButton('', 'submit_button', \_MD_SUICO_SUBMIT, 'submit');
         $field_warning  = new XoopsFormLabel(
             '<object width="425" height="353">
-<param name="movie" value="http://www.youtube.com/v/' . $filename . '"></param>
+<param name="movie" value="https://www.youtube.com/v/' . $filename . '"></param>
 <param name="wmode" value="transparent"></param>
-<embed src="http://www.youtube.com/v/' . $filename . '" type="application/x-shockwave-flash" wmode="transparent" width="425" height="353"></embed>
+<embed src="https://www.youtube.com/v/' . $filename . '" type="application/x-shockwave-flash" wmode="transparent" width="425" height="353"></embed>
 </object>'
         );
         $field_video_id = new XoopsFormHidden('video_id', $video_id);
@@ -361,6 +366,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
         $form->addElement($field_marker);
         $form->addElement($buttonSend);
         $form->display();
+
         return true;
     }
 
@@ -374,6 +380,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
         if (!$result = $this->db->query($sql)) {
             return false;
         }
+
         return true;
     }
 }

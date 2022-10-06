@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -20,9 +18,8 @@ use XoopsObject;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -77,7 +74,7 @@ class Image extends XoopsObject
     /**
      * @param $id
      */
-    public function load($id)
+    public function load($id): void
     {
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_images') . ' WHERE image_id=' . $id;
         $myrow = $this->db->fetchArray($this->db->query($sql));
@@ -129,6 +126,7 @@ class Image extends XoopsObject
                 $ret[] = $myrow['suico_images_id'];
             }
         }
+
         return $ret;
     }
 

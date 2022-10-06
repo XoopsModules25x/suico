@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico\Form;
 
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico\Form;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -57,14 +54,15 @@ class NotesForm extends XoopsThemeForm
     {
         $this->helper       = $target->helper;
         $this->targetObject = $target;
-        $title              = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_NOTES_ADD) : \sprintf(\AM_SUICO_NOTES_EDIT);
+        $title              = $this->targetObject->isNew() ? \AM_SUICO_NOTES_ADD : \AM_SUICO_NOTES_EDIT;
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
         //include ID field, it's needed so the module knows if it is a new form or an edited form
         $hidden = new XoopsFormHidden(
-            'note_id', $this->targetObject->getVar(
-            'note_id'
-        )
+            'note_id',
+            $this->targetObject->getVar(
+                'note_id'
+            )
         );
         $this->addElement($hidden);
         unset($hidden);
@@ -86,21 +84,21 @@ class NotesForm extends XoopsThemeForm
             if ($this->helper->isUserAdmin()) {
                 $descEditor = new XoopsFormEditor(
                     \AM_SUICO_NOTES_NOTE_TEXT, $this->helper->getConfig(
-                    'suicoEditorAdmin'
+                        'suicoEditorAdmin'
                 ), $editorOptions, $nohtml = false, $onfailure = 'textarea'
                 );
             } else {
                 $descEditor = new XoopsFormEditor(
                     \AM_SUICO_NOTES_NOTE_TEXT, $this->helper->getConfig(
-                    'suicoEditorUser'
+                        'suicoEditorUser'
                 ), $editorOptions, $nohtml = false, $onfailure = 'textarea'
                 );
             }
         } else {
             $descEditor = new XoopsFormDhtmlTextArea(
                 \AM_SUICO_NOTES_NOTE_TEXT, 'description', $this->targetObject->getVar(
-                'description',
-                'e'
+                    'description',
+                    'e'
             ), 5, 50
             );
         }
@@ -109,7 +107,7 @@ class NotesForm extends XoopsThemeForm
         $this->addElement(
             new XoopsFormSelectUser(
                 \AM_SUICO_NOTES_NOTE_FROM, 'note_from', false, $this->targetObject->getVar(
-                'note_from'
+                    'note_from'
             ), 1, false
             ),
             false
@@ -118,7 +116,7 @@ class NotesForm extends XoopsThemeForm
         $this->addElement(
             new XoopsFormSelectUser(
                 \AM_SUICO_NOTES_NOTE_TO, 'note_to', false, $this->targetObject->getVar(
-                'note_to'
+                    'note_to'
             ), 1, false
             ),
             false

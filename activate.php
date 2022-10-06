@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /**
  * Extended User Profile
  *
@@ -13,7 +11,6 @@ declare(strict_types=1);
  *
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
  * @license             GNU GPL 2 (https://www.gnu.org/licenses/gpl-2.0.html)
- * @package             profile
  * @since               2.3.0
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
@@ -27,7 +24,7 @@ if (!empty($_GET['id']) && !empty($_GET['actkey'])) {
     if (empty($id)) {
         redirect_header(XOOPS_URL, 1, '');
     }
-    /* @var XoopsMemberHandler $memberHandler */
+    /** @var XoopsMemberHandler $memberHandler */
     $memberHandler = xoops_getHandler('member');
     $thisuser      = $memberHandler->getUser($id);
     if (!is_object($thisuser)) {
@@ -36,45 +33,44 @@ if (!empty($_GET['id']) && !empty($_GET['actkey'])) {
     if ($thisuser->getVar('actkey') != $actkey) {
         redirect_header(XOOPS_URL . '/', 5, _US_ACTKEYNOT);
     } elseif ($thisuser->getVar('level') > 0) {
-            redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/index.php', 5, _US_ACONTACT, false);
-        } elseif (false !== $memberHandler->activateUser($thisuser)) {
-                $xoopsPreload = XoopsPreload::getInstance();
-                $xoopsPreload->triggerEvent('core.behavior.user.activate', $thisuser);
-                /* @var XoopsConfigHandler $configHandler */
-                $configHandler              = xoops_getHandler('config');
-                $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
-                if (2 == $GLOBALS['xoopsConfigUser']['activation_type']) {
-                    $myts        = \MyTextSanitizer::getInstance();
-                    $xoopsMailer = xoops_getMailer();
-                    $xoopsMailer->useMail();
-                    $xoopsMailer->setTemplate('activated.tpl');
-                    $xoopsMailer->assign('SITENAME', $GLOBALS['xoopsConfig']['sitename']);
-                    $xoopsMailer->assign('ADMINMAIL', $GLOBALS['xoopsConfig']['adminmail']);
-                    $xoopsMailer->assign('SITEURL', XOOPS_URL . '/');
-                    $xoopsMailer->setToUsers($thisuser);
-                    $xoopsMailer->setFromEmail($GLOBALS['xoopsConfig']['adminmail']);
-                    $xoopsMailer->setFromName($GLOBALS['xoopsConfig']['sitename']);
-                    $xoopsMailer->setSubject(sprintf(_US_YOURACCOUNT, $GLOBALS['xoopsConfig']['sitename']));
-                    include $GLOBALS['xoops']->path('header.php');
-                    if ($xoopsMailer->send()) {
-                        printf(_US_ACTVMAILOK, $thisuser->getVar('uname'));
-                    } else {
-                        printf(_US_ACTVMAILNG, $thisuser->getVar('uname'));
-                    }
-                    require __DIR__ . '/footer.php';
-                } else {
-                    redirect_header(XOOPS_URL . '/user.php', 5, _US_ACTLOGIN, false);
-                }
+        redirect_header(XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/index.php', 5, _US_ACONTACT, false);
+    } elseif (false !== $memberHandler->activateUser($thisuser)) {
+        $xoopsPreload = XoopsPreload::getInstance();
+        $xoopsPreload->triggerEvent('core.behavior.user.activate', $thisuser);
+        /** @var XoopsConfigHandler $configHandler */
+        $configHandler              = xoops_getHandler('config');
+        $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
+        if (2 == $GLOBALS['xoopsConfigUser']['activation_type']) {
+            $myts        = \MyTextSanitizer::getInstance();
+            $xoopsMailer = xoops_getMailer();
+            $xoopsMailer->useMail();
+            $xoopsMailer->setTemplate('activated.tpl');
+            $xoopsMailer->assign('SITENAME', $GLOBALS['xoopsConfig']['sitename']);
+            $xoopsMailer->assign('ADMINMAIL', $GLOBALS['xoopsConfig']['adminmail']);
+            $xoopsMailer->assign('SITEURL', XOOPS_URL . '/');
+            $xoopsMailer->setToUsers($thisuser);
+            $xoopsMailer->setFromEmail($GLOBALS['xoopsConfig']['adminmail']);
+            $xoopsMailer->setFromName($GLOBALS['xoopsConfig']['sitename']);
+            $xoopsMailer->setSubject(sprintf(_US_YOURACCOUNT, $GLOBALS['xoopsConfig']['sitename']));
+            include $GLOBALS['xoops']->path('header.php');
+            if ($xoopsMailer->send()) {
+                printf(_US_ACTVMAILOK, $thisuser->getVar('uname'));
             } else {
-                redirect_header(XOOPS_URL . '/index.php', 5, 'Activation failed!');
+                printf(_US_ACTVMAILNG, $thisuser->getVar('uname'));
             }
-
+            require __DIR__ . '/footer.php';
+        } else {
+            redirect_header(XOOPS_URL . '/user.php', 5, _US_ACTLOGIN, false);
+        }
+    } else {
+        redirect_header(XOOPS_URL . '/index.php', 5, 'Activation failed!');
+    }
     // Not implemented yet: re-send activiation code
 } elseif (!empty($_REQUEST['email']) && 0 != $xoopsConfigUser['activation_type']) {
     $myts = \MyTextSanitizer::getInstance();
-    /* @var XoopsMemberHandler $memberHandler */
+    /** @var XoopsMemberHandler $memberHandler */
     $memberHandler = xoops_getHandler('member');
-    $getuser       = $memberHandler->getUsers(new Criteria('email', $myts->addSlashes(trim($_REQUEST['email']))));
+    $getuser       = $memberHandler->getUsers(new Criteria('email', $GLOBALS['xoopsDB']->escape(trim($_REQUEST['email']))));
     if (0 == count($getuser)) {
         redirect_header(XOOPS_URL, 2, _US_SORRYNOTFOUND);
     }

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -13,9 +11,8 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -53,16 +50,16 @@ switch ($op) {
         $videoObject->setVar('uid_owner', Request::getVar('uid_owner', ''));
         $videoObject->setVar('video_title', Request::getVar('video_title', ''));
         $videoObject->setVar('video_desc', Request::getVar('video_desc', ''));
-		
-		$videourl=Request::getVar('youtube_code', '');
-		//Get youtube video id
-		if (11 === mb_strlen($videourl)) {
-			$videocode = $videourl;
-		} else {
-		//Get youtube video id
-			preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $videourl, $match);
-			$videocode = $match[1];	
-		}
+
+        $videourl = Request::getVar('youtube_code', '');
+        //Get youtube video id
+        if (11 === mb_strlen($videourl)) {
+            $videocode = $videourl;
+        } else {
+            //Get youtube video id
+            preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $videourl, $match);
+            $videocode = $match[1];
+        }
         $videoObject->setVar('youtube_code', $videocode);
         $videoObject->setVar('featured_video', Request::getVar('featured_video', ''));
         $dateTimeObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('date_created', '', 'POST'));
@@ -142,7 +139,11 @@ switch ($op) {
         if ($videoTempRows > $videoPaginationLimit) {
             xoops_load('XoopsPageNav');
             $pagenav = new \XoopsPageNav(
-                $videoTempRows, $videoPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                $videoTempRows,
+                $videoPaginationLimit,
+                $start,
+                'start',
+                'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
@@ -191,7 +192,11 @@ switch ($op) {
             if ($videoCount > $videoPaginationLimit) {
                 xoops_load('XoopsPageNav');
                 $pagenav = new \XoopsPageNav(
-                    $videoCount, $videoPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                    $videoCount,
+                    $videoPaginationLimit,
+                    $start,
+                    'start',
+                    'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }

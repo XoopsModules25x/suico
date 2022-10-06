@@ -1,17 +1,15 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico\Form;
 
-use XoopsModules\Suico;
-use XoopsThemeForm;
 use XoopsFormButton;
 use XoopsFormHidden;
 use XoopsFormLabel;
 use XoopsModules\Suico\{
     Helper
 };
+use XoopsThemeForm;
+
 /** @var Helper $helper */
 
 /**
@@ -28,7 +26,6 @@ class RegisterForm extends XoopsThemeForm
 {
     /**
      * RegisterForm constructor.
-     * @param \XoopsUser $user
      * @param            $profile
      * @param null       $step
      */
@@ -42,7 +39,7 @@ class RegisterForm extends XoopsThemeForm
         $_SESSION[$opkey] = $next_opname;
         require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
         if (empty($GLOBALS['xoopsConfigUser'])) {
-            /* @var \XoopsConfigHandler $configHandler */
+            /** @var \XoopsConfigHandler $configHandler */
             $configHandler              = \xoops_getHandler('config');
             $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(\XOOPS_CONF_USER);
         }

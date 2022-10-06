@@ -1,27 +1,24 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 //index.php
 define(
     '_MD_SUICO_FRAMEWORKSFALSE',
     "You need to install this package, in order to make this module work correctly:<br><br>
-<a href='http://dev.xoops.org/modules/xfmod/project/showfiles.php?group_id=1357'>Frameworks v 1.1 or newer</a><br>"
+<a href='https://dev.xoops.org/modules/xfmod/project/showfiles.php?group_id=1357'>Frameworks v 1.1 or newer</a><br>"
 );
 define('_MD_SUICO_FRAMEWORKSTRUE', 'You have version %s of the Frameworks package');
 define('_MD_SUICO_BY', 'By');
@@ -402,4 +399,3 @@ define('_AM_SUICO_SAVESTEP_TOGGLE', 'Toggle Save');
 define('_AM_SUICO_SAVESTEP_TOGGLE_SUCCESS', 'Successfully Changed Save After Step');
 define('_AM_SUICO_SAVESTEP_TOGGLE_FAILED', "Changing 'Save After Step' Failed");
 define('_AM_SUICO_CANNOTDEACTIVATEWEBMASTERS', 'You cannot deactivate Webmaster account');
-

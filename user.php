@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
@@ -48,13 +46,13 @@ $op = $_REQUEST['op'] ?? '';
 if ('register' === $op) {
     $GLOBALS['xoopsOption']['template_main'] = 'suico_register.tpl';
     include $GLOBALS['xoops']->path('header.php');
-    if (!empty($_GET['op']) && in_array($_GET['op'], ['actv', 'activate'])) {
+    if (!empty($_GET['op']) && in_array($_GET['op'], ['actv', 'activate'], true)) {
         header('location: ./activate.php' . (Request::getString('QUERY_STRING', '', 'SERVER')));
         exit();
     }
     xoops_load('XoopsUserUtility');
     $myts = \MyTextSanitizer::getInstance();
-    /* @var XoopsConfigHandler $configHandler */
+    /** @var XoopsConfigHandler $configHandler */
     $configHandler              = xoops_getHandler('config');
     $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
     if (empty($GLOBALS['xoopsConfigUser']['allow_register'])) {
@@ -100,7 +98,7 @@ if ('register' === $op) {
     if (isset($steps[$current_step])) {
         $xoBreadcrumbs[] = ['title' => $steps[$current_step]['step_name']];
     }
-    /* @var \XoopsMemberHandler $memberHandler */
+    /** @var \XoopsMemberHandler $memberHandler */
     $memberHandler  = xoops_getHandler('member');
     $profileHandler = $helper->getHandler('Profile');
     $fields         = $profileHandler->loadFields();
@@ -112,7 +110,7 @@ if ('register' === $op) {
         if (count($fields) > 0) {
             foreach (array_keys($fields) as $i) {
                 $fieldname = $fields[$i]->getVar('field_name');
-                if (in_array($fieldname, $userfields)) {
+                if (in_array($fieldname, $userfields, true)) {
                     $default = $fields[$i]->getVar('field_default');
                     if ('' === $default || null === $default) {
                         continue;
@@ -156,7 +154,7 @@ if ('register' === $op) {
             continue;
         }
         $value = $fields[$field]->getValueForSave($_POST[$field]);
-        if (in_array($field, $userfields)) {
+        if (in_array($field, $userfields, true)) {
             $newuser->setVar($field, $value);
         } else {
             $profile->setVar($field, $value);
@@ -214,10 +212,11 @@ if ('register' === $op) {
                 $newuser->setVar('uname', $uname);
                 $newuser->setVar('email', $email);
                 $newuser->setVar('pass', $pass ? password_hash($pass, PASSWORD_DEFAULT) : '');
+
                 try {
                     $actkey = bin2hex(random_bytes(4));
-                } catch (Exception $e) {
-                    echo 'Caught exception: ',  $e->getMessage(), "\n";
+                } catch (\Throwable $e) {
+                    echo 'Caught exception: ', $e->getMessage(), "\n";
                 }
                 $newuser->setVar('actkey', $actkey, true);
                 $newuser->setVar('user_regdate', time(), true);
@@ -253,46 +252,46 @@ if ('register' === $op) {
                     if (!$memberHandler->addUserToGroup(XOOPS_GROUP_USERS, $newuser->getVar('uid'))) {
                         $message = _MD_SUICO_REGISTER_NOTGROUP . '<br>';
                     } elseif (1 == $GLOBALS['xoopsConfigUser']['activation_type']) {
-                            XoopsUserUtility::sendWelcome($newuser);
-                        } elseif (0 == $GLOBALS['xoopsConfigUser']['activation_type']) {
-                                $xoopsMailer = xoops_getMailer();
-                                $xoopsMailer->reset();
-                                $xoopsMailer->useMail();
-                                $xoopsMailer->setTemplate('register.tpl');
-                                $xoopsMailer->assign('SITENAME', $GLOBALS['xoopsConfig']['sitename']);
-                                $xoopsMailer->assign('ADMINMAIL', $GLOBALS['xoopsConfig']['adminmail']);
-                                $xoopsMailer->assign('SITEURL', XOOPS_URL . '/');
-                                $xoopsMailer->assign('X_UPASS', $_POST['vpass']);
-                                $xoopsMailer->setToUsers($newuser);
-                                $xoopsMailer->setFromEmail($GLOBALS['xoopsConfig']['adminmail']);
-                                $xoopsMailer->setFromName($GLOBALS['xoopsConfig']['sitename']);
-                                $xoopsMailer->setSubject(sprintf(_US_USERKEYFOR, $newuser->getVar('uname')));
-                                if ($xoopsMailer->send(true)) {
-                                    $_SESSION['profile_post']['_message_'] = 1;
-                                } else {
-                                    $_SESSION['profile_post']['_message_'] = 0;
-                                }
-                            } elseif (2 == $GLOBALS['xoopsConfigUser']['activation_type']) {
-                                    $xoopsMailer = xoops_getMailer();
-                                    $xoopsMailer->reset();
-                                    $xoopsMailer->useMail();
-                                    $xoopsMailer->setTemplate('adminactivate.tpl');
-                                    $xoopsMailer->assign('USERNAME', $newuser->getVar('uname'));
-                                    $xoopsMailer->assign('USEREMAIL', $newuser->getVar('email'));
-                                    $xoopsMailer->assign('USERACTLINK', XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/activate.php?id=' . $newuser->getVar('uid') . '&actkey=' . $newuser->getVar('actkey', 'n'));
-                                    $xoopsMailer->assign('SITENAME', $GLOBALS['xoopsConfig']['sitename']);
-                                    $xoopsMailer->assign('ADMINMAIL', $GLOBALS['xoopsConfig']['adminmail']);
-                                    $xoopsMailer->assign('SITEURL', XOOPS_URL . '/');
-                                    $xoopsMailer->setToGroups($memberHandler->getGroup($GLOBALS['xoopsConfigUser']['activation_group']));
-                                    $xoopsMailer->setFromEmail($GLOBALS['xoopsConfig']['adminmail']);
-                                    $xoopsMailer->setFromName($GLOBALS['xoopsConfig']['sitename']);
-                                    $xoopsMailer->setSubject(sprintf(_US_USERKEYFOR, $newuser->getVar('uname')));
-                                    if ($xoopsMailer->send()) {
-                                        $_SESSION['profile_post']['_message_'] = 3;
-                                    } else {
-                                        $_SESSION['profile_post']['_message_'] = 2;
-                                    }
-                                }
+                        XoopsUserUtility::sendWelcome($newuser);
+                    } elseif (0 == $GLOBALS['xoopsConfigUser']['activation_type']) {
+                        $xoopsMailer = xoops_getMailer();
+                        $xoopsMailer->reset();
+                        $xoopsMailer->useMail();
+                        $xoopsMailer->setTemplate('register.tpl');
+                        $xoopsMailer->assign('SITENAME', $GLOBALS['xoopsConfig']['sitename']);
+                        $xoopsMailer->assign('ADMINMAIL', $GLOBALS['xoopsConfig']['adminmail']);
+                        $xoopsMailer->assign('SITEURL', XOOPS_URL . '/');
+                        $xoopsMailer->assign('X_UPASS', $_POST['vpass']);
+                        $xoopsMailer->setToUsers($newuser);
+                        $xoopsMailer->setFromEmail($GLOBALS['xoopsConfig']['adminmail']);
+                        $xoopsMailer->setFromName($GLOBALS['xoopsConfig']['sitename']);
+                        $xoopsMailer->setSubject(sprintf(_US_USERKEYFOR, $newuser->getVar('uname')));
+                        if ($xoopsMailer->send(true)) {
+                            $_SESSION['profile_post']['_message_'] = 1;
+                        } else {
+                            $_SESSION['profile_post']['_message_'] = 0;
+                        }
+                    } elseif (2 == $GLOBALS['xoopsConfigUser']['activation_type']) {
+                        $xoopsMailer = xoops_getMailer();
+                        $xoopsMailer->reset();
+                        $xoopsMailer->useMail();
+                        $xoopsMailer->setTemplate('adminactivate.tpl');
+                        $xoopsMailer->assign('USERNAME', $newuser->getVar('uname'));
+                        $xoopsMailer->assign('USEREMAIL', $newuser->getVar('email'));
+                        $xoopsMailer->assign('USERACTLINK', XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname', 'n') . '/activate.php?id=' . $newuser->getVar('uid') . '&actkey=' . $newuser->getVar('actkey', 'n'));
+                        $xoopsMailer->assign('SITENAME', $GLOBALS['xoopsConfig']['sitename']);
+                        $xoopsMailer->assign('ADMINMAIL', $GLOBALS['xoopsConfig']['adminmail']);
+                        $xoopsMailer->assign('SITEURL', XOOPS_URL . '/');
+                        $xoopsMailer->setToGroups($memberHandler->getGroup($GLOBALS['xoopsConfigUser']['activation_group']));
+                        $xoopsMailer->setFromEmail($GLOBALS['xoopsConfig']['adminmail']);
+                        $xoopsMailer->setFromName($GLOBALS['xoopsConfig']['sitename']);
+                        $xoopsMailer->setSubject(sprintf(_US_USERKEYFOR, $newuser->getVar('uname')));
+                        if ($xoopsMailer->send()) {
+                            $_SESSION['profile_post']['_message_'] = 3;
+                        } else {
+                            $_SESSION['profile_post']['_message_'] = 2;
+                        }
+                    }
                     if ($message) {
                         $GLOBALS['xoopsTpl']->append('confirm', $message);
                     }

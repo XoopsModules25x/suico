@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -13,9 +11,8 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -27,7 +24,7 @@ use XoopsModules\Suico\{
 if (!defined('XOOPS_ROOT_PATH')) {
     exit();
 }
-//include_once(XOOPS_ROOT_PATH."/class/criteria.php");
+//require_once XOOPS_ROOT_PATH."/class/criteria.php";
 //require_once XOOPS_ROOT_PATH . '/modules/suico/class/Friendship.php';
 /**
  * @param $options
@@ -52,9 +49,10 @@ function b_suico_friends_show($options)
          * Filter for fetch votes ishot and isnothot
          */
         $criteria2 = new Criteria(
-            'friend1_uid', $xoopsUser->getVar(
-            'uid'
-        )
+            'friend1_uid',
+            $xoopsUser->getVar(
+                'uid'
+            )
         );
         /**
          * Creating factories of pictures and votes
@@ -65,6 +63,7 @@ function b_suico_friends_show($options)
         $block['lang_allfriends'] = _MB_SUICO_ALLFRIENDS;
         $block['lang_nofriends']  = _MB_SUICO_NOFRIENDSYET;
         $block['enablepm']        = $options[1] ?? '';
+
         return $block;
     }
 }
@@ -87,5 +86,6 @@ function b_suico_friends_edit($options)
         $chk = ' checked';
     }
     $form .= "&nbsp;<input type='radio' name='options[1]' value='0'" . $chk . '>' . _NO . '<br>';
+
     return $form;
 }

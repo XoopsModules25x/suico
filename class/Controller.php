@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -17,15 +15,13 @@ namespace XoopsModules\Suico;
 use Criteria;
 use CriteriaCompo;
 use Xmf\Request;
-use XoopsDatabase;
 use XoopsUser;
 use XoopsUserHandler;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
@@ -34,9 +30,9 @@ require_once XOOPS_ROOT_PATH . '/class/criteria.php';
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 
 /**
- * Class SuicoController
+ * Class Controller
  */
-class SuicoController extends \XoopsObject
+class Controller extends \XoopsObject
 {
     public $db;
     public $user;
@@ -89,7 +85,7 @@ class SuicoController extends \XoopsObject
         $this->checkSuspension();
     }
 
-    public function checkSuspension()
+    public function checkSuspension(): void
     {
         $criteria_suspended = new Criteria('uid', $this->uidOwner);
         if (1 === $this->isSuspended) {
@@ -109,7 +105,7 @@ class SuicoController extends \XoopsObject
         }
     }
 
-    public function checkPrivilege()
+    public function checkPrivilege(): void
     {
     }
 
@@ -128,7 +124,7 @@ class SuicoController extends \XoopsObject
     /**
      * Set permissions according to user is logged or not , is owner or not etc..
      */
-    public function getPermissions()
+    public function getPermissions(): void
     {
         global $_GET, $xoopsUser;
         /**
@@ -222,13 +218,14 @@ class SuicoController extends \XoopsObject
         $nbSections['countVideos']  = $this->videosFactory->getCount($criteriaUidVideo);
         $criteriaUidNotes           = new Criteria('note_to', $this->uidOwner);
         $nbSections['countNotes']   = $this->notesFactory->getCount($criteriaUidNotes);
+
         return $nbSections;
     }
 
     /**
      * This creates the module factories
      */
-    public function createFactories()
+    public function createFactories(): void
     {
         $this->albumFactory         = new ImageHandler($this->db);
         $this->visitorsFactory      = new VisitorsHandler($this->db);
@@ -251,12 +248,12 @@ class SuicoController extends \XoopsObject
     {
         global $xoopsModuleConfig;
         $configsectionname = 'enable_' . $section;
-        if (null !== $xoopsModuleConfig){
-        if (\array_key_exists($configsectionname, $xoopsModuleConfig)) {
-            if (0 === $this->helper->getConfig($configsectionname)) {
-                return -1;
+        if (null !== $xoopsModuleConfig) {
+            if (\array_key_exists($configsectionname, $xoopsModuleConfig)) {
+                if (0 === $this->helper->getConfig($configsectionname)) {
+                    return -1;
+                }
             }
-        }
         }
         //  if ($section=="Notes" && $xoopsModuleConfig['enable_notes']==0){
         //          return false;
@@ -276,6 +273,7 @@ class SuicoController extends \XoopsObject
                 return 0;
             }
         }
+
         return 1;
     }
 }

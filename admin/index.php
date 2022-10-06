@@ -1,11 +1,9 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -13,26 +11,22 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Module\Admin;
 use Xmf\Request;
-use Xmf\Yaml;
 use XoopsModules\Suico\{
     Common,
     Common\TestdataButtons,
     Helper,
     Utility
 };
-
 /** @var Admin $adminObject */
 /** @var Helper $helper */
 /** @var Utility $utility */
-
 require_once __DIR__ . '/admin_header.php';
 // Display Admin header
 xoops_cp_header();
@@ -111,7 +105,7 @@ $adminObject->addInfoBoxLine(sprintf(AM_SUICO_THEREARE_PRIVACY, $totalPrivacy));
 $adminObject->displayNavigation(basename(__FILE__));
 //check for latest release
 //$newRelease = $utility->checkVerModule($helper);
-//if (!empty($newRelease)) {
+//if (null !== $newRelease) {
 //    $adminObject->addItemButton($newRelease[0], $newRelease[1], 'download', 'style="color : Red"');
 //}
 

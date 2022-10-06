@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -29,9 +27,8 @@ use XoopsThemeForm;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -60,7 +57,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Suico\Helper $this->helper */
+        /** @var \XoopsModules\Suico\Helper $this- >helper */
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
@@ -89,6 +86,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $obj->unsetNew();
         }
         $obj->helper = $this->helper;
+
         return $obj;
     }
 
@@ -96,7 +94,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
      * retrieve a Image
      *
      * @param int|null $id of the Image
-     * @param null $fields
+     * @param null     $fields
      * @return mixed reference to the {@link Image} object, FALSE if failed
      */
     public function get2(
@@ -111,8 +109,10 @@ class ImageHandler extends XoopsPersistableObjectHandler
         if (1 === $numrows) {
             $image = new Image();
             $image->assignVars($this->db->fetchArray($result));
+
             return $image;
         }
+
         return false;
     }
 
@@ -153,8 +153,8 @@ class ImageHandler extends XoopsPersistableObjectHandler
                 $image_id,
                 $this->db->quoteString($title),
                 $this->db->quoteString($caption),
-                \time(),//$now,
-                \time(),//$now,
+                \time(), //$now,
+                \time(), //$now,
                 $this->db->quoteString($uid_owner),
                 $this->db->quoteString($filename)
             );
@@ -189,6 +189,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $image_id = $this->db->getInsertId();
         }
         $xoopsObject->assignVar('image_id', $image_id);
+
         return true;
     }
 
@@ -219,6 +220,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         if (!$result) {
             return false;
         }
+
         return true;
     }
 
@@ -260,6 +262,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             }
             unset($image);
         }
+
         return $ret;
     }
 
@@ -281,6 +284,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             return 0;
         }
         [$count] = $this->db->fetchRow($result);
+
         return (int)$count;
     }
 
@@ -304,6 +308,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         if (!$result = $this->db->query($sql)) {
             return false;
         }
+
         return true;
     }
 
@@ -333,6 +338,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $form->addElement($field_caption);
         $form->addElement($buttonSend);
         $form->assign($xoopsTpl); //If your server is php 5
+
         return true;
     }
 
@@ -366,6 +372,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $form->addElement($field_marker);
         $form->addElement($buttonSend);
         $form->display();
+
         return true;
     }
 
@@ -410,7 +417,11 @@ class ImageHandler extends XoopsPersistableObjectHandler
         //        $uploadDir = \XOOPS_UPLOAD_PATH . '/suico/images/';
         // create the object to upload
         $uploader = new XoopsMediaUploader(
-            $pathUpload, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight
+            $pathUpload,
+            $allowed_mimetypes,
+            $maxfilesize,
+            $maxfilewidth,
+            $maxfileheight
         );
         // fetch the media
         if ($uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0])) {
@@ -420,6 +431,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             if (!$uploader->upload()) {
                 // if there are errors lets return them
                 echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
+
                 return false;
             }
             // now let s create a new object picture and set its variables
@@ -448,8 +460,10 @@ class ImageHandler extends XoopsPersistableObjectHandler
             );
         } else {
             echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
+
             return false;
         }
+
         return true;
     }
 
@@ -470,7 +484,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $pictwidth,
         $pictheight,
         $pathUpload
-    ) {
+    ): void {
         $img2   = $img;
         $path   = \pathinfo($img);
         $img    = \imagecreatefromjpeg($img);
@@ -552,6 +566,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $vetor[$i]['img_filename'] = $myrow['filename'];
             $i++;
         }
+
         return $vetor;
     }
 
@@ -580,21 +595,20 @@ class ImageHandler extends XoopsPersistableObjectHandler
         }
         if (1 == $isUser) {
             $sql0 = 'SELECT f.friend2_uid FROM ' . $this->db->prefix('suico_friendships') . ' AS f';
-            $sql0 .= ' WHERE f.friend1_uid = '. $uid ;
-            $sql = 'SELECT uname, t.uid_owner, t.filename, t.title, t.caption, t.date_created, t.date_updated  FROM ' . $this->db->prefix('suico_images') . ' AS t';
-            $sql .= ' INNER JOIN ' . $this->db->prefix('users') . ' u ON t.uid_owner=u.uid';
-            $sql .= ' INNER JOIN ' . $this->db->prefix('suico_configs') . ' c on t.uid_owner=c.config_uid';
-            $sql .= ' WHERE (private=0 AND c.pictures < 3 )'; //all pictures visible to members
-            $sql .= ' OR ( private=0 AND c.pictures = 3 AND c.config_uid IN ( '. $sql0 .')) '; //pictures visible to friends
-            $sql .= ' OR ( c.config_uid = '. $uid .' ) '; //my private pictures
-            $sql .= ' ORDER BY image_id DESC';
+            $sql0 .= ' WHERE f.friend1_uid = ' . $uid;
+            $sql  = 'SELECT uname, t.uid_owner, t.filename, t.title, t.caption, t.date_created, t.date_updated  FROM ' . $this->db->prefix('suico_images') . ' AS t';
+            $sql  .= ' INNER JOIN ' . $this->db->prefix('users') . ' u ON t.uid_owner=u.uid';
+            $sql  .= ' INNER JOIN ' . $this->db->prefix('suico_configs') . ' c on t.uid_owner=c.config_uid';
+            $sql  .= ' WHERE (private=0 AND c.pictures < 3 )'; //all pictures visible to members
+            $sql  .= ' OR ( private=0 AND c.pictures = 3 AND c.config_uid IN ( ' . $sql0 . ')) '; //pictures visible to friends
+            $sql  .= ' OR ( c.config_uid = ' . $uid . ' ) '; //my private pictures
+            $sql  .= ' ORDER BY image_id DESC';
         }
 
         $result = $this->db->query($sql, $limit, 0);
 
-
-        $vetor  = [];
-        $i      = 0;
+        $vetor = [];
+        $i     = 0;
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $vetor[$i]['uid_owner']    = $myrow['uid_owner'];
             $vetor[$i]['uname']        = $myrow['uname'];
@@ -605,6 +619,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $vetor[$i]['date_updated'] = \formatTimestamp($myrow['date_updated']);
             $i++;
         }
+
         return $vetor;
     }
 
@@ -621,7 +636,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $width,
         $height,
         $pathUpload
-    ) {
+    ): void {
         $img2   = $img;
         $path   = \pathinfo($img);
         $img    = \imagecreatefromjpeg($img);
@@ -681,4 +696,3 @@ class ImageHandler extends XoopsPersistableObjectHandler
         \imagedestroy($img2);
     }
 }
-

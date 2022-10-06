@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -12,13 +10,11 @@ declare(strict_types=1);
  */
 
 /**
- * @copyright      {@link http://xoops.org/ XOOPS Project}
+ * @copyright      {@link https://xoops.org/ XOOPS Project}
  * @license        {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @author         XOOPS Development Team
  */
 
-use Xmf\Module\Helper\Permission;
-use Xmf\Request;
 use XoopsModules\Suico;
 
 require_once __DIR__ . '/admin_header.php';
@@ -27,7 +23,7 @@ $adminObject->addItemButton(_AM_SUICO_CATEGORY, 'fieldscategory.php?op=new', 'ad
 $adminObject->displayNavigation(basename(__FILE__));
 $adminObject->displayButton('left');
 $op = $_REQUEST['op'] ?? (isset($_REQUEST['id']) ? 'edit' : 'list');
-/* @var Suico\CategoryHandler $categoryHandler */
+/** @var Suico\CategoryHandler $categoryHandler */
 $categoryHandler = $helper->getHandler('Category');
 switch ($op) {
     default:
@@ -64,7 +60,7 @@ switch ($op) {
             redirect_header('fieldscategory.php', 3, sprintf(_AM_SUICO_SAVEDSUCCESS, _AM_SUICO_CATEGORY));
         }
         echo $obj->getHtmlErrors();
-        /* @var  XoopsThemeForm $form */
+        /** @var XoopsThemeForm $form */
         $form = $obj->getForm();
         $form->display();
         break;

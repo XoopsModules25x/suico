@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /**
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -11,7 +9,7 @@ declare(strict_types=1);
  * @author          XOOPS Development Team
  * @copyright       XOOPS Project
  * @link            https://xoops.org
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  */
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
@@ -86,9 +84,10 @@ if ($block['is_custom']) {
         if (count($btemplate) > 0) {
             $form->addElement(
                 new \XoopsFormLabel(
-                    _AM_SYSTEM_BLOCKS_CONTENT, '<a href="' . XOOPS_URL . '/modules/system/admin.php?fct=tplsets&amp;op=edittpl&amp;id=' . $btemplate[0]->getVar(
-                                                 'tpl_id'
-                                             ) . '">' . _AM_SYSTEM_BLOCKS_EDITTPL . '</a>'
+                    _AM_SYSTEM_BLOCKS_CONTENT,
+                    '<a href="' . XOOPS_URL . '/modules/system/admin.php?fct=tplsets&amp;op=edittpl&amp;id=' . $btemplate[0]->getVar(
+                        'tpl_id'
+                    ) . '">' . _AM_SYSTEM_BLOCKS_EDITTPL . '</a>'
                 )
             );
         } else {
@@ -96,9 +95,10 @@ if ($block['is_custom']) {
             if (count($btemplate2) > 0) {
                 $form->addElement(
                     new \XoopsFormLabel(
-                        _AM_SYSTEM_BLOCKS_CONTENT, '<a href="' . XOOPS_URL . '/modules/system/admin.php?fct=tplsets&amp;op=edittpl&amp;id=' . $btemplate2[0]->getVar(
-                                                     'tpl_id'
-                                                 ) . '" target="_blank">' . _AM_SYSTEM_BLOCKS_EDITTPL . '</a>'
+                        _AM_SYSTEM_BLOCKS_CONTENT,
+                        '<a href="' . XOOPS_URL . '/modules/system/admin.php?fct=tplsets&amp;op=edittpl&amp;id=' . $btemplate2[0]->getVar(
+                            'tpl_id'
+                        ) . '" target="_blank">' . _AM_SYSTEM_BLOCKS_EDITTPL . '</a>'
                     )
                 );
             }

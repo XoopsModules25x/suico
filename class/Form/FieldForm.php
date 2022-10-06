@@ -1,25 +1,24 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico\Form;
 
-use XoopsThemeForm;
 use XoopsFormButton;
+use XoopsFormHidden;
+use XoopsFormLabel;
+use XoopsFormSelect;
 use XoopsFormText;
 use XoopsFormTextArea;
-use XoopsFormHidden;
-use XoopsFormSelect;
-use XoopsFormLabel;
 use XoopsFormTextDateSelect;
 use XoopsModules\Suico\{
     Helper
 };
+
+use XoopsThemeForm;
+
 /** @var Helper $helper */
 
 /**
  * Class FieldForm
- * @package XoopsModules\Suico\Form
  */
 class FieldForm extends XoopsThemeForm
 {
@@ -210,7 +209,7 @@ class FieldForm extends XoopsThemeForm
                     break;
             }
         }
-        /* @var \XoopsGroupPermHandler $grouppermHandler */
+        /** @var \XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler = \xoops_getHandler('groupperm');
         $searchable_types = [
             'textbox',
@@ -222,7 +221,7 @@ class FieldForm extends XoopsThemeForm
             'timezone',
             'language',
         ];
-        if (\in_array($field->getVar('field_type'), $searchable_types)) {
+        if (\in_array($field->getVar('field_type'), $searchable_types, true)) {
             $search_groups = $grouppermHandler->getGroupIds('profile_search', $field->getVar('field_id'), $GLOBALS['xoopsModule']->getVar('mid'));
             $this->addElement(new \XoopsFormSelectGroup(\_AM_SUICO_PROF_SEARCH, 'profile_search', true, $search_groups, 5, true));
         }

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -8,7 +6,7 @@ namespace XoopsModules\Suico;
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -47,7 +44,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Suico\Helper $this->helper */
+        /** @var \XoopsModules\Suico\Helper $this- >helper */
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
@@ -73,6 +70,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
             $obj->unsetNew();
         }
         $obj->helper = $this->helper;
+
         return $obj;
     }
 
@@ -80,7 +78,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
      * retrieve a Suspensions
      *
      * @param int|null $id of the Suspensions
-     * @param null $fields
+     * @param null     $fields
      * @return mixed reference to the {@link Suspensions} object, FALSE if failed
      */
     public function get2(
@@ -95,8 +93,10 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
         if (1 === $numrows) {
             $suspensions = new Suspensions();
             $suspensions->assignVars($this->db->fetchArray($result));
+
             return $suspensions;
         }
+
         return false;
     }
 
@@ -170,6 +170,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
             $uid = $this->db->getInsertId();
         }
         $xoopsObject->assignVar('uid', $uid);
+
         return true;
     }
 
@@ -200,6 +201,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
         if (!$result) {
             return false;
         }
+
         return true;
     }
 
@@ -241,6 +243,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
             }
             unset($suspensions);
         }
+
         return $ret;
     }
 
@@ -262,6 +265,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
             return 0;
         }
         [$count] = $this->db->fetchRow($result);
+
         return (int)$count;
     }
 
@@ -285,6 +289,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
         if (!$result = $this->db->queryF($sql)) {
             return false;
         }
+
         return true;
     }
 }

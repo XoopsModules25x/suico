@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -33,7 +31,6 @@ use RuntimeException;
  * @author      Karol Babioch <karol@babioch.de>
  * @copyright   Karol Babioch
  * @license     https://www.gnu.org/licenses/gpl-3.0.html GNU GPL
- * @package     Id3v1
  */
 
 /**
@@ -45,8 +42,7 @@ use RuntimeException;
  * the access is easy and effective.
  *
  * @version      1.0
- * @link         http://www.babioch.de/
- * @package      Id3v1
+ * @link         https://www.babioch.de/
  * @author       Karol Babioch <karol@babioch.de>
  * @copyright    Karol Babioch
  * @license      https://www.gnu.org/licenses/gpl-3.0.html GNU GPL
@@ -107,7 +103,7 @@ class Id3v1
     /**
      * Holds all known ID3 Genres
      *
-     * @link http://id3.org/d3v2.3.0
+     * @link https://id3.org/d3v2.3.0
      * @see  getGenreList()
      * @see  getGenreNameByid()
      * @see  getGenreIdByName()
@@ -413,6 +409,7 @@ class Id3v1
         if (!empty($this->_tags['title'])) {
             return $this->_tags['title'];
         }
+
         return null;
     }
 
@@ -426,6 +423,7 @@ class Id3v1
         if (!empty($this->_tags['artists'])) {
             return $this->_tags['artist'];
         }
+
         return null;
     }
 
@@ -439,6 +437,7 @@ class Id3v1
         if (!empty($this->_tags['album'])) {
             return $this->_tags['album'];
         }
+
         return null;
     }
 
@@ -452,6 +451,7 @@ class Id3v1
         if (self::ID3V1_1 === $this->_version) {
             return mb_substr($this->_tags['comment'], 0, 28);
         }
+
         return $this->_tags['comment'];
     }
 
@@ -486,6 +486,7 @@ class Id3v1
         if (!empty($this->_tags['year'])) {
             return (int)$this->_tags['year'];
         }
+
         return null;
     }
 
@@ -499,6 +500,7 @@ class Id3v1
         if (self::ID3V1_0 === $this->_version || !isset($this->_tags['track'])) {
             return false;
         }
+
         return (int)$this->_tags['track'];
     }
 
@@ -537,6 +539,7 @@ class Id3v1
                 throw new RuntimeException('Invalid version');
         }
         $this->_version = $version;
+
         return $this;
     }
 
@@ -562,6 +565,7 @@ class Id3v1
         } else {
             throw new RuntimeException('Title has to be a string');
         }
+
         return $this;
     }
 
@@ -587,6 +591,7 @@ class Id3v1
         } else {
             throw new RuntimeException('Artist has to be a string');
         }
+
         return $this;
     }
 
@@ -612,6 +617,7 @@ class Id3v1
         } else {
             throw new RuntimeException('Album has to be a string');
         }
+
         return $this;
     }
 
@@ -639,6 +645,7 @@ class Id3v1
         } else {
             throw new RuntimeException('Comment has to be a string');
         }
+
         return $this;
     }
 
@@ -665,6 +672,7 @@ class Id3v1
         } else {
             throw new RuntimeException('Genre type invalid');
         }
+
         return $this;
     }
 
@@ -687,6 +695,7 @@ class Id3v1
         } else {
             throw new RuntimeException('Year has to be an interger');
         }
+
         return $this;
     }
 
@@ -716,6 +725,7 @@ class Id3v1
         } else {
             throw new RuntimeException('Track type invalid or zero');
         }
+
         return $this;
     }
 
@@ -740,6 +750,7 @@ class Id3v1
         $this->_tags['comment'] = '';
         $this->_tags['track']   = null;
         $this->_tags['genre']   = 255;
+
         return $this;
     }
 
@@ -757,6 +768,7 @@ class Id3v1
         if (!isset($genres[$genreName])) {
             return 255;
         }
+
         return (int)$genres[$genreName];
     }
 
@@ -838,6 +850,7 @@ class Id3v1
         if (false === \fwrite($this->_stream, $newTag, 128)) {
             throw new RuntimeException('Not possible to write ID3 tags');
         }
+
         return $this;
     }
 }

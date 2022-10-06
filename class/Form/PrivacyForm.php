@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico\Form;
 
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico\Form;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -47,7 +44,7 @@ class PrivacyForm extends \XoopsThemeForm
     {
         $this->helper       = $target->helper;
         $this->targetObject = $target;
-        $title              = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_PRIVACY_ADD) : \sprintf(\AM_SUICO_PRIVACY_EDIT);
+        $title              = $this->targetObject->isNew() ? \AM_SUICO_PRIVACY_ADD : \AM_SUICO_PRIVACY_EDIT;
         parent::__construct($title, 'form', \xoops_getenv('PHP_SELF'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
         //include ID field, it's needed so the module knows if it is a new form or an edited form

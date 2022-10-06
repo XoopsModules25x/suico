@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico\Common;
 
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico\Common;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -27,7 +24,7 @@ use XoopsModules\Suico;
 
 require_once \dirname(__DIR__, 4) . '/mainfile.php';
 $moduleDirName      = \basename(\dirname(__DIR__, 2));
-$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+$moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 \xoops_loadLanguage('filechecker', $moduleDirName);
 
 /**
@@ -55,7 +52,7 @@ class FileChecker
             $redirectFile = $_SERVER['SCRIPT_NAME'];
         }
         $moduleDirName      = \basename(\dirname(__DIR__, 2));
-        $moduleDirNameUpper = mb_strtoupper($moduleDirName);
+        $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
         if (null === $original_file_path) {
             if (self::fileExists($file_path)) {
                 $pathStatus = "<img src='${pathIcon16}/1.png'>";
@@ -88,6 +85,7 @@ class FileChecker
                 ) . '</button>';
             $pathStatus .= '</form>';
         }
+
         return $pathStatus;
     }
 
@@ -103,6 +101,7 @@ class FileChecker
     ) {
         $source_path      = \str_replace('..', '', $source_path);
         $destination_path = \str_replace('..', '', $destination_path);
+
         return @\copy($source_path, $destination_path);
     }
 
@@ -125,8 +124,9 @@ class FileChecker
         if (\filesize($file1_path) !== \filesize($file2_path)) {
             return false;
         }
-        $crc1 = mb_strtoupper(\dechex(\crc32(file_get_contents($file1_path))));
-        $crc2 = mb_strtoupper(\dechex(\crc32(file_get_contents($file2_path))));
+        $crc1 = \mb_strtoupper(\dechex(\crc32(file_get_contents($file1_path))));
+        $crc2 = \mb_strtoupper(\dechex(\crc32(file_get_contents($file2_path))));
+
         return !($crc1 !== $crc2);
     }
 
@@ -151,6 +151,7 @@ class FileChecker
         $mode = 0777
     ) {
         $target = \str_replace('..', '', $target);
+
         return @\chmod($target, (int)$mode);
     }
 }

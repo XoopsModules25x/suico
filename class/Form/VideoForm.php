@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico\Form;
 
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico\Form;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -55,14 +52,15 @@ class VideoForm extends XoopsThemeForm
     {
         $this->helper       = $target->helper;
         $this->targetObject = $target;
-        $title              = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_VIDEO_ADD) : \sprintf(\AM_SUICO_VIDEO_EDIT);
+        $title              = $this->targetObject->isNew() ? \AM_SUICO_VIDEO_ADD : \AM_SUICO_VIDEO_EDIT;
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
         //include ID field, it's needed so the module knows if it is a new form or an edited form
         $hidden = new XoopsFormHidden(
-            'video_id', $this->targetObject->getVar(
-            'video_id'
-        )
+            'video_id',
+            $this->targetObject->getVar(
+                'video_id'
+            )
         );
         $this->addElement($hidden);
         unset($hidden);
@@ -73,45 +71,66 @@ class VideoForm extends XoopsThemeForm
         // Uid_owner
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_SUICO_VIDEO_UID_OWNER, 'uid_owner', false, $this->targetObject->getVar(
-                'uid_owner'
-            ), 1, false
+                \AM_SUICO_VIDEO_UID_OWNER,
+                'uid_owner',
+                false,
+                $this->targetObject->getVar(
+                    'uid_owner'
+                ),
+                1,
+                false
             ),
             false
         );
         // Video Title
         $this->addElement(
             new XoopsFormText(
-                \AM_SUICO_VIDEO_TITLE, 'video_title', 50, 255, $this->targetObject->getVar(
-                'video_title'
-            )
+                \AM_SUICO_VIDEO_TITLE,
+                'video_title',
+                50,
+                255,
+                $this->targetObject->getVar(
+                    'video_title'
+                )
             ),
             false
         );
         // Video_desc
         $this->addElement(
             new XoopsFormTextArea(
-                \AM_SUICO_VIDEO_VIDEO_DESC, 'video_desc', $this->targetObject->getVar(
-                'video_desc'
-            ), 4, 47
+                \AM_SUICO_VIDEO_VIDEO_DESC,
+                'video_desc',
+                $this->targetObject->getVar(
+                    'video_desc'
+                ),
+                4,
+                47
             ),
             false
         );
         // Youtube_code
         $this->addElement(
             new XoopsFormText(
-                \AM_SUICO_VIDEO_YOUTUBE_CODE, 'youtube_code', 50, 255, $this->targetObject->getVar(
-                'youtube_code'
-            )
+                \AM_SUICO_VIDEO_YOUTUBE_CODE,
+                'youtube_code',
+                50,
+                255,
+                $this->targetObject->getVar(
+                    'youtube_code'
+                )
             ),
             false
         );
         // Main_video
         $this->addElement(
             new XoopsFormText(
-                \AM_SUICO_VIDEO_MAIN_VIDEO, 'featured_video', 50, 255, $this->targetObject->getVar(
-                'featured_video'
-            )
+                \AM_SUICO_VIDEO_MAIN_VIDEO,
+                'featured_video',
+                50,
+                255,
+                $this->targetObject->getVar(
+                    'featured_video'
+                )
             ),
             false
         );
@@ -119,7 +138,10 @@ class VideoForm extends XoopsThemeForm
         $this->addElement(new \XoopsFormTextDateSelect(\AM_SUICO_VIDEO_DATE_CREATED, 'date_created', 0, \formatTimestamp($this->targetObject->getVar('date_created'), 's')));
         $this->addElement(
             new \XoopsFormTextDateSelect(
-                \AM_SUICO_VIDEO_DATE_UPDATED, 'date_updated', 0, \formatTimestamp($this->targetObject->getVar('date_updated'), 's')
+                \AM_SUICO_VIDEO_DATE_UPDATED,
+                'date_updated',
+                0,
+                \formatTimestamp($this->targetObject->getVar('date_updated'), 's')
             )
         );
         $this->addElement(new XoopsFormHidden('op', 'save'));

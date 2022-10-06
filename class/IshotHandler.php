@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -21,12 +19,10 @@ use XoopsPersistableObjectHandler;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
-
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
 /**
@@ -47,7 +43,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Suico\Helper $this->helper */
+        /** @var \XoopsModules\Suico\Helper $this- >helper */
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
@@ -73,6 +69,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
             $obj->unsetNew();
         }
         $obj->helper = $this->helper;
+
         return $obj;
     }
 
@@ -80,7 +77,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
      * retrieve a Ishot
      *
      * @param int|null $id of the Ishot
-     * @param null $fields
+     * @param null     $fields
      * @return mixed reference to the {@link Ishot} object, FALSE if failed
      */
     public function get2(
@@ -95,8 +92,10 @@ class IshotHandler extends XoopsPersistableObjectHandler
         if (1 === $numrows) {
             $suico_ishot = new Ishot();
             $suico_ishot->assignVars($this->db->fetchArray($result));
+
             return $suico_ishot;
         }
+
         return false;
     }
 
@@ -169,6 +168,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
             $cod_ishot = $this->db->getInsertId();
         }
         $xoopsObject->assignVar('cod_ishot', $cod_ishot);
+
         return true;
     }
 
@@ -199,6 +199,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
         if (!$result) {
             return false;
         }
+
         return true;
     }
 
@@ -240,6 +241,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
             }
             unset($suico_ishot);
         }
+
         return $ret;
     }
 
@@ -261,6 +263,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
             return 0;
         }
         [$count] = $this->db->fetchRow($result);
+
         return $count;
     }
 
@@ -284,6 +287,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
         if (!$result = $this->db->query($sql)) {
             return false;
         }
+
         return true;
     }
 
@@ -298,7 +302,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
             ) . ', ' . $this->db->prefix(
                 'users'
             );
-        if (\is_object($criteria) && \is_subclass_of($criteria, \CriteriaElement::class)) {
+        if (($criteria instanceof \CriteriaCompo) || ($criteria instanceof \Criteria)) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         //attention here this is kind of a hack
@@ -321,6 +325,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
             $vetor[$i]['user_avatar'] = $myrow['user_avatar'];
             $i++;
         }
+
         return $vetor;
     }
 
@@ -340,7 +345,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
             ) . ', ' . $this->db->prefix(
                 'users'
             );
-        if (\is_object($criteria) && \is_subclass_of($criteria, \CriteriaElement::class)) {
+        if (($criteria instanceof \CriteriaCompo) || ($criteria instanceof \Criteria)) {
             $sql .= ' ' . $criteria->renderWhere();
             //attention here this is kind of a hack
             $sql .= ' AND uid = uid_voted AND ishot=1';
@@ -358,6 +363,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
                 $vetor[$i]['user_avatar'] = $myrow['user_avatar'];
                 $i++;
             }
+
             return $vetor;
         }
     }

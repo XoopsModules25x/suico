@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -16,7 +14,6 @@ namespace XoopsModules\Suico;
  *
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
  * @license             GNU GPL 2 (https://www.gnu.org/licenses/gpl-2.0.html)
- * @package             profile
  * @since               2.3.0
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
@@ -38,8 +35,8 @@ class VisibilityHandler extends \XoopsPersistableObjectHandler
     /**
      * Get fields visible to the $user_groups on a $profile_groups profile
      *
-     * @param array $profile_groups groups of the user to be accessed
-     * @param array|null  $user_groups    groups of the visitor, default as $GLOBALS['xoopsUser']
+     * @param array      $profile_groups groups of the user to be accessed
+     * @param array|null $user_groups    groups of the visitor, default as $GLOBALS['xoopsUser']
      *
      * @return array
      */
@@ -51,10 +48,11 @@ class VisibilityHandler extends \XoopsPersistableObjectHandler
         $sql              .= ' AND user_group IN (' . \implode(',', $user_groups) . ')';
         $field_ids        = [];
         if (false !== ($result = $this->db->query($sql))) {
-            while (false !== (list($field_id) = $this->db->fetchRow($result))) {
+            while (false !== ([$field_id] = $this->db->fetchRow($result))) {
                 $field_ids[] = $field_id;
             }
         }
+
         return $field_ids;
     }
 
@@ -73,6 +71,7 @@ class VisibilityHandler extends \XoopsPersistableObjectHandler
         foreach ($rawRows as $rawRow) {
             $rows[$rawRow['field_id']][] = $rawRow;
         }
+
         return $rows;
     }
 
@@ -99,6 +98,7 @@ class VisibilityHandler extends \XoopsPersistableObjectHandler
         if (0 !== $userDiff) {
             return $userDiff;
         }
+
         return $profDiff;
     }
 }

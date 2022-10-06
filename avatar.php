@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -13,9 +11,8 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -25,7 +22,6 @@ use XoopsModules\Suico\{
     ImageHandler
 };
 /** @var Image $picture */
-
 require __DIR__ . '/header.php';
 if (!$GLOBALS['xoopsSecurity']->check()) {
     redirect_header('index.php', 3, _MD_SUICO_TOKENEXPIRED);
@@ -36,7 +32,7 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 $imageFactory = new ImageHandler(
     $xoopsDB
 );
-$picture = $imageFactory->create(false);
+$picture      = $imageFactory->create(false);
 $picture->load(Request::getString('image_id', '', 'POST'));
 $uid         = (int)$xoopsUser->getVar('uid');
 $image       = XOOPS_ROOT_PATH . '/uploads/suico/images/' . 'thumb_' . $picture->getVar('filename');

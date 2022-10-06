@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -8,7 +6,7 @@ namespace XoopsModules\Suico;
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -34,7 +31,6 @@ use XoopsMediaUploader;
 use XoopsObject;
 use XoopsPersistableObjectHandler;
 use XoopsThemeForm;
-
 
 /**
  * suico_groupshandler class.
@@ -54,7 +50,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Suico\Helper $this->helper */
+        /** @var \XoopsModules\Suico\Helper $this- >helper */
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
@@ -80,6 +76,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
             $obj->unsetNew();
         }
         $obj->helper = $this->helper;
+
         return $obj;
     }
 
@@ -102,8 +99,10 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         if (1 === $numrows) {
             $suico_groups = new Groups();
             $suico_groups->assignVars($this->db->fetchArray($result));
+
             return $suico_groups;
         }
+
         return false;
     }
 
@@ -175,6 +174,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
             $group_id = $this->db->getInsertId();
         }
         $xoopsObject->assignVar('group_id', $group_id);
+
         return true;
     }
 
@@ -205,6 +205,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         if (!$result) {
             return false;
         }
+
         return true;
     }
 
@@ -246,6 +247,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
             }
             unset($suico_groups);
         }
+
         return $ret;
     }
 
@@ -265,7 +267,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $order = 'ASC';
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_groups');
-        if (\is_object($criteria) && \is_subclass_of($criteria, \CriteriaElement::class)) {
+        if (($criteria instanceof \CriteriaCompo) || ($criteria instanceof \Criteria)) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' !== $sort) {
                 $sql .= ' ORDER BY ' . $sort . ' ' . $order;
@@ -300,6 +302,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
             }
             $i++;
         }
+
         return $ret;
     }
 
@@ -321,6 +324,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
             return 0;
         }
         [$count] = $this->db->fetchRow($result);
+
         return $count;
     }
 
@@ -344,6 +348,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         if (!$result = $this->db->query($sql)) {
             return false;
         }
+
         return true;
     }
 
@@ -371,6 +376,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $form->addElement($field_marker);
         $form->addElement($buttonSend);
         $form->display();
+
         return true;
     }
 
@@ -394,12 +400,14 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $buttonSend          = new XoopsFormButton('', 'submit_button', \_MD_SUICO_UPLOADGROUP, 'submit');
         $field_warning       = new XoopsFormLabel(\sprintf(\_MD_SUICO_YOU_CAN_UPLOAD, $maxbytes / 1024));
         $field_oldpicture    = new XoopsFormLabel(
-            \_MD_SUICO_GROUP_IMAGE, '<img src="' . \XOOPS_UPLOAD_URL . '/' . $group->getVar(
-                                      'group_img'
-                                  ) . '">'
+            \_MD_SUICO_GROUP_IMAGE,
+            '<img src="' . \XOOPS_UPLOAD_URL . '/' . $group->getVar(
+                'group_img'
+            ) . '">'
         );
         $field_maintainimage = new XoopsFormLabel(
-            \_MD_SUICO_MAINTAIN_OLD_IMAGE, "<input type='checkbox' value='1' id='flag_oldimg' name='flag_oldimg' onclick=\"groupImgSwitch(img)\"  checked>"
+            \_MD_SUICO_MAINTAIN_OLD_IMAGE,
+            "<input type='checkbox' value='1' id='flag_oldimg' name='flag_oldimg' onclick=\"groupImgSwitch(img)\"  checked>"
         );
         $form->addElement($field_oldpicture);
         $form->addElement($field_maintainimage);
@@ -430,6 +438,7 @@ var elestyle = xoopsGetElementById(img).style;
 //--></script>
 <!-- End Form Validation JavaScript //-->
         ";
+
         return true;
     }
 
@@ -484,7 +493,11 @@ var elestyle = xoopsGetElementById(img).style;
             $uploadDir         = \XOOPS_UPLOAD_PATH . '/suico/groups/';
             // create the object to upload
             $uploader = new XoopsMediaUploader(
-                $uploadDir, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight
+                $uploadDir,
+                $allowed_mimetypes,
+                $maxfilesize,
+                $maxfilewidth,
+                $maxfileheight
             );
             // fetch the media
             if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
@@ -494,6 +507,7 @@ var elestyle = xoopsGetElementById(img).style;
                 if (!$uploader->upload()) {
                     // if there are errors lets return them
                     echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
+
                     return false;
                 }
                 // now let s create a new object picture and set its variables
@@ -526,6 +540,7 @@ var elestyle = xoopsGetElementById(img).style;
                 $result                 = $resizer->resizeImage();
             } else {
                 echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
+
                 return false;
             }
         }
@@ -533,6 +548,7 @@ var elestyle = xoopsGetElementById(img).style;
         $group->setVar('group_desc', $group_desc);
         $group->setVar('owner_uid', $uid);
         $this->insert($group);
+
         return true;
     }
 
@@ -546,6 +562,7 @@ var elestyle = xoopsGetElementById(img).style;
         $queryresult         = $GLOBALS['xoopsDB']->query($query);
         $row                 = $GLOBALS['xoopsDB']->fetchArray($queryresult);
         $group_total_members = $row['grouptotalmembers'];
+
         return $group_total_members;
     }
 
@@ -561,6 +578,7 @@ var elestyle = xoopsGetElementById(img).style;
         while (false !== ($row = $GLOBALS['xoopsDB']->fetchArray($result))) {
             $group_total_comments = $row['count(com_id)'];
         }
+
         return $group_total_comments;
     }
 
@@ -574,6 +592,7 @@ var elestyle = xoopsGetElementById(img).style;
         $queryresult         = $GLOBALS['xoopsDB']->query($query);
         $row                 = $GLOBALS['xoopsDB']->fetchArray($queryresult);
         $group_total_members = $row['grouptotalmembers'];
+
         return $group_total_members;
     }
 }

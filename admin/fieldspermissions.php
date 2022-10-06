@@ -1,6 +1,5 @@
-<?php
+<?php declare(strict_types=1);
 
-declare(strict_types=1);
 /**
  * Extended User Profile
  *
@@ -13,7 +12,6 @@ declare(strict_types=1);
  *
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
  * @license             GNU GPL 2 (https://www.gnu.org/licenses/gpl-2.0.html)
- * @package             profile
  * @since               2.3.0
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
@@ -65,7 +63,7 @@ $module_id = $GLOBALS['xoopsModule']->getVar('mid');
 require_once $GLOBALS['xoops']->path('/class/xoopsform/grouppermform.php');
 $form = new \XoopsGroupPermForm($title_of_form, $module_id, $perm_name, $perm_desc, 'admin/fieldspermissions.php?op=' . $op, $anonymous);
 if ('access' === $op) {
-    /* @var XoopsMemberHandler $memberHandler */
+    /** @var XoopsMemberHandler $memberHandler */
     $memberHandler = xoops_getHandler('member');
     $glist         = $memberHandler->getGroupList();
     foreach (array_keys($glist) as $i) {
@@ -94,7 +92,7 @@ if ('access' === $op) {
             'language',
         ];
         foreach (array_keys($fields) as $i) {
-            if (in_array($fields[$i]->getVar('field_type'), $searchable_types)) {
+            if (in_array($fields[$i]->getVar('field_type'), $searchable_types, true)) {
                 $form->addItem($fields[$i]->getVar('field_id'), xoops_substr($fields[$i]->getVar('field_title'), 0, 25));
             }
         }

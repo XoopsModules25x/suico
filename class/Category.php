@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -16,14 +14,12 @@ namespace XoopsModules\Suico;
  *
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
  * @license             GNU GPL 2 (https://www.gnu.org/licenses/gpl-2.0.html)
- * @package             profile
  * @since               2.3.0
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
 /**
- * @package             kernel
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
  */
 class Category extends \XoopsObject
@@ -60,6 +56,7 @@ class Category extends \XoopsObject
         $form->addElement(new \XoopsFormText(\_AM_SUICO_WEIGHT, 'cat_weight', 35, 35, $this->getVar('cat_weight', 'e')));
         $form->addElement(new \XoopsFormHidden('op', 'save'));
         $form->addElement(new \XoopsFormButton('', 'submit', \_SUBMIT, 'submit'));
+
         return $form;
     }
 }

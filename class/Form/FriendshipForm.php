@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico\Form;
 
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico\Form;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -54,42 +51,50 @@ class FriendshipForm extends XoopsThemeForm
     {
         $this->helper       = $target->helper;
         $this->targetObject = $target;
-        $title              = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_FRIENDSHIP_ADD) : \sprintf(
-            \AM_SUICO_FRIENDSHIP_EDIT
-        );
+        $title              = $this->targetObject->isNew() ? \AM_SUICO_FRIENDSHIP_ADD :
+            \AM_SUICO_FRIENDSHIP_EDIT;
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
         //include ID field, it's needed so the module knows if it is a new form or an edited form
         $hidden = new XoopsFormHidden(
-            'friendship_id', $this->targetObject->getVar(
-            'friendship_id'
-        )
+            'friendship_id',
+            $this->targetObject->getVar(
+                'friendship_id'
+            )
         );
         $this->addElement($hidden);
         unset($hidden);
         // Friendship_id
         $this->addElement(
             new XoopsFormLabel(
-                \AM_SUICO_FRIENDSHIP_FRIENDSHIP_ID, $this->targetObject->getVar(
+                \AM_SUICO_FRIENDSHIP_FRIENDSHIP_ID,
+                $this->targetObject->getVar(
+                    'friendship_id'
+                ),
                 'friendship_id'
-            ), 'friendship_id'
             )
         );
         // Friend1_uid
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_SUICO_FRIENDSHIP_FRIEND1_UID, 'friend1_uid', false, $this->targetObject->getVar(
-                'friend1_uid'
-            ), 1, false
+                \AM_SUICO_FRIENDSHIP_FRIEND1_UID,
+                'friend1_uid',
+                false,
+                $this->targetObject->getVar('friend1_uid'),
+                1,
+                false
             ),
             false
         );
         // Friend2_uid
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_SUICO_FRIENDSHIP_FRIEND2_UID, 'friend2_uid', false, $this->targetObject->getVar(
-                'friend2_uid'
-            ), 1, false
+                \AM_SUICO_FRIENDSHIP_FRIEND2_UID,
+                'friend2_uid',
+                false,
+                $this->targetObject->getVar('friend2_uid'),
+                1,
+                false
             ),
             false
         );
@@ -121,12 +126,18 @@ class FriendshipForm extends XoopsThemeForm
         // Data_creation
         $this->addElement(
             new \XoopsFormTextDateSelect(
-                \AM_SUICO_FRIENDSHIP_DATE_CREATED, 'date_created', 0, \formatTimestamp($this->targetObject->getVar('date_created'), 's')
+                \AM_SUICO_FRIENDSHIP_DATE_CREATED,
+                'date_created',
+                0,
+                \formatTimestamp($this->targetObject->getVar('date_created'), 's')
             )
         );
         $this->addElement(
             new \XoopsFormTextDateSelect(
-                \AM_SUICO_FRIENDSHIP_DATE_UPDATED, 'date_updated', 0, \formatTimestamp($this->targetObject->getVar('date_updated'), 's')
+                \AM_SUICO_FRIENDSHIP_DATE_UPDATED,
+                'date_updated',
+                0,
+                \formatTimestamp($this->targetObject->getVar('date_updated'), 's')
             )
         );
         $this->addElement(new XoopsFormHidden('op', 'save'));

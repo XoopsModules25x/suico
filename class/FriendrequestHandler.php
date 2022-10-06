@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -8,7 +6,7 @@ namespace XoopsModules\Suico;
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -26,7 +23,6 @@ use CriteriaElement;
 use XoopsDatabase;
 use XoopsObject;
 use XoopsPersistableObjectHandler;
-use XoopsModules\Suico\Helper;
 
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
@@ -45,7 +41,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
     /**
      * Constructor
      * @param \XoopsDatabase|null $xoopsDatabase
-     * @param Helper|null         $helper
+     * @param Helper|null $helper
      */
     public function __construct(
         ?XoopsDatabase $xoopsDatabase = null,
@@ -74,6 +70,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
             $obj->unsetNew();
         }
         $obj->helper = $this->helper;
+
         return $obj;
     }
 
@@ -81,7 +78,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
      * retrieve a Friendrequest
      *
      * @param int|null $id of the Friendrequest
-     * @param null $fields
+     * @param null     $fields
      * @return mixed reference to the {@link Friendrequest} object, FALSE if failed
      */
     public function get2(
@@ -96,8 +93,10 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
         if (1 === $numrows) {
             $suico_friendrequest = new Friendrequest();
             $suico_friendrequest->assignVars($this->db->fetchArray($result));
+
             return $suico_friendrequest;
         }
+
         return false;
     }
 
@@ -167,6 +166,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
             $friendreq_id = $this->db->getInsertId();
         }
         $xoopsObject->assignVar('friendreq_id', $friendreq_id);
+
         return true;
     }
 
@@ -197,6 +197,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
         if (!$result) {
             return false;
         }
+
         return true;
     }
 
@@ -238,6 +239,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
             }
             unset($suico_friendrequest);
         }
+
         return $ret;
     }
 
@@ -259,6 +261,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
             return 0;
         }
         [$count] = $this->db->fetchRow($result);
+
         return (int)$count;
     }
 
@@ -282,6 +285,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
         if (!$result = $this->db->query($sql)) {
             return false;
         }
+
         return true;
     }
 }

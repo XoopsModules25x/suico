@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico\Common;
 
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico\Common;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -30,7 +27,6 @@ use XoopsUser;
 
 /**
  * Trait FilesManagement
- * @package XoopsModules\Suico\Common
  */
 trait FilesManagement
 {
@@ -43,7 +39,7 @@ trait FilesManagement
      */
     public static function createFolder(
         $folder
-    ) {
+    ): void {
         try {
             if (!\is_dir($folder)) {
                 if (!\is_dir($folder) && !\mkdir($folder) && !\is_dir($folder)) {
@@ -102,7 +98,7 @@ trait FilesManagement
      * @return      bool     Returns true on success, false on failure
      * @author      Aidan Lister <aidan@php.net>
      * @version     1.0.1
-     * @link        http://aidanlister.com/2004/04/recursively-copying-directories-in-php/
+     * @link        https://aidanlister.com/2004/04/recursively-copying-directories-in-php/
      */
     public static function xcopy(
         $source,
@@ -136,6 +132,7 @@ trait FilesManagement
             // Clean up
             $dir->close();
         }
+
         return true;
     }
 
@@ -183,6 +180,7 @@ trait FilesManagement
             // input is not a valid directory
             $success = false;
         }
+
         return $success;
     }
 
@@ -222,6 +220,7 @@ trait FilesManagement
             }
         }
         $iterator = null;   // clear iterator Obj to close file/directory
+
         return \rmdir($src); // remove the directory & return results
     }
 
@@ -269,6 +268,7 @@ trait FilesManagement
             }
         }
         $iterator = null;   // clear iterator Obj to close file/directory
+
         return \rmdir($src); // remove the directory & return results
     }
 
@@ -316,6 +316,7 @@ trait FilesManagement
                 self::rcopy($fObj->getPathname(), "{$dest}/" . $fObj->getFilename());
             }
         }
+
         return true;
     }
 }

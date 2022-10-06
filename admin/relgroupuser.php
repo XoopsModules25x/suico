@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -13,9 +11,8 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -125,7 +122,11 @@ switch ($op) {
         if ($relgroupuserTempRows > $relgroupuserPaginationLimit) {
             xoops_load('XoopsPageNav');
             $pagenav = new \XoopsPageNav(
-                $relgroupuserTempRows, $relgroupuserPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                $relgroupuserTempRows,
+                $relgroupuserPaginationLimit,
+                $start,
+                'start',
+                'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
@@ -166,7 +167,11 @@ switch ($op) {
             if ($relgroupuserCount > $relgroupuserPaginationLimit) {
                 xoops_load('XoopsPageNav');
                 $pagenav = new \XoopsPageNav(
-                    $relgroupuserCount, $relgroupuserPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                    $relgroupuserCount,
+                    $relgroupuserPaginationLimit,
+                    $start,
+                    'start',
+                    'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }

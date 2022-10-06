@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -13,9 +11,8 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -85,7 +82,7 @@ if ('sel_photo' === Request::getArray('xoops_upload_file', '', 'POST')[0]) {
         //header("Location: ".XOOPS_URL."/modules/suico/index.php?uid=".$xoopsUser->getVar('uid'));
         $imageId = $imageFactory->db->getInsertId();
         redirect_header(
-            XOOPS_URL . '/modules/suico/album.php?uid=' . $xoopsUser->getVar('uid'). '#' . $imageId,
+            XOOPS_URL . '/modules/suico/album.php?uid=' . $xoopsUser->getVar('uid') . '#' . $imageId,
             3,
             _MD_SUICO_UPLOADED
         );
