@@ -1,7 +1,7 @@
 <{if $suspensionsRows > 0}>
     <div class="outer">
         <form name="select" action="suspensions.php?op=" method="POST"
-              onsubmit="if(window.document.select.op.value =='') {return false;} else if (window.document.select.op.value =='delete') {return deleteSubmitValid('suspensionsId[]');} else if (isOneChecked('suspensionsId[]')) {return true;} else {alert('<{$smarty.const.AM_SUSPENSIONS_SELECTED_ERROR}>'); return false;}">
+              onsubmit="if(window.document.select.op.value =='') {return false;} else if (window.document.select.op.value =='delete') {return deleteSubmitValid('suspensionsId[]');} else if (isOneChecked('suspensionsId[]')) {return true;} else {alert('<{$smarty.const.AM_SUICO_SELECTED_ERROR}>'); return false;}">
             <input type="hidden" name="confirm" value="1">
             <div class="floatleft">
                 <label>

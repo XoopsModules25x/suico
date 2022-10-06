@@ -1,7 +1,7 @@
 <{if $relgroupuserRows > 0}>
     <div class="outer">
         <form name="select" action="relgroupuser.php?op=" method="POST"
-              onsubmit="if(window.document.select.op.value =='') {return false;} else if (window.document.select.op.value =='delete') {return deleteSubmitValid('relgroupuserId[]');} else if (isOneChecked('relgroupuserId[]')) {return true;} else {alert('<{$smarty.const.AM_RELGROUPUSER_SELECTED_ERROR}>'); return false;}">
+              onsubmit="if(window.document.select.op.value =='') {return false;} else if (window.document.select.op.value =='delete') {return deleteSubmitValid('relgroupuserId[]');} else if (isOneChecked('relgroupuserId[]')) {return true;} else {alert('<{$smarty.const.AM_SUICO_SELECTED_ERROR}>'); return false;}">
             <input type="hidden" name="confirm" value="1">
             <div class="floatleft">
                 <label>
