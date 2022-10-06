@@ -177,7 +177,7 @@ CREATE TABLE `suico_profile_field` (
     `step_id`           SMALLINT(3) UNSIGNED NOT NULL DEFAULT '0',
 
     PRIMARY KEY (`field_id`),
-    UNIQUE KEY `field_name` (`field_name`),
+    UNIQUE KEY `field_name` (`field_name`(150)),
     KEY `step` (`step_id`, `field_weight`)
 )
     ENGINE = MyISAM;
@@ -200,7 +200,7 @@ CREATE TABLE `suico_profile_regstep` (
     `step_save`  TINYINT(1) UNSIGNED  NOT NULL DEFAULT '0',
 
     PRIMARY KEY (`step_id`),
-    KEY `sort` (`step_order`, `step_name`)
+    KEY `sort` (`step_order`, `step_name`(150))
 )
     ENGINE = MyISAM;
 
