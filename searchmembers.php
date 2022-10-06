@@ -407,7 +407,7 @@ if ('submit' === $op) {
         if ($totalpages > 1) {
             $hiddenform = "<form name='findnext' action='searchmembers.php' method='post'>";
             foreach ($_POST as $k => $v) {
-                $hiddenform .= "<input type='hidden' name='" . htmlspecialchars($k) . "' value='" . htmlspecialchars($v) . "'>\n";
+                $hiddenform .= "<input type='hidden' name='" . htmlspecialchars($k, ENT_QUOTES | ENT_HTML5) . "' value='" . htmlspecialchars($v, ENT_QUOTES | ENT_HTML5) . "'>\n";
             }
             if (!isset($_POST['limit'])) {
                 $hiddenform .= "<input type='hidden' name='limit' value='" . $limit . "'>\n";

@@ -403,7 +403,7 @@ foreach ($mids as $mid) {
                 if (!preg_match('#^http[s]*:\/\/#i', $results[$i]['link'])) {
                     $results[$i]['link'] = 'modules/' . $module->getVar('dirname') . '/' . $results[$i]['link'];
                 }
-                $results[$i]['title'] = htmlspecialchars($results[$i]['title']);
+                $results[$i]['title'] = htmlspecialchars($results[$i]['title'], ENT_QUOTES | ENT_HTML5);
                 $results[$i]['time']  = $results[$i]['time'] ? formatTimestamp($results[$i]['time']) : '';
             }
             if (5 === $count) {
