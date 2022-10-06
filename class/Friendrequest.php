@@ -98,7 +98,7 @@ class Friendrequest extends XoopsObject
         if (\is_array($criteria) && \count($criteria) > 0) {
             $whereQuery = ' WHERE';
             foreach ($criteria as $c) {
-                $whereQuery .= " ${c} AND";
+                $whereQuery .= " {$c} AND";
             }
             $whereQuery = mb_substr($whereQuery, 0, -4);
         } elseif (!\is_array($criteria) && $criteria) {
@@ -107,7 +107,7 @@ class Friendrequest extends XoopsObject
         if ($asobject) {
             $sql    = 'SELECT * FROM ' . $db->prefix(
                     'suico_friendrequests'
-                ) . "${whereQuery} ORDER BY ${sort} ${order}";
+                ) . "{$whereQuery} ORDER BY {$sort} {$order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new self($myrow);
@@ -115,7 +115,7 @@ class Friendrequest extends XoopsObject
         } else {
             $sql    = 'SELECT friendreq_id FROM ' . $db->prefix(
                     'suico_friendrequests'
-                ) . "${whereQuery} ORDER BY ${sort} ${order}";
+                ) . "{$whereQuery} ORDER BY {$sort} {$order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['suico_friendrequest_id'];

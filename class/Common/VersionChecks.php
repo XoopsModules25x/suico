@@ -108,7 +108,7 @@ trait VersionChecks
         $repository         = 'XoopsModules25x/' . $moduleDirName;
         //        $repository         = 'XoopsModules25x/publisher'; //for testing only
         $ret             = '';
-        $infoReleasesUrl = "https://api.github.com/repos/${repository}/releases";
+        $infoReleasesUrl = "https://api.github.com/repos/{$repository}/releases";
         if ('github' === $source) {
             if (\function_exists('curl_init') && false !== ($curlHandle = \curl_init())) {
                 \curl_setopt($curlHandle, \CURLOPT_URL, $infoReleasesUrl);
@@ -123,7 +123,7 @@ trait VersionChecks
                 } else {
                     $file              = \json_decode($curlReturn, false);
                     $latestVersionLink = \sprintf(
-                        "https://github.com/${repository}/archive/%s.zip",
+                        "https://github.com/{$repository}/archive/%s.zip",
                         $file ? \reset($file)->tag_name : $default
                     );
                     $latestVersion     = $file[0]->tag_name;

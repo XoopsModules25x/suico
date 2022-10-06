@@ -105,9 +105,9 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
             $cachetime_options = '';
             foreach ($cachetimes as $cachetime => $cachetime_name) {
                 if ($i->getVar('bcachetime') === $cachetime) {
-                    $cachetime_options .= "<option value='${cachetime}' selected>${cachetime_name}</option>\n";
+                    $cachetime_options .= "<option value='{$cachetime}' selected>{$cachetime_name}</option>\n";
                 } else {
-                    $cachetime_options .= "<option value='${cachetime}'>${cachetime_name}</option>\n";
+                    $cachetime_options .= "<option value='{$cachetime}'>{$cachetime_name}</option>\n";
                 }
             }
             $sel0 = $sel1 = $ssel0 = $ssel1 = $ssel2 = $ssel3 = $ssel4 = $ssel5 = $ssel6 = $ssel7 = '';
@@ -139,80 +139,80 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
                 $title = $i->getVar('title');
             }
             $name = $i->getVar('name');
-            echo "<tr valign='top'><td class='${class}' align='center'><input type='text' name='title["
+            echo "<tr valign='top'><td class='{$class}' align='center'><input type='text' name='title["
                  . $i->getVar('bid')
                  . "]' value='"
                  . $title
-                 . "'></td><td class='${class}' align='center' nowrap='nowrap'>
+                 . "'></td><td class='{$class}' align='center' nowrap='nowrap'>
                     <div align='center' >
                     <input type='radio' name='side["
                  . $i->getVar('bid')
                  . "]' value='"
                  . XOOPS_CENTERBLOCK_LEFT
-                 . "'${ssel2}>
+                 . "'{$ssel2}>
                         <input type='radio' name='side["
                  . $i->getVar('bid')
                  . "]' value='"
                  . XOOPS_CENTERBLOCK_CENTER
-                 . "'${ssel3}>
+                 . "'{$ssel3}>
                     <input type='radio' name='side["
                  . $i->getVar('bid')
                  . "]' value='"
                  . XOOPS_CENTERBLOCK_RIGHT
-                 . "'${ssel4}>
+                 . "'{$ssel4}>
                     </div>
                     <div>
                         <span style='float:right;'><input type='radio' name='side["
                  . $i->getVar('bid')
                  . "]' value='"
                  . XOOPS_SIDEBLOCK_RIGHT
-                 . "'${ssel1}></span>
+                 . "'{$ssel1}></span>
                     <div align='left'><input type='radio' name='side["
                  . $i->getVar('bid')
                  . "]' value='"
                  . XOOPS_SIDEBLOCK_LEFT
-                 . "'${ssel0}></div>
+                 . "'{$ssel0}></div>
                     </div>
                     <div align='center'>
                     <input type='radio' name='side["
                  . $i->getVar('bid')
                  . "]' value='"
                  . XOOPS_CENTERBLOCK_BOTTOMLEFT
-                 . "'${ssel5}>
+                 . "'{$ssel5}>
                         <input type='radio' name='side["
                  . $i->getVar('bid')
                  . "]' value='"
                  . XOOPS_CENTERBLOCK_BOTTOM
-                 . "'${ssel7}>
+                 . "'{$ssel7}>
                     <input type='radio' name='side["
                  . $i->getVar('bid')
                  . "]' value='"
                  . XOOPS_CENTERBLOCK_BOTTOMRIGHT
-                 . "'${ssel6}>
+                 . "'{$ssel6}>
                     </div>
-                </td><td class='${class}' align='center'><input type='text' name='weight["
+                </td><td class='{$class}' align='center'><input type='text' name='weight["
                  . $i->getVar('bid')
                  . "]' value='"
                  . $i->getVar('weight')
-                 . "' size='5' maxlength='5'></td><td class='${class}' align='center' nowrap><input type='radio' name='visible["
+                 . "' size='5' maxlength='5'></td><td class='{$class}' align='center' nowrap><input type='radio' name='visible["
                  . $i->getVar('bid')
-                 . "]' value='1'${sel1}>"
+                 . "]' value='1'{$sel1}>"
                  . _YES
                  . "&nbsp;<input type='radio' name='visible["
                  . $i->getVar('bid')
-                 . "]' value='0'${sel0}>"
+                 . "]' value='0'{$sel0}>"
                  . _NO
                  . '</td>';
-            echo "<td class='${class}' align='center'><select size='5' name='bmodule[" . $i->getVar(
+            echo "<td class='{$class}' align='center'><select size='5' name='bmodule[" . $i->getVar(
                     'bid'
                 ) . "][]' id='bmodule[" . $i->getVar(
                     'bid'
                 ) . "][]' multiple='multiple'>";
             foreach ($module_list as $k => $v) {
-                echo "<option value='${k}'" . (in_array($k, $modules, true) ? 'selected' : '') . ">${v}</option>";
+                echo "<option value='{$k}'" . (in_array($k, $modules, true) ? 'selected' : '') . ">{$v}</option>";
             }
             echo '</select></td>';
-            echo "<td class='${class}' align='center'><select size='5' name='groups[" . $i->getVar(
+            echo "<td class='{$class}' align='center'><select size='5' name='groups[" . $i->getVar(
                     'bid'
                 ) . "][]' id='groups[" . $i->getVar(
                     'bid'
@@ -233,7 +233,7 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
                 ) . ']" size="1">' . $cachetime_options . '</select>
                                     </td>';
             // Actions
-            echo "<td class='${class}' align='center'><a href='blocksadmin.php?op=edit&amp;bid=" . $i->getVar(
+            echo "<td class='{$class}' align='center'><a href='blocksadmin.php?op=edit&amp;bid=" . $i->getVar(
                     'bid'
                 ) . "'><img src=" . $pathIcon16 . '/edit.png' . " alt='" . _EDIT . "' title='" . _EDIT . "'>
                  </a> <a href='blocksadmin.php?op=clone&amp;bid=" . $i->getVar(

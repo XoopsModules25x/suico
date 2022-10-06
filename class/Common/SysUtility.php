@@ -351,7 +351,7 @@ class SysUtility
         $table
     ) {
         global $xoopsDB;
-        $result = $xoopsDB->queryF("SHOW COLUMNS FROM   ${table} LIKE '${fieldname}'");
+        $result = $xoopsDB->queryF("SHOW COLUMNS FROM   {$table} LIKE '{$fieldname}'");
 
         return $xoopsDB->getRowsNum($result) > 0;
     }

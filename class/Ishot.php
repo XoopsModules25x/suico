@@ -98,14 +98,14 @@ class Ishot extends XoopsObject
         if (\is_array($criteria) && \count($criteria) > 0) {
             $whereQuery = ' WHERE';
             foreach ($criteria as $c) {
-                $whereQuery .= " ${c} AND";
+                $whereQuery .= " {$c} AND";
             }
             $whereQuery = mb_substr($whereQuery, 0, -4);
         } elseif (!\is_array($criteria) && $criteria) {
             $whereQuery = ' WHERE ' . $criteria;
         }
         if ($asobject) {
-            $sql    = 'SELECT * FROM ' . $db->prefix('suico_ishot') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql    = 'SELECT * FROM ' . $db->prefix('suico_ishot') . "{$whereQuery} ORDER BY {$sort} {$order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new self($myrow);
@@ -113,7 +113,7 @@ class Ishot extends XoopsObject
         } else {
             $sql    = 'SELECT cod_ishot FROM ' . $db->prefix(
                     'suico_ishot'
-                ) . "${whereQuery} ORDER BY ${sort} ${order}";
+                ) . "{$whereQuery} ORDER BY {$sort} {$order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['suico_ishot_id'];

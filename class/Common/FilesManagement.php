@@ -127,7 +127,7 @@ trait FilesManagement
                     continue;
                 }
                 // Deep copy directories
-                self::xcopy("${source}/${entry}", "${dest}/${entry}");
+                self::xcopy("{$source}/{$entry}", "{$dest}/{$entry}");
             }
             // Clean up
             $dir->close();

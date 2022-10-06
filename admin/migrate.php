@@ -81,5 +81,5 @@ switch ($op) {
         }
         break;
 }
-echo "<div>${message}</div>";
+echo "<div>{$message}</div>";
 require_once __DIR__ . '/admin_footer.php';

@@ -36,9 +36,9 @@ $modversion = [
     'help'                => 'page=help',
     // ------------------- Folders & Files -------------------
     'release_info'        => 'Changelog',
-    'release_file'        => XOOPS_URL . "/modules/${moduleDirName}/docs/changelog.txt",
+    'release_file'        => XOOPS_URL . "/modules/{$moduleDirName}/docs/changelog.txt",
     'manual'              => 'link to manual file',
-    'manual_file'         => XOOPS_URL . "/modules/${moduleDirName}/docs/install.txt",
+    'manual_file'         => XOOPS_URL . "/modules/{$moduleDirName}/docs/install.txt",
     // images
     'image'               => 'assets/images/logoModule.png',
     'iconsmall'           => 'assets/images/iconsmall.png',
