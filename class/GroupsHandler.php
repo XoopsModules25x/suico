@@ -443,15 +443,15 @@ var elestyle = xoopsGetElementById(img).style;
     }
 
     /**
-     * @param string $group_title
-     * @param string $group_desc
-     * @param string $group_img
-     * @param string $path_upload
-     * @param int    $maxfilebytes
-     * @param int    $maxfilewidth
-     * @param int    $maxfileheight
-     * @param int    $change_img
-     * @param string $group
+     * @param string       $group_title
+     * @param string       $group_desc
+     * @param string       $group_img
+     * @param string       $path_upload
+     * @param int          $maxfilebytes
+     * @param int          $maxfilewidth
+     * @param int          $maxfileheight
+     * @param int          $change_img
+     * @param string|Group $group
      * @return bool
      */
     public function receiveGroup(
