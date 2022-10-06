@@ -2,9 +2,11 @@
 
 namespace XoopsModules\Suico\Form;
 
-use XoopsModules\Suico;
-use XoopsModules\Suico\Profile;
-use XoopsModules\Suico\ProfileHandler;
+use XoopsModules\Suico\{
+    Helper,
+    Profile,
+    ProfileHandler
+};
 use XoopsThemeForm;
 use XoopsFormButton;
 use XoopsFormHidden;
@@ -29,7 +31,7 @@ class UserForm extends XoopsThemeForm
      */
     public function __construct(\XoopsUser $user, Profile $profile = null, $action = false)
     {
-        $helper = \XoopsModules\Suico\Helper::getInstance();
+        $helper = Helper::getInstance();
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];
         }
@@ -42,11 +44,11 @@ class UserForm extends XoopsThemeForm
         $title = $user->isNew() ? \_AM_SUICO_ADDUSER : \_US_EDITPROFILE;
         parent::__construct($title, 'userinfo', $action, 'post', true);
         /** @var ProfileHandler $profileHandler */
-        $profileHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Profile');
+        $profileHandler = Helper::getInstance()->getHandler('Profile');
         // Dynamic fields
         if (!$profile) {
             /** @var ProfileHandler $profileHandler */
-            $profileHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Profile');
+            $profileHandler = Helper::getInstance()->getHandler('Profile');
             $profile        = $profileHandler->get($user->getVar('uid'));
         }
         // Get fields
@@ -90,7 +92,7 @@ class UserForm extends XoopsThemeForm
         $weights[0][]    = 0;
         $elements[0][]   = ['element' => new XoopsFormHidden('op', 'save'), 'required' => 0];
         $weights[0][]    = 0;
-        $categoryHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Category');
+        $categoryHandler = Helper::getInstance()->getHandler('Category');
         $categories      = [];
         $all_categories  = $categoryHandler->getObjects(null, true, false);
         $count_fields    = \count($fields);

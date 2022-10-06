@@ -19,10 +19,11 @@ namespace XoopsModules\Suico;
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
+use Xmf\Module\Helper\Permission;
 use XoopsModules\Suico;
 
 $moduleDirName = \basename(\dirname(__DIR__));
-$permHelper    = new \Xmf\Module\Helper\Permission();
+$permHelper    = new Permission();
 
 /**
  * Class PrivacyHandler

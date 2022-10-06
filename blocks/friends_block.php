@@ -17,8 +17,8 @@
  */
 
 use XoopsModules\Suico\{
-    Helper
-};
+    FriendshipHandler,
+    Helper};
 /** @var Helper $helper */
 
 if (!defined('XOOPS_ROOT_PATH')) {
@@ -58,7 +58,7 @@ function b_suico_friends_show($options)
          * Creating factories of pictures and votes
          */
         //$albumFactory      = new ImagesHandler($xoopsDB);
-        $friendsFactory           = new \XoopsModules\Suico\FriendshipHandler($xoopsDB);
+        $friendsFactory           = new FriendshipHandler($xoopsDB);
         $block['friends']         = $friendsFactory->getFriends($options[0], $criteria2);
         $block['lang_allfriends'] = _MB_SUICO_ALLFRIENDS;
         $block['lang_nofriends']  = _MB_SUICO_NOFRIENDSYET;
