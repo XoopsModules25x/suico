@@ -278,6 +278,7 @@ if ('submit' === $op) {
         $limit = 50;
     }
     $start         = Request::getInt('start', 0, 'POST');
+    /** @var XoopsMemberHandler $memberHandler */
     $memberHandler = xoops_getHandler('member');
     $total         = $memberHandler->getUserCount($criteria);
     $xoopsTpl->assign('lang_search', _MD_SUICO_SEARCH);
