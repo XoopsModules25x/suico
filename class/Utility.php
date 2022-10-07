@@ -117,8 +117,8 @@ class Utility extends Common\SysUtility
         } else {
             @\copy($src_path, $dst_path);
         }
-        if (!$keep_original) {
-            @\unlink($src_path);
+        if (!$keep_original && false === @\unlink($src_path)) {
+            throw new \RuntimeException('The file ' . $src_path . ' could not be deleted.');
         }
 
         return true;
@@ -156,7 +156,9 @@ class Utility extends Common\SysUtility
                             $newName         = XOOPS_ROOT_PATH . '/uploads/news/image/redim_' . \basename($destname);
                             self::resizePicture($fullPictureName, $newName, $helper->getConfig('maxwidth'), $helper->getConfig('maxheight'));
                             if (\file_exists($newName)) {
-                                @\unlink($fullPictureName);
+                                if (false === @\unlink($fullPictureName)) {
+                                    throw new \RuntimeException('The file ' . $fullPictureName . ' could not be deleted.');
+                                }
                                 \rename($newName, $fullPictureName);
                             }
                             $story->setPicture(\basename($destname));

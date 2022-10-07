@@ -169,7 +169,7 @@ trait FilesManagement
                     )) {
                         break;
                     }
-                } elseif (!($success = \unlink($fileInfo->getRealPath()))) {
+                } elseif (!($success = @\unlink($fileInfo->getRealPath()))) {
                     break;
                 }
             }
@@ -212,7 +212,7 @@ trait FilesManagement
             if ($fObj->isFile()) {
                 $filename = $fObj->getPathname();
                 $fObj     = null; // clear this iterator object to close the file
-                if (!\unlink($filename)) {
+                if (false === @\unlink($filename)) {
                     return false; // couldn't delete the file
                 }
             } elseif (!$fObj->isDot() && $fObj->isDir()) {

@@ -95,7 +95,9 @@ function xoops_module_update_suico(
                         $fileInfo = new SplFileInfo($templateFolder . $v);
                         if ('html' === $fileInfo->getExtension() && 'index.html' !== $fileInfo->getFilename()) {
                             if (is_file($templateFolder . $v)) {
-                                unlink($templateFolder . $v);
+                                if (false === @\unlink($templateFolder . $v)) {
+                                    throw new \RuntimeException('The file ' . $templateFolder . $v . ' could not be deleted.');
+                                }
                             }
                         }
                     }
@@ -112,7 +114,9 @@ function xoops_module_update_suico(
             ) {
                 $tempFile = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $configurator->oldFiles[$i]);
                 if (is_file($tempFile)) {
-                    unlink($tempFile);
+                    if (false === @\unlink($tempFile)) {
+                        throw new \RuntimeException('The file ' . $tempFile . ' could not be deleted.');
+                    }
                 }
             }
         }

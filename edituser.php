@@ -189,7 +189,9 @@ if ('avatarupload' === $op) {
                             $avtHandler->delete($avatars[0]);
                             $oldavatar_path = realpath(XOOPS_UPLOAD_PATH . ' / ' . $oldavatar);
                             if (0 === \mb_strpos($oldavatar_path, XOOPS_UPLOAD_PATH) && is_file($oldavatar_path)) {
-                                unlink($oldavatar_path);
+                                if (false === @\unlink($oldavatar_path)) {
+                                    throw new \RuntimeException('The file ' . $oldavatar_path . ' could not be deleted.');
+                                }
                             }
                         }
                     }
@@ -198,7 +200,10 @@ if ('avatarupload' === $op) {
                     $avtHandler->addUser($avatar->getVar('avatar_id'), $GLOBALS['xoopsUser']->getVar('uid'));
                     redirect_header('index . php ? t = ' . time() . ' & amp;uid = ' . $GLOBALS['xoopsUser']->getVar('uid'), 3, _US_PROFUPDATED);
                 } else {
-                    @unlink($uploader->getSavedDestination());
+                    $file = $uploader->getSavedDestination();
+                    if (false === @\unlink($file)) {
+                        throw new \RuntimeException('The file ' . $file . ' could not be deleted.');
+                    }
                 }
             }
         }
@@ -245,7 +250,9 @@ if ('avatarchoose' === $op) {
                 $avtHandler->delete($avatars[0]);
                 $oldavatar_path = realpath(XOOPS_UPLOAD_PATH . ' / ' . $oldavatar);
                 if (0 === mb_strpos($oldavatar_path, realpath(XOOPS_UPLOAD_PATH)) && is_file($oldavatar_path)) {
-                    unlink($oldavatar_path);
+                    if (false === @\unlink($oldavatar_path)) {
+                        throw new \RuntimeException('The file ' . $oldavatar_path . ' could not be deleted.');
+                    }
                 }
             }
         }

@@ -58,15 +58,27 @@ if (!isset($_POST['confirm']) || 1 !== Request::getInt('confirm', 0, 'POST')) {
     if ($imageFactory->deleteAll($criteria)) {
         if (1 === $helper->getConfig('physical_delete')) {
             //unlink($xoopsModuleConfig['path_upload']."\/".$image_name);
-            unlink(
-                XOOPS_ROOT_PATH . '/uploads' . '/images/suico/' . $image_name
-            );
-            unlink(XOOPS_ROOT_PATH . '/uploads' . '/images/suico/resized_' . $image_name);
+//            unlink(XOOPS_ROOT_PATH . '/uploads' . '/images/suico/' . $image_name);
+            $file = XOOPS_ROOT_PATH . '/uploads' . '/images/suico/' . $image_name;
+            if (@\unlink($file) === false) {
+                throw new \RuntimeException('The file ' . $file . ' could not be deleted.');
+            }
+
+//            unlink(XOOPS_ROOT_PATH . '/uploads' . '/images/suico/resized_' . $image_name);
+            $file = XOOPS_ROOT_PATH . '/uploads' . '/images/suico/resized_' . $image_name;
+            if (@\unlink($file) === false) {
+                throw new \RuntimeException('The file ' . $file . ' could not be deleted.');
+            }
+
             /**
              * Delete the thumb (avatar now has another name)
              */
             //if ($avatar_image!=$image_name){
-            unlink(XOOPS_ROOT_PATH . '/uploads' . '/images/thumb_' . $image_name);
+//            unlink(XOOPS_ROOT_PATH . '/uploads' . '/images/thumb_' . $image_name);
+            $file = XOOPS_ROOT_PATH . '/uploads' . '/images/thumb_' . $image_name;
+            if (@\unlink($file) === false) {
+                throw new \RuntimeException('The file ' . $file . ' could not be deleted.');
+            }
             //}
         }
         redirect_header('album.php', 2, _MD_SUICO_DELETED);
