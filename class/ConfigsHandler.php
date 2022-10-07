@@ -77,7 +77,7 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
      *
      * @param int|null $id of the Configs
      * @param null     $fields
-     * @return mixed reference to the {@link Configs} object, FALSE if failed
+     * @return false|\XoopsModules\Suico\Configs reference to the {@link Configs} object, FALSE if failed
      */
     public function get2(
         $id = null,

@@ -78,7 +78,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
      *
      * @param int|null $id of the Ishot
      * @param null     $fields
-     * @return mixed reference to the {@link Ishot} object, FALSE if failed
+     * @return false|\XoopsModules\Suico\Ishot reference to the {@link Ishot} object, FALSE if failed
      */
     public function get2(
         $id = null,

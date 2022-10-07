@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 if (!defined('XOOPS_MAINFILE_INCLUDED')) {
-    require_once \dirname(__DIR__) . '/mainfile.php';
+    require_once \dirname(__DIR__, 2) . '/mainfile.php';
 }
 $xoopsLogger->activated = false;
 if (isset($_POST['cod_img'])) {

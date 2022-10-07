@@ -50,8 +50,6 @@ class ModuleFeedback extends XoopsObject
 
     /**
      * @static function &getInstance
-     *
-     * @param null
      */
     public static function getInstance(): void
     {

@@ -79,7 +79,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
      *
      * @param int|null $id of the Suico\Visitors
      * @param null     $fields
-     * @return mixed reference to the {@link suico_visitors} object, FALSE if failed
+     * @return false|\XoopsModules\Suico\Visitors reference to the {@link suico_visitors} object, FALSE if failed
      */
     public function get2(
         $id = null,

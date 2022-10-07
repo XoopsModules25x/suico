@@ -85,7 +85,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
      *
      * @param int  $id of the Groups
      * @param null $fields
-     * @return mixed reference to the {@link Groups} object, FALSE if failed
+     * @return false|\XoopsModules\Suico\Groups reference to the {@link Groups} object, FALSE if failed
      */
     public function get2(
         $id = null,

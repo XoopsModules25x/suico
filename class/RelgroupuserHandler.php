@@ -79,7 +79,7 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
      *
      * @param int|null $id of the Relgroupuser
      * @param null     $fields
-     * @return mixed reference to the {@link Relgroupuser} object, FALSE if failed
+     * @return false|\XoopsModules\Suico\Relgroupuser reference to the {@link Relgroupuser} object, FALSE if failed
      */
     public function get2(
         $id = null,

@@ -79,7 +79,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
      *
      * @param int|null $id of the Suspensions
      * @param null     $fields
-     * @return mixed reference to the {@link Suspensions} object, FALSE if failed
+     * @return false|\XoopsModules\Suico\Suspensions reference to the {@link Suspensions} object, FALSE if failed
      */
     public function get2(
         $id = null,

@@ -85,7 +85,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
      *
      * @param int|null $id of the Video
      * @param null     $fields
-     * @return mixed reference to the {@link Video} object, FALSE if failed
+     * @return false|\XoopsModules\Suico\Video reference to the {@link Video} object, FALSE if failed
      */
     public function get2(
         $id = null,

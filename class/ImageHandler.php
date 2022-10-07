@@ -95,7 +95,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
      *
      * @param int|null $id of the Image
      * @param null     $fields
-     * @return mixed reference to the {@link Image} object, FALSE if failed
+     * @return false|\XoopsModules\Suico\Image reference to the {@link Image} object, FALSE if failed
      */
     public function get2(
         $id = null,

@@ -81,7 +81,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
      *
      * @param int|null $id of theNotes
      * @param null     $fields
-     * @return mixed reference to the {@linkNotes} object, FALSE if failed
+     * @return false|\XoopsModules\Suico\Notes reference to the {@linkNotes} object, FALSE if failed
      */
     public function get2(
         $id = null,

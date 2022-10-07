@@ -29,7 +29,8 @@ class RegisterForm extends XoopsThemeForm
      * RegisterForm constructor.
      * @param \XoopsUser $user
      * @param Profile    $profile
-     * @param int|null       $step
+     * @param int|null   $step
+     * @throws \Exception
      */
     public function __construct(\XoopsUser $user, $profile, $step = null)
     {
