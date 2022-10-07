@@ -13,7 +13,7 @@
                 <input id="submitUp" class="formButton" type="submit" name="submitselect" value="<{$smarty.const._SUBMIT}>" title="<{$smarty.const._SUBMIT}>">
             </div>
             <div class="floatcenter0">
-                <div id="pagenav"><{$pagenav}></div>
+                <div id="pagenav"><{$pagenav|default:''}></div>
             </div>
 
 

@@ -13,7 +13,7 @@
                 <input id="submitUp" class="formButton" type="submit" name="submitselect" value="<{$smarty.const._SUBMIT}>" title="<{$smarty.const._SUBMIT}>">
             </div>
             <div class="floatcenter0">
-                <div id="pagenav"><{$pagenav}></div>
+                <div id="pagenav"><{$pagenav|default:''}></div>
             </div>
 
 
@@ -34,7 +34,7 @@
                 <{foreach item=videoArray from=$videosArray}>
                     <tr class="<{cycle values="odd,even"}>">
 
-                        <td align="center" style="vertical-align:middle;"><input type="checkbox" name="videos_id[]" title="videos_id[]" id="videos_id[]" value="<{$videosArray.videos_id}>"></td>
+                        <td align="center" style="vertical-align:middle;"><input type="checkbox" name="videos_id[]" title="videos_id[]" id="videos_id[]" value="<{$videoArray.video_id}>"></td>
                         <td class='left'><{$videoArray.video_id}></td>
                         <td class='left'><{$videoArray.uid_owner}></td>
                         <td class='left'><{$videoArray.video_title}></td>
@@ -42,7 +42,7 @@
                         <td class='left'><{$videoArray.youtube_code}></td>
                         <td class='center'><{$videoArray.featured_video}></td>
                         <td class='left'><{$videoArray.date_created}></td>
-                        <td class='left'><{$videsArray.date_updated}></td>
+                        <td class='left'><{$videoArray.date_updated}></td>
 
 
                         <td class="center width5"><{$videoArray.edit_delete}></td>

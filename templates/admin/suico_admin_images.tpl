@@ -13,7 +13,7 @@
                 <input id="submitUp" class="formButton" type="submit" name="submitselect" value="<{$smarty.const._SUBMIT}>" title="<{$smarty.const._SUBMIT}>">
             </div>
             <div class="floatcenter0">
-                <div id="pagenav"><{$pagenav}></div>
+                <div id="pagenav"><{$pagenav|default:''}></div>
             </div>
 
 
@@ -26,7 +26,7 @@
                     <th class="left"><{$selectordate_created}></th>
                     <th class="left"><{$selectordate_updated}></th>
                     <th class="left"><{$selectoruid_owner}></th>
-                    <th class="left"><{$selectorfilename}></th>
+                    <th class="left"><{$selectorfilename|default:''}></th>
                     <th class="center"><{$selectorprivate}></th>
 
                     <th class="center width5"><{$smarty.const.AM_SUICO_FORM_ACTION}></th>
@@ -34,7 +34,7 @@
                 <{foreach item=imagesArray from=$imagesArrays}>
                     <tr class="<{cycle values="odd,even"}>">
 
-                        <td align="center" style="vertical-align:middle;"><input type="checkbox" name="images_id[]" title="images_id[]" id="images_id[]" value="<{$imagesArray.images_id}>"></td>
+                        <td align="center" style="vertical-align:middle;"><input type="checkbox" name="images_id[]" title="images_id[]" id="images_id[]" value="<{$imagesArray.image_id}>"></td>
                         <td class='left'><{$imagesArray.image_id}></td>
                         <td class='left'><{$imagesArray.title}></td>
                         <td class='left'><{$imagesArray.caption}></td>

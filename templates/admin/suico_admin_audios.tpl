@@ -11,7 +11,7 @@
                 <input id="submitUp" class="formButton" type="submit" name="submitselect" value="<{$smarty.const._SUBMIT}>" title="<{$smarty.const._SUBMIT}>">
             </div>
             <div class="floatcenter0">
-                <div id="pagenav"><{$pagenav}></div>
+                <div id="pagenav"><{$pagenav|default:''}></div>
             </div>
 
 
@@ -32,7 +32,7 @@
                 <{foreach item=audiosArray from=$audiosArrays}>
                     <tr class="<{cycle values="odd,even"}>">
 
-                        <td align="center" style="vertical-align:middle;"><input type="checkbox" name="audios_id[]" title="audios_id[]" id="audios_id[]" value="<{$audiosArray.audios_id}>"></td>
+                        <td align="center" style="vertical-align:middle;"><input type="checkbox" name="audios_id[]" title="audios_id[]" id="audios_id[]" value="<{$audiosArray.audio_id}>"></td>
                         <td class='left'><{$audiosArray.audio_id}></td>
                         <td class='left'><{$audiosArray.uid_owner}></td>
                         <td class='left'><{$audiosArray.author}></td>

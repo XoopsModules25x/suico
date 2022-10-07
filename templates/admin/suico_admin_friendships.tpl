@@ -13,7 +13,7 @@
                 <input id="submitUp" class="formButton" type="submit" name="submitselect" value="<{$smarty.const._SUBMIT}>" title="<{$smarty.const._SUBMIT}>">
             </div>
             <div class="floatcenter0">
-                <div id="pagenav"><{$pagenav}></div>
+                <div id="pagenav"><{$pagenav|default:''}></div>
             </div>
 
 
@@ -28,7 +28,7 @@
                     <th class="center"><{$selectortrust}></th>
                     <th class="center"><{$selectorcool}></th>
                     <th class="center"><{$selectorfan}></th>
-                    <th class="left"><{$selectordate_created}></th>
+                    <th class="left"><{$selectordate_created|default:''}></th>
                     <th class="left"><{$selectordate_updated}></th>
 
                     <th class="center width5"><{$smarty.const.AM_SUICO_FORM_ACTION}></th>
@@ -36,7 +36,7 @@
                 <{foreach item=friendshipArray from=$friendshipsArray}>
                     <tr class="<{cycle values="odd,even"}>">
 
-                        <td align="center" style="vertical-align:middle;"><input type="checkbox" name="friendships_id[]" title="friendships_id[]" id="friendships_id[]" value="<{$friendshipArray.friendships_id}>"></td>
+                        <td align="center" style="vertical-align:middle;"><input type="checkbox" name="friendships_id[]" title="friendships_id[]" id="friendships_id[]" value="<{$friendshipArray.friendship_id}>"></td>
                         <td class='left'><{$friendshipArray.friendship_id}></td>
                         <td class='left'><{$friendshipArray.friend1_uid}></td>
                         <td class='left'><{$friendshipArray.friend2_uid}></td>
@@ -68,7 +68,7 @@
                     <th class="center"><{$selectortrust}></th>
                     <th class="center"><{$selectorcool}></th>
                     <th class="center"><{$selectorfan}></th>
-                    <th class="left"><{$selectordate_created}></th>
+                    <th class="left"><{$selectordate_created|default:''}></th>
                     <th class="left"><{$selectordate_updated}></th>
 
                     <th class="center width5"><{$smarty.const.AM_SUICO_FORM_ACTION}></th>
