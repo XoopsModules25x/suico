@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -20,9 +18,8 @@ use XoopsObject;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -40,11 +37,19 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
  */
 class Image extends XoopsObject
 {
-    public $db;
-    public $helper;
-    public $permHelper;
-    // constructor
+    public \XoopsDatabase $db;
+    public Helper         $helper;
+    public Permission     $permHelper;
+    public                $image_id;
+    public $title;
+    public $caption;
+    public $date_created;
+    public $date_updated;
+    public $uid_owner;
+    public $filename;
+    public $private;
 
+    // constructor
     /**
      * Image constructor.
      * @param null $id
@@ -77,7 +82,7 @@ class Image extends XoopsObject
     /**
      * @param $id
      */
-    public function load($id)
+    public function load($id): void
     {
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_images') . ' WHERE image_id=' . $id;
         $myrow = $this->db->fetchArray($this->db->query($sql));
@@ -110,25 +115,26 @@ class Image extends XoopsObject
         if (\is_array($criteria) && \count($criteria) > 0) {
             $whereQuery = ' WHERE';
             foreach ($criteria as $c) {
-                $whereQuery .= " ${c} AND";
+                $whereQuery .= " {$c} AND";
             }
             $whereQuery = mb_substr($whereQuery, 0, -4);
         } elseif (!\is_array($criteria) && $criteria) {
             $whereQuery = ' WHERE ' . $criteria;
         }
         if ($asobject) {
-            $sql    = 'SELECT * FROM ' . $db->prefix('suico_images') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql    = 'SELECT * FROM ' . $db->prefix('suico_images') . "{$whereQuery} ORDER BY {$sort} {$order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new self($myrow);
             }
         } else {
-            $sql    = 'SELECT image_id FROM ' . $db->prefix('suico_images') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql    = 'SELECT image_id FROM ' . $db->prefix('suico_images') . "{$whereQuery} ORDER BY {$sort} {$order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['suico_images_id'];
             }
         }
+
         return $ret;
     }
 

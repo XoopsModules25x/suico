@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -8,7 +6,7 @@ namespace XoopsModules\Suico;
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -41,9 +38,18 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  */
 class Video extends XoopsObject
 {
-    public $db;
-    public $helper;
-    public $permHelper;
+    public \XoopsDatabase $db;
+    public Helper         $helper;
+    public Permission     $permHelper;
+    public                $video_id;
+    public $uid_owner;
+    public $video_title;
+    public $video_desc;
+    public $youtube_code;
+    public $featured_video;
+    public $date_created;
+public $date_updated ;
+
     // constructor
 
     /**
@@ -78,7 +84,7 @@ class Video extends XoopsObject
     /**
      * @param $id
      */
-    public function load($id)
+    public function load($id): void
     {
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_videos') . ' WHERE video_id=' . $id;
         $myrow = $this->db->fetchArray($this->db->query($sql));
@@ -111,25 +117,26 @@ class Video extends XoopsObject
         if (\is_array($criteria) && \count($criteria) > 0) {
             $whereQuery = ' WHERE';
             foreach ($criteria as $c) {
-                $whereQuery .= " ${c} AND";
+                $whereQuery .= " {$c} AND";
             }
             $whereQuery = mb_substr($whereQuery, 0, -4);
         } elseif (!\is_array($criteria) && $criteria) {
             $whereQuery = ' WHERE ' . $criteria;
         }
         if ($asobject) {
-            $sql    = 'SELECT * FROM ' . $db->prefix('suico_videos') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql    = 'SELECT * FROM ' . $db->prefix('suico_videos') . "{$whereQuery} ORDER BY {$sort} {$order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new self($myrow);
             }
         } else {
-            $sql    = 'SELECT video_id FROM ' . $db->prefix('suico_videos') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql    = 'SELECT video_id FROM ' . $db->prefix('suico_videos') . "{$whereQuery} ORDER BY {$sort} {$order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['suico_video_id'];
             }
         }
+
         return $ret;
     }
 

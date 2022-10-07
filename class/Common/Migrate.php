@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico\Common;
 
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico\Common;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -30,7 +27,7 @@ use XoopsModules\Suico\Common;
  * @category  Migrate
  * @author    Richard Griffith <richard@geekwright.com>
  * @copyright 2016 XOOPS Project (https://xoops.org)
- * @license   GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license   GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @link      https://xoops.org
  */
 class Migrate extends \Xmf\Database\Migrate
@@ -60,7 +57,7 @@ class Migrate extends \Xmf\Database\Migrate
      *   table and column renames
      *   data conversions
      */
-    protected function preSyncActions()
+    protected function preSyncActions(): void
     {
         // rename table
         if ($this->renameTables && \is_array($this->renameTables)) {
@@ -75,7 +72,7 @@ class Migrate extends \Xmf\Database\Migrate
     /**
      * rename table if needed
      */
-    private function renameTable()
+    private function renameTable(): void
     {
         foreach ($this->renameTables as $oldName => $newName) {
             if ($this->tableHandler->useTable($oldName) && !$this->tableHandler->useTable($newName)) {
@@ -93,7 +90,7 @@ class Migrate extends \Xmf\Database\Migrate
         $tableName,
         $columnName,
         $newName
-    ) {
+    ): void {
         if ($this->tableHandler->useTable($tableName)) {
             $attributes = $this->tableHandler->getColumnAttributes($tableName, $columnName);
             //            if (false !== strpos($attributes, ' int(')) {

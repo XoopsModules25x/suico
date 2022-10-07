@@ -49,14 +49,14 @@
                         <{if $countAudio > 0}>
                             <div id="suico-audio-allaudiocontainer">
 
-                                <{*    <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="240" height="20" id="dewplayer" align="middle">*}>
+                                <{*    <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="https://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="240" height="20" id="dewplayer" align="middle">*}>
                                 <{*        <param name="wmode" value="transparent">*}>
                                 <{*        <param name="allowScriptAccess" value="sameDomain">*}>
                                 <{*        <param name="movie" value="audioplayers/dewplayer-multi.swf?mp3=<{$audio_list}>">*}>
                                 <{*        <param name="quality" value="high">*}>
                                 <{*        <param name="bgcolor" value="FFFFFF">*}>
                                 <{*        <embed src="audioplayers/dewplayer-multi.swf?mp3=<{$audio_list}>" quality="high" bgcolor="FFFFFF" width="240" height="20" name="dewplayer" wmode="transparent" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash"*}>
-                                <{*               pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>*}>
+                                <{*               pluginspage="https://www.macromedia.com/go/getflashplayer"></embed>*}>
                                 <{*    </object>*}>
 
                             </div>
@@ -71,14 +71,14 @@
 
                         <{section name=i loop=$audios}>
                             <div class="suico-audio">
-                                <{*            <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="200" height="20" id="dewplayer" align="middle">*}>
+                                <{*            <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="https://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="200" height="20" id="dewplayer" align="middle">*}>
                                 <{*                <param name="wmode" value="transparent">*}>
                                 <{*                <param name="allowScriptAccess" value="sameDomain">*}>
                                 <{*                <param name="movie" value="audioplayers/dewplayer.swf?mp3=<{$xoops_url}>/uploads/suico/audio/<{$audios[i].url}>&amp;showtime=1">*}>
                                 <{*                <param name="quality" value="high">*}>
                                 <{*                <param name="bgcolor" value="FFFFFF">*}>
                                 <{*                <embed src="audioplayers/dewplayer.swf?mp3=<{$xoops_url}>/uploads/suico/audio/<{$audios[i].url}>&amp;showtime=1" width="200" height="20" align="middle" quality="high" bgcolor="FFFFFF" name="dewplayer" wmode="transparent" allowScriptAccess="sameDomain"*}>
-                                <{*                       type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>*}>
+                                <{*                       type="application/x-shockwave-flash" pluginspage="https://www.macromedia.com/go/getflashplayer"></embed>*}>
                                 <{*            </object>*}>
 
                             </div>

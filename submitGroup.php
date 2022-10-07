@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -13,9 +11,8 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -63,7 +60,11 @@ if (1 == $marker) { //if (1 === $marker) {
     require_once XOOPS_ROOT_PATH . '/class/uploader.php';
     $uploadDir = XOOPS_UPLOAD_PATH . '/suico/groups/';
     $uploader  = new \XoopsMediaUploader(
-        $uploadDir, $helper->getConfig('mimetypes'), $helper->getConfig('maxsize'), null, null
+        $uploadDir,
+        $helper->getConfig('mimetypes'),
+        $helper->getConfig('maxsize'),
+        null,
+        null
     );
     if ($uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0])) {
         //$extension = preg_replace( '/^.+\.([^.]+)$/sU' , '' , $_FILES['attachedfile']['name']);
@@ -129,4 +130,4 @@ if (1 == $marker) { //if (1 === $marker) {
 /**
  * Close page
  */
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

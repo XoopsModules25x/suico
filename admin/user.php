@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /**
  * Extended User Profile
@@ -13,8 +11,7 @@ declare(strict_types=1);
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
- * @license             GNU GPL 2 (http://www.gnu.org/licenses/gpl-2.0.html)
- * @package             profile
+ * @license             GNU GPL 2 (https://www.gnu.org/licenses/gpl-2.0.html)
  * @since               2.3.0
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
@@ -37,7 +34,7 @@ $op = $_REQUEST['op'] ?? 'list';
 if ('editordelete' === $op) {
     $op = isset($_REQUEST['delete']) ? 'delete' : 'edit';
 }
-/* @var \XoopsMemberHandler $memberHandler */
+/** @var \XoopsMemberHandler $memberHandler */
 $memberHandler = xoops_getHandler('member');
 switch ($op) {
     default:
@@ -63,7 +60,7 @@ switch ($op) {
     case 'edit':
         xoops_loadLanguage('main', $GLOBALS['xoopsModule']->getVar('dirname', 'n'));
         $obj = $memberHandler->getUser($_REQUEST['id']);
-        if (in_array(XOOPS_GROUP_ADMIN, $obj->getGroups()) && !in_array(XOOPS_GROUP_ADMIN, $GLOBALS['xoopsUser']->getGroups())) {
+        if (in_array(XOOPS_GROUP_ADMIN, $obj->getGroups(), true) && !in_array(XOOPS_GROUP_ADMIN, $GLOBALS['xoopsUser']->getGroups(), true)) {
             // If not webmaster trying to edit a webmaster - disallow
             redirect_header('user.php', 3, _US_NOEDITRIGHT);
         }
@@ -77,18 +74,18 @@ switch ($op) {
             exit;
         }
         // Dynamic fields
-        /* @var  ProfileHandler $profileHandler */
+        /** @var ProfileHandler $profileHandler */
         $profileHandler = $helper->getHandler('Profile');
         // Get fields
         $fields     = $profileHandler->loadFields();
         $userfields = $profileHandler->getUserVars();
         // Get ids of fields that can be edited
-        /* @var  \XoopsGroupPermHandler $grouppermHandler */
+        /** @var \XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler = xoops_getHandler('groupperm');
         $editable_fields  = $grouppermHandler->getItemIds('profile_edit', $GLOBALS['xoopsUser']->getGroups(), $GLOBALS['xoopsModule']->getVar('mid'));
         $uid              = empty($_POST['uid']) ? 0 : (int)$_POST['uid'];
         if (!empty($uid)) {
-            $user    = $memberHandler->getUser($uid);
+            $user = $memberHandler->getUser($uid);
             /** @var Profile $profile */
             $profile = $profileHandler->get($uid);
             if (!is_object($profile)) {
@@ -101,7 +98,7 @@ switch ($op) {
             if (count($fields) > 0) {
                 foreach (array_keys($fields) as $i) {
                     $fieldname = $fields[$i]->getVar('field_name');
-                    if (in_array($fieldname, $userfields)) {
+                    if (in_array($fieldname, $userfields, true)) {
                         $default = $fields[$i]->getVar('field_default');
                         if ('' === $default || null === $default) {
                             continue;
@@ -120,13 +117,15 @@ switch ($op) {
         if (isset($_POST['level']) && $user->getVar('level') != (int)$_POST['level']) {
             $user->setVar('level', (int)$_POST['level']);
         }
-        $password = $vpass = null;
+        $vpass    = null;
+        $password = null;
         if (!empty($_POST['password'])) {
             $password = Request::getString('password', '', 'POST');
             $vpass    = Request::getString('vpass', '', 'POST');
             $user->setVar('pass', password_hash($password, PASSWORD_DEFAULT));
         } elseif ($user->isNew()) {
-            $password = $vpass = '';
+            $vpass    = '';
+            $password = '';
         }
         xoops_load('xoopsuserutility');
         $stop   = XoopsUserUtility::validate($user, $password, $vpass);
@@ -136,8 +135,8 @@ switch ($op) {
         }
         foreach (array_keys($fields) as $i) {
             $fieldname = $fields[$i]->getVar('field_name');
-            if (in_array($fields[$i]->getVar('field_id'), $editable_fields) && isset($_REQUEST[$fieldname])) {
-                if (in_array($fieldname, $userfields)) {
+            if (in_array($fields[$i]->getVar('field_id'), $editable_fields, true) && isset($_REQUEST[$fieldname])) {
+                if (in_array($fieldname, $userfields, true)) {
                     $value = $fields[$i]->getValueForSave($_REQUEST[$fieldname], $user->getVar($fieldname, 'n'));
                     $user->setVar($fieldname, $value);
                 } else {
@@ -192,7 +191,7 @@ switch ($op) {
         }
         $obj    = $memberHandler->getUser($_REQUEST['id']);
         $groups = $obj->getGroups();
-        if (in_array(XOOPS_GROUP_ADMIN, $groups)) {
+        if (in_array(XOOPS_GROUP_ADMIN, $groups, true)) {
             redirect_header('user.php', 3, _AM_SUICO_CANNOTDELETEADMIN, false);
         }
         if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {

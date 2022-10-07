@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico\Form;
 
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico\Form;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -54,14 +51,15 @@ class ConfigsForm extends XoopsThemeForm
     {
         $this->helper       = $target->helper;
         $this->targetObject = $target;
-        $title              = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_CONFIGS_ADD) : \sprintf(\AM_SUICO_CONFIGS_EDIT);
+        $title              = $this->targetObject->isNew() ? \AM_SUICO_CONFIGS_ADD : \AM_SUICO_CONFIGS_EDIT;
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
         //include ID field, it's needed so the module knows if it is a new form or an edited form
         $hidden = new XoopsFormHidden(
-            'config_id', $this->targetObject->getVar(
-            'config_id'
-        )
+            'config_id',
+            $this->targetObject->getVar(
+                'config_id'
+            )
         );
         $this->addElement($hidden);
         unset($hidden);
@@ -72,9 +70,14 @@ class ConfigsForm extends XoopsThemeForm
         // Config_uid
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_SUICO_CONFIGS_CONFIG_UID, 'config_uid', false, $this->targetObject->getVar(
-                'config_uid'
-            ), 1, false
+                \AM_SUICO_CONFIGS_CONFIG_UID,
+                'config_uid',
+                false,
+                $this->targetObject->getVar(
+                    'config_uid'
+                ),
+                1,
+                false
             ),
             false
         );
@@ -158,18 +161,26 @@ class ConfigsForm extends XoopsThemeForm
         // Backup_password
         $this->addElement(
             new XoopsFormText(
-                \AM_SUICO_CONFIGS_BACKUP_PASSWORD, 'backup_password', 50, 255, $this->targetObject->getVar(
-                'backup_password'
-            )
+                \AM_SUICO_CONFIGS_BACKUP_PASSWORD,
+                'backup_password',
+                50,
+                255,
+                $this->targetObject->getVar(
+                    'backup_password'
+                )
             ),
             false
         );
         // Backup_email
         $this->addElement(
             new XoopsFormText(
-                \AM_SUICO_CONFIGS_BACKUP_EMAIL, 'backup_email', 50, 255, $this->targetObject->getVar(
-                'backup_email'
-            )
+                \AM_SUICO_CONFIGS_BACKUP_EMAIL,
+                'backup_email',
+                50,
+                255,
+                $this->targetObject->getVar(
+                    'backup_email'
+                )
             ),
             false
         );

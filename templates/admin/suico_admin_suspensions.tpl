@@ -1,7 +1,7 @@
 <{if $suspensionsRows > 0}>
     <div class="outer">
         <form name="select" action="suspensions.php?op=" method="POST"
-              onsubmit="if(window.document.select.op.value =='') {return false;} else if (window.document.select.op.value =='delete') {return deleteSubmitValid('suspensionsId[]');} else if (isOneChecked('suspensionsId[]')) {return true;} else {alert('<{$smarty.const.AM_SUSPENSIONS_SELECTED_ERROR}>'); return false;}">
+              onsubmit="if(window.document.select.op.value =='') {return false;} else if (window.document.select.op.value =='delete') {return deleteSubmitValid('suspensionsId[]');} else if (isOneChecked('suspensionsId[]')) {return true;} else {alert('<{$smarty.const.AM_SUICO_SELECTED_ERROR}>'); return false;}">
             <input type="hidden" name="confirm" value="1">
             <div class="floatleft">
                 <label>
@@ -13,7 +13,7 @@
                 <input id="submitUp" class="formButton" type="submit" name="submitselect" value="<{$smarty.const._SUBMIT}>" title="<{$smarty.const._SUBMIT}>">
             </div>
             <div class="floatcenter0">
-                <div id="pagenav"><{$pagenav}></div>
+                <div id="pagenav"><{$pagenav|default:''}></div>
             </div>
 
 
@@ -33,7 +33,7 @@
                 <{foreach item=suspensionsArray from=$suspensionsArrays}>
                     <tr class="<{cycle values="odd,even"}>">
 
-                        <td align="center" style="vertical-align:middle;"><input type="checkbox" name="suspensions_id[]" title="suspensions_id[]" id="suspensions_id[]" value="<{$suspensionsArray.suspensions_id}>"></td>
+                        <td align="center" style="vertical-align:middle;"><input type="checkbox" name="suspensions_id[]" title="suspensions_id[]" id="suspensions_id[]" value="<{$suspensionsArray.suspension_id}>"></td>
                         <td class='left'><{$suspensionsArray.uid}></td>
                         <td class='left'><{$suspensionsArray.old_pass}></td>
                         <td class='left'><{$suspensionsArray.old_email}></td>

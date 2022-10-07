@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -21,12 +19,10 @@ use XoopsPersistableObjectHandler;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
-
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
 /**
@@ -35,8 +31,8 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  */
 class IshotHandler extends XoopsPersistableObjectHandler
 {
-    public $helper;
-    public $isAdmin;
+    public Helper $helper;
+    public        $isAdmin;
 
     /**
      * Constructor
@@ -47,13 +43,13 @@ class IshotHandler extends XoopsPersistableObjectHandler
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Suico\Helper $this->helper */
+        /** @var \XoopsModules\Suico\Helper $this- >helper */
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
             $this->helper = $helper;
         }
-        $isAdmin = $this->helper->isUserAdmin();
+        $this->isAdmin = $this->helper->isUserAdmin();
         //        parent::__construct($db, 'suico_groups', Image::class, 'group_id', 'group_title');
     }
 
@@ -73,6 +69,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
             $obj->unsetNew();
         }
         $obj->helper = $this->helper;
+
         return $obj;
     }
 
@@ -80,8 +77,8 @@ class IshotHandler extends XoopsPersistableObjectHandler
      * retrieve a Ishot
      *
      * @param int|null $id of the Ishot
-     * @param null $fields
-     * @return mixed reference to the {@link Ishot} object, FALSE if failed
+     * @param null     $fields
+     * @return false|\XoopsModules\Suico\Ishot reference to the {@link Ishot} object, FALSE if failed
      */
     public function get2(
         $id = null,
@@ -95,41 +92,46 @@ class IshotHandler extends XoopsPersistableObjectHandler
         if (1 === $numrows) {
             $suico_ishot = new Ishot();
             $suico_ishot->assignVars($this->db->fetchArray($result));
+
             return $suico_ishot;
         }
+
         return false;
     }
 
     /**
      * insert a new Ishot in the database
      *
-     * @param \XoopsObject $xoopsObject  reference to the {@link Ishot}
+     * @param \XoopsObject $object  reference to the {@link Ishot}
      *                                   object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
     public function insert2(
-        XoopsObject $xoopsObject,
+        XoopsObject $object,
         $force = false
     ) {
         global $xoopsConfig;
-        if (!$xoopsObject instanceof Ishot) {
+        if (!$object instanceof Ishot) {
             return false;
         }
-        if (!$xoopsObject->isDirty()) {
+        if (!$object->isDirty()) {
             return true;
         }
-        if (!$xoopsObject->cleanVars()) {
+        if (!$object->cleanVars()) {
             return false;
         }
-        $cod_ishot = $uid_voter = $uid_voted = $ishot = '';
-        foreach ($xoopsObject->cleanVars as $k => $v) {
+        $ishot     = '';
+        $uid_voted = '';
+        $uid_voter = '';
+        $cod_ishot = '';
+        foreach ($object->cleanVars as $k => $v) {
             ${$k} = $v;
         }
         //        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
-        if ($xoopsObject->isNew()) {
+        if ($object->isNew()) {
             // ajout/modification d'un Ishot
-            $xoopsObject = new Ishot();
+            $object = new Ishot();
             $format      = 'INSERT INTO %s (cod_ishot, uid_voter, uid_voted, ishot, DATE)';
             $format      .= 'VALUES (%u, %u, %u, %u, %s)';
             $sql         = \sprintf(
@@ -168,28 +170,29 @@ class IshotHandler extends XoopsPersistableObjectHandler
         if (empty($cod_ishot)) {
             $cod_ishot = $this->db->getInsertId();
         }
-        $xoopsObject->assignVar('cod_ishot', $cod_ishot);
+        $object->assignVar('cod_ishot', $cod_ishot);
+
         return true;
     }
 
     /**
      * delete a Ishot from the database
      *
-     * @param \XoopsObject $xoopsObject reference to the Ishot to delete
+     * @param \XoopsObject $object reference to the Ishot to delete
      * @param bool         $force
      * @return bool FALSE if failed.
      */
     public function delete(
-        XoopsObject $xoopsObject,
+        XoopsObject $object,
         $force = false
     ) {
-        if (!$xoopsObject instanceof Ishot) {
+        if (!$object instanceof Ishot) {
             return false;
         }
         $sql = \sprintf(
             'DELETE FROM %s WHERE cod_ishot = %u',
             $this->db->prefix('suico_ishot'),
-            $xoopsObject->getVar('cod_ishot')
+            (int)$object->getVar('cod_ishot')
         );
         if ($force) {
             $result = $this->db->queryF($sql);
@@ -199,32 +202,34 @@ class IshotHandler extends XoopsPersistableObjectHandler
         if (!$result) {
             return false;
         }
+
         return true;
     }
 
     /**
      * retrieve suico_ishots from the database
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} conditions to be met
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key       use the UID as key for the array?
      * @param bool                                 $as_object
      * @return array array of {@link Ishot} objects
      */
     public function &getObjects(
-        ?CriteriaElement $criteriaElement = null,
+        ?CriteriaElement $criteria = null,
         $id_as_key = false,
         $as_object = true
     ) {
         $ret   = [];
-        $limit = $start = 0;
+        $start = 0;
+        $limit = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_ishot');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
-            if ('' !== $criteriaElement->getSort()) {
-                $sql .= ' ORDER BY ' . $criteriaElement->getSort() . ' ' . $criteriaElement->getOrder();
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+            $sql .= ' ' . $criteria->renderWhere();
+            if ('' !== $criteria->getSort()) {
+                $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
-            $limit = $criteriaElement->getLimit();
-            $start = $criteriaElement->getStart();
+            $limit = $criteria->getLimit();
+            $start = $criteria->getStart();
         }
         $result = $this->db->query($sql, $limit, $start);
         if (!$result) {
@@ -240,50 +245,53 @@ class IshotHandler extends XoopsPersistableObjectHandler
             }
             unset($suico_ishot);
         }
+
         return $ret;
     }
 
     /**
      * count suico_ishots matching a condition
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link CriteriaElement} to match
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link CriteriaElement} to match
      * @return int count of suico_ishots
      */
     public function getCount(
-        ?CriteriaElement $criteriaElement = null
+        ?CriteriaElement $criteria = null
     ) {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_ishot');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+            $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
         if (!$result) {
             return 0;
         }
         [$count] = $this->db->fetchRow($result);
+
         return $count;
     }
 
     /**
      * delete suico_ishots matching a set of conditions
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link CriteriaElement}
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link CriteriaElement}
      * @param bool                                 $force
      * @param bool                                 $asObject
      * @return bool FALSE if deletion failed
      */
     public function deleteAll(
-        ?CriteriaElement $criteriaElement = null,
+        ?CriteriaElement $criteria = null,
         $force = true,
         $asObject = false
     ) {
         $sql = 'DELETE FROM ' . $this->db->prefix('suico_ishot');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+            $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {
             return false;
         }
+
         return true;
     }
 
@@ -298,7 +306,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
             ) . ', ' . $this->db->prefix(
                 'users'
             );
-        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+        if (($criteria instanceof \CriteriaCompo) || ($criteria instanceof \Criteria)) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         //attention here this is kind of a hack
@@ -321,6 +329,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
             $vetor[$i]['user_avatar'] = $myrow['user_avatar'];
             $i++;
         }
+
         return $vetor;
     }
 
@@ -334,13 +343,14 @@ class IshotHandler extends XoopsPersistableObjectHandler
         $id_as_key = false
     ) {
         $ret   = [];
-        $limit = $start = 0;
+        $start = 0;
+        $limit = 0;
         $sql   = 'SELECT uname, user_avatar, uid_voted FROM ' . $this->db->prefix(
                 'suico_ishot'
             ) . ', ' . $this->db->prefix(
                 'users'
             );
-        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+        if (($criteria instanceof \CriteriaCompo) || ($criteria instanceof \Criteria)) {
             $sql .= ' ' . $criteria->renderWhere();
             //attention here this is kind of a hack
             $sql .= ' AND uid = uid_voted AND ishot=1';
@@ -358,6 +368,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
                 $vetor[$i]['user_avatar'] = $myrow['user_avatar'];
                 $i++;
             }
+
             return $vetor;
         }
     }

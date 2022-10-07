@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /**
  * Extended User Profile
  *
@@ -12,8 +10,7 @@ declare(strict_types=1);
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
- * @license             GNU GPL 2 (http://www.gnu.org/licenses/gpl-2.0.html)
- * @package             profile
+ * @license             GNU GPL 2 (https://www.gnu.org/licenses/gpl-2.0.html)
  * @since               2.3.0
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
@@ -57,7 +54,7 @@ $criteria = new CriteriaCompo();
 $criteria->setSort('field_id, user_group, profile_group');
 $criteria->setOrder('DESC');
 $visibilities = $visibilityHandler->getAllByFieldId($criteria);
-/* @var \XoopsMemberHandler $memberHandler */
+/** @var \XoopsMemberHandler $memberHandler */
 $memberHandler = xoops_getHandler('member');
 $groups        = $memberHandler->getGroupList();
 $groups[0]     = _AM_SUICO_FIELDVISIBLETOALL;

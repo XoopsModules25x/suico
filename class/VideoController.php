@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -19,9 +17,8 @@ use XoopsPageNav;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
@@ -30,9 +27,9 @@ require_once XOOPS_ROOT_PATH . '/class/criteria.php';
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 
 /**
- * Class SuicoVideoController
+ * Class VideoController
  */
-class VideoController extends SuicoController
+class VideoController extends Controller
 {
     /**
      * Fetch videos
@@ -53,7 +50,7 @@ class VideoController extends SuicoController
     public function showFormSubmitVideos(
         $maxNbVideos,
         $presentNb
-    ) {
+    ): void {
         global $xoopsTpl;
         if ($this->isUser) {
             if ((1 === $this->isOwner) && ($maxNbVideos > $presentNb)) {
@@ -67,7 +64,7 @@ class VideoController extends SuicoController
      * Assign Video Content to Template
      * @param $countVideos
      * @param $videos
-     * @return bool
+     * @return array|bool
      */
     public function assignVideoContent(
         $countVideos,
@@ -85,11 +82,12 @@ class VideoController extends SuicoController
             $videosArray[$i]['title']          = $video->getVar('video_title', 's');
             $videosArray[$i]['desc']           = $video->getVar('video_desc', 's');
             $videosArray[$i]['id']             = $video->getVar('video_id', 's');
-			$videosArray[$i]['featured_video'] = $video->getVar('featured_video', 's');
+            $videosArray[$i]['featured_video'] = $video->getVar('featured_video', 's');
             $videosArray[$i]['date_created']   = \formatTimestamp($video->getVar('date_created', 's'));
             $videosArray[$i]['date_updated']   = \formatTimestamp($video->getVar('date_updated', 's'));
             $i++;
         }
+
         return $videosArray;
     }
 
@@ -109,6 +107,7 @@ class VideoController extends SuicoController
         $interval
     ) {
         $pageNav = new XoopsPageNav($countVideos, $videosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
+
         return $pageNav->renderImageNav($interval);
     }
 
@@ -130,6 +129,7 @@ class VideoController extends SuicoController
             }
             */
         }
+
         return true;
     }
 }

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -13,7 +11,7 @@ declare(strict_types=1);
 
 /**
  * @copyright       XOOPS https://xoops.org
- * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          XOOPS https://xoops.org
  */
 
@@ -229,4 +227,3 @@ $xoopsTpl->assign('displayonlinestatus', $xoopsModuleConfig['displayonlinestatus
 $xoopsTpl->assign('displayextrainfo', $xoopsModuleConfig['displayextrainfo']);
 $xoopsTpl->assign('membersperpage', $xoopsModuleConfig['membersperpage']);
 $xoopsTpl->assign('memberslisttemplate', $xoopsModuleConfig['memberslisttemplate']);
-

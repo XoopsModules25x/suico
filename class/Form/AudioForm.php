@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico\Form;
 
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico\Form;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -56,14 +53,15 @@ class AudioForm extends XoopsThemeForm
     {
         $this->helper       = $target->helper;
         $this->targetObject = $target;
-        $title              = $this->targetObject->isNew() ? \sprintf(\AM_SUICO_AUDIO_ADD) : \sprintf(\AM_SUICO_AUDIO_EDIT);
+        $title              = $this->targetObject->isNew() ? \AM_SUICO_AUDIO_ADD : \AM_SUICO_AUDIO_EDIT;
         parent::__construct($title, 'form', \xoops_getenv('SCRIPT_NAME'), 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
         //include ID field, it's needed so the module knows if it is a new form or an edited form
         $hidden = new XoopsFormHidden(
-            'audio_id', $this->targetObject->getVar(
-            'audio_id'
-        )
+            'audio_id',
+            $this->targetObject->getVar(
+                'audio_id'
+            )
         );
         $this->addElement($hidden);
         unset($hidden);
@@ -74,9 +72,14 @@ class AudioForm extends XoopsThemeForm
         // Uid_owner
         $this->addElement(
             new XoopsFormSelectUser(
-                \AM_SUICO_AUDIO_UID_OWNER, 'uid_owner', false, $this->targetObject->getVar(
-                'uid_owner'
-            ), 1, false
+                \AM_SUICO_AUDIO_UID_OWNER,
+                'uid_owner',
+                false,
+                $this->targetObject->getVar(
+                    'uid_owner'
+                ),
+                1,
+                false
             ),
             false
         );
@@ -103,23 +106,35 @@ class AudioForm extends XoopsThemeForm
             //$this->addElement( new \XoopsFormEditor(AM_SUICO_AUDIO_DESCRIPTION, 'description', $editorOptions), false  );
             if ($this->helper->isUserAdmin()) {
                 $descEditor = new XoopsFormEditor(
-                    \AM_SUICO_AUDIO_DESCRIPTION, $this->helper->getConfig(
-                    'suicoEditorAdmin'
-                ), $editorOptions, $nohtml = false, $onfailure = 'textarea'
+                    \AM_SUICO_AUDIO_DESCRIPTION,
+                    $this->helper->getConfig(
+                        'suicoEditorAdmin'
+                    ),
+                    $editorOptions,
+                    $nohtml = false,
+                    $onfailure = 'textarea'
                 );
             } else {
                 $descEditor = new XoopsFormEditor(
-                    \AM_SUICO_AUDIO_DESCRIPTION, $this->helper->getConfig(
-                    'suicoEditorUser'
-                ), $editorOptions, $nohtml = false, $onfailure = 'textarea'
+                    \AM_SUICO_AUDIO_DESCRIPTION,
+                    $this->helper->getConfig(
+                        'suicoEditorUser'
+                    ),
+                    $editorOptions,
+                    $nohtml = false,
+                    $onfailure = 'textarea'
                 );
             }
         } else {
             $descEditor = new \XoopsFormDhtmlTextArea(
-                \AM_SUICO_AUDIO_DESCRIPTION, 'description', $this->targetObject->getVar(
+                \AM_SUICO_AUDIO_DESCRIPTION,
                 'description',
-                'e'
-            ), 5, 50
+                $this->targetObject->getVar(
+                    'description',
+                    'e'
+                ),
+                5,
+                50
             );
         }
         $this->addElement($descEditor);
@@ -128,12 +143,18 @@ class AudioForm extends XoopsThemeForm
         // Data_creation
         $this->addElement(
             new XoopsFormTextDateSelect(
-                \AM_SUICO_AUDIO_DATE_CREATED, 'date_created', 0, \formatTimestamp($this->targetObject->getVar('date_created'), 's')
+                \AM_SUICO_AUDIO_DATE_CREATED,
+                'date_created',
+                0,
+                \formatTimestamp($this->targetObject->getVar('date_created'), 's')
             )
         );
         $this->addElement(
             new XoopsFormTextDateSelect(
-                \AM_SUICO_AUDIO_DATE_UPDATED, 'date_updated', 0, \formatTimestamp($this->targetObject->getVar('date_updated'), 's')
+                \AM_SUICO_AUDIO_DATE_UPDATED,
+                'date_updated',
+                0,
+                \formatTimestamp($this->targetObject->getVar('date_updated'), 's')
             )
         );
         $this->addElement(new XoopsFormHidden('op', 'save'));

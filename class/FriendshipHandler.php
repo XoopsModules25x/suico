@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -8,7 +6,7 @@ namespace XoopsModules\Suico;
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -50,8 +47,8 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  */
 class FriendshipHandler extends XoopsPersistableObjectHandler
 {
-    public $helper;
-    public $isAdmin;
+    public Helper $helper;
+    public        $isAdmin;
 
     /**
      * Constructor
@@ -68,7 +65,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         } else {
             $this->helper = $helper;
         }
-        $isAdmin = $this->helper->isUserAdmin();
+        $this->isAdmin = $this->helper->isUserAdmin();
         parent::__construct($xoopsDatabase, 'suico_friendships', Friendship::class, 'friendship_id', 'friendship_id');
     }
 
@@ -88,6 +85,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
             $obj->unsetNew();
         }
         $obj->helper = $this->helper;
+
         return $obj;
     }
 
@@ -96,7 +94,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
      *
      * @param int|null $id of the Friendship
      * @param null     $fields
-     * @return mixed reference to the {@link Friendship} object, FALSE if failed
+     * @return false|\XoopsModules\Suico\Friendship reference to the {@link Friendship} object, FALSE if failed
      */
     public function get2(
         $id = null,
@@ -110,41 +108,50 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         if (1 === $numrows) {
             $suico_friendship = new Friendship();
             $suico_friendship->assignVars($this->db->fetchArray($result));
+
             return $suico_friendship;
         }
+
         return false;
     }
 
     /**
      * insert a new Friendship in the database
      *
-     * @param \XoopsObject $xoopsObject       reference to the {@link Friendship}
+     * @param \XoopsObject $object       reference to the {@link Friendship}
      *                                        object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
     public function insert2(
-        XoopsObject $xoopsObject,
+        XoopsObject $object,
         $force = false
     ) {
         global $xoopsConfig;
-        if (!$xoopsObject instanceof Friendship) {
+        if (!$object instanceof Friendship) {
             return false;
         }
-        if (!$xoopsObject->isDirty()) {
+        if (!$object->isDirty()) {
             return true;
         }
-        if (!$xoopsObject->cleanVars()) {
+        if (!$object->cleanVars()) {
             return false;
         }
-        $friendship_id = $friend1_uid = $friend2_uid = $level = $hot = $trust = $cool = $fan = '';
-        foreach ($xoopsObject->cleanVars as $k => $v) {
+        $fan           = '';
+        $cool          = '';
+        $trust         = '';
+        $hot           = '';
+        $level         = '';
+        $friend2_uid   = '';
+        $friend1_uid   = '';
+        $friendship_id = '';
+        foreach ($object->cleanVars as $k => $v) {
             ${$k} = $v;
         }
         //        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
-        if ($xoopsObject->isNew()) {
+        if ($object->isNew()) {
             // ajout/modification d'un Friendship
-            $xoopsObject = new Friendship();
+            $object = new Friendship();
             $format      = 'INSERT INTO %s (friendship_id, friend1_uid, friend2_uid, LEVEL, hot, trust, cool, fan)';
             $format      .= 'VALUES (%u, %u, %u, %u, %u, %u, %u, %u)';
             $sql         = \sprintf(
@@ -189,28 +196,29 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         if (empty($friendship_id)) {
             $friendship_id = $this->db->getInsertId();
         }
-        $xoopsObject->assignVar('friendship_id', $friendship_id);
+        $object->assignVar('friendship_id', $friendship_id);
+
         return true;
     }
 
     /**
      * delete a Friendship from the database
      *
-     * @param \XoopsObject $xoopsObject reference to the Friendship to delete
+     * @param \XoopsObject $object reference to the Friendship to delete
      * @param bool         $force
      * @return bool FALSE if failed.
      */
     public function delete(
-        XoopsObject $xoopsObject,
+        XoopsObject $object,
         $force = false
     ) {
-        if (!$xoopsObject instanceof Friendship) {
+        if (!$object instanceof Friendship) {
             return false;
         }
         $sql = \sprintf(
             'DELETE FROM %s WHERE friendship_id = %u',
             $this->db->prefix('suico_friendships'),
-            $xoopsObject->getVar('friendship_id')
+            (int)$object->getVar('friendship_id')
         );
         if ($force) {
             $result = $this->db->queryF($sql);
@@ -220,32 +228,34 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         if (!$result) {
             return false;
         }
+
         return true;
     }
 
     /**
      * retrieve suico_friendships from the database
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} conditions to be met
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key       use the UID as key for the array?
      * @param bool                                 $as_object
      * @return array array of {@link Friendship} objects
      */
     public function &getObjects(
-        ?CriteriaElement $criteriaElement = null,
+        ?CriteriaElement $criteria = null,
         $id_as_key = false,
         $as_object = true
     ) {
         $ret   = [];
-        $limit = $start = 0;
+        $start = 0;
+        $limit = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_friendships');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
-            if ('' !== $criteriaElement->getSort()) {
-                $sql .= ' ORDER BY ' . $criteriaElement->getSort() . ' ' . $criteriaElement->getOrder();
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+            $sql .= ' ' . $criteria->renderWhere();
+            if ('' !== $criteria->getSort()) {
+                $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
-            $limit = $criteriaElement->getLimit();
-            $start = $criteriaElement->getStart();
+            $limit = $criteria->getLimit();
+            $start = $criteria->getStart();
         }
         $result = $this->db->query($sql, $limit, $start);
         if (!$result) {
@@ -261,50 +271,53 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
             }
             unset($suico_friendship);
         }
+
         return $ret;
     }
 
     /**
      * count suico_friendships matching a condition
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} to match
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement} to match
      * @return int count of suico_friendships
      */
     public function getCount(
-        ?CriteriaElement $criteriaElement = null
+        ?CriteriaElement $criteria = null
     ) {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_friendships');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+            $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
         if (!$result) {
             return 0;
         }
         [$count] = $this->db->fetchRow($result);
+
         return (int)$count;
     }
 
     /**
      * delete suico_friendships matching a set of conditions
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement}
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement}
      * @param bool                                 $force
      * @param bool                                 $asObject
      * @return bool FALSE if deletion failed
      */
     public function deleteAll(
-        ?CriteriaElement $criteriaElement = null,
+        ?CriteriaElement $criteria = null,
         $force = true,
         $asObject = false
     ) {
         $sql = 'DELETE FROM ' . $this->db->prefix('suico_friendships');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+            $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {
             return false;
         }
+
         return true;
     }
 
@@ -320,13 +333,14 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         $shuffle = 1
     ) {
         $ret   = [];
-        $limit = $start = 0;
+        $start = 0;
+        $limit = 0;
         $sql   = 'SELECT uname, user_avatar, friend2_uid FROM ' . $this->db->prefix(
                 'suico_friendships'
             ) . ', ' . $this->db->prefix(
                 'users'
             );
-        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+        if (($criteria instanceof \CriteriaCompo) || ($criteria instanceof \Criteria)) {
             $sql .= ' ' . $criteria->renderWhere();
             //attention here this is kind of a hack
             $sql .= ' AND uid = friend2_uid ';
@@ -348,6 +362,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
                 \shuffle($vetor);
                 $vetor = \array_slice($vetor, 0, (int)$countFriends);
             }
+
             return $vetor;
         }
     }
@@ -364,13 +379,14 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         $shuffle = 1
     ) {
         $ret   = [];
-        $limit = $start = 0;
+        $start = 0;
+        $limit = 0;
         $sql   = 'SELECT uname, user_avatar, friend1_uid FROM ' . $this->db->prefix(
                 'suico_friendships'
             ) . ', ' . $this->db->prefix(
                 'users'
             );
-        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+        if (($criteria instanceof \CriteriaCompo) || ($criteria instanceof \Criteria)) {
             $sql .= ' ' . $criteria->renderWhere();
             //attention here this is kind of a hack
             $sql .= ' AND uid = friend1_uid ';
@@ -392,6 +408,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
                 \shuffle($vetor);
                 $vetor = \array_slice($vetor, 0, $countFriends);
             }
+
             return $vetor;
         }
     }
@@ -399,25 +416,33 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
     /**
      * @param $friend
      */
-    public function renderFormSubmit($friend)
+    public function renderFormSubmit($friend): void
     {
         global $xoopsUser;
         /**
          * criteria fetch friendship to be edited
          */
-        $criteria_friend1    = new Criteria(
-            'friend1_uid', $xoopsUser->getVar(
-            'uid'
-        )
+        $criteria_friend1      = new Criteria(
+            'friend1_uid',
+            $xoopsUser->getVar(
+                'uid'
+            )
         );
-        $field_friend_fan    = $field_friend_friendly = $field_friend_funny = $field_friend_cool = '';
-        $criteria_friend2    = new Criteria('friend2_uid', $friend->getVar('uid'));
-        $criteria_friendship = new CriteriaCompo($criteria_friend1);
+        $field_friend_cool     = '';
+        $field_friend_funny    = '';
+        $field_friend_friendly = '';
+        $field_friend_fan      = '';
+        $criteria_friend2      = new Criteria('friend2_uid', $friend->getVar('uid'));
+        $criteria_friendship   = new CriteriaCompo($criteria_friend1);
         $criteria_friendship->add($criteria_friend2);
         $friendships = $this->getObjects($criteria_friendship);
         $friendship  = $friendships[0];
         $form        = new XoopsThemeForm(
-            \_MD_SUICO_EDIT_FRIENDSHIP, 'form_editfriendship', 'editfriendship.php', 'post', true
+            \_MD_SUICO_EDIT_FRIENDSHIP,
+            'form_editfriendship',
+            'editfriendship.php',
+            'post',
+            true
         );
         //$field_friend_avatar      = new XoopsFormLabel(_MD_SUICO_PHOTO, "<img src=../../uploads/".$friend->getVar('user_avatar').">");
         if ('avatars/blank.gif' === $friend->getVar(
@@ -426,9 +451,10 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
             $field_friend_avatar = new XoopsFormLabel(\_MD_SUICO_PHOTO, '<img src=assets/images/noavatar.gif>');
         } else {
             $field_friend_avatar = new XoopsFormLabel(
-                \_MD_SUICO_PHOTO, '<img src=../../uploads/' . $friend->getVar(
-                                    'user_avatar'
-                                ) . '>'
+                \_MD_SUICO_PHOTO,
+                '<img src=../../uploads/' . $friend->getVar(
+                    'user_avatar'
+                ) . '>'
             );
         }
         $field_friend_name = new XoopsFormLabel(\_MD_SUICO_FRIENDNAME, $friend->getVar('uname'));
@@ -441,9 +467,13 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         }
         if (1 === $this->helper->getConfig('allow_fanssevaluation')) {
             $field_friend_fan      = new XoopsFormRadioYN(
-                \_MD_SUICO_FAN, 'fan', $friendship->getVar(
-                'fan'
-            ), '<img src="assets/images/fans.gif" alt="' . \_YES . '" title="' . \_YES . '">', '<img src="assets/images/fansbw.gif" alt="' . \_NO . '" title="' . \_NO . '">'
+                \_MD_SUICO_FAN,
+                'fan',
+                $friendship->getVar(
+                    'fan'
+                ),
+                '<img src="assets/images/fans.gif" alt="' . \_YES . '" title="' . \_YES . '">',
+                '<img src="assets/images/fansbw.gif" alt="' . \_NO . '" title="' . \_NO . '">'
             );
             $field_friend_friendly = new XoopsFormRadio(\_MD_SUICO_FRIENDLY, 'hot', $friendship->getVar('hot'));
             $field_friend_friendly->addOption(
@@ -555,6 +585,7 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $vetor['sumfan'] = $myrow['sumfan'];
         }
+
         return $vetor;
     }
 }

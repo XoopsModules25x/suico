@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -8,7 +6,7 @@ namespace XoopsModules\Suico;
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -36,9 +33,17 @@ require_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';
  */
 class Notes extends XoopsObject
 {
-    public $db;
-    public $helper;
-    public $permHelper;
+    public \XoopsDatabase $db;
+    public Helper         $helper;
+    public Permission     $permHelper;
+    public                $note_id;
+    public $note_text;
+    public $note_from;
+    public $note_to;
+    public $private;
+    public $date_created;
+    
+    
     // constructor
 
     /**
@@ -71,7 +76,7 @@ class Notes extends XoopsObject
     /**
      * @param $id
      */
-    public function load($id)
+    public function load($id): void
     {
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_notes') . ' WHERE note_id=' . $id;
         $myrow = $this->db->fetchArray($this->db->query($sql));
@@ -104,25 +109,26 @@ class Notes extends XoopsObject
         if (\is_array($criteria) && \count($criteria) > 0) {
             $whereQuery = ' WHERE';
             foreach ($criteria as $c) {
-                $whereQuery .= " ${c} AND";
+                $whereQuery .= " {$c} AND";
             }
             $whereQuery = mb_substr($whereQuery, 0, -4);
         } elseif (!\is_array($criteria) && $criteria) {
             $whereQuery = ' WHERE ' . $criteria;
         }
         if ($asobject) {
-            $sql    = 'SELECT * FROM ' . $db->prefix('suico_notes') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql    = 'SELECT * FROM ' . $db->prefix('suico_notes') . "{$whereQuery} ORDER BY {$sort} {$order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new self($myrow);
             }
         } else {
-            $sql    = 'SELECT note_id FROM ' . $db->prefix('suico_notes') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql    = 'SELECT note_id FROM ' . $db->prefix('suico_notes') . "{$whereQuery} ORDER BY {$sort} {$order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['suico_notes_id'];
             }
         }
+
         return $ret;
     }
 

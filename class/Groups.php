@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -8,7 +6,7 @@ namespace XoopsModules\Suico;
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -43,9 +40,16 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  */
 class Groups extends XoopsObject
 {
-    public $xoopsDb;
-    public $helper;
-    public $permHelper;
+    public \XoopsDatabase $xoopsDB;
+    public Helper         $helper;
+    public Permission     $permHelper;
+    public                $group_id;
+    public $owner_uid;
+    public $group_title;
+    public $group_desc;
+    public $group_img;
+    public $date_created;
+    public $date_updated;
 
     /**
      * Groups constructor.
@@ -56,7 +60,7 @@ class Groups extends XoopsObject
         /** @var Helper $helper */
         $this->helper     = Helper::getInstance();
         $this->permHelper = new Permission();
-        $this->xoopsDb    = XoopsDatabaseFactory::getDatabaseConnection();
+        $this->xoopsDB    = XoopsDatabaseFactory::getDatabaseConnection();
         $this->initVar(GROUPID, \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('owner_uid', \XOBJ_DTYPE_INT, null, false, 10);
         $this->initVar('group_title', \XOBJ_DTYPE_TXTBOX, null, false);
@@ -78,10 +82,10 @@ class Groups extends XoopsObject
     /**
      * @param $id
      */
-    public function load($id)
+    public function load($id): void
     {
-        $sql   = 'SELECT * FROM ' . $this->xoopsDb->prefix(SUICOGROUPS) . ' WHERE group_id=' . $id;
-        $myrow = $this->xoopsDb->fetchArray($this->xoopsDb->query($sql));
+        $sql   = 'SELECT * FROM ' . $this->xoopsDB->prefix(SUICOGROUPS) . ' WHERE group_id=' . $id;
+        $myrow = $this->xoopsDB->fetchArray($this->xoopsDB->query($sql));
         $this->assignVars($myrow);
         if (!$myrow) {
             $this->setNew();
@@ -110,27 +114,28 @@ class Groups extends XoopsObject
         if (\is_array($criteria) && \count($criteria) > 0) {
             $whereQuery = ' WHERE';
             foreach ($criteria as $c) {
-                $whereQuery .= " ${c} AND";
+                $whereQuery .= "{$c} AND";
             }
             $whereQuery = mb_substr($whereQuery, 0, -4);
         } elseif (!\is_array($criteria) && $criteria) {
             $whereQuery = ' WHERE ' . $criteria;
         }
         if ($asobject) {
-            $sql    = 'SELECT * FROM ' . $this->xoopsDb->prefix(SUICOGROUPS) . "${whereQuery} ORDER BY ${sort} ${order}";
-            $result = $this->xoopsDb->query($sql, $limit, $start);
-            while (false !== ($myrow = $this->xoopsDb->fetchArray($result))) {
+            $sql    = 'SELECT * FROM ' . $this->xoopsDB->prefix(SUICOGROUPS) . "{$whereQuery} ORDER BY {$sort} {$order}";
+            $result = $this->xoopsDB->query($sql, $limit, $start);
+            while (false !== ($myrow = $this->xoopsDB->fetchArray($result))) {
                 $ret[] = new self($myrow);
             }
         } else {
-            $sql    = 'SELECT group_id FROM ' . $this->xoopsDb->prefix(
+            $sql    = 'SELECT group_id FROM ' . $this->xoopsDB->prefix(
                     SUICOGROUPS
-                ) . "${whereQuery} ORDER BY ${sort} ${order}";
-            $result = $this->xoopsDb->query($sql, $limit, $start);
-            while (false !== ($myrow = $this->xoopsDb->fetchArray($result))) {
+                ) . "{$whereQuery} ORDER BY {$sort} {$order}";
+            $result = $this->xoopsDB->query($sql, $limit, $start);
+            while (false !== ($myrow = $this->xoopsDB->fetchArray($result))) {
                 $ret[] = $myrow['suico_groups_id'];
             }
         }
+
         return $ret;
     }
 

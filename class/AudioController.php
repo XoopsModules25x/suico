@@ -1,12 +1,9 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
 use Criteria;
 use Exception;
-use XoopsPageNav;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -19,9 +16,8 @@ use XoopsPageNav;
 */
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
@@ -30,9 +26,9 @@ require_once XOOPS_ROOT_PATH . '/class/criteria.php';
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 
 /**
- * Class SuicoAudioController
+ * Class AudioController
  */
-class AudioController extends SuicoController
+class AudioController extends Controller
 {
     /**
      * Fetch audios
@@ -84,6 +80,7 @@ class AudioController extends SuicoController
             $audiosArray[$i]['meta']        = $mp3filemetainfoarray;
             $i++;
         }
+
         return $audiosArray;
     }
 
@@ -103,6 +100,7 @@ class AudioController extends SuicoController
         $interval
     ) {
         $pageNav = new \XoopsPageNav($countAudios, $audiosPerPage, $start, 'start', 'uid=' . $this->uidOwner);
+
         return $pageNav->renderImageNav($interval);
     }
 
@@ -122,6 +120,7 @@ class AudioController extends SuicoController
                 \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, \_MD_SUICO_NOPRIVILEGE);
             }
         }
+
         return true;
     }
 }

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -8,7 +6,7 @@ namespace XoopsModules\Suico;
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -16,12 +14,12 @@ namespace XoopsModules\Suico;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
+use Xmf\Module\Helper\Permission;
 use XoopsModules\Suico;
 
 //$permHelper = new \Xmf\Module\Helper\Permission();
@@ -31,20 +29,22 @@ use XoopsModules\Suico;
  */
 class Privacy extends \XoopsObject
 {
-    public $helper;
-    public $permHelper;
+    public            $helper;
+    public Permission $permHelper;
+    public            $id;
+    public $level;
+    public $name;
+    public $description;
 
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
         parent::__construct();
-        //        /** @var  Suico\Helper $helper */
+        // /** @var Suico\Helper $helper */
         //        $this->helper = Suico\Helper::getInstance();
-        $this->permHelper = new \Xmf\Module\Helper\Permission();
+        $this->permHelper = new Permission();
         $this->initVar('id', \XOBJ_DTYPE_INT);
         $this->initVar('level', \XOBJ_DTYPE_INT);
         $this->initVar('name', \XOBJ_DTYPE_TXTBOX);
@@ -54,12 +54,12 @@ class Privacy extends \XoopsObject
     /**
      * Get form
      *
-     * @param null
      * @return Suico\Form\PrivacyForm
      */
     public function getForm()
     {
         $form = new Form\PrivacyForm($this);
+
         return $form;
     }
 

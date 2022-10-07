@@ -10,7 +10,7 @@
 
                         <h4><{$smarty.const._MD_SUICO_RESULTS}></h4>
 
-                        <{if $total_found != 0}>
+                        <{if $total_found|default:0 != 0}>
 
                             <{$lang_numfound|default:''}>
                             <table class="table table-striped table-hover">

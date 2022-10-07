@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
@@ -68,7 +66,10 @@ if ('form' === $op) {
     $extrainfo_text  = new \XoopsFormText(_MD_SUICO_EXTRAINFO_CONTAINS, 'bio', 30, 100);
     $signature_text  = new \XoopsFormText(_MD_SUICO_SIGNATURE_CONTAINS, 'user_sig', 30, 100);
     $lastlog_more    = new \XoopsFormText(
-        _MD_SUICO_LASTLOGMORE, 'user_lastlog_more', 10, 5
+        _MD_SUICO_LASTLOGMORE,
+        'user_lastlog_more',
+        10,
+        5
     );
     $lastlog_less    = new \XoopsFormText(_MD_SUICO_LASTLOGLESS, 'user_lastlog_less', 10, 5);
     $reg_more        = new \XoopsFormText(_MD_SUICO_REGMORE, 'user_reg_more', 10, 5);
@@ -277,6 +278,7 @@ if ('submit' === $op) {
         $limit = 50;
     }
     $start         = Request::getInt('start', 0, 'POST');
+    /** @var XoopsMemberHandler $memberHandler */
     $memberHandler = xoops_getHandler('member');
     $total         = $memberHandler->getUserCount($criteria);
     $xoopsTpl->assign('lang_search', _MD_SUICO_SEARCH);
@@ -406,7 +408,7 @@ if ('submit' === $op) {
         if ($totalpages > 1) {
             $hiddenform = "<form name='findnext' action='searchmembers.php' method='post'>";
             foreach ($_POST as $k => $v) {
-                $hiddenform .= "<input type='hidden' name='" . $myts->htmlSpecialChars($k) . "' value='" . $myts->htmlSpecialChars($v) . "'>\n";
+                $hiddenform .= "<input type='hidden' name='" . htmlspecialchars($k, ENT_QUOTES | ENT_HTML5) . "' value='" . htmlspecialchars($v, ENT_QUOTES | ENT_HTML5) . "'>\n";
             }
             if (!isset($_POST['limit'])) {
                 $hiddenform .= "<input type='hidden' name='limit' value='" . $limit . "'>\n";

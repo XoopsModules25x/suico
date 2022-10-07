@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -15,10 +13,8 @@ namespace XoopsModules\Suico;
  */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @package
- * @since
+ * @copyright    XOOPS Project (https://xoops.org)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  */
 
@@ -52,8 +48,9 @@ class Helper extends \Xmf\Module\Helper
     ) {
         static $instance;
         if (null === $instance) {
-            $instance = new static($debug);
+            $instance = new self($debug);
         }
+
         return $instance;
     }
 
@@ -78,14 +75,15 @@ class Helper extends \Xmf\Module\Helper
         //$ret   = false;
         $class = __NAMESPACE__ . '\\' . \ucfirst($name) . 'Handler';
         if (!\class_exists($class)) {
-            throw new RuntimeException("Class '${class}' not found");
+            throw new RuntimeException("Class '{$class}' not found");
         }
         /** @var \XoopsMySQLDatabase $db */
         $db     = XoopsDatabaseFactory::getDatabaseConnection();
         $helper = self::getInstance();
         $ret    = new $class($db, $helper);
         $this->addLog("Getting handler '{$name}'");
+
         return $ret;
     }
 }
-//require  dirname(dirname(__DIR__)) . '/mainfile.php';
+//require_once \dirname(__DIR__, 2) . '/mainfile.php';

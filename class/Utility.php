@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -8,7 +6,7 @@ namespace XoopsModules\Suico;
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -42,6 +39,7 @@ class Utility extends Common\SysUtility
         if (null === $instance) {
             $instance = new static();
         }
+
         return $instance;
     }
 
@@ -77,6 +75,7 @@ class Utility extends Common\SysUtility
                 $true = false;
             }
         }
+
         return $uid . $ext;
     }
 
@@ -118,9 +117,10 @@ class Utility extends Common\SysUtility
         } else {
             @\copy($src_path, $dst_path);
         }
-        if (!$keep_original) {
-            @\unlink($src_path);
+        if (!$keep_original && false === @\unlink($src_path)) {
+            throw new \RuntimeException('The file ' . $src_path . ' could not be deleted.');
         }
+
         return true;
     }
 
@@ -139,7 +139,7 @@ class Utility extends Common\SysUtility
         $paramHeight,
         $keepOriginal = false,
         $fit = 'inside'
-    ) {
+    ): void {
         if ($allowupload) { // L'image
             if (Request::hasVar('xoops_upload_file', 'POST')) {
                 $helper  = Helper::getInstance();
@@ -156,7 +156,9 @@ class Utility extends Common\SysUtility
                             $newName         = XOOPS_ROOT_PATH . '/uploads/news/image/redim_' . \basename($destname);
                             self::resizePicture($fullPictureName, $newName, $helper->getConfig('maxwidth'), $helper->getConfig('maxheight'));
                             if (\file_exists($newName)) {
-                                @\unlink($fullPictureName);
+                                if (false === @\unlink($fullPictureName)) {
+                                    throw new \RuntimeException('The file ' . $fullPictureName . ' could not be deleted.');
+                                }
                                 \rename($newName, $fullPictureName);
                             }
                             $story->setPicture(\basename($destname));

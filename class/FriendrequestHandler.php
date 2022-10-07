@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -8,7 +6,7 @@ namespace XoopsModules\Suico;
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -26,7 +23,6 @@ use CriteriaElement;
 use XoopsDatabase;
 use XoopsObject;
 use XoopsPersistableObjectHandler;
-use XoopsModules\Suico\Helper;
 
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
@@ -39,13 +35,13 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
     /**
      * @var \XoopsModules\Suico\Helper
      */
-    public $helper;
-    public $isAdmin;
+    public Helper $helper;
+    public        $isAdmin;
 
     /**
      * Constructor
      * @param \XoopsDatabase|null $xoopsDatabase
-     * @param Helper|null         $helper
+     * @param Helper|null $helper
      */
     public function __construct(
         ?XoopsDatabase $xoopsDatabase = null,
@@ -56,7 +52,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
         } else {
             $this->helper = $helper;
         }
-        $isAdmin = $this->helper->isUserAdmin();
+        $this->isAdmin = $this->helper->isUserAdmin();
         parent::__construct($xoopsDatabase, 'suico_friendrequests', Friendrequest::class, 'friendreq_id', 'friendreq_id');
     }
 
@@ -74,6 +70,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
             $obj->unsetNew();
         }
         $obj->helper = $this->helper;
+
         return $obj;
     }
 
@@ -81,8 +78,8 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
      * retrieve a Friendrequest
      *
      * @param int|null $id of the Friendrequest
-     * @param null $fields
-     * @return mixed reference to the {@link Friendrequest} object, FALSE if failed
+     * @param null     $fields
+     * @return false|\XoopsModules\Suico\Friendrequest reference to the {@link Friendrequest} object, FALSE if failed
      */
     public function get2(
         $id = null,
@@ -96,40 +93,42 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
         if (1 === $numrows) {
             $suico_friendrequest = new Friendrequest();
             $suico_friendrequest->assignVars($this->db->fetchArray($result));
+
             return $suico_friendrequest;
         }
+
         return false;
     }
 
     /**
      * insert a new Friendrequest in the database
      *
-     * @param \XoopsObject $xoopsObject           reference to the {@link Friendrequest}
+     * @param \XoopsObject $object           reference to the {@link Friendrequest}
      *                                            object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
     public function insert2(
-        XoopsObject $xoopsObject,
+        XoopsObject $object,
         $force = false
     ) {
         global $xoopsConfig;
-        if (!$xoopsObject instanceof Friendrequest) {
+        if (!$object instanceof Friendrequest) {
             return false;
         }
-        if (!$xoopsObject->isDirty()) {
+        if (!$object->isDirty()) {
             return true;
         }
-        if (!$xoopsObject->cleanVars()) {
+        if (!$object->cleanVars()) {
             return false;
         }
-        foreach ($xoopsObject->cleanVars as $k => $v) {
+        foreach ($object->cleanVars as $k => $v) {
             ${$k} = $v;
         }
         $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
-        if ($xoopsObject->isNew()) {
+        if ($object->isNew()) {
             // ajout/modification d'un Friendrequest
-            $xoopsObject = new Friendrequest();
+            $object = new Friendrequest();
             $format      = 'INSERT INTO %s (friendreq_id, friendrequester_uid, friendrequestto_uid, date_created)';
             $format      .= 'VALUES (%u, %u, %u, %u)';
             $sql         = \sprintf(
@@ -166,28 +165,29 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
         if (empty($friendreq_id)) {
             $friendreq_id = $this->db->getInsertId();
         }
-        $xoopsObject->assignVar('friendreq_id', $friendreq_id);
+        $object->assignVar('friendreq_id', $friendreq_id);
+
         return true;
     }
 
     /**
      * delete a Friendrequest from the database
      *
-     * @param \XoopsObject $xoopsObject reference to the Friendrequest to delete
+     * @param \XoopsObject $object reference to the Friendrequest to delete
      * @param bool         $force
      * @return bool FALSE if failed.
      */
     public function delete(
-        XoopsObject $xoopsObject,
+        XoopsObject $object,
         $force = false
     ) {
-        if (!$xoopsObject instanceof Friendrequest) {
+        if (!$object instanceof Friendrequest) {
             return false;
         }
         $sql = \sprintf(
             'DELETE FROM %s WHERE friendreq_id = %u',
             $this->db->prefix('suico_friendrequests'),
-            $xoopsObject->getVar('friendreq_id')
+            (int)$object->getVar('friendreq_id')
         );
         if ($force) {
             $result = $this->db->queryF($sql);
@@ -197,32 +197,34 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
         if (!$result) {
             return false;
         }
+
         return true;
     }
 
     /**
      * retrieve suico_friendrequests from the database
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} conditions to be met
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key       use the UID as key for the array?
      * @param bool                                 $as_object
      * @return array array of {@link Friendrequest} objects
      */
     public function &getObjects(
-        ?CriteriaElement $criteriaElement = null,
+        ?CriteriaElement $criteria = null,
         $id_as_key = false,
         $as_object = true
     ) {
         $ret   = [];
-        $limit = $start = 0;
+        $start = 0;
+        $limit = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_friendrequests');
-        if (isset($criteriaElement) && $criteriaElement instanceof \CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
-            if ('' !== $criteriaElement->getSort()) {
-                $sql .= ' ORDER BY ' . $criteriaElement->getSort() . ' ' . $criteriaElement->getOrder();
+        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
+            $sql .= ' ' . $criteria->renderWhere();
+            if ('' !== $criteria->getSort()) {
+                $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
-            $limit = $criteriaElement->getLimit();
-            $start = $criteriaElement->getStart();
+            $limit = $criteria->getLimit();
+            $start = $criteria->getStart();
         }
         $result = $this->db->query($sql, $limit, $start);
         if (!$result) {
@@ -238,50 +240,53 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
             }
             unset($suico_friendrequest);
         }
+
         return $ret;
     }
 
     /**
      * count suico_friendrequests matching a condition
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} to match
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement} to match
      * @return int count of suico_friendrequests
      */
     public function getCount(
-        ?CriteriaElement $criteriaElement = null
+        ?CriteriaElement $criteria = null
     ) {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_friendrequests');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+            $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
         if (!$result) {
             return 0;
         }
         [$count] = $this->db->fetchRow($result);
+
         return (int)$count;
     }
 
     /**
      * delete suico_friendrequests matching a set of conditions
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement}
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement}
      * @param bool                                 $force
      * @param bool                                 $asObject
      * @return bool FALSE if deletion failed
      */
     public function deleteAll(
-        ?CriteriaElement $criteriaElement = null,
+        ?CriteriaElement $criteria = null,
         $force = true,
         $asObject = false
     ) {
         $sql = 'DELETE FROM ' . $this->db->prefix('suico_friendrequests');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+            $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {
             return false;
         }
+
         return true;
     }
 }
