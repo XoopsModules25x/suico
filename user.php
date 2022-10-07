@@ -164,7 +164,7 @@ if ('register' === $op) {
     //Client side validation
     if (isset($_POST['step'], $_SESSION['profile_required'])) {
         foreach ($_SESSION['profile_required'] as $name => $title) {
-            if (!isset($_POST[$name]) || empty($_POST[$name])) {
+            if (empty($_POST[$name])) {
                 $stop .= sprintf(_FORM_ENTER, $title) . '<br>';
             }
         }

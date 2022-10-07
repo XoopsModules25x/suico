@@ -99,7 +99,7 @@ class SysUtility
         global $xoopsTpl, $xoTheme;
         $myts    = \MyTextSanitizer::getInstance();
         $content = $myts->undoHtmlSpecialChars($myts->displayTarea($content));
-        if (null !== $xoTheme && \is_object($xoTheme)) {
+        if (\is_object($xoTheme)) {
             $xoTheme->addMeta('meta', 'keywords', \strip_tags($content));
         } else {    // Compatibility for old Xoops versions
             $xoopsTpl->assign('xoops_metaKeywords', \strip_tags($content));
@@ -114,7 +114,7 @@ class SysUtility
         global $xoopsTpl, $xoTheme;
         $myts    = \MyTextSanitizer::getInstance();
         $content = $myts->undoHtmlSpecialChars($myts->displayTarea($content));
-        if (null !== $xoTheme && \is_object($xoTheme)) {
+        if (\is_object($xoTheme)) {
             $xoTheme->addMeta('meta', 'description', \strip_tags($content));
         } else {    // Compatibility for old Xoops versions
             $xoopsTpl->assign('xoops_metaDescription', \strip_tags($content));
