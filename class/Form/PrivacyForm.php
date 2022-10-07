@@ -19,12 +19,13 @@ namespace XoopsModules\Suico\Form;
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
+use Xmf\Module\Helper\Permission;
 use XoopsModules\Suico;
 
 require_once \dirname(__DIR__, 2) . '/include/common.php';
 $moduleDirName = \basename(\dirname(__DIR__, 2));
 //$helper = Suico\Helper::getInstance();
-$permHelper = new \Xmf\Module\Helper\Permission();
+$permHelper = new Permission();
 \xoops_load('XoopsFormLoader');
 
 /**
