@@ -140,9 +140,13 @@ switch ($op) {
                     $fields[$i]->setVar('field_weight', (int)$weight[$i]);
                     $fields[$i]->setVar('cat_id', (int)$category[$i]);
                     if (!$fieldHandler->insert($fields[$i])) {
-                        $errors = array_merge($errors, $fields[$i]->getErrors());
+//                        $errors = array_merge($errors, $fields[$i]->getErrors());
+                        $errors[] = $fields[$i]->getErrors();
                     }
                 }
+                $errors = array_merge([], ...$errors);
+
+
                 if (0 == count($errors)) {
                     //no errors
                     redirect_header('fieldslist.php', 2, sprintf(_AM_SUICO_SAVEDSUCCESS, _AM_SUICO_FIELDS));
