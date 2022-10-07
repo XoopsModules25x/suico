@@ -84,7 +84,7 @@ class Id3v1
      *
      * @see __construct()
      */
-    protected $_stream = null;
+    protected $_stream;
     /**
      * Holds the Id3v1 version
      *
@@ -93,7 +93,7 @@ class Id3v1
      * @see setId3v1Version()
      * @see getId3v1Version()
      */
-    protected $_version = null;
+    protected $_version;
     /**
      * Indicates if the source is read-only
      *
