@@ -144,4 +144,4 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
     echo constant('CO_' . $moduleDirNameUpper . '_' . 'ERROR403');
 }
 
-require __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';
