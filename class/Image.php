@@ -37,10 +37,10 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
  */
 class Image extends XoopsObject
 {
-    public $db;
-    public $helper;
-    public $permHelper;
-    public $image_id;
+    public \XoopsDatabase $db;
+    public Helper         $helper;
+    public Permission     $permHelper;
+    public                $image_id;
     public $title;
     public $caption;
     public $date_created;

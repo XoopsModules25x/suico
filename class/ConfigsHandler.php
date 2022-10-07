@@ -32,8 +32,8 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  */
 class ConfigsHandler extends XoopsPersistableObjectHandler
 {
-    public $helper;
-    public $isAdmin;
+    public Helper $helper;
+    public        $isAdmin;
 
     /**
      * Constructor

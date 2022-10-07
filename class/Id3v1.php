@@ -93,13 +93,13 @@ class Id3v1
      * @see setId3v1Version()
      * @see getId3v1Version()
      */
-    protected $_version;
+    protected ?string $_version;
     /**
      * Indicates if the source is read-only
      *
      * @see __construct()
      */
-    protected $_readOnly = false;
+    protected bool $_readOnly = false;
     /**
      * Holds all known ID3 Genres
      *
@@ -108,7 +108,7 @@ class Id3v1
      * @see  getGenreNameByid()
      * @see  getGenreIdByName()
      */
-    protected static $_genres = [
+    protected static array $_genres = [
         'Blues',
         'Classic Rock',
         'Country',

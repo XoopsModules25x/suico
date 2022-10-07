@@ -38,8 +38,8 @@ require_once XOOPS_ROOT_PATH . '/class/uploader.php';
  */
 class AudioHandler extends XoopsPersistableObjectHandler
 {
-    public $isAdmin;
-    public $helper;
+    public                            $isAdmin;
+    public \XoopsModules\Suico\Helper $helper;
 
     /**
      * Constructor

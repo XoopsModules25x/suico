@@ -35,8 +35,8 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
     /**
      * @var \XoopsModules\Suico\Helper
      */
-    public $helper;
-    public $isAdmin;
+    public Helper $helper;
+    public        $isAdmin;
 
     /**
      * Constructor

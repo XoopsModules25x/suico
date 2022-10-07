@@ -33,7 +33,7 @@ class PrivacyHandler extends \XoopsPersistableObjectHandler
     /**
      * @var Helper
      */
-    public $helper;
+    public Helper $helper;
 
     /**
      * Constructor

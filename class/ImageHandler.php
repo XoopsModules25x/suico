@@ -45,8 +45,8 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
  */
 class ImageHandler extends XoopsPersistableObjectHandler
 {
-    public $helper;
-    public $isAdmin;
+    public Helper $helper;
+    public        $isAdmin;
 
     /**
      * Constructor

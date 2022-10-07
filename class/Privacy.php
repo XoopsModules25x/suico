@@ -29,9 +29,9 @@ use XoopsModules\Suico;
  */
 class Privacy extends \XoopsObject
 {
-    public $helper;
-    public $permHelper;
-    public $id;
+    public            $helper;
+    public Permission $permHelper;
+    public            $id;
     public $level;
     public $name;
     public $description;

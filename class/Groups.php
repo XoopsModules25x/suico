@@ -40,10 +40,10 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  */
 class Groups extends XoopsObject
 {
-    public $xoopsDB;
-    public $helper;
-    public $permHelper;
-    public $group_id;
+    public \XoopsDatabase $xoopsDB;
+    public Helper         $helper;
+    public Permission     $permHelper;
+    public                $group_id;
     public $owner_uid;
     public $group_title;
     public $group_desc;

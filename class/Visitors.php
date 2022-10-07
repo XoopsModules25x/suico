@@ -32,10 +32,10 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  */
 class Visitors extends XoopsObject
 {
-    public $db;
-    public $helper;
-    public $permHelper;
-    public $visit_id;
+    public \XoopsDatabase $db;
+    public Helper         $helper;
+    public Permission     $permHelper;
+    public                $visit_id;
     public $uid_owner;
     public $uid_visitor;
     public $uname_visitor;

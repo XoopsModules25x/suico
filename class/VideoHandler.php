@@ -36,8 +36,8 @@ use XoopsThemeForm;
  */
 class VideoHandler extends XoopsPersistableObjectHandler
 {
-    public $helper;
-    public $isAdmin;
+    public Helper $helper;
+    public        $isAdmin;
 
     /**
      * Constructor

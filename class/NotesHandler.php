@@ -34,8 +34,8 @@ require_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';
  */
 class NotesHandler extends XoopsPersistableObjectHandler
 {
-    public $helper;
-    public $isAdmin;
+    public Helper $helper;
+    public        $isAdmin;
 
     /**
      * Constructor

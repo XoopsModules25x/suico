@@ -31,10 +31,10 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  */
 class Ishot extends XoopsObject
 {
-    public $db;
-    public $helper;
-    public $permHelper;
-    public $cod_ishot;
+    public \XoopsDatabase $db;
+    public Helper         $helper;
+    public Permission     $permHelper;
+    public                $cod_ishot;
     public $uid_voter;
     public $uid_voted;
     public $ishot;

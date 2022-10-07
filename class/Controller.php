@@ -34,13 +34,13 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
  */
 class Controller extends \XoopsObject
 {
-    public $db;
-    public $user;
-    public $isOwner;
-    public $isUser;
-    public $isAnonym;
-    public $isFriend;
-    public $uidOwner;
+    public \XoopsDatabase $db;
+    public                $user;
+    public int            $isOwner;
+    public int            $isUser;
+    public int            $isAnonym;
+    public int            $isFriend;
+    public                $uidOwner;
     public $nameOwner;
     public $owner;
     public $albumFactory;
@@ -56,10 +56,10 @@ class Controller extends \XoopsObject
     public $configsFactory;
     public $section;
     public $privilegeLevel;
-    public $isSuspended;
-    public $helper;
-    public $isSelfRequest;
-    public $isOtherRequest;
+    public                $isSuspended;
+    public Helper         $helper;
+    public int            $isSelfRequest;
+    public int            $isOtherRequest;
 
     /**
      * Constructor

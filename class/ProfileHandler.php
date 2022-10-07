@@ -38,7 +38,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
      * Array of {@link Suico\Field} objects
      * @var array
      */
-    public $_fields = [];
+    public array $_fields = [];
 
     /**
      * @param \XoopsDatabase $db

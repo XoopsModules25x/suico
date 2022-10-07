@@ -31,10 +31,10 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  */
 class Relgroupuser extends \XoopsObject
 {
-    public $db;
-    public $helper;
-    public $permHelper;
-    public $rel_id;
+    public \XoopsDatabase $db;
+    public Helper         $helper;
+    public Permission     $permHelper;
+    public                $rel_id;
     public $rel_group_id;
     public $rel_user_uid;
     // constructor

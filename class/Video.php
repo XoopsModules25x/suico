@@ -38,10 +38,10 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  */
 class Video extends XoopsObject
 {
-    public $db;
-    public $helper;
-    public $permHelper;
-    public $video_id;
+    public \XoopsDatabase $db;
+    public Helper         $helper;
+    public Permission     $permHelper;
+    public                $video_id;
     public $uid_owner;
     public $video_title;
     public $video_desc;

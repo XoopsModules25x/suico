@@ -33,10 +33,10 @@ require_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';
  */
 class Notes extends XoopsObject
 {
-    public $db;
-    public $helper;
-    public $permHelper;
-    public $note_id;
+    public \XoopsDatabase $db;
+    public Helper         $helper;
+    public Permission     $permHelper;
+    public                $note_id;
     public $note_text;
     public $note_from;
     public $note_to;

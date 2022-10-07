@@ -32,10 +32,10 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  */
 class Configs extends XoopsObject
 {
-    public $db;
-    public $helper;
-    public $permHelper;
-    public $config_id;
+    public \XoopsDatabase $db;
+    public Helper         $helper;
+    public Permission     $permHelper;
+    public                $config_id;
     public $config_uid;
     public $pictures;
     public $audio;

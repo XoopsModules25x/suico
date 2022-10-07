@@ -35,11 +35,11 @@ use XoopsThemeForm;
  */
 class ModuleFeedback extends XoopsObject
 {
-    public $name    = '';
-    public $email   = '';
-    public $site    = '';
-    public $type    = '';
-    public $content = '';
+    public string $name    = '';
+    public string $email   = '';
+    public string $site    = '';
+    public string $type    = '';
+    public string $content = '';
 
     /**
      * Constructor

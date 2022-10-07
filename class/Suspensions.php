@@ -32,10 +32,10 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  */
 class Suspensions extends XoopsObject
 {
-    public $db;
-    public $helper;
-    public $permHelper;
-    public $uid;
+    public \XoopsDatabase $db;
+    public Helper         $helper;
+    public Permission     $permHelper;
+    public                $uid;
     public $old_pass;
     public $old_email;
     public $old_signature;

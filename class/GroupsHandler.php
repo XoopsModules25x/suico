@@ -38,8 +38,8 @@ use XoopsThemeForm;
  */
 class GroupsHandler extends XoopsPersistableObjectHandler
 {
-    public $helper;
-    public $isAdmin;
+    public Helper $helper;
+    public        $isAdmin;
 
     /**
      * Constructor

@@ -34,10 +34,10 @@ require_once XOOPS_ROOT_PATH . '/class/uploader.php';
  */
 class Audio extends XoopsObject
 {
-    public $db;
-    public $helper;
-    public $permHelper;
-    public $audio_id;
+    public \XoopsDatabase $db;
+    public Helper         $helper;
+    public Permission     $permHelper;
+    public                $audio_id;
     public $uid_owner;
     public $author;
     public $title;
