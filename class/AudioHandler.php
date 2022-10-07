@@ -200,7 +200,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         XoopsObject $object,
         $force = false
     ) {
-        if ('suico_audio' !== \get_class($object)) {
+        if (Audio::class !== \get_class($object)) {
             return false;
         }
         $sql = \sprintf(
