@@ -137,7 +137,14 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         if (!$object->cleanVars()) {
             return false;
         }
-        $friendship_id = $friend1_uid = $friend2_uid = $level = $hot = $trust = $cool = $fan = '';
+        $fan           = '';
+        $cool          = '';
+        $trust         = '';
+        $hot           = '';
+        $level         = '';
+        $friend2_uid   = '';
+        $friend1_uid   = '';
+        $friendship_id = '';
         foreach ($object->cleanVars as $k => $v) {
             ${$k} = $v;
         }
@@ -239,7 +246,8 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         $as_object = true
     ) {
         $ret   = [];
-        $limit = $start = 0;
+        $start = 0;
+        $limit = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_friendships');
         if (isset($criteria) && $criteria instanceof CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
@@ -325,7 +333,8 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         $shuffle = 1
     ) {
         $ret   = [];
-        $limit = $start = 0;
+        $start = 0;
+        $limit = 0;
         $sql   = 'SELECT uname, user_avatar, friend2_uid FROM ' . $this->db->prefix(
                 'suico_friendships'
             ) . ', ' . $this->db->prefix(
@@ -370,7 +379,8 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         $shuffle = 1
     ) {
         $ret   = [];
-        $limit = $start = 0;
+        $start = 0;
+        $limit = 0;
         $sql   = 'SELECT uname, user_avatar, friend1_uid FROM ' . $this->db->prefix(
                 'suico_friendships'
             ) . ', ' . $this->db->prefix(
@@ -412,15 +422,18 @@ class FriendshipHandler extends XoopsPersistableObjectHandler
         /**
          * criteria fetch friendship to be edited
          */
-        $criteria_friend1    = new Criteria(
+        $criteria_friend1      = new Criteria(
             'friend1_uid',
             $xoopsUser->getVar(
                 'uid'
             )
         );
-        $field_friend_fan    = $field_friend_friendly = $field_friend_funny = $field_friend_cool = '';
-        $criteria_friend2    = new Criteria('friend2_uid', $friend->getVar('uid'));
-        $criteria_friendship = new CriteriaCompo($criteria_friend1);
+        $field_friend_cool     = '';
+        $field_friend_funny    = '';
+        $field_friend_friendly = '';
+        $field_friend_fan      = '';
+        $criteria_friend2      = new Criteria('friend2_uid', $friend->getVar('uid'));
+        $criteria_friendship   = new CriteriaCompo($criteria_friend1);
         $criteria_friendship->add($criteria_friend2);
         $friendships = $this->getObjects($criteria_friendship);
         $friendship  = $friendships[0];

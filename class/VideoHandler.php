@@ -128,7 +128,8 @@ class VideoHandler extends XoopsPersistableObjectHandler
         if (!$object->cleanVars()) {
             return false;
         }
-        $video_id = $uid_owner = '';
+        $uid_owner = '';
+        $video_id  = '';
         foreach ($object->cleanVars as $k => $v) {
             ${$k} = $v;
         }
@@ -226,7 +227,8 @@ class VideoHandler extends XoopsPersistableObjectHandler
         $as_object = true
     ) {
         $ret   = [];
-        $limit = $start = 0;
+        $start = 0;
+        $limit = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_videos');
         if (isset($criteria) && $criteria instanceof CriteriaElement) {
             $sql   .= ' ' . $criteria->renderWhere();

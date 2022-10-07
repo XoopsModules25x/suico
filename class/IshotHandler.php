@@ -121,7 +121,10 @@ class IshotHandler extends XoopsPersistableObjectHandler
         if (!$object->cleanVars()) {
             return false;
         }
-        $cod_ishot = $uid_voter = $uid_voted = $ishot = '';
+        $ishot     = '';
+        $uid_voted = '';
+        $uid_voter = '';
+        $cod_ishot = '';
         foreach ($object->cleanVars as $k => $v) {
             ${$k} = $v;
         }
@@ -217,7 +220,8 @@ class IshotHandler extends XoopsPersistableObjectHandler
         $as_object = true
     ) {
         $ret   = [];
-        $limit = $start = 0;
+        $start = 0;
+        $limit = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_ishot');
         if (isset($criteria) && $criteria instanceof CriteriaElement) {
             $sql .= ' ' . $criteria->renderWhere();
@@ -339,7 +343,8 @@ class IshotHandler extends XoopsPersistableObjectHandler
         $id_as_key = false
     ) {
         $ret   = [];
-        $limit = $start = 0;
+        $start = 0;
+        $limit = 0;
         $sql   = 'SELECT uname, user_avatar, uid_voted FROM ' . $this->db->prefix(
                 'suico_ishot'
             ) . ', ' . $this->db->prefix(
