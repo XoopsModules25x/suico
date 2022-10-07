@@ -105,7 +105,7 @@ class Blocksadmin
         <th align='center'>" . \constant('CO_' . $this->moduleDirNameUpper . '_' . 'ACTION') . '</th>
         </tr>';
         $blockArray = \XoopsBlock::getByModule($xoopsModule->mid());
-        $blockCount = \count($blockArray);
+//        $blockCount = \count($blockArray);
         $class      = 'even';
         $cachetimes = [
             0       => _NOCACHE,
@@ -285,9 +285,9 @@ class Blocksadmin
             \trigger_error("Query Failed! SQL: $sql Error: " . $this->db->error(), \E_USER_ERROR);
         }
         $modules = [];
-            while (false !== ($row = $this->db->fetchArray($result))) {
-                $modules[] = (int)$row['module_id'];
-            }
+        while (false !== ($row = $this->db->fetchArray($result))) {
+            $modules[] = (int)$row['module_id'];
+        }
 
         $isCustom = \in_array($myblock->getVar('block_type'), ['C', 'E']);
         $block    = [
@@ -342,6 +342,7 @@ class Blocksadmin
             \xoops_cp_footer();
             exit();
         }
+        $newid = 0;
         $clone->setVar('side', $bside);
         $clone->setVar('weight', $bweight);
         $clone->setVar('visible', $bvisible);
@@ -362,7 +363,7 @@ class Blocksadmin
         if ($clone->store()) {
             $newid = $clone->id();  //get the id of the cloned block
         }
-        if (!$newid) {
+        if (0 !== $newid) {
             //            \xoops_cp_header();
             $clone->getHtmlErrors();
             \xoops_cp_footer();
@@ -584,9 +585,8 @@ class Blocksadmin
 
     /**
      * @param array|null $block
-     * @return void
      */
-    public function render(?array $block = null): void
+    public function render(?array $block = null)
     {
         \xoops_load('XoopsFormLoader');
         \xoops_loadLanguage('common', $this->moduleDirNameUpper);

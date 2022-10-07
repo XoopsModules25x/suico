@@ -179,7 +179,7 @@ class RelgroupuserHandler extends XoopsPersistableObjectHandler
         $sql = \sprintf(
             'DELETE FROM %s WHERE rel_id = %u',
             $this->db->prefix('suico_relgroupuser'),
-            $object->getVar('rel_id')
+            (int)$object->getVar('rel_id')
         );
         if ($force) {
             $result = $this->db->queryF($sql);

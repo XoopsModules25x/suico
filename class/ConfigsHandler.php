@@ -208,7 +208,7 @@ class ConfigsHandler extends XoopsPersistableObjectHandler
         $sql = \sprintf(
             'DELETE FROM %s WHERE config_id = %u',
             $this->db->prefix('suico_configs'),
-            $object->getVar('config_id')
+            (int)$object->getVar('config_id')
         );
         if ($force) {
             $result = $this->db->queryF($sql);

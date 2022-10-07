@@ -198,7 +198,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
         $sql = \sprintf(
             'DELETE FROM %s WHERE note_id = %u',
             $this->db->prefix('suico_notes'),
-            $object->getVar('note_id')
+            (int)$object->getVar('note_id')
         );
         if ($force) {
             $result = $this->db->queryF($sql);

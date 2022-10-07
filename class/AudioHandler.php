@@ -206,7 +206,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         $sql = \sprintf(
             'DELETE FROM %s WHERE audio_id = %u',
             $this->db->prefix('suico_audios'),
-            $object->getVar('audio_id')
+            (int)$object->getVar('audio_id')
         );
         if ($force) {
             $result = $this->db->queryF($sql);

@@ -192,7 +192,7 @@ class IshotHandler extends XoopsPersistableObjectHandler
         $sql = \sprintf(
             'DELETE FROM %s WHERE cod_ishot = %u',
             $this->db->prefix('suico_ishot'),
-            $object->getVar('cod_ishot')
+            (int)$object->getVar('cod_ishot')
         );
         if ($force) {
             $result = $this->db->queryF($sql);

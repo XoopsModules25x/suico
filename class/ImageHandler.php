@@ -210,7 +210,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $sql = \sprintf(
             'DELETE FROM %s WHERE image_id = %u',
             $this->db->prefix('suico_images'),
-            $object->getVar('image_id')
+            (int)$object->getVar('image_id')
         );
         if ($force) {
             $result = $this->db->queryF($sql);

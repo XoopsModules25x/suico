@@ -67,7 +67,7 @@ class FieldHandler extends \XoopsPersistableObjectHandler
      * @param \XoopsObject $object   reference to the object
      * @param bool         $force whether to force the query execution despite security settings
      *
-     * @return bool FALSE if failed, TRUE if already present and unchanged or successful
+     * @return bool|int FALSE if failed, TRUE if already present and unchanged or successful
      * @internal param bool $checkObject check if the object is dirty and clean the attributes
      */
     public function insert(\XoopsObject $object, $force = false)

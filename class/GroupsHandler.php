@@ -195,7 +195,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $sql = \sprintf(
             'DELETE FROM %s WHERE group_id = %u',
             $this->db->prefix('suico_groups'),
-            $object->getVar('group_id')
+            (int)$object->getVar('group_id')
         );
         if ($force) {
             $result = $this->db->queryF($sql);

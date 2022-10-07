@@ -187,7 +187,7 @@ class FriendrequestHandler extends XoopsPersistableObjectHandler
         $sql = \sprintf(
             'DELETE FROM %s WHERE friendreq_id = %u',
             $this->db->prefix('suico_friendrequests'),
-            $object->getVar('friendreq_id')
+            (int)$object->getVar('friendreq_id')
         );
         if ($force) {
             $result = $this->db->queryF($sql);

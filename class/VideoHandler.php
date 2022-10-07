@@ -199,7 +199,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
         $sql = \sprintf(
             'DELETE FROM %s WHERE video_id = %u',
             $this->db->prefix('suico_videos'),
-            $object->getVar('video_id')
+            (int)$object->getVar('video_id')
         );
         if ($force) {
             $result = $this->db->queryF($sql);

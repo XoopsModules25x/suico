@@ -192,7 +192,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         $sql = \sprintf(
             'DELETE FROM %s WHERE visit_id = %u',
             $this->db->prefix('suico_visitors'),
-            $xoopsObject->getVar('visit_id')
+            (int)$xoopsObject->getVar('visit_id')
         );
         if ($force) {
             $result = $this->db->queryF($sql);

@@ -191,7 +191,7 @@ class SuspensionsHandler extends XoopsPersistableObjectHandler
         $sql = \sprintf(
             'DELETE FROM %s WHERE uid = %u',
             $this->db->prefix('suico_suspensions'),
-            $object->getVar('uid')
+            (int)$object->getVar('uid')
         );
         if ($force) {
             $result = $this->db->queryF($sql);
