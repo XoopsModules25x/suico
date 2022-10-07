@@ -48,7 +48,7 @@ trait ServerStats
             ) . '</span>';
         $html  .= '<li>' . \constant('CO_' . $moduleDirNameUpper . '_GDLIBSTATUS') . $gdlib;
         if (\function_exists('gd_info')) {
-            if (true === ($gdlib = gd_info())) {
+            if (true === ($gdlib = \gd_info())) {
                 $html .= '<li>' . \constant(
                         'CO_' . $moduleDirNameUpper . '_GDLIBVERSION'
                     ) . '<b>' . $gdlib['GD Version'] . '</b>';
