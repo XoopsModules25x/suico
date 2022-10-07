@@ -24,7 +24,7 @@ use XoopsModules\Suico\{
 };
 /** @var Helper $helper */
 /** @var Utility $utility */
-/** @var Common\Configurator $configurator */
+/** @var Configurator $configurator */
 include \dirname(
             __DIR__
         ) . '/preloads/autoloader.php';

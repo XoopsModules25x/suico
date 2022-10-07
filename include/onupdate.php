@@ -24,8 +24,8 @@ use XoopsModules\Suico\{
 };
 /** @var Helper $helper */
 /** @var Utility $utility */
-/** @var Common\Configurator $configurator */
-/** @var Common\Migrate $migrator */
+/** @var Configurator $configurator */
+/** @var Migrate $migrator */
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
     || !$GLOBALS['xoopsUser']->isAdmin()) {
     exit('Restricted access' . PHP_EOL);
