@@ -28,7 +28,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 //require_once XOOPS_ROOT_PATH . '/modules/suico/class/Friendship.php';
 /**
  * @param $options
- * @return array
+ * @return array|false
  */
 function b_suico_friends_show($options)
 {

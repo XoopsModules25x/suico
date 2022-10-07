@@ -64,7 +64,7 @@ class VideoController extends Controller
      * Assign Video Content to Template
      * @param $countVideos
      * @param $videos
-     * @return bool
+     * @return array|bool
      */
     public function assignVideoContent(
         $countVideos,
