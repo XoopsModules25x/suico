@@ -6,7 +6,8 @@ use XoopsFormButton;
 use XoopsFormHidden;
 use XoopsFormLabel;
 use XoopsModules\Suico\{
-    Helper
+    Helper,
+    Profile
 };
 use XoopsThemeForm;
 
@@ -15,7 +16,7 @@ use XoopsThemeForm;
 /**
  * Get {@link XoopsThemeForm} for registering new users
  *
- * @param           $profile
+ * @param Profile   $profile
  * @param XoopsUser $user {@link XoopsUser} to register
  * @param int       $step Which step we are at
  *
@@ -26,8 +27,9 @@ class RegisterForm extends XoopsThemeForm
 {
     /**
      * RegisterForm constructor.
-     * @param            $profile
-     * @param null       $step
+     * @param \XoopsUser $user
+     * @param Profile    $profile
+     * @param int|null       $step
      */
     public function __construct(\XoopsUser $user, $profile, $step = null)
     {

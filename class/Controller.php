@@ -85,6 +85,9 @@ class Controller extends \XoopsObject
         $this->checkSuspension();
     }
 
+    /**
+     * @return void
+     */
     public function checkSuspension(): void
     {
         $criteria_suspended = new Criteria('uid', $this->uidOwner);
@@ -105,6 +108,9 @@ class Controller extends \XoopsObject
         }
     }
 
+    /**
+     * @return void
+     */
     public function checkPrivilege()
     {
     }

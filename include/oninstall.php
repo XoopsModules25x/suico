@@ -180,6 +180,9 @@ function xoops_module_install_suico(XoopsModule $module)
     return true;
 }
 
+/**
+ * @return void
+ */
 function suico_install_initializeProfiles(): void
 {
     global $module_id;

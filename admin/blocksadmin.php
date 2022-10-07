@@ -39,6 +39,9 @@ if ($GLOBALS['xoopsUser']->isAdmin($xoopsModule->mid())) {
     if (in_array($op, ['edit', 'delete', 'delete_ok', 'clone'], true)) {
         $bid = Request::getInt('bid', 0, 'GET');
     }
+    /**
+     * @return void
+     */
     function listBlocks(): void
     {
         global $xoopsModule, $pathIcon16;

@@ -38,8 +38,6 @@ class Privacy extends \XoopsObject
 
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
@@ -56,7 +54,6 @@ class Privacy extends \XoopsObject
     /**
      * Get form
      *
-     * @param null
      * @return Suico\Form\PrivacyForm
      */
     public function getForm()
