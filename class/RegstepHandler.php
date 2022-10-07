@@ -34,18 +34,18 @@ class RegstepHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Delete an object from the database
-     * @param \XoopsObject $obj
+     * @param \XoopsObject $object
      * @param bool $force
      *
      * @return bool
      * @see XoopsPersistableObjectHandler
      */
-    public function delete(\XoopsObject $obj, $force = false)
+    public function delete(\XoopsObject $object, $force = false)
     {
-        if (parent::delete($obj, $force)) {
+        if (parent::delete($object, $force)) {
             $fieldHandler = Helper::getInstance()->getHandler('Field');
 
-            return $fieldHandler->updateAll('step_id', 0, new \Criteria('step_id', $obj->getVar('step_id')), $force);
+            return $fieldHandler->updateAll('step_id', 0, new \Criteria('step_id', $object->getVar('step_id')), $force);
         }
 
         return false;

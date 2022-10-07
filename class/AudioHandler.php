@@ -107,26 +107,26 @@ class AudioHandler extends XoopsPersistableObjectHandler
     /**
      * insert a new Audio in the database
      *
-     * @param XoopsObject $xoopsObject reference to the {@link suico_audio}
+     * @param XoopsObject $object reference to the {@link suico_audio}
      *                                 object
      * @param bool        $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
     public function insert2(
-        XoopsObject $xoopsObject,
+        XoopsObject $object,
         $force = false
     ) {
         global $xoopsConfig;
-        if (Audio::class !== \get_class($xoopsObject)) {
+        if (Audio::class !== \get_class($object)) {
             return false;
         }
-        if (!$xoopsObject->isDirty()) {
+        if (!$object->isDirty()) {
             return true;
         }
-        if (!$xoopsObject->cleanVars()) {
+        if (!$object->cleanVars()) {
             return false;
         }
-        foreach ($xoopsObject->cleanVars as $k => $v) {
+        foreach ($object->cleanVars as $k => $v) {
             ${$k} = $v;
         }
         $audio_id     = Request::getString('audio_id', '', 'POST');
@@ -138,9 +138,9 @@ class AudioHandler extends XoopsPersistableObjectHandler
         $date_created = Request::getString('date_created', \time(), 'POST');
         $date_updated = Request::getString('date_updated', \time(), 'POST');
         //        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
-        if ($xoopsObject->isNew()) {
+        if ($object->isNew()) {
             // adding / modifying a suico_audio
-            $xoopsObject = new Audio();
+            $object = new Audio();
             $format      = 'INSERT INTO %s (audio_id, title, author, description, filename, uid_owner, date_created, date_updated)';
             $format      .= ' VALUES (%u, %s, %s, %s, %s, %u, %s, %s)';
             $sql         = \sprintf(
@@ -184,7 +184,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         if (empty($audio_id)) {
             $audio_id = $this->db->getInsertId();
         }
-        $xoopsObject->assignVar('audio_id', $audio_id);
+        $object->assignVar('audio_id', $audio_id);
 
         return true;
     }
@@ -192,21 +192,21 @@ class AudioHandler extends XoopsPersistableObjectHandler
     /**
      * delete a suico_audio from the database
      *
-     * @param XoopsObject $xoopsObject reference to the suico_audio to delete
+     * @param XoopsObject $object reference to the suico_audio to delete
      * @param bool        $force
      * @return bool FALSE if failed.
      */
     public function delete(
-        XoopsObject $xoopsObject,
+        XoopsObject $object,
         $force = false
     ) {
-        if ('suico_audio' !== \get_class($xoopsObject)) {
+        if ('suico_audio' !== \get_class($object)) {
             return false;
         }
         $sql = \sprintf(
             'DELETE FROM %s WHERE audio_id = %u',
             $this->db->prefix('suico_audios'),
-            $xoopsObject->getVar('audio_id')
+            $object->getVar('audio_id')
         );
         if ($force) {
             $result = $this->db->queryF($sql);
@@ -223,26 +223,26 @@ class AudioHandler extends XoopsPersistableObjectHandler
     /**
      * retrieve suico_audios from the database
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} conditions to be met
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key       use the UID as key for the array?
      * @param bool                                 $as_object
      * @return array array of {@link suico_audio} objects
      */
     public function &getObjects(
-        ?CriteriaElement $criteriaElement = null,
+        ?CriteriaElement $criteria = null,
         $id_as_key = false,
         $as_object = true
     ) {
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_audios');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
-            if ('' !== $criteriaElement->getSort()) {
-                $sql .= ' ORDER BY ' . $criteriaElement->getSort() . ' ' . $criteriaElement->getOrder();
+        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+            $sql .= ' ' . $criteria->renderWhere();
+            if ('' !== $criteria->getSort()) {
+                $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
-            $limit = $criteriaElement->getLimit();
-            $start = $criteriaElement->getStart();
+            $limit = $criteria->getLimit();
+            $start = $criteria->getStart();
         }
         $result = $this->db->query($sql, $limit, $start);
         if (!$result) {
@@ -265,15 +265,15 @@ class AudioHandler extends XoopsPersistableObjectHandler
     /**
      * count suico_audios matching a condition
      *
-     * @param CriteriaElement|CriteriaCompo|null $criteriaElement {@link \CriteriaElement} to match
+     * @param CriteriaElement|CriteriaCompo|null $criteria {@link \CriteriaElement} to match
      * @return int count of suico_audios
      */
     public function getCount(
-        ?CriteriaElement $criteriaElement = null
+        ?CriteriaElement $criteria = null
     ) {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_audios');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
+        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+            $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
         if (!$result) {
@@ -287,19 +287,19 @@ class AudioHandler extends XoopsPersistableObjectHandler
     /**
      * delete suico_audios matching a set of conditions
      *
-     * @param CriteriaElement|CriteriaCompo|null $criteriaElement {@link \CriteriaElement}
+     * @param CriteriaElement|CriteriaCompo|null $criteria {@link \CriteriaElement}
      * @param bool                               $force
      * @param bool                               $asObject
      * @return bool FALSE if deletion failed
      */
     public function deleteAll(
-        ?CriteriaElement $criteriaElement = null,
+        ?CriteriaElement $criteria = null,
         $force = true,
         $asObject = false
     ) {
         $sql = 'DELETE FROM ' . $this->db->prefix('suico_audios');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
+        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+            $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {
             return false;

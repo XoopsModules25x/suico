@@ -109,33 +109,33 @@ class VideoHandler extends XoopsPersistableObjectHandler
     /**
      * insert a new Video in the database
      *
-     * @param \XoopsObject $xoopsObject    reference to the {@link Video}
+     * @param \XoopsObject $object    reference to the {@link Video}
      *                                     object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
     public function insert2(
-        XoopsObject $xoopsObject,
+        XoopsObject $object,
         $force = false
     ) {
         global $xoopsConfig;
-        if (!$xoopsObject instanceof Video) {
+        if (!$object instanceof Video) {
             return false;
         }
-        if (!$xoopsObject->isDirty()) {
+        if (!$object->isDirty()) {
             return true;
         }
-        if (!$xoopsObject->cleanVars()) {
+        if (!$object->cleanVars()) {
             return false;
         }
         $video_id = $uid_owner = '';
-        foreach ($xoopsObject->cleanVars as $k => $v) {
+        foreach ($object->cleanVars as $k => $v) {
             ${$k} = $v;
         }
         //        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
-        if ($xoopsObject->isNew()) {
+        if ($object->isNew()) {
             // ajout/modification d'un Video
-            $xoopsObject = new Video();
+            $object = new Video();
             $format      = 'INSERT INTO %s (video_id, uid_owner, video_title, video_desc, youtube_code, featured_video)';
             $format      .= 'VALUES (%u, %u, %s, %s, %s, %s)';
             $sql         = \sprintf(
@@ -176,7 +176,7 @@ class VideoHandler extends XoopsPersistableObjectHandler
         if (empty($video_id)) {
             $video_id = $this->db->getInsertId();
         }
-        $xoopsObject->assignVar('video_id', $video_id);
+        $object->assignVar('video_id', $video_id);
 
         return true;
     }
@@ -184,21 +184,21 @@ class VideoHandler extends XoopsPersistableObjectHandler
     /**
      * delete a Video from the database
      *
-     * @param \XoopsObject $xoopsObject reference to the Video to delete
+     * @param \XoopsObject $object reference to the Video to delete
      * @param bool         $force
      * @return bool FALSE if failed.
      */
     public function delete(
-        XoopsObject $xoopsObject,
+        XoopsObject $object,
         $force = false
     ) {
-        if (!$xoopsObject instanceof Video) {
+        if (!$object instanceof Video) {
             return false;
         }
         $sql = \sprintf(
             'DELETE FROM %s WHERE video_id = %u',
             $this->db->prefix('suico_videos'),
-            $xoopsObject->getVar('video_id')
+            $object->getVar('video_id')
         );
         if ($force) {
             $result = $this->db->queryF($sql);
@@ -215,31 +215,31 @@ class VideoHandler extends XoopsPersistableObjectHandler
     /**
      * retrieve suico_videos from the database
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} conditions to be met
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key       use the UID as key for the array?
      * @param bool                                 $as_object
      * @return array array of {@link Video} objects
      */
     public function &getObjects(
-        ?CriteriaElement $criteriaElement = null,
+        ?CriteriaElement $criteria = null,
         $id_as_key = false,
         $as_object = true
     ) {
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_videos');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql   .= ' ' . $criteriaElement->renderWhere();
+        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+            $sql   .= ' ' . $criteria->renderWhere();
             $sort  = 'video_id';
             $order = 'DESC';
-            //if ('' !== $criteriaElement->getSort()) {
-            //    $sql .= ' ORDER BY ' . $criteriaElement->getSort() . ' ' . $criteriaElement->getOrder();
+            //if ('' !== $criteria->getSort()) {
+            //    $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             //}
             if ('' !== $sort) {
                 $sql .= ' ORDER BY ' . $sort . ' ' . $order;
             }
-            $limit = $criteriaElement->getLimit();
-            $start = $criteriaElement->getStart();
+            $limit = $criteria->getLimit();
+            $start = $criteria->getStart();
         }
         $result = $this->db->query($sql, $limit, $start);
         if (!$result) {
@@ -262,15 +262,15 @@ class VideoHandler extends XoopsPersistableObjectHandler
     /**
      * count suico_videos matching a condition
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} to match
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement} to match
      * @return int count of suico_videos
      */
     public function getCount(
-        ?CriteriaElement $criteriaElement = null
+        ?CriteriaElement $criteria = null
     ) {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_videos');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
+        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+            $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
         if (!$result) {
@@ -284,19 +284,19 @@ class VideoHandler extends XoopsPersistableObjectHandler
     /**
      * delete suico_videos matching a set of conditions
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement}
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement}
      * @param bool                                 $force
      * @param bool                                 $asObject
      * @return bool FALSE if deletion failed
      */
     public function deleteAll(
-        ?CriteriaElement $criteriaElement = null,
+        ?CriteriaElement $criteria = null,
         $force = true,
         $asObject = false
     ) {
         $sql = 'DELETE FROM ' . $this->db->prefix('suico_videos');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
+        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+            $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {
             return false;

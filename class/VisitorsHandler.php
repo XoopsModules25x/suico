@@ -207,15 +207,15 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
     /**
      * count suico_visitorss matching a condition
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} to match
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement} to match
      * @return int count of suico_visitorss
      */
     public function getCount(
-        ?CriteriaElement $criteriaElement = null
+        ?CriteriaElement $criteria = null
     ) {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_visitors');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
+        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+            $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
         if (!$result) {
@@ -229,19 +229,19 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
     /**
      * delete suico_visitorss matching a set of conditions
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement}
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement}
      * @param bool                                 $force
      * @param bool                                 $asObject
      * @return bool FALSE if deletion failed
      */
     public function deleteAll(
-        ?CriteriaElement $criteriaElement = null,
+        ?CriteriaElement $criteria = null,
         $force = true,
         $asObject = false
     ) {
         $sql = 'DELETE FROM ' . $this->db->prefix('suico_visitors');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
+        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+            $sql .= ' ' . $criteria->renderWhere();
         }
         if ($force) {
             if (!$result = $this->db->queryF($sql)) {

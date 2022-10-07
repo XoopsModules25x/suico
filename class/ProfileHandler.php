@@ -73,17 +73,17 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
      * We will create an empty profile if none exists. This behavior allows user objects
      * created outside of profile to be edited correctly in the profile module.
      *
-     * @param int|null      $uid
+     * @param int|null      $id User ID
      * @param string[]|null $fields array of field names to fetch, null for all
      *
      * @return object {@link ProfileProfile}
      *
-     * @internal This was get($uid, $createOnFailure = true). No callers found using the extra parameter.
+     * @internal This was get($id, $createOnFailure = true). No callers found using the extra parameter.
      * @internal Modified to match parent signature.
      */
-    public function get($uid = null, $fields = null)
+    public function get($id = null, $fields = null)
     {
-        $obj = parent::get($uid, $fields);
+        $obj = parent::get($id, $fields);
         if (!\is_object($obj)) {
             $obj = $this->create();
         }
@@ -222,25 +222,25 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
     /**
      * insert a new object in the database
      *
-     * @param \XoopsObject $obj   reference to the object
+     * @param \XoopsObject $object   reference to the object
      * @param bool         $force whether to force the query execution despite security settings
      *
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(\XoopsObject $obj, $force = false)
+    public function insert(\XoopsObject $object, $force = false)
     {
-        if (!($obj instanceof $this->className)) {
+        if (!($object instanceof $this->className)) {
             return false;
         }
         $uservars = $this->getUserVars();
         foreach ($uservars as $var) {
-            unset($obj->vars[$var]);
+            unset($object->vars[$var]);
         }
-        if (0 == \count($obj->vars)) {
+        if (0 == \count($object->vars)) {
             return true;
         }
 
-        return parent::insert($obj, $force);
+        return parent::insert($object, $force);
     }
 
     /**

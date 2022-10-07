@@ -109,32 +109,32 @@ class GroupsHandler extends XoopsPersistableObjectHandler
     /**
      * insert a new Groups in the database
      *
-     * @param \XoopsObject $xoopsObject   reference to the {@link Groups}
+     * @param \XoopsObject $object   reference to the {@link Groups}
      *                                    object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
     public function insert2(
-        XoopsObject $xoopsObject,
+        XoopsObject $object,
         $force = false
     ) {
         global $xoopsConfig;
-        if (!$xoopsObject instanceof Groups) {
+        if (!$object instanceof Groups) {
             return false;
         }
-        if (!$xoopsObject->isDirty()) {
+        if (!$object->isDirty()) {
             return true;
         }
-        if (!$xoopsObject->cleanVars()) {
+        if (!$object->cleanVars()) {
             return false;
         }
-        foreach ($xoopsObject->cleanVars as $k => $v) {
+        foreach ($object->cleanVars as $k => $v) {
             ${$k} = $v;
         }
         //        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
-        if ($xoopsObject->isNew()) {
+        if ($object->isNew()) {
             // ajout/modification d'un Groups
-            $xoopsObject = new Groups();
+            $object = new Groups();
             $format      = 'INSERT INTO %s (group_id, owner_uid, group_title, group_desc, group_img)';
             $format      .= 'VALUES (%u, %u, %s, %s, %s)';
             $sql         = \sprintf(
@@ -173,7 +173,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         if (empty($group_id)) {
             $group_id = $this->db->getInsertId();
         }
-        $xoopsObject->assignVar('group_id', $group_id);
+        $object->assignVar('group_id', $group_id);
 
         return true;
     }
@@ -181,21 +181,21 @@ class GroupsHandler extends XoopsPersistableObjectHandler
     /**
      * delete a Groups from the database
      *
-     * @param \XoopsObject $xoopsObject reference to the Groups to delete
+     * @param \XoopsObject $object reference to the Groups to delete
      * @param bool         $force
      * @return bool FALSE if failed.
      */
     public function delete(
-        XoopsObject $xoopsObject,
+        XoopsObject $object,
         $force = false
     ) {
-        if (!$xoopsObject instanceof Groups) {
+        if (!$object instanceof Groups) {
             return false;
         }
         $sql = \sprintf(
             'DELETE FROM %s WHERE group_id = %u',
             $this->db->prefix('suico_groups'),
-            $xoopsObject->getVar('group_id')
+            $object->getVar('group_id')
         );
         if ($force) {
             $result = $this->db->queryF($sql);
@@ -212,26 +212,26 @@ class GroupsHandler extends XoopsPersistableObjectHandler
     /**
      * retrieve suico_groupss from the database
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} conditions to be met
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key       use the UID as key for the array?
      * @param bool                                 $as_object
      * @return array array of {@link Groups} objects
      */
     public function &getObjects(
-        ?CriteriaElement $criteriaElement = null,
+        ?CriteriaElement $criteria = null,
         $id_as_key = false,
         $as_object = true
     ) {
         $ret   = [];
         $limit = $start = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_groups');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
-            if ('' !== $criteriaElement->getSort()) {
-                $sql .= ' ORDER BY ' . $criteriaElement->getSort() . ' ' . $criteriaElement->getOrder();
+        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+            $sql .= ' ' . $criteria->renderWhere();
+            if ('' !== $criteria->getSort()) {
+                $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
-            $limit = $criteriaElement->getLimit();
-            $start = $criteriaElement->getStart();
+            $limit = $criteria->getLimit();
+            $start = $criteria->getStart();
         }
         $result = $this->db->query($sql, $limit, $start);
         if (!$result) {
@@ -309,15 +309,15 @@ class GroupsHandler extends XoopsPersistableObjectHandler
     /**
      * count suico_groupss matching a condition
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} to match
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement} to match
      * @return int count of suico_groupss
      */
     public function getCount(
-        ?CriteriaElement $criteriaElement = null
+        ?CriteriaElement $criteria = null
     ) {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_groups');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
+        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+            $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
         if (!$result) {
@@ -331,19 +331,19 @@ class GroupsHandler extends XoopsPersistableObjectHandler
     /**
      * delete suico_groupss matching a set of conditions
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement}
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement}
      * @param bool                                 $force
      * @param bool                                 $asObject
      * @return bool FALSE if deletion failed
      */
     public function deleteAll(
-        ?CriteriaElement $criteriaElement = null,
+        ?CriteriaElement $criteria = null,
         $force = true,
         $asObject = false
     ) {
         $sql = 'DELETE FROM ' . $this->db->prefix('suico_groups');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
+        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+            $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {
             return false;
