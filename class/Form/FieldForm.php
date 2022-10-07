@@ -10,12 +10,14 @@ use XoopsFormText;
 use XoopsFormTextArea;
 use XoopsFormTextDateSelect;
 use XoopsModules\Suico\{
+    Field,
     Helper
 };
 
 use XoopsThemeForm;
 
 /** @var Helper $helper */
+/** @var Field $field */
 
 /**
  * Class FieldForm
@@ -23,10 +25,10 @@ use XoopsThemeForm;
 class FieldForm extends XoopsThemeForm
 {
     /**
-     * @param Suico\Field $field  {@link Suico\Field} object to get edit form for
+     * @param Field $field  {@link Field} object to get edit form for
      * @param mixed       $action URL to submit to - or false for $_SERVER['REQUEST_URI']
      */
-    public function __construct(Suico\Field $field, $action = false)
+    public function __construct(Field $field, $action = false)
     {
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];
