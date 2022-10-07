@@ -37,7 +37,7 @@ class RegisterForm extends XoopsThemeForm
         if (empty($opkey)) {
             $opkey = 'profile_opname';
         }
-        $next_opname      = 'op' . \mt_rand(10000, 99999);
+        $next_opname      = 'op' . \random_int(10000, 99999);
         $_SESSION[$opkey] = $next_opname;
         require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
         if (empty($GLOBALS['xoopsConfigUser'])) {
