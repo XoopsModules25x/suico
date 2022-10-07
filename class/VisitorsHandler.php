@@ -50,7 +50,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         } else {
             $this->helper = $helper;
         }
-        $isAdmin = $this->helper->isUserAdmin();
+        $this->isAdmin = $this->helper->isUserAdmin();
         parent::__construct($xoopsDatabase, 'suico_visitors', Visitors::class, 'visit_id', 'uname_visitor');
     }
 
@@ -216,7 +216,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         ?CriteriaElement $criteria = null
     ) {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_visitors');
-        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
@@ -242,7 +242,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         $asObject = false
     ) {
         $sql = 'DELETE FROM ' . $this->db->prefix('suico_visitors');
-        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         if ($force) {

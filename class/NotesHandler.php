@@ -52,7 +52,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
         } else {
             $this->helper = $helper;
         }
-        $isAdmin = $this->helper->isUserAdmin();
+        $this->isAdmin = $this->helper->isUserAdmin();
         parent::__construct($xoopsDatabase, 'suico_notes', Notes::class, 'note_id', 'note_id');
     }
 
@@ -229,7 +229,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
         $start = 0;
         $limit = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_notes');
-        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' !== $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
@@ -265,7 +265,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
         ?CriteriaElement $criteria = null
     ) {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_notes');
-        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
@@ -291,7 +291,7 @@ class NotesHandler extends XoopsPersistableObjectHandler
         $asObject = false
     ) {
         $sql = 'DELETE FROM ' . $this->db->prefix('suico_notes');
-        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {

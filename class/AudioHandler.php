@@ -38,8 +38,8 @@ require_once XOOPS_ROOT_PATH . '/class/uploader.php';
  */
 class AudioHandler extends XoopsPersistableObjectHandler
 {
-    public                            $isAdmin;
-    public \XoopsModules\Suico\Helper $helper;
+    public $isAdmin;
+    public $helper;
 
     /**
      * Constructor
@@ -56,7 +56,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         } else {
             $this->helper = $helper;
         }
-        $isAdmin = $this->helper->isUserAdmin();
+        $this->isAdmin = $this->helper->isUserAdmin();
         parent::__construct($xoopsDatabase, 'suico_audios', Audio::class, 'audio_id', 'title');
     }
 
@@ -237,7 +237,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         $start = 0;
         $limit = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_audios');
-        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' !== $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
@@ -273,7 +273,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         ?CriteriaElement $criteria = null
     ) {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_audios');
-        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
@@ -299,7 +299,7 @@ class AudioHandler extends XoopsPersistableObjectHandler
         $asObject = false
     ) {
         $sql = 'DELETE FROM ' . $this->db->prefix('suico_audios');
-        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {

@@ -93,7 +93,8 @@ class Controller extends \XoopsObject
         $criteria_suspended = new Criteria('uid', $this->uidOwner);
         if (1 === $this->isSuspended) {
             $suspensions = $this->suspensionsFactory->getObjects($criteria_suspended);
-            $suspension  = $suspensions[0];
+            /** @var Suspensions $suspension */
+            $suspension = $suspensions[0];
             if (\time() > $suspension->getVar('suspension_time')) {
                 $suspension = $this->suspensionsFactory->create(false);
                 $suspension->load($this->uidOwner);
