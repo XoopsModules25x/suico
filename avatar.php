@@ -29,6 +29,7 @@ if (!$GLOBALS['xoopsSecurity']->check()) {
 /**
  * Creating the factory  loading the picture changing its caption
  */
+/** @var ImageHandler $imageFactory */
 $imageFactory = new ImageHandler(
     $xoopsDB
 );
