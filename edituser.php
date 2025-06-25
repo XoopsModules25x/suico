@@ -198,7 +198,7 @@ if ('avatarupload' === $op) {
                     $sql = sprintf('UPDATE % s SET user_avatar = % s WHERE uid = % u', $GLOBALS['xoopsDB']->prefix('users'), $GLOBALS['xoopsDB']->quoteString('avatars / ' . $uploader->getSavedFileName()), $GLOBALS['xoopsUser']->getVar('uid'));
                     $GLOBALS['xoopsDB']->query($sql);
                     $avtHandler->addUser($avatar->getVar('avatar_id'), $GLOBALS['xoopsUser']->getVar('uid'));
-                    redirect_header('index . php ? t = ' . time() . ' & amp;uid = ' . $GLOBALS['xoopsUser']->getVar('uid'), 3, _US_PROFUPDATED);
+                    redirect_header('index.php?t=' . time() . '&uid=' . $GLOBALS['xoopsUser']->getVar('uid'), 3, _US_PROFUPDATED);
                 } else {
                     $file = $uploader->getSavedDestination();
                     if (false === @\unlink($file)) {
@@ -207,19 +207,19 @@ if ('avatarupload' === $op) {
                 }
             }
         }
-        redirect_header('edituser . php ? op = avatarform', 3, $uploader->getErrors());
+        redirect_header('edituser.php?op=avatarform', 3, $uploader->getErrors());
     }
 }
 if ('avatarchoose' === $op) {
     if (!$GLOBALS['xoopsSecurity']->check()) {
-        redirect_header('index . php', 3, _US_NOEDITRIGHT . ' < br > ' . implode(' < br > ', $GLOBALS['xoopsSecurity']->getErrors()));
+        redirect_header('index.php', 3, _US_NOEDITRIGHT . ' <br> ' . implode(' <br> ', $GLOBALS['xoopsSecurity']->getErrors()));
     }
     $uid = 0;
     if (!empty($_POST['uid'])) {
         $uid = Request::getInt('uid', 0, 'POST');
     }
     if (empty($uid) || $GLOBALS['xoopsUser']->getVar('uid') != $uid) {
-        redirect_header('index . php', 3, _US_NOEDITRIGHT);
+        redirect_header('index.php', 3, _US_NOEDITRIGHT);
     }
     $user_avatar = '';
     $avtHandler  = xoops_getHandler('avatar');
@@ -263,7 +263,7 @@ if ('avatarchoose' === $op) {
             }
         }
     }
-    redirect_header('index . php ? uid = ' . $uid, 0, _US_PROFUPDATED);
+    redirect_header('index.php?uid=' . $uid, 0, _US_PROFUPDATED);
 }
 require __DIR__ . '/footer.php';
 require \dirname(__DIR__, 2) . '/footer.php';

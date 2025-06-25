@@ -10,7 +10,7 @@
                         <h4><{$smarty.const._MD_SUICO_SEARCH}></h4>
 
                         <div>(<{$total_users}>)</div>
-                        <{includeq file="db:suico_form.tpl" xoForm=$searchform}>
+                        <{include file="db:suico_form.tpl" xoForm=$searchform}>
 
                         <!-- end -->
                     </div>

@@ -10,7 +10,7 @@
 
                         <h5><{$smarty.const._MD_SUICO_CHANGEPASSWORD}> <span class="fa fa-user-circle"></span></h5><br>
 
-                        <{includeq file="db:suico_form.tpl" xoForm=$form}>
+                        <{include file="db:suico_form.tpl" xoForm=$form}>
 
                         <!-- end -->
                     </div>

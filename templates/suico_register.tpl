@@ -36,7 +36,7 @@
 
                         <{if $regform}>
                             <h3><{$regform.title}></h3>
-                            <{includeq file="db:suico_form.tpl" xoForm=$regform}>
+                            <{include file="db:suico_form.tpl" xoForm=$regform}>
                         <{elseif $finish}>
                             <h1><{$finish}></h1>
                             <{if $finish_message}><p><{$finish_message}></p><{/if}>

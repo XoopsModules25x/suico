@@ -15,7 +15,7 @@
                             <br class='clear'>
                         <{/if}>
 
-                        <{includeq file="db:suico_form.tpl" xoForm=$userinfo}>
+                        <{include file="db:suico_form.tpl" xoForm=$userinfo}>
 
                         <!-- end -->
                     </div>

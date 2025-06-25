@@ -9,7 +9,7 @@
                         <!-- start -->
                         <h5><{$smarty.const._MD_SUICO_CHANGEMAIL}> <span class="fa fa-envelope"></span></h5><br>
 
-                        <{includeq file="db:suico_form.tpl" xoForm=$emailform}>
+                        <{include file="db:suico_form.tpl" xoForm=$emailform}>
 
 
                         <!-- end -->
