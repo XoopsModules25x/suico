@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -13,9 +11,8 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -72,7 +69,11 @@ foreach ($mygroups as $value) {
  * Creating the navigation bar if you have a lot of friends
  */
 $navigationBar = new \XoopsPageNav(
-    $countGroups, $helper->getConfig('groupsperpage'), $start_all, 'start_all', 'group_keyword=' . $group_keyword . '&amp;start_my=' . $start_my
+    $countGroups,
+    $helper->getConfig('groupsperpage'),
+    $start_all,
+    'start_all',
+    'group_keyword=' . $group_keyword . '&amp;start_my=' . $start_my
 );
 $imageNav      = $navigationBar->renderImageNav(2);
 //form
@@ -110,4 +111,4 @@ $xoopsTpl->assign('lang_searchgroup', _MD_SUICO_GROUP_SEARCH);
 $xoopsTpl->assign('lang_groupkeyword', _MD_SUICO_GROUP_SEARCHKEYWORD);
 $xoopsTpl->assign('lang_memberofgroup', _MD_SUICO_MEMBEROFGROUP);
 require __DIR__ . '/footer.php';
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

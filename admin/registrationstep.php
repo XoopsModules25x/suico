@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /**
  * Extended User Profile
@@ -13,8 +11,7 @@ declare(strict_types=1);
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
- * @license             GNU GPL 2 (http://www.gnu.org/licenses/gpl-2.0.html)
- * @package             profile
+ * @license             GNU GPL 2 (https://www.gnu.org/licenses/gpl-2.0.html)
  * @since               2.3.0
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
@@ -32,7 +29,7 @@ xoops_cp_header();
 $adminObject->addItemButton(_AM_SUICO_STEP, 'registrationstep.php?op=new', 'add');
 $adminObject->displayNavigation(basename(__FILE__));
 $adminObject->displayButton('left');
-$op      = $_REQUEST['op'] ?? (isset($_REQUEST['id']) ? 'edit' : 'list');
+$op = $_REQUEST['op'] ?? (isset($_REQUEST['id']) ? 'edit' : 'list');
 /** @var RegstepHandler $regstepHandler */
 $regstepHandler = $helper->getHandler('Regstep');
 switch ($op) {
@@ -105,12 +102,12 @@ if (!empty($template_main)) {
  * @param $step_d
  * @param $step_save
  */
-function profile_stepsave_toggle($step_d, $step_save)
+function profile_stepsave_toggle($step_d, $step_save): void
 {
-    $helper    = XoopsModules\Suico\Helper::getInstance();
-    $step_save = (1 == $step_save) ? 0 : 1;
-    $regstepHandler   = $helper->getHandler('Regstep');
-    $obj       = $regstepHandler->get($_REQUEST['step_id']);
+    $helper         = XoopsModules\Suico\Helper::getInstance();
+    $step_save      = (1 == $step_save) ? 0 : 1;
+    $regstepHandler = $helper->getHandler('Regstep');
+    $obj            = $regstepHandler->get($_REQUEST['step_id']);
     $obj->setVar('step_save', $step_save);
     if ($regstepHandler->insert($obj, true)) {
         redirect_header('registrationstep.php', 1, _AM_SUICO_SAVESTEP_TOGGLE_SUCCESS);

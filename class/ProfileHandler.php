@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -15,15 +13,13 @@ namespace XoopsModules\Suico;
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
- * @license             GNU GPL 2 (http://www.gnu.org/licenses/gpl-2.0.html)
- * @package             profile
+ * @license             GNU GPL 2 (https://www.gnu.org/licenses/gpl-2.0.html)
  * @since               2.3.0
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
 /**
- * @package             kernel
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
  */
 
@@ -31,7 +27,6 @@ use XoopsModules\Suico;
 
 /**
  * Class ProfileHandler
- * @package XoopsModules\Suico
  */
 class ProfileHandler extends \XoopsPersistableObjectHandler
 {
@@ -43,7 +38,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
      * Array of {@link Suico\Field} objects
      * @var array
      */
-    public $_fields = [];
+    public array $_fields = [];
 
     /**
      * @param \XoopsDatabase $db
@@ -68,6 +63,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
         if ($isNew) {
             $obj->setNew();
         }
+
         return $obj;
     }
 
@@ -77,20 +73,21 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
      * We will create an empty profile if none exists. This behavior allows user objects
      * created outside of profile to be edited correctly in the profile module.
      *
-     * @param int|null      $uid
+     * @param int|null      $id User ID
      * @param string[]|null $fields array of field names to fetch, null for all
      *
      * @return object {@link ProfileProfile}
      *
-     * @internal This was get($uid, $createOnFailure = true). No callers found using the extra parameter.
+     * @internal This was get($id, $createOnFailure = true). No callers found using the extra parameter.
      * @internal Modified to match parent signature.
      */
-    public function get($uid = null, $fields = null)
+    public function get($id = null, $fields = null)
     {
-        $obj = parent::get($uid, $fields);
+        $obj = parent::get($id, $fields);
         if (!\is_object($obj)) {
             $obj = $this->create();
         }
+
         return $obj;
     }
 
@@ -104,6 +101,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
     public function createField($isNew = true)
     {
         $return = $this->fieldHandler->create($isNew);
+
         return $return;
     }
 
@@ -117,6 +115,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
         if (0 == \count($this->_fields)) {
             $this->_fields = $this->fieldHandler->loadFields();
         }
+
         return $this->_fields;
     }
 
@@ -216,30 +215,32 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
             $msg = '&nbsp;&nbsp;<span class="red">ERROR: Could not insert field <strong>' . $vars['name'] . '</strong> into the database. ' . \implode(' ', $field->getErrors()) . $this->db->error() . '</span>';
         }
         unset($field);
+
         return $msg;
     }
 
     /**
      * insert a new object in the database
      *
-     * @param \XoopsObject $obj   reference to the object
+     * @param \XoopsObject $object   reference to the object
      * @param bool         $force whether to force the query execution despite security settings
      *
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    public function insert(\XoopsObject $obj, $force = false)
+    public function insert(\XoopsObject $object, $force = false)
     {
-        if (!($obj instanceof $this->className)) {
+        if (!($object instanceof $this->className)) {
             return false;
         }
         $uservars = $this->getUserVars();
         foreach ($uservars as $var) {
-            unset($obj->vars[$var]);
+            unset($object->vars[$var]);
         }
-        if (0 == \count($obj->vars)) {
+        if (0 == \count($object->vars)) {
             return true;
         }
-        return parent::insert($obj, $force);
+
+        return parent::insert($object, $force);
     }
 
     /**
@@ -257,7 +258,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
      *
      * @param \CriteriaElement $criteria   CriteriaElement
      * @param array            $searchvars Fields to be fetched
-     * @param array|null             $groups     for Usergroups is selected (only admin!)
+     * @param array|null       $groups     for Usergroups is selected (only admin!)
      *
      * @return array
      */
@@ -277,8 +278,9 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
         $sql_from   = ' FROM ' . $this->db->prefix('users') . ' AS u LEFT JOIN ' . $this->table . ' AS p ON u.uid=p.profile_id' . (empty($groups) ? '' : ' LEFT JOIN ' . $this->db->prefix('groups_users_link') . ' AS g ON u.uid=g.uid');
         $sql_clause = ' WHERE 1=1';
         $sql_order  = '';
-        $limit      = $start = 0;
-        if (isset($criteria) && $criteria instanceof \CriteriaElement) {
+        $start      = 0;
+        $limit      = 0;
+        if (($criteria instanceof \CriteriaCompo) || ($criteria instanceof \Criteria)) {
             $sql_clause .= ' AND ' . $criteria->render();
             if ('' !== $criteria->getSort()) {
                 $sql_order = ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
@@ -302,7 +304,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
             $profile = $this->create(false);
             $user    = $userHandler->create(false);
             foreach ($myrow as $name => $value) {
-                if (\in_array($name, $uservars)) {
+                if (\in_array($name, $uservars, true)) {
                     $user->assignVar($name, $value);
                 } else {
                     $profile->assignVar($name, $value);
@@ -317,6 +319,7 @@ class ProfileHandler extends \XoopsPersistableObjectHandler
             $result    = $this->db->query($sql_count);
             [$count] = $this->db->fetchRow($result);
         }
+
         return [$users, $profiles, (int)$count];
     }
 }

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -12,9 +10,8 @@ declare(strict_types=1);
 */
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 define(
@@ -63,7 +60,7 @@ define(
 define('_MI_SUICO_LINKPATHUPLOAD_TITLE', 'Link to your uploads directory');
 define(
     '_MI_SUICO_LINKPATHUPLOAD_DESC',
-    'This is the address of the root path to uploads <br>like http://www.yoursite.com/uploads'
+    'This is the address of the root path to uploads <br>like https://www.yoursite.com/uploads'
 );
 define('_MI_SUICO_MAXFILEBYTES_TITLE', 'Max size in bytes');
 define(
@@ -132,7 +129,7 @@ define('_MI_SUICO_MYCONFIGS', 'My Settings');
 define('_MI_SUICO_TEMPLATE_CONFIGSDESC', 'Template settings for the user');
 define('_MI_SUICO_TEMPLATE_FOOTERDESC', 'Template for the footer of the module');
 define('_MI_SUICO_TEMPLATE_EDITGROUP', 'Template for the Groups page atributes');
-//define('_MI_SUICO_LICENSE', 'Suico by Marcello Brand�o is licensed under a Attribution-No Derivative Works 2.5 Brazil.');
+//define('_MI_SUICO_LICENSE', 'Suico by Marcello Brandao is licensed under a Attribution-No Derivative Works 2.5 Brazil.');
 //19/10/2007
 define('_MI_SUICO_GROUPSPERPAGE_TITLE', 'Groups per page');
 define('_MI_SUICO_GROUPSPERPAGE_DESC', 'Groups per page before pagination show up');
@@ -197,7 +194,7 @@ define('_MI_SUICO_HELP_HEADER', __DIR__ . '/help/helpheader.tpl');
 define('_MI_SUICO_BACK_2_ADMIN', 'Back to Administration of ');
 define('_MI_SUICO_OVERVIEW', 'Overview');
 //define('_MI_SUICO_HELP_DIR', __DIR__);
-//help multi-page
+//help multipage
 define('_MI_SUICO_DISCLAIMER', 'Disclaimer');
 define('_MI_SUICO_LICENSE', 'License');
 define('_MI_SUICO_SUPPORT', 'Support');
@@ -438,4 +435,3 @@ define('MI_SUICO_ADMINPAGER', 'Admin: records / page');
 define('MI_SUICO_ADMINPAGER_DESC', 'Admin: # of records shown per page');
 define('MI_SUICO_USERPAGER', 'User: records / page');
 define('MI_SUICO_USERPAGER_DESC', 'User: # of records shown per page');
-

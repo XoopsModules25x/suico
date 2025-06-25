@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -13,9 +11,8 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -59,11 +56,19 @@ foreach ($mygroups as $value) {
  * Creating the navigation bar if you have a lot of friends
  */
 $navigationBar    = new \XoopsPageNav(
-    $countGroups, $helper->getConfig('groupsperpage'), $start_all, 'start_all', 'uid=' . (int)$controller->uidOwner . '&amp;start_my=' . $start_my . '#allgroups'
+    $countGroups,
+    $helper->getConfig('groupsperpage'),
+    $start_all,
+    'start_all',
+    'uid=' . (int)$controller->uidOwner . '&amp;start_my=' . $start_my . '#allgroups'
 );
 $imageNav         = $navigationBar->renderImageNav(2); //allgroups
 $navigationBar_my = new \XoopsPageNav(
-    $countMyGroups, $helper->getConfig('groupsperpage'), $start_my, 'start_my', 'uid=' . (int)$controller->uidOwner . '&amp;start_all=' . $start_all . '#mygroups'
+    $countMyGroups,
+    $helper->getConfig('groupsperpage'),
+    $start_my,
+    'start_my',
+    'uid=' . (int)$controller->uidOwner . '&amp;start_all=' . $start_all . '#mygroups'
 );
 $imageNav_my      = $navigationBar_my->renderImageNav(2);
 $maxfilebytes     = $helper->getConfig('maxfilesize');
@@ -106,4 +111,4 @@ $xoopsTpl->assign('lang_grouptotalmembers', _MD_SUICO_GROUPTOTALMEMBERS);
 $xoopsTpl->assign('lang_mysection', _MD_SUICO_MYGROUPS);
 $xoopsTpl->assign('section_name', _MD_SUICO_GROUPS);
 require __DIR__ . '/footer.php';
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

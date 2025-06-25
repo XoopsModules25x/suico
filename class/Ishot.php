@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -20,12 +18,10 @@ use XoopsObject;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
-
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 
 /**
@@ -35,9 +31,14 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  */
 class Ishot extends XoopsObject
 {
-    public $db;
-    public $helper;
-    public $permHelper;
+    public \XoopsDatabase $db;
+    public Helper         $helper;
+    public Permission     $permHelper;
+    public                $cod_ishot;
+    public $uid_voter;
+    public $uid_voted;
+    public $ishot;
+    public $date_created;
     // constructor
 
     /**
@@ -69,7 +70,7 @@ class Ishot extends XoopsObject
     /**
      * @param $id
      */
-    public function load($id)
+    public function load($id): void
     {
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_ishot') . ' WHERE cod_ishot=' . $id;
         $myrow = $this->db->fetchArray($this->db->query($sql));
@@ -102,14 +103,14 @@ class Ishot extends XoopsObject
         if (\is_array($criteria) && \count($criteria) > 0) {
             $whereQuery = ' WHERE';
             foreach ($criteria as $c) {
-                $whereQuery .= " ${c} AND";
+                $whereQuery .= " {$c} AND";
             }
             $whereQuery = mb_substr($whereQuery, 0, -4);
         } elseif (!\is_array($criteria) && $criteria) {
             $whereQuery = ' WHERE ' . $criteria;
         }
         if ($asobject) {
-            $sql    = 'SELECT * FROM ' . $db->prefix('suico_ishot') . "${whereQuery} ORDER BY ${sort} ${order}";
+            $sql    = 'SELECT * FROM ' . $db->prefix('suico_ishot') . "{$whereQuery} ORDER BY {$sort} {$order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = new self($myrow);
@@ -117,12 +118,13 @@ class Ishot extends XoopsObject
         } else {
             $sql    = 'SELECT cod_ishot FROM ' . $db->prefix(
                     'suico_ishot'
-                ) . "${whereQuery} ORDER BY ${sort} ${order}";
+                ) . "{$whereQuery} ORDER BY {$sort} {$order}";
             $result = $db->query($sql, $limit, $start);
             while (false !== ($myrow = $db->fetchArray($result))) {
                 $ret[] = $myrow['suico_ishot_id'];
             }
         }
+
         return $ret;
     }
 }

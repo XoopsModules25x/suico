@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -15,8 +13,7 @@ namespace XoopsModules\Suico;
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
- * @license             GNU GPL 2 (http://www.gnu.org/licenses/gpl-2.0.html)
- * @package             profile
+ * @license             GNU GPL 2 (https://www.gnu.org/licenses/gpl-2.0.html)
  * @since               2.3.0
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
@@ -27,6 +24,10 @@ namespace XoopsModules\Suico;
  */
 class Visibility extends \XoopsObject
 {
+    public $field_id;
+    public $user_group;
+    public $profile_group;
+
     public function __construct()
     {
         $this->initVar('field_id', \XOBJ_DTYPE_INT);

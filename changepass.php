@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /**
  * Extended User Profile
@@ -13,15 +11,14 @@ declare(strict_types=1);
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
- * @license             GNU GPL 2 (http://www.gnu.org/licenses/gpl-2.0.html)
- * @package             profile
+ * @license             GNU GPL 2 (https://www.gnu.org/licenses/gpl-2.0.html)
  * @since               2.3.0
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
-use XoopsModules\Suico\IndexController;
 use Xmf\Request;
+use XoopsModules\Suico\IndexController;
 
 $GLOBALS['xoopsOption']['template_main'] = 'suico_changepass.tpl';
 require __DIR__ . '/header.php';
@@ -35,7 +32,7 @@ if (!$GLOBALS['xoopsUser']) {
 }
 $xoopsOption['xoops_pagetitle'] = sprintf(_MD_SUICO_CHANGEPASSWORD, $xoopsModule->getVar('name'), $controller->nameOwner);
 if (isset($_POST['submit'])) {
-    /* @var XoopsConfigHandler $configHandler */
+    /** @var XoopsConfigHandler $configHandler */
     $configHandler              = xoops_getHandler('config');
     $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
     $myts                       = \MyTextSanitizer::getInstance();
@@ -57,7 +54,7 @@ if (isset($_POST['submit'])) {
     } else {
         //update password
         $GLOBALS['xoopsUser']->setVar('pass', password_hash($password, PASSWORD_DEFAULT));
-        /* @var XoopsMemberHandler $memberHandler */
+        /** @var XoopsMemberHandler $memberHandler */
         $memberHandler = xoops_getHandler('member');
         $msg           = _MD_SUICO_ERRORDURINGSAVE;
         if ($memberHandler->insertUser($GLOBALS['xoopsUser'])) {
@@ -77,4 +74,4 @@ if (isset($_POST['submit'])) {
     $xoBreadcrumbs[] = ['title' => _MD_SUICO_CHANGEPASSWORD];
 }
 require __DIR__ . '/footer.php';
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

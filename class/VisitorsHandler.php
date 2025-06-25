@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -8,7 +6,7 @@ namespace XoopsModules\Suico;
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Bruno Barthez, Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -35,8 +32,8 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
  */
 class VisitorsHandler extends XoopsPersistableObjectHandler
 {
-    public $helper;
-    public $isAdmin;
+    public Helper $helper;
+    public        $isAdmin;
 
     /**
      * Constructor
@@ -47,13 +44,13 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Suico\Helper $this->helper */
+        /** @var \XoopsModules\Suico\Helper $this- >helper */
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
             $this->helper = $helper;
         }
-        $isAdmin = $this->helper->isUserAdmin();
+        $this->isAdmin = $this->helper->isUserAdmin();
         parent::__construct($xoopsDatabase, 'suico_visitors', Visitors::class, 'visit_id', 'uname_visitor');
     }
 
@@ -73,6 +70,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
             $obj->unsetNew();
         }
         $obj->helper = $this->helper;
+
         return $obj;
     }
 
@@ -80,8 +78,8 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
      * retrieve a Suico\Visitors
      *
      * @param int|null $id of the Suico\Visitors
-     * @param null $fields
-     * @return mixed reference to the {@link suico_visitors} object, FALSE if failed
+     * @param null     $fields
+     * @return false|\XoopsModules\Suico\Visitors reference to the {@link suico_visitors} object, FALSE if failed
      */
     public function get2(
         $id = null,
@@ -95,8 +93,10 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         if (1 === $numrows) {
             $visitors = new Visitors();
             $visitors->assignVars($this->db->fetchArray($result));
+
             return $visitors;
         }
+
         return false;
     }
 
@@ -122,7 +122,9 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         if (!$xoopsObject->cleanVars()) {
             return false;
         }
-        $visit_id = $uid_owner = $uid_visitor = '';
+        $uid_visitor = '';
+        $uid_owner   = '';
+        $visit_id    = '';
         foreach ($xoopsObject->cleanVars as $k => $v) {
             ${$k} = $v;
         }
@@ -169,6 +171,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
             $visit_id = $this->db->getInsertId();
         }
         $xoopsObject->assignVar('visit_id', $visit_id);
+
         return true;
     }
 
@@ -189,7 +192,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         $sql = \sprintf(
             'DELETE FROM %s WHERE visit_id = %u',
             $this->db->prefix('suico_visitors'),
-            $xoopsObject->getVar('visit_id')
+            (int)$xoopsObject->getVar('visit_id')
         );
         if ($force) {
             $result = $this->db->queryF($sql);
@@ -199,46 +202,48 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         if (!$result) {
             return false;
         }
+
         return true;
     }
 
     /**
      * count suico_visitorss matching a condition
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} to match
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement} to match
      * @return int count of suico_visitorss
      */
     public function getCount(
-        ?CriteriaElement $criteriaElement = null
+        ?CriteriaElement $criteria = null
     ) {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_visitors');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+            $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
         if (!$result) {
             return 0;
         }
         [$count] = $this->db->fetchRow($result);
+
         return $count;
     }
 
     /**
      * delete suico_visitorss matching a set of conditions
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement}
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement}
      * @param bool                                 $force
      * @param bool                                 $asObject
      * @return bool FALSE if deletion failed
      */
     public function deleteAll(
-        ?CriteriaElement $criteriaElement = null,
+        ?CriteriaElement $criteria = null,
         $force = true,
         $asObject = false
     ) {
         $sql = 'DELETE FROM ' . $this->db->prefix('suico_visitors');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+            $sql .= ' ' . $criteria->renderWhere();
         }
         if ($force) {
             if (!$result = $this->db->queryF($sql)) {
@@ -247,6 +252,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         } elseif (!$result = $this->db->query($sql)) {
             return false;
         }
+
         return true;
     }
 
@@ -261,6 +267,7 @@ class VisitorsHandler extends XoopsPersistableObjectHandler
         if (!$result = $this->db->queryF($sql)) {
             return false;
         }
+
         return true;
     }
 }

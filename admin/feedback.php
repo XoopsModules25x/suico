@@ -1,11 +1,9 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -13,30 +11,28 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Module\Admin;
 use Xmf\Request;
 use XoopsModules\Suico\{
+    Common\ModuleFeedback,
     Helper,
-    Utility,
-    Common\ModuleFeedback
+    Utility
 };
 /** @var Helper $helper */
 /** @var Utility $utility */
 /** @var Admin $adminObject */
-
-require __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 $adminObject = Admin::getInstance();
 $feedback    = new ModuleFeedback();
 // It recovered the value of argument op in URL$
 $op                 = Request::getString('op', 'list');
 $moduleDirName      = $GLOBALS['xoopsModule']->getVar('dirname');
-$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+$moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 xoops_loadLanguage('feedback', $moduleDirName);
 xoops_cp_header();
 switch ($op) {
@@ -61,7 +57,7 @@ switch ($op) {
         $fb_type     = Request::getString('fb_type', '');
         $fb_content  = Request::getText('fb_content', '');
         $fb_content  = str_replace(
-            ['', '', '',],
+            ['', '', ''],
             '<br>',
             $fb_content
         ); //clean line break from dhtmltextarea
@@ -101,4 +97,4 @@ switch ($op) {
         echo $form->render();
         break;
 }
-require __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

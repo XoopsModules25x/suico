@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico\Common;
 
@@ -18,24 +16,23 @@ namespace XoopsModules\Suico\Common;
  * Image resizer class for xoops
  *
  * @copyright      2000-2020 XOOPS Project (https://xoops.org)
- * @license        GPL 2.0 or later
- * @package        XOOPS common
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @since          1.0
  * @min_xoops      2.5.9
  * @author         Goffy - Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  */
 class Resizer
 {
-    public $sourceFile    = '';
-    public $endFile       = '';
-    public $maxWidth      = 0;
-    public $maxHeight     = 0;
-    public $imageMimetype = '';
-    public $jpgQuality    = 90;
-    public $mergeType     = 0;
-    public $mergePos      = 0;
-    public $degrees       = 0;
-    public $error         = '';
+    public string $sourceFile    = '';
+    public string $endFile       = '';
+    public int    $maxWidth      = 0;
+    public int    $maxHeight     = 0;
+    public string $imageMimetype = '';
+    public int    $jpgQuality    = 90;
+    public int    $mergeType     = 0;
+    public int    $mergePos      = 0;
+    public int    $degrees       = 0;
+    public string $error         = '';
 
     /**
      * resize image if size exceed given width/height
@@ -51,7 +48,7 @@ class Resizer
             case 'image/jpeg':
                 $img = \imagecreatefromjpeg($this->sourceFile);
                 if (!$img) {
-                    $img = \imagecreatefromstring(file_get_contents($this->sourceFile));
+                    $img = \imagecreatefromstring(\file_get_contents($this->sourceFile));
                 }
                 break;
             case 'image/gif':
@@ -81,8 +78,8 @@ class Resizer
             }
             // Create a new temporary image.
             $tmpimg = \imagecreatetruecolor($newWidth, $newHeight);
-            imagealphablending($tmpimg, false);
-            imagesavealpha($tmpimg, true);
+            \imagealphablending($tmpimg, false);
+            \imagesavealpha($tmpimg, true);
             // Copy and resize old image into new image.
             \imagecopyresampled(
                 $tmpimg,
@@ -115,6 +112,7 @@ class Resizer
             return 'copy';
         }
         \imagedestroy($img);
+
         return true;
     }
 
@@ -205,10 +203,14 @@ class Resizer
         )) {
             return false;
         }
+
         return true;
     }
 
-    public function mergeImage()
+    /**
+     * @return void
+     */
+    public function mergeImage(): void
     {
         $dest = \imagecreatefromjpeg($this->endFile);
         $src  = \imagecreatefromjpeg($this->sourceFile);
@@ -309,6 +311,7 @@ class Resizer
         }
         // release the memory
         \imagedestroy($tmpimg);
+
         return true;
     }
 }

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico\Common;
 
@@ -15,9 +13,8 @@ namespace XoopsModules\Suico\Common;
  */
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -32,7 +29,6 @@ namespace XoopsModules\Suico\Common;
 
 use XoopsModules\Suico;
 use XoopsModules\Suico\Common;
-use XoopsTpl;
 use xos_opal_Theme;
 
 /**
@@ -40,8 +36,8 @@ use xos_opal_Theme;
  */
 class Breadcrumb
 {
-    public  $dirname;
-    private $bread = [];
+    public string $dirname;
+    private array $bread = [];
 
     public function __construct()
     {
@@ -57,7 +53,7 @@ class Breadcrumb
     public function addLink(
         $title = '',
         $link = ''
-    ) {
+    ): void {
         $this->bread[] = [
             'link'  => $link,
             'title' => $title,
@@ -78,6 +74,7 @@ class Breadcrumb
         $breadcrumbTpl->assign('breadcrumb', $this->bread);
         $html = $breadcrumbTpl->fetch('db:' . $this->dirname . '_common_breadcrumb.tpl');
         unset($breadcrumbTpl);
+
         return $html;
     }
 }

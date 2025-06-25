@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -18,9 +16,8 @@ use Criteria;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
@@ -31,7 +28,7 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 /**
  * Class FriendsController
  */
-class FriendsController extends SuicoController
+class FriendsController extends Controller
 {
     /**
      * @return bool|void
@@ -45,14 +42,15 @@ class FriendsController extends SuicoController
         if (1 === $this->configsFactory->getCount($criteria)) {
             $configs = $this->configsFactory->getObjects($criteria);
             $config  = $configs[0]->getVar('friends');
-/*
-            if (!$this->checkPrivilegeLevel($config)) {
-                //mb temporary fix for self-loop
-//                  \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, sprintf(_MD_SUICO_NOPRIVILEGE,'Friends'));
-                redirect_header('/', 10, sprintf(_MD_SUICO_NOPRIVILEGE,'Friends'));
-            }
-*/
+            /*
+                        if (!$this->checkPrivilegeLevel($config)) {
+                            //mb temporary fix for self-loop
+            //                  \redirect_header('index.php?uid=' . $this->owner->getVar('uid'), 10, sprintf(_MD_SUICO_NOPRIVILEGE,'Friends'));
+                            redirect_header('/', 10, sprintf(_MD_SUICO_NOPRIVILEGE,'Friends'));
+                        }
+            */
         }
+
         return true;
     }
 }

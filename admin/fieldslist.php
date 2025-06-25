@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /**
  * Extended User Profile
@@ -13,17 +11,17 @@ declare(strict_types=1);
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
- * @license             GNU GPL 2 (http://www.gnu.org/licenses/gpl-2.0.html)
- * @package             profile
+ * @license             GNU GPL 2 (https://www.gnu.org/licenses/gpl-2.0.html)
  * @since               2.3.0
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
-use XoopsModules\Suico\{CategoryHandler,
-    Form\FieldForm,
+use XoopsModules\Suico\{
+    CategoryHandler,
     Field,
-    FieldHandler
+    FieldHandler,
+    Form\FieldForm
 };
 
 require_once __DIR__ . '/admin_header.php';
@@ -32,16 +30,16 @@ $adminObject->addItemButton(_AM_SUICO_FIELD, 'fieldslist.php?op=new', 'add');
 $adminObject->displayNavigation(basename(__FILE__));
 $adminObject->displayButton('left');
 $op = $_REQUEST['op'] ?? (isset($_REQUEST['id']) ? 'edit' : 'list');
-/* @var FieldHandler $fieldHandler */
+/** @var FieldHandler $fieldHandler */
 $fieldHandler = $helper->getHandler('Field');
 switch ($op) {
     default:
     case 'list':
         $fields = $fieldHandler->getObjects(null, true, false);
-        /* @var \XoopsModuleHandler $moduleHandler */
+        /** @var \XoopsModuleHandler $moduleHandler */
         $moduleHandler = xoops_getHandler('module');
         $modules       = $moduleHandler->getObjects(null, true);
-        /* @var CategoryHandler $categoryHandler */
+        /** @var CategoryHandler $categoryHandler */
         $categoryHandler = $helper->getHandler('Category');
         $criteria        = new \CriteriaCompo();
         $criteria->setSort('cat_weight');
@@ -135,16 +133,20 @@ switch ($op) {
             if (count($ids) > 0) {
                 $errors = [];
                 //if there are changed fields, fetch the fieldcategory objects
-                /* @var FieldHandler $fieldHandler */
+                /** @var FieldHandler $fieldHandler */
                 $fieldHandler = $helper->getHandler('Field');
                 $fields       = $fieldHandler->getObjects(new \Criteria('field_id', '(' . implode(',', $ids) . ')', 'IN'), true);
                 foreach ($ids as $i) {
                     $fields[$i]->setVar('field_weight', (int)$weight[$i]);
                     $fields[$i]->setVar('cat_id', (int)$category[$i]);
                     if (!$fieldHandler->insert($fields[$i])) {
-                        $errors = array_merge($errors, $fields[$i]->getErrors());
+//                        $errors = array_merge($errors, $fields[$i]->getErrors());
+                        $errors[] = $fields[$i]->getErrors();
                     }
                 }
+                $errors = array_merge([], ...$errors);
+
+
                 if (0 == count($errors)) {
                     //no errors
                     redirect_header('fieldslist.php', 2, sprintf(_AM_SUICO_SAVEDSUCCESS, _AM_SUICO_FIELDS));
@@ -223,7 +225,7 @@ switch ($op) {
             $obj->setVar('step_id', $_REQUEST['step_id']);
         }
         if ($fieldHandler->insert($obj)) {
-            /* @var \XoopsGroupPermHandler $grouppermHandler */
+            /** @var \XoopsGroupPermHandler $grouppermHandler */
             $grouppermHandler = xoops_getHandler('groupperm');
             $perm_arr         = [];
             if ($obj->getVar('field_show')) {
@@ -325,7 +327,7 @@ if (isset($template_main)) {
  * @param $field_required
  * @param $helper
  */
-function suico_visible_toggle($field_id, $field_required, $helper)
+function suico_visible_toggle($field_id, $field_required, $helper): void
 {
     $field_required = (1 == $field_required) ? 0 : 1;
     /** @var FieldHandler $fieldHandler */

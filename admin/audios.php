@@ -1,11 +1,9 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -13,16 +11,15 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
 use Xmf\Module\Helper\Permission;
 use Xmf\Request;
 
-require __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 //It recovered the value of argument op in URL$
 $op    = Request::getString('op', 'list');
@@ -58,7 +55,11 @@ switch ($op) {
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $uploadDir = XOOPS_UPLOAD_PATH . '/suico/audio/';
         $uploader  = new \XoopsMediaUploader(
-            $uploadDir, $helper->getConfig('mimetypes'), $helper->getConfig('maxsize'), null, null
+            $uploadDir,
+            $helper->getConfig('mimetypes'),
+            $helper->getConfig('maxsize'),
+            null,
+            null
         );
         if ($uploader->fetchMedia(Request::getString('xoops_upload_file', '', 'POST')[0])) {
             //            $uploader->setPrefix('url_');
@@ -149,7 +150,11 @@ switch ($op) {
         if ($audioTempRows > $audioPaginationLimit) {
             xoops_load('XoopsPageNav');
             $pagenav = new \XoopsPageNav(
-                $audioTempRows, $audioPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                $audioTempRows,
+                $audioPaginationLimit,
+                $start,
+                'start',
+                'op=list' . '&sort=' . $sort . '&order=' . $order . ''
             );
             $GLOBALS['xoopsTpl']->assign('pagenav', null === $pagenav ? $pagenav->renderNav() : '');
         }
@@ -201,7 +206,11 @@ switch ($op) {
             if ($audioCount > $audioPaginationLimit) {
                 xoops_load('XoopsPageNav');
                 $pagenav = new \XoopsPageNav(
-                    $audioCount, $audioPaginationLimit, $start, 'start', 'op=list' . '&sort=' . $sort . '&order=' . $order . ''
+                    $audioCount,
+                    $audioPaginationLimit,
+                    $start,
+                    'start',
+                    'op=list' . '&sort=' . $sort . '&order=' . $order . ''
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
@@ -213,4 +222,4 @@ switch ($op) {
         }
         break;
 }
-require __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

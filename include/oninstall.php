@@ -1,11 +1,9 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -13,9 +11,8 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Jan Pedersen
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  */
@@ -27,9 +24,8 @@ use XoopsModules\Suico\{
 };
 /** @var Helper $helper */
 /** @var Utility $utility */
-/** @var Common\Configurator $configurator */
-
-include dirname(
+/** @var Configurator $configurator */
+include \dirname(
             __DIR__
         ) . '/preloads/autoloader.php';
 /**
@@ -53,6 +49,7 @@ function xoops_module_pre_install_suico(
             $GLOBALS['xoopsDB']->queryF('DROP TABLE IF EXISTS ' . $GLOBALS['xoopsDB']->prefix($table) . ';');
         }
     }
+
     return $xoopsSuccess && $phpSuccess;
 }
 
@@ -67,8 +64,8 @@ function xoops_module_install_suico(XoopsModule $module)
     global $module_id;
     $module_id = $module->getVar('mid');
     xoops_loadLanguage('user');
-    require_once dirname(__DIR__) . '/preloads/autoloader.php';
-    $moduleDirName = basename(dirname(__DIR__));
+    require_once \dirname(__DIR__) . '/preloads/autoloader.php';
+    $moduleDirName = \basename(\dirname(__DIR__));
     // Create registration steps
     suico_install_addStep(_MI_SUICO_STEP_BASIC, '', 1, 1);
     // Create categories
@@ -154,7 +151,7 @@ function xoops_module_install_suico(XoopsModule $module)
     }
     //  ---  COPY blank.png FILES ---------------
     if (count($configurator->copyBlankFiles) > 0) {
-        $file = dirname(__DIR__) . '/assets/images/blank.png';
+        $file = \dirname(__DIR__) . '/assets/images/blank.png';
         foreach (array_keys($configurator->copyBlankFiles) as $i) {
             $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
             $utility::copyFile($file, $dest);
@@ -163,7 +160,7 @@ function xoops_module_install_suico(XoopsModule $module)
     /*
         //  ---  COPY test folder files ---------------
     if (count($configurator->copyTestFolders) > 0) {
-        //        $file =  dirname(__DIR__) . '/testdata/images/';
+        //        $file =  \dirname(__DIR__) . '/testdata/images/';
         foreach (array_keys($configurator->copyTestFolders) as $i) {
             $src  = $configurator->copyTestFolders[$i][0];
             $dest = $configurator->copyTestFolders[$i][1];
@@ -179,10 +176,14 @@ function xoops_module_install_suico(XoopsModule $module)
             'n'
         ) . "' AND `tpl_file` LIKE '%.html%'";
     $GLOBALS['xoopsDB']->queryF($sql);
+
     return true;
 }
 
-function suico_install_initializeProfiles()
+/**
+ * @return void
+ */
+function suico_install_initializeProfiles(): void
 {
     global $module_id;
     $GLOBALS['xoopsDB']->queryF('   INSERT INTO ' . $GLOBALS['xoopsDB']->prefix('suico_profile') . ' (profile_id) ' . '   SELECT uid ' . '   FROM ' . $GLOBALS['xoopsDB']->prefix('users'));
@@ -254,6 +255,7 @@ function suico_install_addField($name, $title, $description, $category, $type, $
     $obj->setVar('step_id', $step_id, true);
     $fieldHandler->insert($obj);
     suico_install_setPermissions($obj->getVar('field_id'), $module_id, $canedit, $visible);
+
     return true;
     /*
     //$GLOBALS['xoopsDB']->query("INSERT INTO ".$GLOBALS['xoopsDB']->prefix("suico_field")." VALUES (0, {$category}, '{$type}', {$valuetype}, '{$name}', " . $GLOBALS['xoopsDB']->quote($title) . ", " . $GLOBALS['xoopsDB']->quote($description) . ", 0, {$length}, {$weight}, '', 1, {$canedit}, 1, 0, '" . serialize($options) . "', {$step_id})");
@@ -296,7 +298,7 @@ function suico_install_addField($name, $title, $description, $category, $type, $
  * @param $canedit
  * @param $visible
  */
-function suico_install_setPermissions($field_id, $module_id, $canedit, $visible)
+function suico_install_setPermissions($field_id, $module_id, $canedit, $visible): void
 {
     $gperm_itemid = $field_id;
     $gperm_modid  = $module_id;
@@ -360,7 +362,7 @@ function suico_install_setPermissions($field_id, $module_id, $canedit, $visible)
  * @param $name
  * @param $weight
  */
-function suico_install_addCategory($name, $weight)
+function suico_install_addCategory($name, $weight): void
 {
     $GLOBALS['xoopsDB']->query('INSERT INTO ' . $GLOBALS['xoopsDB']->prefix('suico_profile_category') . ' VALUES (0, ' . $GLOBALS['xoopsDB']->quote($name) . ", '', {$weight})");
 }
@@ -371,7 +373,7 @@ function suico_install_addCategory($name, $weight)
  * @param $order
  * @param $save
  */
-function suico_install_addStep($name, $desc, $order, $save)
+function suico_install_addStep($name, $desc, $order, $save): void
 {
     $GLOBALS['xoopsDB']->query('INSERT INTO ' . $GLOBALS['xoopsDB']->prefix('suico_profile_regstep') . ' VALUES (0, ' . $GLOBALS['xoopsDB']->quote($name) . ', ' . $GLOBALS['xoopsDB']->quote($desc) . ", {$order}, {$save})");
 }

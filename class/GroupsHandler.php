@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -8,7 +6,7 @@ namespace XoopsModules\Suico;
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -35,15 +32,14 @@ use XoopsObject;
 use XoopsPersistableObjectHandler;
 use XoopsThemeForm;
 
-
 /**
  * suico_groupshandler class.
  * This class provides simple mechanism for Groups object
  */
 class GroupsHandler extends XoopsPersistableObjectHandler
 {
-    public $helper;
-    public $isAdmin;
+    public Helper $helper;
+    public        $isAdmin;
 
     /**
      * Constructor
@@ -54,13 +50,13 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Suico\Helper $this->helper */
+        /** @var \XoopsModules\Suico\Helper $this- >helper */
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
             $this->helper = $helper;
         }
-        $isAdmin = $this->helper->isUserAdmin();
+        $this->isAdmin = $this->helper->isUserAdmin();
         parent::__construct($xoopsDatabase, 'suico_groups', Groups::class, 'group_id', 'group_title');
     }
 
@@ -80,6 +76,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
             $obj->unsetNew();
         }
         $obj->helper = $this->helper;
+
         return $obj;
     }
 
@@ -88,7 +85,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
      *
      * @param int  $id of the Groups
      * @param null $fields
-     * @return mixed reference to the {@link Groups} object, FALSE if failed
+     * @return false|\XoopsModules\Suico\Groups reference to the {@link Groups} object, FALSE if failed
      */
     public function get2(
         $id = null,
@@ -102,40 +99,42 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         if (1 === $numrows) {
             $suico_groups = new Groups();
             $suico_groups->assignVars($this->db->fetchArray($result));
+
             return $suico_groups;
         }
+
         return false;
     }
 
     /**
      * insert a new Groups in the database
      *
-     * @param \XoopsObject $xoopsObject   reference to the {@link Groups}
+     * @param \XoopsObject $object   reference to the {@link Groups}
      *                                    object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
     public function insert2(
-        XoopsObject $xoopsObject,
+        XoopsObject $object,
         $force = false
     ) {
         global $xoopsConfig;
-        if (!$xoopsObject instanceof Groups) {
+        if (!$object instanceof Groups) {
             return false;
         }
-        if (!$xoopsObject->isDirty()) {
+        if (!$object->isDirty()) {
             return true;
         }
-        if (!$xoopsObject->cleanVars()) {
+        if (!$object->cleanVars()) {
             return false;
         }
-        foreach ($xoopsObject->cleanVars as $k => $v) {
+        foreach ($object->cleanVars as $k => $v) {
             ${$k} = $v;
         }
         //        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
-        if ($xoopsObject->isNew()) {
+        if ($object->isNew()) {
             // ajout/modification d'un Groups
-            $xoopsObject = new Groups();
+            $object = new Groups();
             $format      = 'INSERT INTO %s (group_id, owner_uid, group_title, group_desc, group_img)';
             $format      .= 'VALUES (%u, %u, %s, %s, %s)';
             $sql         = \sprintf(
@@ -174,28 +173,29 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         if (empty($group_id)) {
             $group_id = $this->db->getInsertId();
         }
-        $xoopsObject->assignVar('group_id', $group_id);
+        $object->assignVar('group_id', $group_id);
+
         return true;
     }
 
     /**
      * delete a Groups from the database
      *
-     * @param \XoopsObject $xoopsObject reference to the Groups to delete
+     * @param \XoopsObject $object reference to the Groups to delete
      * @param bool         $force
      * @return bool FALSE if failed.
      */
     public function delete(
-        XoopsObject $xoopsObject,
+        XoopsObject $object,
         $force = false
     ) {
-        if (!$xoopsObject instanceof Groups) {
+        if (!$object instanceof Groups) {
             return false;
         }
         $sql = \sprintf(
             'DELETE FROM %s WHERE group_id = %u',
             $this->db->prefix('suico_groups'),
-            $xoopsObject->getVar('group_id')
+            (int)$object->getVar('group_id')
         );
         if ($force) {
             $result = $this->db->queryF($sql);
@@ -205,32 +205,34 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         if (!$result) {
             return false;
         }
+
         return true;
     }
 
     /**
      * retrieve suico_groupss from the database
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} conditions to be met
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key       use the UID as key for the array?
      * @param bool                                 $as_object
      * @return array array of {@link Groups} objects
      */
     public function &getObjects(
-        ?CriteriaElement $criteriaElement = null,
+        ?CriteriaElement $criteria = null,
         $id_as_key = false,
         $as_object = true
     ) {
         $ret   = [];
-        $limit = $start = 0;
+        $start = 0;
+        $limit = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_groups');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
-            if ('' !== $criteriaElement->getSort()) {
-                $sql .= ' ORDER BY ' . $criteriaElement->getSort() . ' ' . $criteriaElement->getOrder();
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+            $sql .= ' ' . $criteria->renderWhere();
+            if ('' !== $criteria->getSort()) {
+                $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
-            $limit = $criteriaElement->getLimit();
-            $start = $criteriaElement->getStart();
+            $limit = $criteria->getLimit();
+            $start = $criteria->getStart();
         }
         $result = $this->db->query($sql, $limit, $start);
         if (!$result) {
@@ -246,6 +248,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
             }
             unset($suico_groups);
         }
+
         return $ret;
     }
 
@@ -263,9 +266,10 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $ret   = [];
         $sort  = 'group_title';
         $order = 'ASC';
-        $limit = $start = 0;
+        $start = 0;
+        $limit = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_groups');
-        if (isset($criteria) && $criteria instanceof CriteriaElement) {
+        if (($criteria instanceof \CriteriaCompo) || ($criteria instanceof \Criteria)) {
             $sql .= ' ' . $criteria->renderWhere();
             if ('' !== $sort) {
                 $sql .= ' ORDER BY ' . $sort . ' ' . $order;
@@ -291,59 +295,62 @@ class GroupsHandler extends XoopsPersistableObjectHandler
             $group_total_members = $row['grouptotalmembers'];
             if ($group_total_members > 0) {
                 if (1 == $group_total_members) {
-                    $ret[$i]['group_total_members'] = '' . _MD_SUICO_ONEMEMBER . '&nbsp;';
+                    $ret[$i]['group_total_members'] = '' . \_MD_SUICO_ONEMEMBER . '&nbsp;';
                 } else {
-                    $ret[$i]['group_total_members'] = '' . $group_total_members . '&nbsp;' . _MD_SUICO_GROUPMEMBERS . '&nbsp;';
+                    $ret[$i]['group_total_members'] = '' . $group_total_members . '&nbsp;' . \_MD_SUICO_GROUPMEMBERS . '&nbsp;';
                 }
             } else {
-                $ret[$i]['group_total_members'] = '' . _MD_SUICO_NO_MEMBER . '&nbsp;';
+                $ret[$i]['group_total_members'] = '' . \_MD_SUICO_NO_MEMBER . '&nbsp;';
             }
             $i++;
         }
+
         return $ret;
     }
 
     /**
      * count suico_groupss matching a condition
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} to match
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement} to match
      * @return int count of suico_groupss
      */
     public function getCount(
-        ?CriteriaElement $criteriaElement = null
+        ?CriteriaElement $criteria = null
     ) {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_groups');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+            $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
         if (!$result) {
             return 0;
         }
         [$count] = $this->db->fetchRow($result);
+
         return $count;
     }
 
     /**
      * delete suico_groupss matching a set of conditions
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement}
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement}
      * @param bool                                 $force
      * @param bool                                 $asObject
      * @return bool FALSE if deletion failed
      */
     public function deleteAll(
-        ?CriteriaElement $criteriaElement = null,
+        ?CriteriaElement $criteria = null,
         $force = true,
         $asObject = false
     ) {
         $sql = 'DELETE FROM ' . $this->db->prefix('suico_groups');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+            $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {
             return false;
         }
+
         return true;
     }
 
@@ -371,6 +378,7 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $form->addElement($field_marker);
         $form->addElement($buttonSend);
         $form->display();
+
         return true;
     }
 
@@ -394,12 +402,14 @@ class GroupsHandler extends XoopsPersistableObjectHandler
         $buttonSend          = new XoopsFormButton('', 'submit_button', \_MD_SUICO_UPLOADGROUP, 'submit');
         $field_warning       = new XoopsFormLabel(\sprintf(\_MD_SUICO_YOU_CAN_UPLOAD, $maxbytes / 1024));
         $field_oldpicture    = new XoopsFormLabel(
-            \_MD_SUICO_GROUP_IMAGE, '<img src="' . \XOOPS_UPLOAD_URL . '/' . $group->getVar(
-                                      'group_img'
-                                  ) . '">'
+            \_MD_SUICO_GROUP_IMAGE,
+            '<img src="' . \XOOPS_UPLOAD_URL . '/' . $group->getVar(
+                'group_img'
+            ) . '">'
         );
         $field_maintainimage = new XoopsFormLabel(
-            \_MD_SUICO_MAINTAIN_OLD_IMAGE, "<input type='checkbox' value='1' id='flag_oldimg' name='flag_oldimg' onclick=\"groupImgSwitch(img)\"  checked>"
+            \_MD_SUICO_MAINTAIN_OLD_IMAGE,
+            "<input type='checkbox' value='1' id='flag_oldimg' name='flag_oldimg' onclick=\"groupImgSwitch(img)\"  checked>"
         );
         $form->addElement($field_oldpicture);
         $form->addElement($field_maintainimage);
@@ -430,19 +440,20 @@ var elestyle = xoopsGetElementById(img).style;
 //--></script>
 <!-- End Form Validation JavaScript //-->
         ";
+
         return true;
     }
 
     /**
-     * @param string $group_title
-     * @param string $group_desc
-     * @param string $group_img
-     * @param string $path_upload
-     * @param int    $maxfilebytes
-     * @param int    $maxfilewidth
-     * @param int    $maxfileheight
-     * @param int    $change_img
-     * @param string $group
+     * @param string       $group_title
+     * @param string       $group_desc
+     * @param string       $group_img
+     * @param string       $path_upload
+     * @param int          $maxfilebytes
+     * @param int          $maxfilewidth
+     * @param int          $maxfileheight
+     * @param int          $change_img
+     * @param string|Group $group
      * @return bool
      */
     public function receiveGroup(
@@ -484,7 +495,11 @@ var elestyle = xoopsGetElementById(img).style;
             $uploadDir         = \XOOPS_UPLOAD_PATH . '/suico/groups/';
             // create the object to upload
             $uploader = new XoopsMediaUploader(
-                $uploadDir, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight
+                $uploadDir,
+                $allowed_mimetypes,
+                $maxfilesize,
+                $maxfilewidth,
+                $maxfileheight
             );
             // fetch the media
             if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
@@ -494,6 +509,7 @@ var elestyle = xoopsGetElementById(img).style;
                 if (!$uploader->upload()) {
                     // if there are errors lets return them
                     echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
+
                     return false;
                 }
                 // now let s create a new object picture and set its variables
@@ -526,6 +542,7 @@ var elestyle = xoopsGetElementById(img).style;
                 $result                 = $resizer->resizeImage();
             } else {
                 echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
+
                 return false;
             }
         }
@@ -533,6 +550,7 @@ var elestyle = xoopsGetElementById(img).style;
         $group->setVar('group_desc', $group_desc);
         $group->setVar('owner_uid', $uid);
         $this->insert($group);
+
         return true;
     }
 
@@ -546,6 +564,7 @@ var elestyle = xoopsGetElementById(img).style;
         $queryresult         = $GLOBALS['xoopsDB']->query($query);
         $row                 = $GLOBALS['xoopsDB']->fetchArray($queryresult);
         $group_total_members = $row['grouptotalmembers'];
+
         return $group_total_members;
     }
 
@@ -561,6 +580,7 @@ var elestyle = xoopsGetElementById(img).style;
         while (false !== ($row = $GLOBALS['xoopsDB']->fetchArray($result))) {
             $group_total_comments = $row['count(com_id)'];
         }
+
         return $group_total_comments;
     }
 
@@ -574,6 +594,7 @@ var elestyle = xoopsGetElementById(img).style;
         $queryresult         = $GLOBALS['xoopsDB']->query($query);
         $row                 = $GLOBALS['xoopsDB']->fetchArray($queryresult);
         $group_total_members = $row['grouptotalmembers'];
+
         return $group_total_members;
     }
 }

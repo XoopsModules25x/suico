@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico\Common;
 
@@ -15,9 +13,8 @@ namespace XoopsModules\Suico\Common;
  */
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -27,17 +24,17 @@ namespace XoopsModules\Suico\Common;
 class Configurator
 {
     public $name;
-    public $paths           = [];
-    public $uploadFolders   = [];
-    public $copyBlankFiles  = [];
-    public $copyTestFolders = [];
-    public $templateFolders = [];
-    public $oldFiles        = [];
-    public $oldFolders      = [];
-    public $renameTables    = [];
-    public $renameColumns   = [];
-    public $moduleStats     = [];
-    public $icons;
+    public       $paths           = [];
+    public array $uploadFolders   = [];
+    public array $copyBlankFiles  = [];
+    public array $copyTestFolders = [];
+    public array $templateFolders = [];
+    public array $oldFiles        = [];
+    public array $oldFolders      = [];
+    public array $renameTables    = [];
+    public array $renameColumns   = [];
+    public array $moduleStats     = [];
+    public       $icons;
 
     /**
      * Configurator constructor.
@@ -57,7 +54,7 @@ class Configurator
         $this->renameColumns   = $config->renameColumns;
         $this->moduleStats     = $config->moduleStats;
         //        $this->modCopyright    = $config->modCopyright;
-        $this->icons = include \dirname(__DIR__, 2) . '/config/icons.php';
-        $this->paths = include \dirname(__DIR__, 2) . '/config/paths.php';
+        $this->icons = require \dirname(__DIR__, 2) . '/config/icons.php';
+        $this->paths = require \dirname(__DIR__, 2) . '/config/paths.php';
     }
 }

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -18,9 +16,8 @@ use Criteria;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
@@ -31,7 +28,7 @@ require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 /**
  * Class NotesController
  */
-class NotesController extends SuicoController
+class NotesController extends Controller
 {
     /**
      * @param                                      $countNotes
@@ -46,6 +43,7 @@ class NotesController extends SuicoController
         if ($notes) {
             return $notes;
         }
+
         return false;
     }
 
@@ -76,6 +74,7 @@ class NotesController extends SuicoController
             }
             */
         }
+
         return true;
     }
 }

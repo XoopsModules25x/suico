@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico\Common;
 
@@ -16,9 +14,8 @@ namespace XoopsModules\Suico\Common;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -30,7 +27,6 @@ use XoopsUser;
 
 /**
  * Trait FilesManagement
- * @package XoopsModules\Suico\Common
  */
 trait FilesManagement
 {
@@ -43,13 +39,13 @@ trait FilesManagement
      */
     public static function createFolder(
         $folder
-    ) {
+    ): void {
         try {
             if (!\is_dir($folder)) {
                 if (!\is_dir($folder) && !\mkdir($folder) && !\is_dir($folder)) {
                     throw new RuntimeException(\sprintf('Unable to create the %s directory', $folder));
                 }
-                file_put_contents($folder . '/index.html', '<script>history.go(-1);</script>');
+                \file_put_contents($folder . '/index.html', '<script>history.go(-1);</script>');
             }
         } catch (Throwable $throwable) {
             echo 'Caught exception: ', $throwable->getMessage(), '<br>';
@@ -102,7 +98,7 @@ trait FilesManagement
      * @return      bool     Returns true on success, false on failure
      * @author      Aidan Lister <aidan@php.net>
      * @version     1.0.1
-     * @link        http://aidanlister.com/2004/04/recursively-copying-directories-in-php/
+     * @link        https://aidanlister.com/2004/04/recursively-copying-directories-in-php/
      */
     public static function xcopy(
         $source,
@@ -123,19 +119,21 @@ trait FilesManagement
             }
         }
         // Loop through the folder
+        /** @var \Directory $dir */
         $dir = \dir($source);
-        if (@\is_dir($dir)) {
+        if (@\is_dir((string)$dir)) {
             while (false !== $entry = $dir->read()) {
                 // Skip pointers
                 if ('.' === $entry || '..' === $entry) {
                     continue;
                 }
                 // Deep copy directories
-                self::xcopy("${source}/${entry}", "${dest}/${entry}");
+                self::xcopy("{$source}/{$entry}", "{$dest}/{$entry}");
             }
             // Clean up
             $dir->close();
         }
+
         return true;
     }
 
@@ -171,7 +169,7 @@ trait FilesManagement
                     )) {
                         break;
                     }
-                } elseif (!($success = \unlink($fileInfo->getRealPath()))) {
+                } elseif (!($success = @\unlink($fileInfo->getRealPath()))) {
                     break;
                 }
             }
@@ -183,6 +181,7 @@ trait FilesManagement
             // input is not a valid directory
             $success = false;
         }
+
         return $success;
     }
 
@@ -213,7 +212,7 @@ trait FilesManagement
             if ($fObj->isFile()) {
                 $filename = $fObj->getPathname();
                 $fObj     = null; // clear this iterator object to close the file
-                if (!\unlink($filename)) {
+                if (false === @\unlink($filename)) {
                     return false; // couldn't delete the file
                 }
             } elseif (!$fObj->isDot() && $fObj->isDir()) {
@@ -222,6 +221,7 @@ trait FilesManagement
             }
         }
         $iterator = null;   // clear iterator Obj to close file/directory
+
         return \rmdir($src); // remove the directory & return results
     }
 
@@ -269,6 +269,7 @@ trait FilesManagement
             }
         }
         $iterator = null;   // clear iterator Obj to close file/directory
+
         return \rmdir($src); // remove the directory & return results
     }
 
@@ -316,6 +317,7 @@ trait FilesManagement
                 self::rcopy($fObj->getPathname(), "{$dest}/" . $fObj->getFilename());
             }
         }
+
         return true;
     }
 }

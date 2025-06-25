@@ -1,11 +1,9 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
  which is considered copyrighted (c) material of the original comment or credit authors.
- 
+
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -13,9 +11,8 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -27,24 +24,13 @@ use XoopsModules\Suico\{
 };
 /** @var Helper $helper */
 /** @var Utility $utility */
-/** @var Common\Configurator $configurator */
-/** @var Common\Migrate $migrator */
-
+/** @var Configurator $configurator */
+/** @var Migrate $migrator */
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
     || !$GLOBALS['xoopsUser']->isAdmin()) {
     exit('Restricted access' . PHP_EOL);
 }
-include dirname(__DIR__) . '/preloads/autoloader.php';
-/**
- * @param string $tablename
- *
- * @return bool
- */
-function tableExists($tablename)
-{
-    $result = $GLOBALS['xoopsDB']->queryF("SHOW TABLES LIKE '${tablename}'");
-    return $GLOBALS['xoopsDB']->getRowsNum($result) > 0;
-}
+include \dirname(__DIR__) . '/preloads/autoloader.php';
 
 /**
  * Prepares system prior to attempting to install module
@@ -54,14 +40,15 @@ function tableExists($tablename)
 function xoops_module_pre_update_suico(
     \XoopsModule $module
 ) {
-    $moduleDirName = basename(dirname(__DIR__));
-    $helper       = Helper::getInstance();
-    $utility      = new Utility();
-    $xoopsSuccess = $utility::checkVerXoops($module);
-    $phpSuccess   = $utility::checkVerPhp($module);
-    $configurator = new Configurator();
-    $migrator     = new Migrate($configurator);
+    $moduleDirName = \basename(\dirname(__DIR__));
+    $helper        = Helper::getInstance();
+    $utility       = new Utility();
+    $xoopsSuccess  = $utility::checkVerXoops($module);
+    $phpSuccess    = $utility::checkVerPhp($module);
+    $configurator  = new Configurator();
+    $migrator      = new Migrate($configurator);
     $migrator->synchronizeSchema();
+
     return $xoopsSuccess && $phpSuccess;
 }
 
@@ -76,8 +63,8 @@ function xoops_module_update_suico(
     XoopsModule $module,
     $previousVersion = null
 ) {
-    $moduleDirName      = basename(dirname(__DIR__));
-    $moduleDirNameUpper = mb_strtoupper($moduleDirName);
+    $moduleDirName      = \basename(\dirname(__DIR__));
+    $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
     $helper       = Helper::getInstance();
     $utility      = new Utility();
@@ -108,7 +95,9 @@ function xoops_module_update_suico(
                         $fileInfo = new SplFileInfo($templateFolder . $v);
                         if ('html' === $fileInfo->getExtension() && 'index.html' !== $fileInfo->getFilename()) {
                             if (is_file($templateFolder . $v)) {
-                                unlink($templateFolder . $v);
+                                if (false === @\unlink($templateFolder . $v)) {
+                                    throw new \RuntimeException('The file ' . $templateFolder . $v . ' could not be deleted.');
+                                }
                             }
                         }
                     }
@@ -125,7 +114,9 @@ function xoops_module_update_suico(
             ) {
                 $tempFile = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $configurator->oldFiles[$i]);
                 if (is_file($tempFile)) {
-                    unlink($tempFile);
+                    if (false === @\unlink($tempFile)) {
+                        throw new \RuntimeException('The file ' . $tempFile . ' could not be deleted.');
+                    }
                 }
             }
         }
@@ -160,7 +151,7 @@ function xoops_module_update_suico(
         }
         //  ---  COPY blank.png FILES ---------------
         if (count($configurator->copyBlankFiles) > 0) {
-            $file = dirname(__DIR__) . '/assets/images/blank.png';
+            $file = \dirname(__DIR__) . '/assets/images/blank.png';
             foreach (array_keys($configurator->copyBlankFiles) as $i) {
                 $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
                 $utility::copyFile($file, $dest);
@@ -174,9 +165,10 @@ function xoops_module_update_suico(
                 'n'
             ) . "' AND `tpl_file` LIKE '%.html%'";
         $GLOBALS['xoopsDB']->queryF($sql);
-        /** @var XoopsGroupPermHandler $gpermHandler */
-        $gpermHandler = xoops_getHandler('groupperm');
-        return $gpermHandler->deleteByModule($module->getVar('mid'), 'item_read');
+        /** @var XoopsGroupPermHandler $grouppermHandler */
+        $grouppermHandler = xoops_getHandler('groupperm');
+
+        return $grouppermHandler->deleteByModule($module->getVar('mid'), 'item_read');
     }
     $profileHandler = $helper->getHandler('Profile');
     $profileHandler->cleanOrphan($GLOBALS['xoopsDB']->prefix('users'), 'uid', 'profile_id');
@@ -184,5 +176,6 @@ function xoops_module_update_suico(
     $user_fields  = $fieldHandler->getUserVars();
     $criteria     = new Criteria('field_name', "('" . implode("', '", $user_fields) . "')", 'IN');
     $fieldHandler->updateAll('field_config', 0, $criteria);
+
     return true;
 }

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -29,9 +27,8 @@ use XoopsThemeForm;
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -48,8 +45,8 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
  */
 class ImageHandler extends XoopsPersistableObjectHandler
 {
-    public $helper;
-    public $isAdmin;
+    public Helper $helper;
+    public        $isAdmin;
 
     /**
      * Constructor
@@ -60,13 +57,13 @@ class ImageHandler extends XoopsPersistableObjectHandler
         ?XoopsDatabase $xoopsDatabase = null,
         $helper = null
     ) {
-        /** @var \XoopsModules\Suico\Helper $this->helper */
+        /** @var \XoopsModules\Suico\Helper $this- >helper */
         if (null === $helper) {
             $this->helper = Helper::getInstance();
         } else {
             $this->helper = $helper;
         }
-        $isAdmin = $this->helper->isUserAdmin();
+        $this->isAdmin = $this->helper->isUserAdmin();
         parent::__construct($xoopsDatabase, 'suico_images', Image::class, 'image_id', 'title', 'caption');
     }
 
@@ -89,6 +86,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $obj->unsetNew();
         }
         $obj->helper = $this->helper;
+
         return $obj;
     }
 
@@ -96,8 +94,8 @@ class ImageHandler extends XoopsPersistableObjectHandler
      * retrieve a Image
      *
      * @param int|null $id of the Image
-     * @param null $fields
-     * @return mixed reference to the {@link Image} object, FALSE if failed
+     * @param null     $fields
+     * @return false|\XoopsModules\Suico\Image reference to the {@link Image} object, FALSE if failed
      */
     public function get2(
         $id = null,
@@ -111,40 +109,42 @@ class ImageHandler extends XoopsPersistableObjectHandler
         if (1 === $numrows) {
             $image = new Image();
             $image->assignVars($this->db->fetchArray($result));
+
             return $image;
         }
+
         return false;
     }
 
     /**
      * insert a new Image in the database
      *
-     * @param \XoopsObject $xoopsObject reference to the {@link Image} object
+     * @param \XoopsObject $object reference to the {@link Image} object
      * @param bool         $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
     public function insert2(
-        XoopsObject $xoopsObject,
+        XoopsObject $object,
         $force = false
     ) {
         global $xoopsConfig;
-        if (!$xoopsObject instanceof Image) {
+        if (!$object instanceof Image) {
             return false;
         }
-        if (!$xoopsObject->isDirty()) {
+        if (!$object->isDirty()) {
             return true;
         }
-        if (!$xoopsObject->cleanVars()) {
+        if (!$object->cleanVars()) {
             return false;
         }
         $image_id = '';
-        foreach ($xoopsObject->cleanVars as $k => $v) {
+        foreach ($object->cleanVars as $k => $v) {
             ${$k} = $v;
         }
         //        $now = 'date_add(now(), interval ' . $xoopsConfig['server_TZ'] . ' hour)';
-        if ($xoopsObject->isNew()) {
+        if ($object->isNew()) {
             // ajout/modification d'un Image
-            $xoopsObject = new Image();
+            $object = new Image();
             $format      = 'INSERT INTO %s (image_id, title, caption, date_created, date_updated, uid_owner, filename, private)';
             $format      .= 'VALUES (%u, %s, %s, %s, %s, %s, %s, 0)';
             $sql         = \sprintf(
@@ -153,8 +153,8 @@ class ImageHandler extends XoopsPersistableObjectHandler
                 $image_id,
                 $this->db->quoteString($title),
                 $this->db->quoteString($caption),
-                \time(),//$now,
-                \time(),//$now,
+                \time(), //$now,
+                \time(), //$now,
                 $this->db->quoteString($uid_owner),
                 $this->db->quoteString($filename)
             );
@@ -169,8 +169,8 @@ class ImageHandler extends XoopsPersistableObjectHandler
                 $image_id,
                 $this->db->quoteString($title),
                 $this->db->quoteString($caption),
-                $xoopsObject->getVar('date_created'), // $now,
-                $xoopsObject->getVar('date_updated'), // $now,
+                $object->getVar('date_created'), // $now,
+                $object->getVar('date_updated'), // $now,
                 $this->db->quoteString($uid_owner),
                 $this->db->quoteString($filename),
                 $this->db->quoteString($private),
@@ -188,28 +188,29 @@ class ImageHandler extends XoopsPersistableObjectHandler
         if (empty($image_id)) {
             $image_id = $this->db->getInsertId();
         }
-        $xoopsObject->assignVar('image_id', $image_id);
+        $object->assignVar('image_id', $image_id);
+
         return true;
     }
 
     /**
      * delete a Image from the database
      *
-     * @param \XoopsObject $xoopsObject reference to the Image to delete
+     * @param \XoopsObject $object reference to the Image to delete
      * @param bool         $force
      * @return bool FALSE if failed.
      */
     public function delete(
-        XoopsObject $xoopsObject,
+        XoopsObject $object,
         $force = false
     ) {
-        if (!$xoopsObject instanceof Image) {
+        if (!$object instanceof Image) {
             return false;
         }
         $sql = \sprintf(
             'DELETE FROM %s WHERE image_id = %u',
             $this->db->prefix('suico_images'),
-            $xoopsObject->getVar('image_id')
+            (int)$object->getVar('image_id')
         );
         if ($force) {
             $result = $this->db->queryF($sql);
@@ -219,32 +220,34 @@ class ImageHandler extends XoopsPersistableObjectHandler
         if (!$result) {
             return false;
         }
+
         return true;
     }
 
     /**
      * retrieve suico_imagess from the database
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} conditions to be met
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement} conditions to be met
      * @param bool                                 $id_as_key       use the UID as key for the array?
      * @param bool                                 $as_object
      * @return array array of {@link Image} objects
      */
     public function &getObjects(
-        ?CriteriaElement $criteriaElement = null,
+        ?CriteriaElement $criteria = null,
         $id_as_key = false,
         $as_object = true
     ) {
         $ret   = [];
-        $limit = $start = 0;
+        $start = 0;
+        $limit = 0;
         $sql   = 'SELECT * FROM ' . $this->db->prefix('suico_images');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
-            if ('' !== $criteriaElement->getSort()) {
-                $sql .= ' ORDER BY ' . $criteriaElement->getSort() . ' ' . $criteriaElement->getOrder();
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+            $sql .= ' ' . $criteria->renderWhere();
+            if ('' !== $criteria->getSort()) {
+                $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
-            $limit = $criteriaElement->getLimit();
-            $start = $criteriaElement->getStart();
+            $limit = $criteria->getLimit();
+            $start = $criteria->getStart();
         }
         $result = $this->db->query($sql, $limit, $start);
         if (!$result) {
@@ -260,50 +263,53 @@ class ImageHandler extends XoopsPersistableObjectHandler
             }
             unset($image);
         }
+
         return $ret;
     }
 
     /**
      * count suico_imagess matching a condition
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement} to match
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement} to match
      * @return int count of suico_imagess
      */
     public function getCount(
-        ?CriteriaElement $criteriaElement = null
+        ?CriteriaElement $criteria = null
     ) {
         $sql = 'SELECT COUNT(*) FROM ' . $this->db->prefix('suico_images');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+            $sql .= ' ' . $criteria->renderWhere();
         }
         $result = $this->db->query($sql);
         if (!$result) {
             return 0;
         }
         [$count] = $this->db->fetchRow($result);
+
         return (int)$count;
     }
 
     /**
      * delete suico_imagess matching a set of conditions
      *
-     * @param \CriteriaElement|\CriteriaCompo|null $criteriaElement {@link \CriteriaElement}
+     * @param \CriteriaElement|\CriteriaCompo|null $criteria {@link \CriteriaElement}
      * @param bool                                 $force
      * @param bool                                 $asObject
      * @return bool FALSE if deletion failed
      */
     public function deleteAll(
-        ?CriteriaElement $criteriaElement = null,
+        ?CriteriaElement $criteria = null,
         $force = true,
         $asObject = false
     ) {
         $sql = 'DELETE FROM ' . $this->db->prefix('suico_images');
-        if (isset($criteriaElement) && $criteriaElement instanceof CriteriaElement) {
-            $sql .= ' ' . $criteriaElement->renderWhere();
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
+            $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {
             return false;
         }
+
         return true;
     }
 
@@ -333,6 +339,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $form->addElement($field_caption);
         $form->addElement($buttonSend);
         $form->assign($xoopsTpl); //If your server is php 5
+
         return true;
     }
 
@@ -366,6 +373,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $form->addElement($field_marker);
         $form->addElement($buttonSend);
         $form->display();
+
         return true;
     }
 
@@ -410,7 +418,11 @@ class ImageHandler extends XoopsPersistableObjectHandler
         //        $uploadDir = \XOOPS_UPLOAD_PATH . '/suico/images/';
         // create the object to upload
         $uploader = new XoopsMediaUploader(
-            $pathUpload, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight
+            $pathUpload,
+            $allowed_mimetypes,
+            $maxfilesize,
+            $maxfilewidth,
+            $maxfileheight
         );
         // fetch the media
         if ($uploader->fetchMedia(Request::getArray('xoops_upload_file', '', 'POST')[0])) {
@@ -420,6 +432,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             if (!$uploader->upload()) {
                 // if there are errors lets return them
                 echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
+
                 return false;
             }
             // now let s create a new object picture and set its variables
@@ -448,8 +461,10 @@ class ImageHandler extends XoopsPersistableObjectHandler
             );
         } else {
             echo '<div style="color:#FF0000; background-color:#FFEAF4; border-color:#FF0000; border-width:thick; border-style:solid; text-align:center"><p>' . $uploader->getErrors() . '</p></div>';
+
             return false;
         }
+
         return true;
     }
 
@@ -470,7 +485,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $pictwidth,
         $pictheight,
         $pathUpload
-    ) {
+    ): void {
         $img2   = $img;
         $path   = \pathinfo($img);
         $img    = \imagecreatefromjpeg($img);
@@ -552,6 +567,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $vetor[$i]['img_filename'] = $myrow['filename'];
             $i++;
         }
+
         return $vetor;
     }
 
@@ -580,21 +596,20 @@ class ImageHandler extends XoopsPersistableObjectHandler
         }
         if (1 == $isUser) {
             $sql0 = 'SELECT f.friend2_uid FROM ' . $this->db->prefix('suico_friendships') . ' AS f';
-            $sql0 .= ' WHERE f.friend1_uid = '. $uid ;
-            $sql = 'SELECT uname, t.uid_owner, t.filename, t.title, t.caption, t.date_created, t.date_updated  FROM ' . $this->db->prefix('suico_images') . ' AS t';
-            $sql .= ' INNER JOIN ' . $this->db->prefix('users') . ' u ON t.uid_owner=u.uid';
-            $sql .= ' INNER JOIN ' . $this->db->prefix('suico_configs') . ' c on t.uid_owner=c.config_uid';
-            $sql .= ' WHERE (private=0 AND c.pictures < 3 )'; //all pictures visible to members
-            $sql .= ' OR ( private=0 AND c.pictures = 3 AND c.config_uid IN ( '. $sql0 .')) '; //pictures visible to friends
-            $sql .= ' OR ( c.config_uid = '. $uid .' ) '; //my private pictures
-            $sql .= ' ORDER BY image_id DESC';
+            $sql0 .= ' WHERE f.friend1_uid = ' . $uid;
+            $sql  = 'SELECT uname, t.uid_owner, t.filename, t.title, t.caption, t.date_created, t.date_updated  FROM ' . $this->db->prefix('suico_images') . ' AS t';
+            $sql  .= ' INNER JOIN ' . $this->db->prefix('users') . ' u ON t.uid_owner=u.uid';
+            $sql  .= ' INNER JOIN ' . $this->db->prefix('suico_configs') . ' c on t.uid_owner=c.config_uid';
+            $sql  .= ' WHERE (private=0 AND c.pictures < 3 )'; //all pictures visible to members
+            $sql  .= ' OR ( private=0 AND c.pictures = 3 AND c.config_uid IN ( ' . $sql0 . ')) '; //pictures visible to friends
+            $sql  .= ' OR ( c.config_uid = ' . $uid . ' ) '; //my private pictures
+            $sql  .= ' ORDER BY image_id DESC';
         }
 
         $result = $this->db->query($sql, $limit, 0);
 
-
-        $vetor  = [];
-        $i      = 0;
+        $vetor = [];
+        $i     = 0;
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $vetor[$i]['uid_owner']    = $myrow['uid_owner'];
             $vetor[$i]['uname']        = $myrow['uname'];
@@ -605,6 +620,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
             $vetor[$i]['date_updated'] = \formatTimestamp($myrow['date_updated']);
             $i++;
         }
+
         return $vetor;
     }
 
@@ -621,7 +637,7 @@ class ImageHandler extends XoopsPersistableObjectHandler
         $width,
         $height,
         $pathUpload
-    ) {
+    ): void {
         $img2   = $img;
         $path   = \pathinfo($img);
         $img    = \imagecreatefromjpeg($img);
@@ -681,4 +697,3 @@ class ImageHandler extends XoopsPersistableObjectHandler
         \imagedestroy($img2);
     }
 }
-

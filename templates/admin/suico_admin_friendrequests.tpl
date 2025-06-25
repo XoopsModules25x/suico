@@ -1,7 +1,7 @@
 <{if $friendrequestRows > 0}>
     <div class="outer">
         <form name="select" action="friendrequests.php?op=" method="POST"
-              onsubmit="if(window.document.select.op.value =='') {return false;} else if (window.document.select.op.value =='delete') {return deleteSubmitValid('friendrequestsId[]');} else if (isOneChecked('friendrequestsId[]')) {return true;} else {alert('<{$smarty.const.AM_FRIENDREQUESTS_SELECTED_ERROR}>'); return false;}">
+              onsubmit="if(window.document.select.op.value =='') {return false;} else if (window.document.select.op.value =='delete') {return deleteSubmitValid('friendrequestsId[]');} else if (isOneChecked('friendrequestsId[]')) {return true;} else {alert('<{$smarty.const.AM_SUICO_SELECTED_ERROR}>'); return false;}">
             <input type="hidden" name="confirm" value="1">
             <div class="floatleft">
                 <label>
@@ -13,7 +13,7 @@
                 <input id="submitUp" class="formButton" type="submit" name="submitselect" value="<{$smarty.const._SUBMIT}>" title="<{$smarty.const._SUBMIT}>">
             </div>
             <div class="floatcenter0">
-                <div id="pagenav"><{$pagenav}></div>
+                <div id="pagenav"><{$pagenav|default:''}></div>
             </div>
 
             <table class="$friendrequests" cellpadding="0" cellspacing="0" width="100%">
@@ -29,7 +29,7 @@
                 <{foreach item=friendrequestArray from=$friendrequestsArray}>
                     <tr class="<{cycle values="odd,even"}>">
 
-                        <td align="center" style="vertical-align:middle;"><input type="checkbox" name="friendrequests_id[]" title="friendrequests_id[]" id="friendrequests_id[]" value="<{$friendrequestArray.friendrequests_id}>"></td>
+                        <td align="center" style="vertical-align:middle;"><input type="checkbox" name="friendrequests_id[]" title="friendrequests_id[]" id="friendrequests_id[]" value="<{$friendrequestArray.friendrequest_id}>"></td>
                         <td class='left'><{$friendrequestArray.friendreq_id}></td>
                         <td class='left'><{$friendrequestArray.friendrequester_uid}></td>
                         <td class='left'><{$friendrequestArray.friendrequestto_uid}></td>

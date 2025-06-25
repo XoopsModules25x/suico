@@ -1,12 +1,12 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico\Form;
 
-use XoopsModules\Suico;
-use XoopsModules\Suico\Profile;
-use XoopsModules\Suico\ProfileHandler;
+use XoopsModules\Suico\{
+    Helper,
+    Profile,
+    ProfileHandler
+};
 use XoopsThemeForm;
 use XoopsFormButton;
 use XoopsFormHidden;
@@ -27,34 +27,34 @@ class UserForm extends XoopsThemeForm
      * UserForm constructor.
      * @param \XoopsUser                       $user
      * @param \XoopsModules\Suico\Profile|null $profile
-     * @param bool                             $action
+     * @param bool $action
      */
     public function __construct(\XoopsUser $user, Profile $profile = null, $action = false)
     {
-        $helper = \XoopsModules\Suico\Helper::getInstance();
+        $helper = Helper::getInstance();
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];
         }
         if (empty($GLOBALS['xoopsConfigUser'])) {
-            /* @var \XoopsConfigHandler $configHandler */
+            /** @var \XoopsConfigHandler $configHandler */
             $configHandler              = \xoops_getHandler('config');
             $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(\XOOPS_CONF_USER);
         }
         require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
         $title = $user->isNew() ? \_AM_SUICO_ADDUSER : \_US_EDITPROFILE;
         parent::__construct($title, 'userinfo', $action, 'post', true);
-        /* @var ProfileHandler $profileHandler */
-        $profileHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Profile');
+        /** @var ProfileHandler $profileHandler */
+        $profileHandler = Helper::getInstance()->getHandler('Profile');
         // Dynamic fields
         if (!$profile) {
-            /* @var ProfileHandler $profileHandler */
-            $profileHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Profile');
+            /** @var ProfileHandler $profileHandler */
+            $profileHandler = Helper::getInstance()->getHandler('Profile');
             $profile        = $profileHandler->get($user->getVar('uid'));
         }
         // Get fields
         $fields = $profileHandler->loadFields();
         // Get ids of fields that can be edited
-        /* @var  \XoopsGroupPermHandler $grouppermHandler */
+        /** @var \XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler = \xoops_getHandler('groupperm');
         $editable_fields  = $grouppermHandler->getItemIds('profile_edit', $GLOBALS['xoopsUser']->getGroups(), $GLOBALS['xoopsModule']->getVar('mid'));
         if ($user->isNew() || $GLOBALS['xoopsUser']->isAdmin()) {
@@ -92,12 +92,12 @@ class UserForm extends XoopsThemeForm
         $weights[0][]    = 0;
         $elements[0][]   = ['element' => new XoopsFormHidden('op', 'save'), 'required' => 0];
         $weights[0][]    = 0;
-        $categoryHandler = \XoopsModules\Suico\Helper::getInstance()->getHandler('Category');
+        $categoryHandler = Helper::getInstance()->getHandler('Category');
         $categories      = [];
         $all_categories  = $categoryHandler->getObjects(null, true, false);
         $count_fields    = \count($fields);
         foreach (\array_keys($fields) as $i) {
-            if (\in_array($fields[$i]->getVar('field_id'), $editable_fields)) {
+            if (\in_array($fields[$i]->getVar('field_id'), $editable_fields, true)) {
                 // Set default value for user fields if available
                 if ($user->isNew()) {
                     $default = $fields[$i]->getVar('field_default');
@@ -119,7 +119,7 @@ class UserForm extends XoopsThemeForm
         }
         if ($GLOBALS['xoopsUser'] && $GLOBALS['xoopsUser']->isAdmin()) {
             \xoops_loadLanguage('admin', 'profile');
-            /* @var  \XoopsGroupPermHandler $grouppermHandler */
+            /** @var \XoopsGroupPermHandler $grouppermHandler */
             $grouppermHandler = \xoops_getHandler('groupperm');
             //If user has admin rights on groups
             require_once $GLOBALS['xoops']->path('modules/system/constants.php');

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Suico;
 
@@ -15,19 +13,19 @@ namespace XoopsModules\Suico;
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
- * @license             GNU GPL 2 (http://www.gnu.org/licenses/gpl-2.0.html)
- * @package             profile
+ * @license             GNU GPL 2 (https://www.gnu.org/licenses/gpl-2.0.html)
  * @since               2.3.0
  * @author              Jan Pedersen
  * @author              Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
 /**
- * @package             kernel
  * @copyright       (c) 2000-2016 XOOPS Project (www.xoops.org)
  */
 class Profile extends \XoopsObject
 {
+    public $profile_id;
+
     /**
      * @param $fields
      */
@@ -41,7 +39,7 @@ class Profile extends \XoopsObject
      * Initiate variables
      * @param array $fields field information array of {@link XoopsField} objects
      */
-    public function init($fields)
+    public function init($fields): void
     {
         if (\is_array($fields) && \count($fields) > 0) {
             foreach (\array_keys($fields) as $key) {

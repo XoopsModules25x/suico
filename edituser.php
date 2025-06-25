@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -14,8 +12,8 @@ declare(strict_types=1);
 /**
  * Extended User Profile
  *
- * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @copyright    XOOPS Project (https://xoops.org)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       Jan Pedersen
  * @author       Taiwen Jiang <phppp@users.sourceforge.net>
  * @author       Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
@@ -34,7 +32,7 @@ require __DIR__ . '/header.php';
  * Fetching numbers of groups friends videos pictures etc...
  */
 $controller = new IndexController($xoopsDB, $xoopsUser, $xoopsModule);
-/* @var XoopsMemberHandler $memberHandler */
+/** @var XoopsMemberHandler $memberHandler */
 $memberHandler = xoops_getHandler('member');
 $nbSections    = $controller->getNumbersSections();
 require_once $GLOBALS['xoops']->path('class/xoopsformloader.php');
@@ -44,7 +42,7 @@ if (!is_object($GLOBALS['xoopsUser'])) {
 }
 $myts = \MyTextSanitizer::getInstance();
 $op   = Request::getCmd('op', 'editprofile');
-/* @var \XoopsConfigHandler $configHandler */
+/** @var \XoopsConfigHandler $configHandler */
 $configHandler              = xoops_getHandler('config');
 $GLOBALS['xoopsConfigUser'] = $configHandler->getConfigsByCat(XOOPS_CONF_USER);
 if ('save' === $op) {
@@ -54,7 +52,7 @@ if ('save' === $op) {
     }
     $uid      = $GLOBALS['xoopsUser']->getVar('uid');
     $errors   = [];
-    $edituser =& $GLOBALS['xoopsUser'];
+    $edituser = &$GLOBALS['xoopsUser'];
     if ($GLOBALS['xoopsUser']->isAdmin()) {
         $edituser->setVar('uname', trim($_POST['uname']));
         $edituser->setVar('email', trim($_POST['email']));
@@ -69,7 +67,7 @@ if ('save' === $op) {
         // Get fields
         $fields = $profileHandler->loadFields();
         // Get ids of fields that can be edited
-        /* @var  \XoopsGroupPermHandler $grouppermHandler */
+        /** @var \XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler = xoops_getHandler('groupperm');
         $editable_fields  = $grouppermHandler->getItemIds('profile_edit', $GLOBALS['xoopsUser']->getGroups(), $GLOBALS['xoopsModule']->getVar('mid'));
         if (!$profile = $profileHandler->get($edituser->getVar('uid'))) {
@@ -78,9 +76,9 @@ if ('save' === $op) {
         }
         foreach (array_keys($fields) as $i) {
             $fieldname = $fields[$i]->getVar('field_name');
-            if (in_array($fields[$i]->getVar('field_id'), $editable_fields) && isset($_REQUEST[$fieldname])) {
+            if (in_array($fields[$i]->getVar('field_id'), $editable_fields, true) && isset($_REQUEST[$fieldname])) {
                 $value = $fields[$i]->getValueForSave($_REQUEST[$fieldname]);
-                if (in_array($fieldname, $profileHandler->getUserVars())) {
+                if (in_array($fieldname, $profileHandler->getUserVars(), true)) {
                     $edituser->setVar($fieldname, $value);
                 } else {
                     $profile->setVar($fieldname, $value);
@@ -166,12 +164,16 @@ if ('avatarupload' === $op) {
         && $GLOBALS['xoopsUser']->getVar('posts') >= $GLOBALS['xoopsConfigUser']['avatar_minposts']) {
         require_once $GLOBALS['xoops']->path('class/uploader.php');
         $uploader = new XoopsMediaUploader(
-            XOOPS_UPLOAD_PATH . '/avatars', $allowed_mimetypes, $GLOBALS['xoopsConfigUser']['avatar_maxsize'], $GLOBALS['xoopsConfigUser']['avatar_width'], $GLOBALS['xoopsConfigUser']['avatar_height']
+            XOOPS_UPLOAD_PATH . '/avatars',
+            $allowed_mimetypes,
+            $GLOBALS['xoopsConfigUser']['avatar_maxsize'],
+            $GLOBALS['xoopsConfigUser']['avatar_width'],
+            $GLOBALS['xoopsConfigUser']['avatar_height']
         );
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
             $uploader->setPrefix('cavt');
             if ($uploader->upload()) {
-                /* @var XoopsAvatarHandler $avtHandler */
+                /** @var XoopsAvatarHandler $avtHandler */
                 $avtHandler = xoops_getHandler('avatar');
                 $avatar     = $avtHandler->create();
                 $avatar->setVar('avatar_file', 'avatars / ' . $uploader->getSavedFileName());
@@ -181,13 +183,15 @@ if ('avatarupload' === $op) {
                 $avatar->setVar('avatar_type', 'C');
                 if ($avtHandler->insert($avatar)) {
                     $oldavatar = $GLOBALS['xoopsUser']->getVar('user_avatar');
-                    if (!empty($oldavatar) && false !== stripos($oldavatar, 'cavt')) {
+                    if (!empty($oldavatar) && false !== \mb_stripos($oldavatar, 'cavt')) {
                         $avatars = $avtHandler->getObjects(new Criteria('avatar_file', $oldavatar));
                         if (!empty($avatars) && 1 == count($avatars) && is_object($avatars[0])) {
                             $avtHandler->delete($avatars[0]);
                             $oldavatar_path = realpath(XOOPS_UPLOAD_PATH . ' / ' . $oldavatar);
-                            if (0 === strpos($oldavatar_path, XOOPS_UPLOAD_PATH) && is_file($oldavatar_path)) {
-                                unlink($oldavatar_path);
+                            if (0 === \mb_strpos($oldavatar_path, XOOPS_UPLOAD_PATH) && is_file($oldavatar_path)) {
+                                if (false === @\unlink($oldavatar_path)) {
+                                    throw new \RuntimeException('The file ' . $oldavatar_path . ' could not be deleted.');
+                                }
                             }
                         }
                     }
@@ -196,7 +200,10 @@ if ('avatarupload' === $op) {
                     $avtHandler->addUser($avatar->getVar('avatar_id'), $GLOBALS['xoopsUser']->getVar('uid'));
                     redirect_header('index . php ? t = ' . time() . ' & amp;uid = ' . $GLOBALS['xoopsUser']->getVar('uid'), 3, _US_PROFUPDATED);
                 } else {
-                    @unlink($uploader->getSavedDestination());
+                    $file = $uploader->getSavedDestination();
+                    if (false === @\unlink($file)) {
+                        throw new \RuntimeException('The file ' . $file . ' could not be deleted.');
+                    }
                 }
             }
         }
@@ -243,7 +250,9 @@ if ('avatarchoose' === $op) {
                 $avtHandler->delete($avatars[0]);
                 $oldavatar_path = realpath(XOOPS_UPLOAD_PATH . ' / ' . $oldavatar);
                 if (0 === mb_strpos($oldavatar_path, realpath(XOOPS_UPLOAD_PATH)) && is_file($oldavatar_path)) {
-                    unlink($oldavatar_path);
+                    if (false === @\unlink($oldavatar_path)) {
+                        throw new \RuntimeException('The file ' . $oldavatar_path . ' could not be deleted.');
+                    }
                 }
             }
         }
@@ -257,4 +266,4 @@ if ('avatarchoose' === $op) {
     redirect_header('index . php ? uid = ' . $uid, 0, _US_PROFUPDATED);
 }
 require __DIR__ . '/footer.php';
-require dirname(__DIR__, 2) . '/footer.php';
+require \dirname(__DIR__, 2) . '/footer.php';

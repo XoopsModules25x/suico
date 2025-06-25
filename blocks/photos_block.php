@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -13,9 +11,8 @@ declare(strict_types=1);
 
 /**
  * @category        Module
- * @package         suico
  * @copyright       {@link https://xoops.org/ XOOPS Project}
- * @license         GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author          Marcello Brandão aka  Suico, Mamba, LioMJ  <https://xoops.org>
  */
 
@@ -28,11 +25,11 @@ use XoopsModules\Suico\{
 if (!defined('XOOPS_ROOT_PATH')) {
     exit();
 }
-//include_once(XOOPS_ROOT_PATH."/class/criteria.php");
+//require_once XOOPS_ROOT_PATH."/class/criteria.php";
 //require_once XOOPS_ROOT_PATH . '/modules/suico/class/Image.php';
 /**
  * @param $options
- * @return array
+ * @return array|false
  */
 function b_suico_lastpictures_show($options)
 {
@@ -64,6 +61,7 @@ function b_suico_lastpictures_show($options)
     $block['showcaption'] = $options[1];
     $block['showdate']    = $options[2];
     $block['showowner']   = $options[3];
+
     return $block;
 }
 
@@ -116,5 +114,6 @@ function b_suico_lastpictures_edit($options)
     $form .= "&nbsp;<input type='radio' name='options[3]' value='0'" . $chk . ' >' . _NO . '<br>';
     $form .= _MB_SUICO_TOTALPICTUREDISPLAY . '&nbsp;';
     $form .= "<input type='text' name='options[4]' value='" . ($options[4] ?? 0) . "'>";
+
     return $form;
 }
