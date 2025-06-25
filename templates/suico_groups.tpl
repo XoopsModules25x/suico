@@ -74,11 +74,11 @@
                                                 <{if $uid_owner == $mygroups[i].uid }>
                                                     <form action="delete_group.php" method="POST" id="form_deletegroup" class="suico-groups-form-delete">
                                                         <input type="hidden" value="<{$mygroups[i].group_id}>" name="group_id" id="group_id">
-                                                        <input type="image" src="<{xoModuleIcons16 delete.png}>">
+                                                        <input type="image" src="<{xoModuleIcons16 'delete.png'}>">
                                                     </form>
                                                     <form action="editgroup.php" method="POST" id="form_editgroup" class="suico-groups-form-edit">
                                                         <input type="hidden" value="<{$mygroups[i].group_id}>" name="group_id" id="group_id">
-                                                        <input type="image" src="<{xoModuleIcons16 edit.png}>">
+                                                        <input type="image" src="<{xoModuleIcons16 'edit.png'}>">
                                                     </form>
                                                     <button title="<{$lang_owner}>" class="btn btn-secondary btn-sm float-right"><span class="fa fa-user"></span> <{$smarty.const._MD_SUICO_OWNEROFGROUP}></button>
                                                 <{/if}>
@@ -158,11 +158,11 @@
                                                 <{if ($uid_owner == $groups[j].uid)}>
                                                     <form action="delete_group.php" method="POST" id="form_deletegroup" class="suico-groups-form-delete">
                                                         <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
-                                                        <input type="image" src="<{xoModuleIcons16 delete.png}>">
+                                                        <input type="image" src="<{xoModuleIcons16 'delete.png'}>">
                                                     </form>
                                                     <form action="editgroup.php" method="POST" id="form_editgroup" class="suico-groups-form-edit">
                                                         <input type="hidden" value="<{$groups[j].id}>" name="group_id" id="group_id">
-                                                        <input type="image" src="<{xoModuleIcons16 edit.png}>">
+                                                        <input type="image" src="<{xoModuleIcons16 'edit.png'}>">
                                                     </form>
                                                     <button title="<{$lang_owner}>" class="btn btn-secondary btn-sm float-right"><span class="fa fa-user"></span> <{$smarty.const._MD_SUICO_OWNEROFGROUP}></button>
                                                 <{/if}>

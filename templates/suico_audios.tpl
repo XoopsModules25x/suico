@@ -161,7 +161,7 @@
                                     <form action="delaudio.php" method="post" id="deleteform" class="suico-audio-forms">
                                         <input type="hidden" value="<{$audios[i].id}>" name="cod_audio">
                                         <{$token}>
-                                        <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 delete.png}>">
+                                        <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 'delete.png'}>">
                                     </form>
                                 <{/if}>
                             </div>
