@@ -91,12 +91,12 @@
                                     <form action="delvideo.php" method="post" id="deleteform" class="suico-video-forms">
                                         <input type="hidden" value="<{$videos[i].id}>" name="cod_video">
                                         <{$token}>
-                                        <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 delete.png}>" class="float-left">
+                                        <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 'delete.png'}>" class="float-left">
                                     </form>
                                     <form action="editvideo.php" method="post" id="editform" class="suico-video-forms">
                                         <input type="hidden" alt="<{$lang_edit|default:''}>" title="<{$lang_edit|default:''}>" value="<{$videos[i].id}>" name="video_id">
                                         <{$token}>
-                                        <input name="submit" type="image" alt="<{$lang_editvideo}>" title="<{$lang_editvideo}>" src="<{xoModuleIcons16 edit.png}>" class="float-left">
+                                        <input name="submit" type="image" alt="<{$lang_editvideo}>" title="<{$lang_editvideo}>" src="<{xoModuleIcons16 'edit.png'}>" class="float-left">
                                     </form>
                                     <form action="featuredvideo.php" method="post" id="mainform" class="suico-video-forms">
                                         <input type="hidden" value="<{$videos[i].id}>" name="video_id">

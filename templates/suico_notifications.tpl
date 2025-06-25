@@ -4,7 +4,7 @@
     <form name="notification_select" action="<{$xoops_notification.target_page}>" method="post">
         <h5 style="text-align:center;"><{$lang_activenotifications}></h5>
         <input type="hidden" name="not_redirect" value="<{$xoops_notification.redirect_script}>">
-        <input type="hidden" name="XOOPS_TOKEN_REQUEST" value="<{php}>echo $GLOBALS['xoopsSecurity']->createToken();<{/php}>">
+        <input type="hidden" name="XOOPS_TOKEN_REQUEST" value="<{$xoops_token}>">
         <table class="table table-hover table-border">
             <tr>
                 <th colspan="3"><{$lang_notificationoptions}></th>

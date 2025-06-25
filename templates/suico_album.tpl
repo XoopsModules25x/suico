@@ -71,12 +71,12 @@
                                                         <form action="delpicture.php" method="post" id="deleteform" class="suico-album-formquick">
                                                             <input type="hidden" value="<{$pics_array[i].image_id}>" name="image_id">
                                                             <{$token}>
-                                                            <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 delete.png}>">
+                                                            <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 'delete.png'}>">
                                                         </form>
                                                         <form action="editpicture.php" method="post" id="editform" class="suico-album-formquick">
                                                             <input type="hidden" value="<{$pics_array[i].image_id}>" name="image_id">
                                                             <{$token}>
-                                                            <input name="submit" type="image" alt="<{$lang_editpicture}>" title="<{$lang_editpicture}>" src="<{xoModuleIcons16 edit.png}>">
+                                                            <input name="submit" type="image" alt="<{$lang_editpicture}>" title="<{$lang_editpicture}>" src="<{xoModuleIcons16 'edit.png'}>">
                                                         </form>
                                                         <form action="avatar.php" method="post" id="setavatar" class="suico-album-formquick">
                                                             <input type="hidden" value="<{$pics_array[i].image_id}>" name="image_id">
@@ -125,12 +125,12 @@
                                                             <form action="delpicture.php" method="post" id="deleteform" class="suico-album-formquick">
                                                                 <input type="hidden" value="<{$pics_array[i].image_id}>" name="image_id">
                                                                 <{$token}>
-                                                                <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 delete.png}>">
+                                                                <input name="submit" type="image" alt="<{$lang_delete}>" title="<{$lang_delete}>" src="<{xoModuleIcons16 'delete.png'}>">
                                                             </form>
                                                             <form action="editpicture.php" method="post" id="editform" class="suico-album-formquick">
                                                                 <input type="hidden" value="<{$pics_array[i].image_id}>" name="image_id">
                                                                 <{$token}>
-                                                                <input name="submit" type="image" alt="<{$lang_editpicture}>" title="<{$lang_editpicture}>" src="<{xoModuleIcons16 edit.png}>">
+                                                                <input name="submit" type="image" alt="<{$lang_editpicture}>" title="<{$lang_editpicture}>" src="<{xoModuleIcons16 'edit.png'}>">
                                                             </form>
                                                             <form action="avatar.php" method="post" id="setavatar" class="suico-album-formquick">
                                                                 <input type="hidden" value="<{$pics_array[i].image_id}>" name="image_id">
