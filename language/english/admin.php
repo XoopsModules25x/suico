@@ -184,9 +184,9 @@ define('AM_SUICO_GROUPS_GROUP_IMG', 'Image');
 define('AM_SUICO_GROUPS_DATE_CREATED', 'Created');
 define('AM_SUICO_GROUPS_DATE_UPDATED', 'Updated');
 // Relgroupuser
-define('AM_SUICO_RELGROUPUSER_ADD', 'Add a relgroupuser');
-define('AM_SUICO_RELGROUPUSER_EDIT', 'Edit relgroupuser');
-define('AM_SUICO_RELGROUPUSER_DELETE', 'Delete relgroupuser');
+define('AM_SUICO_RELGROUPUSER_ADD', 'Add Member');
+define('AM_SUICO_RELGROUPUSER_EDIT', 'Edit Member');
+define('AM_SUICO_RELGROUPUSER_DELETE', 'Delete Member');
 define('AM_SUICO_RELGROUPUSER_REL_ID', 'ID');
 define('AM_SUICO_RELGROUPUSER_REL_GROUP_ID', 'Group');
 define('AM_SUICO_RELGROUPUSER_REL_USER_UID', 'User');
