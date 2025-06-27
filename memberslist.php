@@ -183,11 +183,14 @@ if (0 === $total) {
         $uid                   = $userdata['id'];
         $groups                = $memberHandler->getGroupsByUser($uid, true);
         $usergroups            = [];
-        foreach ($groups as $group) {
-            $usergroups[] = $group->getVar('name');
-        }
+		foreach ($groups as $group) {
+			if (is_object($group)) {
+			$usergroups[] = $group->getVar('name');
+			}
+		}
         $userdata['groups'] = implode(', ', $usergroups);
         $xoopsTpl->append('users', $userdata);
+
     }
     if ('normal' == $xoopsModuleConfig['memberslisttemplate']) {
         $totalpages = ceil($total / $limit);
